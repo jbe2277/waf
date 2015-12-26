@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>wafviewmodel</Title>
+      <Shortcut>wafviewmodel</Shortcut>
+      <Description>Code snippet for an empty view model class</Description>
+      <Author>WPF Application Framework (WAF)</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>First part of the class name</ToolTip>
+          <Default>Shell</Default>
+        </Literal>
+        <Literal>
+          <ID>view</ID>
+          <ToolTip>Interface of the view</ToolTip>
+          <Default>IShellView</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[public class $name$ViewModel : ViewModel<$view$>
+  {
+      public $name$ViewModel($view$ view) : base(view)
+      {
+      }
+    
+    
+      $selected$$end$
+  }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

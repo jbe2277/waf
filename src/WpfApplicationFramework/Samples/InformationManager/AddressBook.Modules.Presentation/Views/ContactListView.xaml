@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Waf.InformationManager.AddressBook.Modules.Presentation.Views.ContactListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrl="clr-namespace:Waf.InformationManager.Common.Presentation.Controls;assembly=Waf.InformationManager.Common.Presentation"
+             xmlns:dd="clr-namespace:Waf.InformationManager.AddressBook.Modules.Presentation.DesignData"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance dd:SampleContactListViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ctrl:SearchBox SearchText="{Binding FilterText}"/>
+
+        <ListBox x:Name="contactsBox" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" HorizontalContentAlignment="Stretch"
+                     BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.InputBindings>
+                <KeyBinding Command="{Binding DeleteContactCommand}" Key="Del"/>
+            </ListBox.InputBindings>
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,3,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="12*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Firstname, TargetNullValue=(none)}" Margin="7"/>
+
+                        <TextBlock Text="{Binding Email, TargetNullValue=(none)}" Grid.Column="1" Margin="7"/>
+
+                        <TextBlock Text="{Binding Lastname, TargetNullValue=(none)}" Grid.Row="1" Margin="7,0,7,7"/>
+
+                        <TextBlock Text="{Binding Phone, TargetNullValue=(none)}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

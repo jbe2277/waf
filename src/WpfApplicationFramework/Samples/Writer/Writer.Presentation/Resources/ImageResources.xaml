@@ -1,0 +1,61 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapSource x:Key="WriterImageSource">Images/Writer.ico</BitmapSource>
+
+    <ImageSource x:Key="EmptyLargeImageSource">Images/EmptyLarge.png</ImageSource>
+
+    <ImageSource x:Key="NewImageSource">Images/New.png</ImageSource>
+    <ImageSource x:Key="NewLargeImageSource">Images/NewLarge.png</ImageSource>
+    <ImageSource x:Key="OpenImageSource">Images/Open.png</ImageSource>
+    <ImageSource x:Key="OpenLargeImageSource">Images/OpenLarge.png</ImageSource>
+    <ImageSource x:Key="SaveImageSource">Images/Save.png</ImageSource>
+    <ImageSource x:Key="SaveLargeImageSource">Images/SaveLarge.png</ImageSource>
+    <ImageSource x:Key="PrintLargeImageSource">Images/PrintLarge.png</ImageSource>
+    
+    <ImageSource x:Key="UndoImageSource">Images/Undo.png</ImageSource>
+    <ImageSource x:Key="RedoImageSource">Images/Redo.png</ImageSource>
+
+    <ImageSource x:Key="HelpImageSource">Images/Help.png</ImageSource>
+
+    <ImageSource x:Key="PasteLargeImageSource">Images/PasteLarge.png</ImageSource>
+    <ImageSource x:Key="CopyImageSource">Images/Copy.png</ImageSource>
+    <ImageSource x:Key="CopyLargeImageSource">Images/CopyLarge.png</ImageSource>
+    <ImageSource x:Key="CutImageSource">Images/Cut.png</ImageSource>
+
+    <ImageSource x:Key="BoldImageSource">Images/Bold.png</ImageSource>
+    <ImageSource x:Key="ItalicImageSource">Images/Italic.png</ImageSource>
+    <ImageSource x:Key="UnderlineImageSource">Images/Underline.png</ImageSource>
+
+    <ImageSource x:Key="NumberingImageSource">Images/Numbering.png</ImageSource>
+    <ImageSource x:Key="BulletsImageSource">Images/Bullets.png</ImageSource>
+    <ImageSource x:Key="DecreaseIndentationImageSource">Images/DecreaseIndentation.png</ImageSource>
+    <ImageSource x:Key="IncreaseIndentationImageSource">Images/IncreaseIndentation.png</ImageSource>
+
+    <ImageSource x:Key="SelectAllImageSource">Images/SelectAll.png</ImageSource>
+    <ImageSource x:Key="DeleteImageSource">Images/Delete.png</ImageSource>
+
+    <ImageSource x:Key="CheckSpellingLargeImageSource">Images/CheckSpellingLarge.png</ImageSource>
+
+    <ImageSource x:Key="FlagEnImageSource">Images/FlagEn.png</ImageSource>
+    <ImageSource x:Key="FlagDeImageSource">Images/FlagDe.png</ImageSource>
+
+    <ImageSource x:Key="CloseLargeImageSource">Images/CloseLarge.png</ImageSource>
+    <ImageSource x:Key="ZoomInLargeImageSource">Images/ZoomInLarge.png</ImageSource>
+    <ImageSource x:Key="ZoomOutLargeImageSource">Images/ZoomOutLarge.png</ImageSource>
+    <ImageSource x:Key="ZoomPageWidthImageSource">Images/ZoomPageWidth.png</ImageSource>
+
+    <ImageSource x:Key="PinImageSource">Images/Pin.png</ImageSource>
+    <ImageSource x:Key="PinnedImageSource">Images/Pinned.png</ImageSource>
+
+    <Image x:Key="PinImage" x:Shared="False" Source="Images/Pin.png" Height="16" Width="16"/>
+    <Image x:Key="PinnedImage" x:Shared="False" Source="Images/Pinned.png" Height="16" Width="16"/>
+    
+    <Image x:Key="CutImage" x:Shared="False" Source="Images/Cut.png" Height="16" Width="16"/>
+    <Image x:Key="CopyImage" x:Shared="False" Source="Images/Copy.png" Height="16" Width="16"/>
+    <Image x:Key="PasteImage" x:Shared="False" Source="Images/Paste.png" Height="16" Width="16"/>
+    
+    <Image x:Key="CloseSmallImage" x:Shared="False" Source="Images/CloseSmall.png" Height="10" Width="11"/>
+    <Image x:Key="ClosePreviewImage" x:Shared="False" Source="Images/ClosePreview.png" Height="16" Width="16"/>
+</ResourceDictionary>

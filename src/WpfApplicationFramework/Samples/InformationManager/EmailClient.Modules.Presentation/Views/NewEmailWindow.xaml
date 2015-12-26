@@ -1,0 +1,65 @@
+﻿<Window x:Class="Waf.InformationManager.EmailClient.Modules.Presentation.Views.NewEmailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
+        mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        Title="New email" Icon="{StaticResource InformationManagerImageSource}" Height="370" Width="550"
+        d:DataContext="{d:DesignInstance dd:SampleNewEmailViewModel, IsDesignTimeCreatable=True}">
+    
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Command="{Binding SendCommand}" Click="SendButtonClick" ToolTip="This does not really send the email. It just saves the email in the Sent items."><AccessText Text="_Send"/></Button>
+            <Button Command="{Binding CloseCommand}" ToolTip="Close this window. The email will not be saved."><AccessText Text="_Close"/></Button>
+        </ToolBar>
+        
+        <Grid Margin="0,0,11,11">
+            <Grid.Resources>
+                <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                    <Setter Property="Padding" Value="1,3"/>
+                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="MinWidth" Value="25"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="11"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="From: " Grid.Row="0" Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1"/>
+            
+            <Label Content="To:" Grid.Row="1" Grid.Column="0"/>
+            <TextBox x:Name="toBox" Text="{Binding To}" Grid.Row="1" Grid.Column="1"/>
+            <Button Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..." Grid.Row="1" Grid.Column="2"/>
+
+            <Label Content="CC:" Grid.Row="0" Grid.Column="4"/>
+            <TextBox Text="{Binding CC}" Grid.Row="0" Grid.Column="5"/>
+            <Button Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..." Grid.Row="0" Grid.Column="6"/>
+
+            <Label Content="BCC:" Grid.Row="1" Grid.Column="4"/>
+            <TextBox Text="{Binding Bcc}" Grid.Row="1" Grid.Column="5"/>
+            <Button Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..." Grid.Row="1" Grid.Column="6"/>
+            
+            <Label Content="Title:" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6"/>
+
+            <TextBox Text="{Binding Email.Message}" Grid.Row="3" Grid.ColumnSpan="7" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Waf.BookLibrary.Reporting.Presentation.Reports.BookListReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Properties"
+             xmlns:ctrl="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Controls"
+             xmlns:dm="clr-namespace:Waf.BookLibrary.Reporting.Applications.DataModels;assembly=Waf.BookLibrary.Reporting.Applications"
+             mc:Ignorable="d" d:DataContext="{d:DesignData Source=../DesignData/SampleBookListReportDataModel.xaml}"
+             d:DesignHeight="300" d:DesignWidth="800" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+    
+    <FlowDocument x:Name="flowDocument" ColumnWidth="1000" PagePadding="0.5in">
+        <Table>
+            <Table.Columns>
+                <TableColumn/>
+                <TableColumn/>
+            </Table.Columns>
+            
+            <TableRowGroup>
+                <TableRow Foreground="#365F91" FontSize="20" FontWeight="Bold">
+                    <TableCell>
+                        <Paragraph>
+                            <Run Text="{x:Static p:Resources.ReportBookListTitle}"/>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>
+                            <Run Text="{Binding BookCount, StringFormat={x:Static p:Resources.ReportBookListCount}, Mode=OneTime}"/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        
+        <ctrl:BindableTable ItemsSource="{Binding Books, Mode=OneTime}" CellSpacing="0" BorderBrush="#FF4F81BD" BorderThickness="1,1,0,0">
+            <ctrl:BindableTable.Columns>
+                <TableColumn/>
+                <TableColumn/>
+            </ctrl:BindableTable.Columns>
+            <ctrl:BindableTable.HeaderRowGroup>
+                <TableRowGroup Foreground="White" Background="#FF4F81BD">
+                    <TableRow>
+                        <TableCell Padding="4,2" BorderBrush="#FF4F81BD" BorderThickness="0,0,1,1">
+                            <Paragraph><Run Text="{x:Static p:Resources.Title}"/></Paragraph>
+                        </TableCell>
+                        <TableCell Padding="4,2" BorderBrush="#FF4F81BD" BorderThickness="0,0,1,1">
+                            <Paragraph><Run Text="{x:Static p:Resources.Author}"/></Paragraph>
+                        </TableCell>
+                    </TableRow>
+                </TableRowGroup>
+            </ctrl:BindableTable.HeaderRowGroup>
+            <ctrl:BindableTable.ItemTemplate>
+                <DataTemplate>
+                    <ctrl:ContentElement>
+                        <TableRow>
+                            <TableCell Padding="4,2" BorderBrush="#FF4F81BD" BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    <Run Text="{Binding Title, Mode=OneTime}"/>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell Padding="4,2" BorderBrush="#FF4F81BD" BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    <Run Text="{Binding Author, Mode=OneTime}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </ctrl:ContentElement>
+                </DataTemplate>
+            </ctrl:BindableTable.ItemTemplate>
+        </ctrl:BindableTable>
+    </FlowDocument>
+</UserControl>

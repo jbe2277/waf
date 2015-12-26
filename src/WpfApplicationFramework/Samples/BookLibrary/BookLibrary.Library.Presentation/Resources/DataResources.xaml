@@ -1,0 +1,13 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:domain="clr-namespace:Waf.BookLibrary.Library.Domain;assembly=Waf.BookLibrary.Library.Domain">
+
+    <ObjectDataProvider x:Key="LanguageValues" ObjectType="sys:Enum" MethodName="GetValues">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type Type="domain:Language" />
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    
+</ResourceDictionary>

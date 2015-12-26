@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="525ed0b3-9e93-4578-8b44-69cad24977c0" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="a2ac7b82-27c3-4c94-a7a8-8c2f667d1081" name="Comment1">
+      <body>Root Namespace: Waf.InformationManager.Infrastructure.Modules</body>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="c2960e74-698e-470a-a37a-4bdd0381fd17" name="Presentation">
+      <childLayers>
+        <layer Id="9d78dc51-d01d-4d1d-95e7-6a0770ae8782" name="Converters">
+          <references>
+            <reference Id="cb97c6fb-45c1-4538-8a53-04c5c7a46c81" name="Waf.InformationManager.Infrastructure.Modules.Presentation.Converters">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Converters" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Converters)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Presentation)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Converters)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Converters" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="4b4ea1a5-71c2-4197-ae62-1c2714697c09" name="Services">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="addfddf0-58d1-4982-ba62-83522ffb6cc2" direction="Forward">
+              <layerMoniker Id="e07a0f7b-f5c7-423d-891a-df7733261e0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="3a8b38c9-f12b-409e-9489-2df734ac4a5d" name="Waf.InformationManager.Infrastructure.Modules.Presentation.Services">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Services)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Presentation)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Services)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="bd02e5ca-3a8a-4de3-ac3f-377cd9ab9869" name="Views">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="14ec296d-a799-452e-92c1-6d2d21c71095" direction="Forward">
+              <layerMoniker Id="54219adc-bf30-4fd8-a0e3-9e6698aa9190" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="d3818d5d-98dc-4625-984f-91023bba64ea" direction="Forward">
+              <layerMoniker Id="8c768236-da0e-4bba-bd1e-2a7cc4ad3dee" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="37b4fcbf-db6e-483b-a728-6a13d5deea40" direction="Forward">
+              <layerMoniker Id="e07a0f7b-f5c7-423d-891a-df7733261e0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="f8fc16fe-f24b-4611-8113-3aed35df82a1" name="Waf.InformationManager.Infrastructure.Modules.Presentation.Views">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Presentation)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation.Views)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="c48d8481-a146-4bda-8951-8bad866663e3" name="Waf.InformationManager.Infrastructure.Modules.Presentation">
+          <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Presentation" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Presentation)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Presentation)" Label="Waf.InformationManager.Infrastructure.Modules.Presentation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="327502a9-f8ac-4626-b0b4-9ada6222b464" name="Applications">
+      <childLayers>
+        <layer Id="1bc2718b-ceec-4da2-94d6-e098c407233c" name="Controllers">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="f3f4df1d-d466-446e-81c8-5559234db721" direction="Forward">
+              <layerMoniker Id="8c768236-da0e-4bba-bd1e-2a7cc4ad3dee" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="2843678c-97cf-4033-a34d-fed92b463904" direction="Forward">
+              <layerMoniker Id="e07a0f7b-f5c7-423d-891a-df7733261e0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="78121dce-8e15-46d7-9a87-cebba08a41a0" name="Waf.InformationManager.Infrastructure.Modules.Applications.Controllers">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Applications.Controllers" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Controllers)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Controllers)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.Controllers" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="e07a0f7b-f5c7-423d-891a-df7733261e0a" name="Services">
+          <references>
+            <reference Id="c38b3c3b-0984-4793-b5c6-3418afcec9a1" name="Waf.InformationManager.Infrastructure.Modules.Applications.Services">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Applications.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Services)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Services)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="8c768236-da0e-4bba-bd1e-2a7cc4ad3dee" name="ViewModels">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="3e432889-e513-4375-b99b-2e83574a0ef9" direction="Forward">
+              <layerMoniker Id="54219adc-bf30-4fd8-a0e3-9e6698aa9190" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="8355c381-7f61-48db-89dc-3971bc02d419" direction="Forward">
+              <layerMoniker Id="e07a0f7b-f5c7-423d-891a-df7733261e0a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="4731f368-5e83-4328-90c4-8abff4af9e6a" name="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="54219adc-bf30-4fd8-a0e3-9e6698aa9190" name="Views">
+          <references>
+            <reference Id="d9f14baf-fec0-46f8-842f-1383dbd98c1b" name="Waf.InformationManager.Infrastructure.Modules.Applications.Views">
+              <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Applications.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications.Views)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="f7386899-d742-4c5e-a652-4510aabc1e20" name="Waf.InformationManager.Infrastructure.Modules.Applications">
+          <ArtifactNode Label="Waf.InformationManager.Infrastructure.Modules.Applications" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.Infrastructure.Modules.Applications)" Label="Waf.InformationManager.Infrastructure.Modules.Applications" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

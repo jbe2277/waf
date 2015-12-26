@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Unrecognized>
+    </Unrecognized>
+    <Recognized>
+      <Word>Firstname</Word>
+      <Word>Lastname</Word>
+      <Word>Codeplex</Word>
+      <Word>Paginator</Word>
+      <Word>WAF</Word>
+      <Word>XPS</Word>
+      <Word>DTO</Word>
+      <Word>ISBN</Word>
+    </Recognized>
+    <Deprecated>
+    </Deprecated>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

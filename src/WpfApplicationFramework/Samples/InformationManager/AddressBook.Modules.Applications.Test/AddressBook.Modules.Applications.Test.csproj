@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.InformationManager.AddressBook.Modules.Applications</RootNamespace>
+    <AssemblyName>Waf.InformationManager.AddressBook.Modules.Applications.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Output\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controllers\ContactControllerTest.cs" />
+    <Compile Include="Controllers\ModuleControllerTest.cs" />
+    <Compile Include="Controllers\SelectContactControllerTest.cs" />
+    <Compile Include="DtoFactoryTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleData\SampleDataProviderTest.cs" />
+    <Compile Include="Services\MockAddressBookService.cs" />
+    <Compile Include="AddressBookTest.cs" />
+    <Compile Include="ViewModels\ContactLayoutViewModelTest.cs" />
+    <Compile Include="ViewModels\ContactListViewModelTest.cs" />
+    <Compile Include="ViewModels\ContactViewModelTest.cs" />
+    <Compile Include="ViewModels\SelectContactViewModelTest.cs" />
+    <Compile Include="Views\MockContactLayoutView.cs" />
+    <Compile Include="Views\MockContactListView.cs" />
+    <Compile Include="Views\MockContactView.cs" />
+    <Compile Include="Views\MockSelectContactView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework.UnitTesting\WpfApplicationFramework.UnitTesting.csproj">
+      <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
+      <Name>WpfApplicationFramework.UnitTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj">
+      <Project>{E270D7E7-0E35-4DED-B330-25FF7EED8581}</Project>
+      <Name>AddressBook.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj">
+      <Project>{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}</Project>
+      <Name>AddressBook.Modules.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj">
+      <Project>{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}</Project>
+      <Name>AddressBook.Modules.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj">
+      <Project>{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}</Project>
+      <Name>Common.Applications.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj">
+      <Project>{3BC491D6-786A-46F1-9B93-69F23F89055A}</Project>
+      <Name>Common.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj">
+      <Project>{1112ecba-ac14-46e6-bf67-3caa8cb93022}</Project>
+      <Name>Common.Domain.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
+      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
+      <Name>Common.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
+      <Project>{664D5E11-1BAB-4D48-BEF5-775DB427D691}</Project>
+      <Name>Infrastructure.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj">
+      <Project>{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}</Project>
+      <Name>Infrastructure.Modules.Applications.Test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

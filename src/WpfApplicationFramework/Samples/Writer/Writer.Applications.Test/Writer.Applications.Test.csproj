@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.Writer.Applications</RootNamespace>
+    <AssemblyName>Waf.Writer.Applications.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Output\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controllers\ModuleControllerTest.cs" />
+    <Compile Include="Controllers\DocumentControllerTest.cs" />
+    <Compile Include="Controllers\FileControllerTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Services\FileServiceTest.cs" />
+    <Compile Include="Services\MockEnvironmentService.cs" />
+    <Compile Include="Services\MockPresentationService.cs" />
+    <Compile Include="Controllers\PrintControllerTest.cs" />
+    <Compile Include="Controllers\RichTextDocumentControllerTest.cs" />
+    <Compile Include="Documents\MockDocumentType.cs" />
+    <Compile Include="Documents\DocumentTypeTest.cs" />
+    <Compile Include="Documents\RichTextDocumentTypeTest.cs" />
+    <Compile Include="Documents\XpsExportDocumentTypeTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MockPrintDialogService.cs" />
+    <Compile Include="TestClassBase.cs" />
+    <Compile Include="Services\ShellServiceTest.cs" />
+    <Compile Include="ViewModels\PrintPreviewViewModelTest.cs" />
+    <Compile Include="ViewModels\RichTextViewModelTest.cs" />
+    <Compile Include="ViewModels\SaveChangesViewModelTest.cs" />
+    <Compile Include="ViewModels\ShellViewModelTest.cs" />
+    <Compile Include="ViewModels\StartViewModelTest.cs" />
+    <Compile Include="ViewModels\ZoomViewModelTest.cs" />
+    <Compile Include="Views\MockMainView.cs" />
+    <Compile Include="Views\MockPrintPreviewView.cs" />
+    <Compile Include="Views\MockRichTextView.cs" />
+    <Compile Include="Views\MockSaveChangesView.cs" />
+    <Compile Include="ViewModels\MainViewModelTest.cs" />
+    <Compile Include="Views\MockShellView.cs" />
+    <Compile Include="Views\MockStartView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework.UnitTesting\WpfApplicationFramework.UnitTesting.csproj">
+      <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
+      <Name>WpfApplicationFramework.UnitTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writer.Applications\Writer.Applications.csproj">
+      <Project>{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}</Project>
+      <Name>Writer.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

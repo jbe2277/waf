@@ -1,0 +1,10 @@
+﻿<vm:PersonListViewModel 
+    xmlns:vm="clr-namespace:Waf.BookLibrary.Library.Applications.ViewModels;assembly=Waf.BookLibrary.Library.Applications"
+    xmlns:bo="clr-namespace:Waf.BookLibrary.Library.Domain;assembly=Waf.BookLibrary.Library.Domain">
+
+    <vm:PersonListViewModel.Persons>
+        <bo:Person Firstname="Harry" Lastname="Potter" Email="harry.potter@hogwarts.edu"/>
+        <bo:Person Firstname="Hermione" Lastname="Granger" Email="hermione.granger@howarts.edu"/>
+    </vm:PersonListViewModel.Persons>
+    
+</vm:PersonListViewModel>

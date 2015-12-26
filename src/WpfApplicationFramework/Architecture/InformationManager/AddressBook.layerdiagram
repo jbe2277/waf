@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="b2190e71-78ef-4c56-8c88-02b7a2c2da46" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="bf2b3e9a-d703-4a65-bed5-0e54a40e392e" name="Comment1">
+      <body>Root Namespace: Waf.InformationManager.AddressBook.Modules</body>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="b26c01ee-2b0d-420b-bba4-aef50bdde464" name="Presentation">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="68e624de-449a-4d89-a4bb-b9539480a923" direction="Forward">
+          <layerMoniker Id="4922f4b8-71a9-4f0d-b59c-7d2e9f3d4785" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="66c099a8-725f-42f2-97f8-63c9e961f8b3" name="Services">
+          <references>
+            <reference Id="acf2f081-4562-4add-8b39-51f80f4f2a7f" name="Waf.InformationManager.AddressBook.Modules.Presentation.Services">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Presentation.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.Services)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Presentation)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.Services)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="925c579f-6a85-4859-9619-041fac8c2671" name="Views">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="0b678f49-5241-4f77-99d8-f387907fe976" direction="Forward">
+              <layerMoniker Id="bb3945ef-569f-4b04-9713-75d0989e589f" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="bdd09cff-9b00-4912-9f71-a85c8b7fe18c" direction="Forward">
+              <layerMoniker Id="079c4530-b221-48e8-b23c-590929e8b2a2" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="81a2f0ea-a25d-46b0-aacd-55cd3178ebbf" name="Waf.InformationManager.AddressBook.Modules.Presentation.Views">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Presentation.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Presentation)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.Views)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="e8c9326f-37c0-4b1b-a280-f8bd2b174430" name="DesignData">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="d3d3cffa-9cd0-4dc5-a988-86ac0723e4fd" direction="Forward">
+              <layerMoniker Id="94dbd1af-6555-4dcd-a6f9-787065289d67" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="60c78529-4c8a-410e-b933-76fb09265962" name="Waf.InformationManager.AddressBook.Modules.Presentation.DesignData">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Presentation.DesignData" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.DesignData)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Presentation)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation.DesignData)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.DesignData" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="0deeb3f8-2d57-4c2a-9243-11deb4b33aad" name="Waf.InformationManager.AddressBook.Modules.Presentation">
+          <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Presentation" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Presentation)" Label="Waf.InformationManager.AddressBook.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Presentation)" Label="Waf.InformationManager.AddressBook.Modules.Presentation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="94dbd1af-6555-4dcd-a6f9-787065289d67" name="Applications">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="cebeb069-0572-4f64-bd37-291bdc8d472d" direction="Forward">
+          <layerMoniker Id="4922f4b8-71a9-4f0d-b59c-7d2e9f3d4785" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="6d1a0fb7-e2c2-4779-9d88-06a1916bd9f1" name="Controllers">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="09efb6a2-2370-43eb-8e08-cfc35a533630" direction="Forward">
+              <layerMoniker Id="079c4530-b221-48e8-b23c-590929e8b2a2" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="de9e5bbd-a674-4b59-bd1c-88047d157656" direction="Forward">
+              <layerMoniker Id="97eee902-213c-441c-b72b-f1aa551eac46" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="d159c303-21a6-4e1d-aa6c-63f78ffd7c10" name="Waf.InformationManager.AddressBook.Modules.Applications.Controllers">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Applications.Controllers" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.Controllers)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.Controllers)" Label="Waf.InformationManager.AddressBook.Modules.Applications.Controllers" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="97eee902-213c-441c-b72b-f1aa551eac46" name="SampleData">
+          <references>
+            <reference Id="8274f089-1ef2-4fb5-85c3-7f55a9730ff4" name="Waf.InformationManager.AddressBook.Modules.Applications.SampleData">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Applications.SampleData" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.SampleData)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.SampleData)" Label="Waf.InformationManager.AddressBook.Modules.Applications.SampleData" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="079c4530-b221-48e8-b23c-590929e8b2a2" name="ViewModels">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="8f4929d2-0b1f-422e-ad18-b05a2d79d070" direction="Forward">
+              <layerMoniker Id="bb3945ef-569f-4b04-9713-75d0989e589f" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="4b9465c2-e12a-4436-b384-5edac1c2ee2a" name="Waf.InformationManager.AddressBook.Modules.Applications.ViewModels">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Applications.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.ViewModels)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.ViewModels)" Label="Waf.InformationManager.AddressBook.Modules.Applications.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="bb3945ef-569f-4b04-9713-75d0989e589f" name="Views">
+          <references>
+            <reference Id="912b70a1-d07c-4806-89a8-69e23cddf82c" name="Waf.InformationManager.AddressBook.Modules.Applications.Views">
+              <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Applications.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications.Views)" Label="Waf.InformationManager.AddressBook.Modules.Applications.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="6d9b83cb-b1b8-48f4-8377-50eee4ae54d8" name="Waf.InformationManager.AddressBook.Modules.Applications">
+          <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Applications" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Applications)" Label="Waf.InformationManager.AddressBook.Modules.Applications" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="4922f4b8-71a9-4f0d-b59c-7d2e9f3d4785" name="Domain">
+      <references>
+        <reference Id="46fa6b36-d083-4a7c-9efc-27d13f6e6437" name="Waf.InformationManager.AddressBook.Modules.Domain">
+          <ArtifactNode Label="Waf.InformationManager.AddressBook.Modules.Domain" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Domain)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.AddressBook.Modules.Domain)" Label="Waf.InformationManager.AddressBook.Modules.Domain.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.AddressBook.Modules.Domain)" Label="Waf.InformationManager.AddressBook.Modules.Domain" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

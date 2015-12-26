@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>wafvalconv</Title>
+      <Shortcut>wafvalconv</Shortcut>
+      <Description>Code snippet for a WPF value converter class</Description>
+      <Author>WPF Application Framework (WAF)</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>System.Globalization</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Windows.Data</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Class name</ToolTip>
+          <Default>MyConverter</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[
+  public class $name$ : IValueConverter
+	{
+    private static readonly $name$ defaultInstance = new $name$();
+
+    public static $name$ Default { get { return defaultInstance; } }
+
+        
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+      $selected$$end$throw new NotImplementedException();
+    }
+    
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+      throw new NotImplementedException();
+    }
+	}]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

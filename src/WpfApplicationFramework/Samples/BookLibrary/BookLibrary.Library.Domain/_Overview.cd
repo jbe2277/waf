@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Waf.BookLibrary.Library.Domain.Person">
+    <Position X="3.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="email" Hidden="true" />
+      <Field Name="firstname" Hidden="true" />
+      <Field Name="lastname" Hidden="true" />
+      <Method Name="Person" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAChAAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Waf.BookLibrary.Library.Domain.Book">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="author" Hidden="true" />
+      <Method Name="Book" Hidden="true" />
+      <Field Name="isbn" Hidden="true" />
+      <Field Name="language" Hidden="true" />
+      <Field Name="lendTo" Hidden="true" />
+      <Field Name="pages" Hidden="true" />
+      <Field Name="publishDate" Hidden="true" />
+      <Field Name="publisher" Hidden="true" />
+      <Field Name="title" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAAAASCAIAEgkiAABAJgAAQAAAAAAAAACAAAAAgA=</HashCode>
+      <FileName>Book.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LendTo" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
+using System.Waf.UnitTesting;
+using System.Waf.Foundation;
+using Test.InformationManager.Common.Domain;
+
+namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
+{
+    [TestClass]
+    public class EmailTest : DomainTest
+    {
+        [TestMethod]
+        public void PropertiesTest()
+        {
+            var email = new Email();
+
+            AssertHelper.PropertyChangedEvent(email, x => x.EmailType, () => email.EmailType = EmailType.Sent);
+            Assert.AreEqual(EmailType.Sent, email.EmailType);
+
+            AssertHelper.PropertyChangedEvent(email, x => x.Title, () => email.Title = "Duis nunc");
+            Assert.AreEqual("Duis nunc", email.Title);
+
+            AssertHelper.PropertyChangedEvent(email, x => x.From, () => email.From = "user@adventure-works.com");
+            Assert.AreEqual("user@adventure-works.com", email.From);
+
+            var to = new[] { "harry@example.com", "admin@adventure-works.com" };
+            AssertHelper.PropertyChangedEvent(email, x => x.To, () => email.To = to);
+            Assert.AreEqual(to, email.To);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.To = null);
+            Assert.AreEqual(to, email.To);
+
+            var cc = new[] { "user-2@fabrikam.com" };
+            AssertHelper.PropertyChangedEvent(email, x => x.CC, () => email.CC = cc);
+            Assert.AreEqual(cc, email.CC);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.CC = null);
+            Assert.AreEqual(cc, email.CC);
+
+            var bcc = new[] { "someone@example.com" };
+            AssertHelper.PropertyChangedEvent(email, x => x.Bcc, () => email.Bcc = bcc);
+            Assert.AreEqual(bcc, email.Bcc);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.Bcc = null);
+            Assert.AreEqual(bcc, email.Bcc);
+
+            var sent = new DateTime(2012, 8, 2);
+            AssertHelper.PropertyChangedEvent(email, x => x.Sent, () => email.Sent = sent);
+            Assert.AreEqual(sent, email.Sent);
+
+            AssertHelper.PropertyChangedEvent(email, x => x.Message, () => email.Message = "abc");
+            Assert.AreEqual("abc", email.Message);
+        }
+
+        [TestMethod]
+        public void ValidateTest()
+        {
+            var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+            var email = new Email();
+
+            Assert.AreEqual("", email.Validate("Title"));
+            email.Title = longText;
+            Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.Validate("Title"));
+            email.Title = "";
+
+            Assert.AreEqual("", email.Validate("From"));
+            email.From = longText;
+            Assert.AreEqual("The field From must be a string with a maximum length of 255.", email.Validate("From"));
+            email.From = "";
+
+            Assert.AreEqual("This email doesn't define a recipient.", email.Validate());
+            
+            email.To = new[] { "wrong email address" };
+            email.CC = email.To;
+            email.Bcc = email.To;
+            Assert.AreEqual("The email wrong email address in the To field is not valid." + Environment.NewLine 
+                + "The email wrong email address in the CC field is not valid." + Environment.NewLine
+                + "The email wrong email address in the BCC field is not valid.", email.Validate());
+
+            email.To = new[] { "correct-address@mail.com" };
+            email.CC = email.To;
+            email.Bcc = email.To;
+            Assert.AreEqual("", email.Validate());
+        }
+    }
+}

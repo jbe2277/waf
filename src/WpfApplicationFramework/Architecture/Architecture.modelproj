@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{efcca47d-ff09-43c1-bdd1-380945a9feaf}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>Architecture</Name>
+    <RootNamespace>Architecture</RootNamespace>
+    <ValidateArchitecture>true</ValidateArchitecture>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="false" />
+  <ItemGroup>
+    <Content Include="Readme.txt">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\Architecture.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="InformationManager" />
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="BookLibrary.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="BookLibrary.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>BookLibrary.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="BookLibrary.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>BookLibrary.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\AddressBook.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="InformationManager\AddressBook.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\AddressBook.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\AddressBook.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\AddressBook.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\EmailClient.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="InformationManager\EmailClient.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\EmailClient.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\EmailClient.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\EmailClient.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\InformationManager.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="InformationManager\InformationManager.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\InformationManager.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\InformationManager.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\InformationManager.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\Infrastructure.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="InformationManager\Infrastructure.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\Infrastructure.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="InformationManager\Infrastructure.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>InformationManager\Infrastructure.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="WpfApplicationFramework.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="WpfApplicationFramework.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>WpfApplicationFramework.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="WpfApplicationFramework.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>WpfApplicationFramework.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Writer.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Writer.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Writer.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Writer.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Writer.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Samples\BookLibrary\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj">
+      <Name>BookLibrary.Library.Applications</Name>
+      <Project>{0985021e-9ad0-455a-a26b-2b8cebd26297}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\BookLibrary\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj">
+      <Name>BookLibrary.Library.Domain</Name>
+      <Project>{db087110-bdba-4e9d-813f-ef08295ecf8c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\BookLibrary\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj">
+      <Name>BookLibrary.Library.Presentation</Name>
+      <Project>{0f051a17-542a-4981-8155-a99f547e4442}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj">
+      <Name>BookLibrary.Reporting.Applications</Name>
+      <Project>{a050ed65-bf3c-4cbc-9a9a-68cb5aa82bcc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\BookLibrary\BookLibrary.Reporting.Presentation\BookLibrary.Reporting.Presentation.csproj">
+      <Name>BookLibrary.Reporting.Presentation</Name>
+      <Project>{0257aacf-ae9a-4002-8e2e-c98d6fd17437}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\AddressBook.Interfaces\AddressBook.Interfaces.csproj">
+      <Name>AddressBook.Interfaces</Name>
+      <Project>{e270d7e7-0e35-4ded-b330-25ff7eed8581}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj">
+      <Name>AddressBook.Modules.Applications</Name>
+      <Project>{d1d6d2d8-3d5d-4db1-8f97-e20cfa5f1f0b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj">
+      <Name>AddressBook.Modules.Domain</Name>
+      <Project>{6dd92044-33d8-4f00-8921-de9daf2fbcaa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\AddressBook.Modules.Presentation\AddressBook.Modules.Presentation.csproj">
+      <Name>AddressBook.Modules.Presentation</Name>
+      <Project>{99901356-ad33-4e23-8f0e-2a9dfccf4885}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Assembler\Assembler.csproj">
+      <Name>Assembler</Name>
+      <Project>{66f216da-838e-463b-b5a5-8631177f0079}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Common.Applications\Common.Applications.csproj">
+      <Name>Common.Applications</Name>
+      <Project>{3bc491d6-786a-46f1-9b93-69f23f89055a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Common.Domain\Common.Domain.csproj">
+      <Name>Common.Domain</Name>
+      <Project>{383153f8-9ab1-455b-9800-93f668e720f5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Common.Presentation\Common.Presentation.csproj">
+      <Name>Common.Presentation</Name>
+      <Project>{23854875-ddbb-4bb9-81b5-637fca6b1831}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj">
+      <Name>EmailClient.Modules.Applications</Name>
+      <Project>{8c37381e-d1f6-4173-adcd-ded9cbb474af}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj">
+      <Name>EmailClient.Modules.Domain</Name>
+      <Project>{d647b501-c650-4877-8cf6-06515391e28f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\EmailClient.Modules.Presentation\EmailClient.Modules.Presentation.csproj">
+      <Name>EmailClient.Modules.Presentation</Name>
+      <Project>{7db633c2-1ea6-420f-9ba9-320d42289119}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
+      <Name>Infrastructure.Interfaces</Name>
+      <Project>{664d5e11-1bab-4d48-bef5-775db427d691}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj">
+      <Name>Infrastructure.Modules.Applications</Name>
+      <Project>{5e82eaa0-abb1-40d2-8931-f7be9e9439d7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\InformationManager\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj">
+      <Name>Infrastructure.Modules.Presentation</Name>
+      <Project>{2947c827-ffc2-4e77-a8fd-e54a009ed4a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\Writer\Writer.Applications\Writer.Applications.csproj">
+      <Name>Writer.Applications</Name>
+      <Project>{4746f5c7-adc1-4e06-8365-9400ac0fb4a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\Writer\Writer.Presentation\Writer.Presentation.csproj">
+      <Name>Writer.Presentation</Name>
+      <Project>{2c041533-4ba4-4498-8867-43f87ffd5fac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
+      <Name>WpfApplicationFramework</Name>
+      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

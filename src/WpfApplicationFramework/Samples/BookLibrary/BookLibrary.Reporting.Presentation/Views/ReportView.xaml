@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Waf.BookLibrary.Reporting.Presentation.Views.ReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Properties"
+             xmlns:dd="clr-namespace:Waf.BookLibrary.Reporting.Presentation.DesignData"
+             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance dd:SampleReportViewModel, IsDesignTimeCreatable=True}">
+    
+    <DockPanel>
+        <Border DockPanel.Dock="Left" Background="{x:Static SystemColors.ControlBrush}">
+            <StackPanel Width="140" Margin="0,0,16,11">
+                <Label Content="{x:Static p:Resources.CreateReport}" Style="{StaticResource HeaderLabel}"/>
+
+                <Label Margin="11,22,0,0">
+                    <TextBlock Text="{x:Static p:Resources.ListAllBooks}" TextWrapping="Wrap"/>
+                </Label>
+                <Button x:Name="createButton" Command="{Binding CreateBookListReportCommand}" Content="{x:Static p:Resources.Create}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+
+                <Label Margin="11,22,0,0">
+                    <TextBlock Text="{x:Static p:Resources.ListBorrowedBooks}" TextWrapping="Wrap"/>
+                </Label>
+                <Button Command="{Binding CreateBorrowedBooksReportCommand}" Content="{x:Static p:Resources.Create}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+
+                <Label Margin="11,44,0,0">
+                    <TextBlock Text="Print the report" TextWrapping="Wrap"/>
+                </Label>
+                <Button Command="ApplicationCommands.Print" CommandTarget="{Binding ElementName=reportReader}" Content="{x:Static p:Resources.Print}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <FlowDocumentReader x:Name="reportReader" Document="{Binding Report}" Padding="0,-30,0,0"/>
+    </DockPanel>
+</UserControl>

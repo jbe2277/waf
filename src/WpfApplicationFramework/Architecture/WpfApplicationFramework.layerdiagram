@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a00fb891-2501-4a00-896b-7453860c594e" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="5f20b75b-b9a0-4164-9998-947c80d2ed6b" name="System.Waf.Applications" forbiddenNamespaceDependencies="System.Windows.Controls;System.Windows.Data;System.Windows.Media;System.Media">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="38ff925c-8f3d-4ba2-830b-6cbeeac21918" direction="Forward">
+          <layerMoniker Id="c67d09a0-3bb2-43a9-a96d-b8e06df9c9d0" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="b9599152-9d8b-480a-bdb6-79165fa3a8ed" name="Services">
+          <references>
+            <reference Id="7f1c2f11-3cd5-4fde-9254-e8a51769a2c0" name="System.Waf.Applications.Services">
+              <ArtifactNode Label="System.Waf.Applications.Services" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Applications.Services)" />
+              <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=System.Waf.Applications.Services)" Label="System.Waf.Applications.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="b9138a2c-d440-4e02-b1b4-833d0e4432ea" name="System.Waf.Applications1">
+          <ArtifactNode Label="System.Waf.Applications" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Applications)" />
+          <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=System.Waf.Applications)" Label="System.Waf.Applications" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="c67d09a0-3bb2-43a9-a96d-b8e06df9c9d0" name="System.Waf.Foundation" forbiddenNamespaceDependencies="System.Windows;System.Media">
+      <references>
+        <reference Id="f3d4d3c1-ebc2-42f1-a5c3-38fff85ecd13" name="System.Waf.Foundation">
+          <ArtifactNode Label="System.Waf.Foundation" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Foundation)" />
+          <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=System.Waf.Foundation)" Label="System.Waf.Foundation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="8f4246f5-3e4f-4c64-b5b5-7ac4effa74eb" name="System.Waf.Presentation">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="0b660a87-f092-451b-bd73-0a67c072ff07" direction="Forward">
+          <layerMoniker Id="c67d09a0-3bb2-43a9-a96d-b8e06df9c9d0" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="957808b0-c396-45ff-ba1b-06f008c0e178" name="Services">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="5632d9aa-daff-4f7b-ad6c-61352fb70832" direction="Forward">
+              <layerMoniker Id="b9599152-9d8b-480a-bdb6-79165fa3a8ed" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="1740a097-ec2e-49e8-84a0-f59ba4586e7f" direction="Forward">
+              <layerMoniker Id="5f20b75b-b9a0-4164-9998-947c80d2ed6b" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="d4b2c012-edaf-4614-ad6a-7a8ea20e555e" name="System.Waf.Presentation.Services">
+              <ArtifactNode Label="System.Waf.Presentation.Services" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Presentation.Services)" />
+              <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=System.Waf.Presentation.Services)" Label="System.Waf.Presentation.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="0be80282-fab4-48a5-9225-d9cec28822d8" name="Converters">
+          <references>
+            <reference Id="196cbb33-4e40-41ef-b827-ffa4850c396c" name="System.Waf.Presentation.Converters">
+              <ArtifactNode Label="System.Waf.Presentation.Converters" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Presentation.Converters)" />
+              <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=System.Waf.Presentation.Converters)" Label="System.Waf.Presentation.Converters" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="e7aacf4a-0c38-4572-a917-b7be162cded5" name="System.Waf.Presentation">
+          <ArtifactNode Label="System.Waf.Presentation" Category="CodeSchema_Namespace" Id="(Namespace=System.Waf.Presentation)" />
+          <ExpandedNode Id="(Assembly=WpfApplicationFramework)" Label="WpfApplicationFramework.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=System.Waf.Presentation)" Label="System.Waf.Presentation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

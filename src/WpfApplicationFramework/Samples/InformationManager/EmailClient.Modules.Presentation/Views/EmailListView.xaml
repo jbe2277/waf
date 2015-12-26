@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Waf.InformationManager.EmailClient.Modules.Presentation.Views.EmailListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.Selectors"
+             xmlns:ctrl="clr-namespace:Waf.InformationManager.Common.Presentation.Controls;assembly=Waf.InformationManager.Common.Presentation"
+             xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance dd:SampleEmailListViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <s:EmailItemTemplateSelector x:Key="EmailItemTemplateSelector"/>
+
+        <DataTemplate x:Key="ReceivedEmailItemTemplate">
+            <Grid Margin="0,0,3,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding From}" Margin="7"/>
+
+                <TextBlock Text="{Binding Sent, StringFormat=d}" Grid.Column="1" Margin="7"/>
+
+                <TextBlock Text="{Binding Title}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SentEmailItemTemplate">
+            <Grid Margin="0,0,3,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding To, Converter={StaticResource StringCollectionToStringConverter}}"
+                           Margin="7" TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Text="{Binding Sent, StringFormat=d}" Grid.Column="1" Margin="7"/>
+
+                <TextBlock Text="{Binding Title}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>        
+        
+        <ctrl:SearchBox SearchText="{Binding FilterText}"/>
+        
+        <ListBox x:Name="emailsBox" ItemsSource="{Binding Emails}" SelectedItem="{Binding SelectedEmail}" Grid.Row="1" HorizontalContentAlignment="Stretch"
+                 ItemTemplateSelector="{StaticResource EmailItemTemplateSelector}"
+                 BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.InputBindings>
+                <KeyBinding Command="{Binding DeleteEmailCommand}" Key="Del"/>
+            </ListBox.InputBindings>
+        </ListBox>
+    </Grid>
+</UserControl>

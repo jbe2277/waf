@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BoldToolTip" xml:space="preserve">
+    <value>Fett (Strg+B)</value>
+  </data>
+  <data name="BoldToolTipDescription" xml:space="preserve">
+    <value>Den markierten Text fett formatieren.</value>
+  </data>
+  <data name="BulletedList" xml:space="preserve">
+    <value>Punktierte Liste</value>
+  </data>
+  <data name="BulletedListToolTipDescription" xml:space="preserve">
+    <value>Eine Aufzählung starten.</value>
+  </data>
+  <data name="CancelMenu" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CheckSpelling" xml:space="preserve">
+    <value>Rechtschreibprüfung</value>
+  </data>
+  <data name="CheckSpellingToolTipDescription" xml:space="preserve">
+    <value>Die Rechtschreibung des Textes im Dokument prüfen.</value>
+  </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>Zwischenablage</value>
+  </data>
+  <data name="CloseMenu" xml:space="preserve">
+    <value>S_chließen</value>
+  </data>
+  <data name="CloseToolTip" xml:space="preserve">
+    <value>Schließen (Strg+F4)</value>
+  </data>
+  <data name="CloseToolTipDescription" xml:space="preserve">
+    <value>Aktives Dokument schließen.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="CopyMenu" xml:space="preserve">
+    <value>_Kopieren</value>
+  </data>
+  <data name="CopyToolTip" xml:space="preserve">
+    <value>Kopieren (Strg+C)</value>
+  </data>
+  <data name="CopyToolTipDescription" xml:space="preserve">
+    <value>Kopiert die Auswahl und fügt sie in die Zwischenablage ein.</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="CutMenu" xml:space="preserve">
+    <value>Ausschnei_den</value>
+  </data>
+  <data name="CutToolTip" xml:space="preserve">
+    <value>Ausschneiden (Strg+X)</value>
+  </data>
+  <data name="CutToolTipDescription" xml:space="preserve">
+    <value>Schneidet die Auswahl aus und fügt sie in die Zwischenablage ein.</value>
+  </data>
+  <data name="DecreaseIndentToolTip" xml:space="preserve">
+    <value>Einrückung verkleinern</value>
+  </data>
+  <data name="DecreaseIndentToolTipDescription" xml:space="preserve">
+    <value>Den Einzug des Absatzes verringern.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DeleteToolTip" xml:space="preserve">
+    <value>Löschen (Entf)</value>
+  </data>
+  <data name="DeleteToolTipDescription" xml:space="preserve">
+    <value>Den markierten Text löschen.</value>
+  </data>
+  <data name="Editing" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="EditMenu" xml:space="preserve">
+    <value>_Bearbeiten</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>_Beenden</value>
+  </data>
+  <data name="ExitToolTip" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="ExitToolTipDescription" xml:space="preserve">
+    <value>Anwendung beenden.</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Schriftart</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="HelpToolTip" xml:space="preserve">
+    <value>Hilfe (F1)</value>
+  </data>
+  <data name="HelpToolTipDescription" xml:space="preserve">
+    <value>Zeigt Informationen über die Anwendung.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="IgnoreAllMenu" xml:space="preserve">
+    <value>A_lle Ignorieren</value>
+  </data>
+  <data name="IncreaseIndentToolTip" xml:space="preserve">
+    <value>Einrückung vergrößern</value>
+  </data>
+  <data name="IncreaseIndentToolTipDescription" xml:space="preserve">
+    <value>Den Einzug des Absatzes vergrößern.</value>
+  </data>
+  <data name="ItalicToolTip" xml:space="preserve">
+    <value>Kursiv (Strg+I)</value>
+  </data>
+  <data name="ItalicToolTipDescription" xml:space="preserve">
+    <value>Den markierten Text kursiv formatieren.</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="NewMenu" xml:space="preserve">
+    <value>_Neu</value>
+  </data>
+  <data name="NewToolTip" xml:space="preserve">
+    <value>Neu (Strg+N)</value>
+  </data>
+  <data name="NewToolTipDescription" xml:space="preserve">
+    <value>Neues Dokument erstellen.</value>
+  </data>
+  <data name="NoMenu" xml:space="preserve">
+    <value>_Nein</value>
+  </data>
+  <data name="NoSpellingSuggestions" xml:space="preserve">
+    <value>(Keine Vorschläge)</value>
+  </data>
+  <data name="NumberedList" xml:space="preserve">
+    <value>Nummerierte Liste</value>
+  </data>
+  <data name="NumberedListToolTipDescription" xml:space="preserve">
+    <value>Eine nummerierte Liste starten.</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="OpenFileMenu" xml:space="preserve">
+    <value>Ö_ffnen</value>
+  </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>Ö_ffnen</value>
+  </data>
+  <data name="OpenToolTip" xml:space="preserve">
+    <value>Öffnen (Strg+O)</value>
+  </data>
+  <data name="OpenToolTipDescription" xml:space="preserve">
+    <value>Vorhandenes Dokument öffnen.</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="PasteMenu" xml:space="preserve">
+    <value>E_infürgen</value>
+  </data>
+  <data name="PasteToolTip" xml:space="preserve">
+    <value>Einfügen (Strg+V)</value>
+  </data>
+  <data name="PasteToolTipDescription" xml:space="preserve">
+    <value>Fügt den Inhalt in die Zwischenablage ein.</value>
+  </data>
+  <data name="PinFileMenu" xml:space="preserve">
+    <value>An Liste _anheften</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="PrintMenu" xml:space="preserve">
+    <value>_Drucken</value>
+  </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Seitenansicht</value>
+  </data>
+  <data name="PrintPreviewMenu" xml:space="preserve">
+    <value>Seiten_ansicht</value>
+  </data>
+  <data name="PrintPreviewToolTip" xml:space="preserve">
+    <value>Druckvorschau</value>
+  </data>
+  <data name="PrintPreviewToolTipDescription" xml:space="preserve">
+    <value>Vor dem Drucken eine Vorschau der Seiten anzeigen.</value>
+  </data>
+  <data name="PrintToolTip" xml:space="preserve">
+    <value>Drucken (Strg+P)</value>
+  </data>
+  <data name="PrintToolTipDescription" xml:space="preserve">
+    <value>Das aktuelle Dokument drucken.</value>
+  </data>
+  <data name="Proofing" xml:space="preserve">
+    <value>Dokumentprüfung</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Bereit.</value>
+  </data>
+  <data name="RecentDocuments" xml:space="preserve">
+    <value>Zuletzt verwendete Dokumente</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="RedoToolTip" xml:space="preserve">
+    <value>Wiederholen (Strg+Y)</value>
+  </data>
+  <data name="RedoToolTipDescription" xml:space="preserve">
+    <value>Wiederholt die letzte Aktion.</value>
+  </data>
+  <data name="RemoveFileMenu" xml:space="preserve">
+    <value>Aus Liste _entfernen</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SaveAsMenu" xml:space="preserve">
+    <value>Speichern _unter</value>
+  </data>
+  <data name="SaveAsToolTip" xml:space="preserve">
+    <value>Speichern unter</value>
+  </data>
+  <data name="SaveAsToolTipDescription" xml:space="preserve">
+    <value>Dokument unter einem neuen Namen oder in einem anderen Format speichern.</value>
+  </data>
+  <data name="SaveChangesTo" xml:space="preserve">
+    <value>Sollen die Änderungen für folgende Dateien gespeichert werden?</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>_Speichern</value>
+  </data>
+  <data name="SaveToolTip" xml:space="preserve">
+    <value>Speichern (Strg+S)</value>
+  </data>
+  <data name="SaveToolTipDescription" xml:space="preserve">
+    <value>Aktives Dokument speichern.</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Alles auswählen</value>
+  </data>
+  <data name="SelectAllToolTip" xml:space="preserve">
+    <value>Alles auswählen (Strg+A)</value>
+  </data>
+  <data name="SelectAllToolTipDescription" xml:space="preserve">
+    <value>Das gesamte Dokument auswählen.</value>
+  </data>
+  <data name="StartPage" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="UnderlineToolTip" xml:space="preserve">
+    <value>Unterstrichen (Strg+U)</value>
+  </data>
+  <data name="UnderlineToolTipDescription" xml:space="preserve">
+    <value>Den markierten Text unterstreichen.</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="UndoToolTip" xml:space="preserve">
+    <value>Rückgängig (Strg+Z)</value>
+  </data>
+  <data name="UndoToolTipDescription" xml:space="preserve">
+    <value>Macht die letzte Aktion rückgängig.</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unbekannter Anwendungsfehler</value>
+  </data>
+  <data name="UnpinFileMenu" xml:space="preserve">
+    <value>Aus Liste _lösen</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+  <data name="YesMenu" xml:space="preserve">
+    <value>_Ja</value>
+  </data>
+  <data name="ZoomMenu" xml:space="preserve">
+    <value>_Zoom</value>
+  </data>
+  <data name="EnglishToolTipDescription" xml:space="preserve">
+    <value>Ändert die Anwendungssprache auf Englisch.</value>
+  </data>
+  <data name="GermanToolTipDescription" xml:space="preserve">
+    <value>Ändert die Anwendungssprache auf Deutsch.</value>
+  </data>
+  <data name="PinToolTip" xml:space="preserve">
+    <value>Dieses Element an die Liste anheften.</value>
+  </data>
+  <data name="UnpinToolTip" xml:space="preserve">
+    <value>Dieses Element aus der Liste löschen.</value>
+  </data>
+  <data name="ClosePreview" xml:space="preserve">
+    <value>Vorschau schließen</value>
+  </data>
+  <data name="ClosePreviewToolTip" xml:space="preserve">
+    <value>Vorschau schließen</value>
+  </data>
+  <data name="ClosePreviewToolTipDescription" xml:space="preserve">
+    <value>Die Seitenansicht schließen.</value>
+  </data>
+  <data name="PageWidth" xml:space="preserve">
+    <value>Seitenbreite</value>
+  </data>
+  <data name="PageWidthToolTip" xml:space="preserve">
+    <value>Seitenbreite</value>
+  </data>
+  <data name="PageWidthToolTipDescription" xml:space="preserve">
+    <value>Dokument zoomen, sodass die Breite der Seite an die Breite  des Fensters angepasst wird.</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Vergrößern</value>
+  </data>
+  <data name="ZoomInToolTip" xml:space="preserve">
+    <value>Vergrößern</value>
+  </data>
+  <data name="ZoomInToolTipDescription" xml:space="preserve">
+    <value>Vergrößert das Dokument.</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Verkleinern</value>
+  </data>
+  <data name="ZoomOutToolTip" xml:space="preserve">
+    <value>Verkleinern</value>
+  </data>
+  <data name="ZoomOutToolTipDescription" xml:space="preserve">
+    <value>Verkleinert das Dokument.</value>
+  </data>
+</root>

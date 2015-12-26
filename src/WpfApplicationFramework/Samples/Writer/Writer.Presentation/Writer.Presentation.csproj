@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2C041533-4BA4-4498-8867-43F87FFD5FAC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Waf.Writer.Presentation</RootNamespace>
+    <AssemblyName>Writer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Resources\Images\Writer.ico</ApplicationIcon>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Output\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationUI" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="DesignData\MockFileService.cs" />
+    <Compile Include="DesignData\MockShellService.cs" />
+    <Compile Include="DesignData\MockView.cs" />
+    <Compile Include="DesignData\SampleMainViewModel.cs" />
+    <Compile Include="DesignData\SampleStartViewModel.cs" />
+    <Compile Include="Services\EnvironmentService.cs" />
+    <Compile Include="Views\StartView.xaml.cs">
+      <DependentUpon>StartView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\ControlResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ConverterResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PrintPreviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RichTextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SaveChangesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\StartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\DoubleToZoomConverter.cs" />
+    <Compile Include="Converters\MenuFileNameConverter.cs" />
+    <Compile Include="Converters\TabFileNameConverter.cs" />
+    <Compile Include="Converters\PercentConverter.cs" />
+    <Compile Include="Converters\TitleConverter.cs" />
+    <Compile Include="DesignData\SampleShellViewModel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Services\PresentationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PrintDialogService.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintPreviewView.xaml.cs">
+      <DependentUpon>PrintPreviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RichTextView.xaml.cs">
+      <DependentUpon>RichTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaveChangesWindow.xaml.cs">
+      <DependentUpon>SaveChangesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellWindow.xaml.cs">
+      <DependentUpon>ShellWindow.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writer.Applications\Writer.Applications.csproj">
+      <Project>{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}</Project>
+      <Name>Writer.Applications</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Delete.png" />
+    <Resource Include="Resources\Images\New.png" />
+    <Resource Include="Resources\Images\Open.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Print.png" />
+    <Resource Include="Resources\Images\Redo.png" />
+    <Resource Include="Resources\Images\Save.png" />
+    <Resource Include="Resources\Images\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\CloseSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Writer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\FlagDe.png" />
+    <Resource Include="Resources\Images\FlagEn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PrintPreview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ClosePreview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Bold.png" />
+    <Resource Include="Resources\Images\Italic.png" />
+    <Resource Include="Resources\Images\Underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Bullets.png" />
+    <Resource Include="Resources\Images\Numbering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DecreaseIndentation.png" />
+    <Resource Include="Resources\Images\IncreaseIndentation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\CheckSpelling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Pinned.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\NewLarge.png" />
+    <Resource Include="Resources\Images\OpenLarge.png" />
+    <Resource Include="Resources\Images\PrintLarge.png" />
+    <Resource Include="Resources\Images\SaveLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EmptyLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PasteLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SelectAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\CheckSpellingLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\CloseLarge.png" />
+    <Resource Include="Resources\Images\CopyLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ZoomInLarge.png" />
+    <Resource Include="Resources\Images\ZoomOutLarge.png" />
+    <Resource Include="Resources\Images\ZoomPageWidth.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

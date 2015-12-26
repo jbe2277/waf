@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d6ad0b7f-853a-4b89-9bfc-4e9c9a735e17" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="08e2dd11-d06e-498f-bb5d-694d7bcbfc7d" name="Waf.Writer.Applications" forbiddenNamespaceDependencies="System.Windows.Controls;System.Windows.Data;System.Windows.Media;System.Media;System.Waf.Presentation">
+      <childLayers>
+        <layer Id="2e57d966-f55a-4f98-91eb-ea8063afd06f" name="Controllers">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="87f713d6-72e0-4c9d-a195-53d8a544527b" direction="Forward">
+              <layerMoniker Id="a74ede8a-b2ac-42b0-8eb4-0c4add639c96" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="df001bb2-0c32-4c6c-ac61-4388bfdb2beb" direction="Forward">
+              <layerMoniker Id="ff052264-ab70-4662-be01-db8e49ec9161" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="4bbce8fa-d922-4605-8963-cc63aec45139" direction="Forward">
+              <layerMoniker Id="c80adbc1-8a5d-401a-adea-978df315d391" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="cc860ed4-0421-44c7-beaa-9cc602acc4ac" direction="Forward">
+              <layerMoniker Id="f27715f9-e1ba-469d-8a91-dd15ef3c71aa" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="22295249-ab51-4b22-97e6-93422085cb66" name="Waf.Writer.Applications.Controllers">
+              <ArtifactNode Label="Waf.Writer.Applications.Controllers" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications.Controllers)" />
+              <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Applications.Controllers)" Label="Waf.Writer.Applications.Controllers" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="a74ede8a-b2ac-42b0-8eb4-0c4add639c96" name="Documents">
+          <references>
+            <reference Id="445fef4d-41b7-450f-b57a-93d57d2e0ce4" name="Waf.Writer.Applications.Documents">
+              <ArtifactNode Label="Waf.Writer.Applications.Documents" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications.Documents)" />
+              <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Applications.Documents)" Label="Waf.Writer.Applications.Documents" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="c80adbc1-8a5d-401a-adea-978df315d391" name="Services">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="31a8da6d-60d3-4174-b492-8f517b0fe943" direction="Forward">
+              <layerMoniker Id="a74ede8a-b2ac-42b0-8eb4-0c4add639c96" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="c6abcbe5-d961-4db6-9124-99abcbe914e9" name="Waf.Writer.Applications.Services">
+              <ArtifactNode Label="Waf.Writer.Applications.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications.Services)" />
+              <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Applications.Services)" Label="Waf.Writer.Applications.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="ff052264-ab70-4662-be01-db8e49ec9161" name="ViewModels">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="a85b5723-b924-4add-abe2-1cf18f39d362" direction="Forward">
+              <layerMoniker Id="a74ede8a-b2ac-42b0-8eb4-0c4add639c96" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="5e30d16b-4ce0-44f4-a638-8e20af141095" direction="Forward">
+              <layerMoniker Id="f27715f9-e1ba-469d-8a91-dd15ef3c71aa" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="15d518b1-ae73-4dad-9fe8-e34405cd5942" direction="Forward">
+              <layerMoniker Id="c80adbc1-8a5d-401a-adea-978df315d391" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="f78e45b9-8053-4039-8afe-70c98e96faff" name="Waf.Writer.Applications.ViewModels">
+              <ArtifactNode Label="Waf.Writer.Applications.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications.ViewModels)" />
+              <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Applications.ViewModels)" Label="Waf.Writer.Applications.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="f27715f9-e1ba-469d-8a91-dd15ef3c71aa" name="Views">
+          <references>
+            <reference Id="78c87b2a-c313-4117-8324-61a92979a153" name="Waf.Writer.Applications.Views">
+              <ArtifactNode Label="Waf.Writer.Applications.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Applications.Views)" Label="Waf.Writer.Applications.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="e15459e3-0af2-4b17-9f9c-ac4628043bf1" name="Waf.Writer.Applications">
+          <ArtifactNode Label="Waf.Writer.Applications" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Applications)" />
+          <ExpandedNode Id="(Assembly=Waf.Writer.Applications)" Label="Waf.Writer.Applications.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=Waf.Writer.Applications.Test)" Label="Waf.Writer.Applications.Test.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.Writer.Applications)" Label="Waf.Writer.Applications" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="8b05c5c1-03da-4014-a041-a235930cd4b5" name="Waf.Writer.Presentation">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="ea9e2bee-fcb8-46e1-9f45-55d19fb8e743" direction="Forward">
+          <layerMoniker Id="08e2dd11-d06e-498f-bb5d-694d7bcbfc7d" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="108797e0-1df2-4ab2-9eee-e18187dfdff8" name="Services">
+          <references>
+            <reference Id="d705c26b-2de6-4b43-94db-690353f5cc96" name="Waf.Writer.Presentation.Services">
+              <ArtifactNode Label="Waf.Writer.Presentation.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Presentation.Services)" />
+              <ExpandedNode Id="(Assembly=Writer)" Label="Writer.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Presentation.Services)" Label="Waf.Writer.Presentation.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="91428003-14a5-440e-8876-d4fa9cf06233" name="Views">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="f14c1807-364c-4354-ad07-323d94fa3f88" direction="Forward">
+              <layerMoniker Id="a524ca03-79e6-498e-a841-dfb3596715b2" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="b3029ac4-5534-43bd-aaba-39c92b3bc467" name="Waf.Writer.Presentation.Views">
+              <ArtifactNode Label="Waf.Writer.Presentation.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Presentation.Views)" />
+              <ExpandedNode Id="(Assembly=Writer)" Label="Writer.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Presentation.Views)" Label="Waf.Writer.Presentation.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="82dbb6b0-f2b5-4574-b8c3-0528d2a3cd6c" name="DesignData">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="cfeec452-2f9b-4b97-983e-9d4bc1a0ff27" direction="Forward">
+              <layerMoniker Id="91428003-14a5-440e-8876-d4fa9cf06233" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="48778d81-1560-45b5-abc6-062848fa9dbf" name="Waf.Writer.Presentation.DesignData">
+              <ArtifactNode Label="Waf.Writer.Presentation.DesignData" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Presentation.DesignData)" />
+              <ExpandedNode Id="(Assembly=Writer)" Label="Writer.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Presentation.DesignData)" Label="Waf.Writer.Presentation.DesignData" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="a524ca03-79e6-498e-a841-dfb3596715b2" name="Converters">
+          <references>
+            <reference Id="0dae7677-3d6e-4e3d-8902-8170d7fff5f2" name="Waf.Writer.Presentation.Converters">
+              <ArtifactNode Label="Waf.Writer.Presentation.Converters" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Presentation.Converters)" />
+              <ExpandedNode Id="(Assembly=Writer)" Label="Writer.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.Writer.Presentation.Converters)" Label="Waf.Writer.Presentation.Converters" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="deeb9241-bf3f-4108-afe8-fff125a5ff5b" name="Waf.Writer.Presentation">
+          <ArtifactNode Label="Waf.Writer.Presentation" Category="CodeSchema_Namespace" Id="(Namespace=Waf.Writer.Presentation)" />
+          <ExpandedNode Id="(Assembly=Writer)" Label="Writer.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=Waf.Writer.Presentation.Test)" Label="Waf.Writer.Presentation.Test.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.Writer.Presentation)" Label="Waf.Writer.Presentation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

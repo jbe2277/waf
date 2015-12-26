@@ -1,0 +1,10 @@
+﻿<vm:BookViewModel 
+    xmlns:vm="clr-namespace:Waf.BookLibrary.Library.Applications.ViewModels;assembly=Waf.BookLibrary.Library.Applications"
+    xmlns:bo="clr-namespace:Waf.BookLibrary.Library.Domain;assembly=Waf.BookLibrary.Library.Domain">
+    
+    <vm:BookViewModel.Book>
+        <bo:Book Title="Serenity, Vol 1: Those Left Behind" Author="Joss Whedon, Brett Matthews, Will Conrad"
+                 Publisher="Dark Horse" PublishDate="08/02/2006" Isbn="1593074492" Language="English" Pages="104"/>
+    </vm:BookViewModel.Book>
+    
+</vm:BookViewModel>

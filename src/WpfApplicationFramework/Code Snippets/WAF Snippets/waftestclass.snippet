@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>waftestclass</Title>
+      <Shortcut>waftestclass</Shortcut>
+      <Description>Code snippet for an empty unit test class</Description>
+      <Author>WPF Application Framework (WAF)</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>Microsoft.VisualStudio.TestTools.UnitTesting</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Class name</ToolTip>
+          <Default>UnitTestClass</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[[TestClass]
+  public class $name$
+	{
+		public TestContext TestContext { get; set; }
+    
+    
+    #region Additional test attributes
+    // 
+    //You can use the following additional attributes as you write your tests:
+    //
+    //Use ClassInitialize to run code before running the first test in the class
+    //[ClassInitialize]
+    //public static void ClassInitialize(TestContext testContext)
+    //{
+    //}
+    //
+    //Use ClassCleanup to run code after all tests in a class have run
+    //[ClassCleanup]
+    //public static void ClassCleanup()
+    //{
+    //}
+    //
+    //Use TestInitialize to run code before running each test
+    //[TestInitialize]
+    //public void TestInitialize()
+    //{
+    //}
+    //
+    //Use TestCleanup to run code after each test has run
+    //[TestCleanup]
+    //public void TestCleanup()
+    //{
+    //}
+    //
+    #endregion
+    
+    
+    $selected$$end$
+	}]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

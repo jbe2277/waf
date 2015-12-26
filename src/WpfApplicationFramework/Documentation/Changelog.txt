@@ -1,0 +1,401 @@
+Changelog
+---------
+
+Legend: B (Breaking Change); O (Marked member as obsolete)
+
+
+Version 3.2.0.450 (Release)
+* WAF: Add Cache class.
+* WAF: Enhance the AssertHelper methods CanExecuteChangedEvent and PropertyChangedEvent.
+* WAF: Automatic cleanup of MockDialogView.ShowDialogAction when the MEF container gets disposed.
+* BookLibrary: Update to EntityFramework version 6.1.3.
+* BookLibrary: Add a ViewCache to improve start-up performance.
+* InfoMan: Use IReadOnlyObservableList interface so that casting is not necessary anymore.
+* Samples: Replace IEnumerable<T> with IReadOnlyList<T> for a lot members.
+
+
+Version 3.1.0.450 (Release)
+* WAF: Add IReadOnlyObservableList interface and provide the ReadOnlyObservableList class that implements this interface.
+* WAF: SynchronizingCollection implements the IReadOnlyObservableList interface.
+* WAF: Add ThrottledAction class.
+* WAF: Add a constructor for FileType that allows to specify multiple file extensions.
+* WAF: Add UnitTestSynchronizationContext and UnitTestSynchronizationContextExtensions class.
+* Writer: Rename ApplicationController into ModuleController.
+
+
+Version 3.0.0.450 (Release)
+* Update the documentation.
+
+
+Version 3.0.0.440 (Release Candidate)
+* Samples: Use ValueConverters via StaticResource instead of x:Static.
+
+
+Version 3.0.0.6 (Milestone 6)
+* WAF: Change the ValidationErrorsConverter to a multi value converter. This way it is possible to fix an
+       update issue.
+O WAF: The usage of the ValidationErrorsConverter as a value converter is obsolete. Use it now as a multi value converter.
+* BookLibrary: Update the usage of the ValidationErrorsConverter.
+* InfoMan: Update the usage of the ValidationErrorsConverter.
+* InfoMan: Persist the data via DataContractSerializer and Package API.
+* Samples: Fix the ResourceDictionaries and the DesignTimeResources.
+* Samples: Simplify the implementation for unhandled exceptions.
+
+
+Version 3.0.0.5 (Milestone 5)
+* WAF: Add the ValidatableModel class that implements the INotifyDataErrorInfo interface.
+* WAF: Improve ValidationErrorsConverter to support ValidationResult objects as well.
+* BookLibrary: Refactor the domain objects to use the new ValidatableModel class.
+* InfoMan: Refactor the PresentationService implementations to overcome a WPF bug.
+* Samples: Fix bug in upgrade the settings file from a previous version.
+
+
+Version 3.0.0.4 (Milestone 4)
+* WAF: Improve thread-safety of ApplicationInfo.
+* BookLibrary: Upgrade to Entity Framework 5 and use the code first approach.
+* BookLibrary: Use CustomValidation to validate the PublishDate field.
+* BookLibrary: Improve the workaround that the DataGrid might become read only when an invalid cell is ignored.
+* Samples: Upgrade the settings file from a previous version.
+* Unit tests: Refactor the namespaces so that unit tests start with "Test".
+* Unit tests: Add runsettings configuration file to exclude the unit test projects from code coverage.
+
+
+Version 3.0.0.3 (Milestone 3)
+- WAF: Add BoolToVisibility converter. This one allows inverting the result as well.
+- WAF: Add reusable Mock classes in the UnitTesting project.
+- Samples: Enable multicore JIT to improve the app launch performance.
+- Writer: Replace the menu and toolbar with Ribbons.
+- Writer: Show recent file list in the application menu of the Ribbons.
+- InfoMan: Replace the own EmailValidationAttribute with the .NET EmailAddressAttribute.
+- InfoMan: Some usability improvements.
+- BookLibrary: Fix DataGrid bug that when an invalid row is deleted then no other cell could be edited anymore.
+
+
+Version 3.0.0.2 (Milestone 2)
+O WAF: WafConfiguration.Debug property is obsolete because it is not used anymore by the infrastructure.
+O WAF: Controller base class is obsolete because the Add/RemoveWeakEventListener methods are not needed anymore
+       with the new PropertyChangedEventManager and CollectionChangedEventManager implementation.
+O WAF: DataModel base class is obsolete because the Add/RemoveWeakEventListener methods are not needed anymore
+       with the new PropertyChangedEventManager and CollectionChangedEventManager implementation.
+- WAF: Add the SetProperty method and update the RaisePropertyChanged method with the [CallerMemberName] attribute
+       in the Model class.
+- Snippets: Adapt the "wafpropn" code snippet to create the simplified property setter.
+- Samples: Update all properties to use the new set property infrastructure.
+- Samples: Replace all AddWeakEventListener calls with the new method PropertyChangedEventManager.AddHandler.
+           The same is done for all RemoveWeakEventListener calls.
+- Samples: Replace all DataModel classes with Model classes
+- Samples: Remove all Controller classes.
+- Samples: Use ExportFactory<T> instead of the CompositionContainer.
+
+
+Version 3.0.0.1 (Milestone 1)
+B All: Upgrade all projects to target .NET Framework 4.5.
+B WAF: Remove the ConverterCollection. Please use the compatible SynchronizingCollection instead.
+B WAF: Remove the second ViewModel constructor with the isChild parameter.
+B WAF: Remove the StringBuilderExtensions class. Please use the string.Join(Environment.NewLine, stringList) method 
+       instead of the AppendInNewLine extension method.
+- WAF: Remove weak event workaround from DelegateCommand because the memory leak is fixed in .NET 4.5.
+- Samples: Use new MEF diagnostics settings (CompositionOptions.DisableSilentRejection).
+- BookLibrary: Upgrade the database to SQL Server Compact 4.0.
+
+
+Version 2.5.0.400 (Release)
+- Update the documentation.
+- InfoMan: Write the documentation.
+
+
+Version 2.5.0.390 (Release Candidate)
+- WAF: Fix recent file list remove issue.
+- WAF: Minor code improvements.
+- BookLibrary: Fix Blend design time support of ReportView.
+- InfoMan: Minor improvements.
+- All: Update architecture layer diagrams.
+- All: Unit tests: Improve TestClassBase implementations.
+
+
+Version 2.5.0.8 (Milestone 8)
+- WAF: Mark the class DataModel as serializable.
+- InfoMan: Minor improvements.
+- InfoMan: Add unit tests for all modules.
+
+
+Version 2.5.0.7 (Milestone 7)
+- WAF: Add CollectionHelper.GetNextElementOrDefault method.
+- InfoMan: Support creating a new email and saving it in the Send box.
+- InfoMan: New email: Select the email addresses from the address book.
+- InfoMan: Show the number of items in the navigation pane.
+- InfoMan: Support the deletion of emails.
+- InfoMan: Add SearchBox control in Common.Presentation and use it in the EmailClient and the AddressBook module.
+- InfoMan: Add design data to the AddressBook views.
+
+
+Version 2.5.0.6 (Milestone 6)
+- InfoMan: Add the AddressBook module.
+- InfoMan: Add a toolbar which can be manipulated by the modules.
+- InfoMan: Improve focus handling and add further access keys.
+- InfoMan: Update the architecture diagram.
+- BookLibrary: Improve performance of the filter if no FilterText was entered.
+
+
+Version 2.5.0.5 (Milestone 5)
+- WAF: Add IsInDesignMode property to the WafConfiguration class.
+- WAF: Introduce the IModuleController interface.
+- WAF: Add InvertBooleanConverter class.
+- Writer: Apply new namespace schema.
+- InfoMan: Replace the EmailClient application with the new modular Information Manager sample application.
+
+
+Version 2.5.0.4 (Milestone 4)
+- BookLibrary: Add ItemsElement which works in a FlowDocument similar as an ItemsControl.
+- BookLibrary: Add a new report to list all borrowed books.
+
+
+Version 2.5.0.3 (Milestone 3)
+O WAF: Mark the StringBuilderExtensions class as obsolete because the AppendInNewLine method can be replaced with string.Join.
+O WAF: Mark the ConverterCollection<TNew, TOld> as obsolete.
+- WAF: Introduce the SynchronizingCollection<T, TOriginal> which does the same as the ConverterCollection did.
+- BookLibrary: Refactor the App.xaml.cs bootstrapping code to support modules and extensions.
+- BookLibrary: Read the simple module/extension configuration from the App.config file.
+- BookLibrary: Add the reporting extension.
+- BookLibrary: Add a report (FlowDocument) with design time preview in the Visual Studio WPF Designer or Expression Blend.
+- BookLibrary: Add BindableTable and ContentElement to support binding in a FlowDocument.
+- BookLibrary: Update the EntityController to support SQL Compact Edition 4.0. Note: The BookLibrary is still using SQL CE 3.5.
+
+
+Version 2.5.0.2 (Milestone 2)
+O WAF: Mark the ViewModel constructor with the child parameter as obsolete.
+- WAF: Introduce a Remove method in the RecentFileList class.
+- BookLibrary: Fix the missing update of the person name in the BookListView and BookView.
+- Writer: Add a context menu for the recent file list which allows the user to remove files.
+- Writer: FileController.OpenCore removes the file from the RecentFileList when the file was not found.
+
+
+Version 2.5.0.1 (Milestone 1)
+- WAF: Add ValidationHelper class which helps to determine if a View is valid.
+- WAF: Implement the DelegateCommand.CanExecuteChanged event as weak event. This is a workaround for a WPF 4 memory leak.
+- WAF: Fix a potential memory leak in AssertHelper.
+- BookLibrary: Replace manual validation tracking code with the new ValidationHelper.
+- BookLibrary: Add error handling for the create email operation.
+- EmailClient: Replace manual validation tracking code with the new ValidationHelper.
+- Samples: Hide the red validation error rectangle in all TextBoxes.
+
+
+Version 2.0.0.400 (Release)
+- BookLibrary: Fix a bug in the validation detection.
+- EmailClient: Fix a bug in the validation detection.
+- Writer: Fix design time support.
+- Samples: Rewrite the documentation.
+
+
+Version 2.0.0.390 (Release Candidate)
+- WAF: Ensure that the methods of the DataErrorInfoExtensions never return null.
+- WAF: ApplicationInfo.ApplicationPath returns an empty string instead of null when the entry assembly doesn't exist.
+- Writer: Modify the printing and the XPS export to use a one column instead of two column page printing.
+- Writer: Set keyboard focus into the text after closing the PrintPreview view.
+- BookLibrary: Improve focus handling and add access keys for the first label in the detail views.
+- EmailClient: Improve focus handling.
+- EmailClient: Change wizard button text from Next to Finish when the last page is shown.
+- EmailClient: Show a tooltip with explanations for a disabled Back or Next button.
+
+
+Version 2.0.0.7 (Milestone 7)
+B WAF: Change IFileDialogService interface to get the owner passed in the methods.
+B WAF: Change FileDialogService implementation to get the owner passed in the methods.
+B WAF: Change IMessageService interface to get the owner passed in the methods.
+B WAF: Change MessageService implementation to get the owner passed in the methods.
+- WAF: Extend the FileDialogServiceExtensions to support all method overloads without the owner parameter as well.
+- WAF: Add the MessageServiceExtensions class to support all method overloads without the owner parameter as well.
+- Writer: Adapt the application to pass the owner to the FileDialogService and the MessageService.
+- Writer: Add a transition animation when the start page is replaced with the document page and vice versa.
+- Writer: Refactor the DocumentManager into a FileController and a FileService.
+- BookLibrary: Adapt the application to pass the owner to the MessageService. 
+
+
+Version 2.0.0.6 (Milestone 6)
+- WAF: Introduce the RecentFileList class
+- Writer: Use the RecentFileList and show the recent files in the menu and the start page.
+- Writer: Add the start page.
+- Writer: Enable the application to open files which are opened directly with the Windows Explorer.
+          Note: To see this feature you must register the .rtf file extension with the Writer.exe file. You might do this with
+				the Windows Explorer's Open With context menu and then select Choose Default Program.
+- Writer: Implement an error handling when a file cannot be opened or saved.
+- Writer: Show the active document name in the window title.
+- Writer: Implemented the spell checking feature of WPF with a custom Context Menu. 
+          Note: If it doesn't work then you might have to install a .NET Framework language pack first.
+
+
+Version 2.0.0.5 (Milestone 5)
+B WAF: Make base classes 'abstract': Model, DataModel
+B WAF: Rename static class ViewExtensions to ViewHelper.
+- Writer: Use consistent dialog result handling for modal dialogs.
+- Writer: Change zoom behavior.
+- Writer: Add formatting: Bold, Italic, Underline, Numbered List, Bullet List, Decrease Indentation and Increase Indentation.
+- Writer: Add context menu for RichTextBox.
+- BookLibrary: EntityObservableCollection executes the ObjectSet operations before it raises the CollectionChanged events.
+
+
+Version 2.0.0.4 (Milestone 4)
+B WAF: Extend IMessageService with two new methods for asking the user a question. This replaces the BookLibrary IQuestionService.
+B WAF: Change the base type of the ConverterCollection from ObservableCollection to ReadOnlyObservableCollection.
+- WAF: Extend the FileDialogService behavior: The directory name of the parameter defaultFileName is used as initial directory.
+- WAF: Add the StringFormatConverter.
+- WAF: Extend the ApplicationInfo class with the new ApplicationPath property.
+- Writer: Save and restore window location and size.
+- BookLibrary: Save and restore window location and size.
+- BookLibrary: Enable sorting of the Lend To column.
+- BookLibrary: Deploy the database file from the application directory into the user data directory.
+- BookLibrary: Bugfix: Select the correct item after an item is deleted from a sorted/filtered DataGrid.
+
+
+Version 2.0.0.3 (Milestone 3)
+- WAF: Add new class DataModel.
+- WAF: Add new class ConverterCollection.
+- BookLibrary: Use Template column type for the Lend To column and allow the user to open the Lend To dialog via cell click.
+               This feature uses the new DataModel and ConverterCollection class.
+- BookLibrary: Use Hyperlink column type for the email address column and allow the user to create a new email via click.
+- BookLibrary: Simplify the EntityObservableCollection by using the new IObjectSet<T> interface.
+- BookLibrary: Select the next remaining element after removing of DataGrid elements.
+- BookLibrary: Bugfix: When the DataGrid is in edit mode then the Search box doesn't work anymore (Exception).
+- BookLibrary: Bugfix: When the DataGrid is in edit mode and a new Item is added the Search box and the Del key doesn't work anymore.
+
+
+Version 2.0.0.2 (Milestone 2)
+- BookLibrary: Use DataGrid for the tables.
+- BookLibrary: Use DatePicker for PublishDate.
+- BookLibrary: Implement search (filter) feature.
+- BookLibrary: Improve validation support for the ShellWindow.
+- BookLibrary: Improve keyboard navigation via access keys.
+- BookLibrary: Improve ShellWindow design time support.
+- Writer: Remove the Ctrl+Tab shortcut because the TabControl supports this out of the box.
+- EmailClient: Improve validation support for the wizard.
+- Samples: Use a consistent way to access the associated ViewModel inside a View (code-behind).
+- Samples: Improve MenuItem.InputGestureText.
+
+
+Version 2.0.0.1 (Milestone 1)
+- WAF: Add a new helper extension method for the string builder.
+- WAF: Add new validation extension methods for the IDataErrorInfo interface.
+- WAF: Add the DataErrorInfoSupport class which brings the IDataErrorInfo with the DataAnnotations validation together.
+- WAF: Add the ValidationErrorsConverter which can be used to bind the ToolTip to the error messages.
+- BookLibrary: Update the validation code to use the DataAnnotations validation.
+- EmailClient: Add validation support for the wizard.
+- EmailClient: Minor update in Controllers.
+- Remove the ShortcutKey sample application
+- Update Architecture project
+
+
+Version 1.0.0.400 (Release)
+- Update ShortcutKey documentation
+
+
+Version 1.0.0.390 (Release Candidate)
+B Change all projects to .NET Framework 4 Client Profile.
+B Upgrade the solution and project files to Visual Studio 2010.
+- Add an Architecture project which verifies the layer dependencies in Release mode.
+- Fix and suppress code analysis warnings.
+- ShortcutKeySample: Use Binding for the KeyBinding Command property.
+- Writer: Use Binding for the KeyBinding Command property.
+- BookLibrary: Use Binding for the KeyBinding Command property.
+- BookLibrary: Add DesignData for better design time support.
+
+
+Version 1.0.0.350 (Release)
+- Minor improvements in the samples.
+- Documentation updated.
+
+
+Version 1.0.0.90 (Release Candidate)
+B WAF: Moved Model class from System.Waf.Domain into the System.Waf.Foundation namespace.
+- ShortcutKey: Minor updates
+- LocalizationSample: Minor updates
+- ViewModel: Minor updates
+- Writer: Minor updates
+- BookLibrary: Minor updates  
+
+
+Version 1.0.0.11 (Milestone 11)
+B WAF: Moved Model class from System.Waf.Domain into the System.Waf.Foundation namespace.
+- WAF: Improved the unit tests and increased the code coverage.
+- BookLibrary: Create unit tests for the Presentation and Applications project.
+- BookLibrary: Minor changes in bootstrapper (App.xaml.cs)
+- EmailClient: Minor code improvements
+
+
+Version 1.0.0.10 (Milestone 10)
+- BookLibrary: Rewrite the validation part - implement IDataErrorInfo.
+- Use the new version of MEF "Preview 9".
+- Add new code snippet "wafvalconv" which creates a WPF value converter class.
+- Add the new design time tags for Visual Studio 2010 data binding support.
+- EmailClient: Fix minor issue in WPF styles
+- BookLibrary: Fix minor issue in WPF styles
+- BookLibrary: General code improvements
+
+
+Version 1.0.0.9 (Milestone 9)
+- WAF: Minor code improvements found with code inspection.
+- BookLibrary: Add a new sample application which uses the Entity Framework and the SQL Server CE.
+- Writer: Add PresentationController to initialize the correct current culture.
+- Writer: Minor style improvements
+- EmailClient: Minor style improvements
+
+
+Version 1.0.0.8 (Milestone 8)
+B WAF: Rename ViewModel<T>.View property to ViewCore and change it from public to protected.
+B WAF: ViewModel.View property exposes now only object and not IView.
+- WAF: Add new argument null checks in public methods.
+B UnitTesting: Remove the DispatcherUtil class because the DoEvents method is not necessary anymore.
+B UnitTesting: Rename the AssertUtil class to AssertHelper.
+- Writer: Add the introduction Readme.doc.
+- Writer: Bug fix for DocumentManager Save handling.
+- Writer: Minor improvements in the Writer sample application.
+
+
+Version 1.0.0.7 (Milestone 7)
+B Remove the IWeakEventListener interface and the ReceiveWeakEvent method from the Controller and the ViewModel
+  base class. Use the AddWeakEventListener method instead.
+- Use the new version of MEF "Preview 8".
+- Add code snippets for common developer tasks.
+- Add print preview and print functionality in the Writer sample application.
+
+
+Version 1.0.0.6 (Milestone 6)
+- Add WafConfiguration.Debug. When this property is set to true then WAF helps to find coding errors.
+- Add the AssertUtil.CanExecuteChangedEvent method.
+- Add unit tests for the Writer sample application.
+- Minor improvements and bug fixing in the Writer application.
+
+
+Version 1.0.0.5 (Milestone 5)
+- Note: WAF requires the System.ComponentModel.Composition.dll library since this version.
+- Add method 'AddWeakEventListener' and 'RemoveWeakEventListener' to Controller and ViewModel base class 
+  which simplifies the use of the weak event pattern.
+O Mark the method 'ReceiveWeakEvent' in Controller and ViewModel as obsolete. 
+- Add the GetViewModel extension method for the IView interface.
+- Add a basic message service (IMessageService)
+- Add a basic file dialog service (IFileDialogService)
+- Writer: A new sample application which is more a realistic than the other samples.
+
+
+Version 1.0.0.4 (Milestone 4)
+- Simplify unit testing of ViewModel implementations (DispatcherUtil.DoEvents is not necessary anymore)
+- Improve caching of ApplicationInfo properties
+- Add Company property to ApplicationInfo class
+- Use the new version of MEF "Preview 7" for the ViewModel sample
+
+
+Version 1.0.0.3 (Milestone 3)
+- Use the new version of MEF: Preview 6
+- Minor corrections in the Readme documentations
+
+
+Version 1.0.0.2 (Milestone 2)
+- Add the AssertUtil.ExpectedException<T> method and adapt the unit tests to use this method
+  instead of the [ExpectedException] attributes.
+- Fix bug in LocalizationSample/App.config
+- Add Readme.doc to Localization Sample
+- Add Readme.doc to ShortcutKey Sample
+- Add Readme.doc to ViewModel Sample
+
+
+Version 1.0.0.1 (Milestone 1)
+- Initial version

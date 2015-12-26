@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="bc0330fc-2109-4d84-9b79-b1175a642350" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="17451330-8567-4973-ae6b-ea049d2f44a5" name="Comment1">
+      <body>Root Namespace: Waf.InformationManager.EmailClient.Modules</body>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="424e4111-4155-4103-8f4c-e337fbaf180b" name="Presentation">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e201422c-507f-4873-8199-7598b49c6e07" direction="Forward">
+          <layerMoniker Id="d8282367-1ff7-427b-91c5-b878ee68a768" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="3ce1718a-5731-4880-a35e-ba39bc68bfd8" name="Views">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="40e9873d-0a97-4ce9-bc41-59f9ec398a2e" direction="Forward">
+              <layerMoniker Id="4e885f75-0c58-47fa-9e3d-fb3cf5d351cd" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="891401d4-ba97-484b-9ca2-e9800ca7bdf7" direction="Forward">
+              <layerMoniker Id="ac01184c-f909-41ef-bbc0-d1b7c866bde1" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="ca3ad188-6424-4962-b3a5-b7f5bc32080b" name="Waf.InformationManager.EmailClient.Modules.Presentation.Views">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Views)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="1a0b9d82-f9f8-47e3-bdcc-8c1ed833a123" name="DesignData">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="d2f98ef5-4cce-40df-ac00-52791d0d6534" direction="Forward">
+              <layerMoniker Id="74fd89f6-cfee-476a-9c0a-5cad07e05762" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="e6097b42-ae83-4aa9-ba58-b421a0d767b9" name="Waf.InformationManager.EmailClient.Modules.Presentation.DesignData">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation.DesignData" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.DesignData)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.DesignData)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.DesignData" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="139f7d30-e148-4043-b634-6ded3d9b2c15" name="Selectors">
+          <references>
+            <reference Id="4c53da17-f033-45cb-8698-090d44045d69" name="Waf.InformationManager.EmailClient.Modules.Presentation.Selectors">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation.Selectors" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Selectors)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Selectors)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.Selectors" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="c915b189-9cde-4c63-99b7-e4b13787fbc5" name="Services">
+          <references>
+            <reference Id="721990f5-c05f-4d0b-94c9-3ce0a210a178" name="Waf.InformationManager.EmailClient.Modules.Presentation.Services">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation.Services" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Services)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Services)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="bb070730-caf2-45d9-924f-151d1e34b085" name="Converters">
+          <references>
+            <reference Id="517c5861-c1c9-4d1e-9d8d-74d8badbd879" name="Waf.InformationManager.EmailClient.Modules.Presentation.Converters">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation.Converters" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Converters)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation.Converters)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.Converters" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="8e32deb8-fe3b-40a6-b230-1bd1c83ef737" name="Waf.InformationManager.EmailClient.Modules.Presentation">
+          <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Presentation" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Presentation)" Label="Waf.InformationManager.EmailClient.Modules.Presentation" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="74fd89f6-cfee-476a-9c0a-5cad07e05762" name="Applications">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="5351272b-a635-4ff9-8482-42b46d927ff7" direction="Forward">
+          <layerMoniker Id="d8282367-1ff7-427b-91c5-b878ee68a768" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="81cde0b8-84bc-4484-87c4-d1e506ec8344" name="Controllers">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="fb817b37-ce75-4e4c-adc8-44d8507c1269" direction="Forward">
+              <layerMoniker Id="ac01184c-f909-41ef-bbc0-d1b7c866bde1" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="6497c45e-482c-4efe-a255-1d28b3a4ad5c" direction="Forward">
+              <layerMoniker Id="aa2f6a9c-d5ef-44f8-b7a7-05c225aa0b10" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="901c9809-c1dd-49a7-9ee5-eeab2cc8fbe6" name="Waf.InformationManager.EmailClient.Modules.Applications.Controllers">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Applications.Controllers" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.Controllers)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.Controllers)" Label="Waf.InformationManager.EmailClient.Modules.Applications.Controllers" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="ac01184c-f909-41ef-bbc0-d1b7c866bde1" name="ViewModels">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="38065170-d176-4b0c-9d9f-963a67c53c5a" direction="Forward">
+              <layerMoniker Id="4e885f75-0c58-47fa-9e3d-fb3cf5d351cd" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="5e337434-d3f8-44dc-a0a3-0e0d6235c6ce" name="Waf.InformationManager.EmailClient.Modules.Applications.ViewModels">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Applications.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.ViewModels)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.ViewModels)" Label="Waf.InformationManager.EmailClient.Modules.Applications.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="4e885f75-0c58-47fa-9e3d-fb3cf5d351cd" name="Views">
+          <references>
+            <reference Id="cd642811-4ab6-410e-ab1b-5122280aa5c4" name="Waf.InformationManager.EmailClient.Modules.Applications.Views">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Applications.Views" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.Views)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.Views)" Label="Waf.InformationManager.EmailClient.Modules.Applications.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="aa2f6a9c-d5ef-44f8-b7a7-05c225aa0b10" name="SampleData">
+          <references>
+            <reference Id="d8a85a7c-99a7-4688-8f22-e102bb30be27" name="Waf.InformationManager.EmailClient.Modules.Applications.SampleData">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Applications.SampleData" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.SampleData)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications.SampleData)" Label="Waf.InformationManager.EmailClient.Modules.Applications.SampleData" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="de40d38a-3a2f-46d8-a12e-5b2910422ad8" name="Waf.InformationManager.EmailClient.Modules.Applications">
+          <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Applications" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Applications)" Label="Waf.InformationManager.EmailClient.Modules.Applications" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="d8282367-1ff7-427b-91c5-b878ee68a768" name="Domain">
+      <childLayers>
+        <layer Id="4d161a36-9984-493a-b0a3-e4b9ce18b0d4" name="Emails">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="ebcf1413-4161-4b36-bc3b-1e6d0ed7c937" direction="Forward">
+              <layerMoniker Id="ce46c373-a168-4418-9bdb-b25a4cb7b7f8" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="2a6296e2-a0d5-4d48-8238-2a8386080bf9" name="Waf.InformationManager.EmailClient.Modules.Domain.Emails">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Domain.Emails" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain.Emails)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Domain)" Label="Waf.InformationManager.EmailClient.Modules.Domain.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain.Emails)" Label="Waf.InformationManager.EmailClient.Modules.Domain.Emails" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="ce46c373-a168-4418-9bdb-b25a4cb7b7f8" name="AccountSettings">
+          <references>
+            <reference Id="0a1308fb-e4f6-44f2-ba6e-d9550fe3c301" name="Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings">
+              <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings)" />
+              <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Domain)" Label="Waf.InformationManager.EmailClient.Modules.Domain.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings)" Label="Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="29ee2a90-b244-4d23-b0fb-331394c68d48" name="Waf.InformationManager.EmailClient.Modules.Domain">
+          <ArtifactNode Label="Waf.InformationManager.EmailClient.Modules.Domain" Category="CodeSchema_Namespace" Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain)" />
+          <ExpandedNode Id="(Assembly=Waf.InformationManager.EmailClient.Modules.Domain)" Label="Waf.InformationManager.EmailClient.Modules.Domain.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=Waf.InformationManager.EmailClient.Modules.Domain)" Label="Waf.InformationManager.EmailClient.Modules.Domain" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

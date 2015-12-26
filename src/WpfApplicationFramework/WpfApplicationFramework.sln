@@ -1,0 +1,547 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{316D2E5D-61D2-403E-805B-F97F1C06BF46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WpfApplicationFramework", "WpfApplicationFramework", "{88F6DB3A-1BF4-46E3-81CA-04E637DD0368}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E2A1FC8-F9B2-49AE-B6D7-0771D3F15368}"
+	ProjectSection(SolutionItems) = preProject
+		CodeAnalysisDictionary.xml = CodeAnalysisDictionary.xml
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+		WpfApplicationFramework.ruleset = WpfApplicationFramework.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmailClient", "EmailClient", "{74B96B02-FF13-48C1-9A18-F99B27CBBC0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{ED400E91-5417-4177-89E4-6D6C30D7245C}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\Localization\LocalizationSample.docx = Samples\Localization\LocalizationSample.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{2B4F71F9-E177-4B89-9612-4D29D65A9CB9}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Changelog.txt = Documentation\Changelog.txt
+		Documentation\Checklist.txt = Documentation\Checklist.txt
+		Documentation\License.txt = Documentation\License.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writer", "Writer", "{2D498396-C10C-4A20-B24E-FD554FFC49EF}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\Writer\Writer.docx = Samples\Writer\Writer.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Snippets", "Code Snippets", "{93CDC3EA-AB95-4537-8B66-46D0656EF265}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookLibrary", "BookLibrary", "{1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\BookLibrary\BookLibrary.docx = Samples\BookLibrary\BookLibrary.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{F67B337D-296F-4CD3-BC35-3CCE29A33F86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InformationManager", "InformationManager", "{1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\InformationManager\InformationManager.docx = Samples\InformationManager\InformationManager.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D9BAF38A-4FF2-467D-A585-B7843488F115}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AddressBook", "AddressBook", "{D636F237-2893-45D1-870B-605F8A48BB6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{79F77420-A4F7-4712-9DAF-D862F4E19157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationFramework", "WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj", "{27B67DFE-0BF1-4435-B036-E4C083EAEA03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationFramework.Test", "WpfApplicationFramework\WpfApplicationFramework.Test\WpfApplicationFramework.Test.csproj", "{48DD2458-B7EE-4709-998C-F1568B51F32A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationFramework.UnitTesting", "WpfApplicationFramework\WpfApplicationFramework.UnitTesting\WpfApplicationFramework.UnitTesting.csproj", "{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalizationSample", "Samples\Localization\LocalizationSample\LocalizationSample.csproj", "{60A8CE03-3493-47E1-8D83-3FD59D2B7B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Presentation", "Samples\Writer\Writer.Presentation\Writer.Presentation.csproj", "{2C041533-4BA4-4498-8867-43F87FFD5FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Applications", "Samples\Writer\Writer.Applications\Writer.Applications.csproj", "{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Applications.Test", "Samples\Writer\Writer.Applications.Test\Writer.Applications.Test.csproj", "{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Presentation.Test", "Samples\Writer\Writer.Presentation.Test\Writer.Presentation.Test.csproj", "{03FE77F4-4C93-4139-8825-E0070EE3F860}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code Snippets", "Code Snippets\Code Snippets.csproj", "{F0C5BD31-CFF7-4B0B-8483-7471447740D8}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Architecture", "Architecture\Architecture.modelproj", "{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Applications", "Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj", "{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Presentation", "Samples\BookLibrary\BookLibrary.Reporting.Presentation\BookLibrary.Reporting.Presentation.csproj", "{0257AACF-AE9A-4002-8E2E-C98D6FD17437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Applications", "Samples\BookLibrary\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj", "{0985021E-9AD0-455A-A26B-2B8CEBD26297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Applications.Test", "Samples\BookLibrary\BookLibrary.Library.Applications.Test\BookLibrary.Library.Applications.Test.csproj", "{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Domain", "Samples\BookLibrary\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj", "{DB087110-BDBA-4E9D-813F-EF08295ECF8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Domain.Test", "Samples\BookLibrary\BookLibrary.Library.Domain.Test\BookLibrary.Library.Domain.Test.csproj", "{11F1884B-17EC-49F3-8BB3-B19156D3089F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Presentation", "Samples\BookLibrary\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj", "{0F051A17-542A-4981-8155-A99F547E4442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Presentation.Test", "Samples\BookLibrary\BookLibrary.Library.Presentation.Test\BookLibrary.Library.Presentation.Test.csproj", "{684434AD-70CA-4355-87B8-6B11E921D393}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Applications.Test", "Samples\BookLibrary\BookLibrary.Reporting.Applications.Test\BookLibrary.Reporting.Applications.Test.csproj", "{D9F56691-FA01-43C2-A44E-259CF950E7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembler", "Samples\InformationManager\Assembler\Assembler.csproj", "{66F216DA-838E-463B-B5A5-8631177F0079}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8} = {2947C827-FFC2-4E77-A8FD-E54A009ED4A8}
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885} = {99901356-AD33-4E23-8F0E-2A9DFCCF4885}
+		{7DB633C2-1EA6-420F-9BA9-320D42289119} = {7DB633C2-1EA6-420F-9BA9-320D42289119}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Applications", "Samples\InformationManager\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj", "{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Presentation", "Samples\InformationManager\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj", "{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Presentation", "Samples\InformationManager\Common.Presentation\Common.Presentation.csproj", "{23854875-DDBB-4BB9-81B5-637FCA6B1831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Interfaces", "Samples\InformationManager\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj", "{664D5E11-1BAB-4D48-BEF5-775DB427D691}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Domain", "Samples\InformationManager\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj", "{D647B501-C650-4877-8CF6-06515391E28F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Applications", "Samples\InformationManager\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj", "{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Presentation", "Samples\InformationManager\EmailClient.Modules.Presentation\EmailClient.Modules.Presentation.csproj", "{7DB633C2-1EA6-420F-9BA9-320D42289119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Applications", "Samples\InformationManager\Common.Applications\Common.Applications.csproj", "{3BC491D6-786A-46F1-9B93-69F23F89055A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Presentation", "Samples\InformationManager\AddressBook.Modules.Presentation\AddressBook.Modules.Presentation.csproj", "{99901356-AD33-4E23-8F0E-2A9DFCCF4885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Applications", "Samples\InformationManager\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj", "{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Domain", "Samples\InformationManager\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj", "{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Interfaces", "Samples\InformationManager\AddressBook.Interfaces\AddressBook.Interfaces.csproj", "{E270D7E7-0E35-4DED-B330-25FF7EED8581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain", "Samples\InformationManager\Common.Domain\Common.Domain.csproj", "{383153F8-9AB1-455B-9800-93F668E720F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain.Test", "Samples\InformationManager\Common.Domain.Test\Common.Domain.Test.csproj", "{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Applications.Test", "Samples\InformationManager\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj", "{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Presentation.Test", "Samples\InformationManager\Infrastructure.Modules.Presentation.Test\Infrastructure.Modules.Presentation.Test.csproj", "{D213F7FE-7331-4BCD-B989-B68093CA7FB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Domain.Test", "Samples\InformationManager\AddressBook.Modules.Domain.Test\AddressBook.Modules.Domain.Test.csproj", "{27927A49-284A-4F13-9137-E9437538C12B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Applications.Test", "Samples\InformationManager\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj", "{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Domain.Test", "Samples\InformationManager\EmailClient.Modules.Domain.Test\EmailClient.Modules.Domain.Test.csproj", "{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Applications.Test", "Samples\InformationManager\EmailClient.Modules.Applications.Test\EmailClient.Modules.Applications.Test.csproj", "{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Presentation.Test", "Samples\InformationManager\EmailClient.Modules.Presentation.Test\EmailClient.Modules.Presentation.Test.csproj", "{9409DC4C-5D76-411C-9148-71DB2E4BAA75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Applications.Test", "Samples\InformationManager\Common.Applications.Test\Common.Applications.Test.csproj", "{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 43
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs09
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Architecture\\Architecture.modelproj
+		SccProjectTopLevelParentUniqueName1 = WpfApplicationFramework.sln
+		SccProjectName1 = Architecture
+		SccLocalPath1 = Architecture
+		SccProjectUniqueName2 = Code\u0020Snippets\\Code\u0020Snippets.csproj
+		SccProjectTopLevelParentUniqueName2 = WpfApplicationFramework.sln
+		SccProjectName2 = Code\u0020Snippets
+		SccLocalPath2 = Code\u0020Snippets
+		SccProjectUniqueName3 = Samples\\BookLibrary\\BookLibrary.Library.Applications.Test\\BookLibrary.Library.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName3 = WpfApplicationFramework.sln
+		SccProjectName3 = Samples/BookLibrary/BookLibrary.Library.Applications.Test
+		SccLocalPath3 = Samples\\BookLibrary\\BookLibrary.Library.Applications.Test
+		SccProjectUniqueName4 = Samples\\BookLibrary\\BookLibrary.Library.Applications\\BookLibrary.Library.Applications.csproj
+		SccProjectTopLevelParentUniqueName4 = WpfApplicationFramework.sln
+		SccProjectName4 = Samples/BookLibrary/BookLibrary.Library.Applications
+		SccLocalPath4 = Samples\\BookLibrary\\BookLibrary.Library.Applications
+		SccProjectUniqueName5 = Samples\\BookLibrary\\BookLibrary.Library.Domain.Test\\BookLibrary.Library.Domain.Test.csproj
+		SccProjectTopLevelParentUniqueName5 = WpfApplicationFramework.sln
+		SccProjectName5 = Samples/BookLibrary/BookLibrary.Library.Domain.Test
+		SccLocalPath5 = Samples\\BookLibrary\\BookLibrary.Library.Domain.Test
+		SccProjectUniqueName6 = Samples\\BookLibrary\\BookLibrary.Library.Domain\\BookLibrary.Library.Domain.csproj
+		SccProjectTopLevelParentUniqueName6 = WpfApplicationFramework.sln
+		SccProjectName6 = Samples/BookLibrary/BookLibrary.Library.Domain
+		SccLocalPath6 = Samples\\BookLibrary\\BookLibrary.Library.Domain
+		SccProjectUniqueName7 = Samples\\BookLibrary\\BookLibrary.Library.Presentation.Test\\BookLibrary.Library.Presentation.Test.csproj
+		SccProjectTopLevelParentUniqueName7 = WpfApplicationFramework.sln
+		SccProjectName7 = Samples/BookLibrary/BookLibrary.Library.Presentation.Test
+		SccLocalPath7 = Samples\\BookLibrary\\BookLibrary.Library.Presentation.Test
+		SccProjectUniqueName8 = Samples\\BookLibrary\\BookLibrary.Library.Presentation\\BookLibrary.Library.Presentation.csproj
+		SccProjectTopLevelParentUniqueName8 = WpfApplicationFramework.sln
+		SccProjectName8 = Samples/BookLibrary/BookLibrary.Library.Presentation
+		SccLocalPath8 = Samples\\BookLibrary\\BookLibrary.Library.Presentation
+		SccProjectUniqueName9 = Samples\\BookLibrary\\BookLibrary.Reporting.Applications.Test\\BookLibrary.Reporting.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName9 = WpfApplicationFramework.sln
+		SccProjectName9 = Samples/BookLibrary/BookLibrary.Reporting.Applications.Test
+		SccLocalPath9 = Samples\\BookLibrary\\BookLibrary.Reporting.Applications.Test
+		SccProjectUniqueName10 = Samples\\BookLibrary\\BookLibrary.Reporting.Applications\\BookLibrary.Reporting.Applications.csproj
+		SccProjectTopLevelParentUniqueName10 = WpfApplicationFramework.sln
+		SccProjectName10 = Samples/BookLibrary/BookLibrary.Reporting.Applications
+		SccLocalPath10 = Samples\\BookLibrary\\BookLibrary.Reporting.Applications
+		SccProjectUniqueName11 = Samples\\BookLibrary\\BookLibrary.Reporting.Presentation\\BookLibrary.Reporting.Presentation.csproj
+		SccProjectTopLevelParentUniqueName11 = WpfApplicationFramework.sln
+		SccProjectName11 = Samples/BookLibrary/BookLibrary.Reporting.Presentation
+		SccLocalPath11 = Samples\\BookLibrary\\BookLibrary.Reporting.Presentation
+		SccProjectUniqueName12 = Samples\\InformationManager\\AddressBook.Interfaces\\AddressBook.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName12 = WpfApplicationFramework.sln
+		SccProjectName12 = Samples/InformationManager/AddressBook.Interfaces
+		SccLocalPath12 = Samples\\InformationManager\\AddressBook.Interfaces
+		SccProjectUniqueName13 = Samples\\InformationManager\\AddressBook.Modules.Applications.Test\\AddressBook.Modules.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName13 = WpfApplicationFramework.sln
+		SccProjectName13 = Samples/InformationManager/AddressBook.Modules.Applications.Test
+		SccLocalPath13 = Samples\\InformationManager\\AddressBook.Modules.Applications.Test
+		SccProjectUniqueName14 = Samples\\InformationManager\\AddressBook.Modules.Applications\\AddressBook.Modules.Applications.csproj
+		SccProjectTopLevelParentUniqueName14 = WpfApplicationFramework.sln
+		SccProjectName14 = Samples/InformationManager/AddressBook.Modules.Applications
+		SccLocalPath14 = Samples\\InformationManager\\AddressBook.Modules.Applications
+		SccProjectUniqueName15 = Samples\\InformationManager\\AddressBook.Modules.Domain.Test\\AddressBook.Modules.Domain.Test.csproj
+		SccProjectTopLevelParentUniqueName15 = WpfApplicationFramework.sln
+		SccProjectName15 = Samples/InformationManager/AddressBook.Modules.Domain.Test
+		SccLocalPath15 = Samples\\InformationManager\\AddressBook.Modules.Domain.Test
+		SccProjectUniqueName16 = Samples\\InformationManager\\AddressBook.Modules.Domain\\AddressBook.Modules.Domain.csproj
+		SccProjectTopLevelParentUniqueName16 = WpfApplicationFramework.sln
+		SccProjectName16 = Samples/InformationManager/AddressBook.Modules.Domain
+		SccLocalPath16 = Samples\\InformationManager\\AddressBook.Modules.Domain
+		SccProjectUniqueName17 = Samples\\InformationManager\\AddressBook.Modules.Presentation\\AddressBook.Modules.Presentation.csproj
+		SccProjectTopLevelParentUniqueName17 = WpfApplicationFramework.sln
+		SccProjectName17 = Samples/InformationManager/AddressBook.Modules.Presentation
+		SccLocalPath17 = Samples\\InformationManager\\AddressBook.Modules.Presentation
+		SccProjectUniqueName18 = Samples\\InformationManager\\Assembler\\Assembler.csproj
+		SccProjectTopLevelParentUniqueName18 = WpfApplicationFramework.sln
+		SccProjectName18 = Samples/InformationManager/Assembler
+		SccLocalPath18 = Samples\\InformationManager\\Assembler
+		SccProjectUniqueName19 = Samples\\InformationManager\\Common.Applications.Test\\Common.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName19 = WpfApplicationFramework.sln
+		SccProjectName19 = Samples/InformationManager/Common.Applications.Test
+		SccLocalPath19 = Samples\\InformationManager\\Common.Applications.Test
+		SccProjectUniqueName20 = Samples\\InformationManager\\Common.Applications\\Common.Applications.csproj
+		SccProjectTopLevelParentUniqueName20 = WpfApplicationFramework.sln
+		SccProjectName20 = Samples/InformationManager/Common.Applications
+		SccLocalPath20 = Samples\\InformationManager\\Common.Applications
+		SccProjectUniqueName21 = Samples\\InformationManager\\Common.Domain.Test\\Common.Domain.Test.csproj
+		SccProjectTopLevelParentUniqueName21 = WpfApplicationFramework.sln
+		SccProjectName21 = Samples/InformationManager/Common.Domain.Test
+		SccLocalPath21 = Samples\\InformationManager\\Common.Domain.Test
+		SccProjectUniqueName22 = Samples\\InformationManager\\Common.Domain\\Common.Domain.csproj
+		SccProjectTopLevelParentUniqueName22 = WpfApplicationFramework.sln
+		SccProjectName22 = Samples/InformationManager/Common.Domain
+		SccLocalPath22 = Samples\\InformationManager\\Common.Domain
+		SccProjectUniqueName23 = Samples\\InformationManager\\Common.Presentation\\Common.Presentation.csproj
+		SccProjectTopLevelParentUniqueName23 = WpfApplicationFramework.sln
+		SccProjectName23 = Samples/InformationManager/Common.Presentation
+		SccLocalPath23 = Samples\\InformationManager\\Common.Presentation
+		SccProjectUniqueName24 = Samples\\InformationManager\\EmailClient.Modules.Applications.Test\\EmailClient.Modules.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName24 = WpfApplicationFramework.sln
+		SccProjectName24 = Samples/InformationManager/EmailClient.Modules.Applications.Test
+		SccLocalPath24 = Samples\\InformationManager\\EmailClient.Modules.Applications.Test
+		SccProjectUniqueName25 = Samples\\InformationManager\\EmailClient.Modules.Applications\\EmailClient.Modules.Applications.csproj
+		SccProjectTopLevelParentUniqueName25 = WpfApplicationFramework.sln
+		SccProjectName25 = Samples/InformationManager/EmailClient.Modules.Applications
+		SccLocalPath25 = Samples\\InformationManager\\EmailClient.Modules.Applications
+		SccProjectUniqueName26 = Samples\\InformationManager\\EmailClient.Modules.Domain.Test\\EmailClient.Modules.Domain.Test.csproj
+		SccProjectTopLevelParentUniqueName26 = WpfApplicationFramework.sln
+		SccProjectName26 = Samples/InformationManager/EmailClient.Modules.Domain.Test
+		SccLocalPath26 = Samples\\InformationManager\\EmailClient.Modules.Domain.Test
+		SccProjectUniqueName27 = Samples\\InformationManager\\EmailClient.Modules.Domain\\EmailClient.Modules.Domain.csproj
+		SccProjectTopLevelParentUniqueName27 = WpfApplicationFramework.sln
+		SccProjectName27 = Samples/InformationManager/EmailClient.Modules.Domain
+		SccLocalPath27 = Samples\\InformationManager\\EmailClient.Modules.Domain
+		SccProjectUniqueName28 = Samples\\InformationManager\\EmailClient.Modules.Presentation.Test\\EmailClient.Modules.Presentation.Test.csproj
+		SccProjectTopLevelParentUniqueName28 = WpfApplicationFramework.sln
+		SccProjectName28 = Samples/InformationManager/EmailClient.Modules.Presentation.Test
+		SccLocalPath28 = Samples\\InformationManager\\EmailClient.Modules.Presentation.Test
+		SccProjectUniqueName29 = Samples\\InformationManager\\EmailClient.Modules.Presentation\\EmailClient.Modules.Presentation.csproj
+		SccProjectTopLevelParentUniqueName29 = WpfApplicationFramework.sln
+		SccProjectName29 = Samples/InformationManager/EmailClient.Modules.Presentation
+		SccLocalPath29 = Samples\\InformationManager\\EmailClient.Modules.Presentation
+		SccProjectUniqueName30 = Samples\\InformationManager\\Infrastructure.Interfaces\\Infrastructure.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName30 = WpfApplicationFramework.sln
+		SccProjectName30 = Samples/InformationManager/Infrastructure.Interfaces
+		SccLocalPath30 = Samples\\InformationManager\\Infrastructure.Interfaces
+		SccProjectUniqueName31 = Samples\\InformationManager\\Infrastructure.Modules.Applications.Test\\Infrastructure.Modules.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName31 = WpfApplicationFramework.sln
+		SccProjectName31 = Samples/InformationManager/Infrastructure.Modules.Applications.Test
+		SccLocalPath31 = Samples\\InformationManager\\Infrastructure.Modules.Applications.Test
+		SccProjectUniqueName32 = Samples\\InformationManager\\Infrastructure.Modules.Applications\\Infrastructure.Modules.Applications.csproj
+		SccProjectTopLevelParentUniqueName32 = WpfApplicationFramework.sln
+		SccProjectName32 = Samples/InformationManager/Infrastructure.Modules.Applications
+		SccLocalPath32 = Samples\\InformationManager\\Infrastructure.Modules.Applications
+		SccProjectUniqueName33 = Samples\\InformationManager\\Infrastructure.Modules.Presentation.Test\\Infrastructure.Modules.Presentation.Test.csproj
+		SccProjectTopLevelParentUniqueName33 = WpfApplicationFramework.sln
+		SccProjectName33 = Samples/InformationManager/Infrastructure.Modules.Presentation.Test
+		SccLocalPath33 = Samples\\InformationManager\\Infrastructure.Modules.Presentation.Test
+		SccProjectUniqueName34 = Samples\\InformationManager\\Infrastructure.Modules.Presentation\\Infrastructure.Modules.Presentation.csproj
+		SccProjectTopLevelParentUniqueName34 = WpfApplicationFramework.sln
+		SccProjectName34 = Samples/InformationManager/Infrastructure.Modules.Presentation
+		SccLocalPath34 = Samples\\InformationManager\\Infrastructure.Modules.Presentation
+		SccProjectUniqueName35 = Samples\\Localization\\LocalizationSample\\LocalizationSample.csproj
+		SccProjectTopLevelParentUniqueName35 = WpfApplicationFramework.sln
+		SccProjectName35 = Samples/Localization/LocalizationSample
+		SccLocalPath35 = Samples\\Localization\\LocalizationSample
+		SccProjectUniqueName36 = Samples\\Writer\\Writer.Applications.Test\\Writer.Applications.Test.csproj
+		SccProjectTopLevelParentUniqueName36 = WpfApplicationFramework.sln
+		SccProjectName36 = Samples/Writer/Writer.Applications.Test
+		SccLocalPath36 = Samples\\Writer\\Writer.Applications.Test
+		SccProjectUniqueName37 = Samples\\Writer\\Writer.Applications\\Writer.Applications.csproj
+		SccProjectTopLevelParentUniqueName37 = WpfApplicationFramework.sln
+		SccProjectName37 = Samples/Writer/Writer.Applications
+		SccLocalPath37 = Samples\\Writer\\Writer.Applications
+		SccProjectUniqueName38 = Samples\\Writer\\Writer.Presentation.Test\\Writer.Presentation.Test.csproj
+		SccProjectTopLevelParentUniqueName38 = WpfApplicationFramework.sln
+		SccProjectName38 = Samples/Writer/Writer.Presentation.Test
+		SccLocalPath38 = Samples\\Writer\\Writer.Presentation.Test
+		SccProjectUniqueName39 = Samples\\Writer\\Writer.Presentation\\Writer.Presentation.csproj
+		SccProjectTopLevelParentUniqueName39 = WpfApplicationFramework.sln
+		SccProjectName39 = Samples/Writer/Writer.Presentation
+		SccLocalPath39 = Samples\\Writer\\Writer.Presentation
+		SccProjectUniqueName40 = WpfApplicationFramework\\WpfApplicationFramework.Test\\WpfApplicationFramework.Test.csproj
+		SccProjectTopLevelParentUniqueName40 = WpfApplicationFramework.sln
+		SccProjectName40 = WpfApplicationFramework/WpfApplicationFramework.Test
+		SccLocalPath40 = WpfApplicationFramework\\WpfApplicationFramework.Test
+		SccProjectUniqueName41 = WpfApplicationFramework\\WpfApplicationFramework.UnitTesting\\WpfApplicationFramework.UnitTesting.csproj
+		SccProjectTopLevelParentUniqueName41 = WpfApplicationFramework.sln
+		SccProjectName41 = WpfApplicationFramework/WpfApplicationFramework.UnitTesting
+		SccLocalPath41 = WpfApplicationFramework\\WpfApplicationFramework.UnitTesting
+		SccProjectUniqueName42 = WpfApplicationFramework\\WpfApplicationFramework\\WpfApplicationFramework.csproj
+		SccProjectTopLevelParentUniqueName42 = WpfApplicationFramework.sln
+		SccProjectName42 = WpfApplicationFramework/WpfApplicationFramework
+		SccLocalPath42 = WpfApplicationFramework\\WpfApplicationFramework
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27B67DFE-0BF1-4435-B036-E4C083EAEA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B67DFE-0BF1-4435-B036-E4C083EAEA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B67DFE-0BF1-4435-B036-E4C083EAEA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B67DFE-0BF1-4435-B036-E4C083EAEA03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48DD2458-B7EE-4709-998C-F1568B51F32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48DD2458-B7EE-4709-998C-F1568B51F32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48DD2458-B7EE-4709-998C-F1568B51F32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48DD2458-B7EE-4709-998C-F1568B51F32A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A8CE03-3493-47E1-8D83-3FD59D2B7B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A8CE03-3493-47E1-8D83-3FD59D2B7B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A8CE03-3493-47E1-8D83-3FD59D2B7B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A8CE03-3493-47E1-8D83-3FD59D2B7B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C041533-4BA4-4498-8867-43F87FFD5FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C041533-4BA4-4498-8867-43F87FFD5FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C041533-4BA4-4498-8867-43F87FFD5FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C041533-4BA4-4498-8867-43F87FFD5FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0257AACF-AE9A-4002-8E2E-C98D6FD17437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0257AACF-AE9A-4002-8E2E-C98D6FD17437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0257AACF-AE9A-4002-8E2E-C98D6FD17437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0257AACF-AE9A-4002-8E2E-C98D6FD17437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0985021E-9AD0-455A-A26B-2B8CEBD26297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0985021E-9AD0-455A-A26B-2B8CEBD26297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0985021E-9AD0-455A-A26B-2B8CEBD26297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0985021E-9AD0-455A-A26B-2B8CEBD26297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB087110-BDBA-4E9D-813F-EF08295ECF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB087110-BDBA-4E9D-813F-EF08295ECF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB087110-BDBA-4E9D-813F-EF08295ECF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB087110-BDBA-4E9D-813F-EF08295ECF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F1884B-17EC-49F3-8BB3-B19156D3089F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F1884B-17EC-49F3-8BB3-B19156D3089F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F1884B-17EC-49F3-8BB3-B19156D3089F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F1884B-17EC-49F3-8BB3-B19156D3089F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F051A17-542A-4981-8155-A99F547E4442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F051A17-542A-4981-8155-A99F547E4442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F051A17-542A-4981-8155-A99F547E4442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F051A17-542A-4981-8155-A99F547E4442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684434AD-70CA-4355-87B8-6B11E921D393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684434AD-70CA-4355-87B8-6B11E921D393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684434AD-70CA-4355-87B8-6B11E921D393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684434AD-70CA-4355-87B8-6B11E921D393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F56691-FA01-43C2-A44E-259CF950E7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F56691-FA01-43C2-A44E-259CF950E7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F56691-FA01-43C2-A44E-259CF950E7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F56691-FA01-43C2-A44E-259CF950E7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66F216DA-838E-463B-B5A5-8631177F0079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F216DA-838E-463B-B5A5-8631177F0079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F216DA-838E-463B-B5A5-8631177F0079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F216DA-838E-463B-B5A5-8631177F0079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23854875-DDBB-4BB9-81B5-637FCA6B1831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23854875-DDBB-4BB9-81B5-637FCA6B1831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23854875-DDBB-4BB9-81B5-637FCA6B1831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23854875-DDBB-4BB9-81B5-637FCA6B1831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664D5E11-1BAB-4D48-BEF5-775DB427D691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664D5E11-1BAB-4D48-BEF5-775DB427D691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664D5E11-1BAB-4D48-BEF5-775DB427D691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664D5E11-1BAB-4D48-BEF5-775DB427D691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D647B501-C650-4877-8CF6-06515391E28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D647B501-C650-4877-8CF6-06515391E28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D647B501-C650-4877-8CF6-06515391E28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D647B501-C650-4877-8CF6-06515391E28F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DB633C2-1EA6-420F-9BA9-320D42289119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DB633C2-1EA6-420F-9BA9-320D42289119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DB633C2-1EA6-420F-9BA9-320D42289119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DB633C2-1EA6-420F-9BA9-320D42289119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC491D6-786A-46F1-9B93-69F23F89055A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC491D6-786A-46F1-9B93-69F23F89055A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC491D6-786A-46F1-9B93-69F23F89055A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC491D6-786A-46F1-9B93-69F23F89055A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E270D7E7-0E35-4DED-B330-25FF7EED8581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E270D7E7-0E35-4DED-B330-25FF7EED8581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E270D7E7-0E35-4DED-B330-25FF7EED8581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E270D7E7-0E35-4DED-B330-25FF7EED8581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383153F8-9AB1-455B-9800-93F668E720F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383153F8-9AB1-455B-9800-93F668E720F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383153F8-9AB1-455B-9800-93F668E720F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383153F8-9AB1-455B-9800-93F668E720F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D213F7FE-7331-4BCD-B989-B68093CA7FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D213F7FE-7331-4BCD-B989-B68093CA7FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D213F7FE-7331-4BCD-B989-B68093CA7FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D213F7FE-7331-4BCD-B989-B68093CA7FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27927A49-284A-4F13-9137-E9437538C12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27927A49-284A-4F13-9137-E9437538C12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27927A49-284A-4F13-9137-E9437538C12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27927A49-284A-4F13-9137-E9437538C12B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9409DC4C-5D76-411C-9148-71DB2E4BAA75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9409DC4C-5D76-411C-9148-71DB2E4BAA75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9409DC4C-5D76-411C-9148-71DB2E4BAA75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9409DC4C-5D76-411C-9148-71DB2E4BAA75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74B96B02-FF13-48C1-9A18-F99B27CBBC0F} = {1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}
+		{ED400E91-5417-4177-89E4-6D6C30D7245C} = {316D2E5D-61D2-403E-805B-F97F1C06BF46}
+		{2D498396-C10C-4A20-B24E-FD554FFC49EF} = {316D2E5D-61D2-403E-805B-F97F1C06BF46}
+		{1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3} = {316D2E5D-61D2-403E-805B-F97F1C06BF46}
+		{1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D} = {316D2E5D-61D2-403E-805B-F97F1C06BF46}
+		{D9BAF38A-4FF2-467D-A585-B7843488F115} = {1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}
+		{D636F237-2893-45D1-870B-605F8A48BB6E} = {1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}
+		{79F77420-A4F7-4712-9DAF-D862F4E19157} = {1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}
+		{27B67DFE-0BF1-4435-B036-E4C083EAEA03} = {88F6DB3A-1BF4-46E3-81CA-04E637DD0368}
+		{48DD2458-B7EE-4709-998C-F1568B51F32A} = {88F6DB3A-1BF4-46E3-81CA-04E637DD0368}
+		{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A} = {88F6DB3A-1BF4-46E3-81CA-04E637DD0368}
+		{60A8CE03-3493-47E1-8D83-3FD59D2B7B26} = {ED400E91-5417-4177-89E4-6D6C30D7245C}
+		{2C041533-4BA4-4498-8867-43F87FFD5FAC} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
+		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
+		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
+		{03FE77F4-4C93-4139-8825-E0070EE3F860} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
+		{F0C5BD31-CFF7-4B0B-8483-7471447740D8} = {93CDC3EA-AB95-4537-8B66-46D0656EF265}
+		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF} = {F67B337D-296F-4CD3-BC35-3CCE29A33F86}
+		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{0257AACF-AE9A-4002-8E2E-C98D6FD17437} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{0985021E-9AD0-455A-A26B-2B8CEBD26297} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{DB087110-BDBA-4E9D-813F-EF08295ECF8C} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{11F1884B-17EC-49F3-8BB3-B19156D3089F} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{0F051A17-542A-4981-8155-A99F547E4442} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{684434AD-70CA-4355-87B8-6B11E921D393} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{D9F56691-FA01-43C2-A44E-259CF950E7B2} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
+		{66F216DA-838E-463B-B5A5-8631177F0079} = {1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}
+		{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7} = {D9BAF38A-4FF2-467D-A585-B7843488F115}
+		{2947C827-FFC2-4E77-A8FD-E54A009ED4A8} = {D9BAF38A-4FF2-467D-A585-B7843488F115}
+		{23854875-DDBB-4BB9-81B5-637FCA6B1831} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
+		{664D5E11-1BAB-4D48-BEF5-775DB427D691} = {D9BAF38A-4FF2-467D-A585-B7843488F115}
+		{D647B501-C650-4877-8CF6-06515391E28F} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{8C37381E-D1F6-4173-ADCD-DED9CBB474AF} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{7DB633C2-1EA6-420F-9BA9-320D42289119} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{3BC491D6-786A-46F1-9B93-69F23F89055A} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
+		{99901356-AD33-4E23-8F0E-2A9DFCCF4885} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{E270D7E7-0E35-4DED-B330-25FF7EED8581} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{383153F8-9AB1-455B-9800-93F668E720F5} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
+		{1112ECBA-AC14-46E6-BF67-3CAA8CB93022} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
+		{08D35705-7F77-4ABE-9E85-D31DE77A1DC1} = {D9BAF38A-4FF2-467D-A585-B7843488F115}
+		{D213F7FE-7331-4BCD-B989-B68093CA7FB9} = {D9BAF38A-4FF2-467D-A585-B7843488F115}
+		{27927A49-284A-4F13-9137-E9437538C12B} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA} = {D636F237-2893-45D1-870B-605F8A48BB6E}
+		{4EECE5C7-DD23-45AC-8647-24A0FDDF2342} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{BE9FF027-61EC-44F5-B2BD-5AEF797DD510} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{9409DC4C-5D76-411C-9148-71DB2E4BAA75} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
+		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
+	EndGlobalSection
+EndGlobal
