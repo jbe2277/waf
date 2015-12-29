@@ -50,8 +50,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Applications\ApplicationInfoTest.cs" />
-    <Compile Include="Applications\ControllerTest.cs" />
-    <Compile Include="Applications\DataModelTest.cs" />
     <Compile Include="Applications\SynchronizingCollectionTest.cs" />
     <Compile Include="Applications\DelegateCommandTest.cs" />
     <Compile Include="Applications\GenericViewModelTest.cs" />

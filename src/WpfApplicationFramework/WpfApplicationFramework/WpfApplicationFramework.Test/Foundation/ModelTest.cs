@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.Waf.Foundation;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.Waf;
 using System.Runtime.Serialization;
 
 namespace Test.Waf.Foundation
@@ -17,28 +16,8 @@ namespace Test.Waf.Foundation
     [TestClass]
     public class ModelTest
     {
-        private bool originalDebugSetting;
-        
-        
         public TestContext TestContext { get; set; }
-
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-#pragma warning disable 618
-            originalDebugSetting = WafConfiguration.Debug;
-#pragma warning restore 618
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-#pragma warning disable 618
-            WafConfiguration.Debug = originalDebugSetting;
-#pragma warning restore 618
-        }
-
+        
 
         [TestMethod]
         public void RaisePropertyChangedTest()

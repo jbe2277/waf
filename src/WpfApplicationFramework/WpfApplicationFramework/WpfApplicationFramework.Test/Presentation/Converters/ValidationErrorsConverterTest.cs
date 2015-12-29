@@ -33,17 +33,6 @@ namespace Test.Waf.Presentation.Converters
             validationErrors.Add(new ValidationError(rule, new object(), "Second error message", null));
             Assert.AreEqual("First error message" + Environment.NewLine + "Second error message",
                 converter.Convert(new[] { validationErrors }, null, null, null));
-
-
-            // Call the obsolete methods
-
-#pragma warning disable 618
-            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, (Type)null, null, null));
-
-            validationErrors = new List<ValidationError>();
-            validationErrors.Add(new ValidationError(rule, new object(), "First error message", null));
-            Assert.AreEqual("First error message", converter.Convert(validationErrors, null, null, null));
-#pragma warning restore 618
         }
     }
 }

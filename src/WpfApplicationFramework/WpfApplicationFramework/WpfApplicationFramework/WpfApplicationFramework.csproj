@@ -50,14 +50,10 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Applications\ApplicationInfo.cs" />
-    <Compile Include="Applications\CollectionChangedEventListener.cs" />
-    <Compile Include="Applications\Controller.cs" />
-    <Compile Include="Applications\DataModel.cs" />
     <Compile Include="Applications\DelegateCommand.cs" />
     <Compile Include="Applications\DispatcherHelper.cs" />
     <Compile Include="Applications\IModuleController.cs" />
     <Compile Include="Applications\IView.cs" />
-    <Compile Include="Applications\PropertyChangedEventListener.cs" />
     <Compile Include="Applications\RecentFile.cs" />
     <Compile Include="Applications\RecentFileList.cs" />
     <Compile Include="Applications\Services\FileDialogResult.cs" />

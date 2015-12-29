@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Waf.Foundation;
 using System.Windows.Threading;
 
 namespace System.Waf.Applications
@@ -6,9 +7,7 @@ namespace System.Waf.Applications
     /// <summary>
     /// Abstract base class for a ViewModel implementation.
     /// </summary>
-#pragma warning disable 618
-    public abstract class ViewModel : DataModel
-#pragma warning restore 618
+    public abstract class ViewModel : Model
     {
         private readonly IView view;
 

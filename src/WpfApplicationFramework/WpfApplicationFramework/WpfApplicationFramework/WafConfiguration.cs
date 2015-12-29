@@ -9,11 +9,6 @@ namespace System.Waf
     public static class WafConfiguration
     {
         private static readonly bool isInDesignMode = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-#if (DEBUG)
-        private static bool debug = true;
-#else
-        private static bool debug = false;
-#endif
 
 
         /// <summary>
@@ -21,18 +16,5 @@ namespace System.Waf
         /// </summary>
         /// <value><c>true</c> if the code is running in design mode; otherwise, <c>false</c>.</value>
         public static bool IsInDesignMode => isInDesignMode;
-
-        /// <summary>
-        /// Obsolete: Gets or sets a value indicating whether WAF should run in Debug mode.
-        /// </summary>
-        /// <remarks>
-        /// The Debug mode helps to find errors in the application but it might reduce the performance.
-        /// </remarks>
-        [Obsolete("This property is not used anymore. Please remove the code that sets this property.")]
-        public static bool Debug
-        {
-            get { return debug; }
-            set { debug = value; }
-        }
     }
 }

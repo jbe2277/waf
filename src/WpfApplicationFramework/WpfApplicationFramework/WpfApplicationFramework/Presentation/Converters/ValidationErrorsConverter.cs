@@ -27,7 +27,7 @@ namespace System.Waf.Presentation.Converters
     //         </Setter>
     //     </Trigger>
     // </Style.Triggers>
-    public sealed class ValidationErrorsConverter : IMultiValueConverter, IValueConverter
+    public sealed class ValidationErrorsConverter : IMultiValueConverter
     {
         private static readonly ValidationErrorsConverter defaultInstance = new ValidationErrorsConverter();
 
@@ -68,38 +68,6 @@ namespace System.Waf.Presentation.Converters
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// OBSOLETE: Converts a collection of <see cref="ValidationError"/> objects into a multi-line string of error messages.
-        /// </summary>
-        /// <param name="value">The collection of <see cref="ValidationError"/> objects.</param>
-        /// <param name="targetType">The type of the binding target property. This parameter will be ignored.</param>
-        /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A multi-line error message or an empty string when the collection contains no errors. If the value parameter is <c>null</c>
-        /// or not of the type IEnumerable&lt;ValidationError&gt; this method returns <see cref="DependencyProperty.UnsetValue"/>.
-        /// </returns>
-        [Obsolete("Please use the Convert method that has as first parameter an array of values.")]
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Convert(new[] { value }, targetType, parameter, culture);
-        }
-
-        /// <summary>
-        /// OBSOLETE: This method is not supported and throws an exception when it is called.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>Nothing because this method throws an exception.</returns>
-        /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-        [Obsolete("ConvertBack is not supported.")]
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
