@@ -24,8 +24,8 @@ namespace LocalizationSample
             Person person = new Person() 
             { 
                 Name = "Luke", 
-                Birthday = new DateTime(2080, 2, 6) }
-            ;
+                Birthday = new DateTime(2080, 2, 6)
+            };
 
             ShellWindow mainWindow = new ShellWindow();
             mainWindow.DataContext = person;

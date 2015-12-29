@@ -21,6 +21,6 @@
         <Label Content="{x:Static p:Resources.Birthday}" Grid.Column="0" Grid.Row="1" Margin="11,6,0,0"/>
         <TextBox Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="1" Width="100" Margin="11,7,0,0"/>
         
-        <Button Content="{x:Static p:Resources.Close}" Grid.Column="1" Grid.Row="2" Width="75" HorizontalAlignment="Right" Margin="11,22,0,0"/>
+        <Button Content="{x:Static p:Resources.Close}" Click="CloseClick" Grid.Column="1" Grid.Row="2" Width="75" HorizontalAlignment="Right" Margin="11,22,0,0"/>
     </Grid>
 </Window>
