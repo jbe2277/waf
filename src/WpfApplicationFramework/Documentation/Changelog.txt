@@ -4,6 +4,10 @@ Changelog
 Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
+Version 4.0.0.1 (Milestone 1)
+* TODO:
+
+
 Version 3.2.0.450 (Release)
 * WAF: Add Cache class.
 * WAF: Enhance the AssertHelper methods CanExecuteChangedEvent and PropertyChangedEvent.
