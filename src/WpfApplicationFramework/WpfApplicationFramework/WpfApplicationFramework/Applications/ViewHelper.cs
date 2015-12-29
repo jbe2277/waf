@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using System.Threading;
 
 namespace System.Waf.Applications
@@ -17,7 +16,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentNullException">view must not be <c>null</c>.</exception>
         public static ViewModel GetViewModel(this IView view)
         {
-            if (view == null) { throw new ArgumentNullException("view"); }
+            if (view == null) { throw new ArgumentNullException(nameof(view)); }
 
             object dataContext = view.DataContext;
             // When the DataContext is null then it might be that the ViewModel hasn't set it yet.

@@ -26,7 +26,7 @@ namespace System.Waf.Foundation
         /// </summary>
         protected ValidatableModel()
         {
-            this.errors = new Dictionary<string, List<ValidationResult>>();
+            errors = new Dictionary<string, List<ValidationResult>>();
         }
 
 
@@ -138,7 +138,7 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentException">The argument propertyName must not be null or empty.</exception>
         protected bool SetPropertyAndValidate<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            if (string.IsNullOrEmpty(propertyName)) { throw new ArgumentException("The argument propertyName must not be null or empty."); }
+            if (string.IsNullOrEmpty(propertyName)) { throw new ArgumentException("The argument propertyName must not be null or empty.", nameof(propertyName)); }
             
             if (SetProperty(ref field, value, propertyName))
             {
@@ -159,7 +159,7 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentException">The argument propertyName must not be null or empty.</exception>
         protected bool ValidateProperty(object value, [CallerMemberName] string propertyName = null)
         {
-            if (string.IsNullOrEmpty(propertyName)) { throw new ArgumentException("The argument propertyName must not be null or empty."); }
+            if (string.IsNullOrEmpty(propertyName)) { throw new ArgumentException("The argument propertyName must not be null or empty.", nameof(propertyName)); }
             
             List<ValidationResult> validationResults = new List<ValidationResult>();
             Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
@@ -185,11 +185,7 @@ namespace System.Waf.Foundation
         /// <param name="e">The <see cref="System.ComponentModel.DataErrorsChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnErrorsChanged(DataErrorsChangedEventArgs e)
         {
-            EventHandler<DataErrorsChangedEventArgs> handler = ErrorsChanged;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            ErrorsChanged?.Invoke(this, e);
         }
 
         private void RaiseErrorsChanged(string propertyName = "")

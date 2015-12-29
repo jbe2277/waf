@@ -7,10 +7,6 @@ namespace System.Waf.Applications.Services
     /// </summary>
     public class FileType
     {
-        private readonly string description;
-        private readonly string fileExtension;
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FileType"/> class.
         /// </summary>
@@ -20,12 +16,12 @@ namespace System.Waf.Applications.Services
         /// <exception cref="ArgumentException">fileExtension is null, an empty string or doesn't start with a '.' point character.</exception>
         public FileType(string description, string fileExtension)
         {
-            if (string.IsNullOrEmpty(description)) { throw new ArgumentException("The argument description must not be null or empty."); }
-            if (string.IsNullOrEmpty(fileExtension)) { throw new ArgumentException("The argument fileExtension must not be null or empty."); }
-            if (fileExtension[0] != '.') { throw new ArgumentException("The argument fileExtension must start with the '.' character."); }
+            if (string.IsNullOrEmpty(description)) { throw new ArgumentException("The argument description must not be null or empty.", nameof(description)); }
+            if (string.IsNullOrEmpty(fileExtension)) { throw new ArgumentException("The argument fileExtension must not be null or empty.", nameof(fileExtension)); }
+            if (fileExtension[0] != '.') { throw new ArgumentException("The argument fileExtension must start with the '.' character.", nameof(fileExtension)); }
 
-            this.description = description;
-            this.fileExtension = fileExtension;
+            Description = description;
+            FileExtension = fileExtension;
         }
 
         /// <summary>
@@ -45,22 +41,22 @@ namespace System.Waf.Applications.Services
         /// <summary>
         /// Gets the description of the file type.
         /// </summary>
-        public string Description { get { return description; } }
+        public string Description { get; }
 
         /// <summary>
         /// Gets the file extension. This string starts with a '.' point. Multiple file extensions are concatenated with the string ";*" as separator.
         /// </summary>
-        public string FileExtension { get { return fileExtension; } }
+        public string FileExtension { get; }
 
 
         private static IEnumerable<string> CheckFileExtensions(IEnumerable<string> fileExtensions)
         {
-            if (fileExtensions == null) { throw new ArgumentNullException("fileExtensions"); }
+            if (fileExtensions == null) { throw new ArgumentNullException(nameof(fileExtensions)); }
             foreach (string fileExtension in fileExtensions)
             {
                 if (string.IsNullOrEmpty(fileExtension) || fileExtension[0] != '.') 
                 { 
-                    throw new ArgumentException("The argument fileExtension must start with the '.' character."); 
+                    throw new ArgumentException("The argument fileExtension must start with the '.' character.", nameof(fileExtension)); 
                 }
             }
             return fileExtensions;

@@ -29,7 +29,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentException">The argument path must not be null or empty.</exception>
         public RecentFile(string path)
         {
-            if (string.IsNullOrEmpty(path)) { throw new ArgumentException("The argument path must not be null or empty."); }
+            if (string.IsNullOrEmpty(path)) { throw new ArgumentException("The argument path must not be null or empty.", nameof(path)); }
 
             this.path = path;
         }
@@ -54,7 +54,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            if (reader == null) { throw new ArgumentNullException("reader"); }
+            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
 
             IsPinned = bool.Parse(reader.GetAttribute("IsPinned"));
             path = reader.ReadElementContentAsString();
@@ -62,7 +62,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            if (writer == null) { throw new ArgumentNullException("writer"); }
+            if (writer == null) { throw new ArgumentNullException(nameof(writer)); }
 
             writer.WriteAttributeString("IsPinned", IsPinned.ToString(CultureInfo.InvariantCulture));
             writer.WriteString(Path);

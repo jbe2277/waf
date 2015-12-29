@@ -16,7 +16,7 @@
         /// <param name="valueFactory">The delegate that is invoked to produce the value when it is needed.</param>
         public Cache(Func<T> valueFactory)
         {
-            if (valueFactory == null) { throw new ArgumentNullException("valueFactory"); }
+            if (valueFactory == null) { throw new ArgumentNullException(nameof(valueFactory)); }
             this.valueFactory = valueFactory;
             this.isDirty = true;
         }

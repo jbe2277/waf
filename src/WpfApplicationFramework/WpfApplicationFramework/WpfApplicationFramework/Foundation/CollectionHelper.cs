@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace System.Waf.Foundation
 {
@@ -21,7 +18,7 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentException">The collection does not contain the specified current item.</exception>
         public static T GetNextElementOrDefault<T>(IEnumerable<T> collection, T current)
         {
-            if (collection == null) { throw new ArgumentNullException("collection"); }
+            if (collection == null) { throw new ArgumentNullException(nameof(collection)); }
 
             bool found = false;
             IEnumerator<T> enumerator = collection.GetEnumerator();

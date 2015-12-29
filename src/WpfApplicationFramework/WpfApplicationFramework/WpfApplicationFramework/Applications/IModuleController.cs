@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace System.Waf.Applications
+﻿namespace System.Waf.Applications
 {
     /// <summary>
     /// Interface for a module controller which is responsible for the module lifecycle.

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace System.Waf.Applications
 {
@@ -45,7 +44,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
         public DelegateCommand(Action<object> execute, Func<object, bool> canExecute)
         {
-            if (execute == null) { throw new ArgumentNullException("execute"); }
+            if (execute == null) { throw new ArgumentNullException(nameof(execute)); }
 
             this.execute = execute;
             this.canExecute = canExecute;
@@ -99,11 +98,7 @@ namespace System.Waf.Applications
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnCanExecuteChanged(EventArgs e)
         {
-            EventHandler handler = CanExecuteChanged;
-            if (handler != null) 
-            { 
-                handler(this, e); 
-            }
+            CanExecuteChanged?.Invoke(this, e);
         }
     }
 }

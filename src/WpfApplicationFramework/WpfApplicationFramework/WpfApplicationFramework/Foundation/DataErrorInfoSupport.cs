@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Text;
 
 namespace System.Waf.Foundation
 {
@@ -23,7 +22,7 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentNullException">instance must not be <c>null</c>.</exception>
         public DataErrorInfoSupport(object instance)
         {
-            if (instance == null) { throw new ArgumentNullException("instance"); }
+            if (instance == null) { throw new ArgumentNullException(nameof(instance)); }
             this.instance = instance;
         }
 
@@ -32,7 +31,7 @@ namespace System.Waf.Foundation
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
         /// <returns>An error message indicating what is wrong with this object. The default is an empty string ("").</returns>
-        public string Error { get { return this[""]; } }
+        public string Error => this[""];
 
         /// <summary>
         /// Gets the error message for the property with the given name.

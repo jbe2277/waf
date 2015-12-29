@@ -18,27 +18,27 @@ namespace System.Waf.Applications
         /// <summary>
         /// Gets the product name of the application.
         /// </summary>
-        public static string ProductName { get { return productName.Value; } }
+        public static string ProductName => productName.Value;
 
         /// <summary>
         /// Gets the version number of the application.
         /// </summary>
-        public static string Version { get { return version.Value; } }
+        public static string Version => version.Value;
 
         /// <summary>
         /// Gets the company of the application.
         /// </summary>
-        public static string Company { get { return company.Value; } }
+        public static string Company => company.Value;
         
         /// <summary>
         /// Gets the copyright information of the application.
         /// </summary>
-        public static string Copyright { get { return copyright.Value; } }
+        public static string Copyright => copyright.Value;
 
         /// <summary>
         /// Gets the path for the executable file that started the application, not including the executable name.
         /// </summary>
-        public static string ApplicationPath { get { return applicationPath.Value; } }
+        public static string ApplicationPath => applicationPath.Value;
 
 
         private static string GetProductName()

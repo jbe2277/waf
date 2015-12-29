@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace System.Waf.Applications
+﻿namespace System.Waf.Applications
 {
     /// <summary>
     /// Abstract base class for a ViewModel implementation.
@@ -11,16 +6,13 @@ namespace System.Waf.Applications
     /// <typeparam name="TView">The type of the view. Do provide an interface as type and not the concrete type itself.</typeparam>
     public abstract class ViewModel<TView> : ViewModel where TView : IView
     {
-        private readonly TView view;
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewModel&lt;TView&gt;"/> class and attaches itself as <c>DataContext</c> to the view.
         /// </summary>
         /// <param name="view">The view.</param>
         protected ViewModel(TView view) : base(view)
         {
-            this.view = view;
+            ViewCore = view;
         }
 
 
@@ -30,6 +22,6 @@ namespace System.Waf.Applications
         /// <remarks>
         /// Use this property in a ViewModel class to avoid casting.
         /// </remarks>
-        protected TView ViewCore { get { return view; } }
+        protected TView ViewCore { get; }
     }
 }

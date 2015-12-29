@@ -48,7 +48,7 @@ namespace System.Waf.Applications
                 CollectionChangedEventManager.AddHandler(collectionChanged, OriginalCollectionChanged);
             }
 
-            innerCollection = (ObservableCollection<T>)this.Items;
+            innerCollection = (ObservableCollection<T>)Items;
             foreach (TOriginal item in originalCollection)
             {
                 innerCollection.Add(CreateItem(item));

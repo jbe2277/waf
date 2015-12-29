@@ -28,7 +28,7 @@ namespace System.Waf.Foundation
         /// <returns>True if the value has changed, false if the old and new value were equal.</returns>
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals(field, value)) { return false; }
+            if (Equals(field, value)) { return false; }
 
             field = value;
             RaisePropertyChanged(propertyName);
@@ -51,11 +51,7 @@ namespace System.Waf.Foundation
         /// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) 
-            { 
-                handler(this, e); 
-            }
+            PropertyChanged?.Invoke(this, e);
         }
     }
 }

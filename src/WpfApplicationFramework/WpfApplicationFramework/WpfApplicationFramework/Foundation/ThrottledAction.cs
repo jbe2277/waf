@@ -68,7 +68,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Indicates that an execution of the action delegate is requested.
         /// </summary>
-        public bool IsRunning { get { return isRunning; } }
+        public bool IsRunning => isRunning;
 
 
         /// <summary>

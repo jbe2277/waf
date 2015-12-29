@@ -20,7 +20,7 @@ namespace System.Waf
         /// Gets a value indicating whether the code is running in design mode.
         /// </summary>
         /// <value><c>true</c> if the code is running in design mode; otherwise, <c>false</c>.</value>
-        public static bool IsInDesignMode { get { return isInDesignMode; } }
+        public static bool IsInDesignMode => isInDesignMode;
 
         /// <summary>
         /// Obsolete: Gets or sets a value indicating whether WAF should run in Debug mode.

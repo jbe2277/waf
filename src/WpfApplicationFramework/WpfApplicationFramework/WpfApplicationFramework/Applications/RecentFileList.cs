@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.Schema;
@@ -37,7 +35,7 @@ namespace System.Waf.Applications
         /// <summary>
         /// Gets the list of recent files.
         /// </summary>
-        public ReadOnlyObservableCollection<RecentFile> RecentFiles { get { return readOnlyRecentFiles; } }
+        public ReadOnlyObservableCollection<RecentFile> RecentFiles => readOnlyRecentFiles;
 
         /// <summary>
         /// Gets or sets the maximum number of recent files in the list.
@@ -65,7 +63,7 @@ namespace System.Waf.Applications
             }
         }
 
-        private int PinCount { get { return recentFiles.Count(r => r.IsPinned); } }
+        private int PinCount => recentFiles.Count(r => r.IsPinned);
 
 
         /// <summary>
@@ -77,7 +75,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentNullException">The argument recentFiles must not be null.</exception>
         public void Load(IEnumerable<RecentFile> recentFiles)
         {
-            if (recentFiles == null) { throw new ArgumentNullException("recentFiles"); }
+            if (recentFiles == null) { throw new ArgumentNullException(nameof(recentFiles)); }
 
             Clear();
             AddRange(recentFiles.Take(maxFilesNumber));
@@ -90,7 +88,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentException">The argument fileName must not be null or empty.</exception>
         public void AddFile(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("The argument fileName must not be null or empty."); }
+            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName)); }
 
             RecentFile recentFile = recentFiles.FirstOrDefault(r => r.Path == fileName);
             
@@ -124,14 +122,14 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentException">The argument recentFile was not found in the recent files list.</exception>
         public void Remove(RecentFile recentFile)
         {
-            if (recentFile == null) { throw new ArgumentNullException("recentFile"); }
+            if (recentFile == null) { throw new ArgumentNullException(nameof(recentFile)); }
             if (recentFiles.Remove(recentFile))
             {
                 recentFile.PropertyChanged -= RecentFilePropertyChanged;
             }
             else
             {
-                throw new ArgumentException("The passed recentFile was not found in the recent files list.");
+                throw new ArgumentException("The passed recentFile was not found in the recent files list.", nameof(recentFile));
             }
         }
 
@@ -139,7 +137,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            if (reader == null) { throw new ArgumentNullException("reader"); }
+            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
 
             reader.ReadToDescendant("RecentFile");
             while (reader.MoveToContent() == XmlNodeType.Element && reader.LocalName == "RecentFile")
@@ -153,7 +151,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            if (writer == null) { throw new ArgumentNullException("writer"); }
+            if (writer == null) { throw new ArgumentNullException(nameof(writer)); }
 
             foreach (RecentFile recentFile in recentFiles)
             {
@@ -208,7 +206,7 @@ namespace System.Waf.Applications
 
         private void RecentFilePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsPinned")
+            if (e.PropertyName == nameof(RecentFile.IsPinned))
             {
                 RecentFile recentFile = (RecentFile)sender;
                 int oldIndex = recentFiles.IndexOf(recentFile);

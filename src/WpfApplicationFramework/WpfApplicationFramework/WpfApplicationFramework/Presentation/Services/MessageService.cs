@@ -16,16 +16,11 @@ namespace System.Waf.Presentation.Services
     [Export(typeof(IMessageService))]
     public class MessageService : IMessageService
     {
-        private static MessageBoxResult MessageBoxResult { get { return MessageBoxResult.None; } }
+        private static MessageBoxResult MessageBoxResult => MessageBoxResult.None;
 
-        private static MessageBoxOptions MessageBoxOptions
-        {
-            get
-            {
-                return (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft) ? MessageBoxOptions.RtlReading : MessageBoxOptions.None;
-            }
-        }
-
+        private static MessageBoxOptions MessageBoxOptions 
+            => (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft) ? MessageBoxOptions.RtlReading : MessageBoxOptions.None;
+        
         /// <summary>
         /// Shows the message.
         /// </summary>
