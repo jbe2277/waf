@@ -101,7 +101,7 @@ namespace Test.Waf.UnitTesting
                     if (name != value)
                     {
                         name = value;
-                        RaisePropertyChanged("Name");
+                        RaisePropertyChanged(nameof(Name));
                     }
                 }
             }
@@ -139,8 +139,8 @@ namespace Test.Waf.UnitTesting
                     if (weight != value)
                     {
                         weight = value;
-                        OnPropertyChanged(new PropertyChangedEventArgs("Weight"));
-                        OnPropertyChanged(new PropertyChangedEventArgs("Weight"));
+                        OnPropertyChanged(new PropertyChangedEventArgs(nameof(Weight)));
+                        OnPropertyChanged(new PropertyChangedEventArgs(nameof(Weight)));
                     }
                 }
             }
@@ -148,12 +148,12 @@ namespace Test.Waf.UnitTesting
 
             public void RaiseWrongNamePropertyChanged()
             {
-                if (PropertyChanged != null) { PropertyChanged(null, new PropertyChangedEventArgs("Name")); }
+                PropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(Name)));
             }
 
             protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
             {
-                if (PropertyChanged != null) { PropertyChanged(this, e); }
+                PropertyChanged?.Invoke(this, e);
             }
         }
     }

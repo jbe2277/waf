@@ -64,7 +64,7 @@ namespace Test.Waf.UnitTesting
             Assert.AreEqual(1, actionCallCount);
 
             task = asyncAction();
-            context.Wait(TimeSpan.FromMilliseconds(10));
+            context.Wait(TimeSpan.FromMilliseconds(50));
             Assert.AreEqual(2, actionCallCount);
 
             context.Dispose();

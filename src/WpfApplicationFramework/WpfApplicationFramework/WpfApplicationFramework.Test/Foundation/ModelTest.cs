@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Waf.Foundation;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -127,7 +123,7 @@ namespace Test.Waf.Foundation
                     if (phone != value)
                     {
                         phone = value;
-                        RaisePropertyChanged("Phone");
+                        RaisePropertyChanged(nameof(Phone));
                     }
                 }
             }

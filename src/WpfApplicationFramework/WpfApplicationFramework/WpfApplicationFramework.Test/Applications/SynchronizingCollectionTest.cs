@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Foundation;
 using System.Waf.Applications;
@@ -248,7 +247,7 @@ namespace Test.Waf.Applications
             PropertyChangedEventHandler handler = (sender, e) =>
             {
                 Assert.AreEqual(synchronizingCollection, sender);
-                if (e.PropertyName == "Count")
+                if (e.PropertyName == nameof(SynchronizingCollection<MyDataModel, MyModel>.Count))
                 {
                     handlerCalled = true;
                 }
@@ -286,16 +285,13 @@ namespace Test.Waf.Applications
 
         private class MyDataModel : Model
         {
-            private readonly MyModel model;
-
-
             public MyDataModel(MyModel model)
             {
-                this.model = model;
+                Model = model;
             }
 
 
-            public MyModel Model { get { return model; } }
+            public MyModel Model { get; }
         }
         
         private class MyModel : Model { }

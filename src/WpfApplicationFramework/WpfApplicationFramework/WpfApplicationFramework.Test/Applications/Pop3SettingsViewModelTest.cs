@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Foundation;
 using System.Waf.Applications;
 using System.ComponentModel;
-using System.Waf.UnitTesting;
 
 namespace Test.Waf.Applications
 {
@@ -51,7 +46,7 @@ namespace Test.Waf.Applications
 
             private void Pop3SettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
             {
-                if (e.PropertyName == "ServerPath")
+                if (e.PropertyName == nameof(Pop3Settings.ServerPath))
                 {
                     Pop3SettingsServerPathChanged = true;
                 }

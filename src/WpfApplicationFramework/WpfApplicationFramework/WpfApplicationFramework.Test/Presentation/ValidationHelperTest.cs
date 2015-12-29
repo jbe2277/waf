@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Presentation;
 using System.Windows.Controls;
@@ -40,7 +37,7 @@ namespace Test.Waf.Presentation
             AssertHelper.ExpectedException<InvalidOperationException>(() => ValidationHelper.SetIsValid(view, true));
 
             // But we can set a binding.
-            Binding binding = new Binding("IsValid");
+            Binding binding = new Binding(nameof(MockViewModel.IsValid));
             
             // ValidationHelper.IsEnabled is false => exception
             AssertHelper.ExpectedException<InvalidOperationException>(() => 
@@ -55,7 +52,7 @@ namespace Test.Waf.Presentation
             ClearIsValidBinding(view);
 
             // Now everything is correct => no exception
-            binding = new Binding("IsValid");
+            binding = new Binding(nameof(MockViewModel.IsValid));
             binding.Mode = BindingMode.OneWayToSource;
             BindingOperations.SetBinding(view, ValidationHelper.IsValidProperty, binding);
 

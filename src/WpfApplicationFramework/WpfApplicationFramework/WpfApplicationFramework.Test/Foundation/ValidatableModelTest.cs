@@ -32,14 +32,14 @@ namespace Test.Waf.Foundation
                 => AssertErrorsChangedEvent(person, () => person.Validate()));
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors().Single().ErrorMessage);
-            Assert.AreEqual(Person.NameRequiredError, person.GetErrors("Name").Single().ErrorMessage);
+            Assert.AreEqual(Person.NameRequiredError, person.GetErrors(nameof(Person.Name)).Single().ErrorMessage);
 
             // Set a valid name.
 
             AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = "Bill");
             Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.GetErrors().Any());
-            Assert.IsFalse(((INotifyDataErrorInfo)person).GetErrors("Name").Cast<object>().Any());
+            Assert.IsFalse(((INotifyDataErrorInfo)person).GetErrors(nameof(Person.Name)).Cast<object>().Any());
 
             // Set another valid name; ErrorsChanged event must not be called.
 
@@ -58,7 +58,7 @@ namespace Test.Waf.Foundation
             AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = null);
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors().Single().ErrorMessage);
-            Assert.AreEqual(Person.NameRequiredError, person.GetErrors("Name").Single().ErrorMessage);
+            Assert.AreEqual(Person.NameRequiredError, person.GetErrors(nameof(Person.Name)).Single().ErrorMessage);
 
             // Set an invalid email address that creates two additional validation errors.
 
@@ -114,13 +114,13 @@ namespace Test.Waf.Foundation
             AssertHelper.ExpectedException<ArgumentException>(() => person.SetPropertyAndValidate(ref name, "Bill", null));
             AssertHelper.ExpectedException<ArgumentException>(() => person.ValidateProperty("Bill", null));
 
-            Assert.IsTrue(person.SetPropertyAndValidate(ref name, "Bill", "Name")); // Value has been changed
-            Assert.IsFalse(person.SetPropertyAndValidate(ref name, "Bill", "Name")); // Value has not been changed
+            Assert.IsTrue(person.SetPropertyAndValidate(ref name, "Bill", nameof(Person.Name))); // Value has been changed
+            Assert.IsFalse(person.SetPropertyAndValidate(ref name, "Bill", nameof(Person.Name))); // Value has not been changed
 
             person.Name = "Bill";
-            Assert.IsTrue(person.ValidateProperty(person.Name, "Name")); // Name is valid
+            Assert.IsTrue(person.ValidateProperty(person.Name, nameof(Person.Name))); // Name is valid
             person.Name = null;
-            Assert.IsFalse(person.ValidateProperty(person.Name, "Name")); // Name is invalid
+            Assert.IsFalse(person.ValidateProperty(person.Name, nameof(Person.Name))); // Name is invalid
         }
         
         [TestMethod]
