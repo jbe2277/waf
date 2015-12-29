@@ -17,7 +17,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="ArgumentNullException">context must not be null.</exception>
         public static void Wait(this Task task, UnitTestSynchronizationContext context)
         {
-            if (context == null) { throw new ArgumentNullException("context"); }
+            if (context == null) { throw new ArgumentNullException(nameof(context)); }
             context.Wait(task);
         }
 
@@ -30,7 +30,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="ArgumentNullException">context must not be null.</exception>
         public static T GetResult<T>(this Task<T> task, UnitTestSynchronizationContext context)
         {
-            if (context == null) { throw new ArgumentNullException("context"); }
+            if (context == null) { throw new ArgumentNullException(nameof(context)); }
             context.Wait(task);
             return task.Result;
         }
@@ -47,8 +47,8 @@ namespace System.Waf.UnitTesting
         /// <exception cref="TimeoutException">A timeout occurred.</exception>
         public static void WaitFor(this UnitTestSynchronizationContext context, Func<bool> predicate, TimeSpan timeout)
         {
-            if (context == null) { throw new ArgumentNullException("context"); }
-            if (predicate == null) { throw new ArgumentNullException("predicate"); }
+            if (context == null) { throw new ArgumentNullException(nameof(context)); }
+            if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
             var sw = Stopwatch.StartNew();
             while (!predicate())
             {

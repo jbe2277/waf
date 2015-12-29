@@ -1,5 +1,4 @@
-﻿
-namespace System.Waf.UnitTesting.Mocks
+﻿namespace System.Waf.UnitTesting.Mocks
 {
     /// <summary>
     /// Defines the message type.

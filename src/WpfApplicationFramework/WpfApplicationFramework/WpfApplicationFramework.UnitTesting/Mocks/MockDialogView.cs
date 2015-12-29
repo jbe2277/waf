@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 
 namespace System.Waf.UnitTesting.Mocks
 {
@@ -51,11 +50,11 @@ namespace System.Waf.UnitTesting.Mocks
         /// <param name="owner">The owner of this view.</param>
         public void ShowDialog(object owner)
         {
-            this.Owner = owner;
-            this.IsVisible = true;
+            Owner = owner;
+            IsVisible = true;
             if (ShowDialogAction != null) { ShowDialogAction((TMockView)this); }
-            this.Owner = null;
-            this.IsVisible = false;
+            Owner = null;
+            IsVisible = false;
         }
 
         /// <summary>
@@ -63,8 +62,8 @@ namespace System.Waf.UnitTesting.Mocks
         /// </summary>
         public void Close()
         {
-            this.Owner = null;
-            this.IsVisible = false;
+            Owner = null;
+            IsVisible = false;
         }
 
         private void ContainerDisposedNotifierDisposed(object sender, EventArgs e)
@@ -83,7 +82,7 @@ namespace System.Waf.UnitTesting.Mocks
 
         public void Dispose()
         {
-            if (Disposed != null) { Disposed(this, EventArgs.Empty); }
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -33,8 +33,8 @@ namespace System.Waf.Applications
         public SynchronizingCollection(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory)
             : base(new ObservableCollection<T>())
         {
-            if (originalCollection == null) { throw new ArgumentNullException("originalCollection"); }
-            if (factory == null) { throw new ArgumentNullException("factory"); }
+            if (originalCollection == null) { throw new ArgumentNullException(nameof(originalCollection)); }
+            if (factory == null) { throw new ArgumentNullException(nameof(factory)); }
 
             this.mapping = new List<Tuple<TOriginal, T>>();
             this.originalCollection = originalCollection;

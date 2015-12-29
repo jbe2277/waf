@@ -19,7 +19,7 @@ namespace System.Waf.UnitTesting
         /// not thrown by the action.</exception>
         public static void ExpectedException<T>(Action action) where T : Exception
         {
-            if (action == null) { throw new ArgumentNullException("action"); }
+            if (action == null) { throw new ArgumentNullException(nameof(action)); }
             
             bool expectedExceptionThrown = false;
             Exception thrownException = null;
@@ -77,9 +77,9 @@ namespace System.Waf.UnitTesting
         public static void CanExecuteChangedEvent(ICommand command, Action raiseCanExecuteChanged, int expectedChangedCount, 
             ExpectedChangedCountMode expectedChangedCountMode)
         {
-            if (command == null) { throw new ArgumentNullException("command"); }
-            if (raiseCanExecuteChanged == null) { throw new ArgumentNullException("raiseCanExecuteChanged"); }
-            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException("expectedChangedCount", "A negative number is not allowed."); }
+            if (command == null) { throw new ArgumentNullException(nameof(command)); }
+            if (raiseCanExecuteChanged == null) { throw new ArgumentNullException(nameof(raiseCanExecuteChanged)); }
+            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed."); }
             
             int canExecuteChangedCount = 0;
 
@@ -141,10 +141,10 @@ namespace System.Waf.UnitTesting
             ExpectedChangedCountMode expectedChangedCountMode)
             where T : class, INotifyPropertyChanged
         {
-            if (observable == null) { throw new ArgumentNullException("observable"); }
-            if (expression == null) { throw new ArgumentNullException("expression"); }
-            if (raisePropertyChanged == null) { throw new ArgumentNullException("raisePropertyChanged"); }
-            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException("expectedChangedCount", "A negative number is not allowed."); }
+            if (observable == null) { throw new ArgumentNullException(nameof(observable)); }
+            if (expression == null) { throw new ArgumentNullException(nameof(expression)); }
+            if (raisePropertyChanged == null) { throw new ArgumentNullException(nameof(raisePropertyChanged)); }
+            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed."); }
             
             string propertyName = GetProperty(expression).Name;
             int propertyChangedCount = 0;

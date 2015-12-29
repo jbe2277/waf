@@ -24,9 +24,9 @@ namespace System.Waf.UnitTesting
         /// <summary>
         /// Gets the unit test synchronization context for the current thread.
         /// </summary>
-        public new static UnitTestSynchronizationContext Current { get { return SynchronizationContext.Current as UnitTestSynchronizationContext; } }
+        public new static UnitTestSynchronizationContext Current => SynchronizationContext.Current as UnitTestSynchronizationContext;
 
-        private bool IsDisposed { get { return isDisposed != 0; } }
+        private bool IsDisposed => isDisposed != 0;
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="ArgumentNullException">d must not be null.</exception>
         public override void Send(SendOrPostCallback d, object state)
         {
-            if (d == null) { throw new ArgumentNullException("d"); }
+            if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (IsDisposed) { return; }
             base.Send(d, state);
         }
@@ -79,7 +79,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="ArgumentNullException">d must not be null.</exception>
         public override void Post(SendOrPostCallback d, object state)
         {
-            if (d == null) { throw new ArgumentNullException("d"); }
+            if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (IsDisposed) { return; }
             messageQueue.Add(new Tuple<SendOrPostCallback, object>(d, state));
         }
@@ -91,7 +91,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="ArgumentNullException">task must not be null.</exception>
         public void Wait(Task task)
         {
-            if (task == null) { throw new ArgumentNullException("task"); }
+            if (task == null) { throw new ArgumentNullException(nameof(task)); }
             var cancellation = new CancellationTokenSource();
             task.ContinueWith(t => cancellation.Cancel());
             ProcessMessageQueue(cancellation.Token);
