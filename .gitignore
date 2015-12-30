@@ -11,6 +11,9 @@
 [Bb]in/
 [Oo]bj/
 
+# Unit test results
+[Tt]est[Rr]esults
+
 # NuGet Packages Directory
 packages/
 

@@ -9,12 +9,29 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
     [TestClass]
     public class DocumentControllerTest : InfrastructureTest
     {
+        private DocumentController controller;
+
+
+        protected override void OnTestInitialize()
+        {
+            base.OnTestInitialize();
+            controller = Container.GetExportedValue<DocumentController>();
+            controller.Initialize();
+        }
+
+        protected override void OnTestCleanup()
+        {
+            controller.Shutdown();
+            if (File.Exists(controller.PackagePath))
+            {
+                File.Delete(controller.PackagePath);
+            }
+            base.OnTestCleanup();
+        }
+
         [TestMethod]
         public void GetStreamTest()
         {
-            var controller = Container.GetExportedValue<DocumentController>();
-            controller.Initialize();
-
             using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
             {
                 Assert.AreEqual(0, stream.Length);  // File does not exist
@@ -31,8 +48,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
                 var data = (Data)serializer.ReadObject(stream);
                 Assert.AreEqual("Bill", data.Name);
             }
-
-            controller.Shutdown();
         }
 
 

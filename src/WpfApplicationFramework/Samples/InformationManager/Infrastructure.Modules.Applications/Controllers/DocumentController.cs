@@ -23,6 +23,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         }
 
 
+        internal string PackagePath { get; private set; }
+
+
         public void Initialize()
         {
             var dataDirectory = environmentService.DataDirectory;
@@ -31,9 +34,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
                 Directory.CreateDirectory(dataDirectory);
             }
 
-            var packagePath = Path.Combine(dataDirectory, fileName);
+            PackagePath = Path.Combine(dataDirectory, fileName);
 
-            package = Package.Open(packagePath, FileMode.OpenOrCreate);
+            package = Package.Open(PackagePath, FileMode.OpenOrCreate);
         }
 
         public void Shutdown()

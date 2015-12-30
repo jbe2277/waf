@@ -4,6 +4,7 @@ using Test.InformationManager.Common.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using System.IO;
+using System;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications
 {
@@ -24,7 +25,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications
         {
             base.OnTestInitialize();
             var environmentService = Container.GetExportedValue<MockEnvironmentService>();
-            environmentService.DataDirectory = Path.Combine(TestContext.ResultsDirectory, "Data");
+            environmentService.DataDirectory = Path.Combine(Environment.CurrentDirectory, "Data");
         }
     }
 }
