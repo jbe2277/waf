@@ -5,19 +5,18 @@ namespace Waf.Writer.Applications.Documents
 {
     public abstract class Document : Model, IDocument
     {
-        private readonly IDocumentType documentType;
         private string fileName;
         private bool modified;
 
 
         protected Document(IDocumentType documentType)
         {
-            if (documentType == null) { throw new ArgumentNullException("documentType"); }
-            this.documentType = documentType;
+            if (documentType == null) { throw new ArgumentNullException(nameof(documentType)); }
+            DocumentType = documentType;
         }
 
 
-        public IDocumentType DocumentType { get { return documentType; } }
+        public IDocumentType DocumentType { get; }
 
         public string FileName 
         {

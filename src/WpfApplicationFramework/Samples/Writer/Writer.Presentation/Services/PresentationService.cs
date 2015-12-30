@@ -9,9 +9,9 @@ namespace Waf.Writer.Presentation.Services
     [Export(typeof(IPresentationService))]
     public class PresentationService : IPresentationService
     {
-        public double VirtualScreenWidth { get { return SystemParameters.VirtualScreenWidth; } }
+        public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
-        public double VirtualScreenHeight { get { return SystemParameters.VirtualScreenHeight; } }
+        public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
 
         
         public void InitializeCultures()

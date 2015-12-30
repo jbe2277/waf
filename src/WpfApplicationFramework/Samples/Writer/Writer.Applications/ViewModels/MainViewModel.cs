@@ -2,14 +2,10 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Waf.Applications;
-using System.Waf.Applications.Services;
-using System.Windows.Input;
 using Waf.Writer.Applications.Documents;
-using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
@@ -19,8 +15,6 @@ namespace Waf.Writer.Applications.ViewModels
     public class MainViewModel : ViewModel<IMainView>
     {
         private readonly IShellService shellService;
-        private readonly IFileService fileService;
-        private readonly ObservableCollection<object> documentViews;
         private object startView;
         private IDocument activeDocument;
         private object activeDocumentView;
@@ -31,15 +25,15 @@ namespace Waf.Writer.Applications.ViewModels
             : base(view)
         {
             this.shellService = shellService;
-            this.fileService = fileService;
-            this.documentViews = new ObservableCollection<object>();
+            this.FileService = fileService;
+            this.DocumentViews = new ObservableCollection<object>();
             
-            CollectionChangedEventManager.AddHandler(documentViews, DocumentViewsCollectionChanged);
+            CollectionChangedEventManager.AddHandler(DocumentViews, DocumentViewsCollectionChanged);
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
         }
 
 
-        public IFileService FileService { get { return fileService; } }
+        public IFileService FileService { get; }
 
         public object StartView
         {
@@ -47,7 +41,7 @@ namespace Waf.Writer.Applications.ViewModels
             set { SetProperty(ref startView, value); }
         }
 
-        public ObservableCollection<object> DocumentViews { get { return documentViews; } }
+        public ObservableCollection<object> DocumentViews { get; }
 
         public object ActiveDocumentView
         {
@@ -58,7 +52,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void DocumentViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (!documentViews.Any())
+            if (!DocumentViews.Any())
             {
                 ViewCore.ContentViewState = ContentViewState.StartViewVisible;
             }
@@ -70,11 +64,11 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveDocument")
+            if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
                 if (activeDocument != null) { PropertyChangedEventManager.RemoveHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
 
-                activeDocument = fileService.ActiveDocument;
+                activeDocument = FileService.ActiveDocument;
 
                 if (activeDocument != null) { PropertyChangedEventManager.AddHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
 
@@ -84,7 +78,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void ActiveDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "FileName")
+            if (e.PropertyName == nameof(Document.FileName))
             {
                 UpdateShellServiceDocumentName();
             }
@@ -92,9 +86,9 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void UpdateShellServiceDocumentName()
         {
-            if (fileService.ActiveDocument != null)
+            if (FileService.ActiveDocument != null)
             {
-                shellService.DocumentName = Path.GetFileName(fileService.ActiveDocument.FileName);
+                shellService.DocumentName = Path.GetFileName(FileService.ActiveDocument.FileName);
             }
             else
             {

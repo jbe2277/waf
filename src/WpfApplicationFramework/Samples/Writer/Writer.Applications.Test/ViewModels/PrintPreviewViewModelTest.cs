@@ -13,7 +13,6 @@ namespace Test.Writer.Applications.ViewModels
         public void ShowPrintDocument()
         {
             var viewModel = Container.GetExportedValue<PrintPreviewViewModel>();
-            var view = (MockPrintPreviewView)viewModel.View;
             MockDocumentPaginatorSource document = new MockDocumentPaginatorSource();
         
             viewModel.Document = document;

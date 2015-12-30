@@ -58,10 +58,7 @@ namespace Waf.Writer.Applications.Controllers
 
         public void Shutdown()
         {
-            if (xpsDocument != null)
-            {
-                xpsDocument.Close();
-            }
+            xpsDocument?.Close();
         }
 
         private bool CanShowPrintPreview()
@@ -72,7 +69,7 @@ namespace Waf.Writer.Applications.Controllers
         private void ShowPrintPreview()
         {
             // We have to clone the FlowDocument before we use different pagination settings for the export.        
-            RichTextDocument document = fileService.ActiveDocument as RichTextDocument;
+            RichTextDocument document = (RichTextDocument)fileService.ActiveDocument;
             FlowDocument clone = document.CloneContent();
             clone.ColumnWidth = double.PositiveInfinity;
 
@@ -135,7 +132,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveDocument")
+            if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
                 printPreviewCommand.RaiseCanExecuteChanged();
                 printCommand.RaiseCanExecuteChanged();

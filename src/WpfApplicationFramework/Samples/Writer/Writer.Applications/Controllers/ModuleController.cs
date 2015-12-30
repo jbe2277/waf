@@ -98,11 +98,11 @@ namespace Waf.Writer.Applications.Controllers
 
         private static void InitializeCultures()
         {
-            if (!String.IsNullOrEmpty(Settings.Default.Culture))
+            if (!string.IsNullOrEmpty(Settings.Default.Culture))
             {
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.Default.Culture);
             }
-            if (!String.IsNullOrEmpty(Settings.Default.UICulture))
+            if (!string.IsNullOrEmpty(Settings.Default.UICulture))
             {
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.UICulture);
             }

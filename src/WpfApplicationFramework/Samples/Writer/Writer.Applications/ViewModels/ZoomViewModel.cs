@@ -15,7 +15,6 @@ namespace Waf.Writer.Applications.ViewModels
         private const double maxZoom = 16;
 
         private readonly IShellService shellService;
-        private readonly ReadOnlyCollection<string> readOnlyDefaultZooms;
         private readonly DelegateCommand zoomInCommand;
         private readonly DelegateCommand zoomOutCommand;
         private readonly DelegateCommand fitToWidthCommand;
@@ -26,7 +25,7 @@ namespace Waf.Writer.Applications.ViewModels
         protected ZoomViewModel(T view, IShellService shellService) : base(view)
         {
             this.shellService = shellService;
-            readOnlyDefaultZooms = new ReadOnlyCollection<string>(new double[] { 2, 1.5, 1.25, 1, 0.75, 0.5 }
+            DefaultZooms = new ReadOnlyCollection<string>(new[] { 2, 1.5, 1.25, 1, 0.75, 0.5 }
                 .Select(d => string.Format(CultureInfo.CurrentCulture, "{0:P0}", d)).ToArray());
             zoomInCommand = new DelegateCommand(ZoomIn, CanZoomIn);
             zoomOutCommand = new DelegateCommand(ZoomOut, CanZoomOut);
@@ -35,13 +34,13 @@ namespace Waf.Writer.Applications.ViewModels
         }
 
 
-        public IReadOnlyList<string> DefaultZooms { get { return readOnlyDefaultZooms; } }
+        public IReadOnlyList<string> DefaultZooms { get; }
 
-        public ICommand ZoomInCommand { get { return zoomInCommand; } }
+        public ICommand ZoomInCommand => zoomInCommand;
 
-        public ICommand ZoomOutCommand { get { return zoomOutCommand; } }
+        public ICommand ZoomOutCommand => zoomOutCommand;
 
-        public ICommand FitToWidthCommand { get { return fitToWidthCommand; } }
+        public ICommand FitToWidthCommand => fitToWidthCommand;
 
         public bool IsVisible
         {
@@ -50,8 +49,7 @@ namespace Waf.Writer.Applications.ViewModels
             {
                 if (SetProperty(ref isVisible, value))
                 {
-                    if (isVisible) { shellService.ActiveZoomCommands = this; }
-                    else { shellService.ActiveZoomCommands = null; }
+                    shellService.ActiveZoomCommands = isVisible ? this : null;
                 }
             }
         }

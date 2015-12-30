@@ -40,7 +40,6 @@ namespace Test.Writer.Applications.Controllers
             
             // Execute the PrintPreview command and check the the PrintPreviewView is visible inside the ShellView
             shellViewModel.PrintPreviewCommand.Execute(null);
-            PrintPreviewViewModel printPreviewViewModel = ViewHelper.GetViewModel<PrintPreviewViewModel>((IView)shellViewModel.ContentView);
             
             // Execute the Close command and check that the MainView is visible again
             shellViewModel.ClosePrintPreviewCommand.Execute(null);

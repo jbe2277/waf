@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Waf.Foundation;
-using System.Windows.Input;
+﻿using System.Waf.Foundation;
 using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.DesignData

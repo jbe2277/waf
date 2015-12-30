@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Waf.Writer.Applications.Documents
+﻿namespace Waf.Writer.Applications.Documents
 {
     public interface IDocumentType
     {

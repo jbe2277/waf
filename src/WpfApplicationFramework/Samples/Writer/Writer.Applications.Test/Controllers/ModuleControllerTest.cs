@@ -79,8 +79,7 @@ namespace Test.Writer.Applications.Controllers
             richTextViewModel.Document.Modified = true;
 
             bool showDialogCalled = false;
-            MockSaveChangesView saveChangesView = Container.GetExportedValue<MockSaveChangesView>();
-            MockSaveChangesView.ShowDialogAction = (view) =>
+            MockSaveChangesView.ShowDialogAction = view =>
             {
                 showDialogCalled = true;
                 Assert.IsTrue(ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents.SequenceEqual(
@@ -96,7 +95,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsTrue(shellView.IsVisible);
 
             showDialogCalled = false;
-            MockSaveChangesView.ShowDialogAction = (view) =>
+            MockSaveChangesView.ShowDialogAction = view =>
             {
                 showDialogCalled = true;
                 view.ViewModel.YesCommand.Execute(null);

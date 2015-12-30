@@ -24,11 +24,11 @@ namespace Waf.Writer.Applications.ViewModels
         }
 
 
-        public static string Title { get { return ApplicationInfo.ProductName; } }
+        public static string Title => ApplicationInfo.ProductName;
 
-        public ICommand YesCommand { get { return yesCommand; } }
+        public ICommand YesCommand => yesCommand;
 
-        public ICommand NoCommand { get { return noCommand; } }
+        public ICommand NoCommand => noCommand; 
 
         public IReadOnlyList<IDocument> Documents
         {

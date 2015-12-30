@@ -24,7 +24,7 @@ namespace Waf.Writer.Presentation.Views
         }
 
 
-        private PrintPreviewViewModel ViewModel { get { return viewModel.Value; } }
+        private PrintPreviewViewModel ViewModel => viewModel.Value;
 
 
         public void FitToWidth()

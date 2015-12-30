@@ -21,7 +21,7 @@ namespace Test.Writer.Presentation.Converters
             Assert.AreEqual("This is a document with a very long f...",
                 converter.Convert(new object[] { "This is a document with a very long file name.rtf", false }, null, null, null));
 
-            Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new object[] { new object(), new object() }, 
+            Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { new object(), new object() }, 
                 typeof(string), null, null));
 
             AssertHelper.ExpectedException<NotImplementedException>(() =>

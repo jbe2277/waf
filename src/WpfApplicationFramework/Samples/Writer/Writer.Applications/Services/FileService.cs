@@ -30,7 +30,7 @@ namespace Waf.Writer.Applications.Services
         }
 
 
-        public ReadOnlyObservableCollection<IDocument> Documents { get { return readOnlyDocuments; } }
+        public ReadOnlyObservableCollection<IDocument> Documents => readOnlyDocuments;
 
         public IDocument ActiveDocument
         {

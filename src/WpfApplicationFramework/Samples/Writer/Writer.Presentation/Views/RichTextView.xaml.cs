@@ -30,7 +30,7 @@ namespace Waf.Writer.Presentation.Views
         }
 
 
-        private RichTextViewModel ViewModel { get { return viewModel.Value; } }
+        private RichTextViewModel ViewModel => viewModel.Value;
 
 
         private void FirstTimeLoadedHandler(object sender, RoutedEventArgs e)

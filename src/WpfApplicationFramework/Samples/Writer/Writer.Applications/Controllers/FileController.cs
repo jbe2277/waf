@@ -59,15 +59,14 @@ namespace Waf.Writer.Applications.Controllers
             this.fileService.SaveCommand = saveCommand;
             this.fileService.SaveAsCommand = saveAsCommand;
 
-            this.recentFileList = Settings.Default.RecentFileList;
-            if (this.recentFileList == null) { this.recentFileList = new RecentFileList(); }
+            this.recentFileList = Settings.Default.RecentFileList ?? new RecentFileList();
             this.fileService.RecentFileList = recentFileList;
 
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
         }
 
 
-        private ReadOnlyObservableCollection<IDocument> Documents { get { return fileService.Documents; } }
+        private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
 
         private IDocument ActiveDocument 
         { 
@@ -140,7 +139,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveDocument")
+            if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
                 if (lastActiveDocument != null) { PropertyChangedEventManager.RemoveHandler(lastActiveDocument, ActiveDocumentPropertyChanged, ""); }
 
@@ -154,7 +153,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void ActiveDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Modified")
+            if (e.PropertyName == nameof(Document.Modified))
             {
                 UpdateCommands();
             }
@@ -170,7 +169,7 @@ namespace Waf.Writer.Applications.Controllers
 
         internal IDocument New(IDocumentType documentType)
         {
-            if (documentType == null) { throw new ArgumentNullException("documentType"); }
+            if (documentType == null) { throw new ArgumentNullException(nameof(documentType)); }
             if (!documentTypes.Contains(documentType))
             {
                 throw new ArgumentException("documentType is not an item of the DocumentTypes collection.");
@@ -224,8 +223,8 @@ namespace Waf.Writer.Applications.Controllers
             {
                 var saveTypes = documentTypes.Where(d => d.CanSave(document)).ToArray();
                 IDocumentType documentType = saveTypes.First(d => d.FileExtension == Path.GetExtension(document.FileName));
-                selectedFileType = fileTypes.Where(
-                    f => f.Description == documentType.Description && f.FileExtension == documentType.FileExtension).First();
+                selectedFileType = fileTypes.First(
+                    f => f.Description == documentType.Description && f.FileExtension == documentType.FileExtension);
             }
             else
             {
@@ -243,7 +242,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void Close(IDocument document)
         {
-            if (!CanDocumentsClose(new IDocument[] { document })) { return; }
+            if (!CanDocumentsClose(new[] { document })) { return; }
 
             if (ActiveDocument == document)
             {

@@ -62,7 +62,7 @@ namespace Waf.Writer.Applications.ViewModels
             set { SetProperty(ref isBulletList, value); }
         }
 
-        public bool IsSpellCheckAvailable { get { return true; } }
+        public bool IsSpellCheckAvailable => true;
         
         public bool IsSpellCheckEnabled
         {
@@ -74,10 +74,9 @@ namespace Waf.Writer.Applications.ViewModels
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.PropertyName == "IsVisible")
+            if (e.PropertyName == nameof(IsVisible))
             {
-                if (IsVisible) { shellService.ActiveEditingCommands = this; }
-                else { shellService.ActiveEditingCommands = null; }
+                shellService.ActiveEditingCommands = IsVisible ? this : null;
             }
         }
     }

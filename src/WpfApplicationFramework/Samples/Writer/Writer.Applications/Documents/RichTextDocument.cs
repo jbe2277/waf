@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Documents;
+﻿using System.Windows.Documents;
 using System.IO;
 using System.Windows;
 
@@ -10,20 +6,17 @@ namespace Waf.Writer.Applications.Documents
 {
     public class RichTextDocument : Document
     {
-        private readonly FlowDocument content;
-
-
         public RichTextDocument(RichTextDocumentType documentType) : this(documentType, new FlowDocument())
         {
         }
 
         public RichTextDocument(RichTextDocumentType documentType, FlowDocument content) : base(documentType)
         {
-            this.content = content;
+            Content = content;
         }
 
 
-        public FlowDocument Content { get { return content; } }
+        public FlowDocument Content { get; }
 
 
         public FlowDocument CloneContent()

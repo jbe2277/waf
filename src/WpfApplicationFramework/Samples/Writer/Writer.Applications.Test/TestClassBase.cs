@@ -14,7 +14,7 @@ namespace Test.Writer.Applications
         private RichTextDocumentController richTextDocumentController;
 
 
-        protected CompositionContainer Container { get { return container; } }
+        protected CompositionContainer Container => container;
 
 
         [TestInitialize]
@@ -39,7 +39,7 @@ namespace Test.Writer.Applications
         [TestCleanup]
         public void TestCleanup()
         {
-            if (container != null) { container.Dispose(); }
+            container?.Dispose();
             
             OnTestCleanup();
         }

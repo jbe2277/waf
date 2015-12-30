@@ -22,7 +22,7 @@ namespace Waf.Writer.Presentation.Views
         }
 
 
-        private StartViewModel ViewModel { get { return viewModel.Value; } }
+        private StartViewModel ViewModel => viewModel.Value;
 
 
         private void NewButtonIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

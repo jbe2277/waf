@@ -17,7 +17,7 @@ namespace Waf.Writer.Applications.Controllers
         
         protected DocumentController(IFileService fileService)
         {
-            if (fileService == null) { throw new ArgumentNullException("fileService"); }
+            if (fileService == null) { throw new ArgumentNullException(nameof(fileService)); }
             
             this.fileService = fileService;
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
@@ -33,7 +33,10 @@ namespace Waf.Writer.Applications.Controllers
 
         private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveDocument") { OnActiveDocumentChanged(fileService.ActiveDocument); }
+            if (e.PropertyName == nameof(IFileService.ActiveDocument))
+            {
+                OnActiveDocumentChanged(fileService.ActiveDocument);
+            }
         }
 
         private void DocumentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

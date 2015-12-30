@@ -14,7 +14,7 @@ namespace Test.Writer.Applications.ViewModels
         public void SaveChangesViewModelCloseTest()
         {
             MockDocumentType documentType = new MockDocumentType("Mock Document", ".mock");
-            var documents = new IDocument[] 
+            var documents = new[] 
             {
                 documentType.New(),
                 documentType.New(),

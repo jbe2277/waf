@@ -74,7 +74,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void MainViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveDocumentView")
+            if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
             {
                 IView richTextView = mainViewModel.ActiveDocumentView as IView;
                 if (richTextView != null)

@@ -48,7 +48,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsNull(fileService.ActiveDocument);
 
             IDocument document = fileController.New(documentType);
-            Assert.IsTrue(fileService.Documents.SequenceEqual(new IDocument[] { document }));
+            Assert.IsTrue(fileService.Documents.SequenceEqual(new[] { document }));
             Assert.AreEqual(document, fileService.ActiveDocument);
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.New(null));
@@ -86,14 +86,14 @@ namespace Test.Writer.Applications.Controllers
             IDocument document = fileService.Documents.Last();
             Assert.AreEqual("Document1.mock", document.FileName);
 
-            Assert.IsTrue(fileService.Documents.SequenceEqual(new IDocument[] { document }));
+            Assert.IsTrue(fileService.Documents.SequenceEqual(new[] { document }));
             Assert.AreEqual(document, fileService.ActiveDocument);
             
             // Open the same file again -> It's not opened again, just activated.
 
             fileService.ActiveDocument = null;
             fileService.OpenCommand.Execute("Document1.mock");
-            Assert.IsTrue(fileService.Documents.SequenceEqual(new IDocument[] { document }));
+            Assert.IsTrue(fileService.Documents.SequenceEqual(new[] { document }));
             Assert.AreEqual(document, fileService.ActiveDocument);
 
             // Now the user cancels the OpenFileDialog box
@@ -103,7 +103,7 @@ namespace Test.Writer.Applications.Controllers
             fileService.OpenCommand.Execute(null);
             Assert.AreEqual(documentsCount, fileService.Documents.Count);
 
-            Assert.IsTrue(fileService.Documents.SequenceEqual(new IDocument[] { document }));
+            Assert.IsTrue(fileService.Documents.SequenceEqual(new[] { document }));
             Assert.AreEqual(document, fileService.ActiveDocument);
         }
 
@@ -124,7 +124,7 @@ namespace Test.Writer.Applications.Controllers
             IDocument document = fileService.Documents.Last();
             Assert.AreEqual("Document1.mock", document.FileName);
 
-            Assert.IsTrue(fileService.Documents.SequenceEqual(new IDocument[] { document }));
+            Assert.IsTrue(fileService.Documents.SequenceEqual(new[] { document }));
             Assert.AreEqual(document, fileService.ActiveDocument);
 
             // Call open with a fileName that has an invalid extension

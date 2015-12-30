@@ -27,7 +27,6 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void DocumentViewTest()
         {
-            IFileService documentManager = Container.GetExportedValue<IFileService>();
             MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
 
             Assert.IsFalse(mainViewModel.DocumentViews.Any());
@@ -70,7 +69,6 @@ namespace Test.Writer.Applications.ViewModels
         {
             IFileService fileService = Container.GetExportedValue<IFileService>();
             IShellService shellService = Container.GetExportedValue<IShellService>();
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
 
             fileService.NewCommand.Execute(null);
             fileService.ActiveDocument = fileService.Documents.First();

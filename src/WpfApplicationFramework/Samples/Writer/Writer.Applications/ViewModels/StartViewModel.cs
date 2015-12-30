@@ -8,16 +8,13 @@ namespace Waf.Writer.Applications.ViewModels
     [Export]
     public class StartViewModel : ViewModel<IStartView>
     {
-        private readonly IFileService fileService;
-        
-
         [ImportingConstructor]
         public StartViewModel(IStartView view, IFileService fileService) : base(view)
         {
-            this.fileService = fileService;
+            FileService = fileService;
         }
 
 
-        public IFileService FileService { get { return fileService; } }
+        public IFileService FileService { get; }
     }
 }

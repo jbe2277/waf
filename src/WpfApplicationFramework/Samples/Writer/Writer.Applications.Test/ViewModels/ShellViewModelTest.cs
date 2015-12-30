@@ -39,7 +39,6 @@ namespace Test.Writer.Applications.ViewModels
             MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
             MockShellView shellView = Container.GetExportedValue<MockShellView>();
             ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
 
             // Show the ShellView
             Assert.IsFalse(shellView.IsVisible);

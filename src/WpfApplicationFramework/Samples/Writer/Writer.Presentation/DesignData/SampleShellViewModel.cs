@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 using System.ComponentModel;
-using Waf.Writer.Applications.Services;
-using System.Waf.Foundation;
 
 namespace Waf.Writer.Presentation.DesignData
 {
@@ -16,7 +11,7 @@ namespace Waf.Writer.Presentation.DesignData
         {
         }
 
-        public new string Title { get { return "WAF Writer (Design Time)"; } }
+        public new string Title => "WAF Writer (Design Time)";
 
 
 
@@ -42,12 +37,12 @@ namespace Waf.Writer.Presentation.DesignData
 
             protected virtual void OnClosing(CancelEventArgs e)
             {
-                if (Closing != null) { Closing(this, e); }
+                Closing?.Invoke(this, e);
             }
 
             protected virtual void OnClosed(EventArgs e)
             {
-                if (Closed != null) { Closed(this, e); }
+                Closed?.Invoke(this, e);
             }
         }
     }

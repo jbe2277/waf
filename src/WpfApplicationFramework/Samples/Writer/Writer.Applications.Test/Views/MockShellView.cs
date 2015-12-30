@@ -53,12 +53,12 @@ namespace Test.Writer.Applications.Views
 
         protected virtual void OnClosing(CancelEventArgs e)
         {
-            if (Closing != null) { Closing(this, e); }
+            Closing?.Invoke(this, e);
         }
 
         protected virtual void OnClosed(EventArgs e)
         {
-            if (Closed != null) { Closed(this, e); }
+            Closed?.Invoke(this, e);
         }
     }
 }

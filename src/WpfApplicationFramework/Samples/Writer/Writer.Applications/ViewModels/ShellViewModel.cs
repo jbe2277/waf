@@ -15,8 +15,6 @@ namespace Waf.Writer.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>
     {
         private readonly IMessageService messageService;
-        private readonly IShellService shellService;
-        private readonly IFileService fileService;
         private readonly DelegateCommand englishCommand;
         private readonly DelegateCommand germanCommand;
         private readonly DelegateCommand aboutCommand;
@@ -34,8 +32,8 @@ namespace Waf.Writer.Applications.ViewModels
             : base(view)
         {
             this.messageService = messageService;
-            this.shellService = shellService;
-            this.fileService = fileService;
+            this.ShellService = shellService;
+            this.FileService = fileService;
             this.englishCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("en-US")));
             this.germanCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("de-DE")));
             this.aboutCommand = new DelegateCommand(ShowAboutMessage);
@@ -57,19 +55,19 @@ namespace Waf.Writer.Applications.ViewModels
         }
 
 
-        public string Title { get { return ApplicationInfo.ProductName; } }
+        public string Title => ApplicationInfo.ProductName;
 
-        public IShellService ShellService { get { return shellService; } }
+        public IShellService ShellService { get; }
 
-        public IFileService FileService { get { return fileService; } }
+        public IFileService FileService { get; }
 
-        public CultureInfo NewLanguage { get { return newLanguage; } }
+        public CultureInfo NewLanguage => newLanguage;
 
-        public ICommand EnglishCommand { get { return englishCommand; } }
+        public ICommand EnglishCommand => englishCommand;
 
-        public ICommand GermanCommand { get { return germanCommand; } }
+        public ICommand GermanCommand => germanCommand;
 
-        public ICommand AboutCommand { get { return aboutCommand; } }
+        public ICommand AboutCommand => aboutCommand;
 
         public ICommand PrintPreviewCommand
         {
@@ -125,7 +123,7 @@ namespace Waf.Writer.Applications.ViewModels
         {
             if (!uiCulture.Equals(CultureInfo.CurrentUICulture))
             {
-                messageService.ShowMessage(shellService.ShellView, Resources.RestartApplication + "\n\n" +
+                messageService.ShowMessage(ShellService.ShellView, Resources.RestartApplication + "\n\n" +
                     Resources.ResourceManager.GetString("RestartApplication", uiCulture));
             }
             newLanguage = uiCulture;
@@ -133,13 +131,13 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void ShowAboutMessage()
         {
-            messageService.ShowMessage(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.AboutText,
+            messageService.ShowMessage(ShellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.AboutText,
                 ApplicationInfo.ProductName, ApplicationInfo.Version));
         }
 
         protected virtual void OnClosing(CancelEventArgs e)
         {
-            if (Closing != null) { Closing(this, e); }
+            Closing?.Invoke(this, e);
         }
 
         private void ViewClosing(object sender, CancelEventArgs e)

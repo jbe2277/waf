@@ -38,7 +38,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void DefaultZoomsTest()
         {
-            zoomViewModel.DefaultZooms.SequenceEqual(new[] { "200%", "150%", "125%", "100%", "75%", "50%", "25%" });
+            Assert.IsTrue(zoomViewModel.DefaultZooms.SequenceEqual(new[] { "200 %", "150 %", "125 %", "100 %", "75 %", "50 %" }));
         }
 
         [TestMethod]

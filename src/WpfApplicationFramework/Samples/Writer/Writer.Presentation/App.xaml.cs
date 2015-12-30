@@ -85,7 +85,7 @@ namespace Waf.Writer.Presentation
             if (!isTerminating)
             {
                 MessageBox.Show(string.Format(CultureInfo.CurrentCulture, 
-                        Waf.Writer.Presentation.Properties.Resources.UnknownError, e.ToString())
+                        Presentation.Properties.Resources.UnknownError, e)
                     , ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

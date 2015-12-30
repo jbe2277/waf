@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Documents;
+﻿using System.Windows.Documents;
 using System.IO.Packaging;
 using System.IO;
 using System.Windows.Xps.Packaging;
 using System.Windows.Xps.Serialization;
-using System.Windows;
 using Waf.Writer.Applications.Properties;
 
 namespace Waf.Writer.Applications.Documents
@@ -24,7 +19,7 @@ namespace Waf.Writer.Applications.Documents
         protected override void SaveCore(IDocument document, string fileName)
         {
             // We have to clone the FlowDocument before we use different pagination settings for the export.        
-            RichTextDocument richTextDocument = document as RichTextDocument;
+            RichTextDocument richTextDocument = (RichTextDocument)document;
             FlowDocument clone = richTextDocument.CloneContent();
             clone.ColumnWidth = double.PositiveInfinity;
 

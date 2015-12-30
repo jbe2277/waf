@@ -61,7 +61,7 @@ namespace Waf.Writer.Applications.Services
             
             public bool IsBulletList { get; set; }
 
-            public bool IsSpellCheckAvailable { get { return false; } }
+            public bool IsSpellCheckAvailable { get; } = false;
 
             public bool IsSpellCheckEnabled { get; set; }
         }
@@ -71,7 +71,7 @@ namespace Waf.Writer.Applications.Services
             private readonly DelegateCommand disabledCommand = new DelegateCommand(() => { }, () => false);
 
 
-            public IReadOnlyList<string> DefaultZooms { get { return null; } }
+            public IReadOnlyList<string> DefaultZooms { get; } = null;
 
             public double Zoom
             {
@@ -79,11 +79,11 @@ namespace Waf.Writer.Applications.Services
                 set { }
             }
             
-            public ICommand ZoomInCommand { get { return disabledCommand; } }
+            public ICommand ZoomInCommand => disabledCommand;
             
-            public ICommand ZoomOutCommand { get { return disabledCommand; } }
+            public ICommand ZoomOutCommand => disabledCommand;
             
-            public ICommand FitToWidthCommand { get { return disabledCommand; } }
+            public ICommand FitToWidthCommand => disabledCommand;
         }
     }
 }
