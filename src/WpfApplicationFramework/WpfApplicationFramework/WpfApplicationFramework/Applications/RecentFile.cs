@@ -47,7 +47,7 @@ namespace System.Waf.Applications
         /// <summary>
         /// Gets the file path.
         /// </summary>
-        public string Path { get { return path; } }
+        public string Path => path;
 
 
         XmlSchema IXmlSerializable.GetSchema() { return null; }

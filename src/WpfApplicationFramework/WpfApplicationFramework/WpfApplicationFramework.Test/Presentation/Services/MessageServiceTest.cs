@@ -13,7 +13,6 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void MessageBoxResultTest()
         {
-            MessageService messageService = new MessageService();
             PropertyInfo messageBoxResultInfo = typeof(MessageService).GetProperty("MessageBoxResult", 
                 BindingFlags.Static | BindingFlags.NonPublic);
             
@@ -23,7 +22,6 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void MessageBoxOptionsTest()
         {
-            MessageService messageService = new MessageService();
             PropertyInfo messageBoxOptionsInfo = typeof(MessageService).GetProperty("MessageBoxOptions",
                 BindingFlags.Static | BindingFlags.NonPublic);
 

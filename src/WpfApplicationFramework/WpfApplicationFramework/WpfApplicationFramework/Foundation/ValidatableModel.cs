@@ -98,7 +98,7 @@ namespace System.Waf.Foundation
                 errors.Clear();
                 foreach (var validationResult in validationResults)
                 {
-                    var propertyNames = validationResult.MemberNames.Any() ? validationResult.MemberNames : new string[] { "" };
+                    var propertyNames = validationResult.MemberNames.Any() ? validationResult.MemberNames : new[] { "" };
                     foreach (string propertyName in propertyNames)
                     {
                         if (!errors.ContainsKey(propertyName))

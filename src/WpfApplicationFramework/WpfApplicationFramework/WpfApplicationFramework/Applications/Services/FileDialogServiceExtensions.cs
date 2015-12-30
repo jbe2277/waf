@@ -19,7 +19,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowOpenFileDialog(null, new FileType[] { fileType }, fileType, null);
+            return service.ShowOpenFileDialog(null, new[] { fileType }, fileType, null);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowOpenFileDialog(owner, new FileType[] { fileType }, fileType, null);
+            return service.ShowOpenFileDialog(owner, new[] { fileType }, fileType, null);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowOpenFileDialog(null, new FileType[] { fileType }, fileType, defaultFileName);
+            return service.ShowOpenFileDialog(null, new[] { fileType }, fileType, defaultFileName);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowOpenFileDialog(owner, new FileType[] { fileType }, fileType, defaultFileName);
+            return service.ShowOpenFileDialog(owner, new[] { fileType }, fileType, defaultFileName);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowSaveFileDialog(null, new FileType[] { fileType }, fileType, null);
+            return service.ShowSaveFileDialog(null, new[] { fileType }, fileType, null);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowSaveFileDialog(owner, new FileType[] { fileType }, fileType, null);
+            return service.ShowSaveFileDialog(owner, new[] { fileType }, fileType, null);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowSaveFileDialog(null, new FileType[] { fileType }, fileType, defaultFileName);
+            return service.ShowSaveFileDialog(null, new[] { fileType }, fileType, defaultFileName);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace System.Waf.Applications.Services
         {
             if (service == null) { throw new ArgumentNullException(nameof(service)); }
             if (fileType == null) { throw new ArgumentNullException(nameof(fileType)); }
-            return service.ShowSaveFileDialog(owner, new FileType[] { fileType }, fileType, defaultFileName);
+            return service.ShowSaveFileDialog(owner, new[] { fileType }, fileType, defaultFileName);
         }
 
         /// <summary>

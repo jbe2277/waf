@@ -80,22 +80,5 @@ namespace Test.Waf.Applications
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => new DelegateCommand((Action<object>)null));
         }
-
-
-        private class MockView
-        {
-            public bool CanExecuteChangedHandlerCalled { get; private set; }
-            
-            
-            public void CanExecuteChangedHandler(object sender, EventArgs e)
-            {
-                CanExecuteChangedHandlerCalled = true;
-            }
-
-            public void Clear()
-            {
-                CanExecuteChangedHandlerCalled = false;
-            }
-        }
     }
 }

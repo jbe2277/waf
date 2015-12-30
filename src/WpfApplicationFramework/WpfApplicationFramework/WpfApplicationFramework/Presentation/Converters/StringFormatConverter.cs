@@ -10,12 +10,10 @@ namespace System.Waf.Presentation.Converters
     [ValueConversion(typeof(object), typeof(string))]
     public sealed class StringFormatConverter : IValueConverter
     {
-        private static readonly StringFormatConverter defaultInstance = new StringFormatConverter();
-
         /// <summary>
         /// Gets the default instance of this converter.
         /// </summary>
-        public static StringFormatConverter Default { get { return defaultInstance; } }
+        public static StringFormatConverter Default { get; } = new StringFormatConverter();
 
 
         /// <summary>

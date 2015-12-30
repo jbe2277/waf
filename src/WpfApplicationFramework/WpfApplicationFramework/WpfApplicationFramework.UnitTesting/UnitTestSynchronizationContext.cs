@@ -36,7 +36,7 @@ namespace System.Waf.UnitTesting
         public static UnitTestSynchronizationContext Create()
         {
             var context = new UnitTestSynchronizationContext();
-            SynchronizationContext.SetSynchronizationContext(context);
+            SetSynchronizationContext(context);
             return context;
         }
 
@@ -113,7 +113,7 @@ namespace System.Waf.UnitTesting
             {
                 FinishMessageQueue();
                 messageQueue.Dispose();
-                SynchronizationContext.SetSynchronizationContext(previousContext);
+                SetSynchronizationContext(previousContext);
             }
         }
 

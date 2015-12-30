@@ -61,7 +61,7 @@ namespace Test.Waf.Applications.Services
                 Assert.AreEqual(message, m);
                 return true;
             };
-            Assert.IsTrue(messageService.ShowYesNoQuestion(message) == true);
+            Assert.IsTrue(messageService.ShowYesNoQuestion(message));
             Assert.IsTrue(showQuestionCalled);
         }
     }

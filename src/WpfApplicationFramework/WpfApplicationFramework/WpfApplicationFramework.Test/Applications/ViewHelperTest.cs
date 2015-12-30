@@ -43,11 +43,6 @@ namespace Test.Waf.Applications
             public MockViewModel(IView view) : base(view)
             {
             }
-
-            private static void SetDataContext(IView view, ViewModel viewModel)
-            {
-                view.DataContext = viewModel;
-            }
         }
     }
 }

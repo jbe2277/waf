@@ -36,10 +36,7 @@ namespace Test.Waf.Foundation
 
             public string Error { get; set; }
 
-            public string this[string columnName]
-            {
-                get { return Errors[columnName]; }
-            }
+            public string this[string columnName] => Errors[columnName];
         }
     }
 }

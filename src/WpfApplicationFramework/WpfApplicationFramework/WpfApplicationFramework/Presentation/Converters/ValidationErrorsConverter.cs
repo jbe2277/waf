@@ -29,12 +29,10 @@ namespace System.Waf.Presentation.Converters
     // </Style.Triggers>
     public sealed class ValidationErrorsConverter : IMultiValueConverter
     {
-        private static readonly ValidationErrorsConverter defaultInstance = new ValidationErrorsConverter();
-
         /// <summary>
         /// Gets the default instance of this converter.
         /// </summary>
-        public static ValidationErrorsConverter Default { get { return defaultInstance; } }
+        public static ValidationErrorsConverter Default { get; } = new ValidationErrorsConverter();
 
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace System.Waf.Presentation.Converters
         /// </returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            IEnumerable<ValidationError> validationErrors = values == null ? null : values.FirstOrDefault() as IEnumerable<ValidationError>;
+            var validationErrors = values?.FirstOrDefault() as IEnumerable<ValidationError>;
             if (validationErrors != null)
             {
                 return string.Join(Environment.NewLine, validationErrors.Select(x => x.ErrorContent.ToString()));

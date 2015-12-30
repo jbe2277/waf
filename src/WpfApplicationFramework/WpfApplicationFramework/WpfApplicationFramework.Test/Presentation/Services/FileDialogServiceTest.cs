@@ -38,9 +38,9 @@ namespace Test.Waf.Presentation.Services
             FileType xpsFileType = new FileType("XPS Document", ".xps");
             
             
-            Assert.AreEqual("RichText Document|*.rtf", InvokeCreateFilter(new FileType[] { rtfFileType }));
+            Assert.AreEqual("RichText Document|*.rtf", InvokeCreateFilter(new[] { rtfFileType }));
             Assert.AreEqual("RichText Document|*.rtf|XPS Document|*.xps",
-                InvokeCreateFilter(new FileType[] { rtfFileType, xpsFileType }));
+                InvokeCreateFilter(new[] { rtfFileType, xpsFileType }));
         }
 
         private static string InvokeCreateFilter(IEnumerable<FileType> fileTypes)

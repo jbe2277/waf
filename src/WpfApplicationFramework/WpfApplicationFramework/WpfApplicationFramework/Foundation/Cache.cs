@@ -40,7 +40,7 @@
         /// <summary>
         /// Indicates that the Cache is dirty and will update itself at the next Value read.
         /// </summary>
-        public bool IsDirty { get { return isDirty; } }
+        public bool IsDirty => isDirty;
 
         /// <summary>
         /// Sets the Cache dirty. This ensures that the Cache is updated at the next Value read.

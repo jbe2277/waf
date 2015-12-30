@@ -16,7 +16,7 @@ namespace Test.Waf.Applications.Services
         {
             FileType rtfFileType = new FileType("RichText Document", ".rtf");
             FileType xpsFileType = new FileType("XPS Document", ".xps");
-            IEnumerable<FileType> fileTypes = new FileType[] { rtfFileType, xpsFileType };
+            IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
             FileDialogResult result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
@@ -58,20 +58,20 @@ namespace Test.Waf.Applications.Services
             service.Clear();
             Assert.AreEqual(result, service.ShowOpenFileDialog(fileTypes));
             Assert.AreEqual(FileDialogType.OpenFileDialog, service.FileDialogType);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowOpenFileDialog(null, fileTypes));
 
             service.Clear();
             Assert.AreEqual(result, service.ShowOpenFileDialog(owner, fileTypes));
             Assert.AreEqual(FileDialogType.OpenFileDialog, service.FileDialogType);
             Assert.AreEqual(owner, service.Owner);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowOpenFileDialog(null, owner, fileTypes));
 
             service.Clear();
             Assert.AreEqual(result, service.ShowOpenFileDialog(fileTypes, rtfFileType, defaultFileName));
             Assert.AreEqual(FileDialogType.OpenFileDialog, service.FileDialogType);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             Assert.AreEqual(rtfFileType, service.DefaultFileType);
             Assert.AreEqual(defaultFileName, service.DefaultFileName);
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowOpenFileDialog(null, fileTypes, rtfFileType, defaultFileName));
@@ -82,7 +82,7 @@ namespace Test.Waf.Applications.Services
         {
             FileType rtfFileType = new FileType("RichText Document", ".rtf");
             FileType xpsFileType = new FileType("XPS Document", ".xps");
-            IEnumerable<FileType> fileTypes = new FileType[] { rtfFileType, xpsFileType };
+            IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
             FileDialogResult result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
@@ -124,20 +124,20 @@ namespace Test.Waf.Applications.Services
             service.Clear();
             Assert.AreEqual(result, service.ShowSaveFileDialog(fileTypes));
             Assert.AreEqual(FileDialogType.SaveFileDialog, service.FileDialogType);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowSaveFileDialog(null, fileTypes));
 
             service.Clear();
             Assert.AreEqual(result, service.ShowSaveFileDialog(owner, fileTypes));
             Assert.AreEqual(FileDialogType.SaveFileDialog, service.FileDialogType);
             Assert.AreEqual(owner, service.Owner);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowSaveFileDialog(null, owner, fileTypes));
 
             service.Clear();
             Assert.AreEqual(result, service.ShowSaveFileDialog(fileTypes, rtfFileType, defaultFileName));
             Assert.AreEqual(FileDialogType.SaveFileDialog, service.FileDialogType);
-            Assert.IsTrue(service.FileTypes.SequenceEqual(new FileType[] { rtfFileType, xpsFileType }));
+            Assert.IsTrue(service.FileTypes.SequenceEqual(new[] { rtfFileType, xpsFileType }));
             Assert.AreEqual(rtfFileType, service.DefaultFileType);
             Assert.AreEqual(defaultFileName, service.DefaultFileName);
             AssertHelper.ExpectedException<ArgumentNullException>(() => FileDialogServiceExtensions.ShowSaveFileDialog(null, fileTypes, rtfFileType, defaultFileName));

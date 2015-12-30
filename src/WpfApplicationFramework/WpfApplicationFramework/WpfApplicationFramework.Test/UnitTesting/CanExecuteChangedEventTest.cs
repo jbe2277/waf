@@ -86,7 +86,7 @@ namespace Test.Waf.UnitTesting
 
             public void RaiseCanExecuteChanged()
             {
-                if (CanExecuteChanged != null) { CanExecuteChanged(null, EventArgs.Empty); }
+                CanExecuteChanged?.Invoke(null, EventArgs.Empty);
             }
         }
     }

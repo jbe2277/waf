@@ -10,13 +10,10 @@ namespace System.Waf.Presentation.Converters
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public class BoolToVisibilityConverter : IValueConverter
     {
-        private static readonly BoolToVisibilityConverter defaultInstance = new BoolToVisibilityConverter();
-
-
         /// <summary>
         /// Gets the default instance of this converter.
         /// </summary>
-        public static BoolToVisibilityConverter Default { get { return defaultInstance; } }
+        public static BoolToVisibilityConverter Default { get; } = new BoolToVisibilityConverter();
 
 
         /// <summary>

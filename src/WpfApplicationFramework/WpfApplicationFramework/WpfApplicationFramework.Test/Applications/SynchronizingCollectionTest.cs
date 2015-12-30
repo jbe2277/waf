@@ -17,12 +17,10 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ConstructorTest()
         {
-            List<MyModel> originalCollection = new List<MyModel>();
-            
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingCollection<MyDataModel, MyModel>(
                 null, null));
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingCollection<MyDataModel, MyModel>(
-                originalCollection, null));
+                new List<MyModel>(), null));
         }
 
         [TestMethod]

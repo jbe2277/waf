@@ -31,7 +31,7 @@ namespace Test.Waf.Applications
             }
 
 
-            public IView ViewInternal { get { return ViewCore; } }
+            public IView ViewInternal => ViewCore;
         }
 
         private class MockView : IView

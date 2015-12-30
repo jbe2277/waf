@@ -173,7 +173,7 @@ namespace Test.Waf.Applications
             recentFileList.Load(new RecentFile[] { });
             Assert.IsFalse(recentFileList.RecentFiles.Any());
 
-            recentFileList.Load(new RecentFile[] 
+            recentFileList.Load(new[] 
             {
                 new RecentFile("NewDoc1") { IsPinned = true },
                 new RecentFile("NewDoc2"),

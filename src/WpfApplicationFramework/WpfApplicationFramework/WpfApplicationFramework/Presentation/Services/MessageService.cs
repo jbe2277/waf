@@ -19,7 +19,7 @@ namespace System.Waf.Presentation.Services
         private static MessageBoxResult MessageBoxResult => MessageBoxResult.None;
 
         private static MessageBoxOptions MessageBoxOptions 
-            => (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft) ? MessageBoxOptions.RtlReading : MessageBoxOptions.None;
+            => CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? MessageBoxOptions.RtlReading : MessageBoxOptions.None;
         
         /// <summary>
         /// Shows the message.

@@ -52,7 +52,7 @@ namespace System.Waf.UnitTesting.Mocks
         {
             Owner = owner;
             IsVisible = true;
-            if (ShowDialogAction != null) { ShowDialogAction((TMockView)this); }
+            ShowDialogAction?.Invoke((TMockView)this);
             Owner = null;
             IsVisible = false;
         }

@@ -9,12 +9,10 @@ namespace System.Waf.Presentation.Converters
     [ValueConversion(typeof(bool), typeof(bool))]
     public class InvertBooleanConverter : IValueConverter
     {
-        private static readonly InvertBooleanConverter defaultInstance = new InvertBooleanConverter();
-
         /// <summary>
         /// Gets the default instance of this converter.
         /// </summary>
-        public static InvertBooleanConverter Default { get { return defaultInstance; } }
+        public static InvertBooleanConverter Default { get; } = new InvertBooleanConverter();
 
 
         /// <summary>

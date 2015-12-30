@@ -31,12 +31,8 @@ namespace Test.Waf.Applications
 
         private class Pop3SettingsViewModel : ViewModel<IPop3SettingsView>
         {
-            private readonly Pop3Settings pop3Settings;
-
-
             public Pop3SettingsViewModel(IPop3SettingsView view, Pop3Settings pop3Settings) : base(view)
             {
-                this.pop3Settings = pop3Settings;
                 PropertyChangedEventManager.AddHandler(pop3Settings, Pop3SettingsPropertyChanged, "");
             }
 
