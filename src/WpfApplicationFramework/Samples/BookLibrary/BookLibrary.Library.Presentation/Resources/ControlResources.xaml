@@ -56,7 +56,11 @@
     <Style TargetType="RadioButton">
         <Setter Property="Margin" Value="11,11,0,0"/>
     </Style>
-    
+
+    <Style TargetType="ToolBarTray">
+        <Setter Property="IsLocked" Value="True"/>
+    </Style>
+
     <Style TargetType="DataGrid">
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
