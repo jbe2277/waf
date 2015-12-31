@@ -20,10 +20,10 @@ namespace Waf.BookLibrary.Library.Domain
 
         public Book()
         {
-            this.Id = Guid.NewGuid();
-            this.title = "";
-            this.author = "";
-            this.publishDate = DateTime.Now;
+            Id = Guid.NewGuid();
+            title = "";
+            author = "";
+            publishDate = DateTime.Now;
         }
 
 

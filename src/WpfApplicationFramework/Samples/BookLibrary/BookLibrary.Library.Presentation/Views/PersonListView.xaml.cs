@@ -30,7 +30,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         }
 
 
-        private PersonListViewModel ViewModel { get { return viewModel.Value; } }
+        private PersonListViewModel ViewModel => viewModel.Value;
 
 
         public void FocusFirstCell()

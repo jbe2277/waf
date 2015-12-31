@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Waf.Foundation;
@@ -17,9 +16,9 @@ namespace Waf.BookLibrary.Library.Domain
 
         public Person()
         {
-            this.Id = Guid.NewGuid();
-            this.firstname = "";
-            this.lastname = "";
+            Id = Guid.NewGuid();
+            firstname = "";
+            lastname = "";
         }
 
 

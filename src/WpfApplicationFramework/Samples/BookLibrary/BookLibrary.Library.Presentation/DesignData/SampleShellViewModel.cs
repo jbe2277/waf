@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
 using System.ComponentModel;
-using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Presentation.Views;
-using Waf.BookLibrary.Library.Applications.Controllers;
-using Waf.BookLibrary.Library.Applications.Services;
 
 namespace Waf.BookLibrary.Library.Presentation.DesignData
 {
@@ -23,7 +17,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
         }
 
 
-        public new string Title { get { return "WAF Book Library"; } }
+        public new string Title => "WAF Book Library";
 
 
         private class MockShellView : IShellView
@@ -52,12 +46,12 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
             protected virtual void OnClosing(CancelEventArgs e)
             {
-                if (Closing != null) { Closing(this, e); }
+                Closing?.Invoke(this, e);
             }
 
             protected virtual void OnClosed(EventArgs e)
             {
-                if (Closed != null) { Closed(this, e); }
+                Closed?.Invoke(this, e);
             }
         }
     }

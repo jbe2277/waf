@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Globalization;
-using System.Waf.Foundation;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Domain.Properties;
 
@@ -32,14 +31,14 @@ namespace Test.BookLibrary.Library.Domain
             person.Validate();
 
             Assert.AreEqual("", person.Firstname);
-            Assert.AreEqual(Resources.FirstnameMandatory, person.GetErrors("Firstname").Single().ErrorMessage);
+            Assert.AreEqual(Resources.FirstnameMandatory, person.GetErrors(nameof(person.Firstname)).Single().ErrorMessage);
             
             person.Firstname = new string('A', 31);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.FirstnameMaxLength, "Firstname", 30), 
-                person.GetErrors("Firstname").Single().ErrorMessage);
+                person.GetErrors(nameof(person.Firstname)).Single().ErrorMessage);
 
             person.Firstname = new string('A', 30);
-            Assert.IsFalse(person.GetErrors("Firstname").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Firstname)).Any());
         }
 
         [TestMethod]
@@ -49,14 +48,14 @@ namespace Test.BookLibrary.Library.Domain
             person.Validate();
 
             Assert.AreEqual("", person.Lastname);
-            Assert.AreEqual(Resources.LastnameMandatory, person.GetErrors("Lastname").Single().ErrorMessage);
+            Assert.AreEqual(Resources.LastnameMandatory, person.GetErrors(nameof(person.Lastname)).Single().ErrorMessage);
 
             person.Lastname = new string('A', 31);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.LastnameMaxLength, "Lastname",30),
-                person.GetErrors("Lastname").Single().ErrorMessage);
+                person.GetErrors(nameof(person.Lastname)).Single().ErrorMessage);
 
             person.Lastname = new string('A', 30);
-            Assert.IsFalse(person.GetErrors("Lastname").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Lastname)).Any());
         }
 
         [TestMethod]
@@ -66,27 +65,27 @@ namespace Test.BookLibrary.Library.Domain
             person.Validate();
 
             Assert.IsNull(person.Email);
-            Assert.IsFalse(person.GetErrors("Email").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
 
             person.Email = "";
             Assert.IsNull(person.Email);
-            Assert.IsFalse(person.GetErrors("Email").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
 
             person.Email = new string('A', 92) + "@mail.com";
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.EmailMaxLength, "Email", 100),
-                person.GetErrors("Email").Single().ErrorMessage);
+                person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
 
             person.Email = "my." + new string('A', 88) + "@mail.com";
-            Assert.IsFalse(person.GetErrors("Email").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
 
             person.Email = "harry.potter";
-            Assert.AreEqual(Resources.EmailInvalid, person.GetErrors("Email").Single().ErrorMessage);
+            Assert.AreEqual(Resources.EmailInvalid, person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
             
             person.Email = "harry.potter@hogwarts";
-            Assert.AreEqual(Resources.EmailInvalid, person.GetErrors("Email").Single().ErrorMessage);
+            Assert.AreEqual(Resources.EmailInvalid, person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
             
             person.Email = "harry@hogwarts.edu";
-            Assert.IsFalse(person.GetErrors("Email").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
         }
     }
 }

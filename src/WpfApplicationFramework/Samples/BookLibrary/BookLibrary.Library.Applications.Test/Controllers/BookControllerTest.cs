@@ -244,8 +244,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(bookViewModel.IsEnabled);
             
             // Open the LendTo dialog
-            MockLendToView lendToView = Container.GetExportedValue<MockLendToView>();
-            MockLendToView.ShowDialogAction = (view) =>
+            MockLendToView.ShowDialogAction = view =>
             {
                 Assert.AreEqual(Container.GetExportedValue<IShellView>(), view.Owner);
                 Assert.IsTrue(view.IsVisible);

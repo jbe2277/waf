@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Globalization;
-using System.Waf.Foundation;
 using System.Waf.UnitTesting;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Domain.Properties;
@@ -60,14 +59,14 @@ namespace Test.BookLibrary.Library.Domain
             book.Validate();
 
             Assert.AreEqual("", book.Title);
-            Assert.AreEqual(Resources.TitleMandatory, book.GetErrors("Title").Single().ErrorMessage);
+            Assert.AreEqual(Resources.TitleMandatory, book.GetErrors(nameof(book.Title)).Single().ErrorMessage);
 
             book.Title = new string('A', 101);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.TitleMaxLength, "Title", 100),
-                book.GetErrors("Title").Single().ErrorMessage);
+                book.GetErrors(nameof(book.Title)).Single().ErrorMessage);
 
             book.Title = new string('A', 100);
-            Assert.IsFalse(book.GetErrors("Title").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Title)).Any());
         }
 
         [TestMethod]
@@ -77,14 +76,14 @@ namespace Test.BookLibrary.Library.Domain
             book.Validate();
 
             Assert.AreEqual("", book.Author);
-            Assert.AreEqual(Resources.AuthorMandatory, book.GetErrors("Author").Single().ErrorMessage);
+            Assert.AreEqual(Resources.AuthorMandatory, book.GetErrors(nameof(book.Author)).Single().ErrorMessage);
 
             book.Author = new string('A', 101);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.AuthorMaxLength, "Author", 100),
-                book.GetErrors("Author").Single().ErrorMessage);
+                book.GetErrors(nameof(book.Author)).Single().ErrorMessage);
 
             book.Author = new string('A', 100);
-            Assert.IsFalse(book.GetErrors("Author").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Author)).Any());
         }
 
         [TestMethod]
@@ -94,14 +93,14 @@ namespace Test.BookLibrary.Library.Domain
             book.Validate();
 
             Assert.IsNull(book.Publisher);
-            Assert.IsFalse(book.GetErrors("Publisher").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Publisher)).Any());
 
             book.Publisher = new string('A', 101);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PublisherMaxLength, "Publisher", 100),
-                book.GetErrors("Publisher").Single().ErrorMessage);
+                book.GetErrors(nameof(book.Publisher)).Single().ErrorMessage);
 
             book.Publisher = new string('A', 100);
-            Assert.IsFalse(book.GetErrors("Publisher").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Publisher)).Any());
         }
 
         [TestMethod]
@@ -110,16 +109,16 @@ namespace Test.BookLibrary.Library.Domain
             Book book = new Book();
             book.Validate();
 
-            Assert.IsFalse(book.GetErrors("PublishDate").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.PublishDate)).Any());
 
             book.PublishDate = new DateTime(1752, 1, 1);
-            Assert.IsTrue(book.GetErrors("PublishDate").Any());
+            Assert.IsTrue(book.GetErrors(nameof(book.PublishDate)).Any());
 
             book.PublishDate = new DateTime(2000, 1, 1);
-            Assert.IsFalse(book.GetErrors("PublishDate").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.PublishDate)).Any());
 
             book.PublishDate = new DateTime(1000, 1, 1);
-            Assert.IsTrue(book.GetErrors("PublishDate").Any());
+            Assert.IsTrue(book.GetErrors(nameof(book.PublishDate)).Any());
         }
 
         [TestMethod]
@@ -129,14 +128,14 @@ namespace Test.BookLibrary.Library.Domain
             book.Validate();
 
             Assert.IsNull(book.Isbn);
-            Assert.IsFalse(book.GetErrors("Isbn").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Isbn)).Any());
 
             book.Isbn = new string('A', 15);
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.IsbnMaxLength, "Isbn", 14),
-                book.GetErrors("Isbn").Single().ErrorMessage);
+                book.GetErrors(nameof(book.Isbn)).Single().ErrorMessage);
 
             book.Isbn = new string('A', 14);
-            Assert.IsFalse(book.GetErrors("Isbn").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Isbn)).Any());
         }
 
         [TestMethod]
@@ -146,14 +145,14 @@ namespace Test.BookLibrary.Library.Domain
             book.Validate();
 
             Assert.AreEqual(0, book.Pages);
-            Assert.IsFalse(book.GetErrors("Pages").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Pages)).Any());
 
             book.Pages = -1;
             Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PagesEqualOrLarger, "Pages", 0),
-                book.GetErrors("Pages").Single().ErrorMessage);
+                book.GetErrors(nameof(book.Pages)).Single().ErrorMessage);
 
             book.Pages = 400;
-            Assert.IsFalse(book.GetErrors("Pages").Any());
+            Assert.IsFalse(book.GetErrors(nameof(book.Pages)).Any());
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Waf.UnitTesting.Mocks;
 using Waf.BookLibrary.Library.Applications.Controllers;
@@ -19,7 +16,7 @@ namespace Test.BookLibrary.Library.Applications
         private CompositionContainer container;
 
 
-        public CompositionContainer Container { get { return container; } }
+        public CompositionContainer Container => container;
 
 
         [TestInitialize]
@@ -46,7 +43,7 @@ namespace Test.BookLibrary.Library.Applications
         {
             OnTestCleanup();
 
-            if (container != null) { container.Dispose(); }
+            container?.Dispose();
         }
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }

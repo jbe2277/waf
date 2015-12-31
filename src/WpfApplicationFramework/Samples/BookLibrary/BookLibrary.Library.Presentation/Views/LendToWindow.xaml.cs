@@ -23,7 +23,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         }
 
 
-        private LendToViewModel ViewModel { get { return viewModel.Value; } }
+        private LendToViewModel ViewModel => viewModel.Value;
 
 
         public void ShowDialog(object owner)
@@ -35,7 +35,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         private void PersonsListMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var element = e.OriginalSource as FrameworkElement;
-            if (element != null && element.DataContext is Person)
+            if (element?.DataContext is Person)
             {
                 ViewModel.OkCommand.Execute(null);
             }
