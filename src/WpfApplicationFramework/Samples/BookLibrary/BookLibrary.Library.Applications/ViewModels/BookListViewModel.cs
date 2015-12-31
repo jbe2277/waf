@@ -25,11 +25,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         [ImportingConstructor]
         public BookListViewModel(IBookListView view) : base(view)
         {
-            this.selectedBooks = new ObservableCollection<BookDataModel>();
+            selectedBooks = new ObservableCollection<BookDataModel>();
         }
 
 
-        public IReadOnlyList<BookDataModel> SelectedBooks { get { return selectedBooks; } }
+        public IReadOnlyList<BookDataModel> SelectedBooks => selectedBooks;
 
         public IEnumerable<BookDataModel> BookCollectionView { get; set; }
 
@@ -80,8 +80,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             if (string.IsNullOrEmpty(filterText)) { return true; }
             
             Book book = bookDataModel.Book;
-            return (string.IsNullOrEmpty(book.Title) || book.Title.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                || (string.IsNullOrEmpty(book.Author) || book.Author.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            return string.IsNullOrEmpty(book.Title) || book.Title.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || string.IsNullOrEmpty(book.Author) || book.Author.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
         public void AddSelectedBook(BookDataModel bookDataModel)

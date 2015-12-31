@@ -9,14 +9,11 @@ namespace Waf.BookLibrary.Library.Applications.Data
 {
     internal sealed class BookLibraryContextViewCache : DbMappingViewCache
     {
-        public override string MappingHashValue
-        {
-            get { return "51e341e9b0527d94d51d362cb181d06bad45351153a7f7624de5c811a1d65d68"; }
-        }
+        public override string MappingHashValue => "51e341e9b0527d94d51d362cb181d06bad45351153a7f7624de5c811a1d65d68";
 
         public override DbMappingView GetView(EntitySetBase extent)
         {
-            if (extent == null) { throw new ArgumentNullException("extent"); }
+            if (extent == null) { throw new ArgumentNullException(nameof(extent)); }
 
             var extentName = extent.Name;
 

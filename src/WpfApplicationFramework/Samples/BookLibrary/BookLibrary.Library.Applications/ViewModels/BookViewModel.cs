@@ -21,7 +21,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         }
 
 
-        public bool IsEnabled { get { return Book != null; } }
+        public bool IsEnabled => Book != null;
 
         public bool IsValid
         {
@@ -36,7 +36,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             {
                 if (SetProperty(ref book, value))
                 {
-                    RaisePropertyChanged("IsEnabled");
+                    RaisePropertyChanged(nameof(IsEnabled));
                 }
             }
         }

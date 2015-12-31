@@ -6,7 +6,6 @@ using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Views;
-using Waf.BookLibrary.Library.Applications.Controllers;
 using System;
 using Waf.BookLibrary.Library.Applications.Services;
 
@@ -16,7 +15,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>
     {
         private readonly IMessageService messageService;
-        private readonly IShellService shellService;
         private readonly DelegateCommand aboutCommand;
         private ICommand saveCommand;
         private ICommand exitCommand;
@@ -29,7 +27,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             IShellService shellService) : base(view)
         {
             this.messageService = messageService;
-            this.shellService = shellService;
+            this.ShellService = shellService;
             this.aboutCommand = new DelegateCommand(ShowAboutMessage);
             view.Closing += ViewClosing;
             view.Closed += ViewClosed;
@@ -48,11 +46,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         }
 
 
-        public string Title { get { return ApplicationInfo.ProductName; } }
+        public string Title => ApplicationInfo.ProductName;
 
-        public IShellService ShellService { get { return shellService; } }
+        public IShellService ShellService { get; }
 
-        public ICommand AboutCommand { get { return aboutCommand; } }
+        public ICommand AboutCommand => aboutCommand;
 
         public ICommand SaveCommand
         {
@@ -94,7 +92,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         protected virtual void OnClosing(CancelEventArgs e)
         {
-            if (Closing != null) { Closing(this, e); }
+            Closing?.Invoke(this, e);
         }
 
         private void ViewClosing(object sender, CancelEventArgs e)

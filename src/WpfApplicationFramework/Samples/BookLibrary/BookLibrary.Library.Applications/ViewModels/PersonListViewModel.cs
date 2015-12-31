@@ -25,11 +25,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         [ImportingConstructor]
         public PersonListViewModel(IPersonListView view) : base(view)
         {
-            this.selectedPersons = new ObservableCollection<Person>();
+            selectedPersons = new ObservableCollection<Person>();
         }
 
 
-        public IReadOnlyList<Person> SelectedPersons { get { return selectedPersons; } }
+        public IReadOnlyList<Person> SelectedPersons => selectedPersons;
 
         public IEnumerable<Person> PersonCollectionView { get; set; }
         
@@ -85,8 +85,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         {
             if (string.IsNullOrEmpty(filterText)) { return true; }
             
-            return (string.IsNullOrEmpty(person.Firstname) || person.Firstname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                || (string.IsNullOrEmpty(person.Lastname) || person.Lastname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            return string.IsNullOrEmpty(person.Firstname) || person.Firstname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || string.IsNullOrEmpty(person.Lastname) || person.Lastname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
         public void AddSelectedPerson(Person person)

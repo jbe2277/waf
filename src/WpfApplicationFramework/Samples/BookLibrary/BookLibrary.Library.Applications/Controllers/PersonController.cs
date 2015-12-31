@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
@@ -102,7 +101,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         {
             Person person = (Person)recipient;
             
-            if (string.IsNullOrEmpty(person.Email) || person.GetErrors("Email").Any())
+            if (string.IsNullOrEmpty(person.Email) || person.GetErrors(nameof(person.Email)).Any())
             {
                 messageService.ShowError(shellService.ShellView, Resources.CorrectEmailAddress);
                 return;
@@ -119,12 +118,12 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void PersonListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedPerson")
+            if (e.PropertyName == nameof(PersonListViewModel.SelectedPerson))
             {
                 personViewModel.Person = personListViewModel.SelectedPerson;
                 UpdateCommands();
             }
-            else if (e.PropertyName == "IsValid")
+            else if (e.PropertyName == nameof(PersonListViewModel.IsValid))
             {
                 UpdateCommands();
             }
@@ -132,7 +131,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void PersonViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsValid")
+            if (e.PropertyName == nameof(PersonViewModel.IsValid))
             {
                 UpdateCommands();
             }

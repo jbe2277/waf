@@ -45,7 +45,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         }
         
 
-        private ShellViewModel ShellViewModel { get { return shellViewModel.Value; } }
+        private ShellViewModel ShellViewModel => shellViewModel.Value;
 
 
         public void Initialize()
@@ -115,7 +115,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void ShellViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsValid")
+            if (e.PropertyName == nameof(ShellViewModel.IsValid))
             {
                 saveCommand.RaiseCanExecuteChanged();
             }

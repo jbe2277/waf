@@ -116,12 +116,12 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void BookListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedBook")
+            if (e.PropertyName == nameof(BookListViewModel.SelectedBook))
             {
-                bookViewModel.Book = bookListViewModel.SelectedBook != null ? bookListViewModel.SelectedBook.Book : null;
+                bookViewModel.Book = bookListViewModel.SelectedBook?.Book;
                 UpdateCommands();
             }
-            else if (e.PropertyName == "IsValid")
+            else if (e.PropertyName == nameof(BookListViewModel.IsValid))
             {
                 UpdateCommands();
             }
@@ -129,7 +129,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void BookViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsValid")
+            if (e.PropertyName == nameof(BookViewModel.IsValid))
             {
                 UpdateCommands();
             }

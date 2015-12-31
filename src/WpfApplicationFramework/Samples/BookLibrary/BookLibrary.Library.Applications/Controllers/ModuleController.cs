@@ -41,7 +41,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         }
 
 
-        private ShellViewModel ShellViewModel { get { return shellViewModel.Value; } }
+        private ShellViewModel ShellViewModel => shellViewModel.Value;
 
 
         public void Initialize()

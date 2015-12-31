@@ -23,13 +23,13 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         [ImportingConstructor]
         public LendToViewModel(ILendToView view) : base(view)
         {
-            this.okCommand = new DelegateCommand(OkHandler);
+            okCommand = new DelegateCommand(OkHandler);
         }
 
 
-        public static string Title { get { return ApplicationInfo.ProductName; } }
+        public static string Title => ApplicationInfo.ProductName;
 
-        public ICommand OkCommand { get { return okCommand; } }
+        public ICommand OkCommand => okCommand;
 
         public Book Book
         {
