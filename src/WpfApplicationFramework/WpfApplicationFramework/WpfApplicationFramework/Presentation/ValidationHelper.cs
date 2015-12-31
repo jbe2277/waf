@@ -115,7 +115,7 @@ namespace System.Waf.Presentation
 
         private static void CheckBindingMode(BindingMode bindingMode)
         {
-            if (bindingMode != BindingMode.OneWayToSource)
+            if (!WafConfiguration.IsInDesignMode && bindingMode != BindingMode.OneWayToSource)
             {
                 throw new InvalidOperationException("The binding mode of the IsValid attached dependency property must be 'Mode=OneWayToSource'!");
             }
