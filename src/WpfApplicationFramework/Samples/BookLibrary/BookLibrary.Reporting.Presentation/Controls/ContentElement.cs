@@ -3,11 +3,11 @@ using System.Windows.Markup;
 
 namespace Waf.BookLibrary.Reporting.Presentation.Controls
 {
-    [ContentProperty("Content")]
+    [ContentProperty(nameof(Content))]
     public class ContentElement : FrameworkElement
     {
         public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(FrameworkContentElement), typeof(ContentElement), new UIPropertyMetadata(null));
+            DependencyProperty.Register(nameof(Content), typeof(FrameworkContentElement), typeof(ContentElement), new UIPropertyMetadata(null));
 
 
         public FrameworkContentElement Content

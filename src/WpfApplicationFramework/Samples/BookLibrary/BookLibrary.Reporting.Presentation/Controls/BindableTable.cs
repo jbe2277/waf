@@ -9,16 +9,16 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
     public class BindableTable : Table
     {
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(BindableTable), new UIPropertyMetadata(null, ItemsSourceChangedHandler));
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(BindableTable), new UIPropertyMetadata(null, ItemsSourceChangedHandler));
 
         public static readonly DependencyProperty ItemTemplateProperty =
-            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(BindableTable), new UIPropertyMetadata(null));
+            DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(BindableTable), new UIPropertyMetadata(null));
 
         public static readonly DependencyProperty HeaderRowProperty =
-            DependencyProperty.Register("HeaderRowGroup", typeof(TableRowGroup), typeof(BindableTable), new UIPropertyMetadata(null));
+            DependencyProperty.Register(nameof(HeaderRowGroup), typeof(TableRowGroup), typeof(BindableTable), new UIPropertyMetadata(null));
 
         public static readonly DependencyProperty FooterRowProperty =
-            DependencyProperty.Register("FooterRowGroup", typeof(TableRowGroup), typeof(BindableTable), new UIPropertyMetadata(null));
+            DependencyProperty.Register(nameof(FooterRowGroup), typeof(TableRowGroup), typeof(BindableTable), new UIPropertyMetadata(null));
 
 
         public IEnumerable ItemsSource

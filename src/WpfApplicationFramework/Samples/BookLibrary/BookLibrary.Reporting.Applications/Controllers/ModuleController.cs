@@ -34,7 +34,7 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
         }
 
 
-        private ReportViewModel ReportViewModel { get { return reportViewModel.Value; } }
+        private ReportViewModel ReportViewModel => reportViewModel.Value;
 
 
         public void Initialize()

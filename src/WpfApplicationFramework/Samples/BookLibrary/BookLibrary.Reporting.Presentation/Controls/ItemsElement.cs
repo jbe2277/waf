@@ -9,10 +9,10 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
     public class ItemsElement : Section
     {
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ItemsElement), new UIPropertyMetadata(null, ItemsSourceChangedHandler));
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsElement), new UIPropertyMetadata(null, ItemsSourceChangedHandler));
 
         public static readonly DependencyProperty ItemTemplateProperty =
-            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(ItemsElement), new UIPropertyMetadata(null));
+            DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsElement), new UIPropertyMetadata(null));
 
 
         public IEnumerable ItemsSource

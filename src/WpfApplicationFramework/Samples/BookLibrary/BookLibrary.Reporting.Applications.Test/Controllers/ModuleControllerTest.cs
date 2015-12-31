@@ -57,7 +57,7 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
             var bookListReportDataModel = (BorrowedBooksReportDataModel)bookListReport.ReportData;
 
             Assert.IsNotNull(bookListReportDataModel.GroupedBooks);
-            Assert.AreEqual(0, bookListReportDataModel.GroupedBooks.Count());
+            Assert.AreEqual(0, bookListReportDataModel.GroupedBooks.Count);
 
             moduleController.Shutdown();
         }
