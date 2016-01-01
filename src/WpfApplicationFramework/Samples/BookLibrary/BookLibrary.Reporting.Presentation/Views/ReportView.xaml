@@ -10,23 +10,26 @@
     
     <DockPanel>
         <Border DockPanel.Dock="Left" Background="{x:Static SystemColors.ControlBrush}">
-            <StackPanel Width="140" Margin="0,0,16,11">
+            <StackPanel Width="140" Margin="11,11,16,11">
                 <Label Content="{x:Static p:Resources.CreateReport}" Style="{StaticResource HeaderLabel}"/>
 
-                <Label Margin="11,22,0,0">
+                <Label Margin="0,22,0,0">
                     <TextBlock Text="{x:Static p:Resources.ListAllBooks}" TextWrapping="Wrap"/>
                 </Label>
-                <Button x:Name="createButton" Command="{Binding CreateBookListReportCommand}" Content="{x:Static p:Resources.Create}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+                <Button x:Name="createButton" Command="{Binding CreateBookListReportCommand}" Content="{x:Static p:Resources.Create}" 
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
 
-                <Label Margin="11,22,0,0">
+                <Label Margin="0,22,0,0">
                     <TextBlock Text="{x:Static p:Resources.ListBorrowedBooks}" TextWrapping="Wrap"/>
                 </Label>
-                <Button Command="{Binding CreateBorrowedBooksReportCommand}" Content="{x:Static p:Resources.Create}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+                <Button Command="{Binding CreateBorrowedBooksReportCommand}" Content="{x:Static p:Resources.Create}" 
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
 
-                <Label Margin="11,44,0,0">
+                <Label Margin="0,44,0,0">
                     <TextBlock Text="Print the report" TextWrapping="Wrap"/>
                 </Label>
-                <Button Command="ApplicationCommands.Print" CommandTarget="{Binding ElementName=reportReader}" Content="{x:Static p:Resources.Print}" HorizontalAlignment="Right" Margin="11,7,0,0"/>
+                <Button Command="ApplicationCommands.Print" CommandTarget="{Binding ElementName=reportReader}" Content="{x:Static p:Resources.Print}" 
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
             </StackPanel>
         </Border>
 

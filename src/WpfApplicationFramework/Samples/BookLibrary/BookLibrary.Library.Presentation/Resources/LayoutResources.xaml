@@ -5,8 +5,8 @@
 
     <GridLength x:Key="Layout.LargeColumnSpace">11</GridLength>
 
-    <GridLength x:Key="Layout.RowSpace">4</GridLength>
+    <GridLength x:Key="Layout.RowSpace">7</GridLength>
 
-    <GridLength x:Key="Layout.LargeRowSpace">9</GridLength>
+    <GridLength x:Key="Layout.LargeRowSpace">11</GridLength>
 
 </ResourceDictionary>
