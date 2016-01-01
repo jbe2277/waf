@@ -12,13 +12,13 @@ namespace Waf.InformationManager.Common.Presentation.Controls
         /// Identifies the SearchText dependency property.
         /// </summary>
         public static readonly DependencyProperty SearchTextProperty =
-            DependencyProperty.Register("SearchText", typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register(nameof(SearchText), typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// Identifies the HintText dependency property.
         /// </summary>
         public static readonly DependencyProperty HintTextProperty =
-            DependencyProperty.Register("HintText", typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata(""));
+            DependencyProperty.Register(nameof(HintText), typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata(""));
 
         
         static SearchBox()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
@@ -43,10 +39,10 @@ namespace Test.InformationManager.AddressBook.Modules.Domain
             var contact = new Contact();
 
             contact.Email = "jesper.aaberg@example.com";
-            Assert.AreEqual("", contact.Validate("Email"));
+            Assert.AreEqual("", contact.Validate(nameof(contact.Email)));
 
             contact.Email = "jesper.aaberg@example.";
-            Assert.AreEqual("The Email field is not a valid e-mail address.", contact.Validate("Email"));
+            Assert.AreEqual("The Email field is not a valid e-mail address.", contact.Validate(nameof(contact.Email)));
         }
     }
 }

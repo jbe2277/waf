@@ -31,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         }
 
 
-        private EmailListViewModel ViewModel { get { return viewModel.Value; } }
+        private EmailListViewModel ViewModel => viewModel.Value;
 
 
         public void FocusItem()
@@ -57,14 +57,17 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             {
                 emailCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Emails);
                 emailCollectionView.Filter = Filter;
-                emailCollectionView.SortDescriptions.Add(new SortDescription("Sent", ListSortDirection.Descending));
+                emailCollectionView.SortDescriptions.Add(new SortDescription(nameof(Email.Sent), ListSortDirection.Descending));
                 ViewModel.EmailCollectionView = emailCollectionView.Cast<Email>().ToArray();
                 ViewModel.SelectedEmail = ViewModel.EmailCollectionView.FirstOrDefault();
             }
 
             ViewModel.PropertyChanged += ViewModelPropertyChanged;
             emailsBox.Focus();
-            if (ViewModel.SelectedEmail != null) { FocusItem(); }
+            if (ViewModel.SelectedEmail != null)
+            {
+                FocusItem();
+            }
         }
 
         private void UnloadedHandler(object sender, RoutedEventArgs e)
@@ -83,7 +86,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "FilterText")
+            if (e.PropertyName == nameof(ViewModel.FilterText))
             {
                 emailCollectionView.Refresh();
             }

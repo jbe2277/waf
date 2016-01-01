@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Waf.InformationManager.AddressBook.Modules.Applications.Views;
+﻿using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using System.Waf.Applications;
 using System.ComponentModel.Composition;
 using Waf.InformationManager.AddressBook.Modules.Domain;

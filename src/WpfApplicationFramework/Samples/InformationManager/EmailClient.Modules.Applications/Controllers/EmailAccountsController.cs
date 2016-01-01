@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
@@ -37,7 +36,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public EmailClientRoot Root { get; set; }
 
-        public ICommand EmailAccountsCommand { get { return emailAccountsCommand; } }
+        public ICommand EmailAccountsCommand => emailAccountsCommand;
 
         
         private void ShowEmailAccounts()
@@ -99,7 +98,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void EmailAccountsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedEmailAccount")
+            if (e.PropertyName == nameof(EmailAccountsViewModel.SelectedEmailAccount))
             {
                 removeEmailAccountCommand.RaiseCanExecuteChanged();
                 editEmailAccountCommand.RaiseCanExecuteChanged();

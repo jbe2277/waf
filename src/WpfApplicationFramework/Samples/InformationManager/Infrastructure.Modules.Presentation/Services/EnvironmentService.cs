@@ -13,6 +13,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationInfo.Company, ApplicationInfo.ProductName));
         
 
-        public string DataDirectory { get { return dataDirectory.Value; } }
+        public string DataDirectory => dataDirectory.Value;
     }
 }

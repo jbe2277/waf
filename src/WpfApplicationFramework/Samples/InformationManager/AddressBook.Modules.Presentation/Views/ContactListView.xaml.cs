@@ -31,7 +31,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         }
 
 
-        private ContactListViewModel ViewModel { get { return viewModel.Value; } }
+        private ContactListViewModel ViewModel => viewModel.Value;
 
 
         public void FocusItem()
@@ -62,7 +62,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 
             ViewModel.PropertyChanged += ViewModelPropertyChanged;
             contactsBox.Focus();
-            if (ViewModel.SelectedContact != null) { FocusItem(); }
+            if (ViewModel.SelectedContact != null)
+            {
+                FocusItem();
+            }
         }
 
         private void UnloadedHandler(object sender, RoutedEventArgs e)
@@ -80,7 +83,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "FilterText")
+            if (e.PropertyName == nameof(ViewModel.FilterText))
             {
                 contactCollectionView.Refresh();
             }

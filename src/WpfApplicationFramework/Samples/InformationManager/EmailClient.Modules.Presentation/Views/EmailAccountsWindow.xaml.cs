@@ -18,7 +18,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         public EmailAccountsWindow()
         {
             InitializeComponent();
-            this.viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this));
+            viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this));
         }
 
 
@@ -31,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         private void EmailAccountsGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var element = e.OriginalSource as FrameworkElement;
-            if (element != null && element.DataContext is EmailAccount)
+            if (element?.DataContext is EmailAccount)
             {
                 viewModel.Value.EditAccountCommand.Execute(null);
             }

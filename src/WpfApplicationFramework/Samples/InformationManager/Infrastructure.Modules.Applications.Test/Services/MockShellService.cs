@@ -13,11 +13,11 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
 
         public MockShellService()
         {
-            this.toolBarCommands = new List<ToolBarCommand>();
+            toolBarCommands = new List<ToolBarCommand>();
         }
 
 
-        public IReadOnlyList<ToolBarCommand> ToolBarCommands { get { return toolBarCommands; } }
+        public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
         
         public object ShellView { get; set; }
         

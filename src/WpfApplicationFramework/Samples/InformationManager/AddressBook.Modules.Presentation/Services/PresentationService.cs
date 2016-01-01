@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Windows;
+﻿using System.ComponentModel.Composition;
 using Waf.InformationManager.Common.Applications.Services;
 
 namespace Waf.InformationManager.AddressBook.Modules.Presentation.Services

@@ -16,8 +16,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
     {
         private readonly IMessageService messageService;
-        private readonly IShellService shellService;
-        private readonly NavigationService navigationService;
         private readonly DelegateCommand exitCommand;
         private readonly DelegateCommand aboutCommand;
 
@@ -27,8 +25,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
             : base(view)
         {
             this.messageService = messageService;
-            this.shellService = shellService;
-            this.navigationService = navigationService;
+            this.ShellService = shellService;
+            this.NavigationService = navigationService;
             this.exitCommand = new DelegateCommand(Close);
             this.aboutCommand = new DelegateCommand(ShowAboutMessage);
 
@@ -48,15 +46,15 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
         }
 
 
-        public string Title { get { return ApplicationInfo.ProductName; } }
+        public string Title => ApplicationInfo.ProductName;
 
-        public IShellService ShellService { get { return shellService; } }
+        public IShellService ShellService { get; }
 
-        public NavigationService NavigationService { get { return navigationService; } }
+        public NavigationService NavigationService { get; }
 
-        public ICommand ExitCommand { get { return exitCommand; } }
+        public ICommand ExitCommand => exitCommand;
 
-        public ICommand AboutCommand { get { return aboutCommand; } }
+        public ICommand AboutCommand => aboutCommand;
 
 
         public void Show()

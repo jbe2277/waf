@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.Foundation;
@@ -22,7 +21,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly IMessageService messageService;
         private readonly IShellService shellService;
         private readonly IAddressBookService addressBookService;
-        private readonly NewEmailViewModel newEmailViewModel;
         private readonly DelegateCommand selectContactCommand;
         private readonly DelegateCommand sendCommand;
         
@@ -33,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             this.messageService = messageService;
             this.shellService = shellService;
             this.addressBookService = addressBookService;
-            this.newEmailViewModel = newEmailViewModel;
+            this.NewEmailViewModel = newEmailViewModel;
             this.selectContactCommand = new DelegateCommand(SelectContact);
             this.sendCommand = new DelegateCommand(SendEmail);
         }
@@ -41,16 +39,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public EmailClientRoot Root { get; set; }
 
-        internal NewEmailViewModel NewEmailViewModel { get { return newEmailViewModel; } }
+        internal NewEmailViewModel NewEmailViewModel { get; }
 
 
         public void Initialize()
         {
-            newEmailViewModel.SelectContactCommand = selectContactCommand;
-            newEmailViewModel.SendCommand = sendCommand;
-            newEmailViewModel.EmailAccounts = Root.EmailAccounts;
-            newEmailViewModel.SelectedEmailAccount = Root.EmailAccounts.FirstOrDefault();
-            newEmailViewModel.Email = new Email() { EmailType = EmailType.Sent };
+            NewEmailViewModel.SelectContactCommand = selectContactCommand;
+            NewEmailViewModel.SendCommand = sendCommand;
+            NewEmailViewModel.EmailAccounts = Root.EmailAccounts;
+            NewEmailViewModel.SelectedEmailAccount = Root.EmailAccounts.FirstOrDefault();
+            NewEmailViewModel.Email = new Email() { EmailType = EmailType.Sent };
         }
 
         public void Run()
@@ -61,26 +59,26 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 return;
             }
 
-            newEmailViewModel.Show(shellService.ShellView);
+            NewEmailViewModel.Show(shellService.ShellView);
         }
 
         private void SelectContact(object commandParameter)
         {
-            ContactDto selectedContact = addressBookService.ShowSelectContactView(newEmailViewModel.View);
+            ContactDto selectedContact = addressBookService.ShowSelectContactView(NewEmailViewModel.View);
             if (selectedContact == null) { return; }
 
             string parameter = commandParameter as string;
             if (parameter == "To")
             {
-                newEmailViewModel.To += " " + selectedContact.Email;
+                NewEmailViewModel.To += " " + selectedContact.Email;
             }
             else if (parameter == "CC")
             {
-                newEmailViewModel.CC += " " + selectedContact.Email;
+                NewEmailViewModel.CC += " " + selectedContact.Email;
             }
             else if (parameter == "Bcc")
             {
-                newEmailViewModel.Bcc += " " + selectedContact.Email;
+                NewEmailViewModel.Bcc += " " + selectedContact.Email;
             }
             else
             {
@@ -90,7 +88,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void SendEmail()
         {
-            var email = newEmailViewModel.Email;
+            var email = NewEmailViewModel.Email;
             string errorMessage = email.Validate();
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -98,9 +96,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 return;
             }
 
-            newEmailViewModel.Close();
+            NewEmailViewModel.Close();
             
-            email.From = newEmailViewModel.SelectedEmailAccount.Email;
+            email.From = NewEmailViewModel.SelectedEmailAccount.Email;
             email.Sent = DateTime.Now;
             Root.Sent.AddEmail(email);
         }

@@ -22,9 +22,9 @@ namespace Waf.InformationManager.Common.Domain
         }
 
 
-        string IDataErrorInfo.Error { get { return dataErrorInfoSupport.Error; } }
+        string IDataErrorInfo.Error => dataErrorInfoSupport.Error;
 
-        string IDataErrorInfo.this[string columnName] { get { return dataErrorInfoSupport[columnName]; } }
+        string IDataErrorInfo.this[string columnName] => dataErrorInfoSupport[columnName];
 
 
         private void Initialize()

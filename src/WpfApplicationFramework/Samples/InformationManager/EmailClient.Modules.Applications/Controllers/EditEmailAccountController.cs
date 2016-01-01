@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Waf.Applications;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
@@ -47,7 +46,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         
         public void Initialize()
         {
-            PropertyChangedEventManager.AddHandler(editEmailAccountViewModel, EmailAccountsViewModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(editEmailAccountViewModel, EditEmailAccountViewModelPropertyChanged, "");
             
             editEmailAccountViewModel.BackCommand = backCommand;
             editEmailAccountViewModel.NextCommand = nextCommand;
@@ -120,9 +119,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             nextCommand.RaiseCanExecuteChanged();
         }
         
-        private void EmailAccountsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EditEmailAccountViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsValid") { UpdateCommandsState(); }
+            if (e.PropertyName == nameof(EditEmailAccountViewModel.IsValid))
+            {
+                UpdateCommandsState();
+            }
         }
 
         

@@ -27,7 +27,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         public NewEmailViewModel(INewEmailView view)
             : base(view)
         {
-            this.closeCommand = new DelegateCommand(Close);
+            closeCommand = new DelegateCommand(Close);
         }
 
 
@@ -43,7 +43,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set { SetProperty(ref sendCommand, value); }
         }
 
-        public ICommand CloseCommand { get { return closeCommand; } }
+        public ICommand CloseCommand => closeCommand;
 
         public IReadOnlyList<EmailAccount> EmailAccounts
         {
@@ -64,7 +64,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             {
                 if (email != value)
                 {
-                    if (email != null) { PropertyChangedEventManager.RemoveHandler(email, EmailPropertyChanged, ""); }
+                    if (email != null)
+                    {
+                        PropertyChangedEventManager.RemoveHandler(email, EmailPropertyChanged, "");
+                    }
                     email = value;
                     if (email != null)
                     {
@@ -151,15 +154,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         private void EmailPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "To")
+            if (e.PropertyName == nameof(Email.To))
             {
                 To = FormatEmails(Email.To);
             }
-            else if (e.PropertyName == "CC")
+            else if (e.PropertyName == nameof(CC))
             {
                 CC = FormatEmails(Email.CC);
             }
-            else if (e.PropertyName == "Bcc")
+            else if (e.PropertyName == nameof(Bcc))
             {
                 Bcc = FormatEmails(Email.Bcc);
             }

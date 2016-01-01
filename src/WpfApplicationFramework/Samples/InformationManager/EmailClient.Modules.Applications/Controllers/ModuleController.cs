@@ -52,7 +52,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         }
 
 
-        internal EmailClientRoot Root { get { return root; } }
+        internal EmailClientRoot Root => root;
 
 
         public void Initialize()
@@ -61,7 +61,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             {
                 if (stream.Length == 0)
                 {
-                    this.root = new EmailClientRoot();
+                    root = new EmailClientRoot();
                     root.AddEmailAccount(SampleDataProvider.CreateEmailAccount());
                     foreach (var email in SampleDataProvider.CreateInboxEmails()) { root.Inbox.AddEmail(email); }
                     foreach (var email in SampleDataProvider.CreateSentEmails()) { root.Sent.AddEmail(email); }
@@ -144,11 +144,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             shellService.ClearToolBarCommands();
             
-            if (activeEmailFolderController != null)
-            {
-                activeEmailFolderController.Shutdown();
-                activeEmailFolderController = null;
-            }
+            activeEmailFolderController?.Shutdown();
+            activeEmailFolderController = null;
         }
 
         private void NewEmail()

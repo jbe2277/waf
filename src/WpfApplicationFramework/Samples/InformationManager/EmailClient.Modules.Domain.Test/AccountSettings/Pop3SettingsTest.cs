@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
+﻿using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
@@ -49,14 +45,14 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         {
             var pop3Settings = new Pop3Settings();
 
-            Assert.AreEqual("The POP3 Server field is required.", pop3Settings.Validate("Pop3ServerPath"));
-            Assert.AreEqual("The SMTP Server field is required.", pop3Settings.Validate("SmtpServerPath"));
+            Assert.AreEqual("The POP3 Server field is required.", pop3Settings.Validate(nameof(pop3Settings.Pop3ServerPath)));
+            Assert.AreEqual("The SMTP Server field is required.", pop3Settings.Validate(nameof(pop3Settings.SmtpServerPath)));
 
             pop3Settings.Pop3ServerPath = "pop3.example.com";
             pop3Settings.SmtpServerPath = "smtp.example.com";
 
-            Assert.AreEqual("", pop3Settings.Validate("Pop3ServerPath"));
-            Assert.AreEqual("", pop3Settings.Validate("SmtpServerPath"));
+            Assert.AreEqual("", pop3Settings.Validate(nameof(pop3Settings.Pop3ServerPath)));
+            Assert.AreEqual("", pop3Settings.Validate(nameof(pop3Settings.SmtpServerPath)));
         }
     }
 }

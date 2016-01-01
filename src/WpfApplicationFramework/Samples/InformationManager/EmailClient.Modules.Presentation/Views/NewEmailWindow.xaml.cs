@@ -45,11 +45,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         private static void CommitChanges()
         {
             FrameworkElement element = Keyboard.FocusedElement as FrameworkElement;
-            if (element != null)
-            {
-                element.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                element.Focus();
-            }
+            element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            element?.Focus();
         }
     }
 }

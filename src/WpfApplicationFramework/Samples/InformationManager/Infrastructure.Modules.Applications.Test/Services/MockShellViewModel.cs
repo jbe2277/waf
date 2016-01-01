@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
@@ -14,11 +11,11 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         
         public MockShellViewModel()
         {
-            this.toolBarCommands = new List<ToolBarCommand>();
+            toolBarCommands = new List<ToolBarCommand>();
         }
 
 
-        public IReadOnlyList<ToolBarCommand> ToolBarCommands { get { return toolBarCommands; } }
+        public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
         
         public object View { get; set; }
 

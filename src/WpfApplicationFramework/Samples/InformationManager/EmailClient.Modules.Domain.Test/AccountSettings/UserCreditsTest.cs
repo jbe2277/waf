@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
@@ -40,10 +36,10 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public void ValidationTest()
         {
             UserCredits userCredits = new UserCredits();
-            Assert.AreEqual("The Username field is required.", userCredits.Validate("UserName"));
+            Assert.AreEqual("The Username field is required.", userCredits.Validate(nameof(UserCredits.UserName)));
 
             userCredits.UserName = "bill";
-            Assert.AreEqual("", userCredits.Validate("UserName"));
+            Assert.AreEqual("", userCredits.Validate(nameof(UserCredits.UserName)));
         }
     }
 }

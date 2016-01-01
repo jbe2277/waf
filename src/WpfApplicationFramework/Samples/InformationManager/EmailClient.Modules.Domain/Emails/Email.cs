@@ -111,13 +111,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         {
             var validationResults = new List<ValidationResult>();
             
-            foreach (string email in To) { ValidateEmail(validationResults, email, "To", "To"); }
-            foreach (string email in CC) { ValidateEmail(validationResults, email, "CC", "CC"); }
-            foreach (string email in Bcc) { ValidateEmail(validationResults, email, "Bcc", "BCC"); }
+            foreach (string email in To) { ValidateEmail(validationResults, email, nameof(To), "To"); }
+            foreach (string email in CC) { ValidateEmail(validationResults, email, nameof(CC), "CC"); }
+            foreach (string email in Bcc) { ValidateEmail(validationResults, email, nameof(Bcc), "BCC"); }
 
             if (!To.Any() && !CC.Any() && !Bcc.Any())
             {
-                validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { "To", "CC", "Bcc" }));
+                validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To), nameof(CC), nameof(Bcc) }));
             }
 
             return validationResults;

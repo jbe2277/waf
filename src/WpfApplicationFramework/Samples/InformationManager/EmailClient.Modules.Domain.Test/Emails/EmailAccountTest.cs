@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
@@ -55,17 +51,17 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzab@example.com";
             var emailAccount = new EmailAccount();
 
-            Assert.AreEqual("The Name field is required.", emailAccount.Validate("Name"));
+            Assert.AreEqual("The Name field is required.", emailAccount.Validate(nameof(EmailAccount.Name)));
             emailAccount.Name = "bill";
-            Assert.AreEqual("", emailAccount.Validate("Name"));
+            Assert.AreEqual("", emailAccount.Validate(nameof(EmailAccount.Name)));
 
-            Assert.AreEqual("The Email Address field is required.", emailAccount.Validate("Email"));
+            Assert.AreEqual("The Email Address field is required.", emailAccount.Validate(nameof(EmailAccount.Email)));
             emailAccount.Email = longText;
-            Assert.AreEqual("The field Email Address must be a string with a maximum length of 100.", emailAccount.Validate("Email"));
+            Assert.AreEqual("The field Email Address must be a string with a maximum length of 100.", emailAccount.Validate(nameof(EmailAccount.Email)));
             emailAccount.Email = "wrong email address";
-            Assert.AreEqual("The Email Address field is not a valid e-mail address.", emailAccount.Validate("Email"));
+            Assert.AreEqual("The Email Address field is not a valid e-mail address.", emailAccount.Validate(nameof(EmailAccount.Email)));
             emailAccount.Email = "harry@example.com";
-            Assert.AreEqual("", emailAccount.Validate("Email"));
+            Assert.AreEqual("", emailAccount.Validate(nameof(EmailAccount.Email)));
         }
     }
 }

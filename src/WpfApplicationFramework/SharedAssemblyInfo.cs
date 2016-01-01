@@ -5,7 +5,7 @@ using System.Resources;
 
 
 [assembly: AssemblyCompany("Waf")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

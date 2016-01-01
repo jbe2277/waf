@@ -16,11 +16,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
 
         public NavigationService()
         {
-            this.navigationNodes = new ObservableCollection<NavigationNode>();
+            navigationNodes = new ObservableCollection<NavigationNode>();
         }
 
 
-        public IReadOnlyList<NavigationNode> NavigationNodes { get { return navigationNodes; } }
+        public IReadOnlyList<NavigationNode> NavigationNodes => navigationNodes;
 
         
         public INavigationNode AddNavigationNode(string name, Action showAction, Action closeAction, double group, double order)

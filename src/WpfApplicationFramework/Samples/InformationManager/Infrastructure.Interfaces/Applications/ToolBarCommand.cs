@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
@@ -21,28 +18,28 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         /// <exception cref="ArgumentException">text must not be null or empty.</exception>
         public ToolBarCommand(ICommand command, string text, string toolTip = null)
         {
-            if (command == null) { throw new ArgumentNullException("command"); }
-            if (string.IsNullOrEmpty(text)) { throw new ArgumentException("text must not be null or empty."); }
+            if (command == null) { throw new ArgumentNullException(nameof(command)); }
+            if (string.IsNullOrEmpty(text)) { throw new ArgumentException("text must not be null or empty.", nameof(text)); }
             
-            this.Command = command;
-            this.Text = text;
-            this.ToolTip = toolTip ?? "";
+            Command = command;
+            Text = text;
+            ToolTip = toolTip ?? "";
         }
 
 
         /// <summary>
         /// Gets the command which is invoked when the user clicks on the tool bar button.
         /// </summary>
-        public ICommand Command { get; private set; }
+        public ICommand Command { get; }
 
         /// <summary>
         /// Gets the text of the tool bar button.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; }
 
         /// <summary>
         /// Gets the tool tip of the tool bar button.
         /// </summary>
-        public string ToolTip { get; private set; }
+        public string ToolTip { get; }
     }
 }

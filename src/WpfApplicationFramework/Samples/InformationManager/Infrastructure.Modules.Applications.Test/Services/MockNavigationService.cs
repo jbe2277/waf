@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using System.ComponentModel.Composition;
 
@@ -15,11 +13,11 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
 
         public MockNavigationService()
         {
-            this.navigationNodes = new List<MockNavigationNode>();
+            navigationNodes = new List<MockNavigationNode>();
         }
 
 
-        public IReadOnlyList<MockNavigationNode> NavigationNodes { get { return navigationNodes; } }
+        public IReadOnlyList<MockNavigationNode> NavigationNodes => navigationNodes;
         
 
         public INavigationNode AddNavigationNode(string name, Action showAction, Action closeAction, double group, double order)

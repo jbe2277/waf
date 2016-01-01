@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;
 using System.ComponentModel.Composition;
 using Waf.InformationManager.AddressBook.Interfaces.Domain;

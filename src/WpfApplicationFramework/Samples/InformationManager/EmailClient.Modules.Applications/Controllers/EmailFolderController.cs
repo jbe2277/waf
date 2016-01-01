@@ -18,8 +18,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
     {
         private readonly IShellService shellService;
         private readonly EmailLayoutViewModel emailLayoutViewModel;
-        private readonly EmailListViewModel emailListViewModel;
-        private readonly EmailViewModel emailViewModel;
         private readonly DelegateCommand deleteEmailCommand;
 
         
@@ -28,30 +26,30 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             this.shellService = shellService;
             this.emailLayoutViewModel = emailLayoutViewModel;
-            this.emailListViewModel = emailListViewModel;
-            this.emailViewModel = emailViewModel;
+            this.EmailListViewModel = emailListViewModel;
+            this.EmailViewModel = emailViewModel;
             this.deleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
         }
 
         
         public EmailFolder EmailFolder { get; set; }
 
-        public ICommand DeleteEmailCommand { get { return deleteEmailCommand; } }
+        public ICommand DeleteEmailCommand => deleteEmailCommand;
 
-        internal EmailListViewModel EmailListViewModel { get { return emailListViewModel; } }
+        internal EmailListViewModel EmailListViewModel { get; }
 
-        internal EmailViewModel EmailViewModel { get { return emailViewModel; } }
+        internal EmailViewModel EmailViewModel { get; }
 
 
         public void Initialize()
         {
-            emailListViewModel.Emails = EmailFolder.Emails;
-            emailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
+            EmailListViewModel.Emails = EmailFolder.Emails;
+            EmailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
 
-            PropertyChangedEventManager.AddHandler(emailListViewModel, EmailListViewModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");
 
-            emailLayoutViewModel.EmailListView = emailListViewModel.View;
-            emailLayoutViewModel.EmailView = emailViewModel.View;
+            emailLayoutViewModel.EmailListView = EmailListViewModel.View;
+            emailLayoutViewModel.EmailView = EmailViewModel.View;
         }
 
         public void Run()
@@ -66,24 +64,24 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailLayoutViewModel.EmailView = null;
         }
 
-        private bool CanDeleteEmail() { return emailListViewModel.SelectedEmail != null; }
+        private bool CanDeleteEmail() { return EmailListViewModel.SelectedEmail != null; }
 
         private void DeleteEmail()
         {
             // Use the EmailCollectionView, which represents the sorted/filtered state of the emails, to determine the next email to select.
-            var nextEmail = CollectionHelper.GetNextElementOrDefault(emailListViewModel.EmailCollectionView, emailListViewModel.SelectedEmail);
+            var nextEmail = CollectionHelper.GetNextElementOrDefault(EmailListViewModel.EmailCollectionView, EmailListViewModel.SelectedEmail);
             
-            EmailFolder.RemoveEmail(emailListViewModel.SelectedEmail);
+            EmailFolder.RemoveEmail(EmailListViewModel.SelectedEmail);
 
-            emailListViewModel.SelectedEmail = nextEmail ?? emailListViewModel.EmailCollectionView.LastOrDefault();
-            emailListViewModel.FocusItem();
+            EmailListViewModel.SelectedEmail = nextEmail ?? EmailListViewModel.EmailCollectionView.LastOrDefault();
+            EmailListViewModel.FocusItem();
         }
 
         private void EmailListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedEmail")
+            if (e.PropertyName == nameof(EmailListViewModel.SelectedEmail))
             {
-                emailViewModel.Email = emailListViewModel.SelectedEmail;
+                EmailViewModel.Email = EmailListViewModel.SelectedEmail;
                 deleteEmailCommand.RaiseCanExecuteChanged();
             }
         }

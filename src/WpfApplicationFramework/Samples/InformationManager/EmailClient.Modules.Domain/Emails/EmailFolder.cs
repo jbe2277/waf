@@ -15,11 +15,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public EmailFolder()
         {
-            this.emails = new ObservableCollection<Email>();
+            emails = new ObservableCollection<Email>();
         }
 
 
-        public IReadOnlyObservableList<Email> Emails { get { return readOnlyEmails ?? (readOnlyEmails = new ReadOnlyObservableList<Email>(emails)); } }
+        public IReadOnlyObservableList<Email> Emails => readOnlyEmails ?? (readOnlyEmails = new ReadOnlyObservableList<Email>(emails));
 
         internal IEmailDeletionService EmailDeletionService { get; set; }
 

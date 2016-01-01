@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using Test.InformationManager.Common.Domain;

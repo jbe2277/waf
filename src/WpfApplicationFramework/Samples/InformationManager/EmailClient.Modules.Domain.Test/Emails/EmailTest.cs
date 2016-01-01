@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
@@ -59,14 +56,14 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
             var email = new Email();
 
-            Assert.AreEqual("", email.Validate("Title"));
+            Assert.AreEqual("", email.Validate(nameof(Email.Title)));
             email.Title = longText;
-            Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.Validate("Title"));
+            Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.Validate(nameof(Email.Title)));
             email.Title = "";
 
-            Assert.AreEqual("", email.Validate("From"));
+            Assert.AreEqual("", email.Validate(nameof(Email.From)));
             email.From = longText;
-            Assert.AreEqual("The field From must be a string with a maximum length of 255.", email.Validate("From"));
+            Assert.AreEqual("The field From must be a string with a maximum length of 255.", email.Validate(nameof(Email.From)));
             email.From = "";
 
             Assert.AreEqual("This email doesn't define a recipient.", email.Validate());

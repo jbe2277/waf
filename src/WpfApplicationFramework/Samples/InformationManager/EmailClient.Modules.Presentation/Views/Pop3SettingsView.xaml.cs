@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
+using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
@@ -25,7 +26,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         }
 
 
-        private Pop3SettingsViewModel ViewModel { get { return viewModel.Value; } }
+        private Pop3SettingsViewModel ViewModel => viewModel.Value;
 
 
         private void LoadedHandler(object sender, RoutedEventArgs e)
@@ -41,7 +42,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 
         private void SmtpUserCreditsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Password")
+            if (e.PropertyName == nameof(UserCredits.Password))
             {
                 smtpPassword.Password = ViewModel.Model.SmtpUserCredits.Password;
             }

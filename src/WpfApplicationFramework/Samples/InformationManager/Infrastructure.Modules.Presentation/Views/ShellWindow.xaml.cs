@@ -27,9 +27,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
         }
 
 
-        public double VirtualScreenWidth { get { return SystemParameters.VirtualScreenWidth; } }
+        public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
-        public double VirtualScreenHeight { get { return SystemParameters.VirtualScreenHeight; } }
+        public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
 
         public bool IsMaximized
         {
@@ -47,7 +47,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
             }
         }
 
-        private ShellViewModel ViewModel { get { return viewModel.Value; } }
+        private ShellViewModel ViewModel => viewModel.Value;
 
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)

@@ -49,14 +49,14 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         private void Pop3UserCreditsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "UserName")
+            if (e.PropertyName == nameof(UserCredits.UserName))
             {
                 if (UseSameUserCredits)
                 {
                     Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
                 }
             }
-            else if (e.PropertyName == "Password")
+            else if (e.PropertyName == nameof(UserCredits.Password))
             {
                 if (UseSameUserCredits)
                 {

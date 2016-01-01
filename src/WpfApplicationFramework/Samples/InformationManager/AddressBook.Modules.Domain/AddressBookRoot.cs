@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Waf.InformationManager.Common.Domain;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
@@ -17,11 +14,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
 
         public AddressBookRoot()
         {
-            this.contacts = new ObservableCollection<Contact>();
+            contacts = new ObservableCollection<Contact>();
         }
 
 
-        public IReadOnlyList<Contact> Contacts { get { return contacts; } }
+        public IReadOnlyList<Contact> Contacts => contacts;
 
 
         public Contact AddNewContact()

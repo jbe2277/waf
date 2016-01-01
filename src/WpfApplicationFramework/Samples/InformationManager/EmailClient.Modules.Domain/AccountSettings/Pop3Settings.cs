@@ -26,10 +26,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
             set { SetProperty(ref pop3ServerPath, value); }
         }
 
-        public UserCredits Pop3UserCredits
-        {
-            get { return pop3UserCredits; }
-        }
+        public UserCredits Pop3UserCredits => pop3UserCredits;
 
         [Required, Display(Name = "SMTP Server")]
         public string SmtpServerPath
@@ -38,10 +35,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
             set { SetProperty(ref smtpServerPath, value); }
         }
 
-        public UserCredits SmtpUserCredits
-        {
-            get { return smtpUserCredits; }
-        }
+        public UserCredits SmtpUserCredits => smtpUserCredits;
 
 
         public override EmailAccountSettings Clone()

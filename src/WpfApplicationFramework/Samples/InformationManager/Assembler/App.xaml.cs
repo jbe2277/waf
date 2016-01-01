@@ -92,7 +92,7 @@ namespace Waf.InformationManager.Assembler
             if (!isTerminating)
             {
                 MessageBox.Show(string.Format(CultureInfo.CurrentCulture, 
-                        "Unknown application error\n\n{0}", e.ToString()),
+                        "Unknown application error\n\n{0}", e),
                     ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -18,7 +18,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.SampleData
         
         public static IReadOnlyList<Email> CreateInboxEmails()
         {
-            List<Email> emails = new List<Email>();
+            var emails = new List<Email>();
 
             emails.Add(CreateEmail("Aliquam cras class maecenas", new DateTime(2003, 11, 5, 8, 20, 14), "someone@example.com", new[] { "harry@example.com", "user-2@fabrikam.com", "someone@adventure-works.com" }, new[] { "someone-4@adventure-works.com" }, "Vestibulum aenean mauris maecenas pellentesque nullam aliquam cras adipiscing class nam suspendisse praesent parturient integer condimentum consectetuer vestibulum curabitur curae pellentesque vestibulum scelerisque phasellus duis sed nunc donec amet accumsan ante sollicitudin quisque dis arcu consequat etiam fusce convallis dignissim adipiscing elementum pellentesque facilisis fermentum fringilla diam aptent consectetuer vivamus lorem aliquam morbi eget habitasse pellentesque aliquet hendrerit blandit sollicitudin elit nulla pellentesque proin est enim commodo conubia bibendum ullamcorper himenaeos parturient hac leo dictumst augue suspendisse erat mus cubilia condimentum scelerisque auctor imperdiet congue vestibulum vestibulum cursus dapibus eros nibh eleifend ullamcorper adipiscing egestas facilisi parturient vestibulum malesuada"));
             emails.Add(CreateEmail("Duis nunc", new DateTime(2006, 12, 29, 7, 6, 5), "user@adventure-works.com", new[] { "harry@example.com", "admin@adventure-works.com" }, null, "Euismod dolor penatibus vestibulum nec suspendisse feugiat dictum fames porttitor gravida nisi felis faucibus consectetuer non lectus condimentum ipsum pellentesque justo libero nisl per iaculis tincidunt sed sollicitudin ligula habitant pellentesque lacinia nunc inceptos interdum lacus lorem sem litora scelerisque ullamcorper luctus lobortis tristique consectetuer sit suspendisse pellentesque condimentum adipiscing odio parturient nascetur scelerisque magnis orci pede ultricies mattis mauris vestibulum pharetra vel venenatis vulputate nam sed"));
@@ -36,7 +36,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.SampleData
 
         public static IReadOnlyList<Email> CreateSentEmails()
         {
-            List<Email> emails = new List<Email>();
+            var emails = new List<Email>();
 
             emails.Add(CreateEmail("Sed dis", new DateTime(2011, 9, 26, 23, 11, 12), "harry@example.com", new[] { "someone-6@adventure-works.com", "someone-7@adventure-works.com" }, null, "Nulla porta cras fringilla duis est scelerisque ullamcorper adipiscing habitasse pellentesque lacinia purus risus lobortis nunc amet hendrerit nullam himenaeos hac consectetuer velit laoreet parturient leo aptent pellentesque ante vitae sollicitudin mus nec non class pellentesque suspendisse curae auctor condimentum donec scelerisque imperdiet nascetur congue ullamcorper pharetra suspendisse consectetuer placerat arcu vestibulum cursus dictum per lectus pellentesque vestibulum condimentum diam malesuada scelerisque penatibus natoque porttitor ullamcorper"));
             emails.Add(CreateEmail("Etiam eget sed", new DateTime(2001, 4, 24, 16, 32, 44), "harry@example.com", new[] { "someone@example.com" }, new[] { "user@adventure-works.com", "user-2@adventure-works.com" }, "Pulvinar fusce suspendisse libero sagittis posuere lorem morbi tincidunt sem sollicitudin potenti pretium sit tristique elit nulla adipiscing ultricies pellentesque condimentum vel enim rhoncus erat eros ligula nibh proin consectetuer senectus sodales litora scelerisque luctus augue dolor magnis ullamcorper suspendisse condimentum nam fames venenatis scelerisque vulputate nisi ullamcorper pellentesque felis viverra nisl parturient ipsum justo sociosqu nunc mattis lacus mauris odio sed sollicitudin vestibulum suscipit torquent dis curabitur vestibulum aliquam suspendisse pellentesque condimentum adipiscing"));
@@ -50,7 +50,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.SampleData
 
         public static IReadOnlyList<Email> CreateDrafts()
         {
-            List<Email> emails = new List<Email>();
+            var emails = new List<Email>();
 
             emails.Add(CreateEmail("Sociis nunc vivamus sagittis", new DateTime(2006, 7, 1, 3, 40, 49), "harry@example.com", null, null, "Parturient nulla aliquam scelerisque senectus pellentesque porta odio sociosqu suscipit aliquet vestibulum sollicitudin purus blandit ullamcorper vestibulum adipiscing pellentesque"));
 

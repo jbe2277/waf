@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Waf.InformationManager.AddressBook.Interfaces.Domain
+﻿namespace Waf.InformationManager.AddressBook.Interfaces.Domain
 {
     /// <summary>
     /// Contains contact informations. This is a data transfer object that can be used to pass information over module boundaries.
@@ -18,25 +13,25 @@ namespace Waf.InformationManager.AddressBook.Interfaces.Domain
         /// <param name="email">The email.</param>
         public ContactDto(string firstname, string lastname, string email)
         {
-            this.Firstname = firstname;
-            this.Lastname = lastname;
-            this.Email = email;
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
         }
 
 
         /// <summary>
         /// Gets the first name.
         /// </summary>
-        public string Firstname { get; private set; }
+        public string Firstname { get; }
 
         /// <summary>
         /// Gets the last name.
         /// </summary>
-        public string Lastname { get; private set; }
+        public string Lastname { get; }
 
         /// <summary>
         /// Gets the email.
         /// </summary>
-        public string Email { get; private set; }
+        public string Email { get; }
     }
 }

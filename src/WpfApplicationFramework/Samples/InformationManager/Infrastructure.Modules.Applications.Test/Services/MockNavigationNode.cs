@@ -8,23 +8,23 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
     {
         public MockNavigationNode(string name, Action showAction, Action closeAction, double group, double order)
         {
-            this.Name = name;
-            this.ShowAction = showAction;
-            this.CloseAction = closeAction;
-            this.Group = group;
-            this.Order = order;
+            Name = name;
+            ShowAction = showAction;
+            CloseAction = closeAction;
+            Group = group;
+            Order = order;
         }
         
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        public Action ShowAction { get; private set; }
+        public Action ShowAction { get; }
 
-        public Action CloseAction { get; private set; }
+        public Action CloseAction { get; }
 
-        public double Group { get; private set; }
+        public double Group { get; }
 
-        public double Order { get; private set; }
+        public double Order { get; }
 
         public int? ItemCount { get; set; }
     }

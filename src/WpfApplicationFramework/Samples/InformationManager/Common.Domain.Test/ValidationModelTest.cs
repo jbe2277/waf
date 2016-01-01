@@ -13,11 +13,11 @@ namespace Test.InformationManager.Common.Domain
         {
             var model = new MockValidationModel();
             Assert.AreEqual("The Name field is required.", model.Validate());
-            Assert.AreEqual("The Name field is required.", model.Validate("Name"));
+            Assert.AreEqual("The Name field is required.", model.Validate(nameof(model.Name)));
 
             model.Name = "Bill";
             Assert.AreEqual("", model.Validate());
-            Assert.AreEqual("", model.Validate("Name"));
+            Assert.AreEqual("", model.Validate(nameof(model.Name)));
         }
 
 

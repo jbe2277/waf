@@ -51,7 +51,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         }
 
 
-        public void FocusItem() { ViewCore.FocusItem(); }
+        public void FocusItem()
+        {
+            ViewCore.FocusItem();
+        }
 
         public bool Filter(Email email)
         {

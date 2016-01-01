@@ -28,17 +28,17 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         }
 
 
-        public IReadOnlyList<EmailAccount> EmailAccounts { get { return emailAccounts; } }
+        public IReadOnlyList<EmailAccount> EmailAccounts => emailAccounts;
 
-        public EmailFolder Inbox { get { return inbox; } }
+        public EmailFolder Inbox => inbox;
 
-        public EmailFolder Outbox { get { return outbox; } }
+        public EmailFolder Outbox => outbox;
 
-        public EmailFolder Sent { get { return sent; } }
+        public EmailFolder Sent => sent;
 
-        public EmailFolder Drafts { get { return drafts; } }
+        public EmailFolder Drafts => drafts;
 
-        public EmailFolder Deleted { get { return deleted; } }
+        public EmailFolder Deleted => deleted;
 
 
         public void AddEmailAccount(EmailAccount emailAccount)

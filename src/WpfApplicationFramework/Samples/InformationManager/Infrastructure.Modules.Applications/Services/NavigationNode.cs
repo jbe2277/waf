@@ -15,11 +15,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
 
         public NavigationNode(string name, Action showAction, Action closeAction, double group, double order)
         {
-            if (string.IsNullOrEmpty(name)) { throw new ArgumentException("name must not be null or empty."); }
-            if (showAction == null) { throw new ArgumentNullException("showAction"); }
-            if (closeAction == null) { throw new ArgumentNullException("closeAction"); }
-            if (group < 0) { throw new ArgumentException("group must be equal or greater than 0."); }
-            if (order < 0) { throw new ArgumentException("order must be equal or greater than 0."); }
+            if (string.IsNullOrEmpty(name)) { throw new ArgumentException("name must not be null or empty.", nameof(name)); }
+            if (showAction == null) { throw new ArgumentNullException(nameof(showAction)); }
+            if (closeAction == null) { throw new ArgumentNullException(nameof(closeAction)); }
+            if (group < 0) { throw new ArgumentException("group must be equal or greater than 0.", nameof(group)); }
+            if (order < 0) { throw new ArgumentException("order must be equal or greater than 0.", nameof(order)); }
             
             this.Name = name;
             this.showAction = showAction;
@@ -29,11 +29,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
         }
         
       
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        public double Group { get; private set; }
+        public double Group { get; }
 
-        public double Order { get; private set; }
+        public double Order { get; }
 
         public int? ItemCount
         {

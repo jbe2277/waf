@@ -18,8 +18,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
     {
         private readonly IShellService shellService;
         private readonly ContactLayoutViewModel contactLayoutViewModel;
-        private readonly ContactListViewModel contactListViewModel;
-        private readonly ContactViewModel contactViewModel;
         private readonly DelegateCommand newContactCommand;
         private readonly DelegateCommand deleteContactCommand;
 
@@ -29,8 +27,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         {
             this.shellService = shellService;
             this.contactLayoutViewModel = contactLayoutViewModel;
-            this.contactListViewModel = contactListViewModel;
-            this.contactViewModel = contactViewModel;
+            this.ContactListViewModel = contactListViewModel;
+            this.ContactViewModel = contactViewModel;
             this.newContactCommand = new DelegateCommand(NewContact);
             this.deleteContactCommand = new DelegateCommand(DeleteContact, CanDeleteContact);
         }
@@ -38,24 +36,24 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public AddressBookRoot Root { get; set; }
 
-        public ICommand NewContactCommand { get { return newContactCommand; } }
+        public ICommand NewContactCommand => newContactCommand;
 
-        public ICommand DeleteContactCommand { get { return deleteContactCommand; } }
+        public ICommand DeleteContactCommand => deleteContactCommand;
 
-        internal ContactListViewModel ContactListViewModel { get { return contactListViewModel; } }
+        internal ContactListViewModel ContactListViewModel { get; }
 
-        internal ContactViewModel ContactViewModel { get { return contactViewModel; } }
+        internal ContactViewModel ContactViewModel { get; }
 
 
         public void Initialize()
         {
-            contactListViewModel.Contacts = Root.Contacts;
-            contactListViewModel.DeleteContactCommand = DeleteContactCommand;
+            ContactListViewModel.Contacts = Root.Contacts;
+            ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
 
-            PropertyChangedEventManager.AddHandler(contactListViewModel, ContactListViewModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
 
-            contactLayoutViewModel.ContactListView = contactListViewModel.View;
-            contactLayoutViewModel.ContactView = contactViewModel.View;
+            contactLayoutViewModel.ContactListView = ContactListViewModel.View;
+            contactLayoutViewModel.ContactView = ContactViewModel.View;
         }
 
         public void Run()
@@ -73,28 +71,28 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private void NewContact()
         {
             Contact newContact = Root.AddNewContact();
-            contactListViewModel.SelectedContact = newContact;
-            contactListViewModel.FocusItem();
+            ContactListViewModel.SelectedContact = newContact;
+            ContactListViewModel.FocusItem();
         }
 
-        private bool CanDeleteContact() { return contactListViewModel.SelectedContact != null; }
+        private bool CanDeleteContact() { return ContactListViewModel.SelectedContact != null; }
 
         private void DeleteContact()
         {
             // Use the ContactCollectionView, which represents the sorted/filtered state of the contacts, to determine the next contact to select.
-            var nextContact = CollectionHelper.GetNextElementOrDefault(contactListViewModel.ContactCollectionView, contactListViewModel.SelectedContact);
+            var nextContact = CollectionHelper.GetNextElementOrDefault(ContactListViewModel.ContactCollectionView, ContactListViewModel.SelectedContact);
             
-            Root.RemoveContact(contactListViewModel.SelectedContact);
+            Root.RemoveContact(ContactListViewModel.SelectedContact);
 
-            contactListViewModel.SelectedContact = nextContact ?? contactListViewModel.ContactCollectionView.LastOrDefault();
-            contactListViewModel.FocusItem();
+            ContactListViewModel.SelectedContact = nextContact ?? ContactListViewModel.ContactCollectionView.LastOrDefault();
+            ContactListViewModel.FocusItem();
         }
 
         private void ContactListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedContact")
+            if (e.PropertyName == nameof(ContactListViewModel.SelectedContact))
             {
-                contactViewModel.Contact = contactListViewModel.SelectedContact != null ? contactListViewModel.SelectedContact : null;
+                ContactViewModel.Contact = ContactListViewModel.SelectedContact;
                 deleteContactCommand.RaiseCanExecuteChanged();
             }
         }

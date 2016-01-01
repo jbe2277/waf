@@ -11,7 +11,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
     internal class SelectContactController
     {
         private readonly SelectContactViewModel selectContactViewModel;
-        private readonly ContactListViewModel contactListViewModel;
         private readonly DelegateCommand selectContactCommand;
         
 
@@ -19,7 +18,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
         {
             this.selectContactViewModel = selectContactViewModel;
-            this.contactListViewModel = contactListViewModel;
+            this.ContactListViewModel = contactListViewModel;
             this.selectContactCommand = new DelegateCommand(SelectContact, CanSelectContact);
         }
 
@@ -30,17 +29,17 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public Contact SelectedContact { get; private set; }
 
-        internal ContactListViewModel ContactListViewModel { get { return contactListViewModel; } }
+        internal ContactListViewModel ContactListViewModel { get; }
 
 
         public void Initialize()
         {
-            contactListViewModel.Contacts = Root.Contacts;
-            contactListViewModel.SelectedContact = Root.Contacts.FirstOrDefault();
-            selectContactViewModel.ContactListView = contactListViewModel.View;
+            ContactListViewModel.Contacts = Root.Contacts;
+            ContactListViewModel.SelectedContact = Root.Contacts.FirstOrDefault();
+            selectContactViewModel.ContactListView = ContactListViewModel.View;
             selectContactViewModel.OkCommand = selectContactCommand;
 
-            PropertyChangedEventManager.AddHandler(contactListViewModel, ContactListViewModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
         }
 
         public void Run()
@@ -50,20 +49,20 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            PropertyChangedEventManager.RemoveHandler(contactListViewModel, ContactListViewModelPropertyChanged, "");
+            PropertyChangedEventManager.RemoveHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
         }
 
-        private bool CanSelectContact() { return contactListViewModel.SelectedContact != null; }
+        private bool CanSelectContact() { return ContactListViewModel.SelectedContact != null; }
 
         private void SelectContact()
         {
-            SelectedContact = contactListViewModel.SelectedContact;
+            SelectedContact = ContactListViewModel.SelectedContact;
             selectContactViewModel.Close();
         }
 
         private void ContactListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedContact")
+            if (e.PropertyName == nameof(ContactListViewModel.SelectedContact))
             {
                 selectContactCommand.RaiseCanExecuteChanged();
             }

@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Resources;
 
 [assembly: AssemblyTitle("Waf.InformationManager.EmailClient.Modules.Presentation")]
 [assembly: AssemblyDescription("")]

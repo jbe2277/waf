@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
-using Waf.InformationManager.EmailClient.Modules.Applications.SampleData;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 

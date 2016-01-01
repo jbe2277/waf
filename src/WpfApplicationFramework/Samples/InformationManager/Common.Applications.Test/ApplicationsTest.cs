@@ -12,7 +12,7 @@ namespace Test.InformationManager.Common.Applications
         private CompositionContainer container;
 
 
-        public CompositionContainer Container { get { return container; } }
+        public CompositionContainer Container => container;
 
 
         protected override void OnTestInitialize()
@@ -33,7 +33,7 @@ namespace Test.InformationManager.Common.Applications
 
         protected override void OnTestCleanup()
         {
-            if (container != null) { container.Dispose(); }
+            container?.Dispose();
 
             base.OnTestCleanup();
         }

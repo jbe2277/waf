@@ -21,9 +21,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         }
 
 
-        private ShellViewModel ShellViewModel { get { return shellViewModel.Value; } }
+        private ShellViewModel ShellViewModel => shellViewModel.Value;
         
-        private DocumentController DocumentController { get { return documentController.Value; } }
+        private DocumentController DocumentController => documentController.Value;
 
 
         public void Initialize()

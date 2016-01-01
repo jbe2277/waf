@@ -36,11 +36,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public virtual EmailAccount Clone()
         {
-            return new EmailAccount() 
-            { 
-                name = this.name, 
-                email = this.email, 
-                emailAccountSettings = this.emailAccountSettings != null ? this.emailAccountSettings.Clone() : null 
+            return new EmailAccount()
+            {
+                name = this.name,
+                email = this.email,
+                emailAccountSettings = this.emailAccountSettings?.Clone()
             };
         }
     }

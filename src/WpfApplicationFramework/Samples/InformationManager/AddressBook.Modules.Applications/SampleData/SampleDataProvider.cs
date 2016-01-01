@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.CodeDom.Compiler;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.SampleData
 {
-    [GeneratedCodeAttribute("ToSuppressCodeAnalysis", "1.0.0.0")]
+    [GeneratedCode("ToSuppressCodeAnalysis", "1.0.0.0")]
     public static class SampleDataProvider
     {
         public static IReadOnlyList<Contact> CreateContacts()
         {
-            List<Contact> contacts = new List<Contact>();
+            var contacts = new List<Contact>();
             
             contacts.Add(CreateContact("Jesper", "Aaberg", "jesper.aaberg@example.com", "(111) 555-0100", "A. Datum Corporation", "Main St. 4567", "Buffalo", "New York", "98052", "United States"));
             contacts.Add(CreateContact("Lori", "Penor", "lori.penor@fabrikam.com", "(111) 555-0104", "Baldwin Museum of Science", "Front St. 3598", "Seattle", "Washington", "12345", "United States"));

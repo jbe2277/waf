@@ -22,7 +22,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         }
 
 
-        public SelectContactViewModel ViewModel { get { return viewModel.Value; } }
+        public SelectContactViewModel ViewModel => viewModel.Value;
 
 
         public void ShowDialog(object owner)
@@ -34,9 +34,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         private void ContactListViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var element = e.OriginalSource as FrameworkElement;
-            if (element != null && element.DataContext is Contact)
+            if (element?.DataContext is Contact)
             {
-                if (ViewModel.OkCommand.CanExecute(null)) { ViewModel.OkCommand.Execute(null); }
+                if (ViewModel.OkCommand.CanExecute(null))
+                {
+                    ViewModel.OkCommand.Execute(null);
+                }
             }
         }
     }

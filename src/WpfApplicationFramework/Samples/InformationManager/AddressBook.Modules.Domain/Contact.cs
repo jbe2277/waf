@@ -17,7 +17,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
 
         public Contact()
         {
-            this.address = new Address();
+            address = new Address();
         }
 
 
@@ -52,6 +52,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
             set { SetProperty(ref phone, value); }
         }
 
-        public Address Address { get { return address; } }
+        public Address Address => address;
     }
 }

@@ -20,7 +20,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
         }
 
 
-        public object ShellView { get { return shellViewModel.Value.View; } }
+        public object ShellView => shellViewModel.Value.View;
 
         public object ContentView
         {

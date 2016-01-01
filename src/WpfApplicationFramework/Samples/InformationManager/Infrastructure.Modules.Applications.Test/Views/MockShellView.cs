@@ -15,11 +15,11 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
 
         public MockShellView()
         {
-            this.toolBarCommands = new List<ToolBarCommand>();
+            toolBarCommands = new List<ToolBarCommand>();
         }
 
 
-        public IReadOnlyList<ToolBarCommand> ToolBarCommands { get { return toolBarCommands; } }
+        public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
 
         public bool IsVisible { get; private set; }
 
@@ -72,7 +72,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
 
         protected virtual void OnClosed(EventArgs e)
         {
-            if (Closed != null) { Closed(this, e); }
+            Closed?.Invoke(this, e);
         }
     }
 }

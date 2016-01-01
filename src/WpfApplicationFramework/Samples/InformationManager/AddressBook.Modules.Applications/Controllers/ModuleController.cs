@@ -43,7 +43,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         }
 
 
-        internal AddressBookRoot Root { get { return root; } }
+        internal AddressBookRoot Root => root;
 
 
         public void Initialize()
@@ -104,12 +104,9 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private void CloseAddressBook()
         {
             shellService.ClearToolBarCommands();
-            
-            if (activeContactController != null)
-            {
-                activeContactController.Shutdown();
-                activeContactController = null;
-            }
+
+            activeContactController?.Shutdown();
+            activeContactController = null;
         }
 
         private DataContractSerializer CreateDataContractSerializer()
