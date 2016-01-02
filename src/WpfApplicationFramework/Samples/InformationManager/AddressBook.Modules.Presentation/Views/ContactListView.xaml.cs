@@ -56,7 +56,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
             {
                 contactCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Contacts);
                 contactCollectionView.Filter = Filter;
-                ViewModel.ContactCollectionView = contactCollectionView.Cast<Contact>().ToArray();
+                ViewModel.ContactCollectionView = contactCollectionView.Cast<Contact>();
                 ViewModel.SelectedContact = ViewModel.ContactCollectionView.FirstOrDefault();
             }
 

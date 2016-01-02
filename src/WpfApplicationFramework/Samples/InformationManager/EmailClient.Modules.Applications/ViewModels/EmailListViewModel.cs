@@ -36,7 +36,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set { SetProperty(ref selectedEmail, value); }
         }
 
-        public IReadOnlyList<Email> EmailCollectionView { get; set; }
+        public IEnumerable<Email> EmailCollectionView { get; set; }
 
         public ICommand DeleteEmailCommand
         {

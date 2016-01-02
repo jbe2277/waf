@@ -35,7 +35,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
             set { SetProperty(ref selectedContact, value); }
         }
 
-        public IReadOnlyList<Contact> ContactCollectionView { get; set; }
+        public IEnumerable<Contact> ContactCollectionView { get; set; }
 
         public ICommand DeleteContactCommand
         {

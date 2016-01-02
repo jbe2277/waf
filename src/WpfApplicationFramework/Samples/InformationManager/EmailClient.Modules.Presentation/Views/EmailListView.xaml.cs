@@ -58,7 +58,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
                 emailCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Emails);
                 emailCollectionView.Filter = Filter;
                 emailCollectionView.SortDescriptions.Add(new SortDescription(nameof(Email.Sent), ListSortDirection.Descending));
-                ViewModel.EmailCollectionView = emailCollectionView.Cast<Email>().ToArray();
+                ViewModel.EmailCollectionView = emailCollectionView.Cast<Email>();
                 ViewModel.SelectedEmail = ViewModel.EmailCollectionView.FirstOrDefault();
             }
 
