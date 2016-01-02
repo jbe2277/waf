@@ -17,10 +17,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<EmailListViewModel>();
 
-            List<Email> emails = new List<Email>();
-            emails.Add(new Email());
-            emails.Add(new Email());
-
+            var emails = new List<Email>()
+            {
+                new Email(),
+                new Email(),
+            };
+            
             Assert.IsNull(viewModel.Emails);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.Emails, () => viewModel.Emails = emails);
             Assert.AreEqual(emails, viewModel.Emails);
@@ -44,8 +46,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<EmailListViewModel>();
 
-            var email1 = new Email() { Title = "Duis nunc", From = "user@adventure-works.com" };
-            email1.To = new[] { "harry@example.com", "admin@adventure-works.com" };
+            var email1 = new Email()
+            {
+                Title = "Duis nunc",
+                From = "user@adventure-works.com",
+                To = new[] { "harry@example.com", "admin@adventure-works.com" }
+            };
 
             Assert.IsTrue(viewModel.Filter(email1));
 

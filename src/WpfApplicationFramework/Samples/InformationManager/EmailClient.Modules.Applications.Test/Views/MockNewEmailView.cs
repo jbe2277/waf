@@ -17,15 +17,15 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Views
 
         public void Show(object owner)
         {
-            this.Owner = owner;
-            this.IsVisible = true;
-            if (ShowAction != null) { ShowAction(this); }
+            Owner = owner;
+            IsVisible = true;
+            ShowAction?.Invoke(this);
         }
 
         public void Close()
         {
-            this.Owner = null;
-            this.IsVisible = false;
+            Owner = null;
+            IsVisible = false;
         }
     }
 }

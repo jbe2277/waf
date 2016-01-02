@@ -11,7 +11,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         public ExchangeSettingsView()
         {
             InitializeComponent();
-            Loaded += new RoutedEventHandler(LoadedHandler);
+            Loaded += LoadedHandler;
         }
 
 

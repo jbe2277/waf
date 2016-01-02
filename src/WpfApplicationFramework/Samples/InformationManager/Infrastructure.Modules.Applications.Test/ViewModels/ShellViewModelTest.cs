@@ -73,7 +73,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
             SetSettingsValues(20, 10, 400, 300, true);
 
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            Container.GetExportedValue<ShellViewModel>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);

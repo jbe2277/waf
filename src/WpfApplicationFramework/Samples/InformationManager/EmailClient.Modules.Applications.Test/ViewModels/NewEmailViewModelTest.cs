@@ -26,9 +26,11 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
 
             // Email accounts tests
 
-            var emailAccounts = new List<EmailAccount>();
-            emailAccounts.Add(new EmailAccount());
-            emailAccounts.Add(new EmailAccount());
+            var emailAccounts = new List<EmailAccount>()
+            {
+                new EmailAccount(),
+                new EmailAccount()
+            };
 
             AssertHelper.PropertyChangedEvent(viewModel, x => x.EmailAccounts, () => viewModel.EmailAccounts = emailAccounts);
             Assert.AreEqual(emailAccounts, viewModel.EmailAccounts);

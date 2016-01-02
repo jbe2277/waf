@@ -17,10 +17,12 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<ContactListViewModel>();
 
-            List<Contact> contacts = new List<Contact>();
-            contacts.Add(new Contact());
-            contacts.Add(new Contact());
-
+            List<Contact> contacts = new List<Contact>()
+            {
+                new Contact(),
+                new Contact()
+            };
+            
             Assert.IsNull(viewModel.Contacts);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.Contacts, () => viewModel.Contacts = contacts);
             Assert.AreEqual(contacts, viewModel.Contacts);

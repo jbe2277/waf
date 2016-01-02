@@ -32,7 +32,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             if (sameGroup.Any())
             {
                 var nextNode = sameGroup.FirstOrDefault(x => x.Order > order);
-                int nextNodeIndex = (nextNode != null) ? navigationNodes.IndexOf(nextNode) : navigationNodes.IndexOf(sameGroup.Last()) + 1;
+                int nextNodeIndex = nextNode != null ? navigationNodes.IndexOf(nextNode) : navigationNodes.IndexOf(sameGroup.Last()) + 1;
                 navigationNodes.Insert(nextNodeIndex, navigationNode);
             }
             else

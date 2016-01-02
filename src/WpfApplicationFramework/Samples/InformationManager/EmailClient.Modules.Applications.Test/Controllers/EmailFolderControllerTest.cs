@@ -18,7 +18,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             var root = new EmailClientRoot();
             root.Inbox.AddEmail(new Email()); 
             root.Inbox.AddEmail(new Email());
-            var email1 = root.Inbox.Emails.First();
 
             // Create the controller
 
