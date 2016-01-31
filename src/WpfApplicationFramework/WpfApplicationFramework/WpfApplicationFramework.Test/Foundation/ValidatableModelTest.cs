@@ -181,16 +181,17 @@ namespace Test.Waf.Foundation
         }
 
 
-        [Serializable]
+        [DataContract]
         private class Person : ValidatableModel, IValidatableObject
         {
             public const string NameRequiredError = "The Name field is required.";
             public const string EmailLengthError = "The field Email must be a string with a maximum length of 10.";
             public const string EmailInvalidError = "The Email field is not a valid e-mail address.";
 
-            [NonSerialized]
             private ValidationResult entityError;
+            [DataMember]
             private string name;
+            [DataMember]
             private string email;
 
             

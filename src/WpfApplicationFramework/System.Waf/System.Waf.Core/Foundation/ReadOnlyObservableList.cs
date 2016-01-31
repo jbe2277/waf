@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 
 namespace System.Waf.Foundation
 {
@@ -10,7 +9,6 @@ namespace System.Waf.Foundation
     /// This class implements the IReadOnlyObservableList interface and provides public CollectionChanged and PropertyChanged events.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    [DataContract]
     public class ReadOnlyObservableList<T> : ReadOnlyObservableCollection<T>, IReadOnlyObservableList<T>
     {
         /// <summary>
