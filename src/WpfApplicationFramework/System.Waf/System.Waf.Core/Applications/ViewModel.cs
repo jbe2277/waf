@@ -9,6 +9,8 @@ namespace System.Waf.Applications
     /// </summary>
     public abstract class ViewModel : Model
     {
+        private static readonly bool isWinRTApplicationModel = SynchronizationContext.Current?.GetType().FullName == "System.Threading.WinRTSynchronizationContext";
+
         private readonly IView view;
 
 
@@ -20,9 +22,11 @@ namespace System.Waf.Applications
         {
             if (view == null) { throw new ArgumentNullException(nameof(view)); }
             this.view = view;
-            TaskScheduler uiTaskScheduler = SynchronizationContext.Current != null ? TaskScheduler.FromCurrentSynchronizationContext() : null;
-
-
+            
+            // Gets the UI synchronization context; set null for WinRT because their Bindings are delayed during initialization.
+            TaskScheduler uiTaskScheduler = !isWinRTApplicationModel && SynchronizationContext.Current != null 
+                    ? TaskScheduler.FromCurrentSynchronizationContext() : null;
+            
             // Check if the code is running within the UI application model
             if (uiTaskScheduler != null)
             {
