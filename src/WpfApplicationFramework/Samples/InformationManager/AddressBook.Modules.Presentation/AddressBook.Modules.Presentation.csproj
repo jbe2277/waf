@@ -94,7 +94,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj">
       <Project>{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}</Project>

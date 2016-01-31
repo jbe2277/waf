@@ -100,7 +100,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj">
       <Project>{DB087110-BDBA-4E9D-813F-EF08295ECF8C}</Project>

@@ -13,7 +13,7 @@ using System.Resources;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
+[assembly: NeutralResourcesLanguage("en-US")]
 
 
 [assembly: AssemblyVersion("4.0.0.1")]

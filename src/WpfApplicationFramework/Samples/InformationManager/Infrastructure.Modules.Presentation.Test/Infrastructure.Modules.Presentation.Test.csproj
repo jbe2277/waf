@@ -59,7 +59,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj">
       <Project>{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}</Project>

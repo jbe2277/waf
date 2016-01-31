@@ -84,7 +84,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj">
       <Project>{E270D7E7-0E35-4DED-B330-25FF7EED8581}</Project>

@@ -68,7 +68,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
       <Project>{664D5E11-1BAB-4D48-BEF5-775DB427D691}</Project>

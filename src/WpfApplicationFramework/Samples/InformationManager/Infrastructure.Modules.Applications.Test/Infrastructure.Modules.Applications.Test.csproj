@@ -73,7 +73,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj">
       <Project>{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}</Project>

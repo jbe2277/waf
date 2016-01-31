@@ -91,7 +91,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Applications\Common.Applications.csproj">
       <Project>{3BC491D6-786A-46F1-9B93-69F23F89055A}</Project>

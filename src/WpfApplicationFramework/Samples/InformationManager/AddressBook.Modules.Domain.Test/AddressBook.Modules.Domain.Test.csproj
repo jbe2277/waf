@@ -58,7 +58,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework %28WpfApplicationFramework\WpfApplicationFramework%29</Name>
+      <Name>WpfApplicationFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj">
       <Project>{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}</Project>
