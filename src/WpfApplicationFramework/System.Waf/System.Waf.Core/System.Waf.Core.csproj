@@ -48,6 +48,20 @@
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="Applications\DelegateCommand.cs" />
+    <Compile Include="Applications\IView.cs" />
+    <Compile Include="Applications\RecentFile.cs" />
+    <Compile Include="Applications\RecentFileList.cs" />
+    <Compile Include="Applications\SynchronizingCollection.cs" />
+    <Compile Include="Applications\ViewModel.cs" />
+    <Compile Include="Applications\ViewModel.Generic.cs" />
+    <Compile Include="Foundation\Cache.cs" />
+    <Compile Include="Foundation\CollectionHelper.cs" />
+    <Compile Include="Foundation\IReadOnlyObservableList.cs" />
+    <Compile Include="Foundation\Model.cs" />
+    <Compile Include="Foundation\ReadOnlyObservableList.cs" />
+    <Compile Include="Foundation\ThrottledAction.cs" />
+    <Compile Include="Foundation\ValidatableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
