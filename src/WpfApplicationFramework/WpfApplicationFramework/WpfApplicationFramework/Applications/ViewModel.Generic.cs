@@ -7,7 +7,7 @@
     public abstract class ViewModel<TView> : ViewModel where TView : IView
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewModel&lt;TView&gt;"/> class and attaches itself as <c>DataContext</c> to the view.
+        /// Initializes a new instance of the <see cref="ViewModel{TView}"/> class and attaches itself as <c>DataContext</c> to the view.
         /// </summary>
         /// <param name="view">The view.</param>
         protected ViewModel(TView view) : base(view)

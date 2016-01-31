@@ -52,8 +52,7 @@
     <Compile Include="Applications\IView.cs" />
     <Compile Include="Applications\RecentFile.cs" />
     <Compile Include="Applications\RecentFileList.cs" />
-    <Compile Include="Applications\ViewModel.cs" />
-    <Compile Include="Applications\ViewModel.Generic.cs" />
+    <Compile Include="Applications\ViewModelCore.cs" />
     <Compile Include="Foundation\Cache.cs" />
     <Compile Include="Foundation\CollectionHelper.cs" />
     <Compile Include="Foundation\IReadOnlyObservableList.cs" />

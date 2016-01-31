@@ -60,6 +60,8 @@
     <Compile Include="Applications\Services\MessageServiceExtensions.cs" />
     <Compile Include="Applications\SynchronizingCollection.cs" />
     <Compile Include="Applications\ViewHelper.cs" />
+    <Compile Include="Applications\ViewModel.cs" />
+    <Compile Include="Applications\ViewModel.Generic.cs" />
     <Compile Include="Foundation\DataErrorInfoExtensions.cs" />
     <Compile Include="Foundation\DataErrorInfoSupport.cs" />
     <Compile Include="GlobalSuppressions.cs" />
