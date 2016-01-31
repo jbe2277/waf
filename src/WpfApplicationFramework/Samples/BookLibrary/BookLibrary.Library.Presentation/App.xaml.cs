@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using System.Windows;
 using System.Windows.Threading;
 using Waf.BookLibrary.Library.Applications.ViewModels;
@@ -42,7 +43,7 @@ namespace Waf.BookLibrary.Library.Presentation
 
             catalog = new AggregateCatalog();
             // Add the WpfApplicationFramework assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewModel).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
             // Add the Waf.BookLibrary.Library.Presentation assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
             // Add the Waf.BookLibrary.Library.Applications assembly to the catalog

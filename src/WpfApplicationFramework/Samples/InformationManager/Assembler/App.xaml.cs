@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using System.Windows;
 using System.Windows.Threading;
 using Waf.InformationManager.Assembler.Properties;
@@ -41,7 +42,7 @@ namespace Waf.InformationManager.Assembler
 
             catalog = new AggregateCatalog();
             // Add the WpfApplicationFramework assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewModel).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
             
             // Load module assemblies as well. See App.config file.
             foreach (string moduleAssembly in Settings.Default.ModuleAssemblies)
