@@ -65,6 +65,10 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfApplicationFramework\WpfApplicationFramework.csproj">
       <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
       <Name>WpfApplicationFramework</Name>

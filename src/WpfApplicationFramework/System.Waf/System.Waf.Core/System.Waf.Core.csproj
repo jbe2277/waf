@@ -52,7 +52,6 @@
     <Compile Include="Applications\IView.cs" />
     <Compile Include="Applications\RecentFile.cs" />
     <Compile Include="Applications\RecentFileList.cs" />
-    <Compile Include="Applications\SynchronizingCollection.cs" />
     <Compile Include="Applications\ViewModel.cs" />
     <Compile Include="Applications\ViewModel.Generic.cs" />
     <Compile Include="Foundation\Cache.cs" />

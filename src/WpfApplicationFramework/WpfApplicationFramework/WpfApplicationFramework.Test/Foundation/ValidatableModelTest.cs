@@ -124,22 +124,6 @@ namespace Test.Waf.Foundation
         }
         
         [TestMethod]
-        public void SerializationTest()
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            using (MemoryStream stream = new MemoryStream())
-            {
-                Person person = new Person() { Name = "Hugo" };
-                formatter.Serialize(stream, person);
-
-                stream.Position = 0;
-                Person newPerson = (Person)formatter.Deserialize(stream);
-                Assert.AreEqual(person.Name, newPerson.Name);
-            }
-        }
-
-        [TestMethod]
         public void SerializationWithDcsTest()
         {
             var serializer = new DataContractSerializer(typeof(Person));

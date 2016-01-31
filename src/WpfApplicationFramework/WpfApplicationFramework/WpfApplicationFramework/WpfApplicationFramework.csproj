@@ -50,12 +50,8 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Applications\ApplicationInfo.cs" />
-    <Compile Include="Applications\DelegateCommand.cs" />
     <Compile Include="Applications\DispatcherHelper.cs" />
     <Compile Include="Applications\IModuleController.cs" />
-    <Compile Include="Applications\IView.cs" />
-    <Compile Include="Applications\RecentFile.cs" />
-    <Compile Include="Applications\RecentFileList.cs" />
     <Compile Include="Applications\Services\FileDialogResult.cs" />
     <Compile Include="Applications\Services\FileDialogServiceExtensions.cs" />
     <Compile Include="Applications\Services\FileType.cs" />
@@ -63,18 +59,9 @@
     <Compile Include="Applications\Services\IMessageService.cs" />
     <Compile Include="Applications\Services\MessageServiceExtensions.cs" />
     <Compile Include="Applications\SynchronizingCollection.cs" />
-    <Compile Include="Foundation\Cache.cs" />
-    <Compile Include="Foundation\IReadOnlyObservableList.cs" />
-    <Compile Include="Foundation\ReadOnlyObservableList.cs" />
-    <Compile Include="Foundation\ThrottledAction.cs" />
     <Compile Include="Applications\ViewHelper.cs" />
-    <Compile Include="Applications\ViewModel.cs" />
-    <Compile Include="Applications\ViewModel.Generic.cs" />
-    <Compile Include="Foundation\CollectionHelper.cs" />
     <Compile Include="Foundation\DataErrorInfoExtensions.cs" />
     <Compile Include="Foundation\DataErrorInfoSupport.cs" />
-    <Compile Include="Foundation\Model.cs" />
-    <Compile Include="Foundation\ValidatableModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Presentation\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Presentation\Converters\InvertBooleanConverter.cs" />
@@ -92,6 +79,12 @@
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
