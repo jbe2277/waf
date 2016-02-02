@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Waf</RootNamespace>
-    <AssemblyName>WpfApplicationFramework</AssemblyName>
+    <AssemblyName>System.Waf.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -15,21 +15,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\out\WpfApplicationFramework\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\out\System.Waf\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\..\out\WpfApplicationFramework\Debug\WpfApplicationFramework.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\out\System.Waf\Debug\System.Waf.Wpf.xml</DocumentationFile>
     <CodeAnalysisRuleSet>..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\out\WpfApplicationFramework\Release\</OutputPath>
+    <OutputPath>..\..\..\..\out\System.Waf\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\..\out\WpfApplicationFramework\Release\WpfApplicationFramework.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\out\System.Waf\Release\System.Waf.Wpf.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>

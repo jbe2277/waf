@@ -62,9 +62,9 @@
       <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
       <Name>WpfApplicationFramework.UnitTesting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>WpfApplicationFramework</Name>
+      <Name>System.Waf.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\EmailClient.Modules.Presentation\EmailClient.Modules.Presentation.csproj">
       <Project>{7DB633C2-1EA6-420F-9BA9-320D42289119}</Project>
