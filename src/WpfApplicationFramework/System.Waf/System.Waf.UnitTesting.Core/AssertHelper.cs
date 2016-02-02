@@ -83,7 +83,7 @@ namespace System.Waf.UnitTesting
             
             int canExecuteChangedCount = 0;
 
-            EventHandler canExecuteChangedHandler = (object sender, EventArgs e) =>
+            EventHandler canExecuteChangedHandler = (sender, e) =>
             {
                 if (command != sender)
                 {
@@ -149,7 +149,7 @@ namespace System.Waf.UnitTesting
             string propertyName = GetProperty(expression).Name;
             int propertyChangedCount = 0;
 
-            PropertyChangedEventHandler propertyChangedHandler = (object sender, PropertyChangedEventArgs e) =>
+            PropertyChangedEventHandler propertyChangedHandler = (sender, e) =>
             {
                 if (observable != sender)
                 {

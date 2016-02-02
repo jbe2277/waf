@@ -35,8 +35,7 @@ namespace Test.Waf.UnitTesting.Mocks
             catalog.Catalogs.Add(new TypeCatalog(typeof(TestMockDialogView)));
 
             var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
-            container.Compose(batch);
+            container.Compose(new CompositionBatch());
 
             TestMockDialogView shownView = null;
             TestMockDialogView.ShowDialogAction = view =>

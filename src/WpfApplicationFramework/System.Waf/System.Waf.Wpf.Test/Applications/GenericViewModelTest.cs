@@ -2,6 +2,7 @@
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Waf.UnitTesting.Mocks;
 
 namespace Test.Waf.Applications
 {
@@ -32,11 +33,6 @@ namespace Test.Waf.Applications
 
 
             public IView ViewInternal => ViewCore;
-        }
-
-        private class MockView : IView
-        {
-            public object DataContext { get; set; }
         }
     }
 }

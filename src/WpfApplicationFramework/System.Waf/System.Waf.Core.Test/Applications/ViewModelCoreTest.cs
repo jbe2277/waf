@@ -2,6 +2,7 @@
 using System;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
+using System.Waf.UnitTesting.Mocks;
 
 namespace Test.Waf.Applications
 {
@@ -34,11 +35,6 @@ namespace Test.Waf.Applications
             public MockViewModel(IView view, bool initializeDataContext) : base(view, initializeDataContext)
             {
             }
-        }
-
-        private class MockView : IView
-        {
-            public object DataContext { get; set; }
         }
     }
 }
