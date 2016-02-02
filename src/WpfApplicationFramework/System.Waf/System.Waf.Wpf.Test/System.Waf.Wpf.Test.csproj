@@ -58,7 +58,6 @@
     <Compile Include="Applications\Services\FileTypeTest.cs" />
     <Compile Include="Applications\Services\MessageServiceExtensionsTest.cs" />
     <Compile Include="Applications\ViewHelperTest.cs" />
-    <Compile Include="Applications\ViewModelTest.cs" />
     <Compile Include="Foundation\DataErrorInfoExtensionsTest.cs" />
     <Compile Include="Foundation\DataErrorInfoSupportTest.cs" />
     <Compile Include="Presentation\Converters\BoolToVisibilityConverterTest.cs" />
