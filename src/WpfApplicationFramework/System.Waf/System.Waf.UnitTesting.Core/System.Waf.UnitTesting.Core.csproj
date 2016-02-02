@@ -1,78 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</ProjectGuid>
+    <ProjectGuid>{7935D706-6BF7-4096-8282-1E8594709073}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Waf.UnitTesting</RootNamespace>
-    <AssemblyName>WpfApplicationFramework.UnitTesting</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <AssemblyName>System.Waf.UnitTesting.Core</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\out\WpfApplicationFramework\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\out\System.Waf\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\..\out\WpfApplicationFramework\Debug\WpfApplicationFramework.UnitTesting.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\out\System.Waf\Debug\System.Waf.UnitTesting.Core.xml</DocumentationFile>
     <CodeAnalysisRuleSet>..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\out\WpfApplicationFramework\Release\</OutputPath>
+    <OutputPath>..\..\..\..\out\System.Waf\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\..\out\WpfApplicationFramework\Release\WpfApplicationFramework.UnitTesting.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\out\System.Waf\Release\System.Waf.UnitTesting.Core.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\WpfApplicationFramework.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="WindowsBase" />
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Mocks\FileDialogType.cs" />
-    <Compile Include="Mocks\MessageType.cs" />
-    <Compile Include="Mocks\MockDialogView.cs" />
-    <Compile Include="Mocks\MockFileDialogService.cs" />
-    <Compile Include="Mocks\MockMessageService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="AssertException.cs" />
+    <Compile Include="AssertHelper.cs" />
+    <Compile Include="ExpectedChangedCountMode.cs" />
+    <Compile Include="Mocks\MockView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestSynchronizationContext.cs" />
+    <Compile Include="UnitTestSynchronizationContextExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+    <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj">
       <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
       <Name>System.Waf.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj">
-      <Project>{7935d706-6bf7-4096-8282-1e8594709073}</Project>
-      <Name>System.Waf.UnitTesting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

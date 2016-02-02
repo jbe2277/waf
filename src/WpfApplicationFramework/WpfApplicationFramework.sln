@@ -146,6 +146,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System.Waf", "System.Waf", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Waf.Core", "System.Waf\System.Waf.Core\System.Waf.Core.csproj", "{242660C2-8155-4769-991D-08AFBA69A302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Waf.UnitTesting.Core", "System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj", "{7935D706-6BF7-4096-8282-1E8594709073}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +323,10 @@ Global
 		{242660C2-8155-4769-991D-08AFBA69A302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{242660C2-8155-4769-991D-08AFBA69A302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{242660C2-8155-4769-991D-08AFBA69A302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7935D706-6BF7-4096-8282-1E8594709073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7935D706-6BF7-4096-8282-1E8594709073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7935D706-6BF7-4096-8282-1E8594709073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7935D706-6BF7-4096-8282-1E8594709073}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -377,5 +383,6 @@ Global
 		{9409DC4C-5D76-411C-9148-71DB2E4BAA75} = {74B96B02-FF13-48C1-9A18-F99B27CBBC0F}
 		{92D12FFA-90C6-49A3-A483-E4713CD8DCC7} = {79F77420-A4F7-4712-9DAF-D862F4E19157}
 		{242660C2-8155-4769-991D-08AFBA69A302} = {A120EF79-3B18-4B3F-B54D-9767BCE32E33}
+		{7935D706-6BF7-4096-8282-1E8594709073} = {A120EF79-3B18-4B3F-B54D-9767BCE32E33}
 	EndGlobalSection
 EndGlobal
