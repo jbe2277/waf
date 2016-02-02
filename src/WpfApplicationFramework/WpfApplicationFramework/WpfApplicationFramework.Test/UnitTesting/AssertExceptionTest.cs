@@ -18,21 +18,5 @@ namespace Test.Waf.UnitTesting
             new AssertException("message");
             new AssertException("message", null);
         }
-
-        [TestMethod]
-        public void AssertExceptionSerializationTest()
-        {
-            AssertException assertException = new AssertException("message");
-
-            MemoryStream stream = new MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            
-            formatter.Serialize(stream, assertException);
-
-            stream.Position = 0;
-            AssertException newAssertException = (AssertException)formatter.Deserialize(stream);
-            
-            Assert.AreEqual(assertException.Message, newAssertException.Message);
-        }
     }
 }
