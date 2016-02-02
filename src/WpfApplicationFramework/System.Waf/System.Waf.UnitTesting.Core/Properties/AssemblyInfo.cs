@@ -7,5 +7,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("System.Waf.UnitTesting.Core")]
 
 #if (!STRONG_NAME)
-    [assembly: InternalsVisibleTo("WpfApplicationFramework.Test")]
+    [assembly: InternalsVisibleTo("System.Waf.Core.Test")]
 #endif

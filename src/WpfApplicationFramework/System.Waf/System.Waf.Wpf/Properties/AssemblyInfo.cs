@@ -18,5 +18,5 @@ using System.Windows.Markup;
 
 
 #if (!STRONG_NAME)
-    [assembly: InternalsVisibleTo("WpfApplicationFramework.Test")]
+    [assembly: InternalsVisibleTo("System.Waf.Wpf.Test")]
 #endif
