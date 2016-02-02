@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Globalization;
 using System.Waf.UnitTesting.Mocks;
 using Waf.Writer.Applications.Controllers;
 
@@ -20,6 +21,9 @@ namespace Test.Writer.Applications
         [TestInitialize]
         public void TestInitialize()
         {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+
             AggregateCatalog catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));

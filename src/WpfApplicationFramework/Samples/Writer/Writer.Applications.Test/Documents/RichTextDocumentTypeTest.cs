@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.Writer.Applications.Documents;
 using System.Waf.UnitTesting;
 
 namespace Test.Writer.Applications.Documents
 {
     [TestClass]
-    public class RichTextDocumentTypeTest
+    public class RichTextDocumentTypeTest : TestClassBase
     {
-        public TestContext TestContext { get; set; }
-
-
         [TestMethod]
         public void DocumentTypeTest()
         {
