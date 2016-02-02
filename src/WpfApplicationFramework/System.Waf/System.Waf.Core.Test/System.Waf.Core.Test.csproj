@@ -35,7 +35,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,6 +57,7 @@
     <Compile Include="Foundation\CacheTest.cs" />
     <Compile Include="Foundation\CollectionHelperTest.cs" />
     <Compile Include="Foundation\ModelTest.cs" />
+    <Compile Include="Foundation\ReadOnlyObservableListTest.cs" />
     <Compile Include="Foundation\ThrottledActionTest.cs" />
     <Compile Include="Foundation\ValidatableModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

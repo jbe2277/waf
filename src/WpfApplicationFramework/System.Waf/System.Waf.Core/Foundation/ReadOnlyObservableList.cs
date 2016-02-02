@@ -5,20 +5,19 @@ using System.ComponentModel;
 namespace System.Waf.Foundation
 {
     /// <summary>
-    /// Represents a read-only <see cref="System.Collections.ObjectModel.ObservableCollection&lt;T&gt;"/>.
+    /// Represents a read-only <see cref="ObservableCollection{T}"/>.
     /// This class implements the IReadOnlyObservableList interface and provides public CollectionChanged and PropertyChanged events.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ReadOnlyObservableList<T> : ReadOnlyObservableCollection<T>, IReadOnlyObservableList<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="System.Collections.ObjectModel.ReadOnlyObservableCollection&lt;T&gt;"/>
-        /// class that serves as a wrapper around the specified <see cref="System.Collections.ObjectModel.ObservableCollection&lt;T&gt;"/>.
+        /// Initializes a new instance of the <see cref="ReadOnlyObservableCollection{T}"/>
+        /// class that serves as a wrapper around the specified <see cref="ObservableCollection{T}"/>.
         /// </summary>
         /// <param name="list">
-        /// The <see cref="System.Collections.ObjectModel.ObservableCollection&lt;T&gt;"/> with which to
-        /// create this instance of the <see cref="System.Collections.ObjectModel.ReadOnlyObservableCollection&lt;T&gt;"/>
-        /// class.</param>
+        /// The <see cref="ObservableCollection{T}"/> with which to create this instance of the <see cref="ReadOnlyObservableCollection{T}"/> class.
+        /// </param>
         /// <exception cref="ArgumentNullException">list is null.</exception>
         public ReadOnlyObservableList(ObservableCollection<T> list)
             : base(list)
