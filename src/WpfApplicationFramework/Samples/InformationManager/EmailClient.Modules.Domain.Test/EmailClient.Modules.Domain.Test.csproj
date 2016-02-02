@@ -66,9 +66,9 @@
       <Project>{7935d706-6bf7-4096-8282-1e8594709073}</Project>
       <Name>System.Waf.UnitTesting.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\WpfApplicationFramework\WpfApplicationFramework.UnitTesting\WpfApplicationFramework.UnitTesting.csproj">
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj">
       <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
-      <Name>WpfApplicationFramework.UnitTesting</Name>
+      <Name>System.Waf.UnitTesting.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
