@@ -62,12 +62,13 @@ namespace Test.Waf.Applications
         {
             bool executed = false;
             bool canExecute = false;
-            DelegateCommand command = new DelegateCommand(() => executed = false, () => canExecute);
+            DelegateCommand command = new DelegateCommand(() => executed = true, () => canExecute);
             
             Assert.IsFalse(command.CanExecute(null));
             canExecute = true;
             Assert.IsTrue(command.CanExecute(null));
 
+            command.RaiseCanExecuteChanged();
             AssertHelper.CanExecuteChangedEvent(command, () => command.RaiseCanExecuteChanged());
             
             Assert.IsFalse(executed);

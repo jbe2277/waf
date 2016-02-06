@@ -83,12 +83,13 @@ namespace Test.Waf.Applications
         {
             bool executed = false;
             bool canExecute = false;
-            AsyncDelegateCommand command = new AsyncDelegateCommand(() => { executed = false; return Task.FromResult((object)null); }, () => canExecute);
+            AsyncDelegateCommand command = new AsyncDelegateCommand(() => { executed = true; return Task.FromResult((object)null); }, () => canExecute);
 
             Assert.IsFalse(command.CanExecute(null));
             canExecute = true;
             Assert.IsTrue(command.CanExecute(null));
 
+            command.RaiseCanExecuteChanged();
             AssertHelper.CanExecuteChangedEvent(command, () => command.RaiseCanExecuteChanged());
 
             Assert.IsFalse(executed);
