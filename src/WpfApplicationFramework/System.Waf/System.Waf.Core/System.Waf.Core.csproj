@@ -61,6 +61,7 @@
     <Compile Include="Foundation\ReadOnlyObservableList.cs" />
     <Compile Include="Foundation\ThrottledAction.cs" />
     <Compile Include="Foundation\ValidatableModel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

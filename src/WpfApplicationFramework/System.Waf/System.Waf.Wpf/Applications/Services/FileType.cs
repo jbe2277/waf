@@ -56,7 +56,7 @@ namespace System.Waf.Applications.Services
             {
                 if (string.IsNullOrEmpty(fileExtension) || fileExtension[0] != '.') 
                 { 
-                    throw new ArgumentException("The argument fileExtension must start with the '.' character.", nameof(fileExtension)); 
+                    throw new ArgumentException("All items of the argument fileExtensions must start with the '.' character.", nameof(fileExtensions)); 
                 }
             }
             return fileExtensions;

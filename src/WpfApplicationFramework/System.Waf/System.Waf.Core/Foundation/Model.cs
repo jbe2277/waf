@@ -36,7 +36,7 @@ namespace System.Waf.Foundation
         }
 
         /// <summary>
-        /// Raises the <see cref="E:PropertyChanged"/> event.
+        /// Raises the <see cref="PropertyChanged"/> event.
         /// </summary>
         /// <param name="propertyName">The property name of the property that has changed.
         /// This optional parameter can be skipped because the compiler is able to create it automatically.</param>
@@ -46,9 +46,9 @@ namespace System.Waf.Foundation
         }
 
         /// <summary>
-        /// Raises the <see cref="E:PropertyChanged"/> event.
+        /// Raises the <see cref="PropertyChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
