@@ -9,6 +9,30 @@ namespace Test.Waf.UnitTesting.Mocks
     public class MockDialogViewTest
     {
         [TestMethod]
+        public void ShowAndCloseDialogView()
+        {
+            var owner = new object();
+            var mockDialogView = new TestMockDialogView();
+
+            // Call ShowDialog without the ShowDialogAction 
+            mockDialogView.ShowDialog(owner);
+            
+            var showDialogCalled = false;
+            TestMockDialogView.ShowDialogAction = view =>
+            {
+                Assert.AreEqual(owner, view.Owner);
+                Assert.IsTrue(view.IsVisible);
+                view.Close();
+                showDialogCalled = true;
+            };
+
+            Assert.IsFalse(mockDialogView.IsVisible);
+            mockDialogView.ShowDialog(owner);
+            Assert.IsTrue(showDialogCalled);
+            Assert.IsFalse(mockDialogView.IsVisible);
+        }
+
+        [TestMethod]
         public void AutomaticCleanupTestWithMef()
         {
             var container = CreateContainerAndShowView(true);
