@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading.Tasks;
 using System.Waf.Applications;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Applications
 {
@@ -10,6 +12,8 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void CanExecuteDuringAsyncExecute()
         {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new AsyncDelegateCommand((Func<Task>)null));
+
             var tcs = new TaskCompletionSource<object>();
             bool executeCalled = false;
 
@@ -18,9 +22,11 @@ namespace Test.Waf.Applications
                 executeCalled = true;
                 return tcs.Task;
             });
+
             Assert.IsTrue(command.CanExecute(null));
             command.Execute(null);
             Assert.IsFalse(command.CanExecute(null));
+
             tcs.SetResult(null);
             Assert.IsTrue(command.CanExecute(null));
             Assert.IsTrue(executeCalled);
@@ -30,16 +36,24 @@ namespace Test.Waf.Applications
         public void CanExecuteDuringAsyncExecute2()
         {
             var tcs = new TaskCompletionSource<object>();
+            bool canExecute = false;
             bool executeCalled = false;
 
             var command = new AsyncDelegateCommand(() =>
             {
                 executeCalled = true;
                 return tcs.Task;
-            }, () => true);
+            }, () => canExecute);
+
+            Assert.IsFalse(command.CanExecute(null));
+            command.Execute(null);
+            Assert.IsFalse(executeCalled);
+
+            canExecute = true;
             Assert.IsTrue(command.CanExecute(null));
             command.Execute(null);
             Assert.IsFalse(command.CanExecute(null));
+
             tcs.SetResult(null);
             Assert.IsTrue(command.CanExecute(null));
             Assert.IsTrue(executeCalled);
@@ -62,6 +76,22 @@ namespace Test.Waf.Applications
             tcs.SetResult(null);
             Assert.IsTrue(command.CanExecute(null));
             Assert.AreEqual("test", commandParameter);
+        }
+
+        [TestMethod]
+        public void RaiseCanExecuteChangedTest()
+        {
+            bool executed = false;
+            bool canExecute = false;
+            AsyncDelegateCommand command = new AsyncDelegateCommand(() => { executed = false; return Task.FromResult((object)null); }, () => canExecute);
+
+            Assert.IsFalse(command.CanExecute(null));
+            canExecute = true;
+            Assert.IsTrue(command.CanExecute(null));
+
+            AssertHelper.CanExecuteChangedEvent(command, () => command.RaiseCanExecuteChanged());
+
+            Assert.IsFalse(executed);
         }
     }
 }
