@@ -48,6 +48,7 @@
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="Applications\AsyncDelegateCommand.cs" />
     <Compile Include="Applications\DelegateCommand.cs" />
     <Compile Include="Applications\IView.cs" />
     <Compile Include="Applications\RecentFile.cs" />
