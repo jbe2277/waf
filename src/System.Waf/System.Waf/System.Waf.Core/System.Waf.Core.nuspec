@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <description>$description$</description>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    
+    <projectUrl>https://github.com/jbe2277/waf</projectUrl>
+    <licenseUrl>https://github.com/jbe2277/waf/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    
+    <copyright>Copyright © 2016 jbe2277</copyright>
+    <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
+
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+  </metadata>
+</package>

@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 using System.Resources;
 
 
-[assembly: AssemblyCompany("Waf")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCompany("jbe2277")]
+[assembly: AssemblyCopyright("Copyright © 2016 jbe2277")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,3 +18,4 @@ using System.Resources;
 
 [assembly: AssemblyVersion("4.0.0.1")]
 [assembly: AssemblyFileVersion("4.0.0.1")]
+[assembly: AssemblyInformationalVersion("4.0.0-alpha1")]
