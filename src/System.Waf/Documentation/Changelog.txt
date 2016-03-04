@@ -4,11 +4,21 @@ Changelog
 Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
-Version 4.0.0.1 (Milestone 1)
-* TODO:
-  - Add AsyncDelegateCommand unit tests
+Version 4.0.0.2 (Milestone 2)
+- TODO
   - Move SynchCollection into Core; Disposable or unwire method?
   - InfoMan: TextBox wrong font alignment
+
+
+Version 4.0.0.1 (Milestone 1)
+- Provide a core package of WAF as reusable portable library.
+- Improved ViewModel implementation for faster DataContext initialization when using MEF.
+- Add AsyncDelegateCommand class.
+- Change TargetFrameworkVersion to v4.6 for WPF applications
+- Removed types and members that were marked as obsolete in version 3.
+- Removed serialization support because the portable library does not support it.
+- Samples: Improve code by using C# 6.0.
+- InfoMan: Introduce a custom ToolBar style.
 
 
 Version 3.2.0.450 (Release)
