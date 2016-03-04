@@ -35,6 +35,8 @@
         <dependency id="System.Runtime.Extensions" version="4.0.10" />
         <dependency id="System.Threading" version="4.0.10" />
         <dependency id="System.Threading.Tasks" version="4.0.10" />
+        
+        <dependency id="System.Waf.Core" version="4.0.0-alpha2" />
       </group>
     </dependencies>
   </metadata>
