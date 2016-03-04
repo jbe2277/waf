@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <description>$description$</description>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>System.Waf.UnitTesting.Core</id>
+    <version>4.0.0-alpha1</version>
+    <title>System.Waf.UnitTesting.Core</title>
+    <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests. It is the portable core part that can be used in different application types.</description>
+    <authors>jbe2277</authors>
+    <owners>jbe2277</owners>
 
     <projectUrl>https://github.com/jbe2277/waf</projectUrl>
     <licenseUrl>https://github.com/jbe2277/waf/blob/master/LICENSE</licenseUrl>
@@ -22,5 +22,27 @@
 - Removed types and members that were marked as obsolete in version 3.
 - Removed serialization support because the portable library does not support it.
     </releaseNotes>
+
+    <dependencies>
+      <group targetFramework="dotnet">
+        <dependency id="System.Collections.Concurrent" version="4.0.10" />
+        <dependency id="System.Diagnostics.Debug" version="4.0.10" />
+        <dependency id="System.Linq.Expressions" version="4.0.10" />
+        <dependency id="System.ObjectModel" version="4.0.10" />
+        <dependency id="System.Reflection" version="4.0.10" />
+        <dependency id="System.Resources.ResourceManager" version="4.0.0" />
+        <dependency id="System.Runtime" version="4.0.20" />
+        <dependency id="System.Runtime.Extensions" version="4.0.10" />
+        <dependency id="System.Threading" version="4.0.10" />
+        <dependency id="System.Threading.Tasks" version="4.0.10" />
+      </group>
+    </dependencies>
   </metadata>
+
+  <files>
+    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.UnitTesting.Core.dll" target="lib\dotnet" />
+    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.UnitTesting.Core.xml" target="lib\dotnet" />
+    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.UnitTesting.Core.pdb" target="lib\dotnet" />
+    <file src="**\*.cs" target="src" />
+  </files>
 </package>
