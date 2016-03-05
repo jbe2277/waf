@@ -2,7 +2,7 @@
 setlocal
 set PkgDir=%~dp0
 set PATH=%PATH%;%PkgDir%
-set PackParams=-Build -IncludeReferencedProjects -Symbols -Properties Configuration=Release -MinClientVersion 3.1 -OutputDirectory System.Waf\Release
+set PackParams=-IncludeReferencedProjects -Symbols -Properties Configuration=Release -MinClientVersion 3.1 -OutputDirectory System.Waf\Release
 
 cd %PkgDir%
 if not exist "System.Waf\Release" mkdir System.Waf\Release
