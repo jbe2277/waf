@@ -1,12 +1,11 @@
 @echo off
 setlocal
 set SolutionDir=%~dp0..\src\System.Waf
-set OutputPath=..\..\..\..\out\System.Waf\StrongName\
 set Configuration=Release
 set DefineConstants="TRACE;CODE_ANALYSIS;STRONG_NAME"
 set KeyOriginatorFile=P:\IdentityKey.snk
 
-set BuildParams=/t:Rebuild /p:Configuration=%Configuration% /p:OutputPath=%OutputPath% /p:DefineConstants=%DefineConstants% /p:KeyOriginatorFile=%KeyOriginatorFile%
+set BuildParams=/t:Rebuild /p:Configuration=%Configuration% /p:DefineConstants=%DefineConstants% /p:KeyOriginatorFile=%KeyOriginatorFile%
 
 call "%VS140COMNTOOLS%\vsvars32.bat"
 
