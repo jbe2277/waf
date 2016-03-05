@@ -14,7 +14,17 @@ Starting with version 4 the framework comes with the new name Win Application Fr
 
 Version 4 is still under development and not production ready yet.
 
-At the moment it is recommended to use and older stable version of this framework. You will find these versions on CodePlex: http://waf.codeplex.com
+At the moment it is recommended to use an older stable version of this framework. You will find these versions on CodePlex: http://waf.codeplex.com
+
+## NuGet Packages
+
+Package | Usage | Successor of
+--- | --- | ---
+[System.Waf.Wpf](https://www.nuget.org/packages/System.Waf.Wpf) | For WPF applications. | [waf](https://www.nuget.org/packages/waf)
+[System.Waf.Core](https://www.nuget.org/packages/System.Waf.Core) | For .NET Core based applications. | 
+. |  | 
+[System.Waf.UnitTesting.Wpf](https://www.nuget.org/packages/System.Waf.UnitTesting.Wpf) | For .NET Core based applications. | [waf.testing](https://www.nuget.org/packages/waf.testing)
+[System.Waf.UnitTesting.Core](https://www.nuget.org/packages/System.Waf.UnitTesting.Core) | For WPF applications. | 
 
 ## License
 
