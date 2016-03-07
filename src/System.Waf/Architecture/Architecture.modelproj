@@ -93,16 +93,16 @@
       <SubType>Content</SubType>
       <DependentUpon>InformationManager\Infrastructure.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="WpfApplicationFramework.layerdiagram">
+    <Validate Include="System.Waf.layerdiagram">
       <SubType>Content</SubType>
     </Validate>
-    <Validate Include="WpfApplicationFramework.layerdiagram.layout">
+    <Validate Include="System.Waf.layerdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>WpfApplicationFramework.layerdiagram</DependentUpon>
+      <DependentUpon>System.Waf.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="WpfApplicationFramework.layerdiagram.suppressions">
+    <Validate Include="System.Waf.layerdiagram.suppressions">
       <SubType>Content</SubType>
-      <DependentUpon>WpfApplicationFramework.layerdiagram</DependentUpon>
+      <DependentUpon>System.Waf.layerdiagram</DependentUpon>
     </Validate>
     <Validate Include="Writer.layerdiagram">
       <SubType>Content</SubType>
@@ -201,8 +201,12 @@
       <Name>Writer.Presentation</Name>
       <Project>{2c041533-4ba4-4498-8867-43f87ffd5fac}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\WpfApplicationFramework\WpfApplicationFramework\WpfApplicationFramework.csproj">
-      <Name>WpfApplicationFramework</Name>
+    <ProjectReference Include="..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Name>System.Waf.Core</Name>
+      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Name>System.Waf.Wpf</Name>
       <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
     </ProjectReference>
   </ItemGroup>
