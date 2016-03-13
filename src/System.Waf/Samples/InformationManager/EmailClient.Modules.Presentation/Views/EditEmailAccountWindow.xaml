@@ -11,10 +11,10 @@
 
     <DockPanel>
         <Border DockPanel.Dock="Bottom" Background="{x:Static SystemColors.ControlBrush}">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,11,11">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="11">
                 <Button Content="&lt; _Back" Command="{Binding BackCommand}" ToolTipService.ShowOnDisabled="True">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style TargetType="Button" BasedOn="{StaticResource DialogButton}">
                             <Style.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="ToolTip" Value="It's not possible to go back on the first page."/>
@@ -23,9 +23,9 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Command="{Binding NextCommand}" IsDefault="True" ToolTipService.ShowOnDisabled="True">
+                <Button Command="{Binding NextCommand}" IsDefault="True" ToolTipService.ShowOnDisabled="True" Margin="11,0,0,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style TargetType="Button" BasedOn="{StaticResource DialogButton}">
                             <Setter Property="Content" Value="_Next &gt;"/>
                             <Style.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
@@ -38,7 +38,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="_Cancel" IsCancel="True" Margin="22,11,0,0"/>
+                <Button Content="_Cancel" IsCancel="True" Style="{StaticResource DialogButton}" Margin="22,0,0,0"/>
             </StackPanel>
         </Border>
 

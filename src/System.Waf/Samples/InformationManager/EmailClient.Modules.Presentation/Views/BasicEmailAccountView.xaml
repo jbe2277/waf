@@ -7,33 +7,37 @@
     mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:BasicEmailAccountViewModel}"
     HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Grid Margin="0,0,11,11">
+    <Grid Margin="11">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="22"/>
+            <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Create Account:" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderLabel}" Margin="11,11,0,11"/>
+        <Label Grid.Column="0" Grid.Row="0" Content="Create Account:" Style="{StaticResource HeaderLabel}"/>
 
-        <Label Content="Name" Grid.Column="0" Grid.Row="1"/>
-        <TextBox x:Name="nameBox" Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, 
-            NotifyOnValidationError=true}" Width="150" Grid.Column="1" Grid.Row="1"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="Name"/>
+        <TextBox x:Name="nameBox" Grid.Column="2" Grid.Row="2" Width="150"
+                 Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
 
-        <Label Content="Email address" Grid.Column="0" Grid.Row="2"/>
-        <TextBox Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, 
-            NotifyOnValidationError=true}" Width="150" Grid.Column="1" Grid.Row="2"/>
+        <Label Grid.Column="0" Grid.Row="4" Content="Email address"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Width="150" 
+                 Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
 
-        <RadioButton Content="_Internet Email (POP3, SMTP)" IsChecked="{Binding IsPop3Checked}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"/>
-        
-        <RadioButton Content="_Microsoft Exchange" IsChecked="{Binding IsExchangeChecked}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"/>
+        <RadioButton Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6" Content="_Internet Email (POP3, SMTP)" IsChecked="{Binding IsPop3Checked}"/>
+
+        <RadioButton Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="8" Content="_Microsoft Exchange" IsChecked="{Binding IsExchangeChecked}"/>
     </Grid>
 
 </UserControl>

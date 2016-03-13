@@ -16,9 +16,9 @@
         <ContentControl Content="{Binding ContactListView}" MouseDoubleClick="ContactListViewMouseDoubleClick"/>
 
         <Border Grid.Row="1" Background="{x:Static SystemColors.ControlBrush}">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,11,11">
-                <Button Command="{Binding OkCommand}" Content="_OK" IsDefault="True"/>
-                <Button Content="_Cancel" IsCancel="True"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="11">
+                <Button Command="{Binding OkCommand}" Content="_OK" IsDefault="True" Style="{StaticResource DialogButton}"/>
+                <Button Content="_Cancel" IsCancel="True" Style="{StaticResource DialogButton}" Margin="11,0,0,0"/>
             </StackPanel>
         </Border>
     </Grid>
