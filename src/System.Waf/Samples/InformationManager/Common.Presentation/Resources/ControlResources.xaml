@@ -6,21 +6,14 @@
     <SolidColorBrush x:Key="HeaderTextBrush" Color="#003399"/>
 
     <Style TargetType="Label">
-        <Setter Property="Margin" Value="11,11,0,0"/>
-        <Setter Property="Padding" Value="5,3"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="TextBox">
-        <Setter Property="MinHeight" Value="25"/>
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="Margin" Value="11,11,0,0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate/>
-                <!-- Set an empty error template, hide the red rectangle -->
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Padding" Value="1,3"/>
+        <!-- Set an empty error template, hide the red rectangle -->
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="true">
                 <Setter Property="Background" Value="{StaticResource InvalidControlBrush}"/>
@@ -37,28 +30,7 @@
     </Style>
 
     <Style TargetType="PasswordBox">
-        <Setter Property="MinHeight" Value="25"/>
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="Margin" Value="11,11,0,0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-    </Style>
-
-    <Style TargetType="Button">
-        <Setter Property="MinWidth" Value="75"/>
-        <Setter Property="MinHeight" Value="23"/>
-        <Setter Property="Margin" Value="11,11,0,0"/>
-    </Style>
-
-    <Style TargetType="RadioButton">
-        <Setter Property="Margin" Value="16,11,0,0"/>
-    </Style>
-
-    <Style TargetType="CheckBox">
-        <Setter Property="Margin" Value="11,11,0,0"/>
-    </Style>
-
-    <Style TargetType="ComboBox">
-        <Setter Property="Margin" Value="11,11,0,0"/>
+        <Setter Property="Padding" Value="1,3"/>
     </Style>
     
     <Style TargetType="DataGrid">
