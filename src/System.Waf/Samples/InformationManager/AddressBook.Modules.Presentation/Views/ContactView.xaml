@@ -10,7 +10,7 @@
     <Grid Margin="11,11,22,11">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="{StaticResource Layout.LargeColumnSpace}"/>
+            <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

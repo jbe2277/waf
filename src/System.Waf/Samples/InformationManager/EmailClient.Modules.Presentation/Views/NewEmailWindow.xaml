@@ -13,7 +13,7 @@
             <Button Command="{Binding CloseCommand}" ToolTip="Close this window. The email will not be saved."><AccessText Text="_Close"/></Button>
         </ToolBar>
         
-        <Grid Margin="0,0,11,11">
+        <Grid Margin="11,11,11,11">
             <Grid.Resources>
                 <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
                     <Setter Property="Padding" Value="1,3"/>
@@ -27,39 +27,48 @@
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="11"/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="{StaticResource Layout.ColumnSpace}"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Label Content="From: " Grid.Row="0" Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1"/>
-            
-            <Label Content="To:" Grid.Row="1" Grid.Column="0"/>
-            <TextBox x:Name="toBox" Text="{Binding To}" Grid.Row="1" Grid.Column="1"/>
-            <Button Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..." Grid.Row="1" Grid.Column="2"/>
 
-            <Label Content="CC:" Grid.Row="0" Grid.Column="4"/>
-            <TextBox Text="{Binding CC}" Grid.Row="0" Grid.Column="5"/>
-            <Button Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..." Grid.Row="0" Grid.Column="6"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="From: "/>
+            <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name"/>
 
-            <Label Content="BCC:" Grid.Row="1" Grid.Column="4"/>
-            <TextBox Text="{Binding Bcc}" Grid.Row="1" Grid.Column="5"/>
-            <Button Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..." Grid.Row="1" Grid.Column="6"/>
-            
-            <Label Content="Title:" Grid.Row="2" Grid.Column="0"/>
-            <TextBox Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="To:"/>
+            <TextBox x:Name="toBox" Grid.Row="2" Grid.Column="2" Text="{Binding To}"/>
+            <Button Grid.Row="2" Grid.Column="4" Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..."/>
 
-            <TextBox Text="{Binding Email.Message}" Grid.Row="3" Grid.ColumnSpan="7" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
+            <Label Grid.Row="0" Grid.Column="8" Content="CC:"/>
+            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding CC}"/>
+            <Button Grid.Row="0" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..."/>
+
+            <Label Grid.Row="2" Grid.Column="8" Content="BCC:"/>
+            <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Bcc}"/>
+            <Button Grid.Row="2" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..."/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Title:"/>
+            <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="11" Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+            <TextBox Grid.Row="6" Grid.ColumnSpan="13" Text="{Binding Email.Message}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
         </Grid>
     </DockPanel>
 </Window>
