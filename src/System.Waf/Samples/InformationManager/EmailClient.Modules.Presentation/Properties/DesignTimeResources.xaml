@@ -6,6 +6,8 @@
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ImageResources.xaml"/>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ConverterResources.xaml"/>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ControlResources.xaml"/>
+        <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ToolBarResources.xaml"/>
+        <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/LayoutResources.xaml"/>
 
         <ResourceDictionary Source="/Waf.InformationManager.EmailClient.Modules.Presentation;Component/Resources/ConverterResources.xaml"/>
 	</ResourceDictionary.MergedDictionaries>

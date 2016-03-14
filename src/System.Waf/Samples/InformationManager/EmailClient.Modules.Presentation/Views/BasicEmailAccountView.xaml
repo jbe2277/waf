@@ -25,7 +25,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Create Account:" Style="{StaticResource HeaderLabel}"/>
+        <Label Grid.Column="0" Grid.Row="0" Content="Create account:" Style="{StaticResource HeaderLabel}"/>
 
         <Label Grid.Column="0" Grid.Row="2" Content="Name"/>
         <TextBox x:Name="nameBox" Grid.Column="2" Grid.Row="2" Width="150"
