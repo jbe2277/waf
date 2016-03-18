@@ -23,7 +23,7 @@ namespace System.Waf.Applications
             // Enforce it by executing the event queue of the Dispatcher.
             if (dataContext == null && SynchronizationContext.Current is DispatcherSynchronizationContext)
             {
-                DispatcherHelper.DoEvents();
+                DispatcherHelperCore.DoEvents();
                 dataContext = view.DataContext;
             }
             return dataContext as ViewModel;

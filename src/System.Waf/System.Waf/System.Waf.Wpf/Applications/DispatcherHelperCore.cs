@@ -1,14 +1,9 @@
-﻿using System.Security.Permissions;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace System.Waf.Applications
 {
-    internal static class DispatcherHelper
+    internal static class DispatcherHelperCore
     {
-        /// <summary>
-        /// Execute the event queue of the dispatcher.
-        /// </summary>
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal static void DoEvents()
         {
             DispatcherFrame frame = new DispatcherFrame();

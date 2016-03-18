@@ -50,7 +50,8 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Applications\ApplicationInfo.cs" />
-    <Compile Include="Applications\DispatcherHelper.cs" />
+    <Compile Include="Applications\DispatcherHelperCore.cs" />
+    <Compile Include="Presentation\DispatcherHelper.cs" />
     <Compile Include="Applications\IModuleController.cs" />
     <Compile Include="Applications\Services\FileDialogResult.cs" />
     <Compile Include="Applications\Services\FileDialogServiceExtensions.cs" />

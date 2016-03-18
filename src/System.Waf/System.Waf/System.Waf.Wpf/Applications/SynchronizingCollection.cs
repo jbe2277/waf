@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Waf.Foundation;
 
 namespace System.Waf.Applications
 {

@@ -6,8 +6,6 @@ Legend: B (Breaking Change); O (Marked member as obsolete)
 
 Version 4.0.0.2 (Milestone 2)
 - TODO
-  - Move SynchCollection into Core; Disposable or unwire method?
-  - InfoMan: TextBox wrong font alignment
 
 
 Version 4.0.0.1 (Milestone 1)
