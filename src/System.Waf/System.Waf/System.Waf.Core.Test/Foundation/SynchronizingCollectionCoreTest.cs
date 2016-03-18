@@ -5,11 +5,10 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Waf.UnitTesting;
 
-namespace Test.Waf.Applications
+namespace Test.Waf.Foundation
 {
     [TestClass]
     public class SynchronizingCollectionCoreTest

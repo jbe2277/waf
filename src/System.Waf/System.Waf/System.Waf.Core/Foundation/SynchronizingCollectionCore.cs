@@ -2,9 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Waf.Foundation;
 
-namespace System.Waf.Applications
+namespace System.Waf.Foundation
 {
     /// <summary>
     /// Represents a collection that synchronizes all of it's items with the items of the specified original collection.
