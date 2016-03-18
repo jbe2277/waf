@@ -31,4 +31,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Data.BookLibraryContext.#OnModelCreating(System.Data.Entity.DbModelBuilder)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Services.EntityService.#GenerateViewCache()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "Waf.BookLibrary.Library.Applications.Controllers.BookController")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "mappingHashValue", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Services.EntityService.#GenerateViewCache()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "views", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Services.EntityService.#GenerateViewCache()")]
 

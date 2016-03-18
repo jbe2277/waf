@@ -63,6 +63,7 @@
     <Compile Include="Foundation\ReadOnlyObservableListTest.cs" />
     <Compile Include="Foundation\ThrottledActionTest.cs" />
     <Compile Include="Foundation\ValidatableModelTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTesting\AssertExceptionTest.cs" />
     <Compile Include="UnitTesting\CanExecuteChangedEventTest.cs" />
