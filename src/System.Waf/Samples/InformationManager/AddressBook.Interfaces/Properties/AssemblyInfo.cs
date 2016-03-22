@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Waf.InformationManager.AddressBook.Interfaces")]
@@ -8,3 +9,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("97064030-eaf7-4c5f-b69a-c81a4bfdbece")]
+[assembly: CLSCompliant(true)]

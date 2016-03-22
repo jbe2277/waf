@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Waf.InformationManager.AddressBook.Modules.Domain.Test")]
@@ -8,3 +9,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("7a46b995-1083-4b8c-afea-f6a85fcfaa33")]
+[assembly: CLSCompliant(true)]

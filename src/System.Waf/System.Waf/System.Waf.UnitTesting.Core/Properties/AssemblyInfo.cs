@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("System.Waf.UnitTesting.Core")]
@@ -7,6 +8,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("System.Waf.UnitTesting.Core")]
 
+[assembly: CLSCompliant(true)]
+
 #if (!STRONG_NAME)
-    [assembly: InternalsVisibleTo("System.Waf.Core.Test")]
+[assembly: InternalsVisibleTo("System.Waf.Core.Test")]
 #endif

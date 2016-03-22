@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Waf.InformationManager.Common.Domain")]
@@ -8,3 +9,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("73c94972-9a32-4518-be1c-35de3abce300")]
+[assembly: CLSCompliant(true)]

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System;
 using System.Runtime.InteropServices;
 using System.Resources;
 
@@ -10,9 +9,7 @@ using System.Resources;
 [assembly: AssemblyCulture("")]
 
 
-[assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
-
 [assembly: NeutralResourcesLanguage("en-US")]
 
 

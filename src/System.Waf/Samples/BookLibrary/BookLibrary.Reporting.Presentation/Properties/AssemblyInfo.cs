@@ -9,3 +9,4 @@ using System;
 
 
 [assembly: Guid("056d95ec-a162-48f9-8822-9cd9751618b8")]
+[assembly: CLSCompliant(true)]

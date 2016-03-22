@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("4c170d10-d5a8-44f6-9618-d847e72b4365")]
+[assembly: CLSCompliant(true)]
 
 
 [assembly: InternalsVisibleTo("Waf.InformationManager.EmailClient.Modules.Domain.Test")]

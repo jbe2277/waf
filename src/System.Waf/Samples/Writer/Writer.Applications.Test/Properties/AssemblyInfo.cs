@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 
@@ -9,3 +10,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("2c0501fd-81f1-4191-a318-d4241135a4f6")]
+[assembly: CLSCompliant(true)]

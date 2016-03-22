@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Waf.InformationManager.Infrastructure.Modules.Presentation")]
@@ -8,3 +9,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("bfdd4c66-76d1-4bd7-93f7-2544c74b01a3")]
+[assembly: CLSCompliant(true)]

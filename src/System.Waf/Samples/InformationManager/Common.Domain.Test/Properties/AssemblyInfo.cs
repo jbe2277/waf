@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Waf.InformationManager.Common.Domain.Test")]
@@ -8,3 +9,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("f22d5bc7-3da2-4938-9bf6-21f60e5d4e5d")]
+[assembly: CLSCompliant(true)]

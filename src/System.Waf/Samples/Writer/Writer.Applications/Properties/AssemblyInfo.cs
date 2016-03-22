@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("25671ccd-cace-440a-b8f7-cf131ca4ccb6")]
+[assembly: CLSCompliant(true)]
 
 
 [assembly: InternalsVisibleTo("Waf.Writer.Applications.Test")]

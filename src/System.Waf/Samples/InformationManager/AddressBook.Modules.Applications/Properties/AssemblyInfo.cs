@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices;
 
 
 [assembly: Guid("734dba4d-22c5-4385-8154-9049bb302752")]
+[assembly: CLSCompliant(true)]
 
 
 [assembly: InternalsVisibleTo("Waf.InformationManager.AddressBook.Modules.Applications.Test")]
