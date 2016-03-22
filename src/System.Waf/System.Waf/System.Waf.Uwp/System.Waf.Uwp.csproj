@@ -36,7 +36,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\..\..\..\out\System.Waf\Release\System.Waf.Uwp.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -64,7 +63,11 @@
     <Compile Include="Applications\ViewModel.cs" />
     <Compile Include="Applications\ViewModel.Generic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Presentation\Controls\HeaderContentControl.cs" />
     <Compile Include="Presentation\Controls\LazyContentPresenter.cs" />
+    <Compile Include="Presentation\Controls\NavigationSplitView.cs" />
+    <Compile Include="Presentation\Controls\NavigationSplitViewToggleButton.cs" />
+    <Compile Include="Presentation\Controls\NavigationToggleButton.cs" />
     <Compile Include="Presentation\Converters\NoOperationConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\System.Waf.Uwp.rd.xml" />
@@ -74,6 +77,13 @@
       <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
       <Name>System.Waf.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
