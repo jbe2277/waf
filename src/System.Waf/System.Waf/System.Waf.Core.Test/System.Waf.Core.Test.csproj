@@ -55,6 +55,7 @@
     <Compile Include="Applications\DelegateCommandTest.cs" />
     <Compile Include="Applications\RecentFileListTest.cs" />
     <Compile Include="Applications\RecentFileTest.cs" />
+    <Compile Include="Foundation\StringHelperTest.cs" />
     <Compile Include="Foundation\SynchronizingCollectionCoreTest.cs" />
     <Compile Include="Applications\ViewModelCoreTest.cs" />
     <Compile Include="Foundation\CacheTest.cs" />
