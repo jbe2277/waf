@@ -1,5 +1,9 @@
 ﻿using System.Globalization;
-using System.Windows.Data;
+#if WINDOWS_UWP
+    using Windows.UI.Xaml.Data;
+#else    
+    using System.Windows.Data;
+#endif
 
 namespace System.Waf.Presentation.Converters
 {
@@ -7,7 +11,6 @@ namespace System.Waf.Presentation.Converters
     /// Value converter that converts an object into a formatted string. The format specification is passed via the 
     /// ConverterParameter property.
     /// </summary>
-    [ValueConversion(typeof(object), typeof(string))]
     public sealed class StringFormatConverter : IValueConverter
     {
         /// <summary>
@@ -24,11 +27,14 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The format specification used to format the object.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>The formatted string.</returns>
+#if WINDOWS_UWP
+        public object Convert(object value, Type targetType, object parameter, string culture)
+#else
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             string format = parameter as string ?? "{0}";
-
-            return string.Format(culture, format, value);
+            return string.Format(CultureInfo.CurrentCulture, format, value);
         }
 
         /// <summary>
@@ -40,7 +46,11 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
+#if WINDOWS_UWP
+        public object ConvertBack(object value, Type targetType, object parameter, string culture)
+#else
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             throw new NotSupportedException();
         }

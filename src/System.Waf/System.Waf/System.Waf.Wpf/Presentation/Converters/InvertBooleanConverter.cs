@@ -1,13 +1,16 @@
-﻿using System.Globalization;
-using System.Windows.Data;
+﻿#if WINDOWS_UWP
+    using Windows.UI.Xaml.Data;
+#else    
+    using System.Globalization;
+    using System.Windows.Data;
+#endif
 
 namespace System.Waf.Presentation.Converters
 {
     /// <summary>
     /// Value converter that inverts a boolean value.
     /// </summary>
-    [ValueConversion(typeof(bool), typeof(bool))]
-    public class InvertBooleanConverter : IValueConverter
+    public sealed class InvertBooleanConverter : IValueConverter
     {
         /// <summary>
         /// Gets the default instance of this converter.
@@ -23,7 +26,11 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>The inverter boolean value.</returns>
+#if WINDOWS_UWP
+        public object Convert(object value, Type targetType, object parameter, string culture)
+#else
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             return !(bool)value;
         }
@@ -36,7 +43,11 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>The inverter boolean value.</returns>
+#if WINDOWS_UWP
+        public object ConvertBack(object value, Type targetType, object parameter, string culture)
+#else
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             return !(bool)value;
         }

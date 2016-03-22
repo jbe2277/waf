@@ -51,11 +51,21 @@
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="..\System.Waf.Wpf\Presentation\Converters\BoolToVisibilityConverter.cs">
+      <Link>Presentation\Converters\BoolToVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\System.Waf.Wpf\Presentation\Converters\InvertBooleanConverter.cs">
+      <Link>Presentation\Converters\InvertBooleanConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\System.Waf.Wpf\Presentation\Converters\StringFormatConverter.cs">
+      <Link>Presentation\Converters\StringFormatConverter.cs</Link>
+    </Compile>
     <Compile Include="Applications\IAppController.cs" />
     <Compile Include="Applications\ViewModel.cs" />
     <Compile Include="Applications\ViewModel.Generic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Presentation\Controls\LazyContentPresenter.cs" />
+    <Compile Include="Presentation\Converters\NoOperationConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\System.Waf.Uwp.rd.xml" />
   </ItemGroup>

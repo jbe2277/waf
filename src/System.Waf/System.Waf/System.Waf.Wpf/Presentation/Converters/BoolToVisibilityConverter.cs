@@ -1,14 +1,18 @@
-﻿using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+﻿#if WINDOWS_UWP
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Data;
+#else
+    using System.Globalization;    
+    using System.Windows;
+    using System.Windows.Data;
+#endif
 
 namespace System.Waf.Presentation.Converters
 {
     /// <summary>
     /// Value converter that converts a boolean value to and from Visibility enumeration values.
     /// </summary>
-    [ValueConversion(typeof(bool), typeof(Visibility))]
-    public class BoolToVisibilityConverter : IValueConverter
+    public sealed class BoolToVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Gets the default instance of this converter.
@@ -25,7 +29,11 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Visible when the boolean value was true; otherwise Collapsed.</returns>
+#if WINDOWS_UWP
+        public object Convert(object value, Type targetType, object parameter, string culture)
+#else
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             bool? flag = (bool?)value;
             bool invert = IsInvertParameterSet(parameter);
@@ -46,7 +54,11 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>true when the Visibility enumeration value was Visible; otherwise false.</returns>
+#if WINDOWS_UWP
+        public object ConvertBack(object value, Type targetType, object parameter, string culture)
+#else
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+#endif
         {
             Visibility visibility = (Visibility)value;
             bool invert = IsInvertParameterSet(parameter);
@@ -60,8 +72,7 @@ namespace System.Waf.Presentation.Converters
 
         private static bool IsInvertParameterSet(object parameter)
         {
-            string invertParameter = parameter as string;
-            if (!string.IsNullOrEmpty(invertParameter) && string.Equals(invertParameter, "invert", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
