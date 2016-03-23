@@ -21,6 +21,7 @@ At the moment it is recommended to use an older stable version of this framework
 Package | Usage | Successor of
 --- | --- | ---
 [System.Waf.Wpf](https://www.nuget.org/packages/System.Waf.Wpf) | For WPF applications | [waf](https://www.nuget.org/packages/waf)
+[System.Waf.Uwp](https://www.nuget.org/packages/System.Waf.Uwp) | For UWP Apps | 
 [System.Waf.Core](https://www.nuget.org/packages/System.Waf.Core) | For .NET Core based applications | 
 . |  | 
 [System.Waf.UnitTesting.Wpf](https://www.nuget.org/packages/System.Waf.UnitTesting.Wpf) | For unit testing of WPF applications | [waf.testing](https://www.nuget.org/packages/waf.testing)
