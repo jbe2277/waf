@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>System.Waf.Uwp</id>
-    <version>4.0.0-alpha2</version>
+    <version>4.0.0-alpha3</version>
     <title>System.Waf.Uwp</title>
     <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package contains the UWP (Universal Windows Platform) specific types.</description>
     <authors>jbe2277</authors>
@@ -37,7 +37,7 @@
         <dependency id="System.Runtime.WindowsRuntime.UI.Xaml" version="4.0.0" />
         <dependency id="System.Threading.Tasks" version="4.0.10" />
 
-        <dependency id="System.Waf.Core" version="4.0.0-alpha2" />
+        <dependency id="System.Waf.Core" version="4.0.0-alpha3" />
       </group>
     </dependencies>
   </metadata>

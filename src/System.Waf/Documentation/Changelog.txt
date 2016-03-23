@@ -4,6 +4,10 @@ Changelog
 Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
+Version 4.0.0.3 (Milestone 3)
+- TODO
+
+
 Version 4.0.0.2 (Milestone 2)
 - WAF: Add System.Waf.Uwp project with initial support for UWP App development.
 - WAF: Add SynchronizingCollectionCore class and adapt the SynchronizingCollection class.

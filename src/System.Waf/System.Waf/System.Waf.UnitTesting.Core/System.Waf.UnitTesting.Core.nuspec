@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>System.Waf.UnitTesting.Core</id>
-    <version>4.0.0-alpha2</version>
+    <version>4.0.0-alpha3</version>
     <title>System.Waf.UnitTesting.Core</title>
     <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests. It is the portable core part that can be used in different application types.</description>
     <authors>jbe2277</authors>
@@ -36,7 +36,7 @@
         <dependency id="System.Threading" version="4.0.10" />
         <dependency id="System.Threading.Tasks" version="4.0.10" />
         
-        <dependency id="System.Waf.Core" version="4.0.0-alpha2" />
+        <dependency id="System.Waf.Core" version="4.0.0-alpha3" />
       </group>
     </dependencies>
   </metadata>
