@@ -12,3 +12,5 @@ nuget pack ..\src\System.Waf\System.Waf\System.Waf.UnitTesting.Core\System.Waf.U
 
 nuget pack ..\src\System.Waf\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj %PackParams%
 nuget pack ..\src\System.Waf\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj %PackParams%
+
+nuget pack ..\src\System.Waf\System.Waf\System.Waf.Uwp\System.Waf.Uwp.csproj %PackParams%
