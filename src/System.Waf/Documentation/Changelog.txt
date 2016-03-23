@@ -5,7 +5,12 @@ Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
 Version 4.0.0.2 (Milestone 2)
-- TODO
+- WAF: Add System.Waf.Uwp project with initial support for UWP App development.
+- WAF: Add SynchronizingCollectionCore class and adapt the SynchronizingCollection class.
+- WAF: Add public DispatcherHelper.DoEvents implementation.
+- WAF: Add StringHelper.Truncate implementation.
+- InfoMan: Improve UI styling for better text alignment.
+- Samples: Enhance WPF design time support.
 
 
 Version 4.0.0.1 (Milestone 1)
