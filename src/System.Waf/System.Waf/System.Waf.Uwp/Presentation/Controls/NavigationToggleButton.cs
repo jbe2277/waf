@@ -20,18 +20,18 @@ namespace System.Waf.Presentation.Controls
 
 
         /// <summary>
-        /// Identifies the <see cref="Symbol"/> dependency property.
+        /// Identifies the <see cref="Icon"/> dependency property.
         /// </summary>
-        public static DependencyProperty SymbolProperty { get; } =
-            DependencyProperty.Register(nameof(Symbol), typeof(Symbol), typeof(NavigationToggleButton), new PropertyMetadata(default(Symbol)));
+        public static DependencyProperty IconProperty { get; } =
+            DependencyProperty.Register(nameof(Icon), typeof(IconElement), typeof(NavigationToggleButton), new PropertyMetadata(null));
 
         /// <summary>
-        /// Gets or sets the symbol that is shown within the button.
+        /// Gets or sets the graphic content of the navigation toggle button.
         /// </summary>
-        public Symbol Symbol
+        public IconElement Icon
         {
-            get { return (Symbol)GetValue(SymbolProperty); }
-            set { SetValue(SymbolProperty, value); }
+            get { return (IconElement)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
         }
 
 

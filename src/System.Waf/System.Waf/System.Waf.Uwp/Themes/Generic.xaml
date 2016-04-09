@@ -184,12 +184,17 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <SymbolIcon x:Name="SymbolIcon" Grid.Column="0" Symbol="{TemplateBinding Symbol}"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                            <SymbolIcon.RenderTransform>
+                        <ContentPresenter x:Name="ContentIcon" Grid.Column="0" 
+                                          AutomationProperties.AccessibilityView="Raw" 
+                                          Content="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, TargetNullValue=' '}" 
+                                          Foreground="{TemplateBinding Foreground}" 
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Center"
+                                          RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter.RenderTransform>
                                 <CompositeTransform ScaleX="0.8" ScaleY="0.8" TranslateX="0" TranslateY="0"/>
-                            </SymbolIcon.RenderTransform>
-                        </SymbolIcon>
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
 
                         <ContentPresenter x:Name="ContentPresenter" Grid.Column="1"
                                 AutomationProperties.AccessibilityView="Raw" 
@@ -198,6 +203,7 @@
                                 ContentTemplate="{TemplateBinding ContentTemplate}" 
                                 ContentTransitions="{TemplateBinding ContentTransitions}" 
                                 Content="{TemplateBinding Content}" 
+                                Foreground="{TemplateBinding Foreground}" 
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                 Padding="{TemplateBinding Padding}" 
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
