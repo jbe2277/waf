@@ -53,7 +53,7 @@ namespace Test.Waf.Applications
             bool canExecute = false;
             DelegateCommand command = new DelegateCommand(() => executed = true, () => canExecute);
 
-            AssertHelper.ExpectedException<InvalidOperationException>(() => command.Execute(null));
+            command.Execute(null);
             Assert.IsFalse(executed);
         }
 

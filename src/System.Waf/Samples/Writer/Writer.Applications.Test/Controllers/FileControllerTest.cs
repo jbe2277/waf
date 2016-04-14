@@ -208,7 +208,7 @@ namespace Test.Writer.Applications.Controllers
             // Change the CanSave to return false so that no documentType is able to save the document anymore
 
             documentType.CanSaveResult = false;
-            AssertHelper.ExpectedException<InvalidOperationException>(() => fileService.SaveCommand.Execute(null));
+            Assert.IsFalse(fileService.SaveCommand.CanExecute(null));
 
             // Simulate an exception during the Save operation.
 

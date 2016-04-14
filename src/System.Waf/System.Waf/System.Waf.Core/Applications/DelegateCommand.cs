@@ -71,12 +71,11 @@ namespace System.Waf.Applications
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        /// <exception cref="InvalidOperationException">The <see cref="CanExecute"/> method returns <c>false.</c></exception>
         public void Execute(object parameter)
         {
             if (!CanExecute(parameter))
             {
-                throw new InvalidOperationException("The command cannot be executed because the canExecute action returned false.");
+                return;
             }
 
             execute(parameter);
