@@ -52,6 +52,9 @@
         <dependencyFromLayerToLayer Id="0b660a87-f092-451b-bd73-0a67c072ff07" direction="Forward">
           <layerMoniker Id="c67d09a0-3bb2-43a9-a96d-b8e06df9c9d0" />
         </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="de0b7a24-d7eb-4e29-a06f-e8f797194f38" direction="Forward">
+          <layerMoniker Id="5f20b75b-b9a0-4164-9998-947c80d2ed6b" />
+        </dependencyFromLayerToLayer>
       </dependencyToLayers>
       <childLayers>
         <layer Id="957808b0-c396-45ff-ba1b-06f008c0e178" name="Services">
