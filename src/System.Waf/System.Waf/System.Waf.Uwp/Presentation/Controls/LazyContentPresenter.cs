@@ -15,6 +15,17 @@ namespace System.Waf.Presentation.Controls
 
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LazyContentPresenter"/> class.
+        /// </summary>
+        public LazyContentPresenter()
+        {
+            // Unloading can set ActualWidth/Height to 0 without calling Arrange
+            Loaded += (sender, e) => UpdateIsVisible();
+            Unloaded += (sender, e) => UpdateIsVisible();
+        }
+
+
+        /// <summary>
         /// Identifies the <see cref="LazyContent"/> dependency property.
         /// </summary>
         public static DependencyProperty LazyContentProperty { get; }
@@ -52,6 +63,11 @@ namespace System.Waf.Presentation.Controls
             var actualSize = base.ArrangeOverride(finalSize);
             IsVisible = actualSize.Width > 0 && actualSize.Height > 0;
             return actualSize;
+        }
+
+        private void UpdateIsVisible()
+        {
+            IsVisible = ActualWidth > 0 && ActualHeight > 0;
         }
 
         private void UpdateContent()
