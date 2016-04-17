@@ -4,6 +4,10 @@ Changelog
 Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
+Version 4.0.0.4 (Milestone 4)
+- TODO: Update release notes in nuspec.
+
+
 Version 4.0.0.3 (Milestone 3)
 - WAF: DelegateCommand.Execute does not throw an exception anymore when CanExecute returns false.
 - WAF: NavigationToggleButton uses now IconElement instead of Symbol.

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>System.Waf.Uwp</id>
-    <version>4.0.0-alpha3</version>
+    <version>4.0.0-alpha4</version>
     <title>System.Waf.Uwp</title>
     <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package contains the UWP (Universal Windows Platform) specific types.</description>
     <authors>jbe2277</authors>
