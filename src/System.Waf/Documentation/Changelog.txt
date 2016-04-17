@@ -5,7 +5,10 @@ Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
 Version 4.0.0.3 (Milestone 3)
-- TODO
+- WAF: DelegateCommand.Execute does not throw an exception anymore when CanExecute returns false.
+- WAF: NavigationToggleButton uses now IconElement instead of Symbol.
+- WAF: Fix IsVisible implementation in LazyContentPresenter.
+- WAF: Update Microsoft.NETCore.UniversalWindowsPlatform to 5.1.0
 
 
 Version 4.0.0.2 (Milestone 2)
