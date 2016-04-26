@@ -13,6 +13,15 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navigationSplitView.DisplayMode" Value="CompactOverlay"/>
+                        <Setter Target="contentColumn.Width" Value="0.5*"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
@@ -53,7 +62,7 @@
             <SplitView.Content>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition x:Name="contentColumn"/>
                         <ColumnDefinition x:Name="previewColumn"/>
                     </Grid.ColumnDefinitions>
 
