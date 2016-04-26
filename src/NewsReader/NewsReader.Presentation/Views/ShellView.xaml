@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="Jbe.NewsReader.Presentation.Views.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Jbe.NewsReader.Applications.ViewModels"
+    xmlns:waf="using:System.Waf.Presentation.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navigationSplitView.DisplayMode" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navigationSplitView.DisplayMode" Value="Overlay"/>
+                        <Setter Target="previewColumn.MaxWidth" Value="0"/>
+                        <Setter Target="contentView.Margin" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="200">
+            <SplitView.Pane>
+                <Grid Margin="0,48,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <waf:NavigationToggleButton Grid.Row="0" x:Uid="Feeds" Icon="Library" 
+                            IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=FeedList;FeedItemList;FeedItem}" 
+                            Command="{x:Bind ViewModel.ShowNewsViewCommand}"/>
+                    <waf:NavigationToggleButton Grid.Row="1" x:Uid="Feedback" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
+                        <waf:NavigationToggleButton.Icon>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
+                        </waf:NavigationToggleButton.Icon>
+                    </waf:NavigationToggleButton>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition x:Name="previewColumn"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentPresenter Grid.Column="0" x:Name="contentView" Content="{x:Bind ViewModel.ContentView, Mode=OneWay}" Margin="1,0,0,0"/>
+
+                    <waf:LazyContentPresenter Grid.Column="1" x:Name="previewView" LazyContent="{x:Bind ViewModel.LazyPreviewView, Mode=OneWay}" Margin="1,0,0,0"/>
+                </Grid>
+            </SplitView.Content>
+        </waf:NavigationSplitView>
+
+        <waf:NavigationSplitViewToggleButton x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{Binding IsPaneOpen, ElementName=navigationSplitView, Mode=TwoWay}"
+            TabIndex="1"/>
+    </Grid>
+</Page>

@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="Jbe.NewsReader.Presentation.Views.FeedItemView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:waf="using:System.Waf.Presentation.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <CommandBar Grid.Row="0">
+            <AppBarButton x:Uid="OpenInBrowser" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
+
+            <CommandBar.Content>
+                <waf:HeaderContentControl Margin="13,0,0,0">
+                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeedItem.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+                </waf:HeaderContentControl>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <Grid Grid.Row="1">
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.Transitions>
+
+            <WebView x:Name="webView" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" 
+                     Source="{x:Bind ViewModel.SelectionService.SelectedFeedItem.Uri, Mode=OneWay}"/>
+
+            <ProgressBar x:Name="loadingProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</UserControl>
