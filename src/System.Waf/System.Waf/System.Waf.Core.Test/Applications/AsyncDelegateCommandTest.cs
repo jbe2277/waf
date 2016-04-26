@@ -94,5 +94,15 @@ namespace Test.Waf.Applications
 
             Assert.IsFalse(executed);
         }
+
+        [TestMethod]
+        public void DisabledCommandTest()
+        {
+            var disabledCommand1 = AsyncDelegateCommand.DisabledCommand;
+            var disabledCommand2 = AsyncDelegateCommand.DisabledCommand;
+            Assert.AreSame(disabledCommand1, disabledCommand2);
+            Assert.IsFalse(disabledCommand1.CanExecute(null));
+            disabledCommand1.Execute(null); // Nothing happens
+        }
     }
 }

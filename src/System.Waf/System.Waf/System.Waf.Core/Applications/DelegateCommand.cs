@@ -52,6 +52,12 @@ namespace System.Waf.Applications
 
 
         /// <summary>
+        /// Returns a disabled command.
+        /// </summary>
+        public static DelegateCommand DisabledCommand { get; } = new DelegateCommand(() => { }, () => false);
+
+
+        /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
         public event EventHandler CanExecuteChanged;

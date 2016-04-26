@@ -58,6 +58,16 @@ namespace Test.Waf.Applications
         }
 
         [TestMethod]
+        public void DisabledCommandTest()
+        {
+            var disabledCommand1 = DelegateCommand.DisabledCommand;
+            var disabledCommand2 = DelegateCommand.DisabledCommand;
+            Assert.AreSame(disabledCommand1, disabledCommand2);
+            Assert.IsFalse(disabledCommand1.CanExecute(null));
+            disabledCommand1.Execute(null); // Nothing happens
+        }
+
+        [TestMethod]
         public void RaiseCanExecuteChangedTest()
         {
             bool executed = false;

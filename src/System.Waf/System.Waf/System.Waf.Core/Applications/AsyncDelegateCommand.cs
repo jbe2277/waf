@@ -10,6 +10,7 @@ namespace System.Waf.Applications
     /// </summary>
     public class AsyncDelegateCommand : ICommand
     {
+        private static readonly Task<object> completedTask = Task.FromResult((object)null);
         private readonly Func<object, Task> execute;
         private readonly Func<object, bool> canExecute;
         private bool isExecuting;
@@ -56,6 +57,11 @@ namespace System.Waf.Applications
             this.canExecute = canExecute;
         }
 
+
+        /// <summary>
+        /// Returns a disabled command.
+        /// </summary>
+        public static AsyncDelegateCommand DisabledCommand { get; } = new AsyncDelegateCommand(() => completedTask, () => false);
 
         private bool IsExecuting
         {
