@@ -18,6 +18,7 @@ namespace Jbe.NewsReader.Domain
         public FeedItem(Uri uri, DateTimeOffset date, string name, string description, string author)
         {
             // Note: Serializer does not call the constructor.
+            if (uri == null) { throw new ArgumentNullException(nameof(uri)); }
             this.uri = uri;
             Date = date;
             Name = name;
@@ -37,19 +38,19 @@ namespace Jbe.NewsReader.Domain
         public string Name
         {
             get { return name; }
-            set { SetProperty(ref name, value.Truncate(200).Trim()); }
+            set { SetProperty(ref name, (value ?? "").Truncate(200).Trim()); }
         }
 
         public string Description
         {
             get { return description; }
-            set { SetProperty(ref description, value.Truncate(500).Trim()); }
+            set { SetProperty(ref description, (value ?? "").Truncate(500).Trim()); }
         }
 
         public string Author
         {
             get { return author; }
-            set { SetProperty(ref author, value.Truncate(100).Trim()); }
+            set { SetProperty(ref author, (value ?? "").Truncate(100).Trim()); }
         }
 
         public bool MarkAsRead
