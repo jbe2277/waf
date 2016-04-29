@@ -147,7 +147,7 @@
   <data name="OpenInBrowser.Label" xml:space="preserve">
     <value>Open in browser</value>
   </data>
-  <data name="ReadMore.Content" xml:space="preserve">
+  <data name="ReadMore.Text" xml:space="preserve">
     <value>read more</value>
   </data>
   <data name="RemoveFeed.Label" xml:space="preserve">

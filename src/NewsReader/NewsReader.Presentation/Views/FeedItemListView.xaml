@@ -41,39 +41,20 @@
                         <DataTemplate x:DataType="m:FeedItem">
                             <UserControl>
                                 <RelativePanel>
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup>
-                                            <VisualState>
-                                                <VisualState.StateTriggers>
-                                                    <AdaptiveTrigger MinWindowWidth="720" />
-                                                </VisualState.StateTriggers>
-                                                <VisualState.Setters>
-                                                    <Setter Target="authorBox.(RelativePanel.AlignRightWithPanel)" Value="True"/>
-                                                    <Setter Target="authorBox.(RelativePanel.RightOf)" Value="nameBox"/>
-                                                    <Setter Target="descriptionBox.(RelativePanel.Below)" Value="nameBox"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                            <VisualState>
-                                                <VisualState.StateTriggers>
-                                                    <AdaptiveTrigger MinWindowWidth="0" />
-                                                </VisualState.StateTriggers>
-                                                <VisualState.Setters>
-                                                    <Setter Target="authorBox.(RelativePanel.Below)" Value="nameBox"/>
-                                                    <Setter Target="descriptionBox.(RelativePanel.Below)" Value="authorBox"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
+                                    <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
+                                           Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
+                                    <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
+                                           RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
 
-                                    <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0"/>
-                                    <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}"/>
-
-                                    <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" TextWrapping="WrapWholeWords" MaxLines="2" Margin="0,7"/>
+                                    <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="2" Style="{ThemeResource BodyTextBlockStyle}"
+                                           RelativePanel.Below="authorBox" Margin="0,7"/>
 
                                     <TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
-                                           RelativePanel.Below="descriptionBox"/>
-                                    <HyperlinkButton x:Uid="ReadMore" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                           RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="11,0,0,0"/>
+                                           RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                    <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
+                                           RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="11,0,0,0">
+                                        <TextBlock x:Uid="ReadMore" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                    </HyperlinkButton>
                                 </RelativePanel>
                             </UserControl>
                         </DataTemplate>
