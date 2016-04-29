@@ -7,6 +7,7 @@ namespace Jbe.NewsReader.Presentation.DesignData
     {
         public SampleFeedItemListViewModel() : base(new MockFeedItemListView(), null)
         {
+            // Note: Design time data does not work with {x:Bind}
         }
 
 
