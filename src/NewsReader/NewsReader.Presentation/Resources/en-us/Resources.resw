@@ -153,7 +153,7 @@
   <data name="RemoveFeed.Label" xml:space="preserve">
     <value>Remove the feed</value>
   </data>
-  <data name="Show.Content" xml:space="preserve">
+  <data name="Show.Text" xml:space="preserve">
     <value>show</value>
   </data>
 </root>

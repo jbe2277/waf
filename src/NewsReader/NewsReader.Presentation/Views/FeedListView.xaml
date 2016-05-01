@@ -47,17 +47,20 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Feed">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <RelativePanel>
+                        <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
-                        <TextBlock Grid.Row="0" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
+                            <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
+                            <Run Text="   "/>
+                            <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
+                        </TextBlock>
 
-                        <HyperlinkButton Grid.Row="1" x:Uid="Show" Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                Margin="0,7,0,0"/>
-                    </Grid>
+                        <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
+                                RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
+                            <TextBlock x:Uid="Show" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        </HyperlinkButton>
+                    </RelativePanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

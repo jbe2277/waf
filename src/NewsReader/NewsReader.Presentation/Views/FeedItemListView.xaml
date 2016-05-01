@@ -52,7 +52,7 @@
                                     <TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
                                            RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                     <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                           RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="11,0,0,0">
+                                           RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="22,0,0,0">
                                         <TextBlock x:Uid="ReadMore" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                     </HyperlinkButton>
                                 </RelativePanel>

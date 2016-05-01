@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
@@ -14,6 +16,7 @@ namespace Jbe.NewsReader.Domain
         [DataMember] private readonly ObservableCollection<FeedItem> items;
         [DataMember] private string name;
         private ReadOnlyObservableList<FeedItem> readOnlyItems;
+        private int unreadItemsCount;
         private bool isLoading;
         private Exception loadError;
 
@@ -24,6 +27,7 @@ namespace Jbe.NewsReader.Domain
             this.uri = uri;
             this.items = new ObservableCollection<FeedItem>();
             this.isLoading = true;
+            Initialize();
         }
 
 
@@ -36,7 +40,13 @@ namespace Jbe.NewsReader.Domain
         }
 
         public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ?? (readOnlyItems = new ReadOnlyObservableList<FeedItem>(items));
-
+        
+        public int UnreadItemsCount
+        {
+            get { return unreadItemsCount; }
+            set { SetProperty(ref unreadItemsCount, value); }
+        }
+        
         public bool IsLoading
         {
             get { return isLoading; }
@@ -81,10 +91,46 @@ namespace Jbe.NewsReader.Domain
             IsLoading = false;
         }
 
+        private void Initialize()
+        {
+            items.CollectionChanged += ItemsCollectionChanged;
+            foreach (var item in items)
+            {
+                item.PropertyChanged += FeedItemPropertyChanged;
+            }
+            UpdateUnreadItemsCount();
+        }
+
+        private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            foreach (var item in e.OldItems.Cast<FeedItem>())
+            {
+                item.PropertyChanged -= FeedItemPropertyChanged;
+            }
+            foreach (var item in e.NewItems.Cast<FeedItem>())
+            {
+                item.PropertyChanged += FeedItemPropertyChanged;
+            }
+        }
+
+        private void FeedItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(FeedItem.MarkAsRead))
+            {
+                UpdateUnreadItemsCount();
+            }
+        }
+        
+        private void UpdateUnreadItemsCount()
+        {
+            UnreadItemsCount = Items.Count(x => !x.MarkAsRead);
+        }
+
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
             isLoading = true;
+            Initialize();
         }
     }
 }

@@ -38,19 +38,19 @@ namespace Jbe.NewsReader.Domain
         public string Name
         {
             get { return name; }
-            set { SetProperty(ref name, (value ?? "").Truncate(200).Trim()); }
+            set { SetProperty(ref name, value == null ? null : value.Truncate(200).Trim()); }
         }
 
         public string Description
         {
             get { return description; }
-            set { SetProperty(ref description, (value ?? "").Truncate(500).Trim()); }
+            set { SetProperty(ref description, value == null ? null : value.Truncate(500).Trim()); }
         }
 
         public string Author
         {
             get { return author; }
-            set { SetProperty(ref author, (value ?? "").Truncate(100).Trim()); }
+            set { SetProperty(ref author, value == null ? null : value.Truncate(100).Trim()); }
         }
 
         public bool MarkAsRead
