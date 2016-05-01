@@ -103,11 +103,11 @@ namespace Jbe.NewsReader.Domain
 
         private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            foreach (var item in e.OldItems.Cast<FeedItem>())
+            foreach (var item in e.OldItems?.Cast<FeedItem>() ?? Enumerable.Empty<FeedItem>())
             {
                 item.PropertyChanged -= FeedItemPropertyChanged;
             }
-            foreach (var item in e.NewItems.Cast<FeedItem>())
+            foreach (var item in e.NewItems?.Cast<FeedItem>() ?? Enumerable.Empty<FeedItem>())
             {
                 item.PropertyChanged += FeedItemPropertyChanged;
             }
