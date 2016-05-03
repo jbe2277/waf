@@ -8,10 +8,10 @@ namespace System.Waf.Foundation
     public static class CollectionHelper
     {
         /// <summary>
-        /// Returns an empty <see cref="IReadOnlyList{TResult}"/> that has the specified type argument.
+        /// Returns an empty <see cref="IReadOnlyList{T}"/> that has the specified type argument.
         /// </summary>
-        /// <typeparam name="TResult">The type to assign to the type parameter of the returned generic <see cref="IReadOnlyList{TResult}"/>.</typeparam>
-        /// <returns>An empty <see cref="IReadOnlyList{TResult}"/> whose type argument is TResult.</returns>
+        /// <typeparam name="TResult">The type to assign to the type parameter of the returned generic <see cref="IReadOnlyList{T}"/>.</typeparam>
+        /// <returns>An empty <see cref="IReadOnlyList{T}"/> whose type argument is TResult.</returns>
         /// <remarks>The Empty{TResult}() method caches an empty sequence of type TResult.</remarks>
         public static IReadOnlyList<TResult> Empty<TResult>()
         {

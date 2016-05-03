@@ -18,34 +18,13 @@
             <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeed" Icon="Add">
                 <AppBarButton.Flyout>
                     <Flyout>
-                        <Grid Width="400">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" Text="Add Feed" Style="{StaticResource TitleTextBlockStyle}"/>
-
-                            <TextBlock Grid.Row="2" Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list." TextWrapping="Wrap"/>
-
-                            <RelativePanel Grid.Row="4">
-                                <Button x:Name="pasteButton" Command="Paste">
-                                    <SymbolIcon Symbol="Paste"/>
-                                </Button>
-                                <TextBox Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
-                                    RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0"/>
-                            </RelativePanel>
-                            
-                            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBox Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp" Width="400" Margin="0,0,0,11"/>
+                            <StackPanel Orientation="Horizontal">
                                 <Button x:Uid="AddFeed" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
                                 <Button x:Uid="Cancel" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Flyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
