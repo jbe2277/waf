@@ -49,10 +49,10 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <waf:NavigationToggleButton Grid.Row="0" x:Uid="Feeds" Icon="Library" 
+                    <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
                             IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=FeedList;FeedItemList;FeedItem}" 
                             Command="{x:Bind ViewModel.ShowNewsViewCommand}"/>
-                    <waf:NavigationToggleButton Grid.Row="1" x:Uid="Feedback" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
+                    <waf:NavigationToggleButton Grid.Row="1" x:Uid="FeedbackC" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
                         <waf:NavigationToggleButton.Icon>
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
                         </waf:NavigationToggleButton.Icon>

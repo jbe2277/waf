@@ -117,43 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFeed.Content" xml:space="preserve">
+  <data name="AddFeedC.Content" xml:space="preserve">
     <value>Feed hinzufügen</value>
   </data>
-  <data name="AddNewFeed.Label" xml:space="preserve">
+  <data name="AddFeedT.Text" xml:space="preserve">
     <value>Feed hinzufügen</value>
   </data>
-  <data name="Cancel.Content" xml:space="preserve">
+  <data name="AddNewFeedL.Label" xml:space="preserve">
+    <value>Feed hinzufügen</value>
+  </data>
+  <data name="CancelC.Content" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="Feedback.Content" xml:space="preserve">
+  <data name="EnterFeedUrlT.Text" xml:space="preserve">
+    <value>Geben Sie eine URL zu einem RSS Feed ein um diesen in der Liste hinzuzufügen.</value>
+  </data>
+  <data name="FeedbackC.Content" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="Feeds.Content" xml:space="preserve">
+  <data name="FeedsC.Content" xml:space="preserve">
     <value>Feeds</value>
   </data>
-  <data name="FeedsText.Text" xml:space="preserve">
+  <data name="FeedsT.Text" xml:space="preserve">
     <value>Feeds</value>
   </data>
-  <data name="LoadError.Text" xml:space="preserve">
+  <data name="LoadErrorT.Text" xml:space="preserve">
     <value>Fehler beim Laden</value>
   </data>
-  <data name="MarkAsReadUnread.Label" xml:space="preserve">
+  <data name="MarkAsReadUnreadL.Label" xml:space="preserve">
     <value>Gelesen / Ungelesen</value>
   </data>
   <data name="Menu.ToolTipService.ToolTip" xml:space="preserve">
     <value>Menü</value>
   </data>
-  <data name="OpenInBrowser.Label" xml:space="preserve">
+  <data name="OpenInBrowserL.Label" xml:space="preserve">
     <value>Im Browser öffnen</value>
   </data>
-  <data name="ReadMore.Text" xml:space="preserve">
+  <data name="Paste.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="ReadMoreT.Text" xml:space="preserve">
     <value>lesen</value>
   </data>
-  <data name="RemoveFeed.Label" xml:space="preserve">
+  <data name="RemoveFeedL.Label" xml:space="preserve">
     <value>Feed entfernen</value>
   </data>
-  <data name="Show.Text" xml:space="preserve">
+  <data name="ShowT.Text" xml:space="preserve">
     <value>anzeigen</value>
   </data>
 </root>

@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <CommandBar Grid.Row="0">
-            <AppBarButton x:Uid="OpenInBrowser" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
+            <AppBarButton x:Uid="OpenInBrowserL" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
 
             <CommandBar.Content>
                 <waf:HeaderContentControl Margin="13,0,0,0">

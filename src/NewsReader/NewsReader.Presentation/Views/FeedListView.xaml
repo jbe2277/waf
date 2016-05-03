@@ -15,24 +15,45 @@
         </Grid.RowDefinitions>
 
         <CommandBar Grid.Row="0">
-            <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeed" Icon="Add">
+            <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
                 <AppBarButton.Flyout>
                     <Flyout>
-                        <StackPanel>
-                            <TextBox Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp" Width="400" Margin="0,0,0,11"/>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Uid="AddFeed" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
-                                <Button x:Uid="Cancel" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
+                        <Grid Width="400">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" x:Uid="AddFeedT" Style="{StaticResource TitleTextBlockStyle}"/>
+
+                            <TextBlock Grid.Row="2" x:Uid="EnterFeedUrlT" TextWrapping="Wrap"/>
+
+                            <RelativePanel Grid.Row="4">
+                                <Button x:Name="pasteButton" x:Uid="Paste" Command="{x:Bind PasteCommand}">
+                                    <SymbolIcon Symbol="Paste"/>
+                                </Button>
+                                <TextBox Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
+                                        RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0"/>
+                            </RelativePanel>
+
+                            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                                <Button x:Uid="AddFeedC" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
+                                <Button x:Uid="CancelC" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </Flyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
-            <AppBarButton x:Uid="RemoveFeed" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
+            <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
 
             <CommandBar.Content>
                 <waf:HeaderContentControl Margin="13,0,0,0">
-                    <TextBlock x:Uid="FeedsText" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock x:Uid="FeedsT" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
                 </waf:HeaderContentControl>
             </CommandBar.Content>
         </CommandBar>
@@ -58,7 +79,7 @@
 
                         <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
                                 RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
-                            <TextBlock x:Uid="Show" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                            <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
                         </HyperlinkButton>
                     </RelativePanel>
                 </DataTemplate>

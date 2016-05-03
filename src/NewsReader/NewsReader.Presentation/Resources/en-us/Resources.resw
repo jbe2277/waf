@@ -117,43 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFeed.Content" xml:space="preserve">
+  <data name="AddFeedC.Content" xml:space="preserve">
     <value>Add feed</value>
   </data>
-  <data name="AddNewFeed.Label" xml:space="preserve">
+  <data name="AddFeedT.Text" xml:space="preserve">
+    <value>Add feed</value>
+  </data>
+  <data name="AddNewFeedL.Label" xml:space="preserve">
     <value>Add new feed</value>
   </data>
-  <data name="Cancel.Content" xml:space="preserve">
+  <data name="CancelC.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="Feedback.Content" xml:space="preserve">
+  <data name="EnterFeedUrlT.Text" xml:space="preserve">
+    <value>Enter or paste the URL to a publication's RSS Feed below to add it to your list.</value>
+  </data>
+  <data name="FeedbackC.Content" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="Feeds.Content" xml:space="preserve">
+  <data name="FeedsC.Content" xml:space="preserve">
     <value>Feeds</value>
   </data>
-  <data name="FeedsText.Text" xml:space="preserve">
+  <data name="FeedsT.Text" xml:space="preserve">
     <value>Feeds</value>
   </data>
-  <data name="LoadError.Text" xml:space="preserve">
+  <data name="LoadErrorT.Text" xml:space="preserve">
     <value>Load Error</value>
   </data>
-  <data name="MarkAsReadUnread.Label" xml:space="preserve">
+  <data name="MarkAsReadUnreadL.Label" xml:space="preserve">
     <value>Mark as read/unread</value>
   </data>
   <data name="Menu.ToolTipService.ToolTip" xml:space="preserve">
     <value>Menu</value>
   </data>
-  <data name="OpenInBrowser.Label" xml:space="preserve">
+  <data name="OpenInBrowserL.Label" xml:space="preserve">
     <value>Open in browser</value>
   </data>
-  <data name="ReadMore.Text" xml:space="preserve">
+  <data name="Paste.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="ReadMoreT.Text" xml:space="preserve">
     <value>read more</value>
   </data>
-  <data name="RemoveFeed.Label" xml:space="preserve">
+  <data name="RemoveFeedL.Label" xml:space="preserve">
     <value>Remove the feed</value>
   </data>
-  <data name="Show.Text" xml:space="preserve">
+  <data name="ShowT.Text" xml:space="preserve">
     <value>show</value>
   </data>
 </root>
