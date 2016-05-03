@@ -9,6 +9,22 @@ namespace Test.Waf.Foundation
     public class CollectionHelperTest
     {
         [TestMethod]
+        public void EmptyTest()
+        {
+            var emptyStringList1 = CollectionHelper.Empty<string>();
+            Assert.AreEqual(0, emptyStringList1.Count);
+
+            // Check that the list is cached
+            var emptyStringList2 = CollectionHelper.Empty<string>();
+            Assert.AreSame(emptyStringList1, emptyStringList2);
+
+            var emptyIntList1 = CollectionHelper.Empty<int>();
+            Assert.AreEqual(0, emptyIntList1.Count);
+            var emptyIntList2 = CollectionHelper.Empty<int>();
+            Assert.AreSame(emptyIntList1, emptyIntList2);
+        }
+
+        [TestMethod]
         public void GetNextElementOrDefaultTest()
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.GetNextElementOrDefault(null, 5));

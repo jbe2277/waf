@@ -8,6 +8,22 @@ namespace System.Waf.Foundation
     public static class CollectionHelper
     {
         /// <summary>
+        /// Returns an empty <see cref="IReadOnlyList{T}"/> that has the specified type argument.
+        /// </summary>
+        /// <typeparam name="TResult">The type to assign to the type parameter of the returned generic <see cref="IReadOnlyList{T}"/>.</typeparam>
+        /// <returns>An empty <see cref="IReadOnlyList{T}"/> whose type argument is TResult.</returns>
+        /// <remarks>The Empty{TResult}() method caches an empty sequence of type TResult.</remarks>
+        public static IReadOnlyList<TResult> Empty<TResult>()
+        {
+            return EmptyCollection<TResult>.Instance;
+        }
+
+        private class EmptyCollection<TElement>
+        {
+            internal static readonly TElement[] Instance = new TElement[0];
+        }
+
+        /// <summary>
         /// Gets the next element in the collection or default when no next element can be found.
         /// </summary>
         /// <typeparam name="T">The type of the items.</typeparam>
