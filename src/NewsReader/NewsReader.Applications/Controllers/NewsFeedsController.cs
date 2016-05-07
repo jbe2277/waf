@@ -5,6 +5,7 @@ using System.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Web.Syndication;
 
 namespace Jbe.NewsReader.Applications.Controllers
@@ -69,15 +70,13 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
                 else
                 {
-                    // TODO: Localize
-                    feed.LoadErrorMessage = @"The URL must begin with http:// or https://";
+                    feed.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("UrlMustBeginWithHttp");
                     feed.LoadError = new InvalidOperationException(@"The URL must begin with http:// or https://");
                 }
             }
             catch (Exception ex)
             {
-                // TODO: Localize
-                feed.LoadErrorMessage = @"Could not load the RSS Feed from the provided URL.";
+                feed.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("ErrorLoadRssFeed");
                 feed.LoadError = ex;
             }
         }

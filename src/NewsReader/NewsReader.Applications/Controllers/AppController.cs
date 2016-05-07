@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
 
@@ -214,9 +215,8 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
             }
             else
-            {
-                // TODO: Localize
-                feedListViewModel.Value.LoadErrorMessage = @"The URL must begin with http:// or https://";
+            {   
+                feedListViewModel.Value.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("UrlMustBeginWithHttp");
             }
         }
 
