@@ -17,13 +17,15 @@
         <CommandBar Grid.Row="0">
             <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
                 <AppBarButton.Flyout>
-                    <Flyout>
+                    <Flyout Opened="AddFeedFlyoutOpened">
                         <Grid Width="400">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
                                 <RowDefinition Height="Auto"/>
@@ -37,11 +39,13 @@
                                 <Button x:Name="pasteButton" x:Uid="Paste" Command="{x:Bind PasteCommand}">
                                     <SymbolIcon Symbol="Paste"/>
                                 </Button>
-                                <TextBox Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
+                                <TextBox x:Name="feedBox" Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
                                         RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0"/>
                             </RelativePanel>
 
-                            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                            <TextBlock Grid.Row="6" Text="{x:Bind ViewModel.LoadErrorMessage, Mode=OneWay}" TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Red"/>
+
+                            <StackPanel Grid.Row="8" Orientation="Horizontal">
                                 <Button x:Uid="AddFeedC" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
                                 <Button x:Uid="CancelC" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
                             </StackPanel>

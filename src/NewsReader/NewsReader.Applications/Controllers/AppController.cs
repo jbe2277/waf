@@ -31,7 +31,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly DelegateCommand showFeedItemListViewCommand;
         private readonly DelegateCommand showFeedItemViewCommand;
         private readonly DelegateCommand showReviewViewCommand;
-        private readonly DelegateCommand addNewFeedCommand;
+        private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
         private readonly DelegateCommand readUnreadCommand;
         private readonly AsyncDelegateCommand launchWebBrowserCommand;
@@ -56,7 +56,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
             this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
             this.showReviewViewCommand = new DelegateCommand(ShowReviewView);
-            this.addNewFeedCommand = new DelegateCommand(AddNewFeed);
+            this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
             this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
             this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
@@ -198,15 +198,25 @@ namespace Jbe.NewsReader.Applications.Controllers
             await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:review?PFN={0}", Package.Current.Id.FamilyName)));
         }
 
-        private void AddNewFeed()
+        private async Task AddNewFeed()
         {
             Uri feedUri;
             if (Uri.TryCreate(feedListViewModel.Value.AddNewFeedUri, UriKind.RelativeOrAbsolute, out feedUri))
             {
                 var newFeed = new Feed(feedUri);
-                feedManager.AddFeed(newFeed);
-                selectionService.SelectedFeed = newFeed;
-                feedListViewModel.Value.FeedAdded();
+                await newsFeedsController.Value.LoadFeedAsync(newFeed);
+                feedListViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
+                if (newFeed.LoadError == null)
+                {
+                    feedManager.AddFeed(newFeed);
+                    selectionService.SelectedFeed = newFeed;
+                    feedListViewModel.Value.FeedAdded();
+                }
+            }
+            else
+            {
+                // TODO: Localize
+                feedListViewModel.Value.LoadErrorMessage = @"The URL must begin with http:// or https://";
             }
         }
 

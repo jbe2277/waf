@@ -39,6 +39,13 @@ namespace Jbe.NewsReader.Presentation.Views
             addFeedButton.Flyout.Hide();
         }
 
+        private void AddFeedFlyoutOpened(object sender, object e)
+        {
+            ViewModel.LoadErrorMessage = null;
+            feedBox.Select(feedBox.Text.Length, 0);
+            feedBox.Focus(FocusState.Programmatic);
+        }
+
         private void AddNewFeedUriBoxKeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)

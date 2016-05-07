@@ -19,6 +19,7 @@ namespace Jbe.NewsReader.Domain
         private int unreadItemsCount;
         private bool isLoading;
         private Exception loadError;
+        private string loadErrorMessage;
 
 
         public Feed(Uri uri)
@@ -63,6 +64,12 @@ namespace Jbe.NewsReader.Domain
                     IsLoading = false;
                 }
             }
+        }
+        
+        public string LoadErrorMessage
+        {
+            get { return loadErrorMessage; }
+            set { SetProperty(ref loadErrorMessage, value); }
         }
 
 

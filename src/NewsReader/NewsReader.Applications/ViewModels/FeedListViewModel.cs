@@ -12,12 +12,14 @@ namespace Jbe.NewsReader.Applications.ViewModels
     {
         private FeedManager feedManager;
         private string addNewFeedUri;
+        private string loadErrorMessage;
 
 
         [ImportingConstructor]
         public FeedListViewModel(IFeedListView view, SelectionService selectionService) : base(view)
         {
             SelectionService = selectionService;
+            AddNewFeedUri = null;
         }
 
 
@@ -38,9 +40,21 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public string AddNewFeedUri
         {
             get { return addNewFeedUri; }
-            set { SetProperty(ref addNewFeedUri, value); }
+            set
+            {
+                if (SetProperty(ref addNewFeedUri, value ?? @"http://"))
+                {
+                    LoadErrorMessage = null;
+                }
+            }
         }
-
+        
+        public string LoadErrorMessage
+        {
+            get { return loadErrorMessage; }
+            set { SetProperty(ref loadErrorMessage, value); }
+        }
+        
 
         public void FeedAdded()
         {

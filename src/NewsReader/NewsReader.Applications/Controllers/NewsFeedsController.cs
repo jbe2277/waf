@@ -1,7 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Domain;
 using System;
-using System.Collections.Specialized;
 using System.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,7 +29,6 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public async void Run()
         {
-            FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
             foreach (var feed in FeedManager.Feeds.ToArray())
             {
                 await LoadFeedAsync(feed);
@@ -43,22 +41,11 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
         }
 
-        private async void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Feed feed in e.NewItems)
-                {
-                    await LoadFeedAsync(feed);
-                }
-            }
-        }
-
-        private async Task LoadFeedAsync(Feed feed)
+        public async Task LoadFeedAsync(Feed feed)
         {
             try
             {
-                if ((feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
+                if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
                     if (selectionService.SelectedFeed == null)
                     {
@@ -80,9 +67,17 @@ namespace Jbe.NewsReader.Applications.Controllers
                         selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
                     }
                 }
+                else
+                {
+                    // TODO: Localize
+                    feed.LoadErrorMessage = @"The URL must begin with http:// or https://";
+                    feed.LoadError = new InvalidOperationException(@"The URL must begin with http:// or https://");
+                }
             }
             catch (Exception ex)
             {
+                // TODO: Localize
+                feed.LoadErrorMessage = @"Could not load the RSS Feed from the provided URL.";
                 feed.LoadError = ex;
             }
         }
