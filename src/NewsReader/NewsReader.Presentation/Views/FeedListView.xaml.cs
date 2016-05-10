@@ -23,6 +23,7 @@ namespace Jbe.NewsReader.Presentation.Views
         public FeedListView()
         {
             InitializeComponent();
+            addFeedGrid.MaxWidth = Window.Current.CoreWindow.Bounds.Width - 24;  // Minus the margin defined by the Flyout
             viewModel = new Lazy<FeedListViewModel>(() => (FeedListViewModel)DataContext);
             pasteCommand = new AsyncDelegateCommand(PasteUriAsync, CanPasteUri);
             Clipboard.ContentChanged += ClipboardContentChanged;

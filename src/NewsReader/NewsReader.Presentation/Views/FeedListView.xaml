@@ -18,7 +18,7 @@
             <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
                 <AppBarButton.Flyout>
                     <Flyout Opened="AddFeedFlyoutOpened">
-                        <Grid Width="400">
+                        <Grid x:Name="addFeedGrid" Width="400">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
