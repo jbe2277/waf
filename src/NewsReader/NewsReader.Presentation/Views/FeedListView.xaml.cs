@@ -45,6 +45,7 @@ namespace Jbe.NewsReader.Presentation.Views
             ViewModel.LoadErrorMessage = null;
             feedBox.Select(feedBox.Text.Length, 0);
             feedBox.Focus(FocusState.Programmatic);
+            pasteCommand.RaiseCanExecuteChanged();  // Manual update necessary because of the CanPasteUri workaround.
         }
 
         private void AddNewFeedUriBoxKeyUp(object sender, KeyRoutedEventArgs e)
@@ -62,7 +63,15 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private bool CanPasteUri()
         {
-            return Clipboard.GetContent().Contains(StandardDataFormats.Text);
+            try
+            {
+                return Clipboard.GetContent().Contains(StandardDataFormats.Text);
+            }
+            catch (Exception ex)
+            {
+                // Workaround: The first call comes too early. An UnauthorizedAccessException is thrown but only when the debugger is not running.
+                return false;
+            }
         }
 
         private async Task PasteUriAsync()
