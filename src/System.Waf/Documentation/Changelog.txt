@@ -5,7 +5,10 @@ Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
 Version 4.0.0.4 (Milestone 4)
-- TODO: Update release notes in nuspec.
+- WAF: Fix TargetName in NavigationToggleButton.
+- WAF: Add CollectionHelper.Empty method that returns an empty IReadOnlyList<T>.
+- WAF: DelegateCommand: Add static property DisabledCommand.
+- WAF: Enhance the StringFormatConverter to support MultiBinding.
 
 
 Version 4.0.0.3 (Milestone 3)
