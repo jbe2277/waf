@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>System.Waf.UnitTesting.Core</id>
-    <version>4.0.0-alpha4</version>
+    <version>4.0.0-alpha5</version>
     <title>System.Waf.UnitTesting.Core</title>
     <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests. It is the portable core part that can be used in different application types.</description>
     <authors>jbe2277</authors>

@@ -4,6 +4,10 @@ Changelog
 Legend: B (Breaking Change); O (Marked member as obsolete)
 
 
+Version 4.0.0.5 (Milestone 5)
+- TODO: Update release notes in nuspec.
+
+
 Version 4.0.0.4 (Milestone 4)
 - WAF: Fix TargetName in NavigationToggleButton.
 - WAF: Add CollectionHelper.Empty method that returns an empty IReadOnlyList<T>.
