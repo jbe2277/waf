@@ -31,7 +31,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly DelegateCommand showFeedListViewCommand;
         private readonly DelegateCommand showFeedItemListViewCommand;
         private readonly DelegateCommand showFeedItemViewCommand;
-        private readonly DelegateCommand showReviewViewCommand;
+        private readonly AsyncDelegateCommand showReviewViewCommand;
         private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
         private readonly DelegateCommand readUnreadCommand;
@@ -56,7 +56,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
             this.showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
             this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
-            this.showReviewViewCommand = new DelegateCommand(ShowReviewView);
+            this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
             this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
@@ -193,7 +193,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
         }
 
-        private async void ShowReviewView()
+        private async Task ShowReviewView()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
             await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:review?PFN={0}", Package.Current.Id.FamilyName)));
