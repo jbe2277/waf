@@ -100,7 +100,8 @@ namespace Jbe.NewsReader.Applications.Controllers
 
             try
             {
-                feedManager = await FileIOHelper.LoadAsync<FeedManager>(ApplicationData.Current.RoamingFolder, "feeds.xml") ?? new FeedManager();
+                await FileIOHelper.MigrateDataAsync(ApplicationData.Current.RoamingFolder, "feeds.xml");
+                feedManager = await FileIOHelper.LoadCompressedAsync<FeedManager>(ApplicationData.Current.RoamingFolder, "feeds.xml") ?? new FeedManager();
             }
             catch (Exception ex)
             {
@@ -115,7 +116,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public async Task SuspendingAsync()
         {
-            await FileIOHelper.SaveAsync(feedManager, ApplicationData.Current.RoamingFolder, "feeds.xml");
+            await FileIOHelper.SaveCompressedAsync(feedManager, ApplicationData.Current.RoamingFolder, "feeds.xml");
         }
 
         private FeedListViewModel InitializeFeedListViewModel(Lazy<FeedListViewModel> viewModel)

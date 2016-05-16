@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -8,17 +9,22 @@ namespace Jbe.NewsReader.Applications.Controllers
 {
     public static class FileIOHelper
     {
-        public static async Task<T> LoadAsync<T>(StorageFolder folder, string fileName) where T : class
+        public static async Task<T> LoadCompressedAsync<T>(StorageFolder folder, string fileName) where T : class
         {
             if (folder == null) { throw new ArgumentNullException(nameof(folder)); }
             if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("String must not be null or empty.", nameof(fileName)); }
 
             try
             {
-                using (var stream = await folder.OpenStreamForReadAsync(fileName))
+                using (var archiveStream = await folder.OpenStreamForReadAsync(fileName + ".zip"))
+                using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
                 {
-                    var serializer = new DataContractSerializer(typeof(T));
-                    return (T)serializer.ReadObject(stream);
+                    var entry = archive.GetEntry(fileName);
+                    using (var stream = entry.Open())
+                    {
+                        var serializer = new DataContractSerializer(typeof(T));
+                        return (T)serializer.ReadObject(stream);
+                    }
                 }
             }
             catch (FileNotFoundException)
@@ -27,17 +33,56 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
         }
 
-        public static async Task SaveAsync(object data, StorageFolder folder, string fileName)
+        public static async Task SaveCompressedAsync(object data, StorageFolder folder, string fileName)
         {
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (folder == null) { throw new ArgumentNullException(nameof(folder)); }
             if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("String must not be null or empty.", nameof(fileName)); }
 
-            using (var stream = await folder.OpenStreamForWriteAsync(fileName, CreationCollisionOption.ReplaceExisting))
+            using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + ".zip", CreationCollisionOption.ReplaceExisting))
+            using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
             {
-                var serializer = new DataContractSerializer(data.GetType());
-                serializer.WriteObject(stream, data);
-                await stream.FlushAsync();
+                var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);
+                using (var stream = entry.Open())
+                {
+                    var serializer = new DataContractSerializer(data.GetType());
+                    serializer.WriteObject(stream, data);
+                    await stream.FlushAsync();
+                }
+            }
+        }
+
+        public static async Task MigrateDataAsync(StorageFolder folder, string fileName)
+        {
+            try
+            {
+                using (var copyStream = new MemoryStream())
+                {
+                    // When the migration was already done then fileName does not exists anymore in the folder.
+                    using (var oldStream = await folder.OpenStreamForReadAsync(fileName))
+                    {
+                        await oldStream.CopyToAsync(copyStream);
+                    }
+
+                    copyStream.Seek(0, SeekOrigin.Begin);
+                    using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + ".zip", CreationCollisionOption.ReplaceExisting))
+                    using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
+                    {
+                        var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);
+                        using (var newStream = entry.Open())
+                        {
+                            await copyStream.CopyToAsync(newStream);
+                            await newStream.FlushAsync();
+                        }
+                    }
+                }
+
+                var file = await folder.GetFileAsync(fileName);
+                await file.DeleteAsync();
+            }
+            catch (FileNotFoundException)
+            {
+                return;
             }
         }
     }
