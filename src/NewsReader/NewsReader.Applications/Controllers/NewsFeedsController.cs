@@ -34,10 +34,8 @@ namespace Jbe.NewsReader.Applications.Controllers
             // In this case: selectionService.SelectedFeed = null.
             await Task.Delay(10);
 
-            foreach (var feed in FeedManager.Feeds.ToArray())
-            {
-                await LoadFeedAsync(feed);
-            }
+            var tasks = FeedManager.Feeds.ToArray().Select(x => LoadFeedAsync(x));
+            await Task.WhenAll(tasks);
         }
 
         public async Task LoadFeedAsync(Feed feed)
