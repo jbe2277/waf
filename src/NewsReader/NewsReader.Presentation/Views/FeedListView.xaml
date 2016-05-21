@@ -69,10 +69,10 @@
                     <EntranceThemeTransition/>
                 </TransitionCollection>
             </ListView.Transitions>
-
+            
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Feed">
-                    <RelativePanel>
+                    <RelativePanel DoubleTapped="FeedDoubleTapped" Background="Transparent">
                         <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
                         <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">

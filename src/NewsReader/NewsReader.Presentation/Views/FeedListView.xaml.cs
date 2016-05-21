@@ -83,5 +83,10 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             pasteCommand.RaiseCanExecuteChanged();
         }
+
+        private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            ViewModel.ShowFeedItemListViewCommand.Execute(((FrameworkElement)sender).DataContext);
+        }
     }
 }

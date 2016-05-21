@@ -4,6 +4,7 @@ using System;
 using System.Composition;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -36,6 +37,11 @@ namespace Jbe.NewsReader.Presentation.Views
             {
                 ViewModel.ReadUnreadCommand.Execute("read");
             }
+        }
+
+        private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            ViewModel.ShowFeedItemViewCommand.Execute(((FrameworkElement)sender).DataContext);
         }
     }
 }
