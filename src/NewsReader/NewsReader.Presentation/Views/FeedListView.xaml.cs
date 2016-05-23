@@ -67,7 +67,7 @@ namespace Jbe.NewsReader.Presentation.Views
             {
                 return Clipboard.GetContent().Contains(StandardDataFormats.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Workaround: The first call comes too early. An UnauthorizedAccessException is thrown but only when the debugger is not running.
                 return false;

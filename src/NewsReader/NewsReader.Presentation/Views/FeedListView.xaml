@@ -63,7 +63,8 @@
         </CommandBar>
 
         <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
-                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}"
+                  CanReorderItems="True" AllowDrop="True">
             <ListView.Transitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>

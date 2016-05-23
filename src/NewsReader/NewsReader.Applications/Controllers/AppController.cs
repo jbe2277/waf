@@ -210,7 +210,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                 feedListViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
                 if (newFeed.LoadError == null)
                 {
-                    feedManager.AddFeed(newFeed);
+                    feedManager.Feeds.Add(newFeed);
                     selectionService.SelectedFeed = newFeed;
                     feedListViewModel.Value.FeedAdded();
                 }
@@ -230,7 +230,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             var feedToRemove = selectionService.SelectedFeed;
             var feedToSelect = CollectionHelper.GetNextElementOrDefault(feedManager.Feeds, feedToRemove);
-            feedManager.RemoveFeed(feedToRemove);
+            feedManager.Feeds.Remove(feedToRemove);
             selectionService.SelectedFeed = feedToSelect ?? feedManager.Feeds.LastOrDefault();
         }
 
