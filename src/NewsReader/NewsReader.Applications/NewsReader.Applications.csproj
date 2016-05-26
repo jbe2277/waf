@@ -49,6 +49,7 @@
     <Compile Include="Controllers\FileIOHelper.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ObservableListView.cs" />
     <Compile Include="Services\SelectionService.cs" />
     <Compile Include="ViewModels\FeedItemListViewModel.cs" />
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
