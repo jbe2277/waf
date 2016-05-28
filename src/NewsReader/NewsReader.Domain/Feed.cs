@@ -45,7 +45,7 @@ namespace Jbe.NewsReader.Domain
         public int UnreadItemsCount
         {
             get { return unreadItemsCount; }
-            set { SetProperty(ref unreadItemsCount, value); }
+            private set { SetProperty(ref unreadItemsCount, value); }
         }
         
         public bool IsLoading
@@ -118,6 +118,7 @@ namespace Jbe.NewsReader.Domain
             {
                 item.PropertyChanged += FeedItemPropertyChanged;
             }
+            UpdateUnreadItemsCount();
         }
 
         private void FeedItemPropertyChanged(object sender, PropertyChangedEventArgs e)
