@@ -2,6 +2,7 @@
 using Jbe.NewsReader.Applications.Views;
 using System;
 using System.Composition;
+using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -20,6 +21,8 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             InitializeComponent();
             viewModel = new Lazy<FeedItemListViewModel>(() => (FeedItemListViewModel)DataContext);
+            Window.Current.SizeChanged += WindowSizeChanged;
+            SetDefaultSearchVisibility();
         }
 
 
@@ -42,6 +45,38 @@ namespace Jbe.NewsReader.Presentation.Views
         private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             ViewModel.ShowFeedItemViewCommand.Execute(((FrameworkElement)sender).DataContext);
+        }
+
+        private async void SearchButtonClick(object sender, RoutedEventArgs e)
+        {
+            searchButton.Visibility = Visibility.Collapsed;
+            searchBox.Visibility = Visibility.Visible;
+            await Task.Delay(10);
+            searchBox.Focus(FocusState.Programmatic);
+        }
+
+        private void SetDefaultSearchVisibility()
+        {
+            if (Window.Current.Bounds.Width >= 1024)
+            {
+                searchButton.Visibility = Visibility.Collapsed;
+                searchBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                searchButton.Visibility = Visibility.Visible;
+                searchBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            SetDefaultSearchVisibility();
+        }
+        
+        private void WindowSizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            SetDefaultSearchVisibility();
         }
     }
 }

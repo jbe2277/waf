@@ -31,9 +31,11 @@
             </CommandBar.Content>
         </CommandBar>
 
-        <Border Grid.Column="1" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <AutoSuggestBox x:Uid="SearchT" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0"/>
-        </Border>
+        <Grid Grid.Column="1" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <AppBarButton x:Name="searchButton" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
+            <AutoSuggestBox x:Name="searchBox" x:Uid="SearchP" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0" Visibility="Collapsed"
+                            LostFocus="SearchBoxLostFocus"/>
+        </Grid>
 
         <Grid Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.Transitions>

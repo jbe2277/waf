@@ -165,7 +165,7 @@
   <data name="RemoveFeedL.Label" xml:space="preserve">
     <value>Remove the feed</value>
   </data>
-  <data name="SearchT.PlaceholderText" xml:space="preserve">
+  <data name="SearchP.PlaceholderText" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="ShowT.Text" xml:space="preserve">
