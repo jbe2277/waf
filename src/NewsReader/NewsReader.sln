@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Applications", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Presentation", "NewsReader.Presentation\NewsReader.Presentation.csproj", "{6BD738FC-39E8-46BE-91E1-421CA723477B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37CA503F-2618-4A08-923C-7E73DB73B8AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Domain.Test", "NewsReader.Domain.Test\NewsReader.Domain.Test.csproj", "{DC24398A-1929-4984-AFAC-17AFB2B4AADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,8 +77,27 @@ Global
 		{6BD738FC-39E8-46BE-91E1-421CA723477B}.Release|x86.ActiveCfg = Release|x86
 		{6BD738FC-39E8-46BE-91E1-421CA723477B}.Release|x86.Build.0 = Release|x86
 		{6BD738FC-39E8-46BE-91E1-421CA723477B}.Release|x86.Deploy.0 = Release|x86
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|ARM.Build.0 = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|x64.Build.0 = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC24398A-1929-4984-AFAC-17AFB2B4AADB} = {37CA503F-2618-4A08-923C-7E73DB73B8AC}
 	EndGlobalSection
 EndGlobal
