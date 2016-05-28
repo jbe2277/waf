@@ -21,7 +21,6 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             InitializeComponent();
             viewModel = new Lazy<FeedItemListViewModel>(() => (FeedItemListViewModel)DataContext);
-            Window.Current.SizeChanged += WindowSizeChanged;
             SetDefaultSearchVisibility();
         }
 
@@ -57,7 +56,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void SetDefaultSearchVisibility()
         {
-            if (Window.Current.Bounds.Width >= 1024)
+            if (ActualWidth >= 500)
             {
                 searchButton.Visibility = Visibility.Collapsed;
                 searchBox.Visibility = Visibility.Visible;
@@ -74,7 +73,7 @@ namespace Jbe.NewsReader.Presentation.Views
             SetDefaultSearchVisibility();
         }
         
-        private void WindowSizeChanged(object sender, WindowSizeChangedEventArgs e)
+        private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
         {
             SetDefaultSearchVisibility();
         }

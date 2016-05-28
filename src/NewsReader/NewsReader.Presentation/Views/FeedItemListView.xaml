@@ -9,7 +9,7 @@
     xmlns:m="using:Jbe.NewsReader.Domain"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
     d:DataContext="{d:DesignInstance dd:SampleFeedItemListViewModel, IsDesignTimeCreatable=True}"
-    KeyDown="OnKeyDown">
+    KeyDown="OnKeyDown" SizeChanged="SizeChangedHandler">
 
     <Grid>
         <Grid.ColumnDefinitions>
