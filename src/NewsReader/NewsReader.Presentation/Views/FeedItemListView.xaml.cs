@@ -30,14 +30,18 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            var controlState = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Control);
-            if (controlState.HasFlag(CoreVirtualKeyStates.Down) && e.Key == VirtualKey.U)
+            var isControlKeyDown = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down);
+            if (isControlKeyDown && e.Key == VirtualKey.U)
             {
                 ViewModel.ReadUnreadCommand.Execute("unread");
             }
-            else if (controlState.HasFlag(CoreVirtualKeyStates.Down) && e.Key == VirtualKey.Q)
+            else if (isControlKeyDown && e.Key == VirtualKey.Q)
             {
                 ViewModel.ReadUnreadCommand.Execute("read");
+            }
+            else if (isControlKeyDown && e.Key == VirtualKey.F)
+            {
+                ShowSearch();
             }
         }
 
@@ -46,7 +50,12 @@ namespace Jbe.NewsReader.Presentation.Views
             ViewModel.ShowFeedItemViewCommand.Execute(((FrameworkElement)sender).DataContext);
         }
 
-        private async void SearchButtonClick(object sender, RoutedEventArgs e)
+        private void SearchButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowSearch();
+        }
+
+        private async void ShowSearch()
         {
             searchButton.Visibility = Visibility.Collapsed;
             searchBox.Visibility = Visibility.Visible;
@@ -56,7 +65,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void SetDefaultSearchVisibility()
         {
-            if (ActualWidth >= 500)
+            if (ActualWidth >= 500 || !string.IsNullOrEmpty(searchBox.Text))
             {
                 searchButton.Visibility = Visibility.Collapsed;
                 searchBox.Visibility = Visibility.Visible;
