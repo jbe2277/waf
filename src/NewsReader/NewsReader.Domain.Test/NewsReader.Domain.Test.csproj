@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="FeedItemTest.cs" />
     <Compile Include="FeedTest.cs" />
+    <Compile Include="Foundation\ObservableListViewTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>

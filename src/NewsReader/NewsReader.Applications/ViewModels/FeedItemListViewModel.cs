@@ -1,6 +1,7 @@
 ﻿using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Domain;
+using Jbe.NewsReader.Domain.Foundation;
 using System;
 using System.ComponentModel;
 using System.Composition;
