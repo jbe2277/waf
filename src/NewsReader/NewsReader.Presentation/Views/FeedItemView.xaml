@@ -30,8 +30,7 @@
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <WebView x:Name="webView" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" 
-                     Source="{x:Bind ViewModel.SelectionService.SelectedFeedItem.Uri, Mode=OneWay}"/>
+            <ContentPresenter x:Name="webViewPresenter"/>
 
             <ProgressBar x:Name="loadingProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Visibility="Collapsed"/>
         </Grid>
