@@ -65,7 +65,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void SetDefaultSearchVisibility()
         {
-            if (ActualWidth >= 500 || !string.IsNullOrEmpty(searchBox.Text))
+            if (ActualWidth >= 600 || !string.IsNullOrEmpty(searchBox.Text))
             {
                 searchButton.Visibility = Visibility.Collapsed;
                 searchBox.Visibility = Visibility.Visible;
