@@ -40,7 +40,7 @@
                                     <SymbolIcon Symbol="Paste"/>
                                 </Button>
                                 <TextBox x:Name="feedBox" Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
-                                        RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0"/>
+                                        RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0" IsSpellCheckEnabled="False"/>
                             </RelativePanel>
 
                             <TextBlock Grid.Row="6" Text="{x:Bind ViewModel.LoadErrorMessage, Mode=OneWay}" TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Red"/>
