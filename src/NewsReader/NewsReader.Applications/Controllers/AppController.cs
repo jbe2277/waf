@@ -203,7 +203,17 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task AddNewFeed()
         {
             Uri feedUri;
-            if (Uri.TryCreate(feedListViewModel.Value.AddNewFeedUri, UriKind.RelativeOrAbsolute, out feedUri))
+            var uriString = feedListViewModel.Value.AddNewFeedUri.Trim();
+            if (!uriString.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
+            {
+                uriString = "http://" + uriString;
+            }
+            else if (uriString.StartsWith("http://http://", StringComparison.CurrentCultureIgnoreCase) 
+                || uriString.StartsWith("http://https://", StringComparison.CurrentCultureIgnoreCase))
+            {
+                uriString = uriString.Substring(7);
+            }
+            if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out feedUri))
             {
                 var newFeed = new Feed(feedUri);
                 await newsFeedsController.Value.LoadFeedAsync(newFeed);
