@@ -72,7 +72,7 @@
 
                 <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                         Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
-                    <TextBlock x:Uid="LoadErroTr" Margin="11" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock x:Uid="LoadErrorT" Margin="11" Style="{StaticResource TitleTextBlockStyle}" />
                     <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay}" Margin="11" TextWrapping="Wrap"/>
                 </StackPanel>
 
