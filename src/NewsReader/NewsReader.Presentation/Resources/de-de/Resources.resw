@@ -162,6 +162,9 @@
   <data name="ReadMoreT.Text" xml:space="preserve">
     <value>lesen</value>
   </data>
+  <data name="RefreshL.Label" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
   <data name="RemoveFeedL.Label" xml:space="preserve">
     <value>Feed entfernen</value>
   </data>

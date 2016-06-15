@@ -22,6 +22,7 @@
         </Grid.RowDefinitions>
 
         <CommandBar Grid.Column="0" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
             <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
 
             <CommandBar.Content>

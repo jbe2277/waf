@@ -29,6 +29,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         
         public SelectionService SelectionService { get; }
 
+        public ICommand RefreshCommand { get; set; }
+
         public ICommand ReadUnreadCommand { get; set; }
 
         public ICommand ShowFeedItemViewCommand { get; set; }

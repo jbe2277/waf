@@ -31,6 +31,10 @@ namespace Jbe.NewsReader.Presentation.Views
         private void OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
             var isControlKeyDown = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down);
+            if (!isControlKeyDown && e.Key == VirtualKey.F5)
+            {
+                ViewModel.RefreshCommand.Execute(null);
+            }
             if (isControlKeyDown && e.Key == VirtualKey.U)
             {
                 ViewModel.ReadUnreadCommand.Execute("unread");

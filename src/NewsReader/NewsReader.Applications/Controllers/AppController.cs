@@ -34,6 +34,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly AsyncDelegateCommand showReviewViewCommand;
         private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
+        private readonly AsyncDelegateCommand refreshFeedCommand;
         private readonly DelegateCommand readUnreadCommand;
         private readonly AsyncDelegateCommand launchWebBrowserCommand;
         private readonly Stack<NavigationItem> navigationStack;
@@ -59,6 +60,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
+            this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
             this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
             this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
             this.navigationStack = new Stack<NavigationItem>();
@@ -130,6 +132,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private FeedItemListViewModel InitializeFeedItemListViewModel(Lazy<FeedItemListViewModel> viewModel)
         {
+            viewModel.Value.RefreshCommand = refreshFeedCommand;
             viewModel.Value.ReadUnreadCommand = readUnreadCommand;
             viewModel.Value.ShowFeedItemViewCommand = showFeedItemViewCommand;
             return viewModel.Value;
@@ -244,6 +247,16 @@ namespace Jbe.NewsReader.Applications.Controllers
             selectionService.SelectedFeed = feedToSelect ?? feedManager.Feeds.LastOrDefault();
         }
 
+        private bool CanRefreshFeed()
+        {
+            return selectionService.SelectedFeed != null;
+        }
+
+        private async Task RefreshFeed()
+        {
+            await newsFeedsController.Value.LoadFeedAsync(selectionService.SelectedFeed);
+        }
+
         private bool CanMarkAsReadUnread(object parameter)
         {
             return selectionService.SelectedFeedItem != null;
@@ -281,6 +294,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             if (e.PropertyName == nameof(selectionService.SelectedFeed))
             {
                 removeFeedCommand.RaiseCanExecuteChanged();
+                refreshFeedCommand.RaiseCanExecuteChanged();
             }
             if (e.PropertyName == nameof(selectionService.SelectedFeedItem))
             {
