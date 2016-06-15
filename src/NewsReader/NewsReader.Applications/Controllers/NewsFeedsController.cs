@@ -59,10 +59,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
                     feed.Name = syndicationFeed.Title.Text;
                     feed.UpdateItems(items);
-                    if (selectionService.SelectedFeed == feed)
-                    {
-                        selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
-                    }
+                    
                 }
                 else
                 {
@@ -74,6 +71,13 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 feed.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("ErrorLoadRssFeed");
                 feed.LoadError = ex;
+            }
+            finally
+            {
+                if (selectionService.SelectedFeed == feed)
+                {
+                    selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
+                }
             }
         }
 

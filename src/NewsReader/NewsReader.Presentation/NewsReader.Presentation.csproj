@@ -211,7 +211,17 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Resources\DarkThemeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Resources\LayoutResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resources\LightThemeResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -46,7 +46,19 @@
             </Grid.Transitions>
 
             <Grid Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
-                <ListView x:Name="feedItemListView" ItemsSource="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" 
+                            Background="{ThemeResource ErrorBackgroundThemeBrush}">
+                    <TextBlock x:Uid="LoadErrorT" Margin="13,10,20,0" FontWeight="SemiBold" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay}" Margin="13,7,20,13" TextWrapping="Wrap" MaxLines="5"
+                               Style="{ThemeResource BodyTextBlockStyle}"/>
+                </StackPanel>
+
+                <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:FeedItem">
@@ -69,16 +81,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                        Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
-                    <TextBlock x:Uid="LoadErrorT" Margin="11" Style="{StaticResource TitleTextBlockStyle}" />
-                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.LoadError, Mode=OneWay}" Margin="11" TextWrapping="Wrap"/>
-                </StackPanel>
-
-                <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
-                             Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </Grid>
+
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
+                Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
     </Grid>
 </UserControl>
