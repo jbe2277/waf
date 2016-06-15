@@ -5,5 +5,6 @@
         FeedList,
         FeedItemList,
         FeedItem,
+        Settings
     }
 }

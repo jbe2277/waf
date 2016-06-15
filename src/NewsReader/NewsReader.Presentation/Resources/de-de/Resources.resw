@@ -171,6 +171,12 @@
   <data name="SearchP.PlaceholderText" xml:space="preserve">
     <value>Suchen</value>
   </data>
+  <data name="SettingsC.Content" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="SettingsT.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
   <data name="ShowT.Text" xml:space="preserve">
     <value>anzeigen</value>
   </data>

@@ -47,6 +47,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
@@ -57,6 +59,9 @@
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
                         </waf:NavigationToggleButton.Icon>
                     </waf:NavigationToggleButton>
+                    <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
+                            IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
+                            Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>

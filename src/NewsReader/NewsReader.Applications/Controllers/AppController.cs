@@ -27,11 +27,13 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly Lazy<FeedItemListViewModel> feedItemListViewModel;
         private readonly Lazy<FeedItemViewModel> feedItemViewModel;
+        private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
         private readonly DelegateCommand navigateBackCommand;
         private readonly DelegateCommand showFeedListViewCommand;
         private readonly DelegateCommand showFeedItemListViewCommand;
         private readonly DelegateCommand showFeedItemViewCommand;
         private readonly AsyncDelegateCommand showReviewViewCommand;
+        private readonly DelegateCommand showSettingsViewCommand;
         private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
         private readonly AsyncDelegateCommand refreshFeedCommand;
@@ -45,7 +47,8 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         [ImportingConstructor]
         public AppController(Lazy<NewsFeedsController> newsFeedsController, SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
-            Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
+            Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel,
+            Lazy<SettingsLayoutViewModel> settingsLayoutViewModel)
         {
             this.newsFeedsController = newsFeedsController;
             this.selectionService = selectionService;
@@ -53,11 +56,13 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.feedListViewModel = new Lazy<FeedListViewModel>(() => InitializeFeedListViewModel(feedListViewModel));
             this.feedItemListViewModel = new Lazy<FeedItemListViewModel>(() => InitializeFeedItemListViewModel(feedItemListViewModel));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeFeedItemViewModel(feedItemViewModel));
+            this.settingsLayoutViewModel = settingsLayoutViewModel;
             this.navigateBackCommand = new DelegateCommand(NavigateBack, CanNavigateBack);
             this.showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
             this.showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
             this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
             this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
+            this.showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
             this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
@@ -93,6 +98,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             shellViewModel.Value.NavigateBackCommand = navigateBackCommand;
             shellViewModel.Value.ShowNewsViewCommand = showFeedListViewCommand;
             shellViewModel.Value.ShowReviewViewCommand = showReviewViewCommand;
+            shellViewModel.Value.ShowSettingsViewCommand = showSettingsViewCommand;
         }
 
         public async void Run()
@@ -162,6 +168,9 @@ namespace Jbe.NewsReader.Applications.Controllers
                 case NavigationItem.FeedItem:
                     shellViewModel.Value.ContentView = feedItemViewModel.Value.View;
                     break;
+                case NavigationItem.Settings:
+                    shellViewModel.Value.ContentView = settingsLayoutViewModel.Value.View;
+                    break;
             }
         }
 
@@ -201,6 +210,11 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
             await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:review?PFN={0}", Package.Current.Id.FamilyName)));
+        }
+
+        private void ShowSettingsView()
+        {
+            SelectedNavigationItem = NavigationItem.Settings;
         }
 
         private async Task AddNewFeed()

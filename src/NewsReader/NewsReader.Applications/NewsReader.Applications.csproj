@@ -53,11 +53,17 @@
     <Compile Include="ViewModels\FeedItemListViewModel.cs" />
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
     <Compile Include="ViewModels\FeedListViewModel.cs" />
+    <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
+    <Compile Include="ViewModels\InfoSettingsViewModel.cs" />
     <Compile Include="ViewModels\NavigationItem.cs" />
+    <Compile Include="ViewModels\SettingsLayoutViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\IFeedItemListView.cs" />
     <Compile Include="Views\IFeedItemView.cs" />
     <Compile Include="Views\IFeedListView.cs" />
+    <Compile Include="Views\IGeneralSettingsView.cs" />
+    <Compile Include="Views\IInfoSettingsView.cs" />
+    <Compile Include="Views\ISettingsLayoutView.cs" />
     <Compile Include="Views\IShellView.cs" />
   </ItemGroup>
   <ItemGroup>

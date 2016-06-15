@@ -125,6 +125,15 @@
     <Compile Include="Views\FeedListView.xaml.cs">
       <DependentUpon>FeedListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GeneralSettingsView.xaml.cs">
+      <DependentUpon>GeneralSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InfoSettingsView.xaml.cs">
+      <DependentUpon>InfoSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsLayoutView.xaml.cs">
+      <DependentUpon>SettingsLayoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -235,6 +244,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FeedListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GeneralSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InfoSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

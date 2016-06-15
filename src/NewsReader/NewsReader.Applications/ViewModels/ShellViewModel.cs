@@ -38,6 +38,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public ICommand ShowReviewViewCommand { get; set; }
 
+        public ICommand ShowSettingsViewCommand { get; set; }
+
         public NavigationItem SelectedNavigationItem
         {
             get { return selectedNavigationItem; }
