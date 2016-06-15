@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <Border Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <waf:HeaderContentControl Margin="13,0,0,0">
                 <TextBlock x:Uid="SettingsT" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
             </waf:HeaderContentControl>
