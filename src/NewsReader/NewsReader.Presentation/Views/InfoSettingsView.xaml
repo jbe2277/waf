@@ -5,11 +5,16 @@
     xmlns:local="using:Jbe.NewsReader.Presentation.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
 
-    <Grid>
+    <StackPanel>
+        <TextBlock Text="{x:Bind ViewModel.AppName}" FontWeight="SemiBold" Style="{StaticResource TitleTextBlockStyle}" Margin="0,11"/>
+        <TextBlock Text="{x:Bind ViewModel.AppPublisherName}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,2"/>
+        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,2">
+            <Run x:Uid="VersionT"/>
+            <Run Text="{x:Bind ViewModel.AppVersion}"/>
+        </TextBlock>
 
-    </Grid>
+        <HyperlinkButton x:Uid="WindowsStoreC" Command="{x:Bind ViewModel.LaunchWindowsStoreCommand}" Margin="0,11,0,0" Style="{StaticResource TextBlockButtonStyle}"/>
+    </StackPanel>
 </UserControl>

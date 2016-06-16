@@ -1,4 +1,5 @@
 ﻿using Jbe.NewsReader.Applications.Views;
+using System;
 using System.Composition;
 using System.Waf.Applications;
 
@@ -11,5 +12,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public SettingsLayoutViewModel(ISettingsLayoutView view) : base(view)
         {
         }
+
+
+        public Lazy<object> LazyInfoSettingsView { get; set; }
     }
 }

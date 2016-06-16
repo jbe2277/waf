@@ -24,7 +24,7 @@
                 <TextBlock Text="all emails go here." />
             </PivotItem>
             <PivotItem Header="Info">
-                <TextBlock Text="unread emails go here." />
+                <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyInfoSettingsView}"/>
             </PivotItem>
         </Pivot>
     </Grid>

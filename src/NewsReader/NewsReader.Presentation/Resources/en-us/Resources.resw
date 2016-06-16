@@ -183,4 +183,10 @@
   <data name="UrlMustBeginWithHttp" xml:space="preserve">
     <value>The URL must begin with http:// or https://</value>
   </data>
+  <data name="VersionT.Text" xml:space="preserve">
+    <value>Version: </value>
+  </data>
+  <data name="WindowsStoreC.Content" xml:space="preserve">
+    <value>Windows Store</value>
+  </data>
 </root>
