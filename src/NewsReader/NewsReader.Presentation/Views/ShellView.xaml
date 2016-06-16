@@ -59,6 +59,7 @@
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
                         </waf:NavigationToggleButton.Icon>
                     </waf:NavigationToggleButton>
+                    <Border Grid.Row="2" BorderBrush="{ThemeResource NavigationSeparatorForegroundThemeBrush}" BorderThickness="0,0,0,1"/>
                     <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
                             IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
                             Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>

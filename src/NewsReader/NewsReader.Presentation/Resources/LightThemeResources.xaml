@@ -4,4 +4,6 @@
 
     <SolidColorBrush x:Key="ErrorBackgroundThemeBrush" Color="#FFDA8A8A"/>
 
+    <SolidColorBrush x:Key="NavigationSeparatorForegroundThemeBrush" Color="#FFBBBBBB" />
+
 </ResourceDictionary>
