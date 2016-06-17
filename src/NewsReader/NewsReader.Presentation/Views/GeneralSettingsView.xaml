@@ -13,8 +13,8 @@
             </TransitionCollection>
         </RelativePanel.Transitions>
 
-        <TextBlock x:Name="userInterfaceText" Text="User Interface" Margin="0,10,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
-        <TextBlock x:Name="themeText" Text="Theme" Margin="0,15" RelativePanel.Below="userInterfaceText"/>
+        <TextBlock x:Name="userInterfaceText" x:Uid="userInterfaceT" Margin="0,10,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
+        <TextBlock x:Name="themeText" x:Uid="themeT" Margin="0,15" RelativePanel.Below="userInterfaceText"/>
         <ComboBox ItemsSource="{x:Bind ViewModel.AppThemes}" SelectedItem="{x:Bind ViewModel.SelectedAppTheme, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}" MinWidth="200" Margin="20,0,0,0" 
                   RelativePanel.RightOf="themeText" RelativePanel.AlignVerticalCenterWith="themeText">
             <ComboBox.ItemTemplate>
@@ -23,6 +23,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock x:Name="themeRequiresRestartText" Text="(Changing the theme requires a restart of the App)" RelativePanel.Below="themeText"/>
+        <TextBlock x:Name="themeRequiresRestartText" x:Uid="themeRequiresRestartT" RelativePanel.Below="themeText"/>
     </RelativePanel>
 </UserControl>

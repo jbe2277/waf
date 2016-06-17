@@ -189,8 +189,17 @@
   <data name="ShowT.Text" xml:space="preserve">
     <value>show</value>
   </data>
+  <data name="themeRequiresRestartT.Text" xml:space="preserve">
+    <value>(Changing the theme requires a restart of the App)</value>
+  </data>
+  <data name="themeT.Text" xml:space="preserve">
+    <value>Theme</value>
+  </data>
   <data name="UrlMustBeginWithHttp" xml:space="preserve">
     <value>The URL must begin with http:// or https://</value>
+  </data>
+  <data name="userInterfaceT.Text" xml:space="preserve">
+    <value>User Interface</value>
   </data>
   <data name="VersionT.Text" xml:space="preserve">
     <value>Version: </value>
