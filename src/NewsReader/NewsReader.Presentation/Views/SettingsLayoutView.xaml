@@ -20,6 +20,12 @@
         </Border>
 
         <Pivot Grid.Row="1">
+            <Pivot.Resources>
+                <Style TargetType="PivotHeaderItem">
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </Pivot.Resources>
+
             <PivotItem Header="General">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyGeneralSettingsView}"/>
             </PivotItem>
