@@ -21,7 +21,7 @@
 
         <Pivot Grid.Row="1">
             <PivotItem Header="General">
-                <TextBlock Text="all emails go here." />
+                <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyGeneralSettingsView}"/>
             </PivotItem>
             <PivotItem Header="Info">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyInfoSettingsView}"/>

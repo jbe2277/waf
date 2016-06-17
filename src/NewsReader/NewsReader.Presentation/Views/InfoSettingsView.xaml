@@ -8,6 +8,12 @@
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
 
     <StackPanel>
+        <StackPanel.Transitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </StackPanel.Transitions>
+
         <TextBlock Text="{x:Bind ViewModel.AppName}" FontWeight="SemiBold" Style="{StaticResource TitleTextBlockStyle}" Margin="0,11"/>
         <TextBlock Text="{x:Bind ViewModel.AppPublisherName}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,2"/>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,2">

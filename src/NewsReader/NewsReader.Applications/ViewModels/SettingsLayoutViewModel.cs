@@ -14,6 +14,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         }
 
 
+        public Lazy<object> LazyGeneralSettingsView { get; set; }
+        
         public Lazy<object> LazyInfoSettingsView { get; set; }
     }
 }

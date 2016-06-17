@@ -28,6 +28,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly Lazy<FeedItemListViewModel> feedItemListViewModel;
         private readonly Lazy<FeedItemViewModel> feedItemViewModel;
         private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
+        private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
         private readonly Lazy<InfoSettingsViewModel> infoSettingsViewModel;
         private readonly DelegateCommand navigateBackCommand;
         private readonly DelegateCommand showFeedListViewCommand;
@@ -50,7 +51,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         [ImportingConstructor]
         public AppController(Lazy<NewsFeedsController> newsFeedsController, SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
             Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel,
-            Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
+            Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
         {
             this.newsFeedsController = newsFeedsController;
             this.selectionService = selectionService;
@@ -59,6 +60,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.feedItemListViewModel = new Lazy<FeedItemListViewModel>(() => InitializeFeedItemListViewModel(feedItemListViewModel));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeFeedItemViewModel(feedItemViewModel));
             this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
+            this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
             this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
             this.navigateBackCommand = new DelegateCommand(NavigateBack, CanNavigateBack);
             this.showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
@@ -156,7 +158,13 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private SettingsLayoutViewModel InitializeSettingsLayoutViewModel(Lazy<SettingsLayoutViewModel> viewModel)
         {
+            viewModel.Value.LazyGeneralSettingsView = new Lazy<object>(() => generalSettingsViewModel.Value.View);
             viewModel.Value.LazyInfoSettingsView = new Lazy<object>(() => infoSettingsViewModel.Value.View);
+            return viewModel.Value;
+        }
+
+        private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
+        {
             return viewModel.Value;
         }
 

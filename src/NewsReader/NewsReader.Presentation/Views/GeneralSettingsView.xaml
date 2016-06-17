@@ -5,11 +5,15 @@
     xmlns:local="using:Jbe.NewsReader.Presentation.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
 
     <Grid>
+        <Grid.Transitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.Transitions>
 
+        <TextBlock Text="Test me"/>
     </Grid>
 </UserControl>
