@@ -18,4 +18,6 @@
 
     <c:IsReadToFontStyleConverter x:Key="IsReadToFontStyleConverter"/>
 
+    <c:LocalizeAppThemeConverter x:Key="LocalizeAppThemeConverter"/>
+
 </ResourceDictionary>

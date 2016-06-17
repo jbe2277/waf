@@ -8,6 +8,7 @@ using System.Waf.Applications;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
+using Windows.Storage;
 using Windows.System.UserProfile;
 using Windows.UI.Xaml;
 
@@ -21,6 +22,11 @@ namespace Jbe.NewsReader.Presentation
 
         public App()
         {
+            var themeSettings = ApplicationData.Current.LocalSettings.Values["Theme"];
+            if (themeSettings != null)
+            {
+                RequestedTheme = (ApplicationTheme)themeSettings;
+            }
             InitializeComponent();
             Suspending += OnSuspending;
         }

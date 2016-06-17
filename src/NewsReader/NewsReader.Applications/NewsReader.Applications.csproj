@@ -46,10 +46,12 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\AppThemeExtensions.cs" />
     <Compile Include="Controllers\FileIOHelper.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SelectionService.cs" />
+    <Compile Include="ViewModels\AppTheme.cs" />
     <Compile Include="ViewModels\FeedItemListViewModel.cs" />
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
     <Compile Include="ViewModels\FeedListViewModel.cs" />

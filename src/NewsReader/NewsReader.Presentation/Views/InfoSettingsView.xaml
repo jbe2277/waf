@@ -14,13 +14,13 @@
             </TransitionCollection>
         </StackPanel.Transitions>
 
-        <TextBlock Text="{x:Bind ViewModel.AppName}" FontWeight="SemiBold" Style="{StaticResource TitleTextBlockStyle}" Margin="0,11"/>
+        <TextBlock Text="{x:Bind ViewModel.AppName}" FontWeight="SemiBold" Style="{StaticResource TitleTextBlockStyle}" Margin="0,10"/>
         <TextBlock Text="{x:Bind ViewModel.AppPublisherName}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,2"/>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,2">
             <Run x:Uid="VersionT"/>
             <Run Text="{x:Bind ViewModel.AppVersion}"/>
         </TextBlock>
 
-        <HyperlinkButton x:Uid="WindowsStoreC" Command="{x:Bind ViewModel.LaunchWindowsStoreCommand}" Margin="0,11,0,0" Style="{StaticResource TextBlockButtonStyle}"/>
+        <HyperlinkButton x:Uid="WindowsStoreC" Command="{x:Bind ViewModel.LaunchWindowsStoreCommand}" Margin="0,10,0,0" Style="{StaticResource TextBlockButtonStyle}"/>
     </StackPanel>
 </UserControl>

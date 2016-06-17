@@ -15,6 +15,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
@@ -165,7 +166,18 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
         {
+            var theme = ApplicationData.Current.LocalSettings.Values["Theme"];
+            viewModel.Value.SelectedAppTheme = (theme != null ? ((ApplicationTheme)theme) : (ApplicationTheme?)null).ToAppTheme();
+            viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
             return viewModel.Value;
+        }
+
+        private void GeneralSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GeneralSettingsViewModel.SelectedAppTheme))
+            {
+                ApplicationData.Current.LocalSettings.Values["Theme"] = (int?)generalSettingsViewModel.Value.SelectedAppTheme.ToApplicationTheme();
+            }
         }
 
         private InfoSettingsViewModel InitializeInfoSettingsViewModel(Lazy<InfoSettingsViewModel> viewModel)

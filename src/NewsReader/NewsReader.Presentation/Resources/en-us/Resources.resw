@@ -126,6 +126,15 @@
   <data name="AddNewFeedL.Label" xml:space="preserve">
     <value>Add new feed</value>
   </data>
+  <data name="AppThemeAuto" xml:space="preserve">
+    <value>Automatic (Default)</value>
+  </data>
+  <data name="AppThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="AppThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
   <data name="CancelC.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
