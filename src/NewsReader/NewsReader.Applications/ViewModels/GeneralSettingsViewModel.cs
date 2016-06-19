@@ -10,19 +10,19 @@ namespace Jbe.NewsReader.Applications.ViewModels
     [Export, Shared]
     public class GeneralSettingsViewModel : ViewModel<IGeneralSettingsView>
     {
-        private AppTheme selectedAppTheme;
+        private DisplayAppTheme selectedAppTheme;
 
 
         [ImportingConstructor]
         public GeneralSettingsViewModel(IGeneralSettingsView view) : base(view)
         {
-            AppThemes = Enum.GetValues(typeof(AppTheme)).Cast<AppTheme>().ToArray();
+            AppThemes = Enum.GetValues(typeof(DisplayAppTheme)).Cast<DisplayAppTheme>().ToArray();
         }
 
 
-        public IReadOnlyList<AppTheme> AppThemes { get; }
+        public IReadOnlyList<DisplayAppTheme> AppThemes { get; }
 
-        public AppTheme SelectedAppTheme
+        public DisplayAppTheme SelectedAppTheme
         {
             get { return selectedAppTheme; }
             set { SetProperty(ref selectedAppTheme, value); }

@@ -1,6 +1,6 @@
 ﻿namespace Jbe.NewsReader.Applications.ViewModels
 {
-    public enum AppTheme
+    public enum DisplayAppTheme
     {
         Auto,
         Light,

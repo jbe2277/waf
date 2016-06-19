@@ -113,7 +113,7 @@
     <Compile Include="Converters\IsNavigationSelectedConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\IsReadToFontStyleConverter.cs" />
-    <Compile Include="Converters\LocalizeAppThemeConverter.cs" />
+    <Compile Include="Converters\LocalizeDisplayAppThemeConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="DesignData\SampleFeedItemListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

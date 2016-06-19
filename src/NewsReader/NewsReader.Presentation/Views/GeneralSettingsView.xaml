@@ -19,7 +19,7 @@
                   RelativePanel.RightOf="themeText" RelativePanel.AlignVerticalCenterWith="themeText">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Converter={StaticResource LocalizeAppThemeConverter}}"/>
+                    <TextBlock Text="{Binding Converter={StaticResource LocalizeDisplayAppThemeConverter}}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

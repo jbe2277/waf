@@ -5,18 +5,18 @@ using Windows.UI.Xaml.Data;
 
 namespace Jbe.NewsReader.Presentation.Converters
 {
-    public class LocalizeAppThemeConverter : IValueConverter
+    public class LocalizeDisplayAppThemeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var theme = (AppTheme)value;
+            var theme = (DisplayAppTheme)value;
             switch (theme)
             {
-                case AppTheme.Auto:
+                case DisplayAppTheme.Auto:
                     return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeAuto");
-                case AppTheme.Light:
+                case DisplayAppTheme.Light:
                     return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeLight");
-                case AppTheme.Dark:
+                case DisplayAppTheme.Dark:
                     return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeDark");
                 default:
                     throw new InvalidOperationException($"Theme is not supported: {theme}");

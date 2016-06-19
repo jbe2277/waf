@@ -4,32 +4,32 @@ using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
-    public static class AppThemeExtensions
+    public static class DisplayAppThemeExtensions
     {
-        public static AppTheme ToAppTheme(this ApplicationTheme? theme)
+        public static DisplayAppTheme ToAppTheme(this ApplicationTheme? theme)
         {
             switch (theme)
             {
                 case null:
-                    return AppTheme.Auto;
+                    return DisplayAppTheme.Auto;
                 case ApplicationTheme.Light:
-                    return AppTheme.Light;
+                    return DisplayAppTheme.Light;
                 case ApplicationTheme.Dark:
-                    return AppTheme.Dark;
+                    return DisplayAppTheme.Dark;
                 default:
                     throw new NotSupportedException($"This ApplicationTheme is not supported: {theme}");
             }
         }
 
-        public static ApplicationTheme? ToApplicationTheme(this AppTheme theme)
+        public static ApplicationTheme? ToApplicationTheme(this DisplayAppTheme theme)
         {
             switch (theme)
             {
-                case AppTheme.Auto:
+                case DisplayAppTheme.Auto:
                     return null;
-                case AppTheme.Light:
+                case DisplayAppTheme.Light:
                     return ApplicationTheme.Light;
-                case AppTheme.Dark:
+                case DisplayAppTheme.Dark:
                     return ApplicationTheme.Dark;
                 default:
                     throw new NotSupportedException($"This AppTheme is not supported: {theme}");
