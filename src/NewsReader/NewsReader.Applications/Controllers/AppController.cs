@@ -168,6 +168,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             var theme = ApplicationData.Current.LocalSettings.Values["Theme"];
             viewModel.Value.SelectedAppTheme = (theme != null ? ((ApplicationTheme)theme) : (ApplicationTheme?)null).ToAppTheme();
+            viewModel.Value.FeedManager = feedManager;
             viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
             return viewModel.Value;
         }

@@ -20,6 +20,7 @@ namespace Jbe.NewsReader.Domain
         private bool isLoading;
         private Exception loadError;
         private string loadErrorMessage;
+        internal IDataManager dataManager;
 
 
         public Feed(Uri uri)
@@ -72,6 +73,25 @@ namespace Jbe.NewsReader.Domain
             set { SetProperty(ref loadErrorMessage, value); }
         }
 
+        internal IDataManager DataManager
+        {
+            get { return dataManager; }
+            set
+            {
+                if (dataManager == value) { return; }
+
+                if (dataManager != null)
+                {
+                    dataManager.PropertyChanged -= DataManagerPropertyChanged;
+                }
+                dataManager = value;
+                if (dataManager != null)
+                {
+                    dataManager.PropertyChanged += DataManagerPropertyChanged;
+                    TrimItemsList();
+                }
+            }
+        }
 
         public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems)
         {
@@ -95,6 +115,7 @@ namespace Jbe.NewsReader.Domain
                     items.Insert(i, item);
                 }
             }
+            TrimItemsList();
             IsLoading = false;
         }
 
@@ -106,6 +127,11 @@ namespace Jbe.NewsReader.Domain
                 item.PropertyChanged += FeedItemPropertyChanged;
             }
             UpdateUnreadItemsCount();
+        }
+
+        private void DataManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            TrimItemsList();
         }
 
         private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -129,6 +155,21 @@ namespace Jbe.NewsReader.Domain
             }
         }
         
+        private void TrimItemsList()
+        {
+            uint i = 0;
+            var minDate = DateTimeOffset.Now - DataManager.ItemLifetime;
+            foreach (var item in items.ToArray())
+            {
+                if (i >= DataManager.MaxItemsLimit
+                    || item.Date < minDate)
+                {
+                    items.Remove(item);
+                }
+                i++;
+            }
+        }
+
         private void UpdateUnreadItemsCount()
         {
             UnreadItemsCount = Items.Count(x => !x.MarkAsRead);

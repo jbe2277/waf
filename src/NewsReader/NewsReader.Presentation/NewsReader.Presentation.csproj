@@ -114,6 +114,8 @@
     <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\IsReadToFontStyleConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayAppThemeConverter.cs" />
+    <Compile Include="Converters\LocalizeDisplayItemLifetimeConverter.cs" />
+    <Compile Include="Converters\LocalizeDisplayMaxItemsLimitConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="DesignData\SampleFeedItemListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -127,7 +127,7 @@
     <value>Feed hinzufügen</value>
   </data>
   <data name="AppThemeAuto" xml:space="preserve">
-    <value>Automatisch (Standard)</value>
+    <value>Automatisch</value>
   </data>
   <data name="AppThemeDark" xml:space="preserve">
     <value>Dunkel</value>
@@ -206,5 +206,32 @@
   </data>
   <data name="WindowsStoreC.Content" xml:space="preserve">
     <value>Windows Store</value>
+  </data>
+  <data name="ItemLifetime1Month" xml:space="preserve">
+    <value>1 Monat</value>
+  </data>
+  <data name="ItemLifetime1Year" xml:space="preserve">
+    <value>1 Jahr</value>
+  </data>
+  <data name="ItemLifetime3Month" xml:space="preserve">
+    <value>3 Monate</value>
+  </data>
+  <data name="ItemLifetime6Month" xml:space="preserve">
+    <value>6 Monate</value>
+  </data>
+  <data name="ItemLifetimeForever" xml:space="preserve">
+    <value>Für immer</value>
+  </data>
+  <data name="MaxItemsLimitUnlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <data name="dataManagementT.Text" xml:space="preserve">
+    <value>Daten Management</value>
+  </data>
+  <data name="storeFeedItemsForT.Text" xml:space="preserve">
+    <value>Speichern der Artikel für:</value>
+  </data>
+  <data name="storeMaxFeedItemsT.Text" xml:space="preserve">
+    <value>Speichern von maximal Artikel pro Feed:</value>
   </data>
 </root>

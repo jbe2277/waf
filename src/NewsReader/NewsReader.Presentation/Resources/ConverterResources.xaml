@@ -20,4 +20,8 @@
 
     <c:LocalizeDisplayAppThemeConverter x:Key="LocalizeDisplayAppThemeConverter"/>
 
+    <c:LocalizeDisplayItemLifetimeConverter x:Key="LocalizeDisplayItemLifetimeConverter"/>
+
+    <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
+
 </ResourceDictionary>

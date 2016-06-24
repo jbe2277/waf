@@ -47,6 +47,7 @@
     <Compile Include="FeedItem.cs" />
     <Compile Include="FeedManager.cs" />
     <Compile Include="Foundation\ObservableListView.cs" />
+    <Compile Include="IDataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
