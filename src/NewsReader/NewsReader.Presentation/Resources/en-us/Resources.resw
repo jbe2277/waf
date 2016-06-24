@@ -234,4 +234,10 @@
   <data name="storeMaxFeedItemsT.Text" xml:space="preserve">
     <value>Store at maximum feed items per feed:</value>
   </data>
+  <data name="GeneralH.Header" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="InfoH.Header" xml:space="preserve">
+    <value>Info</value>
+  </data>
 </root>

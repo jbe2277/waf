@@ -20,10 +20,10 @@
         </Border>
 
         <Pivot Grid.Row="1">
-            <PivotItem Header="General">
+            <PivotItem x:Uid="GeneralH">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyGeneralSettingsView}"/>
             </PivotItem>
-            <PivotItem Header="Info">
+            <PivotItem x:Uid="InfoH">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyInfoSettingsView}"/>
             </PivotItem>
         </Pivot>
