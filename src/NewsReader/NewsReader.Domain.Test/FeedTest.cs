@@ -52,14 +52,11 @@ namespace Test.NewsReader.Domain
         private void UpdateItemsCoreTest(bool useSerializer)
         {
             var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
-            var feedManager = new FeedManager();
-            feedManager.Feeds.Add(feed);
             feed.UpdateItems(new[] {
                 new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc", "author"),
                 new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc", "author"),
             });
             feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
-            feedManager.Feeds.Add(feed);
 
             Assert.AreEqual(2, feed.Items.Count);
             Assert.IsTrue(new[] { "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
