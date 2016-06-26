@@ -115,7 +115,10 @@ namespace Jbe.NewsReader.Domain
                     items.Insert(i, item);
                 }
             }
-            TrimItemsList();
+            if (DataManager != null)
+            {
+                TrimItemsList();
+            }
             IsLoading = false;
         }
 
