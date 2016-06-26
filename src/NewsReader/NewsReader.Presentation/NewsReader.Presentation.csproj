@@ -109,6 +109,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolTipHelper.cs" />
     <Compile Include="Converters\ConverterHelper.cs" />
     <Compile Include="Converters\IsNavigationSelectedConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
