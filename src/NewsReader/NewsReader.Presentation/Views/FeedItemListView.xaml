@@ -60,24 +60,40 @@
 
                 <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="7,10,20,10"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:FeedItem">
-                            <RelativePanel DoubleTapped="FeedDoubleTapped" Background="Transparent">
-                                <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
-                                        Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
-                                <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
-                                        RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
+                            <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="9"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                                <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="2" Style="{ThemeResource BodyTextBlockStyle}"
-                                        RelativePanel.Below="authorBox" Margin="0,7"/>
+                                <Rectangle Grid.Column="0" Fill="{ThemeResource UnreadLineFillThemeBrush}" Margin="0,3,0,0" Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
 
-                                <TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
-                                        RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                        RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="22,0,0,0">
-                                    <TextBlock x:Uid="ReadMoreT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                </HyperlinkButton>
-                            </RelativePanel>
+                                <RelativePanel Grid.Column="2">
+                                    <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
+                                            Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
+                                    <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
+                                            RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
+
+                                    <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="2" Style="{ThemeResource BodyTextBlockStyle}"
+                                            RelativePanel.Below="authorBox" Margin="0,7"/>
+
+                                    <TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
+                                            RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                    <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
+                                            RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="22,0,0,0">
+                                        <TextBlock x:Uid="ReadMoreT" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                    </HyperlinkButton>
+                                </RelativePanel>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

@@ -59,7 +59,6 @@ namespace Jbe.NewsReader.Applications.Controllers
 
                     feed.Name = syndicationFeed.Title.Text;
                     feed.UpdateItems(items);
-                    
                 }
                 else
                 {

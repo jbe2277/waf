@@ -6,4 +6,6 @@
 
     <SolidColorBrush x:Key="NavigationSeparatorForegroundThemeBrush" Color="#FFBBBBBB" />
 
+    <SolidColorBrush x:Key="UnreadLineFillThemeBrush" Color="#FF333333"/>
+
 </ResourceDictionary>
