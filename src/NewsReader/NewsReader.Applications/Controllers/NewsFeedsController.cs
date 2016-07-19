@@ -32,7 +32,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             // Workaround for a x:Bind bug during startup: it restores sometimes the previous value during a TwoWay roundtrip sync. 
             // In this case: selectionService.SelectedFeed = null.
-            await Task.Delay(10);
+            await Task.Delay(100);
 
             var tasks = FeedManager.Feeds.ToArray().Select(x => LoadFeedAsync(x));
             await Task.WhenAll(tasks);
