@@ -124,6 +124,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                 Debug.Assert(false, "LoadAsync", ex.ToString());
                 feedManager = new FeedManager();
             }
+            selectionService.FeedManager = feedManager;
             newsFeedsController.Value.FeedManager = feedManager;
             newsFeedsController.Value.Run();
             if (feedListViewModel.IsValueCreated) { feedListViewModel.Value.FeedManager = feedManager; }

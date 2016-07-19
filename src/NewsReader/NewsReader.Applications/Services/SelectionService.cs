@@ -1,5 +1,7 @@
 ﻿using Jbe.NewsReader.Domain;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Composition;
 using System.Linq;
 using System.Waf.Foundation;
@@ -9,6 +11,7 @@ namespace Jbe.NewsReader.Applications.Services
     [Export, Shared]
     public class SelectionService : Model
     {
+        private FeedManager feedManager;
         private Feed selectedFeed;
         private FeedItem selectedFeedItem;
         private Dictionary<Feed, FeedItem> lastSelectedFeedItems;
@@ -20,6 +23,16 @@ namespace Jbe.NewsReader.Applications.Services
         }
 
 
+        internal FeedManager FeedManager
+        {
+            get { return feedManager; }
+            set
+            {
+                feedManager = value;
+                feedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
+            }
+        }
+        
         public Feed SelectedFeed
         {
             get { return selectedFeed; }
@@ -55,6 +68,23 @@ namespace Jbe.NewsReader.Applications.Services
             if (feedItem != null && !lastSelectedFeedItems.ContainsKey(feed))
             {
                 lastSelectedFeedItems[feed] = feedItem;
+            }
+        }
+
+        private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var feed in e.OldItems.Cast<Feed>())
+                {
+                    lastSelectedFeedItems.Remove(feed);
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add) { }
+            else if (e.Action == NotifyCollectionChangedAction.Move) { }
+            else
+            {
+                throw new NotSupportedException("FeedsCollectionChanged: " + e.Action);
             }
         }
     }
