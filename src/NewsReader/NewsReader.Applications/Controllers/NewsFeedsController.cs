@@ -44,9 +44,10 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
+                    selectionService.SetDefaultSelectedFeedItem(feed, feed.Items.FirstOrDefault());
                     if (selectionService.SelectedFeed == null)
                     {
-                        selectionService.SelectedFeed = feed;
+                        selectionService.SelectedFeed = feed;                        
                     }
                     var syndicationFeed = await client.RetrieveFeedAsync(feed.Uri);
                     var items = syndicationFeed.Items.Select(x => new FeedItem(
@@ -73,7 +74,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             finally
             {
-                if (selectionService.SelectedFeed == feed)
+                if (selectionService.SelectedFeedItem == null && selectionService.SelectedFeed == feed)
                 {
                     selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
                 }
