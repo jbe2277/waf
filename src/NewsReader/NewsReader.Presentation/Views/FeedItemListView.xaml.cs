@@ -24,7 +24,7 @@ namespace Jbe.NewsReader.Presentation.Views
             SetDefaultSearchVisibility();
         }
 
-
+        
         public FeedItemListViewModel ViewModel => viewModel.Value;
 
 
@@ -89,6 +89,15 @@ namespace Jbe.NewsReader.Presentation.Views
         private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
         {
             SetDefaultSearchVisibility();
+        }
+
+        private async void FeedItemListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Yield();  // Ensure that items are layouted first so that ScrollIntoView works correct.
+            if (feedItemListView.SelectedItem != null)
+            {
+                feedItemListView.ScrollIntoView(feedItemListView.SelectedItem);
+            }
         }
     }
 }

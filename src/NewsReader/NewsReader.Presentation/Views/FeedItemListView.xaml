@@ -59,7 +59,8 @@
                 </StackPanel>
 
                 <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+                      SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}"
+                      SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Padding" Value="7,10,20,10"/>
