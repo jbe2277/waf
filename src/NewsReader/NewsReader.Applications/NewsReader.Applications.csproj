@@ -50,6 +50,7 @@
     <Compile Include="Controllers\FileIOHelper.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAppService.cs" />
     <Compile Include="Services\SelectionService.cs" />
     <Compile Include="ViewModels\DisplayAppTheme.cs" />
     <Compile Include="ViewModels\DisplayItemLifetime.cs" />

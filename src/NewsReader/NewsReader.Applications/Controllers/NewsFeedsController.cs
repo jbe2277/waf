@@ -13,13 +13,15 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class NewsFeedsController
     {
+        private readonly IAppService appService;
         private readonly SelectionService selectionService;
         private readonly SyndicationClient client;
 
 
         [ImportingConstructor]
-        public NewsFeedsController(SelectionService selectionService)
+        public NewsFeedsController(IAppService appService, SelectionService selectionService)
         {
+            this.appService = appService;
             this.selectionService = selectionService;
             this.client = new SyndicationClient();
         }
@@ -32,7 +34,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             // Workaround for a x:Bind bug during startup: it restores sometimes the previous value during a TwoWay roundtrip sync. 
             // In this case: selectionService.SelectedFeed = null.
-            await Task.Delay(100);
+            await appService.DelayIdleAsync();
 
             var tasks = FeedManager.Feeds.ToArray().Select(x => LoadFeedAsync(x));
             await Task.WhenAll(tasks);
