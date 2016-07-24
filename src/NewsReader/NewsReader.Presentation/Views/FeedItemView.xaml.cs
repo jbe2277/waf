@@ -13,6 +13,7 @@ namespace Jbe.NewsReader.Presentation.Views
     [Export(typeof(IFeedItemView)), Shared]
     public sealed partial class FeedItemView : UserControl, IFeedItemView
     {
+        private static readonly Uri blankUri = new Uri("about:blank");
         private readonly Lazy<FeedItemViewModel> viewModel;
         private readonly WebView webView;
         private TaskCompletionSource<object> unloadedTaskSource;
@@ -96,7 +97,11 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             webView.Visibility = FeedItem != null ? Visibility.Visible : Visibility.Collapsed;
             var uri = FeedItem?.Uri;
-            if (uri != null && webView.Source != uri)
+            if (uri == null)
+            {
+                webView.Navigate(blankUri);
+            }
+            else if (webView.Source != uri)
             {
                 webView.Navigate(uri);
             }
