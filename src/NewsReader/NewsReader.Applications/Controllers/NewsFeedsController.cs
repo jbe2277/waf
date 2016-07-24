@@ -38,6 +38,11 @@ namespace Jbe.NewsReader.Applications.Controllers
 
             var tasks = FeedManager.Feeds.ToArray().Select(x => LoadFeedAsync(x));
             await Task.WhenAll(tasks);
+
+            // Enforce scroll into view after loading more items
+            var itemToSelectAgain = selectionService.SelectedFeedItem;
+            selectionService.SelectedFeedItem = null;
+            selectionService.SelectedFeedItem = itemToSelectAgain;
         }
 
         public async Task LoadFeedAsync(Feed feed)

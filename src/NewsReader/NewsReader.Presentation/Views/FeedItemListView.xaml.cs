@@ -63,7 +63,7 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             searchButton.Visibility = Visibility.Collapsed;
             searchBox.Visibility = Visibility.Visible;
-            await Task.Delay(10);
+            await Dispatcher.RunIdleAsync(ha => { });
             searchBox.Focus(FocusState.Programmatic);
         }
 
