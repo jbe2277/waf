@@ -10,9 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Waf.Applications;
-using System.Waf.Foundation;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
 
@@ -34,11 +32,6 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly DelegateCommand showFeedItemViewCommand;
         private readonly AsyncDelegateCommand showReviewViewCommand;
         private readonly DelegateCommand showSettingsViewCommand;
-        private readonly AsyncDelegateCommand addNewFeedCommand;
-        private readonly DelegateCommand removeFeedCommand;
-        private readonly AsyncDelegateCommand refreshFeedCommand;
-        private readonly DelegateCommand readUnreadCommand;
-        private readonly AsyncDelegateCommand launchWebBrowserCommand;
         private readonly Stack<NavigationItem> navigationStack;
         private NavigationItem selectedNavigationItem;
         private bool isNavigatingBack;
@@ -63,14 +56,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
             this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
             this.showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
-            this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
-            this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
-            this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
-            this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
-            this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
             this.navigationStack = new Stack<NavigationItem>();
-
-            this.selectionService.PropertyChanged += SelectionServicePropertyChanged;
         }
 
         private NavigationItem SelectedNavigationItem
@@ -132,23 +118,23 @@ namespace Jbe.NewsReader.Applications.Controllers
         private FeedListViewModel InitializeFeedListViewModel(Lazy<FeedListViewModel> viewModel)
         {
             viewModel.Value.FeedManager = feedManager;
-            viewModel.Value.AddNewFeedCommand = addNewFeedCommand;
-            viewModel.Value.RemoveFeedCommand = removeFeedCommand;
+            viewModel.Value.AddNewFeedCommand = newsFeedsController.Value.AddNewFeedCommand;
+            viewModel.Value.RemoveFeedCommand = newsFeedsController.Value.RemoveFeedCommand;
             viewModel.Value.ShowFeedItemListViewCommand = showFeedItemListViewCommand;
             return viewModel.Value;
         }
 
         private FeedItemListViewModel InitializeFeedItemListViewModel(Lazy<FeedItemListViewModel> viewModel)
         {
-            viewModel.Value.RefreshCommand = refreshFeedCommand;
-            viewModel.Value.ReadUnreadCommand = readUnreadCommand;
+            viewModel.Value.RefreshCommand = newsFeedsController.Value.RefreshFeedCommand;
+            viewModel.Value.ReadUnreadCommand = newsFeedsController.Value.ReadUnreadCommand;
             viewModel.Value.ShowFeedItemViewCommand = showFeedItemViewCommand;
             return viewModel.Value;
         }
 
         private FeedItemViewModel InitializeFeedItemViewModel(Lazy<FeedItemViewModel> viewModel)
         {
-            viewModel.Value.LaunchWebBrowserCommand = launchWebBrowserCommand;
+            viewModel.Value.LaunchWebBrowserCommand = newsFeedsController.Value.LaunchWebBrowserCommand;
             return viewModel.Value;
         }
         
@@ -217,106 +203,6 @@ namespace Jbe.NewsReader.Applications.Controllers
         private void ShowSettingsView()
         {
             SelectedNavigationItem = NavigationItem.Settings;
-        }
-
-        private async Task AddNewFeed()
-        {
-            Uri feedUri;
-            var uriString = feedListViewModel.Value.AddNewFeedUri.Trim();
-            if (!uriString.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
-            {
-                uriString = "http://" + uriString;
-            }
-            else if (uriString.StartsWith("http://http://", StringComparison.CurrentCultureIgnoreCase) 
-                || uriString.StartsWith("http://https://", StringComparison.CurrentCultureIgnoreCase))
-            {
-                uriString = uriString.Substring(7);
-            }
-            if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out feedUri))
-            {
-                var newFeed = new Feed(feedUri);
-                await newsFeedsController.Value.LoadFeedAsync(newFeed);
-                feedListViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
-                if (newFeed.LoadError == null)
-                {
-                    feedManager.Feeds.Add(newFeed);
-                    selectionService.SelectedFeed = newFeed;
-                    feedListViewModel.Value.FeedAdded();
-                }
-            }
-            else
-            {   
-                feedListViewModel.Value.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("UrlMustBeginWithHttp");
-            }
-        }
-
-        private bool CanRemoveFeed()
-        {
-            return selectionService.SelectedFeed != null;
-        }
-
-        private void RemoveFeed()
-        {
-            var feedToRemove = selectionService.SelectedFeed;
-            var feedToSelect = CollectionHelper.GetNextElementOrDefault(feedManager.Feeds, feedToRemove);
-            feedManager.Feeds.Remove(feedToRemove);
-            selectionService.SelectedFeed = feedToSelect ?? feedManager.Feeds.LastOrDefault();
-        }
-
-        private bool CanRefreshFeed()
-        {
-            return selectionService.SelectedFeed != null;
-        }
-
-        private async Task RefreshFeed()
-        {
-            await newsFeedsController.Value.LoadFeedAsync(selectionService.SelectedFeed);
-        }
-
-        private bool CanMarkAsReadUnread(object parameter)
-        {
-            return selectionService.SelectedFeedItem != null;
-        }
-
-        private void MarkAsReadUnread(object parameter)
-        {
-            var stringParameter = parameter as string;
-            if (string.Equals("read", stringParameter, StringComparison.OrdinalIgnoreCase))
-            {
-                selectionService.SelectedFeedItem.MarkAsRead = true;
-            }
-            else if (string.Equals("unread", stringParameter, StringComparison.OrdinalIgnoreCase))
-            {
-                selectionService.SelectedFeedItem.MarkAsRead = false;
-            }
-            else
-            {
-                selectionService.SelectedFeedItem.MarkAsRead = !selectionService.SelectedFeedItem.MarkAsRead;
-            }
-        }
-
-        private bool CanLaunchWebBrowser()
-        {
-            return selectionService.SelectedFeedItem != null;
-        }
-
-        private async Task LaunchWebBrowser()
-        {
-            await Launcher.LaunchUriAsync(selectionService.SelectedFeedItem.Uri);
-        }
-
-        private void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(selectionService.SelectedFeed))
-            {
-                removeFeedCommand.RaiseCanExecuteChanged();
-                refreshFeedCommand.RaiseCanExecuteChanged();
-            }
-            if (e.PropertyName == nameof(selectionService.SelectedFeedItem))
-            {
-                readUnreadCommand.RaiseCanExecuteChanged();
-                launchWebBrowserCommand.RaiseCanExecuteChanged();
-            }
         }
     }
 }
