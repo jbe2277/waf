@@ -80,7 +80,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             await Task.WhenAll(tasks);
         }
 
-        public async Task LoadFeedAsync(Feed feed)
+        private async Task LoadFeedAsync(Feed feed)
         {
             try
             {
