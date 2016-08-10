@@ -15,7 +15,6 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
@@ -23,21 +22,18 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class AppController : IAppController
     {
         private readonly Lazy<NewsFeedsController> newsFeedsController;
+        private readonly Lazy<SettingsController> settingsController;
         private readonly SelectionService selectionService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly Lazy<FeedItemListViewModel> feedItemListViewModel;
         private readonly Lazy<FeedItemViewModel> feedItemViewModel;
-        private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
-        private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
-        private readonly Lazy<InfoSettingsViewModel> infoSettingsViewModel;
         private readonly DelegateCommand navigateBackCommand;
         private readonly DelegateCommand showFeedListViewCommand;
         private readonly DelegateCommand showFeedItemListViewCommand;
         private readonly DelegateCommand showFeedItemViewCommand;
         private readonly AsyncDelegateCommand showReviewViewCommand;
         private readonly DelegateCommand showSettingsViewCommand;
-        private readonly AsyncDelegateCommand launchWindowsStoreCommand;
         private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
         private readonly AsyncDelegateCommand refreshFeedCommand;
@@ -50,26 +46,23 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(Lazy<NewsFeedsController> newsFeedsController, SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
-            Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel,
-            Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
+        public AppController(Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController,
+            SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
+            Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.newsFeedsController = newsFeedsController;
+            this.settingsController = settingsController;
             this.selectionService = selectionService;
             this.shellViewModel = shellViewModel;
             this.feedListViewModel = new Lazy<FeedListViewModel>(() => InitializeFeedListViewModel(feedListViewModel));
             this.feedItemListViewModel = new Lazy<FeedItemListViewModel>(() => InitializeFeedItemListViewModel(feedItemListViewModel));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeFeedItemViewModel(feedItemViewModel));
-            this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
-            this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
-            this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
             this.navigateBackCommand = new DelegateCommand(NavigateBack, CanNavigateBack);
             this.showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
             this.showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
             this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
             this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
             this.showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
-            this.launchWindowsStoreCommand = new AsyncDelegateCommand(LaunchWindowsStore);
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
             this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
@@ -127,6 +120,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             selectionService.FeedManager = feedManager;
             newsFeedsController.Value.FeedManager = feedManager;
             newsFeedsController.Value.Run();
+            settingsController.Value.FeedManager = feedManager;
             if (feedListViewModel.IsValueCreated) { feedListViewModel.Value.FeedManager = feedManager; }
         }
 
@@ -157,37 +151,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             viewModel.Value.LaunchWebBrowserCommand = launchWebBrowserCommand;
             return viewModel.Value;
         }
-
-        private SettingsLayoutViewModel InitializeSettingsLayoutViewModel(Lazy<SettingsLayoutViewModel> viewModel)
-        {
-            viewModel.Value.LazyGeneralSettingsView = new Lazy<object>(() => generalSettingsViewModel.Value.View);
-            viewModel.Value.LazyInfoSettingsView = new Lazy<object>(() => infoSettingsViewModel.Value.View);
-            return viewModel.Value;
-        }
-
-        private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
-        {
-            var theme = ApplicationData.Current.LocalSettings.Values["Theme"];
-            viewModel.Value.SelectedAppTheme = (theme != null ? ((ApplicationTheme)theme) : (ApplicationTheme?)null).ToAppTheme();
-            viewModel.Value.FeedManager = feedManager;
-            viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
-            return viewModel.Value;
-        }
-
-        private void GeneralSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(GeneralSettingsViewModel.SelectedAppTheme))
-            {
-                ApplicationData.Current.LocalSettings.Values["Theme"] = (int?)generalSettingsViewModel.Value.SelectedAppTheme.ToApplicationTheme();
-            }
-        }
-
-        private InfoSettingsViewModel InitializeInfoSettingsViewModel(Lazy<InfoSettingsViewModel> viewModel)
-        {
-            viewModel.Value.LaunchWindowsStoreCommand = launchWindowsStoreCommand;
-            return viewModel.Value;
-        }
-
+        
         private void Navigate()
         {
             // First we need to set them to null so that not the same view is set in both properties => exception
@@ -207,7 +171,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                     shellViewModel.Value.ContentView = feedItemViewModel.Value.View;
                     break;
                 case NavigationItem.Settings:
-                    shellViewModel.Value.ContentView = settingsLayoutViewModel.Value.View;
+                    shellViewModel.Value.ContentView = settingsController.Value.SettingsView;
                     break;
             }
         }
@@ -253,12 +217,6 @@ namespace Jbe.NewsReader.Applications.Controllers
         private void ShowSettingsView()
         {
             SelectedNavigationItem = NavigationItem.Settings;
-        }
-
-        private async Task LaunchWindowsStore()
-        {
-            // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:pdp?PFN={0}", Package.Current.Id.FamilyName)));
         }
 
         private async Task AddNewFeed()
