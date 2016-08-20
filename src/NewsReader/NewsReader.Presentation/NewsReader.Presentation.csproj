@@ -121,6 +121,7 @@
     <Compile Include="DesignData\SampleFeedItemListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppService.cs" />
+    <Compile Include="Services\MessageService.cs" />
     <Compile Include="Views\FeedItemListView.xaml.cs">
       <DependentUpon>FeedItemListView.xaml</DependentUpon>
     </Compile>

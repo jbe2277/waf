@@ -243,4 +243,18 @@
   <data name="SearchL.Label" xml:space="preserve">
     <value>Suchen</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="ReduceFeedItemLifetimeQuestion" xml:space="preserve">
+    <value>Wollen Sie die Speicherzeit der Artikel reduzieren? 
+Diese Aktion könnte ältere Artikel löschen.</value>
+  </data>
+  <data name="ReduceMaxItemsLimitQuestion" xml:space="preserve">
+    <value>Wollen Sie die maximale Anzahl der Artikel pro Feed reduzieren? 
+Diese Aktion könnte ältere Artikel löschen.</value>
+  </data>
 </root>

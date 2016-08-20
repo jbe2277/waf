@@ -243,4 +243,18 @@
   <data name="SearchL.Label" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ReduceFeedItemLifetimeQuestion" xml:space="preserve">
+    <value>Do you want to reduce the feed item lifetime? 
+This might remove older feed items.</value>
+  </data>
+  <data name="ReduceMaxItemsLimitQuestion" xml:space="preserve">
+    <value>Do you want to reduce the maximum number of feed items per feed? 
+This might remove older feed items.</value>
+  </data>
 </root>

@@ -38,6 +38,7 @@ namespace Jbe.NewsReader.Presentation
             isInitialized = true;
 
             ApplicationLanguages.PrimaryLanguageOverride = GlobalizationPreferences.Languages[0];
+            //ApplicationLanguages.PrimaryLanguageOverride = "en-US";
 
             var configuration = new ContainerConfiguration()
                 .WithAssembly(typeof(ShellViewModel).GetTypeInfo().Assembly)
