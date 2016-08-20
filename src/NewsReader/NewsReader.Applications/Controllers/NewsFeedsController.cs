@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
-using Windows.ApplicationModel.Resources;
 using Windows.System;
 using Windows.Web.Syndication;
 
@@ -19,6 +18,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class NewsFeedsController
     {
+        private readonly IResourceService resourceService;
         private readonly IAppService appService;
         private readonly SelectionService selectionService;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
@@ -31,8 +31,9 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public NewsFeedsController(IAppService appService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
+        public NewsFeedsController(IResourceService resourceService, IAppService appService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
         {
+            this.resourceService = resourceService;
             this.appService = appService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
@@ -105,13 +106,13 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
                 else
                 {
-                    feed.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("UrlMustBeginWithHttp");
+                    feed.LoadErrorMessage = resourceService.GetString("UrlMustBeginWithHttp");
                     feed.LoadError = new InvalidOperationException(@"The URL must begin with http:// or https://");
                 }
             }
             catch (Exception ex)
             {
-                feed.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("ErrorLoadRssFeed");
+                feed.LoadErrorMessage = resourceService.GetString("ErrorLoadRssFeed");
                 feed.LoadError = ex;
             }
             finally
@@ -150,7 +151,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             else
             {
-                feedListViewModel.Value.LoadErrorMessage = ResourceLoader.GetForViewIndependentUse().GetString("UrlMustBeginWithHttp");
+                feedListViewModel.Value.LoadErrorMessage = resourceService.GetString("UrlMustBeginWithHttp");
             }
         }
 

@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using System.Waf.Applications;
-using Windows.ApplicationModel.Resources;
 
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
     public class GeneralSettingsViewModel : ViewModel<IGeneralSettingsView>
     {
+        private readonly IResourceService resourceService;
         private readonly IMessageService messageService;
         private DisplayAppTheme selectedAppTheme;
         private DisplayItemLifetime selectedItemLifetime;
@@ -23,8 +23,9 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
 
         [ImportingConstructor]
-        public GeneralSettingsViewModel(IMessageService messageService, IGeneralSettingsView view) : base(view)
+        public GeneralSettingsViewModel(IResourceService resourceService, IMessageService messageService, IGeneralSettingsView view) : base(view)
         {
+            this.resourceService = resourceService;
             this.messageService = messageService;
             AppThemes = Enum.GetValues(typeof(DisplayAppTheme)).Cast<DisplayAppTheme>().ToArray();
             ItemLifetimes = Enum.GetValues(typeof(DisplayItemLifetime)).Cast<DisplayItemLifetime>().ToArray();
@@ -76,7 +77,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             setSelectedItemLifetimeRunning = true;
 
             var result = selectedItemLifetime < value
-                || await messageService.ShowYesNoQuestionAsync(ResourceLoader.GetForViewIndependentUse().GetString("ReduceFeedItemLifetimeQuestion"));
+                || await messageService.ShowYesNoQuestionAsync(resourceService.GetString("ReduceFeedItemLifetimeQuestion"));
             if (result)
             {
                 selectedItemLifetime = value;
@@ -95,7 +96,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             setSelectedMaxItemsLimitRunning = true;
 
             var result = selectedMaxItemsLimit < value
-                || await messageService.ShowYesNoQuestionAsync(ResourceLoader.GetForViewIndependentUse().GetString("ReduceMaxItemsLimitQuestion"));
+                || await messageService.ShowYesNoQuestionAsync(resourceService.GetString("ReduceMaxItemsLimitQuestion"));
             if (result)
             {
                 selectedMaxItemsLimit = value;
