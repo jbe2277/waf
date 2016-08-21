@@ -7,7 +7,7 @@ using System.Windows.Input;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class ShellViewModel : ViewModel<IShellView>
+    public class ShellViewModel : ViewModelCore<IShellView>
     {
         private object contentView;
         private Lazy<object> lazyPreviewView;

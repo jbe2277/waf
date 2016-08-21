@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class FeedListViewModel : ViewModel<IFeedListView>
+    public class FeedListViewModel : ViewModelCore<IFeedListView>
     {
         private FeedManager feedManager;
         private string addNewFeedUri;

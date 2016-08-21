@@ -48,6 +48,7 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\DisplayAppThemeExtensions.cs" />
     <Compile Include="Controllers\FileIOHelper.cs" />
+    <Compile Include="Controllers\IAppController.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

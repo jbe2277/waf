@@ -10,7 +10,7 @@ using System.Waf.Applications;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class GeneralSettingsViewModel : ViewModel<IGeneralSettingsView>
+    public class GeneralSettingsViewModel : ViewModelCore<IGeneralSettingsView>
     {
         private readonly IResourceService resourceService;
         private readonly IMessageService messageService;

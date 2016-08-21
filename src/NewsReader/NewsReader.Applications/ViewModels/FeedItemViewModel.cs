@@ -7,7 +7,7 @@ using System.Windows.Input;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class FeedItemViewModel : ViewModel<IFeedItemView>
+    public class FeedItemViewModel : ViewModelCore<IFeedItemView>
     {
         [ImportingConstructor]
         public FeedItemViewModel(IFeedItemView view, SelectionService selectionService) : base(view)

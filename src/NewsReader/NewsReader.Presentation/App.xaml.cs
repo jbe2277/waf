@@ -1,10 +1,10 @@
-﻿using Jbe.NewsReader.Applications.ViewModels;
+﻿using Jbe.NewsReader.Applications.Controllers;
+using Jbe.NewsReader.Applications.ViewModels;
 using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Waf.Applications;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;

@@ -6,7 +6,7 @@ using System.Waf.Applications;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class SettingsLayoutViewModel : ViewModel<ISettingsLayoutView>
+    public class SettingsLayoutViewModel : ViewModelCore<ISettingsLayoutView>
     {
         [ImportingConstructor]
         public SettingsLayoutViewModel(ISettingsLayoutView view) : base(view)

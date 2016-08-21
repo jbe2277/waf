@@ -33,12 +33,12 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Waf.Core, Version=4.0.0.4, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Waf.Core.4.0.0-alpha4\lib\dotnet\System.Waf.Core.dll</HintPath>
+    <Reference Include="System.Waf.Core, Version=4.0.0.5, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Waf.Core.4.0.0-alpha5\lib\dotnet\System.Waf.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Waf.UnitTesting.Core, Version=4.0.0.4, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Waf.UnitTesting.Core.4.0.0-alpha4\lib\dotnet\System.Waf.UnitTesting.Core.dll</HintPath>
+    <Reference Include="System.Waf.UnitTesting.Core, Version=4.0.0.5, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Waf.UnitTesting.Core.4.0.0-alpha5\lib\dotnet\System.Waf.UnitTesting.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />

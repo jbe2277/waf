@@ -7,7 +7,7 @@ using Windows.ApplicationModel;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class InfoSettingsViewModel : ViewModel<IInfoSettingsView>
+    public class InfoSettingsViewModel : ViewModelCore<IInfoSettingsView>
     {
         [ImportingConstructor]
         public InfoSettingsViewModel(IInfoSettingsView view) : base(view)

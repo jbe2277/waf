@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace Jbe.NewsReader.Applications.ViewModels
 {
     [Export, Shared]
-    public class FeedItemListViewModel : ViewModel<IFeedItemListView>
+    public class FeedItemListViewModel : ViewModelCore<IFeedItemListView>
     {
         private ObservableListView<FeedItem> itemsListView;
         private string searchText = "";

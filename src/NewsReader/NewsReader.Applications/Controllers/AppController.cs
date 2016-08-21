@@ -3,7 +3,6 @@ using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Domain;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Composition;
 using System.Diagnostics;
 using System.Globalization;

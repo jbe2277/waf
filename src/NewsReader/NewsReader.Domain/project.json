@@ -6,7 +6,7 @@
   "dependencies": {
     "Microsoft.NETCore": "5.0.0",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.0",
-    "System.Waf.Core": "4.0.0-alpha4"
+    "System.Waf.Core": "4.0.0-alpha5"
   },
   "frameworks": {
     "dotnet": {
