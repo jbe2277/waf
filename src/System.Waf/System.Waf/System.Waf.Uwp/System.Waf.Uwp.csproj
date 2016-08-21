@@ -60,9 +60,6 @@
     <Compile Include="..\System.Waf.Wpf\Presentation\Converters\StringFormatConverter.cs">
       <Link>Presentation\Converters\StringFormatConverter.cs</Link>
     </Compile>
-    <Compile Include="Applications\IAppController.cs" />
-    <Compile Include="Applications\ViewModel.cs" />
-    <Compile Include="Applications\ViewModel.Generic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Presentation\Controls\HeaderContentControl.cs" />
     <Compile Include="Presentation\Controls\LazyContentPresenter.cs" />

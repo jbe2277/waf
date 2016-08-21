@@ -11,10 +11,11 @@ namespace System.Waf.Applications
         /// <summary>
         /// Gets the ViewModel which is associated with the specified view.
         /// </summary>
+        /// <typeparam name="T">The type of the ViewModel</typeparam>
         /// <param name="view">The view.</param>
         /// <returns>The associated ViewModel, or <c>null</c> when no ViewModel was found.</returns>
         /// <exception cref="ArgumentNullException">view must not be <c>null</c>.</exception>
-        public static ViewModel GetViewModel(this IView view)
+        public static T GetViewModel<T>(this IView view) where T : class
         {
             if (view == null) { throw new ArgumentNullException(nameof(view)); }
 
@@ -26,19 +27,7 @@ namespace System.Waf.Applications
                 DispatcherHelperCore.DoEvents();
                 dataContext = view.DataContext;
             }
-            return dataContext as ViewModel;
-        }
-        
-        /// <summary>
-        /// Gets the ViewModel which is associated with the specified view.
-        /// </summary>
-        /// <typeparam name="T">The type of the ViewModel</typeparam>
-        /// <param name="view">The view.</param>
-        /// <returns>The associated ViewModel, or <c>null</c> when no ViewModel was found.</returns>
-        /// <exception cref="ArgumentNullException">view must not be <c>null</c>.</exception>
-        public static T GetViewModel<T>(this IView view) where T : ViewModel
-        {
-            return GetViewModel(view) as T;
+            return dataContext as T;
         }
     }
 }

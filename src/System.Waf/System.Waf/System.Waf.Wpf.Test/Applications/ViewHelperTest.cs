@@ -18,7 +18,7 @@ namespace Test.Waf.Applications
 
             Assert.AreEqual(viewModel, view.GetViewModel<MockViewModel>());
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => ViewHelper.GetViewModel(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => ViewHelper.GetViewModel<MockViewModel>(null));
         }
 
         [TestMethod]

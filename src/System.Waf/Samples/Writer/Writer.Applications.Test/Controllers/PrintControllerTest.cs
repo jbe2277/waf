@@ -43,7 +43,7 @@ namespace Test.Writer.Applications.Controllers
             
             // Execute the Close command and check that the MainView is visible again
             shellViewModel.ClosePrintPreviewCommand.Execute(null);
-            Assert.AreEqual(ViewHelper.GetViewModel((IView)shellViewModel.ContentView), mainViewModel);
+            Assert.AreEqual(ViewHelper.GetViewModel<MainViewModel>((IView)shellViewModel.ContentView), mainViewModel);
         }
 
         [TestMethod]

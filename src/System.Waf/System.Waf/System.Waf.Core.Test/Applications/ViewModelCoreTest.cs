@@ -30,7 +30,7 @@ namespace Test.Waf.Applications
         }
         
 
-        private class MockViewModel : ViewModelCore
+        private class MockViewModel : ViewModelCore<IView>
         {
             public MockViewModel(IView view, bool initializeDataContext) : base(view, initializeDataContext)
             {
