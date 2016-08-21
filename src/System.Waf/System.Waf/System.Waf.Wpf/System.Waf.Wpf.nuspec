@@ -15,12 +15,6 @@
     <copyright>Copyright © 2016 jbe2277</copyright>
     <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
 
-    <releaseNotes>- Provide a core package of WAF as reusable portable library.
-- Improved ViewModel implementation for faster DataContext initialization when using MEF.
-- Add AsyncDelegateCommand class.
-- Change TargetFrameworkVersion to v4.6 for WPF applications
-- Removed types and members that were marked as obsolete in version 3.
-- Removed serialization support because the portable library does not support it.
-    </releaseNotes>
+    <releaseNotes>See https://github.com/jbe2277/waf/releases </releaseNotes>
   </metadata>
 </package>

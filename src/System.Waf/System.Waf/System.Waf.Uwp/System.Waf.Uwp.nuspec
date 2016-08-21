@@ -15,11 +15,7 @@
     <copyright>Copyright © 2016 jbe2277</copyright>
     <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
 
-    <releaseNotes>- Fix TargetName in NavigationToggleButton.
-- Add CollectionHelper.Empty method that returns an empty IReadOnlyList{T}.
-- DelegateCommand: Add static property DisabledCommand.
-- Enhance the StringFormatConverter to support MultiBinding.
-    </releaseNotes>
+    <releaseNotes>See https://github.com/jbe2277/waf/releases </releaseNotes>
 
     <dependencies>
       <group targetFramework="uap10.0">

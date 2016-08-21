@@ -1,11 +1,9 @@
 Changelog
 ---------
 
-Legend: B (Breaking Change); O (Marked member as obsolete)
-
-
 Version 4.0.0.5 (Milestone 5)
-- TODO: Update release notes in nuspec.
+- WAF: Remove all types from the Applications layer in the System.Waf.Uwp project. An UWP Applications layer should only reference the Core library.
+- WAF: Refactor the ViewModelCore and ViewModel base classes.
 
 
 Version 4.0.0.4 (Milestone 4)
