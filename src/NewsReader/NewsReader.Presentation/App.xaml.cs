@@ -1,5 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.Controllers;
 using Jbe.NewsReader.Applications.ViewModels;
+using Jbe.NewsReader.ExternalServices;
 using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace Jbe.NewsReader.Presentation
 
             var configuration = new ContainerConfiguration()
                 .WithAssembly(typeof(ShellViewModel).GetTypeInfo().Assembly)
+                .WithAssembly(typeof(AppInfoService).GetTypeInfo().Assembly)
                 .WithAssembly(typeof(App).GetTypeInfo().Assembly);
             var container = configuration.CreateContainer();
 

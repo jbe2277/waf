@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EEB646F7-C75A-4D7F-9DA5-1B2046962790}</ProjectGuid>
+    <ProjectGuid>{2B7BA354-7132-4E99-BF8F-10DE6A9CD401}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jbe.NewsReader.Applications</RootNamespace>
-    <AssemblyName>Jbe.NewsReader.Applications</AssemblyName>
+    <RootNamespace>Jbe.NewsReader.ExternalServices</RootNamespace>
+    <AssemblyName>Jbe.NewsReader.ExternalServices</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -45,44 +45,16 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <Compile Include="Controllers\AppController.cs" />
-    <Compile Include="Controllers\DisplayAppThemeExtensions.cs" />
-    <Compile Include="Controllers\FileIOHelper.cs" />
-    <Compile Include="Controllers\IAppController.cs" />
-    <Compile Include="Controllers\NewsFeedsController.cs" />
-    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="AppInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IAppInfoService.cs" />
-    <Compile Include="Services\IAppService.cs" />
-    <Compile Include="Services\IMessageService.cs" />
-    <Compile Include="Services\IResourceService.cs" />
-    <Compile Include="Services\SelectionService.cs" />
-    <Compile Include="ViewModels\DisplayAppTheme.cs" />
-    <Compile Include="ViewModels\DisplayItemLifetime.cs" />
-    <Compile Include="ViewModels\DisplayMaxItemsLimit.cs" />
-    <Compile Include="ViewModels\FeedItemListViewModel.cs" />
-    <Compile Include="ViewModels\FeedItemViewModel.cs" />
-    <Compile Include="ViewModels\FeedListViewModel.cs" />
-    <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
-    <Compile Include="ViewModels\InfoSettingsViewModel.cs" />
-    <Compile Include="ViewModels\NavigationItem.cs" />
-    <Compile Include="ViewModels\SettingsLayoutViewModel.cs" />
-    <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\IFeedItemListView.cs" />
-    <Compile Include="Views\IFeedItemView.cs" />
-    <Compile Include="Views\IFeedListView.cs" />
-    <Compile Include="Views\IGeneralSettingsView.cs" />
-    <Compile Include="Views\IInfoSettingsView.cs" />
-    <Compile Include="Views\ISettingsLayoutView.cs" />
-    <Compile Include="Views\IShellView.cs" />
+    <EmbeddedResource Include="Properties\NewsReader.ExternalServices.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj">
-      <Project>{f022f956-241e-444d-ba42-1dd008071fe6}</Project>
-      <Name>NewsReader.Domain</Name>
+    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
+      <Project>{EEB646F7-C75A-4D7F-9DA5-1B2046962790}</Project>
+      <Name>NewsReader.Applications</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

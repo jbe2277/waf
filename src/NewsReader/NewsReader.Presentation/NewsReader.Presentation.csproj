@@ -214,6 +214,10 @@
       <Project>{f022f956-241e-444d-ba42-1dd008071fe6}</Project>
       <Name>NewsReader.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NewsReader.ExternalServices\NewsReader.ExternalServices.csproj">
+      <Project>{2b7ba354-7132-4e99-bf8f-10de6a9cd401}</Project>
+      <Name>NewsReader.ExternalServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
