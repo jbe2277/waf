@@ -9,5 +9,7 @@
         string AppDescription { get; }
 
         string AppPublisherName { get; }
+
+        string PackageFamilyName { get; }
     }
 }

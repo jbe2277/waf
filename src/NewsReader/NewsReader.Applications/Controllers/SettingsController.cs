@@ -4,10 +4,8 @@ using Jbe.NewsReader.Domain;
 using System;
 using System.ComponentModel;
 using System.Composition;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Waf.Applications;
-using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
@@ -17,6 +15,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class SettingsController
     {
         private readonly ILauncherService launcherService;
+        private readonly IAppInfoService appInfoService;
         private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
         private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
         private readonly Lazy<InfoSettingsViewModel> infoSettingsViewModel;
@@ -24,10 +23,11 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public SettingsController(ILauncherService launcherService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
+        public SettingsController(ILauncherService launcherService, IAppInfoService appInfoService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
             Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
         {
             this.launcherService = launcherService;
+            this.appInfoService = appInfoService;
             this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
             this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
             this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
@@ -65,7 +65,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task LaunchWindowsStore()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await launcherService.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:pdp?PFN={0}", Package.Current.Id.FamilyName)));
+            await launcherService.LaunchUriAsync(new Uri($"ms-windows-store:pdp?PFN={appInfoService.PackageFamilyName}"));
         }
 
         private void GeneralSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

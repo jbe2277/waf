@@ -21,5 +21,7 @@ namespace Jbe.NewsReader.ExternalServices
         public string AppDescription => Package.Current.Description;
 
         public string AppPublisherName => Package.Current.PublisherDisplayName;
+
+        public string PackageFamilyName => Package.Current.Id.FamilyName;
     }
 }
