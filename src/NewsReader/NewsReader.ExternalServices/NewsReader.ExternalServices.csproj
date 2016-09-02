@@ -46,6 +46,7 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Compile Include="AppInfoService.cs" />
+    <Compile Include="LauncherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\NewsReader.ExternalServices.rd.xml" />
   </ItemGroup>

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Waf.Applications;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.System;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
     [Export(typeof(IAppController)), Shared]
     internal class AppController : IAppController
     {
+        private readonly ILauncherService launcherService;
         private readonly Lazy<NewsFeedsController> newsFeedsController;
         private readonly Lazy<SettingsController> settingsController;
         private readonly SelectionService selectionService;
@@ -38,10 +38,11 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController,
+        public AppController(ILauncherService launcherService, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController,
             SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
             Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
+            this.launcherService = launcherService;
             this.newsFeedsController = newsFeedsController;
             this.settingsController = settingsController;
             this.selectionService = selectionService;
@@ -196,7 +197,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task ShowReviewView()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:review?PFN={0}", Package.Current.Id.FamilyName)));
+            await launcherService.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:review?PFN={0}", Package.Current.Id.FamilyName)));
         }
 
         private void ShowSettingsView()

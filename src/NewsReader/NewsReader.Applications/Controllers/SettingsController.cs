@@ -1,4 +1,5 @@
-﻿using Jbe.NewsReader.Applications.ViewModels;
+﻿using Jbe.NewsReader.Applications.Services;
+using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Domain;
 using System;
 using System.ComponentModel;
@@ -8,7 +9,6 @@ using System.Threading.Tasks;
 using System.Waf.Applications;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
@@ -16,6 +16,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class SettingsController
     {
+        private readonly ILauncherService launcherService;
         private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
         private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
         private readonly Lazy<InfoSettingsViewModel> infoSettingsViewModel;
@@ -23,8 +24,10 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public SettingsController(Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
+        public SettingsController(ILauncherService launcherService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
+            Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
         {
+            this.launcherService = launcherService;
             this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
             this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
             this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
@@ -62,7 +65,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task LaunchWindowsStore()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await Launcher.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:pdp?PFN={0}", Package.Current.Id.FamilyName)));
+            await launcherService.LaunchUriAsync(new Uri(string.Format(CultureInfo.InvariantCulture, "ms-windows-store:pdp?PFN={0}", Package.Current.Id.FamilyName)));
         }
 
         private void GeneralSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

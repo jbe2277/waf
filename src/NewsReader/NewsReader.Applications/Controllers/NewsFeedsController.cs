@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
-using Windows.System;
 using Windows.Web.Syndication;
 
 namespace Jbe.NewsReader.Applications.Controllers
@@ -20,6 +19,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     {
         private readonly IResourceService resourceService;
         private readonly IAppService appService;
+        private readonly ILauncherService launcherService;
         private readonly SelectionService selectionService;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly SyndicationClient client;
@@ -31,10 +31,12 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public NewsFeedsController(IResourceService resourceService, IAppService appService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
+        public NewsFeedsController(IResourceService resourceService, IAppService appService, ILauncherService launcherService, 
+            SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
         {
             this.resourceService = resourceService;
             this.appService = appService;
+            this.launcherService = launcherService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
             this.client = new SyndicationClient();
@@ -207,7 +209,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private async Task LaunchWebBrowser()
         {
-            await Launcher.LaunchUriAsync(selectionService.SelectedFeedItem.Uri);
+            await launcherService.LaunchUriAsync(selectionService.SelectedFeedItem.Uri);
         }
 
         private void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
