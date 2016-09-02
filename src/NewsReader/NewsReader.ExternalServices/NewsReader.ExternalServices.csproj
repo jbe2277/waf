@@ -45,6 +45,7 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="AppDataService.cs" />
     <Compile Include="AppInfoService.cs" />
     <Compile Include="LauncherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

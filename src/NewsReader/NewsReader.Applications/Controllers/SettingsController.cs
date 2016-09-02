@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Composition;
 using System.Threading.Tasks;
 using System.Waf.Applications;
-using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
@@ -16,6 +15,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     {
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
+        private readonly IAppDataService appDataService;
         private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
         private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
         private readonly Lazy<InfoSettingsViewModel> infoSettingsViewModel;
@@ -23,11 +23,12 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public SettingsController(ILauncherService launcherService, IAppInfoService appInfoService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
+        public SettingsController(ILauncherService launcherService, IAppInfoService appInfoService, IAppDataService appDataService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
             Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel)
         {
             this.launcherService = launcherService;
             this.appInfoService = appInfoService;
+            this.appDataService = appDataService;
             this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
             this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
             this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
@@ -49,7 +50,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
         {
-            var theme = ApplicationData.Current.LocalSettings.Values["Theme"];
+            var theme = appDataService.LocalSettings["Theme"];
             viewModel.Value.SelectedAppTheme = (theme != null ? ((ApplicationTheme)theme) : (ApplicationTheme?)null).ToAppTheme();
             viewModel.Value.FeedManager = FeedManager;
             viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
@@ -72,7 +73,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             if (e.PropertyName == nameof(GeneralSettingsViewModel.SelectedAppTheme))
             {
-                ApplicationData.Current.LocalSettings.Values["Theme"] = (int?)generalSettingsViewModel.Value.SelectedAppTheme.ToApplicationTheme();
+                appDataService.LocalSettings["Theme"] = (int?)generalSettingsViewModel.Value.SelectedAppTheme.ToApplicationTheme();
             }
         }
     }

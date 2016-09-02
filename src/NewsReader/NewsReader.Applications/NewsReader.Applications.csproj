@@ -52,6 +52,7 @@
     <Compile Include="Controllers\NewsFeedsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAppDataService.cs" />
     <Compile Include="Services\IAppInfoService.cs" />
     <Compile Include="Services\IAppService.cs" />
     <Compile Include="Services\ILauncherService.cs" />
