@@ -49,6 +49,7 @@
     <Compile Include="AppInfoService.cs" />
     <Compile Include="LauncherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyndicationService.cs" />
     <EmbeddedResource Include="Properties\NewsReader.ExternalServices.rd.xml" />
   </ItemGroup>
   <ItemGroup>

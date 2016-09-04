@@ -58,6 +58,7 @@
     <Compile Include="Services\ILauncherService.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\IResourceService.cs" />
+    <Compile Include="Services\ISyndicationService.cs" />
     <Compile Include="Services\SelectionService.cs" />
     <Compile Include="ViewModels\DisplayAppTheme.cs" />
     <Compile Include="ViewModels\DisplayItemLifetime.cs" />

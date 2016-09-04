@@ -5,12 +5,10 @@ using System;
 using System.ComponentModel;
 using System.Composition;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
-using Windows.Web.Syndication;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
@@ -22,7 +20,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly ILauncherService launcherService;
         private readonly SelectionService selectionService;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
-        private readonly SyndicationClient client;
+        private readonly ISyndicationClient client;
         private readonly AsyncDelegateCommand addNewFeedCommand;
         private readonly DelegateCommand removeFeedCommand;
         private readonly AsyncDelegateCommand refreshFeedCommand;
@@ -32,14 +30,14 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         [ImportingConstructor]
         public NewsFeedsController(IResourceService resourceService, IAppService appService, ILauncherService launcherService, 
-            SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
+            ISyndicationService syndicationService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
         {
             this.resourceService = resourceService;
             this.appService = appService;
             this.launcherService = launcherService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
-            this.client = new SyndicationClient();
+            this.client = syndicationService.CreateClient();
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
             this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
@@ -95,15 +93,9 @@ namespace Jbe.NewsReader.Applications.Controllers
                         selectionService.SelectedFeed = feed;                        
                     }
                     var syndicationFeed = await client.RetrieveFeedAsync(feed.Uri);
-                    var items = syndicationFeed.Items.Select(x => new FeedItem(
-                            x.ItemUri ?? x.Links.FirstOrDefault()?.Uri,
-                            x.PublishedDate,
-                            x.Title.Text,
-                            RemoveHtmlTags(x.Summary?.Text),
-                            x.Authors.FirstOrDefault()?.NodeValue
-                        )).ToArray();
+                    var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description, x.Author)).ToArray();
 
-                    feed.Name = syndicationFeed.Title.Text;
+                    feed.Name = syndicationFeed.Title;
                     feed.UpdateItems(items);
                 }
                 else
@@ -224,12 +216,6 @@ namespace Jbe.NewsReader.Applications.Controllers
                 readUnreadCommand.RaiseCanExecuteChanged();
                 launchWebBrowserCommand.RaiseCanExecuteChanged();
             }
-        }
-
-        private static string RemoveHtmlTags(string message)
-        {
-            if (string.IsNullOrEmpty(message)) { return message; }
-            return Regex.Replace(Regex.Replace(message, "\\&.{0,4}\\;", ""), "<.*?>", "");
         }
     }
 }
