@@ -6,5 +6,9 @@ namespace Jbe.NewsReader.Applications.Services
     public interface ILauncherService
     {
         Task<bool> LaunchUriAsync(Uri uri);
+
+        Task<bool> LaunchStoreAsync();
+
+        Task<bool> LaunchReviewAsync();
     }
 }

@@ -61,10 +61,9 @@ namespace Jbe.NewsReader.Applications.Controllers
             return viewModel.Value;
         }
 
-        private async Task LaunchWindowsStore()
+        private Task LaunchWindowsStore()
         {
-            // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await launcherService.LaunchUriAsync(new Uri($"ms-windows-store:pdp?PFN={appInfoService.PackageFamilyName}"));
+            return launcherService.LaunchStoreAsync();
         }
 
         private void GeneralSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

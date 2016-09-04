@@ -194,10 +194,9 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
         }
 
-        private async Task ShowReviewView()
+        private Task ShowReviewView()
         {
-            // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            await launcherService.LaunchUriAsync(new Uri($"ms-windows-store:review?PFN={appInfoService.PackageFamilyName}"));
+            return launcherService.LaunchReviewAsync();
         }
 
         private void ShowSettingsView()
