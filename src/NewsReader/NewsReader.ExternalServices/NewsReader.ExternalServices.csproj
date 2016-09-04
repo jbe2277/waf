@@ -47,6 +47,7 @@
     </CodeAnalysisDictionary>
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppInfoService.cs" />
+    <Compile Include="FileIOHelper.cs" />
     <Compile Include="LauncherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyndicationService.cs" />

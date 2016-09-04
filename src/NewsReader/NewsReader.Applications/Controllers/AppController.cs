@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Waf.Applications;
-using Windows.Storage;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
@@ -17,9 +16,10 @@ namespace Jbe.NewsReader.Applications.Controllers
     {
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
+        private readonly IAppDataService appDataService;
+        private readonly SelectionService selectionService;
         private readonly Lazy<NewsFeedsController> newsFeedsController;
         private readonly Lazy<SettingsController> settingsController;
-        private readonly SelectionService selectionService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly Lazy<FeedItemListViewModel> feedItemListViewModel;
@@ -37,15 +37,16 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController,
-            SelectionService selectionService, Lazy<ShellViewModel> shellViewModel,
+        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, IAppDataService appDataService, SelectionService selectionService,
+            Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, Lazy<ShellViewModel> shellViewModel,
             Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.launcherService = launcherService;
             this.appInfoService = appInfoService;
+            this.appDataService = appDataService;
+            this.selectionService = selectionService;
             this.newsFeedsController = newsFeedsController;
             this.settingsController = settingsController;
-            this.selectionService = selectionService;
             this.shellViewModel = shellViewModel;
             this.feedListViewModel = new Lazy<FeedListViewModel>(() => InitializeFeedListViewModel(feedListViewModel));
             this.feedItemListViewModel = new Lazy<FeedItemListViewModel>(() => InitializeFeedItemListViewModel(feedItemListViewModel));
@@ -94,8 +95,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
             try
             {
-                await FileIOHelper.MigrateDataAsync(ApplicationData.Current.RoamingFolder, "feeds.xml");
-                feedManager = await FileIOHelper.LoadCompressedAsync<FeedManager>(ApplicationData.Current.RoamingFolder, "feeds.xml") ?? new FeedManager();
+                feedManager = await appDataService.LoadCompressedRoamingFileAsync<FeedManager>("feeds.xml") ?? new FeedManager();
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public async Task SuspendingAsync()
         {
-            await FileIOHelper.SaveCompressedAsync(feedManager, ApplicationData.Current.RoamingFolder, "feeds.xml");
+            await appDataService.SaveCompressedRoamingFileAsync(feedManager, "feeds.xml");
         }
 
         private FeedListViewModel InitializeFeedListViewModel(Lazy<FeedListViewModel> viewModel)

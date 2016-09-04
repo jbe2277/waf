@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Jbe.NewsReader.Applications.Controllers
+namespace Jbe.NewsReader.ExternalServices
 {
-    public static class FileIOHelper
+    internal static class FileIOHelper
     {
         public static async Task<T> LoadCompressedAsync<T>(StorageFolder folder, string fileName) where T : class
         {
