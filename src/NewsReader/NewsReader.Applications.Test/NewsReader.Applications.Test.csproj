@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC24398A-1929-4984-AFAC-17AFB2B4AADB}</ProjectGuid>
+    <ProjectGuid>{50CFAE43-D359-43FC-AB9F-C07D13990851}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.NewsReader.Domain</RootNamespace>
-    <AssemblyName>Test.NewsReader.Domain</AssemblyName>
+    <RootNamespace>Test.NewsReader.Applications</RootNamespace>
+    <AssemblyName>Test.NewsReader.Applications</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,40 +32,61 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Waf.Core, Version=4.0.0.5, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Waf.Core.4.0.0-alpha5\lib\dotnet\System.Waf.Core.dll</HintPath>
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Convention, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Waf.Core, Version=4.0.0.3, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Waf.Core.4.0.0-alpha3\lib\dotnet\System.Waf.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Waf.UnitTesting.Core, Version=4.0.0.5, Culture=neutral, PublicKeyToken=1d6a5af5fe952afb, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Waf.UnitTesting.Core.4.0.0-alpha5\lib\dotnet\System.Waf.UnitTesting.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FeedItemTest.cs" />
-    <Compile Include="FeedManagerTest.cs" />
-    <Compile Include="FeedTest.cs" />
-    <Compile Include="Foundation\ObservableListViewTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <Compile Include="SerializerHelper.cs" />
-    <Compile Include="UnitTesting\DomainTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTesting\ApplicationsTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
+      <Project>{eeb646f7-c75a-4d7f-9da5-1b2046962790}</Project>
+      <Name>NewsReader.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsReader.Domain.Test\NewsReader.Domain.Test.csproj">
+      <Project>{dc24398a-1929-4984-afac-17afb2b4aadb}</Project>
+      <Name>NewsReader.Domain.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj">
       <Project>{f022f956-241e-444d-ba42-1dd008071fe6}</Project>
       <Name>NewsReader.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

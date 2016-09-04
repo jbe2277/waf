@@ -2,11 +2,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Waf.UnitTesting;
+using Test.NewsReader.Domain.UnitTesting;
 
 namespace Test.NewsReader.Domain
 {
     [TestClass]
-    public class FeedItemTest
+    public class FeedItemTest : DomainTest
     {
         [TestMethod]
         public void ApplyValuesFromTest()

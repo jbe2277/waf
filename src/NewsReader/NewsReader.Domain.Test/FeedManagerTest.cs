@@ -2,11 +2,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using Test.NewsReader.Domain.UnitTesting;
 
 namespace Test.NewsReader.Domain
 {
     [TestClass]
-    public class FeedManagerTest
+    public class FeedManagerTest : DomainTest
     {
         [TestMethod]
         public void SetDataManager()

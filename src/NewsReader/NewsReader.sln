@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Domain.Test", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.ExternalServices", "NewsReader.ExternalServices\NewsReader.ExternalServices.csproj", "{2B7BA354-7132-4E99-BF8F-10DE6A9CD401}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Applications.Test", "NewsReader.Applications.Test\NewsReader.Applications.Test.csproj", "{50CFAE43-D359-43FC-AB9F-C07D13990851}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,11 +113,28 @@ Global
 		{2B7BA354-7132-4E99-BF8F-10DE6A9CD401}.Release|x64.Build.0 = Release|Any CPU
 		{2B7BA354-7132-4E99-BF8F-10DE6A9CD401}.Release|x86.ActiveCfg = Release|Any CPU
 		{2B7BA354-7132-4E99-BF8F-10DE6A9CD401}.Release|x86.Build.0 = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|ARM.Build.0 = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|x64.Build.0 = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Debug|x86.Build.0 = Debug|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|ARM.ActiveCfg = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|ARM.Build.0 = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|x64.ActiveCfg = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|x64.Build.0 = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|x86.ActiveCfg = Release|Any CPU
+		{50CFAE43-D359-43FC-AB9F-C07D13990851}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DC24398A-1929-4984-AFAC-17AFB2B4AADB} = {37CA503F-2618-4A08-923C-7E73DB73B8AC}
+		{50CFAE43-D359-43FC-AB9F-C07D13990851} = {37CA503F-2618-4A08-923C-7E73DB73B8AC}
 	EndGlobalSection
 EndGlobal

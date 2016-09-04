@@ -5,11 +5,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using Test.NewsReader.Domain.UnitTesting;
 
 namespace Test.NewsReader.Domain.Foundation
 {
     [TestClass]
-    public class ObservableListViewTest
+    public class ObservableListViewTest : DomainTest
     {
         private ObservableCollection<string> originalList;
         private ObservableListView<string> observableListView;
@@ -17,9 +18,9 @@ namespace Test.NewsReader.Domain.Foundation
         private int countChangedCount;
         private int indexerChangedCount;
 
-        [TestInitialize]
-        public void Initialize()
+        protected override void OnInitialize()
         {
+            base.OnInitialize();
             originalList = new ObservableCollection<string>();
             observableListView = new ObservableListView<string>(originalList);
 
@@ -43,14 +44,14 @@ namespace Test.NewsReader.Domain.Foundation
             observableListView.PropertyChanged += propertyHandler;
         }
 
-        [TestCleanup]
-        public void Cleanup()
+        protected override void OnCleanup()
         {
             AssertNoEventsRaised(() =>
             {
                 observableListView.Dispose();
                 originalList.Add("disposed");
             });
+            base.OnCleanup();
         }
 
         [TestMethod]
