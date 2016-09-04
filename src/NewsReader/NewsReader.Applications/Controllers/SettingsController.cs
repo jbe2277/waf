@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Composition;
 using System.Threading.Tasks;
 using System.Waf.Applications;
-using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
@@ -50,8 +49,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
         {
-            var theme = appDataService.LocalSettings["Theme"];
-            viewModel.Value.SelectedAppTheme = (theme != null ? ((ApplicationTheme)theme) : (ApplicationTheme?)null).ToAppTheme();
+            viewModel.Value.SelectedAppTheme = DisplayAppThemeExtensions.FromSettings((int?)appDataService.LocalSettings["Theme"]);
             viewModel.Value.FeedManager = FeedManager;
             viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
             return viewModel.Value;
@@ -73,7 +71,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             if (e.PropertyName == nameof(GeneralSettingsViewModel.SelectedAppTheme))
             {
-                appDataService.LocalSettings["Theme"] = (int?)generalSettingsViewModel.Value.SelectedAppTheme.ToApplicationTheme();
+                appDataService.LocalSettings["Theme"] = generalSettingsViewModel.Value.SelectedAppTheme.ToSettings();
             }
         }
     }
