@@ -31,7 +31,7 @@
         <dependency id="System.Runtime.WindowsRuntime.UI.Xaml" version="4.0.0" />
         <dependency id="System.Threading.Tasks" version="4.0.10" />
 
-        <dependency id="System.Waf.Core" version="4.0.0-alpha3" />
+        <dependency id="System.Waf.Core" version="4.0.0-alpha6" />
       </group>
     </dependencies>
   </metadata>
