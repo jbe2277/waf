@@ -4,6 +4,7 @@ using Jbe.NewsReader.Domain;
 using System;
 using System.ComponentModel;
 using System.Composition;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Waf.Applications;
@@ -18,28 +19,30 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IResourceService resourceService;
         private readonly IAppService appService;
         private readonly ILauncherService launcherService;
+        private readonly IMessageService messageService;
         private readonly SelectionService selectionService;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly ISyndicationClient client;
         private readonly AsyncDelegateCommand addNewFeedCommand;
-        private readonly DelegateCommand removeFeedCommand;
+        private readonly AsyncDelegateCommand removeFeedCommand;
         private readonly AsyncDelegateCommand refreshFeedCommand;
         private readonly DelegateCommand readUnreadCommand;
         private readonly AsyncDelegateCommand launchWebBrowserCommand;
 
 
         [ImportingConstructor]
-        public NewsFeedsController(IResourceService resourceService, IAppService appService, ILauncherService launcherService, 
+        public NewsFeedsController(IResourceService resourceService, IAppService appService, ILauncherService launcherService, IMessageService messageService,
             ISyndicationService syndicationService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
         {
             this.resourceService = resourceService;
             this.appService = appService;
             this.launcherService = launcherService;
+            this.messageService = messageService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
             this.client = syndicationService.CreateClient();
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
-            this.removeFeedCommand = new DelegateCommand(RemoveFeed, CanRemoveFeed);
+            this.removeFeedCommand = new AsyncDelegateCommand(RemoveFeedAsync, CanRemoveFeed);
             this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
             this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
             this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
@@ -154,9 +157,15 @@ namespace Jbe.NewsReader.Applications.Controllers
             return selectionService.SelectedFeed != null;
         }
 
-        private void RemoveFeed()
+        private async Task RemoveFeedAsync()
         {
             var feedToRemove = selectionService.SelectedFeed;
+            if (!await messageService.ShowYesNoQuestionAsync(string.Format(CultureInfo.CurrentCulture, 
+                resourceService.GetString("RemoveFeedQuestion"), feedToRemove.Name)))
+            {
+                return;  // User canceled operation
+            }
+            
             var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds, feedToRemove);
             FeedManager.Feeds.Remove(feedToRemove);
             selectionService.SelectedFeed = feedToSelect ?? FeedManager.Feeds.LastOrDefault();

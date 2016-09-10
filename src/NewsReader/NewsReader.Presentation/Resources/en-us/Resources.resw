@@ -257,4 +257,7 @@ This might remove older feed items.</value>
     <value>Do you want to reduce the maximum number of feed items per feed? 
 This might remove older feed items.</value>
   </data>
+  <data name="RemoveFeedQuestion" xml:space="preserve">
+    <value>Do you want to remove the Feed '{0}'?</value>
+  </data>
 </root>

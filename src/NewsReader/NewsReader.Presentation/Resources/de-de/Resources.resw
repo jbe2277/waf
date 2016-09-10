@@ -257,4 +257,7 @@ Diese Aktion könnte ältere Artikel löschen.</value>
     <value>Wollen Sie die maximale Anzahl der Artikel pro Feed reduzieren? 
 Diese Aktion könnte ältere Artikel löschen.</value>
   </data>
+  <data name="RemoveFeedQuestion" xml:space="preserve">
+    <value>Soll der Feed '{0}' gelöscht werden?</value>
+  </data>
 </root>
