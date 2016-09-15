@@ -11,17 +11,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar Grid.Row="0">
-            <AppBarButton x:Uid="OpenInBrowserL" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
-
-            <CommandBar.Content>
-                <waf:HeaderContentControl Margin="13,0,0,0">
-                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeedItem.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
-                </waf:HeaderContentControl>
-            </CommandBar.Content>
-        </CommandBar>
+        <Border Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <waf:HeaderContentControl Margin="13,0,0,0">
+                <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeedItem.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+            </waf:HeaderContentControl>
+        </Border>
 
         <Grid Grid.Row="1">
             <Grid.Transitions>
@@ -34,5 +31,9 @@
 
             <ProgressBar x:Name="loadingProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Visibility="Collapsed"/>
         </Grid>
+
+        <CommandBar Grid.Row="2">
+            <AppBarButton x:Uid="OpenInBrowserL" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
+        </CommandBar>
     </Grid>
 </UserControl>

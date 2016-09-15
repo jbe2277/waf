@@ -12,9 +12,45 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar Grid.Row="0">
+        <Border Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <waf:HeaderContentControl Margin="13,0,0,0">
+                <TextBlock x:Uid="FeedsT" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+            </waf:HeaderContentControl>
+        </Border>
+
+        <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
+                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}"
+                  CanReorderItems="True" AllowDrop="True">
+            <ListView.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </ListView.Transitions>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="m:Feed">
+                    <RelativePanel DoubleTapped="FeedDoubleTapped" Background="Transparent">
+                        <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
+
+                        <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
+                            <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
+                            <Run Text="   "/>
+                            <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
+                        </TextBlock>
+
+                        <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
+                                RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
+                            <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        </HyperlinkButton>
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <CommandBar Grid.Row="2">
             <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
                 <AppBarButton.Flyout>
                     <Flyout Opened="AddFeedFlyoutOpened">
@@ -54,41 +90,6 @@
                 </AppBarButton.Flyout>
             </AppBarButton>
             <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
-
-            <CommandBar.Content>
-                <waf:HeaderContentControl Margin="13,0,0,0">
-                    <TextBlock x:Uid="FeedsT" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
-                </waf:HeaderContentControl>
-            </CommandBar.Content>
         </CommandBar>
-
-        <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
-                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}"
-                  CanReorderItems="True" AllowDrop="True">
-            <ListView.Transitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition/>
-                </TransitionCollection>
-            </ListView.Transitions>
-            
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="m:Feed">
-                    <RelativePanel DoubleTapped="FeedDoubleTapped" Background="Transparent">
-                        <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
-
-                        <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
-                            <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
-                        </TextBlock>
-
-                        <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
-                            <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        </HyperlinkButton>
-                    </RelativePanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </Grid>
 </UserControl>

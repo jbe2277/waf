@@ -19,18 +19,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar Grid.Column="0" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
-            <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
-
-            <CommandBar.Content>
-                <waf:HeaderContentControl Margin="13,0,0,0">
-                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
-                </waf:HeaderContentControl>
-            </CommandBar.Content>
-        </CommandBar>
+        <Border Grid.Column="0" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <waf:HeaderContentControl Margin="13,0,0,0">
+                <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+            </waf:HeaderContentControl>
+        </Border>
 
         <Grid Grid.Column="1" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <AppBarButton x:Name="searchButton" x:Uid="SearchL" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
@@ -103,5 +99,10 @@
             <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
                 Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
+
+        <CommandBar Grid.ColumnSpan="2" Grid.Row="2" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
+            <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
+        </CommandBar>
     </Grid>
 </UserControl>
