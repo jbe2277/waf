@@ -41,7 +41,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="200">
+        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="250">
             <SplitView.Pane>
                 <Grid Margin="0,48,0,0">
                     <Grid.RowDefinitions>
