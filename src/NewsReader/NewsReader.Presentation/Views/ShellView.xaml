@@ -41,29 +41,31 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="250">
+        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <SplitView.Pane>
-                <Grid Margin="0,48,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid Margin="0,48,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
-                            IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=FeedList;FeedItemList;FeedItem}" 
-                            Command="{x:Bind ViewModel.ShowNewsViewCommand}"/>
-                    <waf:NavigationToggleButton Grid.Row="1" x:Uid="FeedbackC" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
-                        <waf:NavigationToggleButton.Icon>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
-                        </waf:NavigationToggleButton.Icon>
-                    </waf:NavigationToggleButton>
-                    <Border Grid.Row="2" BorderBrush="{ThemeResource NavigationSeparatorForegroundThemeBrush}" BorderThickness="0,0,0,1"/>
-                    <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
-                            IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
-                            Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>
-                </Grid>
+                        <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
+                                IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=FeedList;FeedItemList;FeedItem}" 
+                                Command="{x:Bind ViewModel.ShowNewsViewCommand}"/>
+                        <waf:NavigationToggleButton Grid.Row="1" x:Uid="FeedbackC" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
+                            <waf:NavigationToggleButton.Icon>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
+                            </waf:NavigationToggleButton.Icon>
+                        </waf:NavigationToggleButton>
+                        <Border Grid.Row="2" BorderBrush="{ThemeResource AppBarBorderBrush}" BorderThickness="0,0,0,1"/>
+                        <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
+                                IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
+                                Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>
+                    </Grid>
+                </Border>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>

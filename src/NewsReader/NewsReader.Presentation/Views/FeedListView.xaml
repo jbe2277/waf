@@ -50,46 +50,48 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <CommandBar Grid.Row="2">
-            <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
-                <AppBarButton.Flyout>
-                    <Flyout Opened="AddFeedFlyoutOpened">
-                        <Grid x:Name="addFeedGrid" Width="400">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource AppBarBorderBrush}">
+            <CommandBar>
+                <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
+                    <AppBarButton.Flyout>
+                        <Flyout Opened="AddFeedFlyoutOpened">
+                            <Grid x:Name="addFeedGrid" Width="400">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" x:Uid="AddFeedT" Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Grid.Row="0" x:Uid="AddFeedT" Style="{StaticResource TitleTextBlockStyle}"/>
 
-                            <TextBlock Grid.Row="2" x:Uid="EnterFeedUrlT" TextWrapping="Wrap"/>
+                                <TextBlock Grid.Row="2" x:Uid="EnterFeedUrlT" TextWrapping="Wrap"/>
 
-                            <RelativePanel Grid.Row="4">
-                                <Button x:Name="pasteButton" x:Uid="Paste" Command="{x:Bind PasteCommand}">
-                                    <SymbolIcon Symbol="Paste"/>
-                                </Button>
-                                <TextBox x:Name="feedBox" Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
+                                <RelativePanel Grid.Row="4">
+                                    <Button x:Name="pasteButton" x:Uid="Paste" Command="{x:Bind PasteCommand}">
+                                        <SymbolIcon Symbol="Paste"/>
+                                    </Button>
+                                    <TextBox x:Name="feedBox" Text="{Binding AddNewFeedUri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="AddNewFeedUriBoxKeyUp"
                                         RelativePanel.RightOf="pasteButton" RelativePanel.AlignRightWithPanel="True" Margin="11,0,0,0" IsSpellCheckEnabled="False"/>
-                            </RelativePanel>
+                                </RelativePanel>
 
-                            <TextBlock Grid.Row="6" Text="{x:Bind ViewModel.LoadErrorMessage, Mode=OneWay}" TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Red"/>
+                                <TextBlock Grid.Row="6" Text="{x:Bind ViewModel.LoadErrorMessage, Mode=OneWay}" TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Red"/>
 
-                            <StackPanel Grid.Row="8" Orientation="Horizontal">
-                                <Button x:Uid="AddFeedC" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
-                                <Button x:Uid="CancelC" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
-                            </StackPanel>
-                        </Grid>
-                    </Flyout>
-                </AppBarButton.Flyout>
-            </AppBarButton>
-            <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
-        </CommandBar>
+                                <StackPanel Grid.Row="8" Orientation="Horizontal">
+                                    <Button x:Uid="AddFeedC" Command="{x:Bind ViewModel.AddNewFeedCommand}"/>
+                                    <Button x:Uid="CancelC" Click="AddFeedFlyoutCloseAction" Margin="11,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
+            </CommandBar>
+        </Border>
     </Grid>
 </UserControl>

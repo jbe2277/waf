@@ -32,8 +32,10 @@
             <ProgressBar x:Name="loadingProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Visibility="Collapsed"/>
         </Grid>
 
-        <CommandBar Grid.Row="2">
-            <AppBarButton x:Uid="OpenInBrowserL" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
-        </CommandBar>
+        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource AppBarBorderBrush}">
+            <CommandBar Grid.Row="2">
+                <AppBarButton x:Uid="OpenInBrowserL" Command="{x:Bind ViewModel.LaunchWebBrowserCommand}" Icon="Globe"/>
+            </CommandBar>
+        </Border>
     </Grid>
 </UserControl>

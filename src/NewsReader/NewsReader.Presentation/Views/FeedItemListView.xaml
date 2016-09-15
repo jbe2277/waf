@@ -100,9 +100,11 @@
                 Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
-        <CommandBar Grid.ColumnSpan="2" Grid.Row="2" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
-            <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
-        </CommandBar>
+        <Border Grid.ColumnSpan="2" Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource AppBarBorderBrush}">
+            <CommandBar Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
+                <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
+            </CommandBar>
+        </Border>
     </Grid>
 </UserControl>

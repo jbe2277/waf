@@ -4,8 +4,8 @@
 
     <SolidColorBrush x:Key="ErrorBackgroundThemeBrush" Color="#FFDA8A8A"/>
 
-    <SolidColorBrush x:Key="NavigationSeparatorForegroundThemeBrush" Color="#FFBBBBBB" />
-
     <SolidColorBrush x:Key="UnreadLineFillThemeBrush" Color="#FF333333"/>
+
+    <SolidColorBrush x:Key="AppBarBorderBrush" Color="#FFD2D2D2"/>
 
 </ResourceDictionary>
