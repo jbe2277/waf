@@ -67,7 +67,7 @@
                         <DataTemplate x:DataType="m:FeedItem">
                             <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="6"/>
                                     <ColumnDefinition Width="9"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
