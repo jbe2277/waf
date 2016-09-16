@@ -59,7 +59,7 @@
                       SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Padding" Value="7,10,20,10"/>
+                            <Setter Property="Padding" Value="0"/>
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         </Style>
                     </ListView.ItemContainerStyle>
@@ -67,14 +67,21 @@
                         <DataTemplate x:DataType="m:FeedItem">
                             <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="12"/>
                                     <ColumnDefinition Width="9"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                                <Rectangle Grid.Column="0" Fill="{ThemeResource UnreadLineFillThemeBrush}" Margin="0,3,0,0" Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+                                <Rectangle Grid.ColumnSpan="3" Grid.Row="0" Fill="{ThemeResource JbeMainBorderBrush}"/>
 
-                                <RelativePanel Grid.Column="2">
+                                <Rectangle Grid.Column="0" Grid.Row="1" Fill="{ThemeResource JbeUnreadLineFillThemeBrush}"
+                                           Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+
+                                <RelativePanel Grid.Column="2" Grid.Row="1" Margin="7,7,20,10">
                                     <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
                                             Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
                                     <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
@@ -100,7 +107,7 @@
                 Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
-        <Border Grid.ColumnSpan="2" Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource AppBarBorderBrush}">
+        <Border Grid.ColumnSpan="2" Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}">
             <CommandBar Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
                 <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
                 <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>

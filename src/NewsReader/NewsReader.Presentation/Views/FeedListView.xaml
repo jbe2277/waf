@@ -29,28 +29,42 @@
                     <EntranceThemeTransition/>
                 </TransitionCollection>
             </ListView.Transitions>
-            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Feed">
-                    <RelativePanel DoubleTapped="FeedDoubleTapped" Background="Transparent">
-                        <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
-                            <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
-                        </TextBlock>
+                        <Rectangle Grid.Row="0" Fill="{ThemeResource JbeMainBorderBrush}"/>
 
-                        <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
-                            <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        </HyperlinkButton>
-                    </RelativePanel>
+                        <RelativePanel Grid.Row="1" DoubleTapped="FeedDoubleTapped" Background="Transparent" Margin="7,7,20,10">
+                            <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
+
+                            <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
+                                <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
+                                <Run Text="   "/>
+                                <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
+                            </TextBlock>
+
+                            <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
+                                    RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
+                                <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                            </HyperlinkButton>
+                        </RelativePanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource AppBarBorderBrush}">
+        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}">
             <CommandBar>
                 <AppBarButton x:Name="addFeedButton" x:Uid="AddNewFeedL" Icon="Add">
                     <AppBarButton.Flyout>

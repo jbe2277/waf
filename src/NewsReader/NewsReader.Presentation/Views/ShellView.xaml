@@ -8,7 +8,7 @@
     xmlns:waf="using:System.Waf.Presentation.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource JbeMainBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -43,8 +43,8 @@
 
         <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <SplitView.Pane>
-                <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Grid Margin="0,48,0,0">
+                <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource JbeMainBackgroundBrush}">
+                    <Grid Margin="0,49,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -60,7 +60,7 @@
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE939;"/>
                             </waf:NavigationToggleButton.Icon>
                         </waf:NavigationToggleButton>
-                        <Border Grid.Row="2" BorderBrush="{ThemeResource AppBarBorderBrush}" BorderThickness="0,0,0,1"/>
+                        <Border Grid.Row="2" BorderBrush="{ThemeResource JbeAppBarBorderBrush}" BorderThickness="0,0,0,1"/>
                         <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
                                 IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
                                 Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>

@@ -4,8 +4,12 @@
 
     <SolidColorBrush x:Key="ErrorBackgroundThemeBrush" Color="DarkRed"/>
 
-    <SolidColorBrush x:Key="UnreadLineFillThemeBrush" Color="#FFCCCCCC"/>
+    <SolidColorBrush x:Key="JbeUnreadLineFillThemeBrush" Color="#FF2488D8"/>
 
-    <SolidColorBrush x:Key="AppBarBorderBrush" Color="#FF444444"/>
+    <SolidColorBrush x:Key="JbeMainBorderBrush" Color="#FF000000"/>
+
+    <SolidColorBrush x:Key="JbeAppBarBorderBrush" Color="#FF444444"/>
+
+    <SolidColorBrush x:Key="JbeMainBackgroundBrush" Color="#FF1A1A1A"/>
 
 </ResourceDictionary>
