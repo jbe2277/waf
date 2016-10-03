@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,14 +11,14 @@ namespace System.Waf.UnitTesting
     public sealed class UnitTestSynchronizationContext : SynchronizationContext, IDisposable
     {
         private readonly SynchronizationContext previousContext;
-        private readonly BlockingCollection<Tuple<SendOrPostCallback, object>> messageQueue;
+        private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> messageQueue;
         private int isDisposed;
 
 
         private UnitTestSynchronizationContext()
         {
             previousContext = SynchronizationContext.Current;
-            messageQueue = new BlockingCollection<Tuple<SendOrPostCallback, object>>();
+            messageQueue = new BlockingCollection<KeyValuePair<SendOrPostCallback, object>>();
         }
 
 
@@ -46,7 +47,7 @@ namespace System.Waf.UnitTesting
         /// <returns>The copy of this synchronization context.</returns>
         public override SynchronizationContext CreateCopy()
         {
-            return Create();
+            return new UnitTestSynchronizationContext();
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace System.Waf.UnitTesting
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (IsDisposed) { return; }
-            base.Send(d, state);
+            d(state);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace System.Waf.UnitTesting
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (IsDisposed) { return; }
-            messageQueue.Add(new Tuple<SendOrPostCallback, object>(d, state));
+            messageQueue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace System.Waf.UnitTesting
                 while (!token.IsCancellationRequested)
                 {
                     var message = messageQueue.Take(token);
-                    Send(message.Item1, message.Item2);
+                    message.Key(message.Value);
                 }
             }
             catch (OperationCanceledException)
@@ -138,7 +139,7 @@ namespace System.Waf.UnitTesting
             messageQueue.CompleteAdding();
             foreach (var message in messageQueue)
             {
-                message.Item1(message.Item2);
+                message.Key(message.Value);
             }
         }
 

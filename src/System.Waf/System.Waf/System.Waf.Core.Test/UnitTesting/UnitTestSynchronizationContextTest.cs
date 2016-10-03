@@ -20,6 +20,7 @@ namespace Test.Waf.UnitTesting
 
                 using (var nestedContext = (UnitTestSynchronizationContext)context.CreateCopy())
                 {
+                    SynchronizationContext.SetSynchronizationContext(nestedContext);
                     Assert.AreEqual(nestedContext, SynchronizationContext.Current);
                     Assert.AreEqual(nestedContext, UnitTestSynchronizationContext.Current);
                 }
