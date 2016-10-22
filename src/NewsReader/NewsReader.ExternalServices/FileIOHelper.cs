@@ -16,7 +16,7 @@ namespace Jbe.NewsReader.ExternalServices
 
             try
             {
-                using (var archiveStream = await folder.OpenStreamForReadAsync(fileName + "z"))
+                using (var archiveStream = await folder.OpenStreamForReadAsync(fileName + ".zip"))
                 using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
                 {
                     var entry = archive.GetEntry(fileName);
@@ -39,7 +39,7 @@ namespace Jbe.NewsReader.ExternalServices
             if (folder == null) { throw new ArgumentNullException(nameof(folder)); }
             if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("String must not be null or empty.", nameof(fileName)); }
 
-            using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + "z", CreationCollisionOption.ReplaceExisting))
+            using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + ".zip", CreationCollisionOption.ReplaceExisting))
             using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
             {
                 var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);
@@ -53,25 +53,6 @@ namespace Jbe.NewsReader.ExternalServices
         }
 
         public static async Task MigrateDataAsync(StorageFolder folder, string fileName)
-        {
-            await MigrateDataV100ToV110Async(folder, fileName);
-            await MigrateDataV110ToV120Async(folder, fileName);
-        }
-
-        private static async Task MigrateDataV110ToV120Async(StorageFolder folder, string fileName)
-        {
-            try
-            {
-                var fileV110 = await folder.GetFileAsync(fileName + ".zip");  // ZIP files are excluded from Roaming
-                await fileV110.RenameAsync(fileName + "z");                   // Rename to e.g. feeds.xmlz
-            }
-            catch (FileNotFoundException)
-            {
-                return;
-            }
-        }
-
-        private static async Task MigrateDataV100ToV110Async(StorageFolder folder, string fileName)
         {
             try
             {
