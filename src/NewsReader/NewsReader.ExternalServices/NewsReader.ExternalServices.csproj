@@ -45,6 +45,7 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="AccountService.cs" />
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppInfoService.cs" />
     <Compile Include="FileIOHelper.cs" />
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
       <Project>{EEB646F7-C75A-4D7F-9DA5-1B2046962790}</Project>
       <Name>NewsReader.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj">
+      <Project>{f022f956-241e-444d-ba42-1dd008071fe6}</Project>
+      <Name>NewsReader.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />

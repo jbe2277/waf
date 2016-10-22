@@ -1,4 +1,5 @@
-﻿using Jbe.NewsReader.Applications.Views;
+﻿using Jbe.NewsReader.Applications.Services;
+using Jbe.NewsReader.Applications.Views;
 using System;
 using System.Composition;
 using System.Waf.Applications;
@@ -15,10 +16,13 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view) : base(view)
+        public ShellViewModel(IShellView view, IAccountInfoService accountInfoService) : base(view)
         {
+            AccountInfoService = accountInfoService;
         }
 
+
+        public IAccountInfoService AccountInfoService { get; }
 
         public object ContentView
         {
@@ -39,6 +43,10 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public ICommand ShowReviewViewCommand { get; set; }
 
         public ICommand ShowSettingsViewCommand { get; set; }
+
+        public ICommand SignInCommand { get; set; }
+
+        public ICommand SignOutCommand { get; set; }
 
         public NavigationItem SelectedNavigationItem
         {

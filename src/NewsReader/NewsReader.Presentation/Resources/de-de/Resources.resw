@@ -260,4 +260,10 @@ Diese Aktion könnte ältere Artikel löschen.</value>
   <data name="RemoveFeedQuestion" xml:space="preserve">
     <value>Soll der Feed '{0}' gelöscht werden?</value>
   </data>
+  <data name="SignInC.Content" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="SignOutT.Text" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
 </root>

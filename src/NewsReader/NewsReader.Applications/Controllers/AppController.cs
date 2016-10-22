@@ -18,6 +18,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAppInfoService appInfoService;
         private readonly IAppDataService appDataService;
         private readonly SelectionService selectionService;
+        private readonly Lazy<AccountController> accountController;
         private readonly Lazy<NewsFeedsController> newsFeedsController;
         private readonly Lazy<SettingsController> settingsController;
         private readonly Lazy<ShellViewModel> shellViewModel;
@@ -38,13 +39,14 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         [ImportingConstructor]
         public AppController(ILauncherService launcherService, IAppInfoService appInfoService, IAppDataService appDataService, SelectionService selectionService,
-            Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, Lazy<ShellViewModel> shellViewModel,
-            Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
+            Lazy<AccountController> accountController, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, 
+            Lazy<ShellViewModel> shellViewModel, Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.launcherService = launcherService;
             this.appInfoService = appInfoService;
             this.appDataService = appDataService;
             this.selectionService = selectionService;
+            this.accountController = accountController;
             this.newsFeedsController = newsFeedsController;
             this.settingsController = settingsController;
             this.shellViewModel = shellViewModel;
@@ -59,6 +61,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
             this.navigationStack = new Stack<NavigationItem>();
         }
+
 
         private NavigationItem SelectedNavigationItem
         {
@@ -86,6 +89,8 @@ namespace Jbe.NewsReader.Applications.Controllers
             shellViewModel.Value.ShowNewsViewCommand = showFeedListViewCommand;
             shellViewModel.Value.ShowReviewViewCommand = showReviewViewCommand;
             shellViewModel.Value.ShowSettingsViewCommand = showSettingsViewCommand;
+            shellViewModel.Value.SignInCommand = accountController.Value.SignInCommand;
+            shellViewModel.Value.SignOutCommand = accountController.Value.SignOutCommand;
         }
 
         public async void Run()

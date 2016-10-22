@@ -50,6 +50,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
@@ -61,7 +62,16 @@
                             </waf:NavigationToggleButton.Icon>
                         </waf:NavigationToggleButton>
                         <Border Grid.Row="2" BorderBrush="{ThemeResource JbeAppBarBorderBrush}" BorderThickness="0,0,0,1"/>
-                        <waf:NavigationToggleButton Grid.Row="3" x:Uid="SettingsC" Icon="Setting"
+                        <waf:NavigationToggleButton Grid.Row="3" x:Uid="SignInC" Icon="AddFriend" Command="{x:Bind ViewModel.SignInCommand}" 
+                                Visibility="{x:Bind ViewModel.AccountInfoService.CurrentAccount, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=invert}"/>
+                        <waf:NavigationToggleButton Grid.Row="3" Icon="Contact" Command="{x:Bind ViewModel.SignOutCommand}"
+                                Visibility="{x:Bind ViewModel.AccountInfoService.CurrentAccount, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
+                            <StackPanel>
+                                <TextBlock Text="{x:Bind ViewModel.AccountInfoService.CurrentAccount.UserName, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                <TextBlock x:Uid="SignOutT"/>
+                            </StackPanel>
+                        </waf:NavigationToggleButton>
+                        <waf:NavigationToggleButton Grid.Row="4" x:Uid="SettingsC" Icon="Setting"
                                 IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
                                 Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>
                     </Grid>

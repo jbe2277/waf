@@ -260,4 +260,10 @@ This might remove older feed items.</value>
   <data name="RemoveFeedQuestion" xml:space="preserve">
     <value>Do you want to remove the Feed '{0}'?</value>
   </data>
+  <data name="SignInC.Content" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignOutT.Text" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
 </root>
