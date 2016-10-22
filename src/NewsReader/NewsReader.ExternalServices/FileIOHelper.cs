@@ -54,6 +54,25 @@ namespace Jbe.NewsReader.ExternalServices
 
         public static async Task MigrateDataAsync(StorageFolder folder, string fileName)
         {
+            await MigrateDataV100ToV110Async(folder, fileName);
+            await MigrateDataV110ToV120Async(folder, fileName);
+        }
+
+        private static async Task MigrateDataV110ToV120Async(StorageFolder folder, string fileName)
+        {
+            try
+            {
+                var fileV110 = await ApplicationData.Current.RoamingFolder.GetFileAsync(fileName + ".zip");  // Old file is stored in Roaming folder
+                await fileV110.MoveAsync(folder);   // Move the file into Local folder
+            }
+            catch (FileNotFoundException)
+            {
+                return;
+            }
+        }
+
+        private static async Task MigrateDataV100ToV110Async(StorageFolder folder, string fileName)
+        {
             try
             {
                 using (var copyStream = new MemoryStream())

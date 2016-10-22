@@ -14,13 +14,13 @@ namespace Jbe.NewsReader.ExternalServices
 
         public async Task<T> LoadCompressedRoamingFileAsync<T>(string fileName) where T : class
         {
-            await FileIOHelper.MigrateDataAsync(ApplicationData.Current.RoamingFolder, fileName);
-            return await FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.RoamingFolder, fileName);
+            await FileIOHelper.MigrateDataAsync(ApplicationData.Current.LocalFolder, fileName);
+            return await FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.LocalFolder, fileName);
         }
 
         public Task SaveCompressedRoamingFileAsync(object data, string fileName)
         {
-            return FileIOHelper.SaveCompressedAsync(data, ApplicationData.Current.RoamingFolder, fileName);
+            return FileIOHelper.SaveCompressedAsync(data, ApplicationData.Current.LocalFolder, fileName);
         }
     }
 }
