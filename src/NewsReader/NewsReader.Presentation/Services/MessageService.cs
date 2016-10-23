@@ -10,6 +10,16 @@ namespace Jbe.NewsReader.Presentation.Services
     [Export(typeof(IMessageService)), Export, Shared]
     internal class MessageService : IMessageService
     {
+        public async Task ShowMessageAsync(string message)
+        {
+            var messageDialog = new MessageDialog(message);
+            var closeCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Close"));
+            messageDialog.Commands.Add(closeCommand);
+            messageDialog.DefaultCommandIndex = 0;
+            messageDialog.CancelCommandIndex = 0;
+            await messageDialog.ShowAsync();
+        }
+
         public async Task<bool> ShowYesNoQuestionAsync(string message)
         {
             var messageDialog = new MessageDialog(message);

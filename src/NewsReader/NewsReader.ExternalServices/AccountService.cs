@@ -16,9 +16,18 @@ namespace Jbe.NewsReader.ExternalServices
     internal class AccountService : Model, IAccountService
     {
         private const string tokenScope = "onedrive.appfolder";
+        private readonly IResourceService resourceService;
         private WebAccountProvider provider;
         private WebAccount account;
         private UserAccount currentAccount;
+        private Action<Task<UserAccount>> signInStartedCallback;
+
+
+        [ImportingConstructor]
+        public AccountService(IResourceService resourceService)
+        {
+            this.resourceService = resourceService;
+        }
 
 
         public UserAccount CurrentAccount
@@ -28,8 +37,9 @@ namespace Jbe.NewsReader.ExternalServices
         }
 
 
-        public void SignIn()
+        public void SignIn(Action<Task<UserAccount>> signInStarted)
         {
+            signInStartedCallback = signInStarted;
             AccountsSettingsPane.GetForCurrentView().AccountCommandsRequested += BuildAccountsSettingsPaneAsync;
             AccountsSettingsPane.Show();
         }
@@ -46,15 +56,22 @@ namespace Jbe.NewsReader.ExternalServices
 
             var deferral = e.GetDeferral();
 
-            e.HeaderText = "TODO: Explain why the user should sign in.";
+            e.HeaderText = resourceService.GetString("SignInDescription");
             var msaProvider = await WebAuthenticationCoreManager.FindAccountProviderAsync("https://login.microsoft.com", "consumers");
-            var command = new WebAccountProviderCommand(msaProvider, GetMsaTokenAsync);
+            var command = new WebAccountProviderCommand(msaProvider, GetMsaToken);
             e.WebAccountProviderCommands.Add(command);
 
             deferral.Complete();
         }
 
-        private async void GetMsaTokenAsync(WebAccountProviderCommand command)
+        private void GetMsaToken(WebAccountProviderCommand command)
+        {
+            CurrentAccount = null;
+            var task = GetMsaTokenAsync(command);
+            signInStartedCallback(task);
+        }
+
+        private async Task<UserAccount> GetMsaTokenAsync(WebAccountProviderCommand command)
         {
             var request = new WebTokenRequest(command.WebAccountProvider, tokenScope);
             var result = await WebAuthenticationCoreManager.RequestTokenAsync(request);
@@ -65,6 +82,11 @@ namespace Jbe.NewsReader.ExternalServices
                 account = result.ResponseData[0].WebAccount;
                 var userName = await GetUserNameAsync(result.ResponseData[0].Token);
                 CurrentAccount = new UserAccount(userName);
+                return CurrentAccount;
+            }
+            else
+            {
+                throw new InvalidOperationException("WebAuthentication Response: " + result.ResponseStatus);
             }
         }
 

@@ -266,4 +266,14 @@ Diese Aktion könnte ältere Artikel löschen.</value>
   <data name="SignOutT.Text" xml:space="preserve">
     <value>Abmelden</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="SignInError" xml:space="preserve">
+    <value>Ein Fehler ist während der Anmeldung aufgetreten. 
+Details: {0}</value>
+  </data>
+  <data name="SignInDescription" xml:space="preserve">
+    <value>Wenn Sie sich anmelden, können Ihre Daten und Einstellungen geräteübergreifend synchronisiert werden.</value>
+  </data>
 </root>

@@ -1,5 +1,8 @@
 ﻿using Jbe.NewsReader.Applications.Services;
+using Jbe.NewsReader.Domain;
+using System;
 using System.Composition;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Windows.Input;
@@ -10,15 +13,20 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class AccountController
     {
         private readonly IAccountService accountService;
+        private readonly IMessageService messageService;
+        private readonly IResourceService resourceService;
         private readonly DelegateCommand signInCommand;
         private readonly AsyncDelegateCommand signOutCommand;
+        private bool signInTaskRunning;
 
 
         [ImportingConstructor]
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IMessageService messageService, IResourceService resourceService)
         {
             this.accountService = accountService;
-            signInCommand = new DelegateCommand(SignIn);
+            this.messageService = messageService;
+            this.resourceService = resourceService;
+            signInCommand = new DelegateCommand(SignIn, CanSignIn);
             signOutCommand = new AsyncDelegateCommand(SignOutAsync);
         }
 
@@ -28,9 +36,33 @@ namespace Jbe.NewsReader.Applications.Controllers
         public ICommand SignOutCommand => signOutCommand;
 
 
+        private bool CanSignIn()
+        {
+            return !signInTaskRunning;
+        }
+
         private void SignIn()
         {
-            accountService.SignIn();
+            accountService.SignIn(SignInStarted);
+        }
+
+        private async void SignInStarted(Task<UserAccount> signInTask)
+        {
+            signInTaskRunning = true;
+            signInCommand.RaiseCanExecuteChanged();
+            try
+            {
+                await signInTask;
+            }
+            catch (Exception ex)
+            {
+                await messageService.ShowMessageAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));  
+            }
+            finally
+            {
+                signInTaskRunning = false;
+                signInCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private Task SignOutAsync()

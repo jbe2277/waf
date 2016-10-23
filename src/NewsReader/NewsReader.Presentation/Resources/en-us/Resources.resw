@@ -266,4 +266,14 @@ This might remove older feed items.</value>
   <data name="SignOutT.Text" xml:space="preserve">
     <value>Sign Out</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SignInError" xml:space="preserve">
+    <value>An error occurred during the sign-in process. 
+Details: {0}</value>
+  </data>
+  <data name="SignInDescription" xml:space="preserve">
+    <value>Signing in lets you sync your data and settings across devices.</value>
+  </data>
 </root>
