@@ -85,6 +85,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public void Initialize()
         {
+            accountController.Value.Initialize();
             shellViewModel.Value.NavigateBackCommand = navigateBackCommand;
             shellViewModel.Value.ShowNewsViewCommand = showFeedListViewCommand;
             shellViewModel.Value.ShowReviewViewCommand = showReviewViewCommand;

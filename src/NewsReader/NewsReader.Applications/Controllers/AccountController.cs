@@ -36,6 +36,18 @@ namespace Jbe.NewsReader.Applications.Controllers
         public ICommand SignOutCommand => signOutCommand;
 
 
+        public async void Initialize()
+        {
+            try
+            {
+                await accountService.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                await messageService.ShowMessageAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));
+            }
+        }
+
         private bool CanSignIn()
         {
             return !signInTaskRunning;
