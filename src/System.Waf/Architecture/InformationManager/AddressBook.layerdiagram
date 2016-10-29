@@ -93,6 +93,9 @@
             <dependencyFromLayerToLayer Id="de9e5bbd-a674-4b59-bd1c-88047d157656" direction="Forward">
               <layerMoniker Id="97eee902-213c-441c-b72b-f1aa551eac46" />
             </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="a80728bf-a4d7-4de2-ad08-e8f643f6a997" direction="Forward">
+              <layerMoniker Id="bb3945ef-569f-4b04-9713-75d0989e589f" />
+            </dependencyFromLayerToLayer>
           </dependencyToLayers>
           <references>
             <reference Id="d159c303-21a6-4e1d-aa6c-63f78ffd7c10" name="Waf.InformationManager.AddressBook.Modules.Applications.Controllers">

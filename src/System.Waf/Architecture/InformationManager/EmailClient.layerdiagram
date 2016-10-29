@@ -119,6 +119,9 @@
             <dependencyFromLayerToLayer Id="6497c45e-482c-4efe-a255-1d28b3a4ad5c" direction="Forward">
               <layerMoniker Id="aa2f6a9c-d5ef-44f8-b7a7-05c225aa0b10" />
             </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="4c5b63fe-2801-4cb8-9d79-8bb394b9811f" direction="Forward">
+              <layerMoniker Id="4e885f75-0c58-47fa-9e3d-fb3cf5d351cd" />
+            </dependencyFromLayerToLayer>
           </dependencyToLayers>
           <references>
             <reference Id="901c9809-c1dd-49a7-9ee5-eeab2cc8fbe6" name="Waf.InformationManager.EmailClient.Modules.Applications.Controllers">
