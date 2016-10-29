@@ -101,7 +101,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
             try
             {
-                feedManager = await appDataService.LoadCompressedRoamingFileAsync<FeedManager>("feeds.xml") ?? new FeedManager();
+                feedManager = await appDataService.LoadCompressedFileAsync<FeedManager>("feeds.xml") ?? new FeedManager();
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public async Task SuspendingAsync()
         {
-            await appDataService.SaveCompressedRoamingFileAsync(feedManager, "feeds.xml");
+            await appDataService.SaveCompressedFileAsync(feedManager, "feeds.xml");
         }
 
         private FeedListViewModel InitializeFeedListViewModel(Lazy<FeedListViewModel> viewModel)

@@ -8,8 +8,8 @@ namespace Jbe.NewsReader.Applications.Services
         IDictionary<string, object> LocalSettings { get; }
 
 
-        Task<T> LoadCompressedRoamingFileAsync<T>(string fileName) where T : class;
+        Task<T> LoadCompressedFileAsync<T>(string fileName) where T : class;
 
-        Task SaveCompressedRoamingFileAsync(object data, string fileName);
+        Task SaveCompressedFileAsync(object data, string fileName);
     }
 }
