@@ -45,6 +45,7 @@
     </CodeAnalysisDictionary>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DisplayAppThemeExtensions.cs" />
     <Compile Include="Controllers\IAppController.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\IResourceService.cs" />
     <Compile Include="Services\ISyndicationService.cs" />
+    <Compile Include="Services\IWebStorageService.cs" />
     <Compile Include="Services\SelectionService.cs" />
     <Compile Include="ViewModels\DisplayAppTheme.cs" />
     <Compile Include="ViewModels\DisplayItemLifetime.cs" />

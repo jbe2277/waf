@@ -9,6 +9,24 @@ namespace Jbe.NewsReader.ExternalServices
 {
     internal static class FileIOHelper
     {
+        public static string GetArchiveFileName(string fileName)
+        {
+            return fileName + ".zip";
+        }
+
+        public static T LoadCompressed<T>(Stream archiveStream, string fileName) where T : class
+        {
+            using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
+            {
+                var entry = archive.GetEntry(fileName);
+                using (var stream = entry.Open())
+                {
+                    var serializer = new DataContractSerializer(typeof(T));
+                    return (T)serializer.ReadObject(stream);
+                }
+            }
+        }
+
         public static async Task<T> LoadCompressedAsync<T>(StorageFolder folder, string fileName) where T : class
         {
             if (folder == null) { throw new ArgumentNullException(nameof(folder)); }
@@ -16,15 +34,9 @@ namespace Jbe.NewsReader.ExternalServices
 
             try
             {
-                using (var archiveStream = await folder.OpenStreamForReadAsync(fileName + ".zip"))
-                using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
+                using (var archiveStream = await folder.OpenStreamForReadAsync(GetArchiveFileName(fileName)))
                 {
-                    var entry = archive.GetEntry(fileName);
-                    using (var stream = entry.Open())
-                    {
-                        var serializer = new DataContractSerializer(typeof(T));
-                        return (T)serializer.ReadObject(stream);
-                    }
+                    return LoadCompressed<T>(archiveStream, fileName);
                 }
             }
             catch (FileNotFoundException)
@@ -39,7 +51,7 @@ namespace Jbe.NewsReader.ExternalServices
             if (folder == null) { throw new ArgumentNullException(nameof(folder)); }
             if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("String must not be null or empty.", nameof(fileName)); }
 
-            using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + ".zip", CreationCollisionOption.ReplaceExisting))
+            using (var archiveStream = await folder.OpenStreamForWriteAsync(GetArchiveFileName(fileName), CreationCollisionOption.ReplaceExisting))
             using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
             {
                 var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);
@@ -62,7 +74,7 @@ namespace Jbe.NewsReader.ExternalServices
         {
             try
             {
-                var fileV110 = await ApplicationData.Current.RoamingFolder.GetFileAsync(fileName + ".zip");  // Old file is stored in Roaming folder
+                var fileV110 = await ApplicationData.Current.RoamingFolder.GetFileAsync(GetArchiveFileName(fileName));  // Old file is stored in Roaming folder
                 await fileV110.MoveAsync(folder);   // Move the file into Local folder
             }
             catch (FileNotFoundException)
@@ -84,7 +96,7 @@ namespace Jbe.NewsReader.ExternalServices
                     }
 
                     copyStream.Seek(0, SeekOrigin.Begin);
-                    using (var archiveStream = await folder.OpenStreamForWriteAsync(fileName + ".zip", CreationCollisionOption.ReplaceExisting))
+                    using (var archiveStream = await folder.OpenStreamForWriteAsync(GetArchiveFileName(fileName), CreationCollisionOption.ReplaceExisting))
                     using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
                     {
                         var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);

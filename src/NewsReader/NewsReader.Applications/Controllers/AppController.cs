@@ -16,8 +16,8 @@ namespace Jbe.NewsReader.Applications.Controllers
     {
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
-        private readonly IAppDataService appDataService;
         private readonly SelectionService selectionService;
+        private readonly Lazy<DataController> dataController;
         private readonly Lazy<AccountController> accountController;
         private readonly Lazy<NewsFeedsController> newsFeedsController;
         private readonly Lazy<SettingsController> settingsController;
@@ -38,14 +38,14 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, IAppDataService appDataService, SelectionService selectionService,
-            Lazy<AccountController> accountController, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, 
+        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, SelectionService selectionService,
+            Lazy<DataController> dataController, Lazy<AccountController> accountController, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, 
             Lazy<ShellViewModel> shellViewModel, Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.launcherService = launcherService;
             this.appInfoService = appInfoService;
-            this.appDataService = appDataService;
             this.selectionService = selectionService;
+            this.dataController = dataController;
             this.accountController = accountController;
             this.newsFeedsController = newsFeedsController;
             this.settingsController = settingsController;
@@ -85,6 +85,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public void Initialize()
         {
+            dataController.Value.Initialize();
             accountController.Value.Initialize();
             shellViewModel.Value.NavigateBackCommand = navigateBackCommand;
             shellViewModel.Value.ShowNewsViewCommand = showFeedListViewCommand;
@@ -99,16 +100,8 @@ namespace Jbe.NewsReader.Applications.Controllers
             Navigate();
             shellViewModel.Value.Show();
 
-            try
-            {
-                feedManager = await appDataService.LoadCompressedFileAsync<FeedManager>("feeds.xml") ?? new FeedManager();
-            }
-            catch (Exception ex)
-            {
-                // Better to forget the settings (data loss) as to never start the app again
-                Debug.Assert(false, "LoadAsync", ex.ToString());
-                feedManager = new FeedManager();
-            }
+            feedManager = await dataController.Value.LoadAsync();
+
             selectionService.FeedManager = feedManager;
             newsFeedsController.Value.FeedManager = feedManager;
             newsFeedsController.Value.Run();
@@ -116,9 +109,9 @@ namespace Jbe.NewsReader.Applications.Controllers
             if (feedListViewModel.IsValueCreated) { feedListViewModel.Value.FeedManager = feedManager; }
         }
 
-        public async Task SuspendingAsync()
+        public Task SuspendingAsync()
         {
-            await appDataService.SaveCompressedFileAsync(feedManager, "feeds.xml");
+            return dataController.Value.SaveAsync();
         }
 
         private FeedListViewModel InitializeFeedListViewModel(Lazy<FeedListViewModel> viewModel)
