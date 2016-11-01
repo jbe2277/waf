@@ -2,6 +2,7 @@
 using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Domain;
 using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Composition;
 using System.Globalization;
@@ -82,7 +83,18 @@ namespace Jbe.NewsReader.Applications.Controllers
             selectionService.SelectedFeedItem = itemToSelectAgain;
 
             await Task.WhenAll(tasks);
+            FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
         }
+
+        private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            foreach (Feed item in e.NewItems?.Cast<Feed>() ?? CollectionHelper.Empty<Feed>())
+            {
+                IgnoreResult(LoadFeedAsync(item));
+            }
+        }
+
+        private static void IgnoreResult(Task task) { }
 
         private async Task LoadFeedAsync(Feed feed)
         {

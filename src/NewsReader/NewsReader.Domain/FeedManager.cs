@@ -43,6 +43,22 @@ namespace Jbe.NewsReader.Domain
         }
 
 
+        public void Merge(FeedManager secondFeedManager)
+        {
+            // TODO: secondFeedManager wins; improve Merge so that local offline changes are not lost.
+            ItemLifetime = secondFeedManager.ItemLifetime;
+            MaxItemsLimit = secondFeedManager.MaxItemsLimit;
+
+            foreach (var feed in Feeds.ToArray())
+            {
+                Feeds.Remove(feed);
+            }
+            foreach (var feed in secondFeedManager.Feeds)
+            {
+                Feeds.Add(feed);
+            }
+        }
+
         private void Initialize()
         {
             feeds.CollectionChanged += FeedsCollectionChanged;
@@ -54,6 +70,10 @@ namespace Jbe.NewsReader.Domain
 
         private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                throw new NotSupportedException("The Reset action is not supported.");
+            }
             foreach (var newFeed in e.NewItems?.Cast<Feed>() ?? CollectionHelper.Empty<Feed>())
             {
                 newFeed.DataManager = this;

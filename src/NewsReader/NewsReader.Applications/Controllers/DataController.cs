@@ -17,7 +17,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAppDataService appDataService;
         private readonly IAccountService accountService;
         private readonly IWebStorageService webStorageService;
-        private FeedManager feedManager;
+        private readonly TaskCompletionSource<FeedManager> feedManagerCompletion;
 
 
         [ImportingConstructor]
@@ -26,6 +26,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.appDataService = appDataService;
             this.accountService = accountService;
             this.webStorageService = webStorageService;
+            feedManagerCompletion = new TaskCompletionSource<FeedManager>();
         }
 
 
@@ -37,6 +38,8 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public async Task<FeedManager> LoadAsync()
         {
+            // NOTE: Load must be called just once! See feedManagerCompletion
+            FeedManager feedManager;
             try
             {
                 feedManager = await appDataService.LoadCompressedFileAsync<FeedManager>(dataFileName) ?? new FeedManager();
@@ -47,11 +50,15 @@ namespace Jbe.NewsReader.Applications.Controllers
                 Debug.Assert(false, "LoadAsync", ex.ToString());
                 feedManager = new FeedManager();
             }
+            feedManagerCompletion.SetResult(feedManager);
             return feedManager;
         }
 
         public async Task SaveAsync()
         {
+            if (!feedManagerCompletion.Task.IsCompleted) { return; }
+
+            var feedManager = await feedManagerCompletion.Task;
             await appDataService.SaveCompressedFileAsync(feedManager, dataFileName);
             await UploadAsync();
         }
@@ -62,6 +69,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             var token = await accountService.GetTokenAsync();
             if (token == null) { return; }
 
+            FeedManager feedManagerFromWeb = null;
             using (var stream = new MemoryStream())
             {
                 try
@@ -69,15 +77,19 @@ namespace Jbe.NewsReader.Applications.Controllers
                     if (await webStorageService.DownloadFileAsync(dataFileName, stream, token))
                     {
                         stream.Position = 0;
-                        var feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
-                        
-                        // TODO: Merge data into current feedManager
+                        feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
                     }
                 }
                 catch (Exception)
                 {
                     // TODO: Download has failed - or another error; how to handle this???
                 }
+            }
+
+            if (feedManagerFromWeb != null)
+            {
+                var originalFeedManager = await feedManagerCompletion.Task;
+                originalFeedManager.Merge(feedManagerFromWeb);
             }
         }
         
