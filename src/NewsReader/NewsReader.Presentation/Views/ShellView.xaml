@@ -41,7 +41,26 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <waf:NavigationSplitView x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Visibility="{x:Bind ViewModel.LastMessage.Key, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" Background="Yellow">
+            <Grid Margin="6,6,10,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{x:Bind ViewModel.LastMessage.Key, Mode=OneWay}" Foreground="Black" MaxLines="2" TextWrapping="Wrap"/>
+                <HyperlinkButton Grid.Column="1" Command="{x:Bind ViewModel.CloseMessageCommand}" Padding="0">
+                    <TextBlock Text="Close"/>
+                </HyperlinkButton>
+            </Grid>
+        </Border>
+        
+        <waf:NavigationSplitView Grid.Row="1" x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <SplitView.Pane>
                 <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource JbeMainBackgroundBrush}">
                     <Grid Margin="0,49,0,0">
@@ -91,7 +110,7 @@
             </SplitView.Content>
         </waf:NavigationSplitView>
 
-        <waf:NavigationSplitViewToggleButton x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{Binding IsPaneOpen, ElementName=navigationSplitView, Mode=TwoWay}"
+        <waf:NavigationSplitViewToggleButton Grid.Row="1" x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{Binding IsPaneOpen, ElementName=navigationSplitView, Mode=TwoWay}"
             TabIndex="1"/>
     </Grid>
 </Page>

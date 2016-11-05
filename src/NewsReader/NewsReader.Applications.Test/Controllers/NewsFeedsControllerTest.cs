@@ -35,7 +35,7 @@ namespace Test.NewsReader.Applications.Controllers
             var messageService = Container.GetExport<MockMessageService>();
             var confirmationShown = false;
             var confirmationResult = false;
-            messageService.ShowYesNoQuestionAsyncStub = msg =>
+            messageService.ShowYesNoQuestionDialogAsyncStub = msg =>
             {
                 confirmationShown = true;
                 return Task.FromResult(confirmationResult);

@@ -17,15 +17,17 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAppDataService appDataService;
         private readonly IAccountService accountService;
         private readonly IWebStorageService webStorageService;
+        private readonly IMessageService messageService;
         private readonly TaskCompletionSource<FeedManager> feedManagerCompletion;
 
 
         [ImportingConstructor]
-        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService)
+        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, IMessageService messageService)
         {
             this.appDataService = appDataService;
             this.accountService = accountService;
             this.webStorageService = webStorageService;
+            this.messageService = messageService;
             feedManagerCompletion = new TaskCompletionSource<FeedManager>();
         }
 
@@ -80,9 +82,10 @@ namespace Jbe.NewsReader.Applications.Controllers
                         feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     // TODO: Download has failed - or another error; how to handle this???
+                    messageService.ShowMessage("Download error: " + ex.ToString());
                 }
             }
 
@@ -106,9 +109,10 @@ namespace Jbe.NewsReader.Applications.Controllers
                     await webStorageService.UploadFileAsync(stream, dataFileName, token);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: Upload has failed; how to handle this???
+                messageService.ShowMessage("Upload error: " + ex.ToString());
             }
         }
 

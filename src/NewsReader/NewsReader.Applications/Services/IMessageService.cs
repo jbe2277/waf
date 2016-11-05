@@ -4,8 +4,10 @@ namespace Jbe.NewsReader.Applications.Services
 {
     public interface IMessageService
     {
-        Task ShowMessageAsync(string message);
+        void ShowMessage(string message);
 
-        Task<bool> ShowYesNoQuestionAsync(string message);
+        Task ShowMessageDialogAsync(string message);
+
+        Task<bool> ShowYesNoQuestionDialogAsync(string message);
     }
 }

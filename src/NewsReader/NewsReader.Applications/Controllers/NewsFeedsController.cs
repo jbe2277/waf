@@ -172,7 +172,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task RemoveFeedAsync()
         {
             var feedToRemove = selectionService.SelectedFeed;
-            if (!await messageService.ShowYesNoQuestionAsync(string.Format(CultureInfo.CurrentCulture, 
+            if (!await messageService.ShowYesNoQuestionDialogAsync(string.Format(CultureInfo.CurrentCulture, 
                 resourceService.GetString("RemoveFeedQuestion"), feedToRemove.Name)))
             {
                 return;  // User canceled operation

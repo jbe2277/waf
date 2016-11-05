@@ -8,18 +8,25 @@ namespace Test.NewsReader.Applications.Services
     [Export(typeof(IMessageService)), Export, Shared]
     public class MockMessageService : IMessageService
     {
-        public Func<string, Task> ShowMessageAsyncStup { get; set; }
-        
-        public Task ShowMessageAsync(string message)
+        public Action<string> ShowMessageStub { get; set; }
+
+        public void ShowMessage(string message)
         {
-            return ShowMessageAsyncStup?.Invoke(message) ?? Task.FromResult((object)null);
+            ShowMessageStub?.Invoke(message);
         }
 
-        public Func<string, Task<bool>> ShowYesNoQuestionAsyncStub { get; set; }
-
-        public Task<bool> ShowYesNoQuestionAsync(string message)
+        public Func<string, Task> ShowMessageAsyncDialogStub { get; set; }
+        
+        public Task ShowMessageDialogAsync(string message)
         {
-            return ShowYesNoQuestionAsyncStub?.Invoke(message) ?? Task.FromResult(true);
+            return ShowMessageAsyncDialogStub?.Invoke(message) ?? Task.FromResult((object)null);
+        }
+
+        public Func<string, Task<bool>> ShowYesNoQuestionDialogAsyncStub { get; set; }
+
+        public Task<bool> ShowYesNoQuestionDialogAsync(string message)
+        {
+            return ShowYesNoQuestionDialogAsyncStub?.Invoke(message) ?? Task.FromResult(true);
         }
     }
 }

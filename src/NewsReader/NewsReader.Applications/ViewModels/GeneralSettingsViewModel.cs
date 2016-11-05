@@ -77,7 +77,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             setSelectedItemLifetimeRunning = true;
 
             var result = selectedItemLifetime < value
-                || await messageService.ShowYesNoQuestionAsync(resourceService.GetString("ReduceFeedItemLifetimeQuestion"));
+                || await messageService.ShowYesNoQuestionDialogAsync(resourceService.GetString("ReduceFeedItemLifetimeQuestion"));
             if (result)
             {
                 selectedItemLifetime = value;
@@ -96,7 +96,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             setSelectedMaxItemsLimitRunning = true;
 
             var result = selectedMaxItemsLimit < value
-                || await messageService.ShowYesNoQuestionAsync(resourceService.GetString("ReduceMaxItemsLimitQuestion"));
+                || await messageService.ShowYesNoQuestionDialogAsync(resourceService.GetString("ReduceMaxItemsLimitQuestion"));
             if (result)
             {
                 selectedMaxItemsLimit = value;

@@ -44,7 +44,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                await messageService.ShowMessageAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));
+                await messageService.ShowMessageDialogAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));
             }
         }
 
@@ -68,7 +68,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                await messageService.ShowMessageAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));  
+                await messageService.ShowMessageDialogAsync(string.Format(CultureInfo.CurrentCulture, resourceService.GetString("SignInError"), ex.Message));  
             }
             finally
             {

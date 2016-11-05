@@ -1,8 +1,13 @@
 ﻿using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Applications.Views;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Composition;
+using System.Linq;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using System.Windows.Input;
 
 namespace Jbe.NewsReader.Applications.ViewModels
@@ -10,19 +15,27 @@ namespace Jbe.NewsReader.Applications.ViewModels
     [Export, Shared]
     public class ShellViewModel : ViewModelCore<IShellView>
     {
+        private readonly ObservableCollection<KeyValuePair<string, Exception>> messages;
         private object contentView;
         private Lazy<object> lazyPreviewView;
         private NavigationItem selectedNavigationItem;
-
+        
 
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IAccountInfoService accountInfoService) : base(view)
         {
             AccountInfoService = accountInfoService;
+            messages = new ObservableCollection<KeyValuePair<string, Exception>>();
+            Messages = new ReadOnlyObservableList<KeyValuePair<string, Exception>>(messages);
+            CloseMessageCommand = new DelegateCommand(CloseMessage);
+            messages.CollectionChanged += MessagesCollectionChanged;
         }
 
-
         public IAccountInfoService AccountInfoService { get; }
+
+        public IReadOnlyObservableList<KeyValuePair<string, Exception>> Messages { get; }
+
+        public KeyValuePair<string, Exception> LastMessage => messages.LastOrDefault();
 
         public object ContentView
         {
@@ -35,6 +48,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
             get { return lazyPreviewView; }
             set { SetProperty(ref lazyPreviewView, value); }
         }
+
+        public ICommand CloseMessageCommand { get; }
 
         public ICommand NavigateBackCommand { get; set; }
 
@@ -58,6 +73,21 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public void Show()
         {
             ViewCore.Show();
+        }
+
+        public void ShowMessage(string message, Exception exception)
+        {
+            messages.Add(new KeyValuePair<string, Exception>(message, exception));
+        }
+
+        private void CloseMessage()
+        {
+            if (messages.Any()) { messages.RemoveAt(messages.Count - 1); }
+        }
+
+        private void MessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(LastMessage));
         }
     }
 }

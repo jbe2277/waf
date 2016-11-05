@@ -1,4 +1,5 @@
 ﻿using Jbe.NewsReader.Applications.Services;
+using Jbe.NewsReader.Applications.ViewModels;
 using System;
 using System.Composition;
 using System.Threading.Tasks;
@@ -10,7 +11,22 @@ namespace Jbe.NewsReader.Presentation.Services
     [Export(typeof(IMessageService)), Export, Shared]
     internal class MessageService : IMessageService
     {
-        public async Task ShowMessageAsync(string message)
+        private readonly Lazy<ShellViewModel> shellViewModel;
+
+
+        [ImportingConstructor]
+        public MessageService(Lazy<ShellViewModel> shellViewModel)
+        {
+            this.shellViewModel = shellViewModel;
+        }
+
+
+        public void ShowMessage(string message)
+        {
+            shellViewModel.Value.ShowMessage(message, null);
+        }
+
+        public async Task ShowMessageDialogAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
             var closeCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Close"));
@@ -20,7 +36,7 @@ namespace Jbe.NewsReader.Presentation.Services
             await messageDialog.ShowAsync();
         }
 
-        public async Task<bool> ShowYesNoQuestionAsync(string message)
+        public async Task<bool> ShowYesNoQuestionDialogAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
             var yesCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Yes"));
