@@ -276,4 +276,10 @@ Details: {0}</value>
   <data name="SignInDescription" xml:space="preserve">
     <value>Wenn Sie sich anmelden, können Ihre Daten und Einstellungen geräteübergreifend synchronisiert werden.</value>
   </data>
+  <data name="SynchronizationDownloadError" xml:space="preserve">
+    <value>Die Synchronisierung ist fehlgeschlagen. Error: {0}</value>
+  </data>
+  <data name="SynchronizationUploadError" xml:space="preserve">
+    <value>Der Synchronisierungs-Upload ist fehlgeschlagen. Error {0}</value>
+  </data>
 </root>

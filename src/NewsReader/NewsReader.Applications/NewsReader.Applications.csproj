@@ -61,6 +61,7 @@
     <Compile Include="Services\IResourceService.cs" />
     <Compile Include="Services\ISyndicationService.cs" />
     <Compile Include="Services\IWebStorageService.cs" />
+    <Compile Include="Services\MessageServiceExtensions.cs" />
     <Compile Include="Services\SelectionService.cs" />
     <Compile Include="ViewModels\DisplayAppTheme.cs" />
     <Compile Include="ViewModels\DisplayItemLifetime.cs" />

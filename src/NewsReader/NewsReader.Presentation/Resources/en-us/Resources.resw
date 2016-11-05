@@ -276,4 +276,10 @@ Details: {0}</value>
   <data name="SignInDescription" xml:space="preserve">
     <value>Signing in lets you sync your data and settings across devices.</value>
   </data>
+  <data name="SynchronizationDownloadError" xml:space="preserve">
+    <value>Synchronization failed. Error: {0}</value>
+  </data>
+  <data name="SynchronizationUploadError" xml:space="preserve">
+    <value>Synchronization upload failed. Error {0}</value>
+  </data>
 </root>

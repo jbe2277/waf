@@ -18,16 +18,19 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAccountService accountService;
         private readonly IWebStorageService webStorageService;
         private readonly IMessageService messageService;
+        private readonly IResourceService resourceService;
         private readonly TaskCompletionSource<FeedManager> feedManagerCompletion;
+        private bool isInSync;
 
 
         [ImportingConstructor]
-        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, IMessageService messageService)
+        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, IMessageService messageService, IResourceService resourceService)
         {
             this.appDataService = appDataService;
             this.accountService = accountService;
             this.webStorageService = webStorageService;
             this.messageService = messageService;
+            this.resourceService = resourceService;
             feedManagerCompletion = new TaskCompletionSource<FeedManager>();
         }
 
@@ -84,8 +87,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // TODO: Download has failed - or another error; how to handle this???
-                    messageService.ShowMessage("Download error: " + ex.ToString());
+                    messageService.ShowMessage(resourceService.GetString("SynchronizationDownloadError"), ex.Message);
                 }
             }
 
@@ -93,12 +95,13 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 var originalFeedManager = await feedManagerCompletion.Task;
                 originalFeedManager.Merge(feedManagerFromWeb);
+                isInSync = true;
             }
         }
         
         private async Task UploadAsync()
         {
-            if (accountService.CurrentAccount == null) { return; }
+            if (!isInSync || accountService.CurrentAccount == null) { return; }
             var token = await accountService.GetTokenAsync();
             if (token == null) { return; }
 
@@ -111,8 +114,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Upload has failed; how to handle this???
-                messageService.ShowMessage("Upload error: " + ex.ToString());
+                messageService.ShowMessage(resourceService.GetString("SynchronizationUploadError"), ex.Message);
             }
         }
 
