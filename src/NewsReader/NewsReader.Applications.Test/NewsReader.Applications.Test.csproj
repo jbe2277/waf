@@ -70,6 +70,7 @@
     </CodeAnalysisDictionary>
     <Compile Include="Controllers\NewsFeedsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MockAccountService.cs" />
     <Compile Include="Services\MockAppService.cs" />
     <Compile Include="Services\MockLauncherService.cs" />
     <Compile Include="Services\MockMessageService.cs" />
