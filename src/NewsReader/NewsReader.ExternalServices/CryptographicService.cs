@@ -14,25 +14,24 @@ namespace Jbe.NewsReader.ExternalServices
     {
         private const uint keySize = 256;
 
-        public async Task<Stream> EncryptAsync(Stream stream, string key, string salt, uint iterationCount)
+        public Task<Stream> EncryptAsync(Stream stream, string key, string salt, uint iterationCount)
         {
-            var derivedKeyAndSalt = DeriveKeyAndSalt(key, salt, iterationCount);
-
-            var symmetricAlgorithm = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesCbcPkcs7);
-            var symmetricKey = symmetricAlgorithm.CreateSymmetricKey(derivedKeyAndSalt.Item1);
-            var contentBuffer = await CreateBuffer(stream).ConfigureAwait(false);
-            var resultBuffer = CryptographicEngine.Encrypt(symmetricKey, contentBuffer, derivedKeyAndSalt.Item2);
-            return CreateStream(resultBuffer);
+            return RunSymmetricAlgorithmAsync(CryptographicEngine.Encrypt, stream, key, salt, iterationCount);
         }
 
-        public async Task<Stream> DecryptAsync(Stream stream, string key, string salt, uint iterationCount)
+        public Task<Stream> DecryptAsync(Stream stream, string key, string salt, uint iterationCount)
         {
-            var derivedKeyAndSalt = DeriveKeyAndSalt(key, salt, iterationCount);
+            return RunSymmetricAlgorithmAsync(CryptographicEngine.Decrypt, stream, key, salt, iterationCount);
+        }
+
+        private static async Task<Stream> RunSymmetricAlgorithmAsync(Func<CryptographicKey, IBuffer, IBuffer, IBuffer> algorithm, Stream stream, string key, string salt, uint iterationCount)
+        {
+            var contentBuffer = await CreateBuffer(stream).ConfigureAwait(false);  // Create first the buffer synchronously
+            var derivedKeyAndSalt = await Task.Run(() => DeriveKeyAndSalt(key, salt, iterationCount)).ConfigureAwait(false);  // Ensure that the UI thread is not blocked
 
             var symmetricAlgorithm = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesCbcPkcs7);
             var symmetricKey = symmetricAlgorithm.CreateSymmetricKey(derivedKeyAndSalt.Item1);
-            var contentBuffer = await CreateBuffer(stream).ConfigureAwait(false);
-            var resultBuffer = CryptographicEngine.Decrypt(symmetricKey, contentBuffer, derivedKeyAndSalt.Item2);
+            var resultBuffer = algorithm(symmetricKey, contentBuffer, derivedKeyAndSalt.Item2);
             return CreateStream(resultBuffer);
         }
 
@@ -42,9 +41,8 @@ namespace Jbe.NewsReader.ExternalServices
             var saltBuffer = CryptographicBuffer.ConvertStringToBinary(salt, BinaryStringEncoding.Utf8);
 
             var pbkdf2Sha512 = KeyDerivationAlgorithmProvider.OpenAlgorithm(KeyDerivationAlgorithmNames.Pbkdf2Sha512);
-            var keyDerivationParameters = KeyDerivationParameters.BuildForPbkdf2(saltBuffer, iterationCount);
-            var derivedKeyBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(keyBuffer), keyDerivationParameters, keySize);
-            var derivedSaltBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(derivedKeyBuffer), keyDerivationParameters, keySize);
+            var derivedKeyBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(keyBuffer), KeyDerivationParameters.BuildForPbkdf2(saltBuffer, iterationCount), keySize);
+            var derivedSaltBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(derivedKeyBuffer), KeyDerivationParameters.BuildForPbkdf2(saltBuffer, 8), keySize);
             return new Tuple<IBuffer, IBuffer>(derivedKeyBuffer, derivedSaltBuffer);
         }
 

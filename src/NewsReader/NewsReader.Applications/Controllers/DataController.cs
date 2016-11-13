@@ -13,7 +13,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class DataController
     {
         private const string salt = "20E1EB34-CF2D-4298-9A95-FACC60759745+74546543-0405-4901-9CFC-E88DFB5BACE5";
-        private const uint iterationCount = 10000;
+        private const uint iterationCount = 5000;
         private const string dataFileName = "feeds.xml";
 
         private readonly IAppDataService appDataService;
