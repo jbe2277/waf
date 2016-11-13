@@ -12,11 +12,14 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class DataController
     {
+        private const string salt = "20E1EB34-CF2D-4298-9A95-FACC60759745";
+        private const uint iterationCount = 3916;
         private const string dataFileName = "feeds.xml";
 
         private readonly IAppDataService appDataService;
         private readonly IAccountService accountService;
         private readonly IWebStorageService webStorageService;
+        private readonly ICryptographicService cryptographicService;
         private readonly IMessageService messageService;
         private readonly IResourceService resourceService;
         private readonly TaskCompletionSource<FeedManager> feedManagerCompletion;
@@ -24,11 +27,13 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, IMessageService messageService, IResourceService resourceService)
+        public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, ICryptographicService cryptographicService,
+            IMessageService messageService, IResourceService resourceService)
         {
             this.appDataService = appDataService;
             this.accountService = accountService;
             this.webStorageService = webStorageService;
+            this.cryptographicService = cryptographicService;
             this.messageService = messageService;
             this.resourceService = resourceService;
             feedManagerCompletion = new TaskCompletionSource<FeedManager>();
@@ -75,14 +80,21 @@ namespace Jbe.NewsReader.Applications.Controllers
             if (token == null) { return; }
 
             FeedManager feedManagerFromWeb = null;
-            using (var stream = new MemoryStream())
+            using (var cryptoStream = new MemoryStream())
             {
                 try
                 {
-                    if (await webStorageService.DownloadFileAsync(dataFileName, stream, token))
+                    if (await webStorageService.DownloadFileAsync(dataFileName, cryptoStream, token))
                     {
-                        stream.Position = 0;
-                        feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
+                        cryptoStream.Position = 0;
+                        using (var stream = await cryptographicService.DecryptAsync(cryptoStream, accountService.CurrentAccount.Id, salt, iterationCount))
+                        {
+                            feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
+                        }
+                    }
+                    else
+                    {
+                        isInSync = true;  // We are in-sync when no file exists on web storage.
                     }
                 }
                 catch (Exception ex)
@@ -101,6 +113,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         
         private async Task UploadAsync()
         {
+            // TODO: When the online file is corrupt then the upload does not run anymore.
             if (!isInSync || accountService.CurrentAccount == null) { return; }
             var token = await accountService.GetTokenAsync();
             if (token == null) { return; }
@@ -108,8 +121,9 @@ namespace Jbe.NewsReader.Applications.Controllers
             try
             {
                 using (var stream = await appDataService.GetFileStreamForReadAsync(dataFileName))
+                using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt, iterationCount))
                 {
-                    await webStorageService.UploadFileAsync(stream, dataFileName, token);
+                    await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
                 }
             }
             catch (Exception ex)

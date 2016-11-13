@@ -48,6 +48,7 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppInfoService.cs" />
+    <Compile Include="CryptographicService.cs" />
     <Compile Include="FileIOHelper.cs" />
     <Compile Include="LauncherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

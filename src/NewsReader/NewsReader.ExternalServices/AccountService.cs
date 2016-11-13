@@ -170,7 +170,7 @@ namespace Jbe.NewsReader.ExternalServices
             {
                 // Do not care if we cannot get the user name from Microsoft's web api.
             }
-            return new UserAccount(userName);
+            return new UserAccount(webAccount.Id, userName);
         }
     }
 }
