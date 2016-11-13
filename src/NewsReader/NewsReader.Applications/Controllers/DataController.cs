@@ -12,8 +12,8 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class DataController
     {
-        private const string salt = "20E1EB34-CF2D-4298-9A95-FACC60759745";
-        private const uint iterationCount = 3916;
+        private const string salt = "20E1EB34-CF2D-4298-9A95-FACC60759745+74546543-0405-4901-9CFC-E88DFB5BACE5";
+        private const uint iterationCount = 10000;
         private const string dataFileName = "feeds.xml";
 
         private readonly IAppDataService appDataService;
@@ -87,7 +87,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                     if (await webStorageService.DownloadFileAsync(dataFileName, cryptoStream, token))
                     {
                         cryptoStream.Position = 0;
-                        using (var stream = await cryptographicService.DecryptAsync(cryptoStream, accountService.CurrentAccount.Id, salt, iterationCount))
+                        using (var stream = await cryptographicService.DecryptAsync(cryptoStream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
                         {
                             feedManagerFromWeb = appDataService.LoadCompressedFile<FeedManager>(stream, dataFileName);
                         }
@@ -121,7 +121,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             try
             {
                 using (var stream = await appDataService.GetFileStreamForReadAsync(dataFileName))
-                using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt, iterationCount))
+                using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
                 {
                     await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
                 }

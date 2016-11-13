@@ -12,7 +12,7 @@ namespace Jbe.NewsReader.ExternalServices
     [Export(typeof(ICryptographicService)), Export, Shared]
     public class CryptographicService : ICryptographicService
     {
-        private const uint keySize = 64;
+        private const uint keySize = 256;
 
         public async Task<Stream> EncryptAsync(Stream stream, string key, string salt, uint iterationCount)
         {
