@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Jbe.NewsReader.Domain.Foundation;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -43,19 +45,26 @@ namespace Jbe.NewsReader.Domain
         }
 
 
-        public void Merge(FeedManager secondFeedManager)
+        public void Merge(FeedManager newFeedManager)
         {
-            // TODO: secondFeedManager wins; improve Merge so that local offline changes are not lost.
-            ItemLifetime = secondFeedManager.ItemLifetime;
-            MaxItemsLimit = secondFeedManager.MaxItemsLimit;
+            // TODO: newFeedManager wins; improve Merge so that local offline changes are not lost.
+            ItemLifetime = newFeedManager.ItemLifetime;
+            MaxItemsLimit = newFeedManager.MaxItemsLimit;
 
-            foreach (var feed in Feeds.ToArray())
+            ListMerger.Merge(newFeedManager.Feeds, Feeds, FeedEqualityComparer.Default);
+
+            foreach (var feed in Feeds)
             {
-                Feeds.Remove(feed);
-            }
-            foreach (var feed in secondFeedManager.Feeds)
-            {
-                Feeds.Add(feed);
+                var newFeed = newFeedManager.Feeds.Single(x => x.Uri == feed.Uri);
+                // TODO: This works only if local Feeds are already up-to-date
+                foreach (var feedItem in feed.Items)
+                {
+                    var newFeedItem = newFeed.Items.SingleOrDefault(x => x.Uri == feedItem.Uri);
+                    if (newFeedItem != null)
+                    {
+                        feedItem.MarkAsRead = newFeedItem.MarkAsRead;
+                    }
+                }
             }
         }
 
@@ -88,6 +97,23 @@ namespace Jbe.NewsReader.Domain
         private void OnDeserialized(StreamingContext context)
         {
             Initialize();
+        }
+
+
+        private sealed class FeedEqualityComparer : IEqualityComparer<Feed>
+        {
+            public static FeedEqualityComparer Default { get; } = new FeedEqualityComparer();
+
+
+            public bool Equals(Feed x, Feed y)
+            {
+                return x?.Uri == y?.Uri;
+            }
+
+            public int GetHashCode(Feed obj)
+            {
+                return obj?.Uri?.GetHashCode() ?? 0;
+            }
         }
     }
 }

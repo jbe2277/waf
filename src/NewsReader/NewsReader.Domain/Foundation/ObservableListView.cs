@@ -113,72 +113,7 @@ namespace Jbe.NewsReader.Domain.Foundation
                 newList = originalList.ToArray();
             }
 
-            if (innerList.SequenceEqual(newList, comparer))
-            {
-                return;
-            }
-
-            // Item added or removed
-            if (innerList.Count != newList.Length)
-            {
-                // Change of more than 1 item added or removed is not supported -> Reset
-                if (Math.Abs(innerList.Count - newList.Length) != 1)
-                {
-                    Reset(newList);
-                    return;
-                }
-
-                if (innerList.Count < newList.Length)
-                {
-                    int newItemIndex = -1;
-                    for (int i = 0, j = 0; i < innerList.Count; i++, j++)
-                    {
-                        if (!comparer.Equals(innerList[i], newList[j]))
-                        {
-                            if (newItemIndex != -1)
-                            {
-                                // Second change is not supported -> Reset
-                                Reset(newList);
-                                return;
-                            }
-                            newItemIndex = j;
-                            i--;
-                        }
-                    }
-                    if (newItemIndex == -1)
-                    {
-                        newItemIndex = newList.Length - 1;
-                    }
-                    Insert(newItemIndex, newList[newItemIndex]);
-                    return;
-                }
-                else
-                {
-                    int oldItemIndex = -1;
-                    for (int i = 0, j = 0; i < newList.Length; i++, j++)
-                    {
-                        if (!comparer.Equals(innerList[i], newList[j]))
-                        {
-                            if (oldItemIndex != -1)
-                            {
-                                // Second change is not supported -> Reset
-                                Reset(newList);
-                                return;
-                            }
-                            oldItemIndex = i;
-                            j--;
-                        }
-                    }
-                    if (oldItemIndex == -1)
-                    {
-                        oldItemIndex = innerList.Count - 1;
-                    }
-                    RemoveAt(oldItemIndex);
-                    return;
-                }
-            }
-            
-            Reset(newList);
+            ListMerger.Merge(newList, innerList, comparer, Insert, RemoveAt, () => Reset(newList));
         }
 
         private void Insert(int newItemIndex, T newItem)
