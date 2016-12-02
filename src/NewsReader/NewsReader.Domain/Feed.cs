@@ -93,7 +93,7 @@ namespace Jbe.NewsReader.Domain
             }
         }
 
-        public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems)
+        public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems, bool cloneItemsBeforeInsert = false)
         {
             foreach (var item in newFeedItems)
             {
@@ -112,7 +112,8 @@ namespace Jbe.NewsReader.Domain
                             break;
                         }
                     }
-                    items.Insert(i, item);
+                    var itemToInsert = cloneItemsBeforeInsert ? item.Clone() : item;
+                    items.Insert(i, itemToInsert);
                 }
             }
             if (DataManager != null)

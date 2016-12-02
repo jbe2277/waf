@@ -47,7 +47,6 @@ namespace Jbe.NewsReader.Domain
 
         public void Merge(FeedManager newFeedManager)
         {
-            // TODO: newFeedManager wins; improve Merge so that local offline changes are not lost.
             ItemLifetime = newFeedManager.ItemLifetime;
             MaxItemsLimit = newFeedManager.MaxItemsLimit;
 
@@ -56,15 +55,7 @@ namespace Jbe.NewsReader.Domain
             foreach (var feed in Feeds)
             {
                 var newFeed = newFeedManager.Feeds.Single(x => x.Uri == feed.Uri);
-                // TODO: This works only if local Feeds are already up-to-date
-                foreach (var feedItem in feed.Items)
-                {
-                    var newFeedItem = newFeed.Items.SingleOrDefault(x => x.Uri == feedItem.Uri);
-                    if (newFeedItem != null)
-                    {
-                        feedItem.MarkAsRead = newFeedItem.MarkAsRead;
-                    }
-                }
+                feed.UpdateItems(newFeed.Items, cloneItemsBeforeInsert: true);
             }
         }
 
