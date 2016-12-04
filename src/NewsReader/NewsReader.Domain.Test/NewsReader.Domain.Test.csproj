@@ -47,6 +47,7 @@
     <Compile Include="FeedItemTest.cs" />
     <Compile Include="FeedManagerTest.cs" />
     <Compile Include="FeedTest.cs" />
+    <Compile Include="Foundation\ListMergerTest.cs" />
     <Compile Include="Foundation\ObservableListViewTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">

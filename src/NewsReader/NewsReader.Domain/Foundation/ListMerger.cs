@@ -60,7 +60,7 @@ namespace Jbe.NewsReader.Domain.Foundation
                 else
                 {
                     int oldItemIndex = -1;
-                    for (int i = 0, j = 0; i < source.Count; i++, j++)
+                    for (int i = 0, j = 0; j < source.Count; i++, j++)
                     {
                         if (!comparer.Equals(target[i], source[j]))
                         {
