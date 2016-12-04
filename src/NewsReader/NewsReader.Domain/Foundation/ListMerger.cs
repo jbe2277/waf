@@ -14,7 +14,7 @@ namespace Jbe.NewsReader.Domain.Foundation
             removeAtAction = removeAtAction ?? target.RemoveAt;
             resetAction = resetAction ?? (() => 
             {
-                target.Clear();
+                foreach (var item in target.ToArray()) { target.Remove(item); }  // Avoid Clear because of CollectionChanged events
                 foreach (var item in source) { target.Add(item); }
             });
             
