@@ -36,9 +36,9 @@ namespace Jbe.NewsReader.Domain.Foundation
                 if (target.Count < source.Count)
                 {
                     int newItemIndex = -1;
-                    for (int i = 0, j = 0; i < target.Count; i++, j++)
+                    for (int t = 0, s = 0; t < target.Count; t++, s++)
                     {
-                        if (!comparer.Equals(target[i], source[j]))
+                        if (!comparer.Equals(target[t], source[s]))
                         {
                             if (newItemIndex != -1)
                             {
@@ -46,8 +46,8 @@ namespace Jbe.NewsReader.Domain.Foundation
                                 resetAction();
                                 return;
                             }
-                            newItemIndex = j;
-                            i--;
+                            newItemIndex = s;
+                            t--;
                         }
                     }
                     if (newItemIndex == -1)
@@ -60,9 +60,9 @@ namespace Jbe.NewsReader.Domain.Foundation
                 else
                 {
                     int oldItemIndex = -1;
-                    for (int i = 0, j = 0; j < source.Count; i++, j++)
+                    for (int t = 0, s = 0; s < source.Count; t++, s++)
                     {
-                        if (!comparer.Equals(target[i], source[j]))
+                        if (!comparer.Equals(target[t], source[s]))
                         {
                             if (oldItemIndex != -1)
                             {
@@ -70,8 +70,8 @@ namespace Jbe.NewsReader.Domain.Foundation
                                 resetAction();
                                 return;
                             }
-                            oldItemIndex = i;
-                            j--;
+                            oldItemIndex = t;
+                            s--;
                         }
                     }
                     if (oldItemIndex == -1)
