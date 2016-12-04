@@ -45,12 +45,18 @@ namespace Test.NewsReader.Domain
         }
 
         [TestMethod]
-        public void UpdateItemsTest1() => UpdateItemsCoreTest(false);
+        public void UpdateItemsTest1() => UpdateItemsCoreTest(false, false);
 
         [TestMethod]
-        public void UpdateItemsTest2() => UpdateItemsCoreTest(true);
+        public void UpdateItemsTest2() => UpdateItemsCoreTest(false, true);
 
-        private void UpdateItemsCoreTest(bool useSerializer)
+        [TestMethod]
+        public void UpdateItemsTest3() => UpdateItemsCoreTest(true, false);
+
+        [TestMethod]
+        public void UpdateItemsTest4() => UpdateItemsCoreTest(true, true);
+
+        private void UpdateItemsCoreTest(bool cloneItemsBeforeInsert, bool useSerializer)
         {
             var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
             feed.UpdateItems(new[] {
@@ -62,20 +68,30 @@ namespace Test.NewsReader.Domain
             Assert.AreEqual(2, feed.Items.Count);
             Assert.IsTrue(new[] { "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
 
-            feed.UpdateItems(new[] {
+            var newItems = new[]
+            {
                 new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2b", "desc", "author"),
                 new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 6, 12, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc", "author"),
-            });
+            };
+            feed.UpdateItems(newItems, cloneItemsBeforeInsert);
 
             Assert.AreEqual(3, feed.Items.Count);
             Assert.IsTrue(new[] { "name2b", "name3", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+            if (cloneItemsBeforeInsert)
+            {
+                Assert.AreNotSame(feed.Items[1], newItems[1]);
+            }
+            else
+            {
+                Assert.AreSame(feed.Items[1], newItems[1]);
+            }
         }
 
         [TestMethod]
-        public void UnreadItemsCountTest1() => UpdateItemsCoreTest(false);
+        public void UnreadItemsCountTest1() => UnreadItemsCountCoreTest(false);
 
         [TestMethod]
-        public void UnreadItemsCountTest2() => UpdateItemsCoreTest(true);
+        public void UnreadItemsCountTest2() => UnreadItemsCountCoreTest(true);
 
         private void UnreadItemsCountCoreTest(bool useSerializer)
         {

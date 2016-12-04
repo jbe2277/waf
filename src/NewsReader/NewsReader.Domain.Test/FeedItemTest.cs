@@ -32,6 +32,21 @@ namespace Test.NewsReader.Domain
         }
 
         [TestMethod]
+        public void CloneTest()
+        {
+            var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author");
+            item.MarkAsRead = true;
+            var clone = item.Clone();
+
+            Assert.AreNotSame(item, clone);
+            Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), clone.Date);
+            Assert.AreEqual("name", clone.Name);
+            Assert.AreEqual("desc", clone.Description);
+            Assert.AreEqual("author", clone.Author);
+            Assert.IsTrue(clone.MarkAsRead);
+        }
+
+        [TestMethod]
         public void SupportNull()
         {
             var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author");
