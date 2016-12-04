@@ -91,7 +91,7 @@ namespace Jbe.NewsReader.Domain
         }
 
 
-        private sealed class FeedEqualityComparer : IEqualityComparer<Feed>
+        internal sealed class FeedEqualityComparer : IEqualityComparer<Feed>
         {
             public static FeedEqualityComparer Default { get; } = new FeedEqualityComparer();
 
