@@ -19,13 +19,16 @@ namespace Test.NewsReader.Domain
             Assert.AreEqual("name", itemA1.Name);
             Assert.AreEqual("desc", itemA1.Description);
             Assert.AreEqual("author", itemA1.Author);
+            Assert.IsFalse(itemA1.MarkAsRead);
 
             var itemA2 = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2022, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2", "author2");
+            itemA2.MarkAsRead = true;
             itemA1.ApplyValuesFrom(itemA2);
             Assert.AreEqual(new DateTimeOffset(2022, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), itemA1.Date);
             Assert.AreEqual("name2", itemA1.Name);
             Assert.AreEqual("desc2", itemA1.Description);
             Assert.AreEqual("author2", itemA1.Author);
+            Assert.IsTrue(itemA1.MarkAsRead);
 
             var itemB1 = new FeedItem(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author");
             AssertHelper.ExpectedException<InvalidOperationException>(() => itemA1.ApplyValuesFrom(itemB1));

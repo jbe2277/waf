@@ -67,6 +67,7 @@ namespace Jbe.NewsReader.Domain
             Name = item.Name;
             Description = item.Description;
             Author = item.Author;
+            MarkAsRead = item.MarkAsRead;
         }
 
         public FeedItem Clone()
