@@ -30,6 +30,7 @@ namespace Jbe.NewsReader.Presentation
             }
             InitializeComponent();
             Suspending += OnSuspending;
+            Resuming += OnResuming;
         }
 
 
@@ -56,6 +57,11 @@ namespace Jbe.NewsReader.Presentation
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Initialize();
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            foreach (var appController in appControllers) { appController.Resuming(); }
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)

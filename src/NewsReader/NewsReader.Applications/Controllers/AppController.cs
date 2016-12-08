@@ -4,7 +4,6 @@ using Jbe.NewsReader.Domain;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Waf.Applications;
@@ -35,6 +34,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private NavigationItem selectedNavigationItem;
         private bool isNavigatingBack;
         private FeedManager feedManager;
+        private DateTime lastUpdate;
 
 
         [ImportingConstructor]
@@ -105,8 +105,19 @@ namespace Jbe.NewsReader.Applications.Controllers
             selectionService.FeedManager = feedManager;
             newsFeedsController.Value.FeedManager = feedManager;
             newsFeedsController.Value.Run();
+            lastUpdate = DateTime.Now;
             settingsController.Value.FeedManager = feedManager;
             if (feedListViewModel.IsValueCreated) { feedListViewModel.Value.FeedManager = feedManager; }
+        }
+
+        public void Resuming()
+        {
+            if (DateTime.Now - lastUpdate > TimeSpan.FromMinutes(5))
+            {
+                dataController.Value.Update();
+                newsFeedsController.Value.Update();
+                lastUpdate = DateTime.Now;
+            }
         }
 
         public Task SuspendingAsync()

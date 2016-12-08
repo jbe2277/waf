@@ -46,6 +46,11 @@ namespace Jbe.NewsReader.Applications.Controllers
             DownloadAndMerge();
         }
 
+        public void Update()
+        {
+            DownloadAndMerge();
+        }
+
         public async Task<FeedManager> LoadAsync()
         {
             // NOTE: Load must be called just once! See feedManagerCompletion
