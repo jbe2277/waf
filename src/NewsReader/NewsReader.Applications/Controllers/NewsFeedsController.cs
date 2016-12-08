@@ -119,7 +119,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                     var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description, x.Author)).ToArray();
 
                     feed.Name = syndicationFeed.Title;
-                    feed.UpdateItems(items);
+                    feed.UpdateItems(items, excludeMarkAsRead: true);
                 }
                 else
                 {

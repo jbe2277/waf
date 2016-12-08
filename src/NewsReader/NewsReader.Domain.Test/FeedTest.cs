@@ -73,7 +73,7 @@ namespace Test.NewsReader.Domain
                 new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2b", "desc", "author"),
                 new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 6, 12, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc", "author"),
             };
-            feed.UpdateItems(newItems, cloneItemsBeforeInsert);
+            feed.UpdateItems(newItems, cloneItemsBeforeInsert: cloneItemsBeforeInsert);
 
             Assert.AreEqual(3, feed.Items.Count);
             Assert.IsTrue(new[] { "name2b", "name3", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));

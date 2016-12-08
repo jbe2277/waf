@@ -93,14 +93,14 @@ namespace Jbe.NewsReader.Domain
             }
         }
 
-        public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems, bool cloneItemsBeforeInsert = false)
+        public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems, bool excludeMarkAsRead = false, bool cloneItemsBeforeInsert = false)
         {
             foreach (var item in newFeedItems)
             {
                 var foundItem = items.FirstOrDefault(x => x.Uri == item.Uri);
                 if (foundItem != null)
                 {
-                    foundItem.ApplyValuesFrom(item);
+                    foundItem.ApplyValuesFrom(item, excludeMarkAsRead);
                 }
                 else
                 {

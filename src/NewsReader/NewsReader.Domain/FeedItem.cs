@@ -60,14 +60,14 @@ namespace Jbe.NewsReader.Domain
         }
 
 
-        public void ApplyValuesFrom(FeedItem item)
+        public void ApplyValuesFrom(FeedItem item, bool excludeMarkAsRead = false)
         {
             if (Uri != item.Uri) { throw new InvalidOperationException("The Uri must be the same."); }
             Date = item.Date;
             Name = item.Name;
             Description = item.Description;
             Author = item.Author;
-            MarkAsRead = item.MarkAsRead;
+            if (!excludeMarkAsRead) { MarkAsRead = item.MarkAsRead; }
         }
 
         public FeedItem Clone()
