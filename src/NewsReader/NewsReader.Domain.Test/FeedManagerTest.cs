@@ -45,6 +45,7 @@ namespace Test.NewsReader.Domain
         public void MergeTest()
         {
             var feedManagerA = new FeedManager();
+            feedManagerA.Feeds.Remove(feedManagerA.Feeds.Single());
             var feedA1 = new Feed(new Uri("http://www.test.com/rss/feedA1"));
             var feedA2 = new Feed(new Uri("http://www.test.com/rss/feedA2"));
             feedManagerA.Feeds.Add(feedA1);
@@ -72,6 +73,20 @@ namespace Test.NewsReader.Domain
             Assert.AreEqual(43u, feedManagerA.MaxItemsLimit.Value);
             Assert.IsTrue(new[] { "http://www.test.com/rss/feedB1", "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
             Assert.IsTrue(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
+
+
+            // Just remove one element => this way the Merge does not create new instances
+            var feedManagerC = new FeedManager();
+            feedManagerC.Feeds.Remove(feedManagerC.Feeds.Single());
+            var feedC2 = new Feed(new Uri("http://www.test.com/rss/feedA2"));
+            feedManagerC.Feeds.Add(feedC2);
+            feedC2.UpdateItems(new[] { item }, cloneItemsBeforeInsert: true);
+            feedC2.Items.Single().MarkAsRead = false;
+
+            feedManagerA.Merge(feedManagerC);
+
+            Assert.IsTrue(new[] { "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
+            Assert.IsFalse(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
         }
 
         [TestMethod]
