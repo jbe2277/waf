@@ -82,11 +82,13 @@ namespace Test.NewsReader.Domain
             feedManagerC.Feeds.Add(feedC2);
             feedC2.UpdateItems(new[] { item }, cloneItemsBeforeInsert: true);
             feedC2.Items.Single().MarkAsRead = false;
+            var itemA = feedManagerA.Feeds.Last().Items.Single();
 
             feedManagerA.Merge(feedManagerC);
 
             Assert.IsTrue(new[] { "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
-            Assert.IsFalse(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
+            Assert.AreSame(itemA, feedManagerA.Feeds.Last().Items.Single());
+            Assert.IsFalse(itemA.MarkAsRead);
         }
 
         [TestMethod]
