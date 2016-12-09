@@ -35,12 +35,14 @@ namespace Test.NewsReader.Applications.Controllers
 
 
         [TestMethod]
-        public void RunAndUpdate()
+        public void RunAndUpdateAndRefresh()
         {
-            Assert.AreEqual(3, feedManager.Feeds.Single().Items.Count);
-            Assert.IsFalse(feedManager.Feeds.Single().Items[0].MarkAsRead);
             var item = feedManager.Feeds.Single().Items[0];
-            item.MarkAsRead = true;
+            Assert.AreEqual(item, selectionService.SelectedFeedItem);
+            controller.ReadUnreadCommand.Execute("read");
+            Assert.IsTrue(item.MarkAsRead);
+
+            // Update
 
             var syndicationService = Container.GetExport<MockSyndicationService>();
             var firstFeed = MockSyndicationClient.CreateSampleFeed();
@@ -52,6 +54,20 @@ namespace Test.NewsReader.Applications.Controllers
             controller.Update();
             Context.WaitFor(() => feedManager.Feeds.Single().Items.Count == 4, TimeSpan.FromSeconds(1));
             Assert.IsTrue(feedManager.Feeds.Single().Items.Single(x => x.Uri == item.Uri).MarkAsRead);
+
+            // Refresh
+
+            syndicationService.LastCreatedMockClient.RetrieveFeedAsyncStub = uri => Task.FromResult(new FeedDto("Sample Feed", new[]
+            {
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 9", "desc 9", "Bill"),
+            }.Concat(firstFeed.Items).ToArray()));
+
+            controller.RefreshFeedCommand.Execute(null);
+            Context.Wait(TimeSpan.FromMilliseconds(500));
+            Context.WaitFor(() => feedManager.Feeds.Single().Items[0].Author == "Bill", TimeSpan.FromSeconds(1));
+
+            AssertHelper.CanExecuteChangedEvent(controller.RefreshFeedCommand, () => selectionService.SelectedFeed = null);
+            Assert.IsFalse(controller.RefreshFeedCommand.CanExecute(null));
         }
 
         [TestMethod]
@@ -86,6 +102,32 @@ namespace Test.NewsReader.Applications.Controllers
             Context.WaitFor(() => feedManager.Feeds.Count == 0, TimeSpan.FromSeconds(1));
             Assert.IsFalse(controller.RemoveFeedCommand.CanExecute(null));
             Assert.IsTrue(confirmationShown);
+        }
+
+        [TestMethod]
+        public void ReadUnreadCommand()
+        {
+            var item = feedManager.Feeds.Single().Items[0];
+            Assert.AreEqual(item, selectionService.SelectedFeedItem);
+            Assert.IsFalse(item.MarkAsRead);
+
+            controller.ReadUnreadCommand.Execute(null);
+            Assert.IsTrue(item.MarkAsRead);
+            
+            controller.ReadUnreadCommand.Execute("unread");
+            Assert.IsFalse(item.MarkAsRead);
+
+            controller.ReadUnreadCommand.Execute("unread");
+            Assert.IsFalse(item.MarkAsRead);
+
+            controller.ReadUnreadCommand.Execute("read");
+            Assert.IsTrue(item.MarkAsRead);
+
+            controller.ReadUnreadCommand.Execute("read");
+            Assert.IsTrue(item.MarkAsRead);
+
+            AssertHelper.CanExecuteChangedEvent(controller.ReadUnreadCommand, () => selectionService.SelectedFeedItem = null);
+            Assert.IsFalse(controller.ReadUnreadCommand.CanExecute(null));
         }
     }
 }
