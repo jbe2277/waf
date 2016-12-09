@@ -10,6 +10,10 @@ namespace Test.NewsReader.Applications.Services
     {
         public Func<ISyndicationClient> CreateClientStub { get; set; }
 
+        public ISyndicationClient LastCreatedClient { get; private set; }
+
+        public MockSyndicationClient LastCreatedMockClient => LastCreatedClient as MockSyndicationClient;
+        
 
         public void SetEmptyClientStub()
         {
@@ -27,7 +31,8 @@ namespace Test.NewsReader.Applications.Services
 
         public ISyndicationClient CreateClient()
         {
-            return CreateClientStub?.Invoke() ?? new MockSyndicationClient();
+            LastCreatedClient = CreateClientStub?.Invoke() ?? new MockSyndicationClient();
+            return LastCreatedClient;
         }
     }
 
@@ -36,15 +41,19 @@ namespace Test.NewsReader.Applications.Services
         public Func<Uri, Task<FeedDto>> RetrieveFeedAsyncStub { get; set; }
 
 
+        public static FeedDto CreateSampleFeed()
+        {
+            return new FeedDto("Sample Feed", new[]
+            {
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 16, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2", "author2"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed3"), new DateTimeOffset(2020, 5, 6, 9, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc3", "author3")
+            });
+        }
+
         public Task<FeedDto> RetrieveFeedAsync(Uri uri)
         {
-            return RetrieveFeedAsyncStub?.Invoke(uri) 
-                ?? Task.FromResult(new FeedDto("Sample Feed", new[]
-                    {
-                        new FeedItemDto(new Uri("http://www.test.com/rss/feed1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author"),
-                        new FeedItemDto(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 16, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2", "author2"),
-                        new FeedItemDto(new Uri("http://www.test.com/rss/feed3"), new DateTimeOffset(2020, 5, 6, 9, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc3", "author3")
-                    }));
+            return RetrieveFeedAsyncStub?.Invoke(uri) ?? Task.FromResult(CreateSampleFeed());
         }
     }
 }

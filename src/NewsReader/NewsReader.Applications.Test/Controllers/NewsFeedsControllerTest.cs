@@ -14,20 +14,49 @@ namespace Test.NewsReader.Applications.Controllers
     [TestClass]
     public class NewsFeedsControllerTest : ApplicationsTest
     {
-        [TestMethod]
-        public void RemoveFeed()
-        {
-            var feedManager = new FeedManager();
-            var selectionService = Container.GetExport<SelectionService>();
+        private FeedManager feedManager;
+        private SelectionService selectionService;
+        private NewsFeedsController controller;
 
-            var controller = Container.GetExport<NewsFeedsController>();
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            feedManager = new FeedManager();
+            selectionService = Container.GetExport<SelectionService>();
+
+            controller = Container.GetExport<NewsFeedsController>();
             controller.FeedManager = feedManager;
 
             // Wait for Run to udate the first Feed
             controller.Run();
             Context.WaitFor(() => feedManager.Feeds.Single().Items.Count == 3, TimeSpan.FromSeconds(1));
+        }
 
 
+        [TestMethod]
+        public void RunAndUpdate()
+        {
+            Assert.AreEqual(3, feedManager.Feeds.Single().Items.Count);
+            Assert.IsFalse(feedManager.Feeds.Single().Items[0].MarkAsRead);
+            var item = feedManager.Feeds.Single().Items[0];
+            item.MarkAsRead = true;
+
+            var syndicationService = Container.GetExport<MockSyndicationService>();
+            var firstFeed = MockSyndicationClient.CreateSampleFeed();
+            syndicationService.LastCreatedMockClient.RetrieveFeedAsyncStub = uri => Task.FromResult(new FeedDto("Sample Feed", new[]
+            {
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 9", "desc 9", "author"),
+            }.Concat(firstFeed.Items).ToArray()));
+
+            controller.Update();
+            Context.WaitFor(() => feedManager.Feeds.Single().Items.Count == 4, TimeSpan.FromSeconds(1));
+            Assert.IsTrue(feedManager.Feeds.Single().Items.Single(x => x.Uri == item.Uri).MarkAsRead);
+        }
+
+        [TestMethod]
+        public void RemoveFeed()
+        {
             // Remove but cancel confirmation
             Assert.AreEqual(feedManager.Feeds.Single(), selectionService.SelectedFeed);
             Assert.IsTrue(controller.RemoveFeedCommand.CanExecute(null));
