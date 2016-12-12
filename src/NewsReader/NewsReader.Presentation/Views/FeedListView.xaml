@@ -39,13 +39,11 @@
                 <DataTemplate x:DataType="m:Feed">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="1.5"/>
                         </Grid.RowDefinitions>
-
-                        <Rectangle Grid.Row="0" Fill="{ThemeResource JbeMainBorderBrush}"/>
-
-                        <RelativePanel Grid.Row="1" DoubleTapped="FeedDoubleTapped" Background="Transparent" Margin="7,7,20,10">
+                        
+                        <RelativePanel Grid.Row="0" DoubleTapped="FeedDoubleTapped" Background="Transparent" Margin="7,7,20,10">
                             <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
                             <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
@@ -59,6 +57,8 @@
                                 <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
                             </HyperlinkButton>
                         </RelativePanel>
+
+                        <Rectangle Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

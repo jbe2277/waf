@@ -47,6 +47,8 @@
     <Compile Include="FeedItem.cs" />
     <Compile Include="FeedManager.cs" />
     <Compile Include="Foundation\ListMerger.cs" />
+    <Compile Include="Foundation\ObservableGroupedListView.cs" />
+    <Compile Include="Foundation\ObservableGroupingView.cs" />
     <Compile Include="Foundation\ObservableListView.cs" />
     <Compile Include="IDataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

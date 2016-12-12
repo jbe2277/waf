@@ -12,4 +12,6 @@
     
     <SolidColorBrush x:Key="JbeMainBackgroundBrush" Color="#FFF9F9F9"/>
 
+    <SolidColorBrush x:Key="JbeHeaderBackgroundBrush" Color="#FFF1F1F1"/>
+    
 </ResourceDictionary>

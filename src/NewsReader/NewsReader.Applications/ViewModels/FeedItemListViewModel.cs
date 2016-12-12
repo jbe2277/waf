@@ -5,6 +5,7 @@ using Jbe.NewsReader.Domain.Foundation;
 using System;
 using System.ComponentModel;
 using System.Composition;
+using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
@@ -14,7 +15,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
     [Export, Shared]
     public class FeedItemListViewModel : ViewModelCore<IFeedItemListView>
     {
-        private ObservableListView<FeedItem> itemsListView;
+        private ObservableGroupedListView<DateTime, FeedItem> itemsListView;
         private string searchText = "";
 
 
@@ -35,7 +36,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public ICommand ShowFeedItemViewCommand { get; set; }
 
-        public IReadOnlyObservableList<FeedItem> ItemsListView => itemsListView;
+        public ObservableGroupedListView<DateTime, FeedItem> ItemsListView => itemsListView;
         
         public string SearchText
         {
@@ -60,7 +61,9 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         private void UpdateItemsListView()
         {
-            itemsListView = new ObservableListView<FeedItem>(SelectionService.SelectedFeed?.Items ?? CollectionHelper.Empty<FeedItem>()) { Filter = FilterFeedItems };
+            itemsListView = new ObservableGroupedListView<DateTime, FeedItem>(new ObservableListView<FeedItem>(
+                    SelectionService.SelectedFeed?.Items ?? CollectionHelper.Empty<FeedItem>()) { Filter = FilterFeedItems },
+                x => x.GroupBy(y => y.Date.LocalDateTime.Date), null, null);
             RaisePropertyChanged(nameof(ItemsListView));
         }
 
