@@ -166,6 +166,7 @@ namespace System.Waf.Foundation
         protected void Dispose(bool disposing)
         {
             if (isDisposed) { return; }
+            isDisposed = true;
 
             OnDispose(disposing);
             if (disposing)
@@ -175,7 +176,6 @@ namespace System.Waf.Foundation
                     originalObservableCollection.CollectionChanged -= OriginalCollectionChanged;
                 }
             }
-            isDisposed = true;
         }
 
         /// <summary>

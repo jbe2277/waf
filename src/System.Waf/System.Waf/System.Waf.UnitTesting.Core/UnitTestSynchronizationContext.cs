@@ -12,7 +12,7 @@ namespace System.Waf.UnitTesting
     {
         private readonly SynchronizationContext previousContext;
         private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> messageQueue;
-        private int isDisposed;
+        private volatile bool isDisposed;
 
 
         private UnitTestSynchronizationContext()
@@ -26,8 +26,6 @@ namespace System.Waf.UnitTesting
         /// Gets the unit test synchronization context for the current thread.
         /// </summary>
         public new static UnitTestSynchronizationContext Current => SynchronizationContext.Current as UnitTestSynchronizationContext;
-
-        private bool IsDisposed => isDisposed != 0;
 
 
         /// <summary>
@@ -55,7 +53,7 @@ namespace System.Waf.UnitTesting
         /// </summary>
         public void Dispose()
         {
-            DisposeCore(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -68,7 +66,7 @@ namespace System.Waf.UnitTesting
         public override void Send(SendOrPostCallback d, object state)
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
-            if (IsDisposed) { return; }
+            if (isDisposed) { return; }
             d(state);
         }
 
@@ -81,7 +79,7 @@ namespace System.Waf.UnitTesting
         public override void Post(SendOrPostCallback d, object state)
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
-            if (IsDisposed) { return; }
+            if (isDisposed) { return; }
             messageQueue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
         }
 
@@ -110,6 +108,9 @@ namespace System.Waf.UnitTesting
 
         private void Dispose(bool isDisposing)
         {
+            if (isDisposed) { return; }
+            isDisposed = true;
+
             if (isDisposing)
             {
                 FinishMessageQueue();
@@ -140,14 +141,6 @@ namespace System.Waf.UnitTesting
             foreach (var message in messageQueue)
             {
                 message.Key(message.Value);
-            }
-        }
-
-        private void DisposeCore(bool isDisposing)
-        {
-            if (Interlocked.CompareExchange(ref isDisposed, 1, 0) == 0)
-            {
-                Dispose(isDisposing);
             }
         }
     }
