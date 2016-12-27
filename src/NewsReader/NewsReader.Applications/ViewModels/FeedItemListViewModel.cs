@@ -45,7 +45,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             {
                 if (SetProperty(ref searchText, value))
                 {
-                    itemsListView.Refresh();
+                    // TODO: itemsListView.Refresh();
                 }
             }
         }

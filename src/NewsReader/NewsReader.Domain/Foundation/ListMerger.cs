@@ -6,7 +6,7 @@ namespace Jbe.NewsReader.Domain.Foundation
 {
     public static class ListMerger
     {
-        public static void Merge<T>(IList<T> source, IList<T> target, IEqualityComparer<T> comparer = null,
+        public static void Merge<T>(IReadOnlyList<T> source, IList<T> target, IEqualityComparer<T> comparer = null,
             Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null)
         {
             comparer = comparer ?? EqualityComparer<T>.Default;
