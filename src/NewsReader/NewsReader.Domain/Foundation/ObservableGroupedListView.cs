@@ -12,10 +12,17 @@ namespace Jbe.NewsReader.Domain.Foundation
         private readonly InnerListKeyComparer innerListKeyComparer;
         private readonly IEqualityComparer<TElement> elementComparer;
         private readonly INotifyCollectionChanged originalObservableCollection;
+        private Predicate<TElement> filter;
         private volatile bool isDisposed;
 
 
-        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping, IEqualityComparer<TKey> keyComparer, IEqualityComparer<TElement> elementComparer)
+        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping) 
+            : this(originalList, createGrouping, null, null)
+        {
+        }
+
+        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping, 
+            IEqualityComparer<TKey> keyComparer, IEqualityComparer<TElement> elementComparer)
             : base(new List<ObservableGroupingView<TKey, TElement>>())
         {
             this.originalList = originalList;
@@ -33,6 +40,25 @@ namespace Jbe.NewsReader.Domain.Foundation
         }
 
 
+        public Predicate<TElement> Filter
+        {
+            get { return filter; }
+            set
+            {
+                if (filter != value)
+                {
+                    filter = value;
+                    UpdateInnerList();
+                }
+            }
+        }
+
+
+        public void Refresh()
+        {
+            UpdateInnerList();
+        }
+        
         public void Dispose()
         {
             Dispose(true);
@@ -56,12 +82,7 @@ namespace Jbe.NewsReader.Domain.Foundation
 
         protected virtual void OnDispose(bool disposing) { }
 
-        private IReadOnlyList<ObservableGroupingView<TKey, TElement>> CreateGroupingList()
-        {
-            return createGrouping(originalList).Select(x => new ObservableGroupingView<TKey, TElement>(x.Key, x)).ToArray();
-        }
-
-        private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void UpdateInnerList()
         {
             var newGroupingList = CreateGroupingList();
             var intersect = InnerList.Intersect(newGroupingList, innerListKeyComparer);
@@ -72,6 +93,22 @@ namespace Jbe.NewsReader.Domain.Foundation
             }
             ListMerger.Merge(newGroupingList, InnerList, innerListKeyComparer, Insert, RemoveAt, () => Reset(newGroupingList));
         }
+
+        private IReadOnlyList<ObservableGroupingView<TKey, TElement>> CreateGroupingList()
+        {
+            IEnumerable<TElement> filteredList = originalList;
+            if (Filter != null)
+            {
+                filteredList = originalList.Where(x => Filter(x)).ToArray();
+            }
+            return createGrouping(filteredList).Select(x => new ObservableGroupingView<TKey, TElement>(x.Key, x)).ToArray();
+        }
+        
+        private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateInnerList();
+        }
+
 
 
         private sealed class InnerListKeyComparer : IEqualityComparer<ObservableGroupingView<TKey, TElement>>

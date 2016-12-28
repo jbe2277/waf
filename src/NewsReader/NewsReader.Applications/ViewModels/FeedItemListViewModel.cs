@@ -45,7 +45,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             {
                 if (SetProperty(ref searchText, value))
                 {
-                    // TODO: itemsListView.Refresh();
+                    itemsListView.Refresh();
                 }
             }
         }
@@ -61,9 +61,12 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         private void UpdateItemsListView()
         {
-            itemsListView = new ObservableGroupedListView<DateTime, FeedItem>(new ObservableListView<FeedItem>(
-                    SelectionService.SelectedFeed?.Items ?? CollectionHelper.Empty<FeedItem>()) { Filter = FilterFeedItems },
-                x => x.GroupBy(y => y.Date.LocalDateTime.Date), null, null);
+            itemsListView = new ObservableGroupedListView<DateTime, FeedItem>(
+                SelectionService.SelectedFeed?.Items ?? CollectionHelper.Empty<FeedItem>(),
+                x => x.GroupBy(y => y.Date.LocalDateTime.Date))
+            {
+                Filter = FilterFeedItems
+            };
             RaisePropertyChanged(nameof(ItemsListView));
         }
 
