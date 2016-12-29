@@ -67,10 +67,10 @@
                             <Setter Property="FontSize" Value="{ThemeResource ListViewHeaderItemThemeFontSize}" />
                             <Setter Property="Background" Value="Transparent" />
                             <Setter Property="Margin" Value="0"/>
-                            <Setter Property="Padding" Value="12,8,12,0"/>
+                            <Setter Property="Padding" Value="12,8,12,8"/>
                             <Setter Property="HorizontalContentAlignment" Value="Left" />
                             <Setter Property="VerticalContentAlignment" Value="Top" />
-                            <Setter Property="MinHeight" Value="{ThemeResource ListViewHeaderItemMinHeight}"/>
+                            <Setter Property="MinHeight" Value="0"/>
                             <Setter Property="UseSystemFocusVisuals" Value="True" />
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -95,7 +95,8 @@
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}'}"/>
+                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}'}" Style="{StaticResource BodyTextBlockStyle}"
+                                               Margin="9,0,0,0"/>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
@@ -128,15 +129,16 @@
                                     <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
                                             RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
 
-                                    <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="2" Style="{ThemeResource BodyTextBlockStyle}"
-                                            RelativePanel.Below="authorBox" Margin="0,7"/>
+                                    <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="3" Style="{ThemeResource BodyTextBlockStyle}"
+                                            RelativePanel.Below="authorBox" Margin="0,5"/>
 
-                                    <TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
+                                    <!-- TODO: Maybe this information is not that important for an overview list? -->
+                                    <!--<TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
                                             RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                     <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
                                             RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="22,0,0,0">
                                         <TextBlock x:Uid="ReadMoreT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                    </HyperlinkButton>
+                                    </HyperlinkButton>-->
                                 </RelativePanel>
 
                                 <Rectangle Grid.ColumnSpan="3" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
