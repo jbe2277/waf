@@ -9,7 +9,9 @@
     <SolidColorBrush x:Key="JbeMainBorderBrush" Color="#FFE6E6E6"/>
 
     <SolidColorBrush x:Key="JbeAppBarBorderBrush" Color="#FFD2D2D2"/>
-    
+
+    <SolidColorBrush x:Key="JbeLightForegroundBrush" Color="#FF737373"/>
+
     <SolidColorBrush x:Key="JbeMainBackgroundBrush" Color="#FFF9F9F9"/>
 
     <SolidColorBrush x:Key="JbeHeaderBackgroundBrush" Color="#FFF1F1F1"/>

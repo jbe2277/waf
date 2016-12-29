@@ -135,7 +135,8 @@
                                 </RelativePanel>
 
                                 <Button Grid.Column="3" Grid.Row="0" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
-                                        Content="&#xE76C;" Padding="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" FontFamily="Segoe MDL2 Assets"/>
+                                        Content="&#xE76C;" Padding="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" FontFamily="Segoe MDL2 Assets"
+                                        Foreground="{ThemeResource JbeLightForegroundBrush}"/>
 
                                 <Rectangle Grid.ColumnSpan="4" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
                             </Grid>
