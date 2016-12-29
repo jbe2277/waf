@@ -168,9 +168,6 @@
   <data name="Paste.ToolTipService.ToolTip" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="ReadMoreT.Text" xml:space="preserve">
-    <value>read more</value>
-  </data>
   <data name="RefreshL.Label" xml:space="preserve">
     <value>Refresh</value>
   </data>
@@ -185,9 +182,6 @@
   </data>
   <data name="SettingsT.Text" xml:space="preserve">
     <value>Settings</value>
-  </data>
-  <data name="ShowT.Text" xml:space="preserve">
-    <value>show</value>
   </data>
   <data name="themeRequiresRestartT.Text" xml:space="preserve">
     <value>(Changing the theme requires a restart of the App)</value>

@@ -168,9 +168,6 @@
   <data name="Paste.ToolTipService.ToolTip" xml:space="preserve">
     <value>Einfügen</value>
   </data>
-  <data name="ReadMoreT.Text" xml:space="preserve">
-    <value>lesen</value>
-  </data>
   <data name="RefreshL.Label" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
@@ -185,9 +182,6 @@
   </data>
   <data name="SettingsT.Text" xml:space="preserve">
     <value>Einstellungen</value>
-  </data>
-  <data name="ShowT.Text" xml:space="preserve">
-    <value>anzeigen</value>
   </data>
   <data name="themeRequiresRestartT.Text" xml:space="preserve">
     <value>(Änderung des Designs treten nach dem Neustart der App in Kraft)</value>

@@ -114,6 +114,7 @@
                                     <ColumnDefinition Width="6"/>
                                     <ColumnDefinition Width="9"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -123,25 +124,20 @@
                                 <Rectangle Grid.Column="0" Grid.Row="0" Fill="{ThemeResource JbeUnreadLineFillThemeBrush}"
                                            Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
 
-                                <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,7,20,10">
+                                <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,5,7,8">
                                     <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
                                             Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
                                     <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
                                             RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
 
                                     <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="3" Style="{ThemeResource BodyTextBlockStyle}"
-                                            RelativePanel.Below="authorBox" Margin="0,5"/>
-
-                                    <!-- TODO: Maybe this information is not that important for an overview list? -->
-                                    <!--<TextBlock x:Name="dateBox" Text="{x:Bind Date, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}'}"
-                                            RelativePanel.Below="descriptionBox" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                    <HyperlinkButton Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                            RelativePanel.Below="descriptionBox" RelativePanel.RightOf="dateBox" Margin="22,0,0,0">
-                                        <TextBlock x:Uid="ReadMoreT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                    </HyperlinkButton>-->
+                                            RelativePanel.Below="authorBox" Margin="0,5,0,3"/>
                                 </RelativePanel>
 
-                                <Rectangle Grid.ColumnSpan="3" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
+                                <Button Grid.Column="3" Grid.Row="0" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
+                                        Content="&#xE76C;" Padding="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" FontFamily="Segoe MDL2 Assets"/>
+
+                                <Rectangle Grid.ColumnSpan="4" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

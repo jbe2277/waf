@@ -37,13 +37,17 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Feed">
-                    <Grid>
+                    <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="1.5"/>
                         </Grid.RowDefinitions>
                         
-                        <RelativePanel Grid.Row="0" DoubleTapped="FeedDoubleTapped" Background="Transparent" Margin="7,7,20,10">
+                        <RelativePanel Grid.Column="0" Grid.Row="0" Background="Transparent" Margin="7,7,7,10">
                             <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
                             <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
@@ -51,14 +55,12 @@
                                 <Run Text="   "/>
                                 <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
                             </TextBlock>
-
-                            <HyperlinkButton Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}" Padding="0"
-                                    RelativePanel.Below="nameBox" RelativePanel.RightOf="itemsCountBox" Margin="22,0,0,0">
-                                <TextBlock x:Uid="ShowT" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                            </HyperlinkButton>
                         </RelativePanel>
 
-                        <Rectangle Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
+                        <Button Grid.Column="1" Grid.Row="0" Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}"
+                                Content="&#xE76C;" Padding="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" FontFamily="Segoe MDL2 Assets"/>
+                        
+                        <Rectangle Grid.ColumnSpan="2" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
