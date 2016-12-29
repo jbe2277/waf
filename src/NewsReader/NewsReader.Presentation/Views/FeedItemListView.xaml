@@ -127,11 +127,9 @@
                                 <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,5,7,8">
                                     <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
                                             Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
-                                    <TextBlock x:Name="authorBox" Text="{x:Bind Author}" HorizontalAlignment="Right" Visibility="{x:Bind Author, Converter={StaticResource NullToVisibilityConverter}}" 
-                                            RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,3,0,0"/>
 
                                     <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="3" Style="{ThemeResource BodyTextBlockStyle}"
-                                            RelativePanel.Below="authorBox" Margin="0,5,0,3"/>
+                                            RelativePanel.Below="nameBox" Margin="0,5,0,3"/>
                                 </RelativePanel>
 
                                 <Button Grid.Column="3" Grid.Row="0" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
