@@ -15,7 +15,7 @@ namespace Jbe.NewsReader.Domain.Foundation
         private readonly IEnumerable<T> originalList;
         
 
-        public ObservableListViewBase(IEnumerable<T> originalList) : base(new List<T>())
+        protected ObservableListViewBase(IEnumerable<T> originalList) : base(new List<T>())
         {
             this.originalList = originalList;
 

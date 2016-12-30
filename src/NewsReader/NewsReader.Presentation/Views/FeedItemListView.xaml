@@ -14,31 +14,34 @@
     <UserControl.Resources>
         <CollectionViewSource x:Name="ItemsListViewSource" IsSourceGrouped="True" Source="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" />
     </UserControl.Resources>
-    
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <waf:HeaderContentControl Margin="13,0,0,0">
-                <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
-            </waf:HeaderContentControl>
-        </Border>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1" Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <AppBarButton x:Name="searchButton" x:Uid="SearchL" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
-            <AutoSuggestBox x:Name="searchBox" x:Uid="SearchP" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0" Visibility="Collapsed"
-                            LostFocus="SearchBoxLostFocus"/>
+            <Border Grid.Column="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                <waf:HeaderContentControl Margin="13,0,0,0">
+                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+                </waf:HeaderContentControl>
+            </Border>
+
+            <Grid Grid.Column="1" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                <AppBarButton x:Name="searchButton" x:Uid="SearchL" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
+                <AutoSuggestBox x:Name="searchBox" x:Uid="SearchP" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0" Visibility="Collapsed"
+                                LostFocus="SearchBoxLostFocus"/>
+            </Grid>
         </Grid>
 
-        <Grid Grid.ColumnSpan="2" Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.Transitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -147,7 +150,7 @@
                 Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
-        <Border Grid.ColumnSpan="2" Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}">
+        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}">
             <CommandBar Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
                 <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
                 <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
