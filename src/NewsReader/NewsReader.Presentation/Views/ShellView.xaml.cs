@@ -26,8 +26,9 @@ namespace Jbe.NewsReader.Presentation.Views
             previewView.RegisterPropertyChangedCallback(LazyContentPresenter.LazyContentProperty, PreviewChanged);
             UpdatePreviewColumnWidth();
 
-            ToolBarHelper.SetHideBottomToolBar(navigationSplitView, false);
-            CoreWindow.GetForCurrentThread().SizeChanged += WindowSizeChanged;
+            var window = CoreWindow.GetForCurrentThread();
+            UpdateHideBottomToolBar(window.Bounds.Width);
+            window.SizeChanged += WindowSizeChanged;
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManagerBackRequested;
         }
 
@@ -51,7 +52,12 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void WindowSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)
         {
-            ToolBarHelper.SetHideBottomToolBar(navigationSplitView, args.Size.Width > 600);
+            UpdateHideBottomToolBar(args.Size.Width);
+        }
+
+        private void UpdateHideBottomToolBar(double windowWidth)
+        {
+            ToolBarHelper.SetHideBottomToolBar(navigationSplitView, windowWidth > 600);
         }
 
         private void ContentChanged(DependencyObject obj, DependencyProperty property)

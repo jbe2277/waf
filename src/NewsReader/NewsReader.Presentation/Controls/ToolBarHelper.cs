@@ -9,7 +9,6 @@ namespace Jbe.NewsReader.Presentation.Controls
 {
     public enum DynamicToolBarMode
     {
-        Deactivated,
         TopBar,
         BottomBar
     }
@@ -44,17 +43,15 @@ namespace Jbe.NewsReader.Presentation.Controls
         
         private static void DynamicToolBarPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue is DynamicToolBarMode && !e.OldValue.Equals(DynamicToolBarMode.Deactivated))
+            if (e.OldValue is DynamicToolBarMode)
             {
                 throw new NotSupportedException("DynamicToolBar property cannot be changed anymore after the property was set.");
             }
-            if (!e.NewValue.Equals(DynamicToolBarMode.Deactivated))
-            {
-                var dynamicToolBar = (FrameworkElement)obj;
-                UpdateDynamicToolBar(dynamicToolBar);
-                dynamicToolBar.RegisterSafeLoadedCallback(DynamicToolBarLoaded);
-                dynamicToolBar.RegisterSafeUnloadedCallback(DynamicToolBarUnloaded);
-            }
+            
+            var dynamicToolBar = (FrameworkElement)obj;
+            UpdateDynamicToolBar(dynamicToolBar);
+            dynamicToolBar.RegisterSafeLoadedCallback(DynamicToolBarLoaded);
+            dynamicToolBar.RegisterSafeUnloadedCallback(DynamicToolBarUnloaded);
         }
         
         private static void DynamicToolBarLoaded(object sender, RoutedEventArgs e)
