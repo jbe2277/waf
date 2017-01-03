@@ -6,6 +6,7 @@ using System.Composition;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Jbe.NewsReader.Presentation.Controls;
 
 namespace Jbe.NewsReader.Presentation.Views
 {
@@ -25,6 +26,8 @@ namespace Jbe.NewsReader.Presentation.Views
             previewView.RegisterPropertyChangedCallback(LazyContentPresenter.LazyContentProperty, PreviewChanged);
             UpdatePreviewColumnWidth();
 
+            ToolBarHelper.SetHideBottomToolBar(navigationSplitView, false);
+            CoreWindow.GetForCurrentThread().SizeChanged += WindowSizeChanged;
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManagerBackRequested;
         }
 
@@ -44,6 +47,11 @@ namespace Jbe.NewsReader.Presentation.Views
 
             ViewModel.NavigateBackCommand.CanExecuteChanged += NavigateBackCommandCanExecuteChanged;
             UpdateBackButtonVisibility();
+        }
+
+        private void WindowSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)
+        {
+            ToolBarHelper.SetHideBottomToolBar(navigationSplitView, args.Size.Width > 600);
         }
 
         private void ContentChanged(DependencyObject obj, DependencyProperty property)

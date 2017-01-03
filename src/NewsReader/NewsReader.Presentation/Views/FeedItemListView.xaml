@@ -5,6 +5,7 @@
     xmlns:waf="using:System.Waf.Presentation.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctrl="using:Jbe.NewsReader.Presentation.Controls"
     xmlns:dd="using:Jbe.NewsReader.Presentation.DesignData"
     xmlns:m="using:Jbe.NewsReader.Domain"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
@@ -26,15 +27,21 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
                 <waf:HeaderContentControl Margin="13,0,0,0">
-                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind ViewModel.SelectionService.SelectedFeed.Name, Mode=OneWay, FallbackValue=''}" MaxLines="1" Style="{StaticResource TitleTextBlockStyle}"/>
                 </waf:HeaderContentControl>
             </Border>
 
-            <Grid Grid.Column="1" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <CommandBar x:Name="topBar" Grid.Column="1" ctrl:ToolBarHelper.DynamicToolBar="TopBar" ctrl:ToolBarHelper.AssociatedToolBar="{x:Bind bottomBar}">
+                <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
+                <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
+            </CommandBar>
+
+            <Grid Grid.Column="2" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
                 <AppBarButton x:Name="searchButton" x:Uid="SearchL" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
                 <AutoSuggestBox x:Name="searchBox" x:Uid="SearchP" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0" Visibility="Collapsed"
                                 LostFocus="SearchBoxLostFocus"/>
@@ -150,11 +157,8 @@
                 Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
-        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}">
-            <CommandBar Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
-                <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
-            </CommandBar>
+        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">
+            <CommandBar x:Name="bottomBar" ctrl:ToolBarHelper.DynamicToolBar="BottomBar" ctrl:ToolBarHelper.AssociatedToolBar="{x:Bind topBar}" />
         </Border>
     </Grid>
 </UserControl>

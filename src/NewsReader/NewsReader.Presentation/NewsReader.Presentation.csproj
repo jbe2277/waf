@@ -109,6 +109,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FrameworkElementHelper.cs" />
+    <Compile Include="Controls\ToolBarHelper.cs" />
     <Compile Include="Controls\ToolTipHelper.cs" />
     <Compile Include="Converters\ConverterHelper.cs" />
     <Compile Include="Converters\IsNavigationSelectedConverter.cs" />
