@@ -115,11 +115,18 @@ namespace Jbe.NewsReader.Applications.Controllers
                     {
                         selectionService.SelectedFeed = feed;                        
                     }
-                    var syndicationFeed = await client.RetrieveFeedAsync(feed.Uri);
-                    var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description, x.Author)).ToArray();
+                    try
+                    {
+                        var syndicationFeed = await client.RetrieveFeedAsync(feed.Uri);
+                        var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description, x.Author)).ToArray();
 
-                    feed.Name = syndicationFeed.Title;
-                    feed.UpdateItems(items, excludeMarkAsRead: true);
+                        feed.Name = syndicationFeed.Title;
+                        feed.UpdateItems(items, excludeMarkAsRead: true);
+                    }
+                    catch (SyndicationServiceException ex) when (ex.Error == SyndicationServiceError.NotModified)
+                    {
+                        // Ignore the NotModified status
+                    }
                 }
                 else
                 {

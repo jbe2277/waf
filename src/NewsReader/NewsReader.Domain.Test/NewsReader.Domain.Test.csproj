@@ -49,6 +49,7 @@
     <Compile Include="FeedTest.cs" />
     <Compile Include="Foundation\ListMergerTest.cs" />
     <Compile Include="Foundation\ObservableListViewTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
