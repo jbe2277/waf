@@ -62,14 +62,14 @@ namespace Jbe.NewsReader.ExternalServices
 
         public async Task<string> GetTokenAsync()
         {
-            var webAccount = await GetWebAccount();
+            var webAccount = await GetWebAccount().ConfigureAwait(false);
             if (webAccount == null)
             {
                 return null;
             }
 
             var request = new WebTokenRequest(webAccount.WebAccountProvider, tokenScope);
-            var result = await WebAuthenticationCoreManager.GetTokenSilentlyAsync(request, webAccount);
+            var result = await WebAuthenticationCoreManager.GetTokenSilentlyAsync(request, webAccount).AsTask().ConfigureAwait(false);
 
             if (result.ResponseStatus == WebTokenRequestStatus.Success)
             {
@@ -131,8 +131,8 @@ namespace Jbe.NewsReader.ExternalServices
                 return null;
             }
 
-            var provider = await WebAuthenticationCoreManager.FindAccountProviderAsync(providerId);
-            webAccount = await WebAuthenticationCoreManager.FindAccountAsync(provider, accountId);
+            var provider = await WebAuthenticationCoreManager.FindAccountProviderAsync(providerId).AsTask().ConfigureAwait(false);
+            webAccount = await WebAuthenticationCoreManager.FindAccountAsync(provider, accountId).AsTask().ConfigureAwait(false);
             return webAccount;
         }
 
@@ -158,9 +158,9 @@ namespace Jbe.NewsReader.ExternalServices
             {
                 var restApi = new Uri(@"https://apis.live.net/v5.0/me?access_token=" + token);
                 using (var client = new HttpClient())
-                using (var result = await client.GetAsync(restApi))
+                using (var result = await client.GetAsync(restApi).ConfigureAwait(false))
                 {
-                    string content = await result.Content.ReadAsStringAsync();
+                    string content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     var jsonObject = JsonObject.Parse(content);
                     userName = jsonObject["name"].GetString();

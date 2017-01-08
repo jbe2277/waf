@@ -31,7 +31,7 @@ namespace Jbe.NewsReader.ExternalServices
         {
             try
             {
-                var feed = await client.RetrieveFeedAsync(uri);
+                var feed = await client.RetrieveFeedAsync(uri).AsTask().ConfigureAwait(false);
                 return new FeedDto(feed.Title.Text,
                     feed.Items.Select(x => new FeedItemDto(
                                 x.ItemUri ?? x.Links.FirstOrDefault()?.Uri,

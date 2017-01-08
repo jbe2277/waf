@@ -67,7 +67,7 @@ namespace Jbe.NewsReader.Presentation
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            await Task.WhenAll(appControllers.Select(x => x.SuspendingAsync()));
+            await Task.WhenAll(appControllers.Select(x => x.SuspendingAsync())).ConfigureAwait(false);
             deferral.Complete();
         }
     }

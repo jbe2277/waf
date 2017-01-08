@@ -10,21 +10,21 @@ namespace Jbe.NewsReader.ExternalServices
     [Export(typeof(ILauncherService)), Export, Shared]
     public class LauncherService : ILauncherService
     {
-        public async Task<bool> LaunchUriAsync(Uri uri)
+        public Task<bool> LaunchUriAsync(Uri uri)
         {
-            return await Launcher.LaunchUriAsync(uri);
+            return Launcher.LaunchUriAsync(uri).AsTask();
         }
 
-        public async Task<bool> LaunchStoreAsync()
+        public Task<bool> LaunchStoreAsync()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            return await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:pdp?PFN={Package.Current.Id.FamilyName}"));
+            return Launcher.LaunchUriAsync(new Uri($"ms-windows-store:pdp?PFN={Package.Current.Id.FamilyName}")).AsTask();
         }
 
-        public async Task<bool> LaunchReviewAsync()
+        public Task<bool> LaunchReviewAsync()
         {
             // https://msdn.microsoft.com/en-us/library/windows/apps/mt228343.aspx
-            return await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:review?PFN={Package.Current.Id.FamilyName}"));
+            return Launcher.LaunchUriAsync(new Uri($"ms-windows-store:review?PFN={Package.Current.Id.FamilyName}")).AsTask();
         }
     }
 }

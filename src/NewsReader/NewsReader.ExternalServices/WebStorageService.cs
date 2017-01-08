@@ -15,16 +15,16 @@ namespace Jbe.NewsReader.ExternalServices
         {
             using (var client = CreateClient(token))
             {
-                var result = await client.GetAsync($"drive/special/approot:/{fileName}:/content");
+                var result = await client.GetAsync($"drive/special/approot:/{fileName}:/content").ConfigureAwait(false);
                 if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     return false;
                 }
                 result.EnsureSuccessStatusCode();
                 
-                using (var webStream = await result.Content.ReadAsStreamAsync())
+                using (var webStream = await result.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    await webStream.CopyToAsync(destination);
+                    await webStream.CopyToAsync(destination).ConfigureAwait(false);
                 }
                 return true;
             }
@@ -34,7 +34,7 @@ namespace Jbe.NewsReader.ExternalServices
         {
             using (var client = CreateClient(token))
             {
-                var result = await client.PutAsync($"drive/special/approot:/{fileName}:/content", new StreamContent(source));
+                var result = await client.PutAsync($"drive/special/approot:/{fileName}:/content", new StreamContent(source)).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
             }
         }

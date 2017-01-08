@@ -26,14 +26,14 @@ namespace Jbe.NewsReader.Presentation.Services
             shellViewModel.Value.ShowMessage(message, null);
         }
 
-        public async Task ShowMessageDialogAsync(string message)
+        public Task ShowMessageDialogAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
             var closeCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Close"));
             messageDialog.Commands.Add(closeCommand);
             messageDialog.DefaultCommandIndex = 0;
             messageDialog.CancelCommandIndex = 0;
-            await messageDialog.ShowAsync();
+            return messageDialog.ShowAsync().AsTask();
         }
 
         public async Task<bool> ShowYesNoQuestionDialogAsync(string message)
@@ -45,7 +45,7 @@ namespace Jbe.NewsReader.Presentation.Services
             messageDialog.Commands.Add(noCommand);
             messageDialog.DefaultCommandIndex = 0;
             messageDialog.CancelCommandIndex = 1;
-            var result = await messageDialog.ShowAsync();
+            var result = await messageDialog.ShowAsync().AsTask().ConfigureAwait(false);
             return result == yesCommand;
         }    
     }

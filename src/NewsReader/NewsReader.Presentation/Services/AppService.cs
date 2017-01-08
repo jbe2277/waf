@@ -8,9 +8,9 @@ namespace Jbe.NewsReader.Presentation.Services
     [Export(typeof(IAppService)), Shared]
     public class AppService : IAppService
     {
-        public async Task DelayIdleAsync()
+        public Task DelayIdleAsync()
         {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunIdleAsync(ha => { });
+            return Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunIdleAsync(ha => { }).AsTask();
         }
     }
 }

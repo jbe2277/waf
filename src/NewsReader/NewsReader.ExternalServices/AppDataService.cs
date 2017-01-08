@@ -13,10 +13,10 @@ namespace Jbe.NewsReader.ExternalServices
         public IDictionary<string, object> LocalSettings => ApplicationData.Current.LocalSettings.Values;
 
 
-        public async Task<Stream> GetFileStreamForReadAsync(string fileName)
+        public Task<Stream> GetFileStreamForReadAsync(string fileName)
         {
             var folder = ApplicationData.Current.LocalFolder;
-            return await folder.OpenStreamForReadAsync(FileIOHelper.GetArchiveFileName(fileName));
+            return folder.OpenStreamForReadAsync(FileIOHelper.GetArchiveFileName(fileName));
         }
 
         public T LoadCompressedFile<T>(Stream archiveStream, string fileName) where T : class
@@ -26,8 +26,8 @@ namespace Jbe.NewsReader.ExternalServices
 
         public async Task<T> LoadCompressedFileAsync<T>(string fileName) where T : class
         {
-            await FileIOHelper.MigrateDataAsync(ApplicationData.Current.LocalFolder, fileName);
-            return await FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.LocalFolder, fileName);
+            await FileIOHelper.MigrateDataAsync(ApplicationData.Current.LocalFolder, fileName).ConfigureAwait(false);
+            return await FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.LocalFolder, fileName).ConfigureAwait(false);
         }
 
         public Task SaveCompressedFileAsync(object data, string fileName)
