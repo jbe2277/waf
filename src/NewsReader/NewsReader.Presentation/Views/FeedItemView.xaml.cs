@@ -1,10 +1,10 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Domain;
+using Jbe.NewsReader.Presentation.Controls;
 using System;
 using System.ComponentModel;
 using System.Composition;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,7 +16,7 @@ namespace Jbe.NewsReader.Presentation.Views
         private static readonly Uri blankUri = new Uri("about:blank");
         private readonly Lazy<FeedItemViewModel> viewModel;
         private readonly WebView webView;
-        private TaskCompletionSource<object> unloadedTaskSource;
+        private bool isLoaded;
         private FeedItem feedItem;
         
 
@@ -26,18 +26,14 @@ namespace Jbe.NewsReader.Presentation.Views
             webView = new WebView(WebViewExecutionMode.SeparateThread) { Visibility = Visibility.Collapsed };
             webViewPresenter.Content = webView;
             viewModel = new Lazy<FeedItemViewModel>(() => (FeedItemViewModel)DataContext);
-            unloadedTaskSource = new TaskCompletionSource<object>();
-            unloadedTaskSource.SetResult(null);
-            Loaded += LoadedHandler;
-            Unloaded += UnloadedHandler;
+            FrameworkElementHelper.RegisterSafeLoadedCallback(this, LoadedHandler);
+            FrameworkElementHelper.RegisterSafeUnloadedCallback(this, UnloadedHandler);
             webView.NavigationStarting += WebViewNavigationStarting;
             webView.NavigationCompleted += WebViewNavigationCompleted;
         }
 
 
         public FeedItemViewModel ViewModel => viewModel.Value;
-
-        private bool IsLoaded => !unloadedTaskSource.Task.IsCompleted;
 
         private FeedItem FeedItem
         {
@@ -61,20 +57,18 @@ namespace Jbe.NewsReader.Presentation.Views
         }
         
 
-        private async void LoadedHandler(object sender, RoutedEventArgs e)
+        private void LoadedHandler(object sender, RoutedEventArgs e)
         {
-            // Workaround because the Windows Runtime does not guarantee that first the Unloaded handler is called before the second Loaded handler comes.
-            await unloadedTaskSource.Task;
-            unloadedTaskSource = new TaskCompletionSource<object>();
+            isLoaded = true;
             ViewModel.SelectionService.PropertyChanged += SelectionServicePropertyChanged;
             FeedItem = ViewModel.SelectionService.SelectedFeedItem;
         }
 
         private void UnloadedHandler(object sender, RoutedEventArgs e)
         {
+            isLoaded = false;
             ViewModel.SelectionService.PropertyChanged -= SelectionServicePropertyChanged;
             FeedItem = null;
-            unloadedTaskSource.SetResult(null);
         }
 
         private void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -109,7 +103,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void WebViewNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs e)
         {
-            if (!IsLoaded)
+            if (!isLoaded)
             {
                 e.Cancel = true;
                 return;
