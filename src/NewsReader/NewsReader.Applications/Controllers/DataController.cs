@@ -15,6 +15,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private const string salt = "20E1EB34-CF2D-4298-9A95-FACC60759745+74546543-0405-4901-9CFC-E88DFB5BACE5";
         private const uint iterationCount = 5000;
         private const string dataFileName = "feeds.xml";
+        private const string webStorageFileETagSettingsKey = "WebStorageFileETag";
 
         private readonly IAppDataService appDataService;
         private readonly IAccountService accountService;
@@ -89,8 +90,11 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 try
                 {
-                    if (await webStorageService.DownloadFileAsync(dataFileName, cryptoStream, token))
+                    var eTag = (string)appDataService.LocalSettings[webStorageFileETagSettingsKey];
+                    eTag = await webStorageService.DownloadFileAsync(dataFileName, cryptoStream, token, eTag);
+                    if (!string.IsNullOrEmpty(eTag))
                     {
+                        appDataService.LocalSettings[webStorageFileETagSettingsKey] = eTag;
                         cryptoStream.Position = 0;
                         using (var stream = await cryptographicService.DecryptAsync(cryptoStream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
                         {
@@ -128,7 +132,8 @@ namespace Jbe.NewsReader.Applications.Controllers
                 using (var stream = await appDataService.GetFileStreamForReadAsync(dataFileName))
                 using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
                 {
-                    await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
+                    var eTag = await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
+                    appDataService.LocalSettings[webStorageFileETagSettingsKey] = eTag;
                 }
             }
             catch (Exception ex)

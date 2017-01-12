@@ -5,8 +5,8 @@ namespace Jbe.NewsReader.Applications.Services
 {
     public interface IWebStorageService
     {
-        Task<bool> DownloadFileAsync(string fileName, Stream destination, string token);
+        Task<string> DownloadFileAsync(string fileName, Stream destination, string token, string eTag);
 
-        Task UploadFileAsync(Stream source, string fileName, string token);
+        Task<string> UploadFileAsync(Stream source, string fileName, string token);
     }
 }

@@ -12,6 +12,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     [Export, Shared]
     internal class SettingsController
     {
+        private const string themeSettingsKey = "Theme";
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
         private readonly IAppDataService appDataService;
@@ -49,7 +50,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private GeneralSettingsViewModel InitializeGeneralSettingsViewModel(Lazy<GeneralSettingsViewModel> viewModel)
         {
-            viewModel.Value.SelectedAppTheme = DisplayAppThemeExtensions.FromSettings((int?)appDataService.LocalSettings["Theme"]);
+            viewModel.Value.SelectedAppTheme = DisplayAppThemeExtensions.FromSettings((int?)appDataService.LocalSettings[themeSettingsKey]);
             viewModel.Value.FeedManager = FeedManager;
             viewModel.Value.PropertyChanged += GeneralSettingsViewModelPropertyChanged;
             return viewModel.Value;
@@ -70,7 +71,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             if (e.PropertyName == nameof(GeneralSettingsViewModel.SelectedAppTheme))
             {
-                appDataService.LocalSettings["Theme"] = generalSettingsViewModel.Value.SelectedAppTheme.ToSettings();
+                appDataService.LocalSettings[themeSettingsKey] = generalSettingsViewModel.Value.SelectedAppTheme.ToSettings();
             }
         }
     }
