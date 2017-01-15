@@ -66,9 +66,9 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void UnloadedHandler(object sender, RoutedEventArgs e)
         {
-            isLoaded = false;
             ViewModel.SelectionService.PropertyChanged -= SelectionServicePropertyChanged;
             FeedItem = null;
+            isLoaded = false;  // set this flag at last
         }
 
         private void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
