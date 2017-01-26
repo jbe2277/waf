@@ -55,6 +55,7 @@ namespace Jbe.NewsReader.ExternalServices
             using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
             {
                 var entry = archive.CreateEntry(fileName, CompressionLevel.Optimal);
+                entry.LastWriteTime = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
                 using (var stream = entry.Open())
                 {
                     var serializer = new DataContractSerializer(data.GetType());

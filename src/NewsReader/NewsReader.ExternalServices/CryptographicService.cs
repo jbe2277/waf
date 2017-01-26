@@ -14,6 +14,14 @@ namespace Jbe.NewsReader.ExternalServices
     {
         private const uint keySize = 256;
 
+        public async Task<string> HashAsync(Stream stream)
+        {
+            var contentBuffer = await CreateBuffer(stream).ConfigureAwait(false);  // Create first the buffer synchronously
+            var hashAlgorithm = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
+            var hash = hashAlgorithm.HashData(contentBuffer);
+            return CryptographicBuffer.EncodeToBase64String(hash);
+        }
+
         public Task<Stream> EncryptAsync(Stream stream, string key, string salt, uint iterationCount)
         {
             return RunSymmetricAlgorithmAsync(CryptographicEngine.Encrypt, stream, key, salt, iterationCount);

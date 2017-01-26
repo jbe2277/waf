@@ -16,6 +16,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private const uint iterationCount = 5000;
         private const string dataFileName = "feeds.xml";
         private const string webStorageFileETagSettingsKey = "WebStorageFileETag";
+        private const string lastUploadedDataFileHashSettingsKey = "LastUploadedDataFileHash";
 
         private readonly IAppDataService appDataService;
         private readonly IAccountService accountService;
@@ -64,6 +65,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 // Better to forget the settings (data loss) as to never start the app again
                 Debug.Assert(false, "LoadAsync", ex.ToString());
+                appDataService.LocalSettings[webStorageFileETagSettingsKey] = null;
                 feedManager = new FeedManager();
             }
             feedManagerCompletion.SetResult(feedManager);
@@ -130,10 +132,19 @@ namespace Jbe.NewsReader.Applications.Controllers
             try
             {
                 using (var stream = await appDataService.GetFileStreamForReadAsync(dataFileName))
-                using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
                 {
-                    var eTag = await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
-                    appDataService.LocalSettings[webStorageFileETagSettingsKey] = eTag;
+                    var dataFileHash = await cryptographicService.HashAsync(stream);
+                    if (dataFileHash.Equals(appDataService.LocalSettings[lastUploadedDataFileHashSettingsKey]))
+                    {
+                        return;
+                    }
+                    stream.Position = 0;
+                    using (var cryptoStream = await cryptographicService.EncryptAsync(stream, accountService.CurrentAccount.Id, salt + accountService.CurrentAccount.Id, iterationCount))
+                    {
+                        var eTag = await webStorageService.UploadFileAsync(cryptoStream, dataFileName, token);
+                        appDataService.LocalSettings[webStorageFileETagSettingsKey] = eTag;
+                        appDataService.LocalSettings[lastUploadedDataFileHashSettingsKey] = dataFileHash;
+                    }
                 }
             }
             catch (Exception ex)
