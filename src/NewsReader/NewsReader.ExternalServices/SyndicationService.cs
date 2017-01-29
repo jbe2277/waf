@@ -37,8 +37,7 @@ namespace Jbe.NewsReader.ExternalServices
                                 x.ItemUri ?? x.Links.FirstOrDefault()?.Uri,
                                 x.PublishedDate,
                                 x.Title.Text,
-                                RemoveHtmlTags(x.Summary?.Text),
-                                x.Authors.FirstOrDefault()?.NodeValue
+                                RemoveHtmlTags(x.Summary?.Text)
                             )).ToArray()
                 );
             }

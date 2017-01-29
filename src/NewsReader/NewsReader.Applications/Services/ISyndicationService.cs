@@ -29,13 +29,12 @@ namespace Jbe.NewsReader.Applications.Services
 
     public sealed class FeedItemDto
     {
-        public FeedItemDto(Uri uri, DateTimeOffset date, string name, string description, string author)
+        public FeedItemDto(Uri uri, DateTimeOffset date, string name, string description)
         {
             Uri = uri;
             Date = date;
             Name = name;
             Description = description;
-            Author = author;
         }
 
         public Uri Uri { get; }
@@ -45,8 +44,6 @@ namespace Jbe.NewsReader.Applications.Services
         public string Name { get; }
 
         public string Description { get; }
-
-        public string Author { get; }
     }
 
     public enum SyndicationServiceError

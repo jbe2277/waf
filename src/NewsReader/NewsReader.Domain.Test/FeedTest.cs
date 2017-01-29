@@ -60,8 +60,8 @@ namespace Test.NewsReader.Domain
         {
             var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
             feed.UpdateItems(new[] {
-                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc", "author"),
-                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc", "author"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc"),
             });
             feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
@@ -70,8 +70,8 @@ namespace Test.NewsReader.Domain
 
             var newItems = new[]
             {
-                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2b", "desc", "author"),
-                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 6, 12, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc", "author"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2b", "desc"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 6, 12, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc"),
             };
             feed.UpdateItems(newItems, cloneItemsBeforeInsert: cloneItemsBeforeInsert);
 
@@ -99,8 +99,8 @@ namespace Test.NewsReader.Domain
             var feedManager = new FeedManager();
             feedManager.Feeds.Add(feed);
             feed.UpdateItems(new[] {
-                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc", "author"),
-                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc", "author"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc"),
             });
             feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
             
@@ -182,9 +182,9 @@ namespace Test.NewsReader.Domain
         private void UpdateFeedItems(Feed feed)
         {
             feed.UpdateItems(new[] {
-                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), DateTimeOffset.Now - TimeSpan.FromDays(10), "name1", "desc", "author"),
-                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), DateTimeOffset.Now - TimeSpan.FromDays(5), "name2", "desc", "author"),
-                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), DateTimeOffset.Now - TimeSpan.FromDays(1), "name3", "desc", "author"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/1"), DateTimeOffset.Now - TimeSpan.FromDays(10), "name1", "desc"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/2"), DateTimeOffset.Now - TimeSpan.FromDays(5), "name2", "desc"),
+                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), DateTimeOffset.Now - TimeSpan.FromDays(1), "name3", "desc"),
             });
         }
     }

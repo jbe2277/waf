@@ -45,9 +45,9 @@ namespace Test.NewsReader.Applications.Services
         {
             return new FeedDto("Sample Feed", new[]
             {
-                new FeedItemDto(new Uri("http://www.test.com/rss/feed1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author"),
-                new FeedItemDto(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 16, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2", "author2"),
-                new FeedItemDto(new Uri("http://www.test.com/rss/feed3"), new DateTimeOffset(2020, 5, 6, 9, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc3", "author3")
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 16, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed3"), new DateTimeOffset(2020, 5, 6, 9, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc3")
             });
         }
 

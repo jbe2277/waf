@@ -118,7 +118,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                     try
                     {
                         var syndicationFeed = await client.RetrieveFeedAsync(feed.Uri);
-                        var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description, x.Author)).ToArray();
+                        var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description)).ToArray();
 
                         feed.Name = syndicationFeed.Title;
                         feed.UpdateItems(items, excludeMarkAsRead: true);

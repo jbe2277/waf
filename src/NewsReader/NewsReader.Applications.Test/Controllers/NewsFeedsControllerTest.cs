@@ -48,7 +48,7 @@ namespace Test.NewsReader.Applications.Controllers
             var firstFeed = MockSyndicationClient.CreateSampleFeed();
             syndicationService.LastCreatedMockClient.RetrieveFeedAsyncStub = uri => Task.FromResult(new FeedDto("Sample Feed", new[]
             {
-                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 9", "desc 9", "author"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 9", "desc 9"),
             }.Concat(firstFeed.Items).ToArray()));
 
             controller.Update();
@@ -59,12 +59,12 @@ namespace Test.NewsReader.Applications.Controllers
 
             syndicationService.LastCreatedMockClient.RetrieveFeedAsyncStub = uri => Task.FromResult(new FeedDto("Sample Feed", new[]
             {
-                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 9", "desc 9", "Bill"),
+                new FeedItemDto(new Uri("http://www.test.com/rss/feed9"), new DateTimeOffset(2021, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name 10", "desc 9"),
             }.Concat(firstFeed.Items).ToArray()));
 
             controller.RefreshFeedCommand.Execute(null);
             Context.Wait(TimeSpan.FromMilliseconds(500));
-            Context.WaitFor(() => feedManager.Feeds.Single().Items[0].Author == "Bill", TimeSpan.FromSeconds(1));
+            Context.WaitFor(() => feedManager.Feeds.Single().Items[0].Name == "name 10", TimeSpan.FromSeconds(1));
 
             AssertHelper.CanExecuteChangedEvent(controller.RefreshFeedCommand, () => selectionService.SelectedFeed = null);
             Assert.IsFalse(controller.RefreshFeedCommand.CanExecute(null));

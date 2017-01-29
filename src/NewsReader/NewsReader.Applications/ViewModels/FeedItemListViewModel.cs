@@ -55,8 +55,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
         {
             return string.IsNullOrEmpty(SearchText)
                 || (item.Name ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || (item.Description ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || (item.Author ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
+                || (item.Description ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
         private void UpdateItemsListView()

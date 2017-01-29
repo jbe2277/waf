@@ -11,11 +11,10 @@ namespace Jbe.NewsReader.Domain
         [DataMember] private DateTimeOffset date;
         [DataMember] private string name;
         [DataMember] private string description;
-        [DataMember] private string author;
         [DataMember] private bool markAsRead;
 
 
-        public FeedItem(Uri uri, DateTimeOffset date, string name, string description, string author)
+        public FeedItem(Uri uri, DateTimeOffset date, string name, string description)
         {
             // Note: Serializer does not call the constructor.
             if (uri == null) { throw new ArgumentNullException(nameof(uri)); }
@@ -23,7 +22,6 @@ namespace Jbe.NewsReader.Domain
             Date = date;
             Name = name;
             Description = description;
-            Author = author;
         }
 
 
@@ -47,12 +45,6 @@ namespace Jbe.NewsReader.Domain
             set { SetProperty(ref description, value == null ? null : value.Truncate(500).Trim()); }
         }
 
-        public string Author
-        {
-            get { return author; }
-            set { SetProperty(ref author, value == null ? null : value.Truncate(100).Trim()); }
-        }
-
         public bool MarkAsRead
         {
             get { return markAsRead; }
@@ -66,13 +58,12 @@ namespace Jbe.NewsReader.Domain
             Date = item.Date;
             Name = item.Name;
             Description = item.Description;
-            Author = item.Author;
             if (!excludeMarkAsRead) { MarkAsRead = item.MarkAsRead; }
         }
 
         public FeedItem Clone()
         {
-            return new FeedItem(Uri, Date, Name, Description, Author)
+            return new FeedItem(Uri, Date, Name, Description)
             {
                 MarkAsRead = MarkAsRead
             };

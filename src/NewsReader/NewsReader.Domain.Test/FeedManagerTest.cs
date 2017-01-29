@@ -50,7 +50,7 @@ namespace Test.NewsReader.Domain
             var feedA2 = new Feed(new Uri("http://www.test.com/rss/feedA2"));
             feedManagerA.Feeds.Add(feedA1);
             feedManagerA.Feeds.Add(feedA2);
-            var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc", "author");
+            var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
             feedA2.UpdateItems(new[] { item });
             Assert.IsFalse(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
 
