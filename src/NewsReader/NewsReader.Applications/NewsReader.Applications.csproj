@@ -64,6 +64,8 @@
     <Compile Include="Services\IWebStorageService.cs" />
     <Compile Include="Services\MessageServiceExtensions.cs" />
     <Compile Include="Services\SelectionService.cs" />
+    <Compile Include="Services\SettingsKey.cs" />
+    <Compile Include="ViewModels\DeveloperSettingsViewModel.cs" />
     <Compile Include="ViewModels\DisplayAppTheme.cs" />
     <Compile Include="ViewModels\DisplayItemLifetime.cs" />
     <Compile Include="ViewModels\DisplayMaxItemsLimit.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="ViewModels\NavigationItem.cs" />
     <Compile Include="ViewModels\SettingsLayoutViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\IDeveloperSettingsView.cs" />
     <Compile Include="Views\IFeedItemListView.cs" />
     <Compile Include="Views\IFeedItemView.cs" />
     <Compile Include="Views\IFeedListView.cs" />

@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <GridLength x:Key="Form.ColumnSpace">20</GridLength>
+
+    <GridLength x:Key="Form.RowSpaceSmall">10</GridLength>
+    <GridLength x:Key="Form.RowSpaceMedium">15</GridLength>
+    <GridLength x:Key="Form.RowSpaceLarge">30</GridLength>
+
+    <Style x:Key="Form.MainGrid" TargetType="Grid">
+        <Setter Property="MaxWidth" Value="500"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="Transitions">
+            <Setter.Value>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="Form.TextBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+    </Style>
+    
+    <Style x:Key="Form.ComboBox" TargetType="ComboBox">
+        <Setter Property="MinWidth" Value="170"/>
+    </Style>
+
+</ResourceDictionary>

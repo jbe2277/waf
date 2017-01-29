@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Resources/ConverterResources.xaml"/>
                 <ResourceDictionary Source="Resources/ControlResources.xaml"/>
                 <ResourceDictionary Source="Resources/LayoutResources.xaml"/>
+                <ResourceDictionary Source="Resources/FormResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

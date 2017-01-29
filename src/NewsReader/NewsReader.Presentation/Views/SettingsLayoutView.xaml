@@ -19,12 +19,15 @@
             </waf:HeaderContentControl>
         </Border>
 
-        <Pivot Grid.Row="1">
+        <Pivot x:Name="pivot" Grid.Row="1">
             <PivotItem x:Uid="GeneralH">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyGeneralSettingsView}"/>
             </PivotItem>
             <PivotItem x:Uid="InfoH">
                 <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyInfoSettingsView}"/>
+            </PivotItem>
+            <PivotItem x:Name="developerPivotItem" Header="Developer">
+                <waf:LazyContentPresenter LazyContent="{x:Bind ViewModel.LazyDeveloperSettingsView}"/>
             </PivotItem>
         </Pivot>
     </Grid>

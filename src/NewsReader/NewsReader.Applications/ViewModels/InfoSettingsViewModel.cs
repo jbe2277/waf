@@ -28,5 +28,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public string AppPublisherName { get; }
 
         public ICommand LaunchWindowsStoreCommand { get; set; }
+
+        public ICommand EnableDeveloperSettingsCommand { get; set; }
     }
 }

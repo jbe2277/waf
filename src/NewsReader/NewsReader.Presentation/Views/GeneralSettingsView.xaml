@@ -6,39 +6,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600">
 
-    <Grid MaxWidth="500" HorizontalAlignment="Left" Margin="0,10,0,0">
-        <Grid.Transitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.Transitions>
+    <Grid Style="{StaticResource Form.MainGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="{StaticResource Form.ColumnSpace}"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="{StaticResource Form.RowSpaceSmall}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="{StaticResource Form.RowSpaceMedium}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="{StaticResource Form.RowSpaceLarge}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="{StaticResource Form.RowSpaceSmall}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="{StaticResource Form.RowSpaceMedium}"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="MaxLines" Value="4"/>
-            </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="MinWidth" Value="170"/>
-            </Style>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource Form.TextBlock}"/>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource Form.ComboBox}"/>
         </Grid.Resources>
 
         <TextBlock Grid.ColumnSpan="3" Grid.Row="0" x:Uid="userInterfaceT" Style="{StaticResource SubtitleTextBlockStyle}"/>

@@ -1,8 +1,10 @@
 ﻿using Jbe.NewsReader.Applications.Controllers;
+using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.ExternalServices;
 using System.Collections.Generic;
 using System.Composition.Hosting;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -23,25 +25,34 @@ namespace Jbe.NewsReader.Presentation
 
         public App()
         {
-            var themeSettings = ApplicationData.Current.LocalSettings.Values["Theme"];
+            var themeSettings = ApplicationData.Current.LocalSettings.Values[SettingsKey.Theme];
             if (themeSettings != null)
             {
                 RequestedTheme = (ApplicationTheme)themeSettings;
             }
+            var languageSettings = ApplicationData.Current.LocalSettings.Values[SettingsKey.Language] as string;
+            if (string.IsNullOrEmpty(languageSettings))
+            {
+                ApplicationLanguages.PrimaryLanguageOverride = GlobalizationPreferences.Languages[0];
+            }
+            else
+            {
+                ApplicationLanguages.PrimaryLanguageOverride = languageSettings;
+                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(languageSettings);
+                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(languageSettings);
+            }
+
             InitializeComponent();
             Suspending += OnSuspending;
             Resuming += OnResuming;
         }
-
+        
 
         private void Initialize()
         {
             if (isInitialized) { return; }
             isInitialized = true;
-
-            ApplicationLanguages.PrimaryLanguageOverride = GlobalizationPreferences.Languages[0];
-            //ApplicationLanguages.PrimaryLanguageOverride = "en-US";
-
+            
             var configuration = new ContainerConfiguration()
                 .WithAssembly(typeof(ShellViewModel).GetTypeInfo().Assembly)
                 .WithAssembly(typeof(AppInfoService).GetTypeInfo().Assembly)

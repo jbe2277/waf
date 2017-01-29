@@ -125,6 +125,9 @@
     <Compile Include="Services\AppService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\ResourceService.cs" />
+    <Compile Include="Views\DeveloperSettingsView.xaml.cs">
+      <DependentUpon>DeveloperSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FeedItemListView.xaml.cs">
       <DependentUpon>FeedItemListView.xaml</DependentUpon>
     </Compile>
@@ -238,6 +241,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Resources\FormResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Resources\LayoutResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +255,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\DeveloperSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FeedItemListView.xaml">
       <SubType>Designer</SubType>

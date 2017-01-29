@@ -8,6 +8,9 @@ namespace Jbe.NewsReader.Applications.ViewModels
     [Export, Shared]
     public class SettingsLayoutViewModel : ViewModelCore<ISettingsLayoutView>
     {
+        private bool developerSettingsEnabled;
+
+
         [ImportingConstructor]
         public SettingsLayoutViewModel(ISettingsLayoutView view) : base(view)
         {
@@ -17,5 +20,13 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public Lazy<object> LazyGeneralSettingsView { get; set; }
         
         public Lazy<object> LazyInfoSettingsView { get; set; }
+
+        public Lazy<object> LazyDeveloperSettingsView { get; set; }
+        
+        public bool DeveloperSettingsEnabled
+        {
+            get { return developerSettingsEnabled; }
+            set { SetProperty(ref developerSettingsEnabled, value); }
+        }
     }
 }
