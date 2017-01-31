@@ -22,5 +22,7 @@
         </TextBlock>
 
         <HyperlinkButton x:Uid="WindowsStoreC" Command="{x:Bind ViewModel.LaunchWindowsStoreCommand}" Margin="0,10,0,0" Style="{StaticResource TextBlockButtonStyle}"/>
+
+        <Rectangle Fill="Transparent" Width="100" Height="100" HorizontalAlignment="Right" DoubleTapped="HiddenRectangleDoubleTapped"/>
     </StackPanel>
 </UserControl>

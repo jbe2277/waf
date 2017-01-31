@@ -34,5 +34,10 @@ namespace Jbe.NewsReader.Presentation.Views
                 ViewModel.EnableDeveloperSettingsCommand.Execute(null);
             }
         }
+
+        private void HiddenRectangleDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            ViewModel.EnableDeveloperSettingsCommand.Execute(null);
+        }
     }
 }
