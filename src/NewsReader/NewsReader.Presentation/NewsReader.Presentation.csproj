@@ -113,7 +113,6 @@
     <Compile Include="Controls\ToolBarHelper.cs" />
     <Compile Include="Controls\ToolTipHelper.cs" />
     <Compile Include="Converters\ConverterHelper.cs" />
-    <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayAppThemeConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayItemLifetimeConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayMaxItemsLimitConverter.cs" />

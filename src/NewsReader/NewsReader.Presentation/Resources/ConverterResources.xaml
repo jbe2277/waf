@@ -10,8 +10,6 @@
 
     <cc:NoOperationConverter x:Key="NoOperationConverter"/>
 
-    <c:IsNotNullConverter x:Key="IsNotNullConverter"/>
-
     <c:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
     <c:LocalizeDisplayAppThemeConverter x:Key="LocalizeDisplayAppThemeConverter"/>
