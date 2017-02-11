@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:waf="using:System.Waf.Presentation.Controls"
     xmlns:ctrl="using:Jbe.NewsReader.Presentation.Controls"
+    xmlns:v="using:Jbe.NewsReader.Presentation.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:m="using:Jbe.NewsReader.Domain"
@@ -101,9 +102,9 @@
                             <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
                             <TextBlock x:Name="itemsCountBox" RelativePanel.Below="nameBox" Style="{ThemeResource CaptionTextBlockStyle}">
-                                <Run Text="{Binding Items.Count, Converter={StaticResource StringFormatConverter}, ConverterParameter=Items: \{0\}}"/>
+                                <Run Text="{x:Bind v:FeedListView.GetItemsCountText(Items.Count), Mode=OneWay}"/>
                                 <Run Text="   "/>
-                                <Run Text="{Binding UnreadItemsCount, Converter={StaticResource StringFormatConverter}, ConverterParameter=Unread: \{0\}}"/>
+                                <Run Text="{x:Bind v:FeedListView.GetUnreadItemsCountText(UnreadItemsCount), Mode=OneWay}"/>
                             </TextBlock>
                         </RelativePanel>
 

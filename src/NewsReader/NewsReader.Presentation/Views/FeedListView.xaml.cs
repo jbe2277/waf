@@ -1,5 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Applications.Views;
+using Jbe.NewsReader.Presentation.Services;
 using System;
 using System.Composition;
 using System.Threading.Tasks;
@@ -35,10 +36,7 @@ namespace Jbe.NewsReader.Presentation.Views
         public ICommand PasteCommand => pasteCommand;
 
 
-        public void FeedAdded()
-        {
-            addFeedButton.Flyout.Hide();
-        }
+        public void FeedAdded() => addFeedButton.Flyout.Hide();
 
         private void AddFeedFlyoutOpened(object sender, object e)
         {
@@ -56,11 +54,8 @@ namespace Jbe.NewsReader.Presentation.Views
             }
         }
 
-        private void AddFeedFlyoutCloseAction(object sender, RoutedEventArgs e)
-        {
-            addFeedButton.Flyout.Hide();
-        }
-
+        private void AddFeedFlyoutCloseAction(object sender, RoutedEventArgs e) => addFeedButton.Flyout.Hide();
+        
         private bool CanPasteUri()
         {
             try
@@ -74,19 +69,17 @@ namespace Jbe.NewsReader.Presentation.Views
             }
         }
 
-        private async Task PasteUriAsync()
-        {
-            ViewModel.AddNewFeedUri = await Clipboard.GetContent().GetTextAsync();
-        }
-
-        private void ClipboardContentChanged(object sender, object e)
-        {
-            pasteCommand.RaiseCanExecuteChanged();
-        }
-
+        private async Task PasteUriAsync() => ViewModel.AddNewFeedUri = await Clipboard.GetContent().GetTextAsync();
+        
+        private void ClipboardContentChanged(object sender, object e) => pasteCommand.RaiseCanExecuteChanged();
+        
         private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             ViewModel.ShowFeedItemListViewCommand.Execute(((FrameworkElement)sender).DataContext);
         }
+
+        private static string GetItemsCountText(int itemsCount) => ResourceService.GetString("ItemsCount", itemsCount);
+        
+        private static string GetUnreadItemsCountText(int itemsCount) => ResourceService.GetString("UnreadItemsCount", itemsCount);
     }
 }

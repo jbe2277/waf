@@ -10,7 +10,7 @@ namespace Test.NewsReader.Applications.Services
         public Func<string, string> GetStringStub { get; set; }
 
 
-        public string GetString(string resource)
+        public string GetString(string resource, params object[] args)
         {
             return GetStringStub?.Invoke(resource) ?? "Dummy Text";
         }

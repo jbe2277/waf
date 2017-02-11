@@ -2,6 +2,6 @@
 {
     public interface IResourceService
     {
-        string GetString(string resource);
+        string GetString(string resource, params object[] args);
     }
 }

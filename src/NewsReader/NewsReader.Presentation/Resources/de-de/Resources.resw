@@ -276,4 +276,10 @@ Details: {0}</value>
   <data name="SynchronizationUploadError" xml:space="preserve">
     <value>Der Synchronisierungs-Upload ist fehlgeschlagen. Error {0}</value>
   </data>
+  <data name="ItemsCount" xml:space="preserve">
+    <value>Elemente: {0}</value>
+  </data>
+  <data name="UnreadItemsCount" xml:space="preserve">
+    <value>Ungelesen: {0}</value>
+  </data>
 </root>

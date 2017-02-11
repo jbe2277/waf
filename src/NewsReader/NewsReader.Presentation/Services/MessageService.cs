@@ -3,7 +3,6 @@ using Jbe.NewsReader.Applications.ViewModels;
 using System;
 using System.Composition;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 
 namespace Jbe.NewsReader.Presentation.Services
@@ -29,7 +28,7 @@ namespace Jbe.NewsReader.Presentation.Services
         public Task ShowMessageDialogAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
-            var closeCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Close"));
+            var closeCommand = new UICommand(ResourceService.GetString("Close"));
             messageDialog.Commands.Add(closeCommand);
             messageDialog.DefaultCommandIndex = 0;
             messageDialog.CancelCommandIndex = 0;
@@ -39,8 +38,8 @@ namespace Jbe.NewsReader.Presentation.Services
         public async Task<bool> ShowYesNoQuestionDialogAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
-            var yesCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("Yes"));
-            var noCommand = new UICommand(ResourceLoader.GetForViewIndependentUse().GetString("No"));
+            var yesCommand = new UICommand(ResourceService.GetString("Yes"));
+            var noCommand = new UICommand(ResourceService.GetString("No"));
             messageDialog.Commands.Add(yesCommand);
             messageDialog.Commands.Add(noCommand);
             messageDialog.DefaultCommandIndex = 0;

@@ -1,6 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
+using Jbe.NewsReader.Presentation.Services;
 using System;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Data;
 
 namespace Jbe.NewsReader.Presentation.Converters
@@ -13,15 +13,15 @@ namespace Jbe.NewsReader.Presentation.Converters
             switch (lifetime)
             {
                 case DisplayItemLifetime._1Month:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("ItemLifetime1Month");
+                    return ResourceService.GetString("ItemLifetime1Month");
                 case DisplayItemLifetime._3Month:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("ItemLifetime3Month");
+                    return ResourceService.GetString("ItemLifetime3Month");
                 case DisplayItemLifetime._6Month:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("ItemLifetime6Month");
+                    return ResourceService.GetString("ItemLifetime6Month");
                 case DisplayItemLifetime._1Year:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("ItemLifetime1Year");
+                    return ResourceService.GetString("ItemLifetime1Year");
                 case DisplayItemLifetime.Forever:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("ItemLifetimeForever");
+                    return ResourceService.GetString("ItemLifetimeForever");
                 default:
                     throw new InvalidOperationException($"DisplayItemLifetime is not supported: {lifetime}");
             }

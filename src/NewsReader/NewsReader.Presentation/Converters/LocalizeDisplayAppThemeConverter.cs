@@ -1,6 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
+using Jbe.NewsReader.Presentation.Services;
 using System;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Data;
 
 namespace Jbe.NewsReader.Presentation.Converters
@@ -13,11 +13,11 @@ namespace Jbe.NewsReader.Presentation.Converters
             switch (theme)
             {
                 case DisplayAppTheme.Auto:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeAuto");
+                    return ResourceService.GetString("AppThemeAuto");
                 case DisplayAppTheme.Light:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeLight");
+                    return ResourceService.GetString("AppThemeLight");
                 case DisplayAppTheme.Dark:
-                    return ResourceLoader.GetForViewIndependentUse().GetString("AppThemeDark");
+                    return ResourceService.GetString("AppThemeDark");
                 default:
                     throw new InvalidOperationException($"Theme is not supported: {theme}");
             }

@@ -2,7 +2,6 @@
 using Jbe.NewsReader.Domain;
 using System;
 using System.Composition;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Windows.Input;
