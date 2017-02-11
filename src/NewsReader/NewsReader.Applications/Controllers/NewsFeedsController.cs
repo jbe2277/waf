@@ -179,14 +179,14 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
         }
 
-        private bool CanRemoveFeed()
+        private bool CanRemoveFeed(object parameter)
         {
-            return selectionService.SelectedFeed != null;
+            return parameter is Feed || selectionService.SelectedFeed != null;
         }
 
-        private async Task RemoveFeedAsync()
+        private async Task RemoveFeedAsync(object parameter)
         {
-            var feedToRemove = selectionService.SelectedFeed;
+            var feedToRemove = (parameter as Feed) ?? selectionService.SelectedFeed;
             if (!await messageService.ShowYesNoQuestionDialogAsync(resourceService.GetString("RemoveFeedQuestion"), feedToRemove.Name))
             {
                 return;  // User canceled operation
