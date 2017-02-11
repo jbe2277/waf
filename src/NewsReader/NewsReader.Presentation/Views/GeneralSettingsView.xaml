@@ -33,7 +33,7 @@
         <TextBlock Grid.ColumnSpan="3" Grid.Row="0" x:Uid="userInterfaceT" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
         <TextBlock Grid.Column="0" Grid.Row="2" x:Uid="themeT"/>
-        <ComboBox Grid.Column="2" Grid.Row="2" ItemsSource="{x:Bind ViewModel.AppThemes}" SelectedItem="{x:Bind ViewModel.SelectedAppTheme, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+        <ComboBox Grid.Column="2" Grid.Row="2" ItemsSource="{x:Bind ViewModel.AppThemes}" SelectedItem="{x:Bind ViewModel.SelectedAppTheme, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource LocalizeDisplayAppThemeConverter}}"/>
@@ -44,7 +44,7 @@
 
         <TextBlock Grid.ColumnSpan="3" Grid.Row="6" x:Uid="dataManagementT" Style="{StaticResource SubtitleTextBlockStyle}"/>
         <TextBlock Grid.Column="0" Grid.Row="8" x:Uid="storeFeedItemsForT" Text="Store feed items for:"/>
-        <ComboBox Grid.Column="2" Grid.Row="8" ItemsSource="{x:Bind ViewModel.ItemLifetimes}" SelectedItem="{x:Bind ViewModel.SelectedItemLifetime, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+        <ComboBox Grid.Column="2" Grid.Row="8" ItemsSource="{x:Bind ViewModel.ItemLifetimes}" SelectedItem="{x:Bind ViewModel.SelectedItemLifetime, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource LocalizeDisplayItemLifetimeConverter}}"/>
@@ -52,7 +52,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock Grid.Column="0" Grid.Row="10" x:Uid="storeMaxFeedItemsT"/>
-        <ComboBox Grid.Column="2" Grid.Row="10" ItemsSource="{x:Bind ViewModel.MaxItemsLimits}" SelectedItem="{x:Bind ViewModel.SelectedMaxItemsLimit, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}">
+        <ComboBox Grid.Column="2" Grid.Row="10" ItemsSource="{x:Bind ViewModel.MaxItemsLimits}" SelectedItem="{x:Bind ViewModel.SelectedMaxItemsLimit, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource LocalizeDisplayMaxItemsLimitConverter}}"/>

@@ -70,7 +70,7 @@
                 </StackPanel>
 
                 <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ItemsListViewSource.View, Mode=OneWay}"
-                    SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay, Converter={StaticResource NoOperationConverter}}"
+                    SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay}"
                     SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="ListViewHeaderItem">
@@ -155,7 +155,7 @@
             </Grid>
 
             <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
-                Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay}"/>
         </Grid>
 
         <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">
