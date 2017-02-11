@@ -288,4 +288,7 @@ Details: {0}</value>
   <data name="OpenT.Text" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="RemoveFeedT.Text" xml:space="preserve">
+    <value>Remove the feed</value>
+  </data>
 </root>

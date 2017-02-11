@@ -97,7 +97,15 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="1.5"/>
                         </Grid.RowDefinitions>
-                        
+
+                        <Grid.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Uid="OpenT" Command="{Binding DataContext.ShowFeedItemListViewCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}"
+                                                FontWeight="SemiBold"/>
+                                <MenuFlyoutItem x:Uid="RemoveFeedT" Command="{Binding DataContext.RemoveFeedCommand, ElementName=feedListView, Mode=OneTime}" CommandParameter="{x:Bind}"/>
+                            </MenuFlyout>
+                        </Grid.ContextFlyout>
+
                         <RelativePanel Grid.Column="0" Grid.Row="0" Background="Transparent" Margin="7,7,7,10">
                             <TextBlock x:Name="nameBox" Text="{x:Bind Name, Mode=OneWay}" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,7"/>
 
