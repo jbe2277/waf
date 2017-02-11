@@ -209,23 +209,31 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private bool CanMarkAsReadUnread(object parameter)
         {
-            return selectionService.SelectedFeedItem != null;
+            return parameter is FeedItem || selectionService.SelectedFeedItem != null;
         }
 
         private void MarkAsReadUnread(object parameter)
         {
-            var stringParameter = parameter as string;
-            if (string.Equals("read", stringParameter, StringComparison.OrdinalIgnoreCase))
+            var feedItem = parameter as FeedItem;
+            if (feedItem != null)
             {
-                selectionService.SelectedFeedItem.MarkAsRead = true;
-            }
-            else if (string.Equals("unread", stringParameter, StringComparison.OrdinalIgnoreCase))
-            {
-                selectionService.SelectedFeedItem.MarkAsRead = false;
+                feedItem.MarkAsRead = !feedItem.MarkAsRead;
             }
             else
             {
-                selectionService.SelectedFeedItem.MarkAsRead = !selectionService.SelectedFeedItem.MarkAsRead;
+                var stringParameter = parameter as string;
+                if (string.Equals("read", stringParameter, StringComparison.OrdinalIgnoreCase))
+                {
+                    selectionService.SelectedFeedItem.MarkAsRead = true;
+                }
+                else if (string.Equals("unread", stringParameter, StringComparison.OrdinalIgnoreCase))
+                {
+                    selectionService.SelectedFeedItem.MarkAsRead = false;
+                }
+                else
+                {
+                    selectionService.SelectedFeedItem.MarkAsRead = !selectionService.SelectedFeedItem.MarkAsRead;
+                }
             }
         }
 

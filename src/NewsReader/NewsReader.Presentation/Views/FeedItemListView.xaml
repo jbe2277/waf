@@ -88,7 +88,7 @@
                                     <ControlTemplate TargetType="ListViewHeaderItem">
                                         <StackPanel Background="{ThemeResource JbeHeaderBackgroundBrush}"
                                             BorderBrush="{ThemeResource JbeMainBorderBrush}"
-                                            BorderThickness="0,0,0,1.5">    
+                                            BorderThickness="0,0,0,1.5">
                                             <ContentPresenter x:Name="ContentPresenter"
                                                 Margin="{TemplateBinding Padding}"
                                                 Content="{TemplateBinding Content}"
@@ -132,8 +132,16 @@
                                     <RowDefinition Height="1.5"/>
                                 </Grid.RowDefinitions>
 
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Uid="OpenT" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
+                                                        FontWeight="SemiBold"/>
+                                        <MenuFlyoutItem x:Uid="MarkAsReadUnreadT" Command="{Binding DataContext.ReadUnreadCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
+
                                 <Rectangle Grid.Column="0" Grid.Row="0" Fill="{ThemeResource JbeUnreadLineFillThemeBrush}"
-                                           Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+                                        Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
 
                                 <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,5,7,8">
                                     <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind v:FeedItemListView.GetFontWeight(MarkAsRead), Mode=OneWay}" Margin="0,0,11,0" 
@@ -154,8 +162,7 @@
                 </ListView>
             </Grid>
 
-            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
-                Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay}"/>
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay}"/>
         </Grid>
 
         <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">

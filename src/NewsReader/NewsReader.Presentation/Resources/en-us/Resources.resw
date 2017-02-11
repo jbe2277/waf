@@ -282,4 +282,10 @@ Details: {0}</value>
   <data name="UnreadItemsCount" xml:space="preserve">
     <value>Unread: {0}</value>
   </data>
+  <data name="MarkAsReadUnreadT.Text" xml:space="preserve">
+    <value>Mark as read/unread</value>
+  </data>
+  <data name="OpenT.Text" xml:space="preserve">
+    <value>Open</value>
+  </data>
 </root>
