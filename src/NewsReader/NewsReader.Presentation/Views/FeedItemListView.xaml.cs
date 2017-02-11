@@ -2,9 +2,9 @@
 using Jbe.NewsReader.Applications.Views;
 using System;
 using System.Composition;
-using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -54,10 +54,7 @@ namespace Jbe.NewsReader.Presentation.Views
             ViewModel.ShowFeedItemViewCommand.Execute(((FrameworkElement)sender).DataContext);
         }
 
-        private void SearchButtonClick(object sender, RoutedEventArgs e)
-        {
-            ShowSearch();
-        }
+        private void SearchButtonClick(object sender, RoutedEventArgs e) => ShowSearch();
 
         private async void ShowSearch()
         {
@@ -81,15 +78,9 @@ namespace Jbe.NewsReader.Presentation.Views
             }
         }
 
-        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            SetDefaultSearchVisibility();
-        }
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e) => SetDefaultSearchVisibility();
         
-        private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
-        {
-            SetDefaultSearchVisibility();
-        }
+        private void SizeChangedHandler(object sender, SizeChangedEventArgs e) => SetDefaultSearchVisibility();
 
         private async void FeedItemListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -107,5 +98,7 @@ namespace Jbe.NewsReader.Presentation.Views
                 }
             }
         }
+
+        private static FontWeight GetFontWeight(bool markAsRead) => markAsRead ? FontWeights.Normal : FontWeights.SemiBold;
     }
 }

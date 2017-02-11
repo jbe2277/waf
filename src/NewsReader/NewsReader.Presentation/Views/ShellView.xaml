@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Jbe.NewsReader.Applications.ViewModels"
+    xmlns:v="using:Jbe.NewsReader.Presentation.Views"
     xmlns:waf="using:System.Waf.Presentation.Controls"
     mc:Ignorable="d">
 
@@ -73,7 +74,7 @@
                         </Grid.RowDefinitions>
 
                         <waf:NavigationToggleButton Grid.Row="0" x:Uid="FeedsC" Icon="Library" 
-                                IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=FeedList;FeedItemList;FeedItem}" 
+                                IsChecked="{x:Bind v:ShellView.IsNavigationSelected(ViewModel.SelectedNavigationItem, 'FeedList;FeedItemList;FeedItem'), Mode=OneWay}" 
                                 Command="{x:Bind ViewModel.ShowNewsViewCommand}"/>
                         <waf:NavigationToggleButton Grid.Row="1" x:Uid="FeedbackC" Command="{x:Bind ViewModel.ShowReviewViewCommand}">
                             <waf:NavigationToggleButton.Icon>
@@ -91,7 +92,7 @@
                             </StackPanel>
                         </waf:NavigationToggleButton>
                         <waf:NavigationToggleButton Grid.Row="4" x:Uid="SettingsC" Icon="Setting"
-                                IsChecked="{x:Bind ViewModel.SelectedNavigationItem, Mode=OneWay, Converter={StaticResource IsNavigationSelectedConverter}, ConverterParameter=Settings}" 
+                                IsChecked="{x:Bind v:ShellView.IsNavigationSelected(ViewModel.SelectedNavigationItem, 'Settings'), Mode=OneWay}" 
                                 Command="{x:Bind ViewModel.ShowSettingsViewCommand}"/>
                     </Grid>
                 </Border>

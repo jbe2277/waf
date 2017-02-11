@@ -10,13 +10,9 @@
 
     <cc:NoOperationConverter x:Key="NoOperationConverter"/>
 
-    <c:IsNavigationSelectedConverter x:Key="IsNavigationSelectedConverter"/>
-
     <c:IsNotNullConverter x:Key="IsNotNullConverter"/>
 
     <c:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
-
-    <c:IsReadToFontStyleConverter x:Key="IsReadToFontStyleConverter"/>
 
     <c:LocalizeDisplayAppThemeConverter x:Key="LocalizeDisplayAppThemeConverter"/>
 

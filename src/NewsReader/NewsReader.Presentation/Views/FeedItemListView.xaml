@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ctrl="using:Jbe.NewsReader.Presentation.Controls"
+    xmlns:v="using:Jbe.NewsReader.Presentation.Views"
     xmlns:dd="using:Jbe.NewsReader.Presentation.DesignData"
     xmlns:m="using:Jbe.NewsReader.Domain"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
@@ -135,7 +136,7 @@
                                            Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
 
                                 <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,5,7,8">
-                                    <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource IsReadToFontStyleConverter}}" Margin="0,0,11,0" 
+                                    <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind v:FeedItemListView.GetFontWeight(MarkAsRead), Mode=OneWay}" Margin="0,0,11,0" 
                                             Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
 
                                     <TextBlock x:Name="descriptionBox" Text="{x:Bind Description}" MaxLines="3" Style="{ThemeResource BodyTextBlockStyle}"

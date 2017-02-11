@@ -11,8 +11,8 @@
     <AssemblyName>Jbe.NewsReader.Presentation</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -113,9 +113,7 @@
     <Compile Include="Controls\ToolBarHelper.cs" />
     <Compile Include="Controls\ToolTipHelper.cs" />
     <Compile Include="Converters\ConverterHelper.cs" />
-    <Compile Include="Converters\IsNavigationSelectedConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
-    <Compile Include="Converters\IsReadToFontStyleConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayAppThemeConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayItemLifetimeConverter.cs" />
     <Compile Include="Converters\LocalizeDisplayMaxItemsLimitConverter.cs" />
