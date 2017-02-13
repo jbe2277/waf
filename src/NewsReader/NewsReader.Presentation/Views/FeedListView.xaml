@@ -36,13 +36,13 @@
                             <Grid x:Name="addFeedGrid" Width="400">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
+                                    <RowDefinition Height="{StaticResource Form.RowSpaceSmall}"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                    <RowDefinition Height="{StaticResource Form.RowSpaceMedium}"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="{StaticResource Layout.RowSpace}"/>
+                                    <RowDefinition Height="{StaticResource Form.RowSpaceSmall}"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="{StaticResource Layout.LargeRowSpace}"/>
+                                    <RowDefinition Height="{StaticResource Form.RowSpaceMedium}"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
