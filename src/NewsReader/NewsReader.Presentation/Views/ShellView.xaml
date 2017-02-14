@@ -111,7 +111,6 @@
             </SplitView.Content>
         </waf:NavigationSplitView>
 
-        <waf:NavigationSplitViewToggleButton Grid.Row="1" x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{x:Bind navigationSplitView.IsPaneOpen, Mode=TwoWay}"
-            TabIndex="1"/>
+        <waf:NavigationSplitViewToggleButton Grid.Row="1" x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{x:Bind navigationSplitView.IsPaneOpen, Mode=TwoWay}"/>
     </Grid>
 </Page>
