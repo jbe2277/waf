@@ -5,7 +5,6 @@ using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Composition;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Waf.Applications;
@@ -108,6 +107,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         {
             try
             {
+                feed.LoadError = null;
                 if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
                     selectionService.SetDefaultSelectedFeedItem(feed, feed.Items.FirstOrDefault());
