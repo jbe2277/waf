@@ -24,10 +24,9 @@ namespace Jbe.NewsReader.ExternalServices
             return FileIOHelper.LoadCompressed<T>(archiveStream, fileName);
         }
 
-        public async Task<T> LoadCompressedFileAsync<T>(string fileName) where T : class
+        public Task<T> LoadCompressedFileAsync<T>(string fileName) where T : class
         {
-            await FileIOHelper.MigrateDataAsync(ApplicationData.Current.LocalFolder, fileName).ConfigureAwait(false);
-            return await FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.LocalFolder, fileName).ConfigureAwait(false);
+            return FileIOHelper.LoadCompressedAsync<T>(ApplicationData.Current.LocalFolder, fileName);
         }
 
         public Task SaveCompressedFileAsync(object data, string fileName)
