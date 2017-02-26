@@ -74,6 +74,7 @@
     <Compile Include="Services\MockAppService.cs" />
     <Compile Include="Services\MockLauncherService.cs" />
     <Compile Include="Services\MockMessageService.cs" />
+    <Compile Include="Services\MockNetworkInfoService.cs" />
     <Compile Include="Services\MockResourceService.cs" />
     <Compile Include="Services\MockSyndicationService.cs" />
     <Compile Include="UnitTesting\ApplicationsTest.cs" />
