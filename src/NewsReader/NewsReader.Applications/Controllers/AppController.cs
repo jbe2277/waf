@@ -3,6 +3,7 @@ using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Composition;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Jbe.NewsReader.Applications.Controllers
     {
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
+        private readonly INetworkInfoService networkInfoService;
         private readonly SelectionService selectionService;
         private readonly Lazy<DataController> dataController;
         private readonly Lazy<AccountController> accountController;
@@ -38,12 +40,13 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, SelectionService selectionService,
+        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, INetworkInfoService networkInfoService, SelectionService selectionService,
             Lazy<DataController> dataController, Lazy<AccountController> accountController, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, 
             Lazy<ShellViewModel> shellViewModel, Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.launcherService = launcherService;
             this.appInfoService = appInfoService;
+            this.networkInfoService = networkInfoService;
             this.selectionService = selectionService;
             this.dataController = dataController;
             this.accountController = accountController;
@@ -85,6 +88,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public void Initialize()
         {
+            networkInfoService.PropertyChanged += NetworkInfoServicePropertyChanged;
             dataController.Value.Initialize();
             accountController.Value.Initialize();
             shellViewModel.Value.NavigateBackCommand = navigateBackCommand;
@@ -212,6 +216,14 @@ namespace Jbe.NewsReader.Applications.Controllers
         private void ShowSettingsView()
         {
             SelectedNavigationItem = NavigationItem.Settings;
+        }
+
+        private void NetworkInfoServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess)
+            {
+                Resuming();
+            }
         }
     }
 }
