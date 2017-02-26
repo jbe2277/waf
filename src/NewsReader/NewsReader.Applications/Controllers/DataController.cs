@@ -22,6 +22,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAccountService accountService;
         private readonly IWebStorageService webStorageService;
         private readonly ICryptographicService cryptographicService;
+        private readonly INetworkInfoService networkInfoService;
         private readonly IMessageService messageService;
         private readonly IResourceService resourceService;
         private readonly TaskCompletionSource<FeedManager> feedManagerCompletion;
@@ -30,12 +31,13 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         [ImportingConstructor]
         public DataController(IAppDataService appDataService, IAccountService accountService, IWebStorageService webStorageService, ICryptographicService cryptographicService,
-            IMessageService messageService, IResourceService resourceService)
+            INetworkInfoService networkInfoService, IMessageService messageService, IResourceService resourceService)
         {
             this.appDataService = appDataService;
             this.accountService = accountService;
             this.webStorageService = webStorageService;
             this.cryptographicService = cryptographicService;
+            this.networkInfoService = networkInfoService;
             this.messageService = messageService;
             this.resourceService = resourceService;
             feedManagerCompletion = new TaskCompletionSource<FeedManager>();
@@ -83,7 +85,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private async void DownloadAndMerge()
         {
-            if (accountService.CurrentAccount == null) { return; }
+            if (accountService.CurrentAccount == null || !networkInfoService.InternetAccess) { return; }
             var token = await accountService.GetTokenAsync();
             if (token == null) { return; }
 
@@ -125,7 +127,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private async Task UploadAsync()
         {
             // TODO: When the online file is corrupt then the upload does not run anymore.
-            if (!isInSync || accountService.CurrentAccount == null) { return; }
+            if (!isInSync || accountService.CurrentAccount == null || !networkInfoService.InternetAccess) { return; }
             var token = await accountService.GetTokenAsync();
             if (token == null) { return; }
 

@@ -20,6 +20,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly IAppService appService;
         private readonly ILauncherService launcherService;
         private readonly IMessageService messageService;
+        private readonly INetworkInfoService networkInfoService;
         private readonly SelectionService selectionService;
         private readonly Lazy<FeedListViewModel> feedListViewModel;
         private readonly ISyndicationClient client;
@@ -32,12 +33,13 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         [ImportingConstructor]
         public NewsFeedsController(IResourceService resourceService, IAppService appService, ILauncherService launcherService, IMessageService messageService,
-            ISyndicationService syndicationService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
+            ISyndicationService syndicationService, INetworkInfoService networkInfoService, SelectionService selectionService, Lazy<FeedListViewModel> feedListViewModel)
         {
             this.resourceService = resourceService;
             this.appService = appService;
             this.launcherService = launcherService;
             this.messageService = messageService;
+            this.networkInfoService = networkInfoService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
             this.client = syndicationService.CreateClient();
@@ -105,6 +107,8 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private async Task LoadFeedAsync(Feed feed)
         {
+            if (!networkInfoService.InternetAccess) { return; }
+
             try
             {
                 feed.LoadError = null;
@@ -164,7 +168,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out feedUri))
             {
                 var newFeed = new Feed(feedUri);
-                await LoadFeedAsync(newFeed);
+                await LoadFeedAsync(newFeed);  // TODO: Won't work when no internet access is available
                 feedListViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
                 if (newFeed.LoadError == null)
                 {

@@ -51,6 +51,7 @@
     <Compile Include="CryptographicService.cs" />
     <Compile Include="FileIOHelper.cs" />
     <Compile Include="LauncherService.cs" />
+    <Compile Include="NetworkInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyndicationService.cs" />
     <Compile Include="WebStorageService.cs" />
