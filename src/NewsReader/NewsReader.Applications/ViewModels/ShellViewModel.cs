@@ -22,9 +22,10 @@ namespace Jbe.NewsReader.Applications.ViewModels
         
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IAccountInfoService accountInfoService) : base(view)
+        public ShellViewModel(IShellView view, IAccountInfoService accountInfoService, INetworkInfoService networkInfoService) : base(view)
         {
             AccountInfoService = accountInfoService;
+            NetworkInfoService = networkInfoService;
             messages = new ObservableCollection<KeyValuePair<string, Exception>>();
             Messages = new ReadOnlyObservableList<KeyValuePair<string, Exception>>(messages);
             CloseMessageCommand = new DelegateCommand(CloseMessage);
@@ -32,6 +33,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         }
 
         public IAccountInfoService AccountInfoService { get; }
+
+        public INetworkInfoService NetworkInfoService { get; }
 
         public IReadOnlyObservableList<KeyValuePair<string, Exception>> Messages { get; }
 

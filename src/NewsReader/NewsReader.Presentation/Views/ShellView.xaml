@@ -44,10 +44,18 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Visibility="{x:Bind ViewModel.LastMessage.Key, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" Background="Yellow">
+        <Border Grid.Row="0" Visibility="{x:Bind ViewModel.NetworkInfoService.InternetAccess, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}" 
+                Background="{ThemeResource ErrorBackgroundThemeBrush}">
+            <Grid Margin="6,6,10,6">
+                <TextBlock x:Uid="NoInternetAccessT"/>
+            </Grid>
+        </Border>
+        
+        <Border Grid.Row="1" Visibility="{x:Bind ViewModel.LastMessage.Key, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" Background="Yellow">
             <Grid Margin="6,6,10,6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -60,8 +68,8 @@
                 </HyperlinkButton>
             </Grid>
         </Border>
-        
-        <waf:NavigationSplitView Grid.Row="1" x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+        <waf:NavigationSplitView Grid.Row="2" x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <SplitView.Pane>
                 <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource JbeMainBackgroundBrush}">
                     <Grid Margin="0,49,0,0">
@@ -111,6 +119,6 @@
             </SplitView.Content>
         </waf:NavigationSplitView>
 
-        <waf:NavigationSplitViewToggleButton Grid.Row="1" x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{x:Bind navigationSplitView.IsPaneOpen, Mode=TwoWay}"/>
+        <waf:NavigationSplitViewToggleButton Grid.Row="2" x:Name="togglePaneButton" x:Uid="Menu" IsChecked="{x:Bind navigationSplitView.IsPaneOpen, Mode=TwoWay}"/>
     </Grid>
 </Page>

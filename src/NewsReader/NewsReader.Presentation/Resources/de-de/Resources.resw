@@ -291,4 +291,7 @@ Details: {0}</value>
   <data name="RemoveFeedT.Text" xml:space="preserve">
     <value>Feed entfernen</value>
   </data>
+  <data name="NoInternetAccessT.Text" xml:space="preserve">
+    <value>Keine Internet Verbindung.</value>
+  </data>
 </root>
