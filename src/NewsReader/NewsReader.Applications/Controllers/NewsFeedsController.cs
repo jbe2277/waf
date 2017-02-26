@@ -77,7 +77,10 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 await tasks.First();
             }
-            
+
+            // Ensure that a feed is selected
+            selectionService.SelectedFeed = selectionService.SelectedFeed ?? selectionService.FeedManager.Feeds.FirstOrDefault();
+
             // Enforce scroll into view after loading more items
             var itemToSelectAgain = selectionService.SelectedFeedItem;
             selectionService.SelectedFeedItem = null;
