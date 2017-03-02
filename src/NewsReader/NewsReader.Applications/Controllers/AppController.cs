@@ -109,14 +109,14 @@ namespace Jbe.NewsReader.Applications.Controllers
             selectionService.FeedManager = feedManager;
             newsFeedsController.Value.FeedManager = feedManager;
             newsFeedsController.Value.Run();
-            lastUpdate = DateTime.Now;
+            if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
             settingsController.Value.FeedManager = feedManager;
             if (feedListViewModel.IsValueCreated) { feedListViewModel.Value.FeedManager = feedManager; }
         }
 
         public void Resuming()
         {
-            if (DateTime.Now - lastUpdate > TimeSpan.FromMinutes(5))
+            if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(5))
             {
                 dataController.Value.Update();
                 newsFeedsController.Value.Update();
