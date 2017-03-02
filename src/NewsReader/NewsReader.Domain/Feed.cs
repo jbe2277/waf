@@ -28,7 +28,6 @@ namespace Jbe.NewsReader.Domain
             // Note: Serializer does not call the constructor.
             this.uri = uri;
             this.items = new ObservableCollection<FeedItem>();
-            this.isLoading = true;
             Initialize();
         }
 
@@ -58,19 +57,13 @@ namespace Jbe.NewsReader.Domain
         public Exception LoadError
         {
             get { return loadError; }
-            set
-            {
-                if (SetProperty(ref loadError, value))
-                {
-                    IsLoading = false;
-                }
-            }
+            private set { SetProperty(ref loadError, value); }
         }
         
         public string LoadErrorMessage
         {
             get { return loadErrorMessage; }
-            set { SetProperty(ref loadErrorMessage, value); }
+            private set { SetProperty(ref loadErrorMessage, value); }
         }
 
         internal IDataManager DataManager
@@ -91,6 +84,13 @@ namespace Jbe.NewsReader.Domain
                     TrimItemsList();
                 }
             }
+        }
+
+        public void StartLoading()
+        {
+            IsLoading = true;
+            LoadError = null;
+            LoadErrorMessage = null;
         }
 
         public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems, bool excludeMarkAsRead = false, bool cloneItemsBeforeInsert = false)
@@ -120,6 +120,13 @@ namespace Jbe.NewsReader.Domain
             {
                 TrimItemsList();
             }
+            IsLoading = false;
+        }
+
+        public void SetLoadError(Exception loadError, string loadErrorMessage)
+        {
+            LoadError = loadError;
+            LoadErrorMessage = LoadErrorMessage;
             IsLoading = false;
         }
 
@@ -182,7 +189,6 @@ namespace Jbe.NewsReader.Domain
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            isLoading = true;
             Initialize();
         }
     }

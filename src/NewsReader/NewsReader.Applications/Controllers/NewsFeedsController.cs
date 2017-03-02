@@ -114,7 +114,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
             try
             {
-                feed.LoadError = null;
+                feed.StartLoading();
                 if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
                     selectionService.SetDefaultSelectedFeedItem(feed, feed.Items.FirstOrDefault());
@@ -137,14 +137,12 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
                 else
                 {
-                    feed.LoadErrorMessage = resourceService.GetString("UrlMustBeginWithHttp");
-                    feed.LoadError = new InvalidOperationException(@"The URL must begin with http:// or https://");
+                    feed.SetLoadError(new InvalidOperationException(@"The URL must begin with http:// or https://"), resourceService.GetString("UrlMustBeginWithHttp"));
                 }
             }
             catch (Exception ex)
             {
-                feed.LoadErrorMessage = resourceService.GetString("ErrorLoadRssFeed");
-                feed.LoadError = ex;
+                feed.SetLoadError(ex, resourceService.GetString("ErrorLoadRssFeed"));
             }
             finally
             {

@@ -35,10 +35,17 @@ namespace Test.NewsReader.Domain
             feedManager.Feeds.Add(feed1);
             feedManager.Feeds.Add(feed2);
 
-            Assert.IsTrue(feed1.IsLoading);
-            feed1.LoadError = new InvalidOperationException("test");
             Assert.IsFalse(feed1.IsLoading);
-
+            feed1.StartLoading();
+            Assert.IsTrue(feed1.IsLoading);
+            feed1.SetLoadError(new InvalidOperationException("test"), "display test");
+            Assert.IsFalse(feed1.IsLoading);
+            feed1.StartLoading();
+            Assert.IsNull(feed1.LoadError);
+            Assert.IsNull(feed1.LoadErrorMessage);
+            
+            Assert.IsFalse(feed2.IsLoading);
+            feed2.StartLoading();
             Assert.IsTrue(feed2.IsLoading);
             feed2.UpdateItems(new FeedItem[0]);
             Assert.IsFalse(feed2.IsLoading);
