@@ -209,7 +209,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private async Task RefreshFeed()
         {
-            await LoadFeedAsync(selectionService.SelectedFeed);
+            await Task.WhenAll(FeedManager.Feeds.Select(LoadFeedAsync));
         }
 
         private bool CanMarkAsReadUnread(object parameter)
