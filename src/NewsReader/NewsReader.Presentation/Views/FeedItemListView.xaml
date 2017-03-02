@@ -43,7 +43,8 @@
             </CommandBar>
 
             <Grid Grid.Column="2" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                <AppBarButton x:Name="searchButton" x:Uid="SearchL" Icon="Find" IsCompact="True" Click="SearchButtonClick"/>
+                <!-- Workaround for searchButton: Set Height and remove Label so that it does not expand when width is reduzed to minimum; IsCompact seems to be ignored -->
+                <AppBarButton x:Name="searchButton" Icon="Find" IsCompact="True" Click="SearchButtonClick" Height="48"/>
                 <AutoSuggestBox x:Name="searchBox" x:Uid="SearchP" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" Width="250" QueryIcon="Find" VerticalAlignment="Center" Margin="7,0" Visibility="Collapsed"
                                 LostFocus="SearchBoxLostFocus"/>
             </Grid>
