@@ -40,6 +40,8 @@ namespace Test.NewsReader.Domain
             Assert.IsTrue(feed1.IsLoading);
             feed1.SetLoadError(new InvalidOperationException("test"), "display test");
             Assert.IsFalse(feed1.IsLoading);
+            Assert.AreEqual("test", feed1.LoadError.Message);
+            Assert.AreEqual("display test", feed1.LoadErrorMessage);
             feed1.StartLoading();
             Assert.IsNull(feed1.LoadError);
             Assert.IsNull(feed1.LoadErrorMessage);

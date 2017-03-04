@@ -116,7 +116,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public void Resuming()
         {
-            if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(5))
+            if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(1))
             {
                 dataController.Value.Update();
                 newsFeedsController.Value.Update();

@@ -126,7 +126,7 @@ namespace Jbe.NewsReader.Domain
         public void SetLoadError(Exception loadError, string loadErrorMessage)
         {
             LoadError = loadError;
-            LoadErrorMessage = LoadErrorMessage;
+            LoadErrorMessage = loadErrorMessage;
             IsLoading = false;
         }
 

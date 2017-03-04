@@ -108,9 +108,9 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private static void IgnoreResult(Task task) { }
 
-        private async Task LoadFeedAsync(Feed feed)
+        private async Task LoadFeedAsync(Feed feed, bool ignoreInternetAccessStatus = false)
         {
-            if (!networkInfoService.InternetAccess) { return; }
+            if (!ignoreInternetAccessStatus && !networkInfoService.InternetAccess) { return; }
 
             try
             {
@@ -169,7 +169,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out feedUri))
             {
                 var newFeed = new Feed(feedUri);
-                await LoadFeedAsync(newFeed);  // TODO: Won't work when no internet access is available
+                await LoadFeedAsync(newFeed, ignoreInternetAccessStatus: true);
                 feedListViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
                 if (newFeed.LoadError == null)
                 {
@@ -209,7 +209,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private async Task RefreshFeed()
         {
-            await Task.WhenAll(FeedManager.Feeds.Select(LoadFeedAsync));
+            await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeedAsync(x)));
         }
 
         private bool CanMarkAsReadUnread(object parameter)
