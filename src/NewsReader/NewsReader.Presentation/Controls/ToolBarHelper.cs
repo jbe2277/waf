@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Jbe.NewsReader.Presentation.Controls
 {
@@ -15,10 +13,6 @@ namespace Jbe.NewsReader.Presentation.Controls
 
     public static class ToolBarHelper
     {
-        private static readonly Dictionary<FrameworkElement, DependencyObject> objectWithValues = new Dictionary<FrameworkElement, DependencyObject>();
-        private static readonly Dictionary<DependencyObject, long> objectWithValueHandles = new Dictionary<DependencyObject, long>();
-
-
         public static readonly DependencyProperty HideBottomToolBarProperty =
             DependencyProperty.RegisterAttached("HideBottomToolBar", typeof(bool), typeof(ToolBarHelper), new PropertyMetadata(false));
 
@@ -27,7 +21,9 @@ namespace Jbe.NewsReader.Presentation.Controls
 
         public static DependencyProperty AssociatedToolBarProperty { get; } =
             DependencyProperty.RegisterAttached("AssociatedToolBar", typeof(FrameworkElement), typeof(ToolBarHelper), new PropertyMetadata(null));
-        
+
+        private static readonly AttachedPropertyService<bool> attachedPropertiesService = new AttachedPropertyService<bool>(HideBottomToolBarProperty, HideBottomToolBarPropertyChanged);
+
 
         public static bool GetHideBottomToolBar(DependencyObject obj) => (bool)obj.GetValue(HideBottomToolBarProperty);
         
@@ -49,56 +45,21 @@ namespace Jbe.NewsReader.Presentation.Controls
             }
             
             var dynamicToolBar = (FrameworkElement)obj;
+            attachedPropertiesService.RegisterElement(dynamicToolBar);
             UpdateDynamicToolBar(dynamicToolBar);
-            dynamicToolBar.RegisterSafeLoadedCallback(DynamicToolBarLoaded);
-            dynamicToolBar.RegisterSafeUnloadedCallback(DynamicToolBarUnloaded);
         }
         
-        private static void DynamicToolBarLoaded(object sender, RoutedEventArgs e)
+        private static void HideBottomToolBarPropertyChanged(FrameworkElement element)
         {
-            UpdateDynamicToolBar((FrameworkElement)sender);
-        }
-
-        private static void DynamicToolBarUnloaded(object sender, RoutedEventArgs e)
-        {
-            var dynamicToolBar = (FrameworkElement)sender;
-            var objectWithValue = objectWithValues[dynamicToolBar];
-            long handle;
-            if (objectWithValueHandles.TryGetValue(objectWithValue, out handle)
-                && objectWithValues.Count(x => x.Value == objectWithValue) == 1)
-            {
-                objectWithValue.UnregisterPropertyChangedCallback(HideBottomToolBarProperty, handle);
-                objectWithValueHandles.Remove(objectWithValue);
-            }
-            objectWithValues.Remove(dynamicToolBar);
-        }
-        
-        private static void HideBottomToolBarPropertyChanged(DependencyObject sender, DependencyProperty dp)
-        {
-            foreach (var item in objectWithValues.Where(x => x.Value == sender))
-            {
-                UpdateDynamicToolBar(item.Key);
-            }
+            UpdateDynamicToolBar(element);
         }
 
         private static void UpdateDynamicToolBar(FrameworkElement dynamicToolBar)
         {
-            DependencyObject objectWithValue = null;
-            objectWithValues.TryGetValue(dynamicToolBar, out objectWithValue);
-            if (objectWithValue == null)
+            bool hideBottomToolBar;
+            if (attachedPropertiesService.TryGetInheritedValue(dynamicToolBar, out hideBottomToolBar))
             {
-                objectWithValue = FindObjectWithDependencyProperty(dynamicToolBar, HideBottomToolBarProperty);
-                objectWithValues[dynamicToolBar] = objectWithValue;
-            }
-            if (objectWithValue != null)
-            {
-                if (!objectWithValueHandles.ContainsKey(objectWithValue))
-                {
-                    objectWithValueHandles.Add(objectWithValue, objectWithValue.RegisterPropertyChangedCallback(HideBottomToolBarProperty, HideBottomToolBarPropertyChanged));
-                }
-
                 var dynamicToolBarMode = GetDynamicToolBar(dynamicToolBar);
-                var hideBottomToolBar = GetHideBottomToolBar(objectWithValue);
                 var associatedToolBar = GetAssociatedToolBar(dynamicToolBar);
                 if (associatedToolBar == null)
                 {
@@ -131,22 +92,6 @@ namespace Jbe.NewsReader.Presentation.Controls
             {
                 target.SecondaryCommands.Add(command);
             }
-        }
-
-        private static DependencyObject FindObjectWithDependencyProperty(DependencyObject startObj, DependencyProperty dp)
-        {
-            var currentObj = startObj;
-            while (currentObj != null)
-            {
-                var propertyValue = currentObj.ReadLocalValue(dp);
-                if (propertyValue != DependencyProperty.UnsetValue)
-                {
-                    return currentObj;
-                }
-
-                currentObj = VisualTreeHelper.GetParent(currentObj);
-            }
-            return null;
         }
     }
 }
