@@ -57,10 +57,12 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public ICommand AddNewFeedCommand => addNewFeedCommand;
 
+        // TODO: Support to remove multiple feeds
         public ICommand RemoveFeedCommand => removeFeedCommand;
 
         public ICommand RefreshFeedCommand => refreshFeedCommand;
 
+        // TODO: Support to mark multiple feeds
         public ICommand ReadUnreadCommand => readUnreadCommand;
 
         public ICommand LaunchWebBrowserCommand => launchWebBrowserCommand;

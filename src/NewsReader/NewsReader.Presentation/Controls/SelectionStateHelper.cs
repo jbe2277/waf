@@ -60,8 +60,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             private readonly ButtonBase cancelSelectionButton;
             private SelectionState selectionState;
             private bool isSinglePageViewSize;
-
-
+            
 
             public SelectionStateManager(ListViewBase listView, ButtonBase selectItemsButton, ButtonBase cancelSelectionButton)
             {

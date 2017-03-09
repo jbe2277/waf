@@ -1,5 +1,6 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Applications.Views;
+using Jbe.NewsReader.Presentation.Controls;
 using System;
 using System.Composition;
 using Windows.System;
@@ -15,6 +16,7 @@ namespace Jbe.NewsReader.Presentation.Views
     public sealed partial class FeedItemListView : UserControl, IFeedItemListView
     {
         private readonly Lazy<FeedItemListViewModel> viewModel;
+        private readonly ISelectionStateManager selectionStateManager;
 
 
         public FeedItemListView()
@@ -22,6 +24,7 @@ namespace Jbe.NewsReader.Presentation.Views
             InitializeComponent();
             viewModel = new Lazy<FeedItemListViewModel>(() => (FeedItemListViewModel)DataContext);
             SetDefaultSearchVisibility();
+            selectionStateManager = SelectionStateHelper.CreateManager(feedItemListView, selectItemsButton, cancelSelectionButton);
         }
 
 
@@ -47,6 +50,11 @@ namespace Jbe.NewsReader.Presentation.Views
             {
                 ShowSearch();
             }
+        }
+
+        private void FeedItemListViewItemClick(object sender, ItemClickEventArgs e)
+        {
+            ViewModel.ShowFeedItemViewCommand.Execute(e.ClickedItem);
         }
 
         private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

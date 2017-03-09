@@ -40,6 +40,12 @@
             <CommandBar x:Name="topBar" Grid.Column="1" ctrl:ToolBarHelper.DynamicToolBar="TopBar" ctrl:ToolBarHelper.AssociatedToolBar="{x:Bind bottomBar}">
                 <AppBarButton x:Uid="RefreshL" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
                 <AppBarButton x:Uid="MarkAsReadUnreadL" Command="{x:Bind ViewModel.ReadUnreadCommand}" Icon="Flag"/>
+                <AppBarButton x:Name="selectItemsButton" x:Uid="SelectItemsL">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE762;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="cancelSelectionButton" x:Uid="CancelL" Icon="Cancel" Visibility="Collapsed"/>
             </CommandBar>
 
             <Grid Grid.Column="2" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
@@ -71,7 +77,7 @@
                 </StackPanel>
 
                 <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ItemsListViewSource.View, Mode=OneWay}"
-                    SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay}"
+                    SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay}" ItemClick="FeedItemListViewItemClick"
                     SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="ListViewHeaderItem">

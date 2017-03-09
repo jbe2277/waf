@@ -291,4 +291,10 @@ Details: {0}</value>
   <data name="NoInternetAccessT.Text" xml:space="preserve">
     <value>No internet access.</value>
   </data>
+  <data name="CancelL.Label" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SelectItemsL.Label" xml:space="preserve">
+    <value>Select Items</value>
+  </data>
 </root>
