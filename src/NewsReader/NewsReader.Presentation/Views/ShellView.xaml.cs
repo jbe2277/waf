@@ -29,6 +29,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
             var window = CoreWindow.GetForCurrentThread();
             UpdateHideBottomToolBar(window.Bounds.Width);
+            UpdateSelectionState(window.Bounds.Width);
             window.SizeChanged += WindowSizeChanged;
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManagerBackRequested;
         }
@@ -51,10 +52,16 @@ namespace Jbe.NewsReader.Presentation.Views
             UpdateBackButtonVisibility();
         }
 
-        private void WindowSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args) => UpdateHideBottomToolBar(args.Size.Width);
+        private void WindowSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)
+        {
+            UpdateHideBottomToolBar(args.Size.Width);
+            UpdateSelectionState(args.Size.Width);
+        }
         
         private void UpdateHideBottomToolBar(double windowWidth) => ToolBarHelper.SetHideBottomToolBar(navigationSplitView, windowWidth > 600);
-        
+
+        private void UpdateSelectionState(double windowWidth) => SelectionStateHelper.SetIsSinglePageViewSize(this, windowWidth < 720);
+
         private void ContentChanged(DependencyObject obj, DependencyProperty property) => navigationSplitView.IsPaneOpen = false;
         
         private void PreviewChanged(DependencyObject obj, DependencyProperty property) => UpdatePreviewColumnWidth();

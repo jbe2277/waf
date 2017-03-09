@@ -1,7 +1,9 @@
 ﻿using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Applications.Views;
+using Jbe.NewsReader.Presentation.Controls;
 using Jbe.NewsReader.Presentation.Services;
 using System;
+using System.ComponentModel;
 using System.Composition;
 using System.Threading.Tasks;
 using System.Waf.Applications;
@@ -19,6 +21,7 @@ namespace Jbe.NewsReader.Presentation.Views
     {
         private readonly Lazy<FeedListViewModel> viewModel;
         private readonly AsyncDelegateCommand pasteCommand;
+        private readonly ISelectionStateManager selectionStateManager;
 
 
         public FeedListView()
@@ -28,9 +31,11 @@ namespace Jbe.NewsReader.Presentation.Views
             viewModel = new Lazy<FeedListViewModel>(() => (FeedListViewModel)DataContext);
             pasteCommand = new AsyncDelegateCommand(PasteUriAsync, CanPasteUri);
             Clipboard.ContentChanged += ClipboardContentChanged;
+            selectionStateManager = SelectionStateHelper.CreateManager(feedListView, selectItemsButton, cancelSelectionButton);
+            selectionStateManager.PropertyChanged += SelectionStateManagerPropertyChanged;
         }
 
-        
+
         public FeedListViewModel ViewModel => viewModel.Value;
 
         public ICommand PasteCommand => pasteCommand;
@@ -73,9 +78,23 @@ namespace Jbe.NewsReader.Presentation.Views
         
         private void ClipboardContentChanged(object sender, object e) => pasteCommand.RaiseCanExecuteChanged();
         
+        private void FeedListViewItemClick(object sender, ItemClickEventArgs e)
+        {
+            ViewModel.ShowFeedItemListViewCommand.Execute(e.ClickedItem);
+        }
+
         private void FeedDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             ViewModel.ShowFeedItemListViewCommand.Execute(((FrameworkElement)sender).DataContext);
+        }
+
+        private void SelectionStateManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ISelectionStateManager.SelectionState))
+            {
+                addFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.ExtendedSelection
+                    || selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Collapsed : Visibility.Visible;
+            }
         }
 
         private static string GetItemsCountText(int itemsCount) => ResourceService.GetString("ItemsCount", itemsCount);

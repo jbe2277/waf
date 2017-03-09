@@ -69,11 +69,17 @@
                     </AppBarButton.Flyout>
                 </AppBarButton>
                 <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
+                <AppBarButton x:Name="selectItemsButton" Label="TODO Select Items">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE762;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="cancelSelectionButton" Label="TODO Cancel" Icon="Cancel" Visibility="Collapsed"/>
             </CommandBar>
         </Grid>
 
         <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
-                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay}"
+                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay}" ItemClick="FeedListViewItemClick"
                   CanReorderItems="True" AllowDrop="True">
             <ListView.Transitions>
                 <TransitionCollection>
