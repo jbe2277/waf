@@ -16,7 +16,7 @@ namespace Test.Waf.Applications
             string version = ApplicationInfo.Version;
             string company = ApplicationInfo.Company;
             string copyright = ApplicationInfo.Copyright;
-            string applicationPath = ApplicationInfo.ApplicationPath;
+            Assert.IsFalse(string.IsNullOrEmpty(ApplicationInfo.ApplicationPath));
 
             // The second time it returns the cached values
 
@@ -24,7 +24,7 @@ namespace Test.Waf.Applications
             version = ApplicationInfo.Version;
             company = ApplicationInfo.Company;
             copyright = ApplicationInfo.Copyright;
-            applicationPath = ApplicationInfo.ApplicationPath;
+            Assert.IsFalse(string.IsNullOrEmpty(ApplicationInfo.ApplicationPath));
         }
     }
 }

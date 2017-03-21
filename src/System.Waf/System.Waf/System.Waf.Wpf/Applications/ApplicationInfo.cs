@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.IO;
 
 namespace System.Waf.Applications
 {
@@ -48,19 +47,14 @@ namespace System.Waf.Applications
             {
                 AssemblyProductAttribute attribute = (AssemblyProductAttribute)Attribute.GetCustomAttribute(
                     entryAssembly, typeof(AssemblyProductAttribute));
-                return attribute != null ? attribute.Product : "";
+                return attribute?.Product ?? "";
             }
             return "";
         }
 
         private static string GetVersion()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
-            if (entryAssembly != null)
-            {
-                return entryAssembly.GetName().Version.ToString();
-            }
-            return "";
+            return Assembly.GetEntryAssembly()?.GetName().Version.ToString() ?? "";
         }
 
         private static string GetCompany()
@@ -70,7 +64,7 @@ namespace System.Waf.Applications
             {
                 AssemblyCompanyAttribute attribute = (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(
                     entryAssembly, typeof(AssemblyCompanyAttribute));
-                return attribute != null ? attribute.Company : "";
+                return attribute?.Company ?? "";
             }
             return "";
         }
@@ -82,19 +76,14 @@ namespace System.Waf.Applications
             {
                 AssemblyCopyrightAttribute attribute = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(
                     entryAssembly, typeof(AssemblyCopyrightAttribute));
-                return attribute != null ? attribute.Copyright : "";
+                return attribute?.Copyright ?? "";
             }
             return "";
         }
 
         private static string GetApplicationPath()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
-            if (entryAssembly != null)
-            {
-                return Path.GetDirectoryName(entryAssembly.Location);
-            }
-            return "";
+            return AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
         }
     }
 }
