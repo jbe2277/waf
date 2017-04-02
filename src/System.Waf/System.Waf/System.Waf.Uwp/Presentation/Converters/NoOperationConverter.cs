@@ -2,7 +2,6 @@
 
 namespace System.Waf.Presentation.Converters
 {
-    // TODO: Review - not necessary with 10.0.14393.0 anymore
     /// <summary>
     /// Special value converter that just returns the value.
     /// Use this converter with x:Bind Mode=TwoWay when binding to a dependency property of type object (e.g. SelectedItem).
