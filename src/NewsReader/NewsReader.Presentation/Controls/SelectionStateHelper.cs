@@ -67,6 +67,7 @@ namespace Jbe.NewsReader.Presentation.Controls
                 this.listView = listView;
                 this.selectItemsButton = selectItemsButton;
                 this.cancelSelectionButton = cancelSelectionButton;
+                UpdateSelectionStateGroup();
                 this.listView.Items.VectorChanged += ItemsCollectionChanged;
                 this.listView.SelectionChanged += ListViewSelectionChanged;
                 this.selectItemsButton.Click += SelectItemsButtonClick;
