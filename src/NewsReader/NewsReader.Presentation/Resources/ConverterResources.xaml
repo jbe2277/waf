@@ -16,4 +16,6 @@
 
     <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
 
+    <c:SelectionModeToVisibilityConverter x:Key="SelectionModeToVisibilityConverter"/>
+
 </ResourceDictionary>
