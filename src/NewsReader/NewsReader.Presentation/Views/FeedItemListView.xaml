@@ -11,7 +11,7 @@
     xmlns:m="using:Jbe.NewsReader.Domain"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
     d:DataContext="{d:DesignInstance dd:SampleFeedItemListViewModel, IsDesignTimeCreatable=True}"
-    KeyDown="OnKeyDown" SizeChanged="SizeChangedHandler">
+    KeyDown="OnKeyDown">
 
     <UserControl.Resources>
         <CollectionViewSource x:Name="ItemsListViewSource" IsSourceGrouped="True" Source="{x:Bind ViewModel.ItemsListView, Mode=OneWay}" />

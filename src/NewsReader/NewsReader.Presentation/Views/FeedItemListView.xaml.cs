@@ -74,22 +74,12 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void SetDefaultSearchVisibility()
         {
-            if (ActualWidth >= 600 || !string.IsNullOrEmpty(searchBox.Text))
-            {
-                searchButton.Visibility = Visibility.Collapsed;
-                searchBox.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                searchButton.Visibility = Visibility.Visible;
-                searchBox.Visibility = Visibility.Collapsed;
-            }
+            searchButton.Visibility = Visibility.Visible;
+            searchBox.Visibility = Visibility.Collapsed;
         }
 
         private void SearchBoxLostFocus(object sender, RoutedEventArgs e) => SetDefaultSearchVisibility();
         
-        private void SizeChangedHandler(object sender, SizeChangedEventArgs e) => SetDefaultSearchVisibility();
-
         private async void FeedItemListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await Dispatcher.RunIdleAsync(ha => { });  // Ensure that items are layouted first so that ScrollIntoView works correct.
