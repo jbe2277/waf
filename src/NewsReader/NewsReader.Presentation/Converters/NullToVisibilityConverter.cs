@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Jbe.NewsReader.Presentation.Converters
 {
+    // TODO: Consider to move into WAF?
     public class NullToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
