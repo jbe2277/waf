@@ -2,6 +2,7 @@
 using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Domain;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Composition;
@@ -45,11 +46,12 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.client = syndicationService.CreateClient();
             this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
             this.removeFeedCommand = new AsyncDelegateCommand(RemoveFeedAsync, CanRemoveFeed);
-            this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed, CanRefreshFeed);
+            this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed);
             this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
             this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
 
             this.selectionService.PropertyChanged += SelectionServicePropertyChanged;
+            ((INotifyCollectionChanged)this.selectionService.SelectedFeeds).CollectionChanged += SelectedFeedsCollectionChanged;
         }
 
 
@@ -57,7 +59,6 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public ICommand AddNewFeedCommand => addNewFeedCommand;
 
-        // TODO: Support to remove multiple feeds
         public ICommand RemoveFeedCommand => removeFeedCommand;
 
         public ICommand RefreshFeedCommand => refreshFeedCommand;
@@ -81,7 +82,10 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
 
             // Ensure that a feed is selected
-            selectionService.SelectedFeed = selectionService.SelectedFeed ?? selectionService.FeedManager.Feeds.FirstOrDefault();
+            if (!selectionService.SelectedFeeds.Any())
+            {
+                selectionService.SelectFeed(selectionService.FeedManager.Feeds.FirstOrDefault());
+            }
 
             // Enforce scroll into view after loading more items
             var itemToSelectAgain = selectionService.SelectedFeedItem;
@@ -120,9 +124,9 @@ namespace Jbe.NewsReader.Applications.Controllers
                 if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
                     selectionService.SetDefaultSelectedFeedItem(feed, feed.Items.FirstOrDefault());
-                    if (selectionService.SelectedFeed == null)
+                    if (!selectionService.SelectedFeeds.Any())
                     {
-                        selectionService.SelectedFeed = feed;                        
+                        selectionService.SelectFeed(feed);
                     }
                     try
                     {
@@ -148,7 +152,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             finally
             {
-                if (selectionService.SelectedFeedItem == null && selectionService.SelectedFeed == feed)
+                if (selectionService.SelectedFeedItem == null && selectionService.SelectedFeeds.FirstOrDefault() == feed)
                 {
                     selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
                 }
@@ -176,7 +180,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                 if (newFeed.LoadError == null)
                 {
                     FeedManager.Feeds.Add(newFeed);
-                    selectionService.SelectedFeed = newFeed;
+                    selectionService.SelectFeed(newFeed);
                     feedListViewModel.Value.FeedAdded();
                 }
             }
@@ -188,25 +192,21 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private bool CanRemoveFeed(object parameter)
         {
-            return parameter is Feed || selectionService.SelectedFeed != null;
+            return parameter is Feed || selectionService.SelectedFeeds.Any();
         }
 
         private async Task RemoveFeedAsync(object parameter)
         {
-            var feedToRemove = (parameter as Feed) ?? selectionService.SelectedFeed;
-            if (!await messageService.ShowYesNoQuestionDialogAsync(resourceService.GetString("RemoveFeedQuestion"), feedToRemove.Name))
+            var feedParameter = parameter as Feed;
+            var feedsToRemove = feedParameter != null ? new[] { feedParameter } : (IReadOnlyList<Feed>)selectionService.SelectedFeeds;
+            if (!await messageService.ShowYesNoQuestionDialogAsync(resourceService.GetString("RemoveFeedQuestion"), string.Join(Environment.NewLine, feedsToRemove.Select(x => x.Name))))
             {
                 return;  // User canceled operation
             }
             
-            var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds, feedToRemove);
-            FeedManager.Feeds.Remove(feedToRemove);
-            selectionService.SelectedFeed = feedToSelect ?? FeedManager.Feeds.LastOrDefault();
-        }
-
-        private bool CanRefreshFeed()
-        {
-            return selectionService.SelectedFeed != null;
+            var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds.Except(feedsToRemove.Except(new[] { feedsToRemove.First() })), feedsToRemove.First());
+            foreach (var feed in feedsToRemove) FeedManager.Feeds.Remove(feed);
+            selectionService.SelectFeed(feedToSelect ?? FeedManager.Feeds.LastOrDefault());
         }
 
         private async Task RefreshFeed()
@@ -256,16 +256,16 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(selectionService.SelectedFeed))
-            {
-                removeFeedCommand.RaiseCanExecuteChanged();
-                refreshFeedCommand.RaiseCanExecuteChanged();
-            }
             if (e.PropertyName == nameof(selectionService.SelectedFeedItem))
             {
                 readUnreadCommand.RaiseCanExecuteChanged();
                 launchWebBrowserCommand.RaiseCanExecuteChanged();
             }
+        }
+
+        private void SelectedFeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            removeFeedCommand.RaiseCanExecuteChanged();
         }
     }
 }

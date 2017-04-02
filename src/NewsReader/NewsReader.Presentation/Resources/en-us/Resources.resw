@@ -249,7 +249,8 @@ This might remove older feed items.</value>
 This might remove older feed items.</value>
   </data>
   <data name="RemoveFeedQuestion" xml:space="preserve">
-    <value>Do you want to remove the Feed '{0}'?</value>
+    <value>Do you want to remove the Feeds?
+{0}</value>
   </data>
   <data name="SignInC.Content" xml:space="preserve">
     <value>Sign In</value>

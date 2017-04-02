@@ -65,9 +65,6 @@ namespace Test.NewsReader.Applications.Controllers
             controller.RefreshFeedCommand.Execute(null);
             Context.Wait(TimeSpan.FromMilliseconds(500));
             Context.WaitFor(() => feedManager.Feeds.Single().Items[0].Name == "name 10", TimeSpan.FromSeconds(1));
-
-            AssertHelper.CanExecuteChangedEvent(controller.RefreshFeedCommand, () => selectionService.SelectedFeed = null);
-            Assert.IsFalse(controller.RefreshFeedCommand.CanExecute(null));
         }
 
         [TestMethod]

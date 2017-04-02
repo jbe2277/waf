@@ -79,8 +79,8 @@
         </Grid>
 
         <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
-                  SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=TwoWay}" ItemClick="FeedListViewItemClick"
-                  CanReorderItems="True" AllowDrop="True">
+                  ctrl:SelectionBehavior.SyncSelectedItems="{x:Bind ViewModel.SelectionService.SelectedFeeds}" 
+                  ItemClick="FeedListViewItemClick" CanReorderItems="True" AllowDrop="True">
             <ListView.Transitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>

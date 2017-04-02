@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Controls\AttachedPropertyService.cs" />
     <Compile Include="Controls\FrameworkElementHelper.cs" />
+    <Compile Include="Controls\SelectionBehavior.cs" />
     <Compile Include="Controls\SelectionStateHelper.cs" />
     <Compile Include="Controls\ToolBarHelper.cs" />
     <Compile Include="Controls\ToolTipHelper.cs" />

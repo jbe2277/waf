@@ -1,6 +1,7 @@
 ﻿using Jbe.NewsReader.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Composition;
 using System.Linq;
@@ -11,15 +12,17 @@ namespace Jbe.NewsReader.Applications.Services
     [Export, Shared]
     public class SelectionService : Model
     {
+        private readonly Dictionary<Feed, FeedItem> lastSelectedFeedItems;
         private FeedManager feedManager;
         private Feed selectedFeed;
         private FeedItem selectedFeedItem;
-        private Dictionary<Feed, FeedItem> lastSelectedFeedItems;
 
 
         public SelectionService()
         {
             lastSelectedFeedItems = new Dictionary<Feed, FeedItem>();
+            SelectedFeeds = new ObservableCollection<Feed>();
+            SelectedFeeds.CollectionChanged += SelectedFeedsCollectionChanged;
         }
 
 
@@ -33,10 +36,12 @@ namespace Jbe.NewsReader.Applications.Services
             }
         }
         
+        public ObservableCollection<Feed> SelectedFeeds { get; }
+
         public Feed SelectedFeed
         {
             get { return selectedFeed; }
-            set
+            private set
             {
                 if (SetProperty(ref selectedFeed, value))
                 {
@@ -71,6 +76,12 @@ namespace Jbe.NewsReader.Applications.Services
             }
         }
 
+        public void SelectFeed(Feed feedToSelect)
+        {
+            if (SelectedFeeds.Any()) SelectedFeeds.Clear();
+            if (feedToSelect != null) SelectedFeeds.Add(feedToSelect);
+        }
+
         private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -86,6 +97,11 @@ namespace Jbe.NewsReader.Applications.Services
             {
                 throw new NotSupportedException("FeedsCollectionChanged: " + e.Action);
             }
+        }
+
+        private void SelectedFeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            SelectedFeed = SelectedFeeds.FirstOrDefault();
         }
     }
 }
