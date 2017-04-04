@@ -54,7 +54,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             UpdateDynamicToolBar(element);
         }
 
-        private static void UpdateDynamicToolBar(FrameworkElement dynamicToolBar)
+        private async static void UpdateDynamicToolBar(FrameworkElement dynamicToolBar)
         {
             bool hideBottomToolBar;
             if (attachedPropertiesService.TryGetInheritedValue(dynamicToolBar, out hideBottomToolBar))
@@ -69,6 +69,8 @@ namespace Jbe.NewsReader.Presentation.Controls
                 if (hideBottomToolBar && dynamicToolBarMode == DynamicToolBarMode.TopBar
                     || !hideBottomToolBar && dynamicToolBarMode == DynamicToolBarMode.BottomBar)
                 {
+                    // Workaround: Await idle to solve a rendering issue of the moved toolbar commands (e.g. AppBarButton).
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunIdleAsync(ha => { });
                     associatedToolBar.Visibility = Visibility.Collapsed;
                     MoveCommands((CommandBar)associatedToolBar, (CommandBar)dynamicToolBar);
                     dynamicToolBar.Visibility = Visibility.Visible;
