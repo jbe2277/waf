@@ -20,7 +20,6 @@ namespace Jbe.NewsReader.Presentation.Controls
         SelectionState SelectionState { get; }
     }
 
-    // TODO: After X the SelectItemsButton does not come visible again
     public static class SelectionStateHelper
     {
         public static readonly DependencyProperty IsSinglePageViewSizeProperty =
