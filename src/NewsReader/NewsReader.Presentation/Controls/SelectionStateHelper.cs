@@ -20,6 +20,7 @@ namespace Jbe.NewsReader.Presentation.Controls
         SelectionState SelectionState { get; }
     }
 
+    // TODO: After X the SelectItemsButton does not come visible again
     public static class SelectionStateHelper
     {
         public static readonly DependencyProperty IsSinglePageViewSizeProperty =
@@ -82,33 +83,34 @@ namespace Jbe.NewsReader.Presentation.Controls
                 {
                     if (SetProperty(ref selectionState, value))
                     {
+                        // Set SelectionMode last because this might change the current selection and results in reentry of this method.
                         if (selectionState == SelectionState.Master)
                         {
-                            listView.SelectionMode = ListViewSelectionMode.None;
-                            listView.IsItemClickEnabled = true;
                             selectItemsButton.Visibility = Visibility.Visible;
                             cancelSelectionButton.Visibility = Visibility.Collapsed;
+                            listView.IsItemClickEnabled = true;
+                            listView.SelectionMode = ListViewSelectionMode.None;
                         }
                         else if (selectionState == SelectionState.MasterDetail)
                         {
-                            listView.SelectionMode = ListViewSelectionMode.Extended;
-                            listView.IsItemClickEnabled = false;
                             selectItemsButton.Visibility = Visibility.Visible;
                             cancelSelectionButton.Visibility = Visibility.Collapsed;
+                            listView.IsItemClickEnabled = false;
+                            listView.SelectionMode = ListViewSelectionMode.Extended;
                         }
                         else if (selectionState == SelectionState.ExtendedSelection)
                         {
-                            listView.SelectionMode = ListViewSelectionMode.Extended;
-                            listView.IsItemClickEnabled = false;
                             selectItemsButton.Visibility = Visibility.Collapsed;
                             cancelSelectionButton.Visibility = Visibility.Collapsed;
+                            listView.IsItemClickEnabled = false;
+                            listView.SelectionMode = ListViewSelectionMode.Extended;
                         }
                         else // SelectionState.MultipleSelection
                         {
-                            listView.SelectionMode = ListViewSelectionMode.Multiple;
-                            listView.IsItemClickEnabled = false;
                             selectItemsButton.Visibility = Visibility.Collapsed;
                             cancelSelectionButton.Visibility = Visibility.Visible;
+                            listView.IsItemClickEnabled = false;
+                            listView.SelectionMode = ListViewSelectionMode.Multiple;
                         }
                     }
                 }
