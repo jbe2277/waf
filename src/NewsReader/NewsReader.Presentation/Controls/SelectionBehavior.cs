@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Jbe.NewsReader.Presentation.Controls
 {
+    // TODO: Crash when deleting multiple feeds
     public static class SelectionBehavior
     {
         private static List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
@@ -78,9 +79,11 @@ namespace Jbe.NewsReader.Presentation.Controls
 
         private static void ListCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (syncListsThatAreUpdating.Contains(sender)) { return; }
+            if (syncListsThatAreUpdating.Contains(sender)) return;
 
             var multiSelector = multiSelectorWithObservableList.First(x => x.Item2 == sender).Item1;
+            if (multiSelector.SelectionMode == ListViewSelectionMode.None) return;
+
             selectorsThatAreUpdating.Add(multiSelector.Selector);
             try
             {
@@ -155,6 +158,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             Selector Selector { get; }
 
             IList<object> SelectedItems { get; }
+
+            ListViewSelectionMode SelectionMode { get; }
         }
 
         private class ListViewAdapter : IMultiSelector
@@ -169,6 +174,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             public Selector Selector => listView;
 
             public IList<object> SelectedItems => listView.SelectedItems;
+
+            public ListViewSelectionMode SelectionMode => listView.SelectionMode;
         }
 
         private class ListBoxAdapter : IMultiSelector
@@ -183,6 +190,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             public Selector Selector => listBox;
 
             public IList<object> SelectedItems => listBox.SelectedItems;
+
+            public ListViewSelectionMode SelectionMode => (ListViewSelectionMode)(listBox.SelectionMode + 1);
         }
     }
 }
