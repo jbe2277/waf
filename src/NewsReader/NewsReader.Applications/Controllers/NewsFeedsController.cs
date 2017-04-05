@@ -205,7 +205,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             }
             
             var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds.Except(feedsToRemove.Except(new[] { feedsToRemove.First() })), feedsToRemove.First());
-            foreach (var feed in feedsToRemove) FeedManager.Feeds.Remove(feed);
+            foreach (var feed in feedsToRemove.ToArray()) FeedManager.Feeds.Remove(feed);
             selectionService.SelectFeed(feedToSelect ?? FeedManager.Feeds.LastOrDefault());
         }
 

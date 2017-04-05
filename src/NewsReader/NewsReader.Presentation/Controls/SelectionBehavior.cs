@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Jbe.NewsReader.Presentation.Controls
 {
-    // TODO: Crash when deleting multiple feeds
+    // TODO: Listen to SelectionMode changed: From None to other - restore selection from model
     public static class SelectionBehavior
     {
         private static List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
