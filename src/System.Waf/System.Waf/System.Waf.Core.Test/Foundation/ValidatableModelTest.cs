@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Waf.Foundation;
 using System.Waf.UnitTesting;
 
@@ -23,13 +22,13 @@ namespace Test.Waf.Foundation
 
             // Person is invalid but until now nobody has validated this object.
 
-            Assert.IsFalse(person.HasErrors);            
+            Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.GetErrors().Any());
 
             // Validate person and see that Name is required.
 
             AssertHelper.PropertyChangedEvent(person, x => x.HasErrors, () 
-                => AssertErrorsChangedEvent(person, () => person.Validate()));
+                => AssertErrorsChangedEvent(person, x => x.Name, () => person.Validate()));
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors().Single().ErrorMessage);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors(nameof(Person.Name)).Single().ErrorMessage);
@@ -51,7 +50,7 @@ namespace Test.Waf.Foundation
 
             // Call validate on the valid Person; ErrorsChanged event must not be called.
 
-            AssertHelper.ExpectedException<AssertFailedException>(() => AssertErrorsChangedEvent(person, () => person.Validate()));
+            AssertHelper.ExpectedException<AssertFailedException>(() => AssertErrorsChangedEvent(person, null, () => person.Validate()));
 
             // Set an invalid name (null)
 
@@ -64,7 +63,7 @@ namespace Test.Waf.Foundation
 
             person.Email = "TooLongAndAnInvalidEmailAddress@";
             bool isValid = true;
-            AssertErrorsChangedEvent(person, () => isValid = person.Validate());
+            AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(3, person.GetErrors().Count());
@@ -76,7 +75,7 @@ namespace Test.Waf.Foundation
 
             AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = "Bill");
             person.Email = "h.p@h.edu";
-            AssertErrorsChangedEvent(person, () => isValid = person.Validate());
+            AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
             Assert.IsTrue(isValid);
             Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.GetErrors().Any());
@@ -97,7 +96,7 @@ namespace Test.Waf.Foundation
 
             bool isValid = true;
             AssertHelper.PropertyChangedEvent(person, x => x.HasErrors, () =>
-                AssertErrorsChangedEvent(person, () => isValid = person.Validate()));
+                AssertErrorsChangedEvent(person, null, () => isValid = person.Validate()));
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(entityError, person.GetErrors().Single());
@@ -139,35 +138,15 @@ namespace Test.Waf.Foundation
             }
         }
 
-        private static void AssertErrorsChangedEvent<T>(T model, Action raiseErrorsChanged) where T : INotifyDataErrorInfo
-        {
-            int errorsChangedCount = 0;
-
-            EventHandler<DataErrorsChangedEventArgs> handler = (sender, e) =>
-            {
-                Assert.AreEqual(model, sender);
-                if (string.IsNullOrEmpty(e.PropertyName))
-                {
-                    errorsChangedCount++;
-                }
-            };
-
-            model.ErrorsChanged += handler;
-            raiseErrorsChanged();
-            model.ErrorsChanged -= handler;
-
-            Assert.AreEqual(1, errorsChangedCount);
-        }
-        
         private static void AssertErrorsChangedEvent<T>(T model, Expression<Func<T, object>> expression, Action raiseErrorsChanged) where T : INotifyDataErrorInfo
         {
-            string propertyName = AssertHelper.GetProperty(expression).Name;
+            string propertyName = expression == null ? null : AssertHelper.GetProperty(expression).Name;
             int errorsChangedCount = 0;
 
             EventHandler<DataErrorsChangedEventArgs> handler = (sender, e) =>
             {
                 Assert.AreEqual(model, sender);
-                if (e.PropertyName == propertyName)
+                if (propertyName == null || e.PropertyName == propertyName)
                 {
                     errorsChangedCount++;
                 }
