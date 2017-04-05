@@ -150,7 +150,6 @@ namespace System.Waf.Foundation
 
         private void RaiseErrorsChanged(string propertyName = "")
         {
-            HasErrors = errors.Any();
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
         }
 
@@ -195,7 +194,11 @@ namespace System.Waf.Foundation
                 errors.Add(propertyToAdd, newErrors[propertyToAdd]);
             }
 
-            allErrorsCache = errors.Values.SelectMany(x => x).Distinct().ToArray();
+            if (changedProperties.Any())
+            {
+                allErrorsCache = errors.Values.SelectMany(x => x).Distinct().ToArray();
+                HasErrors = errors.Any();
+            }
 
             foreach (var changedProperty in changedProperties) RaiseErrorsChanged(changedProperty);
         }
