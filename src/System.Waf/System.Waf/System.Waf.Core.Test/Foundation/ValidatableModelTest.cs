@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
 using System.Waf.UnitTesting;
@@ -136,6 +137,33 @@ namespace Test.Waf.Foundation
                 Person newPerson = (Person)serializer.ReadObject(stream);
                 Assert.AreEqual(person.Name, newPerson.Name);
             }
+        }
+
+        [TestMethod]
+        public void ValidationResultComparerTest()
+        {
+            var comparerType = typeof(ValidatableModel).GetNestedType("ValidationResultComparer", BindingFlags.NonPublic);
+            var comparer = (IEqualityComparer<ValidationResult>)comparerType.GetProperty("Default", BindingFlags.Static | BindingFlags.Public).GetValue(null);
+
+            Assert.IsTrue(comparer.Equals(null, null));
+            Assert.IsFalse(comparer.Equals(new ValidationResult(null), null));
+            Assert.IsFalse(comparer.Equals(null, new ValidationResult(null)));
+            Assert.IsTrue(comparer.Equals(new ValidationResult(null), new ValidationResult(null)));
+            Assert.IsFalse(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Bill")));
+            Assert.IsTrue(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Test")));
+            Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Age" }), new ValidationResult("Test", new[] { "Name", "Age" })));
+            Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", null }), new ValidationResult("Test", new[] { "Name", null })));
+            Assert.IsFalse(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Wrong" }), new ValidationResult("Test", new[] { "Name", "Age" })));
+
+            Assert.AreEqual(0, comparer.GetHashCode(null));
+            Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null)));
+            Assert.AreEqual("".GetHashCode(), comparer.GetHashCode(new ValidationResult("")));
+            Assert.AreEqual("Test".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test")));
+            Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null, new string[0])));
+            Assert.AreEqual("Test".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new string[0])));
+            Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name" })));
+            Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", null })));
+            Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode() ^ "Age".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", "Age" })));
         }
 
         private static void AssertErrorsChangedEvent<T>(T model, Expression<Func<T, object>> expression, Action raiseErrorsChanged) where T : INotifyDataErrorInfo

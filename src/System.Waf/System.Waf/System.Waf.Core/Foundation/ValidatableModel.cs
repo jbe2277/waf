@@ -204,7 +204,7 @@ namespace System.Waf.Foundation
         }
 
 
-        internal sealed class ValidationResultComparer : IEqualityComparer<ValidationResult>
+        private sealed class ValidationResultComparer : IEqualityComparer<ValidationResult>
         {
             public static ValidationResultComparer Default { get; } = new ValidationResultComparer();
 
@@ -218,7 +218,7 @@ namespace System.Waf.Foundation
             public int GetHashCode(ValidationResult obj)
             {
                 if (obj == null) return 0;
-                return (obj.ErrorMessage?.GetHashCode() ?? 0) ^ obj.MemberNames.Select(x => x?.GetHashCode() ?? 0).Aggregate((current, next) => current ^ next);
+                return (obj.ErrorMessage?.GetHashCode() ?? 0) ^ obj.MemberNames.Select(x => x?.GetHashCode() ?? 0).Aggregate(0, (current, next) => current ^ next);
             }
         }
     }
