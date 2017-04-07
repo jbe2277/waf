@@ -114,29 +114,10 @@ namespace System.Waf.Foundation
             
             if (SetProperty(ref field, value, propertyName))
             {
-                ValidateProperty(value, propertyName);
+                Validate();
                 return true;
             }
             return false;
-        }
-
-        /// <summary>
-        /// Validates the property with the specified value. The validation results are stored and can be retrieved by the 
-        /// GetErrors method. If the validation results are changing then the ErrorsChanged event will be raised.
-        /// </summary>
-        /// <param name="value">The value of the property.</param>
-        /// <param name="propertyName">The property name. This optional parameter can be skipped
-        /// because the compiler is able to create it automatically.</param>
-        /// <returns>True if the property value is valid, otherwise false.</returns>
-        /// <exception cref="ArgumentException">The argument propertyName must not be null or empty.</exception>
-        protected bool ValidateProperty(object value, [CallerMemberName] string propertyName = null)
-        {
-            if (string.IsNullOrEmpty(propertyName)) throw new ArgumentException("The argument propertyName must not be null or empty.", nameof(propertyName));
-            
-            var validationResults = new List<ValidationResult>();
-            Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
-            UpdateErrors(validationResults, propertyName);
-            return !GetErrors(propertyName).Any();
         }
 
         /// <summary>

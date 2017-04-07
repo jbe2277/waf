@@ -106,24 +106,6 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
-        public void ValidatePropertyTest()
-        {
-            Person person = new Person();
-
-            string name = null;
-            AssertHelper.ExpectedException<ArgumentException>(() => person.SetPropertyAndValidate(ref name, "Bill", null));
-            AssertHelper.ExpectedException<ArgumentException>(() => person.ValidateProperty("Bill", null));
-
-            Assert.IsTrue(person.SetPropertyAndValidate(ref name, "Bill", nameof(Person.Name))); // Value has been changed
-            Assert.IsFalse(person.SetPropertyAndValidate(ref name, "Bill", nameof(Person.Name))); // Value has not been changed
-
-            person.Name = "Bill";
-            Assert.IsTrue(person.ValidateProperty(person.Name, nameof(Person.Name))); // Name is valid
-            person.Name = null;
-            Assert.IsFalse(person.ValidateProperty(person.Name, nameof(Person.Name))); // Name is invalid
-        }
-        
-        [TestMethod]
         public void SerializationWithDcsTest()
         {
             var serializer = new DataContractSerializer(typeof(Person));
@@ -221,11 +203,6 @@ namespace Test.Waf.Foundation
             {
                 get { return email; }
                 set { SetProperty(ref email, value); }
-            }
-
-            public new bool ValidateProperty(object value, string propertyName)
-            {
-                return base.ValidateProperty(value, propertyName);
             }
 
             public new bool SetPropertyAndValidate<T>(ref T field, T value, string propertyName)

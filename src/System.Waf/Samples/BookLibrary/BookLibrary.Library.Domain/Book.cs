@@ -52,7 +52,7 @@ namespace Waf.BookLibrary.Library.Domain
             set { SetPropertyAndValidate(ref publisher, value); }
         }
 
-        [CustomValidation(typeof(Book), "ValidatePublishDate")]
+        [CustomValidation(typeof(Book), nameof(ValidatePublishDate))]
         public DateTime PublishDate
         {
             get { return publishDate; }
@@ -97,7 +97,7 @@ namespace Waf.BookLibrary.Library.Domain
             var maxValue = new DateTime(9999, 12, 31);
             if (value < minValue || value > maxValue) 
             { 
-                return new ValidationResult(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue)); 
+                return new ValidationResult(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue), new[] { nameof(PublishDate) }); 
             }
             return ValidationResult.Success;
         }
