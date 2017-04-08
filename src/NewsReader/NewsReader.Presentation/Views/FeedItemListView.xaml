@@ -169,7 +169,7 @@
                 </ListView>
             </Grid>
 
-            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, Mode=OneWay}"/>
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed.IsLoading, FallbackValue=Collapsed, Mode=OneWay}"/>
         </Grid>
 
         <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">
