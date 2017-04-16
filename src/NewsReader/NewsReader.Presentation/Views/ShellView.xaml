@@ -72,7 +72,7 @@
         <waf:NavigationSplitView Grid.Row="2" x:Name="navigationSplitView" OpenPaneLength="250" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <SplitView.Pane>
                 <Border BorderThickness="0,0,1,0" BorderBrush="{ThemeResource JbeMainBackgroundBrush}">
-                    <Grid Margin="0,49,0,0">
+                    <Grid Margin="0,48,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
