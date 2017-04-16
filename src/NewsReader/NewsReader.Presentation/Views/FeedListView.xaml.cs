@@ -94,6 +94,7 @@ namespace Jbe.NewsReader.Presentation.Views
             {
                 addFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.ExtendedSelection
                     || selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Collapsed : Visibility.Visible;
+                removeFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

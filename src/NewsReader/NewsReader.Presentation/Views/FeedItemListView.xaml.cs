@@ -2,6 +2,7 @@
 using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Presentation.Controls;
 using System;
+using System.ComponentModel;
 using System.Composition;
 using Windows.System;
 using Windows.UI.Core;
@@ -25,6 +26,7 @@ namespace Jbe.NewsReader.Presentation.Views
             viewModel = new Lazy<FeedItemListViewModel>(() => (FeedItemListViewModel)DataContext);
             SetDefaultSearchVisibility();
             selectionStateManager = SelectionStateHelper.CreateManager(feedItemListView, selectItemsButton, cancelSelectionButton);
+            selectionStateManager.PropertyChanged += SelectionStateManagerPropertyChanged;
         }
 
 
@@ -94,6 +96,14 @@ namespace Jbe.NewsReader.Presentation.Views
                     await Dispatcher.RunIdleAsync(ha => { });
                     feedItemListView.ScrollIntoView(feedItemListView.SelectedItem);
                 }
+            }
+        }
+
+        private void SelectionStateManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ISelectionStateManager.SelectionState))
+            {
+                markAsReadUnreadButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

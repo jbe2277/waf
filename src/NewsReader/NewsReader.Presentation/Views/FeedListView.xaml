@@ -68,7 +68,7 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-                <AppBarButton x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
+                <AppBarButton x:Name="removeFeedButton" x:Uid="RemoveFeedL" Command="{x:Bind ViewModel.RemoveFeedCommand}" Icon="Remove"/>
                 <AppBarButton x:Name="selectItemsButton" x:Uid="SelectItemsL">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE762;" />
