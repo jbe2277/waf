@@ -87,7 +87,7 @@
                 </TransitionCollection>
             </ListView.Transitions>
             <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemExpanded}">
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>

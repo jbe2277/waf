@@ -12,6 +12,7 @@
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/ConverterResources.xaml"/>
+                <ResourceDictionary Source="Resources/ListViewItemResources.xaml"/>
                 <ResourceDictionary Source="Resources/ControlResources.xaml"/>
                 <ResourceDictionary Source="Resources/FormResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
