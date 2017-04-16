@@ -77,8 +77,8 @@
                 </StackPanel>
 
                 <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ItemsListViewSource.View, Mode=OneWay}"
-                    SelectedItem="{x:Bind ViewModel.SelectionService.SelectedFeedItem, Mode=TwoWay}" ItemClick="FeedItemListViewItemClick"
-                    SelectionChanged="FeedItemListViewSelectionChanged">
+                          ctrl:SelectionBehavior.SyncSelectedItems="{x:Bind ViewModel.SelectionService.SelectedFeedItems}"
+                          ItemClick="FeedItemListViewItemClick" SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="ListViewHeaderItem">
                             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />

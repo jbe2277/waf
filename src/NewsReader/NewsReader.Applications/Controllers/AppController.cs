@@ -197,7 +197,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private void ShowFeedItemView(object parameter)
         {
-            selectionService.SelectedFeedItem = (FeedItem)parameter;
+            selectionService.SelectFeedItem((FeedItem)parameter);
             if (SelectedNavigationItem == NavigationItem.FeedList)
             {
                 SelectedNavigationItem = NavigationItem.FeedItemList;

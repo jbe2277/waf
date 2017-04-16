@@ -87,10 +87,10 @@ namespace Jbe.NewsReader.Applications.Controllers
                 selectionService.SelectFeed(selectionService.FeedManager.Feeds.FirstOrDefault());
             }
 
-            // Enforce scroll into view after loading more items
-            var itemToSelectAgain = selectionService.SelectedFeedItem;
-            selectionService.SelectedFeedItem = null;
-            selectionService.SelectedFeedItem = itemToSelectAgain;
+            // TODO: Enforce scroll into view after loading more items
+            //var itemToSelectAgain = selectionService.SelectedFeedItem;
+            //selectionService.SelectedFeedItem = null;
+            //selectionService.SelectedFeedItem = itemToSelectAgain;
 
             await Task.WhenAll(tasks);
             FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
@@ -154,7 +154,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 if (selectionService.SelectedFeedItem == null && selectionService.SelectedFeeds.FirstOrDefault() == feed)
                 {
-                    selectionService.SelectedFeedItem = feed.Items.FirstOrDefault();
+                    selectionService.SelectFeedItem(feed.Items.FirstOrDefault());
                 }
             }
         }
@@ -222,25 +222,17 @@ namespace Jbe.NewsReader.Applications.Controllers
         private void MarkAsReadUnread(object parameter)
         {
             var feedItem = parameter as FeedItem;
-            if (feedItem != null)
+            var items = feedItem != null ? new[] { feedItem } : (IReadOnlyList<FeedItem>)selectionService.SelectedFeedItems;
+
+            var stringParameter = parameter as string;
+            if (string.Equals("read", stringParameter, StringComparison.OrdinalIgnoreCase)
+                || (string.IsNullOrEmpty(stringParameter) && items.Any(x => !x.MarkAsRead)))
             {
-                feedItem.MarkAsRead = !feedItem.MarkAsRead;
+                foreach (var item in items) item.MarkAsRead = true;
             }
             else
             {
-                var stringParameter = parameter as string;
-                if (string.Equals("read", stringParameter, StringComparison.OrdinalIgnoreCase))
-                {
-                    selectionService.SelectedFeedItem.MarkAsRead = true;
-                }
-                else if (string.Equals("unread", stringParameter, StringComparison.OrdinalIgnoreCase))
-                {
-                    selectionService.SelectedFeedItem.MarkAsRead = false;
-                }
-                else
-                {
-                    selectionService.SelectedFeedItem.MarkAsRead = !selectionService.SelectedFeedItem.MarkAsRead;
-                }
+                foreach (var item in items) item.MarkAsRead = false;
             }
         }
 

@@ -22,7 +22,9 @@ namespace Jbe.NewsReader.Applications.Services
         {
             lastSelectedFeedItems = new Dictionary<Feed, FeedItem>();
             SelectedFeeds = new ObservableCollection<Feed>();
+            SelectedFeedItems = new ObservableCollection<FeedItem>();
             SelectedFeeds.CollectionChanged += SelectedFeedsCollectionChanged;
+            SelectedFeedItems.CollectionChanged += SelectedFeedItemsCollectionChanged;
         }
 
 
@@ -50,15 +52,17 @@ namespace Jbe.NewsReader.Applications.Services
                     {
                         itemToSelect = selectedFeed?.Items.FirstOrDefault();
                     }
-                    SelectedFeedItem = itemToSelect;
+                    SelectFeedItem(itemToSelect);
                 }
             }
         }
 
+        public ObservableCollection<FeedItem> SelectedFeedItems { get; }
+
         public FeedItem SelectedFeedItem
         {
             get { return selectedFeedItem; }
-            set
+            private set
             {
                 if (SetProperty(ref selectedFeedItem, value) && SelectedFeed != null && selectedFeedItem != null)
                 {
@@ -82,6 +86,12 @@ namespace Jbe.NewsReader.Applications.Services
             if (feedToSelect != null) SelectedFeeds.Add(feedToSelect);
         }
 
+        public void SelectFeedItem(FeedItem feedItemToSelect)
+        {
+            if (SelectedFeedItems.Any()) SelectedFeedItems.Clear();
+            if (feedItemToSelect != null) SelectedFeedItems.Add(feedItemToSelect);
+        }
+
         private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -102,6 +112,11 @@ namespace Jbe.NewsReader.Applications.Services
         private void SelectedFeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             SelectedFeed = SelectedFeeds.FirstOrDefault();
+        }
+
+        private void SelectedFeedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            SelectedFeedItem = SelectedFeedItems.FirstOrDefault();
         }
     }
 }

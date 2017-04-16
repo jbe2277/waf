@@ -123,7 +123,7 @@ namespace Test.NewsReader.Applications.Controllers
             controller.ReadUnreadCommand.Execute("read");
             Assert.IsTrue(item.MarkAsRead);
 
-            AssertHelper.CanExecuteChangedEvent(controller.ReadUnreadCommand, () => selectionService.SelectedFeedItem = null);
+            AssertHelper.CanExecuteChangedEvent(controller.ReadUnreadCommand, () => selectionService.SelectFeedItem(null));
             Assert.IsFalse(controller.ReadUnreadCommand.CanExecute(null));
         }
     }
