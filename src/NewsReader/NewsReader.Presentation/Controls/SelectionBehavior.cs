@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Jbe.NewsReader.Presentation.Controls
 {
-    // TODO: Listen to SelectionMode changed: From None to other - restore selection from model
     public static class SelectionBehavior
     {
         private static List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
@@ -58,6 +57,7 @@ namespace Jbe.NewsReader.Presentation.Controls
 
                 multiSelectorWithObservableList.Add(new Tuple<IMultiSelector, INotifyCollectionChanged>(multiSelector, observableList));
                 observableList.CollectionChanged += ListCollectionChanged;
+                multiSelector.SelectionModeChanged += MultiSelectorSelectionModeChanged;
             }
             finally
             {
@@ -74,6 +74,7 @@ namespace Jbe.NewsReader.Presentation.Controls
 
             multiSelectorWithObservableList.Remove(item);
             item.Item2.CollectionChanged -= ListCollectionChanged;
+            item.Item1.SelectionModeChanged -= MultiSelectorSelectionModeChanged;
         }
 
 
@@ -122,20 +123,32 @@ namespace Jbe.NewsReader.Presentation.Controls
 
         private static void SelectorSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selector = (Selector)sender;
+            UpdateSelectedItemsModel((Selector)sender);
+        }
+
+        private static void MultiSelectorSelectionModeChanged(object sender, EventArgs e)
+        {
+            UpdateSelectedItemsModel(((IMultiSelector)sender).Selector);
+        }
+
+        private static void UpdateSelectedItemsModel(Selector selector)
+        {
             if (selectorsThatAreUpdating.Contains(selector)) { return; }
 
             var list = GetSyncSelectedItems(selector);
             if (list == null) { return; }
 
+            var multiSelector = multiSelectorWithObservableList.First(x => x.Item1.Selector == selector).Item1;
+
             syncListsThatAreUpdating.Add(list);
             try
             {
-                foreach (var item in e.RemovedItems)
+                var genericList = list.OfType<object>().ToArray();
+                foreach (var item in genericList.Except(multiSelector.SelectedItems))
                 {
                     list.Remove(item);
                 }
-                foreach (var item in e.AddedItems)
+                foreach (var item in multiSelector.SelectedItems.Except(genericList))
                 {
                     list.Add(item);
                 }
@@ -160,6 +173,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             IList<object> SelectedItems { get; }
 
             ListViewSelectionMode SelectionMode { get; }
+
+            event EventHandler SelectionModeChanged;
         }
 
         private class ListViewAdapter : IMultiSelector
@@ -169,13 +184,16 @@ namespace Jbe.NewsReader.Presentation.Controls
             public ListViewAdapter(ListViewBase listView)
             {
                 this.listView = listView;
+                listView.RegisterPropertyChangedCallback(ListViewBase.SelectionModeProperty, (sender, dp) => SelectionModeChanged?.Invoke(this, EventArgs.Empty));
             }
-
+            
             public Selector Selector => listView;
 
             public IList<object> SelectedItems => listView.SelectedItems;
 
             public ListViewSelectionMode SelectionMode => listView.SelectionMode;
+
+            public event EventHandler SelectionModeChanged;
         }
 
         private class ListBoxAdapter : IMultiSelector
@@ -185,6 +203,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             public ListBoxAdapter(ListBox listBox)
             {
                 this.listBox = listBox;
+                listBox.RegisterPropertyChangedCallback(ListBox.SelectionModeProperty, (sender, dp) => SelectionModeChanged?.Invoke(this, EventArgs.Empty));
             }
 
             public Selector Selector => listBox;
@@ -192,6 +211,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             public IList<object> SelectedItems => listBox.SelectedItems;
 
             public ListViewSelectionMode SelectionMode => (ListViewSelectionMode)(listBox.SelectionMode + 1);
+
+            public event EventHandler SelectionModeChanged;
         }
     }
 }
