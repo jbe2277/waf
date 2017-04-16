@@ -390,6 +390,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" />
                         </Grid>
+                        <Rectangle VerticalAlignment="Bottom" Height="1.5" Fill="{ThemeResource JbeMainBorderBrush}"/>
                         <!-- The 'Xg' text simulates the amount of space one line of text will occupy.
                              In the DataPlaceholder state, the Content is not loaded yet so we
                              approximate the size of the item using placeholder text. -->
@@ -403,15 +404,15 @@
                         <Rectangle x:Name="PlaceholderRect" Visibility="Collapsed" Fill="{ThemeResource ListViewItemPlaceholderBackground}" />
                         <Border x:Name="MultiSelectSquare"
                             BorderBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
-                            BorderThickness="2"
-                            Width="20"
-                            Height="20"
+                            BorderThickness="1.7"
+                            Width="16"
+                            Height="16"
                             Margin="12,0,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Visibility="Collapsed">
                             <Border.Clip>
-                                <RectangleGeometry Rect="0,0,20,20">
+                                <RectangleGeometry Rect="0,0,16,16">
                                     <RectangleGeometry.Transform>
                                         <TranslateTransform x:Name="MultiSelectClipTransform" />
                                     </RectangleGeometry.Transform>
@@ -423,7 +424,7 @@
                             <FontIcon x:Name="MultiSelectCheck"
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 Glyph="&#xE73E;"
-                                FontSize="16"
+                                FontSize="12"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
                                 Visibility="Collapsed"
                                 Opacity="0" />

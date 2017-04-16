@@ -134,11 +134,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="1.5"/>
-                                </Grid.RowDefinitions>
-
+                                
                                 <Grid.ContextFlyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem x:Uid="OpenT" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
@@ -147,10 +143,10 @@
                                     </MenuFlyout>
                                 </Grid.ContextFlyout>
 
-                                <Rectangle Grid.Column="0" Grid.Row="0" Fill="{ThemeResource JbeUnreadLineFillThemeBrush}"
+                                <Rectangle Grid.Column="0" Fill="{ThemeResource JbeUnreadLineFillThemeBrush}"
                                         Visibility="{x:Bind MarkAsRead, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
 
-                                <RelativePanel Grid.Column="2" Grid.Row="0" Margin="7,5,7,8">
+                                <RelativePanel Grid.Column="2" Margin="7,5,7,8">
                                     <TextBlock x:Name="nameBox" Text="{x:Bind Name}" FontWeight="{x:Bind v:FeedItemListView.GetFontWeight(MarkAsRead), Mode=OneWay}" Margin="0,0,11,0" 
                                             Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2"/>
 
@@ -158,11 +154,9 @@
                                             RelativePanel.Below="nameBox" Margin="0,5,0,3"/>
                                 </RelativePanel>
 
-                                <Button Grid.Column="3" Grid.Row="0" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
+                                <Button Grid.Column="3" Command="{Binding DataContext.ShowFeedItemViewCommand, ElementName=feedItemListView, Mode=OneTime}" CommandParameter="{x:Bind}"
                                         Content="&#xE76C;" Padding="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" FontFamily="Segoe MDL2 Assets"
                                         Foreground="{ThemeResource JbeLightForegroundBrush}" Visibility="{Binding SelectionMode, ElementName=feedItemListView, Converter={StaticResource SelectionModeToVisibilityConverter}}"/>
-
-                                <Rectangle Grid.ColumnSpan="4" Grid.Row="1" Fill="{ThemeResource JbeMainBorderBrush}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
