@@ -33,6 +33,7 @@ namespace Jbe.NewsReader.Presentation.Views
             Clipboard.ContentChanged += ClipboardContentChanged;
             selectionStateManager = SelectionStateHelper.CreateManager(feedListView, selectItemsButton, cancelSelectionButton);
             selectionStateManager.PropertyChanged += SelectionStateManagerPropertyChanged;
+            UpdateSelectionStateDependentVisibility();
         }
 
 
@@ -92,10 +93,16 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             if (e.PropertyName == nameof(ISelectionStateManager.SelectionState))
             {
-                addFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.ExtendedSelection
-                    || selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Collapsed : Visibility.Visible;
-                removeFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
+                UpdateSelectionStateDependentVisibility();
             }
+        }
+
+        private void UpdateSelectionStateDependentVisibility()
+        {
+            addFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.ExtendedSelection
+                    || selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Collapsed : Visibility.Visible;
+            removeFeedButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
+            allFeeds.Visibility = selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private static string GetItemsCountText(int itemsCount) => ResourceService.GetString("ItemsCount", itemsCount);

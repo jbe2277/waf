@@ -27,6 +27,7 @@ namespace Jbe.NewsReader.Presentation.Views
             SetDefaultSearchVisibility();
             selectionStateManager = SelectionStateHelper.CreateManager(feedItemListView, selectItemsButton, cancelSelectionButton);
             selectionStateManager.PropertyChanged += SelectionStateManagerPropertyChanged;
+            UpdateSelectionStateDependentVisibility();
         }
 
 
@@ -81,11 +82,11 @@ namespace Jbe.NewsReader.Presentation.Views
         }
 
         private void SearchBoxLostFocus(object sender, RoutedEventArgs e) => SetDefaultSearchVisibility();
-        
+
         private async void FeedItemListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await Dispatcher.RunIdleAsync(ha => { });  // Ensure that items are layouted first so that ScrollIntoView works correct.
-            
+
             if (feedItemListView.SelectedItem != null)
             {
                 feedItemListView.ScrollIntoView(feedItemListView.SelectedItem);
@@ -103,8 +104,14 @@ namespace Jbe.NewsReader.Presentation.Views
         {
             if (e.PropertyName == nameof(ISelectionStateManager.SelectionState))
             {
-                markAsReadUnreadButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
+                UpdateSelectionStateDependentVisibility();
             }
+        }
+
+        private void UpdateSelectionStateDependentVisibility()
+        {
+            markAsReadUnreadButton.Visibility = selectionStateManager.SelectionState == SelectionState.Master ? Visibility.Collapsed : Visibility.Visible;
+            allFeedItems.Visibility = selectionStateManager.SelectionState == SelectionState.MultipleSelection ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private static FontWeight GetFontWeight(bool markAsRead) => markAsRead ? FontWeights.Normal : FontWeights.SemiBold;

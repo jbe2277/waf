@@ -13,6 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -78,7 +79,12 @@
             </CommandBar>
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
+        <CheckBox x:Name="allFeeds" Grid.Row="1" IsChecked="{x:Bind ViewModel.SelectionService.SelectAllFeeds, Mode=TwoWay}"
+                  BorderThickness="0,0,0,1.5" BorderBrush="{ThemeResource JbeMainBorderBrush}" HorizontalAlignment="Stretch" Style="{StaticResource ListViewAllItems}">
+            <TextBlock x:Uid="AllItemsT" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="7,7,7,10"/>
+        </CheckBox>
+
+        <ListView Grid.Row="2" x:Name="feedListView" ItemsSource="{x:Bind ViewModel.FeedManager.Feeds, Mode=OneWay}" 
                   ctrl:SelectionBehavior.SyncSelectedItems="{x:Bind ViewModel.SelectionService.SelectedFeeds}" 
                   ItemClick="FeedListViewItemClick" CanReorderItems="True" AllowDrop="True">
             <ListView.Transitions>
@@ -86,12 +92,6 @@
                     <EntranceThemeTransition/>
                 </TransitionCollection>
             </ListView.Transitions>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemExpanded}">
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Feed">
                     <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">
@@ -126,7 +126,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border Grid.Row="2" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">
+        <Border Grid.Row="3" Padding="0,1,0,0" Background="{ThemeResource JbeAppBarBorderBrush}" Visibility="{x:Bind bottomBar.Visibility, Mode=OneWay}">
             <CommandBar x:Name="bottomBar" ctrl:ToolBarHelper.DynamicToolBar="BottomBar" ctrl:ToolBarHelper.AssociatedToolBar="{x:Bind topBar}"/>
         </Border>
     </Grid>

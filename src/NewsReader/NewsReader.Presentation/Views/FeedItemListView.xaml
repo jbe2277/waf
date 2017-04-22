@@ -66,6 +66,7 @@
             <Grid Visibility="{x:Bind ViewModel.SelectionService.SelectedFeed, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -76,7 +77,12 @@
                                Style="{ThemeResource BodyTextBlockStyle}"/>
                 </StackPanel>
 
-                <ListView x:Name="feedItemListView" Grid.Row="1" ItemsSource="{x:Bind ItemsListViewSource.View, Mode=OneWay}"
+                <CheckBox x:Name="allFeedItems" Grid.Row="1" IsChecked="{x:Bind ViewModel.SelectionService.SelectAllFeedItems, Mode=TwoWay}" 
+                          BorderThickness="0,0,0,1.5" BorderBrush="{ThemeResource JbeMainBorderBrush}" HorizontalAlignment="Stretch" Style="{StaticResource ListViewAllItems}">
+                    <TextBlock x:Uid="AllItemsT" FontWeight="SemiBold" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="7,7,7,10"/>
+                </CheckBox>
+
+                <ListView x:Name="feedItemListView" Grid.Row="2" ItemsSource="{x:Bind ItemsListViewSource.View, Mode=OneWay}"
                           ctrl:SelectionBehavior.SyncSelectedItems="{x:Bind ViewModel.SelectionService.SelectedFeedItems}"
                           ItemClick="FeedItemListViewItemClick" SelectionChanged="FeedItemListViewSelectionChanged">
                     <ListView.Resources>
@@ -119,12 +125,6 @@
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
                     </ListView.GroupStyle>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemExpanded}">
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:FeedItem">
                             <Grid DoubleTapped="FeedDoubleTapped" Background="Transparent">

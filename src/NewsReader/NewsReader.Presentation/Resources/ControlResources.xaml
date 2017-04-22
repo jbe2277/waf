@@ -6,5 +6,10 @@
     <Style TargetType="AppBarButton">
         <Setter Property="ctrl:ToolTipHelper.ToolTipBindingPath" Value="Label"/>
     </Style>
-    
+
+    <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemExpanded}">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+
 </ResourceDictionary>

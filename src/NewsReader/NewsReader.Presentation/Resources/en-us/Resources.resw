@@ -298,4 +298,7 @@ Details: {0}</value>
   <data name="SelectItemsL.Label" xml:space="preserve">
     <value>Select Items</value>
   </data>
+  <data name="AllItemsT.Text" xml:space="preserve">
+    <value>All Items</value>
+  </data>
 </root>
