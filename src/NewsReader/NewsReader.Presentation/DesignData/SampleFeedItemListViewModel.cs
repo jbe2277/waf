@@ -15,6 +15,8 @@ namespace Jbe.NewsReader.Presentation.DesignData
         private class MockFeedItemListView : IFeedItemListView
         {
             public object DataContext { get; set; }
+
+            public void CancelMultipleSelectionMode() { }
         }
     }
 }

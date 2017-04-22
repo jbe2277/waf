@@ -4,5 +4,6 @@ namespace Jbe.NewsReader.Applications.Views
 {
     public interface IFeedItemListView : IView
     {
+        void CancelMultipleSelectionMode();
     }
 }

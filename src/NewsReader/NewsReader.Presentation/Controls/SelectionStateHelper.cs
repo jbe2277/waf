@@ -18,6 +18,8 @@ namespace Jbe.NewsReader.Presentation.Controls
     public interface ISelectionStateManager : INotifyPropertyChanged
     {
         SelectionState SelectionState { get; }
+
+        void CancelMultipleSelectionMode();
     }
 
     public static class SelectionStateHelper
@@ -127,6 +129,8 @@ namespace Jbe.NewsReader.Presentation.Controls
             }
 
 
+            public void CancelMultipleSelectionMode() => UpdateSelectionStateGroup(true);
+
             private void ItemsCollectionChanged(IObservableVector<object> sender, IVectorChangedEventArgs e)
             {
                 selectItemsButton.IsEnabled = listView.Items.Count > 0;
@@ -142,7 +146,7 @@ namespace Jbe.NewsReader.Presentation.Controls
                 }
             }
 
-            private void CancelSelectionButtonClick(object sender, RoutedEventArgs e) => UpdateSelectionStateGroup(true);
+            private void CancelSelectionButtonClick(object sender, RoutedEventArgs e) => CancelMultipleSelectionMode();
 
             private void UpdateSelectionStateGroup(bool cancelSelectionState = false)
             {

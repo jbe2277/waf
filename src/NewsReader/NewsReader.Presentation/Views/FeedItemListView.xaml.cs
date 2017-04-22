@@ -34,6 +34,8 @@ namespace Jbe.NewsReader.Presentation.Views
         public FeedItemListViewModel ViewModel => viewModel.Value;
 
 
+        public void CancelMultipleSelectionMode() => selectionStateManager.CancelMultipleSelectionMode();
+
         private void OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
             var isControlKeyDown = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down);

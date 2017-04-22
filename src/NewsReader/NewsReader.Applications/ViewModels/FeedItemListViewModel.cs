@@ -73,6 +73,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
         {
             if (e.PropertyName == nameof(SelectionService.SelectedFeed))
             {
+                ViewCore.CancelMultipleSelectionMode();
                 UpdateItemsListView();
             }
         }
