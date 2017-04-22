@@ -59,6 +59,7 @@
     <Compile Include="Services\ICryptographicService.cs" />
     <Compile Include="Services\ILauncherService.cs" />
     <Compile Include="Services\IMessageService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\INetworkInfoService.cs" />
     <Compile Include="Services\IResourceService.cs" />
     <Compile Include="Services\ISyndicationService.cs" />

@@ -44,6 +44,8 @@ namespace Jbe.NewsReader.Presentation.Views
 
         public void FeedAdded() => addFeedButton.Flyout.Hide();
 
+        public void CancelMultipleSelectionMode() => selectionStateManager.CancelMultipleSelectionMode();
+
         private void AddFeedFlyoutOpened(object sender, object e)
         {
             ViewModel.LoadErrorMessage = null;

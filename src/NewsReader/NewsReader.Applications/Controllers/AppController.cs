@@ -11,8 +11,8 @@ using System.Waf.Applications;
 
 namespace Jbe.NewsReader.Applications.Controllers
 {
-    [Export(typeof(IAppController)), Shared]
-    internal class AppController : IAppController
+    [Export(typeof(IAppController)), Export(typeof(INavigationService)), Shared]
+    internal class AppController : IAppController, INavigationService
     {
         private readonly ILauncherService launcherService;
         private readonly IAppInfoService appInfoService;
@@ -84,6 +84,9 @@ namespace Jbe.NewsReader.Applications.Controllers
                 }
             }
         }
+
+
+        public event EventHandler Navigated;
 
 
         public void Initialize()
@@ -174,6 +177,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                     shellViewModel.Value.ContentView = settingsController.Value.SettingsView;
                     break;
             }
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         private bool CanNavigateBack()

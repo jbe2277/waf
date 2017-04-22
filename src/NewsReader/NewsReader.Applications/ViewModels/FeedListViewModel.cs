@@ -1,6 +1,7 @@
 ﻿using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Domain;
+using System;
 using System.Composition;
 using System.Waf.Applications;
 using System.Windows.Input;
@@ -16,9 +17,10 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
 
         [ImportingConstructor]
-        public FeedListViewModel(IFeedListView view, SelectionService selectionService) : base(view)
+        public FeedListViewModel(IFeedListView view, SelectionService selectionService, INavigationService navigationService) : base(view)
         {
             SelectionService = selectionService;
+            navigationService.Navigated += NavigationServiceNavigated;
             AddNewFeedUri = null;
         }
 
@@ -61,5 +63,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             AddNewFeedUri = null;
             ViewCore.FeedAdded();
         }
+
+        private void NavigationServiceNavigated(object sender, EventArgs e) => ViewCore.CancelMultipleSelectionMode();
     }
 }

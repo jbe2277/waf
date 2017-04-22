@@ -20,10 +20,11 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
 
         [ImportingConstructor]
-        public FeedItemListViewModel(IFeedItemListView view, SelectionService selectionService) : base(view)
+        public FeedItemListViewModel(IFeedItemListView view, SelectionService selectionService, INavigationService navigationService) : base(view)
         {
             SelectionService = selectionService;
             SelectionService.PropertyChanged += SelectionServicePropertyChanged;
+            navigationService.Navigated += NavigationServiceNavigated;
             UpdateItemsListView();
         }
 
@@ -77,5 +78,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
                 UpdateItemsListView();
             }
         }
+
+        private void NavigationServiceNavigated(object sender, EventArgs e) => ViewCore.CancelMultipleSelectionMode();
     }
 }

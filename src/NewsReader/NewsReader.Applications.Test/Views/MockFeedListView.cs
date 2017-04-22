@@ -15,5 +15,7 @@ namespace Test.NewsReader.Applications.Views
         {
             FeedAddedStub?.Invoke();
         }
+
+        public void CancelMultipleSelectionMode() { }
     }
 }

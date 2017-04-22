@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
-    "Microsoft.Composition": "1.0.30",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "System.Composition": "1.0.31",
     "System.Waf.Uwp": "4.0.0-alpha5"
   },
   "frameworks": {
