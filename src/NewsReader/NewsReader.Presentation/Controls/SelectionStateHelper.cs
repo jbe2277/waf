@@ -85,6 +85,7 @@ namespace Jbe.NewsReader.Presentation.Controls
                     if (SetProperty(ref selectionState, value))
                     {
                         // Set SelectionMode last because this might change the current selection and results in reentry of this method.
+                        var oldSelectedItem = listView.SelectedItem;
                         if (selectionState == SelectionState.Master)
                         {
                             selectItemsButton.Visibility = Visibility.Visible;
@@ -113,6 +114,7 @@ namespace Jbe.NewsReader.Presentation.Controls
                             listView.IsItemClickEnabled = false;
                             listView.SelectionMode = ListViewSelectionMode.Multiple;
                         }
+                        if (listView.SelectedItem == null) listView.SelectedItem = oldSelectedItem;
                     }
                 }
             }
