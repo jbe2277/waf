@@ -1,4 +1,5 @@
-﻿using Jbe.NewsReader.Applications.ViewModels;
+﻿using Jbe.NewsReader.Applications.Services;
+using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Presentation.Controls;
 using System;
@@ -28,13 +29,20 @@ namespace Jbe.NewsReader.Presentation.Views
             selectionStateManager = SelectionStateHelper.CreateManager(feedItemListView, selectItemsButton, cancelSelectionButton);
             selectionStateManager.PropertyChanged += SelectionStateManagerPropertyChanged;
             UpdateSelectionStateDependentVisibility();
+            Loaded += FirstTimeLoaded;
         }
-
+        
 
         public FeedItemListViewModel ViewModel => viewModel.Value;
 
 
         public void CancelMultipleSelectionMode() => selectionStateManager.CancelMultipleSelectionMode();
+
+        private void FirstTimeLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= FirstTimeLoaded;
+            ViewModel.SelectionService.PropertyChanged += SelectionServicePropertyChanged;
+        }
 
         private void OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -85,8 +93,10 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private void SearchBoxLostFocus(object sender, RoutedEventArgs e) => SetDefaultSearchVisibility();
 
-        private async void FeedItemListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void SelectionServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName != nameof(SelectionService.SelectedFeedItem)) return;
+
             await Dispatcher.RunIdleAsync(ha => { });  // Ensure that items are layouted first so that ScrollIntoView works correct.
 
             if (feedItemListView.SelectedItem != null)
