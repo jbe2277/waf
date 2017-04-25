@@ -51,7 +51,7 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
 
             this.selectionService.PropertyChanged += SelectionServicePropertyChanged;
-            ((INotifyCollectionChanged)this.selectionService.SelectedFeeds).CollectionChanged += SelectedFeedsCollectionChanged;
+            this.selectionService.SelectedFeeds.CollectionChanged += SelectedFeedsCollectionChanged;
         }
 
 
@@ -63,7 +63,6 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         public ICommand RefreshFeedCommand => refreshFeedCommand;
 
-        // TODO: Support to mark multiple feeds
         public ICommand ReadUnreadCommand => readUnreadCommand;
 
         public ICommand LaunchWebBrowserCommand => launchWebBrowserCommand;

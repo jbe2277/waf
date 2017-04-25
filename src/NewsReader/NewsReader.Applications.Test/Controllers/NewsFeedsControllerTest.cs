@@ -27,6 +27,7 @@ namespace Test.NewsReader.Applications.Controllers
 
             controller = Container.GetExport<NewsFeedsController>();
             controller.FeedManager = feedManager;
+            selectionService.FeedManager = feedManager;
 
             // Wait for Run to udate the first Feed
             controller.Run();
