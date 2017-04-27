@@ -2,7 +2,6 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Ribbon;
 using System.Windows.Data;
 using System.Windows.Input;
 using Waf.Writer.Applications.Views;
@@ -10,7 +9,7 @@ using Waf.Writer.Applications.Views;
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IShellView))]
-    public partial class ShellWindow : RibbonWindow, IShellView
+    public partial class ShellWindow : Window, IShellView
     {
         public ShellWindow()
         {

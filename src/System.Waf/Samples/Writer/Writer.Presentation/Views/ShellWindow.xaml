@@ -1,4 +1,4 @@
-﻿<RibbonWindow x:Class="Waf.Writer.Presentation.Views.ShellWindow"
+﻿<Window x:Class="Waf.Writer.Presentation.Views.ShellWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -29,7 +29,7 @@
     </Window.InputBindings>
 
     <DockPanel>
-        <Ribbon DockPanel.Dock="Top" Margin="0,0,0,2">
+        <Ribbon DockPanel.Dock="Top" Margin="0,-22,0,2">
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
                     <RibbonButton Command="{Binding FileService.SaveCommand}" 
@@ -275,4 +275,4 @@
         
         <ContentPresenter Content="{Binding ContentView}"/>
     </DockPanel>
-</RibbonWindow>
+</Window>
