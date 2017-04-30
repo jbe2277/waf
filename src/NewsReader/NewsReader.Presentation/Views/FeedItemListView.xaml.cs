@@ -99,15 +99,15 @@ namespace Jbe.NewsReader.Presentation.Views
 
             await Dispatcher.RunIdleAsync(ha => { });  // Ensure that items are layouted first so that ScrollIntoView works correct.
 
-            if (feedItemListView.SelectedItem != null)
+            if (ViewModel.SelectionService.SelectedFeedItem != null)
             {
-                feedItemListView.ScrollIntoView(feedItemListView.SelectedItem);
+                feedItemListView.ScrollIntoView(ViewModel.SelectionService.SelectedFeedItem);
 
                 // When the element is not yet available (virtualized) then scroll into view again
-                if (feedItemListView.ContainerFromItem(feedItemListView.SelectedItem) == null)
+                if (feedItemListView.ContainerFromItem(ViewModel.SelectionService.SelectedFeedItem) == null)
                 {
                     await Dispatcher.RunIdleAsync(ha => { });
-                    feedItemListView.ScrollIntoView(feedItemListView.SelectedItem);
+                    feedItemListView.ScrollIntoView(ViewModel.SelectionService.SelectedFeedItem);
                 }
             }
         }
