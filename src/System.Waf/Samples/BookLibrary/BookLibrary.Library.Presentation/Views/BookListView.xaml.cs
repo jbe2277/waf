@@ -47,11 +47,15 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             if (!WafConfiguration.IsInDesignMode)
             {
                 bookCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Books);
+                bookCollectionView.SortDescriptions.Add(new SortDescription("Book.Title", ListSortDirection.Ascending));
                 bookCollectionView.Filter = Filter;
                 ViewModel.BookCollectionView = bookCollectionView.Cast<BookDataModel>();
 
-                bookTable.Focus();
-                bookTable.CurrentCell = new DataGridCellInfo(ViewModel.Books.FirstOrDefault(), bookTable.Columns[0]);
+                if (bookTable.Items.Count > 0)
+                {
+                    bookTable.SelectedIndex = 0;
+                    FocusFirstCell();
+                }
             }
         }
 

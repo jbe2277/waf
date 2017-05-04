@@ -48,11 +48,15 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             if (!WafConfiguration.IsInDesignMode)
             {
                 personCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Persons);
+                personCollectionView.SortDescriptions.Add(new SortDescription(nameof(Person.Firstname), ListSortDirection.Ascending));
                 personCollectionView.Filter = Filter;
                 ViewModel.PersonCollectionView = personCollectionView.Cast<Person>();
 
-                personTable.Focus();
-                personTable.CurrentCell = new DataGridCellInfo(ViewModel.Persons.FirstOrDefault(), personTable.Columns[0]);
+                if (personTable.Items.Count > 0)
+                {
+                    personTable.SelectedIndex = 0;
+                    FocusFirstCell();
+                }
             }
         }
 
