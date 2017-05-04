@@ -3,7 +3,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure.MappingViews;
 using Waf.BookLibrary.Library.Applications.Data;
 
-[assembly: DbMappingViewCacheType(typeof(BookLibraryContext), typeof(BookLibraryContextViewCache))]
+// TODO: [assembly: DbMappingViewCacheType(typeof(BookLibraryContext), typeof(BookLibraryContextViewCache))]
 
 namespace Waf.BookLibrary.Library.Applications.Data
 {

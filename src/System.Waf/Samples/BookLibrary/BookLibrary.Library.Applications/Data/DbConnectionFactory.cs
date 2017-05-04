@@ -17,5 +17,12 @@ namespace Waf.BookLibrary.Library.Applications.Data
 
             return connection;
         }
+
+        private static void JustToReferenceSQLite()
+        {
+            // This is necessary so that these assemblies are copied to output folder.
+            System.Data.SQLite.EF6.SQLiteProviderFactory.Instance.GetHashCode();
+            System.Data.SQLite.SQLiteFactory.Instance.GetHashCode();
+        }
     }
 }

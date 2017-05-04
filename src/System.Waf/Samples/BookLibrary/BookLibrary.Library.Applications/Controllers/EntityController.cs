@@ -64,7 +64,8 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             connection = DbConnectionFactory.CreateConnection("BookLibraryContext");
 
             // Copy the template database file into the DataDirectory when it doesn't exists.
-            string dataSourcePath = connection.DataSource.Replace("|DataDirectory|", dataDirectory);
+            string dataSourcePath = connection.ConnectionString.Split(';').Single(x => x.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
+                .Replace("|DataDirectory|", dataDirectory).Substring(12);
             if (!File.Exists(dataSourcePath))
             {
                 string dbFile = Path.GetFileName(dataSourcePath);
