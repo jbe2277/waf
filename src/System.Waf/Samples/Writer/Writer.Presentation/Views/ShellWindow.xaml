@@ -30,6 +30,7 @@
 
     <DockPanel>
         <Ribbon DockPanel.Dock="Top" Margin="0,-22,0,2">
+            <!-- QuickAccessToolBar requires the RibbonWindow. The sample does not use the RibbonWindow anymore because it has a lot issues -->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
                     <RibbonButton Command="{Binding FileService.SaveCommand}" 
