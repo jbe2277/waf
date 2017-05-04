@@ -3,13 +3,13 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure.MappingViews;
 using Waf.BookLibrary.Library.Applications.Data;
 
-// TODO: [assembly: DbMappingViewCacheType(typeof(BookLibraryContext), typeof(BookLibraryContextViewCache))]
+[assembly: DbMappingViewCacheType(typeof(BookLibraryContext), typeof(BookLibraryContextViewCache))]
 
 namespace Waf.BookLibrary.Library.Applications.Data
 {
     internal sealed class BookLibraryContextViewCache : DbMappingViewCache
     {
-        public override string MappingHashValue => "51e341e9b0527d94d51d362cb181d06bad45351153a7f7624de5c811a1d65d68";
+        public override string MappingHashValue => "66f6f9416c9a7c335b3b918eb56d45d9e343979c69ee4e220e7ab283b732526b";
 
         public override DbMappingView GetView(EntitySetBase extent)
         {
