@@ -2,6 +2,7 @@
 using Jbe.NewsReader.Applications.Services;
 using Jbe.NewsReader.Applications.ViewModels;
 using Jbe.NewsReader.ExternalServices;
+using System;
 using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Globalization;
@@ -10,6 +11,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.ExtendedExecution;
 using Windows.Globalization;
 using Windows.Storage;
 using Windows.System.UserProfile;
@@ -79,7 +81,12 @@ namespace Jbe.NewsReader.Presentation
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            await Task.WhenAll(appControllers.Select(x => x.SuspendingAsync())).ConfigureAwait(false);
+            using (var session = new ExtendedExecutionSession())
+            {
+                session.Reason = ExtendedExecutionReason.SavingData;
+                var requestTask = session.RequestExtensionAsync().AsTask();
+                await Task.WhenAll(appControllers.Select(x => x.SuspendingAsync()).Concat(new[] { requestTask }).ToArray()).ConfigureAwait(false);
+            }
             deferral.Complete();
         }
     }
