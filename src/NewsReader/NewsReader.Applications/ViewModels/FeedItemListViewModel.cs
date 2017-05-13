@@ -28,7 +28,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
             UpdateItemsListView();
         }
 
-        
+
         public SelectionService SelectionService { get; }
 
         public ICommand RefreshCommand { get; set; }
@@ -38,7 +38,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
         public ICommand ShowFeedItemViewCommand { get; set; }
 
         public ObservableGroupedListView<DateTime, FeedItem> ItemsListView => itemsListView;
-        
+
         public string SearchText
         {
             get { return searchText; }
@@ -50,7 +50,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
                 }
             }
         }
-        
+
 
         private bool FilterFeedItems(FeedItem item)
         {
@@ -75,10 +75,15 @@ namespace Jbe.NewsReader.Applications.ViewModels
             if (e.PropertyName == nameof(SelectionService.SelectedFeed))
             {
                 ViewCore.CancelMultipleSelectionMode();
+                SearchText = "";
                 UpdateItemsListView();
             }
         }
 
-        private void NavigationServiceNavigated(object sender, EventArgs e) => ViewCore.CancelMultipleSelectionMode();
+        private void NavigationServiceNavigated(object sender, EventArgs e)
+        {
+            ViewCore.CancelMultipleSelectionMode();
+            SearchText = "";
+        }
     }
 }
