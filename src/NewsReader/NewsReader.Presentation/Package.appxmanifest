@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="50628JuergenBerchtel.JbeNewsReader" Publisher="CN=3C8CBF61-934D-4358-AA07-F08013E88454" Version="3.1.3.0" />
   <mp:PhoneIdentity PhoneProductId="75718e12-02ab-456f-a714-c0e23f57846d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -25,15 +25,9 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Resources\Assets\SplashScreen.png" />
       </uap:VisualElements>
-      <Extensions>
-        <uap:Extension Category="windows.appService" EntryPoint="Jbe.NewsReader.Presentation.Services.MyAppService">
-          <uap3:AppService Name="Jbe.NewsReader.MyAppService" SupportsRemoteSystems="true"/>
-        </uap:Extension>
-      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <uap3:Capability Name="remoteSystem" />
   </Capabilities>
 </Package>
