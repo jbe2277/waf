@@ -125,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppService.cs" />
     <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\MyAppService.cs" />
     <Compile Include="Services\ResourceService.cs" />
     <Compile Include="Views\DeveloperSettingsView.xaml.cs">
       <DependentUpon>DeveloperSettingsView.xaml</DependentUpon>
