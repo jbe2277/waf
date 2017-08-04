@@ -31,10 +31,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             {
                 callback(sender, e);
                 var unloadedTaskSource = GetUnloadedTaskSource(element);
-                if (unloadedTaskSource != null)
-                {
-                    unloadedTaskSource.SetResult(null);
-                }
+                unloadedTaskSource?.SetResult(null);
             };
         }
 

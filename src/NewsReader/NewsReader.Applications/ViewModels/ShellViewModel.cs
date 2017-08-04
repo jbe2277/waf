@@ -42,14 +42,14 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public object ContentView
         {
-            get { return contentView; }
-            set { SetProperty(ref contentView, value); }
+            get => contentView;
+            set => SetProperty(ref contentView, value);
         }
 
         public Lazy<object> LazyPreviewView
         {
-            get { return lazyPreviewView; }
-            set { SetProperty(ref lazyPreviewView, value); }
+            get => lazyPreviewView;
+            set => SetProperty(ref lazyPreviewView, value);
         }
 
         public ICommand CloseMessageCommand { get; }
@@ -68,8 +68,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public NavigationItem SelectedNavigationItem
         {
-            get { return selectedNavigationItem; }
-            internal set { SetProperty(ref selectedNavigationItem, value); }
+            get => selectedNavigationItem;
+            internal set => SetProperty(ref selectedNavigationItem, value);
         }
 
 

@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(IFeedItemListView)), Shared]
-    public sealed partial class FeedItemListView : UserControl, IFeedItemListView
+    public sealed partial class FeedItemListView : IFeedItemListView
     {
         private readonly Lazy<FeedItemListViewModel> viewModel;
         private readonly ISelectionStateManager selectionStateManager;

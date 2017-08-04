@@ -6,19 +6,15 @@ using System.Waf.Foundation;
 
 namespace Jbe.NewsReader.Domain.Foundation
 {
-    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged, IReadOnlyObservableList<T>
+    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, INotifyPropertyChanged, IReadOnlyObservableList<T>
     {
         private const string indexerName = "Item[]";  // This must be equal to Binding.IndexerName
         private static readonly PropertyChangedEventArgs CountChangedEventArgs = new PropertyChangedEventArgs(nameof(Count));
         private static readonly PropertyChangedEventArgs IndexerChangedEventArgs = new PropertyChangedEventArgs(indexerName);
 
-        private readonly IEnumerable<T> originalList;
-        
 
         protected ObservableListViewBase(IEnumerable<T> originalList) : base(new List<T>())
         {
-            this.originalList = originalList;
-
             InnerList = (List<T>)Items;
             InnerList.AddRange(originalList);
         }

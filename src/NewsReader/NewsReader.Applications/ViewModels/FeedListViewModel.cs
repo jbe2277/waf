@@ -29,8 +29,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public FeedManager FeedManager
         {
-            get { return feedManager; }
-            set { SetProperty(ref feedManager, value); }
+            get => feedManager;
+            set => SetProperty(ref feedManager, value);
         }
 
         public ICommand AddNewFeedCommand { get; set; }
@@ -41,7 +41,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public string AddNewFeedUri
         {
-            get { return addNewFeedUri; }
+            get => addNewFeedUri;
             set
             {
                 if (SetProperty(ref addNewFeedUri, value ?? @"http://"))
@@ -53,8 +53,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         
         public string LoadErrorMessage
         {
-            get { return loadErrorMessage; }
-            set { SetProperty(ref loadErrorMessage, value); }
+            get => loadErrorMessage;
+            set => SetProperty(ref loadErrorMessage, value);
         }
         
 

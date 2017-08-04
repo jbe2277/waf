@@ -18,10 +18,8 @@ namespace Jbe.NewsReader.Presentation.Controls
 
         public AttachedPropertyService(DependencyProperty attachedProperty, Action<FrameworkElement> updateInheritedValueCallback)
         {
-            if (attachedProperty == null) throw new ArgumentNullException(nameof(attachedProperty));
-            if (updateInheritedValueCallback == null) throw new ArgumentNullException(nameof(updateInheritedValueCallback));
-            this.attachedProperty = attachedProperty;
-            this.updateInheritedValueCallback = updateInheritedValueCallback;
+            this.attachedProperty = attachedProperty ?? throw new ArgumentNullException(nameof(attachedProperty));
+            this.updateInheritedValueCallback = updateInheritedValueCallback ?? throw new ArgumentNullException(nameof(updateInheritedValueCallback));
         }
 
 
@@ -29,14 +27,12 @@ namespace Jbe.NewsReader.Presentation.Controls
         {
             element.RegisterSafeLoadedCallback(ElementLoaded);
             element.RegisterSafeUnloadedCallback(ElementUnloaded);
-            T value;
-            TryGetInheritedValue(element, out value);  // This method registers the element
+            TryGetInheritedValue(element, out _);  // This method registers the element
         }
 
         public bool TryGetInheritedValue(FrameworkElement element, out T value)
         {
-            DependencyObject objectWithValue = null;
-            objectWithValues.TryGetValue(element, out objectWithValue);
+            objectWithValues.TryGetValue(element, out var objectWithValue);
             if (objectWithValue == null)
             {
                 objectWithValue = FindAncestorWithDependencyProperty(element, attachedProperty);
@@ -58,8 +54,7 @@ namespace Jbe.NewsReader.Presentation.Controls
         private void ElementLoaded(object sender, RoutedEventArgs e)
         {
             var element = (FrameworkElement)sender;
-            T value;
-            TryGetInheritedValue(element, out value);  // This method registers the element
+            TryGetInheritedValue(element, out _);      // This method registers the element
             updateInheritedValueCallback(element);     // Maybe the value has change as long the element was unloaded
         }
 
@@ -67,8 +62,7 @@ namespace Jbe.NewsReader.Presentation.Controls
         {
             var element = (FrameworkElement)sender;
             var objectWithValue = objectWithValues[element];
-            long handle;
-            if (objectWithValueHandles.TryGetValue(objectWithValue, out handle)
+            if (objectWithValueHandles.TryGetValue(objectWithValue, out var handle)
                 && objectWithValues.Count(x => x.Value == objectWithValue) == 1)
             {
                 objectWithValue.UnregisterPropertyChangedCallback(attachedProperty, handle);

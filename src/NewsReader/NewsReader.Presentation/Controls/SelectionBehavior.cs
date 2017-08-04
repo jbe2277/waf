@@ -11,9 +11,9 @@ namespace Jbe.NewsReader.Presentation.Controls
 {
     public static class SelectionBehavior
     {
-        private static List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
-        private static HashSet<object> syncListsThatAreUpdating = new HashSet<object>();
-        private static HashSet<Selector> selectorsThatAreUpdating = new HashSet<Selector>();
+        private static readonly List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
+        private static readonly HashSet<object> syncListsThatAreUpdating = new HashSet<object>();
+        private static readonly  HashSet<Selector> selectorsThatAreUpdating = new HashSet<Selector>();
 
 
         public static DependencyProperty SyncSelectedItemsProperty { get; } =
@@ -161,8 +161,8 @@ namespace Jbe.NewsReader.Presentation.Controls
 
         private static IMultiSelector TryGetMultiSelector(Selector selector)
         {
-            if (selector is ListViewBase) { return new ListViewAdapter((ListViewBase)selector); }
-            if (selector is ListBox) { return new ListBoxAdapter((ListBox)selector); }
+            if (selector is ListViewBase listViewBase) return new ListViewAdapter(listViewBase);
+            if (selector is ListBox listBox) return new ListBoxAdapter(listBox);
             return null;
         }
 

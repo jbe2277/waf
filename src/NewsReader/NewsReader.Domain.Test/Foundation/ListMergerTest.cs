@@ -14,7 +14,7 @@ namespace Test.NewsReader.Domain.Foundation
         [TestMethod]
         public void MergeTestWithDefaultArguments()
         {
-            var targetList = new List<string>() { "2", "3" };
+            var targetList = new List<string> { "2", "3" };
             ListMerger.Merge(new[] { "1", "2" }, targetList);
             Assert.IsTrue(new[] { "1", "2" }.SequenceEqual(targetList));
 

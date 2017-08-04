@@ -20,7 +20,7 @@ namespace Jbe.NewsReader.Domain
         public FeedManager()
         {
             // Note: Serializer does not call the constructor.
-            feeds = new ObservableCollection<Feed>()
+            feeds = new ObservableCollection<Feed>
             {
                 new Feed(new Uri("http://blogs.windows.com/buildingapps/feed/")),
             };
@@ -34,14 +34,14 @@ namespace Jbe.NewsReader.Domain
 
         public TimeSpan? ItemLifetime
         {
-            get { return itemLifetime; }
-            set { SetProperty(ref itemLifetime, value); }
+            get => itemLifetime;
+            set => SetProperty(ref itemLifetime, value);
         }
 
         public uint? MaxItemsLimit
         {
-            get { return maxItemsLimit; }
-            set { SetProperty(ref maxItemsLimit, value); }
+            get => maxItemsLimit;
+            set => SetProperty(ref maxItemsLimit, value);
         }
 
 

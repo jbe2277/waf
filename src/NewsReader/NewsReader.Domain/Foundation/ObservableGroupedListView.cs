@@ -42,7 +42,7 @@ namespace Jbe.NewsReader.Domain.Foundation
 
         public Predicate<TElement> Filter
         {
-            get { return filter; }
+            get => filter;
             set
             {
                 if (filter != value)

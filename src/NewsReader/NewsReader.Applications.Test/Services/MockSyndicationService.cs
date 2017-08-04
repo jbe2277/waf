@@ -19,12 +19,9 @@ namespace Test.NewsReader.Applications.Services
         {
             CreateClientStub = () =>
             {
-                return new MockSyndicationClient()
+                return new MockSyndicationClient
                 {
-                    RetrieveFeedAsyncStub = uri =>
-                    {
-                        return Task.FromResult(new FeedDto("Empty feed", new FeedItemDto[0]));
-                    }
+                    RetrieveFeedAsyncStub = uri => Task.FromResult(new FeedDto("Empty feed", new FeedItemDto[0]))
                 };
             };
         }

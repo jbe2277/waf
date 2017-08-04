@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(IFeedItemView)), Shared]
-    public sealed partial class FeedItemView : UserControl, IFeedItemView
+    public sealed partial class FeedItemView : IFeedItemView
     {
         private static readonly Uri blankUri = new Uri("about:blank");
         private readonly Lazy<FeedItemViewModel> viewModel;
@@ -37,7 +37,7 @@ namespace Jbe.NewsReader.Presentation.Views
 
         private FeedItem FeedItem
         {
-            get { return feedItem; }
+            get => feedItem;
             set
             {
                 if (feedItem != value)

@@ -32,7 +32,7 @@ namespace Jbe.NewsReader.ExternalServices
 
         public UserAccount CurrentAccount
         {
-            get { return currentAccount; }
+            get => currentAccount;
             set { SetProperty(ref currentAccount, value); }
         }
 
@@ -55,7 +55,7 @@ namespace Jbe.NewsReader.ExternalServices
 
         public async Task SignOutAsync()
         {
-            await webAccount?.SignOutAsync();
+            if (webAccount != null) await webAccount.SignOutAsync();
             UpdateWebAccount(null);
             CurrentAccount = null;
         }

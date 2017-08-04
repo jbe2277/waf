@@ -54,7 +54,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             UpdateDynamicToolBar(element);
         }
 
-        private async static void UpdateDynamicToolBar(FrameworkElement dynamicToolBar)
+        private static async void UpdateDynamicToolBar(FrameworkElement dynamicToolBar)
         {
             bool hideBottomToolBar;
             if (attachedPropertiesService.TryGetInheritedValue(dynamicToolBar, out hideBottomToolBar))

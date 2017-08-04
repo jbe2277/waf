@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Input;
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(IFeedListView)), Shared]
-    public sealed partial class FeedListView : UserControl, IFeedListView
+    public sealed partial class FeedListView : IFeedListView
     {
         private readonly Lazy<FeedListViewModel> viewModel;
         private readonly AsyncDelegateCommand pasteCommand;

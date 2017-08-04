@@ -15,7 +15,6 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class AppController : IAppController, INavigationService
     {
         private readonly ILauncherService launcherService;
-        private readonly IAppInfoService appInfoService;
         private readonly INetworkInfoService networkInfoService;
         private readonly SelectionService selectionService;
         private readonly Lazy<DataController> dataController;
@@ -40,12 +39,11 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public AppController(ILauncherService launcherService, IAppInfoService appInfoService, INetworkInfoService networkInfoService, SelectionService selectionService,
+        public AppController(ILauncherService launcherService, INetworkInfoService networkInfoService, SelectionService selectionService,
             Lazy<DataController> dataController, Lazy<AccountController> accountController, Lazy<NewsFeedsController> newsFeedsController, Lazy<SettingsController> settingsController, 
             Lazy<ShellViewModel> shellViewModel, Lazy<FeedListViewModel> feedListViewModel, Lazy<FeedItemListViewModel> feedItemListViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.launcherService = launcherService;
-            this.appInfoService = appInfoService;
             this.networkInfoService = networkInfoService;
             this.selectionService = selectionService;
             this.dataController = dataController;
@@ -56,19 +54,19 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.feedListViewModel = new Lazy<FeedListViewModel>(() => InitializeFeedListViewModel(feedListViewModel));
             this.feedItemListViewModel = new Lazy<FeedItemListViewModel>(() => InitializeFeedItemListViewModel(feedItemListViewModel));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeFeedItemViewModel(feedItemViewModel));
-            this.navigateBackCommand = new DelegateCommand(NavigateBack, CanNavigateBack);
-            this.showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
-            this.showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
-            this.showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
-            this.showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
-            this.showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
-            this.navigationStack = new Stack<NavigationItem>();
+            navigateBackCommand = new DelegateCommand(NavigateBack, CanNavigateBack);
+            showFeedListViewCommand = new DelegateCommand(() => SelectedNavigationItem = NavigationItem.FeedList);
+            showFeedItemListViewCommand = new DelegateCommand(ShowFeedItemListView);
+            showFeedItemViewCommand = new DelegateCommand(ShowFeedItemView);
+            showReviewViewCommand = new AsyncDelegateCommand(ShowReviewView);
+            showSettingsViewCommand = new DelegateCommand(ShowSettingsView);
+            navigationStack = new Stack<NavigationItem>();
         }
 
 
         private NavigationItem SelectedNavigationItem
         {
-            get { return selectedNavigationItem; }
+            get => selectedNavigationItem;
             set
             {
                 if (selectedNavigationItem != value)

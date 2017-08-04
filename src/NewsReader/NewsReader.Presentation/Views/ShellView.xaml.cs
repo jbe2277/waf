@@ -12,7 +12,7 @@ using System.Linq;
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(IShellView)), Shared]
-    public sealed partial class ShellView : Page, IShellView
+    public sealed partial class ShellView : IShellView
     {
         private readonly Lazy<ShellViewModel> viewModel;
 

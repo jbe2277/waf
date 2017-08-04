@@ -21,8 +21,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public string SelectedLanguage
         {
-            get { return selectedLanguage; }
-            set { SetProperty(ref selectedLanguage, value); }
+            get => selectedLanguage;
+            set => SetProperty(ref selectedLanguage, value);
         }
     }
 }

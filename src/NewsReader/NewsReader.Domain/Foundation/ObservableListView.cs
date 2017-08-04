@@ -33,7 +33,7 @@ namespace Jbe.NewsReader.Domain.Foundation
 
         public Predicate<T> Filter
         {
-            get { return filter; }
+            get => filter;
             set
             {
                 if (filter != value)

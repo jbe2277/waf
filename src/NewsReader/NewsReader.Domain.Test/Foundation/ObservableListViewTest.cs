@@ -140,7 +140,7 @@ namespace Test.NewsReader.Domain.Foundation
             AssertElementRemoved("3", 0, eventArgs);  // Index 0 because "2" is hidden by filter
         }
 
-        private void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+        private static void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
         {
             Assert.AreEqual(NotifyCollectionChangedAction.Add, eventArgs.Action);
             Assert.AreEqual(newItem, eventArgs.NewItems.Cast<T>().Single());
@@ -149,7 +149,7 @@ namespace Test.NewsReader.Domain.Foundation
             Assert.AreEqual(-1, eventArgs.OldStartingIndex);
         }
 
-        private void AssertElementRemoved<T>(T oldItem, int oldStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+        private static void AssertElementRemoved<T>(T oldItem, int oldStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
         {
             Assert.AreEqual(NotifyCollectionChangedAction.Remove, eventArgs.Action);
             Assert.AreEqual(oldItem, eventArgs.OldItems.Cast<T>().Single());

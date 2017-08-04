@@ -79,7 +79,7 @@ namespace Jbe.NewsReader.Presentation.Controls
 
             public SelectionState SelectionState
             {
-                get { return selectionState; }
+                get => selectionState;
                 private set
                 {
                     if (SetProperty(ref selectionState, value))
@@ -121,7 +121,7 @@ namespace Jbe.NewsReader.Presentation.Controls
 
             internal bool IsSinglePageViewSize
             {
-                get { return isSinglePageViewSize; }
+                get => isSinglePageViewSize;
                 set
                 {
                     if (isSinglePageViewSize == value) return;

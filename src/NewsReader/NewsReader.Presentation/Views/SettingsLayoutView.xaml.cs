@@ -3,12 +3,11 @@ using Jbe.NewsReader.Applications.Views;
 using System;
 using System.ComponentModel;
 using System.Composition;
-using Windows.UI.Xaml.Controls;
 
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(ISettingsLayoutView)), Shared]
-    public sealed partial class SettingsLayoutView : UserControl, ISettingsLayoutView
+    public sealed partial class SettingsLayoutView : ISettingsLayoutView
     {
         private readonly Lazy<SettingsLayoutViewModel> viewModel;
 

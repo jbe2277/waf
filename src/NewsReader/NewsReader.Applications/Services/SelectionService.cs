@@ -32,7 +32,7 @@ namespace Jbe.NewsReader.Applications.Services
 
         internal FeedManager FeedManager
         {
-            get { return feedManager; }
+            get => feedManager;
             set
             {
                 feedManager = value;
@@ -44,7 +44,7 @@ namespace Jbe.NewsReader.Applications.Services
 
         public Feed SelectedFeed
         {
-            get { return selectedFeed; }
+            get => selectedFeed;
             private set
             {
                 var oldValue = selectedFeed;
@@ -67,7 +67,7 @@ namespace Jbe.NewsReader.Applications.Services
 
         public bool? SelectAllFeeds
         {
-            get { return selectAllFeeds; }
+            get => selectAllFeeds;
             set
             {
                 if (SetProperty(ref selectAllFeeds, value))
@@ -88,7 +88,7 @@ namespace Jbe.NewsReader.Applications.Services
 
         public FeedItem SelectedFeedItem
         {
-            get { return selectedFeedItem; }
+            get => selectedFeedItem;
             private set
             {
                 if (SetProperty(ref selectedFeedItem, value) && SelectedFeed != null && selectedFeedItem != null)
@@ -100,7 +100,7 @@ namespace Jbe.NewsReader.Applications.Services
 
         public bool? SelectAllFeedItems
         {
-            get { return selectAllFeedItems; }
+            get => selectAllFeedItems;
             set
             {
                 if (SetProperty(ref selectAllFeedItems, value))

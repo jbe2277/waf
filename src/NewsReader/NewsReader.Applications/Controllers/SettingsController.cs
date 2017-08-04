@@ -13,7 +13,6 @@ namespace Jbe.NewsReader.Applications.Controllers
     internal class SettingsController
     {
         private readonly ILauncherService launcherService;
-        private readonly IAppInfoService appInfoService;
         private readonly IAppDataService appDataService;
         private readonly Lazy<SettingsLayoutViewModel> settingsLayoutViewModel;
         private readonly Lazy<GeneralSettingsViewModel> generalSettingsViewModel;
@@ -24,18 +23,17 @@ namespace Jbe.NewsReader.Applications.Controllers
 
 
         [ImportingConstructor]
-        public SettingsController(ILauncherService launcherService, IAppInfoService appInfoService, IAppDataService appDataService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
+        public SettingsController(ILauncherService launcherService, IAppDataService appDataService, Lazy<SettingsLayoutViewModel> settingsLayoutViewModel, 
             Lazy<GeneralSettingsViewModel> generalSettingsViewModel, Lazy<InfoSettingsViewModel> infoSettingsViewModel, Lazy<DeveloperSettingsViewModel> developerSettingsViewModel)
         {
             this.launcherService = launcherService;
-            this.appInfoService = appInfoService;
             this.appDataService = appDataService;
             this.settingsLayoutViewModel = new Lazy<SettingsLayoutViewModel>(() => InitializeSettingsLayoutViewModel(settingsLayoutViewModel));
             this.generalSettingsViewModel = new Lazy<GeneralSettingsViewModel>(() => InitializeGeneralSettingsViewModel(generalSettingsViewModel));
             this.infoSettingsViewModel = new Lazy<InfoSettingsViewModel>(() => InitializeInfoSettingsViewModel(infoSettingsViewModel));
             this.developerSettingsViewModel = new Lazy<DeveloperSettingsViewModel>(() => InitializeDeveloperSettingsViewModel(developerSettingsViewModel));
-            this.launchWindowsStoreCommand = new AsyncDelegateCommand(LaunchWindowsStore);
-            this.enableDeveloperSettingsCommand = new DelegateCommand(() => settingsLayoutViewModel.Value.DeveloperSettingsEnabled = true);
+            launchWindowsStoreCommand = new AsyncDelegateCommand(LaunchWindowsStore);
+            enableDeveloperSettingsCommand = new DelegateCommand(() => settingsLayoutViewModel.Value.DeveloperSettingsEnabled = true);
         }
 
 

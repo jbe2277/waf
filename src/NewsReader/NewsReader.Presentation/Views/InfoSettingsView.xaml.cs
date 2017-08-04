@@ -4,13 +4,12 @@ using System;
 using System.Composition;
 using Windows.System;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
 namespace Jbe.NewsReader.Presentation.Views
 {
     [Export(typeof(IInfoSettingsView)), Shared]
-    public sealed partial class InfoSettingsView : UserControl, IInfoSettingsView
+    public sealed partial class InfoSettingsView : IInfoSettingsView
     {
         private readonly Lazy<InfoSettingsViewModel> viewModel;
 

@@ -41,7 +41,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public string SearchText
         {
-            get { return searchText; }
+            get => searchText;
             set
             {
                 if (SetProperty(ref searchText, value))

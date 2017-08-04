@@ -37,29 +37,29 @@ namespace Jbe.NewsReader.Applications.ViewModels
 
         public DisplayAppTheme SelectedAppTheme
         {
-            get { return selectedAppTheme; }
-            set { SetProperty(ref selectedAppTheme, value); }
+            get => selectedAppTheme;
+            set => SetProperty(ref selectedAppTheme, value);
         }
 
         public IReadOnlyList<DisplayItemLifetime> ItemLifetimes { get; }
         
         public DisplayItemLifetime SelectedItemLifetime
         {
-            get { return selectedItemLifetime; }
-            set { SetSelectedItemLifetime(value); }
+            get => selectedItemLifetime;
+            set => SetSelectedItemLifetime(value);
         }
 
         public IReadOnlyList<DisplayMaxItemsLimit> MaxItemsLimits { get; }
 
         public DisplayMaxItemsLimit SelectedMaxItemsLimit
         {
-            get { return selectedMaxItemsLimit; }
-            set { SetSelectedMaxItemsLimit(value); }
+            get => selectedMaxItemsLimit;
+            set => SetSelectedMaxItemsLimit(value);
         }
         
         internal FeedManager FeedManager
         {
-            get { return feedManager; }
+            get => feedManager;
             set
             {
                 feedManager = value;

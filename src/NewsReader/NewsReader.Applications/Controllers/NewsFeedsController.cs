@@ -43,12 +43,12 @@ namespace Jbe.NewsReader.Applications.Controllers
             this.networkInfoService = networkInfoService;
             this.selectionService = selectionService;
             this.feedListViewModel = feedListViewModel;
-            this.client = syndicationService.CreateClient();
-            this.addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
-            this.removeFeedCommand = new AsyncDelegateCommand(RemoveFeedAsync, CanRemoveFeed);
-            this.refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed);
-            this.readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
-            this.launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
+            client = syndicationService.CreateClient();
+            addNewFeedCommand = new AsyncDelegateCommand(AddNewFeed);
+            removeFeedCommand = new AsyncDelegateCommand(RemoveFeedAsync, CanRemoveFeed);
+            refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed);
+            readUnreadCommand = new DelegateCommand(MarkAsReadUnread, CanMarkAsReadUnread);
+            launchWebBrowserCommand = new AsyncDelegateCommand(LaunchWebBrowser, CanLaunchWebBrowser);
 
             this.selectionService.PropertyChanged += SelectionServicePropertyChanged;
             this.selectionService.SelectedFeeds.CollectionChanged += SelectedFeedsCollectionChanged;

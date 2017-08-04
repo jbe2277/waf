@@ -20,14 +20,14 @@ namespace Jbe.NewsReader.Domain
         private bool isLoading;
         private Exception loadError;
         private string loadErrorMessage;
-        internal IDataManager dataManager;
+        private IDataManager dataManager;
 
 
         public Feed(Uri uri)
         {
             // Note: Serializer does not call the constructor.
             this.uri = uri;
-            this.items = new ObservableCollection<FeedItem>();
+            items = new ObservableCollection<FeedItem>();
             Initialize();
         }
 
@@ -36,39 +36,39 @@ namespace Jbe.NewsReader.Domain
 
         public string Name
         {
-            get { return name ?? (name = uri.ToString()); }
-            set { SetProperty(ref name, value); }
+            get => name ?? (name = uri.ToString());
+            set => SetProperty(ref name, value);
         }
 
         public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ?? (readOnlyItems = new ReadOnlyObservableList<FeedItem>(items));
         
         public int UnreadItemsCount
         {
-            get { return unreadItemsCount; }
-            private set { SetProperty(ref unreadItemsCount, value); }
+            get => unreadItemsCount;
+            private set => SetProperty(ref unreadItemsCount, value);
         }
         
         public bool IsLoading
         {
-            get { return isLoading; }
-            private set { SetProperty(ref isLoading, value); }
+            get => isLoading;
+            private set => SetProperty(ref isLoading, value);
         }
 
         public Exception LoadError
         {
-            get { return loadError; }
-            private set { SetProperty(ref loadError, value); }
+            get => loadError;
+            private set => SetProperty(ref loadError, value);
         }
         
         public string LoadErrorMessage
         {
-            get { return loadErrorMessage; }
-            private set { SetProperty(ref loadErrorMessage, value); }
+            get => loadErrorMessage;
+            private set => SetProperty(ref loadErrorMessage, value);
         }
 
         internal IDataManager DataManager
         {
-            get { return dataManager; }
+            get => dataManager;
             set
             {
                 if (dataManager == value) { return; }

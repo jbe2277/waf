@@ -25,8 +25,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         
         public bool DeveloperSettingsEnabled
         {
-            get { return developerSettingsEnabled; }
-            set { SetProperty(ref developerSettingsEnabled, value); }
+            get => developerSettingsEnabled;
+            set => SetProperty(ref developerSettingsEnabled, value);
         }
     }
 }

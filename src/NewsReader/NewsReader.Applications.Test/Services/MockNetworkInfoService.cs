@@ -11,8 +11,8 @@ namespace Test.NewsReader.Applications.Services
 
         public bool InternetAccess
         {
-            get { return internetAccess; }
-            set { SetProperty(ref internetAccess, value); }
+            get => internetAccess;
+            set => SetProperty(ref internetAccess, value);
         }
     }
 }

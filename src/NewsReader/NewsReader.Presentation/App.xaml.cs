@@ -19,7 +19,7 @@ using Windows.UI.Xaml;
 
 namespace Jbe.NewsReader.Presentation
 {
-    sealed partial class App : Application
+    sealed partial class App
     {
         private IEnumerable<IAppController> appControllers;
         private bool isInitialized;
