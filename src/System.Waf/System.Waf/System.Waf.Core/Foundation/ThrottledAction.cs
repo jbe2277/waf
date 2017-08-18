@@ -29,12 +29,11 @@ namespace System.Waf.Foundation
     public class ThrottledAction
     {
         private readonly TaskScheduler taskScheduler;
-        private readonly object timerLock = new object();
-        private readonly Timer timer;
+        private readonly object cancellationTokenSourceLock = new object();
         private readonly Action action;
         private readonly ThrottledActionMode mode;
         private readonly TimeSpan delayTime;
-        private volatile bool isRunning;
+        private CancellationTokenSource cancellationTokenSource;
 
 
         /// <summary>
@@ -58,7 +57,6 @@ namespace System.Waf.Foundation
         {
             if (action == null) { throw new ArgumentNullException(nameof(action)); }
             this.taskScheduler = SynchronizationContext.Current != null ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
-            this.timer = new Timer(TimerCallback, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             this.action = action;
             this.mode = mode;
             this.delayTime = delayTime;
@@ -68,21 +66,39 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Indicates that an execution of the action delegate is requested.
         /// </summary>
-        public bool IsRunning => isRunning;
+        public bool IsRunning => cancellationTokenSource != null;
 
 
         /// <summary>
         /// Requests the execution of the action delegate.
         /// </summary>
-        public void InvokeAccumulated()
+        public async void InvokeAccumulated()
         {
-            lock (timerLock)
+            try
             {
-                if (mode == ThrottledActionMode.InvokeOnlyIfIdleForDelayTime || !isRunning)
+                CancellationToken? token = null;
+                lock (cancellationTokenSourceLock)
                 {
-                    isRunning = true;
-                    timer.Change(delayTime, Timeout.InfiniteTimeSpan);
+                    if (mode == ThrottledActionMode.InvokeOnlyIfIdleForDelayTime || cancellationTokenSource == null)
+                    {
+                        cancellationTokenSource?.Cancel();
+                        cancellationTokenSource = new CancellationTokenSource();
+                        token = cancellationTokenSource.Token;
+                    }
                 }
+
+                if (token != null)
+                {
+                    await Task.Delay(delayTime, token.Value).ConfigureAwait(false);
+                    lock (cancellationTokenSourceLock)
+                    {
+                        cancellationTokenSource = null;
+                    }
+                    await Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, taskScheduler).ConfigureAwait(false);
+                }
+            }
+            catch (OperationCanceledException)
+            {
             }
         }
 
@@ -91,21 +107,11 @@ namespace System.Waf.Foundation
         /// </summary>
         public void Cancel()
         {
-            lock (timerLock)
+            lock (cancellationTokenSourceLock)
             {
-                isRunning = false;
-                timer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+                cancellationTokenSource?.Cancel();
+                cancellationTokenSource = null;
             }
-        }
-
-        private void TimerCallback(object state)
-        {
-            lock (timerLock)
-            {
-                isRunning = false;
-            }
-
-            Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, taskScheduler);
         }
     }
 }

@@ -24,7 +24,7 @@ packages/
 project.lock.json
 
 # Visual Studio Upgrade Log
-UpgradeLog.htm
+UpgradeLog*.htm
 
 # Store Packages
 *StoreKey.pfx
