@@ -7,14 +7,13 @@
     <description>$description$</description>
     <authors>$author$</authors>
     <owners>$author$</owners>
+    <copyright>$copyright$</copyright>
 
     <projectUrl>https://github.com/jbe2277/waf</projectUrl>
-    <licenseUrl>https://github.com/jbe2277/waf/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    
-    <copyright>Copyright © 2016 jbe2277</copyright>
-    <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
 
-    <releaseNotes>See https://github.com/jbe2277/waf/releases </releaseNotes>
+    <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
+    <releaseNotes>https://github.com/jbe2277/waf/releases</releaseNotes>
   </metadata>
 </package>

@@ -1,45 +1,19 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>System.Waf.Core</id>
-    <version>4.0.0-alpha6</version>
-    <title>System.Waf.Core</title>
-    <description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This is the portable core part that can be used in different application types.</description>
-    <authors>jbe2277</authors>
-    <owners>jbe2277</owners>
-    
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <description>$description$</description>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <copyright>$copyright$</copyright>
+
     <projectUrl>https://github.com/jbe2277/waf</projectUrl>
-    <licenseUrl>https://github.com/jbe2277/waf/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    
-    <copyright>Copyright © 2016 jbe2277</copyright>
+
     <tags>WAF WPF MVVM XAML UWP Model-View-ViewModel UI MVC ViewModel PresentationModel Architecture Module Layered</tags>
-
-    <releaseNotes>See https://github.com/jbe2277/waf/releases </releaseNotes>
-
-    <dependencies>
-      <group targetFramework="dotnet">
-        <dependency id="System.Collections" version="4.0.10" />
-        <dependency id="System.ComponentModel.Annotations" version="4.0.10" />
-        <dependency id="System.Diagnostics.Debug" version="4.0.10" />
-        <dependency id="System.Diagnostics.Tools" version="4.0.0" />
-        <dependency id="System.Linq" version="4.0.0" />
-        <dependency id="System.ObjectModel" version="4.0.10" />
-        <dependency id="System.Resources.ResourceManager" version="4.0.0" />
-        <dependency id="System.Runtime" version="4.0.20" />
-        <dependency id="System.Runtime.Serialization.Primitives" version="4.0.10" />
-        <dependency id="System.Threading" version="4.0.10" />
-        <dependency id="System.Threading.Tasks" version="4.0.10" />
-        <dependency id="System.Threading.Timer" version="4.0.0" />
-        <dependency id="System.Xml.ReaderWriter" version="4.0.10" />
-      </group>
-    </dependencies>
+    <releaseNotes>https://github.com/jbe2277/waf/releases</releaseNotes>
   </metadata>
-
-  <files>
-    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.Core.dll" target="lib\dotnet" />
-    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.Core.xml" target="lib\dotnet" />
-    <file src="..\..\..\..\out\System.Waf\Release\System.Waf.Core.pdb" target="lib\dotnet" />
-    <file src="**\*.cs" target="src" />
-  </files>
 </package>
