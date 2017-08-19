@@ -14,6 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("497d4744-3d62-432d-81d9-7d77c0590f05")]
 [assembly: CLSCompliant(true)]
 
-#if (!STRONG_NAME)
 [assembly: InternalsVisibleTo("WpfApplicationFramework.Test")]
-#endif

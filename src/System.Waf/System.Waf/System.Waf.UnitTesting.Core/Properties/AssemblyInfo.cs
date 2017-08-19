@@ -10,6 +10,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: CLSCompliant(true)]
 
-#if (!STRONG_NAME)
 [assembly: InternalsVisibleTo("System.Waf.Core.Test")]
-#endif

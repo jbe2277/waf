@@ -20,6 +20,4 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://waf.codeplex.com/schemas", "System.Waf.Presentation.Converters")]
 
 
-#if (!STRONG_NAME)
-    [assembly: InternalsVisibleTo("System.Waf.Wpf.Test")]
-#endif
+[assembly: InternalsVisibleTo("System.Waf.Wpf.Test")]
