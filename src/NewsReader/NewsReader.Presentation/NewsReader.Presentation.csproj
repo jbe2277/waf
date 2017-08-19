@@ -234,7 +234,7 @@
       <Version>1.0.31</Version>
     </PackageReference>
     <PackageReference Include="System.Waf.Uwp">
-      <Version>4.1.0-alpha6</Version>
+      <Version>4.1.0-alpha7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
