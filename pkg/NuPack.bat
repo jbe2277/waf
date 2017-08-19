@@ -2,7 +2,8 @@
 setlocal
 set PkgDir=%~dp0
 set PATH=%PATH%;%PkgDir%
-set PackParams=-IncludeReferencedProjects -Symbols -Properties Configuration=Release -MinClientVersion 3.1 -OutputDirectory System.Waf\Release
+set MinPackParams=-IncludeReferencedProjects -Symbols -Properties Configuration=Release -MinClientVersion 3.1
+set PackParams=%MinPackParams=% -OutputDirectory System.Waf\Release
 
 cd %PkgDir%
 if not exist "System.Waf\Release" mkdir System.Waf\Release
@@ -13,4 +14,18 @@ nuget pack ..\src\System.Waf\System.Waf\System.Waf.UnitTesting.Core\System.Waf.U
 nuget pack ..\src\System.Waf\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj %PackParams%
 nuget pack ..\src\System.Waf\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj %PackParams%
 
-nuget pack ..\src\System.Waf\System.Waf\System.Waf.Uwp\System.Waf.Uwp.csproj %PackParams%
+rem UWP .csproj projects are not supported by NuGet correctly - missing some important files.
+rem |-- Workaround: Create nupkg from .csproj; read created nuspec; update template nuspec; create final package
+
+nuget pack ..\src\System.Waf\System.Waf\System.Waf.Uwp\System.Waf.Uwp.csproj %MinPackParams% -OutputDirectory Temp
+
+FOR %%F IN (%PkgDir%Temp\*.nupkg) DO (
+ set TemplateNupkg=%%F
+ goto found
+)
+:found
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0Update-Nuspec.ps1' -Nuspec '..\src\System.Waf\System.Waf\System.Waf.Uwp\System.Waf.Uwp-2.nuspec' -TemplateNupkg '%TemplateNupkg%' -TemplateNuspec 'System.Waf.Uwp.nuspec'"
+rmdir /S /Q %PkgDir%Temp
+
+nuget pack ..\src\System.Waf\System.Waf\System.Waf.Uwp\System.Waf.Uwp-2.nuspec %PackParams%
