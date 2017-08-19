@@ -1,17 +1,10 @@
-﻿{
-  "supports": {
-    "net46.app": {},
-    "uwp.10.0.app": {}
-  },
+{
+  "supports": {},
   "dependencies": {
-    "Microsoft.NETCore": "5.0.0",
-    "Microsoft.NETCore.Portable.Compatibility": "1.0.0",
     "System.Composition": "1.0.31",
-    "System.Waf.Core": "4.0.0-alpha5"
+    "System.Waf.Core": "4.1.0-alpha6"
   },
   "frameworks": {
-    "dotnet": {
-      "imports": "portable-net452+win81"
-    }
+    ".NETPortable,Version=v4.5,Profile=Profile7": {}
   }
 }

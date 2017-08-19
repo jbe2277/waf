@@ -74,7 +74,7 @@ namespace Jbe.NewsReader.Applications.Services
                 {
                     if (value == true)
                     {
-                        FeedManager.Feeds.Except(SelectedFeeds).ToList().ForEach(x => SelectedFeeds.Add(x));
+                        foreach (var feed in FeedManager.Feeds.Except(SelectedFeeds).ToList()) SelectedFeeds.Add(feed);
                     }
                     else if (value == false)
                     {
@@ -107,7 +107,7 @@ namespace Jbe.NewsReader.Applications.Services
                 {
                     if (value == true)
                     {
-                        SelectedFeed?.Items.Except(SelectedFeedItems).ToList().ForEach(x => SelectedFeedItems.Add(x));
+                        foreach (var feed in SelectedFeed?.Items.Except(SelectedFeedItems).ToList()) SelectedFeedItems.Add(feed);
                     }
                     else if (value == false)
                     {
