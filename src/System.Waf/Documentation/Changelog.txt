@@ -2,11 +2,10 @@ Changelog
 ---------
 
 Version 4.1.0.6 (Milestone 6)
-- TODO: NuGet from project file; check NuSpec files (e.g. Version number)
-
 - WAF: <Breaking change> The WAF assemblies are not signed with the strong name anymore.
 - WAF: Remove Timer from ThrottleAction (Timer is not supported by PCL Profile7)
 - WAF: Change the WAF Core assemblies to PCL Profile7 (portable-net45+win8)
+- WAF: Update NuGet package creation
 
 
 Version 4.0.0.5 (Milestone 5)
