@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace System.Waf.Foundation
 {
@@ -21,6 +22,27 @@ namespace System.Waf.Foundation
         private class EmptyCollection<TElement>
         {
             internal static readonly TElement[] Instance = new TElement[0];
+        }
+
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.
+        /// </summary>
+        /// <typeparam name="T">The collection item type.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="item">The object to locate in the collection. The value can be null for reference types.</param>
+        /// <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
+        public static int IndexOf<T>(this IEnumerable<T> collection, T item)
+        {
+            var list = collection as IList<T>;
+            if (list != null) return list.IndexOf(item);
+
+            int i = 0;
+            foreach (T localItem in collection)
+            {
+                if (Equals(localItem, item)) return i;
+                i++;
+            }
+            return -1;
         }
 
         /// <summary>

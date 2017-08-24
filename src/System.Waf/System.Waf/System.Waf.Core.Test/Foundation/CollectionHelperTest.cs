@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Test.Waf.Foundation
 {
@@ -22,6 +24,24 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(0, emptyIntList1.Count);
             var emptyIntList2 = CollectionHelper.Empty<int>();
             Assert.AreSame(emptyIntList1, emptyIntList2);
+        }
+
+        [TestMethod]
+        public void IndexOfTest()
+        {
+            IReadOnlyList<string> collection1 = new[] { "Zero", "One", "Two" };
+            Assert.AreEqual(0, collection1.IndexOf("Zero"));
+            Assert.AreEqual(1, collection1.IndexOf("One"));
+            Assert.AreEqual(2, collection1.IndexOf("Two"));
+            Assert.AreEqual(-1, collection1.IndexOf("Nine"));
+            Assert.AreEqual(-1, collection1.IndexOf(null));
+
+            var collection2 = new Queue<string>(new[] { "Zero", "One", "Two" });
+            Assert.AreEqual(0, collection2.IndexOf("Zero"));
+            Assert.AreEqual(1, collection2.IndexOf("One"));
+            Assert.AreEqual(2, collection2.IndexOf("Two"));
+            Assert.AreEqual(-1, collection2.IndexOf("Nine"));
+            Assert.AreEqual(-1, collection2.IndexOf(null));
         }
 
         [TestMethod]
