@@ -32,7 +32,7 @@ namespace System.Waf.Presentation.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 #endif
         {
-            return !(bool)value;
+            return value == null ? (object)null : !(bool)value;
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace System.Waf.Presentation.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 #endif
         {
-            return !(bool)value;
+            return value == null ? (object)null : !(bool)value;
         }
     }
 }
