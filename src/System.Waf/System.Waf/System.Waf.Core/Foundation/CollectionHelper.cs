@@ -33,6 +33,7 @@ namespace System.Waf.Foundation
         /// <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
         public static int IndexOf<T>(this IEnumerable<T> collection, T item)
         {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
             var list = collection as IList<T>;
             if (list != null) return list.IndexOf(item);
 
