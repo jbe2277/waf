@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.1.0.8 (Milestone 8)
+- WAF: Fix NuGet package creation bat file (nuget parameters were not passed correctly)
+
+
 Version 4.1.0.7 (Milestone 7)
 - WAF: Fix UWP NuGet package creation
 
