@@ -61,13 +61,13 @@ namespace System.Waf.Presentation.Controls
         protected override Size ArrangeOverride(Size finalSize)
         {
             var actualSize = base.ArrangeOverride(finalSize);
-            IsVisible = actualSize.Width > 0 && actualSize.Height > 0;
+            IsVisible = Visibility == Visibility.Visible && actualSize.Width > 0 && actualSize.Height > 0;
             return actualSize;
         }
 
         private void UpdateIsVisible()
         {
-            IsVisible = ActualWidth > 0 && ActualHeight > 0;
+            IsVisible = Visibility == Visibility.Visible && ActualWidth > 0 && ActualHeight > 0;
         }
 
         private void UpdateContent()
