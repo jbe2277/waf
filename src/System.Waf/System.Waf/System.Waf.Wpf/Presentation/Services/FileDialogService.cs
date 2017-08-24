@@ -5,6 +5,7 @@ using System.Linq;
 using System.Waf.Applications.Services;
 using System.Windows;
 using Microsoft.Win32;
+using System.Waf.Foundation;
 
 namespace System.Waf.Presentation.Services
 {
@@ -60,7 +61,7 @@ namespace System.Waf.Presentation.Services
         private static FileDialogResult ShowFileDialog(object owner, FileDialog dialog, IEnumerable<FileType> fileTypes, 
             FileType defaultFileType, string defaultFileName)
         {
-            int filterIndex = fileTypes.ToList().IndexOf(defaultFileType);
+            int filterIndex = fileTypes.IndexOf(defaultFileType);
             if (filterIndex >= 0) { dialog.FilterIndex = filterIndex + 1; }
             if (!string.IsNullOrEmpty(defaultFileName))
             {
