@@ -23,10 +23,12 @@ namespace Test.Waf.Presentation.Converters
             Assert.IsTrue((bool)converter.ConvertBack(Visibility.Visible, null, null, null));
             Assert.IsFalse((bool)converter.ConvertBack(Visibility.Collapsed, null, null, null));
             Assert.IsFalse((bool)converter.ConvertBack(Visibility.Hidden, null, null, null));
+            Assert.IsFalse((bool)converter.ConvertBack(null, null, null, null));
 
             Assert.IsFalse((bool)converter.ConvertBack(Visibility.Visible, null, "Invert", null));
             Assert.IsTrue((bool)converter.ConvertBack(Visibility.Collapsed, null, "invert", null));
             Assert.IsTrue((bool)converter.ConvertBack(Visibility.Hidden, null, "InVerT", null));
+            Assert.IsTrue((bool)converter.ConvertBack(null, null, "InVerT", null));
         }
     }
 }

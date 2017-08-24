@@ -35,7 +35,7 @@ namespace System.Waf.Presentation.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 #endif
         {
-            bool? flag = (bool?)value;
+            var flag = (bool?)value;
             bool invert = IsInvertParameterSet(parameter);
 
             if (invert)
@@ -60,7 +60,7 @@ namespace System.Waf.Presentation.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 #endif
         {
-            Visibility visibility = (Visibility)value;
+            var visibility = (Visibility?)value;
             bool invert = IsInvertParameterSet(parameter);
             
             if (invert)

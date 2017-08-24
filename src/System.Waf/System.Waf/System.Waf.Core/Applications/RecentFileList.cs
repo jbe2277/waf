@@ -18,7 +18,6 @@ namespace System.Waf.Applications
     public sealed class RecentFileList : IXmlSerializable
     {
         private readonly ObservableCollection<RecentFile> recentFiles;
-        private readonly ReadOnlyObservableCollection<RecentFile> readOnlyRecentFiles;
         private int maxFilesNumber = 8;
         
 
@@ -28,14 +27,14 @@ namespace System.Waf.Applications
         public RecentFileList()
         {
             recentFiles = new ObservableCollection<RecentFile>();
-            readOnlyRecentFiles = new ReadOnlyObservableCollection<RecentFile>(recentFiles);
+            RecentFiles = new ReadOnlyObservableCollection<RecentFile>(recentFiles);
         }
 
 
         /// <summary>
         /// Gets the list of recent files.
         /// </summary>
-        public ReadOnlyObservableCollection<RecentFile> RecentFiles => readOnlyRecentFiles;
+        public ReadOnlyObservableCollection<RecentFile> RecentFiles { get; }
 
         /// <summary>
         /// Gets or sets the maximum number of recent files in the list.
