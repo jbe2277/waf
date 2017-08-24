@@ -30,8 +30,8 @@ namespace Test.Waf.Foundation
             AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.GetNextElementOrDefault(null, 5));
 
             int[] collection1 = new[] { 1, 2, 3, 4, 5 };
-            Assert.AreEqual(2, CollectionHelper.GetNextElementOrDefault(collection1, 1));
             Assert.AreEqual(4, CollectionHelper.GetNextElementOrDefault(collection1, 3));
+            Assert.AreEqual(2, CollectionHelper.GetNextElementOrDefault(collection1, 1));
             Assert.AreEqual(0, CollectionHelper.GetNextElementOrDefault(collection1, 5));
 
             int[] collection2 = new[] { 1 };

@@ -34,30 +34,22 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentException">The collection does not contain the specified current item.</exception>
         public static T GetNextElementOrDefault<T>(IEnumerable<T> collection, T current)
         {
-            if (collection == null) { throw new ArgumentNullException(nameof(collection)); }
-
-            bool found = false;
-            IEnumerator<T> enumerator = collection.GetEnumerator();
-            while (enumerator.MoveNext())
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            
+            using (IEnumerator<T> enumerator = collection.GetEnumerator())
             {
-                if (EqualityComparer<T>.Default.Equals(enumerator.Current, current))
+                bool found = false;
+                while (enumerator.MoveNext())
                 {
-                    found = true;
-                    break;
+                    if (EqualityComparer<T>.Default.Equals(enumerator.Current, current))
+                    {
+                        found = true;
+                        break;
+                    }
                 }
-            }
-            if (!found)
-            {
-                throw new ArgumentException("The collection does not contain the current item.");
-            }
-
-            if (enumerator.MoveNext())
-            {
-                return enumerator.Current;
-            }
-            else
-            {
-                return default(T);
+                if (!found) throw new ArgumentException("The collection does not contain the current item.");
+                
+                return enumerator.MoveNext() ? enumerator.Current : default(T);
             }
         }
     }
