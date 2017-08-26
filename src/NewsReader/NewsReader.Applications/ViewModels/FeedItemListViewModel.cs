@@ -46,7 +46,13 @@ namespace Jbe.NewsReader.Applications.ViewModels
             {
                 if (SetProperty(ref searchText, value))
                 {
-                    itemsListView.Refresh();
+                    var selectedFeedItems = SelectionService.SelectedFeedItems.ToArray();
+                    itemsListView.Refresh();  // The UI resets the selection because of the CollectionChanged Reset event
+                    if (SelectionService.SelectedFeedItem == null)
+                    {
+                        var currentItems = itemsListView.SelectMany(x => x).ToArray();
+                        foreach (var item in selectedFeedItems.Where(x => currentItems.Contains(x))) SelectionService.SelectedFeedItems.Add(item);
+                    }
                 }
             }
         }
