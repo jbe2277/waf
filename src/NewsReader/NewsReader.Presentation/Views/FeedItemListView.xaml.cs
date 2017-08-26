@@ -5,6 +5,7 @@ using Jbe.NewsReader.Presentation.Controls;
 using System;
 using System.ComponentModel;
 using System.Composition;
+using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Text;
@@ -82,6 +83,7 @@ namespace Jbe.NewsReader.Presentation.Views
             searchButton.Visibility = Visibility.Collapsed;
             searchBox.Visibility = Visibility.Visible;
             await Dispatcher.RunIdleAsync(ha => { });
+            await Task.Delay(25);
             searchBox.Focus(FocusState.Programmatic);
         }
 
