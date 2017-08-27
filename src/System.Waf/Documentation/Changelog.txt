@@ -1,8 +1,12 @@
 Changelog
 ---------
 
-Version 4.1.0.8 (Milestone 8)
-- WAF: Fix NuGet package creation bat file (nuget parameters were not passed correctly)
+Version 4.1.0.91 (Release Candidate 1)
+- WAF: Add extension method IndexOf for IEnumerable<T>.
+- WAF: Fix NuGet package creation bat file (nuget parameters were not passed correctly).
+- WAF: Fix Dispose enumerator in GetNextElementOrDefault.
+- WAF: Support null in BoolToVisibilityConverter and InvertBooleanConverter.
+- WAF: UWP IsVisible needs to consider Visibility as well in LazyContentPresenter.
 
 
 Version 4.1.0.7 (Milestone 7)
