@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{316D2E5D-61D2-403E-805B-F97F1C06BF46}"
 EndProject
@@ -38,8 +38,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookLibrary", "BookLibrary"
 		Samples\BookLibrary\BookLibrary.docx = Samples\BookLibrary\BookLibrary.docx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{F67B337D-296F-4CD3-BC35-3CCE29A33F86}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InformationManager", "InformationManager", "{1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\InformationManager\InformationManager.docx = Samples\InformationManager\InformationManager.docx
@@ -68,8 +66,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Presentation.Test", "Samples\Writer\Writer.Presentation.Test\Writer.Presentation.Test.csproj", "{03FE77F4-4C93-4139-8825-E0070EE3F860}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code Snippets", "Code Snippets\Code Snippets.csproj", "{F0C5BD31-CFF7-4B0B-8483-7471447740D8}"
-EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Architecture", "Architecture\Architecture.modelproj", "{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Applications", "Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj", "{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}"
 EndProject
@@ -190,9 +186,6 @@ Global
 		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -359,7 +352,6 @@ Global
 		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
 		{03FE77F4-4C93-4139-8825-E0070EE3F860} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
 		{F0C5BD31-CFF7-4B0B-8483-7471447740D8} = {93CDC3EA-AB95-4537-8B66-46D0656EF265}
-		{EFCCA47D-FF09-43C1-BDD1-380945A9FEAF} = {F67B337D-296F-4CD3-BC35-3CCE29A33F86}
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
 		{0257AACF-AE9A-4002-8E2E-C98D6FD17437} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
 		{0985021E-9AD0-455A-A26B-2B8CEBD26297} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
