@@ -1,7 +1,14 @@
 ﻿{
-    "supports": {},
-    "dependencies": {},
-    "frameworks": {
-        ".NETPortable,Version=v4.5,Profile=Profile7": {}
-    }
+  "supports": {},
+  "dependencies": {},
+  "frameworks": {
+    ".NETPortable,Version=v4.5,Profile=Profile7": {}
+  },
+  "packOptions": {
+    "tags": [ "WAF", "WPF", "MVVM", "XAML", "UWP", "Model-View-ViewModel", "UI", "MVC", "ViewModel", "PresentationModel", "Architecture", "Module", "Layered" ],
+    "releaseNotes": "https://github.com/jbe2277/waf/releases",
+    "projectUrl": "https://github.com/jbe2277/waf",
+    "licenseUrl": "https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE",
+    "requireLicenseAcceptance": false
+  }
 }

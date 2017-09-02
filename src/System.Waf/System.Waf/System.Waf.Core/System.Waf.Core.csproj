@@ -41,7 +41,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="project.json" />
-    <None Include="System.Waf.Core.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
