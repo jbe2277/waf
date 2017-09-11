@@ -35,15 +35,15 @@ namespace Jbe.NewsReader.ExternalServices
         private static async Task<Stream> RunSymmetricAlgorithmAsync(Func<CryptographicKey, IBuffer, IBuffer, IBuffer> algorithm, Stream stream, string key, string salt, uint iterationCount)
         {
             var contentBuffer = await CreateBuffer(stream).ConfigureAwait(false);  // Create first the buffer synchronously
-            var derivedKeyAndSalt = await Task.Run(() => DeriveKeyAndSalt(key, salt, iterationCount)).ConfigureAwait(false);  // Ensure that the UI thread is not blocked
+            var (derivedKey, derivedSalt) = await Task.Run(() => DeriveKeyAndSalt(key, salt, iterationCount)).ConfigureAwait(false);  // Ensure that the UI thread is not blocked
 
             var symmetricAlgorithm = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesCbcPkcs7);
-            var symmetricKey = symmetricAlgorithm.CreateSymmetricKey(derivedKeyAndSalt.Item1);
-            var resultBuffer = algorithm(symmetricKey, contentBuffer, derivedKeyAndSalt.Item2);
+            var symmetricKey = symmetricAlgorithm.CreateSymmetricKey(derivedKey);
+            var resultBuffer = algorithm(symmetricKey, contentBuffer, derivedSalt);
             return CreateStream(resultBuffer);
         }
 
-        private static Tuple<IBuffer, IBuffer> DeriveKeyAndSalt(string key, string salt, uint iterationCount)
+        private static (IBuffer DerivedKey, IBuffer DerivedSalt) DeriveKeyAndSalt(string key, string salt, uint iterationCount)
         {
             var keyBuffer = CryptographicBuffer.ConvertStringToBinary(key, BinaryStringEncoding.Utf8);
             var saltBuffer = CryptographicBuffer.ConvertStringToBinary(salt, BinaryStringEncoding.Utf8);
@@ -51,7 +51,7 @@ namespace Jbe.NewsReader.ExternalServices
             var pbkdf2Sha512 = KeyDerivationAlgorithmProvider.OpenAlgorithm(KeyDerivationAlgorithmNames.Pbkdf2Sha512);
             var derivedKeyBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(keyBuffer), KeyDerivationParameters.BuildForPbkdf2(saltBuffer, iterationCount), keySize);
             var derivedSaltBuffer = CryptographicEngine.DeriveKeyMaterial(pbkdf2Sha512.CreateKey(derivedKeyBuffer), KeyDerivationParameters.BuildForPbkdf2(saltBuffer, 8), keySize);
-            return new Tuple<IBuffer, IBuffer>(derivedKeyBuffer, derivedSaltBuffer);
+            return (derivedKeyBuffer, derivedSaltBuffer);
         }
 
         private static async Task<IBuffer> CreateBuffer(Stream stream)

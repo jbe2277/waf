@@ -11,7 +11,7 @@ namespace Jbe.NewsReader.Presentation.Controls
 {
     public static class SelectionBehavior
     {
-        private static readonly List<Tuple<IMultiSelector, INotifyCollectionChanged>> multiSelectorWithObservableList = new List<Tuple<IMultiSelector, INotifyCollectionChanged>>();
+        private static readonly List<(IMultiSelector MultiSelector, INotifyCollectionChanged ObservableList)> multiSelectorWithObservableList = new List<(IMultiSelector, INotifyCollectionChanged)>();
         private static readonly HashSet<object> syncListsThatAreUpdating = new HashSet<object>();
         private static readonly  HashSet<Selector> selectorsThatAreUpdating = new HashSet<Selector>();
 
@@ -55,7 +55,7 @@ namespace Jbe.NewsReader.Presentation.Controls
                 var observableList = list as INotifyCollectionChanged;
                 if (observableList == null) { return; }
 
-                multiSelectorWithObservableList.Add(new Tuple<IMultiSelector, INotifyCollectionChanged>(multiSelector, observableList));
+                multiSelectorWithObservableList.Add((multiSelector, observableList));
                 observableList.CollectionChanged += ListCollectionChanged;
                 multiSelector.SelectionModeChanged += MultiSelectorSelectionModeChanged;
             }
@@ -69,12 +69,12 @@ namespace Jbe.NewsReader.Presentation.Controls
         {
             selector.SelectionChanged -= SelectorSelectionChanged;  // Remove a previously added event handler.
 
-            var item = multiSelectorWithObservableList.FirstOrDefault(x => x.Item1.Selector == selector);
-            if (item == null) { return; }
+            var item = multiSelectorWithObservableList.FirstOrDefault(x => x.MultiSelector.Selector == selector);
+            if (item.MultiSelector == null) { return; }
 
             multiSelectorWithObservableList.Remove(item);
-            item.Item2.CollectionChanged -= ListCollectionChanged;
-            item.Item1.SelectionModeChanged -= MultiSelectorSelectionModeChanged;
+            item.ObservableList.CollectionChanged -= ListCollectionChanged;
+            item.MultiSelector.SelectionModeChanged -= MultiSelectorSelectionModeChanged;
         }
 
 
@@ -82,7 +82,7 @@ namespace Jbe.NewsReader.Presentation.Controls
         {
             if (syncListsThatAreUpdating.Contains(sender)) return;
 
-            var multiSelector = multiSelectorWithObservableList.First(x => x.Item2 == sender).Item1;
+            var multiSelector = multiSelectorWithObservableList.First(x => x.ObservableList == sender).MultiSelector;
             if (multiSelector.SelectionMode == ListViewSelectionMode.None) return;
 
             selectorsThatAreUpdating.Add(multiSelector.Selector);
@@ -138,7 +138,7 @@ namespace Jbe.NewsReader.Presentation.Controls
             var list = GetSyncSelectedItems(selector);
             if (list == null) { return; }
 
-            var multiSelector = multiSelectorWithObservableList.First(x => x.Item1.Selector == selector).Item1;
+            var multiSelector = multiSelectorWithObservableList.First(x => x.MultiSelector.Selector == selector).MultiSelector;
 
             syncListsThatAreUpdating.Add(list);
             try
