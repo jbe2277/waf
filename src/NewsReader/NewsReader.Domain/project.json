@@ -1,7 +1,7 @@
 ﻿{
   "supports": {},
   "dependencies": {
-    "System.Waf.Core": "4.1.0-rc1"
+    "System.Waf.Core": "4.1.0-rc2"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile7": {}
