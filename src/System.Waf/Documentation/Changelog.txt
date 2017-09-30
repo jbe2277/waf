@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.1.0.92 (Release Candidate 2)
+- WAF: Fix metadata of *.Core NuGet packages.
+
+
 Version 4.1.0.91 (Release Candidate 1)
 - WAF: Add extension method IndexOf for IEnumerable<T>.
 - WAF: Fix NuGet package creation bat file (nuget parameters were not passed correctly).
