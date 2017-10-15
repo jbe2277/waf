@@ -32,4 +32,3 @@ namespace Waf.Writer.Applications.ViewModels
         }
     }
 }
-

@@ -19,8 +19,8 @@ namespace Waf.Writer.Applications.ViewModels
         [ImportingConstructor]
         public SaveChangesViewModel(ISaveChangesView view) : base(view)
         {
-            this.yesCommand = new DelegateCommand(() => Close(true));
-            this.noCommand = new DelegateCommand(() => Close(false));
+            yesCommand = new DelegateCommand(() => Close(true));
+            noCommand = new DelegateCommand(() => Close(false));
         }
 
 

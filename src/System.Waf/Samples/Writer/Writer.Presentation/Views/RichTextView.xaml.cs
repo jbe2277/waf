@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
-using System.ComponentModel;
 using System.Collections.Generic;
 
 namespace Waf.Writer.Presentation.Views

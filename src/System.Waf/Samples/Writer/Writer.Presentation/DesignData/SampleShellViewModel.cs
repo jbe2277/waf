@@ -2,6 +2,7 @@
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 using System.ComponentModel;
+using Waf.Writer.Presentation.Views;
 
 namespace Waf.Writer.Presentation.DesignData
 {
@@ -9,11 +10,9 @@ namespace Waf.Writer.Presentation.DesignData
     {
         public SampleShellViewModel() : base(new MockShellView(), null, null, new MockShellService(), new MockFileService())
         {
+            ContentView = new SampleMainViewModel(new MainView()).View;
         }
-
-        public new string Title => "WAF Writer (Design Time)";
-
-
+        
 
         private class MockShellView : MockView, IShellView
         {

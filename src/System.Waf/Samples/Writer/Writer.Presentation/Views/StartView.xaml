@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="Waf.Writer.Presentation.Views.StartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:c="clr-namespace:Waf.Writer.Presentation.Converters"
              xmlns:p="clr-namespace:Waf.Writer.Presentation.Properties"
              xmlns:dd="clr-namespace:Waf.Writer.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
