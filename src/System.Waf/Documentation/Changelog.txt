@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 4.2.0.1 (Milestone 1)
+- Samples: Improve WPF design time support.
+- TODO
+
+
 Version 4.1.0.100 (Release)
 - WAF: Update version number.
 
