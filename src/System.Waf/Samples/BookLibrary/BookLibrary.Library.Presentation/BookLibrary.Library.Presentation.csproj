@@ -59,21 +59,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <DesignData Include="DesignData\SamplePersonViewModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="DesignData\SampleBookViewModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="DesignData\SamplePersonListViewModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="DesignData\SampleBookListViewModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="DesignData\SampleLendToViewModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
     <Page Include="Resources\ControlResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +133,11 @@
     <Compile Include="Converters\LanguageToStringConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
     <Compile Include="DesignData\MockShellService.cs" />
+    <Compile Include="DesignData\SampleBookListViewModel.cs" />
+    <Compile Include="DesignData\SampleBookViewModel.cs" />
+    <Compile Include="DesignData\SampleLendToViewModel.cs" />
+    <Compile Include="DesignData\SamplePersonListViewModel.cs" />
+    <Compile Include="DesignData\SamplePersonViewModel.cs" />
     <Compile Include="DesignData\SampleShellViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

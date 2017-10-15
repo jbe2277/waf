@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:p="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Properties"
              xmlns:ctrl="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Controls"
-             xmlns:dm="clr-namespace:Waf.BookLibrary.Reporting.Applications.DataModels;assembly=Waf.BookLibrary.Reporting.Applications"
-             mc:Ignorable="d" d:DataContext="{d:DesignData Source=../DesignData/SampleBookListReportDataModel.xaml}"
+             xmlns:dd="clr-namespace:Waf.BookLibrary.Reporting.Presentation.DesignData"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleBookListReportDataModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="800" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
     
     <FlowDocument x:Name="flowDocument" ColumnWidth="1000" PagePadding="0.5in">

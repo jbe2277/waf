@@ -5,9 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:waf="http://waf.codeplex.com/schemas"
-    xmlns:c="clr-namespace:Waf.BookLibrary.Library.Presentation.Converters"
-    xmlns:vm="clr-namespace:Waf.BookLibrary.Library.Applications.ViewModels;assembly=Waf.BookLibrary.Library.Applications"
-    mc:Ignorable="d" d:DataContext="{d:DesignData Source=../DesignData/SamplePersonListViewModel.xaml}"
+    xmlns:dd="clr-namespace:Waf.BookLibrary.Library.Presentation.DesignData"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SamplePersonListViewModel, IsDesignTimeCreatable=True}"
     d:DesignWidth="500" d:DesignHeight="150"
     waf:ValidationHelper.IsEnabled="true" waf:ValidationHelper.IsValid="{Binding IsValid, Mode=OneWayToSource}">
     

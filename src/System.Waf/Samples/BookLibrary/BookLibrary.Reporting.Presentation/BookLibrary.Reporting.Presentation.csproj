@@ -51,6 +51,7 @@
     <Compile Include="Controls\BindableTable.cs" />
     <Compile Include="Controls\ContentElement.cs" />
     <Compile Include="Controls\ItemsElement.cs" />
+    <Compile Include="DesignData\SampleBookListReportDataModel.cs" />
     <Compile Include="DesignData\SampleBorrowedBooksReportDataModel.cs" />
     <Compile Include="DesignData\SampleReportViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -76,9 +77,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <DesignData Include="DesignData\SampleBookListReportDataModel.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
     <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
