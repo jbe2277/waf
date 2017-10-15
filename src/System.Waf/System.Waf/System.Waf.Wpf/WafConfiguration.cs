@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace System.Waf
 {
     /// <summary>
-    /// Configuration settings for the WPF Application Framework (WAF).
+    /// Configuration settings for the Win Application Framework (WAF).
     /// </summary>
     public static class WafConfiguration
     {

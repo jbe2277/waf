@@ -78,8 +78,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         private void ShowAboutMessage()
         {
-            messageService.ShowMessage(View, string.Format(CultureInfo.CurrentCulture, 
-                "{0} {1}\n\nThis software is a reference sample of the WPF Application Framework (WAF).\n\nhttp://waf.codeplex.com",
+            messageService.ShowMessage(View, string.Format(CultureInfo.CurrentCulture,
+                "{0} {1}\n\nThis software is a reference sample of the Win Application Framework (WAF).\n\nhttps://github.com/jbe2277/waf",
                 ApplicationInfo.ProductName, ApplicationInfo.Version));
         }
 
