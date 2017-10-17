@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace Test.Waf.Foundation
 {
