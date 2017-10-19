@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:waf="http://waf.codeplex.com/schemas"
-    xmlns:vm="clr-namespace:Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;assembly=Waf.InformationManager.EmailClient.Modules.Applications"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:EditEmailAccountViewModel}"
+    xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleEditEmailAccountViewModel, IsDesignTimeCreatable=True}"
     Title="Email account" Icon="{StaticResource InformationManagerImageSource}" Height="410" Width="550" ShowInTaskbar="False"
     waf:ValidationHelper.IsEnabled="true" waf:ValidationHelper.IsValid="{Binding IsValid, Mode=OneWayToSource}">
 

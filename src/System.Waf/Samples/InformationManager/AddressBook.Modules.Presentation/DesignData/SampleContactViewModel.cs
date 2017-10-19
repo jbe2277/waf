@@ -7,7 +7,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
 {
     public class SampleContactViewModel : ContactViewModel
     {
-        public SampleContactViewModel() : base(new MockContactView())
+        public SampleContactViewModel() : this(new MockContactView())
+        {
+        }
+
+        public SampleContactViewModel(IContactView view) : base(view)
         {
             Contact = SampleDataProvider.CreateContacts().First();
         }

@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="Waf.InformationManager.EmailClient.Modules.Presentation.Views.EmailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.Selectors"
              xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 

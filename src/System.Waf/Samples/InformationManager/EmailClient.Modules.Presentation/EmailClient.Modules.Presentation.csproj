@@ -48,10 +48,15 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Converters\StringCollectionToStringConverter.cs" />
+    <Compile Include="DesignData\SampleBasicEmailAccountViewModel.cs" />
+    <Compile Include="DesignData\SampleEditEmailAccountViewModel.cs" />
     <Compile Include="DesignData\SampleEmailAccountsViewModel.cs" />
+    <Compile Include="DesignData\SampleEmailLayoutViewModel.cs" />
     <Compile Include="DesignData\SampleEmailListViewModel.cs" />
     <Compile Include="DesignData\SampleEmailViewModel.cs" />
+    <Compile Include="DesignData\SampleExchangeSettingsViewModel.cs" />
     <Compile Include="DesignData\SampleNewEmailViewModel.cs" />
+    <Compile Include="DesignData\SamplePop3SettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\EmailItemTemplateSelector.cs" />
     <Compile Include="Services\PresentationService.cs" />

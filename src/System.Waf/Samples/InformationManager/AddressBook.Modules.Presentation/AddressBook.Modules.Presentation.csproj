@@ -46,8 +46,10 @@
     <Compile Include="..\..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DesignData\SampleContactLayoutViewModel.cs" />
     <Compile Include="DesignData\SampleContactListViewModel.cs" />
     <Compile Include="DesignData\SampleContactViewModel.cs" />
+    <Compile Include="DesignData\SampleSelectContactViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PresentationService.cs" />
     <Compile Include="Views\ContactLayoutView.xaml.cs">

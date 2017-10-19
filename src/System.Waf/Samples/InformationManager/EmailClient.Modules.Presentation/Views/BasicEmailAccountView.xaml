@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;assembly=Waf.InformationManager.EmailClient.Modules.Applications"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:BasicEmailAccountViewModel}"
-    HorizontalAlignment="Left" VerticalAlignment="Top">
+    xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleBasicEmailAccountViewModel, IsDesignTimeCreatable=True}"
+    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="400">
 
     <Grid Margin="11">
         <Grid.ColumnDefinitions>

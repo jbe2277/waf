@@ -11,7 +11,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
         {
             var root = new EmailClientRoot();
             root.AddEmailAccount(SampleDataProvider.CreateEmailAccount());
-            base.EmailClientRoot = root;
+            EmailClientRoot = root;
         }
         
 

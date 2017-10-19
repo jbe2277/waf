@@ -7,7 +7,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 {
     public class SampleEmailListViewModel : EmailListViewModel
     {
-        public SampleEmailListViewModel() : base(new MockEmailListView())
+        public SampleEmailListViewModel() : this(new MockEmailListView())
+        {
+        }
+
+        public SampleEmailListViewModel(IEmailListView view) : base(view)
         {
             EmailClientRoot root = new EmailClientRoot();
             foreach (var email in SampleDataProvider.CreateInboxEmails()) { root.Inbox.AddEmail(email); }
