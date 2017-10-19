@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:waf="http://waf.codeplex.com/schemas">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="InvalidControlBrush" Color="#E5B8B7"/>
     <SolidColorBrush x:Key="HeaderTextBrush" Color="#003399"/>
