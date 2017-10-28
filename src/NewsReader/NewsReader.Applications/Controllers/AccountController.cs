@@ -17,6 +17,7 @@ namespace Jbe.NewsReader.Applications.Controllers
         private readonly DelegateCommand signInCommand;
         private readonly AsyncDelegateCommand signOutCommand;
         private bool signInTaskRunning;
+        private bool isInitialized;
 
 
         [ImportingConstructor]
@@ -45,11 +46,16 @@ namespace Jbe.NewsReader.Applications.Controllers
             {
                 await messageService.ShowMessageDialogAsync(resourceService.GetString("SignInError"), ex.Message);
             }
+            finally
+            {
+                isInitialized = true;
+                signInCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private bool CanSignIn()
         {
-            return !signInTaskRunning;
+            return isInitialized && !signInTaskRunning;
         }
 
         private void SignIn()
