@@ -41,11 +41,32 @@ namespace Test.Waf.Applications
         }
 
         [TestMethod]
+        public void DisposeTest()
+        {
+            // Calling dispose twice must not throw an exception.
+            var originalCollection = new ObservableCollection<MyModel>();
+            bool factoryCalled = false;
+            var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m =>
+            {
+                factoryCalled = true;
+                return new MyDataModel(m);
+            });
+            originalCollection.Add(new MyModel());
+            Assert.IsTrue(factoryCalled);
+
+            synchronizingCollection.Dispose();
+            synchronizingCollection.Dispose();
+            factoryCalled = false;
+            originalCollection.Add(new MyModel());
+            Assert.IsFalse(factoryCalled);
+        }
+
+        [TestMethod]
         public void WeakEventHandlerTest()
         {
             var originalCollection = new ObservableCollection<MyModel>();
             var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            WeakReference weakSynchronizingCollection = new WeakReference(synchronizingCollection);
+            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
 
             originalCollection.Add(new MyModel());
             Assert.IsTrue(weakSynchronizingCollection.IsAlive);

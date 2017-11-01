@@ -262,12 +262,24 @@ namespace Test.Waf.Foundation
         {
             // Calling dispose twice must not throw an exception.
             var originalCollection = new ObservableCollection<MyModel>();
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+            bool factoryCalled = false;
+            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => 
+                {
+                    factoryCalled = true;
+                    return new MyDataModel(m);
+                });
+            originalCollection.Add(new MyModel());
+            Assert.IsTrue(factoryCalled);
+            
             synchronizingCollection.Dispose();
             synchronizingCollection.Dispose();
+            factoryCalled = false;
+            originalCollection.Add(new MyModel());
+            Assert.IsFalse(factoryCalled);
 
+            // Check that no memory leak occurs
             synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            WeakReference weakSynchronizingCollection = new WeakReference(synchronizingCollection);
+            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
 
             originalCollection.Add(new MyModel());
             Assert.IsTrue(weakSynchronizingCollection.IsAlive);
