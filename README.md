@@ -1,7 +1,14 @@
 # Win Application Framework (WAF)
 #### Successor of the WPF Application Framework
 
-The Win Application Framework (WAF) is a lightweight Framework that helps you to create well structured XAML Applications. It supports you in applying a Layered Architecture and the Model-View-ViewModel (aka MVVM, M-V-VM) pattern.
+The Win Application Framework (WAF) is a lightweight Framework that helps you to create well-structured XAML Applications in WPF and UWP. It supports you in applying various architectural patterns:
+* [Layered Architecture](https://github.com/jbe2277/waf/wiki/Layered-Architecture)
+* [Modular Architecture](https://github.com/jbe2277/waf/wiki/Modular-Architecture)
+* [Model-View-ViewModel pattern](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)
+
+**How to get started?**
+* WAF comes with realistic real-world reference sample applications. Please have a look at them. See Sample Applications below.
+* The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
 
 ## Version 4
 
