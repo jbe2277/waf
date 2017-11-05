@@ -65,6 +65,7 @@
     <Compile Include="Presentation\Converters\InvertBooleanConverterTest.cs" />
     <Compile Include="Presentation\Converters\StringFormatConverterTest.cs" />
     <Compile Include="Presentation\Converters\ValidationErrorsConverterTest.cs" />
+    <Compile Include="Presentation\ResourceHelperTest.cs" />
     <Compile Include="Presentation\Services\FileDialogServiceTest.cs" />
     <Compile Include="Presentation\Services\MessageServiceTest.cs" />
     <Compile Include="Presentation\ValidationHelperTest.cs" />

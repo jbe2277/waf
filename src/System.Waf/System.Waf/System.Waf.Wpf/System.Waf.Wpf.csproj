@@ -70,6 +70,7 @@
     <Compile Include="Presentation\Converters\InvertBooleanConverter.cs" />
     <Compile Include="Presentation\Converters\StringFormatConverter.cs" />
     <Compile Include="Presentation\Converters\ValidationErrorsConverter.cs" />
+    <Compile Include="Presentation\ResourceHelper.cs" />
     <Compile Include="Presentation\Services\FileDialogService.cs" />
     <Compile Include="Presentation\Services\MessageService.cs" />
     <Compile Include="Presentation\ValidationHelper.cs" />
