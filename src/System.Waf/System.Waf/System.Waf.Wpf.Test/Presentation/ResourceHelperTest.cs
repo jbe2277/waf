@@ -32,27 +32,45 @@ namespace Test.Waf.Presentation
         [TestMethod]
         public void AddToApplicationResources()
         {
-            var app = new Application();
-            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => app.Run()));
+            var testAppDomain = AppDomain.CreateDomain("TestAppDomain", null, new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory });
+            try
+            {
+                var test = (ResourceHelperWpfTest)testAppDomain.CreateInstanceAndUnwrap(typeof(ResourceHelperWpfTest).Assembly.FullName, typeof(ResourceHelperWpfTest).FullName);
+                test.AddToApplicationResources();
+            }
+            finally
+            {
+                AppDomain.Unload(testAppDomain);
+            }
+        }
+        
 
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources((string)null, "test"));
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("", "test"));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources("test", null));
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("test", ""));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources((Assembly)null, "test"));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, null));
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, ""));
+        private class ResourceHelperWpfTest : MarshalByRefObject
+        {
+            public void AddToApplicationResources()
+            {
+                var app = new Application();
+                Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => app.Run()));
 
-            Assert.AreEqual(0, app.Resources.MergedDictionaries.Count);
-            ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, 
-                "Presentation/Resources/BrushResources.xaml", "Presentation/Resources/LayoutResources.xaml");
-            Assert.AreEqual(2, app.Resources.MergedDictionaries.Count);
-            Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Presentation/Resources/BrushResources.xaml",
-                app.Resources.MergedDictionaries[0].Source.ToString());
-            Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Presentation/Resources/LayoutResources.xaml",
-                app.Resources.MergedDictionaries[1].Source.ToString());
+                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources((string)null, "test"));
+                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("", "test"));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources("test", null));
+                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("test", ""));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources((Assembly)null, "test"));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, null));
+                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, ""));
 
-            Dispatcher.CurrentDispatcher.InvokeShutdown();
+                Assert.AreEqual(0, app.Resources.MergedDictionaries.Count);
+                ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly,
+                    "Presentation/Resources/BrushResources.xaml", "Presentation/Resources/LayoutResources.xaml");
+                Assert.AreEqual(2, app.Resources.MergedDictionaries.Count);
+                Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Presentation/Resources/BrushResources.xaml",
+                    app.Resources.MergedDictionaries[0].Source.ToString());
+                Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Presentation/Resources/LayoutResources.xaml",
+                    app.Resources.MergedDictionaries[1].Source.ToString());
+
+                app.Shutdown();
+            }
         }
     }
 }
