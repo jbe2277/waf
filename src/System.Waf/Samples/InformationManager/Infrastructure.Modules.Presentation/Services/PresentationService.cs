@@ -27,7 +27,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
             {
                 mergedDictionaries.Add(new ResourceDictionary()
                 {
-                    Source = ResourceHelper.GetPackUri(resourcePath, resourceAssembly)
+                    Source = ResourceHelper.GetPackUri(resourceAssembly, resourcePath)
                 });
             }
         }

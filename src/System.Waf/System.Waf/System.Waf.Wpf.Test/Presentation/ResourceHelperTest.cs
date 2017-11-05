@@ -10,10 +10,10 @@ namespace Test.Waf.Presentation
         public void GetPackUri()
         {
             Assert.AreEqual("pack://application:,,,/MyAssembly;Component/Resources/ConverterResources.xaml", 
-                ResourceHelper.GetPackUri("Resources/ConverterResources.xaml", "MyAssembly").ToString());
+                ResourceHelper.GetPackUri("MyAssembly", "Resources/ConverterResources.xaml").ToString());
 
             Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Resources/ConverterResources.xaml",
-                ResourceHelper.GetPackUri("Resources/ConverterResources.xaml", typeof(ResourceHelperTest).Assembly).ToString());
+                ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, "Resources/ConverterResources.xaml").ToString());
         }
     }
 }

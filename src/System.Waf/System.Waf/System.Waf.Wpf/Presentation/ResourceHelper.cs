@@ -11,21 +11,21 @@ namespace System.Waf.Presentation
         /// <summary>
         /// Gets the pack URI from a local resource path.
         /// </summary>
-        /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <param name="resourceAssembly">The assembly containing the resource.</param>
+        /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <returns>The pack uri.</returns>
-        public static Uri GetPackUri(string resourcePath, Assembly resourceAssembly)
+        public static Uri GetPackUri(Assembly resourceAssembly, string resourcePath)
         {
-            return GetPackUri(resourcePath, resourceAssembly.GetName().Name);
+            return GetPackUri(resourceAssembly.GetName().Name, resourcePath);
         }
 
         /// <summary>
         /// Gets the pack URI from a local resource path.
         /// </summary>
-        /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <param name="assemblyName">The assembly containing the resource.</param>
+        /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <returns>The pack uri.</returns>
-        public static Uri GetPackUri(string resourcePath, string assemblyName)
+        public static Uri GetPackUri(string assemblyName, string resourcePath)
         {
             return new Uri(PackUriHelper.UriSchemePack + "://application:,,,/" + assemblyName + ";Component/" + resourcePath);
         }
