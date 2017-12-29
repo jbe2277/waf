@@ -120,5 +120,18 @@ namespace Test.Waf.Foundation
                 Assert.IsFalse(throttledAction.IsRunning);
             }
         }
+
+        [TestMethod]  // TODO: Review
+        public void InvokeOnlyIfIdleForDelayTimePerformanceTest()
+        {
+            int actionCallCount = 0;
+            var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeOnlyIfIdleForDelayTime, TimeSpan.FromMilliseconds(10));
+            for (int i = 0; i < 20000; i++)
+            {
+                throttledAction.InvokeAccumulated();
+            }
+            Task.Delay(20).Wait();
+            Assert.AreEqual(1, actionCallCount);
+        }
     }
 }
