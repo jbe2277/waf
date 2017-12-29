@@ -72,33 +72,29 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Requests the execution of the action delegate.
         /// </summary>
-        public async void InvokeAccumulated()
+        public void InvokeAccumulated()
         {
-            try
+            CancellationToken? token = null;
+            lock (cancellationTokenSourceLock)
             {
-                CancellationToken? token = null;
-                lock (cancellationTokenSourceLock)
+                if (mode == ThrottledActionMode.InvokeOnlyIfIdleForDelayTime || cancellationTokenSource == null)
                 {
-                    if (mode == ThrottledActionMode.InvokeOnlyIfIdleForDelayTime || cancellationTokenSource == null)
-                    {
-                        cancellationTokenSource?.Cancel();
-                        cancellationTokenSource = new CancellationTokenSource();
-                        token = cancellationTokenSource.Token;
-                    }
+                    cancellationTokenSource?.Cancel();
+                    cancellationTokenSource = new CancellationTokenSource();
+                    token = cancellationTokenSource.Token;
                 }
+            }
 
-                if (token != null)
+            if (token != null)
+            {
+                Task.Delay(delayTime, token.Value).ContinueWith(t =>
                 {
-                    await Task.Delay(delayTime, token.Value).ConfigureAwait(false);
                     lock (cancellationTokenSourceLock)
                     {
                         cancellationTokenSource = null;
                     }
-                    await Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, taskScheduler).ConfigureAwait(false);
-                }
-            }
-            catch (OperationCanceledException)
-            {
+                    Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, taskScheduler);
+                }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
             }
         }
 

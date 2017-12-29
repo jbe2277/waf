@@ -121,7 +121,7 @@ namespace Test.Waf.Foundation
             }
         }
 
-        [TestMethod]  // TODO: Review
+        [TestMethod]
         public void InvokeOnlyIfIdleForDelayTimePerformanceTest()
         {
             int actionCallCount = 0;
@@ -130,7 +130,7 @@ namespace Test.Waf.Foundation
             {
                 throttledAction.InvokeAccumulated();
             }
-            Task.Delay(20).Wait();
+            Task.Delay(100).Wait();
             Assert.AreEqual(1, actionCallCount);
         }
     }
