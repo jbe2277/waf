@@ -63,6 +63,7 @@
     <Compile Include="Foundation\DataErrorInfoSupportTest.cs" />
     <Compile Include="Presentation\Converters\BoolToVisibilityConverterTest.cs" />
     <Compile Include="Presentation\Converters\InvertBooleanConverterTest.cs" />
+    <Compile Include="Presentation\Converters\NullToVisibilityConverterTest.cs" />
     <Compile Include="Presentation\Converters\StringFormatConverterTest.cs" />
     <Compile Include="Presentation\Converters\ValidationErrorsConverterTest.cs" />
     <Compile Include="Presentation\ResourceHelperTest.cs" />

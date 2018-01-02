@@ -36,7 +36,7 @@ namespace System.Waf.Presentation.Converters
 #endif
         {
             var flag = (bool?)value;
-            bool invert = IsInvertParameterSet(parameter);
+            bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
 
             if (invert)
             {
@@ -61,22 +61,13 @@ namespace System.Waf.Presentation.Converters
 #endif
         {
             var visibility = (Visibility?)value;
-            bool invert = IsInvertParameterSet(parameter);
+            bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
             
             if (invert)
             {
                 return visibility != Visibility.Visible;
             }
             return visibility == Visibility.Visible;
-        }
-
-        private static bool IsInvertParameterSet(object parameter)
-        {
-            if (string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

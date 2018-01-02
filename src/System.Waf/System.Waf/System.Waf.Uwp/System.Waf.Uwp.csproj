@@ -54,6 +54,9 @@
     <Compile Include="..\System.Waf.Wpf\Presentation\Converters\InvertBooleanConverter.cs">
       <Link>Presentation\Converters\InvertBooleanConverter.cs</Link>
     </Compile>
+    <Compile Include="..\System.Waf.Wpf\Presentation\Converters\NullToVisibilityConverter.cs">
+      <Link>Presentation\Converters\NullToVisibilityConverter.cs</Link>
+    </Compile>
     <Compile Include="..\System.Waf.Wpf\Presentation\Converters\StringFormatConverter.cs">
       <Link>Presentation\Converters\StringFormatConverter.cs</Link>
     </Compile>
