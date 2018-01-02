@@ -95,13 +95,7 @@ namespace System.Waf.Presentation.Services
 
         private static string CreateFilter(IEnumerable<FileType> fileTypes)
         {
-            string filter = "";
-            foreach (FileType fileType in fileTypes)
-            {
-                if (!String.IsNullOrEmpty(filter)) { filter += "|"; }
-                filter += fileType.Description + "|*" + fileType.FileExtension;
-            }
-            return filter;
+            return string.Join("|", fileTypes.Select(x => x.Description + "|" + FileType.NormalizeFileExtension(x.FileExtension)));
         }
     }
 }

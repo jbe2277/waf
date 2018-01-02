@@ -11,7 +11,7 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ConstructorTest()
         {
-            FileType fileType = new FileType("RichText Documents (*.rtf)", ".rtf");
+            var fileType = new FileType("RichText Documents (*.rtf)", ".rtf");
             Assert.AreEqual("RichText Documents (*.rtf)", fileType.Description);
             Assert.AreEqual(".rtf", fileType.FileExtension);
 
@@ -19,14 +19,20 @@ namespace Test.Waf.Applications.Services
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("", ".rtf"));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", (string)null));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", ""));
-            AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", "rtf"));
+
+            fileType = new FileType("RichText Documents", "rtf");
+            Assert.AreEqual("rtf", fileType.FileExtension);
+            fileType = new FileType("All Files", "*.*");
+            Assert.AreEqual("*.*", fileType.FileExtension);
 
             fileType = new FileType("Pictures", new[] { ".jpg", ".png" });
             Assert.AreEqual("Pictures", fileType.Description);
-            Assert.AreEqual(".jpg;*.png", fileType.FileExtension);
+            Assert.AreEqual("*.jpg;*.png", fileType.FileExtension);
+
+            fileType = new FileType("Pictures", new[] { ".jpg", "*.png" });
+            Assert.AreEqual("*.jpg;*.png", fileType.FileExtension);
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => new FileType("Pictures", (string[])null));
-            AssertHelper.ExpectedException<ArgumentException>(() => new FileType("Pictures", new[] { ".jpg", "wrong" }));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("Pictures", new[] { ".jpg", "" }));
         }
     }
