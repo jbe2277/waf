@@ -34,4 +34,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "mappingHashValue", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Services.EntityService.#GenerateViewCache()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "views", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Services.EntityService.#GenerateViewCache()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.BookLibrary.Library.Applications.Data.DbConnectionFactory.#JustToReferenceSQLite()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "github", Scope = "resource", Target = "Waf.BookLibrary.Library.Applications.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "jbe", Scope = "resource", Target = "Waf.BookLibrary.Library.Applications.Properties.Resources.resources")]
 

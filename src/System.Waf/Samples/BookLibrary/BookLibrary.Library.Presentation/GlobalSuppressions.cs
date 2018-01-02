@@ -25,3 +25,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.BookLibrary.Library.Presentation.DesignData.SampleShellViewModel+MockPresentationService.#VirtualScreenWidth")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.BookLibrary.Library.Presentation.Services.EmailService.#.ctor(System.Waf.Applications.Services.IMessageService,Waf.BookLibrary.Library.Applications.Services.IShellService)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "Waf.BookLibrary.Library.Presentation.Services.EmailService.#CreateNewEmail(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "Waf.BookLibrary.Library.Presentation.DesignData.SampleBookListViewModel")]
+
