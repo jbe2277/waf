@@ -249,17 +249,7 @@
         
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem Content="{x:Static p:Resources.Ready}" Margin="3,0,0,0"/>
-            <StatusBarItem HorizontalAlignment="Right">
-                <StatusBarItem.Style>
-                    <Style TargetType="StatusBarItem" BasedOn="{StaticResource {x:Type StatusBarItem}}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ShellService.ActiveZoomCommands.DefaultZooms}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StatusBarItem.Style>
-                
+            <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding ShellService.ActiveZoomCommands.DefaultZooms, Converter={StaticResource NullToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{x:Static p:Resources.ZoomMenu}" Target="{Binding ElementName=zoomBox}" VerticalAlignment="Center" Padding="0" Margin="0"/>
                     <ComboBox x:Name="zoomBox" ItemsSource="{Binding ShellService.ActiveZoomCommands.DefaultZooms}"

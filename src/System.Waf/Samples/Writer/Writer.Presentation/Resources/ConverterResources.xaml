@@ -5,6 +5,8 @@
 
     <waf:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
+    <waf:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+
     <waf:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
 
     <c:DoubleToZoomConverter x:Key="DoubleToZoomConverter"/>
