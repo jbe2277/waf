@@ -78,7 +78,7 @@ namespace Test.Writer.Applications.Controllers
 
             Assert.AreEqual(FileDialogType.OpenFileDialog, fileDialogService.FileDialogType);
             Assert.AreEqual("Mock Document", fileDialogService.FileTypes.Last().Description);
-            Assert.AreEqual(".mock", fileDialogService.FileTypes.Last().FileExtension);
+            Assert.AreEqual(".mock", fileDialogService.FileTypes.Last().FileExtensions.Single());
 
             Assert.AreEqual(DocumentOperation.Open, documentType.DocumentOperation);
             Assert.AreEqual("Document1.mock", documentType.FileName);
@@ -195,9 +195,9 @@ namespace Test.Writer.Applications.Controllers
             
             Assert.AreEqual(FileDialogType.SaveFileDialog, fileDialogService.FileDialogType);
             Assert.AreEqual("Mock Document", fileDialogService.FileTypes.Single().Description);
-            Assert.AreEqual(".mock", fileDialogService.FileTypes.Single().FileExtension);
+            Assert.AreEqual(".mock", fileDialogService.FileTypes.Single().FileExtensions.Single());
             Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType.Description);
-            Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtension);
+            Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
             Assert.AreEqual("Document", fileDialogService.DefaultFileName);
             
             Assert.AreEqual(DocumentOperation.Save, documentType.DocumentOperation);
@@ -252,7 +252,7 @@ namespace Test.Writer.Applications.Controllers
             fileDialogService.Result = new FileDialogResult(fileName, new FileType("Mock Document", ".mock"));
             fileService.SaveAsCommand.Execute(null);
             Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType.Description);
-            Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtension);
+            Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
             Assert.AreEqual(DocumentOperation.Save, documentType.DocumentOperation);
             Assert.AreEqual(document, documentType.Document);
             Assert.AreEqual(fileName, documentType.FileName);

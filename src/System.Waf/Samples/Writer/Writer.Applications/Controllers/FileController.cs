@@ -224,7 +224,7 @@ namespace Waf.Writer.Applications.Controllers
                 var saveTypes = documentTypes.Where(d => d.CanSave(document)).ToArray();
                 IDocumentType documentType = saveTypes.First(d => d.FileExtension == Path.GetExtension(document.FileName));
                 selectedFileType = fileTypes.First(
-                    f => f.Description == documentType.Description && f.FileExtension == documentType.FileExtension);
+                    f => f.Description == documentType.Description && f.FileExtensions.Contains(documentType.FileExtension));
             }
             else
             {
@@ -342,7 +342,7 @@ namespace Waf.Writer.Applications.Controllers
         {
             IDocumentType documentType = (from d in documentTypes
                                           where d.Description == fileType.Description
-                                              && d.FileExtension == fileType.FileExtension
+                                              && fileType.FileExtensions.Contains(d.FileExtension)
                                           select d).First();
             return documentType;
         }

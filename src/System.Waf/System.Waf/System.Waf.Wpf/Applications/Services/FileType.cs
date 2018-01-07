@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace System.Waf.Applications.Services
 {
@@ -14,12 +15,8 @@ namespace System.Waf.Applications.Services
         /// <param name="fileExtension">The file extension. Use the string ".*" to allow all file extensions.</param>
         /// <exception cref="ArgumentException">description is null or an empty string.</exception>
         /// <exception cref="ArgumentException">fileExtension is null, an empty string.</exception>
-        public FileType(string description, string fileExtension)
+        public FileType(string description, string fileExtension) : this(description, new[] { fileExtension })
         {
-            if (string.IsNullOrEmpty(description)) { throw new ArgumentException("The argument description must not be null or empty.", nameof(description)); }
-            if (string.IsNullOrEmpty(fileExtension)) { throw new ArgumentException("The argument fileExtension must not be null or empty.", nameof(fileExtension)); }
-            Description = description;
-            FileExtension = fileExtension;
         }
 
         /// <summary>
@@ -31,8 +28,15 @@ namespace System.Waf.Applications.Services
         /// <exception cref="ArgumentException">One or more of the file extension strings is null or empty.</exception>
         /// <exception cref="ArgumentNullException">fileExtensions is null.</exception>
         public FileType(string description, IEnumerable<string> fileExtensions)
-            : this(description, string.Join(";", CheckFileExtensions(fileExtensions)))
         {
+            if (string.IsNullOrEmpty(description)) throw new ArgumentException("The argument description must not be null or empty.", nameof(description));
+            if (fileExtensions == null) throw new ArgumentNullException(nameof(fileExtensions));
+            if (!fileExtensions.Any() || fileExtensions.Any(x => string.IsNullOrEmpty(x)))
+            {
+                throw new ArgumentException("The argument fileExtensions must have at least one item and all items must not be null or empty.", nameof(fileExtensions));
+            }
+            Description = description;
+            FileExtensions = fileExtensions;
         }
 
 
@@ -42,27 +46,8 @@ namespace System.Waf.Applications.Services
         public string Description { get; }
 
         /// <summary>
-        /// Gets the file extension. Multiple file extensions are concatenated with the string ";" as separator.
+        /// Gets the list of file extensions.
         /// </summary>
-        public string FileExtension { get; }
-
-
-        private static IEnumerable<string> CheckFileExtensions(IEnumerable<string> fileExtensions)
-        {
-            if (fileExtensions == null) { throw new ArgumentNullException(nameof(fileExtensions)); }
-            foreach (string fileExtension in fileExtensions)
-            {
-                if (string.IsNullOrEmpty(fileExtension)) 
-                { 
-                    throw new ArgumentException("All items of the argument fileExtensions must not be empty.", nameof(fileExtensions)); 
-                }
-                yield return NormalizeFileExtension(fileExtension);
-            }
-        }
-
-        internal static string NormalizeFileExtension(string fileExtension)
-        {
-            return fileExtension[0] == '.' ? ("*" + fileExtension) : fileExtension;
-        }
+        public IEnumerable<string> FileExtensions { get; }
     }
 }
