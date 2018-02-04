@@ -41,9 +41,7 @@ namespace Waf.BookLibrary.Library.Domain
         }
 
         [StringLength(100, ErrorMessageResourceName = "EmailMaxLength", ErrorMessageResourceType = typeof(Resources))]
-        // Because of a bug in the .NET Framework it is necessary to explicitly set ErrorMessage = null
-        // https://connect.microsoft.com/VisualStudio/feedback/details/757298/emailaddress-attribute-is-unable-to-load-error-message-from-resource-mvc
-        [EmailAddress(ErrorMessageResourceName = "EmailInvalid", ErrorMessageResourceType = typeof(Resources), ErrorMessage=null)]
+        [EmailAddress(ErrorMessageResourceName = "EmailInvalid", ErrorMessageResourceType = typeof(Resources))]
         public string Email 
         {
             get { return email; }
