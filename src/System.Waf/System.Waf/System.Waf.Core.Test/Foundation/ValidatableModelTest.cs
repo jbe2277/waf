@@ -24,21 +24,21 @@ namespace Test.Waf.Foundation
             // Person is invalid but until now nobody has validated this object.
 
             Assert.IsFalse(person.HasErrors);
-            Assert.IsFalse(person.GetErrors().Any());
+            Assert.IsFalse(person.Errors.Any());
 
             // Validate person and see that Name is required.
 
             AssertHelper.PropertyChangedEvent(person, x => x.HasErrors, () 
                 => AssertErrorsChangedEvent(person, x => x.Name, () => person.Validate()));
             Assert.IsTrue(person.HasErrors);
-            Assert.AreEqual(Person.NameRequiredError, person.GetErrors().Single().ErrorMessage);
+            Assert.AreEqual(Person.NameRequiredError, person.Errors.Single().ErrorMessage);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors(nameof(Person.Name)).Single().ErrorMessage);
 
             // Set a valid name.
 
-            AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = "Bill");
+            AssertHelper.PropertyChangedEvent(person, x => x.Errors, () => person.Name = "Bill");
             Assert.IsFalse(person.HasErrors);
-            Assert.IsFalse(person.GetErrors().Any());
+            Assert.IsFalse(person.Errors.Any());
             Assert.IsFalse(((INotifyDataErrorInfo)person).GetErrors(nameof(Person.Name)).Cast<object>().Any());
 
             // Set another valid name; ErrorsChanged event must not be called.
@@ -57,7 +57,7 @@ namespace Test.Waf.Foundation
 
             AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = null);
             Assert.IsTrue(person.HasErrors);
-            Assert.AreEqual(Person.NameRequiredError, person.GetErrors().Single().ErrorMessage);
+            Assert.AreEqual(Person.NameRequiredError, person.Errors.Single().ErrorMessage);
             Assert.AreEqual(Person.NameRequiredError, person.GetErrors(nameof(Person.Name)).Single().ErrorMessage);
 
             // Set an invalid email address that creates two additional validation errors.
@@ -67,7 +67,7 @@ namespace Test.Waf.Foundation
             AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
-            Assert.AreEqual(3, person.GetErrors().Count());
+            Assert.AreEqual(3, person.Errors.Count());
             Assert.AreEqual(2, person.GetErrors("Email").Count());
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailInvalidError));
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailLengthError));
@@ -79,7 +79,7 @@ namespace Test.Waf.Foundation
             AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
             Assert.IsTrue(isValid);
             Assert.IsFalse(person.HasErrors);
-            Assert.IsFalse(person.GetErrors().Any());
+            Assert.IsFalse(person.Errors.Any());
             Assert.IsFalse(person.GetErrors("Email").Any());
         }
 
@@ -100,7 +100,7 @@ namespace Test.Waf.Foundation
                 AssertErrorsChangedEvent(person, null, () => isValid = person.Validate()));
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
-            Assert.AreEqual(entityError, person.GetErrors().Single());
+            Assert.AreEqual(entityError, person.Errors.Single());
             Assert.AreEqual(entityError, person.GetErrors("").Single());
             Assert.AreEqual(entityError, person.GetErrors(null).Single());
         }

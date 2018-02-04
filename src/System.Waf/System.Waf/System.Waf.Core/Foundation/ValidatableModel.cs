@@ -40,21 +40,17 @@ namespace System.Waf.Foundation
             private set { SetProperty(ref hasErrors, value); }
         }
 
+        /// <summary>
+        /// Gets all errors. The errors for a specified property and the entity errors.
+        /// </summary>
+        public IReadOnlyList<ValidationResult> Errors => allErrorsCache;
+
 
         /// <summary>
         /// Occurs when the validation errors have changed for a property or for the entire entity.
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-
-        /// <summary>
-        /// Gets the validation errors for the entire entity.
-        /// </summary>
-        /// <returns>The validation errors for the entity.</returns>
-        public IEnumerable<ValidationResult> GetErrors()
-        {
-            return GetErrors(null);
-        }
 
         /// <summary>
         /// Gets the validation errors for a specified property or for the entire entity.
@@ -64,19 +60,12 @@ namespace System.Waf.Foundation
         /// <returns>The validation errors for the property or entity.</returns>
         public IEnumerable<ValidationResult> GetErrors(string propertyName)
         {
-            if (!string.IsNullOrEmpty(propertyName))
+            List<ValidationResult> result;
+            if (errors.TryGetValue(propertyName ?? "", out result))
             {
-                List<ValidationResult> result;
-                if (errors.TryGetValue(propertyName, out result))
-                {
-                    return result;
-                }
-                return noErrors;
+                return result;
             }
-            else
-            {
-                return allErrorsCache;
-            }
+            return noErrors;
         }
         
         IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
@@ -179,6 +168,7 @@ namespace System.Waf.Foundation
             {
                 allErrorsCache = errors.Values.SelectMany(x => x).Distinct().ToArray();
                 HasErrors = errors.Any();
+                RaisePropertyChanged(nameof(Errors));
             }
 
             foreach (var changedProperty in changedProperties) RaiseErrorsChanged(changedProperty);
