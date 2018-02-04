@@ -45,8 +45,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
             {
                 // It is necessary to delay this code because data binding updates the values asynchronously.
+                emailsBox.ScrollIntoView(ViewModel.SelectedEmail);
                 var selectedListBoxItem = (ListBoxItem)emailsBox.ItemContainerGenerator.ContainerFromItem(ViewModel.SelectedEmail);
-                selectedListBoxItem.Focus();
+                selectedListBoxItem?.Focus();
             }));
         }
 

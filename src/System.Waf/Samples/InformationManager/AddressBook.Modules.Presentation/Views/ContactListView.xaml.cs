@@ -44,8 +44,9 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() => {
                 // It is necessary to delay this code because data binding updates the values asynchronously.
+                contactsBox.ScrollIntoView(ViewModel.SelectedContact);
                 var selectedListBoxItem = (ListBoxItem)contactsBox.ItemContainerGenerator.ContainerFromItem(ViewModel.SelectedContact);
-                selectedListBoxItem.Focus();
+                selectedListBoxItem?.Focus();
             }));
         }
 
