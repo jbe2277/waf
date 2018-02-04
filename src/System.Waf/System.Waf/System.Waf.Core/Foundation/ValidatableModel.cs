@@ -15,20 +15,11 @@ namespace System.Waf.Foundation
     public abstract class ValidatableModel : Model, INotifyDataErrorInfo
     {
         private static readonly ValidationResult[] noErrors = new ValidationResult[0];
-        
-        private readonly Dictionary<string, List<ValidationResult>> errors;
-        private IReadOnlyList<ValidationResult> allErrorsCache;
+
+        // DCS does not call ctor -> initialize fields at first use.
+        private Dictionary<string, List<ValidationResult>> errorsDictionary;
+        private IReadOnlyList<ValidationResult> errors;
         private bool hasErrors;
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ValidatableModel"/> class.
-        /// </summary>
-        protected ValidatableModel()
-        {
-            errors = new Dictionary<string, List<ValidationResult>>();
-            allErrorsCache = noErrors;
-        }
 
 
         /// <summary>
@@ -43,7 +34,9 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets all errors. The errors for a specified property and the entity errors.
         /// </summary>
-        public IReadOnlyList<ValidationResult> Errors => allErrorsCache;
+        public IReadOnlyList<ValidationResult> Errors => errors ?? (errors = noErrors);
+
+        private Dictionary<string, List<ValidationResult>> ErrorsDictionary => errorsDictionary ?? (errorsDictionary = new Dictionary<string, List<ValidationResult>>());
 
 
         /// <summary>
@@ -61,7 +54,7 @@ namespace System.Waf.Foundation
         public IEnumerable<ValidationResult> GetErrors(string propertyName)
         {
             List<ValidationResult> result;
-            if (errors.TryGetValue(propertyName ?? "", out result))
+            if (ErrorsDictionary.TryGetValue(propertyName ?? "", out result))
             {
                 return result;
             }
@@ -143,31 +136,31 @@ namespace System.Waf.Foundation
             }
 
             var changedProperties = new HashSet<string>();
-            var errorKeys = propertyName == null ? errors.Keys : errors.Keys.Where(x => x == propertyName);
+            var errorKeys = propertyName == null ? ErrorsDictionary.Keys : ErrorsDictionary.Keys.Where(x => x == propertyName);
             var newErrorKeys = propertyName == null ? newErrors.Keys : newErrors.Keys.Where(x => x == propertyName);
             foreach (var propertyToRemove in errorKeys.Except(newErrorKeys).ToArray())
             {
                 changedProperties.Add(propertyToRemove);
-                errors.Remove(propertyToRemove);
+                ErrorsDictionary.Remove(propertyToRemove);
             }
             foreach (var propertyToUpdate in errorKeys.ToArray())
             {
-                if (!errors[propertyToUpdate].SequenceEqual(newErrors[propertyToUpdate], ValidationResultComparer.Default))
+                if (!ErrorsDictionary[propertyToUpdate].SequenceEqual(newErrors[propertyToUpdate], ValidationResultComparer.Default))
                 {
                     changedProperties.Add(propertyToUpdate);
-                    errors[propertyToUpdate] = newErrors[propertyToUpdate];
+                    ErrorsDictionary[propertyToUpdate] = newErrors[propertyToUpdate];
                 }
             }
             foreach (var propertyToAdd in newErrorKeys.Except(errorKeys).ToArray())
             {
                 changedProperties.Add(propertyToAdd);
-                errors.Add(propertyToAdd, newErrors[propertyToAdd]);
+                ErrorsDictionary.Add(propertyToAdd, newErrors[propertyToAdd]);
             }
 
             if (changedProperties.Any())
             {
-                allErrorsCache = errors.Values.SelectMany(x => x).Distinct().ToArray();
-                HasErrors = errors.Any();
+                errors = ErrorsDictionary.Values.SelectMany(x => x).Distinct().ToArray();
+                HasErrors = ErrorsDictionary.Any();
                 RaisePropertyChanged(nameof(Errors));
             }
 
