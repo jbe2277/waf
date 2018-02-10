@@ -34,13 +34,13 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Firstname, TargetNullValue=(none)}" Margin="7"/>
+                        <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, TargetNullValue=(none)}" Margin="7"/>
 
-                        <TextBlock Text="{Binding Email, TargetNullValue=(none)}" Grid.Column="1" Margin="7"/>
+                        <TextBlock Text="{Binding Email, ValidatesOnNotifyDataErrors=False, TargetNullValue=(none)}" Grid.Column="1" Margin="7"/>
 
-                        <TextBlock Text="{Binding Lastname, TargetNullValue=(none)}" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Text="{Binding Lastname, ValidatesOnNotifyDataErrors=False, TargetNullValue=(none)}" Grid.Row="1" Margin="7,0,7,7"/>
 
-                        <TextBlock Text="{Binding Phone, TargetNullValue=(none)}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Text="{Binding Phone, ValidatesOnNotifyDataErrors=False, TargetNullValue=(none)}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

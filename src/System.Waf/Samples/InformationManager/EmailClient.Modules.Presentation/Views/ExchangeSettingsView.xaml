@@ -25,10 +25,10 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="Exchange server" />
         <TextBox x:Name="serverPathBox" Grid.Column="2" Grid.Row="2" Width="150"
-            Text="{Binding Model.ServerPath, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.ServerPath, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150"
-            Text="{Binding Model.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
     </Grid>
 </UserControl>

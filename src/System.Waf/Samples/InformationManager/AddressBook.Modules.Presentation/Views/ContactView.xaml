@@ -38,52 +38,42 @@
 
         <Label Grid.Column="0" Grid.Row="0" Content="_Firstname" Target="{Binding ElementName=firstnameBox}"/>
         <TextBox x:Name="firstnameBox" Grid.Column="2" Grid.Row="0" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Firstname, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+                 Text="{Binding Contact.Firstname, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Column="0" Grid.Row="2" Content="Lastname"/>
         <TextBox Grid.Column="2" Grid.Row="2" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Lastname, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Lastname, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="Company"/>
         <TextBox Grid.Column="2" Grid.Row="4" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Company, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Company, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="Email"/>
         <TextBox Grid.Column="2" Grid.Row="6" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Email, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="8" Content="Phone"/>
         <TextBox Grid.Column="2" Grid.Row="8" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Phone, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="10" Content="Street"/>
         <TextBox Grid.Column="2" Grid.Row="10" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.Street, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Address.Street, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="12" Content="City"/>
         <TextBox Grid.Column="2" Grid.Row="12" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.City, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Address.City, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="14" Content="State"/>
         <TextBox Grid.Column="2" Grid.Row="14" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.State, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Address.State, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="16" Content="Postal Code"/>
         <TextBox Grid.Column="2" Grid.Row="16" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.PostalCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Address.PostalCode, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Column="0" Grid.Row="18" Content="Country"/>
         <TextBox Grid.Column="2" Grid.Row="18" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
-                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding Contact.Address.Country, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>
