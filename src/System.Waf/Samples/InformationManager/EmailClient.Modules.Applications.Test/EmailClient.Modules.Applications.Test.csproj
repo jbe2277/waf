@@ -114,10 +114,6 @@
       <Project>{1112ecba-ac14-46e6-bf67-3caa8cb93022}</Project>
       <Name>Common.Domain.Test</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
-      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
-      <Name>Common.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj">
       <Project>{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}</Project>
       <Name>EmailClient.Modules.Applications</Name>

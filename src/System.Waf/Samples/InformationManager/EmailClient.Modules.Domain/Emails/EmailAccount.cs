@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
-    public class EmailAccount : ValidationModel
+    public class EmailAccount : ValidatableModel
     {
         [DataMember] private string name;
         [DataMember] private string email;
@@ -16,7 +16,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         public string Name
         {
             get { return name; }
-            set { SetProperty(ref name, value); }
+            set { SetPropertyAndValidate(ref name, value); }
         }
 
         [Required, StringLength(100), Display(Name = "Email Address")]
@@ -24,24 +24,26 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         public string Email
         {
             get { return email; }
-            set { SetProperty(ref email, value); }
+            set { SetPropertyAndValidate(ref email, value); }
         }
 
         public EmailAccountSettings EmailAccountSettings
         {
             get { return emailAccountSettings; }
-            set { SetProperty(ref emailAccountSettings, value); }
+            set { SetPropertyAndValidate(ref emailAccountSettings, value); }
         }
 
 
         public virtual EmailAccount Clone()
         {
-            return new EmailAccount()
+            var clone = new EmailAccount()
             {
-                name = this.name,
-                email = this.email,
-                emailAccountSettings = this.emailAccountSettings?.Clone()
+                name = name,
+                email = email,
+                emailAccountSettings = emailAccountSettings?.Clone()
             };
+            clone.Validate();
+            return clone;
         }
     }
 }

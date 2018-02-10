@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
 {
     [DataContract]
-    public class UserCredits : ValidationModel
+    public class UserCredits : ValidatableModel
     {
         [DataMember] private string userName;
         [DataMember] private string password;
@@ -15,19 +15,21 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public string UserName
         {
             get { return userName; }
-            set { SetProperty(ref userName, value); }
+            set { SetPropertyAndValidate(ref userName, value); }
         }
 
         public string Password
         {
             get { return password; }
-            set { SetProperty(ref password, value); }
+            set { SetPropertyAndValidate(ref password, value); }
         }
 
 
         public virtual UserCredits Clone()
         {
-            return new UserCredits() { userName = this.userName, password = this.password };
+            var clone = new UserCredits() { userName = userName, password = password };
+            clone.Validate();
+            return clone;
         }
     }
 }

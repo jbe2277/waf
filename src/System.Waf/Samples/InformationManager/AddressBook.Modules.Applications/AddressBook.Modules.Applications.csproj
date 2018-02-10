@@ -83,10 +83,6 @@
       <Project>{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}</Project>
       <Name>AddressBook.Modules.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
-      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
-      <Name>Common.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
       <Project>{664D5E11-1BAB-4D48-BEF5-775DB427D691}</Project>
       <Name>Infrastructure.Interfaces</Name>

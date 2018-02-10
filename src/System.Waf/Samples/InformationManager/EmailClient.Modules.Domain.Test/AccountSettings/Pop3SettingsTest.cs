@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
 using Test.InformationManager.Common.Domain;
+using System.Linq;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
 {
@@ -44,15 +45,15 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public void ValidationTest()
         {
             var pop3Settings = new Pop3Settings();
+            pop3Settings.Validate();
 
-            Assert.AreEqual("The POP3 Server field is required.", pop3Settings.Validate(nameof(pop3Settings.Pop3ServerPath)));
-            Assert.AreEqual("The SMTP Server field is required.", pop3Settings.Validate(nameof(pop3Settings.SmtpServerPath)));
+            Assert.AreEqual("The POP3 Server field is required.", pop3Settings.GetErrors(nameof(pop3Settings.Pop3ServerPath)).Single().ErrorMessage);
+            Assert.AreEqual("The SMTP Server field is required.", pop3Settings.GetErrors(nameof(pop3Settings.SmtpServerPath)).Single().ErrorMessage);
 
             pop3Settings.Pop3ServerPath = "pop3.example.com";
             pop3Settings.SmtpServerPath = "smtp.example.com";
 
-            Assert.AreEqual("", pop3Settings.Validate(nameof(pop3Settings.Pop3ServerPath)));
-            Assert.AreEqual("", pop3Settings.Validate(nameof(pop3Settings.SmtpServerPath)));
+            Assert.IsFalse(pop3Settings.HasErrors);
         }
     }
 }

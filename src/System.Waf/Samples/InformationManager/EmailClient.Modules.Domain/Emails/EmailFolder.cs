@@ -1,12 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
-using Waf.InformationManager.Common.Domain;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
     [DataContract]
-    public class EmailFolder : ValidationModel
+    public class EmailFolder : ValidatableModel
     {
         [DataMember] private readonly ObservableCollection<Email> emails;
 

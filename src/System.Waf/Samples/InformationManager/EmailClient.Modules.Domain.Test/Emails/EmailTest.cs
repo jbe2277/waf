@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
@@ -56,29 +57,29 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
             var email = new Email();
 
-            Assert.AreEqual("", email.Validate(nameof(Email.Title)));
+            Assert.IsFalse(email.GetErrors(nameof(Email.Title)).Any());
             email.Title = longText;
-            Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.Validate(nameof(Email.Title)));
+            Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.GetErrors(nameof(Email.Title)).Single().ErrorMessage);
             email.Title = "";
 
-            Assert.AreEqual("", email.Validate(nameof(Email.From)));
+            Assert.IsFalse(email.GetErrors(nameof(Email.From)).Any());
             email.From = longText;
-            Assert.AreEqual("The field From must be a string with a maximum length of 255.", email.Validate(nameof(Email.From)));
+            Assert.AreEqual("The field From must be a string with a maximum length of 255.", email.GetErrors(nameof(Email.From)).Single().ErrorMessage);
             email.From = "";
 
-            Assert.AreEqual("This email doesn't define a recipient.", email.Validate());
+            Assert.AreEqual("This email doesn't define a recipient.", string.Join(Environment.NewLine, email.Errors));
             
             email.To = new[] { "wrong email address" };
             email.CC = email.To;
             email.Bcc = email.To;
-            Assert.AreEqual("The email wrong email address in the To field is not valid." + Environment.NewLine 
+            Assert.AreEqual("The email wrong email address in the BCC field is not valid." + Environment.NewLine 
                 + "The email wrong email address in the CC field is not valid." + Environment.NewLine
-                + "The email wrong email address in the BCC field is not valid.", email.Validate());
+                + "The email wrong email address in the To field is not valid.", string.Join(Environment.NewLine, email.Errors));
 
             email.To = new[] { "correct-address@mail.com" };
             email.CC = email.To;
             email.Bcc = email.To;
-            Assert.AreEqual("", email.Validate());
+            Assert.IsFalse(email.HasErrors);
         }
     }
 }

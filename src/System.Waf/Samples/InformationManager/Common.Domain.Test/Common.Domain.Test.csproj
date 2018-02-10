@@ -44,7 +44,6 @@
     </Compile>
     <Compile Include="DomainTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidationModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
@@ -63,10 +62,6 @@
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
       <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
       <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
-      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
-      <Name>Common.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

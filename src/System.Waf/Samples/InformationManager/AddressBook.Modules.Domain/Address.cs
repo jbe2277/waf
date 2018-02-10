@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.AddressBook.Modules.Domain
 {
     [DataContract]
-    public class Address : ValidationModel
+    public class Address : ValidatableModel
     {
         [DataMember] private string street;
         [DataMember] private string city;
@@ -16,31 +16,31 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         public string Street
         {
             get { return street; }
-            set { SetProperty(ref street, value); }
+            set { SetPropertyAndValidate(ref street, value); }
         }
 
         public string City
         {
             get { return city; }
-            set { SetProperty(ref city, value); }
+            set { SetPropertyAndValidate(ref city, value); }
         }
 
         public string State
         {
             get { return state; }
-            set { SetProperty(ref state, value); }
+            set { SetPropertyAndValidate(ref state, value); }
         }
 
         public string PostalCode
         {
             get { return postalCode; }
-            set { SetProperty(ref postalCode, value); }
+            set { SetPropertyAndValidate(ref postalCode, value); }
         }
 
         public string Country
         {
             get { return country; }
-            set { SetProperty(ref country, value); }
+            set { SetPropertyAndValidate(ref country, value); }
         }
     }
 }

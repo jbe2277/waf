@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
     [DataContract]
-    public class EmailClientRoot : ValidationModel, IEmailDeletionService
+    public class EmailClientRoot : ValidatableModel, IEmailDeletionService
     {
         [DataMember] private readonly ObservableCollection<EmailAccount> emailAccounts;
         [DataMember] private readonly EmailFolder inbox;
@@ -18,12 +18,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public EmailClientRoot()
         {
-            this.emailAccounts = new ObservableCollection<EmailAccount>();
-            this.inbox = new EmailFolder();
-            this.outbox = new EmailFolder();
-            this.sent = new EmailFolder();
-            this.drafts = new EmailFolder();
-            this.deleted = new EmailFolder();
+            emailAccounts = new ObservableCollection<EmailAccount>();
+            inbox = new EmailFolder();
+            outbox = new EmailFolder();
+            sent = new EmailFolder();
+            drafts = new EmailFolder();
+            deleted = new EmailFolder();
             Initialize();
         }
 

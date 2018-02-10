@@ -23,7 +23,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public string Pop3ServerPath
         {
             get { return pop3ServerPath; }
-            set { SetProperty(ref pop3ServerPath, value); }
+            set { SetPropertyAndValidate(ref pop3ServerPath, value); }
         }
 
         public UserCredits Pop3UserCredits => pop3UserCredits;
@@ -32,7 +32,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public string SmtpServerPath
         {
             get { return smtpServerPath; }
-            set { SetProperty(ref smtpServerPath, value); }
+            set { SetPropertyAndValidate(ref smtpServerPath, value); }
         }
 
         public UserCredits SmtpUserCredits => smtpUserCredits;
@@ -40,13 +40,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
 
         public override EmailAccountSettings Clone()
         {
-            return new Pop3Settings() 
+            var clone = new Pop3Settings() 
             { 
-                pop3UserCredits = this.pop3UserCredits.Clone(), 
-                smtpUserCredits = this.smtpUserCredits.Clone(), 
-                pop3ServerPath = this.pop3ServerPath, 
-                smtpServerPath = this.smtpServerPath 
+                pop3UserCredits = pop3UserCredits.Clone(), 
+                smtpUserCredits = smtpUserCredits.Clone(), 
+                pop3ServerPath = pop3ServerPath, 
+                smtpServerPath = smtpServerPath 
             };
+            clone.Validate();
+            return clone;
         }
     }
 }

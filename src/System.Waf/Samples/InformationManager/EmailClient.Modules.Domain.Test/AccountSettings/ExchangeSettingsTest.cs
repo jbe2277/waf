@@ -3,6 +3,7 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
 using Test.InformationManager.Common.Domain;
+using System.Linq;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
 {
@@ -36,10 +37,11 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public void ValidationTest()
         {
             var exchangeSettings = new ExchangeSettings();
-            Assert.AreEqual("The Exchange Server field is required.", exchangeSettings.Validate("ServerPath"));
+            exchangeSettings.Validate();
+            Assert.AreEqual("The Exchange Server field is required.", exchangeSettings.GetErrors("ServerPath").Single().ErrorMessage);
 
             exchangeSettings.ServerPath = "exchange.example.com";
-            Assert.AreEqual("", exchangeSettings.Validate("ServerPath"));
+            Assert.IsFalse(exchangeSettings.GetErrors(nameof(exchangeSettings.ServerPath)).Any());
         }
     }
 }

@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
     [DataContract]
-    public class Email : ValidationModel, IValidatableObject
+    public class Email : ValidatableModel, IValidatableObject
     {
         private static readonly EmailAddressAttribute emailAddress = new EmailAddressAttribute();
 
@@ -35,21 +35,21 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         public EmailType EmailType
         {
             get { return emailType; }
-            set { SetProperty(ref emailType, value); }
+            set { SetPropertyAndValidate(ref emailType, value); }
         }
 
         [StringLength(255), DisplayName("Title")]
         public string Title
         {
             get { return title; }
-            set { SetProperty(ref title, value); }
+            set { SetPropertyAndValidate(ref title, value); }
         }
 
         [StringLength(255), DisplayName("From")]
         public string From
         {
             get { return from; }
-            set { SetProperty(ref from, value); }
+            set { SetPropertyAndValidate(ref from, value); }
         }
 
         public IEnumerable<string> To
@@ -61,6 +61,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
                 {
                     if (value == null) { throw new ArgumentNullException("value"); }
                     to = value;
+                    Validate();
                     RaisePropertyChanged();
                 }
             }
@@ -75,6 +76,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
                 {
                     if (value == null) { throw new ArgumentNullException("value"); }
                     cc = value;
+                    Validate();
                     RaisePropertyChanged();
                 }
             }
@@ -89,6 +91,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
                 {
                     if (value == null) { throw new ArgumentNullException("value"); }
                     bcc = value;
+                    Validate();
                     RaisePropertyChanged();
                 }
             }
@@ -97,13 +100,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         public DateTime Sent
         {
             get { return sent; }
-            set { SetProperty(ref sent, value); }
+            set { SetPropertyAndValidate(ref sent, value); }
         }
 
         public string Message
         {
             get { return message; }
-            set { SetProperty(ref message, value); }
+            set { SetPropertyAndValidate(ref message, value); }
         }
 
 

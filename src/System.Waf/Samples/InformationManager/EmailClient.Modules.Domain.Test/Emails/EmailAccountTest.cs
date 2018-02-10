@@ -4,6 +4,7 @@ using System.Waf.UnitTesting;
 using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using Test.InformationManager.Common.Domain;
+using System.Linq;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 {
@@ -50,18 +51,19 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
         {
             var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzab@example.com";
             var emailAccount = new EmailAccount();
+            emailAccount.Validate();
 
-            Assert.AreEqual("The Name field is required.", emailAccount.Validate(nameof(EmailAccount.Name)));
+            Assert.AreEqual("The Name field is required.", emailAccount.GetErrors(nameof(EmailAccount.Name)).Single().ErrorMessage);
             emailAccount.Name = "bill";
-            Assert.AreEqual("", emailAccount.Validate(nameof(EmailAccount.Name)));
+            Assert.IsFalse(emailAccount.GetErrors(nameof(EmailAccount.Name)).Any());
 
-            Assert.AreEqual("The Email Address field is required.", emailAccount.Validate(nameof(EmailAccount.Email)));
+            Assert.AreEqual("The Email Address field is required.", emailAccount.GetErrors(nameof(EmailAccount.Email)).Single().ErrorMessage);
             emailAccount.Email = longText;
-            Assert.AreEqual("The field Email Address must be a string with a maximum length of 100.", emailAccount.Validate(nameof(EmailAccount.Email)));
+            Assert.AreEqual("The field Email Address must be a string with a maximum length of 100.", emailAccount.GetErrors(nameof(EmailAccount.Email)).Single().ErrorMessage);
             emailAccount.Email = "wrong email address";
-            Assert.AreEqual("The Email Address field is not a valid e-mail address.", emailAccount.Validate(nameof(EmailAccount.Email)));
+            Assert.AreEqual("The Email Address field is not a valid e-mail address.", emailAccount.GetErrors(nameof(EmailAccount.Email)).Single().ErrorMessage);
             emailAccount.Email = "harry@example.com";
-            Assert.AreEqual("", emailAccount.Validate(nameof(EmailAccount.Email)));
+            Assert.IsFalse(emailAccount.GetErrors(nameof(EmailAccount.Email)).Any());
         }
     }
 }

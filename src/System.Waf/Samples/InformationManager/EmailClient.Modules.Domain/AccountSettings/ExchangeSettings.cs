@@ -14,20 +14,22 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public string ServerPath
         {
             get { return serverPath; }
-            set { SetProperty(ref serverPath, value); }
+            set { SetPropertyAndValidate(ref serverPath, value); }
         }
 
         [Required, Display(Name = "User Name")]
         public string UserName
         {
             get { return userName; }
-            set { SetProperty(ref userName, value); }
+            set { SetPropertyAndValidate(ref userName, value); }
         }
 
 
         public override EmailAccountSettings Clone()
         {
-            return new ExchangeSettings() { serverPath = this.serverPath, userName = this.userName };
+            var clone = new ExchangeSettings() { serverPath = serverPath, userName = userName };
+            clone.Validate();
+            return clone;
         }
     }
 }

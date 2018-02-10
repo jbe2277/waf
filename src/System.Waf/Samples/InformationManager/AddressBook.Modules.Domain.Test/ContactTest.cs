@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using System.Waf.UnitTesting;
-using System.Waf.Foundation;
 using Test.InformationManager.Common.Domain;
+using System.Linq;
 
 namespace Test.InformationManager.AddressBook.Modules.Domain
 {
@@ -36,13 +36,17 @@ namespace Test.InformationManager.AddressBook.Modules.Domain
         [TestMethod]
         public void ValidationTest()
         {
-            var contact = new Contact();
+            var root = new AddressBookRoot();
+            var contact = root.AddNewContact();
+            Assert.AreEqual(nameof(contact.Firstname), contact.Errors.Single().MemberNames.Single());
+            contact.Firstname = "Jesper";
+            Assert.AreEqual(0, contact.Errors.Count);
 
             contact.Email = "jesper.aaberg@example.com";
-            Assert.AreEqual("", contact.Validate(nameof(contact.Email)));
+            Assert.IsFalse(contact.HasErrors);
 
             contact.Email = "jesper.aaberg@example.";
-            Assert.AreEqual("The Email field is not a valid e-mail address.", contact.Validate(nameof(contact.Email)));
+            Assert.AreEqual("The Email field is not a valid e-mail address.", contact.Errors.Single().ErrorMessage);
         }
     }
 }

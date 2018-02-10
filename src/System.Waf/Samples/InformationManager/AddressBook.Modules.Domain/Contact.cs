@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Waf.InformationManager.Common.Domain;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.AddressBook.Modules.Domain
 {
     [DataContract]
-    public class Contact : ValidationModel
+    public class Contact : ValidatableModel
     {
         [DataMember] private readonly Address address;
         [DataMember] private string firstname;
@@ -18,40 +18,48 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         public Contact()
         {
             address = new Address();
+            address.Validate();
         }
 
 
+        [Required]
         public string Firstname
         {
             get { return firstname; }
-            set { SetProperty(ref firstname, value); }
+            set { SetPropertyAndValidate(ref firstname, value); }
         }
 
         public string Lastname
         {
             get { return lastname; }
-            set { SetProperty(ref lastname, value); }
+            set { SetPropertyAndValidate(ref lastname, value); }
         }
 
         public string Company
         {
             get { return company; }
-            set { SetProperty(ref company, value); }
+            set { SetPropertyAndValidate(ref company, value); }
         }
 
         [EmailAddress]
         public string Email
         {
             get { return email; }
-            set { SetProperty(ref email, value); }
+            set { SetPropertyAndValidate(ref email, value); }
         }
 
         public string Phone
         {
             get { return phone; }
-            set { SetProperty(ref phone, value); }
+            set { SetPropertyAndValidate(ref phone, value); }
         }
 
         public Address Address => address;
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            Address.Validate();
+        }
     }
 }

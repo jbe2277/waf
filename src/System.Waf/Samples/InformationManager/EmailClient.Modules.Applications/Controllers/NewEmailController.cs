@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
-using System.Waf.Foundation;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;
 using Waf.InformationManager.AddressBook.Interfaces.Domain;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
@@ -31,9 +30,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             this.messageService = messageService;
             this.shellService = shellService;
             this.addressBookService = addressBookService;
-            this.NewEmailViewModel = newEmailViewModel;
-            this.selectContactCommand = new DelegateCommand(SelectContact);
-            this.sendCommand = new DelegateCommand(SendEmail);
+            NewEmailViewModel = newEmailViewModel;
+            selectContactCommand = new DelegateCommand(SelectContact);
+            sendCommand = new DelegateCommand(SendEmail);
         }
 
 
@@ -89,10 +88,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private void SendEmail()
         {
             var email = NewEmailViewModel.Email;
-            string errorMessage = email.Validate();
-            if (!string.IsNullOrEmpty(errorMessage))
+            if (email.HasErrors)
             {
-                messageService.ShowError("One or more fields are not valid. Please correct them before sending this email.\n\n" + errorMessage);
+                messageService.ShowError("One or more fields are not valid. Please correct them before sending this email.\n\n" 
+                    + string.Join("\n", email.Errors.Select(x => x.ErrorMessage)));
                 return;
             }
 

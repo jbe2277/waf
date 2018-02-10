@@ -91,10 +91,6 @@
       <Project>{E270D7E7-0E35-4DED-B330-25FF7EED8581}</Project>
       <Name>AddressBook.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
-      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
-      <Name>Common.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj">
       <Project>{D647B501-C650-4877-8CF6-06515391E28F}</Project>
       <Name>EmailClient.Modules.Domain</Name>

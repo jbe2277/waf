@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Waf.InformationManager.Common.Domain;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Waf.Foundation;
 
 namespace Waf.InformationManager.AddressBook.Modules.Domain
 {
     [DataContract]
-    public class AddressBookRoot : ValidationModel
+    public class AddressBookRoot : ValidatableModel
     {
         [DataMember]
         private readonly ObservableCollection<Contact> contacts;
@@ -25,6 +25,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         {
             var contact = new Contact();
             AddContact(contact);
+            contact.Validate();
             return contact;
         }
 
@@ -36,6 +37,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         public void RemoveContact(Contact contact)
         {
             contacts.Remove(contact);
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            foreach (var contact in Contacts) contact.Validate();
         }
     }
 }

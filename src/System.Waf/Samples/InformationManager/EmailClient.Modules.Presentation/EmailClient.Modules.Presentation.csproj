@@ -106,10 +106,6 @@
       <Project>{3BC491D6-786A-46F1-9B93-69F23F89055A}</Project>
       <Name>Common.Applications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj">
-      <Project>{383153F8-9AB1-455B-9800-93F668E720F5}</Project>
-      <Name>Common.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Presentation\Common.Presentation.csproj">
       <Project>{23854875-DDBB-4BB9-81B5-637FCA6B1831}</Project>
       <Name>Common.Presentation</Name>

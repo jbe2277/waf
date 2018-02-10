@@ -3,6 +3,7 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using System.Waf.UnitTesting;
 using System.Waf.Foundation;
 using Test.InformationManager.Common.Domain;
+using System.Linq;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
 {
@@ -36,10 +37,11 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public void ValidationTest()
         {
             UserCredits userCredits = new UserCredits();
-            Assert.AreEqual("The Username field is required.", userCredits.Validate(nameof(UserCredits.UserName)));
+            userCredits.Validate();
+            Assert.AreEqual("The Username field is required.", userCredits.GetErrors(nameof(UserCredits.UserName)).Single().ErrorMessage);
 
             userCredits.UserName = "bill";
-            Assert.AreEqual("", userCredits.Validate(nameof(UserCredits.UserName)));
+            Assert.IsFalse(userCredits.HasErrors);
         }
     }
 }
