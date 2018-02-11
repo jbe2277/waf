@@ -78,11 +78,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         private void OnDeserialized(StreamingContext context)
         {
             Initialize();
-            Inbox.Validate();
-            Outbox.Validate();
-            Sent.Validate();
-            Drafts.Validate();
-            Deleted.Validate();
         }
     }
 }

@@ -134,5 +134,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
                     "The email {0} in the {1} field is not valid.", email, displayName), new[] { field }));
             }
         }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            Validate();
+        }
     }
 }
