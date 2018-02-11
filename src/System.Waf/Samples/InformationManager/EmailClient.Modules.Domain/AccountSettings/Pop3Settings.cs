@@ -16,6 +16,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         {
             pop3UserCredits = new UserCredits();
             smtpUserCredits = new UserCredits();
+            pop3UserCredits.Validate();
+            smtpUserCredits.Validate();
         }
 
 
