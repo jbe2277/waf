@@ -1,11 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
     [DataContract]
-    public class EmailFolder : ValidatableModel
+    public class EmailFolder : ValidatableModel, IValidatableObject
     {
         [DataMember] private readonly ObservableCollection<Email> emails;
 
@@ -32,6 +35,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         {
             emails.Remove(email);
             EmailDeletionService.NotifyEmailDeleted(this, email);
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var email in emails) email.Validate();
+            return Array.Empty<ValidationResult>();
         }
     }
 }

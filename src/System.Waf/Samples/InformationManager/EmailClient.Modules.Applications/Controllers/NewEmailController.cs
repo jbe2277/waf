@@ -47,7 +47,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             NewEmailViewModel.SendCommand = sendCommand;
             NewEmailViewModel.EmailAccounts = Root.EmailAccounts;
             NewEmailViewModel.SelectedEmailAccount = Root.EmailAccounts.FirstOrDefault();
-            NewEmailViewModel.Email = new Email() { EmailType = EmailType.Sent };
+            var newEmail = new Email() { EmailType = EmailType.Sent };
+            newEmail.Validate();
+            NewEmailViewModel.Email = newEmail;
         }
 
         public void Run()

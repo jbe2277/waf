@@ -4,6 +4,7 @@
              xmlns:s="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.Selectors"
              xmlns:ctrl="clr-namespace:Waf.InformationManager.Common.Presentation.Controls;assembly=Waf.InformationManager.Common.Presentation"
              xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
+             xmlns:domain="clr-namespace:Waf.InformationManager.EmailClient.Modules.Domain.Emails;assembly=Waf.InformationManager.EmailClient.Modules.Domain"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
@@ -12,7 +13,7 @@
         <s:EmailItemTemplateSelector x:Key="EmailItemTemplateSelector"/>
 
         <DataTemplate x:Key="ReceivedEmailItemTemplate">
-            <Grid Margin="0,0,3,0">
+            <Grid Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
@@ -22,16 +23,16 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding From}" Margin="7"/>
+                <TextBlock Text="{Binding From, ValidatesOnNotifyDataErrors=False}" Margin="7"/>
 
-                <TextBlock Text="{Binding Sent, StringFormat=d}" Grid.Column="1" Margin="7"/>
+                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7"/>
 
-                <TextBlock Text="{Binding Title}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="SentEmailItemTemplate">
-            <Grid Margin="0,0,3,0">
+            <Grid Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
@@ -41,12 +42,12 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding To, Converter={StaticResource StringCollectionToStringConverter}}"
+                <TextBlock Text="{Binding To, ValidatesOnNotifyDataErrors=False, Converter={StaticResource StringCollectionToStringConverter}}"
                            Margin="7" TextTrimming="CharacterEllipsis" />
 
-                <TextBlock Text="{Binding Sent, StringFormat=d}" Grid.Column="1" Margin="7"/>
+                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7"/>
 
-                <TextBlock Text="{Binding Title}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

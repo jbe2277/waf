@@ -26,9 +26,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public Email()
         {
-            to = new string[] { };
-            cc = new string[] { };
-            bcc = new string[] { };
+            to = Array.Empty<string>();
+            cc = Array.Empty<string>();
+            bcc = Array.Empty<string>();
         }
 
 
@@ -57,9 +57,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get { return to; }
             set
             {
-                if (to != value)
+                if (value == null) { throw new ArgumentNullException("value"); }
+                if (to != value && !to.SequenceEqual(value))
                 {
-                    if (value == null) { throw new ArgumentNullException("value"); }
                     to = value;
                     Validate();
                     RaisePropertyChanged();
@@ -72,9 +72,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get { return cc; }
             set
             {
-                if (cc != value)
+                if (value == null) { throw new ArgumentNullException("value"); }
+                if (cc != value && !cc.SequenceEqual(value))
                 {
-                    if (value == null) { throw new ArgumentNullException("value"); }
                     cc = value;
                     Validate();
                     RaisePropertyChanged();
@@ -87,9 +87,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get { return bcc; }
             set
             {
-                if (bcc != value)
+                if (value == null) { throw new ArgumentNullException("value"); }
+                if (bcc != value && !bcc.SequenceEqual(value))
                 {
-                    if (value == null) { throw new ArgumentNullException("value"); }
                     bcc = value;
                     Validate();
                     RaisePropertyChanged();
@@ -120,7 +120,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
             if (!To.Any() && !CC.Any() && !Bcc.Any())
             {
-                validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To), nameof(CC), nameof(Bcc) }));
+                validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To) }));
             }
 
             return validationResults;

@@ -72,9 +72,9 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             email.To = new[] { "wrong email address" };
             email.CC = email.To;
             email.Bcc = email.To;
-            Assert.AreEqual("The email wrong email address in the BCC field is not valid." + Environment.NewLine 
+            Assert.AreEqual("The email wrong email address in the To field is not valid." + Environment.NewLine 
                 + "The email wrong email address in the CC field is not valid." + Environment.NewLine
-                + "The email wrong email address in the To field is not valid.", string.Join(Environment.NewLine, email.Errors));
+                + "The email wrong email address in the BCC field is not valid.", string.Join(Environment.NewLine, email.Errors));
 
             email.To = new[] { "correct-address@mail.com" };
             email.CC = email.To;

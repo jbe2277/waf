@@ -54,19 +54,20 @@
             <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name"/>
 
             <Label Grid.Row="2" Grid.Column="0" Content="To:"/>
-            <TextBox x:Name="toBox" Grid.Row="2" Grid.Column="2" Text="{Binding To}"/>
+            <!-- Use Tag with Binding to domain object for validation -->
+            <TextBox x:Name="toBox" Grid.Row="2" Grid.Column="2" Text="{Binding To}" Tag="{Binding Email.To}"/>
             <Button Grid.Row="2" Grid.Column="4" Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..."/>
 
             <Label Grid.Row="0" Grid.Column="8" Content="CC:"/>
-            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding CC}"/>
+            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding CC}" Tag="{Binding Email.CC}"/>
             <Button Grid.Row="0" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..."/>
 
             <Label Grid.Row="2" Grid.Column="8" Content="BCC:"/>
-            <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Bcc}"/>
+            <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Bcc}" Tag="{Binding Email.Bcc}"/>
             <Button Grid.Row="2" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..."/>
 
             <Label Grid.Row="4" Grid.Column="0" Content="Title:"/>
-            <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="11" Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+            <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="11" Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox Grid.Row="6" Grid.ColumnSpan="13" Text="{Binding Email.Message}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
         </Grid>
