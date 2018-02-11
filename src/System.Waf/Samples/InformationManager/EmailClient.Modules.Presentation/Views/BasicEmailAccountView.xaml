@@ -29,11 +29,11 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="Name"/>
         <TextBox x:Name="nameBox" Grid.Column="2" Grid.Row="2" Width="150"
-                 Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="Email address"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150" 
-                 Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
+                 Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
 
         <RadioButton Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6" Content="_Internet Email (POP3, SMTP)" IsChecked="{Binding IsPop3Checked}"/>
 

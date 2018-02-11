@@ -37,11 +37,11 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="POP3 server"/>
         <TextBox x:Name="serverPathBox" Grid.Column="2" Grid.Row="2" Width="150"
-            Text="{Binding Model.Pop3ServerPath, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.Pop3ServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150"
-            Text="{Binding Model.Pop3UserCredits.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.Pop3UserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="Password"/>
         <PasswordBox Grid.Column="2" Grid.Row="6" LostFocus="Pop3PasswordChanged" Width="150"/>
@@ -49,11 +49,11 @@
 
         <Label Grid.Column="0" Grid.Row="8" Content="SMTP server"/>
         <TextBox Grid.Column="2" Grid.Row="8" Width="150" 
-            Text="{Binding Model.SmtpServerPath, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.SmtpServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
 
         <Label Grid.Column="0" Grid.Row="10" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="10" Width="150" 
-            Text="{Binding Model.SmtpUserCredits.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+            Text="{Binding Model.SmtpUserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" 
             IsEnabled="{Binding UseSameUserCredits, Converter={StaticResource InvertBooleanConverter}}"/>
 
         <Label Grid.Column="0" Grid.Row="12" Content="Password"/>
