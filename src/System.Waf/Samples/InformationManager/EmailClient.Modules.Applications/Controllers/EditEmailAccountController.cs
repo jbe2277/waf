@@ -134,6 +134,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             Pop3Settings pop3Settings = EmailAccount.EmailAccountSettings is Pop3Settings 
                 ? (Pop3Settings)EmailAccount.EmailAccountSettings : new Pop3Settings();
+            pop3Settings.Validate();
             pop3SettingsViewModel = pop3SettingsViewModelFactory.CreateExport().Value;
             pop3SettingsViewModel.Model = pop3Settings;
             editEmailAccountViewModel.ContentView = pop3SettingsViewModel.View;
@@ -143,6 +144,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             ExchangeSettings exchangeSettings = EmailAccount.EmailAccountSettings is ExchangeSettings 
                 ? (ExchangeSettings)EmailAccount.EmailAccountSettings : new ExchangeSettings();
+            exchangeSettings.Validate();
             exchangeSettingsViewModel = exchangeSettingsViewModelFactory.CreateExport().Value;
             exchangeSettingsViewModel.Model = exchangeSettings;
             editEmailAccountViewModel.ContentView = exchangeSettingsViewModel.View;

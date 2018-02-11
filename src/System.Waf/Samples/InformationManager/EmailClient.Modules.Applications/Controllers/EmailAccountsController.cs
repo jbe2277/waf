@@ -63,7 +63,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             EditEmailAccountController editEmailAccountController = editEmailAccountControllerFactory.CreateExport().Value;
             editEmailAccountController.OwnerWindow = emailAccountsViewModel.View;
-            editEmailAccountController.EmailAccount = new EmailAccount();
+            var emailAccount = new EmailAccount();
+            emailAccount.Validate();
+            editEmailAccountController.EmailAccount = emailAccount;
 
             editEmailAccountController.Initialize();
             if (editEmailAccountController.Run())

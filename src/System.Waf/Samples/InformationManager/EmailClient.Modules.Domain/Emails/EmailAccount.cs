@@ -45,5 +45,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             clone.Validate();
             return clone;
         }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            Validate();
+        }
     }
 }
