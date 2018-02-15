@@ -46,7 +46,13 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         {
             var pop3Settings = new Pop3Settings();
             pop3Settings.Validate();
+            var clone = (Pop3Settings)pop3Settings.Clone();
+            ValidationTestCore(pop3Settings);
+            ValidationTestCore(clone);
+        }
 
+        private static void ValidationTestCore(Pop3Settings pop3Settings)
+        {
             Assert.AreEqual("The POP3 Server field is required.", pop3Settings.GetErrors(nameof(pop3Settings.Pop3ServerPath)).Single().ErrorMessage);
             Assert.AreEqual("The SMTP Server field is required.", pop3Settings.GetErrors(nameof(pop3Settings.SmtpServerPath)).Single().ErrorMessage);
 

@@ -37,7 +37,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             Assert.AreNotEqual(emailAccount, clone);
             Assert.AreEqual(emailAccount.Name, clone.Name);
             Assert.AreEqual(emailAccount.Email, clone.Email);
-            
+
             Assert.AreNotEqual(emailAccount.EmailAccountSettings, clone.EmailAccountSettings);
             Assert.AreEqual(((ExchangeSettings)emailAccount.EmailAccountSettings).UserName, ((ExchangeSettings)clone.EmailAccountSettings).UserName);
 
@@ -49,9 +49,16 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
         [TestMethod]
         public void ValidationTest()
         {
-            var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzab@example.com";
             var emailAccount = new EmailAccount();
             emailAccount.Validate();
+            var clone = emailAccount.Clone();
+            ValidationTestCore(emailAccount);
+            ValidationTestCore(clone);
+        }
+
+        private static void ValidationTestCore(EmailAccount emailAccount)
+        {
+            const string longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzab@example.com";
 
             Assert.AreEqual("The Name field is required.", emailAccount.GetErrors(nameof(EmailAccount.Name)).Single().ErrorMessage);
             emailAccount.Name = "bill";
@@ -63,7 +70,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             emailAccount.Email = "wrong email address";
             Assert.AreEqual("The Email Address field is not a valid e-mail address.", emailAccount.GetErrors(nameof(EmailAccount.Email)).Single().ErrorMessage);
             emailAccount.Email = "harry@example.com";
-            Assert.IsFalse(emailAccount.GetErrors(nameof(EmailAccount.Email)).Any());
+            Assert.IsFalse(emailAccount.HasErrors);
         }
     }
 }

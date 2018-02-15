@@ -12,7 +12,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [TestMethod]
         public void PropertiesTest()
         {
-            UserCredits userCredits = new UserCredits();
+            var userCredits = new UserCredits();
 
             AssertHelper.PropertyChangedEvent(userCredits, x => x.UserName, () => userCredits.UserName = "bill");
             Assert.AreEqual("bill", userCredits.UserName);
@@ -24,8 +24,8 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [TestMethod]
         public void CloneTest()
         {
-            UserCredits userCredits = new UserCredits() { UserName = "bill", Password = "secret" };
-            UserCredits clone = userCredits.Clone();
+            var userCredits = new UserCredits() { UserName = "bill", Password = "secret" };
+            var clone = userCredits.Clone();
 
             Assert.AreNotEqual(userCredits, clone);
             Assert.AreEqual(userCredits.UserName, clone.UserName);
@@ -35,8 +35,15 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [TestMethod]
         public void ValidationTest()
         {
-            UserCredits userCredits = new UserCredits();
+            var userCredits = new UserCredits();
             userCredits.Validate();
+            var clone = userCredits.Clone();
+            ValidationTestCore(userCredits);
+            ValidationTestCore(clone);
+        }
+
+        private static void ValidationTestCore(UserCredits userCredits)
+        {
             Assert.AreEqual("The Username field is required.", userCredits.GetErrors(nameof(UserCredits.UserName)).Single().ErrorMessage);
 
             userCredits.UserName = "bill";

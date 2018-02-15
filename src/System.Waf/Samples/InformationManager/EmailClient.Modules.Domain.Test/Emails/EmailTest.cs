@@ -56,8 +56,11 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
         {
             var longText = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
             var email = new Email();
+            email.Validate();
 
-            Assert.IsFalse(email.GetErrors(nameof(Email.Title)).Any());
+            // No recipient.
+            Assert.AreEqual(nameof(Email.To), email.Errors.Single().MemberNames.Single());
+
             email.Title = longText;
             Assert.AreEqual("The field Title must be a string with a maximum length of 255.", email.GetErrors(nameof(Email.Title)).Single().ErrorMessage);
             email.Title = "";

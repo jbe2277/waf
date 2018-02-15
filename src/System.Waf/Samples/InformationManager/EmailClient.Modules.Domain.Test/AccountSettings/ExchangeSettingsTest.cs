@@ -38,10 +38,19 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
         {
             var exchangeSettings = new ExchangeSettings();
             exchangeSettings.Validate();
-            Assert.AreEqual("The Exchange Server field is required.", exchangeSettings.GetErrors("ServerPath").Single().ErrorMessage);
+            var clone = (ExchangeSettings)exchangeSettings.Clone();
+            ValidationTestCore(exchangeSettings);
+            ValidationTestCore(clone);
+        }
+
+        private static void ValidationTestCore(ExchangeSettings exchangeSettings)
+        {
+            Assert.AreEqual("The Exchange Server field is required.", exchangeSettings.GetErrors(nameof(ExchangeSettings.ServerPath)).Single().ErrorMessage);
+            Assert.AreEqual("The User Name field is required.", exchangeSettings.GetErrors(nameof(ExchangeSettings.UserName)).Single().ErrorMessage);
 
             exchangeSettings.ServerPath = "exchange.example.com";
-            Assert.IsFalse(exchangeSettings.GetErrors(nameof(exchangeSettings.ServerPath)).Any());
+            exchangeSettings.UserName = "bill";
+            Assert.IsFalse(exchangeSettings.HasErrors);
         }
     }
 }
