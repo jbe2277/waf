@@ -1,8 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="InvalidControlBrush" Color="#E5B8B7"/>
     <SolidColorBrush x:Key="HeaderTextBrush" Color="#003399"/>
+
+    <ControlTemplate x:Key="ErrorTemplate">
+        <Grid>
+            <AdornedElementPlaceholder x:Name="controlWithError"/>
+            <Border BorderThickness="1" BorderBrush="#FFDB000C">
+                <Border.ToolTip>
+                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
+                    </MultiBinding>
+                </Border.ToolTip>
+                <Grid Width="12" Height="12" Margin="-4,-4,1,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,0 L6,0 z" Fill="#FFDC000C"/>
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,7 L7,0 L6,0" Fill="#ffffff"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
 
     <Style TargetType="Label">
         <Setter Property="Padding" Value="0"/>
@@ -11,21 +28,7 @@
 
     <Style TargetType="TextBox">
         <Setter Property="Padding" Value="1,3"/>
-        <!-- Set an empty error template, hide the red rectangle -->
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-        <Style.Triggers>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="Background" Value="{StaticResource InvalidControlBrush}"/>
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
-                            <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
-                            <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
 
     <Style TargetType="PasswordBox">
