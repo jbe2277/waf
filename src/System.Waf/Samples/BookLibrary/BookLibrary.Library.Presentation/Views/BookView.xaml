@@ -53,15 +53,8 @@
                  MaxLength="100" HorizontalAlignment="Stretch"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="{x:Static p:Resources.PublishDate}"/>
-        <DatePicker Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" SelectedDate="{Binding Book.PublishDate}" HorizontalAlignment="Stretch" 
-                    Padding="0">
-            <DatePicker.Resources>
-                <Style TargetType="Button">
-                    <!-- Workaround to align the button about vertical center -->
-                    <Setter Property="Height" Value="24"/>
-                </Style>
-            </DatePicker.Resources>
-        </DatePicker>
+        <DatePicker Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" SelectedDate="{Binding Book.PublishDate}" 
+                    HorizontalAlignment="Stretch"/>
 
         <Label Grid.Column="0" Grid.Row="8" Content="{x:Static p:Resources.Isbn}"/>
         <TextBox Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="3" 

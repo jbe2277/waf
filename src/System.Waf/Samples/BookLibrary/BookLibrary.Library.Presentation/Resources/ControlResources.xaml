@@ -1,11 +1,41 @@
-﻿<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:waf="http://waf.codeplex.com/schemas"
-    xmlns:c="clr-namespace:Waf.BookLibrary.Library.Presentation.Converters">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="InvalidControlBrush" Color="#E5B8B7"/>
+    <ControlTemplate x:Key="ErrorTemplate">
+        <Grid>
+            <AdornedElementPlaceholder x:Name="controlWithError"/>
+            <Border BorderThickness="1" BorderBrush="#FFDB000C">
+                <Border.ToolTip>
+                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
+                    </MultiBinding>
+                </Border.ToolTip>
+                <Grid Width="12" Height="12" Margin="-4,-4,1,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,0 L6,0 z" Fill="#FFDC000C"/>
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,7 L7,0 L6,0" Fill="#ffffff"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
 
+    <ControlTemplate x:Key="DataGridErrorTemplate">
+        <Grid>
+            <AdornedElementPlaceholder x:Name="controlWithError" Margin="1"/>
+            <Border BorderThickness="1" BorderBrush="#FFDB000C">
+                <Border.ToolTip>
+                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
+                        <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
+                    </MultiBinding>
+                </Border.ToolTip>
+                <Grid Width="12" Height="12" Margin="-4,-4,1,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,0 L6,0 z" Fill="#FFDC000C"/>
+                    <Path Margin="3,3,1,0" Data="M 0,6 L0,7 L7,0 L6,0" Fill="#ffffff"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
 
     <Style TargetType="Label">
         <Setter Property="Padding" Value="0"/>
@@ -14,28 +44,13 @@
     
     <Style TargetType="TextBox">
         <Setter Property="Padding" Value="1,3"/>
-        <!-- Set an empty error template, hide the red rectangle -->
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-        <Style.Triggers>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="Background" Value="{StaticResource InvalidControlBrush}"/>
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
-                            <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
-                            <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
 
-    <Style TargetType="DatePickerTextBox">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Padding" Value="0, 2" />
+    <Style TargetType="DatePicker">
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
-
+    
     <Style TargetType="ToolBarTray">
         <Setter Property="IsLocked" Value="True"/>
     </Style>
@@ -51,11 +66,13 @@
 
     <Style x:Key="TextCellElementStyle" TargetType="TextBlock">
         <Setter Property="Padding" Value="4,2,4,3"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource DataGridErrorTemplate}"/>
     </Style>
 
     <Style x:Key="TextCellEditingStyle" TargetType="TextBox">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="2,2,2,3"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource DataGridErrorTemplate}"/>
     </Style>
 
     <Style TargetType="MenuItem">
