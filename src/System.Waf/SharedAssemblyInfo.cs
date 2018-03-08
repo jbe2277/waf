@@ -4,7 +4,7 @@ using System.Resources;
 
 
 [assembly: AssemblyCompany("jbe2277")]
-[assembly: AssemblyCopyright("Copyright © 2017 jbe2277")]
+[assembly: AssemblyCopyright("Copyright © 2018 jbe2277")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -13,6 +13,6 @@ using System.Resources;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 
-[assembly: AssemblyVersion("4.2.0.1")]
-[assembly: AssemblyFileVersion("4.2.0.1")]
-[assembly: AssemblyInformationalVersion("4.2.0-alpha1")]
+[assembly: AssemblyVersion("4.2.0.91")]
+[assembly: AssemblyFileVersion("4.2.0.91")]
+[assembly: AssemblyInformationalVersion("4.2.0-rc1")]

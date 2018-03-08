@@ -1,9 +1,16 @@
 Changelog
 ---------
 
-Version 4.2.0.1 (Milestone 1)
+Version 4.2.0.91 (Release Candidate 1)
+- WAF: Change ValidatableModel to match the INotifyDataErrorInfo.GetErrors description. [Breaking change]
+- WAF: ThrottledAction: Improve performance of InvokeAccumulated.
+- WAF: Remove the FileType.FileExtension limitation that it has to start with a '.' point character.
+- WAF: Change FileType to expose FileExtensions collection instead of FileExtension with the concatenated string. [Breaking change]
+- WAF: Add NullToVisibilityConverter class.
+- WAF: Add ResourceHelper class.
 - Samples: Improve WPF design time support.
-- TODO
+- InfoMan: Improve validation logic (Replace custom ValidationModel class with ValidatableModel).
+- BookLibrary: Improve validation error style.
 
 
 Version 4.1.0.100 (Release)
