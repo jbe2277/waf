@@ -9,6 +9,7 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 **How to get started?**
 * WAF comes with realistic real-world sample applications. Please have a look at them. See Sample Applications below.
 * The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
+* The fastest way to create a WAF project is by using the [WAF Visual Studio Project Template](https://marketplace.visualstudio.com/items?itemName=jbe2277.WAFProjectTemplate). Please update the WAF NuGet packages to the latest stable version after project creation.
 
 ## Version 4
 
