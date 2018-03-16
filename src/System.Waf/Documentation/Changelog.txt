@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.2.0.100 (Release)
+- WAF: Update version number.
+
+
 Version 4.2.0.91 (Release Candidate 1)
 - WAF: Change ValidatableModel to match the INotifyDataErrorInfo.GetErrors description. [Breaking change]
 - WAF: ThrottledAction: Improve performance of InvokeAccumulated.
