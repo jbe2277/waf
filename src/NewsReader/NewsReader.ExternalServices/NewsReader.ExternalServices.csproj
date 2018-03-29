@@ -11,8 +11,8 @@
     <AssemblyName>Jbe.NewsReader.ExternalServices</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>15</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,21 +57,11 @@
     <EmbeddedResource Include="Properties\NewsReader.ExternalServices.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
-      <Project>{EEB646F7-C75A-4D7F-9DA5-1B2046962790}</Project>
-      <Name>NewsReader.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj">
-      <Project>{f022f956-241e-444d-ba42-1dd008071fe6}</Project>
-      <Name>NewsReader.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.4.1</Version>
+      <Version>6.0.8</Version>
     </PackageReference>
     <PackageReference Include="System.Composition">
-      <Version>1.0.31</Version>
+      <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.4.0</Version>
@@ -79,6 +69,16 @@
     <PackageReference Include="System.Waf.Uwp">
       <Version>4.1.0-alpha8</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
+      <Project>{53cb6f45-3ea4-4f45-b836-cfdde46316cd}</Project>
+      <Name>NewsReader.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj">
+      <Project>{dd706f3e-0749-4231-8d5c-3ae838b5dfcd}</Project>
+      <Name>NewsReader.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
