@@ -2,6 +2,7 @@
 using System;
 using System.Composition;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Web;
@@ -36,7 +37,7 @@ namespace Jbe.NewsReader.ExternalServices
                     feed.Items.Select(x => new FeedItemDto(
                                 x.ItemUri ?? x.Links.FirstOrDefault()?.Uri,
                                 x.PublishedDate,
-                                x.Title.Text,
+                                RemoveHtmlTags(x.Title.Text),
                                 RemoveHtmlTags(x.Summary?.Text)
                             )).ToArray()
                 );
@@ -50,6 +51,7 @@ namespace Jbe.NewsReader.ExternalServices
         private static string RemoveHtmlTags(string message)
         {
             if (string.IsNullOrEmpty(message)) { return message; }
+            message = WebUtility.HtmlDecode(message);
             return Regex.Replace(Regex.Replace(message, "\\&.{0,4}\\;", ""), "<.*?>", "");
         }
     }
