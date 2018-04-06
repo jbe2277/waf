@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Jbe.NewsReader.Presentation.Controls;
 using System.Linq;
+using Windows.ApplicationModel.Core;
 
 namespace Jbe.NewsReader.Presentation.Views
 {
@@ -19,6 +20,8 @@ namespace Jbe.NewsReader.Presentation.Views
 
         public ShellView()
         {
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
+
             InitializeComponent();
             viewModel = new Lazy<ShellViewModel>(() => (ShellViewModel)DataContext);
             Loaded += FirstTimeLoadedHandler;
