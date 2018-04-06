@@ -97,7 +97,7 @@ namespace Jbe.NewsReader.Domain
         {
             foreach (var item in newFeedItems)
             {
-                var foundItem = items.FirstOrDefault(x => x.Uri == item.Uri);
+                var foundItem = items.FirstOrDefault(x => x.Uri == item.Uri && x.Uri.Fragment == item.Uri.Fragment);
                 if (foundItem != null)
                 {
                     foundItem.ApplyValuesFrom(item, excludeMarkAsRead);
