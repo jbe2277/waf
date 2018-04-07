@@ -29,6 +29,7 @@ UpgradeLog*.htm
 # Store Packages
 *StoreKey.pfx
 Package.StoreAssociation.xml
+Package.xml
 *.appx
 _pkginfo.txt
 [Bb]undle[Aa]rtifacts/
