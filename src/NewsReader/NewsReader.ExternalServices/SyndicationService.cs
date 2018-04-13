@@ -36,7 +36,7 @@ namespace Jbe.NewsReader.ExternalServices
                 return new FeedDto(feed.Title.Text,
                     feed.Items.Select(x => new FeedItemDto(
                                 x.ItemUri ?? x.Links.FirstOrDefault()?.Uri,
-                                x.PublishedDate,
+                                x.PublishedDate.UtcDateTime > new DateTime(1601, 1, 2) ? x.PublishedDate : x.LastUpdatedTime,  // 1601 is used when PublishedDate is not set
                                 RemoveHtmlTags(x.Title.Text),
                                 RemoveHtmlTags(x.Summary?.Text)
                             )).ToArray()
