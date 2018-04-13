@@ -62,7 +62,7 @@ namespace Jbe.NewsReader.Presentation
             var container = configuration.CreateContainer();
 
             // Initialize and run all module controllers
-            // TODO: Dirty hack because of a serious bug in MEF2 (Multiple Exports toghether with Shared)
+            // TODO: Dirty hack because of a serious bug in MEF2 https://github.com/dotnet/corefx/issues/18789
             appControllers = container.GetExports<INavigationService>().Cast<IAppController>().ToArray();
             foreach (var appController in appControllers) { appController.Initialize(); }
             foreach (var appController in appControllers) { appController.Run(); }
