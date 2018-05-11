@@ -4,7 +4,7 @@
     <ControlTemplate x:Key="ErrorTemplate">
         <Grid>
             <AdornedElementPlaceholder x:Name="controlWithError"/>
-            <Border BorderThickness="1" BorderBrush="#FFDB000C">
+            <Border BorderThickness="1" BorderBrush="#FFDB000C" SnapsToDevicePixels="True">
                 <Border.ToolTip>
                     <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
@@ -22,7 +22,7 @@
     <ControlTemplate x:Key="DataGridErrorTemplate">
         <Grid>
             <AdornedElementPlaceholder x:Name="controlWithError" Margin="1"/>
-            <Border BorderThickness="1" BorderBrush="#FFDB000C">
+            <Border BorderThickness="1" BorderBrush="#FFDB000C" SnapsToDevicePixels="True">
                 <Border.ToolTip>
                     <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
