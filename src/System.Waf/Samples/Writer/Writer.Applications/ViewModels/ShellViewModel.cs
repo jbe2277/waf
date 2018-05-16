@@ -15,28 +15,20 @@ namespace Waf.Writer.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>
     {
         private readonly IMessageService messageService;
-        private readonly DelegateCommand englishCommand;
-        private readonly DelegateCommand germanCommand;
-        private readonly DelegateCommand aboutCommand;
-        private ICommand printPreviewCommand;
-        private ICommand closePrintPreviewCommand;
-        private ICommand printCommand;
-        private ICommand exitCommand;
         private object contentView;
         private bool isPrintPreviewVisible;
         private CultureInfo newLanguage;
-        
 
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService, IShellService shellService, IFileService fileService)
             : base(view)
         {
             this.messageService = messageService;
-            this.ShellService = shellService;
-            this.FileService = fileService;
-            this.englishCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("en-US")));
-            this.germanCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("de-DE")));
-            this.aboutCommand = new DelegateCommand(ShowAboutMessage);
+            ShellService = shellService;
+            FileService = fileService;
+            EnglishCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("en-US")));
+            GermanCommand = new DelegateCommand(() => SelectLanguage(new CultureInfo("de-DE")));
+            AboutCommand = new DelegateCommand(ShowAboutMessage);
 
             view.Closing += ViewClosing;
             view.Closed += ViewClosed;
@@ -54,8 +46,7 @@ namespace Waf.Writer.Applications.ViewModels
             ViewCore.IsMaximized = Settings.Default.IsMaximized;
         }
 
-
-        public string Title => ApplicationInfo.ProductName;
+        public static string Title => ApplicationInfo.ProductName;
 
         public IShellService ShellService { get; }
 
@@ -63,35 +54,19 @@ namespace Waf.Writer.Applications.ViewModels
 
         public CultureInfo NewLanguage => newLanguage;
 
-        public ICommand EnglishCommand => englishCommand;
+        public ICommand EnglishCommand { get; }
 
-        public ICommand GermanCommand => germanCommand;
+        public ICommand GermanCommand { get; }
 
-        public ICommand AboutCommand => aboutCommand;
+        public ICommand AboutCommand { get; }
 
-        public ICommand PrintPreviewCommand
-        {
-            get { return printPreviewCommand; }
-            set { SetProperty(ref printPreviewCommand, value); }
-        }
+        public ICommand PrintPreviewCommand { get; set; }
 
-        public ICommand ClosePrintPreviewCommand
-        {
-            get { return closePrintPreviewCommand; }
-            set { SetProperty(ref closePrintPreviewCommand, value); }
-        }
+        public ICommand ClosePrintPreviewCommand { get; set; }
 
-        public ICommand PrintCommand
-        {
-            get { return printCommand; }
-            set { SetProperty(ref printCommand, value); }
-        }
+        public ICommand PrintCommand { get; set; }
 
-        public ICommand ExitCommand
-        {
-            get { return exitCommand; }
-            set { SetProperty(ref exitCommand, value); }
-        }
+        public ICommand ExitCommand { get; set; }
 
         public object ContentView
         {
@@ -105,9 +80,7 @@ namespace Waf.Writer.Applications.ViewModels
             set { SetProperty(ref isPrintPreviewVisible, value); }
         }
 
-
         public event CancelEventHandler Closing;
-
 
         public void Show()
         {

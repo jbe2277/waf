@@ -15,31 +15,24 @@ namespace Waf.Writer.Applications.ViewModels
     public class MainViewModel : ViewModel<IMainView>
     {
         private readonly IShellService shellService;
-        private object startView;
         private IDocument activeDocument;
         private object activeDocumentView;
-        
 
         [ImportingConstructor]
         public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) 
             : base(view)
         {
             this.shellService = shellService;
-            this.FileService = fileService;
-            this.DocumentViews = new ObservableCollection<object>();
+            FileService = fileService;
+            DocumentViews = new ObservableCollection<object>();
             
             CollectionChangedEventManager.AddHandler(DocumentViews, DocumentViewsCollectionChanged);
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
         }
 
-
         public IFileService FileService { get; }
 
-        public object StartView
-        {
-            get { return startView; }
-            set { SetProperty(ref startView, value); }
-        }
+        public object StartView { get; set; }
 
         public ObservableCollection<object> DocumentViews { get; }
 
@@ -48,7 +41,6 @@ namespace Waf.Writer.Applications.ViewModels
             get { return activeDocumentView; }
             set { SetProperty(ref activeDocumentView, value); }
         }
-
 
         private void DocumentViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

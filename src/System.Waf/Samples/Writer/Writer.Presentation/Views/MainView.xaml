@@ -39,7 +39,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ContentControl x:Name="startView" Content="{Binding StartView}">
+        <ContentControl x:Name="startView" Content="{Binding StartView, Mode=OneTime}">
             <ContentControl.RenderTransform>
                 <TranslateTransform/>
             </ContentControl.RenderTransform>

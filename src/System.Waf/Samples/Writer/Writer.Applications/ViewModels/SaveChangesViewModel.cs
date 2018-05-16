@@ -12,10 +12,8 @@ namespace Waf.Writer.Applications.ViewModels
     {
         private readonly DelegateCommand yesCommand;
         private readonly DelegateCommand noCommand;
-        private IReadOnlyList<IDocument> documents;
         private bool? dialogResult;
 
-        
         [ImportingConstructor]
         public SaveChangesViewModel(ISaveChangesView view) : base(view)
         {
@@ -23,19 +21,13 @@ namespace Waf.Writer.Applications.ViewModels
             noCommand = new DelegateCommand(() => Close(false));
         }
 
-
         public static string Title => ApplicationInfo.ProductName;
 
         public ICommand YesCommand => yesCommand;
 
         public ICommand NoCommand => noCommand; 
 
-        public IReadOnlyList<IDocument> Documents
-        {
-            get { return documents; }
-            set { SetProperty(ref documents, value); }
-        }
-
+        public IReadOnlyList<IDocument> Documents { get; set; }
 
         public bool? ShowDialog(object owner)
         {

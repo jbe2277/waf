@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.Writer.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleSaveChangesViewModel, IsDesignTimeCreatable=True}"
-    Title="{Binding Title}" MinWidth="440" MinHeight="300" SizeToContent="WidthAndHeight" ShowInTaskbar="False" 
+    Title="{Binding Title, Mode=OneTime}" MinWidth="440" MinHeight="300" SizeToContent="WidthAndHeight" ShowInTaskbar="False" 
     Icon="{StaticResource WriterImageSource}">
     
     <Grid Margin="0,0,11,11">
@@ -26,12 +26,12 @@
         
         <Border BorderBrush="#828790" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="11,11,0,11">
             <ScrollViewer Padding="4">
-                <ItemsControl ItemsSource="{Binding Documents}" DisplayMemberPath="FileName"/>
+                <ItemsControl ItemsSource="{Binding Documents, Mode=OneTime}" DisplayMemberPath="FileName"/>
             </ScrollViewer>
         </Border>
         
-        <Button Command="{Binding YesCommand}" Content="{x:Static p:Resources.YesMenu}" IsDefault="True" Grid.Column="1" Grid.Row="2"/>
-        <Button Command="{Binding NoCommand}" Content="{x:Static p:Resources.NoMenu}" Grid.Column="2" Grid.Row="2"/>
+        <Button Command="{Binding YesCommand, Mode=OneTime}" Content="{x:Static p:Resources.YesMenu}" IsDefault="True" Grid.Column="1" Grid.Row="2"/>
+        <Button Command="{Binding NoCommand, Mode=OneTime}" Content="{x:Static p:Resources.NoMenu}" Grid.Column="2" Grid.Row="2"/>
         <Button Content="{x:Static p:Resources.CancelMenu}" IsCancel="True" Grid.Column="3" Grid.Row="2"/>
     </Grid>
     

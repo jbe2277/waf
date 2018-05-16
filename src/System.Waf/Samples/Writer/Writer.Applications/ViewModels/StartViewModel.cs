@@ -14,7 +14,6 @@ namespace Waf.Writer.Applications.ViewModels
             FileService = fileService;
         }
 
-
         public IFileService FileService { get; }
     }
 }

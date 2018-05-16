@@ -21,7 +21,6 @@ namespace Waf.Writer.Applications.ViewModels
         private bool isVisible;
         private double zoom;
 
-
         protected ZoomViewModel(T view, IShellService shellService) : base(view)
         {
             this.shellService = shellService;
@@ -32,7 +31,6 @@ namespace Waf.Writer.Applications.ViewModels
             fitToWidthCommand = new DelegateCommand(FitToWidth);
             zoom = 1;
         }
-
 
         public IReadOnlyList<string> DefaultZooms { get; }
 
@@ -69,7 +67,6 @@ namespace Waf.Writer.Applications.ViewModels
                 }
             }
         }
-
 
         protected virtual void FitToWidthCore() { }
         
