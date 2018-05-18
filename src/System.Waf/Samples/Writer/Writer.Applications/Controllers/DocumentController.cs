@@ -14,16 +14,13 @@ namespace Waf.Writer.Applications.Controllers
     {
         private readonly IFileService fileService;
         
-        
         protected DocumentController(IFileService fileService)
         {
             if (fileService == null) { throw new ArgumentNullException(nameof(fileService)); }
-            
             this.fileService = fileService;
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
             CollectionChangedEventManager.AddHandler(fileService.Documents, DocumentsCollectionChanged);
         }
-
 
         protected abstract void OnDocumentAdded(IDocument document);
 

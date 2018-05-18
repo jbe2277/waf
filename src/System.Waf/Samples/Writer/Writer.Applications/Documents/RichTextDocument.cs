@@ -6,18 +6,12 @@ namespace Waf.Writer.Applications.Documents
 {
     public class RichTextDocument : Document
     {
-        public RichTextDocument(RichTextDocumentType documentType) : this(documentType, new FlowDocument())
+        public RichTextDocument(RichTextDocumentType documentType, FlowDocument content = null) : base(documentType)
         {
+            Content = content ?? new FlowDocument();
         }
-
-        public RichTextDocument(RichTextDocumentType documentType, FlowDocument content) : base(documentType)
-        {
-            Content = content;
-        }
-
 
         public FlowDocument Content { get; }
-
 
         public FlowDocument CloneContent()
         {

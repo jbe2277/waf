@@ -8,13 +8,11 @@ namespace Waf.Writer.Applications.Documents
         private string fileName;
         private bool modified;
 
-
         protected Document(IDocumentType documentType)
         {
             if (documentType == null) { throw new ArgumentNullException(nameof(documentType)); }
             DocumentType = documentType;
         }
-
 
         public IDocumentType DocumentType { get; }
 

@@ -13,8 +13,8 @@ namespace Test.Writer.Applications.ViewModels
         public void PropertyChangedEventTest()
         {
             var viewModel = Container.GetExportedValue<RichTextViewModel>();
-            RichTextDocumentType documentType = new RichTextDocumentType();
-            RichTextDocument document = new RichTextDocument(documentType);
+            var documentType = new RichTextDocumentType();
+            var document = new RichTextDocument(documentType);
             viewModel.Document = document;
 
             Assert.AreEqual(document, viewModel.Document);

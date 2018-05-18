@@ -19,24 +19,21 @@ namespace Waf.Writer.Applications.Controllers
         private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
         private readonly Dictionary<RichTextDocument, RichTextViewModel> richTextViewModels;
 
-        
         [ImportingConstructor]
-        public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, 
-            ExportFactory<RichTextViewModel> richTextViewModelFactory) 
+        public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) 
             : base(fileService)
         {
             this.fileService = fileService;
             this.mainViewModel = mainViewModel;
             this.richTextViewModelFactory = richTextViewModelFactory;
-            this.richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
+            richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
             
             PropertyChangedEventManager.AddHandler(mainViewModel, MainViewModelPropertyChanged, "");
         }
 
-        
         protected override void OnDocumentAdded(IDocument document)
         {
-            RichTextDocument richTextDocument = document as RichTextDocument;
+            var richTextDocument = document as RichTextDocument;
             if (richTextDocument != null)
             {
                 RichTextViewModel richTextViewModel = richTextViewModelFactory.CreateExport().Value;
@@ -48,7 +45,7 @@ namespace Waf.Writer.Applications.Controllers
 
         protected override void OnDocumentRemoved(IDocument document)
         {
-            RichTextDocument richTextDocument = document as RichTextDocument;
+            var richTextDocument = document as RichTextDocument;
             if (richTextDocument != null)
             {
                 mainViewModel.DocumentViews.Remove(richTextViewModels[richTextDocument].View);
@@ -64,7 +61,7 @@ namespace Waf.Writer.Applications.Controllers
             }
             else
             {
-                RichTextDocument richTextDocument = activeDocument as RichTextDocument;
+                var richTextDocument = activeDocument as RichTextDocument;
                 if (richTextDocument != null)
                 {
                     mainViewModel.ActiveDocumentView = richTextViewModels[richTextDocument].View;
@@ -76,10 +73,10 @@ namespace Waf.Writer.Applications.Controllers
         {
             if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
             {
-                IView richTextView = mainViewModel.ActiveDocumentView as IView;
+                var richTextView = mainViewModel.ActiveDocumentView as IView;
                 if (richTextView != null)
                 {
-                    RichTextViewModel richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
+                    var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
                     if (richTextViewModel != null)
                     {
                         fileService.ActiveDocument = richTextViewModel.Document;

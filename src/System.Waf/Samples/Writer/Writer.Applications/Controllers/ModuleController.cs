@@ -25,7 +25,6 @@ namespace Waf.Writer.Applications.Controllers
         private readonly StartViewModel startViewModel;
         private readonly DelegateCommand exitCommand;
 
-        
         [ImportingConstructor]
         public ModuleController(IEnvironmentService environmentService, IPresentationService presentationService, ShellService shellService,
             Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController, Lazy<PrintController> printController,
@@ -52,10 +51,9 @@ namespace Waf.Writer.Applications.Controllers
 
             shellService.ShellView = this.shellViewModel.View;
             this.shellViewModel.Closing += ShellViewModelClosing;
-            this.exitCommand = new DelegateCommand(Close);
+            exitCommand = new DelegateCommand(Close);
         }
 
-        
         public void Initialize()
         {
             shellViewModel.ExitCommand = exitCommand;

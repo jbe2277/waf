@@ -15,11 +15,9 @@ namespace Waf.Writer.Applications.Documents
             FileExtension = fileExtension;
         }
 
-
         public string Description { get; }
 
         public string FileExtension { get; }
-
 
         public virtual bool CanNew() { return false; }
 

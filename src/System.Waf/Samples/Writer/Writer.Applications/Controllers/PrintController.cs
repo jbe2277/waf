@@ -32,7 +32,6 @@ namespace Waf.Writer.Applications.Controllers
         private Package package;
         private XpsDocument xpsDocument;
 
-        
         [ImportingConstructor]
         public PrintController(IFileService fileService, IPrintDialogService printDialogService, 
             ShellViewModel shellViewModel, ExportFactory<PrintPreviewViewModel> printPreviewViewModelFactory)
@@ -41,13 +40,12 @@ namespace Waf.Writer.Applications.Controllers
             this.printDialogService = printDialogService;
             this.shellViewModel = shellViewModel;
             this.printPreviewViewModelFactory = printPreviewViewModelFactory;
-            this.printPreviewCommand = new DelegateCommand(ShowPrintPreview, CanShowPrintPreview);
-            this.printCommand = new DelegateCommand(PrintDocument, CanPrintDocument);
-            this.closePrintPreviewCommand = new DelegateCommand(ClosePrintPreview);
+            printPreviewCommand = new DelegateCommand(ShowPrintPreview, CanShowPrintPreview);
+            printCommand = new DelegateCommand(PrintDocument, CanPrintDocument);
+            closePrintPreviewCommand = new DelegateCommand(ClosePrintPreview);
 
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
         }
-
 
         public void Initialize()
         {

@@ -36,7 +36,6 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand saveAsCommand;
         private IDocument lastActiveDocument;
 
-
         [ImportingConstructor]
         public FileController(IMessageService messageService, IFileDialogService fileDialogService, IShellService shellService,
             FileService fileService, ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory)
@@ -46,12 +45,12 @@ namespace Waf.Writer.Applications.Controllers
             this.shellService = shellService;
             this.fileService = fileService;
             this.saveChangesViewModelFactory = saveChangesViewModelFactory;
-            this.documentTypes = new List<IDocumentType>();
-            this.newCommand = new DelegateCommand(NewCommand);
-            this.openCommand = new DelegateCommand(OpenCommand);
-            this.closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
-            this.saveCommand = new DelegateCommand(SaveCommand, CanSaveCommand);
-            this.saveAsCommand = new DelegateCommand(SaveAsCommand, CanSaveAsCommand);
+            documentTypes = new List<IDocumentType>();
+            newCommand = new DelegateCommand(NewCommand);
+            openCommand = new DelegateCommand(OpenCommand);
+            closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
+            saveCommand = new DelegateCommand(SaveCommand, CanSaveCommand);
+            saveAsCommand = new DelegateCommand(SaveAsCommand, CanSaveAsCommand);
             
             this.fileService.NewCommand = newCommand;
             this.fileService.OpenCommand = openCommand;
@@ -59,12 +58,11 @@ namespace Waf.Writer.Applications.Controllers
             this.fileService.SaveCommand = saveCommand;
             this.fileService.SaveAsCommand = saveAsCommand;
 
-            this.recentFileList = Settings.Default.RecentFileList ?? new RecentFileList();
+            recentFileList = Settings.Default.RecentFileList ?? new RecentFileList();
             this.fileService.RecentFileList = recentFileList;
 
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
         }
-
 
         private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
 
@@ -73,7 +71,6 @@ namespace Waf.Writer.Applications.Controllers
             get { return fileService.ActiveDocument; }
             set { fileService.ActiveDocument = value; }
         }
-
 
         public void Initialize()
         {
@@ -90,7 +87,6 @@ namespace Waf.Writer.Applications.Controllers
         {
             Settings.Default.RecentFileList = recentFileList;
         }
-
 
         public IDocument Open(string fileName)
         {
@@ -165,7 +161,6 @@ namespace Waf.Writer.Applications.Controllers
             saveCommand.RaiseCanExecuteChanged();
             saveAsCommand.RaiseCanExecuteChanged();
         }
-
 
         internal IDocument New(IDocumentType documentType)
         {
@@ -272,7 +267,6 @@ namespace Waf.Writer.Applications.Controllers
 
             return dialogResult != null;
         }
-
 
         private IDocument OpenCore(string fileName, FileType fileType = null)
         {

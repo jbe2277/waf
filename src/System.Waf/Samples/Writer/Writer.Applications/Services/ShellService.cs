@@ -10,11 +10,9 @@ namespace Waf.Writer.Applications.Services
     [Export(typeof(IShellService)), Export]
     internal class ShellService : Model, IShellService
     {
-        private object shellView;
         private string documentName;
         private IEditingCommands activeEditingCommands;
         private IZoomCommands activeZoomCommands;
-
 
         [ImportingConstructor]
         public ShellService()
@@ -23,12 +21,7 @@ namespace Waf.Writer.Applications.Services
             activeZoomCommands = new DisabledZoomCommands();
         }
 
-
-        public object ShellView
-        {
-            get { return shellView; }
-            set { SetProperty(ref shellView, value); }
-        }
+        public object ShellView { get; set; }
 
         public string DocumentName
         {
@@ -68,10 +61,7 @@ namespace Waf.Writer.Applications.Services
 
         private class DisabledZoomCommands : Model, IZoomCommands
         {
-            private readonly DelegateCommand disabledCommand = new DelegateCommand(() => { }, () => false);
-
-
-            public IReadOnlyList<string> DefaultZooms { get; } = null;
+            public IReadOnlyList<string> DefaultZooms => null;
 
             public double Zoom
             {
@@ -79,11 +69,11 @@ namespace Waf.Writer.Applications.Services
                 set { }
             }
             
-            public ICommand ZoomInCommand => disabledCommand;
+            public ICommand ZoomInCommand => DelegateCommand.DisabledCommand;
             
-            public ICommand ZoomOutCommand => disabledCommand;
+            public ICommand ZoomOutCommand => DelegateCommand.DisabledCommand;
             
-            public ICommand FitToWidthCommand => disabledCommand;
+            public ICommand FitToWidthCommand => DelegateCommand.DisabledCommand;
         }
     }
 }

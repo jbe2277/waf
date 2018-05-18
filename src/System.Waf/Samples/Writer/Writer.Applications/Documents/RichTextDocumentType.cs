@@ -9,12 +9,10 @@ namespace Waf.Writer.Applications.Documents
     public class RichTextDocumentType : DocumentType
     {
         private int documentCount;
-
         
         public RichTextDocumentType() : base(Resources.RichTextDocuments, ".rtf")
         {
         }
-
 
         public override bool CanNew() { return true; }
 

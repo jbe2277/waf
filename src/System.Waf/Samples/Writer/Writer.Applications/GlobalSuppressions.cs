@@ -35,4 +35,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "github", Scope = "resource", Target = "Waf.Writer.Applications.Properties.Resources.resources")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "jbe", Scope = "resource", Target = "Waf.Writer.Applications.Properties.Resources.resources")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.Writer.Applications.ViewModels.SaveChangesViewModel.#Title")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Waf.Writer.Applications.Documents.RichTextDocument.#.ctor(Waf.Writer.Applications.Documents.RichTextDocumentType,System.Windows.Documents.FlowDocument)")]
 

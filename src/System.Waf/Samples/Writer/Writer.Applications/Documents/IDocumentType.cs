@@ -6,7 +6,6 @@
 
         string FileExtension { get; }
 
-
         bool CanNew();
         
         IDocument New();
