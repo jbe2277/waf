@@ -17,7 +17,6 @@ namespace Test.Writer.Applications.ViewModels
         private IShellService shellService;
         private MockZoomViewModel zoomViewModel;
 
-
         protected override void OnTestInitialize()
         {
 	        base.OnTestInitialize();
@@ -33,7 +32,6 @@ namespace Test.Writer.Applications.ViewModels
 	        base.OnTestCleanup();
             Thread.CurrentThread.CurrentCulture = currentCulture;
         }
-
 
         [TestMethod]
         public void DefaultZoomsTest()

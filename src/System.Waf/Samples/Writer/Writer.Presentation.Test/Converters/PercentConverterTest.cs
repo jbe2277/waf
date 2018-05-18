@@ -11,7 +11,6 @@ namespace Test.Writer.Presentation.Converters
     {
         private CultureInfo currentCulture;
 
-
         [TestInitialize]
         public void TestInitialize()
         {
@@ -25,18 +24,17 @@ namespace Test.Writer.Presentation.Converters
             Thread.CurrentThread.CurrentCulture = currentCulture;
         }
         
-
         [TestMethod]
         public void ConvertTest()
         {
-            PercentConverter converter = new PercentConverter();
+            var converter = new PercentConverter();
             Assert.AreEqual("75 %", converter.Convert(0.75, null, null, CultureInfo.InvariantCulture));
         }
 
         [TestMethod]
         public void ConvertBackTest()
         {
-            PercentConverter converter = new PercentConverter();
+            var converter = new PercentConverter();
             Assert.AreEqual(0.75, converter.ConvertBack("75 %", null, null, CultureInfo.InvariantCulture));
             Assert.AreEqual(0.75, converter.ConvertBack("75 %", null, null, null));
 

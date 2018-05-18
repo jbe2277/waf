@@ -13,7 +13,7 @@ namespace Test.Writer.Applications.ViewModels
         public void ShowPrintDocument()
         {
             var viewModel = Container.GetExportedValue<PrintPreviewViewModel>();
-            MockDocumentPaginatorSource document = new MockDocumentPaginatorSource();
+            var document = new MockDocumentPaginatorSource();
         
             viewModel.Document = document;
             Assert.AreEqual(document, viewModel.Document);

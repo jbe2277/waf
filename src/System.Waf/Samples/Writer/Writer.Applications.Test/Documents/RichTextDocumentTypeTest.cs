@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.Writer.Applications.Documents;
 using System.Waf.UnitTesting;
+using Waf.Writer.Applications.Documents;
 
 namespace Test.Writer.Applications.Documents
 {
@@ -10,7 +10,7 @@ namespace Test.Writer.Applications.Documents
         [TestMethod]
         public void DocumentTypeTest()
         {
-            RichTextDocumentType documentType = new RichTextDocumentType();
+            var documentType = new RichTextDocumentType();
             Assert.AreEqual(".rtf", documentType.FileExtension);
             Assert.AreEqual("RichText Documents (*.rtf)", documentType.Description);
         }
@@ -18,9 +18,9 @@ namespace Test.Writer.Applications.Documents
         [TestMethod]
         public void NewDocumentTest()
         {
-            RichTextDocumentType documentType = new RichTextDocumentType();
+            var documentType = new RichTextDocumentType();
             Assert.IsTrue(documentType.CanNew());
-            RichTextDocument document = documentType.New() as RichTextDocument;
+            var document = documentType.New() as RichTextDocument;
             Assert.IsNotNull(document);
             Assert.AreEqual("Document 1.rtf", document.FileName);
         }
@@ -28,7 +28,7 @@ namespace Test.Writer.Applications.Documents
         [TestMethod]
         public void SaveAndOpenDocumentTest()
         {
-            RichTextDocumentType documentType = new RichTextDocumentType();
+            var documentType = new RichTextDocumentType();
             IDocument document = documentType.New();
             Assert.AreEqual("Document 1.rtf", document.FileName);
 
@@ -46,7 +46,7 @@ namespace Test.Writer.Applications.Documents
         [TestMethod]
         public void DocumentTest()
         {
-            RichTextDocumentType documentType = new RichTextDocumentType();
+            var documentType = new RichTextDocumentType();
             IDocument document = documentType.New();
 
             Assert.AreEqual(document.DocumentType, documentType);

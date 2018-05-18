@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Waf.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Services;
+using Waf.Writer.Applications.ViewModels;
 
 namespace Test.Writer.Applications.ViewModels
 {

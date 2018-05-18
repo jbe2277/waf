@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.Writer.Applications.Controllers;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -19,8 +18,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void AddAndRemoveDocumentViewTest()
         {
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
-            IFileService fileService = Container.GetExportedValue<IFileService>();
+            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var fileService = Container.GetExportedValue<IFileService>();
 
             Assert.IsFalse(fileService.Documents.Any());
             Assert.IsFalse(mainViewModel.DocumentViews.Any());
@@ -30,8 +29,8 @@ namespace Test.Writer.Applications.Controllers
             fileService.NewCommand.Execute(null);
             IDocument document = fileService.Documents.Last();
 
-            IRichTextView richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
-            RichTextViewModel richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
+            var richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
+            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
             Assert.AreEqual(document, richTextViewModel.Document);
 
             fileService.NewCommand.Execute(null);
@@ -65,13 +64,13 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void IllegalDocumentCollectionChangeTest()
         {
-            IFileService fileService = Container.GetExportedValue<IFileService>();
+            var fileService = Container.GetExportedValue<IFileService>();
 
             fileService.NewCommand.Execute(null);
 
             // We have to use reflection to get the private documents collection field
-            FieldInfo documentsInfo = typeof(FileService).GetField("documents", BindingFlags.Instance | BindingFlags.NonPublic);
-            ObservableCollection<IDocument> documents = (ObservableCollection<IDocument>)documentsInfo.GetValue(fileService);
+            var documentsInfo = typeof(FileService).GetField("documents", BindingFlags.Instance | BindingFlags.NonPublic);
+            var documents = (ObservableCollection<IDocument>)documentsInfo.GetValue(fileService);
 
             // Now we call a method that is not supported by the DocumentController base class
             AssertHelper.ExpectedException<NotSupportedException>(() => documents.Clear());

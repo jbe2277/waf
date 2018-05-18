@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Applications;
 using System.Waf.UnitTesting.Mocks;
-using Waf.Writer.Applications.Properties;
-using Waf.Writer.Applications.Services;
 using Test.Writer.Applications.Services;
 using Test.Writer.Applications.Views;
+using Waf.Writer.Applications.Properties;
+using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
 namespace Test.Writer.Applications.ViewModels

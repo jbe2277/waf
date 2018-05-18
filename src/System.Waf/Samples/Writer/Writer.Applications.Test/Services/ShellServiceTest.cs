@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.Writer.Applications.Services;
-using System.Threading;
-using System.Globalization;
 
 namespace Test.Writer.Applications.Services
 {

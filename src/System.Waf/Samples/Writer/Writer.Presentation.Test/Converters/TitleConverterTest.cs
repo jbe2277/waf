@@ -13,7 +13,7 @@ namespace Test.Writer.Presentation.Converters
         [TestMethod]
         public void ConvertTest()
         {
-            TitleConverter converter = new TitleConverter();
+            var converter = new TitleConverter();
 
             Assert.AreEqual("App Title", converter.Convert(new[] { "App Title", null }, null, null, CultureInfo.InvariantCulture));
             Assert.AreEqual("Document1.rtf - App Title", 

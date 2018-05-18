@@ -5,10 +5,10 @@ using System.Threading;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting.Mocks;
-using Waf.Writer.Applications.Controllers;
-using Waf.Writer.Applications.Properties;
 using Test.Writer.Applications.Services;
 using Test.Writer.Applications.Views;
+using Waf.Writer.Applications.Controllers;
+using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 
@@ -24,14 +24,14 @@ namespace Test.Writer.Applications.Controllers
             
             controller.Initialize();
             
-            MockShellView shellView = (MockShellView)Container.GetExportedValue<IShellView>();
-            ShellViewModel shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
+            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
             Assert.IsNotNull(shellViewModel.ExitCommand);
 
             controller.Run();
 
             Assert.IsTrue(shellView.IsVisible);
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var mainViewModel = Container.GetExportedValue<MainViewModel>();
             Assert.AreEqual(mainViewModel.View, shellViewModel.ContentView);
 
             shellViewModel.ExitCommand.Execute(null);
@@ -43,7 +43,7 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenFileViaCommandLine()
         {
-            MockEnvironmentService environmentService = Container.GetExportedValue<MockEnvironmentService>();
+            var environmentService = Container.GetExportedValue<MockEnvironmentService>();
             environmentService.DocumentFileName = "Document.mock";
 
             var controller = Container.GetExportedValue<ModuleController>();
@@ -55,7 +55,7 @@ namespace Test.Writer.Applications.Controllers
 
             // Open a file with an unknown file extension and check if an error message is shown.
             environmentService.DocumentFileName = "Unknown.fileExtension";
-            MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Container.GetExportedValue<MockMessageService>();
             messageService.Clear();
             
             controller.Run();
@@ -71,11 +71,11 @@ namespace Test.Writer.Applications.Controllers
             controller.Initialize();
             controller.Run();
 
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
             shellViewModel.FileService.NewCommand.Execute(null);
             
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
-            RichTextViewModel richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
+            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
             richTextViewModel.Document.Modified = true;
 
             bool showDialogCalled = false;
@@ -91,7 +91,7 @@ namespace Test.Writer.Applications.Controllers
             // modified document wasn't saved.
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsTrue(showDialogCalled);
-            MockShellView shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
             Assert.IsTrue(shellView.IsVisible);
 
             showDialogCalled = false;
@@ -101,7 +101,7 @@ namespace Test.Writer.Applications.Controllers
                 view.ViewModel.YesCommand.Execute(null);
             };
 
-            MockFileDialogService fileDialogService = (MockFileDialogService)Container.GetExportedValue<IFileDialogService>();
+            var fileDialogService = (MockFileDialogService)Container.GetExportedValue<IFileDialogService>();
             fileDialogService.Result = new FileDialogResult();
 
             // This time we let the SaveChangesView to save the modified document
@@ -128,7 +128,7 @@ namespace Test.Writer.Applications.Controllers
             controller.Initialize();
             controller.Run();
 
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
             shellViewModel.EnglishCommand.Execute(null);
             Assert.AreEqual(new CultureInfo("en-US"), shellViewModel.NewLanguage);
 

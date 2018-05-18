@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.Writer.Applications.Documents;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Waf.UnitTesting;
-using System.ComponentModel;
+using Waf.Writer.Applications.Documents;
 
 namespace Test.Writer.Applications.Documents
 {
@@ -25,12 +21,12 @@ namespace Test.Writer.Applications.Documents
         [TestMethod]
         public void CheckBaseImplementation()
         {
-            MockDocumentTypeBase documentType = new MockDocumentTypeBase("RichText Documents", ".rtf");
+            var documentType = new MockDocumentTypeBase("RichText Documents", ".rtf");
             Assert.IsFalse(documentType.CanNew());
             Assert.IsFalse(documentType.CanOpen());
             Assert.IsFalse(documentType.CanSave(null));
 
-            MockDocumentTypeBase documentType2 = new MockDocumentTypeBase("XPS Documents", ".xps");
+            var documentType2 = new MockDocumentTypeBase("XPS Documents", ".xps");
             AssertHelper.ExpectedException<NotSupportedException>(() => documentType.New());
             AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Open("TestDocument1.rtf"));
             AssertHelper.ExpectedException<NotSupportedException>(() => 
@@ -52,7 +48,6 @@ namespace Test.Writer.Applications.Documents
                 : base(description, fileExtension)
             {
             }
-
 
             public IDocument CallNewCore() { return NewCore(); }
 

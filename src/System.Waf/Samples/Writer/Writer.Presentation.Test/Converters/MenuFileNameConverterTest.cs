@@ -11,7 +11,7 @@ namespace Test.Writer.Presentation.Converters
         [TestMethod]
         public void Convert()
         {
-            MenuFileNameConverter converter = new MenuFileNameConverter();
+            var converter = new MenuFileNameConverter();
 
             Assert.AreEqual("", converter.Convert(null, null, null, null));
             Assert.AreEqual("Document 1.rtf", converter.Convert(@"C:\Document 1.rtf", null, null, null));

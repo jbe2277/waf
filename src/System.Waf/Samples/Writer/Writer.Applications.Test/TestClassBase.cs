@@ -14,9 +14,7 @@ namespace Test.Writer.Applications
         private PrintController printController;
         private RichTextDocumentController richTextDocumentController;
 
-
         protected CompositionContainer Container => container;
-
 
         [TestInitialize]
         public void TestInitialize()

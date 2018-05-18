@@ -12,7 +12,7 @@ namespace Test.Writer.Presentation.Converters
         [TestMethod]
         public void ConvertTest()
         {
-            TabFileNameConverter converter = new TabFileNameConverter();
+            var converter = new TabFileNameConverter();
 
             Assert.AreEqual("Document 1.rtf", 
                 converter.Convert(new object[] { "Document 1.rtf", false }, null, null, null));
@@ -24,8 +24,7 @@ namespace Test.Writer.Presentation.Converters
             Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { new object(), new object() }, 
                 typeof(string), null, null));
 
-            AssertHelper.ExpectedException<NotImplementedException>(() =>
-                converter.ConvertBack(null, null, null, null));
+            AssertHelper.ExpectedException<NotImplementedException>(() => converter.ConvertBack(null, null, null, null));
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using Waf.Writer.Applications.Documents;
 using Test.Writer.Applications.Documents;
 using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.ViewModels;
@@ -13,7 +11,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void SaveChangesViewModelCloseTest()
         {
-            MockDocumentType documentType = new MockDocumentType("Mock Document", ".mock");
+            var documentType = new MockDocumentType("Mock Document", ".mock");
             var documents = new[] 
             {
                 documentType.New(),
@@ -21,8 +19,8 @@ namespace Test.Writer.Applications.ViewModels
                 documentType.New()
             };
 
-            MockSaveChangesView view = new MockSaveChangesView();
-            SaveChangesViewModel viewModel = new SaveChangesViewModel(view) { Documents = documents };
+            var view = new MockSaveChangesView();
+            var viewModel = new SaveChangesViewModel(view) { Documents = documents };
             
             // In this case it tries to get the title of the unit test framework which is ""
             Assert.AreEqual("", viewModel.Title);

@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.Writer.Applications.Services;
 using Test.Writer.Applications.Services;
+using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
 namespace Test.Writer.Applications.Controllers
@@ -27,8 +27,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void PrintPreviewTest()
         {
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
-            MainViewModel mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var mainViewModel = Container.GetExportedValue<MainViewModel>();
             shellViewModel.ContentView = mainViewModel.View;
 
             // When no document is available then the command cannot be executed
@@ -49,15 +49,14 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void PrintTest()
         {
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
             Assert.IsFalse(shellViewModel.PrintCommand.CanExecute(null));
 
             shellViewModel.FileService.NewCommand.Execute(null);
             Assert.IsTrue(shellViewModel.PrintCommand.CanExecute(null));
 
-            IFileService fileService = Container.GetExportedValue<IFileService>();
-            MockPrintDialogService printDialogService = 
-                (MockPrintDialogService)Container.GetExportedValue<IPrintDialogService>();
+            var fileService = Container.GetExportedValue<IFileService>();
+            var printDialogService = (MockPrintDialogService)Container.GetExportedValue<IPrintDialogService>();
 
             printDialogService.ShowDialogResult = true;
             shellViewModel.PrintCommand.Execute(null);
@@ -73,8 +72,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void UpdateCommandsTest()
         {
-            IFileService fileService = Container.GetExportedValue<IFileService>();
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var fileService = Container.GetExportedValue<IFileService>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
 
             fileService.NewCommand.Execute(null);
             fileService.NewCommand.Execute(null);

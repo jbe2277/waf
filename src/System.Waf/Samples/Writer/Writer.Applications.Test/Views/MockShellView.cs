@@ -21,11 +21,9 @@ namespace Test.Writer.Applications.Views
 
         public bool IsMaximized { get; set; }
         
-        
         public event CancelEventHandler Closing;
 
         public event EventHandler Closed;
-
 
         public void Show()
         {

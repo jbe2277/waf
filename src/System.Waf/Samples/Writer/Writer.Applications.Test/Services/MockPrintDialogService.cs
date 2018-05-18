@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Waf.Writer.Applications.Services;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Documents;
+using Waf.Writer.Applications.Services;
 
 namespace Test.Writer.Applications.Services
 {
@@ -15,7 +11,6 @@ namespace Test.Writer.Applications.Services
         public DocumentPaginator DocumentPaginator { get; private set; }
         public string Description { get; private set; }
 
-        
         public bool ShowDialog()
         {
             DocumentPaginator = null;

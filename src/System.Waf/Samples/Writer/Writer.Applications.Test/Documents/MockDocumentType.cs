@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using Waf.Writer.Applications.Documents;
-using System.ComponentModel;
-using System.IO;
 
 namespace Test.Writer.Applications.Documents
 {
@@ -16,7 +11,6 @@ namespace Test.Writer.Applications.Documents
             CanSaveResult = true;
         }
 
-
         public bool CanSaveResult { get; set; }
         
         public DocumentOperation DocumentOperation { get; private set; }
@@ -26,7 +20,6 @@ namespace Test.Writer.Applications.Documents
         public string FileName { get; private set; }
 
         public bool ThrowException { get; set; }
-
 
         public void Clear()
         {
