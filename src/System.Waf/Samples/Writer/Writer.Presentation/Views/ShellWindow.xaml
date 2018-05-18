@@ -11,7 +11,7 @@
     
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleConverter}">
-            <Binding Path="Title" Mode="OneTime"/>
+            <Binding Path="Title"/>
             <Binding Path="ShellService.DocumentName"/>
         </MultiBinding>
     </Window.Title>

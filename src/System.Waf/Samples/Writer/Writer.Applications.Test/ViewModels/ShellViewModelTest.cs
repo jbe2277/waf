@@ -25,7 +25,7 @@ namespace Test.Writer.Applications.ViewModels
             Assert.IsTrue(shellView.IsVisible);
 
             // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", ShellViewModel.Title);
+            Assert.AreEqual("", shellViewModel.Title);
 
             Assert.AreEqual(1d, shellViewModel.ShellService.ActiveZoomCommands.Zoom);
 

@@ -21,7 +21,7 @@ namespace Waf.Writer.Applications.ViewModels
             noCommand = new DelegateCommand(() => Close(false));
         }
 
-        public static string Title => ApplicationInfo.ProductName;
+        public string Title => ApplicationInfo.ProductName;
 
         public ICommand YesCommand => yesCommand;
 

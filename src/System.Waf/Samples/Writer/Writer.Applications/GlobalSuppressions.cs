@@ -34,4 +34,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "2", Scope = "member", Target = "Waf.Writer.Applications.ViewModels.ShellViewModel.#.ctor(Waf.Writer.Applications.Views.IShellView,System.Waf.Applications.Services.IMessageService,Waf.Writer.Applications.Services.IPresentationService,Waf.Writer.Applications.Services.IShellService,Waf.Writer.Applications.Services.IFileService)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "github", Scope = "resource", Target = "Waf.Writer.Applications.Properties.Resources.resources")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "jbe", Scope = "resource", Target = "Waf.Writer.Applications.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.Writer.Applications.ViewModels.SaveChangesViewModel.#Title")]
 

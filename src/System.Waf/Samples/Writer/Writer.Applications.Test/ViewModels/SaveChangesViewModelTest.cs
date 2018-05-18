@@ -25,7 +25,7 @@ namespace Test.Writer.Applications.ViewModels
             SaveChangesViewModel viewModel = new SaveChangesViewModel(view) { Documents = documents };
             
             // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", SaveChangesViewModel.Title);
+            Assert.AreEqual("", viewModel.Title);
             Assert.AreEqual(documents, viewModel.Documents);
             
             object owner = new object();

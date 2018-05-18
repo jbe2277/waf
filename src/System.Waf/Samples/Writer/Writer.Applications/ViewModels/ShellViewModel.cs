@@ -46,7 +46,7 @@ namespace Waf.Writer.Applications.ViewModels
             ViewCore.IsMaximized = Settings.Default.IsMaximized;
         }
 
-        public static string Title => ApplicationInfo.ProductName;
+        public string Title => ApplicationInfo.ProductName;
 
         public IShellService ShellService { get; }
 
