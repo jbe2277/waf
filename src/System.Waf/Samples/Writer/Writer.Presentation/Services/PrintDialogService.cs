@@ -10,7 +10,6 @@ namespace Waf.Writer.Presentation.Services
     {
         private readonly PrintDialog printDialog = new PrintDialog();
 
-
         public bool ShowDialog()
         {
             return printDialog.ShowDialog() == true;

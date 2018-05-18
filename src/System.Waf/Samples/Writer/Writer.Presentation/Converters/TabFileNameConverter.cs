@@ -10,7 +10,6 @@ namespace Waf.Writer.Presentation.Converters
     {
         private const int MaxCharacters = 40;
 
-        
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values == null || values.Length != 2 || !(values[0] is string) || !(values[1] is bool))

@@ -18,7 +18,6 @@ namespace Waf.Writer.Presentation.DesignData
             ActiveDocumentView = DocumentViews[0];
         }
 
-
         private static RichTextViewModel CreateRichTextViewModel(string fileName)
         {
             return new RichTextViewModel(new RichTextView(), new MockShellService()) { Document = new RichTextDocument(new RichTextDocumentType()) { FileName = fileName } };

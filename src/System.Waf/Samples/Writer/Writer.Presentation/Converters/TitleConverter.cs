@@ -15,8 +15,8 @@ namespace Waf.Writer.Presentation.Converters
                 return DependencyProperty.UnsetValue;
             }
 
-            string title = (string)values[0];
-            string documentName = (string)values[1];
+            var title = (string)values[0];
+            var documentName = (string)values[1];
 
             if (!string.IsNullOrEmpty(documentName))
             {

@@ -17,7 +17,6 @@ namespace Waf.Writer.Presentation.Views
         private readonly Lazy<RichTextViewModel> viewModel;
         private bool suppressTextChanged;
         private IReadOnlyList<Control> dynamicContextMenuItems;
-        
 
         public RichTextView()
         {
@@ -28,9 +27,7 @@ namespace Waf.Writer.Presentation.Views
             IsVisibleChanged += IsVisibleChangedHandler;
         }
 
-
         private RichTextViewModel ViewModel => viewModel.Value;
-
 
         private void FirstTimeLoadedHandler(object sender, RoutedEventArgs e)
         {
@@ -98,14 +95,14 @@ namespace Waf.Writer.Presentation.Views
 
         private void RichTextBoxContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            List<Control> menuItems = new List<Control>();
+            var menuItems = new List<Control>();
 
             SpellingError spellingError = richTextBox.GetSpellingError(richTextBox.CaretPosition);
             if (spellingError != null)
             {
                 foreach (string suggestion in spellingError.Suggestions.Take(5))
                 {
-                    MenuItem menuItem = new MenuItem()
+                    var menuItem = new MenuItem()
                     {
                         Header = suggestion,
                         FontWeight = FontWeights.Bold,
@@ -117,7 +114,7 @@ namespace Waf.Writer.Presentation.Views
 
                 if (!menuItems.Any())
                 {
-                    MenuItem noSpellingSuggestions = new MenuItem()
+                    var noSpellingSuggestions = new MenuItem()
                     {
                         Header = Properties.Resources.NoSpellingSuggestions,
                         FontWeight = FontWeights.Bold,
@@ -128,7 +125,7 @@ namespace Waf.Writer.Presentation.Views
 
                 menuItems.Add(new Separator());
 
-                MenuItem ignoreAllMenuItem = new MenuItem()
+                var ignoreAllMenuItem = new MenuItem()
                 {
                     Header = Properties.Resources.IgnoreAllMenu,
                     Command = EditingCommands.IgnoreSpellingError

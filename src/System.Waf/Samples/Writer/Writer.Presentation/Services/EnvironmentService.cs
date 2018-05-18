@@ -10,7 +10,6 @@ namespace Waf.Writer.Presentation.Services
     {
         private readonly Lazy<string> documentFileName = new Lazy<string>(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
 
-        
         public string DocumentFileName => documentFileName.Value;
     }
 }

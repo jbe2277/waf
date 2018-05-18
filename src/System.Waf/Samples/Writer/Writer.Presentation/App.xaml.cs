@@ -22,7 +22,6 @@ namespace Waf.Writer.Presentation
         private CompositionContainer container;
         private IEnumerable<IModuleController> moduleControllers;
 
-
         public App()
         {
             var profileRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -32,7 +31,6 @@ namespace Waf.Writer.Presentation
             ProfileOptimization.StartProfile("Startup.profile");
         }
 
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -41,7 +39,7 @@ namespace Waf.Writer.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             catalog = new AggregateCatalog();
-            // Add the WpfApplicationFramework assembly to the catalog
+            // Add the WinApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
             // Add the Writer.Presentation assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
@@ -49,7 +47,7 @@ namespace Waf.Writer.Presentation
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
 
@@ -85,9 +83,8 @@ namespace Waf.Writer.Presentation
 
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, 
-                        Presentation.Properties.Resources.UnknownError, e)
-                    , ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), 
+                    ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

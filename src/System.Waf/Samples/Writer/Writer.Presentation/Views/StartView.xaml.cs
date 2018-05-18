@@ -21,9 +21,7 @@ namespace Waf.Writer.Presentation.Views
             newButton.IsVisibleChanged += NewButtonIsVisibleChanged;
         }
 
-
         private StartViewModel ViewModel => viewModel.Value;
-
 
         private void NewButtonIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -35,25 +33,25 @@ namespace Waf.Writer.Presentation.Views
 
         private void OpenContextMenuHandler(object sender, RoutedEventArgs e)
         {
-            RecentFile recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
+            var recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
             ViewModel.FileService.OpenCommand.Execute(recentFile.Path);
         }
 
         private void PinContextMenuHandler(object sender, RoutedEventArgs e)
         {
-            RecentFile recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
+            var recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
             recentFile.IsPinned = true;
         }
 
         private void UnpinContextMenuHandler(object sender, RoutedEventArgs e)
         {
-            RecentFile recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
+            var recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
             recentFile.IsPinned = false;
         }
 
         private void RemoveContextMenuHandler(object sender, RoutedEventArgs e)
         {
-            RecentFile recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
+            var recentFile = (RecentFile)((FrameworkElement)sender).DataContext;
             ViewModel.FileService.RecentFileList.Remove(recentFile);
         }
     }

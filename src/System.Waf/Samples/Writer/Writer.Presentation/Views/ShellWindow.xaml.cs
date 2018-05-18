@@ -16,7 +16,6 @@ namespace Waf.Writer.Presentation.Views
             InitializeComponent();
         }
 
-
         public bool IsMaximized
         {
             get { return WindowState == WindowState.Maximized; }
@@ -32,7 +31,6 @@ namespace Waf.Writer.Presentation.Views
                 }
             }
         }
-
 
         private void ZoomBoxDropDownClosedHandler(object sender, EventArgs e)
         {

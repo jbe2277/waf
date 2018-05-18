@@ -12,7 +12,6 @@ namespace Waf.Writer.Presentation.Views
     public partial class PrintPreviewView : UserControl, IPrintPreviewView
     {
         private readonly Lazy<PrintPreviewViewModel> viewModel;
-
         
         public PrintPreviewView()
         {
@@ -22,7 +21,6 @@ namespace Waf.Writer.Presentation.Views
             Loaded += FirstTimeLoadedHandler;
             IsVisibleChanged += IsVisibleChangedHandler;
         }
-
 
         private PrintPreviewViewModel ViewModel => viewModel.Value;
 

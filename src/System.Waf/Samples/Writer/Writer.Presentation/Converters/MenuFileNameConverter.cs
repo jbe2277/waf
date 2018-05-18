@@ -9,7 +9,6 @@ namespace Waf.Writer.Presentation.Converters
     {
         private const int MaxCharacters = 40;
         
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string fileName = value as string;

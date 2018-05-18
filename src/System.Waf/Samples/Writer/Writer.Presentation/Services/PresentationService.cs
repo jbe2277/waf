@@ -13,7 +13,6 @@ namespace Waf.Writer.Presentation.Services
 
         public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
 
-        
         public void InitializeCultures()
         {
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
