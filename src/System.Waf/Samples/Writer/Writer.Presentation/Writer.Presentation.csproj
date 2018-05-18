@@ -36,6 +36,9 @@
     <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationUI" />
     <Reference Include="System" />
@@ -216,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\App.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Bold.png" />
