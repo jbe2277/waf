@@ -13,16 +13,13 @@ namespace Test.BookLibrary.Library.Applications
     [TestClass]
     public abstract class TestClassBase
     {
-        private CompositionContainer container;
-
-
-        public CompositionContainer Container => container;
+        public CompositionContainer Container { get; private set; }
 
 
         [TestInitialize]
         public void TestInitialize()
         {
-            AggregateCatalog catalog = new AggregateCatalog();
+            var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
             catalog.Catalogs.Add(new FilteredCatalog(new AssemblyCatalog(typeof(ModuleController).Assembly), 
@@ -30,10 +27,10 @@ namespace Test.BookLibrary.Library.Applications
 
             OnCatalogInitialize(catalog);
 
-            container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
-            batch.AddExportedValue(container);
-            container.Compose(batch);
+            Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+            var batch = new CompositionBatch();
+            batch.AddExportedValue(Container);
+            Container.Compose(batch);
             
             OnTestInitialize();
         }
@@ -42,8 +39,7 @@ namespace Test.BookLibrary.Library.Applications
         public void TestCleanup()
         {
             OnTestCleanup();
-
-            container?.Dispose();
+            Container?.Dispose();
         }
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }

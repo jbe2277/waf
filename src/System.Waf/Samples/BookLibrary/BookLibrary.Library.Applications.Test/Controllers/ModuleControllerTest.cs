@@ -15,9 +15,9 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void ModuleControllerLifecycleTest()
         {
-            MockPresentationService presentationService = Container.GetExportedValue<MockPresentationService>();
-            MockEntityController entityController = Container.GetExportedValue<MockEntityController>();
-            ModuleController moduleController = Container.GetExportedValue<ModuleController>();
+            var presentationService = Container.GetExportedValue<MockPresentationService>();
+            var entityController = Container.GetExportedValue<MockEntityController>();
+            var moduleController = Container.GetExportedValue<ModuleController>();
             Assert.IsTrue(presentationService.InitializeCulturesCalled);
 
             // Initialize
@@ -26,13 +26,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(entityController.InitializeCalled);
 
             // Run
-            MockShellView shellView = Container.GetExportedValue<MockShellView>();
+            var shellView = Container.GetExportedValue<MockShellView>();
             Assert.IsFalse(shellView.IsVisible);
             moduleController.Run();
             Assert.IsTrue(shellView.IsVisible);
 
             // Exit the ShellView
-            ShellViewModel shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsFalse(shellView.IsVisible);
 
@@ -45,16 +45,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void ModuleControllerHasChangesTest()
         {
-            MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
-            MockEntityController entityController = Container.GetExportedValue<MockEntityController>();
-            ModuleController moduleController = Container.GetExportedValue<ModuleController>();
-
+            var messageService = Container.GetExportedValue<MockMessageService>();
+            var entityController = Container.GetExportedValue<MockEntityController>();
+            var moduleController = Container.GetExportedValue<ModuleController>();
             moduleController.Initialize();
             moduleController.Run();
-
-            MockShellView shellView = Container.GetExportedValue<MockShellView>();
-            ShellViewModel shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
-
+            var shellView = Container.GetExportedValue<MockShellView>();
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
 
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
@@ -72,7 +69,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(entityController.SaveCalled);
             Assert.IsTrue(shellView.IsVisible);
 
-
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
             entityController.SaveCalled = false;
@@ -83,7 +79,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsFalse(entityController.SaveCalled);
             Assert.IsTrue(shellView.IsVisible);
-
 
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
@@ -100,16 +95,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void ModuleControllerIsInvalidTest()
         {
-            MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
-            MockEntityController entityController = Container.GetExportedValue<MockEntityController>();
-            ModuleController moduleController = Container.GetExportedValue<ModuleController>();
-
+            var messageService = Container.GetExportedValue<MockMessageService>();
+            var entityController = Container.GetExportedValue<MockEntityController>();
+            var moduleController = Container.GetExportedValue<ModuleController>();
             moduleController.Initialize();
             moduleController.Run();
-
-            MockShellView shellView = Container.GetExportedValue<MockShellView>();
-            ShellViewModel shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
-
+            var shellView = Container.GetExportedValue<MockShellView>();
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
 
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
@@ -125,7 +117,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // We expect the ShellView to stay open.
             Assert.IsTrue(shellView.IsVisible);
 
-            
             // Exit the application again but this time we agree to loose our changes.
             messageService.ShowYesNoQuestionAction = (message) => true;
             shellViewModel.ExitCommand.Execute(null);

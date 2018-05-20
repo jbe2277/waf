@@ -21,25 +21,24 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void SelectionTest()
         {
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(new Person() { Firstname = "Harry"});
             entityService.Persons.Add(new Person() { Firstname = "Ron" });
-            
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
 
             // Check that Initialize shows the PersonListView and PersonView
-            ShellService shellService = Container.GetExportedValue<ShellService>();
+            var shellService = Container.GetExportedValue<ShellService>();
             Assert.IsInstanceOfType(shellService.PersonListView, typeof(IPersonListView));
             Assert.IsInstanceOfType(shellService.PersonView, typeof(IPersonView));
 
             // Check that the first Person is selected
-            IPersonListView personListView = Container.GetExportedValue<IPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personListView = Container.GetExportedValue<IPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             Assert.AreEqual(entityService.Persons.First(), personListViewModel.SelectedPerson);
             
             // Change the selection
-            PersonViewModel personViewModel = Container.GetExportedValue<PersonViewModel>();
+            var personViewModel = Container.GetExportedValue<PersonViewModel>();
             personListViewModel.SelectedPerson = entityService.Persons.Last();
             Assert.AreEqual(entityService.Persons.Last(), personViewModel.Person);
         }
@@ -49,14 +48,11 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         {
             var harry = new Person() { Firstname = "Harry" };
             var ron = new Person() { Firstname = "Ron" };
-            
             var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
-
             var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
             var personListView = Container.GetExportedValue<MockPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             personListViewModel.PersonCollectionView = personListViewModel.Persons;
@@ -101,31 +97,28 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void CreateNewEmailTest()
         {
-            Person harry = new Person() { Firstname = "Harry", Email = "harry.potter@hogwarts.edu" };
-            Person ron = new Person() { Firstname = "Ron", Email = "Wrong Address" };
-
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var harry = new Person() { Firstname = "Harry", Email = "harry.potter@hogwarts.edu" };
+            var ron = new Person() { Firstname = "Ron", Email = "Wrong Address" };
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
-
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
-            MockPersonListView personListView = Container.GetExportedValue<MockPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
-            MockPersonView personView = Container.GetExportedValue<MockPersonView>();
-            PersonViewModel personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView);
+            var personListView = Container.GetExportedValue<MockPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personView = Container.GetExportedValue<MockPersonView>();
+            var personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView);
 
             ICommand command = personListViewModel.CreateNewEmailCommand;
             Assert.AreEqual(command, personViewModel.CreateNewEmailCommand);
 
-            MockEmailService emailService = Container.GetExportedValue<MockEmailService>();
+            var emailService = Container.GetExportedValue<MockEmailService>();
             command.Execute(harry);
             Assert.AreEqual(harry.Email, emailService.ToEmailAddress);
 
             // An error message should occur when the email address is invalid.
 
-            MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Container.GetExportedValue<MockMessageService>();
             messageService.Clear();
             emailService.ToEmailAddress = null;
             command.Execute(ron);
@@ -148,13 +141,10 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         public void AddAndRemoveDisableTest()
         {
             var harry = new Person() { Firstname = "Harry" };
-
             var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
-
             var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
             var personListViewModel = Container.GetExportedValue<PersonListViewModel>();
             personListViewModel.AddSelectedPerson(personListViewModel.Persons.Single());
             var personViewModel = Container.GetExportedValue<PersonViewModel>();
@@ -179,20 +169,17 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void RemoveAndSelection1Test()
         {
-            Person harry = new Person() { Firstname = "Harry" };
-            Person ron = new Person() { Firstname = "Ron" };
-            Person ginny = new Person() { Firstname = "Ginny" };
-
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var harry = new Person() { Firstname = "Harry" };
+            var ron = new Person() { Firstname = "Ron" };
+            var ginny = new Person() { Firstname = "Ginny" };
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
             entityService.Persons.Add(ginny);
-
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
-            MockPersonListView personListView = Container.GetExportedValue<MockPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personListView = Container.GetExportedValue<MockPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             // Set the sorting to: "Ginny", "Harry", "Ron"
             personListViewModel.PersonCollectionView = personListViewModel.Persons.OrderBy(p => p.Firstname);
 
@@ -207,20 +194,17 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void RemoveAndSelection2Test()
         {
-            Person harry = new Person() { Firstname = "Harry" };
-            Person ron = new Person() { Firstname = "Ron" };
-            Person ginny = new Person() { Firstname = "Ginny" };
-
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var harry = new Person() { Firstname = "Harry" };
+            var ron = new Person() { Firstname = "Ron" };
+            var ginny = new Person() { Firstname = "Ginny" };
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
             entityService.Persons.Add(ginny);
-
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
-            MockPersonListView personListView = Container.GetExportedValue<MockPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personListView = Container.GetExportedValue<MockPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             // Set the sorting to: "Ginny", "Harry", "Ron"
             personListViewModel.PersonCollectionView = personListViewModel.Persons.OrderBy(p => p.Firstname);
 
@@ -235,20 +219,17 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void RemoveAndSelection3Test()
         {
-            Person harry = new Person() { Firstname = "Harry" };
-            Person ron = new Person() { Firstname = "Ron" };
-            Person ginny = new Person() { Firstname = "Ginny" };
-
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var harry = new Person() { Firstname = "Harry" };
+            var ron = new Person() { Firstname = "Ron" };
+            var ginny = new Person() { Firstname = "Ginny" };
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
             entityService.Persons.Add(ginny);
-
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
-
-            MockPersonListView personListView = Container.GetExportedValue<MockPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personListView = Container.GetExportedValue<MockPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             personListViewModel.PersonCollectionView = personListViewModel.Persons;
 
             // Remove all persons and check that nothing is selected anymore

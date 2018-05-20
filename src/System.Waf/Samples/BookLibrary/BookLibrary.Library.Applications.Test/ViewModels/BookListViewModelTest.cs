@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.BookLibrary.Library.Applications.ViewModels;
-using Test.BookLibrary.Library.Applications.Views;
-using System.Waf.UnitTesting;
-using Waf.BookLibrary.Library.Domain;
-using System.Waf.Applications;
-using Waf.BookLibrary.Library.Applications.DataModels;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Waf.Applications;
+using System.Waf.UnitTesting;
 using System.Windows.Input;
+using Test.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Applications.DataModels;
+using Waf.BookLibrary.Library.Applications.ViewModels;
+using Waf.BookLibrary.Library.Domain;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -23,16 +21,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void BookListViewModelBooksTest()
         {
-            List<Book> books = new List<Book>()
+            var books = new List<Book>()
             {
                 new Book() { Title = "The Fellowship of the Ring" },
                 new Book() { Title = "The Two Towers" }
             };
-            
-            MockBookListView bookListView = new MockBookListView();
+            var bookListView = new MockBookListView();
             var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
-
-            BookListViewModel bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
+            var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
 
             Assert.AreEqual(bookDataModels, bookListViewModel.Books);
             Assert.IsNull(bookListViewModel.SelectedBook);
@@ -54,15 +50,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void BookListViewModelFilterTest()
         {
-            IList<Book> books = new ObservableCollection<Book>()
+            var books = new ObservableCollection<Book>()
             {
                 new Book() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
                 new Book() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
             };
-
-            MockBookListView bookListView = new MockBookListView();
+            var bookListView = new MockBookListView();
             var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
-            BookListViewModel bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
+            var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
 
             Assert.IsTrue(bookListViewModel.Filter(bookDataModels[0]));
             Assert.IsTrue(bookListViewModel.Filter(bookDataModels[1]));

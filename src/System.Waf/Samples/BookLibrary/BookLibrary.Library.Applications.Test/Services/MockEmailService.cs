@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.Composition;
 using Waf.BookLibrary.Library.Applications.Services;
-using System.ComponentModel.Composition;
 
 namespace Test.BookLibrary.Library.Applications.Services
 {
@@ -12,7 +8,6 @@ namespace Test.BookLibrary.Library.Applications.Services
     {
         public string ToEmailAddress { get; set; }
         
-
         public void CreateNewEmail(string toEmailAddress)
         {
             ToEmailAddress = toEmailAddress;

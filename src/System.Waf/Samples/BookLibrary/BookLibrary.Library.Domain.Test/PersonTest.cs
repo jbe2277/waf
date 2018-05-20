@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Domain.Properties;
 
@@ -12,7 +12,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void GeneralPersonTest()
         {
-            Person person = new Person();
+            var person = new Person();
             Assert.IsNotNull(person.Id);
 
             person.Firstname = "Harry";
@@ -27,7 +27,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void PersonFirstnameValidationTest()
         {
-            Person person = new Person();
+            var person = new Person();
             person.Validate();
 
             Assert.AreEqual("", person.Firstname);
@@ -44,7 +44,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void PersonLastnameValidationTest()
         {
-            Person person = new Person();
+            var person = new Person();
             person.Validate();
 
             Assert.AreEqual("", person.Lastname);
@@ -61,7 +61,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void PersonEmailValidationTest()
         {
-            Person person = new Person();
+            var person = new Person();
             person.Validate();
 
             Assert.IsNull(person.Email);

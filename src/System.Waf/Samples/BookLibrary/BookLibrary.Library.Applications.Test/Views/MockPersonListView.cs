@@ -9,7 +9,6 @@ namespace Test.BookLibrary.Library.Applications.Views
     {
         public bool FirstCellHasFocus { get; set; }
 
-
         public void FocusFirstCell() { FirstCellHasFocus = true; }
     }
 }

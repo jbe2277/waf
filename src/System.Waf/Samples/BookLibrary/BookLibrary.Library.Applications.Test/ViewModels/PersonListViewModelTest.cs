@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Waf.UnitTesting;
 using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.ViewModels;
-using System.Waf.UnitTesting;
 using Waf.BookLibrary.Library.Domain;
-using System.Waf.Applications;
-using Test.BookLibrary.Library.Applications.Services;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -18,15 +14,13 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void PersonListViewModelPersonsTest()
         {
-            List<Person> persons = new List<Person>()
+            var persons = new List<Person>()
             {
                 new Person() { Firstname = "Harry" },
                 new Person() { Firstname = "Ron" }
             };
-            
-            MockPersonListView personListView = new MockPersonListView();
-
-            PersonListViewModel personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
+            var personListView = new MockPersonListView();
+            var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
 
             Assert.AreEqual(persons, personListViewModel.Persons);
             Assert.IsNull(personListViewModel.SelectedPerson);
@@ -48,14 +42,13 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void PersonListViewModelFilterTest()
         {
-            List<Person> persons = new List<Person>()
+            var persons = new List<Person>()
             {
                 new Person() { Firstname = "Harry", Lastname = "Potter" },
                 new Person() { Firstname = "Ron", Lastname = "Weasley" }
             };
-
-            MockPersonListView personListView = new MockPersonListView();
-            PersonListViewModel personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
+            var personListView = new MockPersonListView();
+            var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
 
             Assert.IsTrue(personListViewModel.Filter(persons[0]));
             Assert.IsTrue(personListViewModel.Filter(persons[1]));

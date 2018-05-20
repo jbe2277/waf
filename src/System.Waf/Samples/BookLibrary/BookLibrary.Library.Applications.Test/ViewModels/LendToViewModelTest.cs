@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.BookLibrary.Library.Applications.ViewModels;
-using Test.BookLibrary.Library.Applications.Views;
 using System.Waf.UnitTesting;
+using Test.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
@@ -22,7 +21,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 new Person() { Firstname = "Harry" },
                 new Person() { Firstname = "Ron" }
             };
-            
             var lendToView = new MockLendToView();
             var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 
@@ -67,7 +65,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 new Person() { Firstname = "Ron" }
             };
             var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons.First() };
-
             var lendToView = new MockLendToView();
             var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 

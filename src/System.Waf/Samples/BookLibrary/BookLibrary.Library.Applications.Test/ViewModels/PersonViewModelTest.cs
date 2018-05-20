@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.BookLibrary.Library.Applications.ViewModels;
-using Test.BookLibrary.Library.Applications.Views;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
+using Test.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Domain;
-using System.Waf.Applications;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -17,12 +12,12 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void PersonViewModelPersonTest()
         {
-            MockPersonView personView = new MockPersonView();
-            PersonViewModel personViewModel = new PersonViewModel(personView);
+            var personView = new MockPersonView();
+            var personViewModel = new PersonViewModel(personView);
 
             Assert.IsFalse(personViewModel.IsEnabled);
 
-            Person person = new Person();
+            var person = new Person();
             AssertHelper.PropertyChangedEvent(personViewModel, x => x.Person, () => personViewModel.Person = person);
             Assert.AreEqual(person, personViewModel.Person);
             Assert.IsTrue(personViewModel.IsEnabled);
@@ -35,8 +30,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void PersonViewModelIsValidTest()
         {
-            MockPersonView personView = new MockPersonView();
-            PersonViewModel personViewModel = new PersonViewModel(personView);
+            var personView = new MockPersonView();
+            var personViewModel = new PersonViewModel(personView);
             
             Assert.IsTrue(personViewModel.IsValid);
 

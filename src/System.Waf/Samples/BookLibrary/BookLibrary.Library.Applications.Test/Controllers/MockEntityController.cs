@@ -18,13 +18,11 @@ namespace Test.BookLibrary.Library.Applications.Controllers
 
         public bool SaveCalled { get; set; }
 
-
         public MockEntityController()
         {
             CanSaveResult = true;
         }
         
-
         public void Initialize()
         {
             InitializeCalled = true;

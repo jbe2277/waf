@@ -13,7 +13,7 @@ namespace Test.BookLibrary.Library.Presentation.Converters
         [TestMethod]
         public void LanguageToStringConverterBasicTest()
         {
-            LanguageToStringConverter converter = new LanguageToStringConverter();
+            var converter = new LanguageToStringConverter();
 
             Assert.AreEqual(Resources.Undefined, converter.Convert(Language.Undefined, null, null, null));
             Assert.AreEqual(Resources.English, converter.Convert(Language.English, null, null, null));

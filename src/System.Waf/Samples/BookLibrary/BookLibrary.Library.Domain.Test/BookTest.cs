@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using System.Waf.UnitTesting;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Domain.Properties;
@@ -14,7 +14,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void GeneralBookTest()
         {
-            Book book = new Book();
+            var book = new Book();
             Assert.IsNotNull(book.Id);
 
             book.Title = "Star Wars - Heir to the Empire";
@@ -34,7 +34,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookLanguagePropertyChangedTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Language = Language.English;
 
             AssertHelper.PropertyChangedEvent(book, x => x.Language, () => book.Language = Language.German);
@@ -44,10 +44,10 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookLendToPropertyChangedTest()
         {
-            Book book = new Book();
+            var book = new Book();
             Assert.IsNull(book.LendTo);
 
-            Person person = new Person();
+            var person = new Person();
             AssertHelper.PropertyChangedEvent(book, x => x.LendTo, () => book.LendTo = person);
             Assert.AreEqual(person, book.LendTo);
         }
@@ -55,7 +55,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookTitleValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.AreEqual("", book.Title);
@@ -72,7 +72,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookAuthorValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.AreEqual("", book.Author);
@@ -89,7 +89,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookPublisherValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.IsNull(book.Publisher);
@@ -106,7 +106,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookPublishDateValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.IsFalse(book.GetErrors(nameof(book.PublishDate)).Any());
@@ -124,7 +124,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookIsbnValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.IsNull(book.Isbn);
@@ -141,7 +141,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookPagesValidationTest()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
 
             Assert.AreEqual(0, book.Pages);

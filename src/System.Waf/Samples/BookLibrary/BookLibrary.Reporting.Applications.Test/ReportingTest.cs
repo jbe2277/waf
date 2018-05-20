@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel.Composition.Hosting;
 using Test.BookLibrary.Library.Applications;
 using Waf.BookLibrary.Reporting.Applications.Controllers;
 

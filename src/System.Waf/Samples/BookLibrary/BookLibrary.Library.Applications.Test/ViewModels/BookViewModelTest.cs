@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Waf.UnitTesting;
 using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Domain;
-using System.Waf.UnitTesting;
-using System.Waf.Applications;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -17,12 +12,12 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void BookViewModelBookTest()
         {
-            MockBookView bookView = new MockBookView();
-            BookViewModel bookViewModel = new BookViewModel(bookView);
+            var bookView = new MockBookView();
+            var bookViewModel = new BookViewModel(bookView);
 
             Assert.IsFalse(bookViewModel.IsEnabled);
 
-            Book book = new Book();
+            var book = new Book();
             AssertHelper.PropertyChangedEvent(bookViewModel, x => x.Book, () => bookViewModel.Book = book);
             Assert.AreEqual(book, bookViewModel.Book);
             Assert.IsTrue(bookViewModel.IsEnabled);
@@ -35,8 +30,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void BookViewModelIsValidTest()
         {
-            MockBookView bookView = new MockBookView();
-            BookViewModel bookViewModel = new BookViewModel(bookView);
+            var bookView = new MockBookView();
+            var bookViewModel = new BookViewModel(bookView);
 
             Assert.IsTrue(bookViewModel.IsValid);
 

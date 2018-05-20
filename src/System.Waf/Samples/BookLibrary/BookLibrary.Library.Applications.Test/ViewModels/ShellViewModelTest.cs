@@ -1,17 +1,13 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.Waf.Applications;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting;
-using Waf.BookLibrary.Library.Applications.Controllers;
-using Waf.BookLibrary.Library.Applications.Properties;
-using Test.BookLibrary.Library.Applications.Controllers;
+using System.Waf.UnitTesting.Mocks;
 using Test.BookLibrary.Library.Applications.Services;
 using Test.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Applications.Properties;
+using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.BookLibrary.Library.Applications.Services;
-using System.Waf.UnitTesting.Mocks;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -21,10 +17,10 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void ShellViewModelBasicTest()
         {
-            MockShellView shellView = Container.GetExportedValue<MockShellView>();
-            MockMessageService messageService = Container.GetExportedValue<MockMessageService>();
-            IShellService shellService = Container.GetExportedValue<IShellService>();
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellView = Container.GetExportedValue<MockShellView>();
+            var messageService = Container.GetExportedValue<MockMessageService>();
+            var shellService = Container.GetExportedValue<IShellService>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
 
             // The title isn't available in the unit test environment.
             Assert.AreEqual("", shellViewModel.Title);
@@ -66,14 +62,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            MockPresentationService presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
+            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
             SetSettingsValues(20, 10, 400, 300, true);
 
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
-            MockShellView shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -93,13 +89,13 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
-            IMessageService messageService = Container.GetExportedValue<IMessageService>();
-            MockPresentationService presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
-            IShellService shellService = Container.GetExportedValue<IShellService>();
+            var messageService = Container.GetExportedValue<IMessageService>();
+            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
+            var shellService = Container.GetExportedValue<IShellService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            MockShellView shellViewMock = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellViewMock = (MockShellView)Container.GetExportedValue<IShellView>();
             shellViewMock.SetNAForLocationAndSize();
 
             SetSettingsValues();

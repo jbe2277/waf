@@ -10,10 +10,10 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void EntityToStringTest()
         {
-            Entity entity = new Entity() { ToStringValue = "Test1" };
+            var entity = new Entity() { ToStringValue = "Test1" };
             Assert.AreEqual("Test1", EntityController.EntityToString(entity));
 
-            FormattableEntity entity2 = new FormattableEntity() { ToStringValue = "Test2" };
+            var entity2 = new FormattableEntity() { ToStringValue = "Test2" };
             Assert.AreEqual("Test2", EntityController.EntityToString(entity2));
         }
 
