@@ -11,15 +11,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private bool isValid = true;
         private Person person;
-        private ICommand createNewEmailCommand;
 
-        
         [ImportingConstructor]
-        public PersonViewModel(IPersonView view)
-            : base(view)
+        public PersonViewModel(IPersonView view) : base(view)
         {
         }
-
 
         public bool IsEnabled => Person != null;
 
@@ -41,10 +37,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             }
         }
 
-        public ICommand CreateNewEmailCommand
-        {
-            get { return createNewEmailCommand; }
-            set { SetProperty(ref createNewEmailCommand, value); }
-        }
+        public ICommand CreateNewEmailCommand { get; set; }
     }
 }

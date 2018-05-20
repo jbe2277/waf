@@ -9,15 +9,11 @@ namespace Waf.BookLibrary.Reporting.Applications.ViewModels
     public class ReportViewModel : ViewModel<IReportView>
     {
         private object report;
-        private ICommand createBookListReportCommand;
-        private ICommand createBorrowedBooksReportCommand;
-
 
         [ImportingConstructor]
         public ReportViewModel(IReportView view) : base(view)
         {
         }
-
 
         public object Report
         {
@@ -25,16 +21,8 @@ namespace Waf.BookLibrary.Reporting.Applications.ViewModels
             set { SetProperty(ref report, value); }
         }
 
-        public ICommand CreateBookListReportCommand
-        {
-            get { return createBookListReportCommand; }
-            set { SetProperty(ref createBookListReportCommand, value); }
-        }
+        public ICommand CreateBookListReportCommand { get; set; }
         
-        public ICommand CreateBorrowedBooksReportCommand
-        {
-            get { return createBorrowedBooksReportCommand; }
-            set { SetProperty(ref createBorrowedBooksReportCommand, value); }
-        }
+        public ICommand CreateBorrowedBooksReportCommand { get; set; }
     }
 }

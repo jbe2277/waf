@@ -11,15 +11,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private bool isValid = true;
         private Book book;
-        private ICommand lendToCommand;
-
         
         [ImportingConstructor]
-        public BookViewModel(IBookView view)
-            : base(view)
+        public BookViewModel(IBookView view) : base(view)
         {
         }
-
 
         public bool IsEnabled => Book != null;
 
@@ -41,10 +37,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             }
         }
 
-        public ICommand LendToCommand
-        {
-            get { return lendToCommand; }
-            set { SetProperty(ref lendToCommand, value); }
-        }
+        public ICommand LendToCommand { get; set; }
     }
 }

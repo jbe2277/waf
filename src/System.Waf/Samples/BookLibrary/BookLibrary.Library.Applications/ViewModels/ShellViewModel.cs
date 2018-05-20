@@ -1,13 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Properties;
-using Waf.BookLibrary.Library.Applications.Views;
-using System;
 using Waf.BookLibrary.Library.Applications.Services;
+using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels
 {
@@ -16,19 +16,15 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private readonly IMessageService messageService;
         private readonly DelegateCommand aboutCommand;
-        private ICommand saveCommand;
-        private ICommand exitCommand;
         private bool isValid = true;
-        private string databasePath = Resources.NotAvailable;
 
-        
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService,
             IShellService shellService) : base(view)
         {
             this.messageService = messageService;
-            this.ShellService = shellService;
-            this.aboutCommand = new DelegateCommand(ShowAboutMessage);
+            ShellService = shellService;
+            aboutCommand = new DelegateCommand(ShowAboutMessage);
             view.Closing += ViewClosing;
             view.Closed += ViewClosed;
 
@@ -45,24 +41,15 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             ViewCore.IsMaximized = Settings.Default.IsMaximized;
         }
 
-
         public string Title => ApplicationInfo.ProductName;
 
         public IShellService ShellService { get; }
 
         public ICommand AboutCommand => aboutCommand;
 
-        public ICommand SaveCommand
-        {
-            get { return saveCommand; }
-            set { SetProperty(ref saveCommand, value); }
-        }
+        public ICommand SaveCommand { get; set; }
 
-        public ICommand ExitCommand
-        {
-            get { return exitCommand; }
-            set { SetProperty(ref exitCommand, value); }
-        }
+        public ICommand ExitCommand { get; set; }
 
         public bool IsValid
         {
@@ -70,15 +57,9 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set { SetProperty(ref isValid, value); }
         }
 
-        public string DatabasePath
-        {
-            get { return databasePath; }
-            set { SetProperty(ref databasePath, value); }
-        }
-
+        public string DatabasePath { get; set; } = Resources.NotAvailable;
 
         public event CancelEventHandler Closing;
-
 
         public void Show()
         {

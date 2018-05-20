@@ -34,7 +34,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             object owner = new object();
             Action<MockLendToView> showDialogAction = (view) =>
             {
-                Assert.AreEqual("", LendToViewModel.Title);
+                Assert.AreEqual("", lendToViewModel.Title);
                 Assert.IsTrue(lendToView.IsVisible);
                 Assert.AreEqual(owner, lendToView.Owner);
 

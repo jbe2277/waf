@@ -101,6 +101,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             LendToViewModel lendToViewModel = lendToViewModelFactory.CreateExport().Value;
             lendToViewModel.Book = book;
             lendToViewModel.Persons = entityService.Persons;
+            lendToViewModel.SelectedPerson = entityService.Persons.FirstOrDefault();
             if (lendToViewModel.ShowDialog(shellService.ShellView))
             {
                 book.LendTo = lendToViewModel.SelectedPerson;

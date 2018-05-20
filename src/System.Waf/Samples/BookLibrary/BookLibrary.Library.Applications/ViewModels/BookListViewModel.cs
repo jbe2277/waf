@@ -15,19 +15,14 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private readonly ObservableCollection<BookDataModel> selectedBooks;
         private bool isValid = true;
-        private IReadOnlyList<BookDataModel> books;
         private BookDataModel selectedBook;
-        private ICommand addNewCommand;
-        private ICommand removeCommand;
         private string filterText = "";
-
         
         [ImportingConstructor]
         public BookListViewModel(IBookListView view) : base(view)
         {
             selectedBooks = new ObservableCollection<BookDataModel>();
         }
-
 
         public IReadOnlyList<BookDataModel> SelectedBooks => selectedBooks;
 
@@ -39,11 +34,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set { SetProperty(ref isValid, value); }
         }
 
-        public IReadOnlyList<BookDataModel> Books
-        {
-            get { return books; }
-            set { SetProperty(ref books, value); }
-        }
+        public IReadOnlyList<BookDataModel> Books { get; set; }
 
         public BookDataModel SelectedBook
         {
@@ -51,24 +42,15 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set { SetProperty(ref selectedBook, value); }
         }
 
-        public ICommand AddNewCommand
-        {
-            get { return addNewCommand; }
-            set { SetProperty(ref addNewCommand, value); }
-        }
+        public ICommand AddNewCommand { get; set; }
 
-        public ICommand RemoveCommand
-        {
-            get { return removeCommand; }
-            set { SetProperty(ref removeCommand, value); }
-        }
+        public ICommand RemoveCommand { get; set; }
 
         public string FilterText
         {
             get { return filterText; }
             set { SetProperty(ref filterText, value); }
         }
-
 
         public void Focus()
         {

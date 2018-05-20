@@ -14,20 +14,14 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private readonly ObservableCollection<Person> selectedPersons;
         private bool isValid = true;
-        private IReadOnlyList<Person> persons;
         private Person selectedPerson;
-        private ICommand addNewCommand;
-        private ICommand removeCommand;
-        private ICommand createNewEmailCommand;
         private string filterText = "";
         
-
         [ImportingConstructor]
         public PersonListViewModel(IPersonListView view) : base(view)
         {
             selectedPersons = new ObservableCollection<Person>();
         }
-
 
         public IReadOnlyList<Person> SelectedPersons => selectedPersons;
 
@@ -39,11 +33,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set { SetProperty(ref isValid, value); }
         }
         
-        public IReadOnlyList<Person> Persons
-        {
-            get { return persons; }
-            set { SetProperty(ref persons, value); }
-        }
+        public IReadOnlyList<Person> Persons { get; set; }
 
         public Person SelectedPerson
         {
@@ -51,30 +41,17 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set { SetProperty(ref selectedPerson, value); }
         }
 
-        public ICommand AddNewCommand
-        {
-            get { return addNewCommand; }
-            set { SetProperty(ref addNewCommand, value); }
-        }
+        public ICommand AddNewCommand { get; set; }
 
-        public ICommand RemoveCommand
-        {
-            get { return removeCommand; }
-            set { SetProperty(ref removeCommand, value); }
-        }
+        public ICommand RemoveCommand { get; set; }
 
-        public ICommand CreateNewEmailCommand
-        {
-            get { return createNewEmailCommand; }
-            set { SetProperty(ref createNewEmailCommand, value); }
-        }
+        public ICommand CreateNewEmailCommand { get; set; }
 
         public string FilterText
         {
             get { return filterText; }
             set { SetProperty(ref filterText, value); }
         }
-
 
         public void Focus()
         {

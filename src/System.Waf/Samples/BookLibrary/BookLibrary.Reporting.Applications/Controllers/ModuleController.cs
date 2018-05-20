@@ -29,8 +29,8 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
             this.reportViewModel = reportViewModel;
             this.bookListReportFactory = bookListReportFactory;
             this.borrowedBooksReportFactory = borrowedBooksReportFactory;
-            this.createBookListReportCommand = new DelegateCommand(CreateBookListReport);
-            this.createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
+            createBookListReportCommand = new DelegateCommand(CreateBookListReport);
+            createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
         }
 
 
