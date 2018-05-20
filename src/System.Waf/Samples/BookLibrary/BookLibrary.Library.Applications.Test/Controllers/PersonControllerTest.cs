@@ -47,21 +47,21 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void AddAndRemoveTest()
         {
-            Person harry = new Person() { Firstname = "Harry" };
-            Person ron = new Person() { Firstname = "Ron" };
+            var harry = new Person() { Firstname = "Harry" };
+            var ron = new Person() { Firstname = "Ron" };
             
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
 
-            PersonController personController = Container.GetExportedValue<PersonController>();
+            var personController = Container.GetExportedValue<PersonController>();
             personController.Initialize();
 
-            MockPersonListView personListView = Container.GetExportedValue<MockPersonListView>();
-            PersonListViewModel personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
+            var personListView = Container.GetExportedValue<MockPersonListView>();
+            var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             personListViewModel.PersonCollectionView = personListViewModel.Persons;
-            MockPersonView personView = Container.GetExportedValue<MockPersonView>();
-            PersonViewModel personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView);
+            var personView = Container.GetExportedValue<MockPersonView>();
+            var personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView);
 
             // Add a new Person
             Assert.AreEqual(2, entityService.Persons.Count);
@@ -77,7 +77,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             AssertHelper.CanExecuteChangedEvent(personListViewModel.AddNewCommand, () => 
                 personViewModel.IsValid = false);
             Assert.IsFalse(personListViewModel.AddNewCommand.CanExecute(null));
-            Assert.IsFalse(personListViewModel.RemoveCommand.CanExecute(null));
 
             // Remove the last two Persons at once
             personViewModel.IsValid = true;
@@ -160,21 +159,21 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personListViewModel.AddSelectedPerson(personListViewModel.Persons.Single());
             var personViewModel = Container.GetExportedValue<PersonViewModel>();
 
-            CheckCommand(personListViewModel.AddNewCommand, personListViewModel, personViewModel);
-            CheckCommand(personListViewModel.RemoveCommand, personListViewModel, personViewModel);
-        }
+            var addNewCommand = personListViewModel.AddNewCommand;
+            Assert.IsTrue(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => personListViewModel.IsValid = false);
+            Assert.IsFalse(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => personListViewModel.IsValid = true);
+            Assert.IsTrue(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => personViewModel.IsValid = false);
+            Assert.IsFalse(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => personViewModel.IsValid = true);
+            Assert.IsTrue(addNewCommand.CanExecute(null));
 
-        private void CheckCommand(ICommand command, PersonListViewModel personListViewModel, PersonViewModel personViewModel)
-        {
-            Assert.IsTrue(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => personListViewModel.IsValid = false);
-            Assert.IsFalse(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => personListViewModel.IsValid = true);
-            Assert.IsTrue(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => personViewModel.IsValid = false);
-            Assert.IsFalse(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => personViewModel.IsValid = true);
-            Assert.IsTrue(command.CanExecute(null));
+            var removeCommand = personListViewModel.RemoveCommand;
+            Assert.IsTrue(removeCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(removeCommand, () => personListViewModel.SelectedPerson = null);
+            Assert.IsFalse(removeCommand.CanExecute(null));
         }
 
         [TestMethod]

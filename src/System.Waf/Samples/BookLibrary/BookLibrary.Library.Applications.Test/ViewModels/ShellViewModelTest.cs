@@ -55,25 +55,12 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void ShellViewModelPropertiesTest()
         {
-            ShellViewModel shellViewModel = Container.GetExportedValue<ShellViewModel>();
-
-            DelegateCommand mockCommand = new DelegateCommand(() => {});
-            AssertHelper.PropertyChangedEvent(shellViewModel, x => x.SaveCommand, () => 
-                shellViewModel.SaveCommand = mockCommand);
-            Assert.AreEqual(mockCommand, shellViewModel.SaveCommand);
-            
-            AssertHelper.PropertyChangedEvent(shellViewModel, x => x.ExitCommand, () =>
-                shellViewModel.ExitCommand = mockCommand);
-            Assert.AreEqual(mockCommand, shellViewModel.ExitCommand);
+            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
 
             Assert.IsTrue(shellViewModel.IsValid);
             AssertHelper.PropertyChangedEvent(shellViewModel, x => x.IsValid, () =>
                 shellViewModel.IsValid = false);
             Assert.IsFalse(shellViewModel.IsValid);
-
-            AssertHelper.PropertyChangedEvent(shellViewModel, x => x.DatabasePath, () =>
-                shellViewModel.DatabasePath = @"C:\MyDatabase.sdf");
-            Assert.AreEqual(@"C:\MyDatabase.sdf", shellViewModel.DatabasePath);
         }
 
         [TestMethod]

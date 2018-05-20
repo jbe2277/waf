@@ -44,21 +44,21 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void AddAndRemoveTest()
         {
-            Book fellowship = new Book() { Title = "The Fellowship of the Ring" };
-            Book twoTowers = new Book() { Title = "The Two Towers" };
+            var fellowship = new Book() { Title = "The Fellowship of the Ring" };
+            var twoTowers = new Book() { Title = "The Two Towers" };
 
-            IEntityService entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Container.GetExportedValue<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
 
-            BookController bookController = Container.GetExportedValue<BookController>();
+            var bookController = Container.GetExportedValue<BookController>();
             bookController.Initialize();
 
-            MockBookListView bookListView = Container.GetExportedValue<MockBookListView>();
-            BookListViewModel bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
+            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             bookListViewModel.BookCollectionView = bookListViewModel.Books;
-            MockBookView bookView = Container.GetExportedValue<MockBookView>();
-            BookViewModel bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView);
+            var bookView = Container.GetExportedValue<MockBookView>();
+            var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView);
 
             // Add a new Book
             Assert.AreEqual(2, entityService.Books.Count);
@@ -74,7 +74,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             AssertHelper.CanExecuteChangedEvent(bookListViewModel.AddNewCommand, () =>
                 bookViewModel.IsValid = false);
             Assert.IsFalse(bookListViewModel.AddNewCommand.CanExecute(null));
-            Assert.IsFalse(bookListViewModel.RemoveCommand.CanExecute(null));
 
             // Remove the last two Books at once and check that the last remaining book is selected.
             bookViewModel.IsValid = true;
@@ -110,22 +109,22 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             BookListViewModel bookListViewModel = Container.GetExportedValue<BookListViewModel>();
             bookListViewModel.AddSelectedBook(bookListViewModel.Books.Single());
             BookViewModel bookViewModel = Container.GetExportedValue<BookViewModel>();
-            
-            CheckCommand(bookListViewModel.AddNewCommand, bookListViewModel, bookViewModel);
-            CheckCommand(bookListViewModel.RemoveCommand, bookListViewModel, bookViewModel);
-        }
 
-        private void CheckCommand(ICommand command, BookListViewModel bookListViewModel, BookViewModel bookViewModel)
-        {
-            Assert.IsTrue(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => bookListViewModel.IsValid = false);
-            Assert.IsFalse(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => bookListViewModel.IsValid = true);
-            Assert.IsTrue(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => bookViewModel.IsValid = false);
-            Assert.IsFalse(command.CanExecute(null));
-            AssertHelper.CanExecuteChangedEvent(command, () => bookViewModel.IsValid = true);
-            Assert.IsTrue(command.CanExecute(null));
+            var addNewCommand = bookListViewModel.AddNewCommand;
+            Assert.IsTrue(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => bookListViewModel.IsValid = false);
+            Assert.IsFalse(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => bookListViewModel.IsValid = true);
+            Assert.IsTrue(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => bookViewModel.IsValid = false);
+            Assert.IsFalse(addNewCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(addNewCommand, () => bookViewModel.IsValid = true);
+            Assert.IsTrue(addNewCommand.CanExecute(null));
+
+            var removeCommand = bookListViewModel.RemoveCommand;
+            Assert.IsTrue(removeCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(removeCommand, () => bookListViewModel.SelectedBook = null);
+            Assert.IsFalse(removeCommand.CanExecute(null));
         }
 
         [TestMethod]

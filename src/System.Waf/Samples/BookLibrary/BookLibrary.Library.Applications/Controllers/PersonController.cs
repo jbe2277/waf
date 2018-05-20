@@ -26,7 +26,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand addNewCommand;
         private readonly DelegateCommand removeCommand;
         private readonly DelegateCommand createNewEmailCommand;
-        
 
         [ImportingConstructor]
         public PersonController(IMessageService messageService, IShellService shellService,
@@ -39,11 +38,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.emailService = emailService;
             this.personListViewModel = personListViewModel;
             this.personViewModel = personViewModel;
-            this.addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
-            this.removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
-            this.createNewEmailCommand = new DelegateCommand(CreateNewEmail);
+            addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
+            removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
+            createNewEmailCommand = new DelegateCommand(CreateNewEmail);
         }
-
 
         public void Initialize()
         {
@@ -66,7 +64,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void AddNewPerson()
         {
-            Person person = new Person();
+            var person = new Person();
             person.Validate();
             entityService.Persons.Add(person);
             
@@ -76,37 +74,31 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private bool CanRemovePerson() 
         {
-            // Unfortunately, it is necessary to deactivate the Remove command when a cell is invalid in the DataGrid. Otherwise, it might freeze.
-            // See: https://connect.microsoft.com/VisualStudio/feedback/details/777761/wpf-datagrid-becomes-readonly-after-deleting-an-invalid-row
-            return personListViewModel.SelectedPerson != null && personListViewModel.IsValid && personViewModel.IsValid; 
+            return personListViewModel.SelectedPerson != null; 
         }
 
         private void RemovePerson()
         {
             // Use the PersonCollectionView, which represents the sorted/filtered state of the persons, to determine the next person to select.
             var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
-            Person nextPerson = CollectionHelper.GetNextElementOrDefault(personListViewModel.PersonCollectionView.Except(personsToExclude),
+            var nextPerson = CollectionHelper.GetNextElementOrDefault(personListViewModel.PersonCollectionView.Except(personsToExclude),
                 personListViewModel.SelectedPerson);
-
             foreach (Person person in personListViewModel.SelectedPersons.ToArray())
             {
                 entityService.Persons.Remove(person);
             }
-
             personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.PersonCollectionView.LastOrDefault();
             personListViewModel.Focus();
         }
 
         private void CreateNewEmail(object recipient)
         {
-            Person person = (Person)recipient;
-            
+            var person = (Person)recipient;
             if (string.IsNullOrEmpty(person.Email) || person.GetErrors(nameof(person.Email)).Any())
             {
                 messageService.ShowError(shellService.ShellView, Resources.CorrectEmailAddress);
                 return;
             }
-
             emailService.CreateNewEmail(person.Email);
         }
 

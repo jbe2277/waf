@@ -11,11 +11,9 @@ namespace Waf.BookLibrary.Library.Applications.DataModels
         {
             if (book == null) { throw new ArgumentNullException(nameof(book)); }
             if (lendToCommand == null) { throw new ArgumentNullException(nameof(lendToCommand)); }
-
             Book = book;
             LendToCommand = lendToCommand;
         }
-
 
         public Book Book { get; }
 

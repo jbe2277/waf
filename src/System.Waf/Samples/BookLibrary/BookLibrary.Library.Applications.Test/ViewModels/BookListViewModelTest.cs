@@ -52,23 +52,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         }
 
         [TestMethod]
-        public void BookListViewModelCommandsTest()
-        {
-            MockBookListView bookListView = new MockBookListView();
-            BookListViewModel bookListViewModel = new BookListViewModel(bookListView) { Books = new List<BookDataModel>() };
-
-            DelegateCommand mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(bookListViewModel, x => x.AddNewCommand, () =>
-                bookListViewModel.AddNewCommand = mockCommand);
-            Assert.AreEqual(mockCommand, bookListViewModel.AddNewCommand);
-
-            mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(bookListViewModel, x => x.RemoveCommand, () =>
-                bookListViewModel.RemoveCommand = mockCommand);
-            Assert.AreEqual(mockCommand, bookListViewModel.RemoveCommand);
-        }
-
-        [TestMethod]
         public void BookListViewModelFilterTest()
         {
             IList<Book> books = new ObservableCollection<Book>()

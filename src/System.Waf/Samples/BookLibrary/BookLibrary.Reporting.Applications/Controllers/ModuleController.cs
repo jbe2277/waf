@@ -19,7 +19,6 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
         private readonly DelegateCommand createBookListReportCommand;
         private readonly DelegateCommand createBorrowedBooksReportCommand;
 
-
         [ImportingConstructor]
         public ModuleController(IShellService shellService, IEntityService entityService, Lazy<ReportViewModel> reportViewModel,
             ExportFactory<IBookListReport> bookListReportFactory, ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory)
@@ -33,9 +32,7 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
             createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
         }
 
-
         private ReportViewModel ReportViewModel => reportViewModel.Value;
-
 
         public void Initialize()
         {
@@ -60,14 +57,14 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
 
         private void CreateBookListReport()
         {
-            IBookListReport bookListReport = bookListReportFactory.CreateExport().Value;
+            var bookListReport = bookListReportFactory.CreateExport().Value;
             bookListReport.ReportData = new BookListReportDataModel(entityService.Books);
             ReportViewModel.Report = bookListReport.Report;
         }
 
         private void CreateBorrowedBooksReport()
         {
-            IBorrowedBooksReport borrowedBooksReport = borrowedBooksReportFactory.CreateExport().Value;
+            var borrowedBooksReport = borrowedBooksReportFactory.CreateExport().Value;
             borrowedBooksReport.ReportData = new BorrowedBooksReportDataModel(entityService.Books);
             ReportViewModel.Report = borrowedBooksReport.Report;
         }

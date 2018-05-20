@@ -6,7 +6,6 @@
 
         double VirtualScreenHeight { get; }
 
-        
         void InitializeCultures();
     }
 }

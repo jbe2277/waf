@@ -16,7 +16,6 @@ namespace Waf.BookLibrary.Library.Applications.Services
         private ObservableCollection<Book> books;
         private ObservableCollection<Person> persons;
 
-
         public BookLibraryContext BookLibraryContext { get; set; }
         
         public ObservableCollection<Book> Books

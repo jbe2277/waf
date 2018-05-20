@@ -43,17 +43,5 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             AssertHelper.PropertyChangedEvent(bookViewModel, x => x.IsValid, () => bookViewModel.IsValid = false);
             Assert.IsFalse(bookViewModel.IsValid);
         }
-
-        [TestMethod]
-        public void BookViewModelCommandsTest()
-        {
-            MockBookView bookView = new MockBookView();
-            BookViewModel bookViewModel = new BookViewModel(bookView);
-
-            DelegateCommand mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(bookViewModel, x => x.LendToCommand, () =>
-                bookViewModel.LendToCommand = mockCommand);
-            Assert.AreEqual(mockCommand, bookViewModel.LendToCommand);
-        }
     }
 }

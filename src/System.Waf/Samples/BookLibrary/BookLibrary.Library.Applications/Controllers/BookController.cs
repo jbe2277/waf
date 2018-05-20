@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
@@ -26,7 +25,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand removeCommand;
         private readonly DelegateCommand lendToCommand;
         private SynchronizingCollection<BookDataModel, Book> bookDataModels;
-        
 
         [ImportingConstructor]
         public BookController(IShellService shellService, IEntityService entityService,
@@ -37,11 +35,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.bookListViewModel = bookListViewModel;
             this.bookViewModel = bookViewModel;
             this.lendToViewModelFactory = lendToViewModelFactory;
-            this.addNewCommand = new DelegateCommand(AddNewBook, CanAddNewBook);
-            this.removeCommand = new DelegateCommand(RemoveBook, CanRemoveBook);
-            this.lendToCommand = new DelegateCommand(p => LendTo((Book)p));
+            addNewCommand = new DelegateCommand(AddNewBook, CanAddNewBook);
+            removeCommand = new DelegateCommand(RemoveBook, CanRemoveBook);
+            lendToCommand = new DelegateCommand(p => LendTo((Book)p));
         }
-
 
         public void Initialize()
         {
@@ -65,7 +62,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void AddNewBook()
         {
-            Book book = new Book();
+            var book = new Book();
             book.Validate();
             entityService.Books.Add(book);
 
@@ -74,17 +71,15 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         }
 
         private bool CanRemoveBook() 
-        { 
-            // Unfortunately, it is necessary to deactivate the Remove command when a cell is invalid in the DataGrid. Otherwise, it might freeze.
-            // See: https://connect.microsoft.com/VisualStudio/feedback/details/777761/wpf-datagrid-becomes-readonly-after-deleting-an-invalid-row
-            return bookListViewModel.SelectedBook != null && bookListViewModel.IsValid && bookViewModel.IsValid; 
+        {
+            return bookListViewModel.SelectedBook != null;
         }
 
         private void RemoveBook()
         {
             // Use the BookCollectionView, which represents the sorted/filtered state of the books, to determine the next book to select.
-            IEnumerable<BookDataModel> booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
-            BookDataModel nextBook = CollectionHelper.GetNextElementOrDefault(bookListViewModel.BookCollectionView.Except(booksToExclude), 
+            var booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
+            var nextBook = CollectionHelper.GetNextElementOrDefault(bookListViewModel.BookCollectionView.Except(booksToExclude), 
                 bookListViewModel.SelectedBook);
 
             foreach (BookDataModel book in bookListViewModel.SelectedBooks.ToArray())
@@ -98,7 +93,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void LendTo(Book book)
         {
-            LendToViewModel lendToViewModel = lendToViewModelFactory.CreateExport().Value;
+            var lendToViewModel = lendToViewModelFactory.CreateExport().Value;
             lendToViewModel.Book = book;
             lendToViewModel.Persons = entityService.Persons;
             lendToViewModel.SelectedPerson = entityService.Persons.FirstOrDefault();

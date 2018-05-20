@@ -16,7 +16,6 @@ namespace Waf.BookLibrary.Reporting.Applications.DataModels
                             ).ToArray();
         }
 
-
         public IReadOnlyList<IGrouping<Person, Book>> GroupedBooks { get; }
     }
 }

@@ -32,7 +32,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private DbConnection connection;
         private BookLibraryContext bookLibraryContext;
 
-
         [ImportingConstructor]
         public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService, 
             Lazy<ShellViewModel> shellViewModel)
@@ -41,12 +40,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.messageService = messageService;
             this.shellService = shellService;
             this.shellViewModel = shellViewModel;
-            this.saveCommand = new DelegateCommand(() => Save(), CanSave);
+            saveCommand = new DelegateCommand(() => Save(), CanSave);
         }
         
-
         private ShellViewModel ShellViewModel => shellViewModel.Value;
-
 
         public void Initialize()
         {
@@ -124,7 +121,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         internal static string EntityToString(object entity)
         {
-            IFormattable formattableEntity = entity as IFormattable;
+            var formattableEntity = entity as IFormattable;
             if (formattableEntity != null)
             {
                 return formattableEntity.ToString(null, CultureInfo.CurrentCulture);

@@ -16,16 +16,15 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void LendToViewModelLendToTest()
         {
-            Book book = new Book() { Title = "The Fellowship of the Ring" };
-            
-            List<Person> persons = new List<Person>()
+            var book = new Book() { Title = "The Fellowship of the Ring" };
+            var persons = new List<Person>()
             {
                 new Person() { Firstname = "Harry" },
                 new Person() { Firstname = "Ron" }
             };
             
-            MockLendToView lendToView = new MockLendToView();
-            LendToViewModel lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons };
+            var lendToView = new MockLendToView();
+            var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 
             Assert.AreEqual(book, lendToViewModel.Book);
             Assert.AreEqual(persons, lendToViewModel.Persons);
@@ -62,16 +61,15 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void LendToViewModelWasReturnedTest()
         {
-            List<Person> persons = new List<Person>()
+            var persons = new List<Person>()
             {
                 new Person() { Firstname = "Harry" },
                 new Person() { Firstname = "Ron" }
             };
-            
-            Book book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons.First() };
+            var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons.First() };
 
-            MockLendToView lendToView = new MockLendToView();
-            LendToViewModel lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons };
+            var lendToView = new MockLendToView();
+            var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 
             // Show the dialog
             object owner = new object();

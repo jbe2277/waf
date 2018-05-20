@@ -46,28 +46,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         }
 
         [TestMethod]
-        public void PersonListViewModelCommandsTest()
-        {
-            MockPersonListView personListView = new MockPersonListView();
-            PersonListViewModel personListViewModel = new PersonListViewModel(personListView) { Persons = new List<Person>() };
-
-            DelegateCommand mockCommand = new DelegateCommand(() => {});
-            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.AddNewCommand, () => 
-                personListViewModel.AddNewCommand = mockCommand);
-            Assert.AreEqual(mockCommand, personListViewModel.AddNewCommand);
-
-            mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.RemoveCommand, () =>
-                personListViewModel.RemoveCommand = mockCommand);
-            Assert.AreEqual(mockCommand, personListViewModel.RemoveCommand);
-
-            mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.CreateNewEmailCommand, () =>
-                personListViewModel.CreateNewEmailCommand = mockCommand);
-            Assert.AreEqual(mockCommand, personListViewModel.CreateNewEmailCommand);
-        }
-
-        [TestMethod]
         public void PersonListViewModelFilterTest()
         {
             List<Person> persons = new List<Person>()

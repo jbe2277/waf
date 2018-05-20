@@ -10,7 +10,6 @@ namespace Waf.BookLibrary.Library.Applications.Data
             Database.SetInitializer<BookLibraryContext>(null);
         }
 
-
         public bool HasChanges() 
         {
             ChangeTracker.DetectChanges();

@@ -43,17 +43,5 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             AssertHelper.PropertyChangedEvent(personViewModel, x => x.IsValid, () => personViewModel.IsValid = false);
             Assert.IsFalse(personViewModel.IsValid);
         }
-
-        [TestMethod]
-        public void PersonViewModelCommandsTest()
-        {
-            MockPersonView personView = new MockPersonView();
-            PersonViewModel personViewModel = new PersonViewModel(personView);
-
-            DelegateCommand mockCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(personViewModel, x => x.CreateNewEmailCommand, () =>
-                personViewModel.CreateNewEmailCommand = mockCommand);
-            Assert.AreEqual(mockCommand, personViewModel.CreateNewEmailCommand);
-        }
     }
 }

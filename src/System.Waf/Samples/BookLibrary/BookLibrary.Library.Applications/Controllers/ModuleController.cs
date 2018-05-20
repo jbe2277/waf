@@ -22,7 +22,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly ShellService shellService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly DelegateCommand exitCommand;
-        
 
         [ImportingConstructor]
         public ModuleController(IMessageService messageService, IPresentationService presentationService, 
@@ -37,12 +36,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.personController = personController;
             this.shellService = shellService;
             this.shellViewModel = shellViewModel;
-            this.exitCommand = new DelegateCommand(Close);
+            exitCommand = new DelegateCommand(Close);
         }
 
-
         private ShellViewModel ShellViewModel => shellViewModel.Value;
-
 
         public void Initialize()
         {
@@ -70,7 +67,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         public void Shutdown()
         {
             entityController.Shutdown();
-
             try
             {
                 Settings.Default.Save();

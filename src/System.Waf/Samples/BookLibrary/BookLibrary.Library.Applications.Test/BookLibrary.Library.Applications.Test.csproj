@@ -55,7 +55,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Services\MockPresentationService.cs" />
     <Compile Include="DataModels\BookDataModelTest.cs" />
-    <Compile Include="Services\ShellServiceTest.cs" />
     <Compile Include="TestClassBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MockEmailService.cs" />
