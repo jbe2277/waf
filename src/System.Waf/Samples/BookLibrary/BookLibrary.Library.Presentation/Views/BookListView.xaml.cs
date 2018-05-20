@@ -19,18 +19,14 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         private readonly Lazy<BookListViewModel> viewModel;
         private ICollectionView bookCollectionView;
 
-        
         public BookListView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<BookListViewModel>(() => ViewHelper.GetViewModel<BookListViewModel>(this));
             Loaded += FirstTimeLoadedHandler;
         }
 
-
         private BookListViewModel ViewModel => viewModel.Value;
-
 
         public void FocusFirstCell()
         {

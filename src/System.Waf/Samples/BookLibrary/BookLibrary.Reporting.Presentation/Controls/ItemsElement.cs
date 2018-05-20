@@ -14,7 +14,6 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
         public static readonly DependencyProperty ItemTemplateProperty =
             DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsElement), new UIPropertyMetadata(null));
 
-
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
@@ -27,7 +26,6 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
             set { SetValue(ItemTemplateProperty, value); }
         }
 
-
         private void UpdateContent()
         {
             if (ItemsSource != null)
@@ -36,17 +34,15 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
                 {
                     throw new InvalidOperationException("When ItemsSource is used then the ItemTemplate must not be null.");
                 }
-
-                List<Block> blocks = new List<Block>();
+                var blocks = new List<Block>();
                 foreach (object item in ItemsSource)
                 {
                     Block block = null;
-                    ContentElement contentElement = ItemTemplate.LoadContent() as ContentElement;
+                    var contentElement = ItemTemplate.LoadContent() as ContentElement;
                     if (contentElement != null)
                     {
                         block = contentElement.Content as Block;
                     }
-
                     if (block == null)
                     {
                         throw new InvalidOperationException("The ItemTemplate must define: DataTemplate > ContentElement > Block element.");
@@ -54,15 +50,13 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
                     block.DataContext = item;
                     blocks.Add(block);
                 }
-
                 Blocks.AddRange(blocks);
             }
         }
 
         private static void ItemsSourceChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ItemsElement itemsElement = (ItemsElement)d;
-            itemsElement.UpdateContent();
+            ((ItemsElement)d).UpdateContent();
         }
     }
 }

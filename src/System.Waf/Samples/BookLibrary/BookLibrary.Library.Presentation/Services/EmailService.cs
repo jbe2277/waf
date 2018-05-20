@@ -13,7 +13,6 @@ namespace Waf.BookLibrary.Library.Presentation.Services
         private readonly IMessageService messageService;
         private readonly IShellService shellService;
         
-
         [ImportingConstructor]
         public EmailService(IMessageService messageService, IShellService shellService)
         {
@@ -21,7 +20,6 @@ namespace Waf.BookLibrary.Library.Presentation.Services
             this.shellService = shellService;
         }
         
-
         public void CreateNewEmail(string toEmailAddress)
         {
             try

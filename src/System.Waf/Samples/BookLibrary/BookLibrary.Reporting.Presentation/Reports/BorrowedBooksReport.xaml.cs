@@ -9,15 +9,12 @@ namespace Waf.BookLibrary.Reporting.Presentation.Reports
     {
         private object reportData;
 
-
         public BorrowedBooksReport()
         {
             InitializeComponent();
-
             // Disconnect the flowDocument from the UserControl. The UserControl is only used for DesignTime support.
             Content = null;
         }
-
 
         public object Report => flowDocument;
 

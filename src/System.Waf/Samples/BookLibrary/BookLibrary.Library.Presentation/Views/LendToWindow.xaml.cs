@@ -14,17 +14,13 @@ namespace Waf.BookLibrary.Library.Presentation.Views
     {
         private readonly Lazy<LendToViewModel> viewModel;
         
-        
         public LendToWindow()
         {
             InitializeComponent();
-
             viewModel = new Lazy<LendToViewModel>(() => ViewHelper.GetViewModel<LendToViewModel>(this));
         }
 
-
         private LendToViewModel ViewModel => viewModel.Value;
-
 
         public void ShowDialog(object owner)
         {

@@ -20,18 +20,14 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         private readonly Lazy<PersonListViewModel> viewModel;
         private ICollectionView personCollectionView;
         
-        
         public PersonListView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<PersonListViewModel>(() => ViewHelper.GetViewModel<PersonListViewModel>(this));
             Loaded += FirstTimeLoadedHandler;
         }
 
-
         private PersonListViewModel ViewModel => viewModel.Value;
-
 
         public void FocusFirstCell()
         {
@@ -88,7 +84,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void EmailClick(object sender, RoutedEventArgs e)
         {
-            Hyperlink hyperlink = (Hyperlink)e.OriginalSource;
+            var hyperlink = (Hyperlink)e.OriginalSource;
             ViewModel.CreateNewEmailCommand.Execute(hyperlink.DataContext);
         }
     }

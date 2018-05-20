@@ -17,7 +17,6 @@ namespace Waf.BookLibrary.Library.Domain
         private int pages;
         private Person lendTo;
 
-
         public Book()
         {
             Id = Guid.NewGuid();
@@ -26,26 +25,25 @@ namespace Waf.BookLibrary.Library.Domain
             publishDate = DateTime.Now;
         }
 
-
         public Guid Id { get; private set; }
 
-        [Required(ErrorMessageResourceName = "TitleMandatory", ErrorMessageResourceType = typeof(Resources))]
-        [StringLength(100, ErrorMessageResourceName = "TitleMaxLength", ErrorMessageResourceType = typeof(Resources))]
+        [Required(ErrorMessageResourceName = nameof(Resources.TitleMandatory), ErrorMessageResourceType = typeof(Resources))]
+        [StringLength(100, ErrorMessageResourceName = nameof(Resources.TitleMaxLength), ErrorMessageResourceType = typeof(Resources))]
         public string Title 
         {
             get { return title; }
             set { SetPropertyAndValidate(ref title, value); }
         }
 
-        [Required(ErrorMessageResourceName = "AuthorMandatory", ErrorMessageResourceType = typeof(Resources))]
-        [StringLength(100, ErrorMessageResourceName = "AuthorMaxLength", ErrorMessageResourceType = typeof(Resources))]
+        [Required(ErrorMessageResourceName = nameof(Resources.AuthorMandatory), ErrorMessageResourceType = typeof(Resources))]
+        [StringLength(100, ErrorMessageResourceName = nameof(Resources.AuthorMaxLength), ErrorMessageResourceType = typeof(Resources))]
         public string Author 
         {
             get { return author; }
             set { SetPropertyAndValidate(ref author, value); }
         }
 
-        [StringLength(100, ErrorMessageResourceName = "PublisherMaxLength", ErrorMessageResourceType = typeof(Resources))]
+        [StringLength(100, ErrorMessageResourceName = nameof(Resources.PublisherMaxLength), ErrorMessageResourceType = typeof(Resources))]
         public string Publisher 
         {
             get { return publisher; }
@@ -59,7 +57,7 @@ namespace Waf.BookLibrary.Library.Domain
             set { SetPropertyAndValidate(ref publishDate, value); }
         }
 
-        [StringLength(14, ErrorMessageResourceName = "IsbnMaxLength", ErrorMessageResourceType = typeof(Resources))]
+        [StringLength(14, ErrorMessageResourceName = nameof(Resources.IsbnMaxLength), ErrorMessageResourceType = typeof(Resources))]
         public string Isbn 
         { 
             get { return isbn; }
@@ -72,7 +70,7 @@ namespace Waf.BookLibrary.Library.Domain
             set { SetPropertyAndValidate(ref language, value); }
         }
 
-        [Range(0, int.MaxValue, ErrorMessageResourceName = "PagesEqualOrLarger", ErrorMessageResourceType = typeof(Resources))]
+        [Range(0, int.MaxValue, ErrorMessageResourceName = nameof(Resources.PagesEqualOrLarger), ErrorMessageResourceType = typeof(Resources))]
         public int Pages 
         {
             get { return pages; }
@@ -84,7 +82,6 @@ namespace Waf.BookLibrary.Library.Domain
             get { return lendTo; }
             set { SetPropertyAndValidate(ref lendTo, value); }
         }
-
 
         public string ToString(string format, IFormatProvider formatProvider)
         {

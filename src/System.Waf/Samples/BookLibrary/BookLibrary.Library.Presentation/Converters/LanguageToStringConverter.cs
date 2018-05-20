@@ -12,7 +12,7 @@ namespace Waf.BookLibrary.Library.Presentation.Converters
         {
             if (!(value is Language)) { return null; }
             
-            Language language = (Language)value;
+            var language = (Language)value;
             switch (language)
             {
                 case Language.Undefined:

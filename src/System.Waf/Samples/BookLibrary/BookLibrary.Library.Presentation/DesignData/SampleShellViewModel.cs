@@ -16,9 +16,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
             ShellService.PersonView = new PersonView();
         }
 
-
         public new string Title => "WAF Book Library";
-
 
         private class MockShellView : IShellView
         {
@@ -34,11 +32,9 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
             public bool IsMaximized { get; set; }
 
-            
             public event CancelEventHandler Closing;
 
             public event EventHandler Closed;
-
 
             public void Show() { }
 

@@ -23,7 +23,6 @@ namespace Waf.BookLibrary.Library.Presentation
         private CompositionContainer container;
         private IEnumerable<IModuleController> moduleControllers;
 
-
         public App()
         {
             var profileRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -33,7 +32,6 @@ namespace Waf.BookLibrary.Library.Presentation
             ProfileOptimization.StartProfile("Startup.profile");
         }
 
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -42,7 +40,7 @@ namespace Waf.BookLibrary.Library.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             catalog = new AggregateCatalog();
-            // Add the WpfApplicationFramework assembly to the catalog
+            // Add the WinApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
             // Add the Waf.BookLibrary.Library.Presentation assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
@@ -56,21 +54,20 @@ namespace Waf.BookLibrary.Library.Presentation
             }
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
 
             moduleControllers = container.GetExportedValues<IModuleController>();
-            foreach (IModuleController moduleController in moduleControllers) { moduleController.Initialize(); }
-            foreach (IModuleController moduleController in moduleControllers) { moduleController.Run(); }
+            foreach (var moduleController in moduleControllers) { moduleController.Initialize(); }
+            foreach (var moduleController in moduleControllers) { moduleController.Run(); }
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            foreach (IModuleController moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
+            foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
             container.Dispose();
             catalog.Dispose();
-
             base.OnExit(e);
         }
 
@@ -89,12 +86,10 @@ namespace Waf.BookLibrary.Library.Presentation
             if (e == null) { return; }
 
             Trace.TraceError(e.ToString());
-
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
-                        Presentation.Properties.Resources.UnknownError, e)
-                    , ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), 
+                    ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

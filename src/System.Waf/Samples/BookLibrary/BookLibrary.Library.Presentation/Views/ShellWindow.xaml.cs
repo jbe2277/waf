@@ -12,7 +12,6 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             InitializeComponent();
         }
 
-
         public bool IsMaximized
         {
             get { return WindowState == WindowState.Maximized; }
