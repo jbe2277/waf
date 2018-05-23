@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.InformationManager.AddressBook.Modules.Domain;
+using System.Linq;
 using System.Waf.UnitTesting;
 using Test.InformationManager.Common.Domain;
-using System.Linq;
+using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Test.InformationManager.AddressBook.Modules.Domain
 {

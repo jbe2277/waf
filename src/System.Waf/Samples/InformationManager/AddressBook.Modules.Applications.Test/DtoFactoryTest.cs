@@ -18,7 +18,6 @@ namespace Test.InformationManager.AddressBook.Modules.Applications
             Assert.AreEqual(contact.Lastname, contactDto.Lastname);
             Assert.AreEqual(contact.Email, contactDto.Email);
 
-            
             Assert.IsNull(DtoFactory.ToDto(null));
         }
     }

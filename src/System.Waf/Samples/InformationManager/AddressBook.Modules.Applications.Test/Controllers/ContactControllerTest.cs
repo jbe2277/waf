@@ -65,8 +65,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             contactListViewModel.ContactCollectionView = root.Contacts;
             
-            AssertHelper.CanExecuteChangedEvent(controller.DeleteContactCommand, () =>
-                contactListViewModel.SelectedContact = contact1);
+            AssertHelper.CanExecuteChangedEvent(controller.DeleteContactCommand, () => contactListViewModel.SelectedContact = contact1);
             
             controller.DeleteContactCommand.Execute(null);
             

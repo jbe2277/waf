@@ -10,7 +10,6 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Views
     {
         public Action<MockContactListView> FocusItemAction { get; set; }
         
-
         public void FocusItem()
         {
             FocusItemAction(this);

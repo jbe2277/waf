@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.AddressBook.Modules.Applications.SampleData;
-using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Test.InformationManager.AddressBook.Modules.Applications.SampleData
 {
@@ -12,7 +10,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.SampleData
         [TestMethod]
         public void CreateContactsTest()
         {
-            IReadOnlyList<Contact> contacts = SampleDataProvider.CreateContacts();
+            var contacts = SampleDataProvider.CreateContacts();
             Assert.IsTrue(contacts.Any());
         }
     }
