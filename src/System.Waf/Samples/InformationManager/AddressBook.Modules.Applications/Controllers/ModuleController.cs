@@ -29,7 +29,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private ContactController activeContactController;
         private AddressBookRoot root;
 
-        
         [ImportingConstructor]
         public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
             ExportFactory<ContactController> contactControllerFactory, ExportFactory<SelectContactController> selectContactControllerFactory)
@@ -39,12 +38,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             this.navigationService = navigationService;
             this.contactControllerFactory = contactControllerFactory;
             this.selectContactControllerFactory = selectContactControllerFactory;
-            this.serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
+            serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
         }
 
-
         internal AddressBookRoot Root => root;
-
 
         public void Initialize()
         {
@@ -60,7 +57,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
                     root = (AddressBookRoot)serializer.Value.ReadObject(stream);
                 }
             }
-            
             navigationService.AddNavigationNode("Contacts", ShowAddressBook, CloseAddressBook, 2, 1);
         }
 
@@ -78,7 +74,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public ContactDto ShowSelectContactView(object ownerView)
         {
-            SelectContactController selectContactController = selectContactControllerFactory.CreateExport().Value;
+            var selectContactController = selectContactControllerFactory.CreateExport().Value;
             selectContactController.OwnerView = ownerView;
             selectContactController.Root = root;
             selectContactController.Initialize();
@@ -94,17 +90,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             activeContactController.Initialize();
             activeContactController.Run();
 
-            ToolBarCommand uiNewContactCommand = new ToolBarCommand(activeContactController.NewContactCommand, "_New contact",
-                "Creates a new contact.");
-            ToolBarCommand uiDeleteCommand = new ToolBarCommand(activeContactController.DeleteContactCommand, "_Delete",
-                "Deletes the selected contact.");
+            var uiNewContactCommand = new ToolBarCommand(activeContactController.NewContactCommand, "_New contact", "Creates a new contact.");
+            var uiDeleteCommand = new ToolBarCommand(activeContactController.DeleteContactCommand, "_Delete", "Deletes the selected contact.");
             shellService.AddToolBarCommands(new[] { uiNewContactCommand, uiDeleteCommand });
         }
 
         private void CloseAddressBook()
         {
             shellService.ClearToolBarCommands();
-
             activeContactController?.Shutdown();
             activeContactController = null;
         }

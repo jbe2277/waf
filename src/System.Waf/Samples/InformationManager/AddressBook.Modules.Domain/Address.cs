@@ -12,7 +12,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         [DataMember] private string postalCode;
         [DataMember] private string country;
 
-
         public string Street
         {
             get { return street; }

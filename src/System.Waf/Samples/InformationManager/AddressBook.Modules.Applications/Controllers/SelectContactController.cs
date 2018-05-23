@@ -13,15 +13,13 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private readonly SelectContactViewModel selectContactViewModel;
         private readonly DelegateCommand selectContactCommand;
         
-
         [ImportingConstructor]
         public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
         {
             this.selectContactViewModel = selectContactViewModel;
-            this.ContactListViewModel = contactListViewModel;
-            this.selectContactCommand = new DelegateCommand(SelectContact, CanSelectContact);
+            ContactListViewModel = contactListViewModel;
+            selectContactCommand = new DelegateCommand(SelectContact, CanSelectContact);
         }
-
 
         public object OwnerView { get; set; }
 
@@ -30,7 +28,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         public Contact SelectedContact { get; private set; }
 
         internal ContactListViewModel ContactListViewModel { get; }
-
 
         public void Initialize()
         {

@@ -11,15 +11,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         [DataMember]
         private readonly ObservableCollection<Contact> contacts;
 
-
         public AddressBookRoot()
         {
             contacts = new ObservableCollection<Contact>();
         }
 
-
         public IReadOnlyList<Contact> Contacts => contacts;
-
 
         public Contact AddNewContact()
         {

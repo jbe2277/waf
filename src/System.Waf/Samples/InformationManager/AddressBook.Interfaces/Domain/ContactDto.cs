@@ -18,7 +18,6 @@
             Email = email;
         }
 
-
         /// <summary>
         /// Gets the first name.
         /// </summary>

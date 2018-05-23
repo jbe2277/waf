@@ -14,16 +14,13 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
     {
         private readonly Lazy<SelectContactViewModel> viewModel;
         
-
         public SelectContactWindow()
         {
             InitializeComponent();
             viewModel = new Lazy<SelectContactViewModel>(() => ViewHelper.GetViewModel<SelectContactViewModel>(this));
         }
 
-
         public SelectContactViewModel ViewModel => viewModel.Value;
-
 
         public void ShowDialog(object owner)
         {
@@ -36,10 +33,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
             var element = e.OriginalSource as FrameworkElement;
             if (element?.DataContext is Contact)
             {
-                if (ViewModel.OkCommand.CanExecute(null))
-                {
-                    ViewModel.OkCommand.Execute(null);
-                }
+                ViewModel.OkCommand.Execute(null);
             }
         }
     }

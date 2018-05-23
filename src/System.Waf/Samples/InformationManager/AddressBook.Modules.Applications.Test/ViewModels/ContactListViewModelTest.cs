@@ -16,25 +16,18 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         public void PropertiesTest()
         {
             var viewModel = Container.GetExportedValue<ContactListViewModel>();
-
-            List<Contact> contacts = new List<Contact>()
+            var contacts = new List<Contact>()
             {
                 new Contact(),
                 new Contact()
             };
             
             Assert.IsNull(viewModel.Contacts);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.Contacts, () => viewModel.Contacts = contacts);
-            Assert.AreEqual(contacts, viewModel.Contacts);
+            viewModel.Contacts = contacts;
 
             Assert.IsNull(viewModel.SelectedContact);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedContact, () => viewModel.SelectedContact = contacts.First());
             Assert.AreEqual(contacts.First(), viewModel.SelectedContact);
-
-            var emptyCommand = new DelegateCommand(() => { });
-            Assert.IsNull(viewModel.DeleteContactCommand);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.DeleteContactCommand, () => viewModel.DeleteContactCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.DeleteContactCommand);
 
             Assert.AreEqual("", viewModel.FilterText);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.FilterText, () => viewModel.FilterText = "abc");

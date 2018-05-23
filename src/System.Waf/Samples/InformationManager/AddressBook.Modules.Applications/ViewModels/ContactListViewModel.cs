@@ -11,23 +11,17 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ContactListViewModel : ViewModel<IContactListView>
     {
-        private IReadOnlyList<Contact> contacts;
         private Contact selectedContact;
-        private ICommand deleteContactCommand;
         private string filterText = "";
 
-        
         [ImportingConstructor]
         public ContactListViewModel(IContactListView view) : base(view)
         {
         }
 
+        public IReadOnlyList<Contact> Contacts { get; set; }
 
-        public IReadOnlyList<Contact> Contacts
-        {
-            get { return contacts; }
-            set { SetProperty(ref contacts, value); }
-        }
+        public IEnumerable<Contact> ContactCollectionView { get; set; }
 
         public Contact SelectedContact
         {
@@ -35,20 +29,13 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
             set { SetProperty(ref selectedContact, value); }
         }
 
-        public IEnumerable<Contact> ContactCollectionView { get; set; }
-
-        public ICommand DeleteContactCommand
-        {
-            get { return deleteContactCommand; }
-            set { SetProperty(ref deleteContactCommand, value); }
-        }
+        public ICommand DeleteContactCommand { get; set; }
 
         public string FilterText
         {
             get { return filterText; }
             set { SetProperty(ref filterText, value); }
         }
-
 
         public void FocusItem()
         {

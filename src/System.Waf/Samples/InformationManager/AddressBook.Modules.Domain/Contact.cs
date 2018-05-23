@@ -14,13 +14,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         [DataMember] private string email;
         [DataMember] private string phone;
 
-
         public Contact()
         {
             address = new Address();
             address.Validate();
         }
-
 
         [Required]
         public string Firstname

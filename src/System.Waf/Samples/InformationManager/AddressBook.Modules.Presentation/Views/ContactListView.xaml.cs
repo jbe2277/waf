@@ -20,19 +20,15 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         private readonly Lazy<ContactListViewModel> viewModel;
         private ICollectionView contactCollectionView;
         
-        
         public ContactListView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<ContactListViewModel>(() => ViewHelper.GetViewModel<ContactListViewModel>(this));
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
         }
 
-
         private ContactListViewModel ViewModel => viewModel.Value;
-
 
         public void FocusItem()
         {
@@ -52,7 +48,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 
         private void LoadedHandler(object sender, RoutedEventArgs e)
         {
-            // The following code doesn't work in the WPF Designer environment (Cider or Blend).
+            // The following code doesn't work in the WPF Designer environment.
             if (!WafConfiguration.IsInDesignMode)
             {
                 contactCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Contacts);
@@ -73,7 +69,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         {
             // We need to set the Filter back to null => prevent a WPF memory leak
             contactCollectionView.Filter = null;
-
             ViewModel.PropertyChanged -= ViewModelPropertyChanged;
         }
 

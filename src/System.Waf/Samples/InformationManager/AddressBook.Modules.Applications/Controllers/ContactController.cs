@@ -18,32 +18,28 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
     {
         private readonly IShellService shellService;
         private readonly ContactLayoutViewModel contactLayoutViewModel;
-        private readonly DelegateCommand newContactCommand;
         private readonly DelegateCommand deleteContactCommand;
 
-        
         [ImportingConstructor]
         public ContactController(IShellService shellService, ContactLayoutViewModel contactLayoutViewModel, ContactListViewModel contactListViewModel, ContactViewModel contactViewModel)
         {
             this.shellService = shellService;
             this.contactLayoutViewModel = contactLayoutViewModel;
-            this.ContactListViewModel = contactListViewModel;
-            this.ContactViewModel = contactViewModel;
-            this.newContactCommand = new DelegateCommand(NewContact);
-            this.deleteContactCommand = new DelegateCommand(DeleteContact, CanDeleteContact);
+            ContactListViewModel = contactListViewModel;
+            ContactViewModel = contactViewModel;
+            NewContactCommand = new DelegateCommand(NewContact);
+            deleteContactCommand = new DelegateCommand(DeleteContact, CanDeleteContact);
         }
-
 
         public AddressBookRoot Root { get; set; }
 
-        public ICommand NewContactCommand => newContactCommand;
+        public ICommand NewContactCommand { get; }
 
         public ICommand DeleteContactCommand => deleteContactCommand;
 
         internal ContactListViewModel ContactListViewModel { get; }
 
         internal ContactViewModel ContactViewModel { get; }
-
 
         public void Initialize()
         {

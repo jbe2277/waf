@@ -10,12 +10,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
     {
         private Contact contact;
 
-        
         [ImportingConstructor]
         public ContactViewModel(IContactView view) : base(view)
         {
         }
-
 
         public Contact Contact
         {
