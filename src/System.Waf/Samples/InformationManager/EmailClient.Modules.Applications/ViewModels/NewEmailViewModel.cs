@@ -12,44 +12,25 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class NewEmailViewModel : ViewModel<INewEmailView>
     {
-        private ICommand selectContactCommand;
-        private ICommand sendCommand;
-        private readonly DelegateCommand closeCommand;
-        private IReadOnlyList<EmailAccount> emailAccounts;
         private EmailAccount selectedEmailAccount;
         private Email email;
         private string to = "";
         private string cc = "";
         private string bcc = "";
 
-
         [ImportingConstructor]
-        public NewEmailViewModel(INewEmailView view)
-            : base(view)
+        public NewEmailViewModel(INewEmailView view) : base(view)
         {
-            closeCommand = new DelegateCommand(Close);
+            CloseCommand = new DelegateCommand(Close);
         }
 
+        public ICommand SelectContactCommand { get; set; }
 
-        public ICommand SelectContactCommand
-        {
-            get { return selectContactCommand; }
-            set { SetProperty(ref selectContactCommand, value); }
-        }
+        public ICommand SendCommand { get; set; }
 
-        public ICommand SendCommand
-        {
-            get { return sendCommand; }
-            set { SetProperty(ref sendCommand, value); }
-        }
+        public ICommand CloseCommand { get; }
 
-        public ICommand CloseCommand => closeCommand;
-
-        public IReadOnlyList<EmailAccount> EmailAccounts
-        {
-            get { return emailAccounts; }
-            set { SetProperty(ref emailAccounts, value); }
-        }
+        public IReadOnlyList<EmailAccount> EmailAccounts { get; set; }
 
         public EmailAccount SelectedEmailAccount
         {
@@ -123,7 +104,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
                 }
             }
         }
-
 
         public void Show(object owner)
         {

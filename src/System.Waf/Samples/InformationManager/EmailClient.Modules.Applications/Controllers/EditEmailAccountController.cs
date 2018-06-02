@@ -23,7 +23,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private ExchangeSettingsViewModel exchangeSettingsViewModel;
         private bool result;
 
-
         [ImportingConstructor]
         public EditEmailAccountController(EditEmailAccountViewModel editEmailAccountViewModel,
             BasicEmailAccountViewModel basicEmailAccountViewModel, ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory, 
@@ -33,21 +32,17 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             this.basicEmailAccountViewModel = basicEmailAccountViewModel;
             this.pop3SettingsViewModelFactory = pop3SettingsViewModelFactory;
             this.exchangeSettingsViewModelFactory = exchangeSettingsViewModelFactory;
-
             backCommand = new DelegateCommand(Back, CanBack);
             nextCommand = new DelegateCommand(Next, CanNext);
         }
 
-
         public object OwnerWindow { get; set; }
 
         public EmailAccount EmailAccount { get; set; }
-
         
         public void Initialize()
         {
             PropertyChangedEventManager.AddHandler(editEmailAccountViewModel, EditEmailAccountViewModelPropertyChanged, "");
-            
             editEmailAccountViewModel.BackCommand = backCommand;
             editEmailAccountViewModel.NextCommand = nextCommand;
             basicEmailAccountViewModel.EmailAccount = EmailAccount;
@@ -59,9 +54,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             editEmailAccountViewModel.ShowDialog(OwnerWindow);
             return result;
         }
-
-
-        // Wizard workflow
 
         private void Close()
         {
@@ -97,19 +89,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                     ShowExchangeSettingsView();
                 }
             }
-            else if (pop3SettingsViewModel != null
-                && editEmailAccountViewModel.ContentView == pop3SettingsViewModel.View)
+            else if (pop3SettingsViewModel != null && editEmailAccountViewModel.ContentView == pop3SettingsViewModel.View)
             {
                 SavePop3Settings();
                 Close();
             }
-            else if (exchangeSettingsViewModel != null
-                && editEmailAccountViewModel.ContentView == exchangeSettingsViewModel.View)
+            else if (exchangeSettingsViewModel != null && editEmailAccountViewModel.ContentView == exchangeSettingsViewModel.View)
             {
                 SaveExchangeSettings();
                 Close();
             }
-
             UpdateCommandsState();
         }
 
@@ -126,10 +115,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 UpdateCommandsState();
             }
         }
-
         
-        // Show wizard pages
-
         private void ShowPop3SettingsView()
         {
             Pop3Settings pop3Settings = EmailAccount.EmailAccountSettings is Pop3Settings 

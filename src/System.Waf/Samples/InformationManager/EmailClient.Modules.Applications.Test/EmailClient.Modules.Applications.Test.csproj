@@ -59,7 +59,6 @@
     <Compile Include="ViewModels\EmailLayoutViewModelTest.cs" />
     <Compile Include="ViewModels\EmailListViewModelTest.cs" />
     <Compile Include="ViewModels\EmailViewModelTest.cs" />
-    <Compile Include="ViewModels\ExchangeSettingsViewModelTest.cs" />
     <Compile Include="ViewModels\NewEmailViewModelTest.cs" />
     <Compile Include="ViewModels\Pop3SettingsViewModelTest.cs" />
     <Compile Include="Views\MockBasicEmailAccountView.cs" />

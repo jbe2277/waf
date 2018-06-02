@@ -11,7 +11,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [DataMember] private string pop3ServerPath;
         [DataMember] private string smtpServerPath;
 
-
         public Pop3Settings()
         {
             pop3UserCredits = new UserCredits();
@@ -19,7 +18,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
             pop3UserCredits.Validate();
             smtpUserCredits.Validate();
         }
-
 
         [Required, Display(Name = "POP3 Server")]
         public string Pop3ServerPath
@@ -38,7 +36,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         }
 
         public UserCredits SmtpUserCredits => smtpUserCredits;
-
 
         public override EmailAccountSettings Clone()
         {

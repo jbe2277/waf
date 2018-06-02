@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
-using System.Waf.Applications;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
@@ -16,25 +15,15 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         public void PropertiesTest()
         {
             var viewModel = Container.GetExportedValue<EmailListViewModel>();
-
             var emails = new List<Email>()
             {
                 new Email(),
                 new Email(),
             };
             
-            Assert.IsNull(viewModel.Emails);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.Emails, () => viewModel.Emails = emails);
-            Assert.AreEqual(emails, viewModel.Emails);
-
             Assert.IsNull(viewModel.SelectedEmail);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmail, () => viewModel.SelectedEmail = emails.First());
             Assert.AreEqual(emails.First(), viewModel.SelectedEmail);
-
-            var emptyCommand = new DelegateCommand(() => { });
-            Assert.IsNull(viewModel.DeleteEmailCommand);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.DeleteEmailCommand, () => viewModel.DeleteEmailCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.DeleteEmailCommand);
 
             Assert.AreEqual("", viewModel.FilterText);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.FilterText, () => viewModel.FilterText = "abc");

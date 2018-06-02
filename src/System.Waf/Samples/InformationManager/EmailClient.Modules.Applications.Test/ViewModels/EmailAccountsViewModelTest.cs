@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
-using System.Waf.Applications;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
@@ -15,29 +14,13 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         public void PropertiesTest()
         {
             var viewModel = Container.GetExportedValue<EmailAccountsViewModel>();
-
             var root = new EmailClientRoot();
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.EmailClientRoot, () => viewModel.EmailClientRoot = root);
-            Assert.AreEqual(root, viewModel.EmailClientRoot);
-
             root = new EmailClientRoot();
             root.AddEmailAccount(new EmailAccount());
             root.AddEmailAccount(new EmailAccount());
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.EmailClientRoot = root);
-            Assert.AreEqual(root.EmailAccounts.First(), viewModel.SelectedEmailAccount);
-
+            viewModel.EmailClientRoot = root;
             AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = root.EmailAccounts.ElementAt(1));
             Assert.AreEqual(root.EmailAccounts.ElementAt(1), viewModel.SelectedEmailAccount);
-
-            var emptyCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.NewAccountCommand, () => viewModel.NewAccountCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.NewAccountCommand);
-
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.RemoveAccountCommand, () => viewModel.RemoveAccountCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.RemoveAccountCommand);
-
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.EditAccountCommand, () => viewModel.EditAccountCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.EditAccountCommand);
         }
 
         [TestMethod]

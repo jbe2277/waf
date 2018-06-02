@@ -15,7 +15,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             Loaded += LoadedHandler;
         }
 
-
         public void Show(object owner)
         {
             Owner = owner as Window;

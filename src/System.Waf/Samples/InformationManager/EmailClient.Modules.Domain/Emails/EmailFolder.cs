@@ -8,20 +8,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
     public class EmailFolder : ValidatableModel
     {
         [DataMember] private readonly ObservableCollection<Email> emails;
-
         private ReadOnlyObservableList<Email> readOnlyEmails;
-
 
         public EmailFolder()
         {
             emails = new ObservableCollection<Email>();
         }
 
-
         public IReadOnlyObservableList<Email> Emails => readOnlyEmails ?? (readOnlyEmails = new ReadOnlyObservableList<Email>(emails));
 
         internal IEmailDeletionService EmailDeletionService { get; set; }
-
 
         public void AddEmail(Email email)
         {

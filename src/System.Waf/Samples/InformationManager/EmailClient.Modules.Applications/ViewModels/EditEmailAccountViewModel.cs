@@ -8,30 +8,18 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class EditEmailAccountViewModel : ViewModel<IEditEmailAccountView>
     {
-        private ICommand backCommand;
-        private ICommand nextCommand;
         private object contentView;
         private bool isValid = true;
         private bool isLastPage;
-        
         
         [ImportingConstructor]
         public EditEmailAccountViewModel(IEditEmailAccountView view) : base(view)
         {
         }
 
+        public ICommand BackCommand { get; set; }
 
-        public ICommand BackCommand 
-        { 
-            get { return backCommand; }
-            set { SetProperty(ref backCommand, value); }
-        }
-
-        public ICommand NextCommand 
-        { 
-            get { return nextCommand; }
-            set { SetProperty(ref nextCommand, value); }
-        }
+        public ICommand NextCommand { get; set; }
 
         public object ContentView
         {
@@ -50,7 +38,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get { return isLastPage; }
             set { SetProperty(ref isLastPage, value); }
         }
-
 
         public void ShowDialog(object owner)
         {

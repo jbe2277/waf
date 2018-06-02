@@ -10,12 +10,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         private object emailListView;
         private object emailView;
 
-        
         [ImportingConstructor]
         public EmailLayoutViewModel(IEmailLayoutView view) : base(view)
         {
         }
-
 
         public object EmailListView
         {

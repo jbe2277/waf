@@ -10,12 +10,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     {
         private Email email;
         
-
         [ImportingConstructor]
         public EmailViewModel(IEmailView view) : base(view)
         {
         }
-
 
         public Email Email
         {

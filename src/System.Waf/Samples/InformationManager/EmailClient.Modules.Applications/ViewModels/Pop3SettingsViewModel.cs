@@ -12,12 +12,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         private Pop3Settings model;
         private bool useSameUserCredits;
 
-
         [ImportingConstructor]
         public Pop3SettingsViewModel(IPop3SettingsView view) : base(view)
         {
         }
-
 
         public Pop3Settings Model 
         { 

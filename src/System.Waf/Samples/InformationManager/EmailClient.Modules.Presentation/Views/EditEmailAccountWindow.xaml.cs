@@ -12,7 +12,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             InitializeComponent();
         }
 
-
         public void ShowDialog(object owner)
         {
             Owner = owner as Window;

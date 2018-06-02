@@ -15,7 +15,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         [DataMember] private readonly EmailFolder drafts;
         [DataMember] private readonly EmailFolder deleted;
 
-
         public EmailClientRoot()
         {
             emailAccounts = new ObservableCollection<EmailAccount>();
@@ -26,7 +25,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             deleted = new EmailFolder();
             Initialize();
         }
-
 
         public IReadOnlyList<EmailAccount> EmailAccounts => emailAccounts;
 
@@ -39,7 +37,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         public EmailFolder Drafts => drafts;
 
         public EmailFolder Deleted => deleted;
-
 
         public void AddEmailAccount(EmailAccount emailAccount)
         {

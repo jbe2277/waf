@@ -10,7 +10,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [DataMember] private string userName;
         [DataMember] private string password;
 
-
         [Required, Display(Name = "Username")]
         public string UserName
         {
@@ -23,7 +22,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
             get { return password; }
             set { SetPropertyAndValidate(ref password, value); }
         }
-
 
         public virtual UserCredits Clone()
         {

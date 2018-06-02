@@ -14,7 +14,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Views
 
         public bool IsVisible { get; private set; }
 
-
         public void Show(object owner)
         {
             Owner = owner;

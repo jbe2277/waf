@@ -8,10 +8,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Selectors
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            FrameworkElement element = (FrameworkElement)container;
-            Email email = (Email)item;
-
-            if (email != null && email.EmailType == EmailType.Received)
+            var element = (FrameworkElement)container;
+            var email = (Email)item;
+            if (email.EmailType == EmailType.Received)
             {
                 return (DataTemplate)element.FindResource("ReceivedEmailItemTemplate");
             }

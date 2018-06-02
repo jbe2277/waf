@@ -15,19 +15,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
     {
         private readonly Lazy<Pop3SettingsViewModel> viewModel;
 
-
         public Pop3SettingsView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<Pop3SettingsViewModel>(() => ViewHelper.GetViewModel<Pop3SettingsViewModel>(this));
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
         }
 
-
         private Pop3SettingsViewModel ViewModel => viewModel.Value;
-
 
         private void LoadedHandler(object sender, RoutedEventArgs e)
         {
@@ -50,13 +46,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 
         private void Pop3PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox passwordBox = (PasswordBox)sender;
+            var passwordBox = (PasswordBox)sender;
             ViewModel.Model.Pop3UserCredits.Password = passwordBox.Password;
         }
 
         private void SmtpPasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox passwordBox = (PasswordBox)sender;
+            var passwordBox = (PasswordBox)sender;
             ViewModel.Model.SmtpUserCredits.Password = passwordBox.Password;
         }
     }

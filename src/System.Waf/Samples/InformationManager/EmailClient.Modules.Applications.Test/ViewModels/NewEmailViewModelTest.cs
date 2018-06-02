@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
-using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
@@ -17,13 +16,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<NewEmailViewModel>();
 
-            var emptyCommand = new DelegateCommand(() => { });
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectContactCommand, () => viewModel.SelectContactCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.SelectContactCommand);
-
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SendCommand, () => viewModel.SendCommand = emptyCommand);
-            Assert.AreEqual(emptyCommand, viewModel.SendCommand);
-
             // Email accounts tests
 
             var emailAccounts = new List<EmailAccount>()
@@ -31,9 +23,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
                 new EmailAccount(),
                 new EmailAccount()
             };
-
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.EmailAccounts, () => viewModel.EmailAccounts = emailAccounts);
-            Assert.AreEqual(emailAccounts, viewModel.EmailAccounts);
 
             AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts.First());
             Assert.AreEqual(emailAccounts.First(), viewModel.SelectedEmailAccount);

@@ -23,7 +23,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly DelegateCommand selectContactCommand;
         private readonly DelegateCommand sendCommand;
         
-
         [ImportingConstructor]
         public NewEmailController(IMessageService messageService, IShellService shellService, IAddressBookService addressBookService, NewEmailViewModel newEmailViewModel)
         {
@@ -35,11 +34,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             sendCommand = new DelegateCommand(SendEmail);
         }
 
-
         public EmailClientRoot Root { get; set; }
 
         internal NewEmailViewModel NewEmailViewModel { get; }
-
 
         public void Initialize()
         {
@@ -59,7 +56,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 messageService.ShowError("Please create an email account first.");
                 return;
             }
-
             NewEmailViewModel.Show(shellService.ShellView);
         }
 
@@ -96,9 +92,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                     + string.Join("\n", email.Errors.Select(x => x.ErrorMessage)));
                 return;
             }
-
             NewEmailViewModel.Close();
-            
             email.From = NewEmailViewModel.SelectedEmailAccount.Email;
             email.Sent = DateTime.Now;
             Root.Sent.AddEmail(email);

@@ -14,13 +14,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
     {
         private readonly Lazy<EmailAccountsViewModel> viewModel;
 
-        
         public EmailAccountsWindow()
         {
             InitializeComponent();
             viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this));
         }
-
 
         public void ShowDialog(object owner)
         {

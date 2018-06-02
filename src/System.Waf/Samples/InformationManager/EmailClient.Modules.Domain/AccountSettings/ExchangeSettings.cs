@@ -9,7 +9,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [DataMember] private string serverPath;
         [DataMember] private string userName;
 
-
         [Required, Display(Name = "Exchange Server")]
         public string ServerPath
         {
@@ -23,7 +22,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
             get { return userName; }
             set { SetPropertyAndValidate(ref userName, value); }
         }
-
 
         public override EmailAccountSettings Clone()
         {

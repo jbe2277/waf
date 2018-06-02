@@ -20,18 +20,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly EmailLayoutViewModel emailLayoutViewModel;
         private readonly DelegateCommand deleteEmailCommand;
 
-        
         [ImportingConstructor]
         public EmailFolderController(IShellService shellService, EmailLayoutViewModel emailLayoutViewModel, EmailListViewModel emailListViewModel, EmailViewModel emailViewModel)
         {
             this.shellService = shellService;
             this.emailLayoutViewModel = emailLayoutViewModel;
-            this.EmailListViewModel = emailListViewModel;
-            this.EmailViewModel = emailViewModel;
-            this.deleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
+            EmailListViewModel = emailListViewModel;
+            EmailViewModel = emailViewModel;
+            deleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
         }
 
-        
         public EmailFolder EmailFolder { get; set; }
 
         public ICommand DeleteEmailCommand => deleteEmailCommand;
@@ -40,14 +38,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         internal EmailViewModel EmailViewModel { get; }
 
-
         public void Initialize()
         {
             EmailListViewModel.Emails = EmailFolder.Emails;
             EmailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
-
             PropertyChangedEventManager.AddHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");
-
             emailLayoutViewModel.EmailListView = EmailListViewModel.View;
             emailLayoutViewModel.EmailView = EmailViewModel.View;
         }
@@ -59,6 +54,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public void Shutdown()
         {
+            PropertyChangedEventManager.RemoveHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");
             // Set the views to null so that the garbage collector can collect them.
             emailLayoutViewModel.EmailListView = null;
             emailLayoutViewModel.EmailView = null;
@@ -70,9 +66,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             // Use the EmailCollectionView, which represents the sorted/filtered state of the emails, to determine the next email to select.
             var nextEmail = CollectionHelper.GetNextElementOrDefault(EmailListViewModel.EmailCollectionView, EmailListViewModel.SelectedEmail);
-            
             EmailFolder.RemoveEmail(EmailListViewModel.SelectedEmail);
-
             EmailListViewModel.SelectedEmail = nextEmail ?? EmailListViewModel.EmailCollectionView.LastOrDefault();
             EmailListViewModel.FocusItem();
         }

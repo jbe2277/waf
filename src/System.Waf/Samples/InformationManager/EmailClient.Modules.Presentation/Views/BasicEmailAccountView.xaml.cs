@@ -14,7 +14,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             Loaded += LoadedHandler;
         }
 
-
         private void LoadedHandler(object sender, RoutedEventArgs e)
         {
             nameBox.Focus();

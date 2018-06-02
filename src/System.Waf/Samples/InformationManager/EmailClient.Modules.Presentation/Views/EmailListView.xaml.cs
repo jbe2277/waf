@@ -20,19 +20,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         private readonly Lazy<EmailListViewModel> viewModel;
         private ICollectionView emailCollectionView;
         
-        
         public EmailListView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<EmailListViewModel>(() => ViewHelper.GetViewModel<EmailListViewModel>(this));
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
         }
 
-
         private EmailListViewModel ViewModel => viewModel.Value;
-
 
         public void FocusItem()
         {
@@ -41,7 +37,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
                 emailsBox.Focus();
                 return;
             }
-
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
             {
                 // It is necessary to delay this code because data binding updates the values asynchronously.
@@ -62,7 +57,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
                 ViewModel.EmailCollectionView = emailCollectionView.Cast<Email>();
                 ViewModel.SelectedEmail = ViewModel.EmailCollectionView.FirstOrDefault();
             }
-
             ViewModel.PropertyChanged += ViewModelPropertyChanged;
             emailsBox.Focus();
             if (ViewModel.SelectedEmail != null)
@@ -76,7 +70,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             // We need to set the Filter back to null => prevent a WPF memory leak
             emailCollectionView.Filter = null;
             emailCollectionView.SortDescriptions.Clear();
-
             ViewModel.PropertyChanged -= ViewModelPropertyChanged;
         }
 

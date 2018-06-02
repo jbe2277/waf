@@ -23,14 +23,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         [DataMember] private DateTime sent;
         [DataMember] private string message;
 
-
         public Email()
         {
             to = Array.Empty<string>();
             cc = Array.Empty<string>();
             bcc = Array.Empty<string>();
         }
-
 
         public EmailType EmailType
         {
@@ -109,20 +107,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             set { SetPropertyAndValidate(ref message, value); }
         }
 
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var validationResults = new List<ValidationResult>();
-            
             foreach (string email in To) { ValidateEmail(validationResults, email, nameof(To), "To"); }
             foreach (string email in CC) { ValidateEmail(validationResults, email, nameof(CC), "CC"); }
             foreach (string email in Bcc) { ValidateEmail(validationResults, email, nameof(Bcc), "BCC"); }
-
             if (!To.Any() && !CC.Any() && !Bcc.Any())
             {
                 validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To) }));
             }
-
             return validationResults;
         }
 

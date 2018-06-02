@@ -11,7 +11,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         [DataMember] private string email;
         [DataMember] private EmailAccountSettings emailAccountSettings;
 
-
         [Required, Display(Name = "Name")]
         public string Name
         {
@@ -32,7 +31,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get { return emailAccountSettings; }
             set { SetPropertyAndValidate(ref emailAccountSettings, value); }
         }
-
 
         public virtual EmailAccount Clone()
         {

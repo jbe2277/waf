@@ -8,19 +8,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ExchangeSettingsViewModel : ViewModel<IExchangeSettingsView>
     {
-        private ExchangeSettings model;
-
-        
         [ImportingConstructor]
         public ExchangeSettingsViewModel(IExchangeSettingsView view) : base(view)
         {
         }
 
-
-        public ExchangeSettings Model
-        {
-            get { return model; }
-            set { SetProperty(ref model, value); }
-        }
+        public ExchangeSettings Model { get; set; }
     }
 }
