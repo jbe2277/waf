@@ -7,7 +7,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
     {
         object View { get; }
 
-        
         void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands);
 
         void ClearToolBarCommands();

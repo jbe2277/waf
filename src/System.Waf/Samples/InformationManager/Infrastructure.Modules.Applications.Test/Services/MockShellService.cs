@@ -10,19 +10,16 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
     {
         private readonly List<ToolBarCommand> toolBarCommands;
 
-
         public MockShellService()
         {
             toolBarCommands = new List<ToolBarCommand>();
         }
-
 
         public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
         
         public object ShellView { get; set; }
         
         public object ContentView { get; set; }
-
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {

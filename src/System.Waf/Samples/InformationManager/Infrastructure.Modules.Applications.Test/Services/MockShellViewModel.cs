@@ -8,17 +8,14 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
     {
         private readonly List<ToolBarCommand> toolBarCommands;
         
-        
         public MockShellViewModel()
         {
             toolBarCommands = new List<ToolBarCommand>();
         }
 
-
         public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
         
         public object View { get; set; }
-
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {

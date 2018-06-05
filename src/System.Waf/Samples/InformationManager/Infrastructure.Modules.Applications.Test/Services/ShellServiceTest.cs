@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
+using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
-using System.Waf.Applications;
+using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
 {

@@ -12,7 +12,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
         private readonly Lazy<string> dataDirectory = new Lazy<string>(() => 
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationInfo.Company, ApplicationInfo.ProductName));
         
-
         public string DataDirectory => dataDirectory.Value;
     }
 }

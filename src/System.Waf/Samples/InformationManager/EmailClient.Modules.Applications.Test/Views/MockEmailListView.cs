@@ -10,7 +10,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Views
     {
         public Action<MockEmailListView> FocusItemAction { get; set; }
         
-
         public void FocusItem()
         {
             FocusItemAction(this);

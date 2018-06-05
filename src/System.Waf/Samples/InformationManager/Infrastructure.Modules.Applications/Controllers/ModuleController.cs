@@ -12,7 +12,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         private readonly Lazy<DocumentController> documentController;
         private readonly Lazy<ShellViewModel> shellViewModel;
 
-        
         [ImportingConstructor]
         public ModuleController(Lazy<DocumentController> documentController, Lazy<ShellViewModel> shellViewModel)
         {
@@ -20,11 +19,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
             this.shellViewModel = shellViewModel;
         }
 
-
         private ShellViewModel ShellViewModel => shellViewModel.Value;
         
         private DocumentController DocumentController => documentController.Value;
-
 
         public void Initialize()
         {
@@ -34,7 +31,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
                 Settings.Default.Upgrade();
                 Settings.Default.IsUpgradeNeeded = false;
             }
-
             DocumentController.Initialize();
         }
 
@@ -46,7 +42,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         public void Shutdown()
         {
             DocumentController.Shutdown();
-            
             try
             {
                 Settings.Default.Save();

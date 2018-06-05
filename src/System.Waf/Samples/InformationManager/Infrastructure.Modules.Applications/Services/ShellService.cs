@@ -12,13 +12,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
         private readonly Lazy<IShellViewModel> shellViewModel;
         private object contentView;
 
-        
         [ImportingConstructor]
         public ShellService(Lazy<IShellViewModel> shellViewModel)
         {
             this.shellViewModel = shellViewModel;
         }
-
 
         public object ShellView => shellViewModel.Value.View;
 
@@ -27,7 +25,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             get { return contentView; }
             set { SetProperty(ref contentView, value); }
         }
-
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {

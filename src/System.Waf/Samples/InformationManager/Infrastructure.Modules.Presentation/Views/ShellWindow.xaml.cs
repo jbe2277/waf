@@ -17,7 +17,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
         private readonly Lazy<ShellViewModel> viewModel;
         private readonly List<Control> dynamicToolBarItems;
 
-        
         public ShellWindow()
         {
             InitializeComponent();
@@ -25,7 +24,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
             dynamicToolBarItems = new List<Control>();
             Loaded += LoadedHandler;
         }
-
 
         public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
@@ -49,14 +47,13 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
 
         private ShellViewModel ViewModel => viewModel.Value;
 
-
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {
             int index = 0;
             foreach (var command in commands)
             {
-                AccessText accessText = new AccessText() { Text = command.Text };
-                Button button = new Button() { Content = accessText, Command = command.Command };
+                var accessText = new AccessText() { Text = command.Text };
+                var button = new Button() { Content = accessText, Command = command.Command };
                 if (!string.IsNullOrEmpty(command.ToolTip)) { button.ToolTip = command.ToolTip; }
 
                 toolBar.Items.Insert(index, button);

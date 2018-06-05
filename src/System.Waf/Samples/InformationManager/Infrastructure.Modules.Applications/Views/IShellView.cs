@@ -21,10 +21,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Views
 
         bool IsMaximized { get; set; }
 
-
         event EventHandler Closed;
 
-        
         void Show();
 
         void Close();

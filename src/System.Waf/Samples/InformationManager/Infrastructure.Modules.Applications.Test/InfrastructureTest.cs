@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.InformationManager.Common.Applications;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
-using Test.InformationManager.Infrastructure.Modules.Applications.Services;
-using System.IO;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.ComponentModel.Composition.Hosting;
+using System.IO;
+using Test.InformationManager.Common.Applications;
+using Test.InformationManager.Infrastructure.Modules.Applications.Services;
+using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications
 {
@@ -13,7 +13,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications
     {
         public TestContext TestContext { get; set; }
 
-        
         protected override void OnCatalogInitialize(AggregateCatalog catalog)
         {
             base.OnCatalogInitialize(catalog);

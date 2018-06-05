@@ -16,20 +16,16 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
     {
         private readonly IMessageService messageService;
-        private readonly DelegateCommand exitCommand;
-        private readonly DelegateCommand aboutCommand;
 
-        
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService)
             : base(view)
         {
             this.messageService = messageService;
-            this.ShellService = shellService;
-            this.NavigationService = navigationService;
-            this.exitCommand = new DelegateCommand(Close);
-            this.aboutCommand = new DelegateCommand(ShowAboutMessage);
-
+            ShellService = shellService;
+            NavigationService = navigationService;
+            ExitCommand = new DelegateCommand(Close);
+            AboutCommand = new DelegateCommand(ShowAboutMessage);
             view.Closed += ViewClosed;
 
             // Restore the window size when the values are valid.
@@ -45,17 +41,15 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
             ViewCore.IsMaximized = Settings.Default.IsMaximized;
         }
 
-
         public string Title => ApplicationInfo.ProductName;
 
         public IShellService ShellService { get; }
 
         public NavigationService NavigationService { get; }
 
-        public ICommand ExitCommand => exitCommand;
+        public ICommand ExitCommand { get; }
 
-        public ICommand AboutCommand => aboutCommand;
-
+        public ICommand AboutCommand { get; }
 
         public void Show()
         {
@@ -82,7 +76,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
                 "{0} {1}\n\nThis software is a reference sample of the Win Application Framework (WAF).\n\nhttps://github.com/jbe2277/waf",
                 ApplicationInfo.ProductName, ApplicationInfo.Version));
         }
-
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {

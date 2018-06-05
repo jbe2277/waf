@@ -20,12 +20,10 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         {
             if (command == null) { throw new ArgumentNullException(nameof(command)); }
             if (string.IsNullOrEmpty(text)) { throw new ArgumentException("text must not be null or empty.", nameof(text)); }
-            
             Command = command;
             Text = text;
             ToolTip = toolTip ?? "";
         }
-
 
         /// <summary>
         /// Gets the command which is invoked when the user clicks on the tool bar button.

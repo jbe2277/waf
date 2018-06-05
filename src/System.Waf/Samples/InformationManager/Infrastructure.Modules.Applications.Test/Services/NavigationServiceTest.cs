@@ -13,7 +13,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         public void AddNavigationNodesWithWrongParameters()
         {
             var navigationService = new NavigationService();
-            
             AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode(null, null, null, 0, 0));
             AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", null, null, 0, 0));
             AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", () => { }, null, 0, 0));
@@ -31,7 +30,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             bool closeActionCalled = false;
             Action closeAction = () => { closeActionCalled = true; };
 
-            NavigationNode node = (NavigationNode)navigationService.AddNavigationNode("Node 1", showAction, closeAction, 3, 7);
+            var node = (NavigationNode)navigationService.AddNavigationNode("Node 1", showAction, closeAction, 3, 7);
 
             Assert.AreEqual("Node 1", node.Name);
             Assert.AreEqual(3, node.Group);

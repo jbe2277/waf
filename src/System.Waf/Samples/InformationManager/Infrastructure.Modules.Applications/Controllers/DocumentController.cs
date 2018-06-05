@@ -15,16 +15,13 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         private readonly IEnvironmentService environmentService;
         private Package package;
 
-
         [ImportingConstructor]
         public DocumentController(IEnvironmentService environmentService)
         {
             this.environmentService = environmentService;
         }
 
-
         internal string PackagePath { get; private set; }
-
 
         public void Initialize()
         {
@@ -35,7 +32,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
             }
 
             PackagePath = Path.Combine(dataDirectory, fileName);
-
             package = Package.Open(PackagePath, FileMode.OpenOrCreate);
         }
 
@@ -56,7 +52,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
             {
                 packagePart = package.GetPart(documentUri);
             }
-
             return packagePart.GetStream(fileMode);
         }
     }

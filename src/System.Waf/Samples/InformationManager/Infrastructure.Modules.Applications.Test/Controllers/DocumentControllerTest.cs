@@ -11,7 +11,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
     {
         private DocumentController controller;
 
-
         protected override void OnTestInitialize()
         {
             base.OnTestInitialize();

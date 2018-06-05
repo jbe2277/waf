@@ -127,7 +127,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             AssertSettingsValues(0, 0, 1000, 700, false);
         }
 
-
         private void SetSettingsValues(double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
         {
             Settings.Default.Left = left;

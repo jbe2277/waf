@@ -22,7 +22,6 @@ namespace Waf.InformationManager.Assembler
         private CompositionContainer container;
         private IEnumerable<IModuleController> moduleControllers;
 
-
         public App()
         {
             var profileRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -32,7 +31,6 @@ namespace Waf.InformationManager.Assembler
             ProfileOptimization.StartProfile("Startup.profile");
         }
 
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -41,7 +39,7 @@ namespace Waf.InformationManager.Assembler
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             catalog = new AggregateCatalog();
-            // Add the WpfApplicationFramework assembly to the catalog
+            // Add the WinApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
             
             // Load module assemblies as well. See App.config file.
@@ -51,7 +49,7 @@ namespace Waf.InformationManager.Assembler
             }
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
 
@@ -70,7 +68,6 @@ namespace Waf.InformationManager.Assembler
             foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
             container.Dispose();
             catalog.Dispose();
-
             base.OnExit(e);
         }
 
@@ -89,11 +86,9 @@ namespace Waf.InformationManager.Assembler
             if (e == null) { return; }
 
             Trace.TraceError(e.ToString());
-
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, 
-                        "Unknown application error\n\n{0}", e),
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "Unknown application error\n\n{0}", e),
                     ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

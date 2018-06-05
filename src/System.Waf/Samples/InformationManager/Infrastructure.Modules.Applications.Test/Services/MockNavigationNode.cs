@@ -15,7 +15,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             Order = order;
         }
         
-
         public string Name { get; }
 
         public Action ShowAction { get; }

@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.Composition;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.InformationManager.Common.Domain;
 using System.Waf.UnitTesting.Mocks;
+using Test.InformationManager.Common.Domain;
 
 namespace Test.InformationManager.Common.Applications
 {
     [TestClass]
     public abstract class ApplicationsTest : DomainTest
     {
-        private CompositionContainer container;
-
-
-        public CompositionContainer Container => container;
-
+        public CompositionContainer Container { get; private set; }
 
         protected override void OnTestInitialize()
         {
@@ -25,16 +21,15 @@ namespace Test.InformationManager.Common.Applications
 
             OnCatalogInitialize(catalog);
 
-            container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
-            batch.AddExportedValue(container);
-            container.Compose(batch);
+            Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+            var batch = new CompositionBatch();
+            batch.AddExportedValue(Container);
+            Container.Compose(batch);
         }
 
         protected override void OnTestCleanup()
         {
-            container?.Dispose();
-
+            Container?.Dispose();
             base.OnTestCleanup();
         }
 

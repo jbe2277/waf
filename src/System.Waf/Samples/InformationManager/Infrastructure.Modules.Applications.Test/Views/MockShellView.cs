@@ -12,12 +12,10 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
     {
         private readonly List<ToolBarCommand> toolBarCommands;
 
-
         public MockShellView()
         {
             toolBarCommands = new List<ToolBarCommand>();
         }
-
 
         public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
 
@@ -37,9 +35,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
         
         public bool IsMaximized { get; set; }
         
-
         public event EventHandler Closed;
-
 
         public void Show()
         {

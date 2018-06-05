@@ -10,14 +10,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
     {
         public Func<string, string, FileMode, Stream> GetStreamAction { get; set; }
 
-        
         public Stream GetStream(string documentPartPath, string contentType, FileMode fileMode)
         {
-            if (GetStreamAction == null)
-            {
-                return new MemoryStream();
-            }
-            return GetStreamAction(documentPartPath, contentType, fileMode);
+            return GetStreamAction == null ? new MemoryStream() : GetStreamAction(documentPartPath, contentType, fileMode);
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.InformationManager.Infrastructure.Modules.Presentation.Converters;
-using System.Waf.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Globalization;
+using System.Waf.UnitTesting;
+using Waf.InformationManager.Infrastructure.Modules.Presentation.Converters;
 
 namespace Test.InformationManager.Infrastructure.Modules.Presentation.Converters
 {
@@ -12,7 +12,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Presentation.Converters
         [TestMethod]
         public void ConvertTest()
         {
-            ItemCountToStringConverter converter = new ItemCountToStringConverter();
+            var converter = new ItemCountToStringConverter();
 
             Assert.AreEqual("", converter.Convert(null, null, null, CultureInfo.InvariantCulture));
             Assert.AreEqual("  3", converter.Convert(3, null, null, CultureInfo.InvariantCulture));

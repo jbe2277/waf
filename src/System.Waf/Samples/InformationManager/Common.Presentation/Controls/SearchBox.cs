@@ -20,12 +20,10 @@ namespace Waf.InformationManager.Common.Presentation.Controls
         public static readonly DependencyProperty HintTextProperty =
             DependencyProperty.Register(nameof(HintText), typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata(""));
 
-        
         static SearchBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SearchBox), new FrameworkPropertyMetadata(typeof(SearchBox)));
         }
-
 
         /// <summary>
         /// Gets or sets the search text.

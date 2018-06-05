@@ -18,7 +18,6 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         /// </summary>
         object ContentView { get; set; }
 
-
         /// <summary>
         /// Adds the specified tool bar commands.
         /// </summary>
