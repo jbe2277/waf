@@ -62,6 +62,7 @@
     <Compile Include="Foundation\CollectionHelperTest.cs" />
     <Compile Include="Foundation\ModelTest.cs" />
     <Compile Include="Foundation\ReadOnlyObservableListTest.cs" />
+    <Compile Include="Foundation\TaskHelperTest.cs" />
     <Compile Include="Foundation\ThrottledActionTest.cs" />
     <Compile Include="Foundation\ValidatableModelTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />

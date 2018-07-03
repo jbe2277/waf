@@ -93,7 +93,7 @@ namespace System.Waf.Foundation
                     {
                         cancellationTokenSource = null;
                     }
-                    Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, taskScheduler);
+                    TaskHelper.Run(action, taskScheduler);
                 }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
             }
         }

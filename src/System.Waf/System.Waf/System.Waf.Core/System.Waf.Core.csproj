@@ -62,6 +62,7 @@
     <Compile Include="Foundation\IReadOnlyObservableList.cs" />
     <Compile Include="Foundation\Model.cs" />
     <Compile Include="Foundation\ReadOnlyObservableList.cs" />
+    <Compile Include="Foundation\TaskHelper.cs" />
     <Compile Include="Foundation\ThrottledAction.cs" />
     <Compile Include="Foundation\ValidatableModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
