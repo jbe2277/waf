@@ -22,6 +22,46 @@ Starting with version 4 the framework comes with the new name Win Application Fr
 
 Older versions of WAF 1.0 - 3.2 can be found at CodePlex: http://waf.codeplex.com
 
+## Features
+
+*System.Waf.Core*
+ - *Foundation*
+    - `Cache`: Provides support for caching a value.
+    - `Model`: Base class that implements INotifyPropertyChanged.
+    - `SynchronizingCollectionCore`: Represents a collection that synchronizes all its items with the items of the specified original collection.
+    - `ThrottledAction`: Throttling of multiple method calls to improve the responsiveness of an application.
+    - `ValidatableModel`: Base class for a model that supports validation by implementing INotifyDataErrorInfo.
+ -	*Applications*
+    - `(Async)DelegateCommand`: An implementation of ICommand that delegates Execute and CanExecute.
+    - `RecentFileList`: Most recently used (MRU) file list.
+    - `ViewModelCore`: ViewModel base class with a simple approach to set the DataContext.
+
+*System.Waf.Wpf*
+ - *Foundation*
+    - `DataErrorInfoSupport`: Helper class for working with the legacy IDataErrorInfo interface.
+ - *Applications*
+    -	`ApplicationInfo`: Provides information about the running application.
+    - `SynchronizingCollection`: Same as SynchronizingCollectionCore but using weak event handlers.
+    - `ViewModel`: ViewModel base class which sets the DataContext delayed via the Dispatcher.
+ - *Presentation*
+    - `DispatcherHelper`: Implementation for DoEvents.
+    - `ResourceHelper`: Helper methods to manage resources in WPF.
+    - `ValidationHelper`: Support for data validation tracking.
+    - *Converters*
+       - `BoolToVisibilityConverter`: Converts a boolean value to and from a Visibility value.
+       - `InvertBooleanConverter`: Inverts a boolean value
+       - `NullToVisibilityConverter`: Null condition to return the associated Visibility value.
+       - `StringFormatConverter`: Converts an object into a formatted string.
+       - `ValidationErrorsConverter`: Converts a ValidationError collection to a multi-line string error message.
+    - *Services*
+       - `FileDialogService`: Shows an open or save file dialog box.
+       - `MessageService`: shows messages via the MessageBox.
+       
+*System.Waf.UnitTesting.Core*
+ -	`AssertHelper`: Assertion helper methods for expected exceptions, CanExecuteChanged event and PropertyChanged event.
+ -	`UnitTestSynchronizationContext`: Synchronization context for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.
+
+
 ## NuGet Packages
 
 Package | Usage | Successor of
