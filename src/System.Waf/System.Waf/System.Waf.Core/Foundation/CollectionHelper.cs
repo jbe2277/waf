@@ -83,12 +83,13 @@ namespace System.Waf.Foundation
         /// <typeparam name="T">The type of the items.</typeparam>
         /// <param name="target">The target list.</param>
         /// <param name="source">The sort list.</param>
-        /// <param name="comparer">Optional, a comparer can be provided.</param>
-        /// <param name="insertAction">Optional, an action can be provided that is called for inserts.</param>
-        /// <param name="removeAtAction">Optional, an action can be provided that is called for remove at.</param>
-        /// <param name="resetAction">Optional, an action can be provided that is called for reset.</param>
+        /// <param name="comparer">Optional, a custom comparer can be provided.</param>
+        /// <param name="insertAction">Optional, a custom action can be provided that is called for inserts.</param>
+        /// <param name="removeAtAction">Optional, a custom action can be provided that is called for remove at.</param>
+        /// <param name="resetAction">Optional, a custom action can be provided that is called for reset.</param>
+        /// <param name="moveAction">Optional, a custom action can be provided that is called for move.</param>
         public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer = null,
-            Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null)
+            Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null, Action<int, int> moveAction = null)
         {
             comparer = comparer ?? EqualityComparer<T>.Default;
             insertAction = insertAction ?? target.Insert;
@@ -99,12 +100,9 @@ namespace System.Waf.Foundation
                 foreach (var item in source) { target.Add(item); }
             });
 
-            if (target.SequenceEqual(source, comparer))
-            {
-                return;
-            }
+            if (target.SequenceEqual(source, comparer)) return;
 
-            // Item added or removed
+            // Item(s) added or removed
             if (target.Count != source.Count)
             {
                 // Change of more than 1 item added or removed is not supported -> Reset
@@ -162,6 +160,33 @@ namespace System.Waf.Foundation
                     removeAtAction(oldItemIndex);
                     return;
                 }
+            }
+            else if (moveAction != null)  // Item(s) moved
+            {
+                for (int i = 0; i < source.Count; i++)
+                {
+                    if (!comparer.Equals(target[i], source[i]))
+                    {
+                        int oldIndex = -1;
+                        T item = source[i];
+                        for (int t = i + 1; t < target.Count; t++)
+                        {
+                            if (comparer.Equals(target[t], item))
+                            {
+                                oldIndex = t;
+                                break;
+                            }
+                        }
+                        if (oldIndex < 0)
+                        {
+                            // Item was replaced instead of moved
+                            resetAction();
+                            return;
+                        }
+                        moveAction(oldIndex, i);
+                    }
+                }
+                return;
             }
 
             resetAction();
