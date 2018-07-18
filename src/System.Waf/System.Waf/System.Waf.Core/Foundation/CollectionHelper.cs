@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace System.Waf.Foundation
 {
@@ -54,7 +55,7 @@ namespace System.Waf.Foundation
         /// <returns>The next element in the collection or default when no next element can be found.</returns>
         /// <exception cref="ArgumentNullException">collection must not be <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The collection does not contain the specified current item.</exception>
-        public static T GetNextElementOrDefault<T>(IEnumerable<T> collection, T current)
+        public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, T current)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             
@@ -73,6 +74,97 @@ namespace System.Waf.Foundation
                 
                 return enumerator.MoveNext() ? enumerator.Current : default(T);
             }
+        }
+
+        /// <summary>
+        /// The merge modifies the target list so that all items equals the source list. This has some advantages over Clear and AddRange when
+        /// the target list is bound to the UI or used by an ORM (Object Relational Mapping).
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="target">The target list.</param>
+        /// <param name="source">The sort list.</param>
+        /// <param name="comparer">Optional, a comparer can be provided.</param>
+        /// <param name="insertAction">Optional, an action can be provided that is called for inserts.</param>
+        /// <param name="removeAtAction">Optional, an action can be provided that is called for remove at.</param>
+        /// <param name="resetAction">Optional, an action can be provided that is called for reset.</param>
+        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer = null,
+            Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null)
+        {
+            comparer = comparer ?? EqualityComparer<T>.Default;
+            insertAction = insertAction ?? target.Insert;
+            removeAtAction = removeAtAction ?? target.RemoveAt;
+            resetAction = resetAction ?? (() =>
+            {
+                foreach (var item in target.ToArray()) { target.Remove(item); }  // Avoid Clear because of CollectionChanged events
+                foreach (var item in source) { target.Add(item); }
+            });
+
+            if (target.SequenceEqual(source, comparer))
+            {
+                return;
+            }
+
+            // Item added or removed
+            if (target.Count != source.Count)
+            {
+                // Change of more than 1 item added or removed is not supported -> Reset
+                if (Math.Abs(target.Count - source.Count) != 1)
+                {
+                    resetAction();
+                    return;
+                }
+
+                if (target.Count < source.Count)
+                {
+                    int newItemIndex = -1;
+                    for (int t = 0, s = 0; t < target.Count; t++, s++)
+                    {
+                        if (!comparer.Equals(target[t], source[s]))
+                        {
+                            if (newItemIndex != -1)
+                            {
+                                // Second change is not supported -> Reset
+                                resetAction();
+                                return;
+                            }
+                            newItemIndex = s;
+                            t--;
+                        }
+                    }
+                    if (newItemIndex == -1)
+                    {
+                        newItemIndex = source.Count - 1;
+                    }
+                    insertAction(newItemIndex, source[newItemIndex]);
+                    return;
+                }
+                else
+                {
+                    int oldItemIndex = -1;
+                    for (int t = 0, s = 0; s < source.Count; t++, s++)
+                    {
+                        if (!comparer.Equals(target[t], source[s]))
+                        {
+                            if (oldItemIndex != -1)
+                            {
+                                // Second change is not supported -> Reset
+                                resetAction();
+                                return;
+                            }
+                            oldItemIndex = t;
+                            s--;
+                        }
+                    }
+                    if (oldItemIndex == -1)
+                    {
+                        oldItemIndex = target.Count - 1;
+                    }
+                    removeAtAction(oldItemIndex);
+                    return;
+                }
+            }
+
+            resetAction();
         }
     }
 }
