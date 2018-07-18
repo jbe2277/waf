@@ -92,6 +92,8 @@ namespace System.Waf.Foundation
             Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null, Action<int, int> moveAction = null)
         {
             comparer = comparer ?? EqualityComparer<T>.Default;
+            if (target.SequenceEqual(source, comparer)) return;
+
             insertAction = insertAction ?? target.Insert;
             removeAtAction = removeAtAction ?? target.RemoveAt;
             resetAction = resetAction ?? (() =>
@@ -99,8 +101,6 @@ namespace System.Waf.Foundation
                 foreach (var item in target.ToArray()) { target.Remove(item); }  // Avoid Clear because of CollectionChanged events
                 foreach (var item in source) { target.Add(item); }
             });
-
-            if (target.SequenceEqual(source, comparer)) return;
 
             // Item(s) added or removed
             if (target.Count != source.Count)
@@ -167,23 +167,46 @@ namespace System.Waf.Foundation
                 {
                     if (!comparer.Equals(target[i], source[i]))
                     {
-                        int oldIndex = -1;
-                        T item = source[i];
-                        for (int t = i + 1; t < target.Count; t++)
+                        if (i + 1 < source.Count && comparer.Equals(target[i+1], source[i]))
                         {
-                            if (comparer.Equals(target[t], item))
+                            int newIndex = -1;
+                            T item = target[i];
+                            for (int s = i + 1; s < source.Count; s++)
                             {
-                                oldIndex = t;
-                                break;
+                                if (comparer.Equals(source[s], item))
+                                {
+                                    newIndex = s;
+                                    break;
+                                }
                             }
+                            if (newIndex < 0)
+                            {
+                                // Item was replaced instead of moved
+                                resetAction();
+                                return;
+                            }
+                            moveAction(i, newIndex);
                         }
-                        if (oldIndex < 0)
+                        else
                         {
-                            // Item was replaced instead of moved
-                            resetAction();
-                            return;
+                            int oldIndex = -1;
+                            T item = source[i];
+                            for (int t = i + 1; t < target.Count; t++)
+                            {
+                                if (comparer.Equals(target[t], item))
+                                {
+                                    oldIndex = t;
+                                    break;
+                                }
+                            }
+                            if (oldIndex < 0)
+                            {
+                                // Item was replaced instead of moved
+                                resetAction();
+                                return;
+                            }
+                            moveAction(oldIndex, i);
                         }
-                        moveAction(oldIndex, i);
                     }
                 }
                 return;

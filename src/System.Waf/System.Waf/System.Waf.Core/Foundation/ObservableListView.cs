@@ -22,19 +22,17 @@ namespace System.Waf.Foundation
         /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
         /// </summary>
         /// <param name="originalList">The orignal list.</param>
-        public ObservableListView(IEnumerable<T> originalList) : this(originalList, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
-        /// <param name="originalList">The orignal list.</param>
-        /// <param name="comparer">The IEqualityComparer implementation to use when comparing items.</param>
-        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer) : base(originalList)
+        /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
+        /// <param name="filter">Optional, a filter used for this list view.</param>
+        /// <param name="sort">Optional, a sorting used for this list view.</param>
+        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer = null, Predicate<T> filter = null, 
+            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort = null) : base(originalList)
         {
             this.originalList = originalList;
             this.comparer = comparer ?? EqualityComparer<T>.Default;
+            this.filter = filter;
+            this.sort = sort;
+            if (this.filter != null || this.sort != null) UpdateInnerList();
 
             originalObservableCollection = originalList as INotifyCollectionChanged;
             if (originalObservableCollection != null)
@@ -79,7 +77,6 @@ namespace System.Waf.Foundation
 
         /// <summary>
         /// Updates the list view and raises the appropriate collection changed events.
-        /// If the original list implements the INotifyCollectionChanged interface then calling this method is not necessary.
         /// </summary>
         public void Update()
         {
