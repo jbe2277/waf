@@ -127,6 +127,13 @@ namespace Test.Waf.Foundation
             eventArgsList.Clear();
             originalList.RemoveAt(1);
             AssertElementRemoved("3", 1, eventArgsList.Single());
+
+            observableListView.Dispose();
+            eventArgsList.Clear();
+            AssertNoEventsRaised(() => originalList.Clear());
+            Assert.AreEqual(0, eventArgsList.Count);
+
+            observableListView.Dispose();
         }
 
         [TestMethod]
@@ -179,6 +186,22 @@ namespace Test.Waf.Foundation
             eventArgsList.Clear();
             originalList.RemoveAt(1);
             AssertElementRemoved("3", 0, eventArgsList.Single());  // Index 0 because "2" is hidden by filter
+        }
+
+        [TestMethod]
+        public void RaiseEventsWithoutListener()
+        {
+            var originalList2 = new ObservableCollection<string>();
+            var observableListView2 = new ObservableListViewCore<string>(originalList);
+            originalList2.Add("first");
+            originalList2.Add("second");
+            originalList2.Move(0, 1);
+            originalList2.Remove("first");
+            originalList2.Add("third");
+            originalList2.Clear();
+
+            observableListView2.Dispose();
+            observableListView2.Dispose();
         }
 
         private static void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
