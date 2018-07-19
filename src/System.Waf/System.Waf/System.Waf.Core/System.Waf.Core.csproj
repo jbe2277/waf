@@ -54,7 +54,7 @@
     <Compile Include="Applications\IView.cs" />
     <Compile Include="Applications\RecentFile.cs" />
     <Compile Include="Applications\RecentFileList.cs" />
-    <Compile Include="Foundation\ObservableListView.cs" />
+    <Compile Include="Foundation\ObservableListViewCore.cs" />
     <Compile Include="Foundation\ObservableListViewBase.cs" />
     <Compile Include="Foundation\StringHelper.cs" />
     <Compile Include="Foundation\SynchronizingCollectionCore.cs" />

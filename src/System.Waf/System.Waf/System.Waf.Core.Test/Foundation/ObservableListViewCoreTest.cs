@@ -10,10 +10,10 @@ using System.Waf.Foundation;
 namespace Test.Waf.Foundation
 {
     [TestClass]
-    public class ObservableListViewTest
+    public class ObservableListViewCoreTest
     {
         private ObservableCollection<string> originalList;
-        private ObservableListView<string> observableListView;
+        private ObservableListViewCore<string> observableListView;
         private List<NotifyCollectionChangedEventArgs> eventArgsList;
         private int countChangedCount;
         private int indexerChangedCount;
@@ -22,7 +22,7 @@ namespace Test.Waf.Foundation
         public void Initialize()
         {
             originalList = new ObservableCollection<string>();
-            observableListView = new ObservableListView<string>(originalList);
+            observableListView = new ObservableListViewCore<string>(originalList);
             eventArgsList = new List<NotifyCollectionChangedEventArgs>();
 
             NotifyCollectionChangedEventHandler collectionHandler = (sender, e) =>

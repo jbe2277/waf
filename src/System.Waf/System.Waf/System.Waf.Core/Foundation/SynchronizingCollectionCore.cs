@@ -21,6 +21,7 @@ namespace System.Waf.Foundation
         private readonly Func<TOriginal, T> factory;
         private readonly IEqualityComparer<T> itemComparer;
         private readonly IEqualityComparer<TOriginal> originalItemComparer;
+        private readonly bool noCollectionChangedHandler;
         private volatile bool isDisposed;
 
 
@@ -55,6 +56,7 @@ namespace System.Waf.Foundation
             this.factory = factory;
             this.itemComparer = EqualityComparer<T>.Default;
             this.originalItemComparer = EqualityComparer<TOriginal>.Default;
+            this.noCollectionChangedHandler = noCollectionChangedHandler;
 
             if (!noCollectionChangedHandler)
             {
@@ -171,7 +173,7 @@ namespace System.Waf.Foundation
             OnDispose(disposing);
             if (disposing)
             {
-                if (originalObservableCollection != null)
+                if (!noCollectionChangedHandler && originalObservableCollection != null)
                 {
                     originalObservableCollection.CollectionChanged -= OriginalCollectionChanged;
                 }

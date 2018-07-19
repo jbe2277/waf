@@ -6,13 +6,16 @@ namespace System.Waf.Foundation
 {
     /// <summary>
     /// Represents a observable list view for filtering and sorting a data collection.
+    /// When the original collection notifies a change via the <see cref="INotifyCollectionChanged"/> interface then
+    /// this view updates automatically.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    public class ObservableListView<T> : ObservableListViewBase<T>, IDisposable
+    public class ObservableListViewCore<T> : ObservableListViewBase<T>, IDisposable
     {
         private readonly IEnumerable<T> originalList;
         private readonly IEqualityComparer<T> comparer;
         private readonly INotifyCollectionChanged originalObservableCollection;
+        private readonly bool noCollectionChangedHandler;
         private Predicate<T> filter;
         private Func<IEnumerable<T>, IOrderedEnumerable<T>> sort;
         private volatile bool isDisposed;
@@ -25,19 +28,26 @@ namespace System.Waf.Foundation
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
         /// <param name="sort">Optional, a sorting used for this list view.</param>
-        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer = null, Predicate<T> filter = null, 
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort = null) : base(originalList)
+        /// <param name="noCollectionChangedHandler">Pass true when the subclass takes care about the collection changed event of the originalCollection. Default is false.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer = null, Predicate<T> filter = null, 
+            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort = null, bool noCollectionChangedHandler = false) : base(originalList)
         {
+            if (originalList == null) { throw new ArgumentNullException(nameof(originalList)); }
             this.originalList = originalList;
             this.comparer = comparer ?? EqualityComparer<T>.Default;
             this.filter = filter;
             this.sort = sort;
+            this.noCollectionChangedHandler = noCollectionChangedHandler;
             if (this.filter != null || this.sort != null) UpdateInnerList();
 
-            originalObservableCollection = originalList as INotifyCollectionChanged;
-            if (originalObservableCollection != null)
+            if (!noCollectionChangedHandler)
             {
-                originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
+                originalObservableCollection = originalList as INotifyCollectionChanged;
+                if (originalObservableCollection != null)
+                {
+                    originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
+                }
             }
         }
 
@@ -104,7 +114,7 @@ namespace System.Waf.Foundation
             OnDispose(disposing);
             if (disposing)
             {
-                if (originalObservableCollection != null)
+                if (!noCollectionChangedHandler && originalObservableCollection != null)
                 {
                     originalObservableCollection.CollectionChanged -= OriginalCollectionChanged;
                 }
