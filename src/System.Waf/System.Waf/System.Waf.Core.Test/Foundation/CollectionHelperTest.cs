@@ -30,6 +30,8 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void IndexOfTest()
         {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.IndexOf(null, "Zero"));
+
             IReadOnlyList<string> collection1 = new[] { "Zero", "One", "Two" };
             Assert.AreEqual(0, collection1.IndexOf("Zero"));
             Assert.AreEqual(1, collection1.IndexOf("One"));
@@ -65,6 +67,9 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void MergeTestWithDefaultArguments()
         {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(null, new[] { "1" }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(new[] { "1" }, null));
+
             var targetList = new List<string> { "2", "3" };
             targetList.Merge(new[] { "1", "2" });
             Assert.IsTrue(new[] { "1", "2" }.SequenceEqual(targetList));

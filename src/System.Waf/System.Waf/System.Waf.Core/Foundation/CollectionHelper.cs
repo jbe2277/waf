@@ -31,6 +31,7 @@ namespace System.Waf.Foundation
         /// <param name="collection">The collection.</param>
         /// <param name="item">The object to locate in the collection. The value can be null for reference types.</param>
         /// <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
+        /// <exception cref="ArgumentNullException">collection must not be <c>null</c>.</exception>
         public static int IndexOf<T>(this IEnumerable<T> collection, T item)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -88,9 +89,12 @@ namespace System.Waf.Foundation
         /// <param name="removeAtAction">Optional, a custom action can be provided that is called for remove at.</param>
         /// <param name="resetAction">Optional, a custom action can be provided that is called for reset.</param>
         /// <param name="moveAction">Optional, a custom action can be provided that is called for move.</param>
+        /// <exception cref="ArgumentNullException">target and source must not be <c>null</c>.</exception>
         public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer = null,
             Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null, Action<int, int> moveAction = null)
         {
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (source == null) throw new ArgumentNullException(nameof(source));
             comparer = comparer ?? EqualityComparer<T>.Default;
             if (target.SequenceEqual(source, comparer)) return;
 
