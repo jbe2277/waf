@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="Applications\ApplicationInfoTest.cs" />
     <Compile Include="Applications\MefViewModelTest.cs" />
+    <Compile Include="Applications\ObservableListViewTest.cs" />
     <Compile Include="Applications\SynchronizingCollectionTest.cs" />
     <Compile Include="Applications\GenericViewModelTest.cs" />
     <Compile Include="Applications\Pop3SettingsViewModelTest.cs" />

@@ -12,7 +12,7 @@ namespace Test.Waf.Applications
     public class SynchronizingCollectionTest
     {
         [TestMethod]
-        public void ObservableCollectionTest()
+        public void CollectionChangedTest()
         {
             var originalCollection = new ObservableCollection<MyModel>() { new MyModel() };
             var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
@@ -43,7 +43,6 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void DisposeTest()
         {
-            // Calling dispose twice must not throw an exception.
             var originalCollection = new ObservableCollection<MyModel>();
             bool factoryCalled = false;
             var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m =>
@@ -54,6 +53,7 @@ namespace Test.Waf.Applications
             originalCollection.Add(new MyModel());
             Assert.IsTrue(factoryCalled);
 
+            // Calling dispose twice must not throw an exception.
             synchronizingCollection.Dispose();
             synchronizingCollection.Dispose();
             factoryCalled = false;
