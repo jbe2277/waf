@@ -21,17 +21,27 @@ namespace Test.Waf.Applications
             MockViewModel viewModel2 = new MockViewModel(view2, true);
             Assert.AreEqual(view2, viewModel2.View);
             Assert.AreEqual(viewModel2, view2.DataContext);
+
+            IView view3 = new MockView();
+            MockViewModel viewModel3 = new MockViewModel(view3);
+            Assert.AreEqual(view3, viewModel3.View);
+            Assert.AreEqual(viewModel3, view3.DataContext);
         }
 
         [TestMethod]
         public void ConstructorParameter()
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null, true));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null));
         }
         
 
         private class MockViewModel : ViewModelCore<IView>
         {
+            public MockViewModel(IView view) : base(view)
+            {
+            }
+
             public MockViewModel(IView view, bool initializeDataContext) : base(view, initializeDataContext)
             {
             }

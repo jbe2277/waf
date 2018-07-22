@@ -127,8 +127,9 @@ namespace Test.Waf.Foundation
             MergeTestCore(new[] { "1", "2", "3", "4" }, new[] { "1", "4", "2", "3" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
             MergeTestCore(new[] { "1", "4", "2", "3" }, new[] { "1", "2", "3", "4" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
             MergeTestCore(new[] { "1", "2", "3", "4" }, new[] { "1", "3", "2", "4" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
-            MergeTestCore(new[] { "1", "3", "2", "4", "5" }, new[] { "1", "2", "3", "4", "5" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
-            MergeTestCore(new[] { "1", "2", "3", "4", "5" }, new[] { "4", "3", "2", "1", "5" }.ToList(), ExpectedCollectionChange.Reset, useMoveAction: true);
+            MergeTestCore(new[] { "1", "2", "3", "4", "5", "6" }, new[] { "1", "4", "2", "3", "5", "6" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
+            MergeTestCore(new[] { "1", "4", "2", "3", "5", "6" }, new[] { "1", "2", "3", "4", "5", "6" }.ToList(), ExpectedCollectionChange.Move, useMoveAction: true);
+            MergeTestCore(new[] { "1", "2", "3", "4", "5", "6" }, new[] { "4", "3", "2", "1", "5", "6" }.ToList(), ExpectedCollectionChange.Reset, useMoveAction: true);
             MergeTestCore(new[] { "1", "2", "3", "4" }, new[] { "4", "1", "3", "2" }.ToList(), ExpectedCollectionChange.Reset, useMoveAction: true);
             MergeTestCore(new[] { "1", "2" }, new[] { "1" }.ToList(), ExpectedCollectionChange.Insert, useMoveAction: true);
             MergeTestCore(new[] { "1", "2" }, new[] { "1", "3" }.ToList(), ExpectedCollectionChange.Reset, useMoveAction: true);

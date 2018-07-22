@@ -81,6 +81,9 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.Errors.Any());
             Assert.IsFalse(person.GetErrors("Email").Any());
+
+            string test = "";
+            AssertHelper.ExpectedException<ArgumentException>(() => person.SetPropertyAndValidate(ref test, "Test", null));
         }
 
         [TestMethod]

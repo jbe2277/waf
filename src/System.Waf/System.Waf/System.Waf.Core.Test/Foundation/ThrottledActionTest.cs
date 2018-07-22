@@ -60,6 +60,10 @@ namespace Test.Waf.Foundation
             Task.Delay(200).Wait();
             Assert.AreEqual(0, actionCallCount);
             Assert.IsFalse(throttledAction.IsRunning);
+
+            // Calling Cancel multiple time most not throw an exception
+            throttledAction.Cancel();
+            throttledAction.Cancel();
         }
 
         [TestMethod]

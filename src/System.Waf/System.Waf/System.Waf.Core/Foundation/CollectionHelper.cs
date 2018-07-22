@@ -234,7 +234,6 @@ namespace System.Waf.Foundation
                         }
                     }
                 }
-                return;
             }
 
             resetAction();
