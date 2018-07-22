@@ -189,6 +189,16 @@ namespace System.Waf.Foundation
                                 resetAction();
                                 return;
                             }
+
+                            for (int j = i + 1; j < source.Count; j++)
+                            {
+                                if (!comparer.Equals(source[j <= newIndex ? j - 1 : j], target[j]))
+                                {
+                                    // Second move operation is not supported -> Reset
+                                    resetAction();
+                                    return;
+                                }
+                            }
                             moveAction(i, newIndex);
                         }
                         else
@@ -208,6 +218,16 @@ namespace System.Waf.Foundation
                                 // Item was replaced instead of moved
                                 resetAction();
                                 return;
+                            }
+
+                            for (int j = i + 1; j < target.Count; j++)
+                            {
+                                if (!comparer.Equals(target[j <= oldIndex ? j - 1 : j], source[j]))
+                                {
+                                    // Second move operation is not supported -> Reset
+                                    resetAction();
+                                    return;
+                                }
                             }
                             moveAction(oldIndex, i);
                         }
