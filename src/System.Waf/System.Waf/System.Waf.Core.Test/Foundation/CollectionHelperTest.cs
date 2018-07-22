@@ -100,6 +100,9 @@ namespace Test.Waf.Foundation
 
             targetList.Merge(Array.AsReadOnly(new[] { "1" }));
             Assert.IsTrue(new[] { "1" }.SequenceEqual(targetList));
+
+            targetList.Merge(targetList.Concat(new[] { "98", "99" }).ToArray());
+            Assert.IsTrue(new[] { "1", "98", "99" }.SequenceEqual(targetList));
         }
 
         [TestMethod]
@@ -119,11 +122,12 @@ namespace Test.Waf.Foundation
             MergeTestCore(new[] { "2", "4", "5" }, new[] { "2", "3" }.ToList(), ExpectedCollectionChange.Reset);
             MergeTestCore(new[] { "4" }, new[] { "2", "3" }.ToList(), ExpectedCollectionChange.Reset);
 
-            MergeTestCore(new[] { "1", "2" }, new[] { "2", "1" }.ToList(), ExpectedCollectionChange.None, null, 1);
-            MergeTestCore(new[] { "1", "2", "3" }, new[] { "3", "1", "2" }.ToList(), ExpectedCollectionChange.None, null, 1);
-            MergeTestCore(new[] { "1", "2", "3", "4" }, new[] { "4", "3", "2", "1" }.ToList(), ExpectedCollectionChange.None, null, 3);
-            MergeTestCore(new[] { "1", "2" }, new[] { "1" }.ToList(), ExpectedCollectionChange.Insert, null, 0);
-            MergeTestCore(new[] { "1", "2" }, new[] { "1", "3" }.ToList(), ExpectedCollectionChange.Reset, null, 0);
+            MergeTestCore(new[] { "1", "2" }, new[] { "2", "1" }.ToList(), ExpectedCollectionChange.Move, null, 1);
+            MergeTestCore(new[] { "1", "2", "3" }, new[] { "3", "1", "2" }.ToList(), ExpectedCollectionChange.Move, null, 1);
+            MergeTestCore(new[] { "1", "2", "3", "4" }, new[] { "4", "3", "2", "1" }.ToList(), ExpectedCollectionChange.Move, null, 3);
+            MergeTestCore(new[] { "1", "2" }, new[] { "1" }.ToList(), ExpectedCollectionChange.Insert);
+            MergeTestCore(new[] { "1", "2" }, new[] { "1", "3" }.ToList(), ExpectedCollectionChange.Reset);
+            MergeTestCore(new[] { "1", "2", "3" }, new[] { "4", "1", "3" }.ToList(), ExpectedCollectionChange.Reset);
         }
 
         [TestMethod]
@@ -143,15 +147,18 @@ namespace Test.Waf.Foundation
             MergeTestCore(new[] { "b", "d", "e" }, new[] { "B", "C" }.ToList(), ExpectedCollectionChange.Reset, StringComparer.OrdinalIgnoreCase);
             MergeTestCore(new[] { "d" }, new[] { "B", "C" }.ToList(), ExpectedCollectionChange.Reset, StringComparer.OrdinalIgnoreCase);
 
-            MergeTestCore(new[] { "a", "b" }, new[] { "B", "A" }.ToList(), ExpectedCollectionChange.None, StringComparer.OrdinalIgnoreCase, 1);
-            MergeTestCore(new[] { "a", "b", "c" }, new[] { "C", "A", "B" }.ToList(), ExpectedCollectionChange.None, StringComparer.OrdinalIgnoreCase, 1);
-            MergeTestCore(new[] { "a", "b", "c", "d" }, new[] { "D", "C", "B", "A" }.ToList(), ExpectedCollectionChange.None, StringComparer.OrdinalIgnoreCase, 3);
-            MergeTestCore(new[] { "a", "b" }, new[] { "A" }.ToList(), ExpectedCollectionChange.Insert, StringComparer.OrdinalIgnoreCase, 0);
-            MergeTestCore(new[] { "a", "b" }, new[] { "A", "C" }.ToList(), ExpectedCollectionChange.Reset, StringComparer.OrdinalIgnoreCase, 0);
+            MergeTestCore(new[] { "a", "b" }, new[] { "B", "A" }.ToList(), ExpectedCollectionChange.Move, StringComparer.OrdinalIgnoreCase, 1);
+            MergeTestCore(new[] { "a", "b", "c" }, new[] { "C", "A", "B" }.ToList(), ExpectedCollectionChange.Move, StringComparer.OrdinalIgnoreCase, 1);
+            MergeTestCore(new[] { "a", "b", "c", "d" }, new[] { "D", "C", "B", "A" }.ToList(), ExpectedCollectionChange.Move, StringComparer.OrdinalIgnoreCase, 3);
+            MergeTestCore(new[] { "a", "b" }, new[] { "A" }.ToList(), ExpectedCollectionChange.Insert, StringComparer.OrdinalIgnoreCase);
+            MergeTestCore(new[] { "a", "b" }, new[] { "A", "C" }.ToList(), ExpectedCollectionChange.Reset, StringComparer.OrdinalIgnoreCase);
         }
 
         private void MergeTestCore<T>(IList<T> source, IList<T> target, ExpectedCollectionChange expectedCollectionChange, IEqualityComparer<T> comparer = null, int expectedMoveCounts = -1)
         {
+            if (expectedMoveCounts >= 0 && expectedCollectionChange != ExpectedCollectionChange.Move)
+                throw new ArgumentException("ExpectedCollectionChange must be set to Move when using expectedMoveCounts");
+            if (expectedCollectionChange == ExpectedCollectionChange.Move && expectedMoveCounts < 0) expectedMoveCounts = 1;
             var insertCounter = 0;
             var removeCounter = 0;
             var resetCounter = 0;
@@ -186,7 +193,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Insert ? 1 : 0, insertCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Remove ? 1 : 0, removeCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Reset ? 1 : 0, resetCounter);
-            if (expectedMoveCounts >= 0) Assert.AreEqual(expectedMoveCounts, moveCounter);
+            Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Move ? expectedMoveCounts : 0, moveCounter);
         }
 
         private enum ExpectedCollectionChange
@@ -194,7 +201,8 @@ namespace Test.Waf.Foundation
             None,
             Insert,
             Remove,
-            Reset
+            Reset,
+            Move
         }
     }
 }
