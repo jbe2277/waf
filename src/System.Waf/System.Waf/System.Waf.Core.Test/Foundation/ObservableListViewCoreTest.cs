@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Foundation
 {
@@ -189,6 +190,54 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void RelayEventsWithSort()
+        {
+            observableListView.Sort = x => x.OrderBy(y => y);
+
+            ClearAll();
+            originalList.Add("c");
+            AssertElementAdded("c", 0, eventArgsList.Single());
+            Assert.AreEqual(1, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+
+            ClearAll();
+            originalList.Add("a");
+            AssertElementAdded("a", 0, eventArgsList.Single());
+            Assert.AreEqual(1, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+
+            ClearAll();
+            originalList.Add("b");
+            AssertElementAdded("b", 1, eventArgsList.Single());
+            Assert.AreEqual(1, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+
+            Assert.IsTrue(new[] { "a", "b", "c" }.SequenceEqual(observableListView));
+
+            AssertNoEventsRaised(() => observableListView.Update());  // Collection has not changed.
+
+            ClearAll();
+            observableListView.Sort = x => x.OrderByDescending(y => y);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            Assert.AreEqual(1, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+            Assert.IsTrue(new[] { "c", "b", "a" }.SequenceEqual(observableListView));
+
+            ClearAll();
+            originalList.Remove("b");
+            AssertElementRemoved("b", 1, eventArgsList.Single());
+            Assert.AreEqual(1, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+
+            ClearAll();
+            observableListView.Sort = x => x.OrderBy(y => y);
+            Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgsList.Single().Action);
+            Assert.AreEqual(0, countChangedCount);
+            Assert.AreEqual(1, indexerChangedCount);
+            Assert.IsTrue(new[] { "a", "c" }.SequenceEqual(observableListView));
+        }
+
+        [TestMethod]
         public void RaiseEventsWithoutListener()
         {
             var originalList2 = new ObservableCollection<string>();
@@ -202,6 +251,36 @@ namespace Test.Waf.Foundation
 
             observableListView2.Dispose();
             observableListView2.Dispose();
+        }
+
+        [TestMethod]
+        public void ConstructorTest()
+        {
+            var originalList = new ObservableCollection<string>(new[] { "D", "A", "c", "b" });
+            Predicate<string> filter = x => x != "c";
+            Func<IEnumerable<string>, IOrderedEnumerable<string>> sort = x => x.OrderBy(y => y);
+            var listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort, true);
+            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            Assert.AreSame(filter, listView.Filter);
+            Assert.AreSame(sort, listView.Sort);
+
+            bool collectionChangedCalled = false;
+            listView.CollectionChanged += (sender, e) =>
+            {
+                collectionChangedCalled = true;
+            };
+            originalList.Add("e");
+            Assert.IsFalse(collectionChangedCalled);
+            listView.Dispose();
+
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListViewCore<string>(null));
+        }
+
+        private void ClearAll()
+        {
+            eventArgsList.Clear();
+            countChangedCount = 0;
+            indexerChangedCount = 0;
         }
 
         private static void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
