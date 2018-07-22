@@ -167,15 +167,16 @@ namespace System.Waf.Foundation
             }
             else if (moveAction != null)  // Item(s) moved
             {
-                for (int i = 0; i < source.Count; i++)
+                var count = target.Count;
+                for (int i = 0; i < count; i++)
                 {
                     if (!comparer.Equals(target[i], source[i]))
                     {
-                        if (i + 1 < source.Count && comparer.Equals(target[i+1], source[i]))
+                        if (i + 1 < count && comparer.Equals(target[i + 1], source[i]))
                         {
                             int newIndex = -1;
                             T item = target[i];
-                            for (int s = i + 1; s < source.Count; s++)
+                            for (int s = i + 1; s < count; s++)
                             {
                                 if (comparer.Equals(source[s], item))
                                 {
@@ -189,8 +190,7 @@ namespace System.Waf.Foundation
                                 resetAction();
                                 return;
                             }
-
-                            for (int j = i + 1; j < source.Count; j++)
+                            for (int j = i + 1; j < count; j++)
                             {
                                 if (!comparer.Equals(source[j <= newIndex ? j - 1 : j], target[j]))
                                 {
@@ -200,12 +200,13 @@ namespace System.Waf.Foundation
                                 }
                             }
                             moveAction(i, newIndex);
+                            return;
                         }
                         else
                         {
                             int oldIndex = -1;
                             T item = source[i];
-                            for (int t = i + 1; t < target.Count; t++)
+                            for (int t = i + 1; t < count; t++)
                             {
                                 if (comparer.Equals(target[t], item))
                                 {
@@ -219,8 +220,7 @@ namespace System.Waf.Foundation
                                 resetAction();
                                 return;
                             }
-
-                            for (int j = i + 1; j < target.Count; j++)
+                            for (int j = i + 1; j < count; j++)
                             {
                                 if (!comparer.Equals(target[j <= oldIndex ? j - 1 : j], source[j]))
                                 {
@@ -230,6 +230,7 @@ namespace System.Waf.Foundation
                                 }
                             }
                             moveAction(oldIndex, i);
+                            return;
                         }
                     }
                 }
