@@ -63,7 +63,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             // Remove the first contact
 
-            contactListViewModel.ContactCollectionView = root.Contacts;
+            contactListViewModel.Contacts = root.Contacts;
             
             AssertHelper.CanExecuteChangedEvent(controller.DeleteContactCommand, () => contactListViewModel.SelectedContact = contact1);
             

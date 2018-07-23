@@ -28,8 +28,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set { SetProperty(ref selectedEmail, value); }
         }
 
-        public IEnumerable<Email> EmailCollectionView { get; set; }
-
         public ICommand DeleteEmailCommand { get; set; }
 
         public string FilterText

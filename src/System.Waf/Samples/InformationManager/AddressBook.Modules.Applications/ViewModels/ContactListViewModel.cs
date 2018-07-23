@@ -21,8 +21,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public IReadOnlyList<Contact> Contacts { get; set; }
 
-        public IEnumerable<Contact> ContactCollectionView { get; set; }
-
         public Contact SelectedContact
         {
             get { return selectedContact; }

@@ -19,6 +19,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private readonly IShellService shellService;
         private readonly ContactLayoutViewModel contactLayoutViewModel;
         private readonly DelegateCommand deleteContactCommand;
+        private ObservableListView<Contact> contactsView;
 
         [ImportingConstructor]
         public ContactController(IShellService shellService, ContactLayoutViewModel contactLayoutViewModel, ContactListViewModel contactListViewModel, ContactViewModel contactViewModel)
@@ -43,7 +44,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Initialize()
         {
-            ContactListViewModel.Contacts = Root.Contacts;
+            contactsView = new ObservableListView<Contact>(Root.Contacts, filter: ContactListViewModel.Filter);
+            ContactListViewModel.Contacts = contactsView;
             ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
 
             PropertyChangedEventManager.AddHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
@@ -62,6 +64,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             // Set the views to null so that the garbage collector can collect them.
             contactLayoutViewModel.ContactListView = null;
             contactLayoutViewModel.ContactView = null;
+            contactsView.Dispose();
         }
 
         private void NewContact()
@@ -75,12 +78,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         private void DeleteContact()
         {
-            // Use the ContactCollectionView, which represents the sorted/filtered state of the contacts, to determine the next contact to select.
-            var nextContact = CollectionHelper.GetNextElementOrDefault(ContactListViewModel.ContactCollectionView, ContactListViewModel.SelectedContact);
+            var nextContact = CollectionHelper.GetNextElementOrDefault(ContactListViewModel.Contacts, ContactListViewModel.SelectedContact);
             
             Root.RemoveContact(ContactListViewModel.SelectedContact);
 
-            ContactListViewModel.SelectedContact = nextContact ?? ContactListViewModel.ContactCollectionView.LastOrDefault();
+            ContactListViewModel.SelectedContact = nextContact ?? ContactListViewModel.Contacts.LastOrDefault();
             ContactListViewModel.FocusItem();
         }
 
@@ -90,6 +92,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             {
                 ContactViewModel.Contact = ContactListViewModel.SelectedContact;
                 deleteContactCommand.RaiseCanExecuteChanged();
+            }
+            else if (e.PropertyName == nameof(ContactListViewModel.FilterText))
+            {
+                contactsView.Update();
             }
         }
     }

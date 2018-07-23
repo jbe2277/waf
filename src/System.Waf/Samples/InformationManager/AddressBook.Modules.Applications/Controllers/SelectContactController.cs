@@ -12,6 +12,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
     {
         private readonly SelectContactViewModel selectContactViewModel;
         private readonly DelegateCommand selectContactCommand;
+        private ObservableListView<Contact> contactsView;
         
         [ImportingConstructor]
         public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
@@ -31,7 +32,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Initialize()
         {
-            ContactListViewModel.Contacts = Root.Contacts;
+            contactsView = new ObservableListView<Contact>(Root.Contacts, filter: ContactListViewModel.Filter);
+            ContactListViewModel.Contacts = contactsView;
             ContactListViewModel.SelectedContact = Root.Contacts.FirstOrDefault();
             selectContactViewModel.ContactListView = ContactListViewModel.View;
             selectContactViewModel.OkCommand = selectContactCommand;
@@ -47,6 +49,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         public void Shutdown()
         {
             PropertyChangedEventManager.RemoveHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
+            contactsView.Dispose();
         }
 
         private bool CanSelectContact() { return ContactListViewModel.SelectedContact != null; }
@@ -62,6 +65,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             if (e.PropertyName == nameof(ContactListViewModel.SelectedContact))
             {
                 selectContactCommand.RaiseCanExecuteChanged();
+            }
+            else if (e.PropertyName == nameof(ContactListViewModel.FilterText))
+            {
+                contactsView.Update();
             }
         }
     }
