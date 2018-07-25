@@ -39,7 +39,8 @@
                 </Style>
             </TreeView.Resources>
 
-            <TreeViewItem x:Name="rootItem" Header="Information Manager" ItemsSource="{Binding NavigationService.NavigationNodes}" IsExpanded="True">
+            <TreeViewItem x:Name="rootItem" Header="Information Manager" ItemsSource="{Binding NavigationService.NavigationNodes}" IsExpanded="True"
+                          Padding="5" Style="{x:Null}">
                 <TreeViewItem.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
