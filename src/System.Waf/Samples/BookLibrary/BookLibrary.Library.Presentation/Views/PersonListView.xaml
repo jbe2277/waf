@@ -23,12 +23,12 @@
                 <Label Content="{x:Static p:Resources.SearchMenu}" Target="{Binding ElementName=searchBox}" Padding="5,0,7,0" Margin="0" 
                        VerticalAlignment="Center"/>
                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
-                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilterBoxTextChanged"/>
+                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}"/>
             </ToolBar>
         </ToolBarTray>
 
         <DataGrid x:Name="personTable" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson, ValidatesOnNotifyDataErrors=False}" 
-                  SelectionChanged="DataGridSelectionChanged" CanUserDeleteRows="False" BorderThickness="0">
+                  SelectionChanged="DataGridSelectionChanged" Sorting="DataGridSorting" CanUserDeleteRows="False" BorderThickness="0">
             <DataGrid.InputBindings>
                 <KeyBinding Command="{Binding RemoveCommand}" Key="Del"/>
             </DataGrid.InputBindings>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.DataModels;
@@ -17,7 +18,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private bool isValid = true;
         private BookDataModel selectedBook;
         private string filterText = "";
-        
+        private Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>> sort;
+
         [ImportingConstructor]
         public BookListViewModel(IBookListView view) : base(view)
         {
@@ -25,8 +27,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         }
 
         public IReadOnlyList<BookDataModel> SelectedBooks => selectedBooks;
-
-        public IEnumerable<BookDataModel> BookCollectionView { get; set; }
 
         public bool IsValid
         {
@@ -50,6 +50,12 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         {
             get { return filterText; }
             set { SetProperty(ref filterText, value); }
+        }
+
+        public Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>> Sort
+        {
+            get { return sort; }
+            set { SetProperty(ref sort, value); }
         }
 
         public void Focus()

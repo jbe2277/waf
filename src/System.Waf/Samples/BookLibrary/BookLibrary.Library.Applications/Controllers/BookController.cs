@@ -40,6 +40,8 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             lendToCommand = new DelegateCommand(p => LendTo((Book)p));
         }
 
+        internal ObservableListView<BookDataModel> BooksView { get; private set; }
+
         public void Initialize()
         {
             bookViewModel.LendToCommand = lendToCommand;
@@ -47,7 +49,8 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
             bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, 
                 b => new BookDataModel(b, lendToCommand));
-            bookListViewModel.Books = bookDataModels;
+            BooksView = new ObservableListView<BookDataModel>(bookDataModels, filter: bookListViewModel.Filter);
+            bookListViewModel.Books = BooksView;
             bookListViewModel.AddNewCommand = addNewCommand;
             bookListViewModel.RemoveCommand = removeCommand;
             PropertyChangedEventManager.AddHandler(bookListViewModel, BookListViewModelPropertyChanged, "");
@@ -77,9 +80,8 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void RemoveBook()
         {
-            // Use the BookCollectionView, which represents the sorted/filtered state of the books, to determine the next book to select.
             var booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
-            var nextBook = CollectionHelper.GetNextElementOrDefault(bookListViewModel.BookCollectionView.Except(booksToExclude), 
+            var nextBook = CollectionHelper.GetNextElementOrDefault(bookListViewModel.Books.Except(booksToExclude), 
                 bookListViewModel.SelectedBook);
 
             foreach (BookDataModel book in bookListViewModel.SelectedBooks.ToArray())
@@ -87,7 +89,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 entityService.Books.Remove(book.Book);
             }
 
-            bookListViewModel.SelectedBook = nextBook ?? bookListViewModel.BookCollectionView.LastOrDefault();
+            bookListViewModel.SelectedBook = nextBook ?? bookListViewModel.Books.LastOrDefault();
             bookListViewModel.Focus();
         }
 
@@ -120,6 +122,14 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             else if (e.PropertyName == nameof(BookListViewModel.IsValid))
             {
                 UpdateCommands();
+            }
+            else if (e.PropertyName == nameof(BookListViewModel.FilterText))
+            {
+                BooksView.Update();
+            }
+            else if (e.PropertyName == nameof(BookListViewModel.Sort))
+            {
+                BooksView.Sort = bookListViewModel.Sort;
             }
         }
 

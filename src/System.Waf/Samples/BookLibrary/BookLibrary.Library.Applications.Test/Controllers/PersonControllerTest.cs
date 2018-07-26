@@ -55,7 +55,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personController.Initialize();
             var personListView = Container.GetExportedValue<MockPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
-            personListViewModel.PersonCollectionView = personListViewModel.Persons;
             var personView = Container.GetExportedValue<MockPersonView>();
             var personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView);
 
@@ -181,7 +180,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var personListView = Container.GetExportedValue<MockPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             // Set the sorting to: "Ginny", "Harry", "Ron"
-            personListViewModel.PersonCollectionView = personListViewModel.Persons.OrderBy(p => p.Firstname);
+            personController.PersonsView.Sort = x => x.OrderBy(p => p.Firstname);
 
             // Remove the first person and check that the second one is selected.
             personListViewModel.SelectedPerson = ginny;
@@ -206,7 +205,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var personListView = Container.GetExportedValue<MockPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
             // Set the sorting to: "Ginny", "Harry", "Ron"
-            personListViewModel.PersonCollectionView = personListViewModel.Persons.OrderBy(p => p.Firstname);
+            personController.PersonsView.Sort = x => x.OrderBy(p => p.Firstname);
 
             // Remove the last person and check that the last one is selected again.
             personListViewModel.SelectedPerson = ron;
@@ -230,7 +229,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personController.Initialize();
             var personListView = Container.GetExportedValue<MockPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView);
-            personListViewModel.PersonCollectionView = personListViewModel.Persons;
 
             // Remove all persons and check that nothing is selected anymore
             personListViewModel.SelectedPerson = harry;

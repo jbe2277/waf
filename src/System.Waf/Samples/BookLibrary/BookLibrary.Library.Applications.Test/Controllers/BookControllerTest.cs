@@ -51,7 +51,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookController.Initialize();
             var bookListView = Container.GetExportedValue<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
-            bookListViewModel.BookCollectionView = bookListViewModel.Books;
             var bookView = Container.GetExportedValue<MockBookView>();
             var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView);
 
@@ -134,7 +133,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var bookListView = Container.GetExportedValue<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
-            bookListViewModel.BookCollectionView = bookListViewModel.Books.OrderBy(b => b.Book.Title);
+            bookController.BooksView.Sort = x => x.OrderBy(b => b.Book.Title);
 
             // Remove the first book and check that the second one is selected.
             bookListViewModel.SelectedBook = bookListViewModel.Books.Single(b => b.Book == fellowship);
@@ -159,7 +158,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var bookListView = Container.GetExportedValue<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
-            bookListViewModel.BookCollectionView = bookListViewModel.Books.OrderBy(b => b.Book.Title);
+            bookController.BooksView.Sort = x => x.OrderBy(b => b.Book.Title);
 
             // Remove the last book and check that the last one is selected again.
             bookListViewModel.SelectedBook = bookListViewModel.Books.Single(b => b.Book == twoTowers);
@@ -183,7 +182,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookController.Initialize();
             var bookListView = Container.GetExportedValue<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
-            bookListViewModel.BookCollectionView = bookListViewModel.Books;
 
             // Remove all books and check that nothing is selected anymore
             bookListViewModel.SelectedBook = bookListViewModel.Books.Single(b => b.Book == fellowship);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
@@ -16,7 +17,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private bool isValid = true;
         private Person selectedPerson;
         private string filterText = "";
-        
+        private Func<IEnumerable<Person>, IOrderedEnumerable<Person>> sort;
+
         [ImportingConstructor]
         public PersonListViewModel(IPersonListView view) : base(view)
         {
@@ -25,8 +27,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public IReadOnlyList<Person> SelectedPersons => selectedPersons;
 
-        public IEnumerable<Person> PersonCollectionView { get; set; }
-        
         public bool IsValid
         {
             get { return isValid; }
@@ -51,6 +51,12 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         {
             get { return filterText; }
             set { SetProperty(ref filterText, value); }
+        }
+
+        public Func<IEnumerable<Person>, IOrderedEnumerable<Person>> Sort
+        {
+            get { return sort; }
+            set { SetProperty(ref sort, value); }
         }
 
         public void Focus()

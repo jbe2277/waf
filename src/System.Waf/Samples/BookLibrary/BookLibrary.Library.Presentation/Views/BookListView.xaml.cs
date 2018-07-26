@@ -1,23 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Waf;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Domain;
+using Waf.BookLibrary.Library.Presentation.Controls;
 
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(IBookListView))]
     public partial class BookListView : UserControl, IBookListView
     {
+        private static readonly Dictionary<string, Func<BookDataModel, IComparable>> sortSelectors = new Dictionary<string, Func<BookDataModel, IComparable>>
+        {
+            { nameof(BookDataModel.Book) + "." + nameof(Book.Title), x => x.Book.Title },
+            { nameof(BookDataModel.Book) + "." + nameof(Book.Author), x => x.Book.Author },
+            { nameof(BookDataModel.Book) + "." + nameof(Book.PublishDate), x => x.Book.PublishDate },
+            { nameof(BookDataModel.Book) + "." + nameof(Book.LendTo) + "." + nameof(Person.Firstname), x => x.Book.LendTo?.Firstname }
+        };
         private readonly Lazy<BookListViewModel> viewModel;
-        private ICollectionView bookCollectionView;
 
         public BookListView()
         {
@@ -36,37 +42,15 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void FirstTimeLoadedHandler(object sender, RoutedEventArgs e)
         {
-            // Ensure that this handler is called only once.
-            Loaded -= FirstTimeLoadedHandler;
-            
-            // The following code doesn't work in the WPF Designer environment (Cider or Blend).
-            if (!WafConfiguration.IsInDesignMode)
+            Loaded -= FirstTimeLoadedHandler;  // Ensure that this handler is called only once.
+            if (bookTable.Items.Count > 0)
             {
-                bookCollectionView = CollectionViewSource.GetDefaultView(ViewModel.Books);
-                bookCollectionView.SortDescriptions.Add(new SortDescription("Book.Title", ListSortDirection.Ascending));
-                bookCollectionView.Filter = Filter;
-                ViewModel.BookCollectionView = bookCollectionView.Cast<BookDataModel>();
-
-                if (bookTable.Items.Count > 0)
-                {
-                    bookTable.SelectedIndex = 0;
-                    FocusFirstCell();
-                }
+                var firstColumn = bookTable.ColumnFromDisplayIndex(0);
+                firstColumn.SortDirection = ListSortDirection.Ascending;
+                ViewModel.Sort = DataGridHelper.GetSorting(firstColumn, sortSelectors);
+                bookTable.SelectedIndex = 0;
+                FocusFirstCell();
             }
-        }
-
-        private void FilterBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Refresh must not be called as long the DataGrid is in edit mode.
-            if (bookTable.CommitEdit(DataGridEditingUnit.Row, true))
-            {
-                bookCollectionView.Refresh();
-            }
-        }
-        
-        private bool Filter(object obj)
-        {
-            return ViewModel.Filter((BookDataModel)obj);
         }
 
         private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -79,6 +63,11 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             {
                 ViewModel.AddSelectedBook(book);
             }
+        }
+
+        private void DataGridSorting(object sender, DataGridSortingEventArgs e)
+        {
+            ViewModel.Sort = DataGridHelper.HandleDataGridSorting(e, sortSelectors);
         }
     }
 }

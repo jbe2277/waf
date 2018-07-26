@@ -43,12 +43,15 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             createNewEmailCommand = new DelegateCommand(CreateNewEmail);
         }
 
+        internal ObservableListView<Person> PersonsView { get; private set; }
+
         public void Initialize()
         {
             personViewModel.CreateNewEmailCommand = createNewEmailCommand;
             PropertyChangedEventManager.AddHandler(personViewModel, PersonViewModelPropertyChanged, "");
-            
-            personListViewModel.Persons = entityService.Persons;
+
+            PersonsView = new ObservableListView<Person>(entityService.Persons, filter: personListViewModel.Filter);
+            personListViewModel.Persons = PersonsView;
             personListViewModel.AddNewCommand = addNewCommand;
             personListViewModel.RemoveCommand = removeCommand;
             personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
@@ -79,15 +82,14 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void RemovePerson()
         {
-            // Use the PersonCollectionView, which represents the sorted/filtered state of the persons, to determine the next person to select.
             var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
-            var nextPerson = CollectionHelper.GetNextElementOrDefault(personListViewModel.PersonCollectionView.Except(personsToExclude),
+            var nextPerson = CollectionHelper.GetNextElementOrDefault(personListViewModel.Persons.Except(personsToExclude),
                 personListViewModel.SelectedPerson);
             foreach (Person person in personListViewModel.SelectedPersons.ToArray())
             {
                 entityService.Persons.Remove(person);
             }
-            personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.PersonCollectionView.LastOrDefault();
+            personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons.LastOrDefault();
             personListViewModel.Focus();
         }
 
@@ -118,6 +120,14 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             else if (e.PropertyName == nameof(PersonListViewModel.IsValid))
             {
                 UpdateCommands();
+            }
+            else if (e.PropertyName == nameof(PersonListViewModel.FilterText))
+            {
+                PersonsView.Update();
+            }
+            else if (e.PropertyName == nameof(PersonListViewModel.Sort))
+            {
+                PersonsView.Sort = personListViewModel.Sort;
             }
         }
 
