@@ -108,6 +108,24 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(entityError, person.GetErrors(null).Single());
         }
 
+        [TestMethod, Ignore]
+        public void HasMultipleErrorsWithDifferentValidationTypes()
+        {
+            Person person = new Person() { Name = "Bill", Age = 200 };
+            Assert.AreEqual(nameof(Person.Age), person.Errors.Single().MemberNames.Single());
+
+            person.Name = "";
+            Assert.AreEqual(2, person.Errors.Count);
+            Assert.IsNotNull(person.Errors.Single(x => x.MemberNames.Single() == nameof(Person.Name)));
+
+            var entityError = new ValidationResult("My entity error");
+            person.EntityError = entityError;
+            person.Validate();
+
+            Assert.AreEqual(3, person.Errors.Count);  // TODO: Does not work because of an unwanted optimization in Validator.
+            // See: Validator.GetObjectValidationErrors
+        }
+
         [TestMethod]
         public void SerializationWithDcsTest()
         {
@@ -174,25 +192,18 @@ namespace Test.Waf.Foundation
 
 
         [DataContract]
-        private class Person : ValidatableModel, IValidatableObject
+        public class Person : ValidatableModel, IValidatableObject
         {
             public const string NameRequiredError = "The Name field is required.";
             public const string EmailLengthError = "The field Email must be a string with a maximum length of 10.";
             public const string EmailInvalidError = "The Email field is not a valid e-mail address.";
 
-            private ValidationResult entityError;
-            [DataMember]
-            private string name;
-            [DataMember]
-            private string email;
+            [DataMember] private string name;
+            [DataMember] private string email;
+            [DataMember] private int age;
 
-            
-            public ValidationResult EntityError 
-            {
-                get { return entityError; }
-                set { entityError = value; }
-            }
-            
+            public ValidationResult EntityError { get; set; }
+
             [Required(ErrorMessage = NameRequiredError)]
             public string Name
             {
@@ -208,11 +219,23 @@ namespace Test.Waf.Foundation
                 set { SetProperty(ref email, value); }
             }
 
+            [CustomValidation(typeof(Person), nameof(ValidateAge))]
+            public int Age
+            {
+                get { return age; }
+                set { SetPropertyAndValidate(ref age, value); }
+            }
+
             public new bool SetPropertyAndValidate<T>(ref T field, T value, string propertyName)
             {
                 return base.SetPropertyAndValidate(ref field, value, propertyName);
             }
 
+            public static ValidationResult ValidateAge(int value, ValidationContext context)
+            {
+                if (value > 150) return new ValidationResult("Too old", new[] { nameof(Age) });
+                return ValidationResult.Success;
+            }
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
