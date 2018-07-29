@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading.Tasks;
 using System.Waf.Foundation;
 
@@ -19,8 +20,29 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public async Task NoWaitTest()
         {
-            Task.Delay(1).NoWait();
-            await Task.Delay(5);
+            bool unobservedTaskException = false;
+            EventHandler<UnobservedTaskExceptionEventArgs> handler = (sender, e) =>
+            {
+                unobservedTaskException = true;
+            };
+            TaskScheduler.UnobservedTaskException += handler;
+            try
+            {
+                Task.Delay(1).NoWait();
+                Task.Delay(1).NoWait(true);
+                Task.Run(() => { throw new InvalidOperationException("Test"); }).NoWait(true);
+                await Task.Delay(5);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+
+                Assert.IsFalse(unobservedTaskException);
+            }
+            finally
+            {
+                TaskScheduler.UnobservedTaskException -= handler;
+            }
         }
     }
 }

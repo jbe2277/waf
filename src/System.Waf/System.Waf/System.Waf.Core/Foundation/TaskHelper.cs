@@ -36,9 +36,10 @@ namespace System.Waf.Foundation
         /// The method does nothing.
         /// </summary>
         /// <param name="task">The task.</param>
-        public static void NoWait(this Task task)
+        /// <param name="ignoreExceptions">If set to true the task exception will be observed and ignored.</param>
+        public static void NoWait(this Task task, bool ignoreExceptions = false)
         {
-            // Do nothing
+            if (ignoreExceptions) task.ContinueWith(t => t.Exception, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
         }
     }
 }
