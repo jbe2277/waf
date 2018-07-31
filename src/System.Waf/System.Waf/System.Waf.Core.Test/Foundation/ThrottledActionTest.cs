@@ -125,7 +125,7 @@ namespace Test.Waf.Foundation
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Performance")]
         public void InvokeOnlyIfIdleForDelayTimePerformanceTest()
         {
             int actionCallCount = 0;

@@ -63,6 +63,7 @@
     <Compile Include="Foundation\DataErrorInfoExtensionsTest.cs" />
     <Compile Include="Foundation\DataErrorInfoSupportTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Presentation\Controls\DataGridHelperTest.cs" />
     <Compile Include="Presentation\Converters\BoolToVisibilityConverterTest.cs" />
     <Compile Include="Presentation\Converters\InvertBooleanConverterTest.cs" />
     <Compile Include="Presentation\Converters\NullToVisibilityConverterTest.cs" />

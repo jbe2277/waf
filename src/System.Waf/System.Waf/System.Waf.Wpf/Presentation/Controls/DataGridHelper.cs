@@ -64,9 +64,9 @@ namespace System.Waf.Presentation.Controls
             }
         }
 
-        private static Func<T, object> GetSelector<T>(string propertyPath)
+        internal static Func<T, object> GetSelector<T>(string propertyPath)
         {
-            return SelectorCache<T>.Functions.GetOrAdd(propertyPath, x => CreateSelector<T>(x));
+            return SelectorCache<T>.Functions.GetOrAdd(propertyPath ?? "", x => CreateSelector<T>(x));
         }
 
         private static Func<T, object> CreateSelector<T>(string propertyPath)
@@ -104,7 +104,7 @@ namespace System.Waf.Presentation.Controls
             return Expression.Lambda<Func<T, object>>(block, parameter).Compile();
         }
 
-        private static object GetDefault(Type type)
+        internal static object GetDefault(Type type)
         {
             return !type.IsValueType ? null : Activator.CreateInstance(type);
         }
