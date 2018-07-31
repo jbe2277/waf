@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Presentation.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
-using Waf.BookLibrary.Library.Domain;
-using Waf.BookLibrary.Library.Presentation.Controls;
 
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(IBookListView))]
     public partial class BookListView : UserControl, IBookListView
     {
-        private static readonly Dictionary<string, Func<BookDataModel, IComparable>> sortSelectors = new Dictionary<string, Func<BookDataModel, IComparable>>
-        {
-            { nameof(BookDataModel.Book) + "." + nameof(Book.Title), x => x.Book.Title },
-            { nameof(BookDataModel.Book) + "." + nameof(Book.Author), x => x.Book.Author },
-            { nameof(BookDataModel.Book) + "." + nameof(Book.PublishDate), x => x.Book.PublishDate },
-            { nameof(BookDataModel.Book) + "." + nameof(Book.LendTo) + "." + nameof(Person.Firstname), x => x.Book.LendTo?.Firstname }
-        };
         private readonly Lazy<BookListViewModel> viewModel;
 
         public BookListView()
@@ -47,7 +38,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             {
                 var firstColumn = bookTable.ColumnFromDisplayIndex(0);
                 firstColumn.SortDirection = ListSortDirection.Ascending;
-                ViewModel.Sort = DataGridHelper.GetSorting(firstColumn, sortSelectors);
+                ViewModel.Sort = DataGridHelper.GetSorting<BookDataModel>(firstColumn);
                 bookTable.SelectedIndex = 0;
                 FocusFirstCell();
             }
@@ -67,7 +58,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void DataGridSorting(object sender, DataGridSortingEventArgs e)
         {
-            ViewModel.Sort = DataGridHelper.HandleDataGridSorting(e, sortSelectors);
+            ViewModel.Sort = DataGridHelper.HandleDataGridSorting<BookDataModel>(e);
         }
     }
 }

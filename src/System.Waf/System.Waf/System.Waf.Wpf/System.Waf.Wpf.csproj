@@ -52,6 +52,7 @@
     <Compile Include="Applications\ApplicationInfo.cs" />
     <Compile Include="Applications\DispatcherHelperCore.cs" />
     <Compile Include="Applications\ObservableListView.cs" />
+    <Compile Include="Presentation\Controls\DataGridHelper.cs" />
     <Compile Include="Presentation\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Presentation\DispatcherHelper.cs" />
     <Compile Include="Applications\IModuleController.cs" />

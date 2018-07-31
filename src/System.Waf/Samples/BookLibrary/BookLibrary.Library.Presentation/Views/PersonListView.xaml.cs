@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Presentation.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
-using Waf.BookLibrary.Library.Presentation.Controls;
 
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(IPersonListView))]
     public partial class PersonListView : UserControl, IPersonListView
     {
-        private static readonly Dictionary<string, Func<Person, IComparable>> sortSelectors = new Dictionary<string, Func<Person, IComparable>>
-        {
-            { nameof(Person.Firstname), x => x.Firstname },
-            { nameof(Person.Lastname), x => x.Lastname },
-            { nameof(Person.Email), x => x.Email }
-        };
         private readonly Lazy<PersonListViewModel> viewModel;
         
         public PersonListView()
@@ -46,7 +39,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
             {
                 var firstColumn = personTable.ColumnFromDisplayIndex(0);
                 firstColumn.SortDirection = ListSortDirection.Ascending;
-                ViewModel.Sort = DataGridHelper.GetSorting(firstColumn, sortSelectors);
+                ViewModel.Sort = DataGridHelper.GetSorting<Person>(firstColumn);
                 personTable.SelectedIndex = 0;
                 FocusFirstCell();
             }
@@ -66,7 +59,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void DataGridSorting(object sender, DataGridSortingEventArgs e)
         {
-            ViewModel.Sort = DataGridHelper.HandleDataGridSorting(e, sortSelectors);
+            ViewModel.Sort = DataGridHelper.HandleDataGridSorting<Person>(e);
         }
 
         private void EmailClick(object sender, RoutedEventArgs e)

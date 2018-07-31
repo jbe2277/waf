@@ -133,7 +133,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DataGridHelper.cs" />
     <Compile Include="Converters\LanguageToStringConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
     <Compile Include="DesignData\MockShellService.cs" />
