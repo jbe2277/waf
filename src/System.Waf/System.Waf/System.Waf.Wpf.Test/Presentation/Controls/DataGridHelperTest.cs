@@ -1,14 +1,56 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Waf.Presentation.Controls;
+using System.Windows.Controls;
 
 namespace Test.Waf.Presentation.Controls
 {
     [TestClass]
     public class DataGridHelperTest
     {
+        [TestMethod]
+        public void HandleDataGridSortingTest()
+        {
+            var list = CreateUnorderedList();
+            var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
+
+            var eventArgs = new DataGridSortingEventArgs(column);
+            var sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
+            Assert.IsTrue(eventArgs.Handled);
+            Assert.AreEqual(ListSortDirection.Ascending, column.SortDirection);
+            Assert.IsTrue(new[] { 1, 2, 3, 4 }.SequenceEqual(sort(list).Select(x => x.Person.Age)));
+
+            eventArgs = new DataGridSortingEventArgs(column);
+            sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
+            Assert.IsTrue(eventArgs.Handled);
+            Assert.AreEqual(ListSortDirection.Descending, column.SortDirection);
+            Assert.IsTrue(new[] { 4, 3, 2, 1 }.SequenceEqual(sort(list).Select(x => x.Person.Age)));
+
+            eventArgs = new DataGridSortingEventArgs(column);
+            sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
+            Assert.IsTrue(eventArgs.Handled);
+            Assert.IsNull(column.SortDirection);
+            Assert.IsNull(sort);
+        }
+
+        [TestMethod]
+        public void GetSortingTest()
+        {
+            var list = CreateUnorderedList();
+            var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
+
+            Assert.IsNull(DataGridHelper.GetSorting<PersonDataModel>(column));
+
+            column.SortDirection = ListSortDirection.Ascending;
+            Assert.IsTrue(new[] { 1, 2, 3, 4 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age)));
+
+            column.SortDirection = ListSortDirection.Descending;
+            Assert.IsTrue(new[] { 4, 3, 2, 1 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age)));
+        }
+
         [TestMethod]
         public void GetDefaultTest()
         {
@@ -89,6 +131,17 @@ namespace Test.Waf.Presentation.Controls
                 null,
                 new PersonDataModel() { Person = new Person() { Name = "Steve", Age = 50, Pair = new KeyValuePair<int, string>(50, "Steve") } },
                 new PersonDataModel() { Person = new Person() }
+            };
+        }
+
+        private PersonDataModel[] CreateUnorderedList()
+        {
+            return new[]
+            {
+                new PersonDataModel() { Person = new Person() { Age = 2 } },
+                new PersonDataModel() { Person = new Person() { Age = 1 } },
+                new PersonDataModel() { Person = new Person() { Age = 4 } },
+                new PersonDataModel() { Person = new Person() { Age = 3 } },
             };
         }
 

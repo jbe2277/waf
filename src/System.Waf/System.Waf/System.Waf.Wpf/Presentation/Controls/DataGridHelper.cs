@@ -19,7 +19,7 @@ namespace System.Waf.Presentation.Controls
         /// </summary>
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="e">The EventArgs provided by the Sorting event.</param>
-        /// <returns>The Sort function. Can be used by the ObservableListView.</returns>
+        /// <returns>The Sort function or null when SortDirection is set to null. Can be used by the ObservableListView.</returns>
         public static Func<IEnumerable<T>, IOrderedEnumerable<T>> HandleDataGridSorting<T>(DataGridSortingEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
@@ -45,7 +45,7 @@ namespace System.Waf.Presentation.Controls
         /// </summary>
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="column">The DataGrid column that should be sorted.</param>
-        /// <returns>The Sort function. Can be used by the ObservableListView.</returns>
+        /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
         public static Func<IEnumerable<T>, IOrderedEnumerable<T>> GetSorting<T>(DataGridColumn column)
         {
             if (column == null) throw new ArgumentNullException(nameof(column));
