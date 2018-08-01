@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Jbe.NewsReader.Applications</AssemblyName>
+    <RootNamespace>Jbe.NewsReader.Applications</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
