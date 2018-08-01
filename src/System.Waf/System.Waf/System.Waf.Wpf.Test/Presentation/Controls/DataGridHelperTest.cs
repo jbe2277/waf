@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Waf.Presentation.Controls;
+using System.Waf.UnitTesting;
 using System.Windows.Controls;
 
 namespace Test.Waf.Presentation.Controls
@@ -14,6 +15,8 @@ namespace Test.Waf.Presentation.Controls
         [TestMethod]
         public void HandleDataGridSortingTest()
         {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.HandleDataGridSorting<object>(null));
+
             var list = CreateUnorderedList();
             var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
 
@@ -39,6 +42,8 @@ namespace Test.Waf.Presentation.Controls
         [TestMethod]
         public void GetSortingTest()
         {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.GetSorting<object>(null));
+
             var list = CreateUnorderedList();
             var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
 
