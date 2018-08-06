@@ -9,6 +9,18 @@ namespace Test.Waf.Foundation
     public class StringHelperTest
     {
         [TestMethod]
+        public void ContainsTest()
+        {
+            Assert.IsTrue("Hello".Contains("ll", StringComparison.Ordinal));
+            Assert.IsFalse("Hello".Contains("Ll", StringComparison.Ordinal));
+            Assert.IsFalse("Hello".Contains("lll", StringComparison.Ordinal));
+
+            Assert.IsTrue("Hello".Contains("ll", StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue("Hello".Contains("Ll", StringComparison.OrdinalIgnoreCase));
+            Assert.IsFalse("Hello".Contains("lll", StringComparison.OrdinalIgnoreCase));
+        }
+
+        [TestMethod]
         public void TruncateTest()
         {
             Assert.AreSame("Hi", StringHelper.Truncate("Hi", 5));

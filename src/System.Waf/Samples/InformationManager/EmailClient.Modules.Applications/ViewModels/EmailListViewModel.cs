@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
@@ -43,9 +44,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public bool Filter(Email email)
         {
-            return email.Title.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || email.From.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || email.To.Any(x => x.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            return string.IsNullOrEmpty(filterText)
+                || (!string.IsNullOrEmpty(email.Title) && email.Title.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(email.From) && email.From.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+                || email.To.Any(x => !string.IsNullOrEmpty(x) && x.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

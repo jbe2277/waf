@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using System.Windows.Input;
@@ -42,11 +43,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public bool Filter(Contact contact)
         {
-            if (string.IsNullOrEmpty(filterText)) { return true; }
-            
-            return (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(contact.Email) && contact.Email.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            return string.IsNullOrEmpty(filterText)
+                || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Email) && contact.Email.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

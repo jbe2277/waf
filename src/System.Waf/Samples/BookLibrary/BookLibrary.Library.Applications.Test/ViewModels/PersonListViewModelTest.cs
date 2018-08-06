@@ -70,8 +70,9 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsFalse(personListViewModel.Filter(persons[0]));
             Assert.IsFalse(personListViewModel.Filter(persons[1]));
 
+            personListViewModel.FilterText = "R";
             persons.Add(new Person());
-            Assert.IsTrue(personListViewModel.Filter(persons[2]));
+            Assert.IsFalse(personListViewModel.Filter(persons[2]));
             persons[2].Firstname = "Hermione";
             Assert.IsTrue(personListViewModel.Filter(persons[2]));
         }

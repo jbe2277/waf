@@ -83,8 +83,9 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsFalse(bookListViewModel.Filter(bookDataModels[0]));
             Assert.IsFalse(bookListViewModel.Filter(bookDataModels[1]));
 
+            bookListViewModel.FilterText = "vol";
             books.Add(new Book());
-            Assert.IsTrue(bookListViewModel.Filter(bookDataModels[2]));
+            Assert.IsFalse(bookListViewModel.Filter(bookDataModels[2]));
             books[2].Title = "Serenity, Vol 1: Those Left Behind";
             Assert.IsTrue(bookListViewModel.Filter(bookDataModels[2]));
         }

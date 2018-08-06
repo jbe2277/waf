@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.Views;
@@ -65,11 +66,10 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public bool Filter(BookDataModel bookDataModel)
         {
-            if (string.IsNullOrEmpty(filterText)) { return true; }
-            
             Book book = bookDataModel.Book;
-            return string.IsNullOrEmpty(book.Title) || book.Title.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || string.IsNullOrEmpty(book.Author) || book.Author.IndexOf(filterText, StringComparison.CurrentCultureIgnoreCase) >= 0;
+            return string.IsNullOrEmpty(filterText)
+                || (!string.IsNullOrEmpty(book.Title) && book.Title.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(book.Author) && book.Author.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public void AddSelectedBook(BookDataModel bookDataModel)
