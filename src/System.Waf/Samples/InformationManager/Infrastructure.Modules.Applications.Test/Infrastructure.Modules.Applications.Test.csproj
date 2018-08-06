@@ -52,6 +52,7 @@
     <Compile Include="Services\MockEnvironmentService.cs" />
     <Compile Include="Services\MockNavigationNode.cs" />
     <Compile Include="Services\MockNavigationService.cs" />
+    <Compile Include="Services\MockSettingsProvider.cs" />
     <Compile Include="Services\MockShellService.cs" />
     <Compile Include="Services\MockShellViewModel.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />

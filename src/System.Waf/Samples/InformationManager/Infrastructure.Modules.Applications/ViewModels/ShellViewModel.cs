@@ -16,9 +16,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
     {
         private readonly IMessageService messageService;
+        private readonly AppSettings settings;
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService)
+        public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService,
+            ISettingsProvider settingsProvider)
             : base(view)
         {
             this.messageService = messageService;
@@ -26,19 +28,20 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
             NavigationService = navigationService;
             ExitCommand = new DelegateCommand(Close);
             AboutCommand = new DelegateCommand(ShowAboutMessage);
+            settings = settingsProvider.Get<AppSettings>();
             view.Closed += ViewClosed;
 
             // Restore the window size when the values are valid.
-            if (Settings.Default.Left >= 0 && Settings.Default.Top >= 0 && Settings.Default.Width > 0 && Settings.Default.Height > 0
-                && Settings.Default.Left + Settings.Default.Width <= view.VirtualScreenWidth
-                && Settings.Default.Top + Settings.Default.Height <= view.VirtualScreenHeight)
+            if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
+                && settings.Left + settings.Width <= view.VirtualScreenWidth
+                && settings.Top + settings.Height <= view.VirtualScreenHeight)
             {
-                ViewCore.Left = Settings.Default.Left;
-                ViewCore.Top = Settings.Default.Top;
-                ViewCore.Height = Settings.Default.Height;
-                ViewCore.Width = Settings.Default.Width;
+                ViewCore.Left = settings.Left;
+                ViewCore.Top = settings.Top;
+                ViewCore.Height = settings.Height;
+                ViewCore.Width = settings.Width;
             }
-            ViewCore.IsMaximized = Settings.Default.IsMaximized;
+            ViewCore.IsMaximized = settings.IsMaximized;
         }
 
         public string Title => ApplicationInfo.ProductName;
@@ -63,11 +66,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         private void ViewClosed(object sender, EventArgs e)
         {
-            Settings.Default.Left = ViewCore.Left;
-            Settings.Default.Top = ViewCore.Top;
-            Settings.Default.Height = ViewCore.Height;
-            Settings.Default.Width = ViewCore.Width;
-            Settings.Default.IsMaximized = ViewCore.IsMaximized;
+            settings.Left = ViewCore.Left;
+            settings.Top = ViewCore.Top;
+            settings.Height = ViewCore.Height;
+            settings.Width = ViewCore.Width;
+            settings.IsMaximized = ViewCore.IsMaximized;
         }
 
         private void ShowAboutMessage()
