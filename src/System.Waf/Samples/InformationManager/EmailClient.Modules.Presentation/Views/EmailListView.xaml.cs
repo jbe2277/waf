@@ -50,10 +50,5 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
                 FocusItem();
             }
         }
-
-        private bool Filter(object obj)
-        {
-            return ViewModel.Filter((Email)obj);
-        }
     }
 }

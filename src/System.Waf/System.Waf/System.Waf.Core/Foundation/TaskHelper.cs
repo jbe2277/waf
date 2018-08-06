@@ -39,7 +39,7 @@ namespace System.Waf.Foundation
         /// <param name="ignoreExceptions">If set to true the task exception will be observed and ignored.</param>
         public static void NoWait(this Task task, bool ignoreExceptions = false)
         {
-            if (ignoreExceptions) task.ContinueWith(t => t.Exception, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+            if (ignoreExceptions) task?.ContinueWith(t => t.Exception, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
         }
     }
 }

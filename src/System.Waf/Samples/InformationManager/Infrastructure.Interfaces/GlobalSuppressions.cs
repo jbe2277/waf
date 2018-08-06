@@ -9,3 +9,5 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Waf.InformationManager.Infrastructure.Interfaces.Applications.ToolBarCommand.#.ctor(System.Windows.Input.ICommand,System.String,System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Scope = "member", Target = "Waf.InformationManager.Infrastructure.Interfaces.Applications.ISettingsProvider.#Get`1()")]
+
