@@ -50,7 +50,7 @@ namespace Jbe.NewsReader.Domain
             ItemLifetime = newFeedManager.ItemLifetime;
             MaxItemsLimit = newFeedManager.MaxItemsLimit;
 
-            ListMerger.Merge(newFeedManager.Feeds, Feeds, FeedEqualityComparer.Default);
+            CollectionHelper.Merge(Feeds, newFeedManager.Feeds, FeedEqualityComparer.Default);
 
             foreach (var feed in Feeds)
             {

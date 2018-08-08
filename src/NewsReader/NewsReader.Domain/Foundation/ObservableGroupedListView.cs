@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Waf.Foundation;
 
 namespace Jbe.NewsReader.Domain.Foundation
 {
@@ -89,9 +90,9 @@ namespace Jbe.NewsReader.Domain.Foundation
             foreach (var target in intersect)
             {
                 var source = newGroupingList.First(x => innerListKeyComparer.Equals(x, target));
-                ListMerger.Merge(source, target, elementComparer, target.Insert, target.RemoveAt, () => target.Reset(source));
+                CollectionHelper.Merge(target, source, elementComparer, target.Insert, target.RemoveAt, () => target.Reset(source));
             }
-            ListMerger.Merge(newGroupingList, InnerList, innerListKeyComparer, Insert, RemoveAt, () => Reset(newGroupingList));
+            CollectionHelper.Merge(InnerList, newGroupingList, innerListKeyComparer, Insert, RemoveAt, () => Reset(newGroupingList));
         }
 
         private IReadOnlyList<ObservableGroupingView<TKey, TElement>> CreateGroupingList()

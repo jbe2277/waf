@@ -61,8 +61,8 @@ namespace Jbe.NewsReader.Applications.ViewModels
         private bool FilterFeedItems(FeedItem item)
         {
             return string.IsNullOrEmpty(SearchText)
-                || (item.Name ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || (item.Description ?? "").IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
+                || (item.Name ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)
+                || (item.Description ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase);
         }
 
         private void UpdateItemsListView()

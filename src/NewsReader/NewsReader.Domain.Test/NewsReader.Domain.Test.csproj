@@ -40,8 +40,6 @@
     <Compile Include="FeedItemTest.cs" />
     <Compile Include="FeedManagerTest.cs" />
     <Compile Include="FeedTest.cs" />
-    <Compile Include="Foundation\ListMergerTest.cs" />
-    <Compile Include="Foundation\ObservableListViewTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
@@ -61,10 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Waf.Core">
-      <Version>4.2.0</Version>
+      <Version>4.3.0-alpha1</Version>
     </PackageReference>
     <PackageReference Include="System.Waf.UnitTesting.Core">
-      <Version>4.2.0</Version>
+      <Version>4.3.0-alpha1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
