@@ -1,6 +1,19 @@
 Changelog
 ---------
 
+Version 4.3.0.1 (Alpha 1)
+- WAF: Add StringHelper.Contains method with StringComparison argument.
+- WAF: Add TaskHelper class.
+- WAF: Add CollectionHelper.Merge method.
+- WAF: Add the ObservableListView, ObservableListViewCore and ObservableListViewBase class.
+- WAF: Add the DataGridHelper class with sort support.
+- InfoMan: Replace CollectionView with the new ObservableListView.
+- InfoMan: Replace Settings with SettingsProvider service.
+- BookLibrary: Replace CollectionView with the new ObservableListView.
+- Sampled: Simplify code.
+- Samples: Fix blurring error template rectangle.
+
+
 Version 4.2.0.100 (Release)
 - WAF: Update version number.
 

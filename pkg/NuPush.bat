@@ -2,9 +2,9 @@
 setlocal
 set PkgDir=%~dp0
 set PATH=%PATH%;%PkgDir%
-set Version=4.2.0
+set Version=4.3.0-alpha1
 
-cd %PkgDir%\System.Waf\Release
+cd %PkgDir%\System.Waf\Release\%Version%
 
 nuget Push System.Waf.Core.%Version%.nupkg -Source https://www.nuget.org/api/v2/package
 nuget Push System.Waf.UnitTesting.Core.%Version%.nupkg -Source https://www.nuget.org/api/v2/package

@@ -20,6 +20,9 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public async Task NoWaitTest()
         {
+            TaskHelper.NoWait(null);        // No NullReferenceException
+            TaskHelper.NoWait(null, true);
+
             bool unobservedTaskException = false;
             EventHandler<UnobservedTaskExceptionEventArgs> handler = (sender, e) =>
             {
