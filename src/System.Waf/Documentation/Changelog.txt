@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.3.0.2 (Alpha 2)
+- TODO
+
+
 Version 4.3.0.1 (Alpha 1)
 - WAF: Add StringHelper.Contains method with StringComparison argument.
 - WAF: Add TaskHelper class.
