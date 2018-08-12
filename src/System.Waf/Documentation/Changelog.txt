@@ -14,7 +14,7 @@ Version 4.3.0.1 (Alpha 1)
 - InfoMan: Replace CollectionView with the new ObservableListView.
 - InfoMan: Replace Settings with SettingsProvider service.
 - BookLibrary: Replace CollectionView with the new ObservableListView.
-- Sampled: Simplify code.
+- Samples: Simplify code.
 - Samples: Fix blurring error template rectangle.
 
 
