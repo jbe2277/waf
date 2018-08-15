@@ -15,7 +15,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="targetType">This parameter will be ignored.</param>
         /// <param name="parameter">This parameter will be ignored.</param>
         /// <param name="language">This parameter will be ignored.</param>
-        /// <returns></returns>
+        /// <returns>Returns just the passed value.</returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return value;
@@ -28,7 +28,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="targetType">This parameter will be ignored.</param>
         /// <param name="parameter">This parameter will be ignored.</param>
         /// <param name="language">This parameter will be ignored.</param>
-        /// <returns></returns>
+        /// <returns>Returns just the passed value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             return value;

@@ -13,7 +13,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="action">The work to execute asynchronously</param>
         /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
-        /// <returns></returns>
+        /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
         public static Task Run(Action action, TaskScheduler scheduler)
         {
             return Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, scheduler);
@@ -25,7 +25,7 @@ namespace System.Waf.Foundation
         /// <typeparam name="T"></typeparam>
         /// <param name="action">The work to execute asynchronously</param>
         /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
-        /// <returns></returns>
+        /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
         public static Task<T> Run<T>(Func<T> action, TaskScheduler scheduler)
         {
             return Task<T>.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, scheduler);
