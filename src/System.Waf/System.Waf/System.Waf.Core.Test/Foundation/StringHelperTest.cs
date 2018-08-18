@@ -18,6 +18,8 @@ namespace Test.Waf.Foundation
             Assert.IsTrue("Hello".Contains("ll", StringComparison.OrdinalIgnoreCase));
             Assert.IsTrue("Hello".Contains("Ll", StringComparison.OrdinalIgnoreCase));
             Assert.IsFalse("Hello".Contains("lll", StringComparison.OrdinalIgnoreCase));
+
+            AssertHelper.ExpectedException<ArgumentNullException>(() => StringHelper.Contains(null, "ll", StringComparison.Ordinal));
         }
 
         [TestMethod]
@@ -30,6 +32,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual("", StringHelper.Truncate("Hi", 0));
             Assert.IsNull(StringHelper.Truncate(null, 5));
             Assert.AreEqual("", StringHelper.Truncate("", 5));
+
             AssertHelper.ExpectedException<ArgumentOutOfRangeException>(() => StringHelper.Truncate("Hi", -5));
         }
     }

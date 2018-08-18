@@ -56,6 +56,7 @@ namespace Test.Waf.Presentation.Controls
             Assert.IsTrue(new[] { 4, 3, 2, 1 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age)));
 
             // With primarySort
+            column.SortDirection = null;
             Assert.IsTrue(new[] { 4, 2, 1, 3 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age)));
 
             column.SortDirection = ListSortDirection.Ascending;
