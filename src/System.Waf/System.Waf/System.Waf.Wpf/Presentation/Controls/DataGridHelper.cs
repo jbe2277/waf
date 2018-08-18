@@ -48,19 +48,33 @@ namespace System.Waf.Presentation.Controls
         /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
         public static Func<IEnumerable<T>, IOrderedEnumerable<T>> GetSorting<T>(DataGridColumn column)
         {
+            return GetSorting<T>(column, null);
+        }
+
+        /// <summary>
+        /// Gets a Sort function for the DataGrid column. It reads the SortMemberPath and SortDirection property of the column
+        /// to create the sort.
+        /// </summary>
+        /// <typeparam name="T">The type of item to sort.</typeparam>
+        /// <param name="column">The DataGrid column that should be sorted.</param>
+        /// <param name="primarySort">The primarySort is used first and the column sort is added as subsequent ordering. Example: When grouping is used
+        /// it makes sense to sort first the grouping and then the column as subsequent sort.</param>
+        /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
+        public static Func<IEnumerable<T>, IOrderedEnumerable<T>> GetSorting<T>(DataGridColumn column, Func<IEnumerable<T>, IOrderedEnumerable<T>> primarySort)
+        {
             if (column == null) throw new ArgumentNullException(nameof(column));
             var keySelector = GetSelector<T>(column.SortMemberPath);
             if (column.SortDirection == ListSortDirection.Ascending)
             {
-                return x => x.OrderBy(keySelector);
+                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderBy(keySelector)) : x => primarySort(x).ThenBy(keySelector);
             }
             else if (column.SortDirection == ListSortDirection.Descending)
             {
-                return x => x.OrderByDescending(keySelector);
+                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderByDescending(keySelector)) : x => primarySort(x).ThenByDescending(keySelector);
             }
             else
             {
-                return null;
+                return primarySort == null ? null : (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => primarySort(x));
             }
         }
 

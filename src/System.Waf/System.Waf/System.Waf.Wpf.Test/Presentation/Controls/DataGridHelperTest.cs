@@ -54,6 +54,15 @@ namespace Test.Waf.Presentation.Controls
 
             column.SortDirection = ListSortDirection.Descending;
             Assert.IsTrue(new[] { 4, 3, 2, 1 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age)));
+
+            // With primarySort
+            Assert.IsTrue(new[] { 4, 2, 1, 3 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age)));
+
+            column.SortDirection = ListSortDirection.Ascending;
+            Assert.IsTrue(new[] { 4, 1, 2, 3 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age)));
+
+            column.SortDirection = ListSortDirection.Descending;
+            Assert.IsTrue(new[] { 4, 2, 1, 3 }.SequenceEqual(DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age)));
         }
 
         [TestMethod]
@@ -143,10 +152,10 @@ namespace Test.Waf.Presentation.Controls
         {
             return new[]
             {
-                new PersonDataModel() { Person = new Person() { Age = 2 } },
-                new PersonDataModel() { Person = new Person() { Age = 1 } },
-                new PersonDataModel() { Person = new Person() { Age = 4 } },
-                new PersonDataModel() { Person = new Person() { Age = 3 } },
+                new PersonDataModel() { Person = new Person() { Age = 2, Name = "B" } },
+                new PersonDataModel() { Person = new Person() { Age = 1, Name = "B" } },
+                new PersonDataModel() { Person = new Person() { Age = 4, Name = "A" } },
+                new PersonDataModel() { Person = new Person() { Age = 3, Name = "C" } },
             };
         }
 
