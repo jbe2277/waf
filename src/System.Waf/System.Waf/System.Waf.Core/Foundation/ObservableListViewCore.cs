@@ -25,13 +25,45 @@ namespace System.Waf.Foundation
         /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
         /// </summary>
         /// <param name="originalList">The orignal list.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListViewCore(IEnumerable<T> originalList) : this(originalList, null, null, null, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
+        /// </summary>
+        /// <param name="originalList">The orignal list.</param>
+        /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer) : this(originalList, comparer, null, null, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
+        /// </summary>
+        /// <param name="originalList">The orignal list.</param>
+        /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
+        /// <param name="filter">Optional, a filter used for this list view.</param>
+        /// <param name="sort">Optional, a sorting used for this list view.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter,
+            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort) : this(originalList, comparer, filter, sort, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
+        /// </summary>
+        /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <param name="noCollectionChangedHandler">Pass true when the subclass takes care about the collection changed event of the originalCollection. Default is false.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer = null, Predicate<T> filter = null, 
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort = null, bool noCollectionChangedHandler = false) : base(originalList)
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter, 
+            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort, bool noCollectionChangedHandler) : base(originalList)
         {
             if (originalList == null) { throw new ArgumentNullException(nameof(originalList)); }
             this.originalList = originalList;

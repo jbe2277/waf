@@ -44,7 +44,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Initialize()
         {
-            contactsView = new ObservableListView<Contact>(Root.Contacts, filter: ContactListViewModel.Filter);
+            contactsView = new ObservableListView<Contact>(Root.Contacts, null, ContactListViewModel.Filter, null);
             ContactListViewModel.Contacts = contactsView;
             ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
 

@@ -50,7 +50,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             personViewModel.CreateNewEmailCommand = createNewEmailCommand;
             PropertyChangedEventManager.AddHandler(personViewModel, PersonViewModelPropertyChanged, "");
 
-            PersonsView = new ObservableListView<Person>(entityService.Persons, filter: personListViewModel.Filter);
+            PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
             personListViewModel.Persons = PersonsView;
             personListViewModel.AddNewCommand = addNewCommand;
             personListViewModel.RemoveCommand = removeCommand;

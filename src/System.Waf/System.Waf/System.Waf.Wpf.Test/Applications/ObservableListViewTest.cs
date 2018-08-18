@@ -49,7 +49,7 @@ namespace Test.Waf.Applications
             {
                 filterCalled = true;
                 return true;
-            });
+            }, null);
             originalCollection.Add(new MyModel());
             Assert.IsTrue(filterCalled);
 

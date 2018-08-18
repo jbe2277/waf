@@ -84,14 +84,59 @@ namespace System.Waf.Foundation
         /// <typeparam name="T">The type of the items.</typeparam>
         /// <param name="target">The target list.</param>
         /// <param name="source">The sort list.</param>
+        /// <exception cref="ArgumentNullException">target and source must not be <c>null</c>.</exception>
+        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source)
+        {
+            Merge(target, source, null, null, null, null, null);
+        }
+
+        /// <summary>
+        /// The merge modifies the target list so that all items equals the source list. This has some advantages over Clear and AddRange when
+        /// the target list is bound to the UI or used by an ORM (Object Relational Mapping).
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="target">The target list.</param>
+        /// <param name="source">The sort list.</param>
+        /// <param name="comparer">Optional, a custom comparer can be provided.</param>
+        /// <exception cref="ArgumentNullException">target and source must not be <c>null</c>.</exception>
+        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer)
+        {
+            Merge(target, source, comparer, null, null, null, null);
+        }
+
+        /// <summary>
+        /// The merge modifies the target list so that all items equals the source list. This has some advantages over Clear and AddRange when
+        /// the target list is bound to the UI or used by an ORM (Object Relational Mapping).
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="target">The target list.</param>
+        /// <param name="source">The sort list.</param>
+        /// <param name="comparer">Optional, a custom comparer can be provided.</param>
+        /// <param name="insertAction">Optional, a custom action can be provided that is called for inserts.</param>
+        /// <param name="removeAtAction">Optional, a custom action can be provided that is called for remove at.</param>
+        /// <param name="resetAction">Optional, a custom action can be provided that is called for reset.</param>
+        /// <exception cref="ArgumentNullException">target and source must not be <c>null</c>.</exception>
+        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer,
+            Action<int, T> insertAction, Action<int> removeAtAction, Action resetAction)
+        {
+            Merge(target, source, comparer, insertAction, removeAtAction, resetAction, null);
+        }
+
+        /// <summary>
+        /// The merge modifies the target list so that all items equals the source list. This has some advantages over Clear and AddRange when
+        /// the target list is bound to the UI or used by an ORM (Object Relational Mapping).
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="target">The target list.</param>
+        /// <param name="source">The sort list.</param>
         /// <param name="comparer">Optional, a custom comparer can be provided.</param>
         /// <param name="insertAction">Optional, a custom action can be provided that is called for inserts.</param>
         /// <param name="removeAtAction">Optional, a custom action can be provided that is called for remove at.</param>
         /// <param name="resetAction">Optional, a custom action can be provided that is called for reset.</param>
         /// <param name="moveAction">Optional, a custom action can be provided that is called for move.</param>
         /// <exception cref="ArgumentNullException">target and source must not be <c>null</c>.</exception>
-        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer = null,
-            Action<int, T> insertAction = null, Action<int> removeAtAction = null, Action resetAction = null, Action<int, int> moveAction = null)
+        public static void Merge<T>(this IList<T> target, IReadOnlyList<T> source, IEqualityComparer<T> comparer,
+            Action<int, T> insertAction, Action<int> removeAtAction, Action resetAction, Action<int, int> moveAction)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
             if (source == null) throw new ArgumentNullException(nameof(source));

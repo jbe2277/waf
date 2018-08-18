@@ -24,13 +24,31 @@ namespace System.Waf.Applications
         /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
         /// </summary>
         /// <param name="originalList">The orignal list.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListView(IEnumerable<T> originalList) : this(originalList, null, null, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
+        /// </summary>
+        /// <param name="originalList">The orignal list.</param>
+        /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
+        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
+        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer) : this(originalList, comparer, null, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
+        /// </summary>
+        /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer = null, Predicate<T> filter = null,
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort = null)
-            : base(originalList, comparer, filter, sort, true)
+        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter,
+            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort) : base(originalList, comparer, filter, sort, true)
         {
             originalObservableCollection = originalList as INotifyCollectionChanged;
             if (originalObservableCollection != null)

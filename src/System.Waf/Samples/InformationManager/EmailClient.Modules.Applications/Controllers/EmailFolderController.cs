@@ -41,7 +41,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public void Initialize()
         {
-            emailsView = new ObservableListView<Email>(EmailFolder.Emails, filter: EmailListViewModel.Filter, sort: x => x.OrderByDescending(y => y.Sent));
+            emailsView = new ObservableListView<Email>(EmailFolder.Emails, null, EmailListViewModel.Filter, x => x.OrderByDescending(y => y.Sent));
             EmailListViewModel.Emails = emailsView;
             EmailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
             PropertyChangedEventManager.AddHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");

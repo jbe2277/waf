@@ -36,8 +36,18 @@ namespace System.Waf.Foundation
         /// The method does nothing.
         /// </summary>
         /// <param name="task">The task.</param>
+        public static void NoWait(this Task task)
+        {
+            NoWait(task, false);
+        }
+
+        /// <summary>
+        /// Use this extension method if a Task should not be (a)waited for. Using this method prevents a compile warning.
+        /// The method does nothing.
+        /// </summary>
+        /// <param name="task">The task.</param>
         /// <param name="ignoreExceptions">If set to true the task exception will be observed and ignored.</param>
-        public static void NoWait(this Task task, bool ignoreExceptions = false)
+        public static void NoWait(this Task task, bool ignoreExceptions)
         {
             if (ignoreExceptions) task?.ContinueWith(t => t.Exception, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
         }

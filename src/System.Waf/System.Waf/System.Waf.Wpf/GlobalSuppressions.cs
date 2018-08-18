@@ -44,5 +44,3 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "System.Waf.Foundation.ReadOnlyObservableList`1")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "System.Waf.Applications.ViewModel.#.ctor(System.Waf.Applications.IView)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "System.Waf.Applications.ObservableListView`1")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "System.Waf.Applications.ObservableListView`1.#.ctor(System.Collections.Generic.IEnumerable`1<!0>,System.Collections.Generic.IEqualityComparer`1<!0>,System.Predicate`1<!0>,System.Func`2<System.Collections.Generic.IEnumerable`1<!0>,System.Linq.IOrderedEnumerable`1<!0>>)")]
-

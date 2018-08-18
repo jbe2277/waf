@@ -49,7 +49,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
             bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, 
                 b => new BookDataModel(b, lendToCommand));
-            BooksView = new ObservableListView<BookDataModel>(bookDataModels, filter: bookListViewModel.Filter);
+            BooksView = new ObservableListView<BookDataModel>(bookDataModels, null, bookListViewModel.Filter, null);
             bookListViewModel.Books = BooksView;
             bookListViewModel.AddNewCommand = addNewCommand;
             bookListViewModel.RemoveCommand = removeCommand;
