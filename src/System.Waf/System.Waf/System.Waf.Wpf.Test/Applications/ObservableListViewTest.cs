@@ -1,16 +1,39 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Applications
 {
     [TestClass]
     public class ObservableListViewTest
     {
+        [TestMethod]
+        public void ConstructorTest()
+        {
+            var originalList = new ObservableCollection<string>(new[] { "D", "A", "c", "b" });
+            Predicate<string> filter = x => x != "c";
+            Func<IEnumerable<string>, IOrderedEnumerable<string>> sort = x => x.OrderBy(y => y);
+            var listView = new ObservableListView<string>(originalList, StringComparer.OrdinalIgnoreCase);
+            listView.Filter = filter;
+            listView.Sort = sort;
+            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            listView.Dispose();
+
+            listView = new ObservableListView<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort);
+            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            Assert.AreSame(filter, listView.Filter);
+            Assert.AreSame(sort, listView.Sort);
+            listView.Dispose();
+
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListView<string>(null));
+        }
+
         [TestMethod]
         public void CollectionChangedTest()
         {

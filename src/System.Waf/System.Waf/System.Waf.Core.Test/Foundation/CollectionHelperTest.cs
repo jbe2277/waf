@@ -103,6 +103,11 @@ namespace Test.Waf.Foundation
 
             targetList.Merge(targetList.Concat(new[] { "98", "99" }).ToArray());
             Assert.IsTrue(new[] { "1", "98", "99" }.SequenceEqual(targetList));
+
+            targetList.Clear();
+            targetList.AddRange(new[] { "a", "B" });
+            targetList.Merge(new[] { "A", "B" }, StringComparer.OrdinalIgnoreCase);
+            Assert.IsTrue(new[] { "a", "B" }.SequenceEqual(targetList));
         }
 
         [TestMethod]
@@ -192,7 +197,8 @@ namespace Test.Waf.Foundation
                 moveCounter++;
             };
 
-            target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction, moveAction);
+            if (useMoveAction) target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction, moveAction);
+            else target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction);
             Assert.IsTrue(target.SequenceEqual(source, comparer ?? EqualityComparer<T>.Default));
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Insert ? 1 : 0, insertCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Remove ? 1 : 0, removeCounter);

@@ -259,7 +259,19 @@ namespace Test.Waf.Foundation
             var originalList = new ObservableCollection<string>(new[] { "D", "A", "c", "b" });
             Predicate<string> filter = x => x != "c";
             Func<IEnumerable<string>, IOrderedEnumerable<string>> sort = x => x.OrderBy(y => y);
-            var listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort, true);
+            var listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase);
+            listView.Filter = filter;
+            listView.Sort = sort;
+            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            listView.Dispose();
+
+            listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort);
+            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            Assert.AreSame(filter, listView.Filter);
+            Assert.AreSame(sort, listView.Sort);
+            listView.Dispose();
+
+            listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort, true);
             Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
             Assert.AreSame(filter, listView.Filter);
             Assert.AreSame(sort, listView.Sort);
