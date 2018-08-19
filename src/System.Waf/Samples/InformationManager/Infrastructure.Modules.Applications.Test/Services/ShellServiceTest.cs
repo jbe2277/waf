@@ -44,7 +44,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
 
             Assert.IsFalse(mockShellViewModel.ToolBarCommands.Any());
             shellService.AddToolBarCommands(newToolBarCommands);
-            CollectionAssert.AreEqual(newToolBarCommands, mockShellViewModel.ToolBarCommands.ToArray());
+            AssertHelper.SequenceEqual(newToolBarCommands, mockShellViewModel.ToolBarCommands);
             shellService.ClearToolBarCommands();
             Assert.IsFalse(mockShellViewModel.ToolBarCommands.Any());
         }

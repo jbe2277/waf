@@ -7,9 +7,6 @@ namespace Test.Waf.UnitTesting
     [TestClass]
     public class ExpectedExceptionTest
     {
-        public TestContext TestContext { get; set; }
-
-
         [TestMethod]
         public void ExpectedExceptionTest1()
         {

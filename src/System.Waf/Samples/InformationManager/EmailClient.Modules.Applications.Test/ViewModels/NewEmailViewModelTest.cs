@@ -43,7 +43,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             string cc = cc1 + ", " + cc2;
             AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => viewModel.CC = cc);
             Assert.AreEqual(cc1 + "; " + cc2, viewModel.CC);
-            CollectionAssert.AreEqual(new[] { cc1, cc2 }, email.CC.ToArray());
+            AssertHelper.SequenceEqual(new[] { cc1, cc2 }, email.CC);
 
             string bcc1 = "user@adventure-works.com";
             string bcc2 = "harry@example.com";
@@ -51,7 +51,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             string bcc = bcc1 + "; " + bcc2 + "  " + bcc3;
             AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => viewModel.Bcc = bcc);
             Assert.AreEqual(bcc1 + "; " + bcc2 + "; " + bcc3, viewModel.Bcc);
-            CollectionAssert.AreEqual(new[] { bcc1, bcc2, bcc3 }, email.Bcc.ToArray());
+            AssertHelper.SequenceEqual(new[] { bcc1, bcc2, bcc3 }, email.Bcc);
 
             string newEmail = "mike@adventure-works.com";
             AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => email.To = new[] { newEmail });

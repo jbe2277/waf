@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Test.InformationManager.Common.Domain;
+using System.Waf.UnitTesting;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 {
@@ -20,7 +21,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 
             var emailAccount2 = new EmailAccount();
             root.AddEmailAccount(emailAccount2);
-            CollectionAssert.AreEqual(new[] { emailAccount1, emailAccount2 }, root.EmailAccounts.ToArray());
+            AssertHelper.SequenceEqual(new[] { emailAccount1, emailAccount2 }, root.EmailAccounts);
 
             root.RemoveEmailAccount(emailAccount1);
             Assert.AreEqual(emailAccount2, root.EmailAccounts.Single());

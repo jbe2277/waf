@@ -32,11 +32,11 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.AreEqual(persons.First(), personListViewModel.SelectedPerson);
             
             personListViewModel.AddSelectedPerson(persons.First());
-            CollectionAssert.AreEqual(new Person[] { persons.First() }, personListViewModel.SelectedPersons.ToArray());
+            AssertHelper.SequenceEqual(new Person[] { persons.First() }, personListViewModel.SelectedPersons);
 
             // Select both persons
             personListViewModel.AddSelectedPerson(persons.Last());
-            CollectionAssert.AreEqual(persons, personListViewModel.SelectedPersons.ToArray());
+            AssertHelper.SequenceEqual(persons, personListViewModel.SelectedPersons);
         }
 
         [TestMethod]

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
+using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
@@ -60,7 +61,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
             Assert.IsFalse(shellView.ToolBarCommands.Any());
             shellViewModel.AddToolBarCommands(newToolBarCommands);
-            CollectionAssert.AreEqual(newToolBarCommands, shellView.ToolBarCommands.ToArray());
+            AssertHelper.SequenceEqual(newToolBarCommands, shellView.ToolBarCommands);
             shellViewModel.ClearToolBarCommands();
             Assert.IsFalse(shellView.ToolBarCommands.Any());
         }

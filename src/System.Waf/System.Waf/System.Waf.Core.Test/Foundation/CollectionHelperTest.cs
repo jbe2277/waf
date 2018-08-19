@@ -72,42 +72,42 @@ namespace Test.Waf.Foundation
 
             var targetList = new List<string> { "2", "3" };
             targetList.Merge(new[] { "1", "2" });
-            CollectionAssert.AreEqual(new[] { "1", "2" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "2" }, targetList);
 
             targetList.Merge(new[] { "1", "2" });
-            CollectionAssert.AreEqual(new[] { "1", "2" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "2" }, targetList);
 
             targetList.Merge(new[] { "1", "3" });
-            CollectionAssert.AreEqual(new[] { "1", "3" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "3" }, targetList);
 
             targetList.Merge(new[] { "1", "2", "3" });
-            CollectionAssert.AreEqual(new[] { "1", "2", "3" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "2", "3" }, targetList);
 
             targetList.Merge(new[] { "1", "2", "c", "d" });
-            CollectionAssert.AreEqual(new[] { "1", "2", "c", "d" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "2", "c", "d" }, targetList);
 
             targetList.Merge(new[] { "a", "b", "c" });
-            CollectionAssert.AreEqual(new[] { "a", "b", "c" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "a", "b", "c" }, targetList);
 
             targetList.Merge(new[] { "a", "b" });
-            CollectionAssert.AreEqual(new[] { "a", "b" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "a", "b" }, targetList);
 
             targetList.Merge(new[] { "1" });
-            CollectionAssert.AreEqual(new[] { "1" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1" }, targetList);
 
             targetList.Merge(new string[0]);
-            CollectionAssert.AreEqual(new string[0], targetList);
+            AssertHelper.SequenceEqual(new string[0], targetList);
 
             targetList.Merge(Array.AsReadOnly(new[] { "1" }));
-            CollectionAssert.AreEqual(new[] { "1" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1" }, targetList);
 
             targetList.Merge(targetList.Concat(new[] { "98", "99" }).ToArray());
-            CollectionAssert.AreEqual(new[] { "1", "98", "99" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "1", "98", "99" }, targetList);
 
             targetList.Clear();
             targetList.AddRange(new[] { "a", "B" });
             targetList.Merge(new[] { "A", "B" }, StringComparer.OrdinalIgnoreCase);
-            CollectionAssert.AreEqual(new[] { "a", "B" }, targetList);
+            AssertHelper.SequenceEqual(new[] { "a", "B" }, targetList);
         }
 
         [TestMethod]
@@ -199,7 +199,7 @@ namespace Test.Waf.Foundation
 
             if (useMoveAction) target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction, moveAction);
             else target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction);
-            Assert.IsTrue(target.SequenceEqual(source, comparer ?? EqualityComparer<T>.Default));
+            AssertHelper.SequenceEqual(target, source, comparer ?? EqualityComparer<T>.Default);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Insert ? 1 : 0, insertCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Remove ? 1 : 0, removeCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Reset ? 1 : 0, resetCounter);

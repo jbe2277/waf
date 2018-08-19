@@ -73,7 +73,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             var nodeA2 = navigationService.AddNavigationNode("Node A2", showAction, closeAction, 0, 1);
             var nodeB1 = navigationService.AddNavigationNode("Node B1", showAction, closeAction, 1, 0);
 
-            CollectionAssert.AreEqual(new[] { nodeA1, nodeA2, nodeB1, nodeB2 }, navigationService.NavigationNodes.ToArray());
+            AssertHelper.SequenceEqual(new[] { nodeA1, nodeA2, nodeB1, nodeB2 }, navigationService.NavigationNodes);
             Assert.IsFalse(((NavigationNode)nodeA1).IsFirstItemOfNewGroup);
             Assert.IsFalse(((NavigationNode)nodeA2).IsFirstItemOfNewGroup);
             Assert.IsTrue(((NavigationNode)nodeB1).IsFirstItemOfNewGroup);

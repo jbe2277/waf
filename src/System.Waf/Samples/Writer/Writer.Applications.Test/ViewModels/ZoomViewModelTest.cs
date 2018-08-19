@@ -36,7 +36,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void DefaultZoomsTest()
         {
-            CollectionAssert.AreEqual(new[] { "200 %", "150 %", "125 %", "100 %", "75 %", "50 %" }, zoomViewModel.DefaultZooms.ToArray());
+            AssertHelper.SequenceEqual(new[] { "200 %", "150 %", "125 %", "100 %", "75 %", "50 %" }, zoomViewModel.DefaultZooms);
         }
 
         [TestMethod]

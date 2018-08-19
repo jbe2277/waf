@@ -80,7 +80,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personListViewModel.AddSelectedPerson(entityService.Persons.Last());
             Assert.IsTrue(personListViewModel.RemoveCommand.CanExecute(null));
             personListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new Person[] { harry }, entityService.Persons);
+            AssertHelper.SequenceEqual(new Person[] { harry }, entityService.Persons);
             Assert.AreEqual(harry, personViewModel.Person);
             Assert.IsTrue(personListView.FirstCellHasFocus);
 
@@ -186,7 +186,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personListViewModel.SelectedPerson = ginny;
             personListViewModel.AddSelectedPerson(personListViewModel.SelectedPerson);
             personListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new[] { harry, ron }, entityService.Persons);
+            AssertHelper.SequenceEqual(new[] { harry, ron }, entityService.Persons);
             Assert.AreEqual(harry, personListViewModel.SelectedPerson);
         }
 
@@ -211,7 +211,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personListViewModel.SelectedPerson = ron;
             personListViewModel.AddSelectedPerson(personListViewModel.SelectedPerson);
             personListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new[] { harry, ginny }, entityService.Persons);
+            AssertHelper.SequenceEqual(new[] { harry, ginny }, entityService.Persons);
             Assert.AreEqual(harry, personListViewModel.SelectedPerson);
         }
 

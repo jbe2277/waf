@@ -28,10 +28,10 @@ namespace Test.Waf.Applications.Services
 
             fileType = new FileType("Pictures", new[] { ".jpg", ".png" });
             Assert.AreEqual("Pictures", fileType.Description);
-            CollectionAssert.AreEqual(new[] { ".jpg", ".png" }, fileType.FileExtensions.ToArray());
+            AssertHelper.SequenceEqual(new[] { ".jpg", ".png" }, fileType.FileExtensions);
 
             fileType = new FileType("Pictures", new[] { ".jpg", "*.png" });
-            CollectionAssert.AreEqual(new[] { ".jpg", "*.png" }, fileType.FileExtensions.ToArray());
+            AssertHelper.SequenceEqual(new[] { ".jpg", "*.png" }, fileType.FileExtensions);
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => new FileType("Pictures", (string[])null));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("Pictures", new[] { ".jpg", "" }));

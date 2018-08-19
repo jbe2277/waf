@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
@@ -179,6 +181,43 @@ namespace System.Waf.UnitTesting
                     "The PropertyChanged event for the property '{0}' was raised {1} times. Expected is {2} times{3}.", 
                     propertyName, propertyChangedCount, expectedChangedCount,
                     expectedChangedCountMode == ExpectedChangedCountMode.AtMost ? " or less" : ""));
+            }
+        }
+
+        /// <summary>
+        /// Verifies that two sequences are equal by comparing their elements. The assertion fails if the sequences are not equal.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
+        /// <param name="expected">An System.Collections.Generic.IEnumerable`1 to compare to the actual sequence.</param>
+        /// <param name="actual">An System.Collections.Generic.IEnumerable`1 to compare to the expected sequence.</param>
+        /// <exception cref="ArgumentNullException">expected or actual is null.</exception>
+        /// <exception cref="AssertException">expected is not equal to actual.</exception>
+        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual)
+        {
+            SequenceEqual(expected, actual, null);
+        }
+
+        /// <summary>
+        /// Verifies that two sequences are equal by comparing their elements by using a specified System.Collections.Generic.IEqualityComparer`1. 
+        /// The assertion fails if the sequences are not equal.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
+        /// <param name="expected">An System.Collections.Generic.IEnumerable`1 to compare to the actual sequence.</param>
+        /// <param name="actual">An System.Collections.Generic.IEnumerable`1 to compare to the expected sequence.</param>
+        /// <param name="comparer">An System.Collections.Generic.IEqualityComparer`1 to use to compare elements.</param>
+        /// <exception cref="ArgumentNullException">expected or actual is null.</exception>
+        /// <exception cref="AssertException">expected is not equal to actual.</exception>
+        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer)
+        {
+            if (expected == null) { throw new ArgumentNullException(nameof(expected)); }
+            if (actual == null) { throw new ArgumentNullException(nameof(actual)); }
+            if (!expected.SequenceEqual(actual, comparer))
+            {
+                throw new AssertException(string.Format(null,
+                    "The actual sequence is not equal to the expected sequence." + Environment.NewLine
+                    + "actual:   count: {0}; items (Take 20): [{1}]" + Environment.NewLine
+                    + "expected: count: {2}; items (Take 20): [{3}]",
+                    actual.Count(), string.Join(", ", actual.Take(20)), expected.Count(), string.Join(", ", expected.Take(20))));
             }
         }
 

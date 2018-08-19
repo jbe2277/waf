@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Applications
 {
@@ -16,7 +17,7 @@ namespace Test.Waf.Applications
         {
             var originalCollection = new ObservableCollection<MyModel>() { new MyModel() };
             var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
+            AssertHelper.SequenceEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model));
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;

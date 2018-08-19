@@ -76,7 +76,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookListViewModel.AddSelectedBook(bookListViewModel.Books.Last());
             Assert.IsTrue(bookListViewModel.RemoveCommand.CanExecute(null));
             bookListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new Book[] { fellowship }, entityService.Books);
+            AssertHelper.SequenceEqual(new Book[] { fellowship }, entityService.Books);
             Assert.AreEqual(fellowship, bookViewModel.Book);
             Assert.IsTrue(bookListView.FirstCellHasFocus);
 
@@ -139,7 +139,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookListViewModel.SelectedBook = bookListViewModel.Books.Single(b => b.Book == fellowship);
             bookListViewModel.AddSelectedBook(bookListViewModel.SelectedBook);
             bookListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new[] { twoTowers, returnKing }, entityService.Books);
+            AssertHelper.SequenceEqual(new[] { twoTowers, returnKing }, entityService.Books);
             Assert.AreEqual(returnKing, bookListViewModel.SelectedBook.Book);
         }
 
@@ -164,7 +164,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookListViewModel.SelectedBook = bookListViewModel.Books.Single(b => b.Book == twoTowers);
             bookListViewModel.AddSelectedBook(bookListViewModel.SelectedBook);
             bookListViewModel.RemoveCommand.Execute(null);
-            CollectionAssert.AreEqual(new[] { fellowship, returnKing }, entityService.Books);
+            AssertHelper.SequenceEqual(new[] { fellowship, returnKing }, entityService.Books);
             Assert.AreEqual(returnKing, bookListViewModel.SelectedBook.Book);
         }
 

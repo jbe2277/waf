@@ -24,13 +24,13 @@ namespace Test.Waf.Presentation.Controls
             var sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
             Assert.IsTrue(eventArgs.Handled);
             Assert.AreEqual(ListSortDirection.Ascending, column.SortDirection);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, sort(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, sort(list).Select(x => x.Person.Age));
 
             eventArgs = new DataGridSortingEventArgs(column);
             sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
             Assert.IsTrue(eventArgs.Handled);
             Assert.AreEqual(ListSortDirection.Descending, column.SortDirection);
-            CollectionAssert.AreEqual(new[] { 4, 3, 2, 1 }, sort(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, sort(list).Select(x => x.Person.Age));
 
             eventArgs = new DataGridSortingEventArgs(column);
             sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
@@ -50,20 +50,20 @@ namespace Test.Waf.Presentation.Controls
             Assert.IsNull(DataGridHelper.GetSorting<PersonDataModel>(column));
 
             column.SortDirection = ListSortDirection.Ascending;
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age));
 
             column.SortDirection = ListSortDirection.Descending;
-            CollectionAssert.AreEqual(new[] { 4, 3, 2, 1 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age));
 
             // With primarySort
             column.SortDirection = null;
-            CollectionAssert.AreEqual(new[] { 4, 2, 1, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 4, 2, 1, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age));
 
             column.SortDirection = ListSortDirection.Ascending;
-            CollectionAssert.AreEqual(new[] { 4, 1, 2, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 4, 1, 2, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age));
 
             column.SortDirection = ListSortDirection.Descending;
-            CollectionAssert.AreEqual(new[] { 4, 2, 1, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age).ToArray());
+            AssertHelper.SequenceEqual(new[] { 4, 2, 1, 3 }, DataGridHelper.GetSorting<PersonDataModel>(column, x => x.OrderBy(y => y.Person.Name))(list).Select(x => x.Person.Age));
         }
 
         [TestMethod]

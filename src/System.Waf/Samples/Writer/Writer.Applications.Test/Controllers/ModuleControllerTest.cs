@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
+using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Test.Writer.Applications.Services;
 using Test.Writer.Applications.Views;
@@ -82,7 +83,7 @@ namespace Test.Writer.Applications.Controllers
             MockSaveChangesView.ShowDialogAction = view =>
             {
                 showDialogCalled = true;
-                CollectionAssert.AreEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents.ToArray());
+                AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents);
                 view.Close();
             };
 

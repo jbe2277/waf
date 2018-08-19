@@ -40,11 +40,11 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.AreEqual(books.First(), bookListViewModel.SelectedBook.Book);
 
             bookListViewModel.AddSelectedBook(bookDataModels.First());
-            CollectionAssert.AreEqual(new[] { bookDataModels.First() }, bookListViewModel.SelectedBooks.ToArray());
+            AssertHelper.SequenceEqual(new[] { bookDataModels.First() }, bookListViewModel.SelectedBooks);
 
             // Select both books
             bookListViewModel.AddSelectedBook(bookDataModels.Last());
-            CollectionAssert.AreEqual(bookDataModels, bookListViewModel.SelectedBooks.ToArray());
+            AssertHelper.SequenceEqual(bookDataModels, bookListViewModel.SelectedBooks);
         }
 
         [TestMethod]

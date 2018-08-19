@@ -22,11 +22,11 @@ namespace Test.Waf.Applications
             var listView = new ObservableListView<string>(originalList, StringComparer.OrdinalIgnoreCase);
             listView.Filter = filter;
             listView.Sort = sort;
-            CollectionAssert.AreEqual(new[] { "A", "b", "D" }, listView);
+            AssertHelper.SequenceEqual(new[] { "A", "b", "D" }, listView);
             listView.Dispose();
 
             listView = new ObservableListView<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort);
-            CollectionAssert.AreEqual(new[] { "A", "b", "D" }, listView);
+            AssertHelper.SequenceEqual(new[] { "A", "b", "D" }, listView);
             Assert.AreSame(filter, listView.Filter);
             Assert.AreSame(sort, listView.Sort);
             listView.Dispose();
@@ -39,7 +39,7 @@ namespace Test.Waf.Applications
         {
             var originalCollection = new ObservableCollection<MyModel>() { new MyModel() };
             var listView = new ObservableListView<MyModel>(originalCollection);
-            CollectionAssert.AreEqual(originalCollection, listView);
+            AssertHelper.SequenceEqual(originalCollection, listView);
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;
