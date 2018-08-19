@@ -33,7 +33,7 @@ namespace Test.Waf.Foundation
             };
 
             var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            Assert.IsTrue(originalCollection.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;
@@ -66,7 +66,7 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(handlerCalled);
 
             // Compare the collections
-            Assert.IsTrue(originalCollection.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
 
             // Check remove operation with collection changed event.
             MyModel itemToRemove = originalCollection[2];
@@ -144,7 +144,7 @@ namespace Test.Waf.Foundation
 
             var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(
                 originalCollection, m => new MyDataModel(m));
-            Assert.IsTrue(originalCollection.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;
@@ -162,7 +162,7 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(handlerCalled);
 
             // Compare the collections
-            Assert.IsTrue(originalCollection.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
 
             // Check remove operation with collection changed event.
             MyModel itemToRemove = originalCollection[2];
@@ -227,7 +227,7 @@ namespace Test.Waf.Foundation
             originalCollection.Reset(newItems);
             synchronizingCollection.CollectionChanged -= handler;
             Assert.AreEqual(3, handlerCalledCount);
-            Assert.IsTrue(newItems.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(newItems, synchronizingCollection.Select(dm => dm.Model).ToArray());
         }
 
         [TestMethod]

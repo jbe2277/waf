@@ -156,7 +156,7 @@ namespace Test.Waf.Foundation
 
             AssertNoEventsRaised(() => observableListView.Update());  // Collection has not changed.
 
-            Assert.IsTrue(new[] { "first", "third" }.SequenceEqual(observableListView));
+            CollectionAssert.AreEqual(new[] { "first", "third" }, observableListView);
 
             eventArgsList.Clear();
             countChangedCount = indexerChangedCount = 0;
@@ -175,7 +175,7 @@ namespace Test.Waf.Foundation
 
             AssertNoEventsRaised(() => originalList.Insert(1, "2"));
 
-            Assert.IsTrue(new[] { "1", "3" }.SequenceEqual(observableListView));
+            CollectionAssert.AreEqual(new[] { "1", "3" }, observableListView);
 
             eventArgsList.Clear();
             countChangedCount = indexerChangedCount = 0;
@@ -212,7 +212,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            Assert.IsTrue(new[] { "a", "b", "c" }.SequenceEqual(observableListView));
+            CollectionAssert.AreEqual(new[] { "a", "b", "c" }, observableListView);
 
             AssertNoEventsRaised(() => observableListView.Update());  // Collection has not changed.
 
@@ -221,7 +221,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
-            Assert.IsTrue(new[] { "c", "b", "a" }.SequenceEqual(observableListView));
+            CollectionAssert.AreEqual(new[] { "c", "b", "a" }, observableListView);
 
             ClearAll();
             originalList.Remove("b");
@@ -234,7 +234,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgsList.Single().Action);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
-            Assert.IsTrue(new[] { "a", "c" }.SequenceEqual(observableListView));
+            CollectionAssert.AreEqual(new[] { "a", "c" }, observableListView);
         }
 
         [TestMethod]
@@ -262,17 +262,17 @@ namespace Test.Waf.Foundation
             var listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase);
             listView.Filter = filter;
             listView.Sort = sort;
-            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            CollectionAssert.AreEqual(new[] { "A", "b", "D" }, listView);
             listView.Dispose();
 
             listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort);
-            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            CollectionAssert.AreEqual(new[] { "A", "b", "D" }, listView);
             Assert.AreSame(filter, listView.Filter);
             Assert.AreSame(sort, listView.Sort);
             listView.Dispose();
 
             listView = new ObservableListViewCore<string>(originalList, StringComparer.OrdinalIgnoreCase, filter, sort, true);
-            Assert.IsTrue(new[] { "A", "b", "D" }.SequenceEqual(listView));
+            CollectionAssert.AreEqual(new[] { "A", "b", "D" }, listView);
             Assert.AreSame(filter, listView.Filter);
             Assert.AreSame(sort, listView.Sort);
 

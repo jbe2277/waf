@@ -60,7 +60,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
             Assert.IsFalse(shellView.ToolBarCommands.Any());
             shellViewModel.AddToolBarCommands(newToolBarCommands);
-            Assert.IsTrue(shellView.ToolBarCommands.SequenceEqual(newToolBarCommands));
+            CollectionAssert.AreEqual(newToolBarCommands, shellView.ToolBarCommands.ToArray());
             shellViewModel.ClearToolBarCommands();
             Assert.IsFalse(shellView.ToolBarCommands.Any());
         }

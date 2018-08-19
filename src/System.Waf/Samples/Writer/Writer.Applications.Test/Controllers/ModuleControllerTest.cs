@@ -82,8 +82,7 @@ namespace Test.Writer.Applications.Controllers
             MockSaveChangesView.ShowDialogAction = view =>
             {
                 showDialogCalled = true;
-                Assert.IsTrue(ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents.SequenceEqual(
-                    new[] { richTextViewModel.Document }));
+                CollectionAssert.AreEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents.ToArray());
                 view.Close();
             };
 

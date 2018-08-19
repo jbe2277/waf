@@ -16,7 +16,7 @@ namespace Test.Waf.Applications
         {
             var originalCollection = new ObservableCollection<MyModel>() { new MyModel() };
             var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            Assert.IsTrue(originalCollection.SequenceEqual(synchronizingCollection.Select(dm => dm.Model)));
+            CollectionAssert.AreEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model).ToArray());
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;

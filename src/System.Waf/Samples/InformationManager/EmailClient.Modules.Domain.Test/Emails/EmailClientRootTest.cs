@@ -20,7 +20,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 
             var emailAccount2 = new EmailAccount();
             root.AddEmailAccount(emailAccount2);
-            Assert.IsTrue(root.EmailAccounts.SequenceEqual(new[] { emailAccount1, emailAccount2 }));
+            CollectionAssert.AreEqual(new[] { emailAccount1, emailAccount2 }, root.EmailAccounts.ToArray());
 
             root.RemoveEmailAccount(emailAccount1);
             Assert.AreEqual(emailAccount2, root.EmailAccounts.Single());

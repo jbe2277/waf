@@ -16,14 +16,14 @@ namespace Test.InformationManager.AddressBook.Modules.Domain
             Assert.IsFalse(root.Contacts.Any());
             
             var contact1 = root.AddNewContact();
-            Assert.IsTrue(root.Contacts.SequenceEqual(new[] { contact1 }));
+            CollectionAssert.AreEqual(new[] { contact1 }, root.Contacts.ToArray());
 
             var contact2 = new Contact();
             root.AddContact(contact2);
-            Assert.IsTrue(root.Contacts.SequenceEqual(new[] { contact1, contact2 }));
+            CollectionAssert.AreEqual(new[] { contact1, contact2 }, root.Contacts.ToArray());
 
             root.RemoveContact(contact1);
-            Assert.IsTrue(root.Contacts.SequenceEqual(new[] { contact2 }));
+            CollectionAssert.AreEqual(new[] { contact2 }, root.Contacts.ToArray());
         }
     }
 }

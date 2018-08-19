@@ -22,7 +22,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 
             var email2 = new Email();
             emailFolder.AddEmail(email2);
-            Assert.IsTrue(emailFolder.Emails.SequenceEqual(new[] { email1, email2 }));
+            CollectionAssert.AreEqual(new[] { email1, email2 }, emailFolder.Emails.ToArray());
 
             bool deleteEmailCalled = false;
             emailDeletionService.DeleteEmailAction = (folder, email) =>
