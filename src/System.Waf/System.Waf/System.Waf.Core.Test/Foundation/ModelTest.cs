@@ -10,9 +10,6 @@ namespace Test.Waf.Foundation
     [TestClass]
     public class ModelTest
     {
-        public TestContext TestContext { get; set; }
-        
-
         [TestMethod]
         public void RaisePropertyChangedTest()
         {

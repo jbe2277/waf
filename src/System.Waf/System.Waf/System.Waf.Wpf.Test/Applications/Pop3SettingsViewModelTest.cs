@@ -8,9 +8,6 @@ namespace Test.Waf.Applications
     [TestClass]
     public class Pop3SettingsViewModelTest
     {
-        public TestContext TestContext { get; set; }
-
-
         [TestMethod]
         public void ViewModelTest()
         {
