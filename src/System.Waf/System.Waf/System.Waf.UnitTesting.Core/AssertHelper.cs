@@ -15,44 +15,43 @@ namespace System.Waf.UnitTesting
         /// <summary>
         /// Asserts that the execution of the provided action throws the specified exception.
         /// </summary>
-        /// <typeparam name="T">The expected exception type</typeparam>
+        /// <typeparam name="T">The expected exception type.</typeparam>
         /// <param name="action">The action to execute.</param>
-        /// <exception cref="AssertException">This exception is thrown when the expected exception was
-        /// not thrown by the action.</exception>
-        public static void ExpectedException<T>(Action action) where T : Exception
+        /// <returns>The expected exception.</returns>
+        /// <exception cref="AssertException">Thrown when the expected exception was not thrown by the action.</exception>
+        public static T ExpectedException<T>(Action action) where T : Exception
         {
             if (action == null) { throw new ArgumentNullException(nameof(action)); }
             
-            bool expectedExceptionThrown = false;
-            Exception thrownException = null;
+            T expectedException = null;
+            Exception wrongException = null;
             try
             {
                 action();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                if (e.GetType() == typeof(T))
+                if (ex.GetType() == typeof(T))
                 {
-                    expectedExceptionThrown = true;
-                }
-                thrownException = e;
-            }
-
-            if (!expectedExceptionThrown)
-            {
-                if (thrownException != null)
-                {
-                    throw new AssertException(string.Format(null, 
-                        "Test method threw exception {0}, but exception {1} was expected. "
-                        + "Exception message: {0}: {2}", 
-                        thrownException.GetType().Name, typeof(T).Name, thrownException.Message));
+                    expectedException = (T)ex;
                 }
                 else
                 {
-                    throw new AssertException(string.Format(null, 
-                        "Test method did not throw expected exception {0}", typeof(T).Name));
+                    wrongException = ex;
                 }
             }
+
+            if (wrongException != null)
+            {
+                throw new AssertException(string.Format(null, 
+                    "Test method threw exception {0}, but exception {1} was expected. Exception message: {0}: {2}",
+                    wrongException.GetType().Name, typeof(T).Name, wrongException.Message));
+            }
+            else if (expectedException == null)
+            {
+                throw new AssertException(string.Format(null, "Test method did not throw expected exception {0}", typeof(T).Name));
+            }
+            return expectedException;
         }
 
         /// <summary>

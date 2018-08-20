@@ -18,33 +18,12 @@ namespace Test.Waf.UnitTesting
             AssertHelper.SequenceEqual(new[] { "a", "b", "c" }, new[] { "a", "b", "c" });
             AssertHelper.SequenceEqual(new[] { "a", "b", "c" }, new[] { "A", "B", "C" }, StringComparer.OrdinalIgnoreCase);
 
-            var assertException = ExpectedException(() => AssertHelper.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2 }));
+            var assertException = AssertHelper.ExpectedException<AssertException>(() => AssertHelper.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2 }));
             StringAssert.Contains(assertException.Message, "[1, 2, 3]");
             StringAssert.Contains(assertException.Message, "[1, 2]");
-            assertException = ExpectedException(() => AssertHelper.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2, 4 }));
+            assertException = AssertHelper.ExpectedException<AssertException>(() => AssertHelper.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2, 4 }));
             StringAssert.Contains(assertException.Message, "[1, 2, 3]");
             StringAssert.Contains(assertException.Message, "[1, 2, 4]");
-        }
-
-        private static AssertException ExpectedException(Action action)
-        {
-            bool expectedExceptionThrown = false;
-            AssertException thrownException = null;
-            try
-            {
-                action();
-            }
-            catch (Exception e)
-            {
-                if (e.GetType() == typeof(AssertException))
-                {
-                    expectedExceptionThrown = true;
-                    thrownException = (AssertException)e;
-                }
-            }
-
-            Assert.IsTrue(expectedExceptionThrown);
-            return thrownException;
         }
     }
 }

@@ -269,17 +269,8 @@ namespace Test.Writer.Applications.Controllers
 
             var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic);
             IDocument document = fileController.New(documentType);
-            AssertHelper.ExpectedException<InvalidOperationException>(() =>
-            {
-                try
-                {
-                    saveAsMethod.Invoke(fileController, new[] { document });
-                }
-                catch (TargetInvocationException e)
-                {
-                    throw e.InnerException;
-                }
-            });
+            var exception = AssertHelper.ExpectedException<TargetInvocationException>(() => saveAsMethod.Invoke(fileController, new[] { document }));
+            Assert.IsInstanceOfType(exception.InnerException, typeof(InvalidOperationException));
         }
 
         [TestMethod]
