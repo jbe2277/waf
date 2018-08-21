@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -284,8 +283,7 @@ namespace Waf.Writer.Applications.Controllers
                     documentType = documentTypes.FirstOrDefault(dt => dt.FileExtension == Path.GetExtension(fileName));
                     if (documentType == null)
                     {
-                        Trace.TraceError(string.Format(CultureInfo.InvariantCulture, 
-                            "The extension of the file '{0}' is not supported.", fileName));
+                        Log.Default.Warn("The extension of the file '{0}' is not supported.", fileName);
                         messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.FileExtensionNotSupported, fileName));
                         return null;
                     }
@@ -297,7 +295,7 @@ namespace Waf.Writer.Applications.Controllers
                 }
                 catch (Exception e)
                 {
-                    Trace.TraceError(e.ToString());
+                    Log.Default.Error(e, "Error in open document");
                     messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.CannotOpenFile, fileName));
                     if (e is FileNotFoundException)
                     {
@@ -325,7 +323,7 @@ namespace Waf.Writer.Applications.Controllers
             }
             catch (Exception e)
             {
-                Trace.TraceError(e.ToString());
+                Log.Default.Error(e, "Error in save document");
                 messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.CannotSaveFile, fileName));
             }
 

@@ -28,7 +28,7 @@ namespace Waf.BookLibrary.Library.Presentation.Services
             }
             catch (Exception e)
             {
-                Trace.TraceError("Cannot create a new email. Details: {0}", e);
+                Log.Default.Error(e, "Cannot create a new email");
                 messageService.ShowError(shellService.ShellView, Resources.CreateEmailError);
             }
         }

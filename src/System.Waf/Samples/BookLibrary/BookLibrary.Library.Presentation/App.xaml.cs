@@ -1,8 +1,10 @@
-﻿using System;
+﻿using NLog;
+using NLog.Config;
+using NLog.Targets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,22 +21,53 @@ namespace Waf.BookLibrary.Library.Presentation
 {
     public partial class App : Application
     {
+        private static readonly Tuple<string, LogLevel>[] logSettings =
+        {
+            Tuple.Create("App", LogLevel.Info),
+            Tuple.Create("BookLib.Lib.P", LogLevel.Warn),
+            Tuple.Create("BookLib.Lib.A", LogLevel.Warn),
+            Tuple.Create("BookLib.Lib.D", LogLevel.Warn),
+            Tuple.Create("BookLib.Rep.P", LogLevel.Warn),
+            Tuple.Create("BookLib.Rep.A", LogLevel.Warn),
+        };
+
         private AggregateCatalog catalog;
         private CompositionContainer container;
         private IEnumerable<IModuleController> moduleControllers;
 
         public App()
         {
-            var profileRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                ApplicationInfo.ProductName, "ProfileOptimization");
+            var profileRoot = Path.Combine(AppDataPath, "ProfileOptimization");
             Directory.CreateDirectory(profileRoot);
             ProfileOptimization.SetProfileRoot(profileRoot);
             ProfileOptimization.StartProfile("Startup.profile");
+
+            var fileTarget = new FileTarget("fileTarget")
+            {
+                FileName = Path.Combine(AppDataPath, "Log", "App.log"),
+                Layout = "${longdate} ${level} ${logger} ${message}  ${exception}",
+                ArchiveAboveSize = 1024 * 1024 * 5,  // 5 MB
+                MaxArchiveFiles = 2,
+                KeepFileOpen = true,
+                ConcurrentWrites = false
+            };
+            var logConfig = new LoggingConfiguration();
+            logConfig.AddTarget(fileTarget);
+            var maxLevel = LogLevel.AllLoggingLevels.Last();
+            foreach (var logSetting in logSettings)
+            {
+                logConfig.AddRule(logSetting.Item2, maxLevel, fileTarget, logSetting.Item1);
+            }
+            LogManager.Configuration = logConfig;
         }
+
+        private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                ApplicationInfo.ProductName);
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Log.App.Info("{0} {1} is starting; OS: {2}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion);
 
             DispatcherUnhandledException += AppDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
@@ -68,6 +101,7 @@ namespace Waf.BookLibrary.Library.Presentation
             foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
             container.Dispose();
             catalog.Dispose();
+            Log.App.Info("{0} closed", ApplicationInfo.ProductName);
             base.OnExit(e);
         }
 
@@ -85,7 +119,7 @@ namespace Waf.BookLibrary.Library.Presentation
         {
             if (e == null) { return; }
 
-            Trace.TraceError(e.ToString());
+            Log.App.Error(e, "Unhandled exception");
             if (!isTerminating)
             {
                 MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), 

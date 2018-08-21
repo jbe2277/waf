@@ -40,10 +40,20 @@
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NLog.4.5.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationUI" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
@@ -68,6 +78,7 @@
     <Compile Include="DesignData\SampleMainViewModel.cs" />
     <Compile Include="DesignData\SampleSaveChangesViewModel.cs" />
     <Compile Include="DesignData\SampleStartViewModel.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Services\EnvironmentService.cs" />
     <Compile Include="Views\StartView.xaml.cs">
       <DependentUpon>StartView.xaml</DependentUpon>
@@ -219,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\App.manifest" />
   </ItemGroup>
   <ItemGroup>

@@ -58,7 +58,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
             }
             catch (Exception ex)
             {
-                Trace.TraceError("SettingsProvider save: {0}", ex);
+                Log.Default.Error(ex, "SettingsProvider save");
             }
         }
 
@@ -76,7 +76,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
             }
             catch (Exception ex)
             {
-                Trace.TraceError("SettingsProvider load: {0}", ex);
+                Log.Default.Error(ex, "SettingsProvider load");
                 return new List<object>();
             }
         }
