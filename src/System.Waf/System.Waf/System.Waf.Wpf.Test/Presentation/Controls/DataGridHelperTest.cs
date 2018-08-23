@@ -103,14 +103,14 @@ namespace Test.Waf.Presentation.Controls
         public void GetSelectorPerformanceTest1A()  // Reference
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1_000_000; i++) personDataModels.OrderBy(x => x?.Person?.Name);
+            for (int i = 0; i < 1000000; i++) personDataModels.OrderBy(x => x?.Person?.Name);
         }
 
         [TestMethod, TestCategory("Performance")]
         public void GetSelectorPerformanceTest1B()
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1_000_000; i++)
+            for (int i = 0; i < 1000000; i++)
                 personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel>("Person.Name"));
         }
 
@@ -118,14 +118,14 @@ namespace Test.Waf.Presentation.Controls
         public void GetSelectorPerformanceTest2A()  // Reference
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1_000_000; i++) personDataModels.OrderBy(x => x?.Person?.Age);
+            for (int i = 0; i < 1000000; i++) personDataModels.OrderBy(x => x?.Person?.Age);
         }
 
         [TestMethod, TestCategory("Performance")]
         public void GetSelectorPerformanceTest2B()
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1_000_000; i++)
+            for (int i = 0; i < 1000000; i++)
                 personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel>("Person.Age"));
         }
 
