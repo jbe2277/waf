@@ -68,6 +68,7 @@
     <Compile Include="DesignData\SampleExchangeSettingsViewModel.cs" />
     <Compile Include="DesignData\SampleNewEmailViewModel.cs" />
     <Compile Include="DesignData\SamplePop3SettingsViewModel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\EmailItemTemplateSelector.cs" />

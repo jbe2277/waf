@@ -55,6 +55,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="AddressBookRoot.cs" />
     <Compile Include="Contact.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -19,4 +19,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ItemsSource", Scope = "member", Target = "Waf.BookLibrary.Reporting.Presentation.Controls.ItemsElement.#UpdateContent()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "Waf.BookLibrary.Reporting.Presentation.Reports.BookListReport")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "Waf.BookLibrary.Reporting.Presentation.DesignData.SampleBookListReportDataModel")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.BookLibrary.Reporting.Presentation.Log.#Default")]
 

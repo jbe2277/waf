@@ -61,6 +61,7 @@
     <Compile Include="DesignData\SampleContactListViewModel.cs" />
     <Compile Include="DesignData\SampleContactViewModel.cs" />
     <Compile Include="DesignData\SampleSelectContactViewModel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PresentationService.cs" />

@@ -10,3 +10,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Scope = "member", Target = "Waf.InformationManager.Common.Presentation.Controls.SearchBox.#.cctor()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Waf.InformationManager.Common.Presentation.ResourceHelper.#GetPackUri(System.String,System.Reflection.Assembly)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Waf.InformationManager.Common.Presentation.Log.#Default")]
+
