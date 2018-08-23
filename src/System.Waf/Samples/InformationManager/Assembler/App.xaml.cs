@@ -56,6 +56,7 @@ namespace Waf.InformationManager.Assembler
                 ConcurrentWrites = false
             };
             var logConfig = new LoggingConfiguration();
+            logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
             logConfig.AddTarget(fileTarget);
             var maxLevel = LogLevel.AllLoggingLevels.Last();
             foreach (var logSetting in logSettings)
