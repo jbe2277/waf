@@ -49,11 +49,9 @@ namespace Waf.InformationManager.Assembler
             var fileTarget = new FileTarget("fileTarget")
             {
                 FileName = Path.Combine(AppDataPath, "Log", "App.log"),
-                Layout = "${longdate} ${level} ${logger} ${message}  ${exception}",
+                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} ${level} ${processid} ${logger} ${message}  ${exception}",
                 ArchiveAboveSize = 1024 * 1024 * 5,  // 5 MB
                 MaxArchiveFiles = 2,
-                KeepFileOpen = true,
-                ConcurrentWrites = false
             };
             var logConfig = new LoggingConfiguration();
             logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
