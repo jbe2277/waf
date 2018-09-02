@@ -1,7 +1,8 @@
 ﻿using System.Runtime.Serialization;
+using System.Waf.Applications;
 using System.Waf.Applications.Services;
 
-namespace Waf.InformationManager.Infrastructure.Modules.Applications.Properties
+namespace Waf.Writer.Applications.Properties
 {
     [DataContract]
     public sealed class AppSettings : UserSettingsBase
@@ -15,6 +16,12 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Properties
         [DataMember] public double Width { get; set; }
 
         [DataMember] public bool IsMaximized { get; set; }
+
+        [DataMember] public string Culture { get; set; }
+
+        [DataMember] public string UICulture { get; set; }
+
+        [DataMember] public RecentFileList RecentFileList { get; set; }
 
         protected override void SetDefaultValues()
         {

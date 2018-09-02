@@ -116,9 +116,10 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void SettingsTest()
         {
-            Settings.Default.IsUpgradeNeeded = false;
-            Settings.Default.Culture = "de-DE";
-            Settings.Default.UICulture = "de-AT";
+            var settingsService = Container.GetExportedValue<MockSettingsService>();
+            var settings = settingsService.Get<AppSettings>();
+            settings.Culture = "de-DE";
+            settings.UICulture = "de-AT";
 
             var controller = Container.GetExportedValue<ModuleController>();
             
@@ -132,15 +133,9 @@ namespace Test.Writer.Applications.Controllers
             shellViewModel.EnglishCommand.Execute(null);
             Assert.AreEqual(new CultureInfo("en-US"), shellViewModel.NewLanguage);
 
-            bool settingsSaved = false;
-            Settings.Default.SettingsSaving += (sender, e) =>
-            {
-                settingsSaved = true;
-            };
-
+            shellViewModel.Close();
             controller.Shutdown();
-            Assert.AreEqual("en-US", Settings.Default.UICulture);
-            Assert.IsTrue(settingsSaved);
+            Assert.AreEqual("en-US", settings.UICulture);
 
             // Restore the culture settings
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");

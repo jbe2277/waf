@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using System.Waf.UnitTesting.Mocks;
 using Test.Writer.Applications.Services;
 using Test.Writer.Applications.Views;
@@ -71,7 +72,9 @@ namespace Test.Writer.Applications.ViewModels
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            SetSettingsValues(20, 10, 400, 300, true);
+            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settings = settingsService.Get<AppSettings>();
+            SetSettingsValues(settings, 20, 10, 400, 300, true);
 
             var shellViewModel = Container.GetExportedValue<ShellViewModel>();
             var shellView = Container.GetExportedValue<MockShellView>();
@@ -88,7 +91,7 @@ namespace Test.Writer.Applications.ViewModels
             shellView.IsMaximized = false;
 
             shellView.Close();
-            AssertSettingsValues(25, 15, 450, 350, false);
+            AssertSettingsValues(settings, 25, 15, 450, 350, false);
         }
 
         [TestMethod]
@@ -100,50 +103,51 @@ namespace Test.Writer.Applications.ViewModels
 
             var shellView = Container.GetExportedValue<MockShellView>();
             var shellService = Container.GetExportedValue<IShellService>();
+            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settings = settingsService.Get<AppSettings>();
             shellView.SetNAForLocationAndSize();
 
-            SetSettingsValues();
-            new ShellViewModel(shellView, null, presentationService, shellService, null).Close();
-            AssertSettingsValues(double.NaN, double.NaN, double.NaN, double.NaN, false);
+            SetSettingsValues(settings);
+            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Height is 0 => don't apply the Settings values
-            SetSettingsValues(0, 0, 1, 0);
-            new ShellViewModel(shellView, null, presentationService, shellService, null).Close();
-            AssertSettingsValues(double.NaN, double.NaN, double.NaN, double.NaN, false);
+            SetSettingsValues(settings, 0, 0, 1, 0);
+            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Left = 100 + Width = 901 > VirtualScreenWidth = 1000 => don't apply the Settings values
-            SetSettingsValues(100, 100, 901, 100);
-            new ShellViewModel(shellView, null, presentationService, shellService, null).Close();
-            AssertSettingsValues(double.NaN, double.NaN, double.NaN, double.NaN, false);
+            SetSettingsValues(settings, 100, 100, 901, 100);
+            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Top = 100 + Height = 601 > VirtualScreenWidth = 600 => don't apply the Settings values
-            SetSettingsValues(100, 100, 100, 601);
-            new ShellViewModel(shellView, null, presentationService, shellService, null).Close();
-            AssertSettingsValues(double.NaN, double.NaN, double.NaN, double.NaN, false);
+            SetSettingsValues(settings, 100, 100, 100, 601);
+            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Use the limit values => apply the Settings values
-            SetSettingsValues(0, 0, 1000, 700);
-            new ShellViewModel(shellView, null, presentationService, shellService, null).Close();
-            AssertSettingsValues(0, 0, 1000, 700, false);
+            SetSettingsValues(settings, 0, 0, 1000, 700);
+            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            AssertSettingsValues(settings, 0, 0, 1000, 700, false);
         }
 
-
-        private void SetSettingsValues(double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
+        private void SetSettingsValues(AppSettings settings, double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
         {
-            Settings.Default.Left = left;
-            Settings.Default.Top = top;
-            Settings.Default.Width = width;
-            Settings.Default.Height = height;
-            Settings.Default.IsMaximized = isMaximized;
+            settings.Left = left;
+            settings.Top = top;
+            settings.Width = width;
+            settings.Height = height;
+            settings.IsMaximized = isMaximized;
         }
 
-        private void AssertSettingsValues(double left, double top, double width, double height, bool isMaximized)
+        private void AssertSettingsValues(AppSettings settings, double left, double top, double width, double height, bool isMaximized)
         {
-            Assert.AreEqual(left, Settings.Default.Left);
-            Assert.AreEqual(top, Settings.Default.Top);
-            Assert.AreEqual(width, Settings.Default.Width);
-            Assert.AreEqual(height, Settings.Default.Height);
-            Assert.AreEqual(isMaximized, Settings.Default.IsMaximized);
+            Assert.AreEqual(left, settings.Left);
+            Assert.AreEqual(top, settings.Top);
+            Assert.AreEqual(width, settings.Width);
+            Assert.AreEqual(height, settings.Height);
+            Assert.AreEqual(isMaximized, settings.IsMaximized);
         }
     }
 }

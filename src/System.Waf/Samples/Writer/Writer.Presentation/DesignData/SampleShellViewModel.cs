@@ -8,7 +8,8 @@ namespace Waf.Writer.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() : base(new MockShellView(), null, null, new MockShellService(), new MockFileService())
+        public SampleShellViewModel() 
+            : base(new MockShellView(), null, null, new MockShellService(), new MockFileService(), new MockSettingsService())
         {
             ContentView = new SampleMainViewModel(new MainView()).View;
         }

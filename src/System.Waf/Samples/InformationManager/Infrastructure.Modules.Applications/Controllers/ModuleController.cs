@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
@@ -12,10 +13,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         private readonly Lazy<ShellViewModel> shellViewModel;
 
         [ImportingConstructor]
-        public ModuleController(Lazy<DocumentController> documentController, Lazy<ShellViewModel> shellViewModel)
+        public ModuleController(ISettingsService settingsService, Lazy<DocumentController> documentController, Lazy<ShellViewModel> shellViewModel)
         {
             this.documentController = documentController;
             this.shellViewModel = shellViewModel;
+            settingsService.ErrorOccurred += (sender, e) => Log.Default.Error(e.Error, "Error in SettingsService");
         }
 
         private ShellViewModel ShellViewModel => shellViewModel.Value;

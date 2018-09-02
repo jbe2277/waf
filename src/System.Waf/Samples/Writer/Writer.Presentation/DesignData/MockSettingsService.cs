@@ -1,0 +1,26 @@
+﻿using System;
+using System.Waf.Applications.Services;
+
+namespace Waf.Writer.Presentation.DesignData
+{
+    public class MockSettingsService : ISettingsService
+    {
+        public string FileName { get; set; }
+
+        public event EventHandler<SettingsErrorEventArgs> ErrorOccurred;
+
+        public T Get<T>() where T : class, new()
+        {
+            return new T();
+        }
+
+        public void Save()
+        {
+        }
+
+        public void RaiseErrorOccurred(SettingsErrorEventArgs e)
+        {
+            ErrorOccurred?.Invoke(this, e);
+        }
+    }
+}

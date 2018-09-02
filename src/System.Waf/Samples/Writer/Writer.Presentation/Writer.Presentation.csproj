@@ -73,6 +73,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DesignData\MockFileService.cs" />
+    <Compile Include="DesignData\MockSettingsService.cs" />
     <Compile Include="DesignData\MockShellService.cs" />
     <Compile Include="DesignData\MockView.cs" />
     <Compile Include="DesignData\SampleMainViewModel.cs" />

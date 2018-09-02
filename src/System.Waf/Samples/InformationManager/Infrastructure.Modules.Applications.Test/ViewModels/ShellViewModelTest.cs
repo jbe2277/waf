@@ -4,7 +4,6 @@ using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
-using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Properties;
@@ -73,8 +72,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             shellView.VirtualScreenWidth = 1000;
             shellView.VirtualScreenHeight = 700;
 
-            var settingsProvider = Container.GetExportedValue<ISettingsService>();
-            var settings = settingsProvider.Get<AppSettings>();
+            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
             Container.GetExportedValue<ShellViewModel>();
@@ -104,32 +103,32 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             var messageService = Container.GetExportedValue<IMessageService>();
             var shellService = Container.GetExportedValue<ShellService>();
             var navigationService = Container.GetExportedValue<NavigationService>();
-            var settingsProvider = Container.GetExportedValue<ISettingsService>();
-            var settings = settingsProvider.Get<AppSettings>();
+            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settings = settingsService.Get<AppSettings>();
             shellView.SetNAForLocationAndSize();
 
             SetSettingsValues(settings);
-            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsProvider).Close();
+            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Height is 0 => don't apply the Settings values
             SetSettingsValues(settings, 0, 0, 1, 0);
-            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsProvider).Close();
+            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Left = 100 + Width = 901 > VirtualScreenWidth = 1000 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 901, 100);
-            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsProvider).Close();
+            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Top = 100 + Height = 601 > VirtualScreenWidth = 600 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 100, 601);
-            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsProvider).Close();
+            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Use the limit values => apply the Settings values
             SetSettingsValues(settings, 0, 0, 1000, 700);
-            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsProvider).Close();
+            new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
             AssertSettingsValues(settings, 0, 0, 1000, 700, false);
         }
 

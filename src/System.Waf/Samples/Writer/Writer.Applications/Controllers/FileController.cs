@@ -33,11 +33,13 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand closeCommand;
         private readonly DelegateCommand saveCommand;
         private readonly DelegateCommand saveAsCommand;
+        private readonly AppSettings settings;
         private IDocument lastActiveDocument;
 
         [ImportingConstructor]
-        public FileController(IMessageService messageService, IFileDialogService fileDialogService, IShellService shellService,
-            FileService fileService, ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory)
+        public FileController(IMessageService messageService, IFileDialogService fileDialogService, 
+            ISettingsService settingsService, IShellService shellService, FileService fileService, 
+            ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory)
         {
             this.messageService = messageService;
             this.fileDialogService = fileDialogService;
@@ -50,14 +52,15 @@ namespace Waf.Writer.Applications.Controllers
             closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
             saveCommand = new DelegateCommand(SaveCommand, CanSaveCommand);
             saveAsCommand = new DelegateCommand(SaveAsCommand, CanSaveAsCommand);
-            
+            settings = settingsService.Get<AppSettings>();
+
             this.fileService.NewCommand = newCommand;
             this.fileService.OpenCommand = openCommand;
             this.fileService.CloseCommand = closeCommand;
             this.fileService.SaveCommand = saveCommand;
             this.fileService.SaveAsCommand = saveAsCommand;
 
-            recentFileList = Settings.Default.RecentFileList ?? new RecentFileList();
+            recentFileList = settings.RecentFileList ?? new RecentFileList();
             this.fileService.RecentFileList = recentFileList;
 
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
@@ -84,7 +87,7 @@ namespace Waf.Writer.Applications.Controllers
 
         public void Shutdown()
         {
-            Settings.Default.RecentFileList = recentFileList;
+            settings.RecentFileList = recentFileList;
         }
 
         public IDocument Open(string fileName)
