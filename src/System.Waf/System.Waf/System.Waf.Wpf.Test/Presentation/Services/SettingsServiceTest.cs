@@ -7,6 +7,8 @@ using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.Presentation.Services;
 using System.Waf.UnitTesting;
+using System.Windows.Controls;
+using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Test.Waf.Presentation.Services.SettingsServiceTest.DoubleNestedTypeTest;
 
@@ -104,6 +106,8 @@ namespace Test.Waf.Presentation.Services
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
             settingsService.FileName = settingsFileName;
             File.Delete(settingsFileName);
+            settingsService.Save();
+            Assert.IsFalse(File.Exists(settingsFileName));
 
             var testSettings1 = settingsService.Get<TestSettings1>();
             settingsService.Save();
@@ -114,6 +118,23 @@ namespace Test.Waf.Presentation.Services
                 settingsService.Dispose();
             }
             Assert.IsInstanceOfType(error, typeof(IOException));
+
+            File.WriteAllText(settingsFileName, "Dummy content");
+            settingsService = new SettingsService();
+            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
+            settingsService.FileName = settingsFileName;
+            error = null;
+            settingsService.Get<TestSettings1>();
+            Assert.IsInstanceOfType(error, typeof(XmlException));
+            File.Delete(settingsFileName);
+
+            settingsService = new SettingsService();
+            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
+            settingsService.FileName = settingsFileName;
+            settingsService.Get<NotSerializableTest>();
+            error = null;
+            settingsService.Save();
+            Assert.IsInstanceOfType(error, typeof(SerializationException));
         }
 
         private static void AssertNoErrorOccurred(ISettingsService settingsService)
@@ -157,6 +178,18 @@ namespace Test.Waf.Presentation.Services
             {
                 Value = 4.2;
                 IsActive = true;
+            }
+        }
+
+        [DataContract]
+        public class NotSerializableTest : UserSettingsBase
+        {
+            [DataMember]
+            public Button Button { get; set; }
+
+            protected override void SetDefaultValues()
+            {
+                Button = new Button();
             }
         }
     }
