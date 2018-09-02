@@ -72,6 +72,7 @@
     <Compile Include="Presentation\ResourceHelperTest.cs" />
     <Compile Include="Presentation\Services\FileDialogServiceTest.cs" />
     <Compile Include="Presentation\Services\MessageServiceTest.cs" />
+    <Compile Include="Presentation\Services\SettingsServiceTest.cs" />
     <Compile Include="Presentation\ValidationHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTesting\Mocks\MockDialogViewTest.cs" />

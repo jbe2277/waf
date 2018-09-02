@@ -45,7 +45,6 @@
     <Compile Include="Applications\IDocumentService.cs" />
     <Compile Include="Applications\INavigationNode.cs" />
     <Compile Include="Applications\INavigationService.cs" />
-    <Compile Include="Applications\ISettingsProvider.cs" />
     <Compile Include="Applications\IShellService.cs" />
     <Compile Include="Applications\ToolBarCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />

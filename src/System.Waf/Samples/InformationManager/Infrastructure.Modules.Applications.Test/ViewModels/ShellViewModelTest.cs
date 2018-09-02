@@ -73,7 +73,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             shellView.VirtualScreenWidth = 1000;
             shellView.VirtualScreenHeight = 700;
 
-            var settingsProvider = Container.GetExportedValue<MockSettingsProvider>();
+            var settingsProvider = Container.GetExportedValue<ISettingsService>();
             var settings = settingsProvider.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
@@ -104,7 +104,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             var messageService = Container.GetExportedValue<IMessageService>();
             var shellService = Container.GetExportedValue<ShellService>();
             var navigationService = Container.GetExportedValue<NavigationService>();
-            var settingsProvider = Container.GetExportedValue<MockSettingsProvider>();
+            var settingsProvider = Container.GetExportedValue<ISettingsService>();
             var settings = settingsProvider.Get<AppSettings>();
             shellView.SetNAForLocationAndSize();
 

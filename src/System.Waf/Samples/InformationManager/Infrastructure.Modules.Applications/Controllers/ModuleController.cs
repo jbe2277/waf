@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
-using Waf.InformationManager.Infrastructure.Interfaces.Applications;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Properties;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
@@ -14,11 +12,10 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         private readonly Lazy<ShellViewModel> shellViewModel;
 
         [ImportingConstructor]
-        public ModuleController(ISettingsProvider settingsProvider, Lazy<DocumentController> documentController, Lazy<ShellViewModel> shellViewModel)
+        public ModuleController(Lazy<DocumentController> documentController, Lazy<ShellViewModel> shellViewModel)
         {
             this.documentController = documentController;
             this.shellViewModel = shellViewModel;
-            settingsProvider.RegisterTypes(typeof(AppSettings));
         }
 
         private ShellViewModel ShellViewModel => shellViewModel.Value;

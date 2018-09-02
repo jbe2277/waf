@@ -63,7 +63,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EnvironmentService.cs" />
     <Compile Include="Services\PresentationService.cs" />
-    <Compile Include="Services\SettingsProvider.cs" />
     <Compile Include="Views\ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>

@@ -41,8 +41,10 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +54,9 @@
     <Compile Include="Applications\ApplicationInfo.cs" />
     <Compile Include="Applications\DispatcherHelperCore.cs" />
     <Compile Include="Applications\ObservableListView.cs" />
+    <Compile Include="Applications\Services\ISettingsService.cs" />
+    <Compile Include="Applications\Services\SettingsErrorEventArgs.cs" />
+    <Compile Include="Applications\Services\UserSettingsBase.cs" />
     <Compile Include="Presentation\Controls\DataGridHelper.cs" />
     <Compile Include="Presentation\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Presentation\DispatcherHelper.cs" />
@@ -76,6 +81,7 @@
     <Compile Include="Presentation\ResourceHelper.cs" />
     <Compile Include="Presentation\Services\FileDialogService.cs" />
     <Compile Include="Presentation\Services\MessageService.cs" />
+    <Compile Include="Presentation\Services\SettingsService.cs" />
     <Compile Include="Presentation\ValidationHelper.cs" />
     <Compile Include="Presentation\ValidationReloadedTracker.cs" />
     <Compile Include="Presentation\ValidationTracker.cs" />

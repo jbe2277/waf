@@ -51,6 +51,7 @@
     <Compile Include="Mocks\MockDialogView.cs" />
     <Compile Include="Mocks\MockFileDialogService.cs" />
     <Compile Include="Mocks\MockMessageService.cs" />
+    <Compile Include="Mocks\MockSettingsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

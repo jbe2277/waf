@@ -20,7 +20,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService,
-            ISettingsProvider settingsProvider)
+            ISettingsService settingsService)
             : base(view)
         {
             this.messageService = messageService;
@@ -28,7 +28,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
             NavigationService = navigationService;
             ExitCommand = new DelegateCommand(Close);
             AboutCommand = new DelegateCommand(ShowAboutMessage);
-            settings = settingsProvider.Get<AppSettings>();
+            settings = settingsService.Get<AppSettings>();
             view.Closed += ViewClosed;
 
             // Restore the window size when the values are valid.
