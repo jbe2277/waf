@@ -126,7 +126,18 @@ namespace Test.Waf.Presentation.Services
             error = null;
             settingsService.Get<TestSettings1>();
             Assert.IsInstanceOfType(error, typeof(XmlException));
+            error = null;
+            settingsService.Save();
+            Assert.IsInstanceOfType(error, typeof(XmlException));
             File.Delete(settingsFileName);
+
+            // Now it is repaired with default values
+            settingsService = new SettingsService();
+            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
+            settingsService.FileName = settingsFileName;
+            error = null;
+            settingsService.Get<TestSettings1>();
+            Assert.IsNull(error);
 
             settingsService = new SettingsService();
             settingsService.ErrorOccurred += (sender, e) => error = e.Error;
