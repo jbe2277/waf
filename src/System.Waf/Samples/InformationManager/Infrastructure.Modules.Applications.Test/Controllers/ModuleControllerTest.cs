@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
+using System.IO;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers
 {
@@ -12,6 +13,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
         {
             var shellView = Container.GetExportedValue<MockShellView>();
             var moduleController = Container.GetExportedValue<ModuleController>();
+            var documentController = Container.GetExportedValue<DocumentController>();
+            File.Delete(documentController.PackagePath);
 
             Assert.IsFalse(shellView.IsVisible);
 

@@ -19,9 +19,10 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         public DocumentController(IEnvironmentService environmentService)
         {
             this.environmentService = environmentService;
+            PackagePath = Path.Combine(environmentService.DataDirectory, fileName);
         }
 
-        internal string PackagePath { get; private set; }
+        internal string PackagePath { get; }
 
         public void Initialize()
         {
@@ -30,8 +31,6 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
             {
                 Directory.CreateDirectory(dataDirectory);
             }
-
-            PackagePath = Path.Combine(dataDirectory, fileName);
             package = Package.Open(PackagePath, FileMode.OpenOrCreate);
         }
 

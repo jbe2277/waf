@@ -15,6 +15,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
         {
             base.OnTestInitialize();
             controller = Container.GetExportedValue<DocumentController>();
+            File.Delete(controller.PackagePath);
             controller.Initialize();
         }
 
