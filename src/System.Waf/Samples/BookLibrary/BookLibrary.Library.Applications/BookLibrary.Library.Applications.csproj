@@ -79,6 +79,7 @@
     <Compile Include="Data\PersonMapping.cs" />
     <Compile Include="Data\DbConnectionFactory.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Properties\AppSettings.cs" />
     <Compile Include="Services\IPresentationService.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="DataModels\BookDataModel.cs" />
@@ -88,11 +89,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\EntityService.cs" />
     <Compile Include="Services\IEmailService.cs" />
@@ -136,10 +132,6 @@
     <None Include="App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

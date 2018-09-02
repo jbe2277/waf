@@ -145,6 +145,7 @@
   <ItemGroup>
     <Compile Include="Converters\LanguageToStringConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
+    <Compile Include="DesignData\MockSettingsService.cs" />
     <Compile Include="DesignData\MockShellService.cs" />
     <Compile Include="DesignData\SampleBookListViewModel.cs" />
     <Compile Include="DesignData\SampleBookViewModel.cs" />

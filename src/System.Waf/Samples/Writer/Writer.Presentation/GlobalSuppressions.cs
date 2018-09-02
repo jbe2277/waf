@@ -26,4 +26,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "NLog.Logger.Info(System.String,System.String)", Scope = "member", Target = "Waf.Writer.Presentation.App.#OnExit(System.Windows.ExitEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "NLog.Logger.Info(System.String,System.String)", Scope = "member", Target = "Waf.Writer.Presentation.App.#OnExit(System.Windows.ExitEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "Waf.Writer.Presentation.App.#.ctor()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Scope = "member", Target = "Waf.Writer.Presentation.DesignData.MockSettingsService.#RaiseErrorOccurred(System.Waf.Applications.Services.SettingsErrorEventArgs)")]
 

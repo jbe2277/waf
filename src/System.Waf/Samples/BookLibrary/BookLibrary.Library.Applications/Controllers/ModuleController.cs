@@ -43,13 +43,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         public void Initialize()
         {
-            // Upgrade the settings from a previous version when the new version starts the first time.
-            if (Settings.Default.IsUpgradeNeeded)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.IsUpgradeNeeded = false;
-            }
-
             shellService.ShellView = ShellViewModel.View;
             ShellViewModel.ExitCommand = exitCommand;
             ShellViewModel.Closing += ShellViewModelClosing;
@@ -67,14 +60,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         public void Shutdown()
         {
             entityController.Shutdown();
-            try
-            {
-                Settings.Default.Save();
-            }
-            catch (Exception)
-            {
-                // When more application instances are closed at the same time then an exception occurs.
-            }
         }
 
         private void ShellViewModelClosing(object sender, CancelEventArgs e)

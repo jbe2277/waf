@@ -15,37 +15,38 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>
     {
         private readonly IMessageService messageService;
-        private readonly DelegateCommand aboutCommand;
+        private readonly AppSettings settings;
         private bool isValid = true;
 
         [ImportingConstructor]
         public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService,
-            IShellService shellService) : base(view)
+            IShellService shellService, ISettingsService settingsService) : base(view)
         {
             this.messageService = messageService;
             ShellService = shellService;
-            aboutCommand = new DelegateCommand(ShowAboutMessage);
+            AboutCommand = new DelegateCommand(ShowAboutMessage);
+            settings = settingsService.Get<AppSettings>();
             view.Closing += ViewClosing;
             view.Closed += ViewClosed;
 
             // Restore the window size when the values are valid.
-            if (Settings.Default.Left >= 0 && Settings.Default.Top >= 0 && Settings.Default.Width > 0 && Settings.Default.Height > 0
-                && Settings.Default.Left + Settings.Default.Width <= presentationService.VirtualScreenWidth
-                && Settings.Default.Top + Settings.Default.Height <= presentationService.VirtualScreenHeight)
+            if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
+                && settings.Left + settings.Width <= presentationService.VirtualScreenWidth
+                && settings.Top + settings.Height <= presentationService.VirtualScreenHeight)
             {
-                ViewCore.Left = Settings.Default.Left;
-                ViewCore.Top = Settings.Default.Top;
-                ViewCore.Height = Settings.Default.Height;
-                ViewCore.Width = Settings.Default.Width;
+                ViewCore.Left = settings.Left;
+                ViewCore.Top = settings.Top;
+                ViewCore.Height = settings.Height;
+                ViewCore.Width = settings.Width;
             }
-            ViewCore.IsMaximized = Settings.Default.IsMaximized;
+            ViewCore.IsMaximized = settings.IsMaximized;
         }
 
         public string Title => ApplicationInfo.ProductName;
 
         public IShellService ShellService { get; }
 
-        public ICommand AboutCommand => aboutCommand;
+        public ICommand AboutCommand { get; }
 
         public ICommand SaveCommand { get; set; }
 
@@ -83,11 +84,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         private void ViewClosed(object sender, EventArgs e)
         {
-            Settings.Default.Left = ViewCore.Left;
-            Settings.Default.Top = ViewCore.Top;
-            Settings.Default.Height = ViewCore.Height;
-            Settings.Default.Width = ViewCore.Width;
-            Settings.Default.IsMaximized = ViewCore.IsMaximized;
+            settings.Left = ViewCore.Left;
+            settings.Top = ViewCore.Top;
+            settings.Height = ViewCore.Height;
+            settings.Width = ViewCore.Width;
+            settings.IsMaximized = ViewCore.IsMaximized;
         }
 
         private void ShowAboutMessage()

@@ -8,7 +8,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() : base(new MockShellView(), null, null, new MockShellService())
+        public SampleShellViewModel() : base(new MockShellView(), null, null, new MockShellService(), new MockSettingsService())
         {
             ShellService.BookListView = new BookListView();
             ShellService.BookView = new BookView();
