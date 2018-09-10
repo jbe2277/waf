@@ -15,17 +15,13 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
         {
             base.OnTestInitialize();
             controller = Container.GetExportedValue<DocumentController>();
-            File.Delete(controller.PackagePath);
+            if (File.Exists(controller.PackagePath)) File.Delete(controller.PackagePath);
             controller.Initialize();
         }
 
         protected override void OnTestCleanup()
         {
             controller.Shutdown();
-            if (File.Exists(controller.PackagePath))
-            {
-                File.Delete(controller.PackagePath);
-            }
             base.OnTestCleanup();
         }
 

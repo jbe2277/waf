@@ -14,7 +14,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
             var shellView = Container.GetExportedValue<MockShellView>();
             var moduleController = Container.GetExportedValue<ModuleController>();
             var documentController = Container.GetExportedValue<DocumentController>();
-            File.Delete(documentController.PackagePath);
+            if (File.Exists(documentController.PackagePath)) File.Delete(documentController.PackagePath);
 
             Assert.IsFalse(shellView.IsVisible);
 

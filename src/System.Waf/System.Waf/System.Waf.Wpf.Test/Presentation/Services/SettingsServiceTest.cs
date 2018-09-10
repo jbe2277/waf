@@ -27,7 +27,7 @@ namespace Test.Waf.Presentation.Services
 
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings1.xml");
             settingsService.FileName = settingsFileName;
-            File.Delete(settingsFileName);
+            if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
 
             var testSettings2 = settingsService.Get<TestSettings2>();
             Assert.AreEqual(4.2, testSettings2.Value);
@@ -77,7 +77,7 @@ namespace Test.Waf.Presentation.Services
         public void CompatibleWithDataContractSerializer()
         {
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings2.xml");
-            File.Delete(settingsFileName);
+            if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
 
             TestSettings1 testSettings1;
             TestSettings2 testSettings2;
@@ -105,7 +105,7 @@ namespace Test.Waf.Presentation.Services
             var settingsService = new SettingsService();
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
             settingsService.FileName = settingsFileName;
-            File.Delete(settingsFileName);
+            if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
             settingsService.Save();
             Assert.IsFalse(File.Exists(settingsFileName));
 
@@ -129,7 +129,7 @@ namespace Test.Waf.Presentation.Services
             error = null;
             settingsService.Save();
             Assert.IsInstanceOfType(error, typeof(XmlException));
-            File.Delete(settingsFileName);
+            if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
 
             // Now it is repaired with default values
             settingsService = new SettingsService();
