@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.3.0.3 (Alpha 3)
+- TODO
+
+
 Version 4.3.0.2 (Alpha 2)
 - WAF: Add SettingsService for WPF applications.
 - WAF: Add overload DataGridHelper.GetSorting with custom primary sort.

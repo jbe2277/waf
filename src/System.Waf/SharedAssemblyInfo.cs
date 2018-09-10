@@ -13,6 +13,6 @@ using System.Resources;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 
-[assembly: AssemblyVersion("4.3.0.2")]
-[assembly: AssemblyFileVersion("4.3.0.2")]
-[assembly: AssemblyInformationalVersion("4.3.0-alpha2")]
+[assembly: AssemblyVersion("4.3.0.3")]
+[assembly: AssemblyFileVersion("4.3.0.3")]
+[assembly: AssemblyInformationalVersion("4.3.0-alpha3")]
