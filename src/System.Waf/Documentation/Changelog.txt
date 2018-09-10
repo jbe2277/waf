@@ -2,7 +2,12 @@ Changelog
 ---------
 
 Version 4.3.0.2 (Alpha 2)
-- TODO
+- WAF: Add SettingsService for WPF applications.
+- WAF: Add overload DataGridHelper.GetSorting with custom primary sort.
+- WAF: Add AssertHelper.SequenceEqual to UnitTesting.
+- WAF: Improve AssertHelper.ExpectedException by returning the expected exception for further investigation.
+- Samples: Use new SettingsService.
+- Samples: Introduce logging to a file with NLog.
 
 
 Version 4.3.0.1 (Alpha 1)
