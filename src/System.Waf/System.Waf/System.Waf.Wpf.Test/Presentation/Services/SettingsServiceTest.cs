@@ -46,6 +46,8 @@ namespace Test.Waf.Presentation.Services
             Assert.AreNotEqual(default(Guid), testSettings1.UserId);
             Assert.AreNotEqual(default(Guid), testSettings1.LastRun);
             testSettings1.LastRun = new DateTime(2000, 1, 1);
+            testSettings1.LastOpenedFiles = new[] { "MruFile1", "MruFile2" };
+            testSettings1.ReplaceFiles(new[] { "File1" });
 
             settingsService.Dispose();
             Assert.IsTrue(File.Exists(settingsFileName));
@@ -70,6 +72,8 @@ namespace Test.Waf.Presentation.Services
             testSettings1 = settingsService.Get<TestSettings1>();
             Assert.AreNotEqual(default(Guid), testSettings1.UserId);
             Assert.AreEqual(new DateTime(2000, 1, 1), testSettings1.LastRun);
+            AssertHelper.SequenceEqual(new[] { "MruFile1", "MruFile2" }, testSettings1.LastOpenedFiles);
+            AssertHelper.SequenceEqual(new[] { "File1" }, testSettings1.FileNames);
             settingsService.Dispose();
         }
 
@@ -155,9 +159,12 @@ namespace Test.Waf.Presentation.Services
 
         public class DoubleNestedTypeTest
         {
-            [DataContract]
+            [DataContract, KnownType(typeof(string[]))]
             public class TestSettings1 : UserSettingsBase
             {
+                [DataMember(Name = "FileNames")]
+                private readonly List<string> fileNames = new List<string>();
+
                 [DataMember]
                 public Guid UserId { get; private set; }
 
@@ -167,11 +174,23 @@ namespace Test.Waf.Presentation.Services
                 [DataMember]
                 public DateTime LastRun { get; set; }
 
+                [DataMember]
+                public IReadOnlyList<string> LastOpenedFiles { get; set; }
+
+                public IReadOnlyList<string> FileNames => fileNames;
+
+                public void ReplaceFiles(IEnumerable<string> newFileNames)
+                {
+                    fileNames.Clear();
+                    fileNames.AddRange(newFileNames);
+                }
+
                 protected override void SetDefaultValues()
                 {
                     UserId = Guid.NewGuid();
                     ActivateFeature1 = null;
                     LastRun = DateTime.MinValue.ToUniversalTime();
+                    LastOpenedFiles = Array.Empty<string>();
                 }
             }
         }

@@ -160,8 +160,13 @@ namespace System.Waf.Presentation.Services
                     var serializer = new DataContractSerializer(typeof(List<object>), new[] { type });
                     var document = CreateEmptyDocument();
                     document.Root.Add(element);
-                    var settingObject = serializer.ReadObject(document.CreateReader());
-                    return ((List<object>)settingObject).Single();
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        document.Save(memoryStream);
+                        memoryStream.Position = 0;
+                        var settingObject = serializer.ReadObject(memoryStream);
+                        return ((List<object>)settingObject).Single();
+                    }
                 }
             }
             return null;
