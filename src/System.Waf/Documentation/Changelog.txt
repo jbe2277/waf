@@ -1,8 +1,8 @@
 Changelog
 ---------
 
-Version 4.3.0.3 (Alpha 3)
-- TODO
+Version 4.3.0.100 (Release)
+- WAF: Improve deserializing in SettingsService.
 
 
 Version 4.3.0.2 (Alpha 2)
