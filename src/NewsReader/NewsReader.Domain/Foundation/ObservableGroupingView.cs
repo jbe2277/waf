@@ -27,7 +27,7 @@ namespace Jbe.NewsReader.Domain.Foundation
             base.RemoveAt(oldItemIndex);
         }
 
-        internal new void Reset(IReadOnlyList<TElement> newList)
+        internal new void Reset(IEnumerable<TElement> newList)
         {
             base.Reset(newList);
         }
