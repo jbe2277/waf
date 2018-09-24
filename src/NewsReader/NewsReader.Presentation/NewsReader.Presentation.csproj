@@ -20,7 +20,7 @@
     <AppxPackageDir>..\..\..\out\NewsReader\AppPackages\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>EC7F2D59E1E5C621C7F905E1EDF14C56F99C58D5</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>9B7675F67F9F7184AA329BB30918CD3368F99294</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>NewsReader.Presentation_StoreKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -96,7 +96,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="NewsReader.Presentation_StoreKey.pfx" />
     <PRIResource Include="Resources\en-us\Resources.resw" />
     <PRIResource Include="Resources\de-de\Resources.resw" />
   </ItemGroup>
@@ -158,7 +157,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Package.xml" />
+    <None Include="NewsReader.Presentation_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Resources\Assets\NewStoreLogo.scale-100.png" />
     <Content Include="Resources\Assets\NewStoreLogo.scale-125.png" />
