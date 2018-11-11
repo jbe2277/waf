@@ -23,7 +23,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{2B4F71F9-E177-4B89-9612-4D29D65A9CB9}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Changelog.txt = Documentation\Changelog.txt
-		Documentation\Checklist.txt = Documentation\Checklist.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writer", "Writer", "{2D498396-C10C-4A20-B24E-FD554FFC49EF}"

@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 5.0.0.1 (Alpha 1)
+- All: Improve code by using C# 7.0.
+
+
 Version 4.3.0.100 (Release)
 - WAF: Improve deserializing in SettingsService.
 
