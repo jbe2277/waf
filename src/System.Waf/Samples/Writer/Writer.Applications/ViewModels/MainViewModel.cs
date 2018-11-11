@@ -38,20 +38,13 @@ namespace Waf.Writer.Applications.ViewModels
 
         public object ActiveDocumentView
         {
-            get { return activeDocumentView; }
-            set { SetProperty(ref activeDocumentView, value); }
+            get => activeDocumentView;
+            set => SetProperty(ref activeDocumentView, value);
         }
 
         private void DocumentViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (!DocumentViews.Any())
-            {
-                ViewCore.ContentViewState = ContentViewState.StartViewVisible;
-            }
-            else
-            {
-                ViewCore.ContentViewState = ContentViewState.DocumentViewVisible;
-            }
+            ViewCore.ContentViewState = DocumentViews.Any() ? ContentViewState.DocumentViewVisible : ContentViewState.StartViewVisible;
         }
 
         private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -59,11 +52,8 @@ namespace Waf.Writer.Applications.ViewModels
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
                 if (activeDocument != null) { PropertyChangedEventManager.RemoveHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
-
                 activeDocument = FileService.ActiveDocument;
-
                 if (activeDocument != null) { PropertyChangedEventManager.AddHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
-
                 UpdateShellServiceDocumentName();
             }
         }
@@ -78,14 +68,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         private void UpdateShellServiceDocumentName()
         {
-            if (FileService.ActiveDocument != null)
-            {
-                shellService.DocumentName = Path.GetFileName(FileService.ActiveDocument.FileName);
-            }
-            else
-            {
-                shellService.DocumentName = null;
-            }
+            shellService.DocumentName = FileService.ActiveDocument == null ? null : Path.GetFileName(FileService.ActiveDocument.FileName);
         }
     }
 }

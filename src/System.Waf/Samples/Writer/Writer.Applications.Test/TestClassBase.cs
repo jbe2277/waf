@@ -10,11 +10,9 @@ namespace Test.Writer.Applications
     [TestClass]
     public abstract class TestClassBase
     {
-        private CompositionContainer container;
         private PrintController printController;
-        private RichTextDocumentController richTextDocumentController;
 
-        protected CompositionContainer Container => container;
+        protected CompositionContainer Container { get; private set; }
 
         [TestInitialize]
         public void TestInitialize()
@@ -27,12 +25,12 @@ namespace Test.Writer.Applications
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
 
-            container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+            Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
             CompositionBatch batch = new CompositionBatch();
-            batch.AddExportedValue(container);
-            container.Compose(batch);
+            batch.AddExportedValue(Container);
+            Container.Compose(batch);
             
-            richTextDocumentController = Container.GetExportedValue<RichTextDocumentController>();
+            Container.GetExportedValue<RichTextDocumentController>();
             Container.GetExportedValue<FileController>().Initialize();
             
             OnTestInitialize();
@@ -41,8 +39,7 @@ namespace Test.Writer.Applications
         [TestCleanup]
         public void TestCleanup()
         {
-            container?.Dispose();
-            
+            Container?.Dispose();
             OnTestCleanup();
         }
 
@@ -52,7 +49,7 @@ namespace Test.Writer.Applications
 
         internal PrintController InitializePrintController()
         {
-            printController = container.GetExportedValue<PrintController>();
+            printController = Container.GetExportedValue<PrintController>();
             printController.Initialize();
             return printController;
         }

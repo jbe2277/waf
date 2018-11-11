@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
 using Waf.Writer.Applications.Views;
 using Waf.Writer.Applications.ViewModels;
 using System;
@@ -9,14 +8,13 @@ using System.Waf.Applications;
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IStartView))]
-    public partial class StartView : UserControl, IStartView
+    public partial class StartView : IStartView
     {
         private readonly Lazy<StartViewModel> viewModel;
         
         public StartView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<StartViewModel>(() => ViewHelper.GetViewModel<StartViewModel>(this));
             newButton.IsVisibleChanged += NewButtonIsVisibleChanged;
         }

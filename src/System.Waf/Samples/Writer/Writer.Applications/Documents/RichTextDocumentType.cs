@@ -22,31 +22,31 @@ namespace Waf.Writer.Applications.Documents
 
         protected override IDocument NewCore()
         {
-            RichTextDocument document = new RichTextDocument(this);
-            document.FileName = string.Format(CultureInfo.CurrentCulture, Resources.DocumentFileName, 
-                ++documentCount, FileExtension);
-            return document;
+            return new RichTextDocument(this)
+            {
+                FileName = string.Format(CultureInfo.CurrentCulture, Resources.DocumentFileName, ++documentCount, FileExtension)
+            };
         }
 
         protected override IDocument OpenCore(string fileName)
         {
-            FlowDocument flowDocument = new FlowDocument();
-            TextRange range = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
-            using (FileStream stream = new FileStream(fileName, FileMode.Open))
+            var flowDocument = new FlowDocument();
+            var range = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
+            using (var stream = new FileStream(fileName, FileMode.Open))
             {
                 range.Load(stream, DataFormats.Rtf);
             }
 
-            RichTextDocument document = new RichTextDocument(this, flowDocument);
+            var document = new RichTextDocument(this, flowDocument);
             documentCount++;
             return document;
         }
 
         protected override void SaveCore(IDocument document, string fileName)
         {
-            FlowDocument flowDocument = ((RichTextDocument)document).Content;
-            TextRange range = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
-            using (FileStream stream = new FileStream(fileName, FileMode.Create))
+            var flowDocument = ((RichTextDocument)document).Content;
+            var range = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
+            using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 range.Save(stream, DataFormats.Rtf);
             }

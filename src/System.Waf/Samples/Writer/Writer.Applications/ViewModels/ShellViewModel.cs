@@ -70,14 +70,14 @@ namespace Waf.Writer.Applications.ViewModels
 
         public object ContentView
         {
-            get { return contentView; }
-            set { SetProperty(ref contentView, value); }
+            get => contentView;
+            set => SetProperty(ref contentView, value);
         }
 
         public bool IsPrintPreviewVisible
         {
-            get { return isPrintPreviewVisible; }
-            set { SetProperty(ref isPrintPreviewVisible, value); }
+            get => isPrintPreviewVisible;
+            set => SetProperty(ref isPrintPreviewVisible, value);
         }
 
         public event CancelEventHandler Closing;

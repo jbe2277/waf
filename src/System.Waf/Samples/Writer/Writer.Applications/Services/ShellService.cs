@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
@@ -25,20 +24,20 @@ namespace Waf.Writer.Applications.Services
 
         public string DocumentName
         {
-            get { return documentName; }
-            set { SetProperty(ref documentName, value); }
+            get => documentName;
+            set => SetProperty(ref documentName, value);
         }
 
         public IEditingCommands ActiveEditingCommands
         {
-            get { return activeEditingCommands; }
-            set { SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands()); }
+            get => activeEditingCommands;
+            set => SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands());
         }
 
         public IZoomCommands ActiveZoomCommands
         {
-            get { return activeZoomCommands; }
-            set { SetProperty(ref activeZoomCommands, value ?? new DisabledZoomCommands()); }
+            get => activeZoomCommands;
+            set => SetProperty(ref activeZoomCommands, value ?? new DisabledZoomCommands());
         }
 
 
@@ -54,7 +53,7 @@ namespace Waf.Writer.Applications.Services
             
             public bool IsBulletList { get; set; }
 
-            public bool IsSpellCheckAvailable { get; } = false;
+            public bool IsSpellCheckAvailable => false;
 
             public bool IsSpellCheckEnabled { get; set; }
         }
@@ -65,10 +64,10 @@ namespace Waf.Writer.Applications.Services
 
             public double Zoom
             {
-                get { return 1; }
+                get => 1;
                 set { }
             }
-            
+
             public ICommand ZoomInCommand => DelegateCommand.DisabledCommand;
             
             public ICommand ZoomOutCommand => DelegateCommand.DisabledCommand;

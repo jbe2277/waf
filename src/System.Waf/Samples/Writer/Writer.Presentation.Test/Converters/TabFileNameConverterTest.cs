@@ -24,7 +24,7 @@ namespace Test.Writer.Presentation.Converters
             Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { new object(), new object() }, 
                 typeof(string), null, null));
 
-            AssertHelper.ExpectedException<NotImplementedException>(() => converter.ConvertBack(null, null, null, null));
+            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, null, null, null));
         }
     }
 }

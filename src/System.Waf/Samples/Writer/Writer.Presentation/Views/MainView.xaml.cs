@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using Waf.Writer.Applications.Views;
 using System.Windows;
 
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IMainView))]
-    public partial class MainView : UserControl, IMainView
+    public partial class MainView : IMainView
     {
         private ContentViewState contentViewState;
 
@@ -18,7 +17,7 @@ namespace Waf.Writer.Presentation.Views
 
         public ContentViewState ContentViewState
         {
-            get { return contentViewState; }
+            get => contentViewState;
             set
             {
                 if (contentViewState != value)

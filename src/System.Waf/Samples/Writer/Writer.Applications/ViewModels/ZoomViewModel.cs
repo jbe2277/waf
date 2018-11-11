@@ -42,7 +42,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         public bool IsVisible
         {
-            get { return isVisible; }
+            get => isVisible;
             set
             {
                 if (SetProperty(ref isVisible, value))
@@ -54,7 +54,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         public double Zoom
         {
-            get { return zoom; }
+            get => zoom;
             set
             {
                 if (zoom != value)

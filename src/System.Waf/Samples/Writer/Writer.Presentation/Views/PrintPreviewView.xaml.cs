@@ -2,14 +2,13 @@
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Windows;
-using System.Windows.Controls;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IPrintPreviewView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class PrintPreviewView : UserControl, IPrintPreviewView
+    public partial class PrintPreviewView : IPrintPreviewView
     {
         private readonly Lazy<PrintPreviewViewModel> viewModel;
         
@@ -34,7 +33,6 @@ namespace Waf.Writer.Presentation.Views
         {
             // Ensure that this handler is called only once.
             Loaded -= FirstTimeLoadedHandler;
-
             documentViewer.Focus();
         }
 

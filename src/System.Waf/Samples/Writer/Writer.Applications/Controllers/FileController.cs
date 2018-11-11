@@ -68,10 +68,10 @@ namespace Waf.Writer.Applications.Controllers
 
         private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
 
-        private IDocument ActiveDocument 
-        { 
-            get { return fileService.ActiveDocument; }
-            set { fileService.ActiveDocument = value; }
+        private IDocument ActiveDocument
+        {
+            get => fileService.ActiveDocument;
+            set => fileService.ActiveDocument = value;
         }
 
         public void Initialize()

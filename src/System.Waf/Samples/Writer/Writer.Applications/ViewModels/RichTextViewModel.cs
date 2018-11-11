@@ -27,40 +27,40 @@ namespace Waf.Writer.Applications.ViewModels
 
         public bool IsBold
         {
-            get { return isBold; }
-            set { SetProperty(ref isBold, value); }
+            get => isBold;
+            set => SetProperty(ref isBold, value);
         }
 
         public bool IsItalic
         {
-            get { return isItalic; }
-            set { SetProperty(ref isItalic, value); }
+            get => isItalic;
+            set => SetProperty(ref isItalic, value);
         }
-        
+
         public bool IsUnderline
         {
-            get { return isUnderline; }
-            set { SetProperty(ref isUnderline, value); }
+            get => isUnderline;
+            set => SetProperty(ref isUnderline, value);
         }
 
         public bool IsNumberedList
         {
-            get { return isNumberedList; }
-            set { SetProperty(ref isNumberedList, value); }
+            get => isNumberedList;
+            set => SetProperty(ref isNumberedList, value);
         }
 
         public bool IsBulletList
         {
-            get { return isBulletList; }
-            set { SetProperty(ref isBulletList, value); }
+            get => isBulletList;
+            set => SetProperty(ref isBulletList, value);
         }
 
         public bool IsSpellCheckAvailable => true;
         
         public bool IsSpellCheckEnabled
         {
-            get { return isSpellCheckEnabled; }
-            set { SetProperty(ref isSpellCheckEnabled, value); }
+            get => isSpellCheckEnabled;
+            set => SetProperty(ref isSpellCheckEnabled, value);
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)

@@ -32,10 +32,7 @@ namespace Test.Writer.Applications.ViewModels
 
         private class MockDocumentPaginatorSource : IDocumentPaginatorSource
         {
-            public DocumentPaginator DocumentPaginator
-            {
-                get { throw new NotImplementedException(); }
-            }
+            public DocumentPaginator DocumentPaginator => throw new NotImplementedException();
         }
     }
 }

@@ -10,22 +10,21 @@ namespace Waf.Writer.Applications.Documents
 
         protected Document(IDocumentType documentType)
         {
-            if (documentType == null) { throw new ArgumentNullException(nameof(documentType)); }
-            DocumentType = documentType;
+            DocumentType = documentType ?? throw new ArgumentNullException(nameof(documentType));
         }
 
         public IDocumentType DocumentType { get; }
 
-        public string FileName 
+        public string FileName
         {
-            get { return fileName; }
-            set { SetProperty(ref fileName, value); }
+            get => fileName;
+            set => SetProperty(ref fileName, value);
         }
 
         public bool Modified
         {
-            get { return modified; }
-            set { SetProperty(ref modified, value); }
+            get => modified;
+            set => SetProperty(ref modified, value);
         }
     }
 }

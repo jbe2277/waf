@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IRichTextView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class RichTextView : UserControl, IRichTextView
+    public partial class RichTextView : IRichTextView
     {
         private readonly Lazy<RichTextViewModel> viewModel;
         private bool suppressTextChanged;
@@ -70,11 +70,11 @@ namespace Waf.Writer.Presentation.Views
 
             object fontWeight = selection.GetPropertyValue(TextElement.FontWeightProperty);
             object fontStyle = selection.GetPropertyValue(TextElement.FontStyleProperty);
-            object textDecotations = selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            object textDecorations = selection.GetPropertyValue(Inline.TextDecorationsProperty);
 
             ViewModel.IsBold = fontWeight != DependencyProperty.UnsetValue && (FontWeight)fontWeight != FontWeights.Normal;
             ViewModel.IsItalic = fontStyle != DependencyProperty.UnsetValue && (FontStyle)fontStyle == FontStyles.Italic;
-            ViewModel.IsUnderline = textDecotations != DependencyProperty.UnsetValue && textDecotations == TextDecorations.Underline;
+            ViewModel.IsUnderline = textDecorations != DependencyProperty.UnsetValue && textDecorations == TextDecorations.Underline;
 
             bool isNumberedList = false;
             bool isBulletList = false;
@@ -135,7 +135,7 @@ namespace Waf.Writer.Presentation.Views
                 menuItems.Add(new Separator());
             }
 
-            foreach (Control item in menuItems.Reverse<Control>())
+            foreach (var item in menuItems.Reverse<Control>())
             {
                 contextMenu.Items.Insert(0, item);
             }

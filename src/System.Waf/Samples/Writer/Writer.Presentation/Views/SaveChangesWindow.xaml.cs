@@ -5,7 +5,7 @@ using Waf.Writer.Applications.Views;
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(ISaveChangesView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class SaveChangesWindow : Window, ISaveChangesView
+    public partial class SaveChangesWindow : ISaveChangesView
     {
         public SaveChangesWindow()
         {

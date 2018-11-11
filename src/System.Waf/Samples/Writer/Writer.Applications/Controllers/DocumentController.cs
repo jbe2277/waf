@@ -16,8 +16,7 @@ namespace Waf.Writer.Applications.Controllers
         
         protected DocumentController(IFileService fileService)
         {
-            if (fileService == null) { throw new ArgumentNullException(nameof(fileService)); }
-            this.fileService = fileService;
+            this.fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
             CollectionChangedEventManager.AddHandler(fileService.Documents, DocumentsCollectionChanged);
         }

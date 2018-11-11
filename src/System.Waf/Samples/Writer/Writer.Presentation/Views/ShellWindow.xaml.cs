@@ -18,7 +18,7 @@ namespace Waf.Writer.Presentation.Views
 
         public bool IsMaximized
         {
-            get { return WindowState == WindowState.Maximized; }
+            get => WindowState == WindowState.Maximized;
             set
             {
                 if (value)

@@ -41,7 +41,7 @@ namespace Test.Writer.Applications.Controllers
             richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
             Assert.AreEqual(document, richTextViewModel.Document);
 
-            // Test ActiveDocument <-> ActiveDocumentView synchronisation
+            // Test ActiveDocument <-> ActiveDocumentView synchronization
 
             Assert.AreEqual(fileService.Documents.Last(), fileService.ActiveDocument);
 

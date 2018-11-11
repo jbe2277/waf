@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Input;
+﻿using System.ComponentModel;
 
 namespace Waf.Writer.Applications.Services
 {

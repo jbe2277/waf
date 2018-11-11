@@ -238,7 +238,7 @@ namespace Test.Writer.Applications.Controllers
 
             var document = (MockDocument)fileController.New(documentType);
             document.Modified = true;
-            // We set the absoulte file path to simulate that we already saved the document
+            // We set the absolute file path to simulate that we already saved the document
             document.FileName = fileName;
 
             fileService.SaveCommand.Execute(null);

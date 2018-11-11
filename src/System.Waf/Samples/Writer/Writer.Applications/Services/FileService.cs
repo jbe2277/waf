@@ -12,21 +12,20 @@ namespace Waf.Writer.Applications.Services
     internal class FileService : Model, IFileService
     {
         private readonly ObservableCollection<IDocument> documents;
-        private readonly ReadOnlyObservableCollection<IDocument> readOnlyDocuments;
         private IDocument activeDocument;
 
         [ImportingConstructor]
         public FileService()
         {
             documents = new ObservableCollection<IDocument>();
-            readOnlyDocuments = new ReadOnlyObservableCollection<IDocument>(documents);
+            Documents = new ReadOnlyObservableCollection<IDocument>(documents);
         }
 
-        public ReadOnlyObservableCollection<IDocument> Documents => readOnlyDocuments;
+        public ReadOnlyObservableCollection<IDocument> Documents { get; }
 
         public IDocument ActiveDocument
         {
-            get { return activeDocument; }
+            get => activeDocument;
             set
             {
                 if (activeDocument != value)

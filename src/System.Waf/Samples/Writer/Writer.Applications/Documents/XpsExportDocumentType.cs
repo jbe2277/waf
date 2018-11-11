@@ -18,15 +18,15 @@ namespace Waf.Writer.Applications.Documents
         protected override void SaveCore(IDocument document, string fileName)
         {
             // We have to clone the FlowDocument before we use different pagination settings for the export.        
-            RichTextDocument richTextDocument = (RichTextDocument)document;
-            FlowDocument clone = richTextDocument.CloneContent();
+            var richTextDocument = (RichTextDocument)document;
+            var clone = richTextDocument.CloneContent();
             clone.ColumnWidth = double.PositiveInfinity;
 
-            using (Package package = Package.Open(fileName, FileMode.Create))
-            using (XpsDocument xpsDocument = new XpsDocument(package, CompressionOption.Maximum))
+            using (var package = Package.Open(fileName, FileMode.Create))
+            using (var xpsDocument = new XpsDocument(package, CompressionOption.Maximum))
             {
-                XpsSerializationManager serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false);
-                DocumentPaginator paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
+                var serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false);
+                var paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
                 serializer.SaveAsXaml(paginator);
             }
         }

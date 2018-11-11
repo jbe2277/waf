@@ -33,8 +33,7 @@ namespace Waf.Writer.Applications.Controllers
 
         protected override void OnDocumentAdded(IDocument document)
         {
-            var richTextDocument = document as RichTextDocument;
-            if (richTextDocument != null)
+            if (document is RichTextDocument richTextDocument)
             {
                 RichTextViewModel richTextViewModel = richTextViewModelFactory.CreateExport().Value;
                 richTextViewModel.Document = richTextDocument;
@@ -45,8 +44,7 @@ namespace Waf.Writer.Applications.Controllers
 
         protected override void OnDocumentRemoved(IDocument document)
         {
-            var richTextDocument = document as RichTextDocument;
-            if (richTextDocument != null)
+            if (document is RichTextDocument richTextDocument)
             {
                 mainViewModel.DocumentViews.Remove(richTextViewModels[richTextDocument].View);
                 richTextViewModels.Remove(richTextDocument);
@@ -61,8 +59,7 @@ namespace Waf.Writer.Applications.Controllers
             }
             else
             {
-                var richTextDocument = activeDocument as RichTextDocument;
-                if (richTextDocument != null)
+                if (activeDocument is RichTextDocument richTextDocument)
                 {
                     mainViewModel.ActiveDocumentView = richTextViewModels[richTextDocument].View;
                 }
@@ -73,10 +70,9 @@ namespace Waf.Writer.Applications.Controllers
         {
             if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
             {
-                var richTextView = mainViewModel.ActiveDocumentView as IView;
-                if (richTextView != null)
+                if (mainViewModel.ActiveDocumentView is IView richTextView)
                 {
-                    var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
+                    var richTextViewModel = richTextView.GetViewModel<RichTextViewModel>();
                     if (richTextViewModel != null)
                     {
                         fileService.ActiveDocument = richTextViewModel.Document;

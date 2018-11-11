@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;

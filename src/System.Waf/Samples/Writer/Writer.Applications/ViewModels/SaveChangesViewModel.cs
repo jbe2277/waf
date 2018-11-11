@@ -12,7 +12,7 @@ namespace Waf.Writer.Applications.ViewModels
     {
         private readonly DelegateCommand yesCommand;
         private readonly DelegateCommand noCommand;
-        private bool? dialogResult;
+        private bool? result;
 
         [ImportingConstructor]
         public SaveChangesViewModel(ISaveChangesView view) : base(view)
@@ -32,12 +32,12 @@ namespace Waf.Writer.Applications.ViewModels
         public bool? ShowDialog(object owner)
         {
             ViewCore.ShowDialog(owner);
-            return dialogResult;
+            return result;
         }
 
         private void Close(bool? dialogResult)
         {
-            this.dialogResult = dialogResult;
+            result = dialogResult;
             ViewCore.Close();
         }
     }
