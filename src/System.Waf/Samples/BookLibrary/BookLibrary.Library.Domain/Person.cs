@@ -24,26 +24,26 @@ namespace Waf.BookLibrary.Library.Domain
 
         [Required(ErrorMessageResourceName = nameof(Resources.FirstnameMandatory), ErrorMessageResourceType = typeof(Resources))]
         [StringLength(30, ErrorMessageResourceName = nameof(Resources.FirstnameMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Firstname 
+        public string Firstname
         {
-            get { return firstname; }
-            set { SetPropertyAndValidate(ref firstname, value); }
+            get => firstname;
+            set => SetPropertyAndValidate(ref firstname, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(Resources.LastnameMandatory), ErrorMessageResourceType = typeof(Resources))]
         [StringLength(30, ErrorMessageResourceName = nameof(Resources.LastnameMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Lastname 
+        public string Lastname
         {
-            get { return lastname; }
-            set { SetPropertyAndValidate(ref lastname, value); }
+            get => lastname;
+            set => SetPropertyAndValidate(ref lastname, value);
         }
 
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.EmailMaxLength), ErrorMessageResourceType = typeof(Resources))]
         [EmailAddress(ErrorMessageResourceName = nameof(Resources.EmailInvalid), ErrorMessageResourceType = typeof(Resources))]
-        public string Email 
+        public string Email
         {
-            get { return email; }
-            set { SetPropertyAndValidate(ref email, value == "" ? null : value); }
+            get => email;
+            set => SetPropertyAndValidate(ref email, value == "" ? null : value);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

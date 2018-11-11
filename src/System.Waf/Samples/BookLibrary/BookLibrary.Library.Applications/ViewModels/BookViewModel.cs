@@ -21,13 +21,13 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public bool IsValid
         {
-            get { return isValid; }
-            set { SetProperty(ref isValid, value); }
+            get => isValid;
+            set => SetProperty(ref isValid, value);
         }
 
         public Book Book
         {
-            get { return book; }
+            get => book;
             set
             {
                 if (SetProperty(ref book, value))

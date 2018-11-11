@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waf.BookLibrary.Library.Applications.Services
+﻿namespace Waf.BookLibrary.Library.Applications.Services
 {
     public interface IEmailService
     {

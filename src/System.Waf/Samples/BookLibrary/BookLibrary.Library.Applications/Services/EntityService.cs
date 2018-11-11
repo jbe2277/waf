@@ -24,7 +24,7 @@ namespace Waf.BookLibrary.Library.Applications.Services
             {
                 if (books == null && BookLibraryContext != null)
                 {
-                    // Uncomment this line to generate the ViewChache: GenerateViewCache();
+                    // Uncomment this line to generate the ViewCache: GenerateViewCache();
                     BookLibraryContext.Set<Book>().Include(x => x.LendTo).Load();
                     books = BookLibraryContext.Set<Book>().Local;
                 }

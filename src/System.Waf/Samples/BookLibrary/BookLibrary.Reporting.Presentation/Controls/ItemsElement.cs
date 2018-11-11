@@ -16,14 +16,14 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
+            set => SetValue(ItemTemplateProperty, value);
         }
 
         private void UpdateContent()
@@ -38,8 +38,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
                 foreach (object item in ItemsSource)
                 {
                     Block block = null;
-                    var contentElement = ItemTemplate.LoadContent() as ContentElement;
-                    if (contentElement != null)
+                    if (ItemTemplate.LoadContent() is ContentElement contentElement)
                     {
                         block = contentElement.Content as Block;
                     }

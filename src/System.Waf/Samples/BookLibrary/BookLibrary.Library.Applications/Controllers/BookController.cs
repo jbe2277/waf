@@ -81,8 +81,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private void RemoveBook()
         {
             var booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
-            var nextBook = CollectionHelper.GetNextElementOrDefault(bookListViewModel.Books.Except(booksToExclude), 
-                bookListViewModel.SelectedBook);
+            var nextBook = bookListViewModel.Books.Except(booksToExclude).GetNextElementOrDefault(bookListViewModel.SelectedBook);
 
             foreach (BookDataModel book in bookListViewModel.SelectedBooks.ToArray())
             {

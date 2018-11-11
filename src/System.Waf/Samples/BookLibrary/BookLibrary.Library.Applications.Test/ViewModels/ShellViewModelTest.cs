@@ -70,7 +70,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            Container.GetExportedValue<ShellViewModel>();
             var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);

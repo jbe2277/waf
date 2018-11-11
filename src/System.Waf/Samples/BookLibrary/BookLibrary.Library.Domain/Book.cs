@@ -29,58 +29,58 @@ namespace Waf.BookLibrary.Library.Domain
 
         [Required(ErrorMessageResourceName = nameof(Resources.TitleMandatory), ErrorMessageResourceType = typeof(Resources))]
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.TitleMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Title 
+        public string Title
         {
-            get { return title; }
-            set { SetPropertyAndValidate(ref title, value); }
+            get => title;
+            set => SetPropertyAndValidate(ref title, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(Resources.AuthorMandatory), ErrorMessageResourceType = typeof(Resources))]
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.AuthorMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Author 
+        public string Author
         {
-            get { return author; }
-            set { SetPropertyAndValidate(ref author, value); }
+            get => author;
+            set => SetPropertyAndValidate(ref author, value);
         }
 
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.PublisherMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Publisher 
+        public string Publisher
         {
-            get { return publisher; }
-            set { SetPropertyAndValidate(ref publisher, value); }
+            get => publisher;
+            set => SetPropertyAndValidate(ref publisher, value);
         }
 
         [CustomValidation(typeof(Book), nameof(ValidatePublishDate))]
         public DateTime PublishDate
         {
-            get { return publishDate; }
-            set { SetPropertyAndValidate(ref publishDate, value); }
+            get => publishDate;
+            set => SetPropertyAndValidate(ref publishDate, value);
         }
 
         [StringLength(14, ErrorMessageResourceName = nameof(Resources.IsbnMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Isbn 
-        { 
-            get { return isbn; }
-            set { SetPropertyAndValidate(ref isbn, value); }
+        public string Isbn
+        {
+            get => isbn;
+            set => SetPropertyAndValidate(ref isbn, value);
         }
 
         public Language Language
         {
-            get { return language; }
-            set { SetPropertyAndValidate(ref language, value); }
+            get => language;
+            set => SetPropertyAndValidate(ref language, value);
         }
 
         [Range(0, int.MaxValue, ErrorMessageResourceName = nameof(Resources.PagesEqualOrLarger), ErrorMessageResourceType = typeof(Resources))]
-        public int Pages 
+        public int Pages
         {
-            get { return pages; }
-            set { SetPropertyAndValidate(ref pages, value); }
+            get => pages;
+            set => SetPropertyAndValidate(ref pages, value);
         }
 
         public Person LendTo
         {
-            get { return lendTo; }
-            set { SetPropertyAndValidate(ref lendTo, value); }
+            get => lendTo;
+            set => SetPropertyAndValidate(ref lendTo, value);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

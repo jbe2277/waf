@@ -13,14 +13,14 @@ using Waf.BookLibrary.Library.Domain;
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(IPersonListView))]
-    public partial class PersonListView : UserControl, IPersonListView
+    public partial class PersonListView : IPersonListView
     {
         private readonly Lazy<PersonListViewModel> viewModel;
         
         public PersonListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<PersonListViewModel>(() => ViewHelper.GetViewModel<PersonListViewModel>(this));
+            viewModel = new Lazy<PersonListViewModel>(() => this.GetViewModel<PersonListViewModel>());
             Loaded += FirstTimeLoadedHandler;
         }
 

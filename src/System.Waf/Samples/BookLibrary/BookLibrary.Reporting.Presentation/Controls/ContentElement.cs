@@ -11,8 +11,8 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
 
         public FrameworkContentElement Content
         {
-            get { return (FrameworkContentElement)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get => (FrameworkContentElement)GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
     }
 }

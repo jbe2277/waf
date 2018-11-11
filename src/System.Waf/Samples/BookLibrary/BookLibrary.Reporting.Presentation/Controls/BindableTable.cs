@@ -22,26 +22,26 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
+            set => SetValue(ItemTemplateProperty, value);
         }
 
         public TableRowGroup HeaderRowGroup
         {
-            get { return (TableRowGroup)GetValue(HeaderRowProperty); }
-            set { SetValue(HeaderRowProperty, value); }
+            get => (TableRowGroup)GetValue(HeaderRowProperty);
+            set => SetValue(HeaderRowProperty, value);
         }
 
         public TableRowGroup FooterRowGroup
         {
-            get { return (TableRowGroup)GetValue(FooterRowProperty); }
-            set { SetValue(FooterRowProperty, value); }
+            get => (TableRowGroup)GetValue(FooterRowProperty);
+            set => SetValue(FooterRowProperty, value);
         }
 
         private void UpdateContent()
@@ -58,8 +58,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
                 foreach (object item in ItemsSource)
                 {
                     TableRow tableRow = null;
-                    var contentElement = ItemTemplate.LoadContent() as ContentElement;
-                    if (contentElement != null)
+                    if (ItemTemplate.LoadContent() is ContentElement contentElement)
                     {
                         tableRow = contentElement.Content as TableRow;
                     }

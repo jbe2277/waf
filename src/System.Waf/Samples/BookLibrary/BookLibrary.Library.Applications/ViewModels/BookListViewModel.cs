@@ -31,16 +31,16 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public bool IsValid
         {
-            get { return isValid; }
-            set { SetProperty(ref isValid, value); }
+            get => isValid;
+            set => SetProperty(ref isValid, value);
         }
 
         public IReadOnlyList<BookDataModel> Books { get; set; }
 
         public BookDataModel SelectedBook
         {
-            get { return selectedBook; }
-            set { SetProperty(ref selectedBook, value); }
+            get => selectedBook;
+            set => SetProperty(ref selectedBook, value);
         }
 
         public ICommand AddNewCommand { get; set; }
@@ -49,14 +49,14 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public string FilterText
         {
-            get { return filterText; }
-            set { SetProperty(ref filterText, value); }
+            get => filterText;
+            set => SetProperty(ref filterText, value);
         }
 
         public Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>> Sort
         {
-            get { return sort; }
-            set { SetProperty(ref sort, value); }
+            get => sort;
+            set => SetProperty(ref sort, value);
         }
 
         public void Focus()

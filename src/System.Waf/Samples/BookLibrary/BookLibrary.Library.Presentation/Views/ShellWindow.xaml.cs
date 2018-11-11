@@ -5,7 +5,7 @@ using Waf.BookLibrary.Library.Applications.Views;
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(IShellView))]
-    public partial class ShellWindow : Window, IShellView
+    public partial class ShellWindow : IShellView
     {
         public ShellWindow()
         {
@@ -14,7 +14,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         public bool IsMaximized
         {
-            get { return WindowState == WindowState.Maximized; }
+            get => WindowState == WindowState.Maximized;
             set
             {
                 if (value)

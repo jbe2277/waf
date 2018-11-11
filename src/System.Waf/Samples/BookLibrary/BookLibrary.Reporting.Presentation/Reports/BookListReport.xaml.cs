@@ -1,11 +1,10 @@
-﻿using System.Windows.Controls;
-using Waf.BookLibrary.Reporting.Applications.Reports;
+﻿using Waf.BookLibrary.Reporting.Applications.Reports;
 using System.ComponentModel.Composition;
 
 namespace Waf.BookLibrary.Reporting.Presentation.Reports
 {
     [Export(typeof(IBookListReport)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class BookListReport : UserControl, IBookListReport
+    public partial class BookListReport : IBookListReport
     {
         private object reportData;
         
@@ -20,7 +19,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.Reports
 
         public object ReportData
         {
-            get { return reportData; }
+            get => reportData;
             set
             {
                 reportData = value;

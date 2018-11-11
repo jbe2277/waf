@@ -10,14 +10,14 @@ using Waf.BookLibrary.Library.Domain;
 namespace Waf.BookLibrary.Library.Presentation.Views
 {
     [Export(typeof(ILendToView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class LendToWindow : Window, ILendToView
+    public partial class LendToWindow : ILendToView
     {
         private readonly Lazy<LendToViewModel> viewModel;
         
         public LendToWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<LendToViewModel>(() => ViewHelper.GetViewModel<LendToViewModel>(this));
+            viewModel = new Lazy<LendToViewModel>(() => this.GetViewModel<LendToViewModel>());
         }
 
         private LendToViewModel ViewModel => viewModel.Value;
@@ -30,8 +30,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void PersonsListMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var element = e.OriginalSource as FrameworkElement;
-            if (element?.DataContext is Person)
+            if (e.OriginalSource is FrameworkElement element && element?.DataContext is Person)
             {
                 ViewModel.OkCommand.Execute(null);
             }

@@ -29,8 +29,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public Book Book
         {
-            get { return book; }
-            set 
+            get => book;
+            set
             {
                 if (SetProperty(ref book, value))
                 {
@@ -44,7 +44,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public bool IsWasReturned
         {
-            get { return isWasReturned; }
+            get => isWasReturned;
             set
             {
                 if (SetProperty(ref isWasReturned, value))
@@ -53,10 +53,10 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
                 }
             }
         }
-        
+
         public bool IsLendTo
         {
-            get { return isLendTo; }
+            get => isLendTo;
             set
             {
                 if (SetProperty(ref isLendTo, value))
@@ -65,11 +65,11 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
                 }
             }
         }
-        
+
         public Person SelectedPerson
         {
-            get { return selectedPerson; }
-            set { SetProperty(ref selectedPerson, value); }
+            get => selectedPerson;
+            set => SetProperty(ref selectedPerson, value);
         }
 
         public bool ShowDialog(object owner)

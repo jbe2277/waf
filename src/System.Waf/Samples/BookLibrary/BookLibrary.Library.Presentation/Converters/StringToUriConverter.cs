@@ -9,19 +9,12 @@ namespace Waf.BookLibrary.Library.Presentation.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Uri uri;
-            if (Uri.TryCreate(value as string ?? "", UriKind.RelativeOrAbsolute, out uri))
-            {
-                return uri;
-            }
-            return DependencyProperty.UnsetValue;
+            return Uri.TryCreate(value as string ?? "", UriKind.RelativeOrAbsolute, out Uri uri) ? uri : DependencyProperty.UnsetValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string s = value as string;
-            if (s != null) { return s; }
-
+            if (value is string s) { return s; }
             return ((Uri)value).OriginalString;
         }
     }

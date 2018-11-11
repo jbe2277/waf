@@ -83,8 +83,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private void RemovePerson()
         {
             var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
-            var nextPerson = CollectionHelper.GetNextElementOrDefault(personListViewModel.Persons.Except(personsToExclude),
-                personListViewModel.SelectedPerson);
+            var nextPerson = personListViewModel.Persons.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
             foreach (Person person in personListViewModel.SelectedPersons.ToArray())
             {
                 entityService.Persons.Remove(person);

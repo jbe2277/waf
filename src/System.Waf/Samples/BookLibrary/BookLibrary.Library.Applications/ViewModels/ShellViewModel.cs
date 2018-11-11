@@ -54,8 +54,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public bool IsValid
         {
-            get { return isValid; }
-            set { SetProperty(ref isValid, value); }
+            get => isValid;
+            set => SetProperty(ref isValid, value);
         }
 
         public string DatabasePath { get; set; } = Resources.NotAvailable;

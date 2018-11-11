@@ -80,7 +80,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personListViewModel.AddSelectedPerson(entityService.Persons.Last());
             Assert.IsTrue(personListViewModel.RemoveCommand.CanExecute(null));
             personListViewModel.RemoveCommand.Execute(null);
-            AssertHelper.SequenceEqual(new Person[] { harry }, entityService.Persons);
+            AssertHelper.SequenceEqual(new[] { harry }, entityService.Persons);
             Assert.AreEqual(harry, personViewModel.Person);
             Assert.IsTrue(personListView.FirstCellHasFocus);
 

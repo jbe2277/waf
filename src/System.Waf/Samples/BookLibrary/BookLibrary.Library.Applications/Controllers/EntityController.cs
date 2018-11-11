@@ -121,12 +121,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         internal static string EntityToString(object entity)
         {
-            var formattableEntity = entity as IFormattable;
-            if (formattableEntity != null)
-            {
-                return formattableEntity.ToString(null, CultureInfo.CurrentCulture);
-            }
-            return entity.ToString();
+            return entity is IFormattable formattableEntity ? formattableEntity.ToString(null, CultureInfo.CurrentCulture) : entity.ToString();
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Waf.BookLibrary.Reporting.Applications.ViewModels
 
         public object Report
         {
-            get { return report; }
-            set { SetProperty(ref report, value); }
+            get => report;
+            set => SetProperty(ref report, value);
         }
 
         public ICommand CreateBookListReportCommand { get; set; }

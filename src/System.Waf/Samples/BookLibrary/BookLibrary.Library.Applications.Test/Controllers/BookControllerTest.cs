@@ -76,7 +76,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookListViewModel.AddSelectedBook(bookListViewModel.Books.Last());
             Assert.IsTrue(bookListViewModel.RemoveCommand.CanExecute(null));
             bookListViewModel.RemoveCommand.Execute(null);
-            AssertHelper.SequenceEqual(new Book[] { fellowship }, entityService.Books);
+            AssertHelper.SequenceEqual(new[] { fellowship }, entityService.Books);
             Assert.AreEqual(fellowship, bookViewModel.Book);
             Assert.IsTrue(bookListView.FirstCellHasFocus);
 
