@@ -11,8 +11,7 @@ namespace Waf.Writer.Presentation.Converters
         
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string fileName = value as string;
-            if (!string.IsNullOrEmpty(fileName))
+            if (value is string fileName && !string.IsNullOrEmpty(fileName))
             {
                 fileName = Path.GetFileName(fileName);
                 

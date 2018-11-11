@@ -112,8 +112,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void OpenCommand(object commandParameter)
         {
-            string fileName = commandParameter as string;
-            if (!string.IsNullOrEmpty(fileName))
+            if (commandParameter is string fileName && !string.IsNullOrEmpty(fileName))
             {
                 Open(fileName);
             }

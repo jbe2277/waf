@@ -78,14 +78,9 @@ namespace Waf.Writer.Presentation.Views
 
             bool isNumberedList = false;
             bool isBulletList = false;
-            ListItem listItem = null;
-            if (selection.Start.Paragraph != null)
+            if (selection.Start.Paragraph?.Parent is ListItem listItem)
             {
-                listItem = selection.Start.Paragraph.Parent as ListItem;
-            }
-            if (listItem != null)
-            {
-                List list = (List)listItem.Parent;
+                var list = (List)listItem.Parent;
                 isNumberedList = list.MarkerStyle == TextMarkerStyle.Decimal;
                 isBulletList = list.MarkerStyle == TextMarkerStyle.Disc;
             }
