@@ -25,10 +25,10 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets a value that indicates whether the entity has validation errors.
         /// </summary>
-        public bool HasErrors 
-        { 
-            get { return hasErrors; }
-            private set { SetProperty(ref hasErrors, value); }
+        public bool HasErrors
+        {
+            get => hasErrors;
+            private set => SetProperty(ref hasErrors, value);
         }
 
         /// <summary>
@@ -53,8 +53,7 @@ namespace System.Waf.Foundation
         /// <returns>The validation errors for the property or entity.</returns>
         public IEnumerable<ValidationResult> GetErrors(string propertyName)
         {
-            List<ValidationResult> result;
-            if (ErrorsDictionary.TryGetValue(propertyName ?? "", out result))
+            if (ErrorsDictionary.TryGetValue(propertyName ?? "", out var result))
             {
                 return result;
             }

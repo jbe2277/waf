@@ -48,14 +48,11 @@ namespace System.Waf.Foundation
         protected SynchronizingCollectionCore(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory, bool noCollectionChangedHandler)
             : base(new ObservableCollection<T>())
         {
-            if (originalCollection == null) { throw new ArgumentNullException(nameof(originalCollection)); }
-            if (factory == null) { throw new ArgumentNullException(nameof(factory)); }
-
-            this.mapping = new List<Tuple<TOriginal, T>>();
-            this.originalCollection = originalCollection;
-            this.factory = factory;
-            this.itemComparer = EqualityComparer<T>.Default;
-            this.originalItemComparer = EqualityComparer<TOriginal>.Default;
+            mapping = new List<Tuple<TOriginal, T>>();
+            this.originalCollection = originalCollection ?? throw new ArgumentNullException(nameof(originalCollection));
+            this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            itemComparer = EqualityComparer<T>.Default;
+            originalItemComparer = EqualityComparer<TOriginal>.Default;
             this.noCollectionChangedHandler = noCollectionChangedHandler;
 
             if (!noCollectionChangedHandler)

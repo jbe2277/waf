@@ -45,7 +45,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentException">The value must be equal or larger than 1.</exception>
         public int MaxFilesNumber
         {
-            get { return maxFilesNumber; }
+            get => maxFilesNumber;
             set
             {
                 if (maxFilesNumber != value)
@@ -89,8 +89,7 @@ namespace System.Waf.Applications
         {
             if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName)); }
 
-            RecentFile recentFile = recentFiles.FirstOrDefault(r => r.Path == fileName);
-            
+            var recentFile = recentFiles.FirstOrDefault(r => r.Path == fileName);
             if (recentFile != null)
             {
                 int oldIndex = recentFiles.IndexOf(recentFile);
@@ -141,7 +140,7 @@ namespace System.Waf.Applications
             reader.ReadToDescendant("RecentFile");
             while (reader.MoveToContent() == XmlNodeType.Element && reader.LocalName == "RecentFile")
             {
-                RecentFile recentFile = new RecentFile();
+                var recentFile = new RecentFile();
                 ((IXmlSerializable)recentFile).ReadXml(reader);
                 Add(recentFile);
             }
@@ -207,7 +206,7 @@ namespace System.Waf.Applications
         {
             if (e.PropertyName == nameof(RecentFile.IsPinned))
             {
-                RecentFile recentFile = (RecentFile)sender;
+                var recentFile = (RecentFile)sender;
                 int oldIndex = recentFiles.IndexOf(recentFile);
                 if (recentFile.IsPinned)
                 {

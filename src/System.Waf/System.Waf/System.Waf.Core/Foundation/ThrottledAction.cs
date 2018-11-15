@@ -55,9 +55,8 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentNullException">The argument action must not be null.</exception>
         public ThrottledAction(Action action, ThrottledActionMode mode, TimeSpan delayTime)
         {
-            if (action == null) { throw new ArgumentNullException(nameof(action)); }
-            this.taskScheduler = SynchronizationContext.Current != null ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
-            this.action = action;
+            taskScheduler = SynchronizationContext.Current != null ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.mode = mode;
             this.delayTime = delayTime;
         }

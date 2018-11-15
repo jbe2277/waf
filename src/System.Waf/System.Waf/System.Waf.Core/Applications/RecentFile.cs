@@ -29,7 +29,6 @@ namespace System.Waf.Applications
         public RecentFile(string path)
         {
             if (string.IsNullOrEmpty(path)) { throw new ArgumentException("The argument path must not be null or empty.", nameof(path)); }
-
             this.path = path;
         }
 
@@ -39,8 +38,8 @@ namespace System.Waf.Applications
         /// </summary>
         public bool IsPinned
         {
-            get { return isPinned; }
-            set { SetProperty(ref isPinned, value); }
+            get => isPinned;
+            set => SetProperty(ref isPinned, value);
         }
 
         /// <summary>

@@ -35,8 +35,7 @@ namespace System.Waf.Foundation
         public static int IndexOf<T>(this IEnumerable<T> collection, T item)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            var list = collection as IList<T>;
-            if (list != null) return list.IndexOf(item);
+            if (collection is IList<T> list) return list.IndexOf(item);
 
             int i = 0;
             foreach (T localItem in collection)

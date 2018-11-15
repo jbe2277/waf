@@ -51,9 +51,7 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
         public AsyncDelegateCommand(Func<object, Task> execute, Func<object, bool> canExecute)
         {
-            if (execute == null) { throw new ArgumentNullException(nameof(execute)); }
-
-            this.execute = execute;
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
         }
 
@@ -65,7 +63,7 @@ namespace System.Waf.Applications
 
         private bool IsExecuting
         {
-            get { return isExecuting; }
+            get => isExecuting;
             set
             {
                 if (isExecuting != value)

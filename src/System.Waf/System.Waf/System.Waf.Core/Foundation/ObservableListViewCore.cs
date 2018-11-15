@@ -65,8 +65,7 @@ namespace System.Waf.Foundation
         public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter, 
             Func<IEnumerable<T>, IOrderedEnumerable<T>> sort, bool noCollectionChangedHandler) : base(originalList)
         {
-            if (originalList == null) { throw new ArgumentNullException(nameof(originalList)); }
-            this.originalList = originalList;
+            this.originalList = originalList ?? throw new ArgumentNullException(nameof(originalList));
             this.comparer = comparer ?? EqualityComparer<T>.Default;
             this.filter = filter;
             this.sort = sort;
@@ -89,7 +88,7 @@ namespace System.Waf.Foundation
         /// </summary>
         public Predicate<T> Filter
         {
-            get { return filter; }
+            get => filter;
             set
             {
                 if (filter != value)
@@ -105,7 +104,7 @@ namespace System.Waf.Foundation
         /// </summary>
         public Func<IEnumerable<T>, IOrderedEnumerable<T>> Sort
         {
-            get { return sort; }
+            get => sort;
             set
             {
                 if (sort != value)

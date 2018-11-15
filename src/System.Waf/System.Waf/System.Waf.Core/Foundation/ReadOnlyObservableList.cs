@@ -30,8 +30,8 @@ namespace System.Waf.Foundation
         /// </summary>
         public new event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add { base.CollectionChanged += value; }
-            remove { base.CollectionChanged -= value; }
+            add => base.CollectionChanged += value;
+            remove => base.CollectionChanged -= value;
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace System.Waf.Foundation
         /// </summary>
         public new event PropertyChangedEventHandler PropertyChanged
         {
-            add { base.PropertyChanged += value; }
-            remove { base.PropertyChanged -= value; }
+            add => base.PropertyChanged += value;
+            remove => base.PropertyChanged -= value;
         }
     }
 }
