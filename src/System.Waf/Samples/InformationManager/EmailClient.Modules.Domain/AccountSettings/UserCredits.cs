@@ -13,14 +13,14 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [Required, Display(Name = "Username")]
         public string UserName
         {
-            get { return userName; }
-            set { SetPropertyAndValidate(ref userName, value); }
+            get => userName;
+            set => SetPropertyAndValidate(ref userName, value);
         }
 
         public string Password
         {
-            get { return password; }
-            set { SetPropertyAndValidate(ref password, value); }
+            get => password;
+            set => SetPropertyAndValidate(ref password, value);
         }
 
         public virtual UserCredits Clone()

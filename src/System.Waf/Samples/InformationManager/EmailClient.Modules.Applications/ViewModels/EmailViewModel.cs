@@ -17,8 +17,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public Email Email
         {
-            get { return email; }
-            set { SetProperty(ref email, value); }
+            get => email;
+            set => SetProperty(ref email, value);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<EmailAccountsViewModel>();
             var root = new EmailClientRoot();
-            root = new EmailClientRoot();
             root.AddEmailAccount(new EmailAccount());
             root.AddEmailAccount(new EmailAccount());
             viewModel.EmailClientRoot = root;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 using System.Waf.UnitTesting;

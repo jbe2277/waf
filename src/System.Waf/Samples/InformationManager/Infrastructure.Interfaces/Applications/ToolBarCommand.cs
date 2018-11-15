@@ -18,9 +18,8 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         /// <exception cref="ArgumentException">text must not be null or empty.</exception>
         public ToolBarCommand(ICommand command, string text, string toolTip = null)
         {
-            if (command == null) { throw new ArgumentNullException(nameof(command)); }
+            Command = command ?? throw new ArgumentNullException(nameof(command));
             if (string.IsNullOrEmpty(text)) { throw new ArgumentException("text must not be null or empty.", nameof(text)); }
-            Command = command;
             Text = text;
             ToolTip = toolTip ?? "";
         }

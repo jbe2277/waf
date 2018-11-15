@@ -32,27 +32,27 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public EmailType EmailType
         {
-            get { return emailType; }
-            set { SetPropertyAndValidate(ref emailType, value); }
+            get => emailType;
+            set => SetPropertyAndValidate(ref emailType, value);
         }
 
         [StringLength(255), DisplayName("Title")]
         public string Title
         {
-            get { return title; }
-            set { SetPropertyAndValidate(ref title, value); }
+            get => title;
+            set => SetPropertyAndValidate(ref title, value);
         }
 
         [StringLength(255), DisplayName("From")]
         public string From
         {
-            get { return from; }
-            set { SetPropertyAndValidate(ref from, value); }
+            get => from;
+            set => SetPropertyAndValidate(ref from, value);
         }
 
         public IEnumerable<string> To
         {
-            get { return to; }
+            get => to;
             set
             {
                 if (value == null) { throw new ArgumentNullException("value"); }
@@ -67,7 +67,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public IEnumerable<string> CC
         {
-            get { return cc; }
+            get => cc;
             set
             {
                 if (value == null) { throw new ArgumentNullException("value"); }
@@ -82,7 +82,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public IEnumerable<string> Bcc
         {
-            get { return bcc; }
+            get => bcc;
             set
             {
                 if (value == null) { throw new ArgumentNullException("value"); }
@@ -97,22 +97,22 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public DateTime Sent
         {
-            get { return sent; }
-            set { SetPropertyAndValidate(ref sent, value); }
+            get => sent;
+            set => SetPropertyAndValidate(ref sent, value);
         }
 
         public string Message
         {
-            get { return message; }
-            set { SetPropertyAndValidate(ref message, value); }
+            get => message;
+            set => SetPropertyAndValidate(ref message, value);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var validationResults = new List<ValidationResult>();
-            foreach (string email in To) { ValidateEmail(validationResults, email, nameof(To), "To"); }
-            foreach (string email in CC) { ValidateEmail(validationResults, email, nameof(CC), "CC"); }
-            foreach (string email in Bcc) { ValidateEmail(validationResults, email, nameof(Bcc), "BCC"); }
+            foreach (var email in To) { ValidateEmail(validationResults, email, nameof(To), "To"); }
+            foreach (var email in CC) { ValidateEmail(validationResults, email, nameof(CC), "CC"); }
+            foreach (var email in Bcc) { ValidateEmail(validationResults, email, nameof(Bcc), "BCC"); }
             if (!To.Any() && !CC.Any() && !Bcc.Any())
             {
                 validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To) }));

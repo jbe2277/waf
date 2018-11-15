@@ -52,7 +52,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             var shellViewModel = Container.GetExportedValue<ShellViewModel>();
 
             var emptyCommand = new DelegateCommand(() => { });
-            var newToolBarCommands = new ToolBarCommand[] 
+            var newToolBarCommands = new[] 
             {
                 new ToolBarCommand(emptyCommand, "Command 1"),
                 new ToolBarCommand(emptyCommand, "Command 2")

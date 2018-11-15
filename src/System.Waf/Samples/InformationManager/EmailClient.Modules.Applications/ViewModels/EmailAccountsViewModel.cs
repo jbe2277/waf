@@ -26,8 +26,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public EmailAccount SelectedEmailAccount
         {
-            get { return selectedEmailAccount; }
-            set { SetProperty(ref selectedEmailAccount, value); }
+            get => selectedEmailAccount;
+            set => SetProperty(ref selectedEmailAccount, value);
         }
 
         public void ShowDialog(object owner)

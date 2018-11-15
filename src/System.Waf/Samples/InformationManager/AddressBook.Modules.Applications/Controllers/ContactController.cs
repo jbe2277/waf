@@ -78,7 +78,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         private void DeleteContact()
         {
-            var nextContact = CollectionHelper.GetNextElementOrDefault(ContactListViewModel.Contacts, ContactListViewModel.SelectedContact);
+            var nextContact = ContactListViewModel.Contacts.GetNextElementOrDefault(ContactListViewModel.SelectedContact);
             
             Root.RemoveContact(ContactListViewModel.SelectedContact);
 

@@ -24,16 +24,16 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public Contact SelectedContact
         {
-            get { return selectedContact; }
-            set { SetProperty(ref selectedContact, value); }
+            get => selectedContact;
+            set => SetProperty(ref selectedContact, value);
         }
 
         public ICommand DeleteContactCommand { get; set; }
 
         public string FilterText
         {
-            get { return filterText; }
-            set { SetProperty(ref filterText, value); }
+            get => filterText;
+            set => SetProperty(ref filterText, value);
         }
 
         public void FocusItem()

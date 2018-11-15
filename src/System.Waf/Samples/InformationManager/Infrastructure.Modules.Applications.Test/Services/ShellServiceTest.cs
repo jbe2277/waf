@@ -36,7 +36,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
 
             var mockShellViewModel = (MockShellViewModel)lazyShellViewModel.Value;
             var emptyCommand = new DelegateCommand(() => { });
-            var newToolBarCommands = new ToolBarCommand[] 
+            var newToolBarCommands = new[] 
             {
                 new ToolBarCommand(emptyCommand, "Command 1"),
                 new ToolBarCommand(emptyCommand, "Command 2")

@@ -6,20 +6,19 @@ using System.Windows;
 using System.Windows.Controls;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
-using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Windows.Threading;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(IEmailListView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class EmailListView : UserControl, IEmailListView
+    public partial class EmailListView : IEmailListView
     {
         private readonly Lazy<EmailListViewModel> viewModel;
         
         public EmailListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<EmailListViewModel>(() => ViewHelper.GetViewModel<EmailListViewModel>(this));
+            viewModel = new Lazy<EmailListViewModel>(() => this.GetViewModel<EmailListViewModel>());
             Loaded += LoadedHandler;
         }
 

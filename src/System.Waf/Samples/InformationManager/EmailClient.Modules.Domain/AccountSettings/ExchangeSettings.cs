@@ -12,15 +12,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [Required, Display(Name = "Exchange Server")]
         public string ServerPath
         {
-            get { return serverPath; }
-            set { SetPropertyAndValidate(ref serverPath, value); }
+            get => serverPath;
+            set => SetPropertyAndValidate(ref serverPath, value);
         }
 
         [Required, Display(Name = "User Name")]
         public string UserName
         {
-            get { return userName; }
-            set { SetPropertyAndValidate(ref userName, value); }
+            get => userName;
+            set => SetPropertyAndValidate(ref userName, value);
         }
 
         public override EmailAccountSettings Clone()

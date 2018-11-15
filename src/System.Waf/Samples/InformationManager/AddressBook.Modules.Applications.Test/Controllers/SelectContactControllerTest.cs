@@ -51,8 +51,8 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
         public void SelectContactAndCancelTest()
         {
             var root = new AddressBookRoot();
-            var contact1 = root.AddNewContact();
-            var contact2 = root.AddNewContact();
+            root.AddNewContact();
+            root.AddNewContact();
 
             var controller = Container.GetExportedValue<SelectContactController>();
 

@@ -5,7 +5,7 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(IEditEmailAccountView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class EditEmailAccountWindow : Window, IEditEmailAccountView
+    public partial class EditEmailAccountWindow : IEditEmailAccountView
     {
         public EditEmailAccountWindow()
         {

@@ -21,7 +21,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public EmailAccount EmailAccount
         {
-            get { return emailAccount; }
+            get => emailAccount;
             set
             {
                 if (emailAccount != value)
@@ -42,8 +42,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public bool IsPop3Checked
         {
-            get { return isPop3Checked; }
-            set 
+            get => isPop3Checked;
+            set
             {
                 if (SetProperty(ref isPop3Checked, value))
                 {
@@ -54,8 +54,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public bool IsExchangeChecked
         {
-            get { return isExchangeChecked; }
-            set 
+            get => isExchangeChecked;
+            set
             {
                 if (SetProperty(ref isExchangeChecked, value))
                 {

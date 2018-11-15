@@ -10,7 +10,7 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(IEmailAccountsView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class EmailAccountsWindow : Window, IEmailAccountsView
+    public partial class EmailAccountsWindow : IEmailAccountsView
     {
         private readonly Lazy<EmailAccountsViewModel> viewModel;
 
@@ -28,8 +28,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 
         private void EmailAccountsGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var element = e.OriginalSource as FrameworkElement;
-            if (element?.DataContext is EmailAccount)
+            if (e.OriginalSource is FrameworkElement element && element.DataContext is EmailAccount)
             {
                 viewModel.Value.EditAccountCommand.Execute(null);
             }

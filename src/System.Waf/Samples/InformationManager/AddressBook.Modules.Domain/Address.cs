@@ -14,32 +14,32 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
 
         public string Street
         {
-            get { return street; }
-            set { SetPropertyAndValidate(ref street, value); }
+            get => street;
+            set => SetPropertyAndValidate(ref street, value);
         }
 
         public string City
         {
-            get { return city; }
-            set { SetPropertyAndValidate(ref city, value); }
+            get => city;
+            set => SetPropertyAndValidate(ref city, value);
         }
 
         public string State
         {
-            get { return state; }
-            set { SetPropertyAndValidate(ref state, value); }
+            get => state;
+            set => SetPropertyAndValidate(ref state, value);
         }
 
         public string PostalCode
         {
-            get { return postalCode; }
-            set { SetPropertyAndValidate(ref postalCode, value); }
+            get => postalCode;
+            set => SetPropertyAndValidate(ref postalCode, value);
         }
 
         public string Country
         {
-            get { return country; }
-            set { SetPropertyAndValidate(ref country, value); }
+            get => country;
+            set => SetPropertyAndValidate(ref country, value);
         }
     }
 }

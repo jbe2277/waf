@@ -22,8 +22,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
 
         public object ContentView
         {
-            get { return contentView; }
-            set { SetProperty(ref contentView, value); }
+            get => contentView;
+            set => SetProperty(ref contentView, value);
         }
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)

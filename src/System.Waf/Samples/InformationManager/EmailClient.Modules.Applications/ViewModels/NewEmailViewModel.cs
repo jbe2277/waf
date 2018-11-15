@@ -34,13 +34,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public EmailAccount SelectedEmailAccount
         {
-            get { return selectedEmailAccount; }
-            set { SetProperty(ref selectedEmailAccount, value); }
+            get => selectedEmailAccount;
+            set => SetProperty(ref selectedEmailAccount, value);
         }
 
         public Email Email
         {
-            get { return email; }
+            get => email;
             set
             {
                 if (email != value)
@@ -62,12 +62,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public string To
         {
-            get { return to; }
+            get => to;
             set
             {
                 if (to != value)
                 {
-                    IReadOnlyList<string> emails = ParseEmails(value);
+                    var emails = ParseEmails(value);
                     to = FormatEmails(emails);
                     Email.To = emails;
                     RaisePropertyChanged();
@@ -77,12 +77,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public string CC
         {
-            get { return cc; }
+            get => cc;
             set
             {
                 if (cc != value)
                 {
-                    IReadOnlyList<string> emails = ParseEmails(value);
+                    var emails = ParseEmails(value);
                     cc = FormatEmails(emails);
                     Email.CC = emails;
                     RaisePropertyChanged();
@@ -92,12 +92,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public string Bcc
         {
-            get { return bcc; }
+            get => bcc;
             set
             {
                 if (bcc != value)
                 {
-                    IReadOnlyList<string> emails = ParseEmails(value);
+                    var emails = ParseEmails(value);
                     bcc = FormatEmails(emails);
                     Email.Bcc = emails;
                     RaisePropertyChanged();

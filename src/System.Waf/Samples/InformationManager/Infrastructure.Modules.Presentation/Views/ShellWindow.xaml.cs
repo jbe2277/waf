@@ -12,7 +12,7 @@ using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
 {
     [Export(typeof(IShellView))]
-    public partial class ShellWindow : Window, IShellView
+    public partial class ShellWindow : IShellView
     {
         private readonly Lazy<ShellViewModel> viewModel;
         private readonly List<Control> dynamicToolBarItems;
@@ -20,7 +20,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
         public ShellWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<ShellViewModel>(() => ViewHelper.GetViewModel<ShellViewModel>(this));
+            viewModel = new Lazy<ShellViewModel>(() => this.GetViewModel<ShellViewModel>());
             dynamicToolBarItems = new List<Control>();
             Loaded += LoadedHandler;
         }
@@ -31,7 +31,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
 
         public bool IsMaximized
         {
-            get { return WindowState == WindowState.Maximized; }
+            get => WindowState == WindowState.Maximized;
             set
             {
                 if (value)

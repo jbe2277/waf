@@ -17,14 +17,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public object ContactListView
         {
-            get { return contactListView; }
-            set { SetProperty(ref contactListView, value); }
+            get => contactListView;
+            set => SetProperty(ref contactListView, value);
         }
 
         public object ContactView
         {
-            get { return contactView; }
-            set { SetProperty(ref contactView, value); }
+            get => contactView;
+            set => SetProperty(ref contactView, value);
         }
     }
 }

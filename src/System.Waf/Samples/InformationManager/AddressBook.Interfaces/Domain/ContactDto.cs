@@ -1,7 +1,7 @@
 ﻿namespace Waf.InformationManager.AddressBook.Interfaces.Domain
 {
     /// <summary>
-    /// Contains contact informations. This is a data transfer object that can be used to pass information over module boundaries.
+    /// Contains contact information. This is a data transfer object that can be used to pass information over module boundaries.
     /// </summary>
     public sealed class ContactDto
     {

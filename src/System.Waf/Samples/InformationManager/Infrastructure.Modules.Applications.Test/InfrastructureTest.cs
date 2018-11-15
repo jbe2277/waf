@@ -11,8 +11,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications
     [TestClass]
     public abstract class InfrastructureTest : ApplicationsTest
     {
-        public TestContext TestContext { get; set; }
-
         protected override void OnCatalogInitialize(AggregateCatalog catalog)
         {
             base.OnCatalogInitialize(catalog);

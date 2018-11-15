@@ -17,8 +17,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public Contact Contact
         {
-            get { return contact; }
-            set { SetProperty(ref contact, value); }
+            get => contact;
+            set => SetProperty(ref contact, value);
         }
     }
 }

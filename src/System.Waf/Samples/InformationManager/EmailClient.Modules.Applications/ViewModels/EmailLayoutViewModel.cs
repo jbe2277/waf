@@ -17,14 +17,14 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public object EmailListView
         {
-            get { return emailListView; }
-            set { SetProperty(ref emailListView, value); }
+            get => emailListView;
+            set => SetProperty(ref emailListView, value);
         }
 
         public object EmailView
         {
-            get { return emailView; }
-            set { SetProperty(ref emailView, value); }
+            get => emailView;
+            set => SetProperty(ref emailView, value);
         }
     }
 }

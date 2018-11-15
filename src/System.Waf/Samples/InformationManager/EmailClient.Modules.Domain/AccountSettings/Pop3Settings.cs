@@ -22,8 +22,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [Required, Display(Name = "POP3 Server")]
         public string Pop3ServerPath
         {
-            get { return pop3ServerPath; }
-            set { SetPropertyAndValidate(ref pop3ServerPath, value); }
+            get => pop3ServerPath;
+            set => SetPropertyAndValidate(ref pop3ServerPath, value);
         }
 
         public UserCredits Pop3UserCredits => pop3UserCredits;
@@ -31,8 +31,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         [Required, Display(Name = "SMTP Server")]
         public string SmtpServerPath
         {
-            get { return smtpServerPath; }
-            set { SetPropertyAndValidate(ref smtpServerPath, value); }
+            get => smtpServerPath;
+            set => SetPropertyAndValidate(ref smtpServerPath, value);
         }
 
         public UserCredits SmtpUserCredits => smtpUserCredits;

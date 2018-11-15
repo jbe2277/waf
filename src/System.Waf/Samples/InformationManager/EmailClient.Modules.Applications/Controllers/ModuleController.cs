@@ -30,7 +30,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly ExportFactory<NewEmailController> newEmailControllerFactory;
         private readonly DelegateCommand newEmailCommand;
         private readonly Lazy<DataContractSerializer> serializer;
-        private readonly List<ItemCountSynchronizer> itemCountSychronizers;
+        private readonly List<ItemCountSynchronizer> itemCountSynchronizers;
         private EmailFolderController activeEmailFolderController;
         
         [ImportingConstructor]
@@ -45,7 +45,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             this.emailFolderControllerFactory = emailFolderControllerFactory;
             this.newEmailControllerFactory = newEmailControllerFactory;
             newEmailCommand = new DelegateCommand(NewEmail);
-            itemCountSychronizers = new List<ItemCountSynchronizer>();
+            itemCountSynchronizers = new List<ItemCountSynchronizer>();
             serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
         }
 
@@ -71,15 +71,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailAccountsController.Root = Root;
             
             INavigationNode node = navigationService.AddNavigationNode("Inbox", ShowInbox, CloseCurrentView, 1, 1);
-            itemCountSychronizers.Add(new ItemCountSynchronizer(node, Root.Inbox));
+            itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Inbox));
             node = navigationService.AddNavigationNode("Outbox", ShowOutbox, CloseCurrentView, 1, 2);
-            itemCountSychronizers.Add(new ItemCountSynchronizer(node, Root.Outbox));
+            itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Outbox));
             node = navigationService.AddNavigationNode("Sent", ShowSentEmails, CloseCurrentView, 1, 3);
-            itemCountSychronizers.Add(new ItemCountSynchronizer(node, Root.Sent));
+            itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Sent));
             node = navigationService.AddNavigationNode("Drafts", ShowDrafts, CloseCurrentView, 1, 4);
-            itemCountSychronizers.Add(new ItemCountSynchronizer(node, Root.Drafts));
+            itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Drafts));
             node = navigationService.AddNavigationNode("Deleted", ShowDeletedEmails, CloseCurrentView, 1, 5);
-            itemCountSychronizers.Add(new ItemCountSynchronizer(node, Root.Deleted));
+            itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Deleted));
         }
 
         public void Run()

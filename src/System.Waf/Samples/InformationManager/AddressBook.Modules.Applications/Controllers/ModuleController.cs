@@ -102,7 +102,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             activeContactController = null;
         }
 
-        private DataContractSerializer CreateDataContractSerializer()
+        private static DataContractSerializer CreateDataContractSerializer()
         {
             return new DataContractSerializer(typeof(AddressBookRoot));
         }

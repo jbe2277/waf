@@ -25,16 +25,16 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public Email SelectedEmail
         {
-            get { return selectedEmail; }
-            set { SetProperty(ref selectedEmail, value); }
+            get => selectedEmail;
+            set => SetProperty(ref selectedEmail, value);
         }
 
         public ICommand DeleteEmailCommand { get; set; }
 
         public string FilterText
         {
-            get { return filterText; }
-            set { SetProperty(ref filterText, value); }
+            get => filterText;
+            set => SetProperty(ref filterText, value);
         }
 
         public void FocusItem()

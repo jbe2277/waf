@@ -23,33 +23,33 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         [Required]
         public string Firstname
         {
-            get { return firstname; }
-            set { SetPropertyAndValidate(ref firstname, value); }
+            get => firstname;
+            set => SetPropertyAndValidate(ref firstname, value);
         }
 
         public string Lastname
         {
-            get { return lastname; }
-            set { SetPropertyAndValidate(ref lastname, value); }
+            get => lastname;
+            set => SetPropertyAndValidate(ref lastname, value);
         }
 
         public string Company
         {
-            get { return company; }
-            set { SetPropertyAndValidate(ref company, value); }
+            get => company;
+            set => SetPropertyAndValidate(ref company, value);
         }
 
         [EmailAddress]
         public string Email
         {
-            get { return email; }
-            set { SetPropertyAndValidate(ref email, value); }
+            get => email;
+            set => SetPropertyAndValidate(ref email, value);
         }
 
         public string Phone
         {
-            get { return phone; }
-            set { SetPropertyAndValidate(ref phone, value); }
+            get => phone;
+            set => SetPropertyAndValidate(ref phone, value);
         }
 
         public Address Address => address;

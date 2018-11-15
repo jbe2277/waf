@@ -67,7 +67,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void DeleteEmail()
         {
-            var nextEmail = CollectionHelper.GetNextElementOrDefault(EmailListViewModel.Emails, EmailListViewModel.SelectedEmail);
+            var nextEmail = EmailListViewModel.Emails.GetNextElementOrDefault(EmailListViewModel.SelectedEmail);
             EmailFolder.RemoveEmail(EmailListViewModel.SelectedEmail);
             EmailListViewModel.SelectedEmail = nextEmail ?? EmailListViewModel.Emails.LastOrDefault();
             EmailListViewModel.FocusItem();

@@ -14,22 +14,22 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         [Required, Display(Name = "Name")]
         public string Name
         {
-            get { return name; }
-            set { SetPropertyAndValidate(ref name, value); }
+            get => name;
+            set => SetPropertyAndValidate(ref name, value);
         }
 
         [Required, StringLength(100), Display(Name = "Email Address")]
         [EmailAddress]
         public string Email
         {
-            get { return email; }
-            set { SetPropertyAndValidate(ref email, value); }
+            get => email;
+            set => SetPropertyAndValidate(ref email, value);
         }
 
         public EmailAccountSettings EmailAccountSettings
         {
-            get { return emailAccountSettings; }
-            set { SetPropertyAndValidate(ref emailAccountSettings, value); }
+            get => emailAccountSettings;
+            set => SetPropertyAndValidate(ref emailAccountSettings, value);
         }
 
         public virtual EmailAccount Clone()

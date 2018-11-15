@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(IBasicEmailAccountView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class BasicEmailAccountView : UserControl, IBasicEmailAccountView
+    public partial class BasicEmailAccountView : IBasicEmailAccountView
     {
         public BasicEmailAccountView()
         {

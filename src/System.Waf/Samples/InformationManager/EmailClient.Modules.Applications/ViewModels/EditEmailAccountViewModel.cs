@@ -23,20 +23,20 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public object ContentView
         {
-            get { return contentView; }
-            set { SetProperty(ref contentView, value); }
+            get => contentView;
+            set => SetProperty(ref contentView, value);
         }
 
         public bool IsValid
         {
-            get { return isValid; }
-            set { SetProperty(ref isValid, value); }
+            get => isValid;
+            set => SetProperty(ref isValid, value);
         }
 
         public bool IsLastPage
         {
-            get { return isLastPage; }
-            set { SetProperty(ref isLastPage, value); }
+            get => isLastPage;
+            set => SetProperty(ref isLastPage, value);
         }
 
         public void ShowDialog(object owner)

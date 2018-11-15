@@ -11,14 +11,14 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(IPop3SettingsView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class Pop3SettingsView : UserControl, IPop3SettingsView
+    public partial class Pop3SettingsView : IPop3SettingsView
     {
         private readonly Lazy<Pop3SettingsViewModel> viewModel;
 
         public Pop3SettingsView()
         {
             InitializeComponent();
-            viewModel = new Lazy<Pop3SettingsViewModel>(() => ViewHelper.GetViewModel<Pop3SettingsViewModel>(this));
+            viewModel = new Lazy<Pop3SettingsViewModel>(() => this.GetViewModel<Pop3SettingsViewModel>());
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
         }

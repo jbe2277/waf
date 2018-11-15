@@ -17,9 +17,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
         }
 
-        public Pop3Settings Model 
-        { 
-            get { return model; }
+        public Pop3Settings Model
+        {
+            get => model;
             set
             {
                 if (SetProperty(ref model, value))
@@ -31,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public bool UseSameUserCredits
         {
-            get { return useSameUserCredits; }
+            get => useSameUserCredits;
             set
             {
                 if (SetProperty(ref useSameUserCredits, value))

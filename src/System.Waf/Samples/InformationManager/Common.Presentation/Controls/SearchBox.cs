@@ -30,8 +30,8 @@ namespace Waf.InformationManager.Common.Presentation.Controls
         /// </summary>
         public string SearchText
         {
-            get { return (string)GetValue(SearchTextProperty); }
-            set { SetValue(SearchTextProperty, value); }
+            get => (string)GetValue(SearchTextProperty);
+            set => SetValue(SearchTextProperty, value);
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace Waf.InformationManager.Common.Presentation.Controls
         /// </summary>
         public string HintText
         {
-            get { return (string)GetValue(HintTextProperty); }
-            set { SetValue(HintTextProperty, value); }
+            get => (string)GetValue(HintTextProperty);
+            set => SetValue(HintTextProperty, value);
         }
     }
 }

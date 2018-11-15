@@ -7,7 +7,7 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 {
     [Export(typeof(INewEmailView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class NewEmailWindow : Window, INewEmailView
+    public partial class NewEmailWindow : INewEmailView
     {
         public NewEmailWindow()
         {
@@ -43,7 +43,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
 
         private static void CommitChanges()
         {
-            FrameworkElement element = Keyboard.FocusedElement as FrameworkElement;
+            var element = Keyboard.FocusedElement as FrameworkElement;
             element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             element?.Focus();
         }
