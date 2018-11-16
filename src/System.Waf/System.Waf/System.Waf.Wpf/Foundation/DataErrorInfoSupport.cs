@@ -22,8 +22,7 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentNullException">instance must not be <c>null</c>.</exception>
         public DataErrorInfoSupport(object instance)
         {
-            if (instance == null) { throw new ArgumentNullException(nameof(instance)); }
-            this.instance = instance;
+            this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
         }
 
 
@@ -42,8 +41,7 @@ namespace System.Waf.Foundation
         {
             get
             {
-                List<ValidationResult> validationResults = new List<ValidationResult>();
-
+                var validationResults = new List<ValidationResult>();
                 if (string.IsNullOrEmpty(memberName))
                 {
                     Validator.TryValidateObject(instance, new ValidationContext(instance, null, null), validationResults, true);

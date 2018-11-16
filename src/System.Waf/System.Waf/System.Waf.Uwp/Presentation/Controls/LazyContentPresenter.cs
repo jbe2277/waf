@@ -36,13 +36,13 @@ namespace System.Waf.Presentation.Controls
         /// </summary>
         public Lazy<object> LazyContent
         {
-            get { return (Lazy<object>)GetValue(LazyContentProperty); }
-            set { SetValue(LazyContentProperty, value); }
+            get => (Lazy<object>)GetValue(LazyContentProperty);
+            set => SetValue(LazyContentProperty, value);
         }
 
         private bool IsVisible
         {
-            get { return isVisible; }
+            get => isVisible;
             set
             {
                 if (isVisible != value)
@@ -72,14 +72,7 @@ namespace System.Waf.Presentation.Controls
 
         private void UpdateContent()
         {
-            if (LazyContent != null && IsVisible)
-            {
-                Content = LazyContent.Value;
-            }
-            else
-            {
-                Content = null;
-            }
+            Content = LazyContent != null && IsVisible ? LazyContent.Value : null;
         }
 
         private static void LazyContentPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

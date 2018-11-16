@@ -13,17 +13,17 @@ namespace Test.Waf.Applications
         public void GetViewAndVerifyDataContext()
         {
             IView view1 = new MockView();
-            MockViewModel viewModel1 = new MockViewModel(view1, false);
+            var viewModel1 = new MockViewModel(view1, false);
             Assert.AreEqual(view1, viewModel1.View);
             Assert.IsNull(view1.DataContext);
 
             IView view2 = new MockView();
-            MockViewModel viewModel2 = new MockViewModel(view2, true);
+            var viewModel2 = new MockViewModel(view2, true);
             Assert.AreEqual(view2, viewModel2.View);
             Assert.AreEqual(viewModel2, view2.DataContext);
 
             IView view3 = new MockView();
-            MockViewModel viewModel3 = new MockViewModel(view3);
+            var viewModel3 = new MockViewModel(view3);
             Assert.AreEqual(view3, viewModel3.View);
             Assert.AreEqual(viewModel3, view3.DataContext);
         }

@@ -14,7 +14,7 @@ namespace Test.Waf.Applications
         {
             AssertHelper.ExpectedException<ArgumentException>(() => new RecentFile(null));
 
-            RecentFile recentFile = new RecentFile("Doc1");
+            var recentFile = new RecentFile("Doc1");
             Assert.AreEqual("Doc1", recentFile.Path);
 
             AssertHelper.PropertyChangedEvent(recentFile, x => x.IsPinned, () => recentFile.IsPinned = true);

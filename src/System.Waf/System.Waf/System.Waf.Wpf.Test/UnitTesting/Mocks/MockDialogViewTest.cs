@@ -51,7 +51,7 @@ namespace Test.Waf.UnitTesting.Mocks
 
         private CompositionContainer CreateContainerAndShowView(bool registerUnitTesting)
         {
-            AggregateCatalog catalog = new AggregateCatalog();
+            var catalog = new AggregateCatalog();
             if (registerUnitTesting)
             {
                 catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockDialogView<>).Assembly));

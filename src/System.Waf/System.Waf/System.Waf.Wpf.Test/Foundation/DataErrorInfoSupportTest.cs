@@ -14,7 +14,7 @@ namespace Test.Waf.Foundation
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new DataErrorInfoSupport(null));
 
-            DataErrorInfoSupport dataErrorInfoSupport = new DataErrorInfoSupport(new MockEntity());
+            var dataErrorInfoSupport = new DataErrorInfoSupport(new MockEntity());
             string message;
             AssertHelper.ExpectedException<ArgumentException>(() => message = dataErrorInfoSupport["InvalidMember"]);
         }
@@ -22,8 +22,8 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void ValidateTest()
         {
-            MockEntity mockEntity = new MockEntity();
-            DataErrorInfoSupport dataErrorInfoSupport = new DataErrorInfoSupport(mockEntity);
+            var mockEntity = new MockEntity();
+            var dataErrorInfoSupport = new DataErrorInfoSupport(mockEntity);
             
             Assert.AreEqual("The Firstname field is required.", dataErrorInfoSupport[nameof(MockEntity.Firstname)]);
             Assert.AreEqual("The Lastname field is required.", dataErrorInfoSupport[nameof(MockEntity.Lastname)]);
@@ -43,7 +43,6 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(@"The field Email must match the regular expression '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'.", 
                 dataErrorInfoSupport.Error);
         }
-
 
 
         private class MockEntity

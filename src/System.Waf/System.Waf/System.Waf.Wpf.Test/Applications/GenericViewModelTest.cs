@@ -13,7 +13,7 @@ namespace Test.Waf.Applications
         public void GetView()
         {
             IView view = new MockView();
-            GenericMockViewModel viewModel = new GenericMockViewModel(view);
+            var viewModel = new GenericMockViewModel(view);
             Assert.AreEqual(view, viewModel.ViewInternal);
         }
 
@@ -30,7 +30,6 @@ namespace Test.Waf.Applications
                 : base(view)
             {
             }
-
 
             public IView ViewInternal => ViewCore;
         }

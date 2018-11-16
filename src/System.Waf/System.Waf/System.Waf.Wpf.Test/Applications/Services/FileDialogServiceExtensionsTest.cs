@@ -14,14 +14,14 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ShowOpenFileDialogExtensionTest()
         {
-            FileType rtfFileType = new FileType("RichText Document", ".rtf");
-            FileType xpsFileType = new FileType("XPS Document", ".xps");
+            var rtfFileType = new FileType("RichText Document", ".rtf");
+            var xpsFileType = new FileType("XPS Document", ".xps");
             IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
-            FileDialogResult result = new FileDialogResult("Document 2.rtf", rtfFileType);
+            var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
             object owner = new object();
-            MockFileDialogService service = new MockFileDialogService();
+            var service = new MockFileDialogService();
             service.Result = result;
 
             Assert.AreEqual(result, service.ShowOpenFileDialog(rtfFileType));
@@ -80,14 +80,14 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ShowSaveFileDialogExtensionTest()
         {
-            FileType rtfFileType = new FileType("RichText Document", ".rtf");
-            FileType xpsFileType = new FileType("XPS Document", ".xps");
+            var rtfFileType = new FileType("RichText Document", ".rtf");
+            var xpsFileType = new FileType("XPS Document", ".xps");
             IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
-            FileDialogResult result = new FileDialogResult("Document 2.rtf", rtfFileType);
+            var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
             object owner = new object();
-            MockFileDialogService service = new MockFileDialogService();
+            var service = new MockFileDialogService();
             service.Result = result;
 
             Assert.AreEqual(result, service.ShowSaveFileDialog(rtfFileType));

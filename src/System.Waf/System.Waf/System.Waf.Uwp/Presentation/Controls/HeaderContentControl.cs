@@ -93,10 +93,7 @@ namespace System.Waf.Presentation.Controls
             while (parent != null)
             {
                 parent = VisualTreeHelper.GetParent(parent);
-                if (parent is TAncestorType)
-                {
-                    return (TAncestorType)parent;
-                }
+                if (parent is TAncestorType ancestor) return ancestor;
             }
             return null;
         }

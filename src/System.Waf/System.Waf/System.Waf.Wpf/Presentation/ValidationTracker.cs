@@ -17,8 +17,7 @@ namespace System.Waf.Presentation
         public ValidationTracker(DependencyObject owner)
         {
             this.owner = owner;
-            this.errors = new List<Tuple<object, ValidationError>>();
-
+            errors = new List<Tuple<object, ValidationError>>();
             Validation.AddErrorHandler(owner, ErrorChangedHandler);
         }
 
@@ -29,7 +28,6 @@ namespace System.Waf.Presentation
             {
                 AddError(validationSource, error);
             }
-
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
 
@@ -37,9 +35,9 @@ namespace System.Waf.Presentation
         {
             errors.Add(new Tuple<object, ValidationError>(validationSource, error));
 
-            if (validationSource is FrameworkElement)
+            if (validationSource is FrameworkElement element)
             {
-                ((FrameworkElement)validationSource).Unloaded += ValidationSourceUnloaded;
+                element.Unloaded += ValidationSourceUnloaded;
             }
             else if (validationSource is FrameworkContentElement)
             {
@@ -55,18 +53,17 @@ namespace System.Waf.Presentation
             }
             else
             {
-                Tuple<object, ValidationError> error = errors.FirstOrDefault(err => err.Item1 == e.OriginalSource && err.Item2 == e.Error);
+                var error = errors.FirstOrDefault(err => err.Item1 == e.OriginalSource && err.Item2 == e.Error);
                 if (error != null) { errors.Remove(error); }
             }
-
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
 
         private void ValidationSourceUnloaded(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement)
+            if (sender is FrameworkElement element)
             {
-                ((FrameworkElement)sender).Unloaded -= ValidationSourceUnloaded;
+                element.Unloaded -= ValidationSourceUnloaded;
             }
             else
             {
@@ -74,7 +71,7 @@ namespace System.Waf.Presentation
             }
 
             // An unloaded control might be loaded again. Then we need to restore the validation errors.
-            Tuple<object, ValidationError>[] errorsToRemove = errors.Where(err => err.Item1 == sender).ToArray();
+            var errorsToRemove = errors.Where(err => err.Item1 == sender).ToArray();
             if (errorsToRemove.Any())
             {
                 // It keeps alive because it listens to the Loaded event.

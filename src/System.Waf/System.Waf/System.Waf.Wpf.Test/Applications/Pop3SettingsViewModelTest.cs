@@ -11,19 +11,17 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ViewModelTest()
         {
-            MockPop3SettingsView view = new MockPop3SettingsView();
-            Pop3Settings pop3Settings = new Pop3Settings();
-            Pop3SettingsViewModel viewModel = new Pop3SettingsViewModel(view, pop3Settings);
+            var view = new MockPop3SettingsView();
+            var pop3Settings = new Pop3Settings();
+            var viewModel = new Pop3SettingsViewModel(view, pop3Settings);
 
             Assert.AreEqual(view, viewModel.View);
-
             Assert.AreEqual(viewModel, view.DataContext);
 
             Assert.IsFalse(viewModel.Pop3SettingsServerPathChanged);
             pop3Settings.ServerPath = "pop.mail.com";
             Assert.IsTrue(viewModel.Pop3SettingsServerPathChanged);
         }
-
 
 
         private class Pop3SettingsViewModel : ViewModel<IPop3SettingsView>
@@ -33,9 +31,7 @@ namespace Test.Waf.Applications
                 PropertyChangedEventManager.AddHandler(pop3Settings, Pop3SettingsPropertyChanged, "");
             }
 
-
             public bool Pop3SettingsServerPathChanged { get; set; }
-
 
             private void Pop3SettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
             {
@@ -57,11 +53,10 @@ namespace Test.Waf.Applications
         {
             private string serverPath;
 
-
             public string ServerPath
             {
-                get { return serverPath; }
-                set { SetProperty(ref serverPath, value); }
+                get => serverPath;
+                set => SetProperty(ref serverPath, value);
             }
         }
     }

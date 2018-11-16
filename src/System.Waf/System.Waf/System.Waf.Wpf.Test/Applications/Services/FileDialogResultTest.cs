@@ -9,10 +9,10 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ResultTest()
         {
-            FileDialogResult result = new FileDialogResult();
+            var result = new FileDialogResult();
             Assert.IsFalse(result.IsValid);
 
-            FileType rtfFileType = new FileType("RichText Document", ".rtf");
+            var rtfFileType = new FileType("RichText Document", ".rtf");
             result = new FileDialogResult(@"C:\Document 1.rtf", rtfFileType);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(@"C:\Document 1.rtf", result.FileName);

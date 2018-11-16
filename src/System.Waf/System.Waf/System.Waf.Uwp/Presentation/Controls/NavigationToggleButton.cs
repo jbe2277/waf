@@ -30,8 +30,8 @@ namespace System.Waf.Presentation.Controls
         /// </summary>
         public IconElement Icon
         {
-            get { return (IconElement)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get => (IconElement)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
 

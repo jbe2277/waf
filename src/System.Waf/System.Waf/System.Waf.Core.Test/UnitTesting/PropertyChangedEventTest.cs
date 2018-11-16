@@ -38,7 +38,7 @@ namespace Test.Waf.UnitTesting
         [TestMethod]
         public void PropertyChangedEventTest2()
         {
-            SpecialPerson specialPerson = new SpecialPerson();
+            var specialPerson = new SpecialPerson();
             AssertHelper.ExpectedException<AssertException>(() =>
                 AssertHelper.PropertyChangedEvent(specialPerson, x => x.Name, () => specialPerson.Name = "Luke"));
 
@@ -66,7 +66,7 @@ namespace Test.Waf.UnitTesting
         [TestMethod]
         public void WrongEventSenderTest()
         {
-            SpecialPerson person = new SpecialPerson();
+            var person = new SpecialPerson();
             AssertHelper.ExpectedException<AssertException>(() =>
                 AssertHelper.PropertyChangedEvent(person, x => x.Name, () => person.RaiseWrongNamePropertyChanged()));
         }
@@ -74,7 +74,7 @@ namespace Test.Waf.UnitTesting
         [TestMethod]
         public void WrongExpressionTest()
         {
-            Person person = new Person();
+            var person = new Person();
             
             AssertHelper.ExpectedException<ArgumentException>(() =>
                 AssertHelper.PropertyChangedEvent(person, x => x, () => person.Name = "Luke"));
@@ -92,10 +92,9 @@ namespace Test.Waf.UnitTesting
         {
             private string name;
 
-
             public string Name
             {
-                get { return name; }
+                get => name;
                 set
                 {
                     if (name != value)
@@ -112,13 +111,11 @@ namespace Test.Waf.UnitTesting
             private string name;
             private double weight;
 
-
             public event PropertyChangedEventHandler PropertyChanged;
-
 
             public string Name
             {
-                get { return name; }
+                get => name;
                 set
                 {
                     if (name != value)
@@ -133,7 +130,7 @@ namespace Test.Waf.UnitTesting
 
             public double Weight
             {
-                get { return weight; }
+                get => weight;
                 set
                 {
                     if (weight != value)
@@ -144,7 +141,6 @@ namespace Test.Waf.UnitTesting
                     }
                 }
             }
-
 
             public void RaiseWrongNamePropertyChanged()
             {

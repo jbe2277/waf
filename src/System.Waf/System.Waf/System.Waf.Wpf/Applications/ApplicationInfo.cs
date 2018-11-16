@@ -42,11 +42,10 @@ namespace System.Waf.Applications
 
         private static string GetProductName()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                AssemblyProductAttribute attribute = (AssemblyProductAttribute)Attribute.GetCustomAttribute(
-                    entryAssembly, typeof(AssemblyProductAttribute));
+                var attribute = (AssemblyProductAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyProductAttribute));
                 return attribute?.Product ?? "";
             }
             return "";
@@ -59,11 +58,10 @@ namespace System.Waf.Applications
 
         private static string GetCompany()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                AssemblyCompanyAttribute attribute = (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(
-                    entryAssembly, typeof(AssemblyCompanyAttribute));
+                var attribute = (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCompanyAttribute));
                 return attribute?.Company ?? "";
             }
             return "";
@@ -71,11 +69,10 @@ namespace System.Waf.Applications
 
         private static string GetCopyright()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                AssemblyCopyrightAttribute attribute = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(
-                    entryAssembly, typeof(AssemblyCopyrightAttribute));
+                var attribute = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCopyrightAttribute));
                 return attribute?.Copyright ?? "";
             }
             return "";

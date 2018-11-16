@@ -111,7 +111,7 @@ namespace Test.Waf.Foundation
         //[TestMethod]
         public void HasMultipleErrorsWithDifferentValidationTypes()
         {
-            Person person = new Person() { Name = "Bill", Age = 200 };
+            var person = new Person() { Name = "Bill", Age = 200 };
             Assert.AreEqual(nameof(Person.Age), person.Errors.Single().MemberNames.Single());
 
             person.Name = "";
@@ -131,13 +131,13 @@ namespace Test.Waf.Foundation
         {
             var serializer = new DataContractSerializer(typeof(Person));
 
-            using (MemoryStream stream = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
-                Person person = new Person() { Name = "Hugo" };
+                var person = new Person() { Name = "Hugo" };
                 serializer.WriteObject(stream, person);
 
                 stream.Position = 0;
-                Person newPerson = (Person)serializer.ReadObject(stream);
+                var newPerson = (Person)serializer.ReadObject(stream);
                 Assert.AreEqual(person.Name, newPerson.Name);
             }
         }
@@ -207,23 +207,23 @@ namespace Test.Waf.Foundation
             [Required(ErrorMessage = NameRequiredError)]
             public string Name
             {
-                get { return name; }
-                set { SetPropertyAndValidate(ref name, value); }
+                get => name;
+                set => SetPropertyAndValidate(ref name, value);
             }
 
             [EmailAddress(ErrorMessage = EmailInvalidError)]
             [StringLength(10, ErrorMessage = EmailLengthError)]
             public string Email
             {
-                get { return email; }
-                set { SetProperty(ref email, value); }
+                get => email;
+                set => SetProperty(ref email, value);
             }
 
             [CustomValidation(typeof(Person), nameof(ValidateAge))]
             public int Age
             {
-                get { return age; }
-                set { SetPropertyAndValidate(ref age, value); }
+                get => age;
+                set => SetPropertyAndValidate(ref age, value);
             }
 
             public new bool SetPropertyAndValidate<T>(ref T field, T value, string propertyName)

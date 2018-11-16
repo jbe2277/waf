@@ -12,9 +12,9 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ShowMessageTest()
         {
-            MockMessageService messageService = new MockMessageService();
+            var messageService = new MockMessageService();
 
-            string message = "Hello World";
+            var message = "Hello World";
             AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowMessage(null, message));
             AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowWarning(null, message));
             AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowError(null, message));
@@ -37,9 +37,9 @@ namespace Test.Waf.Applications.Services
         [TestMethod]
         public void ShowQuestionTest()
         {
-            MockMessageService messageService = new MockMessageService();
+            var messageService = new MockMessageService();
 
-            string message = "Hello World";
+            var message = "Hello World";
             AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowQuestion(null, message));
             AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowYesNoQuestion(null, message));
 

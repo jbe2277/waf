@@ -13,8 +13,8 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void GetViewModelTest()
         {
-            MockView view = new MockView();
-            MockViewModel viewModel = new MockViewModel(view);
+            var view = new MockView();
+            var viewModel = new MockViewModel(view);
 
             Assert.AreEqual(viewModel, view.GetViewModel<MockViewModel>());
 
@@ -26,8 +26,8 @@ namespace Test.Waf.Applications
         {
             SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext());
             
-            MockView view = new MockView();
-            MockViewModel viewModel = new MockViewModel(view);
+            var view = new MockView();
+            var viewModel = new MockViewModel(view);
 
             Assert.AreEqual(viewModel, view.GetViewModel<MockViewModel>());
         }

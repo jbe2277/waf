@@ -79,7 +79,6 @@ namespace Test.Waf.Applications
         }
 
 
-
         private class MyDataModel : Model
         {
             public MyDataModel(MyModel model)

@@ -52,16 +52,16 @@ namespace Test.Waf.Foundation
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.GetNextElementOrDefault(null, 5));
 
-            int[] collection1 = new[] { 1, 2, 3, 4, 5 };
-            Assert.AreEqual(4, CollectionHelper.GetNextElementOrDefault(collection1, 3));
-            Assert.AreEqual(2, CollectionHelper.GetNextElementOrDefault(collection1, 1));
-            Assert.AreEqual(0, CollectionHelper.GetNextElementOrDefault(collection1, 5));
+            int[] collection1 = { 1, 2, 3, 4, 5 };
+            Assert.AreEqual(4, collection1.GetNextElementOrDefault(3));
+            Assert.AreEqual(2, collection1.GetNextElementOrDefault(1));
+            Assert.AreEqual(0, collection1.GetNextElementOrDefault(5));
 
-            int[] collection2 = new[] { 1 };
-            Assert.AreEqual(0, CollectionHelper.GetNextElementOrDefault(collection2, 1));
+            int[] collection2 = { 1 };
+            Assert.AreEqual(0, collection2.GetNextElementOrDefault(1));
 
-            int[] collection3 = new int[] { };
-            AssertHelper.ExpectedException<ArgumentException>(() => CollectionHelper.GetNextElementOrDefault(collection3, 9));
+            int[] collection3 = { };
+            AssertHelper.ExpectedException<ArgumentException>(() => collection3.GetNextElementOrDefault(9));
         }
 
         [TestMethod]
@@ -189,7 +189,7 @@ namespace Test.Waf.Foundation
                 resetCounter++;
             };
             Action<int, int> moveAction = null;
-            if (useMoveAction) moveAction = (int oldIndex, int newIndex) =>
+            if (useMoveAction) moveAction = (oldIndex, newIndex) =>
             {
                 T item = target[oldIndex];
                 target.RemoveAt(oldIndex);

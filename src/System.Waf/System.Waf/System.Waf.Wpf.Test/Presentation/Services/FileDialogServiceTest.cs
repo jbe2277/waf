@@ -14,7 +14,7 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ShowOpenFileDialogTest()
         {
-            FileDialogService service = new FileDialogService();
+            var service = new FileDialogService();
             
             AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowOpenFileDialog(null, null, null));
             AssertHelper.ExpectedException<ArgumentException>(() => 
@@ -24,7 +24,7 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ShowSaveFileDialogTest()
         {
-            FileDialogService service = new FileDialogService();
+            var service = new FileDialogService();
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowSaveFileDialog(null, null, null));
             AssertHelper.ExpectedException<ArgumentException>(() =>
@@ -34,9 +34,8 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void CreateFilterTest()
         {
-            FileType rtfFileType = new FileType("RichText Document", ".rtf");
-            FileType xpsFileType = new FileType("XPS Document", ".xps");
-            
+            var rtfFileType = new FileType("RichText Document", ".rtf");
+            var xpsFileType = new FileType("XPS Document", ".xps");
             
             Assert.AreEqual("RichText Document|*.rtf", InvokeCreateFilter(new[] { rtfFileType }));
             Assert.AreEqual("RichText Document|*.rtf|XPS Document|*.xps",
@@ -45,8 +44,7 @@ namespace Test.Waf.Presentation.Services
 
         private static string InvokeCreateFilter(IEnumerable<FileType> fileTypes)
         {
-            MethodInfo createFilterInfo = typeof(FileDialogService).GetMethod("CreateFilter",
-                BindingFlags.Static | BindingFlags.NonPublic);
+            var createFilterInfo = typeof(FileDialogService).GetMethod("CreateFilter", BindingFlags.Static | BindingFlags.NonPublic);
             return (string)createFilterInfo.Invoke(null, new object[] { fileTypes });
         }
     }

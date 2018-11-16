@@ -13,7 +13,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void RaisePropertyChangedTest()
         {
-            Person luke = new Person();
+            var luke = new Person();
 
             AssertHelper.PropertyChangedEvent(luke, x => x.Name, () => luke.Name = "Luke");
             Assert.AreEqual("Luke", luke.Name);
@@ -31,7 +31,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void AddAndRemoveEventHandler()
         {
-            Person luke = new Person();
+            var luke = new Person();
             bool eventRaised;
 
             PropertyChangedEventHandler eventHandler = (sender, e) =>
@@ -55,13 +55,13 @@ namespace Test.Waf.Foundation
         {
             var serializer = new DataContractSerializer(typeof(Person));
 
-            using (MemoryStream stream = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
-                Person person = new Person() { Name = "Hugo" };
+                var person = new Person() { Name = "Hugo" };
                 serializer.WriteObject(stream, person);
 
                 stream.Position = 0;
-                Person newPerson = (Person)serializer.ReadObject(stream);
+                var newPerson = (Person)serializer.ReadObject(stream);
                 Assert.AreEqual(person.Name, newPerson.Name);
             }
         }
@@ -71,22 +71,19 @@ namespace Test.Waf.Foundation
         [DataContract]
         private class Person : Model
         {
-            [DataMember]
-            private string name;
-            [DataMember]
-            private string email;
-            [DataMember]
-            private string phone;
+            [DataMember] private string name;
+            [DataMember] private string email;
+            [DataMember] private string phone;
 
             public string Name
             {
-                get { return name; }
-                set { SetProperty(ref name, value); }
+                get => name;
+                set => SetProperty(ref name, value);
             }
 
             public string Email
             {
-                get { return email; }
+                get => email;
                 set
                 {
                     if (email != value)
@@ -99,7 +96,7 @@ namespace Test.Waf.Foundation
 
             public string Phone
             {
-                get { return phone; }
+                get => phone;
                 set
                 {
                     if (phone != value)

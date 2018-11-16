@@ -14,7 +14,7 @@ namespace Test.Waf.Presentation
         [TestMethod]
         public void IsEnabledTest()
         {
-            UserControl view = new UserControl();
+            var view = new UserControl();
             Assert.IsFalse(ValidationHelper.GetIsEnabled(view));
 
             ValidationHelper.SetIsEnabled(view, true);
@@ -27,8 +27,8 @@ namespace Test.Waf.Presentation
         [TestMethod]
         public void IsValidTest()
         {
-            UserControl view = new UserControl();
-            MockViewModel viewModel = new MockViewModel();
+            var view = new UserControl();
+            var viewModel = new MockViewModel();
             view.DataContext = viewModel;
 
             Assert.IsTrue(ValidationHelper.GetIsValid(view));
@@ -37,7 +37,7 @@ namespace Test.Waf.Presentation
             AssertHelper.ExpectedException<InvalidOperationException>(() => ValidationHelper.SetIsValid(view, true));
 
             // But we can set a binding.
-            Binding binding = new Binding(nameof(MockViewModel.IsValid));
+            var binding = new Binding(nameof(MockViewModel.IsValid));
             
             // ValidationHelper.IsEnabled is false => exception
             AssertHelper.ExpectedException<InvalidOperationException>(() => 

@@ -14,7 +14,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void SetMaxFilesNumber()
         {
-            RecentFileList recentFileList = new RecentFileList();
+            var recentFileList = new RecentFileList();
             recentFileList.AddFile("Doc4");
             recentFileList.AddFile("Doc3");
             recentFileList.AddFile("Doc2");
@@ -32,7 +32,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void AddFiles()
         {
-            RecentFileList recentFileList = new RecentFileList();
+            var recentFileList = new RecentFileList();
             recentFileList.MaxFilesNumber = 3;
 
             AssertHelper.ExpectedException<ArgumentException>(() => recentFileList.AddFile(null));
@@ -57,7 +57,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void AddFilesAndPinThem()
         {
-            RecentFileList recentFileList = new RecentFileList();
+            var recentFileList = new RecentFileList();
             recentFileList.MaxFilesNumber = 3;
 
             // Add files to an empty list
@@ -102,7 +102,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void Remove()
         {
-            RecentFileList recentFileList = new RecentFileList();
+            var recentFileList = new RecentFileList();
 
             AssertHelper.ExpectedException<ArgumentNullException>(() => recentFileList.Remove(null));
 
@@ -126,25 +126,25 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void XmlSerializing()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(RecentFileList));
+            var serializer = new XmlSerializer(typeof(RecentFileList));
 
             // Serialize an empty list            
-            MemoryStream stream1 = new MemoryStream();
-            RecentFileList recentFileList1 = new RecentFileList();
+            var stream1 = new MemoryStream();
+            var recentFileList1 = new RecentFileList();
             serializer.Serialize(stream1, recentFileList1);
             stream1.Position = 0;
-            RecentFileList recentFileList2 = (RecentFileList)serializer.Deserialize(stream1);
+            var recentFileList2 = (RecentFileList)serializer.Deserialize(stream1);
             Assert.AreEqual(recentFileList1.RecentFiles.Count, recentFileList2.RecentFiles.Count);
             AssertHelper.SequenceEqual(recentFileList1.RecentFiles.Select(f => f.Path), recentFileList2.RecentFiles.Select(f => f.Path));
 
             // Serialize a list with items
-            MemoryStream stream2 = new MemoryStream();
+            var stream2 = new MemoryStream();
             recentFileList2.AddFile("Doc3");
             recentFileList2.AddFile("Doc2");
             recentFileList2.AddFile("Doc1");
             serializer.Serialize(stream2, recentFileList2);
             stream2.Position = 0;
-            RecentFileList recentFileList3 = (RecentFileList)serializer.Deserialize(stream2);
+            var recentFileList3 = (RecentFileList)serializer.Deserialize(stream2);
             AssertHelper.SequenceEqual(recentFileList2.RecentFiles.Select(f => f.Path), recentFileList3.RecentFiles.Select(f => f.Path));
 
             // Set MaxFilesNumber to a lower number
@@ -161,7 +161,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void Load()
         {
-            RecentFileList recentFileList = new RecentFileList();
+            var recentFileList = new RecentFileList();
             recentFileList.MaxFilesNumber = 3;
             recentFileList.AddFile("Doc3");
             recentFileList.AddFile("Doc2");

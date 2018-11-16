@@ -29,7 +29,7 @@ namespace System.Waf.UnitTesting.Mocks
         [Import(AllowDefault = true)]
         internal ContainerDisposedNotifier ContainerDisposedNotifier
         {
-            get { return containerDisposedNotifier; }
+            get => containerDisposedNotifier;
             set
             {
                 if (containerDisposedNotifier != value)

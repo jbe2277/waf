@@ -18,9 +18,9 @@ namespace System.Waf.Presentation
             this.validationTracker = validationTracker;
             this.errors = errors;
 
-            if (validationSource is FrameworkElement)
+            if (validationSource is FrameworkElement element)
             {
-                ((FrameworkElement)validationSource).Loaded += ValidationSourceLoaded;
+                element.Loaded += ValidationSourceLoaded;
             }
             else
             {
@@ -31,15 +31,14 @@ namespace System.Waf.Presentation
 
         private void ValidationSourceLoaded(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement)
+            if (sender is FrameworkElement element)
             {
-                ((FrameworkElement)sender).Loaded -= ValidationSourceLoaded;
+                element.Loaded -= ValidationSourceLoaded;
             }
             else
             {
                 ((FrameworkContentElement)sender).Loaded -= ValidationSourceLoaded;
             }
-
             validationTracker.AddErrors(sender, errors);
         }
     }

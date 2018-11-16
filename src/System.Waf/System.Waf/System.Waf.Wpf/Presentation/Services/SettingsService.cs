@@ -40,7 +40,7 @@ namespace System.Waf.Presentation.Services
         /// <exception cref="InvalidOperationException">Setter must not be called anymore if one of the methods was used.</exception>
         public string FileName
         {
-            get { return fileName; }
+            get => fileName;
             set
             {
                 if (settings.Any()) throw new InvalidOperationException("Setter must not be called anymore if one of the methods was used before.");

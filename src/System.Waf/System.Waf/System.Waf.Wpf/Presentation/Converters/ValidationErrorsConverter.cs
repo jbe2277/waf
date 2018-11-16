@@ -48,8 +48,7 @@ namespace System.Waf.Presentation.Converters
         /// </returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var validationErrors = values?.FirstOrDefault() as IEnumerable<ValidationError>;
-            if (validationErrors != null)
+            if (values?.FirstOrDefault() is IEnumerable<ValidationError> validationErrors)
             {
                 return string.Join(Environment.NewLine, validationErrors.Select(x => x.ErrorContent.ToString()));
             }
