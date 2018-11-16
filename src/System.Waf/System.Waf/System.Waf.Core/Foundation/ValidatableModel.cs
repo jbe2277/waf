@@ -14,7 +14,7 @@ namespace System.Waf.Foundation
     [DataContract]
     public abstract class ValidatableModel : Model, INotifyDataErrorInfo
     {
-        private static readonly ValidationResult[] noErrors = new ValidationResult[0];
+        private static readonly ValidationResult[] noErrors = Array.Empty<ValidationResult>();
 
         // DCS does not call ctor -> initialize fields at first use.
         private Dictionary<string, List<ValidationResult>> errorsDictionary;
@@ -102,7 +102,7 @@ namespace System.Waf.Foundation
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ErrorsChanged"/> event.
+        /// Raises the <see cref="ErrorsChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.ComponentModel.DataErrorsChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnErrorsChanged(DataErrorsChangedEventArgs e)

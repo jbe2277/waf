@@ -92,7 +92,7 @@ namespace System.Waf.UnitTesting
         {
             if (task == null) { throw new ArgumentNullException(nameof(task)); }
             var cancellation = new CancellationTokenSource();
-            task.ContinueWith(t => cancellation.Cancel());
+            task.ContinueWith(t => cancellation.Cancel(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
             ProcessMessageQueue(cancellation.Token);
             task.GetAwaiter().GetResult();
         }
