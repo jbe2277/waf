@@ -50,10 +50,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Nlog" Version="4.5.8"/>
-    <PackageReference Include="EntityFramework" Version="6.2.0"/>
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.109.2 "/>
-    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.109.0"/>
+    <PackageReference Include="Nlog" Version="4.5.11" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.109.2 " />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.109.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\SharedAssemblyInfo.cs">
