@@ -14,6 +14,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void EmptyTest()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             var emptyStringList1 = CollectionHelper.Empty<string>();
             Assert.AreEqual(0, emptyStringList1.Count);
 
@@ -25,6 +26,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(0, emptyIntList1.Count);
             var emptyIntList2 = CollectionHelper.Empty<int>();
             Assert.AreSame(emptyIntList1, emptyIntList2);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         [TestMethod]
