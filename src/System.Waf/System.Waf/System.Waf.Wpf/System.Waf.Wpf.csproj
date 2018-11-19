@@ -2,17 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
     <RootNamespace>System.Waf.Wpf</RootNamespace>
-
-    <Authors>jbe2277</Authors>
-    <PackageProjectUrl>https://github.com/jbe2277/waf</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jbe2277/waf</RepositoryUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>https://github.com/jbe2277/waf/releases</PackageReleaseNotes>
-    <PackageTags>WAF; WPF; MVVM; XAML; UWP; Model-View-ViewModel; UI; MVC; ViewModel; PresentationModel; Architecture; Module; Layered</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,10 +20,6 @@
 
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
   </ItemGroup>
 
 </Project>
