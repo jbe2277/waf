@@ -50,4 +50,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "System.Waf.Presentation.Services.SettingsService.#Load(System.Type)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "System.Waf.Presentation.Services.SettingsService.#Save()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Scope = "member", Target = "System.Waf.Applications.Services.ISettingsService.#Get`1()")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.ValidationHelper.GetIsEnabled(System.Windows.DependencyObject)~System.Boolean")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.ValidationHelper.SetIsEnabled(System.Windows.DependencyObject,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.ValidationHelper.GetIsValid(System.Windows.DependencyObject)~System.Boolean")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.ValidationHelper.SetIsValid(System.Windows.DependencyObject,System.Boolean)")]
