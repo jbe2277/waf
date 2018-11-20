@@ -77,30 +77,31 @@ namespace Test.Waf.UnitTesting
         {
             int actionCallCount = 0;
             int innerActionCallCount = 0;
-            var context = UnitTestSynchronizationContext.Create();
-
-            Func<Task> asyncInnerAction = async () =>
+            using (var context = UnitTestSynchronizationContext.Create())
             {
-                await Task.Delay(1);
-                Interlocked.Increment(ref innerActionCallCount);
-            };
+                Func<Task> asyncInnerAction = async () =>
+                {
+                    await Task.Delay(1);
+                    Interlocked.Increment(ref innerActionCallCount);
+                };
 
-            Func<Task> asyncAction = async () =>
-            {
-                await Task.Delay(1);
-                asyncInnerAction().Wait(context);
-                await Task.Delay(1);
-                asyncInnerAction().Wait(context);
-                Interlocked.Increment(ref actionCallCount);
-            };
+                Func<Task> asyncAction = async () =>
+                {
+                    await Task.Delay(1);
+                    asyncInnerAction().Wait(context);
+                    await Task.Delay(1);
+                    asyncInnerAction().Wait(context);
+                    Interlocked.Increment(ref actionCallCount);
+                };
 
-            var task = asyncAction();
-            Assert.AreEqual(0, actionCallCount);
-            Assert.AreEqual(0, innerActionCallCount);
+                var task = asyncAction();
+                Assert.AreEqual(0, actionCallCount);
+                Assert.AreEqual(0, innerActionCallCount);
 
-            task.Wait(context);
-            Assert.AreEqual(1, actionCallCount);
-            Assert.AreEqual(2, innerActionCallCount);
+                task.Wait(context);
+                Assert.AreEqual(1, actionCallCount);
+                Assert.AreEqual(2, innerActionCallCount);
+            }
         }
 
         [TestMethod]
