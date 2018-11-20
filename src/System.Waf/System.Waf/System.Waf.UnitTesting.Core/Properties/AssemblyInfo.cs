@@ -10,4 +10,5 @@ using System.Runtime.CompilerServices;
 
 [assembly: CLSCompliant(true)]
 
-[assembly: InternalsVisibleTo("System.Waf.Core.Test")]
+[assembly: InternalsVisibleTo("System.Waf.Core.Test1")]
+[assembly: InternalsVisibleTo("System.Waf.Core.Test2")]
