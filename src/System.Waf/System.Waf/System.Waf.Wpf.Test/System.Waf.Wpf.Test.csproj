@@ -1,122 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{48DD2458-B7EE-4709-998C-F1568B51F32A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.Waf</RootNamespace>
-    <AssemblyName>System.Waf.Wpf.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\out\System.Waf\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\out\System.Waf\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.XML" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Applications\ApplicationInfoTest.cs" />
-    <Compile Include="Applications\MefViewModelTest.cs" />
-    <Compile Include="Applications\ObservableListViewTest.cs" />
-    <Compile Include="Applications\SynchronizingCollectionTest.cs" />
-    <Compile Include="Applications\GenericViewModelTest.cs" />
-    <Compile Include="Applications\Pop3SettingsViewModelTest.cs" />
-    <Compile Include="Applications\Services\FileDialogResultTest.cs" />
-    <Compile Include="Applications\Services\FileDialogServiceExtensionsTest.cs" />
-    <Compile Include="Applications\Services\FileTypeTest.cs" />
-    <Compile Include="Applications\Services\MessageServiceExtensionsTest.cs" />
-    <Compile Include="Applications\ViewHelperTest.cs" />
-    <Compile Include="Foundation\DataErrorInfoExtensionsTest.cs" />
-    <Compile Include="Foundation\DataErrorInfoSupportTest.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Presentation\Controls\DataGridHelperTest.cs" />
-    <Compile Include="Presentation\Converters\BoolToVisibilityConverterTest.cs" />
-    <Compile Include="Presentation\Converters\InvertBooleanConverterTest.cs" />
-    <Compile Include="Presentation\Converters\NullToVisibilityConverterTest.cs" />
-    <Compile Include="Presentation\Converters\StringFormatConverterTest.cs" />
-    <Compile Include="Presentation\Converters\ValidationErrorsConverterTest.cs" />
-    <Compile Include="Presentation\ResourceHelperTest.cs" />
-    <Compile Include="Presentation\Services\FileDialogServiceTest.cs" />
-    <Compile Include="Presentation\Services\MessageServiceTest.cs" />
-    <Compile Include="Presentation\Services\SettingsServiceTest.cs" />
-    <Compile Include="Presentation\ValidationHelperTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTesting\Mocks\MockDialogViewTest.cs" />
-    <Compile Include="UnitTesting\Mocks\MockFileDialogServiceTest.cs" />
-    <Compile Include="WafConfigurationTest.cs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj">
-      <Project>{7935d706-6bf7-4096-8282-1e8594709073}</Project>
-      <Name>System.Waf.UnitTesting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj">
-      <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
-      <Name>System.Waf.UnitTesting.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj" />
+    <ProjectReference Include="..\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
+    <ProjectReference Include="..\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Presentation\Resources\LayoutResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Presentation\Resources\BrushResources.xaml">
+    <Page Include="**\*.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

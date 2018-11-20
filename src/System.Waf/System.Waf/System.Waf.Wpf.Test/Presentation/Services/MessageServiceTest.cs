@@ -30,6 +30,8 @@ namespace Test.Waf.Presentation.Services
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ar-SA");
             Assert.AreEqual(MessageBoxOptions.RtlReading, (MessageBoxOptions)messageBoxOptionsInfo.GetValue(null, null));
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
         }
     }
 }

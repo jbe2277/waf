@@ -3,12 +3,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Foundation;
 using System.ComponentModel.DataAnnotations;
 using System.Waf.UnitTesting;
+using System.Globalization;
 
 namespace Test.Waf.Foundation
 {
     [TestClass]
     public class DataErrorInfoSupportTest
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+        }
+
         [TestMethod]
         public void InvalidArgumentsTest()
         {
