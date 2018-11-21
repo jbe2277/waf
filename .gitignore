@@ -18,6 +18,7 @@
 [Tt]est[Rr]esults
 
 # NuGet Packages Directory
+nuget.exe
 packages/
 
 # NuGet package restore lockfiles
