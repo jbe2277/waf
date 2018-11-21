@@ -6,11 +6,15 @@
     <Authors>jbe2277</Authors>
     <PackageProjectUrl>https://github.com/jbe2277/waf</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jbe2277/waf</RepositoryUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>https://github.com/jbe2277/waf/releases</PackageReleaseNotes>
     <PackageTags>WAF; WPF; MVVM; XAML; UWP; Model-View-ViewModel; UI; MVC; ViewModel; PresentationModel; Architecture; Module; Layered</PackageTags>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
   </ItemGroup>
