@@ -18,8 +18,4 @@
     <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
-
 </Project>

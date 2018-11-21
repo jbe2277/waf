@@ -67,7 +67,7 @@ namespace Test.Waf.Foundation
             AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
-            Assert.AreEqual(3, person.Errors.Count());
+            Assert.AreEqual(3, person.Errors.Count);
             Assert.AreEqual(2, person.GetErrors("Email").Count());
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailInvalidError));
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailLengthError));
