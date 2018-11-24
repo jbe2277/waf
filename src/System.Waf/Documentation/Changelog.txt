@@ -2,7 +2,13 @@ Changelog
 ---------
 
 Version 5.0.0.1 (Alpha 1)
+- WAF: Core projects target now .Net Standard 2.0 and .NET Framework 4.6.1.
+- WAF: Core unit tests run now on .NET Core 2.1 and on .NET Framework 4.6.1.
+- WAF: Mark CollectionHelper.Empty as Obsolete.
+- WAF: Use new NuGet package creation features.
 - All: Improve code by using C# 7.0.
+- Samples: Migrate csproj files to use PackageReference instead of packages.config.
+- Build: Visual Studio 2017 (Version 15.9) or newer is required.
 
 
 Version 4.3.0.100 (Release)
