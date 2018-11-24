@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>System.Waf.UnitTesting</RootNamespace>
+    <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests of WPF (Windows Presentation Foundation) applications.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,8 +5,7 @@ using System.Runtime.InteropServices;
 
 
 [assembly: AssemblyTitle("System.Waf.UnitTesting.Wpf")]
-[assembly: AssemblyDescription("System.Waf is a lightweight framework that helps you to create well-structured XAML applications. "
-    + "This package supports writing unit tests. It contains the WPF (Windows Presentation Foundation) specific types.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("System.Waf.UnitTesting.Wpf")]
 

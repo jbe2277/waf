@@ -6,8 +6,7 @@ using System.Windows.Markup;
 
 
 [assembly: AssemblyTitle("System.Waf.Wpf")]
-[assembly: AssemblyDescription("System.Waf is a lightweight framework that helps you to create well-structured XAML applications. "
-    + "This package contains the WPF (Windows Presentation Foundation) specific types.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("System.Waf.Wpf")]
 
