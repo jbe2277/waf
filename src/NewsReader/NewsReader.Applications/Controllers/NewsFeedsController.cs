@@ -203,7 +203,7 @@ namespace Jbe.NewsReader.Applications.Controllers
                 return;  // User canceled operation
             }
             
-            var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds.Except(feedsToRemove.Except(new[] { feedsToRemove.First() })), feedsToRemove.First());
+            var feedToSelect = CollectionHelper.GetNextElementOrDefault(FeedManager.Feeds.Except(feedsToRemove.Except(new[] { feedsToRemove[0] })), feedsToRemove[0]);
             foreach (var feed in feedsToRemove.ToArray()) FeedManager.Feeds.Remove(feed);
             selectionService.SelectFeed(feedToSelect ?? FeedManager.Feeds.LastOrDefault());
         }
