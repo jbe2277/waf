@@ -74,11 +74,11 @@ namespace Jbe.NewsReader.Domain
             {
                 throw new NotSupportedException("The Reset action is not supported.");
             }
-            foreach (var newFeed in e.NewItems?.Cast<Feed>() ?? CollectionHelper.Empty<Feed>())
+            foreach (var newFeed in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
             {
                 newFeed.DataManager = this;
             }
-            foreach (var oldFeed in e.OldItems?.Cast<Feed>() ?? CollectionHelper.Empty<Feed>())
+            foreach (var oldFeed in e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>())
             {
                 oldFeed.DataManager = null;
             }

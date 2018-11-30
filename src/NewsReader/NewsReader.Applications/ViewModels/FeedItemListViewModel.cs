@@ -3,6 +3,7 @@ using Jbe.NewsReader.Applications.Views;
 using Jbe.NewsReader.Domain;
 using Jbe.NewsReader.Domain.Foundation;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Composition;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace Jbe.NewsReader.Applications.ViewModels
         private void UpdateItemsListView()
         {
             itemsListView = new ObservableGroupedListView<DateTime, FeedItem>(
-                SelectionService.SelectedFeed?.Items ?? CollectionHelper.Empty<FeedItem>(),
+                SelectionService.SelectedFeed?.Items ?? (IReadOnlyList<FeedItem>)Array.Empty<FeedItem>(),
                 x => x.GroupBy(y => y.Date.LocalDateTime.Date))
             {
                 Filter = FilterFeedItems

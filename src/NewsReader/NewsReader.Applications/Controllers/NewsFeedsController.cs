@@ -105,7 +105,7 @@ namespace Jbe.NewsReader.Applications.Controllers
 
         private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            foreach (Feed item in e.NewItems?.Cast<Feed>() ?? CollectionHelper.Empty<Feed>())
+            foreach (Feed item in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
             {
                 IgnoreResult(LoadFeedAsync(item));
             }
