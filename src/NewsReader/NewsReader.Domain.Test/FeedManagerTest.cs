@@ -103,7 +103,6 @@ namespace Test.NewsReader.Domain
             Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(null), new Feed(null)));
             Assert.IsTrue(FeedEqualityComparer.Default.Equals(null, null));
 
-            Assert.AreEqual(404006159, FeedEqualityComparer.Default.GetHashCode(new Feed(new Uri("http://microsoft.com"))));
             Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(new Feed(null)));
             Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(null));
         }
