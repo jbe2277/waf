@@ -12,8 +12,8 @@
     <PackageReleaseNotes>https://github.com/jbe2277/waf/releases</PackageReleaseNotes>
     <PackageTags>WAF; WPF; MVVM; XAML; UWP; Model-View-ViewModel; UI; MVC; ViewModel; PresentationModel; Architecture; Module; Layered</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
