@@ -48,7 +48,7 @@ namespace Test.BookLibrary.Library.Applications
 
         protected virtual void OnTestCleanup() { }
 
-        private bool ExcludeTypes(ComposablePartDefinition definition, params Type[] typesToExclude)
+        private static bool ExcludeTypes(ComposablePartDefinition definition, params Type[] typesToExclude)
         {
             return !definition.ExportDefinitions.Select(x => x.ContractName).Intersect(typesToExclude.Select(x => x.FullName)).Any();
         }

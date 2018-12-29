@@ -127,7 +127,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             AssertSettingsValues(settings, 0, 0, 1000, 700, false);
         }
 
-        private void SetSettingsValues(AppSettings settings, double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
+        private static void SetSettingsValues(AppSettings settings, double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
         {
             settings.Left = left;
             settings.Top = top;
@@ -136,7 +136,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             settings.IsMaximized = isMaximized;
         }
 
-        private void AssertSettingsValues(AppSettings settings, double left, double top, double width, double height, bool isMaximized)
+        private static void AssertSettingsValues(AppSettings settings, double left, double top, double width, double height, bool isMaximized)
         {
             Assert.AreEqual(left, settings.Left);
             Assert.AreEqual(top, settings.Top);

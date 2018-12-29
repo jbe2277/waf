@@ -5,6 +5,7 @@
     <Rule Id="CA1307" Action="None" />
     <Rule Id="CA1806" Action="None" />
     <Rule Id="CA1825" Action="None" />
+    <Rule Id="CA1826" Action="None" />
     <Rule Id="CA2007" Action="None" />
     <Rule Id="CA2208" Action="None" />
     <Rule Id="CA3075" Action="None" />
