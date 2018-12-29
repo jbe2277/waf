@@ -13,6 +13,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <ApplicationIcon>Resources\Images\BookLibrary.ico</ApplicationIcon>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +60,7 @@
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.5.11" />
     <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

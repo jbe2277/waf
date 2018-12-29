@@ -1,100 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Reporting.Applications</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Reporting.Applications</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\out\BookLibrary\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\out\BookLibrary\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="All" />
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="DataModels\BookListReportDataModel.cs" />
-    <Compile Include="DataModels\BorrowedBooksReportDataModel.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\IBorrowedBooksReport.cs" />
-    <Compile Include="Reports\IBookListReport.cs" />
-    <Compile Include="Reports\IReport.cs" />
-    <Compile Include="ViewModels\ReportViewModel.cs" />
-    <Compile Include="Views\IReportView.cs" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj" />
+    <ProjectReference Include="..\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj">
-      <Project>{0985021E-9AD0-455A-A26B-2B8CEBD26297}</Project>
-      <Name>BookLibrary.Library.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj">
-      <Project>{DB087110-BDBA-4E9D-813F-EF08295ECF8C}</Project>
-      <Name>BookLibrary.Library.Domain</Name>
-    </ProjectReference>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
