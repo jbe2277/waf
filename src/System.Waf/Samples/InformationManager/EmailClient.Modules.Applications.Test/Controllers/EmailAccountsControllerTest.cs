@@ -31,7 +31,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             MockEmailAccountsView.ShowDialogAction = null;
         }
 
-        private void EmailAccountsViewShowDialog(MockEmailAccountsView view)
+        private static void EmailAccountsViewShowDialog(MockEmailAccountsView view)
         {
             var viewModel = ViewHelper.GetViewModel<EmailAccountsViewModel>(view);
             Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
@@ -82,7 +82,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
         }
 
-        private void EditEmailAccountViewShowDialog(MockEditEmailAccountView view)
+        private static void EditEmailAccountViewShowDialog(MockEditEmailAccountView view)
         {
             var viewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(view);
             

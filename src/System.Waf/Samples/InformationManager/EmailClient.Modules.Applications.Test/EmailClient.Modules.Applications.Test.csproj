@@ -1,141 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Applications.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
+    <CodeAnalysisRuleSet>..\..\..\..\UnitTest.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Controllers\EditEmailAccountControllerTest.cs" />
-    <Compile Include="Controllers\EmailAccountsControllerTest.cs" />
-    <Compile Include="Controllers\EmailFolderControllerTest.cs" />
-    <Compile Include="Controllers\ModuleControllerTest.cs" />
-    <Compile Include="Controllers\NewEmailControllerTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData\SampleDataProviderTest.cs" />
-    <Compile Include="EmailClientTest.cs" />
-    <Compile Include="ViewModels\BasicEmailAccountViewModelTest.cs" />
-    <Compile Include="ViewModels\EditEmailAccountViewModelTest.cs" />
-    <Compile Include="ViewModels\EmailAccountsViewModelTest.cs" />
-    <Compile Include="ViewModels\EmailLayoutViewModelTest.cs" />
-    <Compile Include="ViewModels\EmailListViewModelTest.cs" />
-    <Compile Include="ViewModels\EmailViewModelTest.cs" />
-    <Compile Include="ViewModels\NewEmailViewModelTest.cs" />
-    <Compile Include="ViewModels\Pop3SettingsViewModelTest.cs" />
-    <Compile Include="Views\MockBasicEmailAccountView.cs" />
-    <Compile Include="Views\MockEditEmailAccountView.cs" />
-    <Compile Include="Views\MockEmailAccountsView.cs" />
-    <Compile Include="Views\MockEmailLayoutView.cs" />
-    <Compile Include="Views\MockEmailListView.cs" />
-    <Compile Include="Views\MockEmailView.cs" />
-    <Compile Include="Views\MockExchangeSettingsView.cs" />
-    <Compile Include="Views\MockNewEmailView.cs" />
-    <Compile Include="Views\MockPop3SettingsView.cs" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
+    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj" />
+    <ProjectReference Include="..\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj" />
+    <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj" />
+    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
+    <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
+    <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj" />
+    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
+    <ProjectReference Include="..\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj">
-      <Project>{7935d706-6bf7-4096-8282-1e8594709073}</Project>
-      <Name>System.Waf.UnitTesting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj">
-      <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
-      <Name>System.Waf.UnitTesting.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj">
-      <Project>{E270D7E7-0E35-4DED-B330-25FF7EED8581}</Project>
-      <Name>AddressBook.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj">
-      <Project>{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}</Project>
-      <Name>AddressBook.Modules.Applications.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj">
-      <Project>{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}</Project>
-      <Name>Common.Applications.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj">
-      <Project>{3BC491D6-786A-46F1-9B93-69F23F89055A}</Project>
-      <Name>Common.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj">
-      <Project>{1112ecba-ac14-46e6-bf67-3caa8cb93022}</Project>
-      <Name>Common.Domain.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj">
-      <Project>{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}</Project>
-      <Name>EmailClient.Modules.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj">
-      <Project>{D647B501-C650-4877-8CF6-06515391E28F}</Project>
-      <Name>EmailClient.Modules.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
-      <Project>{664D5E11-1BAB-4D48-BEF5-775DB427D691}</Project>
-      <Name>Infrastructure.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj">
-      <Project>{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}</Project>
-      <Name>Infrastructure.Modules.Applications.Test</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

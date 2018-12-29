@@ -1,84 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D213F7FE-7331-4BCD-B989-B68093CA7FB9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.InformationManager.Infrastructure.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Presentation.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
+    <CodeAnalysisRuleSet>..\..\..\..\UnitTest.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
     <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Converters\ItemCountToStringConverterTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
+    <ProjectReference Include="..\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj">
-      <Project>{7935d706-6bf7-4096-8282-1e8594709073}</Project>
-      <Name>System.Waf.UnitTesting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj">
-      <Project>{C4D646D3-5FD7-4A7A-BEEC-36EA3335C11A}</Project>
-      <Name>System.Waf.UnitTesting.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj">
-      <Project>{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}</Project>
-      <Name>Infrastructure.Modules.Presentation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

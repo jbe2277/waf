@@ -1,120 +1,32 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Waf.InformationManager.EmailClient.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Applications</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.XML" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="All" />
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Controllers\EditEmailAccountController.cs" />
-    <Compile Include="Controllers\EmailAccountsController.cs" />
-    <Compile Include="Controllers\EmailFolderController.cs" />
-    <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\NewEmailController.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData\SampleDataProvider.cs" />
-    <Compile Include="ViewModels\BasicEmailAccountViewModel.cs" />
-    <Compile Include="ViewModels\EditEmailAccountViewModel.cs" />
-    <Compile Include="ViewModels\EmailAccountsViewModel.cs" />
-    <Compile Include="ViewModels\EmailLayoutViewModel.cs" />
-    <Compile Include="ViewModels\EmailListViewModel.cs" />
-    <Compile Include="ViewModels\EmailViewModel.cs" />
-    <Compile Include="ViewModels\ExchangeSettingsViewModel.cs" />
-    <Compile Include="ViewModels\NewEmailViewModel.cs" />
-    <Compile Include="ViewModels\Pop3SettingsViewModel.cs" />
-    <Compile Include="Views\IBasicEmailAccountView.cs" />
-    <Compile Include="Views\IEditEmailAccountView.cs" />
-    <Compile Include="Views\IEmailAccountsView.cs" />
-    <Compile Include="Views\IEmailLayoutView.cs" />
-    <Compile Include="Views\IEmailListView.cs" />
-    <Compile Include="Views\IEmailView.cs" />
-    <Compile Include="Views\IExchangeSettingsView.cs" />
-    <Compile Include="Views\INewEmailView.cs" />
-    <Compile Include="Views\IPop3SettingsView.cs" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj" />
+    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj">
-      <Project>{E270D7E7-0E35-4DED-B330-25FF7EED8581}</Project>
-      <Name>AddressBook.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj">
-      <Project>{D647B501-C650-4877-8CF6-06515391E28F}</Project>
-      <Name>EmailClient.Modules.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj">
-      <Project>{664D5E11-1BAB-4D48-BEF5-775DB427D691}</Project>
-      <Name>Infrastructure.Interfaces</Name>
-    </ProjectReference>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
