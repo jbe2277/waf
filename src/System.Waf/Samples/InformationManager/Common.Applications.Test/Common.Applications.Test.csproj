@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
     <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

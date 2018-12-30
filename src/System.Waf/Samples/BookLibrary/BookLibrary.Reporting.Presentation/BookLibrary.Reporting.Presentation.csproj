@@ -55,9 +55,6 @@
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Controls\BindableTable.cs" />
     <Compile Include="Controls\ContentElement.cs" />
     <Compile Include="Controls\ItemsElement.cs" />

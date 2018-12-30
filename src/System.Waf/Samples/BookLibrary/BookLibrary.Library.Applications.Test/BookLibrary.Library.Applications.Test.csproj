@@ -31,8 +31,4 @@
     <ProjectReference Include="..\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj" />
     <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

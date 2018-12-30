@@ -31,8 +31,4 @@
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

@@ -53,9 +53,6 @@
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Converters\ItemCountToStringConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Log.cs" />

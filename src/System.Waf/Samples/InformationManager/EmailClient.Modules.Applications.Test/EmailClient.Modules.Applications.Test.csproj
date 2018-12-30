@@ -37,8 +37,4 @@
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

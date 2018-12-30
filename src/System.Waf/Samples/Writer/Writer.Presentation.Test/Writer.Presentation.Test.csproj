@@ -32,8 +32,4 @@
     <ProjectReference Include="..\Writer.Applications\Writer.Applications.csproj" />
     <ProjectReference Include="..\Writer.Presentation\Writer.Presentation.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

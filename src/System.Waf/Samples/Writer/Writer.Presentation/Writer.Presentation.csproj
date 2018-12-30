@@ -69,9 +69,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="DesignData\MockFileService.cs" />
     <Compile Include="DesignData\MockSettingsService.cs" />
     <Compile Include="DesignData\MockShellService.cs" />

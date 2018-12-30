@@ -30,8 +30,4 @@
     <ProjectReference Include="..\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj" />
     <ProjectReference Include="..\BookLibrary.Library.Applications.Test\BookLibrary.Library.Applications.Test.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

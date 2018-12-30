@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CodeAnalysisDictionary.xml = CodeAnalysisDictionary.xml
 		..\CodeAnalysisRules.ruleset = ..\CodeAnalysisRules.ruleset
 		CodeCoverage.runsettings = CodeCoverage.runsettings
+		Directory.Build.props = Directory.Build.props
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 		..\UnitTest.ruleset = ..\UnitTest.ruleset
 	EndProjectSection
@@ -59,31 +60,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalizationSample", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Presentation", "Samples\Writer\Writer.Presentation\Writer.Presentation.csproj", "{2C041533-4BA4-4498-8867-43F87FFD5FAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Applications", "Samples\Writer\Writer.Applications\Writer.Applications.csproj", "{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer.Applications", "Samples\Writer\Writer.Applications\Writer.Applications.csproj", "{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Applications.Test", "Samples\Writer\Writer.Applications.Test\Writer.Applications.Test.csproj", "{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer.Applications.Test", "Samples\Writer\Writer.Applications.Test\Writer.Applications.Test.csproj", "{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Presentation.Test", "Samples\Writer\Writer.Presentation.Test\Writer.Presentation.Test.csproj", "{03FE77F4-4C93-4139-8825-E0070EE3F860}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer.Presentation.Test", "Samples\Writer\Writer.Presentation.Test\Writer.Presentation.Test.csproj", "{03FE77F4-4C93-4139-8825-E0070EE3F860}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code Snippets", "Code Snippets\Code Snippets.csproj", "{F0C5BD31-CFF7-4B0B-8483-7471447740D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Applications", "Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj", "{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Reporting.Applications", "Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj", "{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Presentation", "Samples\BookLibrary\BookLibrary.Reporting.Presentation\BookLibrary.Reporting.Presentation.csproj", "{0257AACF-AE9A-4002-8E2E-C98D6FD17437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Applications", "Samples\BookLibrary\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj", "{0985021E-9AD0-455A-A26B-2B8CEBD26297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Library.Applications", "Samples\BookLibrary\BookLibrary.Library.Applications\BookLibrary.Library.Applications.csproj", "{0985021E-9AD0-455A-A26B-2B8CEBD26297}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Applications.Test", "Samples\BookLibrary\BookLibrary.Library.Applications.Test\BookLibrary.Library.Applications.Test.csproj", "{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Library.Applications.Test", "Samples\BookLibrary\BookLibrary.Library.Applications.Test\BookLibrary.Library.Applications.Test.csproj", "{85E50648-F96F-40EA-8FC8-EB41FEF5C5FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Domain", "Samples\BookLibrary\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj", "{DB087110-BDBA-4E9D-813F-EF08295ECF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Library.Domain", "Samples\BookLibrary\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj", "{DB087110-BDBA-4E9D-813F-EF08295ECF8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Domain.Test", "Samples\BookLibrary\BookLibrary.Library.Domain.Test\BookLibrary.Library.Domain.Test.csproj", "{11F1884B-17EC-49F3-8BB3-B19156D3089F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Library.Domain.Test", "Samples\BookLibrary\BookLibrary.Library.Domain.Test\BookLibrary.Library.Domain.Test.csproj", "{11F1884B-17EC-49F3-8BB3-B19156D3089F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Presentation", "Samples\BookLibrary\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj", "{0F051A17-542A-4981-8155-A99F547E4442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Library.Presentation.Test", "Samples\BookLibrary\BookLibrary.Library.Presentation.Test\BookLibrary.Library.Presentation.Test.csproj", "{684434AD-70CA-4355-87B8-6B11E921D393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Library.Presentation.Test", "Samples\BookLibrary\BookLibrary.Library.Presentation.Test\BookLibrary.Library.Presentation.Test.csproj", "{684434AD-70CA-4355-87B8-6B11E921D393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Reporting.Applications.Test", "Samples\BookLibrary\BookLibrary.Reporting.Applications.Test\BookLibrary.Reporting.Applications.Test.csproj", "{D9F56691-FA01-43C2-A44E-259CF950E7B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Reporting.Applications.Test", "Samples\BookLibrary\BookLibrary.Reporting.Applications.Test\BookLibrary.Reporting.Applications.Test.csproj", "{D9F56691-FA01-43C2-A44E-259CF950E7B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembler", "Samples\InformationManager\Assembler\Assembler.csproj", "{66F216DA-838E-463B-B5A5-8631177F0079}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -92,47 +93,47 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembler", "Samples\Inform
 		{7DB633C2-1EA6-420F-9BA9-320D42289119} = {7DB633C2-1EA6-420F-9BA9-320D42289119}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Applications", "Samples\InformationManager\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj", "{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Modules.Applications", "Samples\InformationManager\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj", "{5E82EAA0-ABB1-40D2-8931-F7BE9E9439D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Presentation", "Samples\InformationManager\Infrastructure.Modules.Presentation\Infrastructure.Modules.Presentation.csproj", "{2947C827-FFC2-4E77-A8FD-E54A009ED4A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Presentation", "Samples\InformationManager\Common.Presentation\Common.Presentation.csproj", "{23854875-DDBB-4BB9-81B5-637FCA6B1831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Interfaces", "Samples\InformationManager\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj", "{664D5E11-1BAB-4D48-BEF5-775DB427D691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Interfaces", "Samples\InformationManager\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj", "{664D5E11-1BAB-4D48-BEF5-775DB427D691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Domain", "Samples\InformationManager\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj", "{D647B501-C650-4877-8CF6-06515391E28F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient.Modules.Domain", "Samples\InformationManager\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj", "{D647B501-C650-4877-8CF6-06515391E28F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Applications", "Samples\InformationManager\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj", "{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient.Modules.Applications", "Samples\InformationManager\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj", "{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Presentation", "Samples\InformationManager\EmailClient.Modules.Presentation\EmailClient.Modules.Presentation.csproj", "{7DB633C2-1EA6-420F-9BA9-320D42289119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Applications", "Samples\InformationManager\Common.Applications\Common.Applications.csproj", "{3BC491D6-786A-46F1-9B93-69F23F89055A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Applications", "Samples\InformationManager\Common.Applications\Common.Applications.csproj", "{3BC491D6-786A-46F1-9B93-69F23F89055A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Presentation", "Samples\InformationManager\AddressBook.Modules.Presentation\AddressBook.Modules.Presentation.csproj", "{99901356-AD33-4E23-8F0E-2A9DFCCF4885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Applications", "Samples\InformationManager\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj", "{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Modules.Applications", "Samples\InformationManager\AddressBook.Modules.Applications\AddressBook.Modules.Applications.csproj", "{D1D6D2D8-3D5D-4DB1-8F97-E20CFA5F1F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Domain", "Samples\InformationManager\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj", "{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Modules.Domain", "Samples\InformationManager\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj", "{6DD92044-33D8-4F00-8921-DE9DAF2FBCAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Interfaces", "Samples\InformationManager\AddressBook.Interfaces\AddressBook.Interfaces.csproj", "{E270D7E7-0E35-4DED-B330-25FF7EED8581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Interfaces", "Samples\InformationManager\AddressBook.Interfaces\AddressBook.Interfaces.csproj", "{E270D7E7-0E35-4DED-B330-25FF7EED8581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain.Test", "Samples\InformationManager\Common.Domain.Test\Common.Domain.Test.csproj", "{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Domain.Test", "Samples\InformationManager\Common.Domain.Test\Common.Domain.Test.csproj", "{1112ECBA-AC14-46E6-BF67-3CAA8CB93022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Applications.Test", "Samples\InformationManager\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj", "{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Modules.Applications.Test", "Samples\InformationManager\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj", "{08D35705-7F77-4ABE-9E85-D31DE77A1DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Modules.Presentation.Test", "Samples\InformationManager\Infrastructure.Modules.Presentation.Test\Infrastructure.Modules.Presentation.Test.csproj", "{D213F7FE-7331-4BCD-B989-B68093CA7FB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Modules.Presentation.Test", "Samples\InformationManager\Infrastructure.Modules.Presentation.Test\Infrastructure.Modules.Presentation.Test.csproj", "{D213F7FE-7331-4BCD-B989-B68093CA7FB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Domain.Test", "Samples\InformationManager\AddressBook.Modules.Domain.Test\AddressBook.Modules.Domain.Test.csproj", "{27927A49-284A-4F13-9137-E9437538C12B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Modules.Domain.Test", "Samples\InformationManager\AddressBook.Modules.Domain.Test\AddressBook.Modules.Domain.Test.csproj", "{27927A49-284A-4F13-9137-E9437538C12B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Modules.Applications.Test", "Samples\InformationManager\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj", "{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Modules.Applications.Test", "Samples\InformationManager\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj", "{C814BC03-79B3-4B72-A82B-AFA4CF93E5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Domain.Test", "Samples\InformationManager\EmailClient.Modules.Domain.Test\EmailClient.Modules.Domain.Test.csproj", "{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient.Modules.Domain.Test", "Samples\InformationManager\EmailClient.Modules.Domain.Test\EmailClient.Modules.Domain.Test.csproj", "{4EECE5C7-DD23-45AC-8647-24A0FDDF2342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Applications.Test", "Samples\InformationManager\EmailClient.Modules.Applications.Test\EmailClient.Modules.Applications.Test.csproj", "{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient.Modules.Applications.Test", "Samples\InformationManager\EmailClient.Modules.Applications.Test\EmailClient.Modules.Applications.Test.csproj", "{BE9FF027-61EC-44F5-B2BD-5AEF797DD510}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient.Modules.Presentation.Test", "Samples\InformationManager\EmailClient.Modules.Presentation.Test\EmailClient.Modules.Presentation.Test.csproj", "{9409DC4C-5D76-411C-9148-71DB2E4BAA75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient.Modules.Presentation.Test", "Samples\InformationManager\EmailClient.Modules.Presentation.Test\EmailClient.Modules.Presentation.Test.csproj", "{9409DC4C-5D76-411C-9148-71DB2E4BAA75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Applications.Test", "Samples\InformationManager\Common.Applications.Test\Common.Applications.Test.csproj", "{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Applications.Test", "Samples\InformationManager\Common.Applications.Test\Common.Applications.Test.csproj", "{92D12FFA-90C6-49A3-A483-E4713CD8DCC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System.Waf", "System.Waf", "{A120EF79-3B18-4B3F-B54D-9767BCE32E33}"
 	ProjectSection(SolutionItems) = preProject

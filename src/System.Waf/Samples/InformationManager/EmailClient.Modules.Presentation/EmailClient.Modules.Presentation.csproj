@@ -54,9 +54,6 @@
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Converters\StringCollectionToStringConverter.cs" />
     <Compile Include="DesignData\SampleBasicEmailAccountViewModel.cs" />
     <Compile Include="DesignData\SampleEditEmailAccountViewModel.cs" />

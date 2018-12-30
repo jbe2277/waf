@@ -20,8 +20,4 @@
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
     <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
     <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
-  </ItemGroup>
 </Project>
