@@ -4,8 +4,6 @@
     <RootNamespace>Test.InformationManager.Common.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Applications.Test</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>..\..\..\..\UnitTest.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

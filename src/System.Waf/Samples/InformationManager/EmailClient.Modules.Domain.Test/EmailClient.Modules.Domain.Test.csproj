@@ -4,8 +4,6 @@
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Domain.Test</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>..\..\..\..\UnitTest.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

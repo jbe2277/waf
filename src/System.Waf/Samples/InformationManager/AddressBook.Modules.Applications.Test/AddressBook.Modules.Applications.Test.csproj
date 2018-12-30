@@ -4,8 +4,6 @@
     <RootNamespace>Test.InformationManager.AddressBook.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Applications.Test</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>..\..\..\..\UnitTest.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
