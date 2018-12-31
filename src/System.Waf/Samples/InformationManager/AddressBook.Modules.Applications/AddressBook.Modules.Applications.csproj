@@ -3,8 +3,6 @@
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Waf.InformationManager.AddressBook.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Applications</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

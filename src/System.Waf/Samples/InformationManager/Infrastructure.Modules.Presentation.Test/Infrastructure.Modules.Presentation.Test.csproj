@@ -3,7 +3,6 @@
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.InformationManager.Infrastructure.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Presentation.Test</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

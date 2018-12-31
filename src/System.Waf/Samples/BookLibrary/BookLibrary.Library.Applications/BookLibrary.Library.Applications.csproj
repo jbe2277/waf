@@ -3,8 +3,6 @@
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Library.Applications</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Library.Applications</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

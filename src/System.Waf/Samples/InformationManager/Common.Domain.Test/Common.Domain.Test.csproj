@@ -3,7 +3,6 @@
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.InformationManager.Common.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Domain.Test</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

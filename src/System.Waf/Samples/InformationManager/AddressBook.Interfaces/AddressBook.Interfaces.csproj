@@ -3,8 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Waf.InformationManager.AddressBook.Interfaces</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Interfaces</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <CodeAnalysisRuleSet>..\..\..\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 </Project>

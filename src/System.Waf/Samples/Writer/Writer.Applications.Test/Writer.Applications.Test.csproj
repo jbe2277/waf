@@ -3,7 +3,6 @@
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.Writer.Applications</RootNamespace>
     <AssemblyName>Waf.Writer.Applications.Test</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

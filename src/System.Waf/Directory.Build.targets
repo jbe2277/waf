@@ -12,5 +12,10 @@
         <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
       </ItemGroup>
     </When>
+    <Otherwise>
+      <PropertyGroup>
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
+      </PropertyGroup>
+    </Otherwise>
   </Choose>
 </Project>
