@@ -250,11 +250,6 @@
     <Resource Include="Resources\Images\Pinned.png" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Help.png" />
   </ItemGroup>
   <ItemGroup>
