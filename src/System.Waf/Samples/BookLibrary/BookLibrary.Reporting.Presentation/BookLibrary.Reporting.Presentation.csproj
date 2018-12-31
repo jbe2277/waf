@@ -52,6 +52,7 @@
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildFix.cs" />
     <Compile Include="Controls\BindableTable.cs" />
     <Compile Include="Controls\ContentElement.cs" />
     <Compile Include="Controls\ItemsElement.cs" />
