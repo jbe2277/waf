@@ -109,7 +109,7 @@
       <Project>{DB087110-BDBA-4E9D-813F-EF08295ECF8C}</Project>
       <Name>BookLibrary.Library.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+    <ProjectReference Include="..\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj">
       <Project>{0F051A17-542A-4981-8155-A99F547E4442}</Project>
       <Name>BookLibrary.Library.Presentation</Name>
       <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
