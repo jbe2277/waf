@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Data.Common;
-using System.Data.Entity.Validation;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
+using System.Waf.Foundation;
 using Waf.BookLibrary.Library.Applications.Data;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
@@ -29,7 +29,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly IShellService shellService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly DelegateCommand saveCommand;
-        private DbConnection connection;
         private BookLibraryContext bookLibraryContext;
 
         [ImportingConstructor]
@@ -58,10 +57,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             // Set |DataDirectory| macro to our own path. This macro is used within the connection string.
             AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
 
-            connection = DbConnectionFactory.CreateConnection("BookLibraryContext");
+            var connectionString = ConfigurationManager.ConnectionStrings["BookLibraryContext"].ConnectionString;
 
             // Copy the template database file into the DataDirectory when it doesn't exists.
-            string dataSourcePath = connection.ConnectionString.Split(';').Single(x => x.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
+            string dataSourcePath = connectionString.Split(';').Single(x => x.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
                 .Replace("|DataDirectory|", dataDirectory).Substring(12);
             if (!File.Exists(dataSourcePath))
             {
@@ -69,7 +68,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 File.Copy(Path.Combine(ApplicationInfo.ApplicationPath, ResourcesDirectoryName, dbFile), dataSourcePath);
             }
 
-            bookLibraryContext = new BookLibraryContext(connection);
+            bookLibraryContext = new BookLibraryContext("Data Source=" + dataSourcePath);
             entityService.BookLibraryContext = bookLibraryContext;
 
             PropertyChangedEventManager.AddHandler(ShellViewModel, ShellViewModelPropertyChanged, "");
@@ -80,7 +79,6 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         public void Shutdown()
         {
             bookLibraryContext.Dispose();
-            connection.Dispose();
         }
 
         public bool HasChanges()
@@ -97,11 +95,12 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 throw new InvalidOperationException("You must not call Save when CanSave returns false."); 
             }
 
-            IEnumerable<DbEntityValidationResult> errors = bookLibraryContext.GetValidationErrors();
+            var entities = bookLibraryContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).Select(x => x.Entity).ToArray();
+            var errors = entities.OfType<ValidatableModel>().Where(x => x.HasErrors).ToArray();
             if (errors.Any())
             {
-                var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture,  Resources.EntityInvalid,
-                            EntityToString(x.Entry.Entity), string.Join(Environment.NewLine, x.ValidationErrors.Select(y => y.ErrorMessage))));
+                var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture, Resources.EntityInvalid, EntityToString(x), 
+                    string.Join(Environment.NewLine, x.Errors)));
                 messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture,
                     Resources.SaveErrorInvalidEntities, string.Join(Environment.NewLine, errorMessages)));
                 return false;

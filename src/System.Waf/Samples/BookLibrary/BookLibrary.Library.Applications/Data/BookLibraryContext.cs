@@ -1,13 +1,15 @@
-﻿using System.Data.Common;
-using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Data
 {
     internal class BookLibraryContext : DbContext
     {
-        public BookLibraryContext(DbConnection dbConnection) : base(dbConnection, false)
+        private readonly string connectionString;
+
+        public BookLibraryContext(string connectionString)
         {
-            Database.SetInitializer<BookLibraryContext>(null);
+            this.connectionString = connectionString;
         }
 
         public bool HasChanges() 
@@ -15,12 +17,18 @@ namespace Waf.BookLibrary.Library.Applications.Data
             ChangeTracker.DetectChanges();
             return ChangeTracker.HasChanges(); 
         }
-        
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Configurations.Add(new PersonMapping());
-            modelBuilder.Configurations.Add(new BookMapping());
+
+            modelBuilder.Entity<Person>(PersonMapping.Builder);
+            modelBuilder.Entity<Book>(BookMapping.Builder);
         }
     }
 }

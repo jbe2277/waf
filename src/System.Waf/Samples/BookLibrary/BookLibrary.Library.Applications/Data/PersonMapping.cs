@@ -1,22 +1,24 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Data
 {
-    internal class PersonMapping : EntityTypeConfiguration<Person>
+    internal static class PersonMapping
     {
-        public PersonMapping()
+        public static void Builder(EntityTypeBuilder<Person> builder)
         {
-            HasKey(t => t.Id);
+            builder.Ignore(t => t.Errors);
+            builder.Ignore(t => t.HasErrors);
 
-            Property(t => t.Id).HasColumnName("Id");
-            Property(t => t.Firstname).HasMaxLength(30).HasColumnName("Firstname");
-            Property(t => t.Lastname).HasMaxLength(30).HasColumnName("Lastname");
-            Property(t => t.Email).HasMaxLength(100).HasColumnName("Email");
+            builder.HasKey(t => t.Id);
 
-            Ignore(t => t.HasErrors);
+            builder.Property(t => t.Id).HasColumnName("Id");
+            builder.Property(t => t.Firstname).HasMaxLength(30).HasColumnName("Firstname");
+            builder.Property(t => t.Lastname).HasMaxLength(30).HasColumnName("Lastname");
+            builder.Property(t => t.Email).HasMaxLength(100).HasColumnName("Email");
 
-            ToTable("Person");
+            builder.ToTable("Person");
         }
     }
 }
