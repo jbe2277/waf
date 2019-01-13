@@ -5,11 +5,11 @@ namespace Waf.BookLibrary.Library.Applications.Data
 {
     internal class BookLibraryContext : DbContext
     {
-        private readonly string connectionString;
+        private readonly string dataSourcePath;
 
-        public BookLibraryContext(string connectionString)
+        public BookLibraryContext(string dataSourcePath)
         {
-            this.connectionString = connectionString;
+            this.dataSourcePath = dataSourcePath;
         }
 
         public bool HasChanges() 
@@ -20,7 +20,7 @@ namespace Waf.BookLibrary.Library.Applications.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite("Data Source=" + dataSourcePath);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -54,21 +54,16 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 Directory.CreateDirectory(Path.Combine(dataDirectory, ResourcesDirectoryName));
             }
 
-            // Set |DataDirectory| macro to our own path. This macro is used within the connection string.
-            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
-
-            var connectionString = ConfigurationManager.ConnectionStrings["BookLibraryContext"].ConnectionString;
-
             // Copy the template database file into the DataDirectory when it doesn't exists.
-            string dataSourcePath = connectionString.Split(';').Single(x => x.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
-                .Replace("|DataDirectory|", dataDirectory).Substring(12);
+            var connectionString = ConfigurationManager.ConnectionStrings["BookLibraryContext"].ConnectionString;
+            var dataSourcePath = Path.Combine(dataDirectory, connectionString);
             if (!File.Exists(dataSourcePath))
             {
                 string dbFile = Path.GetFileName(dataSourcePath);
                 File.Copy(Path.Combine(ApplicationInfo.ApplicationPath, ResourcesDirectoryName, dbFile), dataSourcePath);
             }
 
-            bookLibraryContext = new BookLibraryContext("Data Source=" + dataSourcePath);
+            bookLibraryContext = new BookLibraryContext(dataSourcePath);
             entityService.BookLibraryContext = bookLibraryContext;
 
             PropertyChangedEventManager.AddHandler(ShellViewModel, ShellViewModelPropertyChanged, "");
