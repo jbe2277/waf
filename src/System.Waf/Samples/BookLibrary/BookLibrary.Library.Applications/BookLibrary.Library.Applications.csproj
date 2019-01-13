@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.5.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SQLite" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>

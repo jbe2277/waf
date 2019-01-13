@@ -9,7 +9,6 @@ using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.Foundation;
-using Waf.BookLibrary.Library.Applications.Data;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
@@ -27,17 +26,19 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly EntityService entityService;
         private readonly IMessageService messageService;
         private readonly IShellService shellService;
+        private readonly IDBContextService dBContextService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly DelegateCommand saveCommand;
-        private BookLibraryContext bookLibraryContext;
+        private DbContext bookLibraryContext;
 
         [ImportingConstructor]
         public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService, 
-            Lazy<ShellViewModel> shellViewModel)
+            IDBContextService dBContextService, Lazy<ShellViewModel> shellViewModel)
         {
             this.entityService = entityService;
             this.messageService = messageService;
             this.shellService = shellService;
+            this.dBContextService = dBContextService;
             this.shellViewModel = shellViewModel;
             saveCommand = new DelegateCommand(() => Save(), CanSave);
         }
@@ -63,7 +64,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 File.Copy(Path.Combine(ApplicationInfo.ApplicationPath, ResourcesDirectoryName, dbFile), dataSourcePath);
             }
 
-            bookLibraryContext = new BookLibraryContext(dataSourcePath);
+            bookLibraryContext = dBContextService.GetBookLibraryContext(dataSourcePath);
             entityService.BookLibraryContext = bookLibraryContext;
 
             PropertyChangedEventManager.AddHandler(ShellViewModel, ShellViewModelPropertyChanged, "");
@@ -78,7 +79,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         public bool HasChanges()
         {
-            return bookLibraryContext != null && bookLibraryContext.HasChanges();
+            return bookLibraryContext != null && bookLibraryContext.ChangeTracker.HasChanges();
         }
 
         public bool CanSave() { return ShellViewModel.IsValid; }

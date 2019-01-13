@@ -124,6 +124,9 @@
   <ItemGroup>
     <Compile Include="Converters\LanguageToStringConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
+    <Compile Include="Data\BookLibraryContext.cs" />
+    <Compile Include="Data\BookMapping.cs" />
+    <Compile Include="Data\PersonMapping.cs" />
     <Compile Include="DesignData\MockSettingsService.cs" />
     <Compile Include="DesignData\MockShellService.cs" />
     <Compile Include="DesignData\SampleBookListViewModel.cs" />
@@ -139,6 +142,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\DBContextService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\PresentationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

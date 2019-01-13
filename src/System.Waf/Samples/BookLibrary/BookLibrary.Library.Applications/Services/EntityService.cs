@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Microsoft.EntityFrameworkCore;
-using Waf.BookLibrary.Library.Applications.Data;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Services
@@ -13,7 +12,7 @@ namespace Waf.BookLibrary.Library.Applications.Services
         private ObservableCollection<Book> books;
         private ObservableCollection<Person> persons;
 
-        public BookLibraryContext BookLibraryContext { get; set; }
+        public DbContext BookLibraryContext { get; set; }
         
         public ObservableCollection<Book> Books
         {
