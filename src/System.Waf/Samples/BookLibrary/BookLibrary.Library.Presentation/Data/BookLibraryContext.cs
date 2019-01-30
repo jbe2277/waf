@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Waf.BookLibrary.Library.Domain;
-using Waf.BookLibrary.Library.Presentation.Data;
 
-namespace Waf.BookLibrary.Library.Applications.Data
+namespace Waf.BookLibrary.Library.Presentation.Data
 {
     internal class BookLibraryContext : DbContext
     {

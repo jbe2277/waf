@@ -4,6 +4,6 @@ namespace Waf.BookLibrary.Library.Applications.Services
 {
     public interface IDBContextService
     {
-        DbContext GetBookLibraryContext(string dataSourcePath);
+        DbContext GetBookLibraryContext(out string dataSourcePath);
     }
 }
