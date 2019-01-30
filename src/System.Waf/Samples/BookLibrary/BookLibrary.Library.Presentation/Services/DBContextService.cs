@@ -6,6 +6,8 @@ using System.Waf.Applications;
 using Microsoft.EntityFrameworkCore;
 using Waf.BookLibrary.Library.Presentation.Data;
 using Waf.BookLibrary.Library.Applications.Services;
+using Waf.BookLibrary.Library.Applications.Data;
+using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.Services
 {
@@ -32,7 +34,13 @@ namespace Waf.BookLibrary.Library.Presentation.Services
                 string dbFile = Path.GetFileName(dataSourcePath);
                 File.Copy(Path.Combine(ApplicationInfo.ApplicationPath, ResourcesDirectoryName, dbFile), dataSourcePath);
             }
-            return new BookLibraryContext(dataSourcePath);
+
+            var options = new DbContextOptionsBuilder<BookLibraryContext>().UseSqlite("Data Source=" + dataSourcePath).Options;
+            return new BookLibraryContext(options, modelBuilder =>
+            {
+                modelBuilder.Entity<Person>(PersonMapping.Builder);
+                modelBuilder.Entity<Book>(BookMapping.Builder);
+            });
         }
     }
 }
