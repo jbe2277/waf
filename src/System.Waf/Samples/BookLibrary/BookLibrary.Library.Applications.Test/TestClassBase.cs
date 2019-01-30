@@ -2,11 +2,8 @@
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Linq;
 using System.Waf.UnitTesting.Mocks;
 using Waf.BookLibrary.Library.Applications.Controllers;
-using Waf.BookLibrary.Library.Applications.Services;
 
 namespace Test.BookLibrary.Library.Applications
 {
@@ -15,15 +12,13 @@ namespace Test.BookLibrary.Library.Applications
     {
         public CompositionContainer Container { get; private set; }
 
-
         [TestInitialize]
-        public void TestInitialize()
+        public void Initialize()
         {
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
-            catalog.Catalogs.Add(new FilteredCatalog(new AssemblyCatalog(typeof(ModuleController).Assembly), 
-                x => ExcludeTypes(x, typeof(IEntityController), typeof(IEntityService))));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
 
             OnCatalogInitialize(catalog);
 
@@ -32,25 +27,30 @@ namespace Test.BookLibrary.Library.Applications
             batch.AddExportedValue(Container);
             Container.Compose(batch);
             
-            OnTestInitialize();
+            OnInitialize();
         }
 
         [TestCleanup]
-        public void TestCleanup()
+        public void Cleanup()
         {
-            OnTestCleanup();
+            OnCleanup();
             Container?.Dispose();
+        }
+
+        public T Get<T>()
+        {
+            return Container.GetExportedValue<T>();
+        }
+
+        public Lazy<T> GetLazy<T>()
+        {
+            return new Lazy<T>(() => Container.GetExportedValue<T>());
         }
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }
 
-        protected virtual void OnTestInitialize() { }
+        protected virtual void OnInitialize() { }
 
-        protected virtual void OnTestCleanup() { }
-
-        private static bool ExcludeTypes(ComposablePartDefinition definition, params Type[] typesToExclude)
-        {
-            return !definition.ExportDefinitions.Select(x => x.ContractName).Intersect(typesToExclude.Select(x => x.FullName)).Any();
-        }
+        protected virtual void OnCleanup() { }
     }
 }

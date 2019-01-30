@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 
 namespace Test.BookLibrary.Library.Applications.Controllers
 {
-    [Export(typeof(IEntityController)), Export]
+    [Export]
     public class MockEntityController : IEntityController
     {
         public bool InitializeCalled { get; set; }

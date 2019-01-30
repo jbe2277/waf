@@ -17,7 +17,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
     {
         private static readonly ICommand dummyCommand = new DelegateCommand(() => { });
 
-        
         [TestMethod]
         public void BookListViewModelBooksTest()
         {

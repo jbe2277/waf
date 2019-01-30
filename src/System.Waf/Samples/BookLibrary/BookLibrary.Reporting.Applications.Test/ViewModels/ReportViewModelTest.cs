@@ -10,7 +10,7 @@ namespace Test.BookLibrary.Reporting.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var reportViewModel = Container.GetExportedValue<ReportViewModel>();
+            var reportViewModel = Get<ReportViewModel>();
             var report = new object();
             AssertHelper.PropertyChangedEvent(reportViewModel, x => x.Report, () => reportViewModel.Report = report);
             Assert.AreEqual(report, reportViewModel.Report);

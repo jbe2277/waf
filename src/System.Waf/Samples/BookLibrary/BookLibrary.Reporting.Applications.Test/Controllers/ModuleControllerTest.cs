@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Test.BookLibrary.Library.Applications.Services;
 using Test.BookLibrary.Reporting.Applications.Reports;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Reporting.Applications.Controllers;
@@ -11,28 +12,33 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
     [TestClass]
     public class ModuleControllerTest : ReportingTest
     {
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+            Get<EntityService>().BookLibraryContext = Get<MockDBContextService>().GetBookLibraryContext(out _);
+        }
+
         private ModuleController InitializeModuleController()
         {
-            var moduleController = Container.GetExportedValue<ModuleController>();
+            var moduleController = Get<ModuleController>();
             moduleController.Initialize();
             moduleController.Run();
 
-            var shellService = Container.GetExportedValue<IShellService>();
+            var shellService = Get<IShellService>();
             Assert.IsTrue(shellService.IsReportingEnabled);
 
-            var reportView = Container.GetExportedValue<IReportView>();
+            var reportView = Get<IReportView>();
             Assert.AreEqual(reportView, shellService.LazyReportingView.Value);
 
             return moduleController;
         }
         
-
         [TestMethod]
         public void CreateBookListReportTest()
         {
             var moduleController = InitializeModuleController();
 
-            var reportViewModel = Container.GetExportedValue<ReportViewModel>();
+            var reportViewModel = Get<ReportViewModel>();
             reportViewModel.CreateBookListReportCommand.Execute(null);
 
             var bookListReport = (MockBookListReport)reportViewModel.Report;
@@ -49,7 +55,7 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
         {
             var moduleController = InitializeModuleController();
 
-            var reportViewModel = Container.GetExportedValue<ReportViewModel>();
+            var reportViewModel = Get<ReportViewModel>();
             reportViewModel.CreateBorrowedBooksReportCommand.Execute(null);
 
             var bookListReport = (MockBorrowedBooksReport)reportViewModel.Report;

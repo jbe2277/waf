@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
+using Test.BookLibrary.Library.Applications.Services;
 using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.Controllers;
 using Waf.BookLibrary.Library.Applications.Services;
@@ -14,27 +15,33 @@ namespace Test.BookLibrary.Library.Applications.Controllers
     [TestClass]
     public class BookControllerTest : TestClassBase
     {
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+            Get<EntityService>().BookLibraryContext = Get<MockDBContextService>().GetBookLibraryContext(out _);
+        }
+
         [TestMethod]
         public void SelectionTest()
         {
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(new Book() { Title = "The Fellowship of the Ring" });
             entityService.Books.Add(new Book() { Title = "The Two Towers" });
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
 
             // Check that Initialize shows the BookListView and BookView
-            var shellService = Container.GetExportedValue<ShellService>();
+            var shellService = Get<ShellService>();
             Assert.IsInstanceOfType(shellService.BookListView, typeof(IBookListView));
             Assert.IsInstanceOfType(shellService.BookView, typeof(IBookView));
 
             // Check that the first Book is selected
-            var bookListView = Container.GetExportedValue<IBookListView>();
+            var bookListView = Get<IBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             Assert.AreEqual(entityService.Books.First(), bookListViewModel.SelectedBook.Book);
 
             // Change the selection
-            var bookViewModel = Container.GetExportedValue<BookViewModel>();
+            var bookViewModel = Get<BookViewModel>();
             bookListViewModel.SelectedBook = bookListViewModel.Books.Last();
             Assert.AreEqual(entityService.Books.Last(), bookViewModel.Book);
         }
@@ -44,14 +51,14 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         {
             var fellowship = new Book() { Title = "The Fellowship of the Ring" };
             var twoTowers = new Book() { Title = "The Two Towers" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListView = Get<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
-            var bookView = Container.GetExportedValue<MockBookView>();
+            var bookView = Get<MockBookView>();
             var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView);
 
             // Add a new Book
@@ -93,13 +100,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         public void AddAndRemoveDisableTest()
         {
             var fellowship = new Book() { Title = "The Fellowship of the Ring" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListViewModel = Container.GetExportedValue<BookListViewModel>();
+            var bookListViewModel = Get<BookListViewModel>();
             bookListViewModel.AddSelectedBook(bookListViewModel.Books.Single());
-            var bookViewModel = Container.GetExportedValue<BookViewModel>();
+            var bookViewModel = Get<BookViewModel>();
 
             var addNewCommand = bookListViewModel.AddNewCommand;
             Assert.IsTrue(addNewCommand.CanExecute(null));
@@ -124,13 +131,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Book fellowship = new Book() { Title = "The Fellowship of the Ring" };
             Book twoTowers = new Book() { Title = "The Two Towers" };
             Book returnKing = new Book() { Title = "The Return of the King" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
             entityService.Books.Add(returnKing);
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListView = Get<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
             bookController.BooksView.Sort = x => x.OrderBy(b => b.Book.Title);
@@ -149,13 +156,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var fellowship = new Book() { Title = "The Fellowship of the Ring" };
             var twoTowers = new Book() { Title = "The Two Towers" };
             var returnKing = new Book() { Title = "The Return of the King" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
             entityService.Books.Add(returnKing);
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListView = Get<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
             // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
             bookController.BooksView.Sort = x => x.OrderBy(b => b.Book.Title);
@@ -174,13 +181,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var fellowship = new Book() { Title = "The Fellowship of the Ring" };
             var twoTowers = new Book() { Title = "The Two Towers" };
             var returnKing = new Book() { Title = "The Return of the King" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
             entityService.Books.Add(returnKing);
-            var bookController = Container.GetExportedValue<BookController>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListView = Get<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
 
             // Remove all books and check that nothing is selected anymore
@@ -200,18 +207,18 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var twoTowers = new Book() { Title = "The Two Towers" };
             var harry = new Person() { Firstname = "Harry" };
             var ron = new Person() { Firstname = "Ron" };
-            var entityService = Container.GetExportedValue<IEntityService>();
+            var entityService = Get<IEntityService>();
             entityService.Books.Add(fellowship);
             entityService.Books.Add(twoTowers);
             entityService.Persons.Add(harry);
             entityService.Persons.Add(ron);
-            var shellService = Container.GetExportedValue<ShellService>();
-            shellService.ShellView = Container.GetExportedValue<IShellView>();
-            var bookController = Container.GetExportedValue<BookController>();
+            var shellService = Get<ShellService>();
+            shellService.ShellView = Get<IShellView>();
+            var bookController = Get<BookController>();
             bookController.Initialize();
-            var bookListView = Container.GetExportedValue<MockBookListView>();
+            var bookListView = Get<MockBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView);
-            var bookView = Container.GetExportedValue<MockBookView>();
+            var bookView = Get<MockBookView>();
             var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView);
 
             // Check that the LendTo Button is enabled
@@ -222,7 +229,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Open the LendTo dialog
             MockLendToView.ShowDialogAction = view =>
             {
-                Assert.AreEqual(Container.GetExportedValue<IShellView>(), view.Owner);
+                Assert.AreEqual(Get<IShellView>(), view.Owner);
                 Assert.IsTrue(view.IsVisible);
                 LendToViewModel viewModel = (LendToViewModel)view.DataContext;
                 Assert.AreEqual(fellowship, viewModel.Book);

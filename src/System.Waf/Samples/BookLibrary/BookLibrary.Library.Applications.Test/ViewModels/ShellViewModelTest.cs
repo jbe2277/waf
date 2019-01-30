@@ -17,10 +17,10 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void ShellViewModelBasicTest()
         {
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var messageService = Container.GetExportedValue<MockMessageService>();
-            var shellService = Container.GetExportedValue<IShellService>();
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellView = Get<MockShellView>();
+            var messageService = Get<MockMessageService>();
+            var shellService = Get<IShellService>();
+            var shellViewModel = Get<ShellViewModel>();
 
             // The title isn't available in the unit test environment.
             Assert.AreEqual("", shellViewModel.Title);
@@ -51,7 +51,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void ShellViewModelPropertiesTest()
         {
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
 
             Assert.IsTrue(shellViewModel.IsValid);
             AssertHelper.PropertyChangedEvent(shellViewModel, x => x.IsValid, () =>
@@ -62,16 +62,16 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
+            var presentationService = (MockPresentationService)Get<IPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-            Container.GetExportedValue<ShellViewModel>();
-            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            Get<ShellViewModel>();
+            var shellView = (MockShellView)Get<IShellView>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -91,14 +91,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
-            var messageService = Container.GetExportedValue<IMessageService>();
-            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
-            var shellService = Container.GetExportedValue<IShellService>();
+            var messageService = Get<IMessageService>();
+            var presentationService = (MockPresentationService)Get<IPresentationService>();
+            var shellService = Get<IShellService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            var shellViewMock = (MockShellView)Container.GetExportedValue<IShellView>();
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var shellViewMock = (MockShellView)Get<IShellView>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             shellViewMock.SetNAForLocationAndSize();
 
