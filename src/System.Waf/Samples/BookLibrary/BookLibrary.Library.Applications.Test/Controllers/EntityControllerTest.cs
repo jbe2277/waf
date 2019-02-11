@@ -1,12 +1,59 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
+using System.Waf.UnitTesting;
+using System.Waf.UnitTesting.Mocks;
 using Waf.BookLibrary.Library.Applications.Controllers;
+using Waf.BookLibrary.Library.Applications.Services;
+using Waf.BookLibrary.Library.Applications.ViewModels;
+using Waf.BookLibrary.Library.Domain;
 
 namespace Test.BookLibrary.Library.Applications.Controllers
 {
     [TestClass]
     public class EntityControllerTest : TestClassBase
     {
+        [TestMethod]
+        public void ValidateBeforeSave()
+        {
+            var controller = (EntityController)Get<IEntityController>();
+            controller.Initialize();
+            Assert.IsFalse(controller.HasChanges());
+            var entityService = Get<EntityService>();
+            entityService.Persons.Add(new Person() { Firstname = "Harry", Lastname = "Potter" });
+            entityService.Persons.Last().Validate();
+            Assert.IsTrue(controller.HasChanges());
+
+            Assert.IsTrue(controller.CanSave());
+            controller.Save();
+            Assert.IsFalse(controller.HasChanges());
+
+            var messageService = Get<MockMessageService>();
+            Assert.AreEqual(MessageType.None, messageService.MessageType);
+
+            entityService.Persons.Add(new Person());
+            entityService.Persons.Last().Validate();
+            Assert.IsTrue(controller.HasChanges());
+            var shellViewModel = Get<ShellViewModel>();
+            shellViewModel.SaveCommand.Execute(null);
+
+            Assert.AreEqual(MessageType.Error, messageService.MessageType);
+            Assert.IsTrue(controller.HasChanges());
+            controller.Shutdown();
+        }
+
+        [TestMethod]
+        public void DisableSaveWhenShellIsInvalid()
+        {
+            var controller = (EntityController)Get<IEntityController>();
+            controller.Initialize();
+            var shellViewModel = Get<ShellViewModel>();
+            Assert.IsTrue(shellViewModel.SaveCommand.CanExecute(null));
+            AssertHelper.CanExecuteChangedEvent(shellViewModel.SaveCommand, () => shellViewModel.IsValid = false);
+            Assert.IsFalse(shellViewModel.SaveCommand.CanExecute(null));
+            controller.Shutdown();
+        }
+
         [TestMethod]
         public void EntityToStringTest()
         {
