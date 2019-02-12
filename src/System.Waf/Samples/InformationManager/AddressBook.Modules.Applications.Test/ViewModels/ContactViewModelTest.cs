@@ -11,7 +11,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<ContactViewModel>();
+            var viewModel = Get<ContactViewModel>();
 
             Assert.IsNull(viewModel.Contact);
             

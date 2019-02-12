@@ -18,9 +18,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
         [TestMethod]
         public void ShowAndClose()
         {
-            var messageService = Container.GetExportedValue<MockMessageService>();
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var messageService = Get<MockMessageService>();
+            var shellView = Get<MockShellView>();
+            var shellViewModel = Get<ShellViewModel>();
 
             // Show the ShellView
             Assert.IsFalse(shellView.IsVisible);
@@ -31,8 +31,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             Assert.AreEqual("", shellViewModel.Title);
 
             // Check the services
-            Assert.AreEqual(Container.GetExportedValue<ShellService>(), shellViewModel.ShellService);
-            Assert.AreEqual(Container.GetExportedValue<NavigationService>(), shellViewModel.NavigationService);
+            Assert.AreEqual(Get<ShellService>(), shellViewModel.ShellService);
+            Assert.AreEqual(Get<NavigationService>(), shellViewModel.NavigationService);
 
             // Show the About Dialog
             Assert.IsNull(messageService.Message);
@@ -48,8 +48,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
         [TestMethod]
         public void ToolBarCommandsDelegation()
         {
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellView = Get<MockShellView>();
+            var shellViewModel = Get<ShellViewModel>();
 
             var emptyCommand = new DelegateCommand(() => { });
             var newToolBarCommands = new[] 
@@ -68,15 +68,15 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var shellView = Container.GetExportedValue<MockShellView>();
+            var shellView = Get<MockShellView>();
             shellView.VirtualScreenWidth = 1000;
             shellView.VirtualScreenHeight = 700;
 
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-            Container.GetExportedValue<ShellViewModel>();
+            Get<ShellViewModel>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -96,14 +96,14 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
-            var shellView = Container.GetExportedValue<MockShellView>();
+            var shellView = Get<MockShellView>();
             shellView.VirtualScreenWidth = 1000;
             shellView.VirtualScreenHeight = 700;
 
-            var messageService = Container.GetExportedValue<IMessageService>();
-            var shellService = Container.GetExportedValue<ShellService>();
-            var navigationService = Container.GetExportedValue<NavigationService>();
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var messageService = Get<IMessageService>();
+            var shellService = Get<ShellService>();
+            var navigationService = Get<NavigationService>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             shellView.SetNAForLocationAndSize();
 

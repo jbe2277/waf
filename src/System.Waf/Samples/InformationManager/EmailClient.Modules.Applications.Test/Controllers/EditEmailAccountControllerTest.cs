@@ -44,7 +44,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         private void EditEmailAccountControllerRun(Action<MockEditEmailAccountView> showDialogAction, EmailAccount emailAccount)
         {
             var ownerWindow = new object();
-            var controller = Container.GetExportedValue<EditEmailAccountController>();
+            var controller = Get<EditEmailAccountController>();
             controller.OwnerWindow = ownerWindow;
             controller.EmailAccount = emailAccount;
             controller.Initialize();

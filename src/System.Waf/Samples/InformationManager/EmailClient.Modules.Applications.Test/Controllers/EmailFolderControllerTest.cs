@@ -21,8 +21,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             // Create the controller
 
-            var controller = Container.GetExportedValue<EmailFolderController>();
-            var emailLayoutViewModel = Container.GetExportedValue<EmailLayoutViewModel>();
+            var controller = Get<EmailFolderController>();
+            var emailLayoutViewModel = Get<EmailLayoutViewModel>();
             var emailListViewModel = controller.EmailListViewModel;
             var emailListView = (MockEmailListView)emailListViewModel.View;
             var emailViewModel = controller.EmailViewModel;
@@ -41,7 +41,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             // Run the controller
 
-            var shellService = Container.GetExportedValue<MockShellService>();
+            var shellService = Get<MockShellService>();
             Assert.IsNull(shellService.ContentView);
 
             controller.Run();

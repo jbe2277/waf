@@ -11,7 +11,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<EmailViewModel>();
+            var viewModel = Get<EmailViewModel>();
 
             var email = new Email();
             AssertHelper.PropertyChangedEvent(viewModel, x => x.Email, () => viewModel.Email = email);

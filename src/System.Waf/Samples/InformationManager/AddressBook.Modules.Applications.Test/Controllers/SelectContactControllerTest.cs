@@ -18,7 +18,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             var contact1 = root.AddNewContact();
             var contact2 = root.AddNewContact();
             
-            var controller = Container.GetExportedValue<SelectContactController>();
+            var controller = Get<SelectContactController>();
 
             controller.OwnerView = new object();
             controller.Root = root;
@@ -54,7 +54,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             root.AddNewContact();
             root.AddNewContact();
 
-            var controller = Container.GetExportedValue<SelectContactController>();
+            var controller = Get<SelectContactController>();
 
             controller.OwnerView = new object();
             controller.Root = root;

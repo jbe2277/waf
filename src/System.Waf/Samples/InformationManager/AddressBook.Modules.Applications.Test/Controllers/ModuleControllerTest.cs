@@ -16,14 +16,14 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
         public void SaveAndLoad()
         {
             var stream = new MasterMemoryStream();
-            var documentService = Container.GetExportedValue<MockDocumentService>();
+            var documentService = Get<MockDocumentService>();
             documentService.GetStreamAction = (documentPartPath, contentType, fileMode) =>
             {
                 stream.Position = 0;
                 return stream;
             };
 
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
             controller.Run();
             var root1 = controller.Root;
@@ -43,14 +43,14 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
         [TestMethod]
         public void ShowAndCloseAddressBook()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             
             // Initialize the controller
 
             controller.Initialize();
 
             Assert.IsTrue(controller.Root.Contacts.Any());
-            var navigationService = Container.GetExportedValue<MockNavigationService>();
+            var navigationService = Get<MockNavigationService>();
             var node = navigationService.NavigationNodes.Single();
             Assert.AreEqual("Contacts", node.Name);
 
@@ -60,7 +60,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             // Show the address book
 
-            var shellService = Container.GetExportedValue<MockShellService>();
+            var shellService = Get<MockShellService>();
             Assert.IsNull(shellService.ContentView);
             Assert.IsFalse(shellService.ToolBarCommands.Any());
             
@@ -83,7 +83,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
         [TestMethod]
         public void ShowSelectContactViewTest()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
             controller.Run();
 

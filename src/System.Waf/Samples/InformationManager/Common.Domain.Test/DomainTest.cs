@@ -7,22 +7,22 @@ namespace Test.InformationManager.Common.Domain
     public abstract class DomainTest
     {
         [TestInitialize]
-        public void TestInitialize()
+        public void Initialize()
         {
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
-            OnTestInitialize();
+            OnInitialize();
         }
 
         [TestCleanup]
-        public void TestCleanup()
+        public void Cleanup()
         {
-            OnTestCleanup();
+            OnCleanup();
         }
 
-        protected virtual void OnTestInitialize() { }
+        protected virtual void OnInitialize() { }
 
-        protected virtual void OnTestCleanup() { }
+        protected virtual void OnCleanup() { }
     }
 }

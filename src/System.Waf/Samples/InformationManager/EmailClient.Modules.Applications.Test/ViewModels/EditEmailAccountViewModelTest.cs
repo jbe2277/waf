@@ -11,7 +11,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<EditEmailAccountViewModel>();
+            var viewModel = Get<EditEmailAccountViewModel>();
 
             var contentView = new object();
             AssertHelper.PropertyChangedEvent(viewModel, x => x.ContentView, () => viewModel.ContentView = contentView);
@@ -29,7 +29,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void ShowDialogAndCloseTest()
         {
-            var viewModel = Container.GetExportedValue<EditEmailAccountViewModel>();
+            var viewModel = Get<EditEmailAccountViewModel>();
             var ownerView = new object();
 
             bool showDialogCalled = false;

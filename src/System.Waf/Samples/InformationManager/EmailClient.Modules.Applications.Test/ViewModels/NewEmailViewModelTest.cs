@@ -14,7 +14,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<NewEmailViewModel>();
+            var viewModel = Get<NewEmailViewModel>();
 
             // Email accounts tests
 
@@ -69,7 +69,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void ShowAndCloseTest()
         {
-            var viewModel = Container.GetExportedValue<NewEmailViewModel>();
+            var viewModel = Get<NewEmailViewModel>();
             var view = (MockNewEmailView)viewModel.View;
             var ownerView = new object();
 

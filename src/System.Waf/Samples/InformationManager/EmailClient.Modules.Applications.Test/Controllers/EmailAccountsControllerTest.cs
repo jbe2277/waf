@@ -16,7 +16,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         public void NewEditAndRemoveEmailAccount()
         {
             var root = new EmailClientRoot();
-            var controller = Container.GetExportedValue<EmailAccountsController>();
+            var controller = Get<EmailAccountsController>();
             controller.Root = root;
 
             bool showDialogCalled = false;

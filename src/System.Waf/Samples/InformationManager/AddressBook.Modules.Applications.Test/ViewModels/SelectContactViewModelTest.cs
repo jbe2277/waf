@@ -11,7 +11,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void ShowDialogAndCloseTest()
         {
-            var viewModel = Container.GetExportedValue<SelectContactViewModel>();
+            var viewModel = Get<SelectContactViewModel>();
 
             bool showDialogActionCalled = false;
             MockSelectContactView.ShowDialogAction = view =>

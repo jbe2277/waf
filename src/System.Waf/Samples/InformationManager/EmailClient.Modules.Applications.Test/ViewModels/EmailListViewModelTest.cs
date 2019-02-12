@@ -14,7 +14,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<EmailListViewModel>();
+            var viewModel = Get<EmailListViewModel>();
             var emails = new List<Email>()
             {
                 new Email(),
@@ -33,7 +33,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void FilterTest()
         {
-            var viewModel = Container.GetExportedValue<EmailListViewModel>();
+            var viewModel = Get<EmailListViewModel>();
 
             var email1 = new Email()
             {
@@ -66,7 +66,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void FocusItemTest()
         {
-            var viewModel = Container.GetExportedValue<EmailListViewModel>();
+            var viewModel = Get<EmailListViewModel>();
             var view = (MockEmailListView)viewModel.View;
 
             bool focusItemActionCalled = false;

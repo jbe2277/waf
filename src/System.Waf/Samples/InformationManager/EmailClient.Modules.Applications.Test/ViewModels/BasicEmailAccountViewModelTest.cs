@@ -12,7 +12,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<BasicEmailAccountViewModel>();
+            var viewModel = Get<BasicEmailAccountViewModel>();
 
             Assert.IsTrue(viewModel.IsPop3Checked);
             Assert.IsFalse(viewModel.IsExchangeChecked);

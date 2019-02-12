@@ -20,8 +20,8 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             
             // Create the controller
             
-            var controller = Container.GetExportedValue<ContactController>();
-            var contactLayoutViewModel = Container.GetExportedValue<ContactLayoutViewModel>();
+            var controller = Get<ContactController>();
+            var contactLayoutViewModel = Get<ContactLayoutViewModel>();
             var contactListViewModel = controller.ContactListViewModel;
             var contactListView = (MockContactListView)contactListViewModel.View;
             var contactViewModel = controller.ContactViewModel;
@@ -40,7 +40,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             // Run the controller
 
-            var shellService = Container.GetExportedValue<MockShellService>();
+            var shellService = Get<MockShellService>();
             Assert.IsNull(shellService.ContentView);
 
             controller.Run();

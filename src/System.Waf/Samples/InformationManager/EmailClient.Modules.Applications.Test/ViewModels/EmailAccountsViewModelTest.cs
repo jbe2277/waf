@@ -13,7 +13,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<EmailAccountsViewModel>();
+            var viewModel = Get<EmailAccountsViewModel>();
             var root = new EmailClientRoot();
             root.AddEmailAccount(new EmailAccount());
             root.AddEmailAccount(new EmailAccount());
@@ -25,7 +25,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void ShowDialogTest()
         {
-            var viewModel = Container.GetExportedValue<EmailAccountsViewModel>();
+            var viewModel = Get<EmailAccountsViewModel>();
             var ownerView = new object();
 
             bool showDialogCalled = false;

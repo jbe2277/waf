@@ -11,18 +11,18 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
     {
         private DocumentController controller;
 
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-            base.OnTestInitialize();
-            controller = Container.GetExportedValue<DocumentController>();
+            base.OnInitialize();
+            controller = Get<DocumentController>();
             if (File.Exists(controller.PackagePath)) File.Delete(controller.PackagePath);
             controller.Initialize();
         }
 
-        protected override void OnTestCleanup()
+        protected override void OnCleanup()
         {
             controller.Shutdown();
-            base.OnTestCleanup();
+            base.OnCleanup();
         }
 
         [TestMethod]

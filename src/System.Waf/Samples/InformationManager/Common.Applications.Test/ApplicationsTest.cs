@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Waf.UnitTesting.Mocks;
@@ -11,9 +12,9 @@ namespace Test.InformationManager.Common.Applications
     {
         public CompositionContainer Container { get; private set; }
 
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-            base.OnTestInitialize();
+            base.OnInitialize();
             
             AggregateCatalog catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
@@ -27,10 +28,20 @@ namespace Test.InformationManager.Common.Applications
             Container.Compose(batch);
         }
 
-        protected override void OnTestCleanup()
+        protected override void OnCleanup()
         {
             Container?.Dispose();
-            base.OnTestCleanup();
+            base.OnCleanup();
+        }
+
+        public T Get<T>()
+        {
+            return Container.GetExportedValue<T>();
+        }
+
+        public Lazy<T> GetLazy<T>()
+        {
+            return new Lazy<T>(() => Container.GetExportedValue<T>());
         }
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }

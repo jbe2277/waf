@@ -10,7 +10,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<ContactLayoutViewModel>();
+            var viewModel = Get<ContactLayoutViewModel>();
 
             Assert.IsNull(viewModel.ContactListView);
             var contactListView = new object();

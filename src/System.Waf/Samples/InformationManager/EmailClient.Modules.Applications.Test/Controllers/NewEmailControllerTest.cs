@@ -21,7 +21,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
             root.AddEmailAccount(emailAccount);
 
-            var controller = Container.GetExportedValue<NewEmailController>();
+            var controller = Get<NewEmailController>();
             controller.Root = root;
             controller.Initialize();
 
@@ -37,7 +37,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             // Select a contact for the To field and cancel the dialog
 
-            var addressBookService = Container.GetExportedValue<MockAddressBookService>();
+            var addressBookService = Get<MockAddressBookService>();
             ContactDto contactResult = null;
             addressBookService.ShowSelectContactViewAction = owner =>
             {
@@ -87,7 +87,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
             root.AddEmailAccount(emailAccount);
 
-            var controller = Container.GetExportedValue<NewEmailController>();
+            var controller = Get<NewEmailController>();
             controller.Root = root;
             controller.Initialize();
 
@@ -104,7 +104,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             // Try to send the email => error message occurs
 
-            var messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Get<MockMessageService>();
             messageService.Clear();
 
             newEmailViewModel.SendCommand.Execute(null);
@@ -123,13 +123,13 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             var root = new EmailClientRoot();
 
-            var controller = Container.GetExportedValue<NewEmailController>();
+            var controller = Get<NewEmailController>();
             controller.Root = root;
             controller.Initialize();
 
             // Create a new email but no email account was created => error message
 
-            var messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Get<MockMessageService>();
             messageService.Clear();
 
             controller.Run();

@@ -14,7 +14,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<ContactListViewModel>();
+            var viewModel = Get<ContactListViewModel>();
             var contacts = new List<Contact>()
             {
                 new Contact(),
@@ -36,7 +36,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void FilterTest()
         {
-            var viewModel = Container.GetExportedValue<ContactListViewModel>();
+            var viewModel = Get<ContactListViewModel>();
             
             var contact1 = new Contact() { Firstname = "Jesper", Lastname = "Aaberg", Email = "j.a@example.com" };
 
@@ -61,7 +61,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
         [TestMethod]
         public void FocusItemTest()
         {
-            var viewModel = Container.GetExportedValue<ContactListViewModel>();
+            var viewModel = Get<ContactListViewModel>();
             var view = (MockContactListView)viewModel.View;
 
             bool focusItemActionCalled = false;

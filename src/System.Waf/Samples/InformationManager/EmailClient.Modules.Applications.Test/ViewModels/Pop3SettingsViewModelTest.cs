@@ -11,7 +11,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            var viewModel = Container.GetExportedValue<Pop3SettingsViewModel>();
+            var viewModel = Get<Pop3SettingsViewModel>();
 
             var pop3Settings = new Pop3Settings();
             pop3Settings.Pop3UserCredits.UserName = "pu";

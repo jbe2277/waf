@@ -11,9 +11,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
         [TestMethod]
         public void ControllerLifecycle()
         {
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var moduleController = Container.GetExportedValue<ModuleController>();
-            var documentController = Container.GetExportedValue<DocumentController>();
+            var shellView = Get<MockShellView>();
+            var moduleController = Get<ModuleController>();
+            var documentController = Get<DocumentController>();
             if (File.Exists(documentController.PackagePath)) File.Delete(documentController.PackagePath);
 
             Assert.IsFalse(shellView.IsVisible);

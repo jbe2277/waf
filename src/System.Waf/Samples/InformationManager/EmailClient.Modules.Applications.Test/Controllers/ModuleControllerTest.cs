@@ -14,14 +14,14 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         public void SaveAndLoad()
         {
             var stream = new MasterMemoryStream();
-            var documentService = Container.GetExportedValue<MockDocumentService>();
+            var documentService = Get<MockDocumentService>();
             documentService.GetStreamAction = (documentPartPath, contentType, fileMode) =>
             {
                 stream.Position = 0;
                 return stream;
             };
 
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
             controller.Run();
             var root1 = controller.Root;
@@ -41,7 +41,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         [TestMethod]
         public void ShowAndCloseEmailViews()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
 
             // Initialize the controller
 
@@ -52,7 +52,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             Assert.IsTrue(controller.Root.Sent.Emails.Any());
             Assert.IsTrue(controller.Root.Drafts.Emails.Any());
 
-            var navigationService = Container.GetExportedValue<MockNavigationService>();
+            var navigationService = Get<MockNavigationService>();
             Assert.AreEqual(5, navigationService.NavigationNodes.Count());
             Assert.AreEqual("Inbox", navigationService.NavigationNodes.ElementAt(0).Name);
             Assert.AreEqual("Outbox", navigationService.NavigationNodes.ElementAt(1).Name);
@@ -72,7 +72,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             // Show the inbox
 
-            var shellService = Container.GetExportedValue<MockShellService>();
+            var shellService = Get<MockShellService>();
             Assert.IsNull(shellService.ContentView);
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
@@ -121,11 +121,11 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         [TestMethod]
         public void ItemCountSynchronizerTest()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
 
             var inbox = controller.Root.Inbox;
-            var navigationService = Container.GetExportedValue<MockNavigationService>();
+            var navigationService = Get<MockNavigationService>();
             var inboxNode = navigationService.NavigationNodes.First();
 
             Assert.AreEqual(inbox.Emails.Count, inboxNode.ItemCount);
@@ -136,15 +136,15 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         [TestMethod]
         public void NewEmail()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
 
-            var navigationService = Container.GetExportedValue<MockNavigationService>();
+            var navigationService = Get<MockNavigationService>();
             var inboxNode = navigationService.NavigationNodes.First();
             
             inboxNode.ShowAction();
             
-            var shellService = Container.GetExportedValue<MockShellService>();
+            var shellService = Get<MockShellService>();
 
             bool isShowCalled = false;
             MockNewEmailView.ShowAction = view =>

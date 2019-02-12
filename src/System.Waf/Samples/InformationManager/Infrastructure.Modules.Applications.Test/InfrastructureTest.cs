@@ -18,10 +18,10 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(InfrastructureTest).Assembly));
         }
 
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-            base.OnTestInitialize();
-            var environmentService = Container.GetExportedValue<MockEnvironmentService>();
+            base.OnInitialize();
+            var environmentService = Get<MockEnvironmentService>();
             environmentService.DataDirectory = Path.Combine(Environment.CurrentDirectory, "Data");
         }
     }
