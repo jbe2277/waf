@@ -18,7 +18,7 @@ namespace Test.Writer.Applications.ViewModels
 
         protected override void OnInitialize()
         {
-	        base.OnInitialize();
+            base.OnInitialize();
             currentCulture = Thread.CurrentThread.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
@@ -28,7 +28,7 @@ namespace Test.Writer.Applications.ViewModels
 
         protected override void OnCleanup()
         {
-	        base.OnCleanup();
+            base.OnCleanup();
             Thread.CurrentThread.CurrentCulture = currentCulture;
         }
 
