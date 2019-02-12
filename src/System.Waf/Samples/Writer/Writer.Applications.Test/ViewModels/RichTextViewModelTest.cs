@@ -12,7 +12,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void PropertyChangedEventTest()
         {
-            var viewModel = Container.GetExportedValue<RichTextViewModel>();
+            var viewModel = Get<RichTextViewModel>();
             var documentType = new RichTextDocumentType();
             var document = new RichTextDocument(documentType);
             viewModel.Document = document;
@@ -41,8 +41,8 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void SyncWithShellServiceTest()
         {
-            var shellService = Container.GetExportedValue<IShellService>();
-            var viewModel = Container.GetExportedValue<RichTextViewModel>();
+            var shellService = Get<IShellService>();
+            var viewModel = Get<RichTextViewModel>();
 
             Assert.AreNotEqual(viewModel, shellService.ActiveEditingCommands);
             Assert.IsFalse(shellService.ActiveEditingCommands.IsSpellCheckAvailable);

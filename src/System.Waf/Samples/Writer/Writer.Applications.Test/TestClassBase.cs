@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
@@ -15,7 +16,7 @@ namespace Test.Writer.Applications
         protected CompositionContainer Container { get; private set; }
 
         [TestInitialize]
-        public void TestInitialize()
+        public void Initialize()
         {
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
@@ -29,27 +30,37 @@ namespace Test.Writer.Applications
             CompositionBatch batch = new CompositionBatch();
             batch.AddExportedValue(Container);
             Container.Compose(batch);
+
+            Get<RichTextDocumentController>();
+            Get<FileController>().Initialize();
             
-            Container.GetExportedValue<RichTextDocumentController>();
-            Container.GetExportedValue<FileController>().Initialize();
-            
-            OnTestInitialize();
+            OnInitialize();
         }
 
         [TestCleanup]
-        public void TestCleanup()
+        public void Cleanup()
         {
             Container?.Dispose();
-            OnTestCleanup();
+            OnCleanup();
         }
 
-        protected virtual void OnTestInitialize() { }
+        public T Get<T>()
+        {
+            return Container.GetExportedValue<T>();
+        }
 
-        protected virtual void OnTestCleanup() { }
+        public Lazy<T> GetLazy<T>()
+        {
+            return new Lazy<T>(() => Container.GetExportedValue<T>());
+        }
+
+        protected virtual void OnInitialize() { }
+
+        protected virtual void OnCleanup() { }
 
         internal PrintController InitializePrintController()
         {
-            printController = Container.GetExportedValue<PrintController>();
+            printController = Get<PrintController>();
             printController.Initialize();
             return printController;
         }

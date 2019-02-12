@@ -22,8 +22,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void RegisterDocumentTypesTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
 
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
@@ -36,8 +36,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void NewAndActiveDocumentTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
 
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
@@ -61,9 +61,9 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenDocumentTest()
         {
-            var fileDialogService = Container.GetExportedValue<MockFileDialogService>();
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileDialogService = Get<MockFileDialogService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
 
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
@@ -108,8 +108,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenDocumentViaCommandLineTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
 
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
@@ -126,7 +126,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.AreEqual(document, fileService.ActiveDocument);
 
             // Call open with a fileName that has an invalid extension
-            var messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Get<MockMessageService>();
             messageService.Clear();
             fileService.OpenCommand.Execute("Document.wrongextension");
             Assert.AreEqual(MessageType.Error, messageService.MessageType);
@@ -142,21 +142,21 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenExceptionsTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
+            var fileController = Get<FileController>();
             var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic);
             ((IList)documentTypesField.GetValue(fileController)).Clear();
 
             AssertHelper.ExpectedException<ArgumentException>(() => fileController.Open(null));
 
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileService = Get<IFileService>();
             AssertHelper.ExpectedException<InvalidOperationException>(() => fileService.OpenCommand.Execute(null));
         }
 
         [TestMethod]
         public void OpenExceptionTestWithRecentFileList()
         {
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
             foreach (var recentFile in fileService.RecentFileList.RecentFiles.ToArray())
             {
                 fileService.RecentFileList.Remove(recentFile);
@@ -178,9 +178,9 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void SaveDocumentTest()
         {
-            var fileDialogService = Container.GetExportedValue<MockFileDialogService>();
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileDialogService = Get<MockFileDialogService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
             var documentType = new MockDocumentType("Mock Document", ".mock");
 
             fileController.Register(documentType);
@@ -210,7 +210,7 @@ namespace Test.Writer.Applications.Controllers
 
             // Simulate an exception during the Save operation.
 
-            var messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Get<MockMessageService>();
             messageService.Clear();
             documentType.ThrowException = true;
             documentType.CanSaveResult = true;
@@ -225,9 +225,9 @@ namespace Test.Writer.Applications.Controllers
             // Get the absolute file path
             string fileName = Path.GetFullPath("SaveWhenFileExistsTest.mock");
 
-            var fileDialogService = Container.GetExportedValue<MockFileDialogService>();
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileDialogService = Get<MockFileDialogService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
 
@@ -259,7 +259,7 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void SaveExceptionsTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
+            var fileController = Get<FileController>();
             var documentType = new MockDocumentType("Mock Document", ".mock");
             documentType.CanSaveResult = false;
             
@@ -276,8 +276,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenSaveDocumentTest()
         {
-            var fileDialogService = Container.GetExportedValue<MockFileDialogService>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileDialogService = Get<MockFileDialogService>();
+            var fileService = Get<IFileService>();
 
             fileDialogService.Result = new FileDialogResult();
             fileService.OpenCommand.Execute(null);
@@ -291,7 +291,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsFalse(fileService.SaveCommand.CanExecute(null));
             Assert.IsTrue(fileService.SaveAsCommand.CanExecute(null));
 
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var mainViewModel = Get<MainViewModel>();
             var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
 
             AssertHelper.CanExecuteChangedEvent(fileService.SaveCommand, () => richTextViewModel.Document.Modified = true);
@@ -312,8 +312,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void CloseDocumentTest()
         {
-            var fileController = Container.GetExportedValue<FileController>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileController = Get<FileController>();
+            var fileService = Get<IFileService>();
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
 
@@ -325,7 +325,7 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void UpdateCommandsTest()
         {
-            var documentManager = Container.GetExportedValue<IFileService>();
+            var documentManager = Get<IFileService>();
 
             documentManager.NewCommand.Execute(null);
             documentManager.NewCommand.Execute(null);

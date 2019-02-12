@@ -12,7 +12,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void ShowPrintDocument()
         {
-            var viewModel = Container.GetExportedValue<PrintPreviewViewModel>();
+            var viewModel = Get<PrintPreviewViewModel>();
             var document = new MockDocumentPaginatorSource();
         
             viewModel.Document = document;
@@ -22,7 +22,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void FitToWidth()
         {
-            var viewModel = Container.GetExportedValue<PrintPreviewViewModel>();
+            var viewModel = Get<PrintPreviewViewModel>();
             var view = (MockPrintPreviewView)viewModel.View;
 
             viewModel.FitToWidthCommand.Execute(null);

@@ -9,16 +9,16 @@ namespace Test.Writer.Applications.ViewModels
     [TestClass]
     public class MainViewModelTest : TestClassBase
     {
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-            base.OnTestInitialize();
+            base.OnInitialize();
             InitializePrintController();
         }
 
         [TestMethod]
         public void DocumentViewTest()
         {
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var mainViewModel = Get<MainViewModel>();
 
             Assert.IsFalse(mainViewModel.DocumentViews.Any());
             Assert.IsNull(mainViewModel.ActiveDocumentView);
@@ -48,8 +48,8 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void UpdateShellServiceDocumentNameTest()
         {
-            var fileService = Container.GetExportedValue<IFileService>();
-            var shellService = Container.GetExportedValue<IShellService>();
+            var fileService = Get<IFileService>();
+            var shellService = Get<IShellService>();
 
             fileService.NewCommand.Execute(null);
             fileService.ActiveDocument = fileService.Documents.First();

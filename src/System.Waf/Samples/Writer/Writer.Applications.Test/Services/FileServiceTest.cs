@@ -10,7 +10,7 @@ namespace Test.Writer.Applications.Services
         [TestMethod]
         public void RecentFileList()
         {
-            var fileService = Container.GetExportedValue<FileService>();
+            var fileService = Get<FileService>();
 
             var recentFileList = new RecentFileList();
             fileService.RecentFileList = recentFileList;

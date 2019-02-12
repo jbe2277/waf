@@ -16,19 +16,19 @@ namespace Test.Writer.Applications.ViewModels
         private IShellService shellService;
         private MockZoomViewModel zoomViewModel;
 
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-	        base.OnTestInitialize();
+	        base.OnInitialize();
             currentCulture = Thread.CurrentThread.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-            shellService = Container.GetExportedValue<IShellService>();
+            shellService = Get<IShellService>();
             zoomViewModel = new MockZoomViewModel(new MockView(), shellService);
         }
 
-        protected override void OnTestCleanup()
+        protected override void OnCleanup()
         {
-	        base.OnTestCleanup();
+	        base.OnCleanup();
             Thread.CurrentThread.CurrentCulture = currentCulture;
         }
 

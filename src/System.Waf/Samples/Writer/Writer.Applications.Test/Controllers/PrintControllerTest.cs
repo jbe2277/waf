@@ -11,24 +11,24 @@ namespace Test.Writer.Applications.Controllers
     [TestClass]
     public class PrintControllerTest : TestClassBase
     {
-        protected override void OnTestInitialize()
+        protected override void OnInitialize()
         {
-            base.OnTestInitialize();
+            base.OnInitialize();
             InitializePrintController();
         }
 
-        protected override void OnTestCleanup()
+        protected override void OnCleanup()
         {
             ShutdownPrintController();
-            base.OnTestCleanup();
+            base.OnCleanup();
         }
 
 
         [TestMethod]
         public void PrintPreviewTest()
         {
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
+            var mainViewModel = Get<MainViewModel>();
             shellViewModel.ContentView = mainViewModel.View;
 
             // When no document is available then the command cannot be executed
@@ -49,14 +49,14 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void PrintTest()
         {
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
             Assert.IsFalse(shellViewModel.PrintCommand.CanExecute(null));
 
             shellViewModel.FileService.NewCommand.Execute(null);
             Assert.IsTrue(shellViewModel.PrintCommand.CanExecute(null));
 
-            var fileService = Container.GetExportedValue<IFileService>();
-            var printDialogService = (MockPrintDialogService)Container.GetExportedValue<IPrintDialogService>();
+            var fileService = Get<IFileService>();
+            var printDialogService = (MockPrintDialogService)Get<IPrintDialogService>();
 
             printDialogService.ShowDialogResult = true;
             shellViewModel.PrintCommand.Execute(null);
@@ -72,8 +72,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void UpdateCommandsTest()
         {
-            var fileService = Container.GetExportedValue<IFileService>();
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var fileService = Get<IFileService>();
+            var shellViewModel = Get<ShellViewModel>();
 
             fileService.NewCommand.Execute(null);
             fileService.NewCommand.Execute(null);

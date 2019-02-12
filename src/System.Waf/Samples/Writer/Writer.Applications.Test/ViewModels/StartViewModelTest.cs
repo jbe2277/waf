@@ -9,7 +9,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void GetFileService()
         {
-            var startViewModel = Container.GetExportedValue<StartViewModel>();
+            var startViewModel = Get<StartViewModel>();
             Assert.IsNotNull(startViewModel.FileService);
         }
     }

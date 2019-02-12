@@ -18,8 +18,8 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void AddAndRemoveDocumentViewTest()
         {
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
-            var fileService = Container.GetExportedValue<IFileService>();
+            var mainViewModel = Get<MainViewModel>();
+            var fileService = Get<IFileService>();
 
             Assert.IsFalse(fileService.Documents.Any());
             Assert.IsFalse(mainViewModel.DocumentViews.Any());
@@ -64,7 +64,7 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void IllegalDocumentCollectionChangeTest()
         {
-            var fileService = Container.GetExportedValue<IFileService>();
+            var fileService = Get<IFileService>();
 
             fileService.NewCommand.Execute(null);
 

@@ -20,18 +20,18 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void ControllerLifecycle()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             
             controller.Initialize();
             
-            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellView = (MockShellView)Get<IShellView>();
             var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
             Assert.IsNotNull(shellViewModel.ExitCommand);
 
             controller.Run();
 
             Assert.IsTrue(shellView.IsVisible);
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var mainViewModel = Get<MainViewModel>();
             Assert.AreEqual(mainViewModel.View, shellViewModel.ContentView);
 
             shellViewModel.ExitCommand.Execute(null);
@@ -43,10 +43,10 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void OpenFileViaCommandLine()
         {
-            var environmentService = Container.GetExportedValue<MockEnvironmentService>();
+            var environmentService = Get<MockEnvironmentService>();
             environmentService.DocumentFileName = "Document.mock";
 
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
 
             
@@ -55,7 +55,7 @@ namespace Test.Writer.Applications.Controllers
 
             // Open a file with an unknown file extension and check if an error message is shown.
             environmentService.DocumentFileName = "Unknown.fileExtension";
-            var messageService = Container.GetExportedValue<MockMessageService>();
+            var messageService = Get<MockMessageService>();
             messageService.Clear();
             
             controller.Run();
@@ -67,14 +67,14 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void SaveChangesTest()
         {
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             controller.Initialize();
             controller.Run();
 
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
             shellViewModel.FileService.NewCommand.Execute(null);
             
-            var mainViewModel = Container.GetExportedValue<MainViewModel>();
+            var mainViewModel = Get<MainViewModel>();
             var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
             richTextViewModel.Document.Modified = true;
 
@@ -90,7 +90,7 @@ namespace Test.Writer.Applications.Controllers
             // modified document wasn't saved.
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsTrue(showDialogCalled);
-            var shellView = (MockShellView)Container.GetExportedValue<IShellView>();
+            var shellView = (MockShellView)Get<IShellView>();
             Assert.IsTrue(shellView.IsVisible);
 
             showDialogCalled = false;
@@ -100,7 +100,7 @@ namespace Test.Writer.Applications.Controllers
                 view.ViewModel.YesCommand.Execute(null);
             };
 
-            var fileDialogService = (MockFileDialogService)Container.GetExportedValue<IFileDialogService>();
+            var fileDialogService = (MockFileDialogService)Get<IFileDialogService>();
             fileDialogService.Result = new FileDialogResult();
 
             // This time we let the SaveChangesView to save the modified document
@@ -115,12 +115,12 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void SettingsTest()
         {
-            var settingsService = Container.GetExportedValue<MockSettingsService>();
+            var settingsService = Get<MockSettingsService>();
             var settings = settingsService.Get<AppSettings>();
             settings.Culture = "de-DE";
             settings.UICulture = "de-AT";
 
-            var controller = Container.GetExportedValue<ModuleController>();
+            var controller = Get<ModuleController>();
             
             Assert.AreEqual(new CultureInfo("de-DE"), CultureInfo.CurrentCulture);
             Assert.AreEqual(new CultureInfo("de-AT"), CultureInfo.CurrentUICulture);
@@ -128,7 +128,7 @@ namespace Test.Writer.Applications.Controllers
             controller.Initialize();
             controller.Run();
 
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
             shellViewModel.EnglishCommand.Execute(null);
             Assert.AreEqual(new CultureInfo("en-US"), shellViewModel.NewLanguage);
 

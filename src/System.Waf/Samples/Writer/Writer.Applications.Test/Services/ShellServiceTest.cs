@@ -9,7 +9,7 @@ namespace Test.Writer.Applications.Services
         [TestMethod]
         public void ZoomCommandsDisabled()
         {
-            var shellService = Container.GetExportedValue<IShellService>();
+            var shellService = Get<IShellService>();
 
             Assert.IsFalse(shellService.ActiveZoomCommands.ZoomInCommand.CanExecute(null));
             Assert.IsFalse(shellService.ActiveZoomCommands.ZoomOutCommand.CanExecute(null));

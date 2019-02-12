@@ -16,9 +16,9 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void ShowAndClose()
         {
-            var messageService = Container.GetExportedValue<MockMessageService>();
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var messageService = Get<MockMessageService>();
+            var shellView = Get<MockShellView>();
+            var shellViewModel = Get<ShellViewModel>();
 
             // Show the ShellView
             Assert.IsFalse(shellView.IsVisible);
@@ -55,7 +55,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void SelectLanguageTest()
         {
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+            var shellViewModel = Get<ShellViewModel>();
             Assert.IsNull(shellViewModel.NewLanguage);
 
             shellViewModel.GermanCommand.Execute(null);
@@ -68,16 +68,16 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
+            var presentationService = (MockPresentationService)Get<IPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-            var shellViewModel = Container.GetExportedValue<ShellViewModel>();
-            var shellView = Container.GetExportedValue<MockShellView>();
+            var shellViewModel = Get<ShellViewModel>();
+            var shellView = Get<MockShellView>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -97,13 +97,13 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
-            var presentationService = (MockPresentationService)Container.GetExportedValue<IPresentationService>();
+            var presentationService = (MockPresentationService)Get<IPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            var shellView = Container.GetExportedValue<MockShellView>();
-            var shellService = Container.GetExportedValue<IShellService>();
-            var settingsService = Container.GetExportedValue<ISettingsService>();
+            var shellView = Get<MockShellView>();
+            var shellService = Get<IShellService>();
+            var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             shellView.SetNAForLocationAndSize();
 
