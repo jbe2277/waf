@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace System.Waf.Presentation.Services
@@ -187,10 +188,13 @@ namespace System.Waf.Presentation.Services
 
             foreach (var element in document.Root.Elements())
             {
-                var typeValue = element.Attribute(xsiNamespace + "type").Value.Split(new[] { ':' }, 2);
-                var typeNamespace = element.Attribute(XNamespace.Xmlns + typeValue[0]).Value;
-                var typeName = typeValue[1];
+                var typeValue = element.Attribute(xsiNamespace + "type")?.Value.Split(new[] { ':' }, 2);
+                if (typeValue == null) throw new XmlException("Wrong XML format. Cannot read type.");
 
+                var typeNamespace = element.Attribute(XNamespace.Xmlns + typeValue[0])?.Value;
+                if (typeNamespace == null) throw new XmlException("Wrong XML format. Cannot read type namespace.");
+
+                var typeName = typeValue[1];
                 if (settingTypeNamespace == typeNamespace && settingTypeName == typeName)
                 {
                     return element;

@@ -123,7 +123,7 @@ namespace Test.Waf.Presentation.Services
             }
             Assert.IsInstanceOfType(error, typeof(IOException));
 
-            File.WriteAllText(settingsFileName, "Dummy content");
+            File.WriteAllText(settingsFileName, "<WrongFormat xmlns=\"http://schemas.datacontract.org/2004/07/Dummy\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MyEnum i:nil=\"true\"/></WrongFormat>");
             settingsService = new SettingsService();
             settingsService.ErrorOccurred += (sender, e) => error = e.Error;
             settingsService.FileName = settingsFileName;
