@@ -88,27 +88,25 @@ namespace System.Waf.Presentation.Services
                     }
                     catch (Exception ex)
                     {
-                        OnErrorOccurred(new SettingsErrorEventArgs(ex));
+                        OnErrorOccurred(new SettingsErrorEventArgs(ex, SettingsServiceAction.Save, FileName));
                     }
                 }
                 else
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(FileName));
                 }
-                document = document ?? CreateEmptyDocument();
 
-                foreach (var setting in settingsList)
+                document = document ?? CreateEmptyDocument();
+                try
                 {
-                    var existingElement = GetSettingElement(document, setting.GetType());
-                    var newElement = CreateSettingElement(setting);
-                    if (existingElement != null)
-                    {
-                        existingElement.ReplaceWith(newElement);
-                    }
-                    else
-                    {
-                        document.Root.Add(newElement);
-                    }
+                    UpdateDocument(document, settingsList);
+                }
+                catch (Exception ex)
+                {
+                    OnErrorOccurred(new SettingsErrorEventArgs(ex, SettingsServiceAction.Save, FileName));
+
+                    document = CreateEmptyDocument();
+                    UpdateDocument(document, settingsList);
                 }
 
                 using (var stream = new FileStream(FileName, FileMode.Create, FileAccess.Write, FileShare.Write))
@@ -118,7 +116,24 @@ namespace System.Waf.Presentation.Services
             }
             catch (Exception ex)
             {
-                OnErrorOccurred(new SettingsErrorEventArgs(ex));
+                OnErrorOccurred(new SettingsErrorEventArgs(ex, SettingsServiceAction.Save, FileName));
+            }
+        }
+
+        private static void UpdateDocument(XDocument document, IReadOnlyList<object> settingsList)
+        {
+            foreach (var setting in settingsList)
+            {
+                var existingElement = GetSettingElement(document, setting.GetType());
+                var newElement = CreateSettingElement(setting);
+                if (existingElement != null)
+                {
+                    existingElement.ReplaceWith(newElement);
+                }
+                else
+                {
+                    document.Root.Add(newElement);
+                }
             }
         }
 
@@ -144,7 +159,7 @@ namespace System.Waf.Presentation.Services
             }
             catch (Exception ex)
             {
-                OnErrorOccurred(new SettingsErrorEventArgs(ex));
+                OnErrorOccurred(new SettingsErrorEventArgs(ex, SettingsServiceAction.Open, FileName));
             }
             return settingObject ?? Activator.CreateInstance(type);  // type has default ctor
         }

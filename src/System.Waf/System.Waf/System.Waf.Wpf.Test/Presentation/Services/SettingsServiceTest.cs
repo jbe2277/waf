@@ -106,6 +106,14 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ErrorOccurredTest()
         {
+            Tuple<Exception, SettingsServiceAction, string> error = null;
+            void AssertErrorEventArgs<TException>(SettingsServiceAction expectedAction, string expectedFileName)
+            {
+                Assert.IsInstanceOfType(error.Item1, typeof(TException));
+                Assert.AreEqual(expectedAction, error.Item2);
+                Assert.AreEqual(expectedFileName, error.Item3);
+            }
+
             var settingsService = new SettingsService();
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
             settingsService.FileName = settingsFileName;
@@ -115,41 +123,44 @@ namespace Test.Waf.Presentation.Services
 
             var testSettings1 = settingsService.Get<TestSettings1>();
             settingsService.Save();
-            Exception error = null;
-            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
+            settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
             using (var stream = File.OpenRead(settingsFileName))
             {
                 settingsService.Dispose();
             }
-            Assert.IsInstanceOfType(error, typeof(IOException));
+            AssertErrorEventArgs<IOException>(SettingsServiceAction.Save, settingsService.FileName);
 
-            File.WriteAllText(settingsFileName, "<WrongFormat xmlns=\"http://schemas.datacontract.org/2004/07/Dummy\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MyEnum i:nil=\"true\"/></WrongFormat>");
-            settingsService = new SettingsService();
-            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
-            settingsService.FileName = settingsFileName;
-            error = null;
-            settingsService.Get<TestSettings1>();
-            Assert.IsInstanceOfType(error, typeof(XmlException));
-            error = null;
-            settingsService.Save();
-            Assert.IsInstanceOfType(error, typeof(XmlException));
-            if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
+            void AssertCorruptFile(string corruptContent)
+            {
+                File.WriteAllText(settingsFileName, corruptContent);
+                settingsService = new SettingsService();
+                settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+                settingsService.FileName = settingsFileName;
+                error = null;
+                settingsService.Get<TestSettings1>();
+                AssertErrorEventArgs<XmlException>(SettingsServiceAction.Open, settingsService.FileName);
+                error = null;
+                settingsService.Save();
+                AssertErrorEventArgs<XmlException>(SettingsServiceAction.Save, settingsService.FileName);
 
-            // Now it is repaired with default values
-            settingsService = new SettingsService();
-            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
-            settingsService.FileName = settingsFileName;
-            error = null;
-            settingsService.Get<TestSettings1>();
-            Assert.IsNull(error);
+                // Now it is repaired with default values
+                settingsService = new SettingsService();
+                settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+                settingsService.FileName = settingsFileName;
+                error = null;
+                settingsService.Get<TestSettings1>();
+                Assert.IsNull(error);
+            }
+            AssertCorruptFile("<WrongFormat xmlns=\"http://schemas.datacontract.org/2004/07/Dummy\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MyEnum i:nil=\"true\"/></WrongFormat>");
+            AssertCorruptFile("WrongFormat");
 
             settingsService = new SettingsService();
-            settingsService.ErrorOccurred += (sender, e) => error = e.Error;
+            settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
             settingsService.FileName = settingsFileName;
             settingsService.Get<NotSerializableTest>();
             error = null;
             settingsService.Save();
-            Assert.IsInstanceOfType(error, typeof(SerializationException));
+            AssertErrorEventArgs<SerializationException>(SettingsServiceAction.Save, settingsService.FileName);
         }
 
         private static void AssertNoErrorOccurred(ISettingsService settingsService)
