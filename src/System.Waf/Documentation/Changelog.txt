@@ -1,6 +1,15 @@
 Changelog
 ---------
 
+Version 5.0.0.2 (Alpha 2)
+- WAF: Improve error handling of the SettingsService.
+- Samples: Use the new Project SDK format for the csproj files.
+- BookLibrary: Migrate Entity Framework 6 to Entity Framework Core 2.2
+- BookLibrary: Refactor the Entity Framework integration so that unit testing of the Application layer is easier.
+- BookLibrary: Improve unit tests by using EF Core InMemoryDatabase.
+- Samples: Change some projects to target .NET Standard 2.0.
+
+
 Version 5.0.0.1 (Alpha 1)
 - WAF: Core projects target now .Net Standard 2.0 and .NET Framework 4.6.1.
 - WAF: Core unit tests run now on .NET Core 2.1 and on .NET Framework 4.6.1.
