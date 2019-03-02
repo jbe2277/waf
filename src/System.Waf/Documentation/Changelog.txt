@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 5.0.0.100 (Release)
+- WAF: Update version numbers.
+
+
 Version 5.0.0.2 (Alpha 2)
 - WAF: Improve error handling of the SettingsService.
 - Samples: Use the new Project SDK format for the csproj files.
