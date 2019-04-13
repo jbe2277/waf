@@ -22,9 +22,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             var shellService = Get<IShellService>();
             var shellViewModel = Get<ShellViewModel>();
 
-            // The title isn't available in the unit test environment.
-            Assert.AreEqual("", shellViewModel.Title);
-
             Assert.AreEqual(shellService, shellViewModel.ShellService);
 
             // Show the ShellView

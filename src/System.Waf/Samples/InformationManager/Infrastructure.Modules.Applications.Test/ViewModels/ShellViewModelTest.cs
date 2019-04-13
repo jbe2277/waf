@@ -27,9 +27,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.ViewModels
             shellViewModel.Show();
             Assert.IsTrue(shellView.IsVisible);
 
-            // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", shellViewModel.Title);
-
             // Check the services
             Assert.AreEqual(Get<ShellService>(), shellViewModel.ShellService);
             Assert.AreEqual(Get<NavigationService>(), shellViewModel.NavigationService);

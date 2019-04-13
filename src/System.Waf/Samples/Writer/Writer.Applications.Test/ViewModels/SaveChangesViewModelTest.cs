@@ -22,8 +22,6 @@ namespace Test.Writer.Applications.ViewModels
             var view = new MockSaveChangesView();
             var viewModel = new SaveChangesViewModel(view) { Documents = documents };
             
-            // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", viewModel.Title);
             Assert.AreEqual(documents, viewModel.Documents);
             
             object owner = new object();
