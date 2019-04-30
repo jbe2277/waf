@@ -11,14 +11,13 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 * The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
 * The fastest way to create a WAF project is by using the [WAF Visual Studio Project Template](https://marketplace.visualstudio.com/items?itemName=jbe2277.WAFProjectTemplate). Please update the WAF NuGet packages to the latest stable version after project creation.
 
-## Version 4
+## Supported Platforms
 
-Starting with version 4 the framework comes with the new name Win Application Framework instead of WPF Application Framework. This rename shows that the framework supports now various application types:
--	WPF (Windows Presentation Foundation)
--	UWP (Universal Windows Platform)
--	Core (Basic support for all .NET based applications)
+-	Core *(.NET Standard 2.0 and .NET Framework 4.6.1)*: Support for all .NET based applications.
+-	WPF *(.NET Framework 4.6.1)*: Extended support for Windows Presentation Foundation.
 
-Older versions of WAF 1.0 - 3.2 can be found at CodePlex: http://waf.codeplex.com
+**Experimental**
+- .NET Core 3.0 with WPF: See [Git Branch: netcoreapp3.0](https://github.com/jbe2277/waf/tree/netcoreapp3.0)
 
 ## Features
 
