@@ -15,9 +15,7 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 
 -	Core *(.NET Standard 2.0 and .NET Framework 4.6.1)*: Support for all .NET based applications.
 -	WPF *(.NET Framework 4.6.1)*: Extended support for Windows Presentation Foundation.
-
-**Experimental**
-- .NET Core 3.0 with WPF: See [Git Branch: netcoreapp3.0](https://github.com/jbe2277/waf/tree/netcoreapp3.0)
+- \[*Experimental*\] .NET Core 3.0 with WPF: See [Git Branch: netcoreapp3.0](https://github.com/jbe2277/waf/tree/netcoreapp3.0)
 
 ## Features
 
