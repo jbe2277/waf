@@ -22,6 +22,7 @@ namespace System.Waf.Presentation.Services
 
         private readonly ConcurrentDictionary<Type, Lazy<object>> settings;
         private string fileName;
+        private volatile bool isDisposed;
 
         /// <summary>
         /// Initializes a new instance of the SettingsService.
@@ -140,7 +141,32 @@ namespace System.Waf.Presentation.Services
         /// </summary>
         public void Dispose()
         {
-            Save();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Call this method from a subclass when you implement a finalizer (destructor).
+        /// </summary>
+        /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
+        protected void Dispose(bool disposing)
+        {
+            if (isDisposed) { return; }
+            isDisposed = true;
+
+            OnDispose(disposing);
+            if (disposing)
+            {
+                Save();
+            }
+        }
+
+        /// <summary>
+        /// Override this method to free, release or reset any resources.
+        /// </summary>
+        /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
+        protected virtual void OnDispose(bool disposing)
+        {
         }
 
         private void OnErrorOccurred(SettingsErrorEventArgs e)

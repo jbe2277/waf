@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.Presentation.Services;
@@ -60,6 +59,7 @@ namespace Test.Waf.Presentation.Services
             testSettings2 = settingsService.Get<TestSettings2>();
             Assert.AreEqual(3.14, testSettings2.Value);
             testSettings2.Value = 72;
+            settingsService.Dispose();
             settingsService.Dispose();
 
             // Read the saved values with another instance

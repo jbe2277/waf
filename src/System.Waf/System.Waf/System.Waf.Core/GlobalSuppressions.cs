@@ -21,4 +21,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.ThrottledAction")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Build", "CA1724:The type name Cache conflicts in whole or in part with the namespace name 'System.Net.Cache' defined in the .NET Framework. Rename the type to eliminate the conflict.", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.Cache`1")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.Services.ISettingsService.Get``1~``0")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2214:Do not call overridable methods in constructors", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.Services.UserSettingsBase.#ctor")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.Services.SettingsServiceCore.Dispose(System.Boolean)")]
 
