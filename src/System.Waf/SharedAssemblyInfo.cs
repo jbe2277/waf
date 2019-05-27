@@ -13,7 +13,7 @@ using System.Resources;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 
-[assembly: AssemblyVersion("5.0.0.100")]
-[assembly: AssemblyFileVersion("5.0.0.100")]
+[assembly: AssemblyVersion("5.1.0.1")]
+[assembly: AssemblyFileVersion("5.1.0.1")]
 
 // Update version number in 'Directory.Build.props' as well

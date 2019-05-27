@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 5.1.0.1 (Alpha 1)
+- WAF: Move ApplicationInfo class from WPF to Core assembly.
+- WAF: Add SettingsServiceCore class in Core assembly.
+
+
 Version 5.0.0.100 (Release)
 - WAF: Update version numbers.
 
