@@ -20,3 +20,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1721:Property names should not match get methods", Justification = "<Pending>", Scope = "member", Target = "~P:System.Waf.Foundation.ValidatableModel.Errors")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.ThrottledAction")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Build", "CA1724:The type name Cache conflicts in whole or in part with the namespace name 'System.Net.Cache' defined in the .NET Framework. Rename the type to eliminate the conflict.", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.Cache`1")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.Services.ISettingsService.Get``1~``0")]
+

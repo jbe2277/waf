@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.Presentation.Services;
 using System.Waf.UnitTesting;
-using System.Windows.Controls;
 using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static Test.Waf.Presentation.Services.SettingsServiceTest.DoubleNestedTypeTest;
+using static Test.Waf.Presentation.Services.SettingsServiceCoreTest.DoubleNestedTypeTest;
 
 namespace Test.Waf.Presentation.Services
 {
     [TestClass]
-    public class SettingsServiceTest
+    public class SettingsServiceCoreTest
     {
         [TestMethod]
         public void GetAndSaveTest()
         {
-            var settingsService = new SettingsService();
+            var settingsService = new SettingsServiceCore();
             AssertNoErrorOccurred(settingsService);
             Assert.AreEqual(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 ApplicationInfo.ProductName, "Settings", "Settings.xml"), settingsService.FileName);
@@ -53,7 +54,7 @@ namespace Test.Waf.Presentation.Services
             Assert.IsTrue(File.Exists(settingsFileName));
 
             // Now read just one setting from the file with another instance -> the other setting must stay "untouched" in the file
-            settingsService = new SettingsService();
+            settingsService = new SettingsServiceCore();
             AssertNoErrorOccurred(settingsService);
             settingsService.FileName = settingsFileName;
             testSettings2 = settingsService.Get<TestSettings2>();
@@ -62,7 +63,7 @@ namespace Test.Waf.Presentation.Services
             settingsService.Dispose();
 
             // Read the saved values with another instance
-            settingsService = new SettingsService();
+            settingsService = new SettingsServiceCore();
             AssertNoErrorOccurred(settingsService);
             settingsService.FileName = settingsFileName;
             testSettings2 = settingsService.Get<TestSettings2>();
@@ -85,7 +86,7 @@ namespace Test.Waf.Presentation.Services
 
             TestSettings1 testSettings1;
             TestSettings2 testSettings2;
-            using (var settingsService = new SettingsService())
+            using (var settingsService = new SettingsServiceCore())
             {
                 AssertNoErrorOccurred(settingsService);
                 settingsService.FileName = settingsFileName;
@@ -114,7 +115,7 @@ namespace Test.Waf.Presentation.Services
                 Assert.AreEqual(expectedFileName, error.Item3);
             }
 
-            var settingsService = new SettingsService();
+            var settingsService = new SettingsServiceCore();
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
             settingsService.FileName = settingsFileName;
             if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
@@ -133,7 +134,7 @@ namespace Test.Waf.Presentation.Services
             void AssertCorruptFile(string corruptContent)
             {
                 File.WriteAllText(settingsFileName, corruptContent);
-                settingsService = new SettingsService();
+                settingsService = new SettingsServiceCore();
                 settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
                 settingsService.FileName = settingsFileName;
                 error = null;
@@ -144,7 +145,7 @@ namespace Test.Waf.Presentation.Services
                 AssertErrorEventArgs<XmlException>(SettingsServiceAction.Save, settingsService.FileName);
 
                 // Now it is repaired with default values
-                settingsService = new SettingsService();
+                settingsService = new SettingsServiceCore();
                 settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
                 settingsService.FileName = settingsFileName;
                 error = null;
@@ -154,13 +155,13 @@ namespace Test.Waf.Presentation.Services
             AssertCorruptFile("<WrongFormat xmlns=\"http://schemas.datacontract.org/2004/07/Dummy\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MyEnum i:nil=\"true\"/></WrongFormat>");
             AssertCorruptFile("WrongFormat");
 
-            settingsService = new SettingsService();
+            settingsService = new SettingsServiceCore();
             settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
             settingsService.FileName = settingsFileName;
             settingsService.Get<NotSerializableTest>();
             error = null;
             settingsService.Save();
-            AssertErrorEventArgs<SerializationException>(SettingsServiceAction.Save, settingsService.FileName);
+            AssertErrorEventArgs<InvalidDataContractException>(SettingsServiceAction.Save, settingsService.FileName);
         }
 
         private static void AssertNoErrorOccurred(ISettingsService settingsService)
@@ -226,11 +227,11 @@ namespace Test.Waf.Presentation.Services
         public class NotSerializableTest : UserSettingsBase
         {
             [DataMember]
-            public Button Button { get; set; }
+            public Thread Thread { get; set; }
 
             protected override void SetDefaultValues()
             {
-                Button = new Button();
+                Thread = Thread.CurrentThread;
             }
         }
     }
