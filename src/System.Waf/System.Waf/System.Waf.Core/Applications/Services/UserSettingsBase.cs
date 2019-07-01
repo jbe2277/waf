@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Waf.Foundation;
 
 namespace System.Waf.Applications.Services
 {
@@ -6,7 +7,7 @@ namespace System.Waf.Applications.Services
     /// Base class for user settings.
     /// </summary>
     [DataContract]
-    public abstract class UserSettingsBase : IExtensibleDataObject
+    public abstract class UserSettingsBase : Model, IExtensibleDataObject
     {
         /// <summary>
         /// Initializes a new instance of the UserSettingsBase.
