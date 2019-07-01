@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 5.1.0.2 (Alpha 2)
+- WAF: UserSettingsBase inherits now from Model.
+
+
 Version 5.1.0.1 (Alpha 1)
 - WAF: Move ApplicationInfo class from WPF to Core assembly.
 - WAF: Add SettingsServiceCore class in Core assembly.
