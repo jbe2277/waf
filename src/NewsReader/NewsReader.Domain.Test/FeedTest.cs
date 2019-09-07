@@ -1,4 +1,4 @@
-﻿using Jbe.NewsReader.Domain;
+﻿using Waf.NewsReader.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace Test.NewsReader.Domain
         [TestMethod]
         public void IsLoadingTest2() => IsLoadingCoreTest(true);
 
-        private void IsLoadingCoreTest(bool useSerializer)
+        private static void IsLoadingCoreTest(bool useSerializer)
         {
             var feed1 = new Feed(new Uri("http://www.test.com/rss/feed"));
             var feed2 = new Feed(new Uri("http://www.test.com/rss/feed"));

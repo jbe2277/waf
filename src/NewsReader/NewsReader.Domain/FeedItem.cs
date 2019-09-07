@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
-namespace Jbe.NewsReader.Domain
+namespace Waf.NewsReader.Domain
 {
     [DataContract]
     public class FeedItem : Model

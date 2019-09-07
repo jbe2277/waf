@@ -1,4 +1,4 @@
-﻿using Jbe.NewsReader.Domain.Foundation;
+﻿using Waf.NewsReader.Domain.Foundation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
-namespace Jbe.NewsReader.Domain
+namespace Waf.NewsReader.Domain
 {
     [DataContract]
     public class FeedManager : Model, IDataManager

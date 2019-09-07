@@ -1,4 +1,4 @@
-﻿namespace Jbe.NewsReader.Domain
+﻿namespace Waf.NewsReader.Domain
 {
     public class UserAccount
     {

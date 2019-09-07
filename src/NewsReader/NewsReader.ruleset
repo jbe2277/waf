@@ -1,8 +1,0 @@
-﻿<RuleSet Name="Unit Test Code Analysis Rule Set" Description="" ToolsVersion="15.0">
-  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
-    <Rule Id="CA1707" Action="None" />
-    <Rule Id="CA1710" Action="None" />
-    <Rule Id="CA1826" Action="None" />
-    <Rule Id="CA2007" Action="None" />
-  </Rules>
-</RuleSet>

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Waf.Foundation;
 
-namespace Jbe.NewsReader.Domain.Foundation
+namespace Waf.NewsReader.Domain.Foundation
 {
     public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<ObservableGroupingView<TKey, TElement>>, IDisposable
     {

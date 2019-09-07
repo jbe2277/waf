@@ -4,23 +4,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>Test.NewsReader.Domain</RootNamespace>
     <AssemblyName>Test.NewsReader.Domain</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
-    <PackageReference Include="System.Waf.UnitTesting.Core" Version="5.0.0" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
 
 </Project>

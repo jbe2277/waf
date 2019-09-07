@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Jbe.NewsReader.Domain
+namespace Waf.NewsReader.Domain
 {
     public interface IDataManager : INotifyPropertyChanged
     {

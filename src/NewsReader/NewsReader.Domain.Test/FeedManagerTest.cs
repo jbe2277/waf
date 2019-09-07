@@ -1,9 +1,9 @@
-﻿using Jbe.NewsReader.Domain;
+﻿using Waf.NewsReader.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using Test.NewsReader.Domain.UnitTesting;
-using static Jbe.NewsReader.Domain.FeedManager;
+using static Waf.NewsReader.Domain.FeedManager;
 
 namespace Test.NewsReader.Domain
 {

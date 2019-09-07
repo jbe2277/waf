@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 using System.Resources;
 
 
-[assembly: AssemblyProduct("Jbe NewsReader")]
-[assembly: AssemblyCompany("Juergen Berchtel")]
-[assembly: AssemblyCopyright("Copyright © 2018 Juergen Berchtel")]
+[assembly: AssemblyProduct("Waf NewsReader")]
+[assembly: AssemblyCompany("jbe2277")]
+[assembly: AssemblyCopyright("Copyright © 2019 jbe2277")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
