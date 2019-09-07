@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
-using System.Threading;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
@@ -12,30 +11,20 @@ namespace Test.Writer.Applications.ViewModels
     [TestClass]
     public class ZoomViewModelTest : TestClassBase
     {
-        private CultureInfo currentCulture;
         private IShellService shellService;
         private MockZoomViewModel zoomViewModel;
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            currentCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
             shellService = Get<IShellService>();
             zoomViewModel = new MockZoomViewModel(new MockView(), shellService);
-        }
-
-        protected override void OnCleanup()
-        {
-            base.OnCleanup();
-            Thread.CurrentThread.CurrentCulture = currentCulture;
         }
 
         [TestMethod]
         public void DefaultZoomsTest()
         {
-            AssertHelper.SequenceEqual(new[] { "200 %", "150 %", "125 %", "100 %", "75 %", "50 %" }, zoomViewModel.DefaultZooms);
+            AssertHelper.SequenceEqual(new[] { "200%", "150%", "125%", "100%", "75%", "50%" }, zoomViewModel.DefaultZooms);
         }
 
         [TestMethod]

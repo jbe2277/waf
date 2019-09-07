@@ -9,8 +9,8 @@ namespace Test.InformationManager.Common.Domain
         [TestInitialize]
         public void Initialize()
         {
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
 
             OnInitialize();
         }

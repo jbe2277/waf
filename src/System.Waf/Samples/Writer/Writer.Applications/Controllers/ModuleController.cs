@@ -81,11 +81,11 @@ namespace Waf.Writer.Applications.Controllers
         {
             if (!string.IsNullOrEmpty(settings.Culture))
             {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(settings.Culture);
+                CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(settings.Culture);
             }
             if (!string.IsNullOrEmpty(settings.UICulture))
             {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(settings.UICulture);
+                CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(settings.UICulture);
             }
         }
 

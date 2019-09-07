@@ -81,7 +81,7 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void CompatibleWithDataContractSerializer()
         {
-            var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings2.xml");
+            var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
             if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
 
             TestSettings1 testSettings1;
@@ -116,7 +116,7 @@ namespace Test.Waf.Presentation.Services
             }
 
             var settingsService = new SettingsServiceCore();
-            var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings3.xml");
+            var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings4.xml");
             settingsService.FileName = settingsFileName;
             if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
             settingsService.Save();

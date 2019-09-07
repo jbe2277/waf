@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
-using System.Threading;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting;
@@ -137,8 +136,8 @@ namespace Test.Writer.Applications.Controllers
             Assert.AreEqual("en-US", settings.UICulture);
 
             // Restore the culture settings
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
         }
     }
 }

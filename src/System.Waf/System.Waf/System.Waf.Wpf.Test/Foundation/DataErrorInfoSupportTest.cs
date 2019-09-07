@@ -13,7 +13,7 @@ namespace Test.Waf.Foundation
         [TestInitialize]
         public void Initialize()
         {
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
         }
 
         [TestMethod]

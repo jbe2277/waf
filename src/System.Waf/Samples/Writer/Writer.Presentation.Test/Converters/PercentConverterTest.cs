@@ -9,19 +9,10 @@ namespace Test.Writer.Presentation.Converters
     [TestClass]
     public class PercentConverterTest
     {
-        private CultureInfo currentCulture;
-
         [TestInitialize]
         public void TestInitialize()
         {
-            currentCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            Thread.CurrentThread.CurrentCulture = currentCulture;
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
         }
         
         [TestMethod]

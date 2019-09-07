@@ -2,7 +2,6 @@
 using System.Waf.Presentation.Services;
 using System.Reflection;
 using System.Windows;
-using System.Threading;
 using System.Globalization;
 
 namespace Test.Waf.Presentation.Services
@@ -25,13 +24,13 @@ namespace Test.Waf.Presentation.Services
             PropertyInfo messageBoxOptionsInfo = typeof(MessageService).GetProperty("MessageBoxOptions",
                 BindingFlags.Static | BindingFlags.NonPublic);
 
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
+            CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
             Assert.AreEqual(MessageBoxOptions.None, (MessageBoxOptions)messageBoxOptionsInfo.GetValue(null, null));
 
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("ar-SA");
+            CultureInfo.CurrentUICulture = new CultureInfo("ar-SA");
             Assert.AreEqual(MessageBoxOptions.RtlReading, (MessageBoxOptions)messageBoxOptionsInfo.GetValue(null, null));
 
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
         }
     }
 }

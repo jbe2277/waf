@@ -36,11 +36,11 @@ namespace LocalizationSample
         {
             if (!string.IsNullOrEmpty(Settings.Default.Culture))
             {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.Default.Culture);
+                CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(Settings.Default.Culture);
             }
             if (!string.IsNullOrEmpty(Settings.Default.UICulture))
             {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.UICulture);
+                CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Settings.Default.UICulture);
             }
 
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
