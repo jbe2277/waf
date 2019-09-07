@@ -4,7 +4,7 @@ using System.Resources;
 
 
 [assembly: AssemblyCompany("jbe2277")]
-[assembly: AssemblyCopyright("Copyright © 2018 jbe2277")]
+[assembly: AssemblyCopyright("Copyright © 2019 jbe2277")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -13,7 +13,7 @@ using System.Resources;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 
-[assembly: AssemblyVersion("5.1.0.2")]
-[assembly: AssemblyFileVersion("5.1.0.2")]
+[assembly: AssemblyVersion("5.1.0.100")]
+[assembly: AssemblyFileVersion("5.1.0.100")]
 
 // Update version number in 'Directory.Build.props' as well

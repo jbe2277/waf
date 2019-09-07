@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 5.1.0.100 (Release)
+- WAF: Update version numbers.
+
+
 Version 5.1.0.2 (Alpha 2)
 - WAF: UserSettingsBase inherits now from Model.
 
