@@ -28,3 +28,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "Waf.Writer.Presentation.App.#.ctor()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Scope = "member", Target = "Waf.Writer.Presentation.DesignData.MockSettingsService.#RaiseErrorOccurred(System.Waf.Applications.Services.SettingsErrorEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Build", "CA1801:Parameter e of method RichTextBoxIsVisibleChanged is never used. Remove the parameter or use it in the method body.", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Views.RichTextView.RichTextBoxIsVisibleChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
+

@@ -23,4 +23,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.Services.ISettingsService.Get``1~``0")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2214:Do not call overridable methods in constructors", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.Services.UserSettingsBase.#ctor")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.Services.SettingsServiceCore.Dispose(System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.Services.SettingsServiceCore.Save")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.Services.SettingsServiceCore.Load(System.Type)~System.Object")]
 
