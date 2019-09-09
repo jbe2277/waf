@@ -92,10 +92,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UwpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -146,6 +148,10 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
+      <Project>{3FF22108-8C24-4451-BCDF-04A38685E53B}</Project>
+      <Name>NewsReader.Applications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewsReader.Presentation\NewsReader.Presentation.csproj">
       <Project>{fc41212b-8f98-4ec6-9520-2099d0b8795f}</Project>
       <Name>NewsReader.Presentation</Name>

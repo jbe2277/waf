@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj" />
   </ItemGroup>
 

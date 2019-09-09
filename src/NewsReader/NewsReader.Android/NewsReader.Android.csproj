@@ -60,6 +60,8 @@
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidModule.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +97,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
+      <Project>{3FF22108-8C24-4451-BCDF-04A38685E53B}</Project>
+      <Name>NewsReader.Applications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewsReader.Presentation\NewsReader.Presentation.csproj">
       <Project>{fc41212b-8f98-4ec6-9520-2099d0b8795f}</Project>
       <Name>NewsReader.Presentation</Name>
