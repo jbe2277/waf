@@ -13,7 +13,6 @@ namespace Waf.NewsReader.Domain
         [DataMember] private string description;
         [DataMember] private bool markAsRead;
 
-
         public FeedItem(Uri uri, DateTimeOffset date, string name, string description)
         {
             // Note: Serializer does not call the constructor.
@@ -22,7 +21,6 @@ namespace Waf.NewsReader.Domain
             Name = name;
             Description = description;
         }
-
 
         public Uri Uri => uri;
 

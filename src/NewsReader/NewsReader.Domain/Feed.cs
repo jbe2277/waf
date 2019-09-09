@@ -22,7 +22,6 @@ namespace Waf.NewsReader.Domain
         private string loadErrorMessage;
         private IDataManager dataManager;
 
-
         public Feed(Uri uri)
         {
             // Note: Serializer does not call the constructor.
@@ -30,7 +29,6 @@ namespace Waf.NewsReader.Domain
             items = new ObservableCollection<FeedItem>();
             Initialize();
         }
-
 
         public Uri Uri => uri;
 

@@ -16,7 +16,6 @@ namespace Waf.NewsReader.Domain.Foundation
 
         internal new List<TElement> InnerList => base.InnerList;
 
-
         internal new void Insert(int newItemIndex, TElement newItem)
         {
             base.Insert(newItemIndex, newItem);

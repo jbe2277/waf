@@ -8,7 +8,6 @@
             UserName = userName;
         }
 
-
         public string Id { get; }
 
         public string UserName { get; }

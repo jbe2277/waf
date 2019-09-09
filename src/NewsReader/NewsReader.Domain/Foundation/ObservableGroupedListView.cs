@@ -16,7 +16,6 @@ namespace Waf.NewsReader.Domain.Foundation
         private Predicate<TElement> filter;
         private volatile bool isDisposed;
 
-
         public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping) 
             : this(originalList, createGrouping, null, null)
         {
@@ -40,7 +39,6 @@ namespace Waf.NewsReader.Domain.Foundation
             }
         }
 
-
         public Predicate<TElement> Filter
         {
             get => filter;
@@ -53,7 +51,6 @@ namespace Waf.NewsReader.Domain.Foundation
                 }
             }
         }
-
 
         public void Refresh()
         {
@@ -109,7 +106,6 @@ namespace Waf.NewsReader.Domain.Foundation
         {
             UpdateInnerList();
         }
-
 
 
         private sealed class InnerListKeyComparer : IEqualityComparer<ObservableGroupingView<TKey, TElement>>
