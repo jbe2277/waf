@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using System.Waf.Applications.Services;
+using System.Waf.Presentation.Services;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Presentation.Services;
@@ -13,7 +15,10 @@ namespace Waf.NewsReader.Presentation
             builder.RegisterType<App>().SingleInstance();
 
             builder.RegisterType<AppInfoService>().As<IAppInfoService>().SingleInstance();
+            builder.RegisterType<MessageService>().As<IMessageService>().SingleInstance();
+            builder.RegisterType<SettingsServiceCore>().As<ISettingsService>().SingleInstance();
 
+            builder.RegisterType<SettingsView>().As<ISettingsView>().AsSelf().SingleInstance();
             builder.RegisterType<ShellView>().As<IShellView>().AsSelf().SingleInstance();
         }
     }

@@ -11,6 +11,8 @@
                 <On Platform="UWP" Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
             </OnPlatform>
 
+            <c:LocalizeDisplayItemLifetimeConverter x:Key="LocalizeDisplayItemLifetimeConverter"/>
+            <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
             <c:NullToBoolConverter x:Key="NullToBoolConverter"/>
             
             <Style TargetType="Label">

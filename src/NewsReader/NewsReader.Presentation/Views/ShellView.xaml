@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
-             mc:Ignorable="d"
-             x:Class="Waf.NewsReader.Presentation.Views.ShellView">
+             x:Class="Waf.NewsReader.Presentation.Views.ShellView"
+             x:DataType="vm:ShellViewModel">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <ContentPage.Resources>
