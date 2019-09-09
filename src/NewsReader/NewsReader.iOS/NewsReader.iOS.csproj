@@ -64,6 +64,9 @@
     <Compile Include="Log.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <BundleResource Include="..\NewsReader.Presentation\Resources\Fonts\materialdesignicons-webfont.ttf">
+      <Link>Resources\materialdesignicons-webfont.ttf</Link>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
