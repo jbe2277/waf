@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Waf.Foundation;
+using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace Waf.NewsReader.Presentation.Views
             set => BindingContext = value;
         }
 
-        public async Task NavigateAsync(object page)
+        public async Task PushAsync(object page)
         {
             var navi = Detail.Navigation;
             var idx = navi.NavigationStack.IndexOf(page);
@@ -45,6 +46,18 @@ namespace Waf.NewsReader.Presentation.Views
             // var navigationPage = new NavigationPage((Page)viewModel.StartViewModel.View);
             var navigationPage = new NavigationPage(new Page() { Title = "TODO" });
             Detail = navigationPage;
+        }
+
+        private void NavigationItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item is NavigationItem item)
+            {
+                if (item.Command != null)
+                {
+                    item.Command.Execute(null);
+                    if (MasterBehavior != MasterBehavior.Split) IsPresented = false;
+                }
+            }
         }
     }
 }

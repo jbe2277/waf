@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Waf.NewsReader.Applications.Controllers;
+using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
 
 namespace Waf.NewsReader.Applications
@@ -10,7 +11,7 @@ namespace Waf.NewsReader.Applications
         {
             builder.RegisterType<AppController>().As<IAppController>().AsSelf().SingleInstance();
 
-            builder.RegisterType<ShellViewModel>().SingleInstance();
+            builder.RegisterType<ShellViewModel>().As<INavigationService>().AsSelf().SingleInstance();
         }
     }
 }

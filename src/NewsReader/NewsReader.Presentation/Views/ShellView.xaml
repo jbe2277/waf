@@ -3,11 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
              mc:Ignorable="d"
              x:Class="Waf.NewsReader.Presentation.Views.ShellView">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
+            <ContentPage.Resources>
+                <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
+                    <ViewCell>
+                        <Grid VerticalOptions="Center" HeightRequest="60" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
+
+                            <Label Grid.RowSpan="2" Text="{Binding IconGlyph}" FontFamily="{StaticResource MaterialFont}" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsCommandEnabled}" Value="False">
+                                        <Setter Property="TextColor" Value="LightGray"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsCommandEnabled}" Value="False">
+                                        <Setter Property="TextColor" Value="LightGray"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Details}" IsVisible="False">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Details, Converter={StaticResource NullToBoolConverter}}" Value="True">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                        <Setter Property="Margin" Value="5,0,0,7"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ContentPage.Resources>
+
+            <Grid Padding="10" BackgroundColor="{OnPlatform Android=#FFEEEEF2}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
+
+                <ListView Grid.Row="3" ItemsSource="{Binding FooterMenu}" ItemTapped="NavigationItemTapped" SelectionMode="None" HasUnevenRows="True"
+                          HeightRequest="63" VerticalScrollBarVisibility="Never" SeparatorVisibility="None" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
+            </Grid>
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

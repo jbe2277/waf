@@ -1,13 +1,18 @@
-﻿using System;
+﻿using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.ViewModels;
 
 namespace Waf.NewsReader.Applications.Controllers
 {
     internal class AppController : IAppController
     {
-        public AppController(Lazy<ShellViewModel> shellViewModel)
+        public AppController(ShellViewModel shellViewModel)
         {
-            MainView = shellViewModel.Value.View;
+            shellViewModel.FooterMenu = new[]
+            {
+                new NavigationItem("Settings", "\uf493")
+            };
+            shellViewModel.Initialize();
+            MainView = shellViewModel.View;
         }
 
         public object MainView { get; }
