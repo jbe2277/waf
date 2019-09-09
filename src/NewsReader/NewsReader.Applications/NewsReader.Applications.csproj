@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Waf.NewsReader.Applications</RootNamespace>
+    <AssemblyName>Waf.NewsReader.Applications</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
