@@ -5,12 +5,12 @@ namespace Waf.NewsReader.Applications.Controllers
 {
     internal class AppController : IAppController
     {
-        private readonly Lazy<ShellViewModel> shellViewModel;
-
         public AppController(Lazy<ShellViewModel> shellViewModel)
         {
-            this.shellViewModel = shellViewModel;
+            MainView = shellViewModel.Value.View;
         }
+
+        public object MainView { get; }
 
         public void Start()
         {

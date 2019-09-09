@@ -2,6 +2,8 @@
 {
     public interface IAppController
     {
+        object MainView { get; }
+
         void Start();
 
         void Sleep();

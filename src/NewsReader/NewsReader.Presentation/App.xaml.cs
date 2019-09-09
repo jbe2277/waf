@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
-using Waf.NewsReader.Applications.ViewModels;
-using Waf.NewsReader.Presentation.Views;
 using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation
@@ -11,13 +9,12 @@ namespace Waf.NewsReader.Presentation
     public partial class App : Application
     {
         private readonly IAppController appController;
-        private readonly Lazy<ShellViewModel> shellViewModel;
 
-        public App(Lazy<IAppController> appController, Lazy<ShellViewModel> shellViewModel)
+        public App(Lazy<IAppController> appController)
         {
             InitializeComponent();
             this.appController = appController.Value;
-            this.shellViewModel = shellViewModel;
+            MainPage = (Page)this.appController.MainView;
         }
 
         public static void InitializeLogging(TraceSource system)
@@ -30,10 +27,6 @@ namespace Waf.NewsReader.Presentation
         {
             Log.Default.Info("App started");
             appController.Start();
-
-            var shellView = (ShellView)shellViewModel.Value.View;
-            shellViewModel.Value.Initialize();
-            MainPage = shellView;
         }
 
         protected override void OnSleep()
