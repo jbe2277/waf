@@ -13,6 +13,7 @@ namespace Waf.NewsReader.Applications
             builder.RegisterType<SettingsController>().SingleInstance();
 
             builder.RegisterType<FeedItemViewModel>().SingleInstance();
+            builder.RegisterType<FeedViewModel>().SingleInstance();
             builder.RegisterType<SettingsViewModel>().SingleInstance();
             builder.RegisterType<ShellViewModel>().As<INavigationService>().AsSelf().SingleInstance();
         }

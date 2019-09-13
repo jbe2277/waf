@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
+             xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
+             x:Class="Waf.NewsReader.Presentation.Views.FeedView"
+             Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="SearchClicked" Text="Search">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xfc59;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <StackLayout IsVisible="{Binding Feed.LoadError, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
+                <Label Text="Load Error" Style="{StaticResource Title}"/>
+                <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
+            </StackLayout>
+            <SearchBar x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
+            <ListView x:Name="listView" ItemsSource="{Binding ItemsListView}" ItemTapped="FeedItemsItemTapped" IsGroupingEnabled="True" HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding Feed.IsLoading}">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <ViewCell>
+                            <StackLayout Padding="10,3" BackgroundColor="LightGray">
+                                <Label Text="{Binding Key, StringFormat='{0:D}'}" FontAttributes="Italic"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="do:FeedItem">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding .}" Text="{Binding MarkAsRead, Converter={StaticResource MarkAsReadConverter}}"/>
+                            </ViewCell.ContextActions>
+
+                            <StackLayout Orientation="Vertical" Padding="10,5,10,10" Spacing="3">
+                                <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding MarkAsRead}" Value="True">
+                                            <Setter Property="FontAttributes" Value="None"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label Text="{Binding Description}" MaxLines="3"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

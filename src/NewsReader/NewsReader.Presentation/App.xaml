@@ -5,6 +5,8 @@
              x:Class="Waf.NewsReader.Presentation.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="ErrorBackgroundColor">#FFDA8A8A</Color>
+            
             <OnPlatform x:Key="MaterialFont" x:TypeArguments="x:String">
                 <On Platform="iOS" Value="Material Design Icons" />
                 <On Platform="Android" Value="materialdesignicons-webfont.ttf#" />
@@ -13,6 +15,7 @@
 
             <c:LocalizeDisplayItemLifetimeConverter x:Key="LocalizeDisplayItemLifetimeConverter"/>
             <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
+            <c:MarkAsReadConverter x:Key="MarkAsReadConverter"/>
             <c:NullToBoolConverter x:Key="NullToBoolConverter"/>
             
             <Style TargetType="Label">

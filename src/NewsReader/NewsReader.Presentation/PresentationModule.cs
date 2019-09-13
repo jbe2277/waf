@@ -19,6 +19,7 @@ namespace Waf.NewsReader.Presentation
             builder.RegisterType<SettingsServiceCore>().As<ISettingsService>().SingleInstance();
 
             builder.RegisterType<FeedItemView>().As<IFeedItemView>().AsSelf().SingleInstance();
+            builder.RegisterType<FeedView>().As<IFeedView>().AsSelf().SingleInstance();
             builder.RegisterType<SettingsView>().As<ISettingsView>().AsSelf().SingleInstance();
             builder.RegisterType<ShellView>().As<IShellView>().AsSelf().SingleInstance();
         }
