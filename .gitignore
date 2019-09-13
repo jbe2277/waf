@@ -6,6 +6,9 @@
 *.suo
 *.user
 
+# Key files
+*.keys.cs
+
 # Build results
 [Dd]ebug/
 [Rr]elease/

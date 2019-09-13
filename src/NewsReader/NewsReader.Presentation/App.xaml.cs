@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 using System.Diagnostics;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
@@ -26,6 +29,10 @@ namespace Waf.NewsReader.Presentation
         protected override void OnStart()
         {
             Log.Default.Info("App started");
+            string appSecret = null;
+            GetAppCenterSecret(ref appSecret);
+            if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
+
             appController.Start();
         }
 
@@ -40,5 +47,7 @@ namespace Waf.NewsReader.Presentation
             Log.Default.Info("App resume");
             appController.Resume();
         }
+
+        static partial void GetAppCenterSecret(ref string appSecret);
     }
 }
