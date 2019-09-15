@@ -4,8 +4,8 @@ namespace Waf.NewsReader.Applications.Services
 {
     public interface IMessageService
     {
-        Task ShowMessageAsync(string message);
+        Task ShowMessage(string message);
 
-        Task<bool> ShowYesNoQuestionAsync(string message);
+        Task<bool> ShowYesNoQuestion(string message);
     }
 }

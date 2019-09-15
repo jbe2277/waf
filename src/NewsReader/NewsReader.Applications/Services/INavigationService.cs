@@ -5,6 +5,6 @@ namespace Waf.NewsReader.Applications.Services
 {
     public interface INavigationService
     {
-        Task PushAsync(IViewModel viewModel);
+        Task Navigate(IViewModel viewModel);
     }
 }

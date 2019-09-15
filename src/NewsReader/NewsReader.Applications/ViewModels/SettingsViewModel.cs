@@ -82,7 +82,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             setSelectedItemLifetimeRunning = true;
 
             var result = selectedItemLifetime < value
-                || await messageService.ShowYesNoQuestionAsync(Resources.ReduceFeedItemLifetimeQuestion);
+                || await messageService.ShowYesNoQuestion(Resources.ReduceFeedItemLifetimeQuestion);
             if (result)
             {
                 selectedItemLifetime = value;
@@ -101,7 +101,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             setSelectedMaxItemsLimitRunning = true;
 
             var result = selectedMaxItemsLimit < value
-                || await messageService.ShowYesNoQuestionAsync(Resources.ReduceMaxItemsLimitQuestion);
+                || await messageService.ShowYesNoQuestion(Resources.ReduceMaxItemsLimitQuestion);
             if (result)
             {
                 selectedMaxItemsLimit = value;

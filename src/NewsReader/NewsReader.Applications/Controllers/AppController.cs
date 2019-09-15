@@ -24,7 +24,7 @@ namespace Waf.NewsReader.Applications.Controllers
             shellViewModel.ShowFeedViewCommand = showFeedViewCommand;
             shellViewModel.FooterMenu = new[]
             {
-                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => shellViewModel.PushAsync(this.settingsController.Value.SettingsViewModel)) }
+                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => shellViewModel.Navigate(this.settingsController.Value.SettingsViewModel)) }
             };
             shellViewModel.Initialize();
             MainView = shellViewModel.View;
@@ -52,7 +52,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private Task ShowFeedView(object parameter)
         {
             feedViewModel.Value.Feed = (Feed)parameter;
-            return shellViewModel.PushAsync(feedViewModel.Value);
+            return shellViewModel.Navigate(feedViewModel.Value);
         }
 
         private FeedViewModel InitializeViewModel(FeedViewModel viewModel)

@@ -31,7 +31,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetProperty(ref feeds, value);
         }
 
-        public Task PushAsync(IViewModel viewModel)
+        public Task Navigate(IViewModel viewModel)
         {
             viewModel.Initialize();
             return ViewCore.PushAsync(viewModel.View);
