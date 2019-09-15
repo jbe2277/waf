@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Waf.Applications;
 using Waf.NewsReader.Applications.DataModels;
+using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Domain;
 
@@ -9,22 +10,26 @@ namespace Waf.NewsReader.Applications.Controllers
 {
     internal class AppController : IAppController
     {
+        private readonly INetworkInfoService networkInfoService;
         private readonly Lazy<SettingsController> settingsController;
+        private readonly FeedsController feedsController;
         private readonly ShellViewModel shellViewModel;
-        private readonly Lazy<FeedViewModel> feedViewModel;
-        private readonly AsyncDelegateCommand showFeedViewCommand;
         private FeedManager feedManager;
+        private DateTime lastUpdate;
 
-        public AppController(Lazy<SettingsController> settingsController, ShellViewModel shellViewModel, Lazy<FeedViewModel> feedViewModel)
+        public AppController(INetworkInfoService networkInfoService, FeedsController feedsController, Lazy<SettingsController> settingsController, 
+            ShellViewModel shellViewModel)
         {
+            this.networkInfoService = networkInfoService;
+            this.feedsController = feedsController;
             this.settingsController = settingsController;
             this.shellViewModel = shellViewModel;
-            this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
-            showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
-            shellViewModel.ShowFeedViewCommand = showFeedViewCommand;
+            shellViewModel.ShowFeedViewCommand = feedsController.ShowFeedViewCommand;
+            shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
             shellViewModel.FooterMenu = new[]
             {
-                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => shellViewModel.Navigate(this.settingsController.Value.SettingsViewModel)) }
+                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => 
+                    shellViewModel.Navigate(this.settingsController.Value.SettingsViewModel)) }
             };
             shellViewModel.Initialize();
             MainView = shellViewModel.View;
@@ -37,6 +42,9 @@ namespace Waf.NewsReader.Applications.Controllers
             // TODO:
             await Task.Delay(100);
             feedManager = new FeedManager();
+            feedsController.FeedManager = feedManager;
+            feedsController.Run();
+            if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
             shellViewModel.Feeds = feedManager.Feeds;
             settingsController.Value.FeedManager = feedManager;
         }
@@ -47,21 +55,11 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public void Resume()
         {
-        }
-
-        private Task ShowFeedView(object parameter)
-        {
-            feedViewModel.Value.Feed = (Feed)parameter;
-            return shellViewModel.Navigate(feedViewModel.Value);
-        }
-
-        private FeedViewModel InitializeViewModel(FeedViewModel viewModel)
-        {
-            // TODO:
-            //viewModel.RefreshCommand = newsFeedsController.Value.RefreshFeedCommand;
-            //viewModel.ReadUnreadCommand = newsFeedsController.Value.ReadUnreadCommand;
-            //viewModel.ShowFeedItemViewCommand = showFeedItemViewCommand;
-            return viewModel;
+            if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(1))
+            {
+                feedsController.Update();
+                lastUpdate = DateTime.Now;
+            }
         }
     }
 }

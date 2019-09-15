@@ -12,7 +12,7 @@ namespace Waf.NewsReader.Applications.ViewModels
         {
         }
 
-        public ICommand LaunchWebBrowserCommand { get; set; }
+        public ICommand LaunchBrowserCommand { get; set; }
 
         public FeedItem FeedItem
         {

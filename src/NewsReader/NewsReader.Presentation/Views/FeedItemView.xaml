@@ -5,7 +5,7 @@
              x:Class="Waf.NewsReader.Presentation.Views.FeedItemView"
              Title="{Binding FeedItem.Name}" x:DataType="vm:FeedItemViewModel">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding LaunchWebBrowserCommand}" Text="Browser">
+        <ToolbarItem Command="{Binding LaunchBrowserCommand}" Text="Browser">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xf59f;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
             </ToolbarItem.IconImageSource>

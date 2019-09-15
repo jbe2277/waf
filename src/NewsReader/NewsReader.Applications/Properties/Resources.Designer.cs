@@ -61,6 +61,15 @@ namespace Waf.NewsReader.Applications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load the RSS Feed from the provided URL..
+        /// </summary>
+        internal static string ErrorLoadRssFeed {
+            get {
+                return ResourceManager.GetString("ErrorLoadRssFeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to reduce the feed item lifetime? 
         ///This might remove older feed items..
         /// </summary>
@@ -77,6 +86,25 @@ namespace Waf.NewsReader.Applications.Properties {
         internal static string ReduceMaxItemsLimitQuestion {
             get {
                 return ResourceManager.GetString("ReduceMaxItemsLimitQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to remove the Feeds?
+        ///{0}.
+        /// </summary>
+        internal static string RemoveFeedQuestion {
+            get {
+                return ResourceManager.GetString("RemoveFeedQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The URL must begin with http:// or https://.
+        /// </summary>
+        internal static string UrlMustBeginWithHttp {
+            get {
+                return ResourceManager.GetString("UrlMustBeginWithHttp", resourceCulture);
             }
         }
     }
