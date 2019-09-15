@@ -59,5 +59,11 @@ namespace Waf.NewsReader.Presentation.Views
                 }
             }
         }
+
+        private void FeedsItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            viewModel.ShowFeedViewCommand.Execute(e.Item);
+            if (MasterBehavior != MasterBehavior.Split) IsPresented = false;
+        }
     }
 }

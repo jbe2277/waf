@@ -10,11 +10,18 @@ namespace Waf.NewsReader.Applications.Controllers
     internal class AppController : IAppController
     {
         private readonly Lazy<SettingsController> settingsController;
+        private readonly ShellViewModel shellViewModel;
+        private readonly Lazy<FeedViewModel> feedViewModel;
+        private readonly AsyncDelegateCommand showFeedViewCommand;
         private FeedManager feedManager;
 
-        public AppController(Lazy<SettingsController> settingsController, ShellViewModel shellViewModel)
+        public AppController(Lazy<SettingsController> settingsController, ShellViewModel shellViewModel, Lazy<FeedViewModel> feedViewModel)
         {
             this.settingsController = settingsController;
+            this.shellViewModel = shellViewModel;
+            this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
+            showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
+            shellViewModel.ShowFeedViewCommand = showFeedViewCommand;
             shellViewModel.FooterMenu = new[]
             {
                 new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => shellViewModel.PushAsync(this.settingsController.Value.SettingsViewModel)) }
@@ -30,6 +37,7 @@ namespace Waf.NewsReader.Applications.Controllers
             // TODO:
             await Task.Delay(100);
             feedManager = new FeedManager();
+            shellViewModel.Feeds = feedManager.Feeds;
             settingsController.Value.FeedManager = feedManager;
         }
 
@@ -39,6 +47,21 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public void Resume()
         {
+        }
+
+        private Task ShowFeedView(object parameter)
+        {
+            feedViewModel.Value.Feed = (Feed)parameter;
+            return shellViewModel.PushAsync(feedViewModel.Value);
+        }
+
+        private FeedViewModel InitializeViewModel(FeedViewModel viewModel)
+        {
+            // TODO:
+            //viewModel.RefreshCommand = newsFeedsController.Value.RefreshFeedCommand;
+            //viewModel.ReadUnreadCommand = newsFeedsController.Value.ReadUnreadCommand;
+            //viewModel.ShowFeedItemViewCommand = showFeedItemViewCommand;
+            return viewModel;
         }
     }
 }
