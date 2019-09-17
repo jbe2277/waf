@@ -12,6 +12,7 @@ namespace Waf.NewsReader.Presentation.Views
     public partial class ShellView : IShellView
     {
         private ShellViewModel viewModel;
+        private bool isFirstPage = true;
 
         public ShellView()
         {
@@ -26,6 +27,8 @@ namespace Waf.NewsReader.Presentation.Views
 
         public async Task PushAsync(object page)
         {
+            bool wasFirstPage = isFirstPage;
+            isFirstPage = false;
             var navi = Detail.Navigation;
             var idx = navi.NavigationStack.IndexOf(page);
             if (idx >= 0)
@@ -35,16 +38,14 @@ namespace Waf.NewsReader.Presentation.Views
                 await navi.PopAsync();
             }
             else await navi.PushAsync((Page)page);
+            if (wasFirstPage) navi.RemovePage(navi.NavigationStack[0]);  // Remove initial empty page from navigation stack
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             viewModel = (ShellViewModel)BindingContext;
-            // TODO: start
-            // viewModel.StartViewModel.Initialize();
-            // var navigationPage = new NavigationPage((Page)viewModel.StartViewModel.View);
-            var navigationPage = new NavigationPage(new Page() { Title = "TODO" });
+            var navigationPage = new NavigationPage(new Page());  // Add empty page; needed by MasterDetailPage when shown
             Detail = navigationPage;
         }
 

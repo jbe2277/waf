@@ -61,7 +61,7 @@
 
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
-                <ListView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" ItemTapped="FeedsItemTapped" RowHeight="70">
+                <ListView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=OneWay}" ItemTapped="FeedsItemTapped" RowHeight="70">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
                             <ViewCell>

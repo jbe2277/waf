@@ -20,7 +20,7 @@
             </StackLayout>
             <SearchBar x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
             <ListView x:Name="listView" ItemsSource="{Binding ItemsListView}" ItemTapped="FeedItemsItemTapped" IsGroupingEnabled="True" HasUnevenRows="True"
-                      IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding Feed.IsLoading}">
+                      IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="{x:Null}">
                         <ViewCell>

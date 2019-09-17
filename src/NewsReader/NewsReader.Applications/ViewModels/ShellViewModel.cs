@@ -11,6 +11,7 @@ namespace Waf.NewsReader.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>, INavigationService
     {
         private IReadOnlyList<Feed> feeds;
+        private Feed selectedFeed;
 
         public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view)
         {
@@ -29,6 +30,12 @@ namespace Waf.NewsReader.Applications.ViewModels
         {
             get => feeds;
             set => SetProperty(ref feeds, value);
+        }
+
+        public Feed SelectedFeed
+        {
+            get => selectedFeed;
+            set => SetProperty(ref selectedFeed, value);
         }
 
         public Task Navigate(IViewModel viewModel)

@@ -42,11 +42,12 @@ namespace Waf.NewsReader.Applications.Controllers
             // TODO:
             await Task.Delay(100);
             feedManager = new FeedManager();
+            shellViewModel.Feeds = feedManager.Feeds;
+            settingsController.Value.FeedManager = feedManager;
+
             feedsController.FeedManager = feedManager;
             feedsController.Run();
             if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
-            shellViewModel.Feeds = feedManager.Feeds;
-            settingsController.Value.FeedManager = feedManager;
         }
 
         public void Sleep()

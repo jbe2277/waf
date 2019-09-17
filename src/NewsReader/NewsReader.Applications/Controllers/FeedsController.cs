@@ -14,6 +14,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers
 {
+    // TODO: Show selection in navi pane
     // TODO: Remove current Feed -> update ViewModel(s)
     internal class FeedsController
     {
@@ -22,6 +23,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private readonly ISyndicationService syndicationService;
         private readonly INetworkInfoService networkInfoService;
         private readonly ILauncherService launcherService;
+        private readonly ShellViewModel shellViewModel;
         private readonly Lazy<FeedViewModel> feedViewModel;
         private readonly Lazy<FeedItemViewModel> feedItemViewModel;
         private readonly AsyncDelegateCommand showFeedViewCommand;
@@ -32,13 +34,15 @@ namespace Waf.NewsReader.Applications.Controllers
         private readonly AsyncDelegateCommand launchBrowserCommand;
 
         public FeedsController(IMessageService messageService, INavigationService navigationService, ISyndicationService syndicationService, 
-            INetworkInfoService networkInfoService, ILauncherService launcherService, Lazy<FeedViewModel> feedViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
+            INetworkInfoService networkInfoService, ILauncherService launcherService,
+            ShellViewModel shellViewModel, Lazy<FeedViewModel> feedViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.messageService = messageService;
             this.navigationService = navigationService;
             this.syndicationService = syndicationService;
             this.networkInfoService = networkInfoService;
             this.launcherService = launcherService;
+            this.shellViewModel = shellViewModel;
             this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeViewModel(feedItemViewModel.Value));
             showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
@@ -59,6 +63,7 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             Update();
             FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
+            ShowFeedView(FeedManager.Feeds.FirstOrDefault()).NoWait();
         }
 
         public void Update()
@@ -106,7 +111,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         private Task ShowFeedView(object parameter)
         {
-            feedViewModel.Value.Feed = (Feed)parameter;
+            shellViewModel.SelectedFeed = feedViewModel.Value.Feed = (Feed)parameter;
             return navigationService.Navigate(feedViewModel.Value);
         }
 
