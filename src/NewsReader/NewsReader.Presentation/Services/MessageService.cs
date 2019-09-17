@@ -13,7 +13,7 @@ namespace Waf.NewsReader.Presentation.Services
 
         public Task<bool> ShowYesNoQuestion(string message)
         {
-            return Application.Current.MainPage.DisplayAlert("Question", message, "No", "Yes");
+            return Application.Current.MainPage.DisplayAlert("Question", message, "Yes", "No");
         }
     }
 }

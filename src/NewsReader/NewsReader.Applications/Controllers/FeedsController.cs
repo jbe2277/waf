@@ -14,8 +14,6 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers
 {
-    // TODO: Show selection in navi pane
-    // TODO: Remove current Feed -> update ViewModel(s)
     internal class FeedsController
     {
         private readonly IMessageService messageService;
@@ -79,6 +77,10 @@ namespace Waf.NewsReader.Applications.Controllers
             foreach (Feed item in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
             {
                 LoadFeedAsync(item).NoWait();
+            }
+            if ((e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()).Any(x => x == feedViewModel.Value.Feed))
+            {
+                shellViewModel.SelectedFeed = feedViewModel.Value.Feed = null;
             }
         }
 

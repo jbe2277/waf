@@ -14,11 +14,14 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="0">
-            <StackLayout IsVisible="{Binding Feed.LoadError, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
+            <StackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
                 <Label Text="Load Error" Style="{StaticResource Title}"/>
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </StackLayout>
             <SearchBar x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
+            <StackLayout IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
+                <Label Text="Please select a feed."/>
+            </StackLayout>
             <ListView x:Name="listView" ItemsSource="{Binding ItemsListView}" ItemTapped="FeedItemsItemTapped" IsGroupingEnabled="True" HasUnevenRows="True"
                       IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}">
                 <ListView.GroupHeaderTemplate>
