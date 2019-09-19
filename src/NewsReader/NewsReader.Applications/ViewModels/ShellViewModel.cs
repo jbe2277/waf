@@ -10,6 +10,7 @@ namespace Waf.NewsReader.Applications.ViewModels
 {
     public class ShellViewModel : ViewModel<IShellView>, INavigationService
     {
+        private NavigationItem selectedFooterMenu;
         private IReadOnlyList<Feed> feeds;
         private Feed selectedFeed;
 
@@ -26,6 +27,18 @@ namespace Waf.NewsReader.Applications.ViewModels
 
         public IReadOnlyList<NavigationItem> FooterMenu { get; set; }
 
+        public NavigationItem SelectedFooterMenu
+        {
+            get => selectedFooterMenu;
+            set
+            {
+                if (SetProperty(ref selectedFooterMenu, value) && selectedFooterMenu != null)
+                {
+                    SelectedFeed = null;
+                }
+            }
+        }
+
         public IReadOnlyList<Feed> Feeds
         {
             get => feeds;
@@ -35,7 +48,13 @@ namespace Waf.NewsReader.Applications.ViewModels
         public Feed SelectedFeed
         {
             get => selectedFeed;
-            set => SetProperty(ref selectedFeed, value);
+            set
+            {
+                if (SetProperty(ref selectedFeed, value) && SelectedFeed != null)
+                {
+                    SelectedFooterMenu = null;
+                }
+            }
         }
 
         public Task Navigate(IViewModel viewModel)
