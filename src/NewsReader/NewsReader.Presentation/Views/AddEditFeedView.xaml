@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
+             x:Class="Waf.NewsReader.Presentation.Views.AddEditFeedView"
+             Title="Add Feed" x:DataType="vm:AddEditFeedViewModel">
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage" Binding="{Binding IsEditMode}" Value="True">
+            <Setter Property="Title" Value="Edit Feed"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
+            <Entry Text="{Binding FeedUrl}" Keyboard="Url"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

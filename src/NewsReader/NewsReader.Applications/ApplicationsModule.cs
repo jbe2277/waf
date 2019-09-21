@@ -13,6 +13,7 @@ namespace Waf.NewsReader.Applications
             builder.RegisterType<FeedsController>().SingleInstance();
             builder.RegisterType<SettingsController>().SingleInstance();
 
+            builder.RegisterType<AddEditFeedViewModel>().SingleInstance();
             builder.RegisterType<FeedItemViewModel>().SingleInstance();
             builder.RegisterType<FeedViewModel>().SingleInstance();
             builder.RegisterType<SettingsViewModel>().SingleInstance();

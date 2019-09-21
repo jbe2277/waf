@@ -25,9 +25,11 @@ namespace Waf.NewsReader.Applications.Controllers
             this.settingsController = settingsController;
             this.shellViewModel = shellViewModel;
             shellViewModel.ShowFeedViewCommand = feedsController.ShowFeedViewCommand;
+            shellViewModel.EditFeedCommand = feedsController.EditFeedCommand;
             shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
             shellViewModel.FooterMenu = new[]
             {
+                new NavigationItem("Add Feed", "\uf412") { Command = feedsController.AddFeedCommand },
                 new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => 
                     shellViewModel.Navigate(this.settingsController.Value.SettingsViewModel)) }
             };
