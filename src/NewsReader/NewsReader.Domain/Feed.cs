@@ -15,6 +15,7 @@ namespace Waf.NewsReader.Domain
         [DataMember] private readonly Uri uri;
         [DataMember] private readonly ObservableCollection<FeedItem> items;
         [DataMember] private string name;
+        private string title;
         private ReadOnlyObservableList<FeedItem> readOnlyItems;
         private int unreadItemsCount;
         private bool isLoading;
@@ -34,8 +35,20 @@ namespace Waf.NewsReader.Domain
 
         public string Name
         {
-            get => name ?? (name = uri.ToString());
+            get => name;
             set => SetProperty(ref name, value);
+        }
+
+        public string Title
+        {
+            get => title;
+            set
+            {
+                if (SetProperty(ref title, value))
+                {
+                    if (string.IsNullOrEmpty(Name)) Name = value;
+                }
+            }
         }
 
         public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ?? (readOnlyItems = new ReadOnlyObservableList<FeedItem>(items));

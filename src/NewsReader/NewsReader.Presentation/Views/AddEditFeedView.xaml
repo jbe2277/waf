@@ -13,7 +13,11 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
-            <Entry Text="{Binding FeedUrl}" Keyboard="Url"/>
+            <Entry Text="{Binding FeedUrl}" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
+            <ActivityIndicator IsRunning="{Binding Feed.IsLoading, FallbackValue=false}"/>
+            <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed"/>
+            <Label Text="{Binding Feed.Title}"/>
+            <Entry Text="{Binding Feed.Name}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

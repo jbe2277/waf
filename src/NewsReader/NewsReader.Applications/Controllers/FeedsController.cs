@@ -26,6 +26,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private readonly Lazy<FeedViewModel> feedViewModel;
         private readonly Lazy<FeedItemViewModel> feedItemViewModel;
         private readonly AsyncDelegateCommand addFeedCommand;
+        private readonly AsyncDelegateCommand addEditLoadFeedCommand;
         private readonly AsyncDelegateCommand showFeedViewCommand;
         private readonly AsyncDelegateCommand editFeedCommand;
         private readonly AsyncDelegateCommand removeFeedCommand;
@@ -48,6 +49,7 @@ namespace Waf.NewsReader.Applications.Controllers
             this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
             this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeViewModel(feedItemViewModel.Value));
             addFeedCommand = new AsyncDelegateCommand(AddFeed);
+            addEditLoadFeedCommand = new AsyncDelegateCommand(AddEditLoadFeed);
             showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
             editFeedCommand = new AsyncDelegateCommand(EditFeed);
             removeFeedCommand = new AsyncDelegateCommand(RemoveFeed);
@@ -78,7 +80,7 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             foreach (var feed in FeedManager.Feeds)
             {
-                LoadFeedAsync(feed).NoWait();
+                LoadFeed(feed).NoWait();
             }
         }
 
@@ -86,7 +88,7 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             foreach (Feed item in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
             {
-                LoadFeedAsync(item).NoWait();
+                LoadFeed(item).NoWait();
             }
             if ((e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()).Any(x => x == feedViewModel.Value.Feed))
             {
@@ -94,7 +96,7 @@ namespace Waf.NewsReader.Applications.Controllers
             }
         }
 
-        private async Task LoadFeedAsync(Feed feed, bool ignoreInternetAccessStatus = false)
+        private async Task LoadFeed(Feed feed, bool ignoreInternetAccessStatus = false)
         {
             if (!ignoreInternetAccessStatus && !networkInfoService.InternetAccess) { return; }
 
@@ -105,7 +107,7 @@ namespace Waf.NewsReader.Applications.Controllers
                 {
                     var syndicationFeed = await syndicationService.RetrieveFeed(feed.Uri);
                     var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description)).ToArray();
-                    feed.Name = syndicationFeed.Title;
+                    feed.Title = syndicationFeed.Title;
                     feed.UpdateItems(items, excludeMarkAsRead: true);
                 }
                 else
@@ -127,6 +129,31 @@ namespace Waf.NewsReader.Applications.Controllers
             addEditFeedViewModel.Value.FeedUrl = null;
             addEditFeedViewModel.Value.Feed = null;
             return navigationService.Navigate(addEditFeedViewModel.Value);
+        }
+
+        private async Task AddEditLoadFeed()
+        {
+            var uriString = addEditFeedViewModel.Value.FeedUrl.Trim();
+            if (!uriString.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
+            {
+                uriString = "http://" + uriString;
+            }
+            else if (uriString.StartsWith("http://http://", StringComparison.CurrentCultureIgnoreCase)
+                || uriString.StartsWith("http://https://", StringComparison.CurrentCultureIgnoreCase))
+            {
+                uriString = uriString.Substring(7);
+            }
+            if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out var feedUri))
+            {
+                var newFeed = new Feed(feedUri);
+                addEditFeedViewModel.Value.Feed = newFeed;
+                await LoadFeed(newFeed, ignoreInternetAccessStatus: true);
+                addEditFeedViewModel.Value.LoadErrorMessage = newFeed.LoadErrorMessage;
+            }
+            else
+            {
+                addEditFeedViewModel.Value.LoadErrorMessage = Resources.UrlMustBeginWithHttp;
+            }
         }
 
         private Task ShowFeedView(object parameter)
@@ -162,7 +189,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         private async Task RefreshFeed()
         {
-            await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeedAsync(x)));
+            await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
         }
 
         private void MarkAsReadUnread(object parameter)
@@ -183,6 +210,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         private AddEditFeedViewModel InitializeViewModel(AddEditFeedViewModel viewModel)
         {
+            viewModel.LoadFeedCommand = addEditLoadFeedCommand;
             return viewModel;
         }
 

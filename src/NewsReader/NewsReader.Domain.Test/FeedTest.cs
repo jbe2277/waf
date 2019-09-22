@@ -10,15 +10,6 @@ namespace Test.NewsReader.Domain
     public class FeedTest : DomainTest
     {
         [TestMethod]
-        public void NameTest()
-        {
-            var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
-            Assert.AreEqual("http://www.test.com/rss/feed", feed.Name);
-            feed.Name = "name";
-            Assert.AreEqual("name", feed.Name);
-        }
-
-        [TestMethod]
         public void IsLoadingTest1() => IsLoadingCoreTest(false);
 
         [TestMethod]

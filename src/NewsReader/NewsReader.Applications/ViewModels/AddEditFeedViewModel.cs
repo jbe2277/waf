@@ -1,4 +1,5 @@
-﻿using Waf.NewsReader.Applications.Views;
+﻿using System.Windows.Input;
+using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels
@@ -8,10 +9,13 @@ namespace Waf.NewsReader.Applications.ViewModels
         private bool isEditMode;
         private string feedUrl;
         private Feed feed;
+        private string loadErrorMessage;
 
         public AddEditFeedViewModel(IAddEditFeedView view) : base(view)
         {
         }
+
+        public ICommand LoadFeedCommand { get; set; }
 
         public bool IsEditMode
         {
@@ -22,13 +26,26 @@ namespace Waf.NewsReader.Applications.ViewModels
         public string FeedUrl
         {
             get => feedUrl;
-            set => SetProperty(ref feedUrl, value);
+            set
+            {
+                if (SetProperty(ref feedUrl, value))
+                {
+                    Feed = null;
+                    LoadErrorMessage = null;
+                }
+            }
         }
 
         public Feed Feed
         {
             get => feed;
             set => SetProperty(ref feed, value);
+        }
+
+        public string LoadErrorMessage
+        {
+            get => loadErrorMessage;
+            set => SetProperty(ref loadErrorMessage, value);
         }
     }
 }
