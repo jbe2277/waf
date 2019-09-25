@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Waf.Foundation;
@@ -10,7 +11,7 @@ using System.Waf.Foundation;
 namespace Waf.NewsReader.Domain
 {
     [DataContract]
-    public class Feed : Model
+    public class Feed : ValidatableModel
     {
         [DataMember] private readonly Uri uri;
         [DataMember] private readonly ObservableCollection<FeedItem> items;
@@ -33,10 +34,11 @@ namespace Waf.NewsReader.Domain
 
         public Uri Uri => uri;
 
+        [Required]
         public string Name
         {
             get => name;
-            set => SetProperty(ref name, value);
+            set => SetPropertyAndValidate(ref name, value);
         }
 
         public string Title
@@ -149,6 +151,7 @@ namespace Waf.NewsReader.Domain
                 item.PropertyChanged += FeedItemPropertyChanged;
             }
             UpdateUnreadItemsCount();
+            Validate();
         }
 
         private void DataManagerPropertyChanged(object sender, PropertyChangedEventArgs e)

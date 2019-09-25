@@ -13,6 +13,7 @@
                 <On Platform="UWP" Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
             </OnPlatform>
 
+            <c:ErrorsToMessageConverter x:Key="ErrorsToMessageConverter"/>
             <c:LocalizeDisplayItemLifetimeConverter x:Key="LocalizeDisplayItemLifetimeConverter"/>
             <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
             <c:MarkAsReadConverter x:Key="MarkAsReadConverter"/>

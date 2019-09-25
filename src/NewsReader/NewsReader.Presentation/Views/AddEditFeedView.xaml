@@ -13,11 +13,32 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
-            <Entry Text="{Binding FeedUrl}" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
+            <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
             <ActivityIndicator IsRunning="{Binding Feed.IsLoading, FallbackValue=false}"/>
             <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed"/>
             <Label Text="{Binding Feed.Title}"/>
-            <Entry Text="{Binding Feed.Name}"/>
+            <Entry Text="{Binding Feed.Name}" Placeholder="Feed Name">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Feed, TargetNullValue='Null'}" Value="Null">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Label Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}"
+                   TextColor="DarkRed">
+                <Label.Triggers>
+                    <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </Trigger>
+                </Label.Triggers>
+            </Label>
+            <Button Text="Add" Command="{Binding AddUpdateCommand}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
+                        <Setter Property="Text" Value="Update"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

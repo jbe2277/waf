@@ -6,5 +6,7 @@ namespace Waf.NewsReader.Applications.Views
     public interface IShellView : IView
     {
         Task PushAsync(object page);
+
+        Task PopAsync();
     }
 }

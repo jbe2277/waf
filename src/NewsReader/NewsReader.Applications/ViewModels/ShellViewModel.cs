@@ -64,5 +64,10 @@ namespace Waf.NewsReader.Applications.ViewModels
             viewModel.Initialize();
             return ViewCore.PushAsync(viewModel.View);
         }
+
+        public Task NavigateBack()
+        {
+            return ViewCore.PopAsync();
+        }
     }
 }
