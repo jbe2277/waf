@@ -7,7 +7,7 @@
              x:Class="Waf.NewsReader.Presentation.Views.ShellView"
              x:DataType="vm:ShellViewModel">
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu">
+        <ContentPage Title="Menu" Padding="{OnPlatform iOS='0,30,0,0'}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
                     <ViewCell>
