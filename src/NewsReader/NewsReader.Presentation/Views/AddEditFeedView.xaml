@@ -11,34 +11,41 @@
     </ContentPage.Triggers>
     
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
-            <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
-            <ActivityIndicator IsRunning="{Binding Feed.IsLoading, FallbackValue=false}"/>
-            <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed"/>
-            <Label Text="{Binding Feed.Title}"/>
-            <Entry Text="{Binding Feed.Name}" Placeholder="Feed Name">
-                <Entry.Triggers>
-                    <DataTrigger TargetType="Entry" Binding="{Binding Feed, TargetNullValue='Null'}" Value="Null">
-                        <Setter Property="IsEnabled" Value="False"/>
-                    </DataTrigger>
-                </Entry.Triggers>
-            </Entry>
-            <Label Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}"
-                   TextColor="DarkRed">
-                <Label.Triggers>
-                    <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
-                        <Setter Property="IsVisible" Value="False"/>
-                    </Trigger>
-                </Label.Triggers>
-            </Label>
-            <Button Text="Add" Command="{Binding AddUpdateCommand}">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
-                        <Setter Property="Text" Value="Update"/>
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
-        </StackLayout>
+        <Grid>
+            <StackLayout Padding="10">
+                <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
+                <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
+                <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding LoadErrorMessage, TargetNullValue='Null'}" Value="Null">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Text="{Binding Feed.Title, StringFormat='Title: {0}', FallbackValue='Title:'}"/>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                    <Entry Text="{Binding Feed.Name}" Placeholder="Feed Name" HorizontalOptions="FillAndExpand">
+                        <Entry.Triggers>
+                            <DataTrigger TargetType="Entry" Binding="{Binding Feed, TargetNullValue='Null'}" Value="Null">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                    <Button Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="{StaticResource MaterialFont}" HorizontalOptions="Start"/>
+                </StackLayout>
+                <Label Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}" TextColor="DarkRed"/>
+                <Button Text="Add" Command="{Binding AddUpdateCommand}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
+                            <Setter Property="Text" Value="Update"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsSameFeed}" Value="True">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding Feed.IsLoading, FallbackValue=false}" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="10"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
