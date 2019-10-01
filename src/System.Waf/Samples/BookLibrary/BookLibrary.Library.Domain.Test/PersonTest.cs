@@ -81,7 +81,7 @@ namespace Test.BookLibrary.Library.Domain
             person.Email = "harry.potter";
             Assert.AreEqual(Resources.EmailInvalid, person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
             
-            person.Email = "harry.potter@hogwarts";
+            person.Email = "harry.potter@";
             Assert.AreEqual(Resources.EmailInvalid, person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
             
             person.Email = "harry@hogwarts.edu";

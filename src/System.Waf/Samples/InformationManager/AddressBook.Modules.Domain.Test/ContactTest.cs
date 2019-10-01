@@ -45,7 +45,7 @@ namespace Test.InformationManager.AddressBook.Modules.Domain
             contact.Email = "jesper.aaberg@example.com";
             Assert.IsFalse(contact.HasErrors);
 
-            contact.Email = "jesper.aaberg@example.";
+            contact.Email = "jesper.aaberg@";
             Assert.AreEqual("The Email field is not a valid e-mail address.", contact.Errors.Single().ErrorMessage);
         }
     }
