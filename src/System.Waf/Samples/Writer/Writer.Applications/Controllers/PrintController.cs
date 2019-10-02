@@ -1,12 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.IO.Packaging;
 using System.Waf.Applications;
 using System.Windows.Documents;
-using System.Windows.Xps.Packaging;
-using System.Windows.Xps.Serialization;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -19,8 +14,6 @@ namespace Waf.Writer.Applications.Controllers
     [Export]
     internal class PrintController
     {
-        private const string PackagePath = "pack://temp.xps";
-        
         private readonly IFileService fileService;
         private readonly IPrintDialogService printDialogService;
         private readonly ShellViewModel shellViewModel;
@@ -29,8 +22,6 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand printCommand;
         private readonly DelegateCommand closePrintPreviewCommand;
         private object previousView;
-        private Package package;
-        private XpsDocument xpsDocument;
 
         [ImportingConstructor]
         public PrintController(IFileService fileService, IPrintDialogService printDialogService, 
@@ -54,11 +45,6 @@ namespace Waf.Writer.Applications.Controllers
             shellViewModel.PrintCommand = printCommand;            
         }
 
-        public void Shutdown()
-        {
-            xpsDocument?.Close();
-        }
-
         private bool CanShowPrintPreview()
         {
             return fileService.ActiveDocument != null && !shellViewModel.IsPrintPreviewVisible;
@@ -66,30 +52,8 @@ namespace Waf.Writer.Applications.Controllers
 
         private void ShowPrintPreview()
         {
-            // We have to clone the FlowDocument before we use different pagination settings for the export.        
-            RichTextDocument document = (RichTextDocument)fileService.ActiveDocument;
-            FlowDocument clone = document.CloneContent();
-            clone.ColumnWidth = double.PositiveInfinity;
-
-            // Create a package for the XPS document
-            MemoryStream packageStream = new MemoryStream();
-            package = Package.Open(packageStream, FileMode.Create, FileAccess.ReadWrite);
-
-            // Create a XPS document with the path "pack://temp.xps"
-            PackageStore.AddPackage(new Uri(PackagePath), package);
-            xpsDocument = new XpsDocument(package, CompressionOption.SuperFast, PackagePath);
-            
-            // Serialize the XPS document
-            XpsSerializationManager serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false);
-            DocumentPaginator paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
-            serializer.SaveAsXaml(paginator);
-
-            // Get the fixed document sequence
-            FixedDocumentSequence documentSequence = xpsDocument.GetFixedDocumentSequence();
-            
-            // Create and show the print preview view
             PrintPreviewViewModel printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
-            printPreviewViewModel.Document = documentSequence;
+            printPreviewViewModel.Document = (RichTextDocument)fileService.ActiveDocument;
             previousView = shellViewModel.ContentView;
             shellViewModel.ContentView = printPreviewViewModel.View;
             shellViewModel.IsPrintPreviewVisible = true;
@@ -116,12 +80,6 @@ namespace Waf.Writer.Applications.Controllers
 
         private void ClosePrintPreview()
         {
-            // Remove the package from the store
-            PackageStore.RemovePackage(new Uri(PackagePath));
-
-            xpsDocument.Close();
-            package.Close();
-
             shellViewModel.ContentView = previousView;
             previousView = null;
             shellViewModel.IsPrintPreviewVisible = false;

@@ -72,9 +72,10 @@ namespace Waf.InformationManager.Assembler
             base.OnStartup(e);
             Log.App.Info("{0} {1} is starting; OS: {2}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion);
 
+#if (!DEBUG)
             DispatcherUnhandledException += AppDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
-
+#endif
             catalog = new AggregateCatalog();
             // Add the WinApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));

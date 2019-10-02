@@ -45,7 +45,7 @@
     </UserControl.Resources>
     
     <DockPanel>
-        <DocumentViewer x:Name="documentViewer" Document="{Binding Document}" Zoom="{Binding Zoom, Converter={StaticResource DoubleToZoomConverter}}"/>
+        <DocumentViewer x:Name="documentViewer" Zoom="{Binding Zoom, Converter={StaticResource DoubleToZoomConverter}}"/>
     </DockPanel>
     
 </UserControl>

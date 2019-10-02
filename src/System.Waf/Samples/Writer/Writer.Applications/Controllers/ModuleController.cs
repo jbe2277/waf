@@ -74,7 +74,6 @@ namespace Waf.Writer.Applications.Controllers
         public void Shutdown()
         {
             fileController.Shutdown();
-            printController.Shutdown();
         }
 
         private static void InitializeCultures(AppSettings settings)

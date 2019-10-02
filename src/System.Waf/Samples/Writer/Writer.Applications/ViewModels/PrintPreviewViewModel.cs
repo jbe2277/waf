@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Documents;
+using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
@@ -14,7 +14,7 @@ namespace Waf.Writer.Applications.ViewModels
         {
         }
 
-        public IDocumentPaginatorSource Document { get; set; }
+        public RichTextDocument Document { get; set; }
 
         protected override void FitToWidthCore()
         {

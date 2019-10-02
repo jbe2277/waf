@@ -67,7 +67,6 @@ namespace Test.Writer.Applications
 
         protected void ShutdownPrintController()
         {
-            printController.Shutdown();
             printController = null;
         }
     }
