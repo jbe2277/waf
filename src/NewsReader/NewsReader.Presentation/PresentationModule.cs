@@ -15,6 +15,7 @@ namespace Waf.NewsReader.Presentation
             builder.RegisterType<App>().SingleInstance();
 
             builder.RegisterType<AppInfoService>().As<IAppInfoService>().SingleInstance();
+            builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
             builder.RegisterType<LauncherService>().As<ILauncherService>().SingleInstance();
             builder.RegisterType<MessageService>().As<IMessageService>().SingleInstance();
             builder.RegisterType<NetworkInfoService>().As<INetworkInfoService>().SingleInstance();

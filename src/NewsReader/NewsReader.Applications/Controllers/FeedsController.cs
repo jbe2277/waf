@@ -80,12 +80,9 @@ namespace Waf.NewsReader.Applications.Controllers
             ShowFeedView(FeedManager.Feeds.FirstOrDefault()).NoWait();
         }
 
-        public void Update()
+        public Task Update()
         {
-            foreach (var feed in FeedManager.Feeds)
-            {
-                LoadFeed(feed).NoWait();
-            }
+            return Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
         }
 
         private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
@@ -11,16 +12,18 @@ namespace Waf.NewsReader.Applications.Controllers
     internal class AppController : IAppController
     {
         private readonly INetworkInfoService networkInfoService;
-        private readonly Lazy<SettingsController> settingsController;
+        private readonly DataController dataController;
+        private readonly SettingsController settingsController;
         private readonly FeedsController feedsController;
         private readonly ShellViewModel shellViewModel;
         private FeedManager feedManager;
         private DateTime lastUpdate;
 
-        public AppController(INetworkInfoService networkInfoService, FeedsController feedsController, Lazy<SettingsController> settingsController, 
-            ShellViewModel shellViewModel)
+        public AppController(INetworkInfoService networkInfoService, DataController dataController, FeedsController feedsController, 
+            SettingsController settingsController, ShellViewModel shellViewModel)
         {
             this.networkInfoService = networkInfoService;
+            this.dataController = dataController;
             this.feedsController = feedsController;
             this.settingsController = settingsController;
             this.shellViewModel = shellViewModel;
@@ -31,7 +34,7 @@ namespace Waf.NewsReader.Applications.Controllers
             {
                 new NavigationItem("Add Feed", "\uf412") { Command = feedsController.AddFeedCommand },
                 new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => 
-                    shellViewModel.Navigate(this.settingsController.Value.SettingsViewModel)) }
+                    shellViewModel.Navigate(this.settingsController.SettingsViewModel)) }
             };
             shellViewModel.Initialize();
             MainView = shellViewModel.View;
@@ -41,11 +44,9 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public async void Start()
         {
-            // TODO:
-            await Task.Delay(100);
-            feedManager = new FeedManager();
+            feedManager = await dataController.Load();
             shellViewModel.Feeds = feedManager.Feeds;
-            settingsController.Value.FeedManager = feedManager;
+            settingsController.FeedManager = feedManager;
 
             feedsController.FeedManager = feedManager;
             feedsController.Run();
@@ -54,13 +55,15 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public void Sleep()
         {
+            Task.Run(dataController.Save).GetAwaiter().GetResult();  // Task.Run needed to avoid dead-lock when Save uses await.
         }
 
         public void Resume()
         {
             if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(1))
             {
-                feedsController.Update();
+                dataController.Update().NoWait();
+                feedsController.Update().NoWait();
                 lastUpdate = DateTime.Now;
             }
         }

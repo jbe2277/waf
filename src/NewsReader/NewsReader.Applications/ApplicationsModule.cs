@@ -10,6 +10,7 @@ namespace Waf.NewsReader.Applications
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AppController>().As<IAppController>().AsSelf().SingleInstance();
+            builder.RegisterType<DataController>().SingleInstance();
             builder.RegisterType<FeedsController>().SingleInstance();
             builder.RegisterType<SettingsController>().SingleInstance();
 
