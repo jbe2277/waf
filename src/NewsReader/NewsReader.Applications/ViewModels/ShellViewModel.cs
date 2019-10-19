@@ -23,6 +23,10 @@ namespace Waf.NewsReader.Applications.ViewModels
 
         public ICommand EditFeedCommand { get; set; }
 
+        public ICommand MoveFeedUpCommand { get; set; }
+
+        public ICommand MoveFeedDownCommand { get; set; }
+
         public ICommand RemoveFeedCommand { get; set; }
 
         public ICommand ShowFeedViewCommand { get; set; }

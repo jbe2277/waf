@@ -14,7 +14,10 @@
         <Grid>
             <StackLayout Padding="10">
                 <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
-                <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused" HorizontalOptions="FillAndExpand"/>
+                    <Button Command="{Binding LoadFeedCommand}" Text="&#xf453;" FontFamily="{StaticResource MaterialFont}" HorizontalOptions="Start"/>
+                </StackLayout>
                 <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" Binding="{Binding LoadErrorMessage, TargetNullValue='Null'}" Value="Null">
