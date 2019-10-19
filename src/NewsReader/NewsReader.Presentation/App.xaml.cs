@@ -9,6 +9,15 @@ using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation
 {
+    // Add App.xaml.key.cs file with:
+    //public partial class App
+    //{
+    //    static partial void GetAppCenterSecret(ref string appSecret)
+    //    {
+    //        appSecret = "android={key};uwp={key};ios={key}";
+    //    }
+    //}
+
     public partial class App : Application
     {
         private readonly IAppController appController;
