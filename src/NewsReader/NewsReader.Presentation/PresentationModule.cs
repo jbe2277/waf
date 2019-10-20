@@ -21,6 +21,7 @@ namespace Waf.NewsReader.Presentation
             builder.RegisterType<NetworkInfoService>().As<INetworkInfoService>().SingleInstance();
             builder.RegisterType<SettingsServiceCore>().As<ISettingsService>().SingleInstance();
             builder.RegisterType<SyndicationService>().As<ISyndicationService>().SingleInstance();
+            builder.RegisterType<WebStorageService>().As<IWebStorageService>().SingleInstance();
 
             builder.RegisterType<AddEditFeedView>().As<IAddEditFeedView>().AsSelf().SingleInstance();
             builder.RegisterType<FeedItemView>().As<IFeedItemView>().AsSelf().SingleInstance();

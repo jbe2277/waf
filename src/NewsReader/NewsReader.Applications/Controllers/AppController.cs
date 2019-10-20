@@ -46,6 +46,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public async void Start()
         {
+            dataController.Initialize();
             feedManager = await dataController.Load();
             shellViewModel.Feeds = feedManager.Feeds;
             settingsController.FeedManager = feedManager;

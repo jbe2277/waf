@@ -24,6 +24,8 @@ namespace Waf.NewsReader.Android
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
 
+            App.InitializeLogging(Log.Default);
+
             var builder = new ContainerBuilder();
             builder.RegisterModule(new ApplicationsModule());
             builder.RegisterModule(new PresentationModule());

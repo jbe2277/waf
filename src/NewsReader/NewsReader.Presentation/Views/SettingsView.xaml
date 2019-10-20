@@ -20,6 +20,22 @@
         </ContentPage.Content>
     </ContentPage>
 
+    <ContentPage Title="Data Sync">
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf4e6;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+        </ContentPage.IconImageSource>
+
+        <ContentPage.Content>
+            <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">
+                <Label Text="TODO" Style="{StaticResource Title}"/>
+                <Label Text="more todo:"/>
+                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start"/>
+                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start"/>
+                <Label Text="{Binding WebStorageService.CurrentAccount.UserName}"/>
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+    
     <ContentPage Title="Info">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf2fd;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>

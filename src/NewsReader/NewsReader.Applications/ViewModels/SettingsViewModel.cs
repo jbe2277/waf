@@ -21,15 +21,19 @@ namespace Waf.NewsReader.Applications.ViewModels
         private bool developerSettingsEnabled;
         private string selectedLanguage;
 
-        public SettingsViewModel(ISettingsView view, IMessageService messageService, IAppInfoService appInfoService) : base(view)
+        public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, 
+            IAppInfoService appInfoService) : base(view)
         {
             this.messageService = messageService;
             AppInfo = appInfoService;
+            WebStorageService = webStorageService;
             ItemLifetimes = Enum.GetValues(typeof(DisplayItemLifetime)).Cast<DisplayItemLifetime>().ToArray();
             MaxItemsLimits = Enum.GetValues(typeof(DisplayMaxItemsLimit)).Cast<DisplayMaxItemsLimit>().ToArray();
         }
 
         public IAppInfoService AppInfo { get; }
+
+        public IWebStorageService WebStorageService { get; }
 
         public IReadOnlyList<DisplayItemLifetime> ItemLifetimes { get; }
 
@@ -47,16 +51,9 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetSelectedMaxItemsLimit(value);
         }
 
-        internal FeedManager FeedManager
-        {
-            get => feedManager;
-            set
-            {
-                feedManager = value;
-                selectedItemLifetime = DisplayItemLifetimeHelper.FromValue(feedManager.ItemLifetime);
-                selectedMaxItemsLimit = DisplayMaxItemsLimitHelper.FromValue(feedManager.MaxItemsLimit);
-            }
-        }
+        public ICommand SignInCommand { get; set; }
+
+        public ICommand SignOutCommand { get; set; }
 
         public ICommand EnableDeveloperSettingsCommand { get; set; }
 
@@ -72,6 +69,17 @@ namespace Waf.NewsReader.Applications.ViewModels
         {
             get => selectedLanguage;
             set => SetProperty(ref selectedLanguage, value);
+        }
+
+        internal FeedManager FeedManager
+        {
+            get => feedManager;
+            set
+            {
+                feedManager = value;
+                selectedItemLifetime = DisplayItemLifetimeHelper.FromValue(feedManager.ItemLifetime);
+                selectedMaxItemsLimit = DisplayMaxItemsLimitHelper.FromValue(feedManager.MaxItemsLimit);
+            }
         }
 
         private async void SetSelectedItemLifetime(DisplayItemLifetime value)

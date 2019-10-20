@@ -132,6 +132,10 @@ This might remove older feed items.</value>
     <value>Do you want to remove the Feeds?
 {0}</value>
   </data>
+  <data name="SignInError" xml:space="preserve">
+    <value>An error occurred during the sign-in process. 
+Details: {0}</value>
+  </data>
   <data name="UrlMustBeginWithHttp" xml:space="preserve">
     <value>The URL must begin with http:// or https://</value>
   </data>

@@ -11,13 +11,15 @@ namespace Waf.NewsReader.Applications.Controllers
     internal class SettingsController
     {
         private readonly AppSettings appSettings;
+        private readonly DataController dataController;
         private readonly Lazy<SettingsViewModel> settingsViewModel;
         private readonly DelegateCommand enableDeveloperSettingsCommand;
         private int enableDeveloperSettingsCallCount;
 
-        public SettingsController(ISettingsService settingsService, Lazy<SettingsViewModel> settingsViewModel)
+        public SettingsController(ISettingsService settingsService, DataController dataController, Lazy<SettingsViewModel> settingsViewModel)
         {
             appSettings = settingsService.Get<AppSettings>();
+            this.dataController = dataController;
             this.settingsViewModel = new Lazy<SettingsViewModel>(() => InitializeViewModel(settingsViewModel.Value));
             enableDeveloperSettingsCommand = new DelegateCommand(() =>
             {
@@ -34,6 +36,8 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             viewModel.FeedManager = FeedManager;
             viewModel.EnableDeveloperSettingsCommand = enableDeveloperSettingsCommand;
+            viewModel.SignInCommand = dataController.SignInCommand;
+            viewModel.SignOutCommand = dataController.SignOutCommand;
             viewModel.Languages = new[] { "Auto", "en-US", "de-DE" };
             viewModel.SelectedLanguage = appSettings.Language ?? "Auto";
             viewModel.PropertyChanged += DeveloperSettingsViewModelPropertyChanged;

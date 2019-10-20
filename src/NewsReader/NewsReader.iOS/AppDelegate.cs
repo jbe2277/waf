@@ -1,14 +1,16 @@
 ﻿using Autofac;
 using Foundation;
+using Microsoft.Identity.Client;
 using UIKit;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Presentation;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace Waf.NewsReader.iOS
 {
-    [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    [Register(nameof(AppDelegate))]
+    public partial class AppDelegate : FormsApplicationDelegate
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -24,6 +26,12 @@ namespace Waf.NewsReader.iOS
             LoadApplication(container.Resolve<App>());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
+            return true;
         }
     }
 }

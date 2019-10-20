@@ -100,6 +100,16 @@ namespace Waf.NewsReader.Applications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred during the sign-in process. 
+        ///Details: {0}.
+        /// </summary>
+        internal static string SignInError {
+            get {
+                return ResourceManager.GetString("SignInError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The URL must begin with http:// or https://.
         /// </summary>
         internal static string UrlMustBeginWithHttp {
