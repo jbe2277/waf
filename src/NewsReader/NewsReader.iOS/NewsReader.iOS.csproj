@@ -68,6 +68,7 @@
       <Link>Resources\materialdesignicons-webfont.ttf</Link>
     </BundleResource>
     <Compile Include="Services\IdentityService.cs" />
+    <Compile Include="Services\LocalizationService.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
+using Waf.NewsReader.Applications.Services;
 using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation
@@ -22,8 +23,10 @@ namespace Waf.NewsReader.Presentation
     {
         private readonly IAppController appController;
 
-        public App(Lazy<IAppController> appController)
+        public App(Lazy<IAppController> appController, ILocalizationService localizationService = null)
         {
+            localizationService?.Initialize();
+
             InitializeComponent();
             this.appController = appController.Value;
             MainPage = (Page)this.appController.MainView;
