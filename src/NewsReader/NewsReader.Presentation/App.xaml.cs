@@ -3,8 +3,11 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using System;
 using System.Diagnostics;
+using System.Globalization;
+using System.Waf.Applications.Services;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
+using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
 using Xamarin.Forms;
 
@@ -21,11 +24,14 @@ namespace Waf.NewsReader.Presentation
 
     public partial class App : Application
     {
+        private readonly ISettingsService settingsService;
         private readonly IAppController appController;
 
-        public App(Lazy<IAppController> appController, ILocalizationService localizationService = null)
+        public App(ISettingsService settingsService, Lazy<IAppController> appController, ILocalizationService localizationService = null)
         {
+            this.settingsService = settingsService;
             localizationService?.Initialize();
+            InitializeCultures(settingsService.Get<AppSettings>());
 
             InitializeComponent();
             this.appController = appController.Value;
@@ -52,12 +58,23 @@ namespace Waf.NewsReader.Presentation
         {
             Log.Default.Info("App sleep");
             appController.Sleep();
+            settingsService.Save();
         }
 
         protected override void OnResume()
         {
             Log.Default.Info("App resume");
             appController.Resume();
+        }
+
+        private static void InitializeCultures(AppSettings appSettings)
+        {
+            if (!string.IsNullOrEmpty(appSettings.Language))
+            {
+                var culture = new CultureInfo(appSettings.Language);
+                CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = culture;
+                CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = culture;
+            }
         }
 
         static partial void GetAppCenterSecret(ref string appSecret);

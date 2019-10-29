@@ -53,6 +53,10 @@
                     <Label Text="Developer" Style="{StaticResource Title}"/>
                     <Label Text="Language"/>
                     <Picker ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"/>
+                    <Label Text="{Binding UICulture, StringFormat='UICulture: {0}'}"/>
+                    <Label Text="{Binding Culture, StringFormat='Culture: {0}'}"/>
+                    <Label Text="{Binding Now, StringFormat='DateTime (now): {0:F}'}"/>
+                    <Label Text="{Binding CurrencyValue, StringFormat='Currency value: {0:C}'}"/>
                 </StackLayout>
             </StackLayout>
         </ContentPage.Content>

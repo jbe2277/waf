@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.DataModels;
@@ -70,6 +71,14 @@ namespace Waf.NewsReader.Applications.ViewModels
             get => selectedLanguage;
             set => SetProperty(ref selectedLanguage, value);
         }
+
+        public string UICulture => CultureInfo.CurrentUICulture.ToString();
+
+        public string Culture => CultureInfo.CurrentCulture.ToString();
+
+        public DateTime Now => DateTime.Now;
+
+        public double CurrencyValue => 42800.90;
 
         internal FeedManager FeedManager
         {
