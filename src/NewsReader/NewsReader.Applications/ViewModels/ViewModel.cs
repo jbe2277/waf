@@ -19,6 +19,9 @@ namespace Waf.NewsReader.Applications.ViewModels
         public void Initialize()
         {
             if (ViewCore.DataContext != this) ViewCore.DataContext = this;
+            OnInitialize();
         }
+
+        protected virtual void OnInitialize() { }
     }
 }

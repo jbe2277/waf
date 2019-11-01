@@ -27,11 +27,22 @@
 
         <ContentPage.Content>
             <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">
-                <Label Text="TODO" Style="{StaticResource Title}"/>
-                <Label Text="more todo:"/>
-                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start"/>
-                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start"/>
-                <Label Text="{Binding WebStorageService.CurrentAccount.UserName}"/>
+                <Label Text="This feature synchronizes the feed list and read/unread status with multiple devices. A Microsoft account is required as the synchronization is using OneDrive." Margin="0,0,0,10"/>
+                <Label Text="Synchronization: Deactivated">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}" Value="True">
+                            <Setter Property="Text" Value="Synchronization: Activated"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Text="{Binding WebStorageService.CurrentAccount.UserName, StringFormat='User name: {0}'}" 
+                       IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
+                <Label Text="{Binding WebStorageService.CurrentAccount.Email, StringFormat='Email: {0}'}" 
+                       IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
+                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start" Margin="0,10,0,0"
+                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}"/>
+                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start" Margin="0,10,0,0"
+                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
