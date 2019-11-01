@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Foundation;
@@ -54,6 +55,7 @@ namespace Waf.NewsReader.Applications.Controllers
             feedsController.FeedManager = feedManager;
             feedsController.Run();
             if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
+            networkInfoService.PropertyChanged += NetworkInfoServicePropertyChanged;
         }
 
         public void Sleep()
@@ -68,6 +70,14 @@ namespace Waf.NewsReader.Applications.Controllers
                 dataController.Update().NoWait();
                 feedsController.Update().NoWait();
                 lastUpdate = DateTime.Now;
+            }
+        }
+
+        private void NetworkInfoServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess)
+            {
+                Resume();
             }
         }
     }

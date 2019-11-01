@@ -5,4 +5,4 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.NewsReader.Presentation.Views.FeedItemView")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5350:Do Not Use Weak Cryptographic Algorithms", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.NewsReader.Presentation.Services.DataService.GetHash~System.String")]
