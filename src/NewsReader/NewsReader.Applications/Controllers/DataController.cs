@@ -1,7 +1,10 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
+using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.Properties;
@@ -12,22 +15,29 @@ namespace Waf.NewsReader.Applications.Controllers
 {
     internal class DataController
     {
+        private readonly AppSettings appSettings;
         private readonly IDataService dataService;
+        private readonly INetworkInfoService networkInfoService;
         private readonly IWebStorageService webStorageService;
         private readonly IMessageService messageService;
         private readonly AsyncDelegateCommand signInCommand;
         private readonly AsyncDelegateCommand signOutCommand;
         private readonly TaskCompletionSource<FeedManager> loadCompletion;
         private bool isInitialized;
+        private bool isInSync;
 
-        public DataController(IDataService dataService, IWebStorageService webStorageService, IMessageService messageService)
+        public DataController(ISettingsService settingsService, IDataService dataService, INetworkInfoService networkInfoService, 
+            IWebStorageService webStorageService, IMessageService messageService)
         {
+            appSettings = settingsService.Get<AppSettings>();
             this.dataService = dataService;
+            this.networkInfoService = networkInfoService;
             this.webStorageService = webStorageService;
             this.messageService = messageService;
             signInCommand = new AsyncDelegateCommand(SignIn, () => isInitialized);
             signOutCommand = new AsyncDelegateCommand(SignOutAsync);
             loadCompletion = new TaskCompletionSource<FeedManager>();
+            webStorageService.PropertyChanged += WebStorageServicePropertyChanged;
         }
 
         public ICommand SignInCommand => signInCommand;
@@ -63,8 +73,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public Task Update()
         {
-            // TODO: Download and update
-            return Task.CompletedTask;
+            return DownloadAndMerge();
         }
 
         public Task Save()
@@ -72,8 +81,7 @@ namespace Waf.NewsReader.Applications.Controllers
             if (!loadCompletion.Task.IsCompleted) return Task.CompletedTask;
             var feedManager = loadCompletion.Task.GetAwaiter().GetResult();
             dataService.Save(feedManager);
-            // TODO: Upload here
-            return Task.CompletedTask;
+            return Upload();
         }
 
         private async Task SignIn()
@@ -93,6 +101,64 @@ namespace Waf.NewsReader.Applications.Controllers
         private Task SignOutAsync()
         {
             return webStorageService.SignOut();
+        }
+
+        private async Task DownloadAndMerge()
+        {
+            if (webStorageService.CurrentAccount == null || !networkInfoService.InternetAccess) return;
+
+            FeedManager feedManagerFromWeb = null;
+            try
+            {
+                var (stream, cTag) = await webStorageService.DownloadFile(appSettings.WebStorageCTag);
+                if (!string.IsNullOrEmpty(cTag))
+                {
+                    appSettings.WebStorageCTag = cTag;
+                    feedManagerFromWeb = dataService.Load<FeedManager>(stream);
+                }
+                else
+                {
+                    isInSync = true;  // We are in-sync when no file exists on web storage.
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Default.Error(ex, "Download failed");
+                Crashes.TrackError(ex);
+                messageService.ShowMessage(Resources.SynchronizationDownloadError, ex.Message).NoWait();
+            }
+
+            if (feedManagerFromWeb != null)
+            {
+                var originalFeedManager = await loadCompletion.Task;
+                originalFeedManager.Merge(feedManagerFromWeb);
+                isInSync = true;
+            }
+        }
+
+        private async Task Upload()
+        {
+            if (!isInSync || webStorageService.CurrentAccount == null || !networkInfoService.InternetAccess) return;
+            try
+            {
+                var dataFileHash = dataService.GetHash();
+                if (dataFileHash != appSettings.LastUploadedFileHash)
+                {
+                    var cTag = await webStorageService.UploadFile(dataService.GetReadStream()).ConfigureAwait(false);
+                    appSettings.WebStorageCTag = cTag;
+                    appSettings.LastUploadedFileHash = dataFileHash;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Default.Error(ex, "Upload failed");
+                Crashes.TrackError(ex);
+            }
+        }
+
+        private void WebStorageServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(webStorageService.CurrentAccount)) DownloadAndMerge().NoWait();
         }
     }
 }

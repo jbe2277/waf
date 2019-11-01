@@ -24,6 +24,7 @@ namespace Waf.NewsReader.Presentation.Services
 
     internal partial class WebStorageService : Model, IWebStorageService
     {
+        private const string dataFileName = "data.zip";
         private static readonly string[] scopes = { "User.Read", "Files.ReadWrite.AppFolder" };
 
         private readonly IIdentityService identityService;
@@ -48,7 +49,7 @@ namespace Waf.NewsReader.Presentation.Services
         public UserAccount CurrentAccount
         {
             get => currentAccount;
-            set => SetProperty(ref currentAccount, value);
+            private set => SetProperty(ref currentAccount, value);
         }
 
         public async Task<bool> TrySilentSignIn()
@@ -130,9 +131,9 @@ namespace Waf.NewsReader.Presentation.Services
             CurrentAccount = new UserAccount(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName, user.Mail);
         }
 
-        public async Task<(Stream stream, string cTag)> DownloadFileAsync(string fileName, string cTag)
+        public async Task<(Stream stream, string cTag)> DownloadFile(string cTag)
         {
-            var item = graphClient.Me.Drive.Special.AppRoot.ItemWithPath(Path.GetFileName(fileName));
+            var item = graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName);
             try
             {
                 var metaItem = await item.Request().GetAsync().ConfigureAwait(false);
@@ -145,9 +146,9 @@ namespace Waf.NewsReader.Presentation.Services
             return (null, null);
         }
 
-        public async Task<string> UploadFileAsync(Stream source, string fileName)
+        public async Task<string> UploadFile(Stream source)
         {
-            var driveItem = await graphClient.Me.Drive.Special.AppRoot.ItemWithPath(Path.GetFileName(fileName))
+            var driveItem = await graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName)
                 .Content.Request().PutAsync<DriveItem>(source).ConfigureAwait(false);
             return driveItem.CTag;
         }

@@ -136,6 +136,9 @@ This might remove older feed items.</value>
     <value>An error occurred during the sign-in process. 
 Details: {0}</value>
   </data>
+  <data name="SynchronizationDownloadError" xml:space="preserve">
+    <value>Synchronization failed. Error: {0}</value>
+  </data>
   <data name="UrlMustBeginWithHttp" xml:space="preserve">
     <value>The URL must begin with http:// or https://</value>
   </data>

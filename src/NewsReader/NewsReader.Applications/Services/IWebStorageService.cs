@@ -14,9 +14,9 @@ namespace Waf.NewsReader.Applications.Services
 
         Task SignOut();
 
-        Task<(Stream stream, string cTag)> DownloadFileAsync(string fileName, string cTag);
+        Task<(Stream stream, string cTag)> DownloadFile(string cTag);
 
-        Task<string> UploadFileAsync(Stream source, string fileName);
+        Task<string> UploadFile(Stream source);
     }
 
     public class UserAccount

@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services
@@ -11,11 +12,25 @@ namespace Waf.NewsReader.Presentation.Services
         private static readonly string containerFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "data.zip");
         private const string itemFileName = "data.xml";
 
-        public T Load<T>() where T : class
+        public Stream GetReadStream()
+        {
+            return File.OpenRead(containerFileName);
+        }
+
+        public string GetHash()
+        {
+            using (var stream = GetReadStream())
+            using (var sha1 = SHA1.Create())
+            {
+                return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "");
+            }
+        }
+
+        public T Load<T>(Stream dataStream = null) where T : class
         {
             try
             {
-                using (var archiveStream = File.OpenRead(containerFileName))
+                using (var archiveStream = dataStream ?? GetReadStream())
                 {
                     return LoadItem<T>(archiveStream, itemFileName);
                 }

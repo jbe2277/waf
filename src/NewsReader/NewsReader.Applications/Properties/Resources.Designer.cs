@@ -110,6 +110,15 @@ namespace Waf.NewsReader.Applications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Synchronization failed. Error: {0}.
+        /// </summary>
+        internal static string SynchronizationDownloadError {
+            get {
+                return ResourceManager.GetString("SynchronizationDownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The URL must begin with http:// or https://.
         /// </summary>
         internal static string UrlMustBeginWithHttp {
