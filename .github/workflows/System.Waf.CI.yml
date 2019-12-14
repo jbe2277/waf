@@ -1,4 +1,4 @@
-name: Waf.NetFramework.CI
+name: System.Waf.CI
 
 on: [push]
 
