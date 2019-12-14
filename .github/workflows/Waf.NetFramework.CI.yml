@@ -14,6 +14,6 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --source ./src/System.Waf/ --configuration Release
     - name: Test
       run: dotnet test --verbosity normal
