@@ -18,4 +18,4 @@ jobs:
     - name: Build
       run: msbuild ./src/System.Waf/System.Waf.sln -p:Configuration=Release
     - name: Test
-      run: dotnet test ./src/System.Waf/System.Waf.sln --verbosity normal
+      run: dotnet test ./src/System.Waf/System.Waf.sln --no-build --verbosity normal
