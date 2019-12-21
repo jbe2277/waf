@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
+    <EmbeddedResource Update="Properties\Resources.resx" Generator="PublicResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
     <Compile Update="Properties\Resources.Designer.cs" AutoGen="True" DependentUpon="Resources.resx" DesignTime="True" />
 
     <Resource Include="Resources\Images\**" />
