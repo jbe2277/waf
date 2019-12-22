@@ -9,11 +9,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Restore packages
-      run: nuget restore ./src/System.Waf/System.Waf.sln
-    - name: Setup MSBuild.exe
-      uses: warrenbuckley/Setup-MSBuild@v1
-    - name: Build
-      run: msbuild ./src/System.Waf/System.Waf.sln -p:Configuration=Release
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
