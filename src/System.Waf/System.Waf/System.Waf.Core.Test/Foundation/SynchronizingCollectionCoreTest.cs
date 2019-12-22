@@ -288,7 +288,7 @@ namespace Test.Waf.Foundation
             synchronizingCollection = null;
             GC.Collect();
             Assert.IsNotNull(originalCollection);
-#if !NETCOREAPP2_1 || !DEBUG
+#if !NETCOREAPP3_1 || !DEBUG
             Assert.IsFalse(weakSynchronizingCollection.IsAlive);
 #endif
         }

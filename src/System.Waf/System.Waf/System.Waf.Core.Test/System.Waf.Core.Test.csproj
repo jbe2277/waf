@@ -1,6 +1,6 @@
-﻿<Project>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
@@ -13,10 +13,7 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj" />
     <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
   </ItemGroup>
-
 </Project>
