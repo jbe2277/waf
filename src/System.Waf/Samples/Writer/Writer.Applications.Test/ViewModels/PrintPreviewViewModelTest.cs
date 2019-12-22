@@ -29,11 +29,5 @@ namespace Test.Writer.Applications.ViewModels
             viewModel.FitToWidthCommand.Execute(null);
             Assert.IsTrue(view.FitToWidthCalled);
         }
-
-
-        private class MockDocumentPaginatorSource : IDocumentPaginatorSource
-        {
-            public DocumentPaginator DocumentPaginator => throw new NotImplementedException();
-        }
     }
 }

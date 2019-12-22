@@ -29,4 +29,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Scope = "member", Target = "Waf.Writer.Presentation.DesignData.MockSettingsService.#RaiseErrorOccurred(System.Waf.Applications.Services.SettingsErrorEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Build", "CA1801:Parameter e of method RichTextBoxIsVisibleChanged is never used. Remove the parameter or use it in the method body.", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Views.RichTextView.RichTextBoxIsVisibleChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.Writer.Presentation.Views.PrintPreviewView")]
