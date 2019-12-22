@@ -1,7 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="WAF Rule Set" Description="This is customized ruleset of Microsoft's AllRules" ToolsVersion="10.0">
-  <IncludeAll Action="Warning" />
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+﻿<RuleSet Name="Unit Test Code Analysis Rule Set" Description="" ToolsVersion="15.0">
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
     <Rule Id="CA1006" Action="None" />
     <Rule Id="CA1020" Action="None" />
     <Rule Id="CA1040" Action="None" />
