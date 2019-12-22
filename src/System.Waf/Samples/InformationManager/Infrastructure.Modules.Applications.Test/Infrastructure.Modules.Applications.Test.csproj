@@ -7,18 +7,12 @@
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
     <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj" />
     <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
-    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj" />
   </ItemGroup>
 </Project>

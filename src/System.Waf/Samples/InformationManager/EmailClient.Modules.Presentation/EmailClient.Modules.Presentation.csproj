@@ -1,178 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7DB633C2-1EA6-420F-9BA9-320D42289119}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net461</TargetFramework>
     <RootNamespace>Waf.InformationManager.EmailClient.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Presentation</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <FileAlignment>512</FileAlignment>
+    <UseWPF>true</UseWPF>
+    <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\out\InformationManager\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.5.11" />
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <ProjectReference Include="..\Common.Presentation\Common.Presentation.csproj" />
+    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
+    <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Converters\StringCollectionToStringConverter.cs" />
-    <Compile Include="DesignData\SampleBasicEmailAccountViewModel.cs" />
-    <Compile Include="DesignData\SampleEditEmailAccountViewModel.cs" />
-    <Compile Include="DesignData\SampleEmailAccountsViewModel.cs" />
-    <Compile Include="DesignData\SampleEmailLayoutViewModel.cs" />
-    <Compile Include="DesignData\SampleEmailListViewModel.cs" />
-    <Compile Include="DesignData\SampleEmailViewModel.cs" />
-    <Compile Include="DesignData\SampleExchangeSettingsViewModel.cs" />
-    <Compile Include="DesignData\SampleNewEmailViewModel.cs" />
-    <Compile Include="DesignData\SamplePop3SettingsViewModel.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selectors\EmailItemTemplateSelector.cs" />
-    <Compile Include="Services\PresentationService.cs" />
-    <Compile Include="Views\BasicEmailAccountView.xaml.cs">
-      <DependentUpon>BasicEmailAccountView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditEmailAccountWindow.xaml.cs">
-      <DependentUpon>EditEmailAccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmailAccountsWindow.xaml.cs">
-      <DependentUpon>EmailAccountsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmailLayoutView.xaml.cs">
-      <DependentUpon>EmailLayoutView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmailListView.xaml.cs">
-      <DependentUpon>EmailListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmailView.xaml.cs">
-      <DependentUpon>EmailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ExchangeSettingsView.xaml.cs">
-      <DependentUpon>ExchangeSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NewEmailWindow.xaml.cs">
-      <DependentUpon>NewEmailWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Pop3SettingsView.xaml.cs">
-      <DependentUpon>Pop3SettingsView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
-      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
-      <Name>System.Waf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
-      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
-      <Name>System.Waf.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj">
-      <Project>{3BC491D6-786A-46F1-9B93-69F23F89055A}</Project>
-      <Name>Common.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Presentation\Common.Presentation.csproj">
-      <Project>{23854875-DDBB-4BB9-81B5-637FCA6B1831}</Project>
-      <Name>Common.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj">
-      <Project>{8C37381E-D1F6-4173-ADCD-DED9CBB474AF}</Project>
-      <Name>EmailClient.Modules.Applications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj">
-      <Project>{D647B501-C650-4877-8CF6-06515391E28F}</Project>
-      <Name>EmailClient.Modules.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
-    </Page>
-    <Page Include="Resources\ConverterResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BasicEmailAccountView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditEmailAccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmailAccountsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmailLayoutView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmailListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ExchangeSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NewEmailWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Pop3SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

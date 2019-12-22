@@ -7,24 +7,13 @@
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
-    <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj" />
     <ProjectReference Include="..\AddressBook.Modules.Applications.Test\AddressBook.Modules.Applications.Test.csproj" />
     <ProjectReference Include="..\Common.Applications.Test\Common.Applications.Test.csproj" />
-    <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
-    <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
     <ProjectReference Include="..\EmailClient.Modules.Applications\EmailClient.Modules.Applications.csproj" />
-    <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
-    <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Modules.Applications.Test\Infrastructure.Modules.Applications.Test.csproj" />
   </ItemGroup>
 </Project>
