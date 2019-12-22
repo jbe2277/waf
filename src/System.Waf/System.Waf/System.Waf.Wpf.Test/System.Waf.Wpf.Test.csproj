@@ -1,32 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="PresentationCore" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj" />
-    <ProjectReference Include="..\System.Waf.Wpf\System.Waf.Wpf.csproj" />
-    <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
     <ProjectReference Include="..\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="**\*.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-
 </Project>
