@@ -263,14 +263,14 @@ namespace Test.Waf.Foundation
             // Calling dispose twice must not throw an exception.
             var originalCollection = new ObservableCollection<MyModel>();
             bool factoryCalled = false;
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => 
-                {
-                    factoryCalled = true;
-                    return new MyDataModel(m);
-                });
+            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m =>
+            {
+                factoryCalled = true;
+                return new MyDataModel(m);
+            });
             originalCollection.Add(new MyModel());
             Assert.IsTrue(factoryCalled);
-            
+
             synchronizingCollection.Dispose();
             synchronizingCollection.Dispose();
             factoryCalled = false;
@@ -278,19 +278,19 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(factoryCalled);
 
             // Check that no memory leak occurs
-            synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
+            var weakSynchronizingCollection = WeakDisposeTest(originalCollection);
+            GC.Collect();
+            Assert.IsFalse(weakSynchronizingCollection.IsAlive);
+        }
 
+        private static WeakReference WeakDisposeTest(ObservableCollection<MyModel> originalCollection)
+        {
+            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
             originalCollection.Add(new MyModel());
             Assert.IsTrue(weakSynchronizingCollection.IsAlive);
-
             synchronizingCollection.Dispose();
-            synchronizingCollection = null;
-            GC.Collect();
-            Assert.IsNotNull(originalCollection);
-#if !NETCOREAPP3_1 || !DEBUG
-            Assert.IsFalse(weakSynchronizingCollection.IsAlive);
-#endif
+            return weakSynchronizingCollection;
         }
 
         [TestMethod]
