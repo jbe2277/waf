@@ -14,7 +14,7 @@
     </When>
     <Otherwise>
       <PropertyGroup>
-        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>
