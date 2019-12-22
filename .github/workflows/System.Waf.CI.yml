@@ -11,3 +11,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build with dotnet
       run: dotnet build ./src/System.Waf/System.Waf.sln --configuration Release
+    - name: Test with dotnet
+      run: dotnet test ./src/System.Waf/System.Waf.sln --configuration Release --no-build
