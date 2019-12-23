@@ -36,7 +36,7 @@ namespace Waf.Writer.Applications.Documents
             {
                 range.Load(stream, DataFormats.Rtf);
             }
-
+            
             var document = new RichTextDocument(this, flowDocument);
             documentCount++;
             return document;
@@ -46,10 +46,8 @@ namespace Waf.Writer.Applications.Documents
         {
             var flowDocument = ((RichTextDocument)document).Content;
             var range = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
-            using (var stream = new FileStream(fileName, FileMode.Create))
-            {
-                range.Save(stream, DataFormats.Rtf);
-            }
+            using var stream = new FileStream(fileName, FileMode.Create);
+            range.Save(stream, DataFormats.Rtf);
         }
     }
 }

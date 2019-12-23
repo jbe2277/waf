@@ -22,13 +22,11 @@ namespace Waf.Writer.Applications.Documents
             var clone = richTextDocument.CloneContent();
             clone.ColumnWidth = double.PositiveInfinity;
 
-            using (var package = Package.Open(fileName, FileMode.Create))
-            using (var xpsDocument = new XpsDocument(package, CompressionOption.Maximum))
-            {
-                var serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false);
-                var paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
-                serializer.SaveAsXaml(paginator);
-            }
+            using var package = Package.Open(fileName, FileMode.Create);
+            using var xpsDocument = new XpsDocument(package, CompressionOption.Maximum);
+            var serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false);
+            var paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
+            serializer.SaveAsXaml(paginator);
         }
     }
 }

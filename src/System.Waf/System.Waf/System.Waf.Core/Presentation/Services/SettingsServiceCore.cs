@@ -80,10 +80,8 @@ namespace System.Waf.Presentation.Services
                 {
                     try
                     {
-                        using (var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                        {
-                            document = XDocument.Load(stream);
-                        }
+                        using var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        document = XDocument.Load(stream);
                     }
                     catch (Exception ex)
                     {
@@ -95,7 +93,7 @@ namespace System.Waf.Presentation.Services
                     Directory.CreateDirectory(Path.GetDirectoryName(FileName));
                 }
 
-                document = document ?? CreateEmptyDocument();
+                document ??= CreateEmptyDocument();
                 try
                 {
                     UpdateDocument(document, settingsList);
@@ -192,22 +190,18 @@ namespace System.Waf.Presentation.Services
         {
             if (!File.Exists(FileName)) return null;
 
-            using (var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var element = GetSettingElement(XDocument.Load(stream), type);
+            if (element != null)
             {
-                var element = GetSettingElement(XDocument.Load(stream), type);
-                if (element != null)
-                {
-                    var serializer = new DataContractSerializer(typeof(List<object>), new[] { type });
-                    var document = CreateEmptyDocument();
-                    document.Root.Add(element);
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        document.Save(memoryStream);
-                        memoryStream.Position = 0;
-                        var settingObject = serializer.ReadObject(memoryStream);
-                        return ((List<object>)settingObject).Single();
-                    }
-                }
+                var serializer = new DataContractSerializer(typeof(List<object>), new[] { type });
+                var document = CreateEmptyDocument();
+                document.Root.Add(element);
+                using var memoryStream = new MemoryStream();
+                document.Save(memoryStream);
+                memoryStream.Position = 0;
+                var settingObject = serializer.ReadObject(memoryStream);
+                return ((List<object>)settingObject).Single();
             }
             return null;
         }

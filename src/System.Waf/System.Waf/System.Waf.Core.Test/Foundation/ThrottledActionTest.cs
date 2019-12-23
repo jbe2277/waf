@@ -103,26 +103,24 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void InvokeMaxEveryDelayTimeTestWithSynchronizationContext()
         {
-            using (var context = UnitTestSynchronizationContext.Create())
-            {
-                int actionCallCount = 0;
-                var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeMaxEveryDelayTime, TimeSpan.FromMilliseconds(100));
-                Assert.IsFalse(throttledAction.IsRunning);
+            using var context = UnitTestSynchronizationContext.Create();
+            int actionCallCount = 0;
+            var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeMaxEveryDelayTime, TimeSpan.FromMilliseconds(100));
+            Assert.IsFalse(throttledAction.IsRunning);
 
-                throttledAction.InvokeAccumulated();
-                Assert.IsTrue(throttledAction.IsRunning);
-                throttledAction.InvokeAccumulated();
-                throttledAction.InvokeAccumulated();
+            throttledAction.InvokeAccumulated();
+            Assert.IsTrue(throttledAction.IsRunning);
+            throttledAction.InvokeAccumulated();
+            throttledAction.InvokeAccumulated();
 
-                // As long the unit test synchronization context is not executed the actionCallCount must not be increased.
-                Task.Delay(200).Wait();
-                Assert.AreEqual(0, actionCallCount);
+            // As long the unit test synchronization context is not executed the actionCallCount must not be increased.
+            Task.Delay(200).Wait();
+            Assert.AreEqual(0, actionCallCount);
 
-                // Execute the unit test synchronization context.
-                context.WaitFor(() => actionCallCount > 0, TimeSpan.FromMilliseconds(200));
-                Assert.AreEqual(1, actionCallCount);
-                Assert.IsFalse(throttledAction.IsRunning);
-            }
+            // Execute the unit test synchronization context.
+            context.WaitFor(() => actionCallCount > 0, TimeSpan.FromMilliseconds(200));
+            Assert.AreEqual(1, actionCallCount);
+            Assert.IsFalse(throttledAction.IsRunning);
         }
 
         [TestMethod, TestCategory("Performance")]

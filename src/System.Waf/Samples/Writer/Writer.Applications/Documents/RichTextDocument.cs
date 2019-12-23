@@ -15,14 +15,12 @@ namespace Waf.Writer.Applications.Documents
 
         public FlowDocument CloneContent()
         {
+            using var stream = new MemoryStream();
+            var source = new TextRange(Content.ContentStart, Content.ContentEnd);
+            source.Save(stream, DataFormats.Xaml);
             var clone = new FlowDocument();
-            using (var stream = new MemoryStream())
-            {
-                var source = new TextRange(Content.ContentStart, Content.ContentEnd);
-                source.Save(stream, DataFormats.Xaml);
-                var target = new TextRange(clone.ContentStart, clone.ContentEnd);
-                target.Load(stream, DataFormats.Xaml);
-            }
+            var target = new TextRange(clone.ContentStart, clone.ContentEnd);
+            target.Load(stream, DataFormats.Xaml);            
             return clone;
         }
     }

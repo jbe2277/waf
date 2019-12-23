@@ -88,10 +88,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            using (var stream = documentService.GetStream(documentPartPath, MediaTypeNames.Text.Xml, FileMode.Create))
-            {
-                serializer.Value.WriteObject(stream, Root);
-            }
+            using var stream = documentService.GetStream(documentPartPath, MediaTypeNames.Text.Xml, FileMode.Create);
+            serializer.Value.WriteObject(stream, Root);
         }
 
         private void ShowEmails(EmailFolder emailFolder)

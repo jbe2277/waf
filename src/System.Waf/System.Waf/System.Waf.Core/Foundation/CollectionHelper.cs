@@ -54,22 +54,19 @@ namespace System.Waf.Foundation
         public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, T current)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            
-            using (IEnumerator<T> enumerator = collection.GetEnumerator())
+            using var enumerator = collection.GetEnumerator();
+            bool found = false;
+            while (enumerator.MoveNext())
             {
-                bool found = false;
-                while (enumerator.MoveNext())
+                if (EqualityComparer<T>.Default.Equals(enumerator.Current, current))
                 {
-                    if (EqualityComparer<T>.Default.Equals(enumerator.Current, current))
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = true;
+                    break;
                 }
-                if (!found) throw new ArgumentException("The collection does not contain the current item.");
-                
-                return enumerator.MoveNext() ? enumerator.Current : default(T);
             }
+            if (!found) throw new ArgumentException("The collection does not contain the current item.");
+                
+            return enumerator.MoveNext() ? enumerator.Current : default;
         }
 
         /// <summary>

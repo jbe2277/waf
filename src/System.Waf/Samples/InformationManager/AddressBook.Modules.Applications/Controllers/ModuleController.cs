@@ -66,10 +66,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            using (var stream = documentService.GetStream(documentPartPath, MediaTypeNames.Text.Xml, FileMode.Create))
-            {
-                serializer.Value.WriteObject(stream, root);
-            }
+            using var stream = documentService.GetStream(documentPartPath, MediaTypeNames.Text.Xml, FileMode.Create);
+            serializer.Value.WriteObject(stream, root);
         }
 
         public ContactDto ShowSelectContactView(object ownerView)

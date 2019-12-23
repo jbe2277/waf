@@ -77,41 +77,38 @@ namespace Test.Waf.UnitTesting
         {
             int actionCallCount = 0;
             int innerActionCallCount = 0;
-            using (var context = UnitTestSynchronizationContext.Create())
+            using var context = UnitTestSynchronizationContext.Create();
+
+            var task = AsyncAction();
+            Assert.AreEqual(0, actionCallCount);
+            Assert.AreEqual(0, innerActionCallCount);
+
+            task.Wait(context);
+            Assert.AreEqual(1, actionCallCount);
+            Assert.AreEqual(2, innerActionCallCount);
+
+            async Task AsyncInnerAction()
             {
-                Func<Task> asyncInnerAction = async () =>
-                {
-                    await Task.Delay(1);
-                    Interlocked.Increment(ref innerActionCallCount);
-                };
+                await Task.Delay(1);
+                Interlocked.Increment(ref innerActionCallCount);
+            }
 
-                Func<Task> asyncAction = async () =>
-                {
-                    await Task.Delay(1);
-                    asyncInnerAction().Wait(context);
-                    await Task.Delay(1);
-                    asyncInnerAction().Wait(context);
-                    Interlocked.Increment(ref actionCallCount);
-                };
-
-                var task = asyncAction();
-                Assert.AreEqual(0, actionCallCount);
-                Assert.AreEqual(0, innerActionCallCount);
-
-                task.Wait(context);
-                Assert.AreEqual(1, actionCallCount);
-                Assert.AreEqual(2, innerActionCallCount);
+            async Task AsyncAction()
+            {
+                await Task.Delay(1);
+                AsyncInnerAction().Wait(context);
+                await Task.Delay(1);
+                AsyncInnerAction().Wait(context);
+                Interlocked.Increment(ref actionCallCount);
             }
         }
 
         [TestMethod]
         public void PostAndWaitExceptionTest()
         {
-            using (var context = UnitTestSynchronizationContext.Create())
-            {
-                AssertHelper.ExpectedException<ArgumentNullException>(() => context.Post(null, null));
-                AssertHelper.ExpectedException<ArgumentNullException>(() => context.Wait(null));
-            }
+            using var context = UnitTestSynchronizationContext.Create();
+            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Post(null, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Wait(null));
         }
     }
 }

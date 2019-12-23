@@ -131,15 +131,13 @@ namespace Test.Waf.Foundation
         {
             var serializer = new DataContractSerializer(typeof(Person));
 
-            using (var stream = new MemoryStream())
-            {
-                var person = new Person() { Name = "Hugo" };
-                serializer.WriteObject(stream, person);
+            using var stream = new MemoryStream();
+            var person = new Person() { Name = "Hugo" };
+            serializer.WriteObject(stream, person);
 
-                stream.Position = 0;
-                var newPerson = (Person)serializer.ReadObject(stream);
-                Assert.AreEqual(person.Name, newPerson.Name);
-            }
+            stream.Position = 0;
+            var newPerson = (Person)serializer.ReadObject(stream);
+            Assert.AreEqual(person.Name, newPerson.Name);
         }
 
         [TestMethod]
