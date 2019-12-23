@@ -74,13 +74,13 @@ namespace System.Waf.Presentation.Controls
             }
             else
             {
-                return primarySort == null ? null : (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => primarySort(x));
+                return primarySort;
             }
         }
 
         internal static Func<T, object> GetSelector<T>(string propertyPath)
         {
-            return SelectorCache<T>.Functions.GetOrAdd(propertyPath ?? "", x => CreateSelector<T>(x));
+            return SelectorCache<T>.Functions.GetOrAdd(propertyPath ?? "", CreateSelector<T>);
         }
 
         private static Func<T, object> CreateSelector<T>(string propertyPath)

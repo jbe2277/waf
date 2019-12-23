@@ -19,7 +19,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         public BookListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<BookListViewModel>(() => this.GetViewModel<BookListViewModel>());
+            viewModel = new Lazy<BookListViewModel>(this.GetViewModel<BookListViewModel>);
             Loaded += FirstTimeLoadedHandler;
         }
 

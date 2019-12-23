@@ -16,8 +16,7 @@ namespace Test.Waf.Foundation
             AssertHelper.ExpectedException<ArgumentNullException>(() => DataErrorInfoExtensions.Validate(null));
             AssertHelper.ExpectedException<ArgumentNullException>(() => DataErrorInfoExtensions.Validate(null, "Name"));
 
-            var entity = new MockEntity();
-            entity.Error = "Test Error";
+            var entity = new MockEntity() { Error = "Test Error" };
             Assert.AreEqual("Test Error", entity.Validate());
             entity.Error = null;
             Assert.AreEqual("", entity.Validate());

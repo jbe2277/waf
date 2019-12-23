@@ -34,9 +34,9 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets all errors. The errors for a specified property and the entity errors.
         /// </summary>
-        public IReadOnlyList<ValidationResult> Errors => errors ?? (errors = noErrors);
+        public IReadOnlyList<ValidationResult> Errors => errors ??= noErrors;
 
-        private Dictionary<string, List<ValidationResult>> ErrorsDictionary => errorsDictionary ?? (errorsDictionary = new Dictionary<string, List<ValidationResult>>());
+        private Dictionary<string, List<ValidationResult>> ErrorsDictionary => errorsDictionary ??= new Dictionary<string, List<ValidationResult>>();
 
 
         /// <summary>

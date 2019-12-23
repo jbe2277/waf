@@ -18,7 +18,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         public EmailListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<EmailListViewModel>(() => this.GetViewModel<EmailListViewModel>());
+            viewModel = new Lazy<EmailListViewModel>(this.GetViewModel<EmailListViewModel>);
             Loaded += LoadedHandler;
         }
 

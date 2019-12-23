@@ -95,7 +95,7 @@ namespace System.Waf.Presentation.Services
 
         private static string CreateFilter(IEnumerable<FileType> fileTypes)
         {
-            return string.Join("|", fileTypes.Select(x => x.Description + "|" + string.Join(";", x.FileExtensions.Select(y => NormalizeFileExtension(y)))));
+            return string.Join("|", fileTypes.Select(x => x.Description + "|" + string.Join(";", x.FileExtensions.Select(NormalizeFileExtension))));
         }
 
         private static string NormalizeFileExtension(string fileExtension)

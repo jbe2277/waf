@@ -20,7 +20,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
         public ShellWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<ShellViewModel>(() => this.GetViewModel<ShellViewModel>());
+            viewModel = new Lazy<ShellViewModel>(this.GetViewModel<ShellViewModel>);
             dynamicToolBarItems = new List<Control>();
             Loaded += LoadedHandler;
         }

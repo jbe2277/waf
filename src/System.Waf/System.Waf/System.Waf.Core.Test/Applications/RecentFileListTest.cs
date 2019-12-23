@@ -32,8 +32,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void AddFiles()
         {
-            var recentFileList = new RecentFileList();
-            recentFileList.MaxFilesNumber = 3;
+            var recentFileList = new RecentFileList() { MaxFilesNumber = 3 };
 
             AssertHelper.ExpectedException<ArgumentException>(() => recentFileList.AddFile(null));
 
@@ -57,8 +56,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void AddFilesAndPinThem()
         {
-            var recentFileList = new RecentFileList();
-            recentFileList.MaxFilesNumber = 3;
+            var recentFileList = new RecentFileList() { MaxFilesNumber = 3 };
 
             // Add files to an empty list
             recentFileList.AddFile("Doc3");
@@ -161,8 +159,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void Load()
         {
-            var recentFileList = new RecentFileList();
-            recentFileList.MaxFilesNumber = 3;
+            var recentFileList = new RecentFileList() { MaxFilesNumber = 3 };
             recentFileList.AddFile("Doc3");
             recentFileList.AddFile("Doc2");
             recentFileList.AddFile("Doc1");

@@ -19,8 +19,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
 
             // Set the email account and check that the boolean flags are set right.
 
-            var emailAccount = new EmailAccount();
-            emailAccount.EmailAccountSettings = new Pop3Settings();
+            var emailAccount = new EmailAccount { EmailAccountSettings = new Pop3Settings() };
 
             AssertHelper.PropertyChangedEvent(viewModel, x => x.EmailAccount, () => viewModel.EmailAccount = emailAccount);
             Assert.AreEqual(emailAccount, viewModel.EmailAccount);
@@ -28,8 +27,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             Assert.IsTrue(viewModel.IsPop3Checked);
             Assert.IsFalse(viewModel.IsExchangeChecked);
 
-            emailAccount = new EmailAccount();
-            emailAccount.EmailAccountSettings = new ExchangeSettings();
+            emailAccount = new EmailAccount { EmailAccountSettings = new ExchangeSettings() };
             viewModel.EmailAccount = emailAccount;
 
             Assert.IsFalse(viewModel.IsPop3Checked);

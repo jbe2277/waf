@@ -162,8 +162,7 @@ namespace Test.Writer.Applications.Controllers
                 fileService.RecentFileList.Remove(recentFile);
             }
             
-            var documentType = new MockDocumentType("Mock Document", ".mock");
-            documentType.ThrowException = true;
+            var documentType = new MockDocumentType("Mock Document", ".mock") { ThrowException = true };
             fileController.Register(documentType);
 
             fileService.RecentFileList.AddFile("Document1.mock");
@@ -260,8 +259,7 @@ namespace Test.Writer.Applications.Controllers
         public void SaveExceptionsTest()
         {
             var fileController = Get<FileController>();
-            var documentType = new MockDocumentType("Mock Document", ".mock");
-            documentType.CanSaveResult = false;
+            var documentType = new MockDocumentType("Mock Document", ".mock") { CanSaveResult = false };
             
             var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic);
             ((IList)documentTypesField.GetValue(fileController)).Clear();

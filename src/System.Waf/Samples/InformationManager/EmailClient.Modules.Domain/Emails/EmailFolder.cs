@@ -15,7 +15,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             emails = new ObservableCollection<Email>();
         }
 
-        public IReadOnlyObservableList<Email> Emails => readOnlyEmails ?? (readOnlyEmails = new ReadOnlyObservableList<Email>(emails));
+        public IReadOnlyObservableList<Email> Emails => readOnlyEmails ??= new ReadOnlyObservableList<Email>(emails);
 
         internal IEmailDeletionService EmailDeletionService { get; set; }
 

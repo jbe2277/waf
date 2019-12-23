@@ -21,8 +21,7 @@ namespace Test.Waf.Applications.Services
             var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
             object owner = new object();
-            var service = new MockFileDialogService();
-            service.Result = result;
+            var service = new MockFileDialogService() { Result = result };
 
             Assert.AreEqual(result, service.ShowOpenFileDialog(rtfFileType));
             Assert.AreEqual(FileDialogType.OpenFileDialog, service.FileDialogType);
@@ -87,8 +86,7 @@ namespace Test.Waf.Applications.Services
             var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
             object owner = new object();
-            var service = new MockFileDialogService();
-            service.Result = result;
+            var service = new MockFileDialogService() { Result = result };
 
             Assert.AreEqual(result, service.ShowSaveFileDialog(rtfFileType));
             Assert.AreEqual(FileDialogType.SaveFileDialog, service.FileDialogType);

@@ -18,7 +18,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         public Pop3SettingsView()
         {
             InitializeComponent();
-            viewModel = new Lazy<Pop3SettingsViewModel>(() => this.GetViewModel<Pop3SettingsViewModel>());
+            viewModel = new Lazy<Pop3SettingsViewModel>(this.GetViewModel<Pop3SettingsViewModel>);
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
         }

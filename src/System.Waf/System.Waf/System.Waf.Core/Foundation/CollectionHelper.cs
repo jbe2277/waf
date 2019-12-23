@@ -132,12 +132,12 @@ namespace System.Waf.Foundation
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
             if (source == null) throw new ArgumentNullException(nameof(source));
-            comparer = comparer ?? EqualityComparer<T>.Default;
+            comparer ??= EqualityComparer<T>.Default;
             if (target.SequenceEqual(source, comparer)) return;
 
-            insertAction = insertAction ?? target.Insert;
-            removeAtAction = removeAtAction ?? target.RemoveAt;
-            resetAction = resetAction ?? (() =>
+            insertAction ??= target.Insert;
+            removeAtAction ??= target.RemoveAt;
+            resetAction ??= (() =>
             {
                 foreach (var item in target.ToArray()) { target.Remove(item); }  // Avoid Clear because of CollectionChanged events
                 foreach (var item in source) { target.Add(item); }

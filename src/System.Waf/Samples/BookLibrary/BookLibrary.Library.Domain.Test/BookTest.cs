@@ -34,9 +34,7 @@ namespace Test.BookLibrary.Library.Domain
         [TestMethod]
         public void BookLanguagePropertyChangedTest()
         {
-            var book = new Book();
-            book.Language = Language.English;
-
+            var book = new Book() { Language = Language.English };
             AssertHelper.PropertyChangedEvent(book, x => x.Language, () => book.Language = Language.German);
             Assert.AreEqual(Language.German, book.Language);
         }

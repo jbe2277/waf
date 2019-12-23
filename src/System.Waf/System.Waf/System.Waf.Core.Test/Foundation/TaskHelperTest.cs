@@ -33,7 +33,7 @@ namespace Test.Waf.Foundation
             {
                 Task.Delay(1).NoWait();
                 Task.Delay(1).NoWait(true);
-                Task.Run(() => { throw new InvalidOperationException("Test"); }).NoWait(true);
+                Task.Run(() => throw new InvalidOperationException("Test")).NoWait(true);
                 await Task.Delay(5);
 
                 GC.Collect();

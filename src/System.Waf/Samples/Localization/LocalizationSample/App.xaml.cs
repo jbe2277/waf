@@ -27,8 +27,7 @@ namespace LocalizationSample
                 Birthday = new DateTime(2080, 2, 6)
             };
 
-            ShellWindow mainWindow = new ShellWindow();
-            mainWindow.DataContext = person;
+            ShellWindow mainWindow = new ShellWindow() { DataContext = person };
             mainWindow.Show();
         }
 

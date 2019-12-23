@@ -31,7 +31,7 @@ namespace System.Waf.Applications.Services
         {
             if (string.IsNullOrEmpty(description)) throw new ArgumentException("The argument description must not be null or empty.", nameof(description));
             if (fileExtensions == null) throw new ArgumentNullException(nameof(fileExtensions));
-            if (!fileExtensions.Any() || fileExtensions.Any(x => string.IsNullOrEmpty(x)))
+            if (!fileExtensions.Any() || fileExtensions.Any(string.IsNullOrEmpty))
             {
                 throw new ArgumentException("The argument fileExtensions must have at least one item and all items must not be null or empty.", nameof(fileExtensions));
             }
