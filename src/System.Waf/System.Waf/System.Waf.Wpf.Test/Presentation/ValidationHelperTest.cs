@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET461
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.Presentation;
 using System.Windows.Controls;
@@ -79,3 +80,4 @@ namespace Test.Waf.Presentation
         }
     }
 }
+#endif

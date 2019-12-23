@@ -3,8 +3,6 @@ using System;
 using System.Reflection;
 using System.Waf.Presentation;
 using System.Waf.UnitTesting;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace Test.Waf.Presentation
 {
@@ -22,17 +20,17 @@ namespace Test.Waf.Presentation
             AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, null));
             AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, ""));
 
-            Assert.AreEqual("pack://application:,,,/MyAssembly;Component/Resources/ConverterResources.xaml", 
+            Assert.AreEqual("pack://application:,,,/MyAssembly;Component/Resources/ConverterResources.xaml",
                 ResourceHelper.GetPackUri("MyAssembly", "Resources/ConverterResources.xaml").ToString());
 
             Assert.AreEqual("pack://application:,,,/System.Waf.Wpf.Test;Component/Resources/ConverterResources.xaml",
                 ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, "Resources/ConverterResources.xaml").ToString());
         }
 
+#if NET461
         [TestMethod]
         public void AddToApplicationResources()
         {
-#if NET461
             var testAppDomain = AppDomain.CreateDomain("TestAppDomain", null, new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory });
             try
             {
@@ -43,18 +41,15 @@ namespace Test.Waf.Presentation
             {
                 AppDomain.Unload(testAppDomain);
             }
-#else
-            new ResourceHelperTest().AddToApplicationResources();
-#endif
         }
-        
+
 
         private class ResourceHelperWpfTest : MarshalByRefObject
         {
             public void AddToApplicationResources()
             {
-                var app = new Application();
-                Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => app.Run()));
+                var app = new System.Windows.Application();
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => app.Run()));
 
                 AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources((string)null, "test"));
                 AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("", "test"));
@@ -76,5 +71,6 @@ namespace Test.Waf.Presentation
                 app.Shutdown();
             }
         }
+#endif
     }
 }
