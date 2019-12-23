@@ -32,6 +32,7 @@ namespace Test.Waf.Presentation
         [TestMethod]
         public void AddToApplicationResources()
         {
+#if NET461
             var testAppDomain = AppDomain.CreateDomain("TestAppDomain", null, new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory });
             try
             {
@@ -42,6 +43,9 @@ namespace Test.Waf.Presentation
             {
                 AppDomain.Unload(testAppDomain);
             }
+#else
+            new ResourceHelperTest().AddToApplicationResources();
+#endif
         }
         
 
