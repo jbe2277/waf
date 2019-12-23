@@ -66,16 +66,18 @@ namespace Test.Waf.Applications
         public void WeakEventHandlerTest()
         {
             var originalCollection = new ObservableCollection<MyModel>();
-            var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
-
-            originalCollection.Add(new MyModel());
-            Assert.IsTrue(weakSynchronizingCollection.IsAlive);
-
-            synchronizingCollection = null;
+            var weakSynchronizingCollection = WeakTest(originalCollection);
             GC.Collect();
-            Assert.IsNotNull(originalCollection);
             Assert.IsFalse(weakSynchronizingCollection.IsAlive);
+
+            static WeakReference WeakTest(ObservableCollection<MyModel> originalCollection)
+            {
+                var synchronizingCollection = new SynchronizingCollection<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+                var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
+                originalCollection.Add(new MyModel());
+                Assert.IsTrue(weakSynchronizingCollection.IsAlive);
+                return weakSynchronizingCollection;
+            }
         }
 
 

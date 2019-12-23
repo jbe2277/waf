@@ -88,16 +88,18 @@ namespace Test.Waf.Applications
         public void WeakEventHandlerTest()
         {
             var originalCollection = new ObservableCollection<MyModel>();
-            var listView = new ObservableListView<MyModel>(originalCollection);
-            var weakListView = new WeakReference(listView);
-
-            originalCollection.Add(new MyModel());
-            Assert.IsTrue(weakListView.IsAlive);
-
-            listView = null;
+            var weakListView = WeakTest(originalCollection);
             GC.Collect();
-            Assert.IsNotNull(originalCollection);
             Assert.IsFalse(weakListView.IsAlive);
+
+            static WeakReference WeakTest(ObservableCollection<MyModel> originalCollection)
+            {
+                var listView = new ObservableListView<MyModel>(originalCollection);
+                var weakListView = new WeakReference(listView);
+                originalCollection.Add(new MyModel());
+                Assert.IsTrue(weakListView.IsAlive);
+                return weakListView;
+            }
         }
 
 

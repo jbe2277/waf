@@ -278,19 +278,19 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(factoryCalled);
 
             // Check that no memory leak occurs
-            var weakSynchronizingCollection = WeakDisposeTest(originalCollection);
+            var weakSynchronizingCollection = WeakTest(originalCollection);
             GC.Collect();
             Assert.IsFalse(weakSynchronizingCollection.IsAlive);
-        }
 
-        private static WeakReference WeakDisposeTest(ObservableCollection<MyModel> originalCollection)
-        {
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
-            var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
-            originalCollection.Add(new MyModel());
-            Assert.IsTrue(weakSynchronizingCollection.IsAlive);
-            synchronizingCollection.Dispose();
-            return weakSynchronizingCollection;
+            static WeakReference WeakTest(ObservableCollection<MyModel> originalCollection)
+            {
+                var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+                var weakSynchronizingCollection = new WeakReference(synchronizingCollection);
+                originalCollection.Add(new MyModel());
+                Assert.IsTrue(weakSynchronizingCollection.IsAlive);
+                synchronizingCollection.Dispose();
+                return weakSynchronizingCollection;
+            }
         }
 
         [TestMethod]
