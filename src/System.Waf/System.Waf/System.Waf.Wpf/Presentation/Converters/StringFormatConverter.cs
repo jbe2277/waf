@@ -1,9 +1,5 @@
 ﻿using System.Globalization;
-#if WINDOWS_UWP
-    using Windows.UI.Xaml.Data;
-#else    
-    using System.Windows.Data;
-#endif
+using System.Windows.Data;
 
 namespace System.Waf.Presentation.Converters
 {
@@ -11,10 +7,7 @@ namespace System.Waf.Presentation.Converters
     /// Value converter that converts an object into a formatted string. The format specification is passed via the 
     /// ConverterParameter property.
     /// </summary>
-    public sealed class StringFormatConverter : IValueConverter
-#if !WINDOWS_UWP
-        , IMultiValueConverter
-#endif
+    public sealed class StringFormatConverter : IValueConverter, IMultiValueConverter
     {
         /// <summary>
         /// Gets the default instance of this converter.
@@ -30,11 +23,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The format specification used to format the object.</param>
         /// <param name="culture">The culture to use in the converter. This parameter will be ignored.</param>
         /// <returns>The formatted string.</returns>
-#if WINDOWS_UWP
-        public object Convert(object value, Type targetType, object parameter, string culture)
-#else
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-#endif
         {
             return string.Format(CultureInfo.CurrentCulture, parameter as string ?? "{0}", value);
         }
@@ -48,16 +37,11 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-#if WINDOWS_UWP
-        public object ConvertBack(object value, Type targetType, object parameter, string culture)
-#else
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-#endif
         {
             throw new NotSupportedException();
         }
 
-#if !WINDOWS_UWP
         /// <summary>
         /// Converts multiple objects into a formatted string.
         /// </summary>
@@ -84,6 +68,5 @@ namespace System.Waf.Presentation.Converters
         {
             throw new NotSupportedException();
         }
-#endif
     }
 }

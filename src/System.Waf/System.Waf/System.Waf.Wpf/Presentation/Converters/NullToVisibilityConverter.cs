@@ -1,11 +1,6 @@
-﻿#if WINDOWS_UWP
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Data;
-#else
-    using System.Globalization;    
-    using System.Windows;
-    using System.Windows.Data;
-#endif
+﻿using System.Globalization;    
+using System.Windows;
+using System.Windows.Data;
 
 namespace System.Waf.Presentation.Converters
 {
@@ -29,11 +24,7 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Visible when the value is not null; otherwise Collapsed.</returns>
-#if WINDOWS_UWP
-        public object Convert(object value, Type targetType, object parameter, string culture)
-#else
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-#endif
         {
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
             if (invert)
@@ -52,11 +43,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-#if WINDOWS_UWP
-        public object ConvertBack(object value, Type targetType, object parameter, string culture)
-#else
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-#endif
         {
             throw new NotSupportedException();
         }
