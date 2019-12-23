@@ -360,7 +360,6 @@ namespace Test.Waf.Foundation
             protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
             {
                 if (suppressNotifications) { return; }
-
                 if (withoutIndex)
                 {
                     switch (e.Action)
@@ -378,7 +377,6 @@ namespace Test.Waf.Foundation
                             e = new NotifyCollectionChangedEventArgs(e.Action);
                             break;
                     }
-
                 }
                 base.OnCollectionChanged(e);
             }
