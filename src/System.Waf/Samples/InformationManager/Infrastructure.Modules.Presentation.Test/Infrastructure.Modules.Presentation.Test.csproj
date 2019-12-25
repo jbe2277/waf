@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <RootNamespace>Test.InformationManager.Infrastructure.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Presentation.Test</AssemblyName>
   <UseWPF>true</UseWPF>

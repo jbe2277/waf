@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <RootNamespace>Waf.Writer.Applications</RootNamespace>
     <AssemblyName>Waf.Writer.Applications</AssemblyName>
   </PropertyGroup>

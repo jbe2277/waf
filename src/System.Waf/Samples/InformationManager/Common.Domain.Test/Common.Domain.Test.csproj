@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <RootNamespace>Test.InformationManager.Common.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Domain.Test</AssemblyName>
   </PropertyGroup>
