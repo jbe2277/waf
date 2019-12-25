@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.Data
@@ -13,7 +14,7 @@ namespace Waf.BookLibrary.Library.Presentation.Data
             
             builder.HasKey(t => t.Id);
 
-            builder.Property(t => t.Id).HasColumnName("Id");
+            builder.Property(t => t.Id).HasColumnName("Id").HasConversion(g => g.ToByteArray(), b => new Guid(b));
             builder.Property(t => t.Title).HasColumnName("Title").HasMaxLength(100);
             builder.Property(t => t.Author).HasColumnName("Author").HasMaxLength(100);
             builder.Property(t => t.Publisher).HasColumnName("Publisher").HasMaxLength(100);
