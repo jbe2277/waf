@@ -13,7 +13,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         [TestMethod]
         public void SaveAndLoad()
         {
-            var stream = new MasterMemoryStream();
+            using var stream = new MasterMemoryStream();
             var documentService = Get<MockDocumentService>();
             documentService.GetStreamAction = (documentPartPath, contentType, fileMode) =>
             {

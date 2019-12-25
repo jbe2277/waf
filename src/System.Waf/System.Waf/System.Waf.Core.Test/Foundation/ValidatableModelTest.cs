@@ -108,7 +108,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(entityError, person.GetErrors(null).Single());
         }
 
-        //[TestMethod]
+        [TestMethod, Ignore]
         public void HasMultipleErrorsWithDifferentValidationTypes()
         {
             var person = new Person() { Name = "Bill", Age = 200 };

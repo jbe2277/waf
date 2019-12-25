@@ -127,7 +127,7 @@ namespace Test.Waf.Applications
             var serializer = new XmlSerializer(typeof(RecentFileList));
 
             // Serialize an empty list            
-            var stream1 = new MemoryStream();
+            using var stream1 = new MemoryStream();
             var recentFileList1 = new RecentFileList();
             serializer.Serialize(stream1, recentFileList1);
             stream1.Position = 0;
@@ -136,7 +136,7 @@ namespace Test.Waf.Applications
             AssertHelper.SequenceEqual(recentFileList1.RecentFiles.Select(f => f.Path), recentFileList2.RecentFiles.Select(f => f.Path));
 
             // Serialize a list with items
-            var stream2 = new MemoryStream();
+            using var stream2 = new MemoryStream();
             recentFileList2.AddFile("Doc3");
             recentFileList2.AddFile("Doc2");
             recentFileList2.AddFile("Doc1");

@@ -47,7 +47,8 @@ namespace Waf.Writer.Presentation.Views
             package = Package.Open(packageStream, FileMode.Create, FileAccess.ReadWrite);
             PackageStore.AddPackage(new Uri(PackagePath), package);
             xpsDocument = new XpsDocument(package, CompressionOption.SuperFast, PackagePath);
-            using (var serializer = new XpsSerializationManager(new XpsPackagingPolicy(xpsDocument), false))
+            using (var policy = new XpsPackagingPolicy(xpsDocument))
+            using (var serializer = new XpsSerializationManager(policy, false))
             {
                 DocumentPaginator paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
                 serializer.SaveAsXaml(paginator);

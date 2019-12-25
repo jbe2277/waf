@@ -32,7 +32,7 @@ namespace Test.Waf.Foundation
                 new MyModel()
             };
 
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+            using var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
             AssertHelper.SequenceEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model));
 
             // Check add operation with collection changed event.
@@ -142,7 +142,7 @@ namespace Test.Waf.Foundation
                 new MyModel()
             };
 
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(
+            using var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(
                 originalCollection, m => new MyDataModel(m));
             AssertHelper.SequenceEqual(originalCollection, synchronizingCollection.Select(dm => dm.Model));
 
@@ -234,7 +234,7 @@ namespace Test.Waf.Foundation
         public void PropertyChangedTest()
         {
             var originalCollection = new ObservableCollection<MyModel>();
-            var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
+            using var synchronizingCollection = new SynchronizingCollectionCore<MyDataModel, MyModel>(originalCollection, m => new MyDataModel(m));
 
             // Check that the PropertyChanged event for Count is raised.
             bool handlerCalled = false;
