@@ -1,12 +1,13 @@
 ﻿<Project>
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Company>jbe2277</Company>
+    <Copyright>Copyright © 2019 jbe2277</Copyright>
+    <Version>5.1.0.100</Version>
+    <PackageVersion>5.1.0</PackageVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8" PrivateAssets="All" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
 </Project>

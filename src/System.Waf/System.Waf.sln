@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CodeCoverage.runsettings = CodeCoverage.runsettings
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 		..\UnitTest.ruleset = ..\UnitTest.ruleset
 	EndProjectSection
 EndProject
@@ -29,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writer", "Writer", "{2D498396-C10C-4A20-B24E-FD554FFC49EF}"
 	ProjectSection(SolutionItems) = preProject
+		Samples\Writer\Directory.Build.props = Samples\Writer\Directory.Build.props
 		Samples\Writer\Writer.docx = Samples\Writer\Writer.docx
 	EndProjectSection
 EndProject
@@ -37,10 +37,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookLibrary", "BookLibrary", "{1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\BookLibrary\BookLibrary.docx = Samples\BookLibrary\BookLibrary.docx
+		Samples\BookLibrary\Directory.Build.props = Samples\BookLibrary\Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InformationManager", "InformationManager", "{1CEBD406-B6C5-4639-A9AA-5F8C850F3A6D}"
 	ProjectSection(SolutionItems) = preProject
+		Samples\InformationManager\Directory.Build.props = Samples\InformationManager\Directory.Build.props
 		Samples\InformationManager\InformationManager.docx = Samples\InformationManager\InformationManager.docx
 	EndProjectSection
 EndProject

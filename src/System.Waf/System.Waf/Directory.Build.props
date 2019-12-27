@@ -2,9 +2,6 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove($(MSBuildThisFile), $(MSBuildThisFileDirectory)../))" />
 
   <PropertyGroup>
-    <PackageVersion>5.1.0</PackageVersion>
-    
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <Authors>jbe2277</Authors>

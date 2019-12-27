@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Product>Waf Localization Sample</Product>
   </PropertyGroup>
 
   <ItemGroup>

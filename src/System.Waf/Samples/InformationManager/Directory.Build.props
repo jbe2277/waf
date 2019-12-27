@@ -1,0 +1,7 @@
+﻿<Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove($(MSBuildThisFile), $(MSBuildThisFileDirectory)../))" />
+
+  <PropertyGroup>
+    <Product>Waf Information Manager</Product>
+  </PropertyGroup>
+</Project>
