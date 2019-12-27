@@ -38,6 +38,7 @@ namespace Waf.BookLibrary.Library.Presentation.Services
             var options = new DbContextOptionsBuilder<BookLibraryContext>().UseSqlite("Data Source=" + dataSourcePath).Options;
             return new BookLibraryContext(options, modelBuilder =>
             {
+                modelBuilder.UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
                 modelBuilder.Entity<Person>(PersonMapping.Builder);
                 modelBuilder.Entity<Book>(BookMapping.Builder);
             });
