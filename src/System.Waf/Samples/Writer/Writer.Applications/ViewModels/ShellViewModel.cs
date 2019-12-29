@@ -105,7 +105,7 @@ namespace Waf.Writer.Applications.ViewModels
         private void ShowAboutMessage()
         {
             messageService.ShowMessage(ShellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.AboutText,
-                ApplicationInfo.ProductName, ApplicationInfo.Version));
+                ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version));
         }
 
         protected virtual void OnClosing(CancelEventArgs e)

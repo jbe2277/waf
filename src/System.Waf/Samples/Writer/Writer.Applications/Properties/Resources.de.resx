@@ -122,7 +122,9 @@
  
 Diese Software ist ein Referenzbeispiel für das Win Application Framework (WAF).
  
-https://github.com/jbe2277/waf</value>
+https://github.com/jbe2277/waf
+
+.NET Runtime: {2}</value>
   </data>
   <data name="CannotOpenFile" xml:space="preserve">
     <value>Die Anwendung kann die Datei '{0}' nicht öffnen.</value>
