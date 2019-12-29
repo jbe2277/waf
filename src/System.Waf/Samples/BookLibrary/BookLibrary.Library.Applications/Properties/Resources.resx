@@ -122,7 +122,9 @@
  
 This software is a reference sample of the Win Application Framework (WAF).
  
-https://github.com/jbe2277/waf</value>
+https://github.com/jbe2277/waf
+
+.NET Runtime: {2}</value>
   </data>
   <data name="CorrectEmailAddress" xml:space="preserve">
     <value>The Email cannot be created. Please correct the email address first.</value>

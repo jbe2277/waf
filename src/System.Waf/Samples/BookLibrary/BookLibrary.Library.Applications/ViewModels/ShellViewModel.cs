@@ -94,7 +94,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private void ShowAboutMessage()
         {
             messageService.ShowMessage(View, string.Format(CultureInfo.CurrentCulture, Resources.AboutText,
-                ApplicationInfo.ProductName, ApplicationInfo.Version));
+                ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version));
         }
     }
 }

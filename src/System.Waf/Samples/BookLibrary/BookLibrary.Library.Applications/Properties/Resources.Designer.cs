@@ -19,7 +19,7 @@ namespace Waf.BookLibrary.Library.Applications.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -65,7 +65,9 @@ namespace Waf.BookLibrary.Library.Applications.Properties {
         /// 
         ///This software is a reference sample of the Win Application Framework (WAF).
         /// 
-        ///https://github.com/jbe2277/waf.
+        ///https://github.com/jbe2277/waf
+        ///
+        ///.NET Runtime: {2}.
         /// </summary>
         internal static string AboutText {
             get {
