@@ -16,8 +16,6 @@ jobs:
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build Android
-      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU"
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m
     - name: Build UWP
-      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="x86"
-    - name: Build iOS
-      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="iPhone"
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Debug -p:Platform="x86" -m
