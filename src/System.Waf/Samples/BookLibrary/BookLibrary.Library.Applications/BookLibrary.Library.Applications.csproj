@@ -9,10 +9,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith(netcore))">
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
-  </ItemGroup>
-  
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
