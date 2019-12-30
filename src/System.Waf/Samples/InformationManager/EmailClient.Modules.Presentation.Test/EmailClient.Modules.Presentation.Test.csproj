@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Presentation.Test</AssemblyName>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
 

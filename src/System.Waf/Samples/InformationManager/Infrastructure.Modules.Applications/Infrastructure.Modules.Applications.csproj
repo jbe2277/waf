@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Waf.InformationManager.Infrastructure.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Applications</AssemblyName>
   </PropertyGroup>
@@ -9,7 +9,7 @@
     <PackageReference Include="NLog" Version="4.5.11" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

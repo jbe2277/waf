@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Test.InformationManager.AddressBook.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Domain.Test</AssemblyName>
   </PropertyGroup>
