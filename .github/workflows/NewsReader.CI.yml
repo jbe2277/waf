@@ -15,5 +15,9 @@ jobs:
       run: nuget restore ./src/NewsReader/NewsReader.sln
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
-    - name: Build
-      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release
+    - name: Build Android
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU"
+    - name: Build UWP
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="x86"
+    - name: Build iOS
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="iPhone"
