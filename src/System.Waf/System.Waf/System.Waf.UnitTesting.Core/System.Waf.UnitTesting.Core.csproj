@@ -4,6 +4,7 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <RootNamespace>System.Waf.UnitTesting</RootNamespace>
     <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests. It can be used in various application types.</Description>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

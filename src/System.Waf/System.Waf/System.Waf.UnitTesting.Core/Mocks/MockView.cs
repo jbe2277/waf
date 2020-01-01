@@ -10,6 +10,6 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// Gets or sets the data context of the view.
         /// </summary>
-        public object DataContext { get; set; }
+        public object? DataContext { get; set; }
     }
 }

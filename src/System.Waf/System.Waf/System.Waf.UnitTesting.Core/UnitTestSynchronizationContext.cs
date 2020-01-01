@@ -11,21 +11,21 @@ namespace System.Waf.UnitTesting
     public sealed class UnitTestSynchronizationContext : SynchronizationContext, IDisposable
     {
         private readonly SynchronizationContext previousContext;
-        private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> messageQueue;
+        private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object?>> messageQueue;
         private volatile bool isDisposed;
 
 
         private UnitTestSynchronizationContext()
         {
             previousContext = SynchronizationContext.Current;
-            messageQueue = new BlockingCollection<KeyValuePair<SendOrPostCallback, object>>();
+            messageQueue = new BlockingCollection<KeyValuePair<SendOrPostCallback, object?>>();
         }
 
 
         /// <summary>
         /// Gets the unit test synchronization context for the current thread.
         /// </summary>
-        public new static UnitTestSynchronizationContext Current => SynchronizationContext.Current as UnitTestSynchronizationContext;
+        public new static UnitTestSynchronizationContext? Current => SynchronizationContext.Current as UnitTestSynchronizationContext;
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace System.Waf.UnitTesting
         /// <param name="d">The delegate to call.</param>
         /// <param name="state">The object passed to the delegate.</param>
         /// <exception cref="ArgumentNullException">d must not be null.</exception>
-        public override void Send(SendOrPostCallback d, object state)
+        public override void Send(SendOrPostCallback d, object? state)
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (isDisposed) { return; }
@@ -76,11 +76,11 @@ namespace System.Waf.UnitTesting
         /// <param name="d">The delegate to call.</param>
         /// <param name="state">The object passed to the delegate.</param>
         /// <exception cref="ArgumentNullException">d must not be null.</exception>
-        public override void Post(SendOrPostCallback d, object state)
+        public override void Post(SendOrPostCallback d, object? state)
         {
             if (d == null) { throw new ArgumentNullException(nameof(d)); }
             if (isDisposed) { return; }
-            messageQueue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
+            messageQueue.Add(new KeyValuePair<SendOrPostCallback, object?>(d, state));
         }
 
         /// <summary>

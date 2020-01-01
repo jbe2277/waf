@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -23,8 +24,8 @@ namespace System.Waf.UnitTesting
         {
             if (action == null) { throw new ArgumentNullException(nameof(action)); }
             
-            T expectedException = null;
-            Exception wrongException = null;
+            T? expectedException = null;
+            Exception? wrongException = null;
             try
             {
                 action();
@@ -121,7 +122,7 @@ namespace System.Waf.UnitTesting
         /// <param name="raisePropertyChanged">An action that results in a property changed event of the observable.</param>
         /// <exception cref="AssertException">This exception is thrown when no or more than one property changed event was 
         /// raised by the observable or the sender object of the event was not the observable object.</exception>
-        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object>> expression, Action raisePropertyChanged)
+        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object?>> expression, Action raisePropertyChanged)
             where T : class, INotifyPropertyChanged
         {
             PropertyChangedEvent(observable, expression, raisePropertyChanged, 1, ExpectedChangedCountMode.Exact);
@@ -138,7 +139,7 @@ namespace System.Waf.UnitTesting
         /// <param name="expectedChangedCountMode">The mode defines how the expected changed count is used as assert condition.</param>
         /// <exception cref="AssertException">This exception is thrown when no or more than one property changed event was 
         /// raised by the observable or the sender object of the event was not the observable object.</exception>
-        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object>> expression, Action raisePropertyChanged, int expectedChangedCount,
+        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object?>> expression, Action raisePropertyChanged, int expectedChangedCount,
             ExpectedChangedCountMode expectedChangedCountMode)
             where T : class, INotifyPropertyChanged
         {
@@ -206,7 +207,7 @@ namespace System.Waf.UnitTesting
         /// <param name="comparer">An System.Collections.Generic.IEqualityComparer`1 to use to compare elements.</param>
         /// <exception cref="ArgumentNullException">expected or actual is null.</exception>
         /// <exception cref="AssertException">expected is not equal to actual.</exception>
-        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer)
+        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T>? comparer)
         {
             if (expected == null) { throw new ArgumentNullException(nameof(expected)); }
             if (actual == null) { throw new ArgumentNullException(nameof(actual)); }
@@ -220,7 +221,7 @@ namespace System.Waf.UnitTesting
             }
         }
 
-        internal static PropertyInfo GetProperty<T>(Expression<Func<T, object>> propertyExpression)
+        internal static PropertyInfo GetProperty<T>(Expression<Func<T, object?>> propertyExpression)
         {
             Expression expression = propertyExpression.Body;
 
@@ -231,13 +232,13 @@ namespace System.Waf.UnitTesting
             }
 
             // If this isn't a member access expression then the expression isn't valid
-            MemberExpression memberExpression = expression as MemberExpression;
+            MemberExpression? memberExpression = expression as MemberExpression;
             if (memberExpression == null)
             {
                 ThrowExpressionArgumentException();
             }
 
-            expression = memberExpression.Expression;
+            expression = memberExpression!.Expression;
 
             // If the Property returns a ValueType then a Convert is required => Remove it
             if (expression.NodeType == ExpressionType.Convert || expression.NodeType == ExpressionType.ConvertChecked)
@@ -252,7 +253,7 @@ namespace System.Waf.UnitTesting
             }
 
             // Finally retrieve the PropertyInfo
-            PropertyInfo propertyInfo = memberExpression.Member as PropertyInfo;
+            PropertyInfo? propertyInfo = memberExpression.Member as PropertyInfo;
             if (propertyInfo == null)
             {
                 ThrowExpressionArgumentException();
@@ -261,6 +262,7 @@ namespace System.Waf.UnitTesting
             return propertyInfo;
         }
 
+        [DoesNotReturn]
         private static void ThrowExpressionArgumentException()
         {
             throw new ArgumentException("Only the simple expression 'x => x.[Property]' is allowed. "
