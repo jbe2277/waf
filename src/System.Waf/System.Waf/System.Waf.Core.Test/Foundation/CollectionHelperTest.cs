@@ -32,7 +32,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void IndexOfTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.IndexOf(null, "Zero"));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.IndexOf(null!, "Zero"));
 
             IReadOnlyList<string> collection1 = new[] { "Zero", "One", "Two" };
             Assert.AreEqual(0, collection1.IndexOf("Zero"));
@@ -52,7 +52,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void GetNextElementOrDefaultTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.GetNextElementOrDefault(null, 5));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.GetNextElementOrDefault(null!, 5));
 
             int[] collection1 = { 1, 2, 3, 4, 5 };
             Assert.AreEqual(4, collection1.GetNextElementOrDefault(3));
@@ -69,8 +69,8 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void MergeTestWithDefaultArguments()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(null, new[] { "1" }));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(new[] { "1" }, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(null!, new[] { "1" }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => CollectionHelper.Merge(new[] { "1" }, null!));
 
             var targetList = new List<string> { "2", "3" };
             targetList.Merge(new[] { "1", "2" });
@@ -168,7 +168,7 @@ namespace Test.Waf.Foundation
             MergeTestCore(new[] { "a", "b" }, new[] { "A", "C" }.ToList(), ExpectedCollectionChange.Reset, StringComparer.OrdinalIgnoreCase, useMoveAction: true);
         }
 
-        private void MergeTestCore<T>(IList<T> source, IList<T> target, ExpectedCollectionChange expectedCollectionChange, IEqualityComparer<T> comparer = null, bool useMoveAction = false)
+        private void MergeTestCore<T>(IList<T> source, IList<T> target, ExpectedCollectionChange expectedCollectionChange, IEqualityComparer<T>? comparer = null, bool useMoveAction = false)
         {
             var insertCounter = 0;
             var removeCounter = 0;
@@ -190,7 +190,7 @@ namespace Test.Waf.Foundation
                 foreach (var item in source) target.Add(item);
                 resetCounter++;
             };
-            Action<int, int> moveAction = null;
+            Action<int, int>? moveAction = null;
             if (useMoveAction) moveAction = (oldIndex, newIndex) =>
             {
                 T item = target[oldIndex];

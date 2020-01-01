@@ -39,7 +39,7 @@ namespace Test.Waf.UnitTesting
             context.Send(state => actionCallCount++, null);
             Assert.AreEqual(1, actionCallCount);
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Send(null, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Send(null!, null));
 
             context.Dispose();
             context.Send(state => actionCallCount++, null);
@@ -107,8 +107,8 @@ namespace Test.Waf.UnitTesting
         public void PostAndWaitExceptionTest()
         {
             using var context = UnitTestSynchronizationContext.Create();
-            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Post(null, null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Wait(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Post(null!, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => context.Wait(null!));
         }
     }
 }

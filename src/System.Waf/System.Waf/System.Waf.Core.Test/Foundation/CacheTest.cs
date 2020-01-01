@@ -39,7 +39,7 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(cache.IsDirty);
             Assert.AreEqual(2, factoryCallCount);
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new Cache<int>(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new Cache<int>(null!));
         }
     }
 }

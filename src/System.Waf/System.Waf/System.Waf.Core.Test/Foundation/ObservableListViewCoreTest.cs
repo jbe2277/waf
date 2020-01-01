@@ -13,9 +13,9 @@ namespace Test.Waf.Foundation
     [TestClass]
     public class ObservableListViewCoreTest
     {
-        private ObservableCollection<string> originalList;
-        private ObservableListViewCore<string> observableListView;
-        private List<NotifyCollectionChangedEventArgs> eventArgsList;
+        private ObservableCollection<string> originalList = null!;
+        private ObservableListViewCore<string> observableListView = null!;
+        private List<NotifyCollectionChangedEventArgs> eventArgsList = null!;
         private int countChangedCount;
         private int indexerChangedCount;
 
@@ -285,7 +285,7 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(collectionChangedCalled);
             listView.Dispose();
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListViewCore<string>(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListViewCore<string>(null!));
         }
 
         private void ClearAll()

@@ -69,17 +69,17 @@ namespace Test.Waf.Foundation
         [DataContract]
         private class Person : Model
         {
-            [DataMember] private string name;
-            [DataMember] private string email;
-            [DataMember] private string phone;
+            [DataMember] private string? name;
+            [DataMember] private string? email;
+            [DataMember] private string? phone;
 
-            public string Name
+            public string? Name
             {
                 get => name;
                 set => SetProperty(ref name, value);
             }
 
-            public string Email
+            public string? Email
             {
                 get => email;
                 set
@@ -92,7 +92,7 @@ namespace Test.Waf.Foundation
                 }
             }
 
-            public string Phone
+            public string? Phone
             {
                 get => phone;
                 set

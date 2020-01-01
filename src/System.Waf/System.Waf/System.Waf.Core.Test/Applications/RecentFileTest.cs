@@ -12,7 +12,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ArgumentsTest()
         {
-            AssertHelper.ExpectedException<ArgumentException>(() => new RecentFile(null));
+            AssertHelper.ExpectedException<ArgumentException>(() => new RecentFile(null!));
 
             var recentFile = new RecentFile("Doc1");
             Assert.AreEqual("Doc1", recentFile.Path);

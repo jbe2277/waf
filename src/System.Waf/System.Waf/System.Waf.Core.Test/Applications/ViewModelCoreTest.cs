@@ -31,8 +31,8 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ConstructorParameter()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null, true));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null!, true));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new MockViewModel(null!));
         }
         
 

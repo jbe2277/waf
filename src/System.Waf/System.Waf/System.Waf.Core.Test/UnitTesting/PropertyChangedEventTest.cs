@@ -20,16 +20,16 @@ namespace Test.Waf.UnitTesting
 
 
             AssertHelper.ExpectedException<ArgumentNullException>(
-                () => AssertHelper.PropertyChangedEvent((Person)null, x => x.Name, () => person.Name = "Han"));
+                () => AssertHelper.PropertyChangedEvent((Person)null!, x => x.Name, () => person.Name = "Han"));
             
             AssertHelper.ExpectedException<ArgumentNullException>(
-                () => AssertHelper.PropertyChangedEvent(person, null, () => person.Name = "Han"));
+                () => AssertHelper.PropertyChangedEvent(person, null!, () => person.Name = "Han"));
 
             AssertHelper.ExpectedException<ArgumentException>(() =>
-                AssertHelper.PropertyChangedEvent(person, x => x.Name.Length, () => person.Name = "Luke"));
+                AssertHelper.PropertyChangedEvent(person, x => x.Name!.Length, () => person.Name = "Luke"));
 
             AssertHelper.ExpectedException<ArgumentNullException>(
-                () => AssertHelper.PropertyChangedEvent(person, x => x.Name, null));
+                () => AssertHelper.PropertyChangedEvent(person, x => x.Name, null!));
            
             AssertHelper.ExpectedException<ArgumentOutOfRangeException>(
                 () => AssertHelper.PropertyChangedEvent(person, x => x.Name, () => person.Name = "Han", -1, ExpectedChangedCountMode.Exact));
@@ -80,7 +80,7 @@ namespace Test.Waf.UnitTesting
                 AssertHelper.PropertyChangedEvent(person, x => x, () => person.Name = "Luke"));
 
             AssertHelper.ExpectedException<ArgumentException>(() =>
-                AssertHelper.PropertyChangedEvent(person, x => x.ToString(), () => person.Name = "Luke"));
+                AssertHelper.PropertyChangedEvent(person, x => x.ToString()!, () => person.Name = "Luke"));
 
             AssertHelper.ExpectedException<ArgumentException>(() =>
                 AssertHelper.PropertyChangedEvent(person, x => Math.Abs(1), () => person.Name = "Luke"));
@@ -90,9 +90,9 @@ namespace Test.Waf.UnitTesting
 
         private class Person : Model
         {
-            private string name;
+            private string? name;
 
-            public string Name
+            public string? Name
             {
                 get => name;
                 set
@@ -108,12 +108,12 @@ namespace Test.Waf.UnitTesting
 
         private class SpecialPerson : INotifyPropertyChanged
         {
-            private string name;
+            private string? name;
             private double weight;
 
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
-            public string Name
+            public string? Name
             {
                 get => name;
                 set

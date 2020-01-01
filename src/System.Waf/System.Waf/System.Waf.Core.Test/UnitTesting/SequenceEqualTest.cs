@@ -10,9 +10,9 @@ namespace Test.Waf.UnitTesting
         [TestMethod]
         public void SequenceEqual()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual<object>(null, null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual(new[] { "a" }, null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual(null, new[] { "a" }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual<object>(null!, null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual(new[] { "a" }, null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => AssertHelper.SequenceEqual(null!, new[] { "a" }));
 
             AssertHelper.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2, 3 });
             AssertHelper.SequenceEqual(new[] { "a", "b", "c" }, new[] { "a", "b", "c" });

@@ -23,7 +23,7 @@ namespace Test.Waf.Applications
         public void ExecuteTest2()
         {
             var executed = false;
-            object commandParameter = null;
+            object? commandParameter = null;
             var command = new DelegateCommand(parameter =>
             {
                 executed = true;
@@ -86,8 +86,8 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ConstructorParameterTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new DelegateCommand((Action)null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new DelegateCommand((Action<object>)null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new DelegateCommand((Action)null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new DelegateCommand((Action<object?>)null!));
         }
     }
 }

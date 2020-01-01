@@ -28,7 +28,7 @@ namespace Test.Waf.UnitTesting
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void ExpectedExceptionTest4()
         {
-            AssertHelper.ExpectedException<InvalidOperationException>(null);
+            AssertHelper.ExpectedException<InvalidOperationException>(null!);
         }
 
 

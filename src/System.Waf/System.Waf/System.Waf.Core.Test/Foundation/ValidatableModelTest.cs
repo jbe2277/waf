@@ -81,9 +81,6 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.Errors.Any());
             Assert.IsFalse(person.GetErrors("Email").Any());
-
-            string test = "";
-            AssertHelper.ExpectedException<ArgumentException>(() => person.SetPropertyAndValidate(ref test, "Test", null));
         }
 
         [TestMethod]
@@ -143,8 +140,8 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void ValidationResultComparerTest()
         {
-            var comparerType = typeof(ValidatableModel).GetNestedType("ValidationResultComparer", BindingFlags.NonPublic);
-            var comparer = (IEqualityComparer<ValidationResult>)comparerType.GetProperty("Default", BindingFlags.Static | BindingFlags.Public).GetValue(null);
+            var comparerType = typeof(ValidatableModel).GetNestedType("ValidationResultComparer", BindingFlags.NonPublic)!;
+            var comparer = (IEqualityComparer<ValidationResult>)comparerType.GetProperty("Default", BindingFlags.Static | BindingFlags.Public)!.GetValue(null)!;
 
             Assert.IsTrue(comparer.Equals(null, null));
             Assert.IsFalse(comparer.Equals(new ValidationResult(null), null));
@@ -156,7 +153,7 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", null }), new ValidationResult("Test", new[] { "Name", null })));
             Assert.IsFalse(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Wrong" }), new ValidationResult("Test", new[] { "Name", "Age" })));
 
-            Assert.AreEqual(0, comparer.GetHashCode(null));
+            Assert.AreEqual(0, comparer.GetHashCode(null!));
             Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null)));
             Assert.AreEqual("".GetHashCode(), comparer.GetHashCode(new ValidationResult("")));
             Assert.AreEqual("Test".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test")));
@@ -167,9 +164,9 @@ namespace Test.Waf.Foundation
             Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode() ^ "Age".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", "Age" })));
         }
 
-        private static void AssertErrorsChangedEvent<T>(T model, Expression<Func<T, object>> expression, Action raiseErrorsChanged) where T : INotifyDataErrorInfo
+        private static void AssertErrorsChangedEvent<T>(T model, Expression<Func<T, object?>>? expression, Action raiseErrorsChanged) where T : INotifyDataErrorInfo
         {
-            string propertyName = expression == null ? null : AssertHelper.GetProperty(expression).Name;
+            string? propertyName = expression == null ? null : AssertHelper.GetProperty(expression).Name;
             int errorsChangedCount = 0;
 
             EventHandler<DataErrorsChangedEventArgs> handler = (sender, e) =>
@@ -196,14 +193,14 @@ namespace Test.Waf.Foundation
             public const string EmailLengthError = "The field Email must be a string with a maximum length of 10.";
             public const string EmailInvalidError = "The Email field is not a valid e-mail address.";
 
-            [DataMember] private string name;
-            [DataMember] private string email;
+            [DataMember] private string? name;
+            [DataMember] private string? email;
             [DataMember] private int age;
 
-            public ValidationResult EntityError { get; set; }
+            public ValidationResult? EntityError { get; set; }
 
             [Required(ErrorMessage = NameRequiredError)]
-            public string Name
+            public string? Name
             {
                 get => name;
                 set => SetPropertyAndValidate(ref name, value);
@@ -211,7 +208,7 @@ namespace Test.Waf.Foundation
 
             [EmailAddress(ErrorMessage = EmailInvalidError)]
             [StringLength(10, ErrorMessage = EmailLengthError)]
-            public string Email
+            public string? Email
             {
                 get => email;
                 set => SetProperty(ref email, value);

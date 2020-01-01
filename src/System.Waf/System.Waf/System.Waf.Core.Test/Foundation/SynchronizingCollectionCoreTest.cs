@@ -17,9 +17,9 @@ namespace Test.Waf.Foundation
         public void ConstructorTest()
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingCollectionCore<MyDataModel, MyModel>(
-                null, null));
+                null!, null!));
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingCollectionCore<MyDataModel, MyModel>(
-                new List<MyModel>(), null));
+                new List<MyModel>(), null!));
         }
 
         [TestMethod]
@@ -304,7 +304,7 @@ namespace Test.Waf.Foundation
             synchronizingCollection.NotifyOriginalCollectionChanged(originalCollection, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new[] { originalCollection.Single() }));
             Assert.AreEqual(originalCollection.Single(), synchronizingCollection.Single().Model);
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => synchronizingCollection.NotifyOriginalCollectionChanged(originalCollection, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => synchronizingCollection.NotifyOriginalCollectionChanged(originalCollection, null!));
 
             synchronizingCollection.Dispose();
         }

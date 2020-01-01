@@ -105,10 +105,10 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ErrorOccurredTest()
         {
-            Tuple<Exception, SettingsServiceAction, string> error = null;
+            Tuple<Exception, SettingsServiceAction, string>? error = null;
             void AssertErrorEventArgs<TException>(SettingsServiceAction expectedAction, string expectedFileName)
             {
-                Assert.IsInstanceOfType(error.Item1, typeof(TException));
+                Assert.IsInstanceOfType(error!.Item1, typeof(TException));
                 Assert.AreEqual(expectedAction, error.Item2);
                 Assert.AreEqual(expectedFileName, error.Item3);
             }
@@ -185,7 +185,7 @@ namespace Test.Waf.Presentation.Services
                 public DateTime LastRun { get; set; }
 
                 [DataMember]
-                public IReadOnlyList<string> LastOpenedFiles { get; set; }
+                public IReadOnlyList<string> LastOpenedFiles { get; set; } = null!;
 
                 public IReadOnlyList<string> FileNames => fileNames;
 
@@ -225,7 +225,7 @@ namespace Test.Waf.Presentation.Services
         public class NotSerializableTest : UserSettingsBase
         {
             [DataMember]
-            public Thread Thread { get; set; }
+            public Thread Thread { get; set; } = null!;
 
             protected override void SetDefaultValues()
             {

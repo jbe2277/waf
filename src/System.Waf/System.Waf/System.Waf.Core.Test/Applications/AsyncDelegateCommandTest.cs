@@ -12,9 +12,9 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void CanExecuteDuringAsyncExecute()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new AsyncDelegateCommand((Func<Task>)null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new AsyncDelegateCommand((Func<Task>)null!));
 
-            var tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object?>();
             var executeCalled = false;
 
             var command = new AsyncDelegateCommand(() =>
@@ -40,7 +40,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void CanExecuteDuringAsyncExecute2()
         {
-            var tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object?>();
             var canExecute = false;
             var executeCalled = false;
 
@@ -72,12 +72,12 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void CanExecuteDuringAsyncExecuteWithParameter()
         {
-            var tcs = new TaskCompletionSource<object>();
-            string commandParameter = null;
+            var tcs = new TaskCompletionSource<object?>();
+            string? commandParameter = null;
 
             var command = new AsyncDelegateCommand(p =>
             {
-                commandParameter = (string)p;
+                commandParameter = (string?)p;
                 return tcs.Task;
             });
             Assert.IsTrue(command.CanExecute(null));
@@ -94,7 +94,7 @@ namespace Test.Waf.Applications
         {
             var executed = false;
             var canExecute = false;
-            var command = new AsyncDelegateCommand(() => { executed = true; return Task.FromResult((object)null); }, () => canExecute);
+            var command = new AsyncDelegateCommand(() => { executed = true; return Task.CompletedTask; }, () => canExecute);
 
             Assert.IsFalse(command.CanExecute(null));
             canExecute = true;

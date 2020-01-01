@@ -13,7 +13,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void ConstructorTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ThrottledAction(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ThrottledAction(null!));
             var throttledAction = new ThrottledAction(() => { });
             Assert.IsFalse(throttledAction.IsRunning);
         }

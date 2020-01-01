@@ -21,10 +21,10 @@ namespace Test.Waf.UnitTesting
 
 
             AssertHelper.ExpectedException<ArgumentNullException>(
-                () => AssertHelper.CanExecuteChangedEvent(null, () => command.RaiseCanExecuteChanged()));
+                () => AssertHelper.CanExecuteChangedEvent(null!, () => command.RaiseCanExecuteChanged()));
             
             AssertHelper.ExpectedException<ArgumentNullException>(
-                () => AssertHelper.CanExecuteChangedEvent(command, null));
+                () => AssertHelper.CanExecuteChangedEvent(command, null!));
 
             AssertHelper.ExpectedException<ArgumentOutOfRangeException>(
                 () => AssertHelper.CanExecuteChangedEvent(command, () => command.RaiseCanExecuteChanged(), -1, ExpectedChangedCountMode.Exact));
@@ -71,15 +71,15 @@ namespace Test.Waf.UnitTesting
 
         private class WrongCommand : ICommand
         {
-            public event EventHandler CanExecuteChanged;
+            public event EventHandler? CanExecuteChanged;
 
 
-            public bool CanExecute(object parameter)
+            public bool CanExecute(object? parameter)
             {
                 throw new NotImplementedException();
             }
 
-            public void Execute(object parameter)
+            public void Execute(object? parameter)
             {
                 throw new NotImplementedException();
             }

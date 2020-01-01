@@ -29,7 +29,7 @@ namespace Test.Waf.UnitTesting
                 Assert.AreEqual(1, actionCallCount);
             }
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.Wait(Task.FromResult((object)null), null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.Wait(Task.FromResult((object)null!), null!));
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace Test.Waf.UnitTesting
                 Assert.AreEqual(1, result);
             }
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.GetResult(Task.FromResult((object)null), null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.GetResult(Task.FromResult((object)null!), null!));
         }
 
         [TestMethod]
@@ -76,10 +76,10 @@ namespace Test.Waf.UnitTesting
 
                 AssertHelper.ExpectedException<TimeoutException>(() => context.WaitFor(() => !flag, TimeSpan.FromMilliseconds(10)));
 
-                AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.WaitFor(context, null, TimeSpan.FromMilliseconds(10)));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.WaitFor(context, null!, TimeSpan.FromMilliseconds(10)));
             }
             
-            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.WaitFor(null, () => true, TimeSpan.FromMilliseconds(10)));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => UnitTestSynchronizationContextExtensions.WaitFor(null!, () => true, TimeSpan.FromMilliseconds(10)));
         }
     }
 }
