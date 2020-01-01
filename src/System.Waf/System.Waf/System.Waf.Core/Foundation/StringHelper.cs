@@ -25,10 +25,10 @@
         /// <param name="maxLength">The maximum length.</param>
         /// <returns>The truncated string.</returns>
         /// <exception cref="ArgumentOutOfRangeException">maxLength is less than 0.</exception>
-        public static string Truncate(this string s, int maxLength)
+        public static string? Truncate(this string? s, int maxLength)
         {
             if (string.IsNullOrEmpty(s)) { return s; }
-            return s.Length <= maxLength ? s : s.Substring(0, maxLength);
+            return s!.Length <= maxLength ? s : s!.Substring(0, maxLength);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
-        public new event NotifyCollectionChangedEventHandler CollectionChanged
+        public new event NotifyCollectionChangedEventHandler? CollectionChanged
         {
             add => base.CollectionChanged += value;
             remove => base.CollectionChanged -= value;
@@ -37,7 +37,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public new event PropertyChangedEventHandler PropertyChanged
+        public new event PropertyChangedEventHandler? PropertyChanged
         {
             add => base.PropertyChanged += value;
             remove => base.PropertyChanged -= value;

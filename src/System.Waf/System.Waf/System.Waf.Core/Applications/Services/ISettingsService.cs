@@ -14,7 +14,7 @@
         /// <summary>
         /// An error occurred.
         /// </summary>
-        event EventHandler<SettingsErrorEventArgs> ErrorOccurred;
+        event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>
         /// Gets the specified user settings object. 

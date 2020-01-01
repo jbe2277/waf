@@ -45,7 +45,7 @@ namespace System.Waf.Applications
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                var attribute = (AssemblyProductAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyProductAttribute));
+                var attribute = (AssemblyProductAttribute?)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyProductAttribute));
                 return attribute?.Product ?? "";
             }
             return "";
@@ -53,7 +53,7 @@ namespace System.Waf.Applications
 
         private static string GetVersion()
         {
-            return Assembly.GetEntryAssembly()?.GetName().Version.ToString() ?? "";
+            return Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "";
         }
 
         private static string GetCompany()
@@ -61,7 +61,7 @@ namespace System.Waf.Applications
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                var attribute = (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCompanyAttribute));
+                var attribute = (AssemblyCompanyAttribute?)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCompanyAttribute));
                 return attribute?.Company ?? "";
             }
             return "";
@@ -72,7 +72,7 @@ namespace System.Waf.Applications
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                var attribute = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCopyrightAttribute));
+                var attribute = (AssemblyCopyrightAttribute?)Attribute.GetCustomAttribute(entryAssembly, typeof(AssemblyCopyrightAttribute));
                 return attribute?.Copyright ?? "";
             }
             return "";
@@ -83,7 +83,7 @@ namespace System.Waf.Applications
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
-                return Path.GetDirectoryName(entryAssembly.Location);
+                return Path.GetDirectoryName(entryAssembly.Location) ?? "";
             }
             return "";
         }

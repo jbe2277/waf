@@ -33,7 +33,7 @@ namespace System.Waf.Foundation
         private readonly Action action;
         private readonly ThrottledActionMode mode;
         private readonly TimeSpan delayTime;
-        private CancellationTokenSource cancellationTokenSource;
+        private CancellationTokenSource? cancellationTokenSource;
 
 
         /// <summary>

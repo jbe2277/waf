@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace System.Waf.Foundation
@@ -17,7 +18,7 @@ namespace System.Waf.Foundation
         private readonly ObservableCollection<T> innerCollection;
         private readonly List<Tuple<TOriginal, T>> mapping;
         private readonly IEnumerable<TOriginal> originalCollection;
-        private readonly INotifyCollectionChanged originalObservableCollection;
+        private readonly INotifyCollectionChanged? originalObservableCollection;
         private readonly Func<TOriginal, T> factory;
         private readonly IEqualityComparer<T> itemComparer;
         private readonly IEqualityComparer<TOriginal> originalItemComparer;
@@ -185,14 +186,14 @@ namespace System.Waf.Foundation
         {
         }
 
-        private T CreateItem(TOriginal oldItem)
+        private T CreateItem([MaybeNull] TOriginal oldItem)
         {
             T newItem = factory(oldItem);
             mapping.Add(new Tuple<TOriginal, T>(oldItem, newItem));
             return newItem;
         }
 
-        private void RemoveCore(TOriginal oldItem)
+        private void RemoveCore([MaybeNull] TOriginal oldItem)
         {
             Tuple<TOriginal, T> tuple = mapping.First(t => originalItemComparer.Equals(t.Item1, oldItem));
             mapping.Remove(tuple);

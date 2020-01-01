@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Waf.Foundation
 {
@@ -20,7 +21,7 @@ namespace System.Waf.Foundation
         /// Initializes a new instance of the ObservableListViewBase class.
         /// </summary>
         /// <param name="originalList">Initialize the list view with the items from this list.</param>
-        protected ObservableListViewBase(IEnumerable<T> originalList) : base(new List<T>())
+        protected ObservableListViewBase(IEnumerable<T>? originalList) : base(new List<T>())
         {
             InnerList = (List<T>)Items;
             if (originalList != null) InnerList.AddRange(originalList);
@@ -36,12 +37,12 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Occurs when an item is added, removed, changed, moved, or the entire list is refreshed.
         /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="newItemIndex">The zero-based index at which item should be inserted.</param>
         /// <param name="newItem">The object to insert.</param>
-        protected void Insert(int newItemIndex, T newItem)
+        protected void Insert(int newItemIndex, [MaybeNull] T newItem)
         {
             InnerList.Insert(newItemIndex, newItem);
             OnPropertyChanged(CountChangedEventArgs);

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
@@ -13,7 +14,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace System.Waf.Foundation
         /// <param name="propertyName">The property name. This optional parameter can be skipped
         /// because the compiler is able to create it automatically.</param>
         /// <returns>True if the value has changed, false if the old and new value were equal.</returns>
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(ref T field, [MaybeNull] T value, [CallerMemberName] string propertyName = null!)
         {
             if (Equals(field, value)) { return false; }
 
@@ -40,7 +41,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="propertyName">The property name of the property that has changed.
         /// This optional parameter can be skipped because the compiler is able to create it automatically.</param>
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null!)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }

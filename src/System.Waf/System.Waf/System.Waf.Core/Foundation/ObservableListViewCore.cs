@@ -14,10 +14,10 @@ namespace System.Waf.Foundation
     {
         private readonly IEnumerable<T> originalList;
         private readonly IEqualityComparer<T> comparer;
-        private readonly INotifyCollectionChanged originalObservableCollection;
+        private readonly INotifyCollectionChanged? originalObservableCollection;
         private readonly bool noCollectionChangedHandler;
-        private Predicate<T> filter;
-        private Func<IEnumerable<T>, IOrderedEnumerable<T>> sort;
+        private Predicate<T>? filter;
+        private Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort;
         private volatile bool isDisposed;
 
 
@@ -36,7 +36,7 @@ namespace System.Waf.Foundation
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer) : this(originalList, comparer, null, null, false)
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer) : this(originalList, comparer, null, null, false)
         {
         }
 
@@ -48,8 +48,8 @@ namespace System.Waf.Foundation
         /// <param name="filter">Optional, a filter used for this list view.</param>
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter,
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort) : this(originalList, comparer, filter, sort, false)
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer, Predicate<T>? filter,
+            Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort) : this(originalList, comparer, filter, sort, false)
         {
         }
 
@@ -62,8 +62,8 @@ namespace System.Waf.Foundation
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <param name="noCollectionChangedHandler">Pass true when the subclass takes care about the collection changed event of the originalCollection. Default is false.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter, 
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort, bool noCollectionChangedHandler) : base(originalList)
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer, Predicate<T>? filter, 
+            Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort, bool noCollectionChangedHandler) : base(originalList)
         {
             this.originalList = originalList ?? throw new ArgumentNullException(nameof(originalList));
             this.comparer = comparer ?? EqualityComparer<T>.Default;
@@ -86,7 +86,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets or sets the filter used for this list view.
         /// </summary>
-        public Predicate<T> Filter
+        public Predicate<T>? Filter
         {
             get => filter;
             set
@@ -102,7 +102,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets or sets the sorting used for this list view.
         /// </summary>
-        public Func<IEnumerable<T>, IOrderedEnumerable<T>> Sort
+        public Func<IEnumerable<T>, IOrderedEnumerable<T>>? Sort
         {
             get => sort;
             set

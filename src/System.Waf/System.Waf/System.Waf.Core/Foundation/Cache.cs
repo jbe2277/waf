@@ -1,4 +1,6 @@
-﻿namespace System.Waf.Foundation
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System.Waf.Foundation
 {
     /// <summary>
     /// Provides support for caching a value.
@@ -7,7 +9,7 @@
     public sealed class Cache<T>
     {
         private readonly Func<T> valueFactory;
-        private T value;
+        [MaybeNull] private T value = default!;
         private bool isDirty;
 
         /// <summary>
@@ -23,6 +25,7 @@
         /// <summary>
         /// Gets the value.
         /// </summary>
+        [MaybeNull]
         public T Value
         {
             get

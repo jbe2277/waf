@@ -131,7 +131,7 @@ namespace System.Waf.Applications
             }
         }
 
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() { return null!; }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

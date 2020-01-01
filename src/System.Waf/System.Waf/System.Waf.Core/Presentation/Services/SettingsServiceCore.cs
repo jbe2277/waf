@@ -51,7 +51,7 @@ namespace System.Waf.Presentation.Services
         /// <summary>
         /// An error occurred.
         /// </summary>
-        public event EventHandler<SettingsErrorEventArgs> ErrorOccurred;
+        public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>
         /// Gets the specified user settings object. 
@@ -75,7 +75,7 @@ namespace System.Waf.Presentation.Services
             if (!settingsList.Any()) return;
             try
             {
-                XDocument document = null;
+                XDocument? document = null;
                 if (File.Exists(FileName))
                 {
                     try
@@ -174,7 +174,7 @@ namespace System.Waf.Presentation.Services
 
         private object Load(Type type)
         {
-            object settingObject = null;
+            object? settingObject = null;
             try
             {
                 settingObject = LoadCore(type);
@@ -183,10 +183,10 @@ namespace System.Waf.Presentation.Services
             {
                 OnErrorOccurred(new SettingsErrorEventArgs(ex, SettingsServiceAction.Open, FileName));
             }
-            return settingObject ?? Activator.CreateInstance(type);  // type has default ctor
+            return settingObject ?? Activator.CreateInstance(type)!;  // type has default ctor
         }
 
-        private object LoadCore(Type type)
+        private object? LoadCore(Type type)
         {
             if (!File.Exists(FileName)) return null;
 
@@ -213,7 +213,7 @@ namespace System.Waf.Presentation.Services
             return document;
         }
 
-        private static XElement GetSettingElement(XDocument document, Type settingType)
+        private static XElement? GetSettingElement(XDocument document, Type settingType)
         {
             var dataContract = settingType.GetCustomAttribute<DataContractAttribute>();
             var settingTypeNamespace = dataContract?.Namespace ?? dcNamespace.NamespaceName + settingType.Namespace;
@@ -238,11 +238,11 @@ namespace System.Waf.Presentation.Services
 
         private static string GetTypeName(Type type)
         {
-            string name = null;
+            string? name = null;
             while (type.IsNested)
             {
                 name = name == null ? type.Name : type.Name + "." + name;
-                type = type.DeclaringType;
+                type = type.DeclaringType!;
             }
             name = name == null ? type.Name : type.Name + "." + name;
             return name;

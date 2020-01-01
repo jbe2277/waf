@@ -36,7 +36,7 @@ namespace System.Waf.Foundation
         /// The method does nothing.
         /// </summary>
         /// <param name="task">The task.</param>
-        public static void NoWait(this Task task)
+        public static void NoWait(this Task? task)
         {
             NoWait(task, false);
         }
@@ -47,7 +47,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="task">The task.</param>
         /// <param name="ignoreExceptions">If set to true the task exception will be observed and ignored.</param>
-        public static void NoWait(this Task task, bool ignoreExceptions)
+        public static void NoWait(this Task? task, bool ignoreExceptions)
         {
             if (ignoreExceptions) task?.ContinueWith(t => t.Exception, CancellationToken.None, 
                 TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);

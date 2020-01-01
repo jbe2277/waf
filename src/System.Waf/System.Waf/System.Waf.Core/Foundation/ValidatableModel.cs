@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -17,8 +18,8 @@ namespace System.Waf.Foundation
         private static readonly ValidationResult[] noErrors = Array.Empty<ValidationResult>();
 
         // DCS does not call ctor -> initialize fields at first use.
-        private Dictionary<string, List<ValidationResult>> errorsDictionary;
-        private IReadOnlyList<ValidationResult> errors;
+        private Dictionary<string, List<ValidationResult>>? errorsDictionary;
+        private IReadOnlyList<ValidationResult>? errors;
         private bool hasErrors;
 
 
@@ -42,7 +43,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Occurs when the validation errors have changed for a property or for the entire entity.
         /// </summary>
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace System.Waf.Foundation
         /// <param name="propertyName">The name of the property to retrieve validation errors for; 
         /// or null or String.Empty, to retrieve entity-level errors.</param>
         /// <returns>The validation errors for the property or entity.</returns>
-        public IEnumerable<ValidationResult> GetErrors(string propertyName)
+        public IEnumerable<ValidationResult> GetErrors(string? propertyName)
         {
             if (ErrorsDictionary.TryGetValue(propertyName ?? "", out var result))
             {
@@ -60,7 +61,7 @@ namespace System.Waf.Foundation
             return noErrors;
         }
         
-        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
         {
             return GetErrors(propertyName);
         }
@@ -88,11 +89,8 @@ namespace System.Waf.Foundation
         /// <param name="propertyName">The property name. This optional parameter can be skipped
         /// because the compiler is able to create it automatically.</param>
         /// <returns>True if the value has changed, false if the old and new value were equal.</returns>
-        /// <exception cref="ArgumentException">The argument propertyName must not be null or empty.</exception>
-        protected bool SetPropertyAndValidate<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetPropertyAndValidate<T>(ref T field, [MaybeNull] T value, [CallerMemberName] string propertyName = null!)
         {
-            if (string.IsNullOrEmpty(propertyName)) throw new ArgumentException("The argument propertyName must not be null or empty.", nameof(propertyName));
-            
             if (SetProperty(ref field, value, propertyName))
             {
                 Validate();
@@ -115,7 +113,7 @@ namespace System.Waf.Foundation
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void UpdateErrors(IReadOnlyList<ValidationResult> validationResults, string propertyName = null)
+        private void UpdateErrors(IReadOnlyList<ValidationResult> validationResults, string? propertyName = null)
         {
             var newErrors = new Dictionary<string, List<ValidationResult>>();
             foreach (var validationResult in validationResults)

@@ -9,7 +9,7 @@ namespace System.Waf.Applications
     public class DelegateCommand : ICommand
     {
         private readonly Action<object> execute;
-        private readonly Func<object, bool> canExecute;
+        private readonly Func<object, bool>? canExecute;
 
 
         /// <summary>
@@ -32,9 +32,12 @@ namespace System.Waf.Applications
         /// <param name="execute">Delegate to execute when Execute is called on the command.</param>
         /// <param name="canExecute">Delegate to execute when CanExecute is called on the command.</param>
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
-        public DelegateCommand(Action execute, Func<bool> canExecute)
-            : this(execute != null ? p => execute() : (Action<object>)null, canExecute != null ? p => canExecute() : (Func<object, bool>)null)
-        { }
+        public DelegateCommand(Action execute, Func<bool>? canExecute)
+        {
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
+            this.execute = p => execute();
+            this.canExecute = canExecute == null ? (Func<object, bool>?)null : p => canExecute!();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateCommand"/> class.
@@ -42,7 +45,7 @@ namespace System.Waf.Applications
         /// <param name="execute">Delegate to execute when Execute is called on the command.</param>
         /// <param name="canExecute">Delegate to execute when CanExecute is called on the command.</param>
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
-        public DelegateCommand(Action<object> execute, Func<object, bool> canExecute)
+        public DelegateCommand(Action<object> execute, Func<object, bool>? canExecute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
@@ -58,7 +61,7 @@ namespace System.Waf.Applications
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
 
         /// <summary>

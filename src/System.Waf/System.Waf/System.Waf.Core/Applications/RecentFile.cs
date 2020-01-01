@@ -12,7 +12,7 @@ namespace System.Waf.Applications
     public sealed class RecentFile : Model, IXmlSerializable
     {
         private bool isPinned;
-        private string path;
+        private string path = default!;
 
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace System.Waf.Applications
         public string Path => path;
 
 
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() { return null!; }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
