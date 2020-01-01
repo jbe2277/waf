@@ -186,14 +186,14 @@ namespace System.Waf.Foundation
         {
         }
 
-        private T CreateItem([MaybeNull] TOriginal oldItem)
+        private T CreateItem([AllowNull] TOriginal oldItem)
         {
             T newItem = factory(oldItem);
             mapping.Add(new Tuple<TOriginal, T>(oldItem, newItem));
             return newItem;
         }
 
-        private void RemoveCore([MaybeNull] TOriginal oldItem)
+        private void RemoveCore([AllowNull] TOriginal oldItem)
         {
             Tuple<TOriginal, T> tuple = mapping.First(t => originalItemComparer.Equals(t.Item1, oldItem));
             mapping.Remove(tuple);

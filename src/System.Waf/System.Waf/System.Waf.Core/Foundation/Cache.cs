@@ -9,7 +9,7 @@ namespace System.Waf.Foundation
     public sealed class Cache<T>
     {
         private readonly Func<T> valueFactory;
-        [MaybeNull] private T value = default!;
+        [AllowNull] private T value = default!;
         private bool isDirty;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace System.Waf.Foundation
         /// <summary>
         /// Gets the value.
         /// </summary>
-        [MaybeNull]
+        [AllowNull]
         public T Value
         {
             get

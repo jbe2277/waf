@@ -68,7 +68,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="newItemIndex">The zero-based index at which item should be inserted.</param>
         /// <param name="newItem">The object to insert.</param>
-        protected void Insert(int newItemIndex, [MaybeNull] T newItem)
+        protected void Insert(int newItemIndex, [AllowNull] T newItem)
         {
             InnerList.Insert(newItemIndex, newItem);
             OnPropertyChanged(CountChangedEventArgs);

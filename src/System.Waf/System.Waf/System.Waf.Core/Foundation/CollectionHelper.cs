@@ -29,7 +29,7 @@ namespace System.Waf.Foundation
         /// <param name="item">The object to locate in the collection. The value can be null for reference types.</param>
         /// <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
         /// <exception cref="ArgumentNullException">collection must not be <c>null</c>.</exception>
-        public static int IndexOf<T>(this IEnumerable<T> collection, [MaybeNull] T item)
+        public static int IndexOf<T>(this IEnumerable<T> collection, [AllowNull] T item)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             if (collection is IList<T> list) return list.IndexOf(item);
@@ -52,7 +52,7 @@ namespace System.Waf.Foundation
         /// <returns>The next element in the collection or default when no next element can be found.</returns>
         /// <exception cref="ArgumentNullException">collection must not be <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The collection does not contain the specified current item.</exception>
-        public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, [MaybeNull] T current)
+        public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, [AllowNull] T current)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             using var enumerator = collection.GetEnumerator();

@@ -10,8 +10,8 @@ namespace System.Waf.Applications
     /// </summary>
     public class AsyncDelegateCommand : ICommand
     {
-        private readonly Func<object, Task> execute;
-        private readonly Func<object, bool>? canExecute;
+        private readonly Func<object?, Task> execute;
+        private readonly Func<object?, bool>? canExecute;
         private bool isExecuting;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace System.Waf.Applications
         /// </summary>
         /// <param name="execute">Async Delegate to execute when Execute is called on the command.</param>
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
-        public AsyncDelegateCommand(Func<object, Task> execute)
+        public AsyncDelegateCommand(Func<object?, Task> execute)
             : this(execute, null)
         { }
 
@@ -42,7 +42,7 @@ namespace System.Waf.Applications
         {
             if (execute == null) throw new ArgumentNullException(nameof(execute));
             this.execute = p => execute();
-            this.canExecute = canExecute == null ? (Func<object, bool>?)null : p => canExecute!();
+            this.canExecute = canExecute == null ? (Func<object?, bool>?)null : p => canExecute!();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace System.Waf.Applications
         /// <param name="execute">Async Delegate to execute when Execute is called on the command.</param>
         /// <param name="canExecute">Delegate to execute when CanExecute is called on the command.</param>
         /// <exception cref="ArgumentNullException">The execute argument must not be null.</exception>
-        public AsyncDelegateCommand(Func<object, Task> execute, Func<object, bool>? canExecute)
+        public AsyncDelegateCommand(Func<object?, Task> execute, Func<object?, bool>? canExecute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
@@ -88,7 +88,7 @@ namespace System.Waf.Applications
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
         /// <returns>true if this command can be executed; otherwise, false.</returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return !IsExecuting && (canExecute == null || canExecute(parameter));
         }
@@ -97,7 +97,7 @@ namespace System.Waf.Applications
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        public async void Execute(object parameter)
+        public async void Execute(object? parameter)
         {
             if (!CanExecute(parameter))
             {
