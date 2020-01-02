@@ -8,18 +8,18 @@ namespace System.Waf.UnitTesting.Mocks
     /// <typeparam name="TMockView">The type of the concrete mock dialog view.</typeparam>
     public abstract class MockDialogView<TMockView> : MockView where TMockView : MockDialogView<TMockView>
     {
-        private ContainerDisposedNotifier containerDisposedNotifier;
+        private ContainerDisposedNotifier? containerDisposedNotifier;
         
 
         /// <summary>
         /// Gets or sets a delegate which is called when this view should be shown.
         /// </summary>
-        public static Action<TMockView> ShowDialogAction { get; set; }
+        public static Action<TMockView>? ShowDialogAction { get; set; }
 
         /// <summary>
         /// Gets the owner of this view.
         /// </summary>
-        public object Owner { get; private set; }
+        public object? Owner { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this view is visible.
@@ -27,7 +27,7 @@ namespace System.Waf.UnitTesting.Mocks
         public bool IsVisible { get; private set; }
 
         [Import(AllowDefault = true)]
-        internal ContainerDisposedNotifier ContainerDisposedNotifier
+        internal ContainerDisposedNotifier? ContainerDisposedNotifier
         {
             get => containerDisposedNotifier;
             set
@@ -66,9 +66,9 @@ namespace System.Waf.UnitTesting.Mocks
             IsVisible = false;
         }
 
-        private void ContainerDisposedNotifierDisposed(object sender, EventArgs e)
+        private void ContainerDisposedNotifierDisposed(object? sender, EventArgs e)
         {
-            containerDisposedNotifier.Disposed -= ContainerDisposedNotifierDisposed;
+            containerDisposedNotifier!.Disposed -= ContainerDisposedNotifierDisposed;
             ShowDialogAction = null;
         }
     }
@@ -77,7 +77,7 @@ namespace System.Waf.UnitTesting.Mocks
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
     internal sealed class ContainerDisposedNotifier : IDisposable
     {
-        public event EventHandler Disposed;
+        public event EventHandler? Disposed;
         
 
         public void Dispose()

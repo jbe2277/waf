@@ -13,12 +13,12 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// The file dialog result of the last dialog.
         /// </summary>
-        public FileDialogResult Result { get; set; }
+        public FileDialogResult? Result { get; set; }
 
         /// <summary>
         /// The owner window of the last dialog.
         /// </summary>
-        public object Owner { get; private set; }
+        public object? Owner { get; private set; }
 
         /// <summary>
         /// The file dialog type of the last dialog.
@@ -28,17 +28,17 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// The supported file types of the last dialog.
         /// </summary>
-        public IEnumerable<FileType> FileTypes { get; private set; }
+        public IEnumerable<FileType>? FileTypes { get; private set; }
 
         /// <summary>
         /// The default file type of the last dialog.
         /// </summary>
-        public FileType DefaultFileType { get; private set; }
+        public FileType? DefaultFileType { get; private set; }
 
         /// <summary>
         /// The default file name of the last dialog.
         /// </summary>
-        public string DefaultFileName { get; private set; }
+        public string? DefaultFileName { get; private set; }
 
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace System.Waf.UnitTesting.Mocks
         /// <param name="defaultFileType">Default file type.</param>
         /// <param name="defaultFileName">Default filename. The directory name is used as initial directory when it is specified.</param>
         /// <returns>A FileDialogResult object which contains the filename selected by the user.</returns>
-        public FileDialogResult ShowOpenFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName)
+        public FileDialogResult ShowOpenFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
             FileDialogType = FileDialogType.OpenFileDialog;
             Owner = owner;
             FileTypes = fileTypes;
             DefaultFileType = defaultFileType;
             DefaultFileName = defaultFileName;
-            return Result;
+            return Result!;
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace System.Waf.UnitTesting.Mocks
         /// <param name="defaultFileType">Default file type.</param>
         /// <param name="defaultFileName">Default filename. The directory name is used as initial directory when it is specified.</param>
         /// <returns>A FileDialogResult object which contains the filename entered by the user.</returns>
-        public FileDialogResult ShowSaveFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName)
+        public FileDialogResult ShowSaveFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
             FileDialogType = FileDialogType.SaveFileDialog;
             Owner = owner;
             FileTypes = fileTypes;
             DefaultFileType = defaultFileType;
             DefaultFileName = defaultFileName;
-            return Result;
+            return Result!;
         }
 
         /// <summary>

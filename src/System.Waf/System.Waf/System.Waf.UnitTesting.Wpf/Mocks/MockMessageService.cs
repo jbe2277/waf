@@ -17,22 +17,22 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// Gets the owner window of the last shown message.
         /// </summary>
-        public object Owner { get; private set; }
+        public object? Owner { get; private set; }
 
         /// <summary>
         /// Gets the message content of the last shown message.
         /// </summary>
-        public string Message { get; private set; }
+        public string? Message { get; private set; }
 
         /// <summary>
         /// Gets or sets a delegate that is called when ShowQuestion is called.
         /// </summary>
-        public Func<string, bool?> ShowQuestionAction { get; set; }
+        public Func<string, bool?>? ShowQuestionAction { get; set; }
 
         /// <summary>
         /// Gets or sets a delegate that is called when ShowYesNoQuestion is called.
         /// </summary>
-        public Func<string, bool> ShowYesNoQuestionAction { get; set; }
+        public Func<string, bool>? ShowYesNoQuestionAction { get; set; }
 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace System.Waf.UnitTesting.Mocks
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowMessage(object owner, string message)
+        public void ShowMessage(object? owner, string message)
         {
             MessageType = MessageType.Message;
             Owner = owner;
@@ -52,7 +52,7 @@ namespace System.Waf.UnitTesting.Mocks
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowWarning(object owner, string message)
+        public void ShowWarning(object? owner, string message)
         {
             MessageType = MessageType.Warning;
             Owner = owner;
@@ -64,7 +64,7 @@ namespace System.Waf.UnitTesting.Mocks
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowError(object owner, string message)
+        public void ShowError(object? owner, string message)
         {
             MessageType = MessageType.Error;
             Owner = owner;
@@ -77,10 +77,10 @@ namespace System.Waf.UnitTesting.Mocks
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes, <c>false</c> for no and <c>null</c> for cancel.</returns>
-        public bool? ShowQuestion(object owner, string message)
+        public bool? ShowQuestion(object? owner, string message)
         {
             Owner = owner;
-            return ShowQuestionAction(message);
+            return ShowQuestionAction!(message);
         }
 
         /// <summary>
@@ -89,10 +89,10 @@ namespace System.Waf.UnitTesting.Mocks
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes and <c>false</c> for no.</returns>
-        public bool ShowYesNoQuestion(object owner, string message)
+        public bool ShowYesNoQuestion(object? owner, string message)
         {
             Owner = owner;
-            return ShowYesNoQuestionAction(message);
+            return ShowYesNoQuestionAction!(message);
         }
 
         /// <summary>

@@ -15,23 +15,23 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// Gets or sets a delegate that is called when Get is called.
         /// </summary>
-        public Func<Type, object> GetStub { get; set; }
+        public Func<Type, object>? GetStub { get; set; }
 
         /// <summary>
         /// Gets or sets a delegate that is called when Save is called.
         /// </summary>
-        public Action SaveStub { get; set; }
+        public Action? SaveStub { get; set; }
 
         /// <summary>
         /// Gets or sets the settings file name.
         /// </summary>
         /// <exception cref="InvalidOperationException">Setter must not be called anymore if one of the methods was used.</exception>
-        public string FileName { get; set; }
+        public string FileName { get; set; } = default!;
 
         /// <summary>
         /// An error occurred.
         /// </summary>
-        public event EventHandler<SettingsErrorEventArgs> ErrorOccurred;
+        public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>
         /// Gets the specified user settings object. 
