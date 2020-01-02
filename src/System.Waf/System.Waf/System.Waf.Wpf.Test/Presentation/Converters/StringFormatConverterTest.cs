@@ -18,7 +18,7 @@ namespace Test.Waf.Presentation.Converters
             Assert.AreEqual(string.Format(null, format, book), converter.Convert(book, null, format, null));
             Assert.AreEqual(string.Format(null, "{0}", book), converter.Convert(book, null, null, null));
 
-            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, (Type)null, null, null));
+            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, (Type)null!, null, null));
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace Test.Waf.Presentation.Converters
             Assert.AreEqual(string.Format(null, format, new[] { book, author }), converter.Convert(new[] { book, author }, null, format, null));
             Assert.AreEqual(string.Format(null, "{0}", new[] { book, author }), converter.Convert(new[] { book, author }, null, null, null));
 
-            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, (Type[])null, null, null));
+            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, (Type[])null!, null, null));
         }
     }
 }

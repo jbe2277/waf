@@ -16,9 +16,9 @@ namespace Test.Waf.Applications.Services
             Assert.AreEqual("RichText Documents (*.rtf)", fileType.Description);
             Assert.AreEqual(".rtf", fileType.FileExtensions.Single());
 
-            AssertHelper.ExpectedException<ArgumentException>(() => new FileType(null, ".rtf"));
+            AssertHelper.ExpectedException<ArgumentException>(() => new FileType(null!, ".rtf"));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("", ".rtf"));
-            AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", (string)null));
+            AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", (string)null!));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("RichText Documents", ""));
 
             fileType = new FileType("RichText Documents", "rtf");
@@ -33,7 +33,7 @@ namespace Test.Waf.Applications.Services
             fileType = new FileType("Pictures", new[] { ".jpg", "*.png" });
             AssertHelper.SequenceEqual(new[] { ".jpg", "*.png" }, fileType.FileExtensions);
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new FileType("Pictures", (string[])null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new FileType("Pictures", (string[])null!));
             AssertHelper.ExpectedException<ArgumentException>(() => new FileType("Pictures", new[] { ".jpg", "" }));
         }
     }

@@ -19,7 +19,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void InvalidArgumentsTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new DataErrorInfoSupport(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new DataErrorInfoSupport(null!));
 
             var dataErrorInfoSupport = new DataErrorInfoSupport(new MockEntity());
             string message;
@@ -55,13 +55,13 @@ namespace Test.Waf.Foundation
         private class MockEntity
         {
             [Required, StringLength(30)]
-            public string Firstname { get; set; }
+            public string? Firstname { get; set; }
 
             [Required, StringLength(30)]
-            public string Lastname { get; set; }
+            public string? Lastname { get; set; }
 
             [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]
-            public string Email { get; set; }
+            public string? Email { get; set; }
         }
     }
 }

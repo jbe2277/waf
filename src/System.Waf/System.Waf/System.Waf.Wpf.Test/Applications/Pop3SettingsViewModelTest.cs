@@ -33,7 +33,7 @@ namespace Test.Waf.Applications
 
             public bool Pop3SettingsServerPathChanged { get; set; }
 
-            private void Pop3SettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
+            private void Pop3SettingsPropertyChanged(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Pop3Settings.ServerPath))
                 {
@@ -46,14 +46,14 @@ namespace Test.Waf.Applications
 
         private class MockPop3SettingsView : IPop3SettingsView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
 
         private class Pop3Settings : Model
         {
-            private string serverPath;
+            private string? serverPath;
 
-            public string ServerPath
+            public string? ServerPath
             {
                 get => serverPath;
                 set => SetProperty(ref serverPath, value);

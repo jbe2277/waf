@@ -12,12 +12,12 @@ namespace Test.Waf.Presentation
         [TestMethod]
         public void GetPackUri()
         {
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri((string)null, "test"));
+            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri((string)null!, "test"));
             AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri("", "test"));
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri("test", null));
+            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri("test", null!));
             AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri("test", ""));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.GetPackUri((Assembly)null, "test"));
-            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.GetPackUri((Assembly)null!, "test"));
+            AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, null!));
             AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.GetPackUri(typeof(ResourceHelperTest).Assembly, ""));
 
             Assert.AreEqual("pack://application:,,,/MyAssembly;Component/Resources/ConverterResources.xaml",
@@ -51,12 +51,12 @@ namespace Test.Waf.Presentation
                 var app = new System.Windows.Application();
                 System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => app.Run()));
 
-                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources((string)null, "test"));
+                AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources((string)null!, "test"));
                 AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("", "test"));
-                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources("test", null));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources("test", null!));
                 AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources("test", ""));
-                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources((Assembly)null, "test"));
-                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, null));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources((Assembly)null!, "test"));
+                AssertHelper.ExpectedException<ArgumentNullException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, null!));
                 AssertHelper.ExpectedException<ArgumentException>(() => ResourceHelper.AddToApplicationResources(typeof(ResourceHelperTest).Assembly, ""));
 
                 Assert.AreEqual(0, app.Resources.MergedDictionaries.Count);

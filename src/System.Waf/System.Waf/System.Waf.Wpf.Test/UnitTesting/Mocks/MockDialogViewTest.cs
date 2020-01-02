@@ -61,7 +61,7 @@ namespace Test.Waf.UnitTesting.Mocks
             var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
             container.Compose(new CompositionBatch());
 
-            TestMockDialogView shownView = null;
+            TestMockDialogView? shownView = null;
             TestMockDialogView.ShowDialogAction = view =>
             {
                 shownView = view;
@@ -78,7 +78,7 @@ namespace Test.Waf.UnitTesting.Mocks
         [TestMethod]
         public void AutomaticCleanupTestWithoutMef()
         {
-            TestMockDialogView shownView = null;
+            TestMockDialogView? shownView = null;
             TestMockDialogView.ShowDialogAction = view =>
             {
                 shownView = view;

@@ -20,7 +20,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void ConstructorParameter()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new GenericMockViewModel(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new GenericMockViewModel(null!));
         }
 
 

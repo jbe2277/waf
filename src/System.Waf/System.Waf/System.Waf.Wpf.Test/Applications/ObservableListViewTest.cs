@@ -31,7 +31,7 @@ namespace Test.Waf.Applications
             Assert.AreSame(sort, listView.Sort);
             listView.Dispose();
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListView<string>(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListView<string>(null!));
         }
 
         [TestMethod]

@@ -48,7 +48,7 @@ namespace System.Waf.UnitTesting.Mocks
         /// Shows the view. This method calls the ShowDialogAction.
         /// </summary>
         /// <param name="owner">The owner of this view.</param>
-        public void ShowDialog(object owner)
+        public void ShowDialog(object? owner)
         {
             Owner = owner;
             IsVisible = true;

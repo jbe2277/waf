@@ -28,7 +28,7 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>
         /// The supported file types of the last dialog.
         /// </summary>
-        public IEnumerable<FileType>? FileTypes { get; private set; }
+        public IEnumerable<FileType> FileTypes { get; private set; } = Array.Empty<FileType>();
 
         /// <summary>
         /// The default file type of the last dialog.
@@ -84,7 +84,7 @@ namespace System.Waf.UnitTesting.Mocks
         {
             Owner = null;
             FileDialogType = FileDialogType.None;
-            FileTypes = null;
+            FileTypes = Array.Empty<FileType>();
             DefaultFileType = null;
             DefaultFileName = null;
         }

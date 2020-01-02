@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -60,6 +61,7 @@ namespace System.Waf.Presentation.Controls
         /// <param name="primarySort">The primarySort is used first and the column sort is added as subsequent ordering. Example: When grouping is used
         /// it makes sense to sort first the grouping and then the column as subsequent sort.</param>
         /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
+        [return: NotNullIfNotNull(parameterName: "primarySort")]
         public static Func<IEnumerable<T>, IOrderedEnumerable<T>>? GetSorting<T>(DataGridColumn column, Func<IEnumerable<T>, IOrderedEnumerable<T>>? primarySort)
         {
             if (column == null) throw new ArgumentNullException(nameof(column));
@@ -78,18 +80,18 @@ namespace System.Waf.Presentation.Controls
             }
         }
 
-        internal static Func<T, object> GetSelector<T>(string propertyPath)
+        internal static Func<T, object> GetSelector<T>(string? propertyPath)
         {
             return SelectorCache<T>.Functions.GetOrAdd(propertyPath ?? "", CreateSelector<T>);
         }
 
-        private static Func<T, object> CreateSelector<T>(string propertyPath)
+        private static Func<T, object> CreateSelector<T>(string? propertyPath)
         {
             var parameter = Expression.Parameter(typeof(T), "item");
             if (string.IsNullOrEmpty(propertyPath))
                 return Expression.Lambda<Func<T, object>>(Expression.Convert(parameter, typeof(object)), parameter).Compile();
 
-            var propertyNames = propertyPath.Split('.');
+            var propertyNames = propertyPath!.Split('.');
             var propertyInfos = new PropertyInfo[propertyNames.Length];
             var type = typeof(T);
             for (int i = 0; i < propertyNames.Length; i++)

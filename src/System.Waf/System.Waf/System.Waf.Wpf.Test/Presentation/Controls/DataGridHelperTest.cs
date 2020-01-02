@@ -15,7 +15,7 @@ namespace Test.Waf.Presentation.Controls
         [TestMethod]
         public void HandleDataGridSortingTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.HandleDataGridSorting<object>(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.HandleDataGridSorting<object>(null!));
 
             var list = CreateUnorderedList();
             var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
@@ -24,13 +24,13 @@ namespace Test.Waf.Presentation.Controls
             var sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
             Assert.IsTrue(eventArgs.Handled);
             Assert.AreEqual(ListSortDirection.Ascending, column.SortDirection);
-            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, sort(list).Select(x => x.Person.Age));
+            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, sort!(list).Select(x => x.Person.Age));
 
             eventArgs = new DataGridSortingEventArgs(column);
             sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
             Assert.IsTrue(eventArgs.Handled);
             Assert.AreEqual(ListSortDirection.Descending, column.SortDirection);
-            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, sort(list).Select(x => x.Person.Age));
+            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, sort!(list).Select(x => x.Person.Age));
 
             eventArgs = new DataGridSortingEventArgs(column);
             sort = DataGridHelper.HandleDataGridSorting<PersonDataModel>(eventArgs);
@@ -42,7 +42,7 @@ namespace Test.Waf.Presentation.Controls
         [TestMethod]
         public void GetSortingTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.GetSorting<object>(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => DataGridHelper.GetSorting<object>(null!));
 
             var list = CreateUnorderedList();
             var column = new DataGridTextColumn { SortMemberPath = "Person.Age" };
@@ -50,10 +50,10 @@ namespace Test.Waf.Presentation.Controls
             Assert.IsNull(DataGridHelper.GetSorting<PersonDataModel>(column));
 
             column.SortDirection = ListSortDirection.Ascending;
-            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age));
+            AssertHelper.SequenceEqual(new[] { 1, 2, 3, 4 }, DataGridHelper.GetSorting<PersonDataModel>(column)!(list).Select(x => x.Person.Age));
 
             column.SortDirection = ListSortDirection.Descending;
-            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, DataGridHelper.GetSorting<PersonDataModel>(column)(list).Select(x => x.Person.Age));
+            AssertHelper.SequenceEqual(new[] { 4, 3, 2, 1 }, DataGridHelper.GetSorting<PersonDataModel>(column)!(list).Select(x => x.Person.Age));
 
             // With primarySort
             column.SortDirection = null;
@@ -78,16 +78,16 @@ namespace Test.Waf.Presentation.Controls
 
         private static void AssertDefaultEqual<T>()
         {
-            Assert.AreEqual(default(T), DataGridHelper.GetDefault(typeof(T)));
+            Assert.AreEqual(default(T)!, DataGridHelper.GetDefault(typeof(T)));
         }
 
         [TestMethod]
         public void GetSelectorTest()
         {
             var obj = new object();
-            Assert.AreSame(obj, DataGridHelper.GetSelector<object>(null)(obj));
-            Assert.AreSame(obj, DataGridHelper.GetSelector<object>("")(obj));
-            Assert.IsNull(DataGridHelper.GetSelector<object>("")(null));
+            Assert.AreSame(obj, DataGridHelper.GetSelector<object?>(null)(obj));
+            Assert.AreSame(obj, DataGridHelper.GetSelector<object?>("")(obj));
+            Assert.IsNull(DataGridHelper.GetSelector<object?>("")(null));
 
             var personDataModels = CreatePersonDataModels();
 
@@ -111,7 +111,7 @@ namespace Test.Waf.Presentation.Controls
         {
             var personDataModels = CreatePersonDataModels();
             for (int i = 0; i < 1000000; i++)
-                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel>("Person.Name"));
+                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Name"));
         }
 
         [TestMethod, TestCategory("Performance")]
@@ -126,10 +126,10 @@ namespace Test.Waf.Presentation.Controls
         {
             var personDataModels = CreatePersonDataModels();
             for (int i = 0; i < 1000000; i++)
-                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel>("Person.Age"));
+                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Age"));
         }
 
-        private static void AssertSelectorEqual<T>(IEnumerable<T> list, Func<T, object> expected, string actual)
+        private static void AssertSelectorEqual<T>(IEnumerable<T> list, Func<T, object?> expected, string actual)
         {
             foreach (var item in list)
             {
@@ -137,7 +137,7 @@ namespace Test.Waf.Presentation.Controls
             }
         }
 
-        private PersonDataModel[] CreatePersonDataModels()
+        private PersonDataModel?[] CreatePersonDataModels()
         {
             return new[]
             {
@@ -162,12 +162,12 @@ namespace Test.Waf.Presentation.Controls
 
         private class PersonDataModel
         {
-            public Person Person { get; set; }
+            public Person Person { get; set; } = default!;
         }
 
         private class Person
         {
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public int Age { get; set; }
             public KeyValuePair<int, string> Pair { get; set; }
         }

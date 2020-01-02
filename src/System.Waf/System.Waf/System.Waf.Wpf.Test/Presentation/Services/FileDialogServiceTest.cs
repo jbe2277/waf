@@ -16,7 +16,7 @@ namespace Test.Waf.Presentation.Services
         {
             var service = new FileDialogService();
             
-            AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowOpenFileDialog(null, null, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowOpenFileDialog(null!, null, null));
             AssertHelper.ExpectedException<ArgumentException>(() => 
                 service.ShowOpenFileDialog(new FileType[] {}, null, null));
         }
@@ -26,7 +26,7 @@ namespace Test.Waf.Presentation.Services
         {
             var service = new FileDialogService();
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowSaveFileDialog(null, null, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowSaveFileDialog(null!, null, null));
             AssertHelper.ExpectedException<ArgumentException>(() =>
                 service.ShowSaveFileDialog(new FileType[] { }, null, null));
         }
@@ -45,7 +45,7 @@ namespace Test.Waf.Presentation.Services
         private static string InvokeCreateFilter(IEnumerable<FileType> fileTypes)
         {
             var createFilterInfo = typeof(FileDialogService).GetMethod("CreateFilter", BindingFlags.Static | BindingFlags.NonPublic);
-            return (string)createFilterInfo.Invoke(null, new object[] { fileTypes });
+            return (string)createFilterInfo!.Invoke(null, new object[] { fileTypes })!;
         }
     }
 }

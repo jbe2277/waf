@@ -15,9 +15,9 @@ namespace Test.Waf.Applications.Services
             var messageService = new MockMessageService();
 
             var message = "Hello World";
-            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowMessage(null, message));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowWarning(null, message));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowError(null, message));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowMessage(null!, message));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowWarning(null!, message));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowError(null!, message));
             
             messageService.ShowMessage(message);
             Assert.AreEqual(MessageType.Message, messageService.MessageType);
@@ -40,8 +40,8 @@ namespace Test.Waf.Applications.Services
             var messageService = new MockMessageService();
 
             var message = "Hello World";
-            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowQuestion(null, message));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowYesNoQuestion(null, message));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowQuestion(null!, message));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => MessageServiceExtensions.ShowYesNoQuestion(null!, message));
 
             bool showQuestionCalled = false;
             messageService.ShowQuestionAction = m =>
