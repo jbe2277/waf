@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting.Mocks;
 
@@ -30,7 +31,7 @@ namespace Test.Waf.UnitTesting.Mocks
 
             Assert.AreEqual(FileDialogType.None, fileDialogService.FileDialogType);
             Assert.IsNull(fileDialogService.Owner);
-            Assert.IsNull(fileDialogService.FileTypes);
+            Assert.IsFalse(fileDialogService.FileTypes.Any());
             Assert.IsNull(fileDialogService.DefaultFileType);
             Assert.IsNull(fileDialogService.DefaultFileName);
 
