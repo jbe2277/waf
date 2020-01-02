@@ -79,7 +79,7 @@ namespace System.Waf.Foundation
         /// <param name="sender">The sender of the collection changed event.</param>
         /// <param name="e">The event args of the collection changed event.</param>
         /// <exception cref="ArgumentNullException">Argument e must not be null.</exception>
-        protected void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e == null) { throw new ArgumentNullException(nameof(e)); }
             if (e.Action == NotifyCollectionChangedAction.Add)

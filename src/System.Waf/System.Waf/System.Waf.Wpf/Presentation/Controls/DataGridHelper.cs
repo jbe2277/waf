@@ -20,7 +20,7 @@ namespace System.Waf.Presentation.Controls
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="e">The EventArgs provided by the Sorting event.</param>
         /// <returns>The Sort function or null when SortDirection is set to null. Can be used by the ObservableListView.</returns>
-        public static Func<IEnumerable<T>, IOrderedEnumerable<T>> HandleDataGridSorting<T>(DataGridSortingEventArgs e)
+        public static Func<IEnumerable<T>, IOrderedEnumerable<T>>? HandleDataGridSorting<T>(DataGridSortingEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
             e.Handled = true;
@@ -46,7 +46,7 @@ namespace System.Waf.Presentation.Controls
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="column">The DataGrid column that should be sorted.</param>
         /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
-        public static Func<IEnumerable<T>, IOrderedEnumerable<T>> GetSorting<T>(DataGridColumn column)
+        public static Func<IEnumerable<T>, IOrderedEnumerable<T>>? GetSorting<T>(DataGridColumn column)
         {
             return GetSorting<T>(column, null);
         }
@@ -60,17 +60,17 @@ namespace System.Waf.Presentation.Controls
         /// <param name="primarySort">The primarySort is used first and the column sort is added as subsequent ordering. Example: When grouping is used
         /// it makes sense to sort first the grouping and then the column as subsequent sort.</param>
         /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
-        public static Func<IEnumerable<T>, IOrderedEnumerable<T>> GetSorting<T>(DataGridColumn column, Func<IEnumerable<T>, IOrderedEnumerable<T>> primarySort)
+        public static Func<IEnumerable<T>, IOrderedEnumerable<T>>? GetSorting<T>(DataGridColumn column, Func<IEnumerable<T>, IOrderedEnumerable<T>>? primarySort)
         {
             if (column == null) throw new ArgumentNullException(nameof(column));
             var keySelector = GetSelector<T>(column.SortMemberPath);
             if (column.SortDirection == ListSortDirection.Ascending)
             {
-                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderBy(keySelector)) : x => primarySort(x).ThenBy(keySelector);
+                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderBy(keySelector)) : x => primarySort!(x).ThenBy(keySelector);
             }
             else if (column.SortDirection == ListSortDirection.Descending)
             {
-                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderByDescending(keySelector)) : x => primarySort(x).ThenByDescending(keySelector);
+                return primarySort == null ? (Func<IEnumerable<T>, IOrderedEnumerable<T>>)(x => x.OrderByDescending(keySelector)) : x => primarySort!(x).ThenByDescending(keySelector);
             }
             else
             {
@@ -94,7 +94,7 @@ namespace System.Waf.Presentation.Controls
             var type = typeof(T);
             for (int i = 0; i < propertyNames.Length; i++)
             {
-                propertyInfos[i] = type.GetProperty(propertyNames[i]);
+                propertyInfos[i] = type.GetProperty(propertyNames[i])!;
                 type = propertyInfos[i].PropertyType;
             }
 
@@ -118,7 +118,7 @@ namespace System.Waf.Presentation.Controls
             return Expression.Lambda<Func<T, object>>(block, parameter).Compile();
         }
 
-        internal static object GetDefault(Type type)
+        internal static object? GetDefault(Type type)
         {
             return !type.IsValueType ? null : Activator.CreateInstance(type);
         }

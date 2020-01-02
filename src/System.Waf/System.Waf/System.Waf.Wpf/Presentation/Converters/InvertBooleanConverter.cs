@@ -22,9 +22,9 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>The inverter boolean value.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            return value == null ? (object)null : !(bool)value;
+            return value == null ? (object?)null : !(bool)value;
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>The inverter boolean value.</returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            return value == null ? (object)null : !(bool)value;
+            return value == null ? (object?)null : !(bool)value;
         }
     }
 }

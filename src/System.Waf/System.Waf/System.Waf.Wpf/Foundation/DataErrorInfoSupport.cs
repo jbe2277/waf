@@ -37,7 +37,7 @@ namespace System.Waf.Foundation
         /// </summary>
         /// <param name="memberName">The name of the property whose error message to get.</param>
         /// <returns>The error message for the property. The default is an empty string ("").</returns>
-        public string this[string memberName]
+        public string this[string? memberName]
         {
             get
             {

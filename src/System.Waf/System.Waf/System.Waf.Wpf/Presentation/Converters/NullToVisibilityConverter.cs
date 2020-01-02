@@ -24,7 +24,7 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Visible when the value is not null; otherwise Collapsed.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
             if (invert)
@@ -43,7 +43,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

@@ -26,7 +26,7 @@ namespace System.Waf.Presentation.Services
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowMessage(object owner, string message)
+        public void ShowMessage(object? owner, string message)
         {
             if (owner is Window ownerWindow)
             {
@@ -45,7 +45,7 @@ namespace System.Waf.Presentation.Services
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowWarning(object owner, string message)
+        public void ShowWarning(object? owner, string message)
         {
             if (owner is Window ownerWindow)
             {
@@ -64,7 +64,7 @@ namespace System.Waf.Presentation.Services
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        public void ShowError(object owner, string message)
+        public void ShowError(object? owner, string message)
         {
             if (owner is Window ownerWindow)
             {
@@ -84,7 +84,7 @@ namespace System.Waf.Presentation.Services
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes, <c>false</c> for no and <c>null</c> for cancel.</returns>
-        public bool? ShowQuestion(object owner, string message)
+        public bool? ShowQuestion(object? owner, string message)
         {
             MessageBoxResult result;
             if (owner is Window ownerWindow)
@@ -109,7 +109,7 @@ namespace System.Waf.Presentation.Services
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes and <c>false</c> for no.</returns>
-        public bool ShowYesNoQuestion(object owner, string message)
+        public bool ShowYesNoQuestion(object? owner, string message)
         {
             MessageBoxResult result;
             if (owner is Window ownerWindow)

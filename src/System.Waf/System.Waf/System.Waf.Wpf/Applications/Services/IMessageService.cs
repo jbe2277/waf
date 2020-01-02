@@ -14,21 +14,21 @@
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        void ShowMessage(object owner, string message);
+        void ShowMessage(object? owner, string message);
 
         /// <summary>
         /// Shows the message as warning.
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        void ShowWarning(object owner, string message);
+        void ShowWarning(object? owner, string message);
 
         /// <summary>
         /// Shows the message as error.
         /// </summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
-        void ShowError(object owner, string message);
+        void ShowError(object? owner, string message);
 
         /// <summary>
         /// Shows the specified question.
@@ -36,7 +36,7 @@
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes, <c>false</c> for no and <c>null</c> for cancel.</returns>
-        bool? ShowQuestion(object owner, string message);
+        bool? ShowQuestion(object? owner, string message);
 
         /// <summary>
         /// Shows the specified yes/no question.
@@ -44,6 +44,6 @@
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes and <c>false</c> for no.</returns>
-        bool ShowYesNoQuestion(object owner, string message);
+        bool ShowYesNoQuestion(object? owner, string message);
     }
 }

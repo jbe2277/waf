@@ -23,7 +23,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The format specification used to format the object.</param>
         /// <param name="culture">The culture to use in the converter. This parameter will be ignored.</param>
         /// <returns>The formatted string.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return string.Format(CultureInfo.CurrentCulture, parameter as string ?? "{0}", value);
         }
@@ -37,7 +37,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }
@@ -50,7 +50,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="parameter">The format specification used to format the object.</param>
         /// <param name="culture">The culture to use in the converter. This parameter will be ignored.</param>
         /// <returns>The formatted string.</returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return string.Format(CultureInfo.CurrentCulture, parameter as string ?? "{0}", values);
         }
@@ -64,7 +64,7 @@ namespace System.Waf.Presentation.Converters
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Nothing because this method throws an exception.</returns>
         /// <exception cref="NotSupportedException">Throws this exception when the method is called.</exception>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object? value, Type[] targetTypes, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

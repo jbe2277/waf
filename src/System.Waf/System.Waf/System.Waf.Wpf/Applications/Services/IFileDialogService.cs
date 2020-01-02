@@ -21,7 +21,7 @@ namespace System.Waf.Applications.Services
         /// <returns>A FileDialogResult object which contains the filename selected by the user.</returns>
         /// <exception cref="ArgumentNullException">fileTypes must not be null.</exception>
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
-        FileDialogResult ShowOpenFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName);
+        FileDialogResult ShowOpenFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName);
 
         /// <summary>
         /// Shows the save file dialog box that allows a user to specify a filename to save a file as.
@@ -33,6 +33,6 @@ namespace System.Waf.Applications.Services
         /// <returns>A FileDialogResult object which contains the filename entered by the user.</returns>
         /// <exception cref="ArgumentNullException">fileTypes must not be null.</exception>
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
-        FileDialogResult ShowSaveFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName);
+        FileDialogResult ShowSaveFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName);
     }
 }

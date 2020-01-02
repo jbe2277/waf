@@ -17,7 +17,7 @@ namespace System.Waf.Applications
     /// <typeparam name="TOriginal">The type of elements in the original collection.</typeparam>
     public class SynchronizingCollection<T, TOriginal> : SynchronizingCollectionCore<T, TOriginal>
     {
-        private readonly INotifyCollectionChanged originalObservableCollection;
+        private readonly INotifyCollectionChanged? originalObservableCollection;
 
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace System.Waf.Presentation.Services
         /// <returns>A FileDialogResult object which contains the filename selected by the user.</returns>
         /// <exception cref="ArgumentNullException">fileTypes must not be null.</exception>
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
-        public FileDialogResult ShowOpenFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName)
+        public FileDialogResult ShowOpenFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
             if (fileTypes == null) { throw new ArgumentNullException(nameof(fileTypes)); }
             if (!fileTypes.Any()) { throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes)); }
@@ -48,7 +48,7 @@ namespace System.Waf.Presentation.Services
         /// <returns>A FileDialogResult object which contains the filename entered by the user.</returns>
         /// <exception cref="ArgumentNullException">fileTypes must not be null.</exception>
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
-        public FileDialogResult ShowSaveFileDialog(object owner, IEnumerable<FileType> fileTypes, FileType defaultFileType, string defaultFileName)
+        public FileDialogResult ShowSaveFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
             if (fileTypes == null) { throw new ArgumentNullException(nameof(fileTypes)); }
             if (!fileTypes.Any()) { throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes)); }
@@ -58,15 +58,15 @@ namespace System.Waf.Presentation.Services
             return ShowFileDialog(owner, dialog, fileTypes, defaultFileType, defaultFileName);
         }
 
-        private static FileDialogResult ShowFileDialog(object owner, FileDialog dialog, IEnumerable<FileType> fileTypes, 
-            FileType defaultFileType, string defaultFileName)
+        private static FileDialogResult ShowFileDialog(object? owner, FileDialog dialog, IEnumerable<FileType> fileTypes, 
+            FileType? defaultFileType, string? defaultFileName)
         {
             int filterIndex = fileTypes.IndexOf(defaultFileType);
             if (filterIndex >= 0) { dialog.FilterIndex = filterIndex + 1; }
             if (!string.IsNullOrEmpty(defaultFileName))
             {
                 dialog.FileName = Path.GetFileName(defaultFileName);
-                string directory = Path.GetDirectoryName(defaultFileName);
+                string? directory = Path.GetDirectoryName(defaultFileName);
                 if (!string.IsNullOrEmpty(directory))
                 {
                     dialog.InitialDirectory = directory;

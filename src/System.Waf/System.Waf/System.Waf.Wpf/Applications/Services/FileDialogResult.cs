@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="fileName">The filename entered by the user.</param>
         /// <param name="selectedFileType">The file type selected by the user.</param>
-        public FileDialogResult(string fileName, FileType selectedFileType)
+        public FileDialogResult(string? fileName, FileType? selectedFileType)
         {
             FileName = fileName;
             SelectedFileType = selectedFileType;
@@ -34,11 +34,11 @@
         /// <summary>
         /// Gets the filename entered by the user or <c>null</c> when the user canceled the dialog box.
         /// </summary>
-        public string FileName { get; }
+        public string? FileName { get; }
 
         /// <summary>
         /// Gets the file type selected by the user or <c>null</c> when the user canceled the dialog box.
         /// </summary>
-        public FileType SelectedFileType { get; }
+        public FileType? SelectedFileType { get; }
     }
 }

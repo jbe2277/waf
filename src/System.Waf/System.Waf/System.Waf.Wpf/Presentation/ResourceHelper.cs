@@ -18,7 +18,7 @@ namespace System.Waf.Presentation
         public static Uri GetPackUri(Assembly resourceAssembly, string resourcePath)
         {
             if (resourceAssembly == null) throw new ArgumentNullException(nameof(resourceAssembly));
-            return GetPackUri(resourceAssembly.GetName().Name, resourcePath);
+            return GetPackUri(resourceAssembly.GetName().Name!, resourcePath);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace System.Waf.Presentation
         public static void AddToApplicationResources(Assembly resourceAssembly, params string[] resourceDictionaryPaths)
         {
             if (resourceAssembly == null) throw new ArgumentNullException(nameof(resourceAssembly));
-            AddToApplicationResources(resourceAssembly.GetName().Name, resourceDictionaryPaths);
+            AddToApplicationResources(resourceAssembly.GetName().Name!, resourceDictionaryPaths);
         }
 
         /// <summary>

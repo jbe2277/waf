@@ -24,7 +24,7 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>Visible when the boolean value was true; otherwise Collapsed.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var flag = (bool?)value;
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
@@ -45,7 +45,7 @@ namespace System.Waf.Presentation.Converters
         /// Do not specify this parameter if the default behavior is desired.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>true when the Visibility enumeration value was Visible; otherwise false.</returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var visibility = (Visibility?)value;
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);

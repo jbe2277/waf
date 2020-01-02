@@ -45,7 +45,7 @@ namespace System.Waf.Presentation
             }
         }
 
-        private void ErrorChangedHandler(object sender, ValidationErrorEventArgs e)
+        private void ErrorChangedHandler(object? sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
             {

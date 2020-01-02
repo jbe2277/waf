@@ -17,7 +17,7 @@ namespace System.Waf.Applications
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableListView<T> : ObservableListViewCore<T>
     {
-        private readonly INotifyCollectionChanged originalObservableCollection;
+        private readonly INotifyCollectionChanged? originalObservableCollection;
 
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace System.Waf.Applications
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer) : this(originalList, comparer, null, null)
+        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T>? comparer) : this(originalList, comparer, null, null)
         {
         }
 
@@ -47,8 +47,8 @@ namespace System.Waf.Applications
         /// <param name="filter">Optional, a filter used for this list view.</param>
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T> comparer, Predicate<T> filter,
-            Func<IEnumerable<T>, IOrderedEnumerable<T>> sort) : base(originalList, comparer, filter, sort, true)
+        public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T>? comparer, Predicate<T>? filter,
+            Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort) : base(originalList, comparer, filter, sort, true)
         {
             originalObservableCollection = originalList as INotifyCollectionChanged;
             if (originalObservableCollection != null)
@@ -73,7 +73,7 @@ namespace System.Waf.Applications
             base.OnDispose(disposing);
         }
 
-        private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             Update();
         }

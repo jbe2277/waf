@@ -27,7 +27,7 @@ namespace System.Waf.Foundation
         /// <param name="memberName">The name of the member to validate.</param>
         /// <returns>The error message for the member. The default is an empty string ("").</returns>
         /// <exception cref="ArgumentNullException">The argument instance must not be null.</exception>
-        public static string Validate(this IDataErrorInfo instance, string memberName)
+        public static string Validate(this IDataErrorInfo instance, string? memberName)
         {
             if (instance == null) { throw new ArgumentNullException(nameof(instance)); }
 
