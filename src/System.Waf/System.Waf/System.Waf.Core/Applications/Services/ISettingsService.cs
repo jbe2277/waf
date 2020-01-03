@@ -1,19 +1,13 @@
 ﻿namespace System.Waf.Applications.Services
 {
-    /// <summary>
-    /// Service that is responsible to load and save user settings.
-    /// </summary>
+    /// <summary>Service that is responsible to load and save user settings.</summary>
     public interface ISettingsService
     {
-        /// <summary>
-        /// Gets or sets the settings file name.
-        /// </summary>
+        /// <summary>Gets or sets the settings file name.</summary>
         /// <exception cref="InvalidOperationException">Setter must not be called anymore if one of the methods was used.</exception>
         string FileName { get; set; }
 
-        /// <summary>
-        /// An error occurred.
-        /// </summary>
+        /// <summary>An error occurred.</summary>
         event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>

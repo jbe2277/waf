@@ -4,14 +4,10 @@ using System.Linq;
 
 namespace System.Waf.Foundation
 {
-    /// <summary>
-    /// Provides helper methods for collections.
-    /// </summary>
+    /// <summary>Provides helper methods for collections.</summary>
     public static class CollectionHelper
     {
-        /// <summary>
-        /// Returns an empty <see cref="IReadOnlyList{TResult}"/> that has the specified type argument.
-        /// </summary>
+        /// <summary>Returns an empty <see cref="IReadOnlyList{TResult}"/> that has the specified type argument.</summary>
         /// <typeparam name="TResult">The type to assign to the type parameter of the returned generic <see cref="IReadOnlyList{TResult}"/>.</typeparam>
         /// <returns>An empty <see cref="IReadOnlyList{TResult}"/> whose type argument is TResult.</returns>
         /// <remarks>The Empty{TResult}() method caches an empty sequence of type TResult. Same implementation as Array.Empty{T}.</remarks>
@@ -21,9 +17,7 @@ namespace System.Waf.Foundation
             return Array.Empty<TResult>();
         }
 
-        /// <summary>
-        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.
-        /// </summary>
+        /// <summary>Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.</summary>
         /// <typeparam name="T">The collection item type.</typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="item">The object to locate in the collection. The value can be null for reference types.</param>
@@ -43,9 +37,7 @@ namespace System.Waf.Foundation
             return -1;
         }
 
-        /// <summary>
-        /// Gets the next element in the collection or default when no next element can be found.
-        /// </summary>
+        /// <summary>Gets the next element in the collection or default when no next element can be found.</summary>
         /// <typeparam name="T">The type of the items.</typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="current">The current item.</param>
@@ -66,7 +58,6 @@ namespace System.Waf.Foundation
                 }
             }
             if (!found) throw new ArgumentException("The collection does not contain the current item.");
-                
             return enumerator.MoveNext() ? enumerator.Current : default;
         }
 

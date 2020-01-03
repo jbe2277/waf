@@ -15,28 +15,19 @@ namespace System.Waf.Foundation
         /// Initializes a new instance of the <see cref="ReadOnlyObservableCollection{T}"/>
         /// class that serves as a wrapper around the specified <see cref="ObservableCollection{T}"/>.
         /// </summary>
-        /// <param name="list">
-        /// The <see cref="ObservableCollection{T}"/> with which to create this instance of the <see cref="ReadOnlyObservableCollection{T}"/> class.
-        /// </param>
+        /// <param name="list">The <see cref="ObservableCollection{T}"/> with which to create this instance of the 
+        /// <see cref="ReadOnlyObservableCollection{T}"/> class.</param>
         /// <exception cref="ArgumentNullException">list is null.</exception>
-        public ReadOnlyObservableList(ObservableCollection<T> list)
-            : base(list)
-        {
-        }
+        public ReadOnlyObservableList(ObservableCollection<T> list) : base(list) { }
 
-
-        /// <summary>
-        /// Occurs when the collection changes.
-        /// </summary>
+        /// <summary>Occurs when the collection changes.</summary>
         public new event NotifyCollectionChangedEventHandler? CollectionChanged
         {
             add => base.CollectionChanged += value;
             remove => base.CollectionChanged -= value;
         }
 
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
+        /// <summary>Occurs when a property value changes.</summary>
         public new event PropertyChangedEventHandler? PropertyChanged
         {
             add => base.PropertyChanged += value;

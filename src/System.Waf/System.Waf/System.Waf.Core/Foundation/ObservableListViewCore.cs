@@ -20,19 +20,14 @@ namespace System.Waf.Foundation
         private Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort;
         private volatile bool isDisposed;
 
-
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
         public ObservableListViewCore(IEnumerable<T> originalList) : this(originalList, null, null, null, false)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
@@ -40,9 +35,7 @@ namespace System.Waf.Foundation
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
@@ -53,9 +46,7 @@ namespace System.Waf.Foundation
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
@@ -83,9 +74,7 @@ namespace System.Waf.Foundation
         }
 
 
-        /// <summary>
-        /// Gets or sets the filter used for this list view.
-        /// </summary>
+        /// <summary>Gets or sets the filter used for this list view.</summary>
         public Predicate<T>? Filter
         {
             get => filter;
@@ -99,9 +88,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>
-        /// Gets or sets the sorting used for this list view.
-        /// </summary>
+        /// <summary>Gets or sets the sorting used for this list view.</summary>
         public Func<IEnumerable<T>, IOrderedEnumerable<T>>? Sort
         {
             get => sort;
@@ -115,31 +102,24 @@ namespace System.Waf.Foundation
             }
         }
 
-
-        /// <summary>
-        /// Updates the list view and raises the appropriate collection changed events.
-        /// </summary>
+        /// <summary>Updates the list view and raises the appropriate collection changed events.</summary>
         public void Update()
         {
             UpdateInnerList();
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Call this method from a subclass when you implement a finalizer (destructor).
-        /// </summary>
+        /// <summary>Call this method from a subclass when you implement a finalizer (destructor).</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) { return; }
+            if (isDisposed) return;
             isDisposed = true;
 
             OnDispose(disposing);
@@ -152,9 +132,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>
-        /// Override this method to free, release or reset any resources.
-        /// </summary>
+        /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected virtual void OnDispose(bool disposing) { }
 

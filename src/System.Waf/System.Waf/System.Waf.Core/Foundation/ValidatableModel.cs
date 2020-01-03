@@ -9,9 +9,7 @@ using System.Runtime.Serialization;
 
 namespace System.Waf.Foundation
 {
-    /// <summary>
-    /// Defines a base class for a model that supports validation.
-    /// </summary>
+    /// <summary>Defines a base class for a model that supports validation.</summary>
     [DataContract]
     public abstract class ValidatableModel : Model, INotifyDataErrorInfo
     {
@@ -22,43 +20,28 @@ namespace System.Waf.Foundation
         private IReadOnlyList<ValidationResult>? errors;
         private bool hasErrors;
 
-
-        /// <summary>
-        /// Gets a value that indicates whether the entity has validation errors.
-        /// </summary>
+        /// <summary>Gets a value that indicates whether the entity has validation errors.</summary>
         public bool HasErrors
         {
             get => hasErrors;
             private set => SetProperty(ref hasErrors, value);
         }
 
-        /// <summary>
-        /// Gets all errors. The errors for a specified property and the entity errors.
-        /// </summary>
+        /// <summary>Gets all errors. The errors for a specified property and the entity errors.</summary>
         public IReadOnlyList<ValidationResult> Errors => errors ??= noErrors;
 
         private Dictionary<string, List<ValidationResult>> ErrorsDictionary => errorsDictionary ??= new Dictionary<string, List<ValidationResult>>();
 
-
-        /// <summary>
-        /// Occurs when the validation errors have changed for a property or for the entire entity.
-        /// </summary>
+        /// <summary>Occurs when the validation errors have changed for a property or for the entire entity.</summary>
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-
-        /// <summary>
-        /// Gets the validation errors for a specified property or for the entire entity.
-        /// </summary>
+        /// <summary>Gets the validation errors for a specified property or for the entire entity.</summary>
         /// <param name="propertyName">The name of the property to retrieve validation errors for; 
         /// or null or String.Empty, to retrieve entity-level errors.</param>
         /// <returns>The validation errors for the property or entity.</returns>
         public IEnumerable<ValidationResult> GetErrors(string? propertyName)
         {
-            if (ErrorsDictionary.TryGetValue(propertyName ?? "", out var result))
-            {
-                return result;
-            }
-            return noErrors;
+            return ErrorsDictionary.TryGetValue(propertyName ?? "", out var result) ? result : (IEnumerable<ValidationResult>)noErrors;
         }
         
         IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
@@ -99,9 +82,7 @@ namespace System.Waf.Foundation
             return false;
         }
 
-        /// <summary>
-        /// Raises the <see cref="ErrorsChanged"/> event.
-        /// </summary>
+        /// <summary>Raises the <see cref="ErrorsChanged"/> event.</summary>
         /// <param name="e">The <see cref="System.ComponentModel.DataErrorsChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnErrorsChanged(DataErrorsChangedEventArgs e)
         {

@@ -11,9 +11,7 @@ using System.Xml.Linq;
 
 namespace System.Waf.Presentation.Services
 {
-    /// <summary>
-    /// Service that is responsible to load and save user settings.
-    /// </summary>
+    /// <summary>Service that is responsible to load and save user settings.</summary>
     public class SettingsServiceCore : ISettingsService, IDisposable
     {
         private static readonly XNamespace xsiNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
@@ -24,9 +22,7 @@ namespace System.Waf.Presentation.Services
         private string fileName;
         private volatile bool isDisposed;
 
-        /// <summary>
-        /// Initializes a new instance of the SettingsService.
-        /// </summary>
+        /// <summary>Initializes a new instance of the SettingsService.</summary>
         public SettingsServiceCore()
         {
             fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -34,9 +30,7 @@ namespace System.Waf.Presentation.Services
             settings = new ConcurrentDictionary<Type, Lazy<object>>();
         }
 
-        /// <summary>
-        /// Gets or sets the settings file name.
-        /// </summary>
+        /// <summary>Gets or sets the settings file name.</summary>
         /// <exception cref="InvalidOperationException">Setter must not be called anymore if one of the methods was used.</exception>
         public string FileName
         {
@@ -48,9 +42,7 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// An error occurred.
-        /// </summary>
+        /// <summary>An error occurred.</summary>
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>
@@ -134,22 +126,18 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// Calls save to ensure that the latest changes are persisted.
-        /// </summary>
+        /// <summary>Calls save to ensure that the latest changes are persisted.</summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Call this method from a subclass when you implement a finalizer (destructor).
-        /// </summary>
+        /// <summary>Call this method from a subclass when you implement a finalizer (destructor).</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) { return; }
+            if (isDisposed) return;
             isDisposed = true;
 
             OnDispose(disposing);
@@ -159,9 +147,7 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// Override this method to free, release or reset any resources.
-        /// </summary>
+        /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected virtual void OnDispose(bool disposing)
         {

@@ -105,7 +105,7 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ErrorOccurredTest()
         {
-            Tuple<Exception, SettingsServiceAction, string>? error = null;
+            Tuple<Exception, SettingsServiceAction, string?>? error = null;
             void AssertErrorEventArgs<TException>(SettingsServiceAction expectedAction, string expectedFileName)
             {
                 Assert.IsInstanceOfType(error!.Item1, typeof(TException));

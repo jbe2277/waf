@@ -3,19 +3,13 @@ using System.Threading.Tasks;
 
 namespace System.Waf.Foundation
 {
-    /// <summary>
-    /// Defines the throttling mode.
-    /// </summary>
+    /// <summary>Defines the throttling mode.</summary>
     public enum ThrottledActionMode
     {
-        /// <summary>
-        /// Invokes the method at maximum once for the delay time.
-        /// </summary>
+        /// <summary>Invokes the method at maximum once for the delay time.</summary>
         InvokeMaxEveryDelayTime,
 
-        /// <summary>
-        /// Invokes the method only if no invoke request was called for duration of the delay time.
-        /// </summary>
+        /// <summary>Invokes the method only if no invoke request was called for duration of the delay time.</summary>
         InvokeOnlyIfIdleForDelayTime
     }
 
@@ -35,10 +29,7 @@ namespace System.Waf.Foundation
         private readonly TimeSpan delayTime;
         private CancellationTokenSource? cancellationTokenSource;
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ThrottledAction"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="ThrottledAction"/> class.</summary>
         /// <param name="action">The action that should be throttled.</param>
         /// <exception cref="ArgumentNullException">The argument action must not be null.</exception>
         public ThrottledAction(Action action)
@@ -46,9 +37,7 @@ namespace System.Waf.Foundation
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ThrottledAction"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="ThrottledAction"/> class.</summary>
         /// <param name="action">The action that should be throttled.</param>
         /// <param name="mode">Defines the throttling mode.</param>
         /// <param name="delayTime">The delay time.</param>
@@ -61,16 +50,10 @@ namespace System.Waf.Foundation
             this.delayTime = delayTime;
         }
 
-
-        /// <summary>
-        /// Indicates that an execution of the action delegate is requested.
-        /// </summary>
+        /// <summary>Indicates that an execution of the action delegate is requested.</summary>
         public bool IsRunning => cancellationTokenSource != null;
 
-
-        /// <summary>
-        /// Requests the execution of the action delegate.
-        /// </summary>
+        /// <summary>Requests the execution of the action delegate.</summary>
         public void InvokeAccumulated()
         {
             CancellationToken? token = null;
@@ -97,9 +80,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>
-        /// Cancel the execution of the action delegate that was requested.
-        /// </summary>
+        /// <summary>Cancel the execution of the action delegate that was requested.</summary>
         public void Cancel()
         {
             lock (cancellationTokenSourceLock)

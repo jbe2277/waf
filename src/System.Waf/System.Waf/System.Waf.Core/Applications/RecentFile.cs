@@ -6,62 +6,46 @@ using System.Xml.Serialization;
 
 namespace System.Waf.Applications
 {
-    /// <summary>
-    /// Represents a recent file.
-    /// </summary>
+    /// <summary>Represents a recent file.</summary>
     public sealed class RecentFile : Model, IXmlSerializable
     {
         private bool isPinned;
-        private string path = default!;
 
-
-        /// <summary>
-        /// This constructor overload is reserved and should not be used. It is used internally by the XmlSerializer.
-        /// </summary>
+        /// <summary>This constructor overload is reserved and should not be used. It is used internally by the XmlSerializer.</summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public RecentFile() { }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RecentFile"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="RecentFile"/> class.</summary>
         /// <param name="path">The file path.</param>
         /// <exception cref="ArgumentException">The argument path must not be null or empty.</exception>
         public RecentFile(string path)
         {
             if (string.IsNullOrEmpty(path)) { throw new ArgumentException("The argument path must not be null or empty.", nameof(path)); }
-            this.path = path;
+            Path = path;
         }
 
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this recent file is pinned.
-        /// </summary>
+        /// <summary>Gets or sets a value indicating whether this recent file is pinned.</summary>
         public bool IsPinned
         {
             get => isPinned;
             set => SetProperty(ref isPinned, value);
         }
 
-        /// <summary>
-        /// Gets the file path.
-        /// </summary>
-        public string Path => path;
-
+        /// <summary>Gets the file path.</summary>
+        public string Path { get; private set; } = null!;
 
         XmlSchema IXmlSerializable.GetSchema() { return null!; }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
-
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
             IsPinned = bool.Parse(reader.GetAttribute("IsPinned"));
-            path = reader.ReadElementContentAsString();
+            Path = reader.ReadElementContentAsString();
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            if (writer == null) { throw new ArgumentNullException(nameof(writer)); }
-
+            if (writer == null) throw new ArgumentNullException(nameof(writer));
             writer.WriteAttributeString("IsPinned", IsPinned.ToString());
             writer.WriteString(Path);
         }

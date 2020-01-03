@@ -25,10 +25,7 @@ namespace System.Waf.Foundation
         private readonly bool noCollectionChangedHandler;
         private volatile bool isDisposed;
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
         /// <param name="factory">The factory which is used to create new elements in this collection.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
@@ -38,9 +35,7 @@ namespace System.Waf.Foundation
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
         /// <param name="factory">The factory which is used to create new elements in this collection.</param>
         /// <param name="noCollectionChangedHandler">Pass true when the subclass takes care about the collection changed event of the originalCollection. Default is false.</param>
@@ -72,16 +67,13 @@ namespace System.Waf.Foundation
             }
         }
 
-
-        /// <summary>
-        /// Call this method when the orignal collection has changed.
-        /// </summary>
+        /// <summary>Call this method when the orignal collection has changed.</summary>
         /// <param name="sender">The sender of the collection changed event.</param>
         /// <param name="e">The event args of the collection changed event.</param>
         /// <exception cref="ArgumentNullException">Argument e must not be null.</exception>
         protected void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e == null) { throw new ArgumentNullException(nameof(e)); }
+            if (e == null) throw new ArgumentNullException(nameof(e));
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 if (e.NewStartingIndex >= 0)
@@ -150,22 +142,18 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Call this method from a subclass when you implement a finalizer (destructor).
-        /// </summary>
+        /// <summary>Call this method from a subclass when you implement a finalizer (destructor).</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) { return; }
+            if (isDisposed) return;
             isDisposed = true;
 
             OnDispose(disposing);
@@ -178,9 +166,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>
-        /// Override this method to free, release or reset any resources.
-        /// </summary>
+        /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected virtual void OnDispose(bool disposing)
         {

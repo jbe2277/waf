@@ -8,9 +8,7 @@ using System.ComponentModel;
 
 namespace System.Waf.Applications
 {
-    /// <summary>
-    /// This class encapsulates the logic for a recent file list.
-    /// </summary>
+    /// <summary>This class encapsulates the logic for a recent file list.</summary>
     /// <remarks>
     /// This class can be used in a Settings file to store and load the recent file list as user settings. In Visual Studio you might need
     /// to enter the full class name "System.Waf.Applications.RecentFileList" in the "Select a type" dialog.
@@ -20,28 +18,18 @@ namespace System.Waf.Applications
         private readonly ObservableCollection<RecentFile> recentFiles;
         private int maxFilesNumber = 8;
         
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RecentFileList"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="RecentFileList"/> class.</summary>
         public RecentFileList()
         {
             recentFiles = new ObservableCollection<RecentFile>();
             RecentFiles = new ReadOnlyObservableCollection<RecentFile>(recentFiles);
         }
 
-
-        /// <summary>
-        /// Gets the list of recent files.
-        /// </summary>
+        /// <summary>Gets the list of recent files.</summary>
         public ReadOnlyObservableCollection<RecentFile> RecentFiles { get; }
 
-        /// <summary>
-        /// Gets or sets the maximum number of recent files in the list.
-        /// </summary>
-        /// <remarks>
-        /// If the set number is lower than the list count then the recent file list is truncated to the number.
-        /// </remarks>
+        /// <summary>Gets or sets the maximum number of recent files in the list.</summary>
+        /// <remarks>If the set number is lower than the list count then the recent file list is truncated to the number.</remarks>
         /// <exception cref="ArgumentException">The value must be equal or larger than 1.</exception>
         public int MaxFilesNumber
         {
@@ -50,10 +38,8 @@ namespace System.Waf.Applications
             {
                 if (maxFilesNumber != value)
                 {
-                    if (value <= 0) { throw new ArgumentException("The value must be equal or larger than 1."); }
-
+                    if (value <= 0) throw new ArgumentException("The value must be equal or larger than 1.");
                     maxFilesNumber = value;
-
                     if (recentFiles.Count - maxFilesNumber >= 1)
                     {
                         RemoveRange(maxFilesNumber, recentFiles.Count - maxFilesNumber);
@@ -64,7 +50,6 @@ namespace System.Waf.Applications
 
         private int PinCount => recentFiles.Count(r => r.IsPinned);
 
-
         /// <summary>
         /// Loads the specified collection into the recent file list. Use this method when you need to initialize the RecentFileList 
         /// manually. This can be useful when you are using an own persistence implementation.
@@ -74,21 +59,17 @@ namespace System.Waf.Applications
         /// <exception cref="ArgumentNullException">The argument recentFiles must not be null.</exception>
         public void Load(IEnumerable<RecentFile> recentFiles)
         {
-            if (recentFiles == null) { throw new ArgumentNullException(nameof(recentFiles)); }
-
+            if (recentFiles == null) throw new ArgumentNullException(nameof(recentFiles));
             Clear();
             AddRange(recentFiles.Take(maxFilesNumber));
         }
 
-        /// <summary>
-        /// Adds a file to the recent file list. If the file already exists in the list then it only changes the position in the list.
-        /// </summary>
+        /// <summary>Adds a file to the recent file list. If the file already exists in the list then it only changes the position in the list.</summary>
         /// <param name="fileName">The path of the recent file.</param>
         /// <exception cref="ArgumentException">The argument fileName must not be null or empty.</exception>
         public void AddFile(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName)); }
-
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName));
             var recentFile = recentFiles.FirstOrDefault(r => r.Path == fileName);
             if (recentFile != null)
             {
@@ -112,15 +93,13 @@ namespace System.Waf.Applications
             }
         }
 
-        /// <summary>
-        /// Removes the specified recent file.
-        /// </summary>
+        /// <summary>Removes the specified recent file.</summary>
         /// <param name="recentFile">The recent file to remove.</param>
         /// <exception cref="ArgumentNullException">The argument recentFile must not be null.</exception>
         /// <exception cref="ArgumentException">The argument recentFile was not found in the recent files list.</exception>
         public void Remove(RecentFile recentFile)
         {
-            if (recentFile == null) { throw new ArgumentNullException(nameof(recentFile)); }
+            if (recentFile == null) throw new ArgumentNullException(nameof(recentFile));
             if (recentFiles.Remove(recentFile))
             {
                 recentFile.PropertyChanged -= RecentFilePropertyChanged;
@@ -135,8 +114,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
-
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
             reader.ReadToDescendant("RecentFile");
             while (reader.MoveToContent() == XmlNodeType.Element && reader.LocalName == "RecentFile")
             {
@@ -149,8 +127,7 @@ namespace System.Waf.Applications
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            if (writer == null) { throw new ArgumentNullException(nameof(writer)); }
-
+            if (writer == null) throw new ArgumentNullException(nameof(writer));
             foreach (RecentFile recentFile in recentFiles)
             {
                 writer.WriteStartElement("RecentFile");

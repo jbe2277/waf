@@ -3,14 +3,10 @@ using System.Threading.Tasks;
 
 namespace System.Waf.Foundation
 {
-    /// <summary>
-    /// Provides helper methods for working with Tasks.
-    /// </summary>
+    /// <summary>Provides helper methods for working with Tasks.</summary>
     public static class TaskHelper
     {
-        /// <summary>
-        /// Queues the specified work to run on the thread pool and returns a Task object that represents that work.
-        /// </summary>
+        /// <summary>Queues the specified work to run on the thread pool and returns a Task object that represents that work.</summary>
         /// <param name="action">The work to execute asynchronously</param>
         /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
         /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
@@ -19,10 +15,8 @@ namespace System.Waf.Foundation
             return Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, scheduler);
         }
 
-        /// <summary>
-        /// Queues the specified work to run on the thread pool and returns a proxy for the task returned by function.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <summary>Queues the specified work to run on the thread pool and returns a proxy for the task returned by function.</summary>
+        /// <typeparam name="T">The type of the result produced by this task.</typeparam>
         /// <param name="action">The work to execute asynchronously</param>
         /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
         /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
