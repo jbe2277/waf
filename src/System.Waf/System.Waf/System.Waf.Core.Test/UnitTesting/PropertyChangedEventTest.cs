@@ -87,7 +87,6 @@ namespace Test.Waf.UnitTesting
         }
 
 
-
         private class Person : Model
         {
             private string? name;

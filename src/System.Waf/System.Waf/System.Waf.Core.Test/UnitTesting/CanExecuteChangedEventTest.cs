@@ -73,7 +73,6 @@ namespace Test.Waf.UnitTesting
         {
             public event EventHandler? CanExecuteChanged;
 
-
             public bool CanExecute(object? parameter)
             {
                 throw new NotImplementedException();

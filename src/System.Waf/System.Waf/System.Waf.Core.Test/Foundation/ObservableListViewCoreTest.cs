@@ -26,13 +26,13 @@ namespace Test.Waf.Foundation
             observableListView = new ObservableListViewCore<string>(originalList);
             eventArgsList = new List<NotifyCollectionChangedEventArgs>();
 
-            NotifyCollectionChangedEventHandler collectionHandler = (sender, e) =>
+            void CollectionHandler(object sender, NotifyCollectionChangedEventArgs e)
             {
                 eventArgsList.Add(e);
-            };
-            observableListView.CollectionChanged += collectionHandler;
+            }
+            observableListView.CollectionChanged += CollectionHandler;
 
-            PropertyChangedEventHandler propertyHandler = (sender, e) =>
+            void PropertyHandler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(observableListView.Count))
                 {
@@ -42,8 +42,8 @@ namespace Test.Waf.Foundation
                 {
                     indexerChangedCount++;
                 }
-            };
-            observableListView.PropertyChanged += propertyHandler;
+            }
+            observableListView.PropertyChanged += PropertyHandler;
         }
 
         [TestCleanup]

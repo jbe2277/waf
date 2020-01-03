@@ -174,22 +174,22 @@ namespace Test.Waf.Foundation
             var removeCounter = 0;
             var resetCounter = 0;
             var moveCounter = 0;
-            Action<int, T> insertAction = (idx, item) => 
+            void InsertAction(int idx, T item)
             {
                 target.Insert(idx, item);
                 insertCounter++;
-            };
-            Action<int> removeAction = idx =>
+            }
+            void RemoveAction(int idx)
             {
                 target.RemoveAt(idx);
                 removeCounter++;
-            };
-            Action resetAction = () =>
+            }
+            void ResetAction()
             {
                 target.Clear();
                 foreach (var item in source) target.Add(item);
                 resetCounter++;
-            };
+            }
             Action<int, int>? moveAction = null;
             if (useMoveAction) moveAction = (oldIndex, newIndex) =>
             {
@@ -199,8 +199,8 @@ namespace Test.Waf.Foundation
                 moveCounter++;
             };
 
-            if (useMoveAction) target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction, moveAction);
-            else target.Merge(new ReadOnlyCollection<T>(source), comparer, insertAction, removeAction, resetAction);
+            if (useMoveAction) target.Merge(new ReadOnlyCollection<T>(source), comparer, InsertAction, RemoveAction, ResetAction, moveAction);
+            else target.Merge(new ReadOnlyCollection<T>(source), comparer, InsertAction, RemoveAction, ResetAction);
             AssertHelper.SequenceEqual(target, source, comparer ?? EqualityComparer<T>.Default);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Insert ? 1 : 0, insertCounter);
             Assert.AreEqual(expectedCollectionChange == ExpectedCollectionChange.Remove ? 1 : 0, removeCounter);
@@ -216,7 +216,5 @@ namespace Test.Waf.Foundation
             Reset,
             Move
         }
-
-        //private 
     }
 }

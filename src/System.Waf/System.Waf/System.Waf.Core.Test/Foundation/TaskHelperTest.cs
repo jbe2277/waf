@@ -5,7 +5,6 @@ using System.Waf.Foundation;
 
 namespace Test.Waf.Foundation
 {
-
     [TestClass]
     public class TaskHelperTest
     {
@@ -24,11 +23,11 @@ namespace Test.Waf.Foundation
             TaskHelper.NoWait(null, true);
 
             bool unobservedTaskException = false;
-            EventHandler<UnobservedTaskExceptionEventArgs> handler = (sender, e) =>
+            void Handler(object? sender, UnobservedTaskExceptionEventArgs e)
             {
                 unobservedTaskException = true;
-            };
-            TaskScheduler.UnobservedTaskException += handler;
+            }
+            TaskScheduler.UnobservedTaskException += Handler;
             try
             {
                 Task.Delay(1).NoWait();
@@ -44,7 +43,7 @@ namespace Test.Waf.Foundation
             }
             finally
             {
-                TaskScheduler.UnobservedTaskException -= handler;
+                TaskScheduler.UnobservedTaskException -= Handler;
             }
         }
     }

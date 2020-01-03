@@ -31,7 +31,6 @@ namespace Test.Waf.UnitTesting
             AssertHelper.ExpectedException<InvalidOperationException>(null!);
         }
 
-
         private static void ThrowsArgumentNullException()
         {
             throw new ArgumentNullException();

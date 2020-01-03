@@ -34,18 +34,18 @@ namespace Test.Waf.Foundation
             var luke = new Person();
             bool eventRaised;
 
-            PropertyChangedEventHandler eventHandler = (sender, e) =>
+            void EventHandler(object sender, PropertyChangedEventArgs e)
             {
                 eventRaised = true;
-            };
+            }
 
             eventRaised = false;
-            luke.PropertyChanged += eventHandler;
+            luke.PropertyChanged += EventHandler;
             luke.Name = "Luke";
             Assert.IsTrue(eventRaised, "The property changed event needs to be raised");
 
             eventRaised = false;
-            luke.PropertyChanged -= eventHandler;
+            luke.PropertyChanged -= EventHandler;
             luke.Name = "Luke Skywalker";
             Assert.IsFalse(eventRaised, "The event handler must not be called because it was removed from the event.");
         }

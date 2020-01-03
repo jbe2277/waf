@@ -3,34 +3,28 @@ using System.Threading.Tasks;
 
 namespace System.Waf.UnitTesting
 {
-    /// <summary>
-    /// Provides extension methods for working with the <see cref="UnitTestSynchronizationContext"/>.
-    /// </summary>
+    /// <summary>Provides extension methods for working with the <see cref="UnitTestSynchronizationContext"/>.</summary>
     public static class UnitTestSynchronizationContextExtensions
     {
-        /// <summary>
-        /// Process the message queue until the task is completed.
-        /// </summary>
+        /// <summary>Process the message queue until the task is completed.</summary>
         /// <param name="task">The task to wait for completion.</param>
         /// <param name="context">The current unit test synchronization context.</param>
         /// <exception cref="ArgumentNullException">task must not be null.</exception>
         /// <exception cref="ArgumentNullException">context must not be null.</exception>
         public static void Wait(this Task task, UnitTestSynchronizationContext context)
         {
-            if (context == null) { throw new ArgumentNullException(nameof(context)); }
+            if (context == null) throw new ArgumentNullException(nameof(context));
             context.Wait(task);
         }
 
-        /// <summary>
-        /// Process the message queue until the task is completed and returns the task's result.
-        /// </summary>
+        /// <summary>Process the message queue until the task is completed and returns the task's result.</summary>
         /// <param name="task">The task to wait for completion.</param>
         /// <param name="context">The current unit test synchronization context.</param>
         /// <exception cref="ArgumentNullException">task must not be null.</exception>
         /// <exception cref="ArgumentNullException">context must not be null.</exception>
         public static T GetResult<T>(this Task<T> task, UnitTestSynchronizationContext context)
         {
-            if (context == null) { throw new ArgumentNullException(nameof(context)); }
+            if (context == null) throw new ArgumentNullException(nameof(context));
             context.Wait(task);
             return task.Result;
         }
@@ -47,8 +41,8 @@ namespace System.Waf.UnitTesting
         /// <exception cref="TimeoutException">A timeout occurred.</exception>
         public static void WaitFor(this UnitTestSynchronizationContext context, Func<bool> predicate, TimeSpan timeout)
         {
-            if (context == null) { throw new ArgumentNullException(nameof(context)); }
-            if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             var sw = Stopwatch.StartNew();
             while (!predicate())
             {

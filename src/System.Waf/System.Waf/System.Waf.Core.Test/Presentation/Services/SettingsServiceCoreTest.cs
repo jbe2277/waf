@@ -43,7 +43,7 @@ namespace Test.Waf.Presentation.Services
             Assert.IsTrue(File.Exists(settingsFileName));
 
             var testSettings1 = settingsService.Get<TestSettings1>();
-            Assert.AreNotEqual(default(Guid), testSettings1.UserId);
+            Assert.AreNotEqual(default, testSettings1.UserId);
             Assert.AreNotEqual(default(Guid), testSettings1.LastRun);
             testSettings1.LastRun = new DateTime(2000, 1, 1);
             testSettings1.LastOpenedFiles = new[] { "MruFile1", "MruFile2" };
@@ -71,7 +71,7 @@ namespace Test.Waf.Presentation.Services
             Assert.IsFalse(testSettings2.IsActive);
 
             testSettings1 = settingsService.Get<TestSettings1>();
-            Assert.AreNotEqual(default(Guid), testSettings1.UserId);
+            Assert.AreNotEqual(default, testSettings1.UserId);
             Assert.AreEqual(new DateTime(2000, 1, 1), testSettings1.LastRun);
             AssertHelper.SequenceEqual(new[] { "MruFile1", "MruFile2" }, testSettings1.LastOpenedFiles);
             AssertHelper.SequenceEqual(new[] { "File1" }, testSettings1.FileNames);

@@ -15,14 +15,14 @@ namespace Test.Waf.UnitTesting
             using (var context = UnitTestSynchronizationContext.Create())
             {
                 int actionCallCount = 0;
-                Func<Task<int>> asyncAction = async () =>
+                async Task<int> AsyncAction()
                 {
                     await Task.Delay(1);
                     Interlocked.Increment(ref actionCallCount);
                     return actionCallCount;
-                };
+                }
 
-                var task = asyncAction();
+                var task = AsyncAction();
                 Assert.AreEqual(0, actionCallCount);
 
                 task.Wait(context);
@@ -38,14 +38,14 @@ namespace Test.Waf.UnitTesting
             using (var context = UnitTestSynchronizationContext.Create())
             {
                 int actionCallCount = 0;
-                Func<Task<int>> asyncAction = async () =>
+                async Task<int> AsyncAction()
                 {
                     await Task.Delay(1);
                     Interlocked.Increment(ref actionCallCount);
                     return actionCallCount;
-                };
+                }
 
-                var task = asyncAction();
+                var task = AsyncAction();
                 Assert.AreEqual(0, actionCallCount);
 
                 var result = task.GetResult(context);
@@ -62,13 +62,13 @@ namespace Test.Waf.UnitTesting
             using (var context = UnitTestSynchronizationContext.Create())
             {
                 bool flag = false;
-                Action asyncAction = async () =>
+                async void AsyncAction()
                 {
                     await Task.Delay(10);
                     flag = true;
-                };
-                
-                asyncAction();
+                }
+
+                AsyncAction();
                 Assert.IsFalse(flag);
 
                 context.WaitFor(() => flag, TimeSpan.FromSeconds(1));

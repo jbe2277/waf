@@ -16,27 +16,27 @@ namespace Test.Waf.Foundation
             var readOnlyList = new ReadOnlyObservableList<string>(list);
 
             int collectionChangedCalled = 0;
-            NotifyCollectionChangedEventHandler collectionChangedHandler = (sender, e) =>
+            void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
             {
                 collectionChangedCalled++;
-            };
+            }
             int countPropertyChangedCalled = 0;
-            PropertyChangedEventHandler propertyChangedHandler = (sender, e) =>
+            void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(readOnlyList.Count))
                 {
                     countPropertyChangedCalled++;
                 }
-            };
+            }
 
-            readOnlyList.CollectionChanged += collectionChangedHandler;
-            readOnlyList.PropertyChanged += propertyChangedHandler;
+            readOnlyList.CollectionChanged += CollectionChangedHandler;
+            readOnlyList.PropertyChanged += PropertyChangedHandler;
             list.Add("Hello");
             Assert.AreEqual(1, collectionChangedCalled);
             Assert.AreEqual(1, countPropertyChangedCalled);
 
-            readOnlyList.CollectionChanged -= collectionChangedHandler;
-            readOnlyList.PropertyChanged -= propertyChangedHandler;
+            readOnlyList.CollectionChanged -= CollectionChangedHandler;
+            readOnlyList.PropertyChanged -= PropertyChangedHandler;
             list.Add("World");
             Assert.AreEqual(1, collectionChangedCalled);
             Assert.AreEqual(1, countPropertyChangedCalled);

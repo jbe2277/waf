@@ -8,21 +8,17 @@ using System.Windows.Input;
 
 namespace System.Waf.UnitTesting
 {
-    /// <summary>
-    /// This class contains assert methods which can be used in unit tests.
-    /// </summary>
+    /// <summary>This class contains assert methods which can be used in unit tests.</summary>
     public static class AssertHelper
     {
-        /// <summary>
-        /// Asserts that the execution of the provided action throws the specified exception.
-        /// </summary>
+        /// <summary>Asserts that the execution of the provided action throws the specified exception.</summary>
         /// <typeparam name="T">The expected exception type.</typeparam>
         /// <param name="action">The action to execute.</param>
         /// <returns>The expected exception.</returns>
         /// <exception cref="AssertException">Thrown when the expected exception was not thrown by the action.</exception>
         public static T ExpectedException<T>(Action action) where T : Exception
         {
-            if (action == null) { throw new ArgumentNullException(nameof(action)); }
+            if (action == null) throw new ArgumentNullException(nameof(action));
             
             T? expectedException = null;
             Exception? wrongException = null;
@@ -55,9 +51,7 @@ namespace System.Waf.UnitTesting
             return expectedException;
         }
 
-        /// <summary>
-        /// Asserts that the execution of the provided action raises the CanExecuteChanged event of the command.
-        /// </summary>
+        /// <summary>Asserts that the execution of the provided action raises the CanExecuteChanged event of the command.</summary>
         /// <param name="command">The command.</param>
         /// <param name="raiseCanExecuteChanged">An action that results in a CanExecuteChanged event of the command.</param>
         /// <exception cref="AssertException">This exception is thrown when no or more than one CanExecuteChanged event was 
@@ -67,9 +61,7 @@ namespace System.Waf.UnitTesting
             CanExecuteChangedEvent(command, raiseCanExecuteChanged, 1, ExpectedChangedCountMode.Exact);
         }
 
-        /// <summary>
-        /// Asserts that the execution of the provided action raises the CanExecuteChanged event of the command.
-        /// </summary>
+        /// <summary>Asserts that the execution of the provided action raises the CanExecuteChanged event of the command.</summary>
         /// <param name="command">The command.</param>
         /// <param name="raiseCanExecuteChanged">An action that results in a CanExecuteChanged event of the command.</param>
         /// <param name="expectedChangedCount">The expected count of CanExecuteChanged events.</param>
@@ -79,25 +71,21 @@ namespace System.Waf.UnitTesting
         public static void CanExecuteChangedEvent(ICommand command, Action raiseCanExecuteChanged, int expectedChangedCount, 
             ExpectedChangedCountMode expectedChangedCountMode)
         {
-            if (command == null) { throw new ArgumentNullException(nameof(command)); }
-            if (raiseCanExecuteChanged == null) { throw new ArgumentNullException(nameof(raiseCanExecuteChanged)); }
-            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed."); }
+            if (command == null) throw new ArgumentNullException(nameof(command));
+            if (raiseCanExecuteChanged == null) throw new ArgumentNullException(nameof(raiseCanExecuteChanged));
+            if (expectedChangedCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed.");
             
             int canExecuteChangedCount = 0;
 
-            EventHandler canExecuteChangedHandler = (sender, e) =>
+            void CanExecuteChangedHandler(object sender, EventArgs e)
             {
-                if (command != sender)
-                {
-                    throw new AssertException("The sender object of the event isn't the command");
-                }
-
+                if (command != sender) throw new AssertException("The sender object of the event isn't the command");
                 canExecuteChangedCount++;
-            };
+            }
 
-            command.CanExecuteChanged += canExecuteChangedHandler;
+            command.CanExecuteChanged += CanExecuteChangedHandler;
             raiseCanExecuteChanged();
-            command.CanExecuteChanged -= canExecuteChangedHandler;
+            command.CanExecuteChanged -= CanExecuteChangedHandler;
 
             if (canExecuteChangedCount < expectedChangedCount && expectedChangedCountMode != ExpectedChangedCountMode.AtMost)
             {
@@ -113,9 +101,7 @@ namespace System.Waf.UnitTesting
             }
         }
 
-        /// <summary>
-        /// Asserts that the execution of the provided action raises the property changed event.
-        /// </summary>
+        /// <summary>Asserts that the execution of the provided action raises the property changed event.</summary>
         /// <typeparam name="T">The type of the observable.</typeparam>
         /// <param name="observable">The observable which should raise the property changed event.</param>
         /// <param name="expression">A simple expression which identifies the property (e.g. x => x.Name).</param>
@@ -128,9 +114,7 @@ namespace System.Waf.UnitTesting
             PropertyChangedEvent(observable, expression, raisePropertyChanged, 1, ExpectedChangedCountMode.Exact);
         }
 
-        /// <summary>
-        /// Asserts that the execution of the provided action raises the property changed event.
-        /// </summary>
+        /// <summary>Asserts that the execution of the provided action raises the property changed event.</summary>
         /// <typeparam name="T">The type of the observable.</typeparam>
         /// <param name="observable">The observable which should raise the property changed event.</param>
         /// <param name="expression">A simple expression which identifies the property (e.g. x => x.Name).</param>
@@ -143,30 +127,26 @@ namespace System.Waf.UnitTesting
             ExpectedChangedCountMode expectedChangedCountMode)
             where T : class, INotifyPropertyChanged
         {
-            if (observable == null) { throw new ArgumentNullException(nameof(observable)); }
-            if (expression == null) { throw new ArgumentNullException(nameof(expression)); }
-            if (raisePropertyChanged == null) { throw new ArgumentNullException(nameof(raisePropertyChanged)); }
-            if (expectedChangedCount < 0) { throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed."); }
+            if (observable == null) throw new ArgumentNullException(nameof(observable));
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            if (raisePropertyChanged == null) throw new ArgumentNullException(nameof(raisePropertyChanged));
+            if (expectedChangedCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedChangedCount), "A negative number is not allowed.");
             
             string propertyName = GetProperty(expression).Name;
             int propertyChangedCount = 0;
 
-            PropertyChangedEventHandler propertyChangedHandler = (sender, e) =>
+            void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
             {
-                if (observable != sender)
-                {
-                    throw new AssertException("The sender object of the event isn't the observable");
-                }
-
+                if (observable != sender) throw new AssertException("The sender object of the event isn't the observable");
                 if (e.PropertyName == propertyName)
                 {
                     propertyChangedCount++;
                 }
-            };
+            }
 
-            observable.PropertyChanged += propertyChangedHandler;
+            observable.PropertyChanged += PropertyChangedHandler;
             raisePropertyChanged();
-            observable.PropertyChanged -= propertyChangedHandler;
+            observable.PropertyChanged -= PropertyChangedHandler;
 
             if (propertyChangedCount < expectedChangedCount && expectedChangedCountMode != ExpectedChangedCountMode.AtMost)
             {
@@ -184,9 +164,7 @@ namespace System.Waf.UnitTesting
             }
         }
 
-        /// <summary>
-        /// Verifies that two sequences are equal by comparing their elements. The assertion fails if the sequences are not equal.
-        /// </summary>
+        /// <summary>Verifies that two sequences are equal by comparing their elements. The assertion fails if the sequences are not equal.</summary>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <param name="expected">An System.Collections.Generic.IEnumerable`1 to compare to the actual sequence.</param>
         /// <param name="actual">An System.Collections.Generic.IEnumerable`1 to compare to the expected sequence.</param>
@@ -209,8 +187,8 @@ namespace System.Waf.UnitTesting
         /// <exception cref="AssertException">expected is not equal to actual.</exception>
         public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T>? comparer)
         {
-            if (expected == null) { throw new ArgumentNullException(nameof(expected)); }
-            if (actual == null) { throw new ArgumentNullException(nameof(actual)); }
+            if (expected == null) throw new ArgumentNullException(nameof(expected));
+            if (actual == null) throw new ArgumentNullException(nameof(actual));
             if (!expected.SequenceEqual(actual, comparer))
             {
                 throw new AssertException(string.Format(null,
@@ -233,11 +211,8 @@ namespace System.Waf.UnitTesting
 
             // If this isn't a member access expression then the expression isn't valid
             MemberExpression? memberExpression = expression as MemberExpression;
-            if (memberExpression == null)
-            {
-                ThrowExpressionArgumentException();
-            }
-
+            if (memberExpression == null) ThrowExpressionArgumentException();
+            
             expression = memberExpression!.Expression;
 
             // If the Property returns a ValueType then a Convert is required => Remove it
@@ -247,18 +222,12 @@ namespace System.Waf.UnitTesting
             }
 
             // Check if the expression is the parameter itself
-            if (expression.NodeType != ExpressionType.Parameter)
-            {
-                ThrowExpressionArgumentException();
-            }
-
+            if (expression.NodeType != ExpressionType.Parameter) ThrowExpressionArgumentException();
+            
             // Finally retrieve the PropertyInfo
             PropertyInfo? propertyInfo = memberExpression.Member as PropertyInfo;
-            if (propertyInfo == null)
-            {
-                ThrowExpressionArgumentException();
-            }
-
+            if (propertyInfo == null) ThrowExpressionArgumentException();
+            
             return propertyInfo;
         }
 

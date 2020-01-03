@@ -52,19 +52,19 @@ namespace Test.Waf.UnitTesting
             int actionCallCount = 0;
             var context = UnitTestSynchronizationContext.Create();
 
-            Func<Task> asyncAction = async () =>
+            async Task AsyncAction()
             {
                 await Task.Delay(1);
                 Interlocked.Increment(ref actionCallCount);
-            };
+            }
 
-            var task = asyncAction();
+            var task = AsyncAction();
             Assert.AreEqual(0, actionCallCount);
 
             task.Wait(context);
             Assert.AreEqual(1, actionCallCount);
 
-            task = asyncAction();
+            task = AsyncAction();
             context.Wait(TimeSpan.FromMilliseconds(50));
             Assert.AreEqual(2, actionCallCount);
 

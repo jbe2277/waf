@@ -317,7 +317,6 @@ namespace Test.Waf.Foundation
                 Model = model;
             }
 
-
             public MyModel Model { get; }
         }
 
@@ -328,12 +327,10 @@ namespace Test.Waf.Foundation
             private readonly bool withoutIndex;
             private bool suppressNotifications;
 
-
             public CustomCollection(bool withoutIndex)
             {
                 this.withoutIndex = withoutIndex;
             }
-
 
             public void Reset(IEnumerable<T> newItems)
             {
@@ -356,10 +353,9 @@ namespace Test.Waf.Foundation
                 }
             }
 
-
             protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
             {
-                if (suppressNotifications) { return; }
+                if (suppressNotifications) return;
                 if (withoutIndex)
                 {
                     switch (e.Action)
