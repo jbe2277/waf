@@ -4,33 +4,23 @@ using System.Waf.Applications.Services;
 
 namespace System.Waf.UnitTesting.Mocks
 {
-    /// <summary>
-    /// Mock for the ISettingsService interface.
-    /// </summary>
+    /// <summary>Mock for the ISettingsService interface.</summary>
     [Export(typeof(ISettingsService)), Export]
     public class MockSettingsService : ISettingsService
     {
         private readonly ConcurrentDictionary<Type, Lazy<object>> services = new ConcurrentDictionary<Type, Lazy<object>>();
 
-        /// <summary>
-        /// Gets or sets a delegate that is called when Get is called.
-        /// </summary>
+        /// <summary>Gets or sets a delegate that is called when Get is called.</summary>
         public Func<Type, object>? GetStub { get; set; }
 
-        /// <summary>
-        /// Gets or sets a delegate that is called when Save is called.
-        /// </summary>
+        /// <summary>Gets or sets a delegate that is called when Save is called.</summary>
         public Action? SaveStub { get; set; }
 
-        /// <summary>
-        /// Gets or sets the settings file name.
-        /// </summary>
+        /// <summary>Gets or sets the settings file name.</summary>
         /// <exception cref="InvalidOperationException">Setter must not be called anymore if one of the methods was used.</exception>
         public string FileName { get; set; } = default!;
 
-        /// <summary>
-        /// An error occurred.
-        /// </summary>
+        /// <summary>An error occurred.</summary>
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <summary>
@@ -54,9 +44,7 @@ namespace System.Waf.UnitTesting.Mocks
             SaveStub?.Invoke();
         }
 
-        /// <summary>
-        /// Raise the ErrorOccurred event.
-        /// </summary>
+        /// <summary>Raise the ErrorOccurred event.</summary>
         /// <param name="e">The error event args.</param>
         public void RaiseErrorOccurred(SettingsErrorEventArgs e)
         {

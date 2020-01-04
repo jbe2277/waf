@@ -43,15 +43,15 @@ namespace Test.Waf.Applications
 
             // Check add operation with collection changed event.
             bool handlerCalled = false;
-            NotifyCollectionChangedEventHandler handler = (sender, e) =>
+            void Handler(object sender, NotifyCollectionChangedEventArgs e)
             {
                 handlerCalled = true;
                 Assert.AreEqual(listView, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(1, e.NewStartingIndex);
                 Assert.AreEqual(originalCollection.Last(), e.NewItems.Cast<MyModel>().Single());
-            };
-            listView.CollectionChanged += handler;
+            }
+            listView.CollectionChanged += Handler;
             originalCollection.Add(new MyModel());
             Assert.IsTrue(handlerCalled);
 
@@ -60,7 +60,7 @@ namespace Test.Waf.Applications
             listView.Dispose();
             originalCollection.Add(new MyModel());
             Assert.IsFalse(handlerCalled);
-            listView.CollectionChanged -= handler;
+            listView.CollectionChanged -= Handler;
         }
 
         [TestMethod]

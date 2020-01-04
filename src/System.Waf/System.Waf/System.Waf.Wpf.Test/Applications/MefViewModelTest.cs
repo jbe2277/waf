@@ -24,9 +24,7 @@ namespace Test.Waf.Applications
         private class MefViewModel : ViewModel<IMefView>
         {
             [ImportingConstructor]
-            public MefViewModel(IMefView view) : base(view)
-            {
-            }
+            public MefViewModel(IMefView view) : base(view) { }
 
             public int OnImportsSatisfiedCalled { get; private set; }
 
@@ -37,13 +35,9 @@ namespace Test.Waf.Applications
             }
         }
 
-        private interface IMefView : IView
-        {
-        }
+        private interface IMefView : IView { }
 
         [Export(typeof(IMefView))]
-        private class MefView : MockView, IMefView
-        {
-        }
+        private class MefView : MockView, IMefView { }
     }
 }

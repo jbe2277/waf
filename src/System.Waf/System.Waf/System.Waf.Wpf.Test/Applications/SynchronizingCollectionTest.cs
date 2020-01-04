@@ -88,7 +88,6 @@ namespace Test.Waf.Applications
                 Model = model;
             }
 
-
             public MyModel Model { get; }
         }
 

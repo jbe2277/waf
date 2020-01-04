@@ -16,7 +16,7 @@ namespace Test.Waf.Applications.Services
         {
             var rtfFileType = new FileType("RichText Document", ".rtf");
             var xpsFileType = new FileType("XPS Document", ".xps");
-            IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
+            var fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
             var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 
@@ -81,7 +81,7 @@ namespace Test.Waf.Applications.Services
         {
             var rtfFileType = new FileType("RichText Document", ".rtf");
             var xpsFileType = new FileType("XPS Document", ".xps");
-            IEnumerable<FileType> fileTypes = new[] { rtfFileType, xpsFileType };
+            var fileTypes = new[] { rtfFileType, xpsFileType };
             string defaultFileName = "Document 1.rtf";
             var result = new FileDialogResult("Document 2.rtf", rtfFileType);
 

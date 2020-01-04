@@ -12,17 +12,14 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void MessageBoxResultTest()
         {
-            PropertyInfo messageBoxResultInfo = typeof(MessageService).GetProperty("MessageBoxResult", 
-                BindingFlags.Static | BindingFlags.NonPublic)!;
-            
+            PropertyInfo messageBoxResultInfo = typeof(MessageService).GetProperty("MessageBoxResult",  BindingFlags.Static | BindingFlags.NonPublic)!;
             Assert.AreEqual(MessageBoxResult.None, (MessageBoxResult)messageBoxResultInfo.GetValue(null, null)!);
         }
 
         [TestMethod]
         public void MessageBoxOptionsTest()
         {
-            PropertyInfo messageBoxOptionsInfo = typeof(MessageService).GetProperty("MessageBoxOptions",
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+            PropertyInfo messageBoxOptionsInfo = typeof(MessageService).GetProperty("MessageBoxOptions", BindingFlags.Static | BindingFlags.NonPublic)!;
 
             CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
             Assert.AreEqual(MessageBoxOptions.None, (MessageBoxOptions)messageBoxOptionsInfo.GetValue(null, null)!);

@@ -40,9 +40,7 @@ namespace Test.Waf.Applications
 
         private class MockViewModel : ViewModel
         {
-            public MockViewModel(IView view) : base(view)
-            {
-            }
+            public MockViewModel(IView view) : base(view) { }
         }
     }
 }

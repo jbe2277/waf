@@ -15,20 +15,16 @@ namespace Test.Waf.Presentation.Services
         public void ShowOpenFileDialogTest()
         {
             var service = new FileDialogService();
-            
             AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowOpenFileDialog(null!, null, null));
-            AssertHelper.ExpectedException<ArgumentException>(() => 
-                service.ShowOpenFileDialog(new FileType[] {}, null, null));
+            AssertHelper.ExpectedException<ArgumentException>(() => service.ShowOpenFileDialog(new FileType[] {}, null, null));
         }
 
         [TestMethod]
         public void ShowSaveFileDialogTest()
         {
             var service = new FileDialogService();
-
             AssertHelper.ExpectedException<ArgumentNullException>(() => service.ShowSaveFileDialog(null!, null, null));
-            AssertHelper.ExpectedException<ArgumentException>(() =>
-                service.ShowSaveFileDialog(new FileType[] { }, null, null));
+            AssertHelper.ExpectedException<ArgumentException>(() => service.ShowSaveFileDialog(new FileType[] { }, null, null));
         }
 
         [TestMethod]
@@ -36,10 +32,8 @@ namespace Test.Waf.Presentation.Services
         {
             var rtfFileType = new FileType("RichText Document", ".rtf");
             var xpsFileType = new FileType("XPS Document", ".xps");
-            
             Assert.AreEqual("RichText Document|*.rtf", InvokeCreateFilter(new[] { rtfFileType }));
-            Assert.AreEqual("RichText Document|*.rtf|XPS Document|*.xps",
-                InvokeCreateFilter(new[] { rtfFileType, xpsFileType }));
+            Assert.AreEqual("RichText Document|*.rtf|XPS Document|*.xps", InvokeCreateFilter(new[] { rtfFileType, xpsFileType }));
         }
 
         private static string InvokeCreateFilter(IEnumerable<FileType> fileTypes)

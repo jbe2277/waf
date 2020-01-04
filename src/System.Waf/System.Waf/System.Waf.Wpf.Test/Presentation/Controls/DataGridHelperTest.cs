@@ -110,8 +110,7 @@ namespace Test.Waf.Presentation.Controls
         public void GetSelectorPerformanceTest1B()
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1000000; i++)
-                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Name"));
+            for (int i = 0; i < 1000000; i++) personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Name"));
         }
 
         [TestMethod, TestCategory("Performance")]
@@ -125,8 +124,7 @@ namespace Test.Waf.Presentation.Controls
         public void GetSelectorPerformanceTest2B()
         {
             var personDataModels = CreatePersonDataModels();
-            for (int i = 0; i < 1000000; i++)
-                personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Age"));
+            for (int i = 0; i < 1000000; i++) personDataModels.OrderBy(DataGridHelper.GetSelector<PersonDataModel?>("Person.Age"));
         }
 
         private static void AssertSelectorEqual<T>(IEnumerable<T> list, Func<T, object?> expected, string actual)
@@ -168,7 +166,9 @@ namespace Test.Waf.Presentation.Controls
         private class Person
         {
             public string? Name { get; set; }
+            
             public int Age { get; set; }
+            
             public KeyValuePair<int, string> Pair { get; set; }
         }
     }

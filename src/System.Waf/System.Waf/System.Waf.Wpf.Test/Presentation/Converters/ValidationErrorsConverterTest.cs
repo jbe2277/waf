@@ -14,7 +14,7 @@ namespace Test.Waf.Presentation.Converters
         [TestMethod]
         public void ConverterTest()
         {
-            ValidationErrorsConverter converter = ValidationErrorsConverter.Default;
+            var converter = ValidationErrorsConverter.Default;
             Assert.AreEqual(converter, ValidationErrorsConverter.Default);
             
             AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, null!, null, null));
@@ -23,10 +23,10 @@ namespace Test.Waf.Presentation.Converters
 
             Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { "WrongType" }, null, null, null));
 
-            List<ValidationError> validationErrors = new List<ValidationError>();
+            var validationErrors = new List<ValidationError>();
             Assert.AreEqual("", converter.Convert(new[] { validationErrors }, null, null, null));
 
-            ExceptionValidationRule rule = new ExceptionValidationRule();
+            var rule = new ExceptionValidationRule();
             validationErrors.Add(new ValidationError(rule, new object(), "First error message", null));
             Assert.AreEqual("First error message", converter.Convert(new[] { validationErrors }, null, null, null));
 
