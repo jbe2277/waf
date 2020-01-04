@@ -19,10 +19,7 @@ namespace System.Waf.Applications
     {
         private readonly INotifyCollectionChanged? originalObservableCollection;
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SynchronizingCollection{T, TOriginal}"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="SynchronizingCollection{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
         /// <param name="factory">The factory which is used to create new elements in this collection.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
@@ -37,9 +34,7 @@ namespace System.Waf.Applications
             }
         }
 
-        /// <summary>
-        /// Override this method to free, release or reset any resources.
-        /// </summary>
+        /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected override void OnDispose(bool disposing)
         {

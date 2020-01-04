@@ -12,7 +12,7 @@ namespace System.Waf.Presentation.Converters
     /// Use the binding for the second value to update the target when the <see cref="ValidationError"/> collection changes.
     /// Set the path of the second binding on the Count property: Binding Path="(Validation.Errors).Count".
     /// </summary>
-    /// 
+    // 
     // Sample code (XAML) that shows how to use this converter:
     //
     // <Style.Triggers>
@@ -29,15 +29,10 @@ namespace System.Waf.Presentation.Converters
     // </Style.Triggers>
     public sealed class ValidationErrorsConverter : IMultiValueConverter
     {
-        /// <summary>
-        /// Gets the default instance of this converter.
-        /// </summary>
+        /// <summary>Gets the default instance of this converter.</summary>
         public static ValidationErrorsConverter Default { get; } = new ValidationErrorsConverter();
 
-
-        /// <summary>
-        /// Converts a collection of <see cref="ValidationError"/> objects into a multi-line string of error messages.
-        /// </summary>
+        /// <summary>Converts a collection of <see cref="ValidationError"/> objects into a multi-line string of error messages.</summary>
         /// <param name="values">The first value is the collection of <see cref="ValidationError"/> objects.</param>
         /// <param name="targetType">The type of the binding target property. This parameter will be ignored.</param>
         /// <param name="parameter">The converter parameter to use. This parameter will be ignored.</param>
@@ -55,9 +50,7 @@ namespace System.Waf.Presentation.Converters
             return DependencyProperty.UnsetValue;
         }
 
-        /// <summary>
-        /// This method is not supported and throws an exception when it is called.
-        /// </summary>
+        /// <summary>This method is not supported and throws an exception when it is called.</summary>
         /// <param name="value">The value that is produced by the binding target.</param>
         /// <param name="targetTypes">The array of types to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>

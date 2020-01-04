@@ -9,15 +9,10 @@ using System.Windows.Controls;
 
 namespace System.Waf.Presentation.Controls
 {
-    /// <summary>
-    /// Provides helper methods for working with the DataGrid.
-    /// </summary>
+    /// <summary>Provides helper methods for working with the DataGrid.</summary>
     public static class DataGridHelper
     {
-        /// <summary>
-        /// Handles the Sorting event raised by the DataGrid and returns the Sort function to be used on the
-        /// data source.
-        /// </summary>
+        /// <summary>Handles the Sorting event raised by the DataGrid and returns the Sort function to be used on the data source.</summary>
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="e">The EventArgs provided by the Sorting event.</param>
         /// <returns>The Sort function or null when SortDirection is set to null. Can be used by the ObservableListView.</returns>
@@ -40,10 +35,7 @@ namespace System.Waf.Presentation.Controls
             return GetSorting<T>(e.Column);
         }
 
-        /// <summary>
-        /// Gets a Sort function for the DataGrid column. It reads the SortMemberPath and SortDirection property of the column
-        /// to create the sort.
-        /// </summary>
+        /// <summary>Gets a Sort function for the DataGrid column. It reads the SortMemberPath and SortDirection property of the column to create the sort.</summary>
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="column">The DataGrid column that should be sorted.</param>
         /// <returns>The Sort function or null when SortDirection is null. Can be used by the ObservableListView.</returns>
@@ -52,10 +44,7 @@ namespace System.Waf.Presentation.Controls
             return GetSorting<T>(column, null);
         }
 
-        /// <summary>
-        /// Gets a Sort function for the DataGrid column. It reads the SortMemberPath and SortDirection property of the column
-        /// to create the sort.
-        /// </summary>
+        /// <summary>Gets a Sort function for the DataGrid column. It reads the SortMemberPath and SortDirection property of the column to create the sort.</summary>
         /// <typeparam name="T">The type of item to sort.</typeparam>
         /// <param name="column">The DataGrid column that should be sorted.</param>
         /// <param name="primarySort">The primarySort is used first and the column sort is added as subsequent ordering. Example: When grouping is used

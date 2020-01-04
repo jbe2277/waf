@@ -4,20 +4,13 @@ using System.Windows.Data;
 
 namespace System.Waf.Presentation.Converters
 {
-    /// <summary>
-    /// Value converter that converts a boolean value to and from Visibility enumeration values.
-    /// </summary>
+    /// <summary>Value converter that converts a boolean value to and from Visibility enumeration values.</summary>
     public sealed class BoolToVisibilityConverter : IValueConverter
     {
-        /// <summary>
-        /// Gets the default instance of this converter.
-        /// </summary>
+        /// <summary>Gets the default instance of this converter.</summary>
         public static BoolToVisibilityConverter Default { get; } = new BoolToVisibilityConverter();
 
-
-        /// <summary>
-        /// Converts a boolean value into a Visibility enumeration value.
-        /// </summary>
+        /// <summary>Converts a boolean value into a Visibility enumeration value.</summary>
         /// <param name="value">The boolean value.</param>
         /// <param name="targetType">The type of the binding target property. This parameter will be ignored.</param>
         /// <param name="parameter">Use the string 'Invert' to get an inverted result (Visible and Collapsed are exchanged). 
@@ -28,7 +21,6 @@ namespace System.Waf.Presentation.Converters
         {
             var flag = (bool?)value;
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
-
             if (invert)
             {
                 return flag == true ? Visibility.Collapsed : Visibility.Visible;
@@ -36,9 +28,7 @@ namespace System.Waf.Presentation.Converters
             return flag == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        /// <summary>
-        /// Converts a Visibility enumeration value into a boolean value.
-        /// </summary>
+        /// <summary>Converts a Visibility enumeration value into a boolean value.</summary>
         /// <param name="value">The Visibility enumeration value.</param>
         /// <param name="targetType">The type of the binding target property. This parameter will be ignored.</param>
         /// <param name="parameter">Use the string 'Invert' to get an inverted result (true and false are exchanged). 
@@ -49,7 +39,6 @@ namespace System.Waf.Presentation.Converters
         {
             var visibility = (Visibility?)value;
             bool invert = string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase);
-            
             if (invert)
             {
                 return visibility != Visibility.Visible;

@@ -6,13 +6,8 @@ using System.Windows;
 
 namespace System.Waf.Presentation.Services
 {
-    /// <summary>
-    /// This is the default implementation of the <see cref="IMessageService"/> interface. It shows messages via the MessageBox 
-    /// to the user.
-    /// </summary>
-    /// <remarks>
-    /// If the default implementation of this service doesn't serve your need then you can provide your own implementation.
-    /// </remarks>
+    /// <summary>This is the default implementation of the <see cref="IMessageService"/> interface. It shows messages via the MessageBox to the user.</summary>
+    /// <remarks>If the default implementation of this service doesn't serve your need then you can provide your own implementation.</remarks>
     [Export(typeof(IMessageService))]
     public class MessageService : IMessageService
     {
@@ -21,9 +16,7 @@ namespace System.Waf.Presentation.Services
         private static MessageBoxOptions MessageBoxOptions 
             => CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? MessageBoxOptions.RtlReading : MessageBoxOptions.None;
         
-        /// <summary>
-        /// Shows the message.
-        /// </summary>
+        /// <summary>Shows the message.</summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
         public void ShowMessage(object? owner, string message)
@@ -40,9 +33,7 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// Shows the message as warning.
-        /// </summary>
+        /// <summary>Shows the message as warning.</summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
         public void ShowWarning(object? owner, string message)
@@ -59,9 +50,7 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// Shows the message as error.
-        /// </summary>
+        /// <summary>Shows the message as error.</summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The message.</param>
         public void ShowError(object? owner, string message)
@@ -78,9 +67,7 @@ namespace System.Waf.Presentation.Services
             }
         }
 
-        /// <summary>
-        /// Shows the specified question.
-        /// </summary>
+        /// <summary>Shows the specified question.</summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes, <c>false</c> for no and <c>null</c> for cancel.</returns>
@@ -97,15 +84,12 @@ namespace System.Waf.Presentation.Services
                 result = MessageBox.Show(message, ApplicationInfo.ProductName, MessageBoxButton.YesNoCancel,
                     MessageBoxImage.Question, MessageBoxResult.Cancel, MessageBoxOptions);
             }
-
             if (result == MessageBoxResult.Yes) { return true; }
             else if (result == MessageBoxResult.No) { return false; }
             return null;
         }
 
-        /// <summary>
-        /// Shows the specified yes/no question.
-        /// </summary>
+        /// <summary>Shows the specified yes/no question.</summary>
         /// <param name="owner">The window that owns this Message Window.</param>
         /// <param name="message">The question.</param>
         /// <returns><c>true</c> for yes and <c>false</c> for no.</returns>

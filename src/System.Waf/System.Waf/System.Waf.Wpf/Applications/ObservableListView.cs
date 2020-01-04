@@ -19,19 +19,14 @@ namespace System.Waf.Applications
     {
         private readonly INotifyCollectionChanged? originalObservableCollection;
 
-
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
         public ObservableListView(IEnumerable<T> originalList) : this(originalList, null, null, null)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
@@ -39,9 +34,7 @@ namespace System.Waf.Applications
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ObservableListView class that represents a view of the specified list.
-        /// </summary>
+        /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The orignal list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <param name="filter">Optional, a filter used for this list view.</param>
@@ -57,9 +50,7 @@ namespace System.Waf.Applications
             }
         }
 
-        /// <summary>
-        /// Override this method to free, release or reset any resources.
-        /// </summary>
+        /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected override void OnDispose(bool disposing)
         {

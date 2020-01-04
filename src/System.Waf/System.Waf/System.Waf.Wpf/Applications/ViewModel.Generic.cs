@@ -4,15 +4,11 @@ using System.Windows.Threading;
 
 namespace System.Waf.Applications
 {
-    /// <summary>
-    /// Abstract base class for a ViewModel implementation.
-    /// </summary>
+    /// <summary>Abstract base class for a ViewModel implementation.</summary>
     /// <typeparam name="TView">The type of the view. Do provide an interface as type and not the concrete type itself.</typeparam>
     public abstract class ViewModel<TView> : ViewModelCore<TView>, IPartImportsSatisfiedNotification where TView : IView
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ViewModel{TView}"/> class and attaches itself as DataContext to the view.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="ViewModel{TView}"/> class and attaches itself as DataContext to the view.</summary>
         /// <param name="view">The view.</param>
         protected ViewModel(TView view) : base(view, false)
         {
@@ -32,7 +28,6 @@ namespace System.Waf.Applications
                 view.DataContext = this;
             }
         }
-
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {

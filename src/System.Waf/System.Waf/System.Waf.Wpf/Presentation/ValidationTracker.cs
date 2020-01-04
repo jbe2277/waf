@@ -5,14 +5,12 @@ using System.Windows.Controls;
 
 namespace System.Waf.Presentation
 {
-    // This class listens to the Validation.Error event of the owner (Control). When the
-    // Error event is raised then it synchronizes the errors with its internal errors list and
-    // updates the ValidationHelper.
+    // This class listens to the Validation.Error event of the owner (Control). When the Error event is raised then it synchronizes 
+    // the errors with its internal errors list and updates the ValidationHelper.
     internal sealed class ValidationTracker
     {
         private readonly List<Tuple<object, ValidationError>> errors;
         private readonly DependencyObject owner;
-
 
         public ValidationTracker(DependencyObject owner)
         {
@@ -20,7 +18,6 @@ namespace System.Waf.Presentation
             errors = new List<Tuple<object, ValidationError>>();
             Validation.AddErrorHandler(owner, ErrorChangedHandler);
         }
-
 
         internal void AddErrors(object validationSource, IEnumerable<ValidationError> errors)
         {
@@ -34,7 +31,6 @@ namespace System.Waf.Presentation
         private void AddError(object validationSource, ValidationError error)
         {
             errors.Add(new Tuple<object, ValidationError>(validationSource, error));
-
             if (validationSource is FrameworkElement element)
             {
                 element.Unloaded += ValidationSourceUnloaded;
@@ -76,13 +72,11 @@ namespace System.Waf.Presentation
             {
                 // It keeps alive because it listens to the Loaded event.
                 new ValidationReloadedTracker(this, errorsToRemove.First().Item1, errorsToRemove.Select(x => x.Item2));
-
                 foreach (Tuple<object, ValidationError> error in errorsToRemove)
                 {
                     errors.Remove(error);
                 }
             }
-
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
     }

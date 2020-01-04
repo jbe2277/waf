@@ -4,14 +4,10 @@ using System.Windows;
 
 namespace System.Waf.Presentation
 {
-    /// <summary>
-    /// Provides helper methods to manage resources in WPF.
-    /// </summary>
+    /// <summary>Provides helper methods to manage resources in WPF.</summary>
     public static class ResourceHelper
     {
-        /// <summary>
-        /// Gets the pack URI from a local resource path.
-        /// </summary>
+        /// <summary>Gets the pack URI from a local resource path.</summary>
         /// <param name="resourceAssembly">The assembly containing the resource.</param>
         /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <returns>The pack uri.</returns>
@@ -21,9 +17,7 @@ namespace System.Waf.Presentation
             return GetPackUri(resourceAssembly.GetName().Name!, resourcePath);
         }
 
-        /// <summary>
-        /// Gets the pack URI from a local resource path.
-        /// </summary>
+        /// <summary>Gets the pack URI from a local resource path.</summary>
         /// <param name="resourceAssemblyName">The assembly containing the resource.</param>
         /// <param name="resourcePath">The local resource path (e.g. Subfolder/ResourceFile.xaml).</param>
         /// <returns>The pack uri.</returns>
@@ -34,9 +28,7 @@ namespace System.Waf.Presentation
             return new Uri(PackUriHelper.UriSchemePack + "://application:,,,/" + resourceAssemblyName + ";Component/" + resourcePath);
         }
 
-        /// <summary>
-        /// Adds a ResourceDictionary to the Application MergedDictionary collection.
-        /// </summary>
+        /// <summary>Adds a ResourceDictionary to the Application MergedDictionary collection.</summary>
         /// <param name="resourceAssembly">The assembly containing the resource dictionary.</param>
         /// <param name="resourceDictionaryPaths">The local resource dictionary path (e.g. Subfolder/ResourceFile.xaml).</param>
         public static void AddToApplicationResources(Assembly resourceAssembly, params string[] resourceDictionaryPaths)
@@ -45,9 +37,7 @@ namespace System.Waf.Presentation
             AddToApplicationResources(resourceAssembly.GetName().Name!, resourceDictionaryPaths);
         }
 
-        /// <summary>
-        /// Adds a ResourceDictionary to the Application MergedDictionary collection.
-        /// </summary>
+        /// <summary>Adds a ResourceDictionary to the Application MergedDictionary collection.</summary>
         /// <param name="resourceAssemblyName">The assembly containing the resource dictionary.</param>
         /// <param name="resourceDictionaryPaths">The local resource dictionary path (e.g. Subfolder/ResourceFile.xaml).</param>
         public static void AddToApplicationResources(string resourceAssemblyName, params string[] resourceDictionaryPaths)

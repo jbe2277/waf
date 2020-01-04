@@ -9,18 +9,12 @@ using System.Waf.Foundation;
 
 namespace System.Waf.Presentation.Services
 {
-    /// <summary>
-    /// This is the default implementation of the <see cref="IFileDialogService"/> interface. It shows an open or save file dialog box.
-    /// </summary>
-    /// <remarks>
-    /// If the default implementation of this service doesn't serve your need then you can provide your own implementation.
-    /// </remarks>
+    /// <summary>This is the default implementation of the <see cref="IFileDialogService"/> interface. It shows an open or save file dialog box.</summary>
+    /// <remarks>If the default implementation of this service doesn't serve your need then you can provide your own implementation.</remarks>
     [Export(typeof(IFileDialogService))]
     public class FileDialogService : IFileDialogService
     {
-        /// <summary>
-        /// Shows the open file dialog box that allows a user to specify a file that should be opened.
-        /// </summary>
+        /// <summary>Shows the open file dialog box that allows a user to specify a file that should be opened.</summary>
         /// <param name="owner">The window that owns this OpenFileDialog.</param>
         /// <param name="fileTypes">The supported file types.</param>
         /// <param name="defaultFileType">Default file type.</param>
@@ -30,17 +24,13 @@ namespace System.Waf.Presentation.Services
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
         public FileDialogResult ShowOpenFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
-            if (fileTypes == null) { throw new ArgumentNullException(nameof(fileTypes)); }
-            if (!fileTypes.Any()) { throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes)); }
-
+            if (fileTypes == null) throw new ArgumentNullException(nameof(fileTypes));
+            if (!fileTypes.Any()) throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes));
             OpenFileDialog dialog = new OpenFileDialog();
-
             return ShowFileDialog(owner, dialog, fileTypes, defaultFileType, defaultFileName);
         }
 
-        /// <summary>
-        /// Shows the save file dialog box that allows a user to specify a filename to save a file as.
-        /// </summary>
+        /// <summary>Shows the save file dialog box that allows a user to specify a filename to save a file as.</summary>
         /// <param name="owner">The window that owns this SaveFileDialog.</param>
         /// <param name="fileTypes">The supported file types.</param>
         /// <param name="defaultFileType">Default file type.</param>
@@ -50,11 +40,9 @@ namespace System.Waf.Presentation.Services
         /// <exception cref="ArgumentException">fileTypes must contain at least one item.</exception>
         public FileDialogResult ShowSaveFileDialog(object? owner, IEnumerable<FileType> fileTypes, FileType? defaultFileType, string? defaultFileName)
         {
-            if (fileTypes == null) { throw new ArgumentNullException(nameof(fileTypes)); }
-            if (!fileTypes.Any()) { throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes)); }
-
+            if (fileTypes == null) throw new ArgumentNullException(nameof(fileTypes));
+            if (!fileTypes.Any()) throw new ArgumentException("The fileTypes collection must contain at least one item.", nameof(fileTypes));
             SaveFileDialog dialog = new SaveFileDialog();
-
             return ShowFileDialog(owner, dialog, fileTypes, defaultFileType, defaultFileName);
         }
 
