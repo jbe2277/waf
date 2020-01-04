@@ -1,6 +1,9 @@
 name: NewsReader.CI
 
-on: [push]
+on: 
+  push:
+    paths: 
+      - 'src/NewsReader/**'
 
 jobs:
   build:
