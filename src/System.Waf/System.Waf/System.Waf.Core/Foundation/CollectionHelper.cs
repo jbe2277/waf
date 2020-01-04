@@ -7,16 +7,6 @@ namespace System.Waf.Foundation
     /// <summary>Provides helper methods for collections.</summary>
     public static class CollectionHelper
     {
-        /// <summary>Returns an empty <see cref="IReadOnlyList{TResult}"/> that has the specified type argument.</summary>
-        /// <typeparam name="TResult">The type to assign to the type parameter of the returned generic <see cref="IReadOnlyList{TResult}"/>.</typeparam>
-        /// <returns>An empty <see cref="IReadOnlyList{TResult}"/> whose type argument is TResult.</returns>
-        /// <remarks>The Empty{TResult}() method caches an empty sequence of type TResult. Same implementation as Array.Empty{T}.</remarks>
-        [Obsolete("Use Array.Empty<T> instead.")]
-        public static IReadOnlyList<TResult> Empty<TResult>()
-        {
-            return Array.Empty<TResult>();
-        }
-
         /// <summary>Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.</summary>
         /// <typeparam name="T">The collection item type.</typeparam>
         /// <param name="collection">The collection.</param>
