@@ -1,6 +1,20 @@
 Changelog
 ---------
 
+Version 6.0.0.1 (Alpha 1)
+- WAF: WPF libraries added support for .Net Core 3.1.
+- WAF: Add nullable annotations which are used by C# 8.0 Nullable Reference Types support.
+- WAF Remove obsolete method CollectionHelper.Empty (Breaking Change).
+- WAF: WPF unit tests run now on .NET Core 3.1 and on .NET Framework 4.6.1.
+- BookLibrary: Migrate Entity Framework Core 2.2 to Entity Framework Core 3.1.
+- Writer: Move creating the XAML print preview into Presentation layer as it depends on the Dispatcher thread.
+- Samples: Target multiple frameworks (runtimes): .Net Core 3.1 and .NET Framework 4.7.2.
+- Samples: Run unit tests on all targeted frameworks: .Net Core 3.1 and .NET Framework 4.7.2.
+- All: Migrate all projects (csproj) to the new Project SDK format.
+- All: Improve code by using C# 8.0.
+- Build: Visual Studio 2019 (Version 16.4) or newer is required.
+
+
 Version 5.1.0.100 (Release)
 - WAF: Update version numbers.
 
