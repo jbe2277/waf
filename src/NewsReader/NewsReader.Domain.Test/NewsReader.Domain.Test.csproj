@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Test.NewsReader.Domain</RootNamespace>
     <AssemblyName>Test.NewsReader.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.UnitTesting.Core" Version="5.1.0" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="6.0.0-alpha1" />
   </ItemGroup>
 
   <ItemGroup>
