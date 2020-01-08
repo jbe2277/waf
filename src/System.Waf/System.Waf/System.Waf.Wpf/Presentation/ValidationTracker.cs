@@ -35,7 +35,7 @@ namespace System.Waf.Presentation
             {
                 element.Unloaded += ValidationSourceUnloaded;
             }
-            else if (validationSource is FrameworkContentElement)
+            else
             {
                 ((FrameworkContentElement)validationSource).Unloaded += ValidationSourceUnloaded;
             }

@@ -67,7 +67,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        /// <summary>Call this method when the orignal collection has changed.</summary>
+        /// <summary>Call this method when the original collection has changed.</summary>
         /// <param name="sender">The sender of the collection changed event.</param>
         /// <param name="e">The event args of the collection changed event.</param>
         /// <exception cref="ArgumentNullException">Argument e must not be null.</exception>

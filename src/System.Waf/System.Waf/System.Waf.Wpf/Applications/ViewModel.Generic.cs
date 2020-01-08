@@ -17,7 +17,7 @@ namespace System.Waf.Applications
             {
                 // Set DataContext of the view has to be delayed so that the ViewModel can initialize the internal data (e.g. Commands)
                 // before the view starts with DataBinding.
-                Dispatcher.CurrentDispatcher.BeginInvoke((Action)delegate ()
+                Dispatcher.CurrentDispatcher.BeginInvoke((Action)delegate
                 {
                     ViewCore.DataContext = this;
                 });
