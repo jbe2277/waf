@@ -26,6 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Restore packages
-        run: nuget restore ./src/NewsReader/NewsReader.sln
+        run: nuget restore ./src/NewsReader/NewsReader.iOS/NewsReader.iOS.csproj
       - name: iOS
         run: msbuild ./src/NewsReader/NewsReader.iOS/NewsReader.iOS.csproj -p:Configuration=Debug -p:Platform="iPhoneSimulator" -m
