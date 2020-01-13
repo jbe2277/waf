@@ -11,9 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Android
-      run: \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe\" ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m /restore
+      run: |
+        cd "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin"
+        msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m /restore
     - name: Build UWP
-      run: \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe\" ./src/NewsReader/NewsReader.UWP/NewsReader.UWP.csproj -p:Configuration=Debug -p:Platform="x86" -m /restore
+      run: msbuild ./src/NewsReader/NewsReader.UWP/NewsReader.UWP.csproj -p:Configuration=Debug -p:Platform="x86" -m /restore
 
   iOS:
     runs-on: macos-latest
