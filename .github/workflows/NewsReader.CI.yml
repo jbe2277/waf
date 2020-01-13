@@ -2,8 +2,8 @@ name: NewsReader.CI
 
 on: 
   push:
-#    paths: 
-#      - 'src/NewsReader/**'
+    paths: 
+      - 'src/NewsReader/**'
 
 jobs:
   Android-UWP:
