@@ -10,16 +10,12 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Restore packages
-      run: nuget restore ./src/NewsReader/NewsReader.sln
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build Android
-      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m
+      run: msbuild ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m /restore
     - name: Build UWP
-      run: msbuild ./src/NewsReader/NewsReader.UWP/NewsReader.UWP.csproj -p:Configuration=Debug -p:Platform="x86" -m
+      run: msbuild ./src/NewsReader/NewsReader.UWP/NewsReader.UWP.csproj -p:Configuration=Debug -p:Platform="x86" -m /restore
 
   iOS:
     runs-on: macos-latest
