@@ -4,7 +4,6 @@
     <RootNamespace>System.Waf</RootNamespace>
     <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. Use this package for WPF (Windows Presentation Foundation) applications.</Description>
     <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(netcore))">

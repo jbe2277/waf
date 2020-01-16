@@ -3,7 +3,6 @@
     <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

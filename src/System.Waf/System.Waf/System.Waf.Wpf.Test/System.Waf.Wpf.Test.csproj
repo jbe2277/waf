@@ -4,7 +4,6 @@
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <RootNamespace>System.Waf</RootNamespace>
     <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This core package can be used in various application types.</Description>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
@@ -14,5 +12,4 @@
   <ItemGroup Condition="$(TargetFramework.StartsWith(netstandard))">
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
-
 </Project>
