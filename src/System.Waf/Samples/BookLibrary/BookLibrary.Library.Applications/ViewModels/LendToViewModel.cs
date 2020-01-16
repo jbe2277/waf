@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
@@ -11,10 +12,10 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     public class LendToViewModel : ViewModel<ILendToView>
     {
         private readonly DelegateCommand okCommand;
-        private Book book;
+        private Book? book;
         private bool isWasReturned;
         private bool isLendTo;
-        private Person selectedPerson;
+        private Person? selectedPerson;
         private bool dialogResult;
 
         [ImportingConstructor]
@@ -27,20 +28,21 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public ICommand OkCommand => okCommand;
 
-        public Book Book
+        [DisallowNull]
+        public Book? Book
         {
             get => book;
             set
             {
                 if (SetProperty(ref book, value))
                 {
-                    if (Book.LendTo == null) { IsLendTo = true; }
+                    if (value!.LendTo == null) { IsLendTo = true; }
                     else { IsWasReturned = true; }
                 }
             }
         }
 
-        public IReadOnlyList<Person> Persons { get; set; }
+        public IReadOnlyList<Person>? Persons { get; set; }
 
         public bool IsWasReturned
         {
@@ -66,7 +68,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             }
         }
 
-        public Person SelectedPerson
+        public Person? SelectedPerson
         {
             get => selectedPerson;
             set => SetProperty(ref selectedPerson, value);

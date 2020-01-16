@@ -16,8 +16,8 @@ namespace Test.BookLibrary.Library.Applications.DataModels
             var book = new Book();
             var dummyCommand = new DelegateCommand(() => {});
             
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new BookDataModel(null, null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new BookDataModel(book, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new BookDataModel(null!, null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new BookDataModel(book, null!));
 
             var bookDataModel = new BookDataModel(book, dummyCommand);
             Assert.AreEqual(book, bookDataModel.Book);

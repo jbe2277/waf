@@ -9,10 +9,10 @@ namespace Waf.BookLibrary.Library.Applications.Services
     [Export(typeof(IEntityService)), Export]
     internal class EntityService : IEntityService
     {
-        private ObservableCollection<Book> books;
-        private ObservableCollection<Person> persons;
+        private ObservableCollection<Book>? books;
+        private ObservableCollection<Person>? persons;
 
-        public DbContext BookLibraryContext { get; set; }
+        public DbContext? BookLibraryContext { get; set; }
         
         public ObservableCollection<Book> Books
         {
@@ -23,7 +23,7 @@ namespace Waf.BookLibrary.Library.Applications.Services
                     BookLibraryContext.Set<Book>().Include(x => x.LendTo).Load();
                     books = BookLibraryContext.Set<Book>().Local.ToObservableCollection();
                 }
-                return books;
+                return books!;
             }
         }
 
@@ -36,7 +36,7 @@ namespace Waf.BookLibrary.Library.Applications.Services
                     BookLibraryContext.Set<Person>().Load();
                     persons = BookLibraryContext.Set<Person>().Local.ToObservableCollection();
                 }
-                return persons;
+                return persons!;
             }
         }
     }

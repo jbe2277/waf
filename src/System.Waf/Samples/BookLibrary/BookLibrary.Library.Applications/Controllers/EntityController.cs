@@ -25,7 +25,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly IDBContextService dBContextService;
         private readonly Lazy<ShellViewModel> shellViewModel;
         private readonly DelegateCommand saveCommand;
-        private DbContext bookLibraryContext;
+        private DbContext? bookLibraryContext;
 
         [ImportingConstructor]
         public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService, 
@@ -53,7 +53,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         public void Shutdown()
         {
-            bookLibraryContext.Dispose();
+            bookLibraryContext?.Dispose();
         }
 
         public bool HasChanges()
@@ -65,12 +65,9 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         
         public bool Save()
         {
-            if (!CanSave()) 
-            { 
-                throw new InvalidOperationException("You must not call Save when CanSave returns false."); 
-            }
+            if (!CanSave()) throw new InvalidOperationException("You must not call Save when CanSave returns false."); 
 
-            var entities = bookLibraryContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).Select(x => x.Entity).ToArray();
+            var entities = bookLibraryContext!.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).Select(x => x.Entity).ToArray();
             var errors = entities.OfType<ValidatableModel>().Where(x => x.HasErrors).ToArray();
             if (errors.Any())
             {
@@ -85,7 +82,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             return true;
         }
 
-        private void ShellViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ShellViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ShellViewModel.IsValid))
             {
@@ -95,7 +92,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         internal static string EntityToString(object entity)
         {
-            return entity is IFormattable formattableEntity ? formattableEntity.ToString(null, CultureInfo.CurrentCulture) : entity.ToString();
+            return entity is IFormattable formattableEntity ? formattableEntity.ToString(null, CultureInfo.CurrentCulture) : entity.ToString() ?? "";
         }
     }
 }

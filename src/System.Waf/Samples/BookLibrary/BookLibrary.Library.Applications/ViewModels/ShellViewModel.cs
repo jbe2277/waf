@@ -48,9 +48,9 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public ICommand AboutCommand { get; }
 
-        public ICommand SaveCommand { get; set; }
+        public ICommand? SaveCommand { get; set; }
 
-        public ICommand ExitCommand { get; set; }
+        public ICommand? ExitCommand { get; set; }
 
         public bool IsValid
         {
@@ -60,7 +60,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public string DatabasePath { get; set; } = Resources.NotAvailable;
 
-        public event CancelEventHandler Closing;
+        public event CancelEventHandler? Closing;
 
         public void Show()
         {
@@ -82,7 +82,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             OnClosing(e);
         }
 
-        private void ViewClosed(object sender, EventArgs e)
+        private void ViewClosed(object? sender, EventArgs e)
         {
             settings.Left = ViewCore.Left;
             settings.Top = ViewCore.Top;

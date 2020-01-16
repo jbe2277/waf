@@ -36,7 +36,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             // Select the first book
             AssertHelper.PropertyChangedEvent(bookListViewModel, x => x.SelectedBook,
                 () => bookListViewModel.SelectedBook = bookDataModels.First());
-            Assert.AreEqual(books.First(), bookListViewModel.SelectedBook.Book);
+            Assert.AreEqual(books.First(), bookListViewModel.SelectedBook?.Book);
 
             bookListViewModel.AddSelectedBook(bookDataModels.First());
             AssertHelper.SequenceEqual(new[] { bookDataModels.First() }, bookListViewModel.SelectedBooks);

@@ -10,7 +10,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     public class BookViewModel : ViewModel<IBookView>
     {
         private bool isValid = true;
-        private Book book;
+        private Book? book;
         
         [ImportingConstructor]
         public BookViewModel(IBookView view) : base(view)
@@ -25,7 +25,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref isValid, value);
         }
 
-        public Book Book
+        public Book? Book
         {
             get => book;
             set
@@ -37,6 +37,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             }
         }
 
-        public ICommand LendToCommand { get; set; }
+        public ICommand? LendToCommand { get; set; }
     }
 }

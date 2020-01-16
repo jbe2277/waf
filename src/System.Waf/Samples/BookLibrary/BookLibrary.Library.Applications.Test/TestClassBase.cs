@@ -10,7 +10,7 @@ namespace Test.BookLibrary.Library.Applications
     [TestClass]
     public abstract class TestClassBase
     {
-        public CompositionContainer Container { get; private set; }
+        public CompositionContainer? Container { get; private set; }
 
         [TestInitialize]
         public void Initialize()
@@ -39,12 +39,12 @@ namespace Test.BookLibrary.Library.Applications
 
         public T Get<T>()
         {
-            return Container.GetExportedValue<T>();
+            return Container!.GetExportedValue<T>();
         }
 
         public Lazy<T> GetLazy<T>()
         {
-            return new Lazy<T>(() => Container.GetExportedValue<T>());
+            return new Lazy<T>(() => Container!.GetExportedValue<T>());
         }
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }

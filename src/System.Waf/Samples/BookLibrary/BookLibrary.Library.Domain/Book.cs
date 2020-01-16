@@ -10,12 +10,12 @@ namespace Waf.BookLibrary.Library.Domain
     {
         private string title;
         private string author;
-        private string publisher;
+        private string? publisher;
         private DateTime publishDate;
-        private string isbn;
+        private string? isbn;
         private Language language;
         private int pages;
-        private Person lendTo;
+        private Person? lendTo;
 
         public Book()
         {
@@ -44,7 +44,7 @@ namespace Waf.BookLibrary.Library.Domain
         }
 
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.PublisherMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Publisher
+        public string? Publisher
         {
             get => publisher;
             set => SetPropertyAndValidate(ref publisher, value);
@@ -58,7 +58,7 @@ namespace Waf.BookLibrary.Library.Domain
         }
 
         [StringLength(14, ErrorMessageResourceName = nameof(Resources.IsbnMaxLength), ErrorMessageResourceType = typeof(Resources))]
-        public string Isbn
+        public string? Isbn
         {
             get => isbn;
             set => SetPropertyAndValidate(ref isbn, value);
@@ -77,13 +77,13 @@ namespace Waf.BookLibrary.Library.Domain
             set => SetPropertyAndValidate(ref pages, value);
         }
 
-        public Person LendTo
+        public Person? LendTo
         {
             get => lendTo;
             set => SetPropertyAndValidate(ref lendTo, value);
         }
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider formatProvider)
         {
             return string.Format(formatProvider, Resources.BookToString, Title, Author);
         }

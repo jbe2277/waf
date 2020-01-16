@@ -16,9 +16,9 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     {
         private readonly ObservableCollection<Person> selectedPersons;
         private bool isValid = true;
-        private Person selectedPerson;
+        private Person? selectedPerson;
         private string filterText = "";
-        private Func<IEnumerable<Person>, IOrderedEnumerable<Person>> sort;
+        private Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? sort;
 
         [ImportingConstructor]
         public PersonListViewModel(IPersonListView view) : base(view)
@@ -34,19 +34,19 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref isValid, value);
         }
 
-        public IReadOnlyList<Person> Persons { get; set; }
+        public IReadOnlyList<Person>? Persons { get; set; }
 
-        public Person SelectedPerson
+        public Person? SelectedPerson
         {
             get => selectedPerson;
             set => SetProperty(ref selectedPerson, value);
         }
 
-        public ICommand AddNewCommand { get; set; }
+        public ICommand? AddNewCommand { get; set; }
 
-        public ICommand RemoveCommand { get; set; }
+        public ICommand? RemoveCommand { get; set; }
 
-        public ICommand CreateNewEmailCommand { get; set; }
+        public ICommand? CreateNewEmailCommand { get; set; }
 
         public string FilterText
         {
@@ -54,7 +54,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref filterText, value);
         }
 
-        public Func<IEnumerable<Person>, IOrderedEnumerable<Person>> Sort
+        public Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? Sort
         {
             get => sort;
             set => SetProperty(ref sort, value);

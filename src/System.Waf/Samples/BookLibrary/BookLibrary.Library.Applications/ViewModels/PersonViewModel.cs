@@ -10,7 +10,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
     public class PersonViewModel : ViewModel<IPersonView>
     {
         private bool isValid = true;
-        private Person person;
+        private Person? person;
 
         [ImportingConstructor]
         public PersonViewModel(IPersonView view) : base(view)
@@ -25,7 +25,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref isValid, value);
         }
 
-        public Person Person
+        public Person? Person
         {
             get => person;
             set
@@ -37,6 +37,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             }
         }
 
-        public ICommand CreateNewEmailCommand { get; set; }
+        public ICommand? CreateNewEmailCommand { get; set; }
     }
 }

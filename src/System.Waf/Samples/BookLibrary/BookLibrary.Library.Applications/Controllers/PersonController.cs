@@ -40,10 +40,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.personViewModel = personViewModel;
             addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
             removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
-            createNewEmailCommand = new DelegateCommand(CreateNewEmail);
+            createNewEmailCommand = new DelegateCommand(CreateNewEmail!);
         }
 
-        internal ObservableListView<Person> PersonsView { get; private set; }
+        internal ObservableListView<Person>? PersonsView { get; private set; }
 
         public void Initialize()
         {
@@ -100,7 +100,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
                 messageService.ShowError(shellService.ShellView, Resources.CorrectEmailAddress);
                 return;
             }
-            emailService.CreateNewEmail(person.Email);
+            emailService.CreateNewEmail(person.Email!);
         }
 
         private void UpdateCommands()
@@ -109,7 +109,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             removeCommand.RaiseCanExecuteChanged();
         }
 
-        private void PersonListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void PersonListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(PersonListViewModel.SelectedPerson))
             {
@@ -122,15 +122,15 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             }
             else if (e.PropertyName == nameof(PersonListViewModel.FilterText))
             {
-                PersonsView.Update();
+                PersonsView!.Update();
             }
             else if (e.PropertyName == nameof(PersonListViewModel.Sort))
             {
-                PersonsView.Sort = personListViewModel.Sort;
+                PersonsView!.Sort = personListViewModel.Sort;
             }
         }
 
-        private void PersonViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void PersonViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(PersonViewModel.IsValid))
             {

@@ -5,9 +5,9 @@ namespace Waf.BookLibrary.Library.Applications.Data
 {
     public class BookLibraryContext : DbContext
     {
-        private readonly Action<ModelBuilder> onModelCreating;
+        private readonly Action<ModelBuilder>? onModelCreating;
 
-        public BookLibraryContext(DbContextOptions options, Action<ModelBuilder> onModelCreating = null) : base(options)
+        public BookLibraryContext(DbContextOptions options, Action<ModelBuilder>? onModelCreating = null) : base(options)
         {
             this.onModelCreating = onModelCreating;
         }

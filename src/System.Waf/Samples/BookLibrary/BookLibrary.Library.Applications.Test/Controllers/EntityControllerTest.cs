@@ -35,7 +35,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             entityService.Persons.Last().Validate();
             Assert.IsTrue(controller.HasChanges());
             var shellViewModel = Get<ShellViewModel>();
-            shellViewModel.SaveCommand.Execute(null);
+            shellViewModel.SaveCommand!.Execute(null);
 
             Assert.AreEqual(MessageType.Error, messageService.MessageType);
             Assert.IsTrue(controller.HasChanges());
@@ -48,7 +48,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var controller = (EntityController)Get<IEntityController>();
             controller.Initialize();
             var shellViewModel = Get<ShellViewModel>();
-            Assert.IsTrue(shellViewModel.SaveCommand.CanExecute(null));
+            Assert.IsTrue(shellViewModel.SaveCommand!.CanExecute(null));
             AssertHelper.CanExecuteChangedEvent(shellViewModel.SaveCommand, () => shellViewModel.IsValid = false);
             Assert.IsFalse(shellViewModel.SaveCommand.CanExecute(null));
             controller.Shutdown();
@@ -67,16 +67,16 @@ namespace Test.BookLibrary.Library.Applications.Controllers
 
         private class Entity
         {
-            public string ToStringValue;
+            public string? ToStringValue;
 
-            public override string ToString() { return ToStringValue; }
+            public override string? ToString() { return ToStringValue; }
         }
 
         private class FormattableEntity : IFormattable
         {
-            public string ToStringValue;
+            public string ToStringValue = "";
 
-            public string ToString(string format, IFormatProvider formatProvider)
+            public string ToString(string? format, IFormatProvider? formatProvider)
             {
                 return ToStringValue;
             }

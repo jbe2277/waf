@@ -11,7 +11,7 @@ namespace Waf.BookLibrary.Library.Domain
     {
         private string firstname;
         private string lastname;
-        private string email;
+        private string? email;
 
         public Person()
         {
@@ -40,13 +40,13 @@ namespace Waf.BookLibrary.Library.Domain
 
         [StringLength(100, ErrorMessageResourceName = nameof(Resources.EmailMaxLength), ErrorMessageResourceType = typeof(Resources))]
         [EmailAddress(ErrorMessageResourceName = nameof(Resources.EmailInvalid), ErrorMessageResourceType = typeof(Resources))]
-        public string Email
+        public string? Email
         {
             get => email;
             set => SetPropertyAndValidate(ref email, value == "" ? null : value);
         }
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider formatProvider)
         {
             return string.Format(formatProvider, Resources.PersonToString, Firstname, Lastname);
         }

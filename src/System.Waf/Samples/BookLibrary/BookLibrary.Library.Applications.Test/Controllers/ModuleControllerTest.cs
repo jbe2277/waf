@@ -41,8 +41,8 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(shellView.IsVisible);
 
             // Exit the ShellView
-            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
-            shellViewModel.ExitCommand.Execute(null);
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
+            shellViewModel.ExitCommand!.Execute(null);
             Assert.IsFalse(shellView.IsVisible);
 
             // Shutdown
@@ -61,7 +61,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             moduleController.Initialize();
             moduleController.Run();
             var shellView = Get<MockShellView>();
-            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
 
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
@@ -73,7 +73,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             };
             // Then we simulate that the EntityController wasn't able to save the changes.
             entityController.SaveResult = false;
-            shellViewModel.ExitCommand.Execute(null);
+            shellViewModel.ExitCommand!.Execute(null);
             // The Save method must be called. Because the save operation failed the expect the ShellView to be
             // still visible.
             Assert.IsTrue(entityController.SaveCalled);
@@ -112,7 +112,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             moduleController.Initialize();
             moduleController.Run();
             var shellView = Get<MockShellView>();
-            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
 
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
@@ -124,7 +124,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
                 Assert.AreEqual(Resources.LoseChangesQuestion, message);
                 return false;
             };
-            shellViewModel.ExitCommand.Execute(null);
+            shellViewModel.ExitCommand!.Execute(null);
             // We expect the ShellView to stay open.
             Assert.IsTrue(shellView.IsVisible);
 

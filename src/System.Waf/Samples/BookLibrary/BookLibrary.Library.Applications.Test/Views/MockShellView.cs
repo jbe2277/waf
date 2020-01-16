@@ -21,9 +21,9 @@ namespace Test.BookLibrary.Library.Applications.Views
 
         public bool IsMaximized { get; set; }
 
-        public event CancelEventHandler Closing;
+        public event CancelEventHandler? Closing;
 
-        public event EventHandler Closed;
+        public event EventHandler? Closed;
 
         public void Show()
         {

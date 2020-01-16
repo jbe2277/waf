@@ -6,7 +6,7 @@ namespace Test.BookLibrary.Library.Applications.Services
     [Export(typeof(IEmailService)), Export]
     internal class MockEmailService : IEmailService
     {
-        public string ToEmailAddress { get; set; }
+        public string? ToEmailAddress { get; set; }
         
         public void CreateNewEmail(string toEmailAddress)
         {

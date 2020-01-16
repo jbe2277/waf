@@ -24,7 +24,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand addNewCommand;
         private readonly DelegateCommand removeCommand;
         private readonly DelegateCommand lendToCommand;
-        private SynchronizingCollection<BookDataModel, Book> bookDataModels;
+        private SynchronizingCollection<BookDataModel, Book>? bookDataModels;
 
         [ImportingConstructor]
         public BookController(IShellService shellService, IEntityService entityService,
@@ -37,10 +37,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             this.lendToViewModelFactory = lendToViewModelFactory;
             addNewCommand = new DelegateCommand(AddNewBook, CanAddNewBook);
             removeCommand = new DelegateCommand(RemoveBook, CanRemoveBook);
-            lendToCommand = new DelegateCommand(p => LendTo((Book)p));
+            lendToCommand = new DelegateCommand(p => LendTo((Book)p!));
         }
 
-        internal ObservableListView<BookDataModel> BooksView { get; private set; }
+        internal ObservableListView<BookDataModel>? BooksView { get; private set; }
 
         public void Initialize()
         {
@@ -98,7 +98,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             lendToViewModel.Book = book;
             lendToViewModel.Persons = entityService.Persons;
             lendToViewModel.SelectedPerson = entityService.Persons.FirstOrDefault();
-            if (lendToViewModel.ShowDialog(shellService.ShellView))
+            if (lendToViewModel.ShowDialog(shellService.ShellView!))
             {
                 book.LendTo = lendToViewModel.SelectedPerson;
             }
@@ -111,7 +111,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             lendToCommand.RaiseCanExecuteChanged();
         }
 
-        private void BookListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void BookListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(BookListViewModel.SelectedBook))
             {
@@ -124,15 +124,15 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             }
             else if (e.PropertyName == nameof(BookListViewModel.FilterText))
             {
-                BooksView.Update();
+                BooksView!.Update();
             }
             else if (e.PropertyName == nameof(BookListViewModel.Sort))
             {
-                BooksView.Sort = bookListViewModel.Sort;
+                BooksView!.Sort = bookListViewModel.Sort;
             }
         }
 
-        private void BookViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void BookViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(BookViewModel.IsValid))
             {
