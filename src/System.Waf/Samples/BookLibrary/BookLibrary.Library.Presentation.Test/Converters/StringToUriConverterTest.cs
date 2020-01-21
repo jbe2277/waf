@@ -20,7 +20,6 @@ namespace Test.BookLibrary.Library.Presentation.Converters
 
             uri = (Uri)converter.Convert(null, null, null, null)!;
             Assert.AreEqual("", uri.OriginalString);
-            Assert.AreEqual("", uri.OriginalString);
         }
         
         [TestMethod]
