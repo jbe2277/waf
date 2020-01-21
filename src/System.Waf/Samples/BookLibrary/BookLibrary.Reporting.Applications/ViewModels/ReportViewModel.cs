@@ -8,21 +8,21 @@ namespace Waf.BookLibrary.Reporting.Applications.ViewModels
     [Export]
     public class ReportViewModel : ViewModel<IReportView>
     {
-        private object report;
+        private object? report;
 
         [ImportingConstructor]
         public ReportViewModel(IReportView view) : base(view)
         {
         }
 
-        public object Report
+        public object? Report
         {
             get => report;
             set => SetProperty(ref report, value);
         }
 
-        public ICommand CreateBookListReportCommand { get; set; }
+        public ICommand? CreateBookListReportCommand { get; set; }
         
-        public ICommand CreateBorrowedBooksReportCommand { get; set; }
+        public ICommand? CreateBorrowedBooksReportCommand { get; set; }
     }
 }

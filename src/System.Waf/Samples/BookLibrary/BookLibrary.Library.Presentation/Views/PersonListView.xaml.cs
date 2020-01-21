@@ -20,7 +20,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         public PersonListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<PersonListViewModel>(this.GetViewModel<PersonListViewModel>);
+            viewModel = new Lazy<PersonListViewModel>(() => this.GetViewModel<PersonListViewModel>()!);
             Loaded += FirstTimeLoadedHandler;
         }
 
@@ -47,13 +47,13 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (Person person in e.RemovedItems)
+            foreach (Person? person in e.RemovedItems)
             {
-                ViewModel.RemoveSelectedPerson(person);
+                ViewModel.RemoveSelectedPerson(person!);
             }
-            foreach (Person person in e.AddedItems)
+            foreach (Person? person in e.AddedItems)
             {
-                ViewModel.AddSelectedPerson(person);
+                ViewModel.AddSelectedPerson(person!);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         private void EmailClick(object sender, RoutedEventArgs e)
         {
             var hyperlink = (Hyperlink)e.OriginalSource;
-            ViewModel.CreateNewEmailCommand.Execute(hyperlink.DataContext);
+            ViewModel.CreateNewEmailCommand!.Execute(hyperlink.DataContext);
         }
     }
 }

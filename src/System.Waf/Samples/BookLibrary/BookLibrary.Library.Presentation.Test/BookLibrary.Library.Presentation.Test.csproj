@@ -4,6 +4,7 @@
     <RootNamespace>Test.BookLibrary.Library.Presentation</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Library.Presentation.Test</AssemblyName>
     <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

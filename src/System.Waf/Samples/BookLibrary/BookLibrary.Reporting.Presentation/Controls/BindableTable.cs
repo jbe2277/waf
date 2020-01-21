@@ -55,9 +55,9 @@ namespace Waf.BookLibrary.Reporting.Presentation.Controls
                     throw new InvalidOperationException("When ItemsSource is used then the ItemTemplate must not be null."); 
                 }
                 var contentRowGroup = new TableRowGroup();
-                foreach (object item in ItemsSource)
+                foreach (object? item in ItemsSource)
                 {
-                    TableRow tableRow = null;
+                    TableRow? tableRow = null;
                     if (ItemTemplate.LoadContent() is ContentElement contentElement)
                     {
                         tableRow = contentElement.Content as TableRow;

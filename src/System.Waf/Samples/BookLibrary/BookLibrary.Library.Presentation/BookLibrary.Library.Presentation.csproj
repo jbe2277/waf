@@ -8,6 +8,7 @@
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Images\BookLibrary.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

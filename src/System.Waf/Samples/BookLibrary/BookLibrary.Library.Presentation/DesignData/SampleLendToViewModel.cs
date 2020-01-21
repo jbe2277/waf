@@ -40,7 +40,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         private class MockLendToView : ILendToView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public void Close() { }
 

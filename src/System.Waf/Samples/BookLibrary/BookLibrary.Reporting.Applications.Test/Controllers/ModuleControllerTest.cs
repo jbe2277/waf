@@ -28,7 +28,7 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
             Assert.IsTrue(shellService.IsReportingEnabled);
 
             var reportView = Get<IReportView>();
-            Assert.AreEqual(reportView, shellService.LazyReportingView.Value);
+            Assert.AreEqual(reportView, shellService.LazyReportingView?.Value);
 
             return moduleController;
         }
@@ -39,10 +39,10 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
             var moduleController = InitializeModuleController();
 
             var reportViewModel = Get<ReportViewModel>();
-            reportViewModel.CreateBookListReportCommand.Execute(null);
+            reportViewModel.CreateBookListReportCommand!.Execute(null);
 
-            var bookListReport = (MockBookListReport)reportViewModel.Report;
-            var bookListReportDataModel = (BookListReportDataModel)bookListReport.ReportData;
+            var bookListReport = (MockBookListReport)reportViewModel.Report!;
+            var bookListReportDataModel = (BookListReportDataModel)bookListReport.ReportData!;
 
             Assert.IsNotNull(bookListReportDataModel.Books);
             Assert.AreEqual(0, bookListReportDataModel.BookCount);
@@ -56,10 +56,10 @@ namespace Test.BookLibrary.Reporting.Applications.Controllers
             var moduleController = InitializeModuleController();
 
             var reportViewModel = Get<ReportViewModel>();
-            reportViewModel.CreateBorrowedBooksReportCommand.Execute(null);
+            reportViewModel.CreateBorrowedBooksReportCommand!.Execute(null);
 
-            var bookListReport = (MockBorrowedBooksReport)reportViewModel.Report;
-            var bookListReportDataModel = (BorrowedBooksReportDataModel)bookListReport.ReportData;
+            var bookListReport = (MockBorrowedBooksReport)reportViewModel.Report!;
+            var bookListReportDataModel = (BorrowedBooksReportDataModel)bookListReport.ReportData!;
 
             Assert.IsNotNull(bookListReportDataModel.GroupedBooks);
             Assert.AreEqual(0, bookListReportDataModel.GroupedBooks.Count);

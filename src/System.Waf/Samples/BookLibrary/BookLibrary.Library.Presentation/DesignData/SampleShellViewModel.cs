@@ -8,7 +8,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() : base(new MockShellView(), null, null, new MockShellService(), new MockSettingsService())
+        public SampleShellViewModel() : base(new MockShellView(), null!, null!, new MockShellService(), new MockSettingsService())
         {
             ShellService.BookListView = new BookListView();
             ShellService.BookView = new BookView();
@@ -20,7 +20,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         private class MockShellView : IShellView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public double Left { get; set; }
 
@@ -32,9 +32,9 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
             public bool IsMaximized { get; set; }
 
-            public event CancelEventHandler Closing;
+            public event CancelEventHandler? Closing;
 
-            public event EventHandler Closed;
+            public event EventHandler? Closed;
 
             public void Show() { }
 

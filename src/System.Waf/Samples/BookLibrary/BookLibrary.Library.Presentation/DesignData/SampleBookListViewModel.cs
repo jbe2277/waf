@@ -45,7 +45,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         private class MockBookListView : IBookListView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public void FocusFirstCell() { }
         }

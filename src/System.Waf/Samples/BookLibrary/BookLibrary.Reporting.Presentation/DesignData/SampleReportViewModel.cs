@@ -18,7 +18,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData
 
         private class MockReportView : IReportView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

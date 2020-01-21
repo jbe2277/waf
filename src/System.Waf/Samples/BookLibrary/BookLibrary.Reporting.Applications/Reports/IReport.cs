@@ -4,6 +4,6 @@
     {
         object Report { get; }
 
-        object ReportData { get; set; }
+        object? ReportData { get; set; }
     }
 }

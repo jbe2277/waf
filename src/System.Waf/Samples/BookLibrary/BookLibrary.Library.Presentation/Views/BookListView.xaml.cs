@@ -19,7 +19,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         public BookListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<BookListViewModel>(this.GetViewModel<BookListViewModel>);
+            viewModel = new Lazy<BookListViewModel>(() => this.GetViewModel<BookListViewModel>()!);
             Loaded += FirstTimeLoadedHandler;
         }
 
@@ -46,13 +46,13 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (BookDataModel book in e.RemovedItems)
+            foreach (BookDataModel? book in e.RemovedItems)
             {
-                ViewModel.RemoveSelectedBook(book);
+                ViewModel.RemoveSelectedBook(book!);
             }
-            foreach (BookDataModel book in e.AddedItems)
+            foreach (BookDataModel? book in e.AddedItems)
             {
-                ViewModel.AddSelectedBook(book);
+                ViewModel.AddSelectedBook(book!);
             }
         }
 

@@ -6,7 +6,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.Reports
     [Export(typeof(IBorrowedBooksReport)), PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class BorrowedBooksReport : IBorrowedBooksReport
     {
-        private object reportData;
+        private object? reportData;
 
         public BorrowedBooksReport()
         {
@@ -17,7 +17,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.Reports
 
         public object Report => flowDocument;
 
-        public object ReportData
+        public object? ReportData
         {
             get => reportData;
             set

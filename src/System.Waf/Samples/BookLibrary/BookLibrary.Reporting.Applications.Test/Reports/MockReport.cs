@@ -6,6 +6,6 @@ namespace Test.BookLibrary.Reporting.Applications.Reports
     {
         public object Report => this;
 
-        public object ReportData { get; set; }
+        public object? ReportData { get; set; }
     }
 }

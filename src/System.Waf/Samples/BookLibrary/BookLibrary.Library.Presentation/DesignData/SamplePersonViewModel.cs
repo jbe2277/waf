@@ -19,7 +19,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         private class MockPersonView : IPersonView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

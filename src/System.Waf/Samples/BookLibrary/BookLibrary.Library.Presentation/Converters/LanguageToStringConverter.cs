@@ -8,7 +8,7 @@ namespace Waf.BookLibrary.Library.Presentation.Converters
 {
     public class LanguageToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (!(value is Language language)) { return null; }
             return language switch
@@ -24,7 +24,7 @@ namespace Waf.BookLibrary.Library.Presentation.Converters
             };
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

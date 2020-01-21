@@ -29,7 +29,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         private class MockBookView : IBookView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

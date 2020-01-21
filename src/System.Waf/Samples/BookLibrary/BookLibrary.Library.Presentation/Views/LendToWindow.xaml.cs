@@ -17,7 +17,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
         public LendToWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<LendToViewModel>(this.GetViewModel<LendToViewModel>);
+            viewModel = new Lazy<LendToViewModel>(() => this.GetViewModel<LendToViewModel>()!);
         }
 
         private LendToViewModel ViewModel => viewModel.Value;

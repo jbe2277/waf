@@ -12,13 +12,14 @@ namespace Test.BookLibrary.Library.Presentation.Converters
         {
             var converter = new StringToUriConverter();
 
-            var uri = (Uri)converter.Convert("harry.potter@hogwarts.edu", null, null, null);
+            var uri = (Uri)converter.Convert("harry.potter@hogwarts.edu", null, null, null)!;
             Assert.AreEqual("harry.potter@hogwarts.edu", uri.OriginalString);
             
-            uri = (Uri)converter.Convert("wrongAddress", null, null, null);
+            uri = (Uri)converter.Convert("wrongAddress", null, null, null)!;
             Assert.AreEqual("wrongAddress", uri.OriginalString);
 
-            uri = (Uri)converter.Convert(null, null, null, null);
+            uri = (Uri)converter.Convert(null, null, null, null)!;
+            Assert.AreEqual("", uri.OriginalString);
             Assert.AreEqual("", uri.OriginalString);
         }
         
