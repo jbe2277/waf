@@ -15,8 +15,8 @@ namespace Waf.Writer.Applications.ViewModels
     public class MainViewModel : ViewModel<IMainView>
     {
         private readonly IShellService shellService;
-        private IDocument activeDocument;
-        private object activeDocumentView;
+        private IDocument? activeDocument;
+        private object? activeDocumentView;
 
         [ImportingConstructor]
         public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) 
@@ -32,22 +32,22 @@ namespace Waf.Writer.Applications.ViewModels
 
         public IFileService FileService { get; }
 
-        public object StartView { get; set; }
+        public object StartView { get; set; } = null!;
 
         public ObservableCollection<object> DocumentViews { get; }
 
-        public object ActiveDocumentView
+        public object? ActiveDocumentView
         {
             get => activeDocumentView;
             set => SetProperty(ref activeDocumentView, value);
         }
 
-        private void DocumentViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void DocumentViewsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             ViewCore.ContentViewState = DocumentViews.Any() ? ContentViewState.DocumentViewVisible : ContentViewState.StartViewVisible;
         }
 
-        private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void FileServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
@@ -58,7 +58,7 @@ namespace Waf.Writer.Applications.ViewModels
             }
         }
 
-        private void ActiveDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ActiveDocumentPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Document.FileName))
             {

@@ -25,9 +25,9 @@ namespace Waf.Writer.Applications.Controllers
 
         protected abstract void OnDocumentRemoved(IDocument document);
 
-        protected abstract void OnActiveDocumentChanged(IDocument activeDocument);
+        protected abstract void OnActiveDocumentChanged(IDocument? activeDocument);
 
-        private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void FileServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
@@ -35,7 +35,7 @@ namespace Waf.Writer.Applications.Controllers
             }
         }
 
-        private void DocumentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void DocumentsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {

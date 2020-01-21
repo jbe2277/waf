@@ -2,6 +2,6 @@
 {
     public interface IEnvironmentService
     {
-        string DocumentFileName { get; }
+        string? DocumentFileName { get; }
     }
 }

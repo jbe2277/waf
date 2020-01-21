@@ -6,7 +6,7 @@ namespace Waf.Writer.Applications.Documents
 {
     public class RichTextDocument : Document
     {
-        public RichTextDocument(RichTextDocumentType documentType, FlowDocument content = null) : base(documentType)
+        public RichTextDocument(RichTextDocumentType documentType, FlowDocument? content = null) : base(documentType)
         {
             Content = content ?? new FlowDocument();
         }

@@ -30,7 +30,7 @@ namespace Test.Writer.Applications.Controllers
             IDocument document = fileService.Documents.Last();
 
             var richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
-            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
+            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;
             Assert.AreEqual(document, richTextViewModel.Document);
 
             fileService.NewCommand.Execute(null);
@@ -38,7 +38,7 @@ namespace Test.Writer.Applications.Controllers
 
             Assert.AreEqual(2, mainViewModel.DocumentViews.Count);
             richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Last();
-            richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView);
+            richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;
             Assert.AreEqual(document, richTextViewModel.Document);
 
             // Test ActiveDocument <-> ActiveDocumentView synchronization
@@ -69,8 +69,8 @@ namespace Test.Writer.Applications.Controllers
             fileService.NewCommand.Execute(null);
 
             // We have to use reflection to get the private documents collection field
-            var documentsInfo = typeof(FileService).GetField("documents", BindingFlags.Instance | BindingFlags.NonPublic);
-            var documents = (ObservableCollection<IDocument>)documentsInfo.GetValue(fileService);
+            var documentsInfo = typeof(FileService).GetField("documents", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            var documents = (ObservableCollection<IDocument>)documentsInfo.GetValue(fileService)!;
 
             // Now we call a method that is not supported by the DocumentController base class
             AssertHelper.ExpectedException<NotSupportedException>(() => documents.Clear());

@@ -15,9 +15,9 @@ namespace Test.Writer.Applications.Documents
         
         public DocumentOperation DocumentOperation { get; private set; }
         
-        public IDocument Document { get; private set; }
+        public IDocument? Document { get; private set; }
         
-        public string FileName { get; private set; }
+        public string? FileName { get; private set; }
 
         public bool ThrowException { get; set; }
 

@@ -8,8 +8,10 @@ namespace Test.Writer.Applications.Services
     public class MockPrintDialogService : IPrintDialogService
     {
         public bool ShowDialogResult { get; set; }
-        public DocumentPaginator DocumentPaginator { get; private set; }
-        public string Description { get; private set; }
+        
+        public DocumentPaginator? DocumentPaginator { get; private set; }
+        
+        public string? Description { get; private set; }
 
         public bool ShowDialog()
         {

@@ -34,7 +34,7 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand saveCommand;
         private readonly DelegateCommand saveAsCommand;
         private readonly AppSettings settings;
-        private IDocument lastActiveDocument;
+        private IDocument? lastActiveDocument;
 
         [ImportingConstructor]
         public FileController(IMessageService messageService, IFileDialogService fileDialogService, 
@@ -68,7 +68,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
 
-        private IDocument ActiveDocument
+        private IDocument? ActiveDocument
         {
             get => fileService.ActiveDocument;
             set => fileService.ActiveDocument = value;
@@ -90,10 +90,10 @@ namespace Waf.Writer.Applications.Controllers
             settings.RecentFileList = recentFileList;
         }
 
-        public IDocument Open(string fileName)
+        public IDocument? Open(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("The argument fileName must not be null or empty."); }
-            return OpenCore(fileName);
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The argument fileName must not be null or empty.");
+            return OpenCore(fileName!);
         }
 
         public bool CloseAll()
@@ -110,7 +110,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void NewCommand() { New(documentTypes.First()); }
 
-        private void OpenCommand(object commandParameter)
+        private void OpenCommand(object? commandParameter)
         {
             if (commandParameter is string fileName && !string.IsNullOrEmpty(fileName))
             {
@@ -124,17 +124,17 @@ namespace Waf.Writer.Applications.Controllers
 
         private bool CanCloseCommand() { return ActiveDocument != null; }
 
-        private void CloseCommand() { Close(ActiveDocument); }
+        private void CloseCommand() { Close(ActiveDocument!); }
 
         private bool CanSaveCommand() { return ActiveDocument != null && ActiveDocument.Modified; }
 
-        private void SaveCommand() { Save(ActiveDocument); }
+        private void SaveCommand() { Save(ActiveDocument!); }
 
         private bool CanSaveAsCommand() { return ActiveDocument != null; }
 
-        private void SaveAsCommand() { SaveAs(ActiveDocument); }
+        private void SaveAsCommand() { SaveAs(ActiveDocument!); }
 
-        private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void FileServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
@@ -148,7 +148,7 @@ namespace Waf.Writer.Applications.Controllers
             }
         }
 
-        private void ActiveDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ActiveDocumentPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Document.Modified))
             {
@@ -176,7 +176,7 @@ namespace Waf.Writer.Applications.Controllers
             return document;
         }
 
-        private IDocument Open()
+        private IDocument? Open()
         {
             var fileTypes = (from d in documentTypes
                              where d.CanOpen()
@@ -187,7 +187,7 @@ namespace Waf.Writer.Applications.Controllers
             FileDialogResult result = fileDialogService.ShowOpenFileDialog(shellService.ShellView, fileTypes);
             if (result.IsValid)
             {
-                return OpenCore(result.FileName, result.SelectedFileType);
+                return OpenCore(result.FileName!, result.SelectedFileType);
             }
             return null;
         }
@@ -231,8 +231,8 @@ namespace Waf.Writer.Applications.Controllers
             FileDialogResult result = fileDialogService.ShowSaveFileDialog(shellService.ShellView, fileTypes, selectedFileType, fileName);
             if (result.IsValid)
             {
-                IDocumentType documentType = GetDocumentType(result.SelectedFileType);
-                SaveCore(documentType, document, result.FileName);
+                IDocumentType documentType = GetDocumentType(result.SelectedFileType!);
+                SaveCore(documentType, document, result.FileName!);
             }
         }
 
@@ -269,7 +269,7 @@ namespace Waf.Writer.Applications.Controllers
             return dialogResult != null;
         }
 
-        private IDocument OpenCore(string fileName, FileType fileType = null)
+        private IDocument? OpenCore(string fileName, FileType? fileType = null)
         {
             // Check if document is already opened
             IDocument document = Documents.SingleOrDefault(d => d.FileName == fileName);

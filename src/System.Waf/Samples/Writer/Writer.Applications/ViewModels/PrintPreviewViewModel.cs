@@ -14,7 +14,7 @@ namespace Waf.Writer.Applications.ViewModels
         {
         }
 
-        public RichTextDocument Document { get; set; }
+        public RichTextDocument Document { get; set; } = null!;
 
         protected override void FitToWidthCore()
         {

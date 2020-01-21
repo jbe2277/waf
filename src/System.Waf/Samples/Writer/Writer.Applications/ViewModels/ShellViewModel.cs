@@ -16,7 +16,7 @@ namespace Waf.Writer.Applications.ViewModels
     {
         private readonly IMessageService messageService;
         private readonly AppSettings settings;
-        private object contentView;
+        private object contentView = null!;
         private bool isPrintPreviewVisible;
 
         [ImportingConstructor]
@@ -52,7 +52,7 @@ namespace Waf.Writer.Applications.ViewModels
 
         public IFileService FileService { get; }
 
-        public CultureInfo NewLanguage { get; private set; }
+        public CultureInfo? NewLanguage { get; private set; }
 
         public ICommand EnglishCommand { get; }
 
@@ -60,13 +60,13 @@ namespace Waf.Writer.Applications.ViewModels
 
         public ICommand AboutCommand { get; }
 
-        public ICommand PrintPreviewCommand { get; set; }
+        public ICommand PrintPreviewCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand ClosePrintPreviewCommand { get; set; }
+        public ICommand ClosePrintPreviewCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand PrintCommand { get; set; }
+        public ICommand PrintCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand ExitCommand { get; set; }
+        public ICommand ExitCommand { get; set; } = DelegateCommand.DisabledCommand;
 
         public object ContentView
         {
@@ -80,7 +80,7 @@ namespace Waf.Writer.Applications.ViewModels
             set => SetProperty(ref isPrintPreviewVisible, value);
         }
 
-        public event CancelEventHandler Closing;
+        public event CancelEventHandler? Closing;
 
         public void Show()
         {
@@ -113,12 +113,12 @@ namespace Waf.Writer.Applications.ViewModels
             Closing?.Invoke(this, e);
         }
 
-        private void ViewClosing(object sender, CancelEventArgs e)
+        private void ViewClosing(object? sender, CancelEventArgs e)
         {
             OnClosing(e);
         }
 
-        private void ViewClosed(object sender, EventArgs e)
+        private void ViewClosed(object? sender, EventArgs e)
         {
             settings.Left = ViewCore.Left;
             settings.Top = ViewCore.Top;

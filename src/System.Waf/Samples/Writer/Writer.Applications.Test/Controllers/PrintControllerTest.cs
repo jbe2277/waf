@@ -61,7 +61,7 @@ namespace Test.Writer.Applications.Controllers
             printDialogService.ShowDialogResult = true;
             shellViewModel.PrintCommand.Execute(null);
             Assert.IsNotNull(printDialogService.DocumentPaginator);
-            Assert.AreEqual(fileService.ActiveDocument.FileName, printDialogService.Description);
+            Assert.AreEqual(fileService.ActiveDocument!.FileName, printDialogService.Description);
             
             printDialogService.ShowDialogResult = false;
             shellViewModel.PrintCommand.Execute(null);

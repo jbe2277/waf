@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Windows.Input;
@@ -25,9 +26,9 @@ namespace Waf.Writer.Applications.ViewModels
 
         public ICommand YesCommand => yesCommand;
 
-        public ICommand NoCommand => noCommand; 
+        public ICommand NoCommand => noCommand;
 
-        public IReadOnlyList<IDocument> Documents { get; set; }
+        public IReadOnlyList<IDocument> Documents { get; set; } = Array.Empty<IDocument>();
 
         public bool? ShowDialog(object owner)
         {

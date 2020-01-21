@@ -21,7 +21,7 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand printPreviewCommand;
         private readonly DelegateCommand printCommand;
         private readonly DelegateCommand closePrintPreviewCommand;
-        private object previousView;
+        private object? previousView;
 
         [ImportingConstructor]
         public PrintController(IFileService fileService, IPrintDialogService printDialogService, 
@@ -53,7 +53,7 @@ namespace Waf.Writer.Applications.Controllers
         private void ShowPrintPreview()
         {
             PrintPreviewViewModel printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
-            printPreviewViewModel.Document = (RichTextDocument)fileService.ActiveDocument;
+            printPreviewViewModel.Document = (RichTextDocument)fileService.ActiveDocument!;
             previousView = shellViewModel.ContentView;
             shellViewModel.ContentView = printPreviewViewModel.View;
             shellViewModel.IsPrintPreviewVisible = true;
@@ -70,23 +70,23 @@ namespace Waf.Writer.Applications.Controllers
             if (printDialogService.ShowDialog())
             {
                 // We have to clone the FlowDocument before we use different pagination settings for the export.        
-                RichTextDocument document = (RichTextDocument)fileService.ActiveDocument;
+                RichTextDocument document = (RichTextDocument)fileService.ActiveDocument!;
                 FlowDocument clone = document.CloneContent();
 
                 printDialogService.PrintDocument(((IDocumentPaginatorSource)clone).DocumentPaginator, 
-                    fileService.ActiveDocument.FileName);
+                    fileService.ActiveDocument!.FileName);
             }
         }
 
         private void ClosePrintPreview()
         {
-            shellViewModel.ContentView = previousView;
+            shellViewModel.ContentView = previousView!;
             previousView = null;
             shellViewModel.IsPrintPreviewVisible = false;
             printPreviewCommand.RaiseCanExecuteChanged();
         }
 
-        private void FileServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void FileServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {

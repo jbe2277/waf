@@ -9,6 +9,6 @@ namespace Test.Writer.Applications.Views
     [Export(typeof(ISaveChangesView)), Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class MockSaveChangesView : MockDialogView<MockSaveChangesView>, ISaveChangesView
     {
-        public SaveChangesViewModel ViewModel => ViewHelper.GetViewModel<SaveChangesViewModel>(this);
+        public SaveChangesViewModel ViewModel => ViewHelper.GetViewModel<SaveChangesViewModel>(this)!;
     }
 }

@@ -17,11 +17,11 @@ namespace Waf.Writer.Applications.Properties
 
         [DataMember] public bool IsMaximized { get; set; }
 
-        [DataMember] public string Culture { get; set; }
+        [DataMember] public string? Culture { get; set; }
 
-        [DataMember] public string UICulture { get; set; }
+        [DataMember] public string? UICulture { get; set; }
 
-        [DataMember] public RecentFileList RecentFileList { get; set; }
+        [DataMember] public RecentFileList? RecentFileList { get; set; }
 
         protected override void SetDefaultValues()
         {

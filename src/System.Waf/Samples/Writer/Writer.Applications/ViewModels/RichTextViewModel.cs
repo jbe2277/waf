@@ -23,7 +23,7 @@ namespace Waf.Writer.Applications.ViewModels
             this.shellService = shellService;
         }
 
-        public RichTextDocument Document { get; set; }
+        public RichTextDocument Document { get; set; } = null!;
 
         public bool IsBold
         {

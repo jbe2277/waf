@@ -51,7 +51,7 @@ namespace Waf.Writer.Applications.Controllers
             }
         }
 
-        protected override void OnActiveDocumentChanged(IDocument activeDocument)
+        protected override void OnActiveDocumentChanged(IDocument? activeDocument)
         {
             if (activeDocument == null)
             {
@@ -66,7 +66,7 @@ namespace Waf.Writer.Applications.Controllers
             }
         }
 
-        private void MainViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MainViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
             {

@@ -12,7 +12,7 @@ namespace Waf.Writer.Applications.Services
     internal class FileService : Model, IFileService
     {
         private readonly ObservableCollection<IDocument> documents;
-        private IDocument activeDocument;
+        private IDocument? activeDocument;
 
         [ImportingConstructor]
         public FileService()
@@ -23,7 +23,7 @@ namespace Waf.Writer.Applications.Services
 
         public ReadOnlyObservableCollection<IDocument> Documents { get; }
 
-        public IDocument ActiveDocument
+        public IDocument? ActiveDocument
         {
             get => activeDocument;
             set
@@ -40,17 +40,17 @@ namespace Waf.Writer.Applications.Services
             }
         }
 
-        public RecentFileList RecentFileList { get; set; }
+        public RecentFileList RecentFileList { get; set; } = null!;
 
-        public ICommand NewCommand { get; set; }
+        public ICommand NewCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand OpenCommand { get; set; }
+        public ICommand OpenCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand CloseCommand { get; set; }
+        public ICommand CloseCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand SaveCommand { get; set; }
+        public ICommand SaveCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand SaveAsCommand { get; set; }
+        public ICommand SaveAsCommand { get; set; } = DelegateCommand.DisabledCommand;
 
         public void AddDocument(IDocument document)
         {

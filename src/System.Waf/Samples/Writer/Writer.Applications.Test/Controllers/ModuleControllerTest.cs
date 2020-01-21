@@ -24,7 +24,7 @@ namespace Test.Writer.Applications.Controllers
             controller.Initialize();
             
             var shellView = (MockShellView)Get<IShellView>();
-            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView);
+            var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
             Assert.IsNotNull(shellViewModel.ExitCommand);
 
             controller.Run();
@@ -74,14 +74,14 @@ namespace Test.Writer.Applications.Controllers
             shellViewModel.FileService.NewCommand.Execute(null);
             
             var mainViewModel = Get<MainViewModel>();
-            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
+            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView!)!;
             richTextViewModel.Document.Modified = true;
 
             bool showDialogCalled = false;
             MockSaveChangesView.ShowDialogAction = view =>
             {
                 showDialogCalled = true;
-                AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view).Documents);
+                AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view)!.Documents);
                 view.Close();
             };
 

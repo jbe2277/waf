@@ -56,7 +56,7 @@ namespace Test.Writer.Applications.ViewModels
             Assert.IsNull(shellViewModel.NewLanguage);
 
             shellViewModel.GermanCommand.Execute(null);
-            Assert.AreEqual("de-DE", shellViewModel.NewLanguage.Name);
+            Assert.AreEqual("de-DE", shellViewModel.NewLanguage!.Name);
 
             shellViewModel.EnglishCommand.Execute(null);
             Assert.AreEqual("en-US", shellViewModel.NewLanguage.Name);
@@ -94,6 +94,8 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
+            var messageService = (MockMessageService)Get<IMessageService>();
+            var fileService = Get<IFileService>();
             var presentationService = (MockPresentationService)Get<IPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
@@ -105,27 +107,27 @@ namespace Test.Writer.Applications.ViewModels
             shellView.SetNAForLocationAndSize();
 
             SetSettingsValues(settings);
-            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            new ShellViewModel(shellView, messageService, presentationService, shellService, fileService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Height is 0 => don't apply the Settings values
             SetSettingsValues(settings, 0, 0, 1, 0);
-            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            new ShellViewModel(shellView, messageService, presentationService, shellService, fileService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Left = 100 + Width = 901 > VirtualScreenWidth = 1000 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 901, 100);
-            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            new ShellViewModel(shellView, messageService, presentationService, shellService, fileService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Top = 100 + Height = 601 > VirtualScreenWidth = 600 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 100, 601);
-            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            new ShellViewModel(shellView, messageService, presentationService, shellService, fileService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Use the limit values => apply the Settings values
             SetSettingsValues(settings, 0, 0, 1000, 700);
-            new ShellViewModel(shellView, null, presentationService, shellService, null, settingsService).Close();
+            new ShellViewModel(shellView, messageService, presentationService, shellService, fileService, settingsService).Close();
             AssertSettingsValues(settings, 0, 0, 1000, 700, false);
         }
 

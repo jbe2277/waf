@@ -49,7 +49,7 @@ namespace Test.Writer.Applications.Controllers
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
             Assert.AreEqual(document, fileService.ActiveDocument);
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.New(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.New(null!));
             AssertHelper.ExpectedException<ArgumentException>(() => fileController.New(new MockDocumentType("Dummy", ".dmy")));
 
             AssertHelper.PropertyChangedEvent(fileService, x => x.ActiveDocument, () => fileService.ActiveDocument = null);
@@ -143,10 +143,10 @@ namespace Test.Writer.Applications.Controllers
         public void OpenExceptionsTest()
         {
             var fileController = Get<FileController>();
-            var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic);
-            ((IList)documentTypesField.GetValue(fileController)).Clear();
+            var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            ((IList)documentTypesField.GetValue(fileController)!).Clear();
 
-            AssertHelper.ExpectedException<ArgumentException>(() => fileController.Open(null));
+            AssertHelper.ExpectedException<ArgumentException>(() => fileController.Open(null!));
 
             var fileService = Get<IFileService>();
             AssertHelper.ExpectedException<InvalidOperationException>(() => fileService.OpenCommand.Execute(null));
@@ -193,7 +193,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.AreEqual(FileDialogType.SaveFileDialog, fileDialogService.FileDialogType);
             Assert.AreEqual("Mock Document", fileDialogService.FileTypes.Single().Description);
             Assert.AreEqual(".mock", fileDialogService.FileTypes.Single().FileExtensions.Single());
-            Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType.Description);
+            Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType!.Description);
             Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
             Assert.AreEqual("Document", fileDialogService.DefaultFileName);
             
@@ -248,7 +248,7 @@ namespace Test.Writer.Applications.Controllers
             // Simulate the scenario when the user overwrites the existing file
             fileDialogService.Result = new FileDialogResult(fileName, new FileType("Mock Document", ".mock"));
             fileService.SaveAsCommand.Execute(null);
-            Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType.Description);
+            Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType!.Description);
             Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
             Assert.AreEqual(DocumentOperation.Save, documentType.DocumentOperation);
             Assert.AreEqual(document, documentType.Document);
@@ -261,11 +261,11 @@ namespace Test.Writer.Applications.Controllers
             var fileController = Get<FileController>();
             var documentType = new MockDocumentType("Mock Document", ".mock") { CanSaveResult = false };
             
-            var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic);
-            ((IList)documentTypesField.GetValue(fileController)).Clear();
+            var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            ((IList)documentTypesField.GetValue(fileController)!).Clear();
             fileController.Register(documentType);
 
-            var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic);
+            var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic)!;
             IDocument document = fileController.New(documentType);
             var exception = AssertHelper.ExpectedException<TargetInvocationException>(() => saveAsMethod.Invoke(fileController, new[] { document }));
             Assert.IsInstanceOfType(exception.InnerException, typeof(InvalidOperationException));
@@ -290,7 +290,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsTrue(fileService.SaveAsCommand.CanExecute(null));
 
             var mainViewModel = Get<MainViewModel>();
-            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView);
+            var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView!)!;
 
             AssertHelper.CanExecuteChangedEvent(fileService.SaveCommand, () => richTextViewModel.Document.Modified = true);
 

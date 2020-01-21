@@ -65,7 +65,7 @@ namespace Waf.Writer.Applications.Controllers
             
             if (!string.IsNullOrEmpty(environmentService.DocumentFileName))
             {
-                fileController.Open(environmentService.DocumentFileName);
+                fileController.Open(environmentService.DocumentFileName!);
             }
             
             shellViewModel.Show();

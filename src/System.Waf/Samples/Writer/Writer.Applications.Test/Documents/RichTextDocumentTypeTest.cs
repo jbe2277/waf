@@ -22,7 +22,7 @@ namespace Test.Writer.Applications.Documents
             Assert.IsTrue(documentType.CanNew());
             var document = documentType.New() as RichTextDocument;
             Assert.IsNotNull(document);
-            Assert.AreEqual("Document 1.rtf", document.FileName);
+            Assert.AreEqual("Document 1.rtf", document!.FileName);
         }
 
         [TestMethod]

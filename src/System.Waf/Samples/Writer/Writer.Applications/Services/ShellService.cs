@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
@@ -9,7 +11,7 @@ namespace Waf.Writer.Applications.Services
     [Export(typeof(IShellService)), Export]
     internal class ShellService : Model, IShellService
     {
-        private string documentName;
+        private string? documentName;
         private IEditingCommands activeEditingCommands;
         private IZoomCommands activeZoomCommands;
 
@@ -20,20 +22,22 @@ namespace Waf.Writer.Applications.Services
             activeZoomCommands = new DisabledZoomCommands();
         }
 
-        public object ShellView { get; set; }
+        public object ShellView { get; set; } = null!;
 
-        public string DocumentName
+        public string? DocumentName
         {
             get => documentName;
             set => SetProperty(ref documentName, value);
         }
 
+        [AllowNull]
         public IEditingCommands ActiveEditingCommands
         {
             get => activeEditingCommands;
             set => SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands());
         }
 
+        [AllowNull]
         public IZoomCommands ActiveZoomCommands
         {
             get => activeZoomCommands;
@@ -60,7 +64,7 @@ namespace Waf.Writer.Applications.Services
 
         private class DisabledZoomCommands : Model, IZoomCommands
         {
-            public IReadOnlyList<string> DefaultZooms => null;
+            public IReadOnlyList<string> DefaultZooms => Array.Empty<string>();
 
             public double Zoom
             {

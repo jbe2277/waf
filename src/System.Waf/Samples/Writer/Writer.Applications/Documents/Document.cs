@@ -5,7 +5,7 @@ namespace Waf.Writer.Applications.Documents
 {
     public abstract class Document : Model, IDocument
     {
-        private string fileName;
+        private string fileName = null!;
         private bool modified;
 
         protected Document(IDocumentType documentType)

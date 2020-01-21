@@ -32,11 +32,11 @@ namespace Waf.Writer.Applications.Documents
 
         public IDocument Open(string fileName) 
         {
-            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("fileName must not be null or empty.", nameof(fileName)); }
-            if (!CanOpen()) { throw new NotSupportedException("The Open operation is not supported. CanOpen returned false."); }
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("fileName must not be null or empty.", nameof(fileName));
+            if (!CanOpen()) throw new NotSupportedException("The Open operation is not supported. CanOpen returned false.");
 
-            IDocument document = OpenCore(fileName);
-            if (document != null) { document.FileName = fileName; }
+            var document = OpenCore(fileName);
+            document.FileName = fileName;
             return document;
         }
 
@@ -44,9 +44,9 @@ namespace Waf.Writer.Applications.Documents
 
         public void Save(IDocument document, string fileName) 
         {
-            if (document == null) { throw new ArgumentNullException(nameof(document)); }
-            if (string.IsNullOrEmpty(fileName)) { throw new ArgumentException("fileName must not be null or empty.", nameof(fileName)); }
-            if (!CanSave(document)) { throw new NotSupportedException("The Save operation is not supported. CanSave returned false."); }
+            if (document == null) throw new ArgumentNullException(nameof(document));
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("fileName must not be null or empty.", nameof(fileName));
+            if (!CanSave(document)) throw new NotSupportedException("The Save operation is not supported. CanSave returned false.");
 
             SaveCore(document, fileName);
 

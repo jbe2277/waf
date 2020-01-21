@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Waf.Writer.Applications.Services
 {
@@ -6,10 +7,12 @@ namespace Waf.Writer.Applications.Services
     {
         object ShellView { get; }
 
-        string DocumentName { get; set; }
+        string? DocumentName { get; set; }
 
+        [AllowNull]
         IEditingCommands ActiveEditingCommands { get; set; }
 
+        [AllowNull]
         IZoomCommands ActiveZoomCommands { get; set; }
     }
 }

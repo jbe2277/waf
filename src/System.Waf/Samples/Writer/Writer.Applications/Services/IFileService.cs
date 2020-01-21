@@ -10,7 +10,7 @@ namespace Waf.Writer.Applications.Services
     {
         ReadOnlyObservableCollection<IDocument> Documents { get; }
 
-        IDocument ActiveDocument { get; set; }
+        IDocument? ActiveDocument { get; set; }
 
         RecentFileList RecentFileList { get; }
 

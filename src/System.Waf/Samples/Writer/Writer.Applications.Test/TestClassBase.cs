@@ -11,9 +11,9 @@ namespace Test.Writer.Applications
     [TestClass]
     public abstract class TestClassBase
     {
-        private PrintController printController;
+        private PrintController? printController;
 
-        protected CompositionContainer Container { get; private set; }
+        protected CompositionContainer Container { get; private set; } = null!;
 
         [TestInitialize]
         public void Initialize()

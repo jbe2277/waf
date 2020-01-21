@@ -13,7 +13,7 @@ namespace Test.Writer.Applications.Controllers
         [TestMethod]
         public void DocumentControllerConstructorTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new TestDocumentController(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new TestDocumentController(null!));
         }
 
 
@@ -33,7 +33,7 @@ namespace Test.Writer.Applications.Controllers
                 throw new NotSupportedException();
             }
 
-            protected override void OnActiveDocumentChanged(IDocument activeDocument)
+            protected override void OnActiveDocumentChanged(IDocument? activeDocument)
             {
                 throw new NotSupportedException();
             }

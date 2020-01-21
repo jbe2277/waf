@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
@@ -11,8 +10,8 @@ namespace Test.Writer.Applications.ViewModels
     [TestClass]
     public class ZoomViewModelTest : TestClassBase
     {
-        private IShellService shellService;
-        private MockZoomViewModel zoomViewModel;
+        private IShellService shellService = null!;
+        private MockZoomViewModel zoomViewModel = null!;
 
         protected override void OnInitialize()
         {
@@ -60,7 +59,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void SyncWithShellServiceTest()
         {
-            Assert.IsNull(shellService.ActiveZoomCommands.DefaultZooms);
+            Assert.AreEqual(0, shellService.ActiveZoomCommands.DefaultZooms.Count);
             AssertHelper.PropertyChangedEvent(shellService, x => x.ActiveZoomCommands, () => zoomViewModel.IsVisible = true);
             Assert.IsTrue(zoomViewModel.IsVisible);
             Assert.AreEqual(zoomViewModel, shellService.ActiveZoomCommands);
