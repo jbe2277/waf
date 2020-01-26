@@ -18,7 +18,7 @@ namespace Waf.Writer.Presentation.DesignData
 
         private class MockSaveChangesView : ISaveChangesView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public void Close() { }
 

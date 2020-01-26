@@ -4,6 +4,7 @@
     <RootNamespace>Test.Writer.Presentation</RootNamespace>
     <AssemblyName>Waf.Writer.Presentation.Test</AssemblyName>
     <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

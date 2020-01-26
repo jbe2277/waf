@@ -117,7 +117,7 @@ namespace Waf.BookLibrary.Library.Presentation
 
         private static void HandleException(Exception? e, bool isTerminating)
         {
-            if (e == null) { return; }
+            if (e == null) return;
 
             Log.App.Error(e, "Unhandled exception");
             if (!isTerminating)

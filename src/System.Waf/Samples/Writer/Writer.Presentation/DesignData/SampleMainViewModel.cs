@@ -9,7 +9,7 @@ namespace Waf.Writer.Presentation.DesignData
     {
         public SampleMainViewModel() : this(null) { }
 
-        public SampleMainViewModel(IMainView view)
+        public SampleMainViewModel(IMainView? view)
             : base(view ?? new MockMainView() { ContentViewState = ContentViewState.DocumentViewVisible }, 
                  new MockShellService(), new MockFileService())
         {

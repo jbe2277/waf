@@ -17,14 +17,14 @@ namespace Waf.Writer.Presentation.Views
     {
         const string PackagePath = "pack://temp.xps";
         private readonly Lazy<PrintPreviewViewModel> viewModel;
-        private Package package;
-        private XpsDocument xpsDocument;
+        private Package? package;
+        private XpsDocument? xpsDocument;
         
         public PrintPreviewView()
         {
             InitializeComponent();
 
-            viewModel = new Lazy<PrintPreviewViewModel>(() => ViewHelper.GetViewModel<PrintPreviewViewModel>(this));
+            viewModel = new Lazy<PrintPreviewViewModel>(() => ViewHelper.GetViewModel<PrintPreviewViewModel>(this)!);
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
             IsVisibleChanged += IsVisibleChangedHandler;
@@ -61,7 +61,7 @@ namespace Waf.Writer.Presentation.Views
         {
             xpsDocument?.Close();
             PackageStore.RemovePackage(new Uri(PackagePath));
-            package.Close();
+            package?.Close();
         }
 
         private void IsVisibleChangedHandler(object sender, DependencyPropertyChangedEventArgs e)

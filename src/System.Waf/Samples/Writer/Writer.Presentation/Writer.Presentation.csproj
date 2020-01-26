@@ -8,6 +8,7 @@
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Images\Writer.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\Writer\$(Configuration)\</OutputPath>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

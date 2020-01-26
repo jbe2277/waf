@@ -5,9 +5,9 @@ namespace Waf.Writer.Presentation.DesignData
 {
     public class MockSettingsService : ISettingsService
     {
-        public string FileName { get; set; }
+        public string FileName { get; set; } = null!;
 
-        public event EventHandler<SettingsErrorEventArgs> ErrorOccurred;
+        public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         public T Get<T>() where T : class, new()
         {

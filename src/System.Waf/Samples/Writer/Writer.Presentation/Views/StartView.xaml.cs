@@ -15,7 +15,7 @@ namespace Waf.Writer.Presentation.Views
         public StartView()
         {
             InitializeComponent();
-            viewModel = new Lazy<StartViewModel>(() => ViewHelper.GetViewModel<StartViewModel>(this));
+            viewModel = new Lazy<StartViewModel>(() => ViewHelper.GetViewModel<StartViewModel>(this)!);
             newButton.IsVisibleChanged += NewButtonIsVisibleChanged;
         }
 

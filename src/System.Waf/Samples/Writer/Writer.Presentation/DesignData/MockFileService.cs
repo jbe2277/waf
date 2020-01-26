@@ -9,20 +9,20 @@ namespace Waf.Writer.Presentation.DesignData
 {
     public class MockFileService : Model, IFileService
     {
-        public ReadOnlyObservableCollection<IDocument> Documents { get; set; }
+        public ReadOnlyObservableCollection<IDocument> Documents { get; set; } = null!;
         
-        public IDocument ActiveDocument { get; set; }
+        public IDocument? ActiveDocument { get; set; }
+
+        public RecentFileList RecentFileList { get; set; } = null!;
+
+        public ICommand NewCommand { get; set; } = DelegateCommand.DisabledCommand;
         
-        public RecentFileList RecentFileList { get; set; }
-        
-        public ICommand NewCommand { get; set; }
-        
-        public ICommand OpenCommand { get; set; }
-        
-        public ICommand CloseCommand { get; set; }
-        
-        public ICommand SaveCommand { get; set; }
-        
-        public ICommand SaveAsCommand { get; set; }
+        public ICommand OpenCommand { get; set; } = DelegateCommand.DisabledCommand;
+
+        public ICommand CloseCommand { get; set; } = DelegateCommand.DisabledCommand;
+
+        public ICommand SaveCommand { get; set; } = DelegateCommand.DisabledCommand;
+
+        public ICommand SaveAsCommand { get; set; } = DelegateCommand.DisabledCommand;
     }
 }

@@ -22,7 +22,8 @@ namespace Waf.Writer.Presentation.Views
         {
             InitializeComponent();
 
-            viewModel = new Lazy<RichTextViewModel>(() => ViewHelper.GetViewModel<RichTextViewModel>(this));
+            viewModel = new Lazy<RichTextViewModel>(() => ViewHelper.GetViewModel<RichTextViewModel>(this)!);
+            dynamicContextMenuItems = Array.Empty<Control>();
             Loaded += FirstTimeLoadedHandler;
             IsVisibleChanged += IsVisibleChangedHandler;
         }

@@ -9,7 +9,7 @@ namespace Waf.Writer.Presentation.DesignData
     public class SampleShellViewModel : ShellViewModel
     {
         public SampleShellViewModel() 
-            : base(new MockShellView(), null, null, new MockShellService(), new MockFileService(), new MockSettingsService())
+            : base(new MockShellView(), null!, null!, new MockShellService(), new MockFileService(), new MockSettingsService())
         {
             ContentView = new SampleMainViewModel(new MainView()).View;
         }
@@ -27,9 +27,9 @@ namespace Waf.Writer.Presentation.DesignData
 
             public bool IsMaximized { get; set; }
 
-            public event CancelEventHandler Closing;
+            public event CancelEventHandler? Closing;
 
-            public event EventHandler Closed;
+            public event EventHandler? Closed;
 
             public void Show() { }
             

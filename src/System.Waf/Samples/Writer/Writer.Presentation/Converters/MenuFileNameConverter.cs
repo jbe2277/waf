@@ -9,7 +9,7 @@ namespace Waf.Writer.Presentation.Converters
     {
         private const int MaxCharacters = 40;
         
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (value is string fileName && !string.IsNullOrEmpty(fileName))
             {
@@ -30,7 +30,7 @@ namespace Waf.Writer.Presentation.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }
