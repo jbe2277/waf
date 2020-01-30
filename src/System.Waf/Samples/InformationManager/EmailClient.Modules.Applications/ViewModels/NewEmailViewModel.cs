@@ -12,8 +12,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class NewEmailViewModel : ViewModel<INewEmailView>
     {
-        private EmailAccount selectedEmailAccount;
-        private Email email;
+        private EmailAccount? selectedEmailAccount;
+        private Email email = null!;
         private string to = "";
         private string cc = "";
         private string bcc = "";
@@ -24,15 +24,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             CloseCommand = new DelegateCommand(Close);
         }
 
-        public ICommand SelectContactCommand { get; set; }
+        public ICommand SelectContactCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand SendCommand { get; set; }
+        public ICommand SendCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand CloseCommand { get; }
+        public ICommand CloseCommand { get; } = DelegateCommand.DisabledCommand;
 
-        public IReadOnlyList<EmailAccount> EmailAccounts { get; set; }
+        public IReadOnlyList<EmailAccount> EmailAccounts { get; set; } = null!;
 
-        public EmailAccount SelectedEmailAccount
+        public EmailAccount? SelectedEmailAccount
         {
             get => selectedEmailAccount;
             set => SetProperty(ref selectedEmailAccount, value);
@@ -45,16 +45,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             {
                 if (email != value)
                 {
-                    if (email != null)
-                    {
-                        PropertyChangedEventManager.RemoveHandler(email, EmailPropertyChanged, "");
-                    }
+                    if (email != null) PropertyChangedEventManager.RemoveHandler(email, EmailPropertyChanged, "");
                     email = value;
-                    if (email != null)
-                    {
-                        PropertyChangedEventManager.AddHandler(email, EmailPropertyChanged, "");
-                        UpdateProperties();
-                    }
+                    PropertyChangedEventManager.AddHandler(email, EmailPropertyChanged, "");
+                    UpdateProperties();
                     RaisePropertyChanged();
                 }
             }
@@ -132,7 +126,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             Bcc = FormatEmails(Email.Bcc);
         }
 
-        private void EmailPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EmailPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Email.To))
             {

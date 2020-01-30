@@ -19,7 +19,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly IShellService shellService;
         private readonly EmailLayoutViewModel emailLayoutViewModel;
         private readonly DelegateCommand deleteEmailCommand;
-        private ObservableListView<Email> emailsView;
+        private ObservableListView<Email> emailsView = null!;
 
         [ImportingConstructor]
         public EmailFolderController(IShellService shellService, EmailLayoutViewModel emailLayoutViewModel, EmailListViewModel emailListViewModel, EmailViewModel emailViewModel)
@@ -31,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             deleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
         }
 
-        public EmailFolder EmailFolder { get; set; }
+        public EmailFolder EmailFolder { get; set; } = null!;
 
         public ICommand DeleteEmailCommand => deleteEmailCommand;
 
@@ -68,12 +68,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private void DeleteEmail()
         {
             var nextEmail = EmailListViewModel.Emails.GetNextElementOrDefault(EmailListViewModel.SelectedEmail);
-            EmailFolder.RemoveEmail(EmailListViewModel.SelectedEmail);
+            EmailFolder.RemoveEmail(EmailListViewModel.SelectedEmail!);
             EmailListViewModel.SelectedEmail = nextEmail ?? EmailListViewModel.Emails.LastOrDefault();
             EmailListViewModel.FocusItem();
         }
 
-        private void EmailListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EmailListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(EmailListViewModel.SelectedEmail))
             {

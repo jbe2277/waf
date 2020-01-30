@@ -14,7 +14,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         private class MockExchangeSettingsView : IExchangeSettingsView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

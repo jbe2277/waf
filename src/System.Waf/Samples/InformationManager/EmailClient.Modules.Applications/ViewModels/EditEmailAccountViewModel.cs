@@ -8,7 +8,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class EditEmailAccountViewModel : ViewModel<IEditEmailAccountView>
     {
-        private object contentView;
+        private object contentView = null!;
         private bool isValid = true;
         private bool isLastPage;
         
@@ -17,9 +17,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
         }
 
-        public ICommand BackCommand { get; set; }
+        public ICommand BackCommand { get; set; } = null!;
 
-        public ICommand NextCommand { get; set; }
+        public ICommand NextCommand { get; set; } = null!;
 
         public object ContentView
         {

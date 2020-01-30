@@ -4,7 +4,6 @@ using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;
-using Waf.InformationManager.AddressBook.Interfaces.Domain;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
@@ -34,7 +33,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             sendCommand = new DelegateCommand(SendEmail);
         }
 
-        public EmailClientRoot Root { get; set; }
+        public EmailClientRoot Root { get; set; } = null!;
 
         internal NewEmailViewModel NewEmailViewModel { get; }
 
@@ -59,12 +58,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             NewEmailViewModel.Show(shellService.ShellView);
         }
 
-        private void SelectContact(object commandParameter)
+        private void SelectContact(object? commandParameter)
         {
-            ContactDto selectedContact = addressBookService.ShowSelectContactView(NewEmailViewModel.View);
-            if (selectedContact == null) { return; }
+            var selectedContact = addressBookService.ShowSelectContactView(NewEmailViewModel.View);
+            if (selectedContact == null) return;
 
-            string parameter = commandParameter as string;
+            var parameter = commandParameter as string;
             if (parameter == "To")
             {
                 NewEmailViewModel.To += " " + selectedContact.Email;
@@ -93,7 +92,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 return;
             }
             NewEmailViewModel.Close();
-            email.From = NewEmailViewModel.SelectedEmailAccount.Email;
+            email.From = NewEmailViewModel.SelectedEmailAccount?.Email ?? "";
             email.Sent = DateTime.Now;
             Root.Sent.AddEmail(email);
         }

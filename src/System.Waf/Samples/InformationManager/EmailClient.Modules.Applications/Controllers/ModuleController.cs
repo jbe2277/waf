@@ -31,7 +31,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly DelegateCommand newEmailCommand;
         private readonly Lazy<DataContractSerializer> serializer;
         private readonly List<ItemCountSynchronizer> itemCountSynchronizers;
-        private EmailFolderController activeEmailFolderController;
+        private EmailFolderController? activeEmailFolderController;
         
         [ImportingConstructor]
         public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
@@ -49,7 +49,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
         }
 
-        internal EmailClientRoot Root { get; private set; }
+        internal EmailClientRoot Root { get; private set; } = null!;
 
         public void Initialize()
         {
@@ -166,7 +166,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 UpdateItemCount();
             }
 
-            private void EmailsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) { UpdateItemCount(); }
+            private void EmailsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) { UpdateItemCount(); }
 
             private void UpdateItemCount() { node.ItemCount = folder.Emails.Count; }
         }

@@ -9,7 +9,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class BasicEmailAccountViewModel : ViewModel<IBasicEmailAccountView>
     {
-        private EmailAccount emailAccount;
+        private EmailAccount emailAccount = null!;
         private bool isPop3Checked;
         private bool isExchangeChecked;
 

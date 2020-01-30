@@ -7,13 +7,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Converters
 {
     public class StringCollectionToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            var stringCollection = (IEnumerable<string>)value;
+            var stringCollection = (IEnumerable<string>)value!;
             return string.Join("; ", stringCollection);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

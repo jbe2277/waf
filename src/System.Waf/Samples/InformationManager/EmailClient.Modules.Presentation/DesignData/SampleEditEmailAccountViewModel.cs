@@ -14,7 +14,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         private class MockEditEmailAccountView : IEditEmailAccountView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public void Close() { }
 

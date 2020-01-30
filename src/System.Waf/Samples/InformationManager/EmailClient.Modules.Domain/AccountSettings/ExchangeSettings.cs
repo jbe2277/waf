@@ -6,18 +6,18 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
     [DataContract]
     public class ExchangeSettings : EmailAccountSettings
     {
-        [DataMember] private string serverPath;
-        [DataMember] private string userName;
+        [DataMember] private string? serverPath;
+        [DataMember] private string? userName;
 
         [Required, Display(Name = "Exchange Server")]
-        public string ServerPath
+        public string? ServerPath
         {
             get => serverPath;
             set => SetPropertyAndValidate(ref serverPath, value);
         }
 
         [Required, Display(Name = "User Name")]
-        public string UserName
+        public string? UserName
         {
             get => userName;
             set => SetPropertyAndValidate(ref userName, value);

@@ -17,7 +17,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         public EmailAccountsWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this));
+            viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this)!);
         }
 
         public void ShowDialog(object owner)

@@ -7,21 +7,21 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export]
     public class EmailLayoutViewModel : ViewModel<IEmailLayoutView>
     {
-        private object emailListView;
-        private object emailView;
+        private object? emailListView;
+        private object? emailView;
 
         [ImportingConstructor]
         public EmailLayoutViewModel(IEmailLayoutView view) : base(view)
         {
         }
 
-        public object EmailListView
+        public object? EmailListView
         {
             get => emailListView;
             set => SetProperty(ref emailListView, value);
         }
 
-        public object EmailView
+        public object? EmailView
         {
             get => emailView;
             set => SetProperty(ref emailView, value);

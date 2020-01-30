@@ -18,9 +18,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly IShellService shellService;
         private readonly ExportFactory<EditEmailAccountController> editEmailAccountControllerFactory;
         private readonly ExportFactory<EmailAccountsViewModel> emailAccountsViewModelFactory;
-        private DelegateCommand removeEmailAccountCommand;
-        private DelegateCommand editEmailAccountCommand;
-        private EmailAccountsViewModel emailAccountsViewModel;
+        private DelegateCommand? removeEmailAccountCommand;
+        private DelegateCommand? editEmailAccountCommand;
+        private EmailAccountsViewModel emailAccountsViewModel = null!;
 
         [ImportingConstructor]
         public EmailAccountsController(IShellService shellService, ExportFactory<EditEmailAccountController> editEmailAccountControllerFactory, 
@@ -32,7 +32,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             EmailAccountsCommand = new DelegateCommand(ShowEmailAccounts);
         }
 
-        public EmailClientRoot Root { get; set; }
+        public EmailClientRoot Root { get; set; } = null!;
 
         public ICommand EmailAccountsCommand { get; }
 
@@ -53,7 +53,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailAccountsViewModel.ShowDialog(shellService.ShellView);
 
             PropertyChangedEventManager.RemoveHandler(emailAccountsViewModel, EmailAccountsViewModelPropertyChanged, "");
-            emailAccountsViewModel = null;
+            emailAccountsViewModel = null!;
             removeEmailAccountCommand = null;
         }
 
@@ -76,14 +76,14 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void RemoveEmailAccount()
         {
-            Root.RemoveEmailAccount(emailAccountsViewModel.SelectedEmailAccount);
+            Root.RemoveEmailAccount(emailAccountsViewModel.SelectedEmailAccount!);
         }
 
         private bool CanEditEmailAccount() { return emailAccountsViewModel.SelectedEmailAccount != null; }
 
         private void EditEmailAccount()
         {
-            var originalAccount = emailAccountsViewModel.SelectedEmailAccount;
+            var originalAccount = emailAccountsViewModel.SelectedEmailAccount!;
 
             EditEmailAccountController editEmailAccountController = editEmailAccountControllerFactory.CreateExport().Value;
             editEmailAccountController.OwnerWindow = emailAccountsViewModel.View;
@@ -96,12 +96,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             }
         }
 
-        private void EmailAccountsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EmailAccountsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(EmailAccountsViewModel.SelectedEmailAccount))
             {
-                removeEmailAccountCommand.RaiseCanExecuteChanged();
-                editEmailAccountCommand.RaiseCanExecuteChanged();
+                removeEmailAccountCommand!.RaiseCanExecuteChanged();
+                editEmailAccountCommand!.RaiseCanExecuteChanged();
             }
         }
     }

@@ -63,11 +63,11 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void EditPop3EmailAccountDialog(MockEditEmailAccountView editEmailAccountView)
         {
-            var editEmailAccountViewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(editEmailAccountView);
+            var editEmailAccountViewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(editEmailAccountView)!;
 
             // Get the first page of the wizard
             var basicEmailAccountView = (MockBasicEmailAccountView)editEmailAccountViewModel.ContentView;
-            var basicEmailAccountViewModel = ViewHelper.GetViewModel<BasicEmailAccountViewModel>(basicEmailAccountView);
+            var basicEmailAccountViewModel = ViewHelper.GetViewModel<BasicEmailAccountViewModel>(basicEmailAccountView)!;
 
             // We are on the first page thus it is not possible to go back
             Assert.IsFalse(editEmailAccountViewModel.BackCommand.CanExecute(null));
@@ -105,11 +105,11 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void EditExchangeEmailAccountDialog(MockEditEmailAccountView editEmailAccountView)
         {
-            var editEmailAccountViewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(editEmailAccountView);
+            var editEmailAccountViewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(editEmailAccountView)!;
 
             // Get the first page of the wizard
             var basicEmailAccountView = (MockBasicEmailAccountView)editEmailAccountViewModel.ContentView;
-            var basicEmailAccountViewModel = ViewHelper.GetViewModel<BasicEmailAccountViewModel>(basicEmailAccountView);
+            var basicEmailAccountViewModel = ViewHelper.GetViewModel<BasicEmailAccountViewModel>(basicEmailAccountView)!;
 
             // Select an Exchange account and call the next command
             basicEmailAccountViewModel.IsExchangeChecked= true;

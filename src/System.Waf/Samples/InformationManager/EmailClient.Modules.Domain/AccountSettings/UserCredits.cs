@@ -7,17 +7,17 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
     [DataContract]
     public class UserCredits : ValidatableModel
     {
-        [DataMember] private string userName;
-        [DataMember] private string password;
+        [DataMember] private string? userName;
+        [DataMember] private string? password;
 
         [Required, Display(Name = "Username")]
-        public string UserName
+        public string? UserName
         {
             get => userName;
             set => SetPropertyAndValidate(ref userName, value);
         }
 
-        public string Password
+        public string? Password
         {
             get => password;
             set => SetPropertyAndValidate(ref password, value);

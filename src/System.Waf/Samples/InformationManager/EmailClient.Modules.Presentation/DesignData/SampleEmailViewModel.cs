@@ -19,7 +19,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         private class MockEmailView : IEmailView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

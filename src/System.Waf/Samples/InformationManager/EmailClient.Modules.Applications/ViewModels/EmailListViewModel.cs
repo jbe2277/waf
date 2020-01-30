@@ -13,7 +13,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmailListViewModel : ViewModel<IEmailListView>
     {
-        private Email selectedEmail;
+        private Email? selectedEmail;
         private string filterText = "";
 
         [ImportingConstructor]
@@ -21,15 +21,15 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
         }
 
-        public IReadOnlyList<Email> Emails { get; set; }
+        public IReadOnlyList<Email> Emails { get; set; } = null!;
 
-        public Email SelectedEmail
+        public Email? SelectedEmail
         {
             get => selectedEmail;
             set => SetProperty(ref selectedEmail, value);
         }
 
-        public ICommand DeleteEmailCommand { get; set; }
+        public ICommand DeleteEmailCommand { get; set; } = DelegateCommand.DisabledCommand;
 
         public string FilterText
         {

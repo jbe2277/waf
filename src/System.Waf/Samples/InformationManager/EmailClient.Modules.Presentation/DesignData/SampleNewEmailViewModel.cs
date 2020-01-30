@@ -17,7 +17,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         private class MockNewEmailView : INewEmailView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
             
             public void Show(object owner) { }
             

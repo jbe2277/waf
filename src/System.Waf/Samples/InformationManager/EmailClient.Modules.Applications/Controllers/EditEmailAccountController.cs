@@ -19,8 +19,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly BasicEmailAccountViewModel basicEmailAccountViewModel;
         private readonly ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory;
         private readonly ExportFactory<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory;
-        private Pop3SettingsViewModel pop3SettingsViewModel;
-        private ExchangeSettingsViewModel exchangeSettingsViewModel;
+        private Pop3SettingsViewModel? pop3SettingsViewModel;
+        private ExchangeSettingsViewModel? exchangeSettingsViewModel;
         private bool result;
 
         [ImportingConstructor]
@@ -36,9 +36,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             nextCommand = new DelegateCommand(Next, CanNext);
         }
 
-        public object OwnerWindow { get; set; }
+        public object OwnerWindow { get; set; } = null!;
 
-        public EmailAccount EmailAccount { get; set; }
+        public EmailAccount EmailAccount { get; set; } = null!;
         
         public void Initialize()
         {
@@ -108,7 +108,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             nextCommand.RaiseCanExecuteChanged();
         }
         
-        private void EditEmailAccountViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EditEmailAccountViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(EditEmailAccountViewModel.IsValid))
             {
@@ -136,13 +136,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void SavePop3Settings()
         {
-            EmailAccount.EmailAccountSettings = pop3SettingsViewModel.Model;
+            EmailAccount.EmailAccountSettings = pop3SettingsViewModel!.Model;
             result = true;
         }
 
         private void SaveExchangeSettings()
         {
-            EmailAccount.EmailAccountSettings = exchangeSettingsViewModel.Model;
+            EmailAccount.EmailAccountSettings = exchangeSettingsViewModel!.Model;
             result = true;
         }
     }

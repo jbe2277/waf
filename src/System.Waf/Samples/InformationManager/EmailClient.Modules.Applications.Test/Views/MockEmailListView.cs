@@ -8,11 +8,11 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Views
     [Export(typeof(IEmailListView)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class MockEmailListView : MockView, IEmailListView
     {
-        public Action<MockEmailListView> FocusItemAction { get; set; }
+        public Action<MockEmailListView>? FocusItemAction { get; set; }
         
         public void FocusItem()
         {
-            FocusItemAction(this);
+            FocusItemAction?.Invoke(this);
         }
     }
 }

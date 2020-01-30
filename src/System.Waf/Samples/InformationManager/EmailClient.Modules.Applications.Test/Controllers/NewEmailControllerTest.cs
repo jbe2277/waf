@@ -38,7 +38,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             // Select a contact for the To field and cancel the dialog
 
             var addressBookService = Get<MockAddressBookService>();
-            ContactDto contactResult = null;
+            ContactDto? contactResult = null;
             addressBookService.ShowSelectContactViewAction = owner =>
             {
                 Assert.AreEqual(newEmailView, owner);

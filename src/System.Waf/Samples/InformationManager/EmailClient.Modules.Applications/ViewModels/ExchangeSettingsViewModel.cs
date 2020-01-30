@@ -13,6 +13,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
         }
 
-        public ExchangeSettings Model { get; set; }
+        public ExchangeSettings? Model { get; set; }
     }
 }

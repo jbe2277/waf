@@ -8,14 +8,14 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmailViewModel : ViewModel<IEmailView>
     {
-        private Email email;
+        private Email? email;
         
         [ImportingConstructor]
         public EmailViewModel(IEmailView view) : base(view)
         {
         }
 
-        public Email Email
+        public Email? Email
         {
             get => email;
             set => SetProperty(ref email, value);

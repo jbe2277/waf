@@ -9,22 +9,22 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmailAccountsViewModel : ViewModel<IEmailAccountsView>
     {
-        private EmailAccount selectedEmailAccount;
+        private EmailAccount? selectedEmailAccount;
 
         [ImportingConstructor]
         public EmailAccountsViewModel(IEmailAccountsView view) : base(view)
         {
         }
 
-        public EmailClientRoot EmailClientRoot { get; set; }
+        public EmailClientRoot EmailClientRoot { get; set; } = null!;
 
-        public ICommand NewAccountCommand { get; set; }
+        public ICommand NewAccountCommand { get; set; } = null!;
 
-        public ICommand RemoveAccountCommand { get; set; }
+        public ICommand RemoveAccountCommand { get; set; } = null!;
 
-        public ICommand EditAccountCommand { get; set; }
+        public ICommand EditAccountCommand { get; set; } = null!;
 
-        public EmailAccount SelectedEmailAccount
+        public EmailAccount? SelectedEmailAccount
         {
             get => selectedEmailAccount;
             set => SetProperty(ref selectedEmailAccount, value);

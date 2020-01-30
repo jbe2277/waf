@@ -38,7 +38,7 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             Assert.AreEqual(emailAccount.Email, clone.Email);
 
             Assert.AreNotEqual(emailAccount.EmailAccountSettings, clone.EmailAccountSettings);
-            Assert.AreEqual(((ExchangeSettings)emailAccount.EmailAccountSettings).UserName, ((ExchangeSettings)clone.EmailAccountSettings).UserName);
+            Assert.AreEqual(((ExchangeSettings)emailAccount.EmailAccountSettings).UserName, ((ExchangeSettings)clone.EmailAccountSettings!).UserName);
 
             emailAccount.EmailAccountSettings = null;
             clone = emailAccount.Clone();

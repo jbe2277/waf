@@ -4,6 +4,7 @@
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Presentation.Test</AssemblyName>
     <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

@@ -27,19 +27,19 @@ namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
             var to = new[] { "harry@example.com", "admin@adventure-works.com" };
             AssertHelper.PropertyChangedEvent(email, x => x.To, () => email.To = to);
             Assert.AreEqual(to, email.To);
-            AssertHelper.ExpectedException<ArgumentNullException>(() => email.To = null);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.To = null!);
             Assert.AreEqual(to, email.To);
 
             var cc = new[] { "user-2@fabrikam.com" };
             AssertHelper.PropertyChangedEvent(email, x => x.CC, () => email.CC = cc);
             Assert.AreEqual(cc, email.CC);
-            AssertHelper.ExpectedException<ArgumentNullException>(() => email.CC = null);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.CC = null!);
             Assert.AreEqual(cc, email.CC);
 
             var bcc = new[] { "someone@example.com" };
             AssertHelper.PropertyChangedEvent(email, x => x.Bcc, () => email.Bcc = bcc);
             Assert.AreEqual(bcc, email.Bcc);
-            AssertHelper.ExpectedException<ArgumentNullException>(() => email.Bcc = null);
+            AssertHelper.ExpectedException<ArgumentNullException>(() => email.Bcc = null!);
             Assert.AreEqual(bcc, email.Bcc);
 
             var sent = new DateTime(2012, 8, 2);

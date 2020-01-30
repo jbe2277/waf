@@ -7,12 +7,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 {
     public class EmailAccount : ValidatableModel
     {
-        [DataMember] private string name;
-        [DataMember] private string email;
-        [DataMember] private EmailAccountSettings emailAccountSettings;
+        [DataMember] private string? name;
+        [DataMember] private string? email;
+        [DataMember] private EmailAccountSettings? emailAccountSettings;
 
         [Required, Display(Name = "Name")]
-        public string Name
+        public string? Name
         {
             get => name;
             set => SetPropertyAndValidate(ref name, value);
@@ -20,13 +20,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         [Required, StringLength(100), Display(Name = "Email Address")]
         [EmailAddress]
-        public string Email
+        public string? Email
         {
             get => email;
             set => SetPropertyAndValidate(ref email, value);
         }
 
-        public EmailAccountSettings EmailAccountSettings
+        public EmailAccountSettings? EmailAccountSettings
         {
             get => emailAccountSettings;
             set => SetPropertyAndValidate(ref emailAccountSettings, value);

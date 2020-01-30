@@ -3,6 +3,7 @@
     <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Domain.Test</AssemblyName>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

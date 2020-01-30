@@ -9,7 +9,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class Pop3SettingsViewModel : ViewModel<IPop3SettingsView>
     {
-        private Pop3Settings model;
+        private Pop3Settings model = null!;
         private bool useSameUserCredits;
 
         [ImportingConstructor]
@@ -45,7 +45,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             }
         }
 
-        private void Pop3UserCreditsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Pop3UserCreditsPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(UserCredits.UserName))
             {

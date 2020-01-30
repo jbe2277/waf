@@ -8,6 +8,7 @@
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>..\Common.Presentation\Resources\Images\InformationManager.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

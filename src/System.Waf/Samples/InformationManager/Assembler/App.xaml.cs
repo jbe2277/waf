@@ -35,9 +35,9 @@ namespace Waf.InformationManager.Assembler
             Tuple.Create("InfoMan.Email.D", LogLevel.Warn),
         };
 
-        private AggregateCatalog catalog;
-        private CompositionContainer container;
-        private IEnumerable<IModuleController> moduleControllers;
+        private AggregateCatalog? catalog;
+        private CompositionContainer? container;
+        private IEnumerable<IModuleController>? moduleControllers;
 
         public App()
         {
@@ -104,8 +104,8 @@ namespace Waf.InformationManager.Assembler
         protected override void OnExit(ExitEventArgs e)
         {
             foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
-            container.Dispose();
-            catalog.Dispose();
+            container?.Dispose();
+            catalog?.Dispose();
             Log.App.Info("{0} closed", ApplicationInfo.ProductName);
             base.OnExit(e);
         }
@@ -120,9 +120,9 @@ namespace Waf.InformationManager.Assembler
             HandleException(e.ExceptionObject as Exception, e.IsTerminating);
         }
 
-        private static void HandleException(Exception e, bool isTerminating)
+        private static void HandleException(Exception? e, bool isTerminating)
         {
-            if (e == null) { return; }
+            if (e == null) return;
 
             Log.App.Error(e, "Unhandled exception");
             if (!isTerminating)

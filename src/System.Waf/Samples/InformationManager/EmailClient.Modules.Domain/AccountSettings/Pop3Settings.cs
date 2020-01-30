@@ -8,8 +8,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
     {
         [DataMember] private UserCredits pop3UserCredits;
         [DataMember] private UserCredits smtpUserCredits;
-        [DataMember] private string pop3ServerPath;
-        [DataMember] private string smtpServerPath;
+        [DataMember] private string? pop3ServerPath;
+        [DataMember] private string? smtpServerPath;
 
         public Pop3Settings()
         {
@@ -20,7 +20,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         }
 
         [Required, Display(Name = "POP3 Server")]
-        public string Pop3ServerPath
+        public string? Pop3ServerPath
         {
             get => pop3ServerPath;
             set => SetPropertyAndValidate(ref pop3ServerPath, value);
@@ -29,7 +29,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings
         public UserCredits Pop3UserCredits => pop3UserCredits;
 
         [Required, Display(Name = "SMTP Server")]
-        public string SmtpServerPath
+        public string? SmtpServerPath
         {
             get => smtpServerPath;
             set => SetPropertyAndValidate(ref smtpServerPath, value);

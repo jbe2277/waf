@@ -21,7 +21,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         [DataMember] private IEnumerable<string> cc;
         [DataMember] private IEnumerable<string> bcc;
         [DataMember] private DateTime sent;
-        [DataMember] private string message;
+        [DataMember] private string? message;
 
         public Email()
         {
@@ -101,7 +101,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             set => SetPropertyAndValidate(ref sent, value);
         }
 
-        public string Message
+        public string? Message
         {
             get => message;
             set => SetPropertyAndValidate(ref message, value);
