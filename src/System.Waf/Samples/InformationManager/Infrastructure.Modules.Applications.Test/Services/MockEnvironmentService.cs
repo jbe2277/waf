@@ -6,6 +6,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
     [Export(typeof(IEnvironmentService)), Export]
     public class MockEnvironmentService : IEnvironmentService
     {
-        public string DataDirectory { get; set; }        
+        public string DataDirectory { get; set; } = null!;
     }
 }

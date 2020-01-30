@@ -16,10 +16,10 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         /// <param name="toolTip">The tooltip of the tool bar button.</param>
         /// <exception cref="ArgumentNullException">command must not be null.</exception>
         /// <exception cref="ArgumentException">text must not be null or empty.</exception>
-        public ToolBarCommand(ICommand command, string text, string toolTip = null)
+        public ToolBarCommand(ICommand command, string text, string? toolTip = null)
         {
             Command = command ?? throw new ArgumentNullException(nameof(command));
-            if (string.IsNullOrEmpty(text)) { throw new ArgumentException("text must not be null or empty.", nameof(text)); }
+            if (string.IsNullOrEmpty(text)) throw new ArgumentException("text must not be null or empty.", nameof(text));
             Text = text;
             ToolTip = toolTip ?? "";
         }

@@ -8,14 +8,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ContactViewModel : ViewModel<IContactView>
     {
-        private Contact contact;
+        private Contact? contact;
 
         [ImportingConstructor]
         public ContactViewModel(IContactView view) : base(view)
         {
         }
 
-        public Contact Contact
+        public Contact? Contact
         {
             get => contact;
             set => SetProperty(ref contact, value);

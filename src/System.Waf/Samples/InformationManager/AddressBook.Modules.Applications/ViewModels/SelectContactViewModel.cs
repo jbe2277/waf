@@ -13,9 +13,9 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
         {
         }
 
-        public ICommand OkCommand { get; set; }
+        public ICommand OkCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public object ContactListView { get; set; }
+        public object? ContactListView { get; set; }
 
         public void ShowDialog(object owner)
         {

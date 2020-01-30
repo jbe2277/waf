@@ -10,7 +10,7 @@ namespace Test.InformationManager.Common.Applications
     [TestClass]
     public abstract class ApplicationsTest : DomainTest
     {
-        public CompositionContainer Container { get; private set; }
+        public CompositionContainer Container { get; private set; } = null!;
 
         protected override void OnInitialize()
         {

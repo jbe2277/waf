@@ -10,7 +10,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
     public class ShellService : Model, IShellService
     {
         private readonly Lazy<IShellViewModel> shellViewModel;
-        private object contentView;
+        private object? contentView;
 
         [ImportingConstructor]
         public ShellService(Lazy<IShellViewModel> shellViewModel)
@@ -20,7 +20,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
 
         public object ShellView => shellViewModel.Value.View;
 
-        public object ContentView
+        public object? ContentView
         {
             get => contentView;
             set => SetProperty(ref contentView, value);

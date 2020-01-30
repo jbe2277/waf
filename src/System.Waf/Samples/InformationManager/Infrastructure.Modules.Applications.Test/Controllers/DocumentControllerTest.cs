@@ -9,7 +9,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
     [TestClass]
     public class DocumentControllerTest : InfrastructureTest
     {
-        private DocumentController controller;
+        private DocumentController controller = null!;
 
         protected override void OnInitialize()
         {
@@ -51,7 +51,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
         private class Data
         {
             [DataMember]
-            public string Name { get; set; }
+            public string? Name { get; set; }
         }
     }
 }

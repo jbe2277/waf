@@ -8,11 +8,11 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Services
     [Export(typeof(IAddressBookService)), Export]
     public class MockAddressBookService : IAddressBookService
     {
-        public Func<object, ContactDto> ShowSelectContactViewAction { get; set; }
+        public Func<object, ContactDto?>? ShowSelectContactViewAction { get; set; }
         
-        public ContactDto ShowSelectContactView(object ownerView)
+        public ContactDto? ShowSelectContactView(object ownerView)
         {
-            return ShowSelectContactViewAction(ownerView);
+            return ShowSelectContactViewAction?.Invoke(ownerView);
         }
     }
 }

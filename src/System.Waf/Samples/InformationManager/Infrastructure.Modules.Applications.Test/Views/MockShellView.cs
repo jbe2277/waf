@@ -35,7 +35,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
         
         public bool IsMaximized { get; set; }
         
-        public event EventHandler Closed;
+        public event EventHandler? Closed;
 
         public void Show()
         {

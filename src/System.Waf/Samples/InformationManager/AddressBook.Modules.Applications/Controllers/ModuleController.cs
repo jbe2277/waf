@@ -26,8 +26,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private readonly ExportFactory<ContactController> contactControllerFactory;
         private readonly ExportFactory<SelectContactController> selectContactControllerFactory;
         private readonly Lazy<DataContractSerializer> serializer;
-        private ContactController activeContactController;
-        private AddressBookRoot root;
+        private ContactController? activeContactController;
 
         [ImportingConstructor]
         public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
@@ -41,7 +40,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
         }
 
-        internal AddressBookRoot Root => root;
+        internal AddressBookRoot Root { get; private set; } = null!;
 
         public void Initialize()
         {
@@ -49,12 +48,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             {
                 if (stream.Length == 0)
                 {
-                    root = new AddressBookRoot();
-                    foreach (var contact in SampleDataProvider.CreateContacts()) { root.AddContact(contact); }
+                    Root = new AddressBookRoot();
+                    foreach (var contact in SampleDataProvider.CreateContacts()) { Root.AddContact(contact); }
                 }
                 else
                 {
-                    root = (AddressBookRoot)serializer.Value.ReadObject(stream);
+                    Root = (AddressBookRoot)serializer.Value.ReadObject(stream);
                 }
             }
             navigationService.AddNavigationNode("Contacts", ShowAddressBook, CloseAddressBook, 2, 1);
@@ -67,14 +66,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         public void Shutdown()
         {
             using var stream = documentService.GetStream(documentPartPath, MediaTypeNames.Text.Xml, FileMode.Create);
-            serializer.Value.WriteObject(stream, root);
+            serializer.Value.WriteObject(stream, Root);
         }
 
-        public ContactDto ShowSelectContactView(object ownerView)
+        public ContactDto? ShowSelectContactView(object ownerView)
         {
             var selectContactController = selectContactControllerFactory.CreateExport().Value;
             selectContactController.OwnerView = ownerView;
-            selectContactController.Root = root;
+            selectContactController.Root = Root;
             selectContactController.Initialize();
             selectContactController.Run();
             selectContactController.Shutdown();
@@ -84,7 +83,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private void ShowAddressBook()
         {
             activeContactController = contactControllerFactory.CreateExport().Value;
-            activeContactController.Root = root;
+            activeContactController.Root = Root;
             activeContactController.Initialize();
             activeContactController.Run();
 

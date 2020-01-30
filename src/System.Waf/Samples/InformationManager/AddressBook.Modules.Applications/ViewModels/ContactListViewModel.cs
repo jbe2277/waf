@@ -12,7 +12,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ContactListViewModel : ViewModel<IContactListView>
     {
-        private Contact selectedContact;
+        private Contact? selectedContact;
         private string filterText = "";
 
         [ImportingConstructor]
@@ -20,15 +20,15 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
         {
         }
 
-        public IReadOnlyList<Contact> Contacts { get; set; }
+        public IReadOnlyList<Contact> Contacts { get; set; } = null!;
 
-        public Contact SelectedContact
+        public Contact? SelectedContact
         {
             get => selectedContact;
             set => SetProperty(ref selectedContact, value);
         }
 
-        public ICommand DeleteContactCommand { get; set; }
+        public ICommand DeleteContactCommand { get; set; } = DelegateCommand.DisabledCommand;
 
         public string FilterText
         {
@@ -44,9 +44,9 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
         public bool Filter(Contact contact)
         {
             return string.IsNullOrEmpty(filterText)
-                || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-                || (!string.IsNullOrEmpty(contact.Email) && contact.Email.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
+                || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Email) && contact.Email!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

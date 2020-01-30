@@ -14,8 +14,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         }
 
         public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
-        
-        public object View { get; set; }
+
+        public object View { get; set; } = null!;
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
         {

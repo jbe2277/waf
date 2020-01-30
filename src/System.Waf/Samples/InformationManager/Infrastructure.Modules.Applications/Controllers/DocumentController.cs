@@ -13,7 +13,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         private const string fileName = "InformationManager.datx";
 
         private readonly IEnvironmentService environmentService;
-        private Package package;
+        private Package? package;
 
         [ImportingConstructor]
         public DocumentController(IEnvironmentService environmentService)
@@ -36,14 +36,14 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            package.Close();
+            package?.Close();
         }
 
         public Stream GetStream(string documentPartPath, string contentType, FileMode fileMode)
         {
             Uri documentUri = PackUriHelper.CreatePartUri(new Uri(documentPartPath, UriKind.Relative));
             PackagePart packagePart;
-            if (!package.PartExists(documentUri))
+            if (!package!.PartExists(documentUri))
             {
                 packagePart = package.CreatePart(documentUri, contentType, CompressionOption.Normal);
             }

@@ -64,7 +64,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
             ViewCore.Close();
         }
 
-        private void ViewClosed(object sender, EventArgs e)
+        private void ViewClosed(object? sender, EventArgs e)
         {
             settings.Left = ViewCore.Left;
             settings.Top = ViewCore.Top;

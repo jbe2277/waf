@@ -7,21 +7,21 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
     [Export]
     public class ContactLayoutViewModel : ViewModel<IContactLayoutView>
     {
-        private object contactListView;
-        private object contactView;
+        private object? contactListView;
+        private object? contactView;
 
         [ImportingConstructor]
         public ContactLayoutViewModel(IContactLayoutView view) : base(view)
         {
         }
 
-        public object ContactListView
+        public object? ContactListView
         {
             get => contactListView;
             set => SetProperty(ref contactListView, value);
         }
 
-        public object ContactView
+        public object? ContactView
         {
             get => contactView;
             set => SetProperty(ref contactView, value);

@@ -12,7 +12,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
     {
         private readonly SelectContactViewModel selectContactViewModel;
         private readonly DelegateCommand selectContactCommand;
-        private ObservableListView<Contact> contactsView;
+        private ObservableListView<Contact> contactsView = null!;
         
         [ImportingConstructor]
         public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
@@ -22,11 +22,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             selectContactCommand = new DelegateCommand(SelectContact, CanSelectContact);
         }
 
-        public object OwnerView { get; set; }
+        public object OwnerView { get; set; } = null!;
 
-        public AddressBookRoot Root { get; set; }
+        public AddressBookRoot Root { get; set; } = null!;
 
-        public Contact SelectedContact { get; private set; }
+        public Contact? SelectedContact { get; private set; }
 
         internal ContactListViewModel ContactListViewModel { get; }
 
@@ -60,7 +60,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             selectContactViewModel.Close();
         }
 
-        private void ContactListViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ContactListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ContactListViewModel.SelectedContact))
             {

@@ -12,9 +12,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         public void AddNavigationNodesWithWrongParameters()
         {
             var navigationService = new NavigationService();
-            AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode(null, null, null, 0, 0));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", null, null, 0, 0));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", () => { }, null, 0, 0));
+            AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode(null!, null!, null!, 0, 0));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", null!, null!, 0, 0));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", () => { }, null!, 0, 0));
             AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("Node 1", () => { }, () => { }, -1, -1));
             AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("Node 1", () => { }, () => { }, 0, -1));
         }
@@ -25,9 +25,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             var navigationService = new NavigationService();
 
             bool showActionCalled = false;
-            Action showAction = () => { showActionCalled = true; };
+            void showAction() => showActionCalled = true;
             bool closeActionCalled = false;
-            Action closeAction = () => { closeActionCalled = true; };
+            void closeAction() => closeActionCalled = true;
 
             var node = (NavigationNode)navigationService.AddNavigationNode("Node 1", showAction, closeAction, 3, 7);
 
@@ -64,8 +64,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         {
             var navigationService = new NavigationService();
 
-            Action showAction = () => { };
-            Action closeAction = () => { };
+            static void showAction() { }
+            static void closeAction() { }
 
             var nodeB2 = navigationService.AddNavigationNode("Node B1", showAction, closeAction, 1, 1);
             var nodeA1 = navigationService.AddNavigationNode("Node A1", showAction, closeAction, 0, 0);

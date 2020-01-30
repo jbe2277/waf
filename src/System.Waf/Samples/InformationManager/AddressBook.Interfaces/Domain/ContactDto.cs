@@ -11,7 +11,7 @@
         /// <param name="firstname">The first name.</param>
         /// <param name="lastname">The last name.</param>
         /// <param name="email">The email.</param>
-        public ContactDto(string firstname, string lastname, string email)
+        public ContactDto(string? firstname, string? lastname, string? email)
         {
             Firstname = firstname;
             Lastname = lastname;
@@ -21,16 +21,16 @@
         /// <summary>
         /// Gets the first name.
         /// </summary>
-        public string Firstname { get; }
+        public string? Firstname { get; }
 
         /// <summary>
         /// Gets the last name.
         /// </summary>
-        public string Lastname { get; }
+        public string? Lastname { get; }
 
         /// <summary>
         /// Gets the email.
         /// </summary>
-        public string Email { get; }
+        public string? Email { get; }
     }
 }

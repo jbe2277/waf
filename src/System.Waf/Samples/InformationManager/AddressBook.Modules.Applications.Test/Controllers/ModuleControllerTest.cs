@@ -91,7 +91,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             MockSelectContactView.ShowDialogAction = view =>
             {
-                var viewModel = ViewHelper.GetViewModel<SelectContactViewModel>(view);
+                var viewModel = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
                 viewModel.OkCommand.Execute(null);
             };
             var ownerView = new object();

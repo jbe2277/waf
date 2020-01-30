@@ -27,7 +27,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
 
             MockSelectContactView.ShowDialogAction = view =>
             {
-                var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view);
+                var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
                 Assert.AreEqual(contact1, controller.ContactListViewModel.SelectedContact);
 
                 AssertHelper.CanExecuteChangedEvent(vm.OkCommand, () => controller.ContactListViewModel.SelectedContact = null);

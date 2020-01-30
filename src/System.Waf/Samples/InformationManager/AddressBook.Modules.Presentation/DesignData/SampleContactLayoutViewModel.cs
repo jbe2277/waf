@@ -14,7 +14,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
 
         private class MockContactLayoutView : IContactLayoutView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
         }
     }
 }

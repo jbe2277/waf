@@ -17,7 +17,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
             MockSelectContactView.ShowDialogAction = view =>
             {
                 showDialogActionCalled = true;
-                var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view);
+                var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
                 vm.Close();
                 Assert.IsFalse(view.IsVisible);
             };

@@ -5,6 +5,7 @@
     <AssemblyName>Waf.InformationManager.Common.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

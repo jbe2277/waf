@@ -14,7 +14,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
 
         private class MockSelectContactView : ISelectContactView
         {
-            public object DataContext { get; set; }
+            public object? DataContext { get; set; }
 
             public void Close() { }
             

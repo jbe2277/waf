@@ -18,7 +18,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         public ContactListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<ContactListViewModel>(() => ViewHelper.GetViewModel<ContactListViewModel>(this));
+            viewModel = new Lazy<ContactListViewModel>(() => ViewHelper.GetViewModel<ContactListViewModel>(this)!);
             Loaded += LoadedHandler;
         }
 

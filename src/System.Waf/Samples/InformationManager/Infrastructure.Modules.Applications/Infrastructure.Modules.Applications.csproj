@@ -3,6 +3,7 @@
     <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Waf.InformationManager.Infrastructure.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Applications</AssemblyName>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

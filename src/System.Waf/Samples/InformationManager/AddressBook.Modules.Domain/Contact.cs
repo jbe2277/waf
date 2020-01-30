@@ -8,11 +8,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
     public class Contact : ValidatableModel
     {
         [DataMember] private readonly Address address;
-        [DataMember] private string firstname;
-        [DataMember] private string lastname;
-        [DataMember] private string company;
-        [DataMember] private string email;
-        [DataMember] private string phone;
+        [DataMember] private string? firstname;
+        [DataMember] private string? lastname;
+        [DataMember] private string? company;
+        [DataMember] private string? email;
+        [DataMember] private string? phone;
 
         public Contact()
         {
@@ -21,32 +21,32 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         }
 
         [Required]
-        public string Firstname
+        public string? Firstname
         {
             get => firstname;
             set => SetPropertyAndValidate(ref firstname, value);
         }
 
-        public string Lastname
+        public string? Lastname
         {
             get => lastname;
             set => SetPropertyAndValidate(ref lastname, value);
         }
 
-        public string Company
+        public string? Company
         {
             get => company;
             set => SetPropertyAndValidate(ref company, value);
         }
 
         [EmailAddress]
-        public string Email
+        public string? Email
         {
             get => email;
             set => SetPropertyAndValidate(ref email, value);
         }
 
-        public string Phone
+        public string? Phone
         {
             get => phone;
             set => SetPropertyAndValidate(ref phone, value);

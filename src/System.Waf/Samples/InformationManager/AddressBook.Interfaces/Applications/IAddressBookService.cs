@@ -12,6 +12,6 @@ namespace Waf.InformationManager.AddressBook.Interfaces.Applications
         /// </summary>
         /// <param name="ownerView">The owner view.</param>
         /// <returns>The selected contact or null when the user canceled this operation.</returns>
-        ContactDto ShowSelectContactView(object ownerView);
+        ContactDto? ShowSelectContactView(object ownerView);
     }
 }

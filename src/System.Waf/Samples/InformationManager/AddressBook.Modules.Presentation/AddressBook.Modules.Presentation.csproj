@@ -5,6 +5,7 @@
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

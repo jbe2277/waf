@@ -14,8 +14,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         {
             var emptyCommand = new DelegateCommand(() => { });
             
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ToolBarCommand(null, null));
-            AssertHelper.ExpectedException<ArgumentException>(() => new ToolBarCommand(emptyCommand, null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ToolBarCommand(null!, null!));
+            AssertHelper.ExpectedException<ArgumentException>(() => new ToolBarCommand(emptyCommand, null!));
 
             var toolBarCommand1 = new ToolBarCommand(emptyCommand, "Command 1");
             Assert.AreEqual(emptyCommand, toolBarCommand1.Command);

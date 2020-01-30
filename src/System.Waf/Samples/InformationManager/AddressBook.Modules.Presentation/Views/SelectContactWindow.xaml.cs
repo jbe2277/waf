@@ -17,7 +17,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         public SelectContactWindow()
         {
             InitializeComponent();
-            viewModel = new Lazy<SelectContactViewModel>(() => ViewHelper.GetViewModel<SelectContactViewModel>(this));
+            viewModel = new Lazy<SelectContactViewModel>(() => ViewHelper.GetViewModel<SelectContactViewModel>(this)!);
         }
 
         public SelectContactViewModel ViewModel => viewModel.Value;

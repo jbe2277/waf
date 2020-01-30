@@ -16,7 +16,7 @@ namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
         /// <summary>
         /// Gets or sets the content view which is shown by the shell.
         /// </summary>
-        object ContentView { get; set; }
+        object? ContentView { get; set; }
 
         /// <summary>
         /// Adds the specified tool bar commands.
