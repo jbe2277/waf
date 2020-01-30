@@ -3,7 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Library.Domain</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Library.Domain</AssemblyName>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

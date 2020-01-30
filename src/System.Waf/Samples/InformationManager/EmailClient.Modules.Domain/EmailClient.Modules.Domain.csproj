@@ -3,7 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Waf.InformationManager.EmailClient.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Domain</AssemblyName>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

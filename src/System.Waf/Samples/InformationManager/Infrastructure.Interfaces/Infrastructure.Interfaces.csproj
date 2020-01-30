@@ -4,6 +4,5 @@
     <RootNamespace>Waf.InformationManager.Infrastructure.Interfaces</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Interfaces</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 </Project>

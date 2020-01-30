@@ -5,7 +5,6 @@
     <AssemblyName>Waf.BookLibrary.Reporting.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

@@ -4,7 +4,6 @@
     <RootNamespace>Test.InformationManager.Infrastructure.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Presentation.Test</AssemblyName>
     <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">

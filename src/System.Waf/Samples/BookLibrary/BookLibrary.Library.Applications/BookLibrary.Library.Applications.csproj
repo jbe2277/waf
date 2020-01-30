@@ -3,7 +3,6 @@
     <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Waf.BookLibrary.Library.Applications</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Library.Applications</AssemblyName>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

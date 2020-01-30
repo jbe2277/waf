@@ -6,6 +6,7 @@
     <Version>6.0.0.1</Version>
     <PackageVersion>6.0.0-alpha1</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8" PrivateAssets="All" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />

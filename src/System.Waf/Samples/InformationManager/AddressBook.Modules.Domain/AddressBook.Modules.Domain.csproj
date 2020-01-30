@@ -3,7 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Waf.InformationManager.AddressBook.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Domain</AssemblyName>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

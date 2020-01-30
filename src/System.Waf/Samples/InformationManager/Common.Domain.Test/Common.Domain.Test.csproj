@@ -3,7 +3,6 @@
     <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>Test.InformationManager.Common.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Domain.Test</AssemblyName>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

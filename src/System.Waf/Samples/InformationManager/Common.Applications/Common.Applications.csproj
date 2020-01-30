@@ -4,7 +4,6 @@
     <RootNamespace>Waf.InformationManager.Common.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Applications</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
