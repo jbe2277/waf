@@ -16,6 +16,18 @@ namespace Test.Waf.Applications
             var viewModel1 = new MockViewModel(view1, false);
             Assert.AreEqual(view1, viewModel1.View);
             Assert.IsNull(view1.DataContext);
+            int initCount = 0;
+            viewModel1.InitializeStub = () => initCount++;
+            viewModel1.Initialize();
+            Assert.AreEqual(viewModel1, view1.DataContext);
+            Assert.AreEqual(1, initCount);
+            viewModel1.Initialize();  // Second call does not initialize twice
+            Assert.AreEqual(viewModel1, view1.DataContext);
+            Assert.AreEqual(1, initCount);
+            view1.DataContext = new object();
+            viewModel1.Initialize();  // But it sets every time the DataContext
+            Assert.AreEqual(viewModel1, view1.DataContext);
+            Assert.AreEqual(1, initCount);
 
             IView view2 = new MockView();
             var viewModel2 = new MockViewModel(view2, true);
@@ -45,6 +57,10 @@ namespace Test.Waf.Applications
             public MockViewModel(IView view, bool initializeDataContext) : base(view, initializeDataContext)
             {
             }
+
+            public Action? InitializeStub { get; set; }
+
+            protected override void OnInitialize() => InitializeStub?.Invoke();            
         }
     }
 }
