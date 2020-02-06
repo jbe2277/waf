@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.Views;
@@ -9,13 +10,13 @@ using Waf.NewsReader.Domain.Foundation;
 
 namespace Waf.NewsReader.Applications.ViewModels
 {
-    public class FeedViewModel : ViewModel<IFeedView>
+    public class FeedViewModel : ViewModelCore<IFeedView>
     {
         private readonly ThrottledAction updateSearchAction;
         private Feed feed;
         private string searchText = "";
 
-        public FeedViewModel(IFeedView view) : base(view)
+        public FeedViewModel(IFeedView view) : base(view, false)
         {
             updateSearchAction = new ThrottledAction(UpdateSearch);
             UpdateItemsListView();

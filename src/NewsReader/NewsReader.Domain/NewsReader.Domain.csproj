@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.Core" Version="6.0.0-alpha1" />
+    <PackageReference Include="System.Waf.Core" Version="6.0.0-alpha2" />
   </ItemGroup>
 
 </Project>

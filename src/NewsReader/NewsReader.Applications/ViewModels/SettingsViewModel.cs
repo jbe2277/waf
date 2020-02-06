@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.Properties;
@@ -11,7 +12,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels
 {
-    public class SettingsViewModel : ViewModel<ISettingsView>
+    public class SettingsViewModel : ViewModelCore<ISettingsView>
     {
         private readonly IMessageService messageService;
         private DisplayItemLifetime selectedItemLifetime;
@@ -23,7 +24,7 @@ namespace Waf.NewsReader.Applications.ViewModels
         private string selectedLanguage;
 
         public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, 
-            IAppInfoService appInfoService) : base(view)
+            IAppInfoService appInfoService) : base(view, false)
         {
             this.messageService = messageService;
             AppInfo = appInfoService;

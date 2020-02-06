@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Waf.NewsReader.Applications.ViewModels;
+using System.Waf.Applications;
 
 namespace Waf.NewsReader.Applications.Services
 {
     public interface INavigationService
     {
-        Task Navigate(IViewModel viewModel);
+        Task Navigate(IViewModelCore viewModel);
 
         Task NavigateBack();
     }

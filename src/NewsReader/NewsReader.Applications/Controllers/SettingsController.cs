@@ -30,7 +30,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public FeedManager FeedManager { get; set; }
 
-        public IViewModel SettingsViewModel => settingsViewModel.Value;
+        public IViewModelCore SettingsViewModel => settingsViewModel.Value;
 
         private SettingsViewModel InitializeViewModel(SettingsViewModel viewModel)
         {

@@ -7,7 +7,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels
 {
-    public class AddEditFeedViewModel : ViewModel<IAddEditFeedView>
+    public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
     {
         private readonly DelegateCommand useTitleAsNameCommand;
         private bool isEditMode;
@@ -16,7 +16,7 @@ namespace Waf.NewsReader.Applications.ViewModels
         private Feed feed;
         private string loadErrorMessage;
 
-        public AddEditFeedViewModel(IAddEditFeedView view) : base(view)
+        public AddEditFeedViewModel(IAddEditFeedView view) : base(view, false)
         {
             useTitleAsNameCommand = new DelegateCommand(() => Feed.Name = Feed.Title, () => !string.IsNullOrEmpty(Feed?.Title) && Feed.Name != Feed.Title);
         }
