@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 6.0.0.2 (Alpha 2)
+- WAF: Add Initialize to ViewModelCore and introduce the IViewModelCore interface
+- Samples: Add nullable annotations
+
+
 Version 6.0.0.1 (Alpha 1)
 - WAF: WPF libraries added support for .Net Core 3.1.
 - WAF: Add nullable annotations which are used by C# 8.0 Nullable Reference Types support.
