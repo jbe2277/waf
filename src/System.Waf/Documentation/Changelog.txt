@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.0.0.3 (Alpha 3)
+- WAF: Add TraceSourceExtensions
+
+
 Version 6.0.0.2 (Alpha 2)
 - WAF: Add Initialize to ViewModelCore and introduce the IViewModelCore interface
 - Samples: Add nullable annotations
