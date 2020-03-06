@@ -63,7 +63,7 @@ namespace Waf.NewsReader.Applications.Controllers
             catch (Exception ex)
             {
                 // Better to forget the settings (data loss) as to never start the app again
-                Log.Default.Error(ex, "DataController.Load");
+                Log.Default.Error("DataController.Load: {0}", ex);
                 Crashes.TrackError(ex);
                 feedManager = new FeedManager();
             }
@@ -92,7 +92,7 @@ namespace Waf.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                Log.Default.Error(ex, "Account sign in failed.");
+                Log.Default.Error("Account sign in failed: {0}", ex);
                 Crashes.TrackError(ex);
                 await messageService.ShowMessage(Resources.SignInError, ex.Message);
             }
@@ -123,7 +123,7 @@ namespace Waf.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                Log.Default.Error(ex, "Download failed");
+                Log.Default.Error("Download failed: {0}", ex);
                 Crashes.TrackError(ex);
                 messageService.ShowMessage(Resources.SynchronizationDownloadError, ex.Message).NoWait();
             }
@@ -151,7 +151,7 @@ namespace Waf.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                Log.Default.Error(ex, "Upload failed");
+                Log.Default.Error("Upload failed: {0}", ex);
                 Crashes.TrackError(ex);
             }
         }

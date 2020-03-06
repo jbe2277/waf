@@ -65,7 +65,7 @@ namespace Waf.NewsReader.Presentation.Services
             }
             catch (Exception ex)
             {
-                Log.Default.Error(ex, "Warning: Silent login failed");
+                Log.Default.Warn("Silent login failed: {0}", ex);
                 Crashes.TrackError(ex);
                 // Ignore (e.g. no internet access)
             }

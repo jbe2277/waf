@@ -127,7 +127,7 @@ namespace Waf.NewsReader.Applications.Controllers
             }
             catch (Exception ex)
             {
-                Log.Default.Error(ex, "Load Feed failed.");
+                Log.Default.Error("Load Feed failed: {0}", ex);
                 Crashes.TrackError(ex);
                 feed.SetLoadError(ex, Resources.ErrorLoadRssFeed);
             }

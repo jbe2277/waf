@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Waf.Applications.Services;
+using System.Waf.Foundation;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
 using Waf.NewsReader.Applications.Properties;
