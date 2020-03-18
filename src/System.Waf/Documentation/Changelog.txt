@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.0.0.100 (Release)
+- WAF: Update version numbers.
+
+
 Version 6.0.0.3 (Alpha 3)
 - WAF: Add TraceSourceExtensions
 

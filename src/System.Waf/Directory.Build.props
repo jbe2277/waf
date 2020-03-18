@@ -3,8 +3,8 @@
     <LangVersion>8.0</LangVersion>
     <Company>jbe2277</Company>
     <Copyright>Copyright © 2016-2020 jbe2277</Copyright>
-    <Version>6.0.0.3</Version>
-    <PackageVersion>6.0.0-alpha3</PackageVersion>
+    <Version>6.0.0.100</Version>
+    <PackageVersion>6.0.0</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
   </PropertyGroup>
