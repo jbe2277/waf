@@ -18,6 +18,7 @@ namespace Waf.NewsReader.Presentation.Services
         {
             string title = "";
             var items = new List<ISyndicationItem>();
+            var errors = new List<Exception>();
 
             using (var client = new HttpClient())
             using (var stream = await client.GetStreamAsync(uri).ConfigureAwait(false))
@@ -29,18 +30,32 @@ namespace Waf.NewsReader.Presentation.Services
                     switch (feedReader.ElementType)
                     {
                         case SyndicationElementType.Item:
-                            items.Add(await feedReader.ReadItem().ConfigureAwait(false));
+                            try
+                            {
+                                items.Add(await feedReader.ReadItem().ConfigureAwait(false));
+                            }
+                            catch (Exception ex)
+                            {
+                                errors.Add(ex);
+                            }
                             break;
                         case SyndicationElementType.Content:
-                            ISyndicationContent content = await feedReader.ReadContent().ConfigureAwait(false);
-                            if (content.Name == "title") title = content.Value;
+                            try
+                            {
+                                ISyndicationContent content = await feedReader.ReadContent().ConfigureAwait(false);
+                                if (content.Name == "title") title = content.Value;
+                            }
+                            catch (Exception ex)
+                            {
+                                errors.Add(ex);
+                            }
                             break;
                     }
                 }
             }
 
             return new FeedDto(title, items.Select(x => new FeedItemDto(x.Links.FirstOrDefault()?.Uri, x.Published, 
-                RemoveHtmlTags(x.Title), RemoveHtmlTags(x.Description))).ToArray());
+                RemoveHtmlTags(x.Title), RemoveHtmlTags(x.Description))).ToArray(), errors);
         }
 
         private static XmlFeedReader GetReader(XmlReader reader)

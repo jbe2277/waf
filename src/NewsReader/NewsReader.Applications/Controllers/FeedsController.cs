@@ -119,6 +119,11 @@ namespace Waf.NewsReader.Applications.Controllers
                     var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description)).ToArray();
                     feed.Title = syndicationFeed.Title;
                     feed.UpdateItems(items, excludeMarkAsRead: true);
+                    foreach (var error in syndicationFeed.Errors)
+                    {
+                        Log.Default.Error("Load Feed item failed: {0}", error);
+                        Crashes.TrackError(error);
+                    }
                 }
                 else
                 {
