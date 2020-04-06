@@ -8,7 +8,7 @@ namespace Waf.NewsReader.Presentation.Services
         public AppInfoService()
         {
             AppName = AppInfo.Name;
-            VersionString = AppInfo.VersionString;
+            VersionString = AppInfo.VersionString + "." + AppInfo.BuildString;
         }
 
         public string AppName { get; }
