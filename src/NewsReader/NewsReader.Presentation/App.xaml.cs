@@ -42,7 +42,7 @@ namespace Waf.NewsReader.Presentation
             MainPage = (Page)this.appController.MainView;
         }
 
-        public static void InitializeLogging(TraceSource system, TraceListener? additionalListener = null)
+        public static void InitializeLogging(TraceSource system, TraceListener? systemListener = null)
         {
             system.Switch.Level = SourceLevels.All;
             Log.Default.Switch.Level = SourceLevels.All;
@@ -55,8 +55,8 @@ namespace Waf.NewsReader.Presentation
             foreach (var source in sources)
             {
                 source.Listeners.Clear();
-                source.Listeners.Add(new AppTraceListener(showTime: false));
-                if (additionalListener != null) source.Listeners.Add(additionalListener);
+                if (systemListener != null) source.Listeners.Add(systemListener);
+                else source.Listeners.Add(new AppTraceListener(showTime: false));
             }
         }
 
