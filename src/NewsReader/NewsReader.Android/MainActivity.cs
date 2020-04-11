@@ -8,11 +8,12 @@ using Waf.NewsReader.Presentation;
 using Autofac;
 using Android.Content;
 using Microsoft.Identity.Client;
+using Waf.NewsReader.Android.Services;
 
 namespace Waf.NewsReader.Android
 {
     [Activity(Label = "NewsReader", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static MainActivity Current { get; private set; }
 
@@ -26,7 +27,7 @@ namespace Waf.NewsReader.Android
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
 
-            App.InitializeLogging(Log.Default);
+            App.InitializeLogging(Log.Default, new AndroidTraceListener());
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new ApplicationsModule());

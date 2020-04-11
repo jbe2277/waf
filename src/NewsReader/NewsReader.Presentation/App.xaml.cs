@@ -10,6 +10,7 @@ using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
 using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
+using Waf.NewsReader.Presentation.Services;
 using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation
@@ -26,11 +27,13 @@ namespace Waf.NewsReader.Presentation
     public partial class App : Application
     {
         private readonly ISettingsService settingsService;
+        private readonly IAppInfoService appInfoService;
         private readonly IAppController appController;
 
-        public App(ISettingsService settingsService, Lazy<IAppController> appController, ILocalizationService localizationService = null)
+        public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService localizationService = null)
         {
             this.settingsService = settingsService;
+            this.appInfoService = appInfoService;
             localizationService?.Initialize();
             InitializeCultures(settingsService.Get<AppSettings>());
 
@@ -39,15 +42,27 @@ namespace Waf.NewsReader.Presentation
             MainPage = (Page)this.appController.MainView;
         }
 
-        public static void InitializeLogging(TraceSource system)
+        public static void InitializeLogging(TraceSource system, TraceListener? additionalListener = null)
         {
             system.Switch.Level = SourceLevels.All;
             Log.Default.Switch.Level = SourceLevels.All;
+
+            var sources = new[]
+            {
+                system,
+                Log.Default
+            };
+            foreach (var source in sources)
+            {
+                source.Listeners.Clear();
+                source.Listeners.Add(new AppTraceListener(showTime: false));
+                if (additionalListener != null) source.Listeners.Add(additionalListener);
+            }
         }
 
         protected override void OnStart()
         {
-            Log.Default.Info("App started");
+            Log.Default.Info("App started ({0}, {1}) on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             string appSecret = null;
             GetAppCenterSecret(ref appSecret);
             if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
