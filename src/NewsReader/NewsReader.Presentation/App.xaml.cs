@@ -55,8 +55,7 @@ namespace Waf.NewsReader.Presentation
             foreach (var source in sources)
             {
                 source.Listeners.Clear();
-                if (systemListener != null) source.Listeners.Add(systemListener);
-                else source.Listeners.Add(new AppTraceListener(showTime: false));
+                source.Listeners.Add(systemListener ?? new AppTraceListener(showTime: false));
             }
         }
 
