@@ -37,10 +37,12 @@ namespace System.Waf.Applications
         /// <summary>Initialize the view model and set the DataContext of the view.</summary>
         public void Initialize()
         {
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                OnInitialize();
+            }
             if (ViewCore.DataContext != this) ViewCore.DataContext = this;
-            if (isInitialized) return;
-            isInitialized = true;
-            OnInitialize();
         }
 
         /// <summary>Override this method to initialize the view model.</summary>
