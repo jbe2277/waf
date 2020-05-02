@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.0.1.100 (Release)
+- WAF: ViewModelCore.Initialize calls first OnInitialize and then sets the DataContext.
+
+
 Version 6.0.0.100 (Release)
 - WAF: Update version numbers.
 
