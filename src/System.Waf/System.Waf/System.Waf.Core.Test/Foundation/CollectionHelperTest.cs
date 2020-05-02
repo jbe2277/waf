@@ -46,6 +46,12 @@ namespace Test.Waf.Foundation
 
             int[] collection3 = { };
             AssertHelper.ExpectedException<ArgumentException>(() => collection3.GetNextElementOrDefault(9));
+
+            string?[] collection4 = { "A", null, "C" };
+            Assert.AreEqual("C", collection4.GetNextElementOrDefault(null));
+
+            string?[] collection5 = { "A", null, null };
+            Assert.IsNull(collection5.GetNextElementOrDefault(null));
         }
 
         [TestMethod]

@@ -22,7 +22,7 @@ namespace System.Waf.Foundation
         /// <param name="propertyName">The property name. This optional parameter can be skipped
         /// because the compiler is able to create it automatically.</param>
         /// <returns>True if the value has changed, false if the old and new value were equal.</returns>
-        protected bool SetProperty<T>(ref T field, [AllowNull] T value, [CallerMemberName] string propertyName = null!)
+        protected bool SetProperty<T>([NotNullIfNotNull(parameterName: "value"), MaybeNull] ref T field, [AllowNull] T value, [CallerMemberName] string propertyName = null!)
         {
             if (Equals(field, value)) return false;
             field = value;

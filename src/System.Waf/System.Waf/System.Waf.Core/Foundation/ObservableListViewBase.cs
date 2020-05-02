@@ -50,7 +50,7 @@ namespace System.Waf.Foundation
         /// <param name="newItem">The object to insert.</param>
         protected void Insert(int newItemIndex, [AllowNull] T newItem)
         {
-            InnerList.Insert(newItemIndex, newItem);
+            InnerList.Insert(newItemIndex, newItem!);
             OnPropertyChanged(CountChangedEventArgs);
             OnPropertyChanged(IndexerChangedEventArgs);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, newItemIndex));

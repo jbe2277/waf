@@ -16,7 +16,7 @@ namespace System.Waf.Foundation
         public static int IndexOf<T>(this IEnumerable<T> collection, [AllowNull] T item)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (collection is IList<T> list) return list.IndexOf(item);
+            if (collection is IList<T> list) return list.IndexOf(item!);
 
             int i = 0;
             foreach (T localItem in collection)
@@ -34,6 +34,7 @@ namespace System.Waf.Foundation
         /// <returns>The next element in the collection or default when no next element can be found.</returns>
         /// <exception cref="ArgumentNullException">collection must not be <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The collection does not contain the specified current item.</exception>
+        [return: MaybeNull]
         public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, [AllowNull] T current)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -41,7 +42,7 @@ namespace System.Waf.Foundation
             bool found = false;
             while (enumerator.MoveNext())
             {
-                if (EqualityComparer<T>.Default.Equals(enumerator.Current, current))
+                if (EqualityComparer<T>.Default.Equals(enumerator.Current, current!))
                 {
                     found = true;
                     break;
