@@ -24,5 +24,7 @@
     <Compile Update="Properties\Resources.Designer.cs" AutoGen="True" DependentUpon="Resources.resx" DesignTime="True" />
 
     <Resource Include="Resources\Images\**" />
+
+    <None Update="NLog.config" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

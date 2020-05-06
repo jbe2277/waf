@@ -30,7 +30,7 @@ namespace System.Waf.Presentation
 
         private void AddError(object validationSource, ValidationError error)
         {
-            errors.Add(new Tuple<object, ValidationError>(validationSource, error));
+            errors.Add(Tuple.Create(validationSource, error));
             if (validationSource is FrameworkElement element)
             {
                 element.Unloaded += ValidationSourceUnloaded;

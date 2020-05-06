@@ -105,12 +105,12 @@ namespace Test.Waf.Presentation.Services
         [TestMethod]
         public void ErrorOccurredTest()
         {
-            Tuple<Exception, SettingsServiceAction, string?>? error = null;
+            SettingsErrorEventArgs? error = null;
             void AssertErrorEventArgs<TException>(SettingsServiceAction expectedAction, string expectedFileName)
             {
-                Assert.IsInstanceOfType(error!.Item1, typeof(TException));
-                Assert.AreEqual(expectedAction, error.Item2);
-                Assert.AreEqual(expectedFileName, error.Item3);
+                Assert.IsInstanceOfType(error!.Error, typeof(TException));
+                Assert.AreEqual(expectedAction, error.Action);
+                Assert.AreEqual(expectedFileName, error.FileName);
             }
 
             var settingsService = new SettingsServiceCore();
@@ -122,7 +122,7 @@ namespace Test.Waf.Presentation.Services
 
             var testSettings1 = settingsService.Get<TestSettings1>();
             settingsService.Save();
-            settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+            settingsService.ErrorOccurred += (sender, e) => error = e;
             using (var stream = File.OpenRead(settingsFileName))
             {
                 settingsService.Dispose();
@@ -133,7 +133,7 @@ namespace Test.Waf.Presentation.Services
             {
                 File.WriteAllText(settingsFileName, corruptContent);
                 settingsService = new SettingsServiceCore();
-                settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+                settingsService.ErrorOccurred += (sender, e) => error = e;
                 settingsService.FileName = settingsFileName;
                 error = null;
                 settingsService.Get<TestSettings1>();
@@ -144,7 +144,7 @@ namespace Test.Waf.Presentation.Services
 
                 // Now it is repaired with default values
                 settingsService = new SettingsServiceCore();
-                settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+                settingsService.ErrorOccurred += (sender, e) => error = e;
                 settingsService.FileName = settingsFileName;
                 error = null;
                 settingsService.Get<TestSettings1>();
@@ -154,7 +154,7 @@ namespace Test.Waf.Presentation.Services
             AssertCorruptFile("WrongFormat");
 
             settingsService = new SettingsServiceCore();
-            settingsService.ErrorOccurred += (sender, e) => error = Tuple.Create(e.Error, e.Action, e.FileName);
+            settingsService.ErrorOccurred += (sender, e) => error = e;
             settingsService.FileName = settingsFileName;
             settingsService.Get<NotSerializableTest>();
             error = null;

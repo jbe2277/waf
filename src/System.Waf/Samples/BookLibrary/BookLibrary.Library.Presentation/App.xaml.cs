@@ -21,14 +21,14 @@ namespace Waf.BookLibrary.Library.Presentation
 {
     public partial class App : Application
     {
-        private static readonly Tuple<string, LogLevel>[] logSettings =
+        private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
         {
-            Tuple.Create("App", LogLevel.Info),
-            Tuple.Create("BookLib.Lib.P", LogLevel.Warn),
-            Tuple.Create("BookLib.Lib.A", LogLevel.Warn),
-            Tuple.Create("BookLib.Lib.D", LogLevel.Warn),
-            Tuple.Create("BookLib.Rep.P", LogLevel.Warn),
-            Tuple.Create("BookLib.Rep.A", LogLevel.Warn),
+            ("App", LogLevel.Info),
+            ("BookLib.Lib.P", LogLevel.Warn),
+            ("BookLib.Lib.A", LogLevel.Warn),
+            ("BookLib.Lib.D", LogLevel.Warn),
+            ("BookLib.Rep.P", LogLevel.Warn),
+            ("BookLib.Rep.A", LogLevel.Warn),
         };
 
         private AggregateCatalog? catalog;
@@ -45,17 +45,25 @@ namespace Waf.BookLibrary.Library.Presentation
             var fileTarget = new FileTarget("fileTarget")
             {
                 FileName = Path.Combine(AppDataPath, "Log", "App.log"),
-                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} ${level} ${processid} ${logger} ${message}  ${exception}",
-                ArchiveAboveSize = 1024 * 1024 * 5,  // 5 MB
+                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}",
+                ArchiveAboveSize = 5_000_000,  // 5 MB
                 MaxArchiveFiles = 2,
             };
+            var traceTarget = new TraceTarget("traceTarget")
+            {
+                Layout = fileTarget.Layout,
+                RawWrite = true
+            };
+
             var logConfig = new LoggingConfiguration();
             logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
             logConfig.AddTarget(fileTarget);
-            var maxLevel = LogLevel.AllLoggingLevels.Last();
-            foreach (var logSetting in logSettings)
+            logConfig.AddTarget(traceTarget);
+            foreach (var (loggerNamePattern, minLevel) in logSettings)
             {
-                logConfig.AddRule(logSetting.Item2, maxLevel, fileTarget, logSetting.Item1);
+                var rule = new LoggingRule(loggerNamePattern, minLevel, fileTarget);
+                rule.Targets.Add(traceTarget);
+                logConfig.LoggingRules.Add(rule);
             }
             LogManager.Configuration = logConfig;
         }

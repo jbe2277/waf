@@ -20,19 +20,19 @@ namespace Waf.InformationManager.Assembler
 {
     public partial class App : Application
     {
-        private static readonly Tuple<string, LogLevel>[] logSettings =
+        private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
         {
-            Tuple.Create("App", LogLevel.Info),
-            Tuple.Create("InfoMan.Common.P", LogLevel.Warn),
-            Tuple.Create("InfoMan.Common.A", LogLevel.Warn),
-            Tuple.Create("InfoMan.Infra.P", LogLevel.Warn),
-            Tuple.Create("InfoMan.Infra.A", LogLevel.Warn),
-            Tuple.Create("InfoMan.Address.P", LogLevel.Warn),
-            Tuple.Create("InfoMan.Address.A", LogLevel.Warn),
-            Tuple.Create("InfoMan.Address.D", LogLevel.Warn),
-            Tuple.Create("InfoMan.Email.P", LogLevel.Warn),
-            Tuple.Create("InfoMan.Email.A", LogLevel.Warn),
-            Tuple.Create("InfoMan.Email.D", LogLevel.Warn),
+            ("App", LogLevel.Info),
+            ("InfoMan.Common.P", LogLevel.Warn),
+            ("InfoMan.Common.A", LogLevel.Warn),
+            ("InfoMan.Infra.P", LogLevel.Warn),
+            ("InfoMan.Infra.A", LogLevel.Warn),
+            ("InfoMan.Address.P", LogLevel.Warn),
+            ("InfoMan.Address.A", LogLevel.Warn),
+            ("InfoMan.Address.D", LogLevel.Warn),
+            ("InfoMan.Email.P", LogLevel.Warn),
+            ("InfoMan.Email.A", LogLevel.Warn),
+            ("InfoMan.Email.D", LogLevel.Warn),
         };
 
         private AggregateCatalog? catalog;
@@ -49,17 +49,25 @@ namespace Waf.InformationManager.Assembler
             var fileTarget = new FileTarget("fileTarget")
             {
                 FileName = Path.Combine(AppDataPath, "Log", "App.log"),
-                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} ${level} ${processid} ${logger} ${message}  ${exception}",
-                ArchiveAboveSize = 1024 * 1024 * 5,  // 5 MB
+                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}",
+                ArchiveAboveSize = 5_000_000,  // 5 MB
                 MaxArchiveFiles = 2,
             };
+            var traceTarget = new TraceTarget("traceTarget")
+            {
+                Layout = fileTarget.Layout,
+                RawWrite = true
+            };
+
             var logConfig = new LoggingConfiguration();
             logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
             logConfig.AddTarget(fileTarget);
-            var maxLevel = LogLevel.AllLoggingLevels.Last();
-            foreach (var logSetting in logSettings)
+            logConfig.AddTarget(traceTarget);
+            foreach (var (loggerNamePattern, minLevel) in logSettings)
             {
-                logConfig.AddRule(logSetting.Item2, maxLevel, fileTarget, logSetting.Item1);
+                var rule = new LoggingRule(loggerNamePattern, minLevel, fileTarget);
+                rule.Targets.Add(traceTarget);
+                logConfig.LoggingRules.Add(rule);
             }
             LogManager.Configuration = logConfig;
         }

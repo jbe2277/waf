@@ -1,7 +1,4 @@
-﻿using NLog;
-using NLog.Config;
-using NLog.Targets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -20,13 +17,6 @@ namespace Waf.Writer.Presentation
 {
     public partial class App : Application
     {
-        private static readonly Tuple<string, LogLevel>[] logSettings =
-        {
-            Tuple.Create("App", LogLevel.Info),
-            Tuple.Create("Writer.P", LogLevel.Warn),
-            Tuple.Create("Writer.A", LogLevel.Warn),
-        };
-
         private AggregateCatalog? catalog;
         private CompositionContainer? container;
         private IEnumerable<IModuleController>? moduleControllers;
@@ -37,23 +27,6 @@ namespace Waf.Writer.Presentation
             Directory.CreateDirectory(profileRoot);
             ProfileOptimization.SetProfileRoot(profileRoot);
             ProfileOptimization.StartProfile("Startup.profile");
-
-            var fileTarget = new FileTarget("fileTarget")
-            {
-                FileName = Path.Combine(AppDataPath, "Log", "App.log"),
-                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} ${level} ${processid} ${logger} ${message}  ${exception}",
-                ArchiveAboveSize = 1024 * 1024 * 5,  // 5 MB
-                MaxArchiveFiles = 2,
-            };
-            var logConfig = new LoggingConfiguration();
-            logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
-            logConfig.AddTarget(fileTarget);
-            var maxLevel = LogLevel.AllLoggingLevels.Last();
-            foreach (var logSetting in logSettings)
-            {
-                logConfig.AddRule(logSetting.Item2, maxLevel, fileTarget, logSetting.Item1);
-            }
-            LogManager.Configuration = logConfig;
         }
 
         private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
