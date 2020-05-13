@@ -80,6 +80,9 @@ namespace Test.Waf.Foundation
                 proxy.Remove();
                 publisher.RaiseEvent();
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
+                proxy.Remove();
+                publisher.RaiseEvent();
+                Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
 
             return (new WeakReference<Manager>(manager), new WeakReference<Publisher>(publisher), new WeakReference<Subscriber>(subscriber));
