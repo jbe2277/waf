@@ -8,14 +8,14 @@ namespace System.Waf.Foundation
 {
     public interface IWeakEventProxy
     {
-        void Deregister();
+        void Remove();
     }
 
     public static class WeakHelper
     {
         public static class EventHandler
         {
-            public static IWeakEventProxy Register<TSource>(TSource source, S.EventHandler targetHandler, Action<TSource, S.EventHandler> subscribe, Action<TSource, S.EventHandler> unsubscribe)
+            public static IWeakEventProxy Add<TSource>(TSource source, S.EventHandler targetHandler, Action<TSource, S.EventHandler> subscribe, Action<TSource, S.EventHandler> unsubscribe)
                 where TSource : class
             {
                 return new WeakEventProxy<TSource>(source, targetHandler, subscribe, unsubscribe);
@@ -36,7 +36,7 @@ namespace System.Waf.Foundation
                     subscribe(source, ProxyHandler);
                 }
 
-                public void Deregister()
+                public void Remove()
                 {
                     Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
                 }
@@ -44,14 +44,14 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, EventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Deregister();
+                    else Remove();
                 }
             }
         }
 
         public static class EventHandler<TArgs> where TArgs : EventArgs
         {
-            public static IWeakEventProxy Register<TSource>(TSource source, S.EventHandler<TArgs> targetHandler, Action<TSource, S.EventHandler<TArgs>> subscribe, Action<TSource, S.EventHandler<TArgs>> unsubscribe)
+            public static IWeakEventProxy Add<TSource>(TSource source, S.EventHandler<TArgs> targetHandler, Action<TSource, S.EventHandler<TArgs>> subscribe, Action<TSource, S.EventHandler<TArgs>> unsubscribe)
                 where TSource : class
             {
                 return new WeakEventProxy<TSource, TArgs>(source, targetHandler, subscribe, unsubscribe);
@@ -73,7 +73,7 @@ namespace System.Waf.Foundation
                     subscribe(source, ProxyHandler);
                 }
 
-                public void Deregister()
+                public void Remove()
                 {
                     Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
                 }
@@ -81,14 +81,14 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, TArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Deregister();
+                    else Remove();
                 }
             }
         }
 
         public static class PropertyChanged
         {
-            public static IWeakEventProxy Register(INotifyPropertyChanged source, PropertyChangedEventHandler targetHandler)
+            public static IWeakEventProxy Add(INotifyPropertyChanged source, PropertyChangedEventHandler targetHandler)
             {
                 return new WeakEventProxy(source, targetHandler, (s, h) => s.PropertyChanged +=h, (s, h) => s.PropertyChanged -= h);
             }
@@ -107,7 +107,7 @@ namespace System.Waf.Foundation
                     subscribe(source, ProxyHandler);
                 }
 
-                public void Deregister()
+                public void Remove()
                 {
                     Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
                 }
@@ -115,14 +115,14 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, PropertyChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Deregister();
+                    else Remove();
                 }
             }
         }
 
         public static class CollectionChanged
         {
-            public static IWeakEventProxy Register(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler targetHandler)
+            public static IWeakEventProxy Add(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler targetHandler)
             {
                 return new WeakEventProxy(source, targetHandler, (s, h) => s.CollectionChanged += h, (s, h) => s.CollectionChanged -= h);
             }
@@ -141,7 +141,7 @@ namespace System.Waf.Foundation
                     subscribe(source, ProxyHandler);
                 }
 
-                public void Deregister()
+                public void Remove()
                 {
                     Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
                 }
@@ -149,24 +149,24 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, NotifyCollectionChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Deregister();
+                    else Remove();
                 }
             }
         }
 
         public static class CanExecuteChanged
         {
-            public static IWeakEventProxy Register(ICommand source, S.EventHandler targetHandler)
+            public static IWeakEventProxy Add(ICommand source, S.EventHandler targetHandler)
             {
-                return EventHandler.Register(source, targetHandler, (s, h) => s.CanExecuteChanged += h, (s, h) => s.CanExecuteChanged -= h);
+                return EventHandler.Add(source, targetHandler, (s, h) => s.CanExecuteChanged += h, (s, h) => s.CanExecuteChanged -= h);
             }
         }
 
         public static class ErrorsChanged
         {
-            public static IWeakEventProxy Register(INotifyDataErrorInfo source, S.EventHandler<DataErrorsChangedEventArgs> targetHandler)
+            public static IWeakEventProxy Add(INotifyDataErrorInfo source, S.EventHandler<DataErrorsChangedEventArgs> targetHandler)
             {
-                return EventHandler<DataErrorsChangedEventArgs>.Register(source, targetHandler, (s, h) => s.ErrorsChanged += h, (s, h) => s.ErrorsChanged -= h);
+                return EventHandler<DataErrorsChangedEventArgs>.Add(source, targetHandler, (s, h) => s.ErrorsChanged += h, (s, h) => s.ErrorsChanged -= h);
             }
         }
     }

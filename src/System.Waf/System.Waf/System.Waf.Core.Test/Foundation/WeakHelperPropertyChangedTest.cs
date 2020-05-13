@@ -44,10 +44,10 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
-        public void WeakEventDeregister()
+        public void WeakEventRemove()
         {
             var publisher = new Publisher();
-            var (weakManager, _, weakSubscriber) = WeakEventHandlerCore(null, publisher, null, deregister: true);
+            var (weakManager, _, weakSubscriber) = WeakEventHandlerCore(null, publisher, null, remove: true);
             GC.Collect();
             Assert.IsFalse(weakManager.TryGetTarget(out _));
             Assert.IsFalse(weakSubscriber.TryGetTarget(out _));
@@ -62,22 +62,22 @@ namespace Test.Waf.Foundation
         }
 
         private (WeakReference<Manager>, WeakReference<Publisher>, WeakReference<Subscriber>) WeakEventHandlerCore(Manager? manager, Publisher? publisher, Subscriber? subscriber,
-            int raiseCount = 1, bool deregister = false)
+            int raiseCount = 1, bool remove = false)
         {
             manager ??= new Manager();
             publisher ??= new Publisher();
             subscriber ??= new Subscriber();
             Assert.AreEqual(0, publisher.EventHandlerCount);
-            var proxy = manager.Register(publisher, subscriber);
+            var proxy = manager.Add(publisher, subscriber);
             Assert.AreEqual(1, publisher.EventHandlerCount);
 
             Assert.AreEqual(0, subscriber.HandlerCallCount);
             for (int i = 0; i < raiseCount; i++) publisher.RaiseEvent();
             Assert.AreEqual(raiseCount, subscriber.HandlerCallCount);
-            if (deregister)
+            if (remove)
             {
                 var count = subscriber.HandlerCallCount;
-                proxy.Deregister();
+                proxy.Remove();
                 publisher.RaiseEvent();
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
@@ -87,7 +87,7 @@ namespace Test.Waf.Foundation
 
         private class Manager
         {
-            public IWeakEventProxy Register(Publisher publisher, Subscriber subscriber) => WeakHelper.PropertyChanged.Register(publisher, subscriber.Handler);
+            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakHelper.PropertyChanged.Add(publisher, subscriber.Handler);
         }
 
         private class Publisher : INotifyPropertyChanged
