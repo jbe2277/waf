@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Specialized;
 using System.Waf.Foundation;
+using System.Windows.Input;
 
 namespace Test.Waf.Foundation
 {
     [TestClass]
-    public class WeakHelperCollectionChangedTest
+    public class WeakEventCanExecuteChangedTest
     {
         [TestMethod]
         public void WeakEvent1()
@@ -90,38 +90,41 @@ namespace Test.Waf.Foundation
 
         private class Manager
         {
-            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakHelper.CollectionChanged.Add(publisher, subscriber.Handler);
+            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakEvent.CanExecuteChanged.Add(publisher, subscriber.Handler);
         }
 
-        private class Publisher : INotifyCollectionChanged
+        private class Publisher : ICommand
         {
-            private static readonly NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
-            private NotifyCollectionChangedEventHandler? collectionChanged;
+            private EventHandler? canExecuteChanged;
 
             public int EventHandlerCount { get; private set; }
 
-            public event NotifyCollectionChangedEventHandler? CollectionChanged
+            public event EventHandler? CanExecuteChanged
             {
                 add
                 {
-                    collectionChanged += value;
+                    canExecuteChanged += value;
                     EventHandlerCount++;
                 }
                 remove
                 {
-                    collectionChanged -= value;
+                    canExecuteChanged -= value;
                     EventHandlerCount--;
                 }
             }
 
-            public void RaiseEvent() => collectionChanged?.Invoke(this, args);
+            public void RaiseEvent() => canExecuteChanged?.Invoke(this, EventArgs.Empty);
+
+            public bool CanExecute(object parameter) => throw new NotImplementedException();
+
+            public void Execute(object parameter) =>throw new NotImplementedException();
         }
 
         private class Subscriber
         {
             public int HandlerCallCount { get; set; }
 
-            public void Handler(object? sender, NotifyCollectionChangedEventArgs e) => HandlerCallCount++;
+            public void Handler(object? sender, EventArgs e) => HandlerCallCount++;
         }
     }
 }

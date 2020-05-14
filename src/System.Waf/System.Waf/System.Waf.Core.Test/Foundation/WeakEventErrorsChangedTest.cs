@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Waf.Foundation;
 
 namespace Test.Waf.Foundation
 {
     [TestClass]
-    public class WeakHelperEventHandlerTTest
+    public class WeakEventErrorsChangedTest
     {
         [TestMethod]
         public void WeakEvent1()
@@ -90,38 +91,42 @@ namespace Test.Waf.Foundation
 
         private class Manager
         {
-            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakHelper.EventHandler<PropertyChangedEventArgs>.Add(publisher, subscriber.Handler, (s, h) => s.Event1 += h, (s, h) => s.Event1 -= h);
+            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakEvent.ErrorsChanged.Add(publisher, subscriber.Handler);
         }
 
-        private class Publisher
+        private class Publisher : INotifyDataErrorInfo
         {
-            private static readonly PropertyChangedEventArgs args = new PropertyChangedEventArgs("Test");
-            private EventHandler<PropertyChangedEventArgs>? event1;
+            private static readonly DataErrorsChangedEventArgs args = new DataErrorsChangedEventArgs("Test");
+            private EventHandler<DataErrorsChangedEventArgs>? errorsChanged;
 
             public int EventHandlerCount { get; private set; }
 
-            public event EventHandler<PropertyChangedEventArgs>? Event1
+            public bool HasErrors => throw new NotImplementedException();
+
+            public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged
             {
                 add
                 {
-                    event1 += value;
+                    errorsChanged += value;
                     EventHandlerCount++;
                 }
                 remove
                 {
-                    event1 -= value;
+                    errorsChanged -= value;
                     EventHandlerCount--;
                 }
             }
 
-            public void RaiseEvent() => event1?.Invoke(this, args);
+            public void RaiseEvent() => errorsChanged?.Invoke(this, args);
+
+            public IEnumerable GetErrors(string propertyName) => throw new NotImplementedException();
         }
 
         private class Subscriber
         {
             public int HandlerCallCount { get; set; }
 
-            public void Handler(object? sender, PropertyChangedEventArgs e) => HandlerCallCount++;
+            public void Handler(object? sender, DataErrorsChangedEventArgs e) => HandlerCallCount++;
         }
     }
 }

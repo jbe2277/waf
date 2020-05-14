@@ -1,11 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.ComponentModel;
 using System.Waf.Foundation;
 
 namespace Test.Waf.Foundation
 {
     [TestClass]
-    public class WeakHelperEventHandlerTest
+    public class WeakEventEventHandlerTTest
     {
         [TestMethod]
         public void WeakEvent1()
@@ -60,7 +61,7 @@ namespace Test.Waf.Foundation
             WeakEventHandlerCore(null, publisher, null, raiseCount: 1_000_000);
         }
 
-        private (WeakReference<Manager>, WeakReference<Publisher>, WeakReference<Subscriber>) WeakEventHandlerCore(Manager? manager, Publisher? publisher, Subscriber? subscriber, 
+        private (WeakReference<Manager>, WeakReference<Publisher>, WeakReference<Subscriber>) WeakEventHandlerCore(Manager? manager, Publisher? publisher, Subscriber? subscriber,
             int raiseCount = 1, bool remove = false)
         {
             manager ??= new Manager();
@@ -83,43 +84,44 @@ namespace Test.Waf.Foundation
                 publisher.RaiseEvent();
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
-            
+
             return (new WeakReference<Manager>(manager), new WeakReference<Publisher>(publisher), new WeakReference<Subscriber>(subscriber));
         }
 
         private class Manager
         {
-            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakHelper.EventHandler.Add(publisher, subscriber.Handler, (s, h) => s.Event1 += h, (s, h) => s.Event1 -= h);
+            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakEvent.EventHandler<PropertyChangedEventArgs>.Add(publisher, subscriber.Handler, (s, h) => s.Event1 += h, (s, h) => s.Event1 -= h);
         }
 
         private class Publisher
         {
-            private EventHandler? event1;
+            private static readonly PropertyChangedEventArgs args = new PropertyChangedEventArgs("Test");
+            private EventHandler<PropertyChangedEventArgs>? event1;
 
             public int EventHandlerCount { get; private set; }
 
-            public event EventHandler? Event1
+            public event EventHandler<PropertyChangedEventArgs>? Event1
             {
-                add 
-                { 
+                add
+                {
                     event1 += value;
                     EventHandlerCount++;
                 }
-                remove 
-                { 
+                remove
+                {
                     event1 -= value;
                     EventHandlerCount--;
                 }
             }
 
-            public void RaiseEvent() => event1?.Invoke(this, EventArgs.Empty);
+            public void RaiseEvent() => event1?.Invoke(this, args);
         }
 
         private class Subscriber
         {
             public int HandlerCallCount { get; set; }
 
-            public void Handler(object? sender, EventArgs e) => HandlerCallCount++;
+            public void Handler(object? sender, PropertyChangedEventArgs e) => HandlerCallCount++;
         }
     }
 }
