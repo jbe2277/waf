@@ -69,7 +69,7 @@ namespace Test.Waf.Foundation
             publisher ??= new Publisher();
             subscriber ??= new Subscriber();
             Assert.AreEqual(0, publisher.EventHandlerCount);
-            var proxy = manager.Add(publisher, subscriber);
+            manager.Add(publisher, subscriber);
             Assert.AreEqual(1, publisher.EventHandlerCount);
 
             Assert.AreEqual(0, subscriber.HandlerCallCount);
@@ -78,10 +78,10 @@ namespace Test.Waf.Foundation
             if (remove)
             {
                 var count = subscriber.HandlerCallCount;
-                proxy.Remove();
+                manager.Proxy!.Remove();
                 publisher.RaiseEvent();
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
-                proxy.Remove();
+                manager.Proxy.Remove();
                 publisher.RaiseEvent();
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
@@ -91,7 +91,9 @@ namespace Test.Waf.Foundation
 
         private class Manager
         {
-            public IWeakEventProxy Add(Publisher publisher, Subscriber subscriber) => WeakEvent.ErrorsChanged.Add(publisher, subscriber.Handler);
+            public IWeakEventProxy? Proxy { get; set; }
+
+            public void Add(Publisher publisher, Subscriber subscriber) => Proxy = WeakEvent.ErrorsChanged.Add(publisher, subscriber.Handler);
         }
 
         private class Publisher : INotifyDataErrorInfo

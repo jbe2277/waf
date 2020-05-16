@@ -46,13 +46,13 @@ namespace System.Waf.Foundation
             private sealed class WeakEventProxy<TSource> : IWeakEventProxy
                 where TSource : class
             {
-                private readonly TSource source;
+                private readonly WeakReference<TSource> source;
                 private readonly WeakReference<S.EventHandler> weakTargetHandler;
                 private Action<TSource, S.EventHandler>? unsubscribe;
 
                 public WeakEventProxy(TSource source, S.EventHandler targetHandler, Action<TSource, S.EventHandler> subscribe, Action<TSource, S.EventHandler> unsubscribe)
                 {
-                    this.source = source;
+                    this.source = new WeakReference<TSource>(source);
                     weakTargetHandler = new WeakReference<S.EventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
@@ -60,7 +60,8 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
                 }
 
                 private void ProxyHandler(object sender, EventArgs e)
@@ -91,13 +92,13 @@ namespace System.Waf.Foundation
             private sealed class WeakEventProxy<TSource> : IWeakEventProxy 
                 where TSource : class 
             {
-                private readonly TSource source;
+                private readonly WeakReference<TSource> source;
                 private readonly WeakReference<S.EventHandler<TArgs>> weakTargetHandler;
                 private Action<TSource, S.EventHandler<TArgs>>? unsubscribe;
 
                 public WeakEventProxy(TSource source, S.EventHandler<TArgs> targetHandler, Action<TSource, S.EventHandler<TArgs>> subscribe, Action<TSource, S.EventHandler<TArgs>> unsubscribe)
                 {
-                    this.source = source;
+                    this.source = new WeakReference<TSource>(source);
                     weakTargetHandler = new WeakReference<S.EventHandler<TArgs>>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
@@ -105,7 +106,8 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
                 }
 
                 private void ProxyHandler(object sender, TArgs e)
@@ -130,13 +132,13 @@ namespace System.Waf.Foundation
 
             private sealed class WeakEventProxy : IWeakEventProxy
             {
-                private readonly INotifyPropertyChanged source;
+                private readonly WeakReference<INotifyPropertyChanged> source;
                 private readonly WeakReference<PropertyChangedEventHandler> weakTargetHandler;
                 private Action<INotifyPropertyChanged, PropertyChangedEventHandler>? unsubscribe;
 
                 public WeakEventProxy(INotifyPropertyChanged source, PropertyChangedEventHandler targetHandler, Action<INotifyPropertyChanged, PropertyChangedEventHandler> subscribe, Action<INotifyPropertyChanged, PropertyChangedEventHandler> unsubscribe)
                 {
-                    this.source = source;
+                    this.source = new WeakReference<INotifyPropertyChanged>(source);
                     weakTargetHandler = new WeakReference<PropertyChangedEventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
@@ -144,7 +146,8 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
                 }
 
                 private void ProxyHandler(object sender, PropertyChangedEventArgs e)
@@ -169,13 +172,13 @@ namespace System.Waf.Foundation
 
             private sealed class WeakEventProxy : IWeakEventProxy
             {
-                private readonly INotifyCollectionChanged source;
+                private readonly WeakReference<INotifyCollectionChanged> source;
                 private readonly WeakReference<NotifyCollectionChangedEventHandler> weakTargetHandler;
                 private Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler>? unsubscribe;
 
                 public WeakEventProxy(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler targetHandler, Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> subscribe, Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> unsubscribe)
                 {
-                    this.source = source;
+                    this.source = new WeakReference<INotifyCollectionChanged>(source);
                     weakTargetHandler = new WeakReference<NotifyCollectionChangedEventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
@@ -183,7 +186,8 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    Interlocked.Exchange(ref unsubscribe, null)?.Invoke(source, ProxyHandler);
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
                 }
 
                 private void ProxyHandler(object sender, NotifyCollectionChangedEventArgs e)
