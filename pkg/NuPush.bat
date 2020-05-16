@@ -2,7 +2,7 @@
 setlocal
 set PkgDir=%~dp0
 set PATH=%PATH%;%PkgDir%
-set Version=6.0.1
+set Version=6.1.0-alpha1
 
 cd %PkgDir%\System.Waf\Release\%Version%
 

@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 6.1.0.1 (Alpha 1)
+- WAF: Add WeakEvent class which provides weak event implementations for the most common events in a platform independent way.
+- Samples: Improve logging.
+
+
 Version 6.0.1.100 (Release)
 - WAF: ViewModelCore.Initialize calls first OnInitialize and then sets the DataContext.
 
