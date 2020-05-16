@@ -48,14 +48,14 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         public void Initialize()
         {
             personViewModel.CreateNewEmailCommand = createNewEmailCommand;
-            PropertyChangedEventManager.AddHandler(personViewModel, PersonViewModelPropertyChanged, "");
+            personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
 
             PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
             personListViewModel.Persons = PersonsView;
             personListViewModel.AddNewCommand = addNewCommand;
             personListViewModel.RemoveCommand = removeCommand;
             personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
-            PropertyChangedEventManager.AddHandler(personListViewModel, PersonListViewModelPropertyChanged, "");
+            personListViewModel.PropertyChanged += PersonListViewModelPropertyChanged;
 
             shellService.PersonListView = personListViewModel.View;
             shellService.PersonView = personViewModel.View;

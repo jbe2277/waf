@@ -20,6 +20,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private readonly EmailLayoutViewModel emailLayoutViewModel;
         private readonly DelegateCommand deleteEmailCommand;
         private ObservableListView<Email> emailsView = null!;
+        private IWeakEventProxy? emailListViewModelPropertyChangedProxy;
 
         [ImportingConstructor]
         public EmailFolderController(IShellService shellService, EmailLayoutViewModel emailLayoutViewModel, EmailListViewModel emailListViewModel, EmailViewModel emailViewModel)
@@ -44,7 +45,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailsView = new ObservableListView<Email>(EmailFolder.Emails, null, EmailListViewModel.Filter, x => x.OrderByDescending(y => y.Sent));
             EmailListViewModel.Emails = emailsView;
             EmailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
-            PropertyChangedEventManager.AddHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");
+            emailListViewModelPropertyChangedProxy = WeakEvent.PropertyChanged.Add(EmailListViewModel, EmailListViewModelPropertyChanged);
             emailLayoutViewModel.EmailListView = EmailListViewModel.View;
             emailLayoutViewModel.EmailView = EmailViewModel.View;
         }
@@ -56,7 +57,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            PropertyChangedEventManager.RemoveHandler(EmailListViewModel, EmailListViewModelPropertyChanged, "");
+            emailListViewModelPropertyChangedProxy?.Remove();
             // Set the views to null so that the garbage collector can collect them.
             emailLayoutViewModel.EmailListView = null;
             emailLayoutViewModel.EmailView = null;

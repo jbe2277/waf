@@ -28,7 +28,7 @@ namespace Waf.Writer.Applications.Controllers
             this.richTextViewModelFactory = richTextViewModelFactory;
             richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
             
-            PropertyChangedEventManager.AddHandler(mainViewModel, MainViewModelPropertyChanged, "");
+            mainViewModel.PropertyChanged += MainViewModelPropertyChanged;
         }
 
         protected override void OnDocumentAdded(IDocument document)

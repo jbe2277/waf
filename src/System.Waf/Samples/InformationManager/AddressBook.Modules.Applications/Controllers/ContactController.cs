@@ -48,7 +48,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             ContactListViewModel.Contacts = contactsView;
             ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
 
-            PropertyChangedEventManager.AddHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
+            WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
 
             contactLayoutViewModel.ContactListView = ContactListViewModel.View;
             contactLayoutViewModel.ContactView = ContactViewModel.View;

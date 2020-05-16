@@ -26,8 +26,8 @@ namespace Waf.Writer.Applications.ViewModels
             FileService = fileService;
             DocumentViews = new ObservableCollection<object>();
             
-            CollectionChangedEventManager.AddHandler(DocumentViews, DocumentViewsCollectionChanged);
-            PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
+            DocumentViews.CollectionChanged += DocumentViewsCollectionChanged;
+            fileService.PropertyChanged += FileServicePropertyChanged;
         }
 
         public IFileService FileService { get; }
@@ -51,9 +51,9 @@ namespace Waf.Writer.Applications.ViewModels
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
-                if (activeDocument != null) { PropertyChangedEventManager.RemoveHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
+                if (activeDocument != null) { activeDocument.PropertyChanged -= ActiveDocumentPropertyChanged; }
                 activeDocument = FileService.ActiveDocument;
-                if (activeDocument != null) { PropertyChangedEventManager.AddHandler(activeDocument, ActiveDocumentPropertyChanged, ""); }
+                if (activeDocument != null) { activeDocument.PropertyChanged += ActiveDocumentPropertyChanged; }
                 UpdateShellServiceDocumentName();
             }
         }

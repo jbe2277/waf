@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
@@ -17,6 +18,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         private string to = "";
         private string cc = "";
         private string bcc = "";
+        private IWeakEventProxy? emailPropertyChangedProxy;
 
         [ImportingConstructor]
         public NewEmailViewModel(INewEmailView view) : base(view)
@@ -45,9 +47,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             {
                 if (email != value)
                 {
-                    if (email != null) PropertyChangedEventManager.RemoveHandler(email, EmailPropertyChanged, "");
+                    emailPropertyChangedProxy?.Remove();
                     email = value;
-                    PropertyChangedEventManager.AddHandler(email, EmailPropertyChanged, "");
+                    emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(email, EmailPropertyChanged);
                     UpdateProperties();
                     RaisePropertyChanged();
                 }

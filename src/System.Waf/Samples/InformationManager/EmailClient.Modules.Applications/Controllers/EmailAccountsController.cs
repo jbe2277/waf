@@ -47,12 +47,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailAccountsViewModel.NewAccountCommand = new DelegateCommand(NewEmailAccount);
             emailAccountsViewModel.RemoveAccountCommand = removeEmailAccountCommand;
             emailAccountsViewModel.EditAccountCommand = editEmailAccountCommand;
-
-            PropertyChangedEventManager.AddHandler(emailAccountsViewModel, EmailAccountsViewModelPropertyChanged, "");
+            emailAccountsViewModel.PropertyChanged += EmailAccountsViewModelPropertyChanged;
 
             emailAccountsViewModel.ShowDialog(shellService.ShellView);
 
-            PropertyChangedEventManager.RemoveHandler(emailAccountsViewModel, EmailAccountsViewModelPropertyChanged, "");
+            emailAccountsViewModel.PropertyChanged -= EmailAccountsViewModelPropertyChanged;
             emailAccountsViewModel = null!;
             removeEmailAccountCommand = null;
         }

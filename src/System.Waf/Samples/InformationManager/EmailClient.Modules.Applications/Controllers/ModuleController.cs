@@ -162,7 +162,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             {
                 this.node = node;
                 this.folder = folder;
-                CollectionChangedEventManager.AddHandler(folder.Emails, EmailsCollectionChanged);
+                WeakEvent.CollectionChanged.Add(folder.Emails, EmailsCollectionChanged);
                 UpdateItemCount();
             }
 

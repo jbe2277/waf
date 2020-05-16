@@ -45,7 +45,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         public void Initialize()
         {
             bookViewModel.LendToCommand = lendToCommand;
-            PropertyChangedEventManager.AddHandler(bookViewModel, BookViewModelPropertyChanged, "");
+            bookViewModel.PropertyChanged += BookViewModelPropertyChanged;
 
             bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, 
                 b => new BookDataModel(b, lendToCommand));
@@ -53,7 +53,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             bookListViewModel.Books = BooksView;
             bookListViewModel.AddNewCommand = addNewCommand;
             bookListViewModel.RemoveCommand = removeCommand;
-            PropertyChangedEventManager.AddHandler(bookListViewModel, BookListViewModelPropertyChanged, "");
+            bookListViewModel.PropertyChanged += BookListViewModelPropertyChanged;
 
             shellService.BookListView = bookListViewModel.View;
             shellService.BookView = bookViewModel.View;

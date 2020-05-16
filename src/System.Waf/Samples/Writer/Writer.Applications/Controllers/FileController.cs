@@ -63,7 +63,7 @@ namespace Waf.Writer.Applications.Controllers
             recentFileList = settings.RecentFileList ?? new RecentFileList();
             this.fileService.RecentFileList = recentFileList;
 
-            PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
+            fileService.PropertyChanged += FileServicePropertyChanged;
         }
 
         private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
@@ -138,11 +138,11 @@ namespace Waf.Writer.Applications.Controllers
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
-                if (lastActiveDocument != null) { PropertyChangedEventManager.RemoveHandler(lastActiveDocument, ActiveDocumentPropertyChanged, ""); }
+                if (lastActiveDocument != null) { lastActiveDocument.PropertyChanged -= ActiveDocumentPropertyChanged; }
 
                 lastActiveDocument = fileService.ActiveDocument;
 
-                if (lastActiveDocument != null) { PropertyChangedEventManager.AddHandler(lastActiveDocument, ActiveDocumentPropertyChanged, ""); }
+                if (lastActiveDocument != null) { lastActiveDocument.PropertyChanged += ActiveDocumentPropertyChanged; }
 
                 UpdateCommands();
             }

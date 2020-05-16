@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
@@ -13,7 +14,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
         private readonly SelectContactViewModel selectContactViewModel;
         private readonly DelegateCommand selectContactCommand;
         private ObservableListView<Contact> contactsView = null!;
-        
+        private IWeakEventProxy contactListViewModelPropertyChangedProxy = null!;
+
         [ImportingConstructor]
         public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
         {
@@ -38,7 +40,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             selectContactViewModel.ContactListView = ContactListViewModel.View;
             selectContactViewModel.OkCommand = selectContactCommand;
 
-            PropertyChangedEventManager.AddHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
+            contactListViewModelPropertyChangedProxy = WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
         }
 
         public void Run()
@@ -48,7 +50,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         public void Shutdown()
         {
-            PropertyChangedEventManager.RemoveHandler(ContactListViewModel, ContactListViewModelPropertyChanged, "");
+            contactListViewModelPropertyChangedProxy.Remove();
             contactsView.Dispose();
         }
 

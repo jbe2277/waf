@@ -46,7 +46,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             bookLibraryContext = dBContextService.GetBookLibraryContext(out var dataSourcePath);
             entityService.BookLibraryContext = bookLibraryContext;
 
-            PropertyChangedEventManager.AddHandler(ShellViewModel, ShellViewModelPropertyChanged, "");
+            ShellViewModel.PropertyChanged += ShellViewModelPropertyChanged;
             ShellViewModel.SaveCommand = saveCommand;
             ShellViewModel.DatabasePath = dataSourcePath;
         }

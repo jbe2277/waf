@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
@@ -42,7 +43,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         
         public void Initialize()
         {
-            PropertyChangedEventManager.AddHandler(editEmailAccountViewModel, EditEmailAccountViewModelPropertyChanged, "");
+            WeakEvent.PropertyChanged.Add(editEmailAccountViewModel, EditEmailAccountViewModelPropertyChanged);
             editEmailAccountViewModel.BackCommand = backCommand;
             editEmailAccountViewModel.NextCommand = nextCommand;
             basicEmailAccountViewModel.EmailAccount = EmailAccount;

@@ -35,7 +35,7 @@ namespace Waf.Writer.Applications.Controllers
             printCommand = new DelegateCommand(PrintDocument, CanPrintDocument);
             closePrintPreviewCommand = new DelegateCommand(ClosePrintPreview);
 
-            PropertyChangedEventManager.AddHandler(fileService, FileServicePropertyChanged, "");
+            fileService.PropertyChanged += FileServicePropertyChanged;
         }
 
         public void Initialize()

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
@@ -24,7 +25,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             {
                 if (SetProperty(ref model, value))
                 {
-                    PropertyChangedEventManager.AddHandler(model.Pop3UserCredits, Pop3UserCreditsPropertyChanged, "");
+                    WeakEvent.PropertyChanged.Add(model.Pop3UserCredits, Pop3UserCreditsPropertyChanged);
                 }
             }
         }
