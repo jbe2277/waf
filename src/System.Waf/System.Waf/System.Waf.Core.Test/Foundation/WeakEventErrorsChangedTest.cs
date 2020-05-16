@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Foundation
 {
@@ -53,6 +54,13 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(weakManager.TryGetTarget(out _));
             Assert.IsFalse(weakSubscriber.TryGetTarget(out _));
             Assert.AreEqual(0, publisher.EventHandlerCount);
+        }
+
+        [TestMethod]
+        public void WeakEventAddArgumentException()
+        {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.ErrorsChanged.Add(null!, (s, h) => { }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.ErrorsChanged.Add(new Publisher(), null!));
         }
 
         [TestMethod]

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 using System.Windows.Input;
 
 namespace Test.Waf.Foundation
@@ -52,6 +53,13 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(weakManager.TryGetTarget(out _));
             Assert.IsFalse(weakSubscriber.TryGetTarget(out _));
             Assert.AreEqual(0, publisher.EventHandlerCount);
+        }
+
+        [TestMethod]
+        public void WeakEventAddArgumentException()
+        {
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CanExecuteChanged.Add(null!, (s, h) => { }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CanExecuteChanged.Add(new Publisher(), null!));
         }
 
         [TestMethod]

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Foundation
 {
@@ -52,6 +53,17 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(weakManager.TryGetTarget(out _));
             Assert.IsFalse(weakSubscriber.TryGetTarget(out _));
             Assert.AreEqual(0, publisher.EventHandlerCount);
+        }
+
+        [TestMethod]
+        public void WeakEventAddArgumentException()
+        {
+            var publisher = new Publisher();
+            var subscriber = new Subscriber();
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.EventHandler<PropertyChangedEventArgs>.Add((Publisher)null!, subscriber.Handler, (s, h) => s.Event1 += h, (s, h) => s.Event1 -= h));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.EventHandler<PropertyChangedEventArgs>.Add(publisher, null!, (s, h) => s.Event1 += h, (s, h) => s.Event1 -= h));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.EventHandler<PropertyChangedEventArgs>.Add(publisher, subscriber.Handler, null!, (s, h) => s.Event1 -= h));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.EventHandler<PropertyChangedEventArgs>.Add(publisher, subscriber.Handler, (s, h) => s.Event1 += h, null!));
         }
 
         [TestMethod]

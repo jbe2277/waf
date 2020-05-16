@@ -40,6 +40,10 @@ namespace System.Waf.Foundation
             public static IWeakEventProxy Add<TSource>(TSource source, S.EventHandler targetHandler, Action<TSource, S.EventHandler> subscribe, Action<TSource, S.EventHandler> unsubscribe)
                 where TSource : class
             {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
+                if (subscribe is null) throw new ArgumentNullException(nameof(subscribe));
+                if (unsubscribe is null) throw new ArgumentNullException(nameof(unsubscribe));
                 return new WeakEventProxy<TSource>(source, targetHandler, subscribe, unsubscribe);
             }
 
@@ -86,6 +90,10 @@ namespace System.Waf.Foundation
             public static IWeakEventProxy Add<TSource>(TSource source, S.EventHandler<TArgs> targetHandler, Action<TSource, S.EventHandler<TArgs>> subscribe, Action<TSource, S.EventHandler<TArgs>> unsubscribe)
                 where TSource : class
             {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
+                if (subscribe is null) throw new ArgumentNullException(nameof(subscribe));
+                if (unsubscribe is null) throw new ArgumentNullException(nameof(unsubscribe));
                 return new WeakEventProxy<TSource>(source, targetHandler, subscribe, unsubscribe);
             }
 
@@ -127,6 +135,8 @@ namespace System.Waf.Foundation
             /// <returns>The created proxy object.</returns>
             public static IWeakEventProxy Add(INotifyPropertyChanged source, PropertyChangedEventHandler targetHandler)
             {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
                 return new WeakEventProxy(source, targetHandler, (s, h) => s.PropertyChanged +=h, (s, h) => s.PropertyChanged -= h);
             }
 
@@ -167,6 +177,8 @@ namespace System.Waf.Foundation
             /// <returns>The created proxy object.</returns>
             public static IWeakEventProxy Add(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler targetHandler)
             {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
                 return new WeakEventProxy(source, targetHandler, (s, h) => s.CollectionChanged += h, (s, h) => s.CollectionChanged -= h);
             }
 
