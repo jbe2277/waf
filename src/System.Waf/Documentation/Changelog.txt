@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.1.0.2 (Alpha 2)
+- WAF: WeakEvent keep event handler alive throughout the lifetime of the target.
+
+
 Version 6.1.0.1 (Alpha 1)
 - WAF: Add WeakEvent class which provides weak event implementations for the most common events in a platform independent way.
 - Samples: Improve logging.
