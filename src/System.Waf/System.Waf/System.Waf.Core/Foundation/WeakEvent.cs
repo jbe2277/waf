@@ -27,6 +27,8 @@ namespace System.Waf.Foundation
     /// </remarks>
     public static class WeakEvent
     {
+        private static readonly WeakEventHandlerTable weakTable = new WeakEventHandlerTable();
+
         /// <summary>Supports listening to EventHandler events via a weak reference.</summary>
         public static class EventHandler
         {
@@ -60,9 +62,16 @@ namespace System.Waf.Foundation
                     weakTargetHandler = new WeakReference<S.EventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
                 }
 
                 public void Remove()
+                {
+                    RemoveCore();
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private void RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
                     if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
@@ -71,7 +80,7 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, EventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Remove();
+                    else RemoveCore();
                 }
             }
         }
@@ -110,9 +119,16 @@ namespace System.Waf.Foundation
                     weakTargetHandler = new WeakReference<S.EventHandler<TArgs>>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
                 }
 
                 public void Remove()
+                {
+                    RemoveCore();
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private void RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
                     if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
@@ -121,7 +137,7 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, TArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Remove();
+                    else RemoveCore();
                 }
             }
         }
@@ -152,9 +168,16 @@ namespace System.Waf.Foundation
                     weakTargetHandler = new WeakReference<PropertyChangedEventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
                 }
 
                 public void Remove()
+                {
+                    RemoveCore();
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private void RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
                     if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
@@ -163,7 +186,7 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, PropertyChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Remove();
+                    else RemoveCore();
                 }
             }
         }
@@ -194,9 +217,16 @@ namespace System.Waf.Foundation
                     weakTargetHandler = new WeakReference<NotifyCollectionChangedEventHandler>(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
                 }
 
                 public void Remove()
+                {
+                    RemoveCore();
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private void RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
                     if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
@@ -205,7 +235,7 @@ namespace System.Waf.Foundation
                 private void ProxyHandler(object sender, NotifyCollectionChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
-                    else Remove();
+                    else RemoveCore();
                 }
             }
         }

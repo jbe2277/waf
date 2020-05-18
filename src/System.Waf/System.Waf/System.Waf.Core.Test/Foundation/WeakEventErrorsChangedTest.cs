@@ -80,6 +80,8 @@ namespace Test.Waf.Foundation
             manager.Add(publisher, subscriber);
             Assert.AreEqual(1, publisher.EventHandlerCount);
 
+            GC.Collect();
+
             Assert.AreEqual(0, subscriber.HandlerCallCount);
             for (int i = 0; i < raiseCount; i++) publisher.RaiseEvent();
             Assert.AreEqual(raiseCount, subscriber.HandlerCallCount);
