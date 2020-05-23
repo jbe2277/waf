@@ -9,10 +9,16 @@ namespace Test.Waf.Foundation
     public class WeakEventEventHandlerTest
     {
         [TestMethod]
-        public void WeakEvent1()
+        public void WeakEvent1() => WeakEvent1Core(false);
+
+        [TestMethod]
+        public void WeakEvent1B() => WeakEvent1Core(true);
+
+        [TestMethod]
+        private void WeakEvent1Core(bool removeTwice)
         {
             var publisher = new Publisher();
-            var (weakManager, _, weakSubscriber) = WeakEventHandlerCore(null, publisher, null);
+            var (weakManager, _, weakSubscriber) = WeakEventHandlerCore(null, publisher, null, removeTwice: removeTwice);
             GC.Collect();
             Assert.IsFalse(weakManager.TryGetTarget(out _));
             Assert.IsFalse(weakSubscriber.TryGetTarget(out _));
@@ -73,14 +79,22 @@ namespace Test.Waf.Foundation
         }
 
         private (WeakReference<Manager>, WeakReference<Publisher>, WeakReference<Subscriber>) WeakEventHandlerCore(Manager? manager, Publisher? publisher, Subscriber? subscriber, 
-            int raiseCount = 1, bool remove = false)
+            int raiseCount = 1, bool remove = false, bool removeTwice = false)
         {
             manager ??= new Manager();
             publisher ??= new Publisher();
             subscriber ??= new Subscriber();
             Assert.AreEqual(0, publisher.EventHandlerCount);
             manager.Add(publisher, subscriber);
-            Assert.AreEqual(1, publisher.EventHandlerCount);
+            IWeakEventProxy? proxy1 = null;
+            if (removeTwice)
+            {
+                proxy1 = manager.Proxy;
+                manager.Add(publisher, subscriber);
+            }
+            Assert.AreEqual(removeTwice ? 2 : 1, publisher.EventHandlerCount);
+            proxy1?.Remove();
+            proxy1?.Remove();
 
             GC.Collect();
 

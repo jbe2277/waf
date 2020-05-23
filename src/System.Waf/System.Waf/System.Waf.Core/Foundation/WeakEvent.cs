@@ -67,14 +67,15 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    RemoveCore();
-                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
                 }
 
-                private void RemoveCore()
+                private bool RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
-                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;                    
                 }
 
                 private void ProxyHandler(object sender, EventArgs e)
@@ -124,14 +125,15 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    RemoveCore();
-                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
                 }
 
-                private void RemoveCore()
+                private bool RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
-                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;
                 }
 
                 private void ProxyHandler(object sender, TArgs e)
@@ -173,14 +175,15 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    RemoveCore();
-                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
                 }
 
-                private void RemoveCore()
+                private bool RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
-                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;
                 }
 
                 private void ProxyHandler(object sender, PropertyChangedEventArgs e)
@@ -222,14 +225,15 @@ namespace System.Waf.Foundation
 
                 public void Remove()
                 {
-                    RemoveCore();
-                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
                 }
 
-                private void RemoveCore()
+                private bool RemoveCore()
                 {
                     var unsub = Interlocked.Exchange(ref unsubscribe, null);
-                    if (!(unsub is null) && source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;
                 }
 
                 private void ProxyHandler(object sender, NotifyCollectionChangedEventArgs e)
