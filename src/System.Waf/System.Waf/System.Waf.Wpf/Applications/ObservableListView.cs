@@ -17,7 +17,7 @@ namespace System.Waf.Applications
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableListView<T> : ObservableListViewCore<T>
     {
-        private readonly INotifyCollectionChanged? originalObservableCollection;
+        private readonly IWeakEventProxy? originalCollectionChangedProxy;
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
@@ -43,10 +43,9 @@ namespace System.Waf.Applications
         public ObservableListView(IEnumerable<T> originalList, IEqualityComparer<T>? comparer, Predicate<T>? filter,
             Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort) : base(originalList, comparer, filter, sort, true)
         {
-            originalObservableCollection = originalList as INotifyCollectionChanged;
-            if (originalObservableCollection != null)
+            if (originalList is INotifyCollectionChanged originalObservableCollection)
             {
-                CollectionChangedEventManager.AddHandler(originalObservableCollection, OriginalCollectionChanged);
+                originalCollectionChangedProxy = WeakEvent.CollectionChanged.Add(originalObservableCollection, OriginalCollectionChanged);
             }
         }
 
@@ -56,10 +55,7 @@ namespace System.Waf.Applications
         {
             if (disposing)
             {
-                if (originalObservableCollection != null)
-                {
-                    CollectionChangedEventManager.RemoveHandler(originalObservableCollection, OriginalCollectionChanged);
-                }
+                originalCollectionChangedProxy?.Remove();
             }
             base.OnDispose(disposing);
         }

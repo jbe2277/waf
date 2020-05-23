@@ -28,7 +28,7 @@ namespace Test.Waf.Applications
         {
             public Pop3SettingsViewModel(IPop3SettingsView view, Pop3Settings pop3Settings) : base(view)
             {
-                PropertyChangedEventManager.AddHandler(pop3Settings, Pop3SettingsPropertyChanged, "");
+                WeakEvent.PropertyChanged.Add(pop3Settings, Pop3SettingsPropertyChanged);
             }
 
             public bool Pop3SettingsServerPathChanged { get; set; }

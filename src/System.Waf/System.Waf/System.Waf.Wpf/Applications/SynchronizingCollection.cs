@@ -17,7 +17,7 @@ namespace System.Waf.Applications
     /// <typeparam name="TOriginal">The type of elements in the original collection.</typeparam>
     public class SynchronizingCollection<T, TOriginal> : SynchronizingCollectionCore<T, TOriginal>
     {
-        private readonly INotifyCollectionChanged? originalObservableCollection;
+        private readonly IWeakEventProxy? originalCollectionChangedProxy;
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingCollection{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
@@ -27,10 +27,9 @@ namespace System.Waf.Applications
         public SynchronizingCollection(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory)
             : base(originalCollection, factory, true)
         {
-            originalObservableCollection = originalCollection as INotifyCollectionChanged;
-            if (originalObservableCollection != null)
+            if (originalCollection is INotifyCollectionChanged originalObservableCollection)
             {
-                CollectionChangedEventManager.AddHandler(originalObservableCollection, OriginalCollectionChanged);
+                originalCollectionChangedProxy = WeakEvent.CollectionChanged.Add(originalObservableCollection, OriginalCollectionChanged);
             }
         }
 
@@ -40,10 +39,7 @@ namespace System.Waf.Applications
         {
             if (disposing)
             {
-                if (originalObservableCollection != null)
-                {
-                    CollectionChangedEventManager.RemoveHandler(originalObservableCollection, OriginalCollectionChanged);
-                }
+                originalCollectionChangedProxy?.Remove();
             }
             base.OnDispose(disposing);
         }
