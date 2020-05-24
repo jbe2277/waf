@@ -120,7 +120,7 @@ namespace Test.Waf.Foundation
             person.Validate();
 
             Assert.AreEqual(3, person.Errors.Count);  // TODO: Does not work because of an unwanted optimization in Validator.
-            // See: Validator.GetObjectValidationErrors
+            // See: https://github.com/dotnet/runtime/issues/31882
         }
 
         [TestMethod]
