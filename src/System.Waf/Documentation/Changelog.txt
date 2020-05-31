@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 6.1.0.3 (Alpha 3)
+- WAF WeakEvent: multiple calls of Remove must remove handler just once.
+- WAF Use new WeakEvent implementation in ObservableListView and SynchronizingCollection.
+
+
 Version 6.1.0.2 (Alpha 2)
 - WAF: WeakEvent keep event handler alive throughout the lifetime of the target.
 
