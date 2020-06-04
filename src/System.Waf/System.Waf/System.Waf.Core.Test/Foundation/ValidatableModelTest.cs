@@ -28,7 +28,7 @@ namespace Test.Waf.Foundation
 
             // Validate person and see that Name is required.
 
-            AssertHelper.PropertyChangedEvent(person, x => x.HasErrors, () 
+            AssertHelper.PropertyChangedEvent(person, x => x.HasErrors, ()
                 => AssertErrorsChangedEvent(person, x => x.Name, () => person.Validate()));
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(Person.NameRequiredError, person.Errors.Single().ErrorMessage);
@@ -71,7 +71,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(2, person.GetErrors("Email").Count());
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailInvalidError));
             Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailLengthError));
-            
+
             // Set a valid name and email address
 
             AssertErrorsChangedEvent(person, x => x.Name, () => person.Name = "Bill");
@@ -105,7 +105,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(entityError, person.GetErrors(null).Single());
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void HasMultipleErrorsWithDifferentValidationTypes()
         {
             var person = new Person() { Name = "Bill", Age = 200 };
@@ -119,8 +119,23 @@ namespace Test.Waf.Foundation
             person.EntityError = entityError;
             person.Validate();
 
-            Assert.AreEqual(3, person.Errors.Count);  // TODO: Does not work because of an unwanted optimization in Validator.
-            // See: https://github.com/dotnet/runtime/issues/31882
+            Assert.AreEqual(3, person.Errors.Count);
+        }
+
+        [TestMethod]
+        public void ValidationPerformanceTest()
+        {
+            var entityError = new ValidationResult("My entity error");
+            var persons = Enumerable.Range(1, 1_000).Select(x =>
+            {
+                var person = new Person { Name = "", Age = 200 };
+                person.EntityError = entityError;
+                return person;
+            }).ToArray();
+
+            foreach (var person in persons) person.Validate();
+
+            Assert.AreEqual(3 * persons.Length, persons.Sum(x => x.Errors.Count));
         }
 
         [TestMethod]

@@ -43,7 +43,7 @@ namespace System.Waf.Foundation
         {
             return ErrorsDictionary.TryGetValue(propertyName ?? "", out var result) ? result : (IEnumerable<ValidationResult>)noErrors;
         }
-        
+
         IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
         {
             return GetErrors(propertyName);
@@ -56,12 +56,11 @@ namespace System.Waf.Foundation
         /// <returns>True if the object is valid, otherwise false.</returns>
         public bool Validate()
         {
-            var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(this, new ValidationContext(this), validationResults, true);
+            var validationResults = ValidationHelper.Validate(this);
             UpdateErrors(validationResults);
             return !HasErrors;
         }
-        
+
         /// <summary>
         /// Set the property with the specified value and validate the property. If the value is not equal with the field then the field is
         /// set, a PropertyChanged event is raised, the property is validated and it returns true.
@@ -94,7 +93,7 @@ namespace System.Waf.Foundation
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void UpdateErrors(IReadOnlyList<ValidationResult> validationResults, string? propertyName = null)
+        private void UpdateErrors(IEnumerable<ValidationResult> validationResults, string? propertyName = null)
         {
             var newErrors = new Dictionary<string, List<ValidationResult>>();
             foreach (var validationResult in validationResults)
