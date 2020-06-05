@@ -93,7 +93,7 @@ namespace System.Waf.Foundation
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void UpdateErrors(IEnumerable<ValidationResult> validationResults, string? propertyName = null)
+        private void UpdateErrors(IEnumerable<ValidationResult> validationResults)
         {
             var newErrors = new Dictionary<string, List<ValidationResult>>();
             foreach (var validationResult in validationResults)
@@ -113,14 +113,12 @@ namespace System.Waf.Foundation
             }
 
             var changedProperties = new HashSet<string>();
-            var errorKeys = propertyName == null ? ErrorsDictionary.Keys : ErrorsDictionary.Keys.Where(x => x == propertyName);
-            var newErrorKeys = propertyName == null ? newErrors.Keys : newErrors.Keys.Where(x => x == propertyName);
-            foreach (var propertyToRemove in errorKeys.Except(newErrorKeys).ToArray())
+            foreach (var propertyToRemove in ErrorsDictionary.Keys.Except(newErrors.Keys).ToArray())
             {
                 changedProperties.Add(propertyToRemove);
                 ErrorsDictionary.Remove(propertyToRemove);
             }
-            foreach (var propertyToUpdate in errorKeys.ToArray())
+            foreach (var propertyToUpdate in ErrorsDictionary.Keys.ToArray())
             {
                 if (!ErrorsDictionary[propertyToUpdate].SequenceEqual(newErrors[propertyToUpdate], ValidationResultComparer.Default))
                 {
@@ -128,7 +126,7 @@ namespace System.Waf.Foundation
                     ErrorsDictionary[propertyToUpdate] = newErrors[propertyToUpdate];
                 }
             }
-            foreach (var propertyToAdd in newErrorKeys.Except(errorKeys).ToArray())
+            foreach (var propertyToAdd in newErrors.Keys.Except(ErrorsDictionary.Keys).ToArray())
             {
                 changedProperties.Add(propertyToAdd);
                 ErrorsDictionary.Add(propertyToAdd, newErrors[propertyToAdd]);

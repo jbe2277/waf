@@ -68,9 +68,15 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(isValid);
             Assert.IsTrue(person.HasErrors);
             Assert.AreEqual(3, person.Errors.Count);
-            Assert.AreEqual(2, person.GetErrors("Email").Count());
-            Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailInvalidError));
-            Assert.IsTrue(person.GetErrors("Email").Any(x => x.ErrorMessage == Person.EmailLengthError));
+            Assert.AreEqual(2, person.GetErrors(nameof(person.Email)).Count());
+            Assert.IsTrue(person.GetErrors(nameof(person.Email)).Any(x => x.ErrorMessage == Person.EmailInvalidError));
+            Assert.IsTrue(person.GetErrors(nameof(person.Email)).Any(x => x.ErrorMessage == Person.EmailLengthError));
+
+            person.Email = "TooLongAndAnInvalidEmailAddress@outlook.com";
+            AssertErrorsChangedEvent(person, x => x.Email, () => isValid = person.Validate());
+            Assert.IsFalse(isValid);
+            Assert.AreEqual(1, person.GetErrors(nameof(person.Email)).Count());
+            Assert.IsTrue(person.GetErrors(nameof(person.Email)).Any(x => x.ErrorMessage == Person.EmailLengthError));
 
             // Set a valid name and email address
 
@@ -80,7 +86,7 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(isValid);
             Assert.IsFalse(person.HasErrors);
             Assert.IsFalse(person.Errors.Any());
-            Assert.IsFalse(person.GetErrors("Email").Any());
+            Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
         }
 
         [TestMethod]
