@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.1.0.4 (Alpha 4)
+- WAF Add ValidationHelper class and use it in ValidatableModel instead of Validator. Now, the ValidatableModel lists all found validation errors and the validation method is faster.
+
+
 Version 6.1.0.3 (Alpha 3)
 - WAF WeakEvent: multiple calls of Remove must remove handler just once.
 - WAF Use new WeakEvent implementation in ObservableListView and SynchronizingCollection.
