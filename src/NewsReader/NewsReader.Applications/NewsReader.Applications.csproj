@@ -4,7 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Waf.NewsReader.Applications</RootNamespace>
     <AssemblyName>Waf.NewsReader.Applications</AssemblyName>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="5.1.3" />
