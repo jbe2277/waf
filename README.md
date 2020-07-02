@@ -16,6 +16,15 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 -	***.Core** *(.NET Standard 2.0 and .NET Framework 4.6.1)*: Support for all .NET based applications.
 -	***.Wpf** *(.NET Core 3.1 and .NET Framework 4.6.1)*: Extended support for Windows Presentation Foundation (WPF).
 
+## NuGet Packages
+
+Package | Usage | Successor of
+--- | --- | ---
+[System.Waf.Core](https://www.nuget.org/packages/System.Waf.Core) | For all .NET based applications | 
+[System.Waf.Wpf](https://www.nuget.org/packages/System.Waf.Wpf) | For WPF applications | [waf](https://www.nuget.org/packages/waf)
+[System.Waf.UnitTesting.Core](https://www.nuget.org/packages/System.Waf.UnitTesting.Core) | For unit testing of all .NET based applications | 
+[System.Waf.UnitTesting.Wpf](https://www.nuget.org/packages/System.Waf.UnitTesting.Wpf) | For unit testing of WPF applications | [waf.testing](https://www.nuget.org/packages/waf.testing)
+
 ## Features
 
 *System.Waf.Core*
@@ -56,16 +65,6 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 *System.Waf.UnitTesting.Core*
  -	`AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
  -	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.
-
-
-## NuGet Packages
-
-Package | Usage | Successor of
---- | --- | ---
-[System.Waf.Wpf](https://www.nuget.org/packages/System.Waf.Wpf) | For WPF applications | [waf](https://www.nuget.org/packages/waf)
-[System.Waf.Core](https://www.nuget.org/packages/System.Waf.Core) | For all .NET based applications | 
-[System.Waf.UnitTesting.Wpf](https://www.nuget.org/packages/System.Waf.UnitTesting.Wpf) | For unit testing of WPF applications | [waf.testing](https://www.nuget.org/packages/waf.testing)
-[System.Waf.UnitTesting.Core](https://www.nuget.org/packages/System.Waf.UnitTesting.Core) | For unit testing of all .NET based applications | 
 
 ## Sample Applications
 Name | Type | Description | Links
