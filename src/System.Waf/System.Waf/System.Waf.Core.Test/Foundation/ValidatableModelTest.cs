@@ -244,7 +244,7 @@ namespace Test.Waf.Foundation
 
             public new bool SetPropertyAndValidate<T>(ref T field, T value, string propertyName)
             {
-                return base.SetPropertyAndValidate(ref field, value, propertyName);
+                return base.SetPropertyAndValidate(ref field!, value, propertyName);
             }
 
             public static ValidationResult ValidateAge(int value, ValidationContext context)
