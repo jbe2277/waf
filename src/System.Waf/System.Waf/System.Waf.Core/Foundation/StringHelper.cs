@@ -1,4 +1,6 @@
-﻿namespace System.Waf.Foundation
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System.Waf.Foundation
 {
     /// <summary>Provides helper methods for working with strings.</summary>
     public static class StringHelper
@@ -19,10 +21,11 @@
         /// <param name="maxLength">The maximum length.</param>
         /// <returns>The truncated string.</returns>
         /// <exception cref="ArgumentOutOfRangeException">maxLength is less than 0.</exception>
+        [return: NotNullIfNotNull(parameterName: "s")]
         public static string? Truncate(this string? s, int maxLength)
         {
             if (string.IsNullOrEmpty(s)) return s;
-            return s!.Length <= maxLength ? s : s!.Substring(0, maxLength);
+            return s!.Length <= maxLength ? s : s.Substring(0, maxLength);
         }
     }
 }
