@@ -145,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.1073" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj">
