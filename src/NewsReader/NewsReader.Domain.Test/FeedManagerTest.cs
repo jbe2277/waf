@@ -69,8 +69,8 @@ namespace Test.NewsReader.Domain
 
             feedManagerA.Merge(feedManagerB);
 
-            Assert.AreEqual(42, feedManagerA.ItemLifetime.Value.Days);
-            Assert.AreEqual(43u, feedManagerA.MaxItemsLimit.Value);
+            Assert.AreEqual(42, feedManagerA.ItemLifetime!.Value.Days);
+            Assert.AreEqual(43u, feedManagerA.MaxItemsLimit!.Value);
             Assert.IsTrue(new[] { "http://www.test.com/rss/feedB1", "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
             Assert.IsTrue(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
 
@@ -96,15 +96,15 @@ namespace Test.NewsReader.Domain
         {
             Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), new Feed(new Uri("http://microsoft.com"))));
             Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), new Feed(new Uri("http://google.com"))));
-            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), new Feed(null)));
-            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(null), new Feed(new Uri("http://microsoft.com"))));
-            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), null));
-            Assert.IsFalse(FeedEqualityComparer.Default.Equals(null, new Feed(new Uri("http://microsoft.com"))));
-            Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(null), new Feed(null)));
-            Assert.IsTrue(FeedEqualityComparer.Default.Equals(null, null));
+            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), new Feed(null!)));
+            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(null!), new Feed(new Uri("http://microsoft.com"))));
+            Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new Uri("http://microsoft.com")), null!));
+            Assert.IsFalse(FeedEqualityComparer.Default.Equals(null!, new Feed(new Uri("http://microsoft.com"))));
+            Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(null!), new Feed(null!)));
+            Assert.IsTrue(FeedEqualityComparer.Default.Equals(null!, null!));
 
-            Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(new Feed(null)));
-            Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(null));
+            Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(new Feed(null!)));
+            Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(null!));
         }
     }
 }

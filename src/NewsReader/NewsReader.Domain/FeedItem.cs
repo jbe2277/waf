@@ -9,11 +9,11 @@ namespace Waf.NewsReader.Domain
     {
         [DataMember] private readonly Uri uri;
         [DataMember] private DateTimeOffset date;
-        [DataMember] private string name;
-        [DataMember] private string description;
+        [DataMember] private string? name;
+        [DataMember] private string? description;
         [DataMember] private bool markAsRead;
 
-        public FeedItem(Uri uri, DateTimeOffset date, string name, string description)
+        public FeedItem(Uri uri, DateTimeOffset date, string? name, string? description)
         {
             // Note: Serializer does not call the constructor.
             this.uri = uri ?? throw new ArgumentNullException(nameof(uri));
@@ -30,13 +30,13 @@ namespace Waf.NewsReader.Domain
             set => SetProperty(ref date, value);
         }
 
-        public string Name
+        public string? Name
         {
             get => name;
             set => SetProperty(ref name, value?.Truncate(200).Trim());
         }
 
-        public string Description
+        public string? Description
         {
             get => description;
             set => SetProperty(ref description, value?.Truncate(500).Trim());

@@ -15,14 +15,14 @@ namespace Waf.NewsReader.Domain
     {
         [DataMember] private readonly Uri uri;
         [DataMember] private readonly ObservableCollection<FeedItem> items;
-        [DataMember] private string name;
-        private string title;
-        private ReadOnlyObservableList<FeedItem> readOnlyItems;
+        [DataMember] private string? name;
+        private string? title;
+        private ReadOnlyObservableList<FeedItem>? readOnlyItems;
         private int unreadItemsCount;
         private bool isLoading;
-        private Exception loadError;
-        private string loadErrorMessage;
-        private IDataManager dataManager;
+        private Exception? loadError;
+        private string? loadErrorMessage;
+        private IDataManager? dataManager;
 
         public Feed(Uri uri)
         {
@@ -35,13 +35,13 @@ namespace Waf.NewsReader.Domain
         public Uri Uri => uri;
 
         [Required]
-        public string Name
+        public string? Name
         {
             get => name;
             set => SetPropertyAndValidate(ref name, value);
         }
 
-        public string Title
+        public string? Title
         {
             get => title;
             set
@@ -53,7 +53,7 @@ namespace Waf.NewsReader.Domain
             }
         }
 
-        public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ?? (readOnlyItems = new ReadOnlyObservableList<FeedItem>(items));
+        public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ??= new ReadOnlyObservableList<FeedItem>(items);
         
         public int UnreadItemsCount
         {
@@ -67,19 +67,19 @@ namespace Waf.NewsReader.Domain
             private set => SetProperty(ref isLoading, value);
         }
 
-        public Exception LoadError
+        public Exception? LoadError
         {
             get => loadError;
             private set => SetProperty(ref loadError, value);
         }
         
-        public string LoadErrorMessage
+        public string? LoadErrorMessage
         {
             get => loadErrorMessage;
             private set => SetProperty(ref loadErrorMessage, value);
         }
 
-        internal IDataManager DataManager
+        internal IDataManager? DataManager
         {
             get => dataManager;
             set
@@ -183,7 +183,7 @@ namespace Waf.NewsReader.Domain
         private void TrimItemsList()
         {
             uint i = 0;
-            var minDate = DateTimeOffset.Now - DataManager.ItemLifetime;
+            var minDate = DateTimeOffset.Now - DataManager!.ItemLifetime;
             foreach (var item in items.ToArray())
             {
                 if (i >= DataManager.MaxItemsLimit

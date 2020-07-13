@@ -6,7 +6,7 @@ namespace Test.NewsReader.Domain.UnitTesting
     [TestClass]
     public abstract class DomainTest
     {
-        public TestContext TestContext { get; set; }
+        public TestContext TestContext { get; set; } = null!;
 
 
         [TestInitialize]

@@ -12,7 +12,7 @@ namespace Test.NewsReader.Domain
         [TestMethod]
         public void ApplyValuesFromTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new FeedItem(null, DateTimeOffset.Now, "test", "test"));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new FeedItem(null!, DateTimeOffset.Now, "test", "test"));
 
             var itemA1 = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
             Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), itemA1.Date);
