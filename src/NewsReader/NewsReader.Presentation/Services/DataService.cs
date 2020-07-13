@@ -26,14 +26,12 @@ namespace Waf.NewsReader.Presentation.Services
             }
         }
 
-        public T Load<T>(Stream dataStream = null) where T : class
+        public T? Load<T>(Stream? dataStream = null) where T : class
         {
             try
             {
-                using (var archiveStream = dataStream ?? GetReadStream())
-                {
-                    return LoadItem<T>(archiveStream, itemFileName);
-                }
+                using var archiveStream = dataStream ?? GetReadStream();
+                return LoadItem<T>(archiveStream, itemFileName);
             }
             catch (FileNotFoundException)
             {

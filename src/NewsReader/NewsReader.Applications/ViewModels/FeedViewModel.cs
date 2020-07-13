@@ -13,7 +13,7 @@ namespace Waf.NewsReader.Applications.ViewModels
     public class FeedViewModel : ViewModelCore<IFeedView>
     {
         private readonly ThrottledAction updateSearchAction;
-        private Feed feed;
+        private Feed? feed;
         private string searchText = "";
 
         public FeedViewModel(IFeedView view) : base(view, false)
@@ -22,15 +22,15 @@ namespace Waf.NewsReader.Applications.ViewModels
             UpdateItemsListView();
         }
 
-        public ICommand RefreshCommand { get; set; }
+        public ICommand RefreshCommand { get; set; } = null!;
 
-        public ICommand ReadUnreadCommand { get; set; }
+        public ICommand ReadUnreadCommand { get; set; } = null!;
 
-        public ICommand ShowFeedItemViewCommand { get; set; }
+        public ICommand ShowFeedItemViewCommand { get; set; } = null!;
 
-        public ObservableGroupedListView<DateTime, FeedItem> ItemsListView { get; private set; }
+        public ObservableGroupedListView<DateTime, FeedItem> ItemsListView { get; private set; } = null!;
 
-        public Feed Feed
+        public Feed? Feed
         {
             get => feed;
             set

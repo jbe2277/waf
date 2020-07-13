@@ -28,7 +28,7 @@ namespace Waf.NewsReader.Applications.Controllers
             });
         }
 
-        public FeedManager FeedManager { get; set; }
+        public FeedManager FeedManager { get; set; } = null!;
 
         public IViewModelCore SettingsViewModel => settingsViewModel.Value;
 

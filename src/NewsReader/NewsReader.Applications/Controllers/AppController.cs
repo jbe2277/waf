@@ -17,7 +17,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private readonly SettingsController settingsController;
         private readonly FeedsController feedsController;
         private readonly ShellViewModel shellViewModel;
-        private FeedManager feedManager;
+        private FeedManager feedManager = null!;
         private DateTime lastUpdate;
 
         public AppController(INetworkInfoService networkInfoService, DataController dataController, FeedsController feedsController, 

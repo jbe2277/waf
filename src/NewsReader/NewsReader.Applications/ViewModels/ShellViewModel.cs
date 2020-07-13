@@ -11,9 +11,9 @@ namespace Waf.NewsReader.Applications.ViewModels
 {
     public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
     {
-        private NavigationItem selectedFooterMenu;
-        private IReadOnlyList<Feed> feeds;
-        private Feed selectedFeed;
+        private NavigationItem? selectedFooterMenu;
+        private IReadOnlyList<Feed> feeds = null!;
+        private Feed? selectedFeed;
 
         public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
         {
@@ -22,19 +22,19 @@ namespace Waf.NewsReader.Applications.ViewModels
 
         public string AppName { get; }
 
-        public ICommand EditFeedCommand { get; set; }
+        public ICommand EditFeedCommand { get; internal set; } = null!;
 
-        public ICommand MoveFeedUpCommand { get; set; }
+        public ICommand MoveFeedUpCommand { get; internal set; } = null!;
 
-        public ICommand MoveFeedDownCommand { get; set; }
+        public ICommand MoveFeedDownCommand { get; internal set; } = null!;
 
-        public ICommand RemoveFeedCommand { get; set; }
+        public ICommand RemoveFeedCommand { get; internal set; } = null!;
 
-        public ICommand ShowFeedViewCommand { get; set; }
+        public ICommand ShowFeedViewCommand { get; internal set; } = null!;
 
-        public IReadOnlyList<NavigationItem> FooterMenu { get; set; }
+        public IReadOnlyList<NavigationItem> FooterMenu { get; internal set; } = null!;
 
-        public NavigationItem SelectedFooterMenu
+        public NavigationItem? SelectedFooterMenu
         {
             get => selectedFooterMenu;
             set
@@ -52,7 +52,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetProperty(ref feeds, value);
         }
 
-        public Feed SelectedFeed
+        public Feed? SelectedFeed
         {
             get => selectedFeed;
             set

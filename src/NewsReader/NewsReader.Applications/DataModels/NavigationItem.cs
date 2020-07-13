@@ -7,8 +7,8 @@ namespace Waf.NewsReader.Applications.DataModels
     public class NavigationItem : Model
     {
         private string title;
-        private string details;
-        private ICommand command;
+        private string? details;
+        private ICommand? command;
         private bool isCommandEnabled;
         private string iconGlyph;
 
@@ -24,7 +24,7 @@ namespace Waf.NewsReader.Applications.DataModels
             set => SetProperty(ref title, value);
         }
 
-        public string Details
+        public string? Details
         {
             get => details;
             set => SetProperty(ref details, value);
@@ -36,7 +36,7 @@ namespace Waf.NewsReader.Applications.DataModels
             set => SetProperty(ref iconGlyph, value);
         }
 
-        public ICommand Command
+        public ICommand? Command
         {
             get => command;
             set

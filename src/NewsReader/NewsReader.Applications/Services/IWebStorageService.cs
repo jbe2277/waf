@@ -6,7 +6,7 @@ namespace Waf.NewsReader.Applications.Services
 {
     public interface IWebStorageService : INotifyPropertyChanged
     {
-        UserAccount CurrentAccount { get; }
+        UserAccount? CurrentAccount { get; }
 
         Task<bool> TrySilentSignIn();
 
@@ -14,9 +14,9 @@ namespace Waf.NewsReader.Applications.Services
 
         Task SignOut();
 
-        Task<(Stream stream, string cTag)> DownloadFile(string cTag);
+        Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag);
 
-        Task<string> UploadFile(Stream source);
+        Task<string?> UploadFile(Stream source);
     }
 
     public class UserAccount

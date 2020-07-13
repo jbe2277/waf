@@ -65,7 +65,7 @@ namespace Waf.NewsReader.Applications.Controllers
             launchBrowserCommand = new AsyncDelegateCommand(LaunchBrowser, CanLaunchBrowser);
         }
 
-        public FeedManager FeedManager { get; set; }
+        public FeedManager FeedManager { get; set; } = null!;
 
         public ICommand AddFeedCommand => addFeedCommand;
 
@@ -185,33 +185,33 @@ namespace Waf.NewsReader.Applications.Controllers
             {
                 if (AddEditFeedViewModel.OldFeed != AddEditFeedViewModel.Feed)
                 {
-                    var index = FeedManager.Feeds.IndexOf(AddEditFeedViewModel.OldFeed);
-                    FeedManager.Feeds[index] = AddEditFeedViewModel.Feed;
+                    var index = FeedManager.Feeds.IndexOf(AddEditFeedViewModel.OldFeed!);
+                    FeedManager.Feeds[index] = AddEditFeedViewModel.Feed!;
                 }
             }
             else
             {
-                FeedManager.Feeds.Add(AddEditFeedViewModel.Feed);
+                FeedManager.Feeds.Add(AddEditFeedViewModel.Feed!);
             }
             shellViewModel.SelectedFeed = feedViewModel.Value.Feed = AddEditFeedViewModel.Feed;
             await navigationService.NavigateBack();
         }
 
-        private Task ShowFeedView(object parameter)
+        private Task ShowFeedView(object? parameter)
         {
-            shellViewModel.SelectedFeed = feedViewModel.Value.Feed = (Feed)parameter;
+            shellViewModel.SelectedFeed = feedViewModel.Value.Feed = (Feed?)parameter;
             return navigationService.Navigate(feedViewModel.Value);
         }
 
-        private Task ShowFeedItemView(object parameter)
+        private Task ShowFeedItemView(object? parameter)
         {
-            feedItemViewModel.Value.FeedItem = (FeedItem)parameter;
+            feedItemViewModel.Value.FeedItem = (FeedItem?)parameter;
             return navigationService.Navigate(feedItemViewModel.Value);
         }
 
-        private Task EditFeed(object parameter)
+        private Task EditFeed(object? parameter)
         {
-            var feed = (Feed)parameter;
+            var feed = (Feed)parameter!;
             shellViewModel.SelectedFeed = feedViewModel.Value.Feed = feed;
             AddEditFeedViewModel.IsEditMode = true;
             AddEditFeedViewModel.FeedUrl = feed.Uri.ToString();
@@ -220,25 +220,25 @@ namespace Waf.NewsReader.Applications.Controllers
             return navigationService.Navigate(AddEditFeedViewModel);
         }
 
-        private bool CanMoveFeedUp(object parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) > 0;
+        private bool CanMoveFeedUp(object? parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) > 0;
         
-        private void MoveFeedUp(object parameter)
+        private void MoveFeedUp(object? parameter)
         {
-            var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter);
+            var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter!);
             FeedManager.Feeds.Move(oldIndex, oldIndex - 1);
         }
 
-        private bool CanMoveFeedDown(object parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) < FeedManager.Feeds.Count - 1;
+        private bool CanMoveFeedDown(object? parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) < FeedManager.Feeds.Count - 1;
 
-        private void MoveFeedDown(object parameter)
+        private void MoveFeedDown(object? parameter)
         {
-            var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter);
+            var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter!);
             FeedManager.Feeds.Move(oldIndex, oldIndex + 1);
         }
 
-        private async Task RemoveFeed(object parameter)
+        private async Task RemoveFeed(object? parameter)
         {
-            var feed = (Feed)parameter;
+            var feed = (Feed)parameter!;
             if (await messageService.ShowYesNoQuestion(Resources.RemoveFeedQuestion, feed.Name))
             {
                 FeedManager.Feeds.Remove(feed);
@@ -250,9 +250,9 @@ namespace Waf.NewsReader.Applications.Controllers
             await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
         }
 
-        private void MarkAsReadUnread(object parameter)
+        private void MarkAsReadUnread(object? parameter)
         {
-            var feedItem = (FeedItem)parameter;
+            var feedItem = (FeedItem)parameter!;
             feedItem.MarkAsRead = !feedItem.MarkAsRead;
         }
 
@@ -263,7 +263,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         private async Task LaunchBrowser()
         {
-            await launcherService.LaunchBrowser(feedItemViewModel.Value.FeedItem.Uri);
+            await launcherService.LaunchBrowser(feedItemViewModel.Value.FeedItem!.Uri);
         }
 
         private AddEditFeedViewModel InitializeViewModel(AddEditFeedViewModel viewModel)

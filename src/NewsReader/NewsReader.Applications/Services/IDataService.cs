@@ -8,7 +8,7 @@ namespace Waf.NewsReader.Applications.Services
 
         string GetHash();
 
-        T Load<T>(Stream dataStream = null) where T : class;
+        T? Load<T>(Stream? dataStream = null) where T : class;
 
         void Save(object data);
     }

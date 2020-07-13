@@ -11,23 +11,23 @@ namespace Waf.NewsReader.Applications.ViewModels
     {
         private readonly DelegateCommand useTitleAsNameCommand;
         private bool isEditMode;
-        private string feedUrl;
-        private Feed oldFeed;
-        private Feed feed;
-        private string loadErrorMessage;
+        private string? feedUrl;
+        private Feed? oldFeed;
+        private Feed? feed;
+        private string? loadErrorMessage;
 
         public AddEditFeedViewModel(IAddEditFeedView view) : base(view, false)
         {
-            useTitleAsNameCommand = new DelegateCommand(() => Feed.Name = Feed.Title, () => !string.IsNullOrEmpty(Feed?.Title) && Feed.Name != Feed.Title);
+            useTitleAsNameCommand = new DelegateCommand(() => Feed!.Name = Feed.Title, () => !string.IsNullOrEmpty(Feed?.Title) && Feed!.Name != Feed.Title);
         }
 
-        public ICommand LoadFeedCommand { get; set; }
+        public ICommand LoadFeedCommand { get; internal set; } = null!;
 
-        public ICommand AddUpdateCommand { get; set; }
+        public ICommand AddUpdateCommand { get; internal set; } = null!;
 
         public ICommand UseTitleAsNameCommand => useTitleAsNameCommand;
 
-        public event PropertyChangedEventHandler FeedChanged;
+        public event PropertyChangedEventHandler? FeedChanged;
 
         public bool IsEditMode
         {
@@ -35,7 +35,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetProperty(ref isEditMode, value);
         }
 
-        public string FeedUrl
+        public string? FeedUrl
         {
             get => feedUrl;
             set
@@ -48,13 +48,13 @@ namespace Waf.NewsReader.Applications.ViewModels
             }
         }
 
-        public Feed OldFeed
+        public Feed? OldFeed
         {
             get => oldFeed;
             set => SetProperty(ref oldFeed, value);
         }
 
-        public Feed Feed
+        public Feed? Feed
         {
             get => feed;
             set
@@ -70,7 +70,7 @@ namespace Waf.NewsReader.Applications.ViewModels
 
         public bool IsSameFeed => OldFeed == Feed;
 
-        public string LoadErrorMessage
+        public string? LoadErrorMessage
         {
             get => loadErrorMessage;
             set => SetProperty(ref loadErrorMessage, value);
@@ -85,7 +85,7 @@ namespace Waf.NewsReader.Applications.ViewModels
 
         private void FeedPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            FeedChanged(sender, e);
+            FeedChanged?.Invoke(sender, e);
             if (new[] { nameof(Feed.Title), nameof(Feed.Name) }.Contains(e.PropertyName)) useTitleAsNameCommand.RaiseCanExecuteChanged();
         }
     }

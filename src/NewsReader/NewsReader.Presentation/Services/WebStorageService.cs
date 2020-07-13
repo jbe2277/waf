@@ -27,15 +27,15 @@ namespace Waf.NewsReader.Presentation.Services
         private const string dataFileName = "data.zip";
         private static readonly string[] scopes = { "User.Read", "Files.ReadWrite.AppFolder" };
 
-        private readonly IIdentityService identityService;
-        private readonly IPublicClientApplication publicClient;
-        private GraphServiceClient graphClient;
-        private UserAccount currentAccount;
+        private readonly IIdentityService? identityService;
+        private readonly IPublicClientApplication? publicClient;
+        private GraphServiceClient? graphClient;
+        private UserAccount? currentAccount;
 
-        public WebStorageService(IIdentityService identityService = null)
+        public WebStorageService(IIdentityService? identityService = null)
         {
             this.identityService = identityService;
-            string appId = null;
+            string? appId = null;
             GetApplicationId(ref appId);
             if (appId != null)
             {
@@ -46,7 +46,7 @@ namespace Waf.NewsReader.Presentation.Services
             }
         }
 
-        public UserAccount CurrentAccount
+        public UserAccount? CurrentAccount
         {
             get => currentAccount;
             private set => SetProperty(ref currentAccount, value);
@@ -75,7 +75,7 @@ namespace Waf.NewsReader.Presentation.Services
         public async Task SignIn()
         {
             var accessToken = await TrySilentSignInCore();
-            if (string.IsNullOrEmpty(accessToken))
+            if (publicClient != null && string.IsNullOrEmpty(accessToken))
             {
                 try
                 {
@@ -95,12 +95,16 @@ namespace Waf.NewsReader.Presentation.Services
         {
             CurrentAccount = null;
             graphClient = null;
-            var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
-            await Task.WhenAll(accounts.Select(x => publicClient.RemoveAsync(x))).ConfigureAwait(false);
+            if (publicClient != null)
+            {
+                var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
+                await Task.WhenAll(accounts.Select(x => publicClient.RemoveAsync(x))).ConfigureAwait(false);
+            }
         }
 
-        private async Task<string> TrySilentSignInCore()
+        private async Task<string?> TrySilentSignInCore()
         {
+            if (publicClient == null) return null;
             try
             {
                 var accounts = await publicClient.GetAccountsAsync();
@@ -122,6 +126,7 @@ namespace Waf.NewsReader.Presentation.Services
             graphClient = new GraphServiceClient(new DelegateAuthenticationProvider(
                 async requestMessage =>
                 {
+                    if (publicClient == null) return;
                     var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
                     if (!accounts.Any()) return;
                     var result = await publicClient.AcquireTokenSilent(scopes, accounts.First()).ExecuteAsync().ConfigureAwait(false);
@@ -131,8 +136,9 @@ namespace Waf.NewsReader.Presentation.Services
             CurrentAccount = new UserAccount(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName, user.Mail);
         }
 
-        public async Task<(Stream stream, string cTag)> DownloadFile(string cTag)
+        public async Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag)
         {
+            if (graphClient == null) return default;
             var item = graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName);
             try
             {
@@ -143,16 +149,17 @@ namespace Waf.NewsReader.Presentation.Services
                 }
             }
             catch (ServiceException ex) when (ex.StatusCode == HttpStatusCode.NotFound) { }
-            return (null, null);
+            return default;
         }
 
-        public async Task<string> UploadFile(Stream source)
+        public async Task<string?> UploadFile(Stream source)
         {
+            if (graphClient == null) return null;
             var driveItem = await graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName)
                 .Content.Request().PutAsync<DriveItem>(source).ConfigureAwait(false);
             return driveItem.CTag;
         }
 
-        static partial void GetApplicationId(ref string applicationId);
+        static partial void GetApplicationId(ref string? applicationId);
     }
 }

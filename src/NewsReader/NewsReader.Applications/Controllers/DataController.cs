@@ -52,7 +52,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         public async Task<FeedManager> Load()
         {
-            FeedManager feedManager = null;
+            FeedManager? feedManager = null;
             try
             {
                 await Task.Run(() =>
@@ -67,8 +67,8 @@ namespace Waf.NewsReader.Applications.Controllers
                 Crashes.TrackError(ex);
                 feedManager = new FeedManager();
             }
-            loadCompletion.SetResult(feedManager);
-            return feedManager;
+            loadCompletion.SetResult(feedManager!);
+            return feedManager!;
         }
 
         public Task Update()
@@ -107,7 +107,7 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             if (webStorageService.CurrentAccount == null || !networkInfoService.InternetAccess) return;
 
-            FeedManager feedManagerFromWeb = null;
+            FeedManager? feedManagerFromWeb = null;
             try
             {
                 var (stream, cTag) = await webStorageService.DownloadFile(appSettings.WebStorageCTag);

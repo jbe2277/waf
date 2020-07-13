@@ -17,11 +17,11 @@ namespace Waf.NewsReader.Applications.ViewModels
         private readonly IMessageService messageService;
         private DisplayItemLifetime selectedItemLifetime;
         private DisplayMaxItemsLimit selectedMaxItemsLimit;
-        private FeedManager feedManager;
+        private FeedManager feedManager = null!;
         private bool setSelectedItemLifetimeRunning;
         private bool setSelectedMaxItemsLimitRunning;
         private bool developerSettingsEnabled;
-        private string selectedLanguage;
+        private string selectedLanguage = null!;
 
         public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, 
             IAppInfoService appInfoService) : base(view, false)
@@ -53,11 +53,11 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetSelectedMaxItemsLimit(value);
         }
 
-        public ICommand SignInCommand { get; set; }
+        public ICommand SignInCommand { get; set; } = null!;
 
-        public ICommand SignOutCommand { get; set; }
+        public ICommand SignOutCommand { get; set; } = null!;
 
-        public ICommand EnableDeveloperSettingsCommand { get; set; }
+        public ICommand EnableDeveloperSettingsCommand { get; set; } = null!;
 
         public bool DeveloperSettingsEnabled
         {
@@ -65,7 +65,7 @@ namespace Waf.NewsReader.Applications.ViewModels
             set => SetProperty(ref developerSettingsEnabled, value);
         }
 
-        public IReadOnlyList<string> Languages { get; set; }
+        public IReadOnlyList<string> Languages { get; set; } = null!;
 
         public string SelectedLanguage
         {
