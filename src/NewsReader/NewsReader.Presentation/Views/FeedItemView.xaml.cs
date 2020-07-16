@@ -11,16 +11,17 @@ namespace Waf.NewsReader.Presentation.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FeedItemView : IFeedItemView
     {
-        private FeedItemViewModel viewModel;
-        private TaskCompletionSource<object> webViewNavigated;
+        private FeedItemViewModel viewModel = null!;
+        private TaskCompletionSource<object?>? webViewNavigated;
         private CancellationTokenSource cancellationTokenSource;
 
         public FeedItemView()
         {
             InitializeComponent();
+            cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get => BindingContext;
             set => BindingContext = value;
@@ -36,7 +37,7 @@ namespace Waf.NewsReader.Presentation.Views
         {
             base.OnAppearing();
             cancellationTokenSource = new CancellationTokenSource();
-            webView.Source = viewModel.FeedItem.Uri;
+            webView.Source = viewModel.FeedItem?.Uri;
         }
 
         protected override void OnDisappearing()
@@ -58,7 +59,7 @@ namespace Waf.NewsReader.Presentation.Views
 
         private async void WebViewNavigating(object sender, WebNavigatingEventArgs e)
         {
-            webViewNavigated = new TaskCompletionSource<object>();
+            webViewNavigated = new TaskCompletionSource<object?>();
             activityIndicator.IsVisible = true;
             activityIndicator.IsRunning = true;
             var delayTask = Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token);
@@ -86,7 +87,7 @@ namespace Waf.NewsReader.Presentation.Views
 
         private void WebViewNavigated(object sender, WebNavigatedEventArgs e)
         {
-            webViewNavigated.TrySetResult(null);
+            webViewNavigated?.TrySetResult(null);
         }
     }
 }

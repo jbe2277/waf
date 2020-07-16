@@ -12,7 +12,7 @@ namespace Waf.NewsReader.Presentation.Views
             InitializeComponent();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get => BindingContext;
             set => BindingContext = value;

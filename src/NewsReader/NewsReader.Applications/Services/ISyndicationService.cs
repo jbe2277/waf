@@ -27,7 +27,7 @@ namespace Waf.NewsReader.Applications.Services
 
     public sealed class FeedItemDto
     {
-        public FeedItemDto(Uri uri, DateTimeOffset date, string name, string description)
+        public FeedItemDto(Uri? uri, DateTimeOffset date, string name, string description)
         {
             Uri = uri;
             Date = date;
@@ -35,7 +35,7 @@ namespace Waf.NewsReader.Applications.Services
             Description = description;
         }
 
-        public Uri Uri { get; }
+        public Uri? Uri { get; }
 
         public DateTimeOffset Date { get; }
 

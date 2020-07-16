@@ -30,7 +30,7 @@ namespace Waf.NewsReader.Presentation
         private readonly IAppInfoService appInfoService;
         private readonly IAppController appController;
 
-        public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService localizationService = null)
+        public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null)
         {
             this.settingsService = settingsService;
             this.appInfoService = appInfoService;
@@ -62,7 +62,7 @@ namespace Waf.NewsReader.Presentation
         protected override void OnStart()
         {
             Log.Default.Info("App started ({0}, {1}) on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-            string appSecret = null;
+            string? appSecret = null;
             GetAppCenterSecret(ref appSecret);
             if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
 
@@ -92,6 +92,6 @@ namespace Waf.NewsReader.Presentation
             }
         }
 
-        static partial void GetAppCenterSecret(ref string appSecret);
+        static partial void GetAppCenterSecret(ref string? appSecret);
     }
 }

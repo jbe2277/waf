@@ -11,7 +11,7 @@ namespace Waf.NewsReader.Presentation.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShellView : IShellView
     {
-        private ShellViewModel viewModel;
+        private ShellViewModel viewModel = null!;
         private bool isFirstPage = true;
 
         public ShellView()
@@ -19,7 +19,7 @@ namespace Waf.NewsReader.Presentation.Views
             InitializeComponent();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get => BindingContext;
             set => BindingContext = value;

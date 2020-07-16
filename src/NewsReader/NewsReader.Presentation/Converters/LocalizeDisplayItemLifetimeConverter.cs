@@ -7,9 +7,9 @@ namespace Waf.NewsReader.Presentation.Converters
 {
     public class LocalizeDisplayItemLifetimeConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            var lifetime = (DisplayItemLifetime)value;
+            var lifetime = (DisplayItemLifetime)value!;
             switch (lifetime)
             {
                 case DisplayItemLifetime._1Month: return "1 Month";
@@ -21,7 +21,7 @@ namespace Waf.NewsReader.Presentation.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

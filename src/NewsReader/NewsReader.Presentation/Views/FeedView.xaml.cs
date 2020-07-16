@@ -9,14 +9,14 @@ namespace Waf.NewsReader.Presentation.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FeedView : IFeedView
     {
-        private FeedViewModel viewModel;
+        private FeedViewModel viewModel = null!;
 
         public FeedView()
         {
             InitializeComponent();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get => BindingContext;
             set => BindingContext = value;

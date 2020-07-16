@@ -8,14 +8,14 @@ namespace Waf.NewsReader.Presentation.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddEditFeedView : IAddEditFeedView
     {
-        private AddEditFeedViewModel viewModel;
+        private AddEditFeedViewModel viewModel = null!;
 
         public AddEditFeedView()
         {
             InitializeComponent();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get => BindingContext;
             set => BindingContext = value;

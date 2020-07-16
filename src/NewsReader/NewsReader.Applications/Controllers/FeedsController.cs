@@ -116,7 +116,7 @@ namespace Waf.NewsReader.Applications.Controllers
                 if (feed.Uri.IsAbsoluteUri && (feed.Uri.Scheme == "http" || feed.Uri.Scheme == "https"))
                 {
                     var syndicationFeed = await syndicationService.RetrieveFeed(feed.Uri);
-                    var items = syndicationFeed.Items.Select(x => new FeedItem(x.Uri, x.Date, x.Name, x.Description)).ToArray();
+                    var items = syndicationFeed.Items.Where(x => x.Uri != null).Select(x => new FeedItem(x.Uri!, x.Date, x.Name, x.Description)).ToArray();
                     feed.Title = syndicationFeed.Title;
                     feed.UpdateItems(items, excludeMarkAsRead: true);
                     foreach (var error in syndicationFeed.Errors)
