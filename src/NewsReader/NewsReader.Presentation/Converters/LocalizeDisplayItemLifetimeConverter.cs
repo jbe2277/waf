@@ -10,15 +10,15 @@ namespace Waf.NewsReader.Presentation.Converters
         public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var lifetime = (DisplayItemLifetime)value!;
-            switch (lifetime)
+            return lifetime switch
             {
-                case DisplayItemLifetime._1Month: return "1 Month";
-                case DisplayItemLifetime._3Month: return "3 Month";
-                case DisplayItemLifetime._6Month: return "6 Month";
-                case DisplayItemLifetime._1Year: return "1 Year";
-                case DisplayItemLifetime.Forever: return "Forever";
-                default: throw new InvalidOperationException($"{nameof(DisplayItemLifetime)} is not supported: {lifetime}");
-            }
+                DisplayItemLifetime._1Month => "1 Month",
+                DisplayItemLifetime._3Month => "3 Month",
+                DisplayItemLifetime._6Month => "6 Month",
+                DisplayItemLifetime._1Year => "1 Year",
+                DisplayItemLifetime.Forever => "Forever",
+                _ => throw new InvalidOperationException($"{nameof(DisplayItemLifetime)} is not supported: {lifetime}"),
+            };
         }
 
         public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)

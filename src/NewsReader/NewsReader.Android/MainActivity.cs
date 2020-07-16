@@ -15,7 +15,7 @@ namespace Waf.NewsReader.Android
     [Activity(Label = "NewsReader", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public static MainActivity Current { get; private set; }
+        public static MainActivity? Current { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
