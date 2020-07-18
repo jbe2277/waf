@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.1.0.100 (Release)
+- WAF StringHelper.Truncate improve nullable annotation.
+
+
 Version 6.1.0.4 (Alpha 4)
 - WAF Add ValidationHelper class and use it in ValidatableModel instead of Validator. Now, the ValidatableModel lists all found validation errors and the validation method is faster.
 
