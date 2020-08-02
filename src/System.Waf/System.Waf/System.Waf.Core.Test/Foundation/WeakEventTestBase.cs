@@ -38,7 +38,6 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void WeakEvent1C() => WeakEvent1Core(1, true);
 
-        [TestMethod]
         private void WeakEvent1Core(int addCount, bool removeTwice)
         {
             var publisher = new TPublisher();
@@ -91,7 +90,7 @@ namespace Test.Waf.Foundation
             WeakEventHandlerCore(null, publisher, null, raiseCount: 1_000_000);
         }
 
-        private (WeakReference<TManager>, WeakReference<TPublisher>, WeakReference<TSubscriber>) WeakEventHandlerCore(TManager? manager, TPublisher? publisher, TSubscriber? subscriber,
+        private static (WeakReference<TManager>, WeakReference<TPublisher>, WeakReference<TSubscriber>) WeakEventHandlerCore(TManager? manager, TPublisher? publisher, TSubscriber? subscriber,
             int raiseCount = 1, int addCount = 1, bool remove = false, bool removeTwice = false)
         {
             manager ??= new TManager();
