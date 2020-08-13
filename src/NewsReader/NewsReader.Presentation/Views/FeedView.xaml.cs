@@ -1,7 +1,6 @@
 ﻿using System;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Waf.NewsReader.Presentation.Views
@@ -33,11 +32,6 @@ namespace Waf.NewsReader.Presentation.Views
             base.OnAppearing();
             searchBar.IsVisible = false;
             viewModel.SearchText = "";
-        }
-
-        private void FeedItemsItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            viewModel.ShowFeedItemViewCommand.Execute(e.Item);
         }
 
         private void SearchClicked(object sender, EventArgs e)

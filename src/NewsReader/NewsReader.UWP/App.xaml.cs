@@ -19,6 +19,8 @@ namespace Waf.NewsReader.UWP
             builder.RegisterModule(new UwpModule());
             Container = builder.Build();
 
+            Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
+
             InitializeComponent();
         }
 

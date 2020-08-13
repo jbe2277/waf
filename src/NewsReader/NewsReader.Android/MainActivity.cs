@@ -23,6 +23,8 @@ namespace Waf.NewsReader.Android
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            Forms.SetFlags("SwipeView_Experimental");
+
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
@@ -36,7 +38,7 @@ namespace Waf.NewsReader.Android
             var container = builder.Build();
             LoadApplication(container.Resolve<App>());
         }
-        
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

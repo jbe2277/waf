@@ -9,7 +9,7 @@ namespace Waf.NewsReader.Presentation.Converters
         public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (!(value is bool markAsRead)) return null;
-            return markAsRead ? "Mark as unread" : "Mark as read";
+            return markAsRead ? "Unread" : "Read";
         }
 
         public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
