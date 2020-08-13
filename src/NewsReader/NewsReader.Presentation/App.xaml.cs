@@ -61,7 +61,7 @@ namespace Waf.NewsReader.Presentation
 
         protected override void OnStart()
         {
-            Log.Default.Info("App started ({0}, {1}) on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            Log.Default.Info("App started ({0}, {1}) on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
             string? appSecret = null;
             GetAppCenterSecret(ref appSecret);
             if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
