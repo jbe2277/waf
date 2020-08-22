@@ -103,7 +103,7 @@ namespace Test.Waf.Foundation
                 TraceEvents.Add(new LogMessage(eventCache, source, eventType, id, message));
             }
 
-            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
+            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object?[] args)
             {
                 TraceEvents.Add(new LogMessage(eventCache, source, eventType, id, format, args));
             }
@@ -111,7 +111,7 @@ namespace Test.Waf.Foundation
 
         private class LogMessage
         {
-            public LogMessage(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string? format = null, object[]? arguments = null)
+            public LogMessage(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string? format = null, object?[]? arguments = null)
             {
                 EventCache = eventCache;
                 Source = source;
@@ -131,7 +131,7 @@ namespace Test.Waf.Foundation
 
             public string? Format { get; }
 
-            public object[]? Arguments { get; }
+            public object?[]? Arguments { get; }
         }
     }
 }

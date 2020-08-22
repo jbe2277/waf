@@ -50,7 +50,7 @@ namespace System.Waf.Foundation
         /// <param name="traceSource">The trace source.</param>
         /// <param name="format">A composite format string.</param>
         /// <param name="arguments">An object array that contains zero or more objects to format.</param>
-        public static void Trace(this TraceSource traceSource, [Localizable(false)] string format, params object[] arguments)
+        public static void Trace(this TraceSource traceSource, [Localizable(false)] string format, params object?[] arguments)
         {
             if (IsTraceEnabled(traceSource)) traceSource.TraceEvent(TraceEventType.Verbose, 0, format, arguments);
         }
@@ -67,7 +67,7 @@ namespace System.Waf.Foundation
         /// <param name="traceSource">The trace source.</param>
         /// <param name="format">A composite format string.</param>
         /// <param name="arguments">An object array that contains zero or more objects to format.</param>
-        public static void Info(this TraceSource traceSource, [Localizable(false)] string format, params object[] arguments)
+        public static void Info(this TraceSource traceSource, [Localizable(false)] string format, params object?[] arguments)
         {
             if (IsInfoEnabled(traceSource)) traceSource.TraceEvent(TraceEventType.Information, 0, format, arguments);
         }
@@ -84,7 +84,7 @@ namespace System.Waf.Foundation
         /// <param name="traceSource">The trace source.</param>
         /// <param name="format">A composite format string.</param>
         /// <param name="arguments">An object array that contains zero or more objects to format.</param>
-        public static void Warn(this TraceSource traceSource, [Localizable(false)] string format, params object[] arguments)
+        public static void Warn(this TraceSource traceSource, [Localizable(false)] string format, params object?[] arguments)
         {
             if (IsWarnEnabled(traceSource)) traceSource.TraceEvent(TraceEventType.Warning, 0, format, arguments);
         }
@@ -101,7 +101,7 @@ namespace System.Waf.Foundation
         /// <param name="traceSource">The trace source.</param>
         /// <param name="format">A composite format string.</param>
         /// <param name="arguments">An object array that contains zero or more objects to format.</param>
-        public static void Error(this TraceSource traceSource, [Localizable(false)] string format, params object[] arguments)
+        public static void Error(this TraceSource traceSource, [Localizable(false)] string format, params object?[] arguments)
         {
             if (IsErrorEnabled(traceSource)) traceSource.TraceEvent(TraceEventType.Error, 0, format, arguments);
         }
