@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.2.0.100 (Release)
+- WAF: TraceSourceExtensions improve nullable annotations.
+
+
 Version 6.2.0.1 (Alpha 1)
 - WAF: Extend WeakEvent class to support weak events for static events in a platform independent way.
 
