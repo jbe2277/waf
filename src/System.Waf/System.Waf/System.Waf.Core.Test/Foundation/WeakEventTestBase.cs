@@ -38,7 +38,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void WeakEvent1C() => WeakEvent1Core(1, true);
 
-        private void WeakEvent1Core(int addCount, bool removeTwice)
+        private static void WeakEvent1Core(int addCount, bool removeTwice)
         {
             var publisher = new TPublisher();
             var (weakManager, _, weakSubscriber) = WeakEventHandlerCore(null, publisher, null, addCount: addCount, removeTwice: removeTwice);

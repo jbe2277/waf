@@ -22,7 +22,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void IsErrorEnabledTest() => IsEnabledTestCore(x => x.IsErrorEnabled(), SourceLevels.Error, SourceLevels.Critical);
 
-        private void IsEnabledTestCore(Func<TraceSource, bool> isEnabled, SourceLevels supported, SourceLevels unsupported)
+        private static void IsEnabledTestCore(Func<TraceSource, bool> isEnabled, SourceLevels supported, SourceLevels unsupported)
         {
             var log = new TraceSource("UnitTest");
             log.Switch.Level = supported;
@@ -43,7 +43,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void ErrorTest() => LogTestCore((l, m) => l.Error(m), (l, f, a) => l.Error(f, a), SourceLevels.Error, SourceLevels.Critical);
 
-        private void LogTestCore(Action<TraceSource, string> logAction1, Action<TraceSource, string, object[]> logAction2, SourceLevels supported, SourceLevels unsupported)
+        private static void LogTestCore(Action<TraceSource, string> logAction1, Action<TraceSource, string, object[]> logAction2, SourceLevels supported, SourceLevels unsupported)
         {
             var log = new TraceSource("UnitTest");
             var listener = new StubTraceListener();

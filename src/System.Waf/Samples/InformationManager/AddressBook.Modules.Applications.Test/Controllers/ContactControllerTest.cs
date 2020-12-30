@@ -56,7 +56,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             };
             controller.NewContactCommand.Execute(null);
 
-            Assert.AreEqual(2, root.Contacts.Count());
+            Assert.AreEqual(2, root.Contacts.Count);
             var contact2 = root.Contacts.Last();
             Assert.AreEqual(contact2, contactViewModel.Contact);
             Assert.IsTrue(focusItemCalled);

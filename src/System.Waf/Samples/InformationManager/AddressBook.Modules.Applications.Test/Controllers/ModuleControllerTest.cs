@@ -67,7 +67,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             node.ShowAction();
 
             Assert.IsNotNull(shellService.ContentView);
-            Assert.AreEqual(2, shellService.ToolBarCommands.Count());
+            Assert.AreEqual(2, shellService.ToolBarCommands.Count);
 
             // Close the address book
 

@@ -135,7 +135,7 @@ namespace Test.Waf.Presentation.Controls
             }
         }
 
-        private PersonDataModel?[] CreatePersonDataModels()
+        private static PersonDataModel?[] CreatePersonDataModels()
         {
             return new[]
             {
@@ -147,7 +147,7 @@ namespace Test.Waf.Presentation.Controls
             };
         }
 
-        private PersonDataModel[] CreateUnorderedList()
+        private static PersonDataModel[] CreateUnorderedList()
         {
             return new[]
             {

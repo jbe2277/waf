@@ -24,7 +24,7 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void WeakEvent1C() => WeakEvent1Core(1, true);
 
-        private void WeakEvent1Core(int addCount, bool removeTwice)
+        private static void WeakEvent1Core(int addCount, bool removeTwice)
         {
             var (weakManager, weakSubscriber) = WeakEventHandlerCore(null, null, addCount: addCount, removeTwice: removeTwice);
             GC.Collect();

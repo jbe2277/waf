@@ -53,7 +53,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             Assert.IsTrue(controller.Root.Drafts.Emails.Any());
 
             var navigationService = Get<MockNavigationService>();
-            Assert.AreEqual(5, navigationService.NavigationNodes.Count());
+            Assert.AreEqual(5, navigationService.NavigationNodes.Count);
             Assert.AreEqual("Inbox", navigationService.NavigationNodes.ElementAt(0).Name);
             Assert.AreEqual("Outbox", navigationService.NavigationNodes.ElementAt(1).Name);
             Assert.AreEqual("Sent", navigationService.NavigationNodes.ElementAt(2).Name);
@@ -79,7 +79,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             navigationService.NavigationNodes.ElementAt(0).ShowAction();
 
             Assert.IsNotNull(shellService.ContentView);
-            Assert.AreEqual(3, shellService.ToolBarCommands.Count());
+            Assert.AreEqual(3, shellService.ToolBarCommands.Count);
 
             navigationService.NavigationNodes.ElementAt(0).CloseAction();
 
