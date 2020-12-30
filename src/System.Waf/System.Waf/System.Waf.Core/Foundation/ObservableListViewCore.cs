@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading;
 
 namespace System.Waf.Foundation
 {
@@ -18,7 +19,7 @@ namespace System.Waf.Foundation
         private readonly bool noCollectionChangedHandler;
         private Predicate<T>? filter;
         private Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort;
-        private volatile bool isDisposed;
+        private volatile int isDisposed;
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
@@ -119,8 +120,7 @@ namespace System.Waf.Foundation
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) return;
-            isDisposed = true;
+            if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
 
             OnDispose(disposing);
             if (disposing)

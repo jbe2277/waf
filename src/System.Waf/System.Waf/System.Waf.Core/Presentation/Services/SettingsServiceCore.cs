@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Xml;
@@ -20,7 +21,7 @@ namespace System.Waf.Presentation.Services
 
         private readonly ConcurrentDictionary<Type, Lazy<object>> settings;
         private string fileName;
-        private volatile bool isDisposed;
+        private volatile int isDisposed;
 
         /// <summary>Initializes a new instance of the SettingsService.</summary>
         public SettingsServiceCore()
@@ -137,8 +138,7 @@ namespace System.Waf.Presentation.Services
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) return;
-            isDisposed = true;
+            if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
 
             OnDispose(disposing);
             if (disposing)

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 
 namespace System.Waf.Foundation
 {
@@ -23,7 +24,7 @@ namespace System.Waf.Foundation
         private readonly IEqualityComparer<T> itemComparer;
         private readonly IEqualityComparer<TOriginal> originalItemComparer;
         private readonly bool noCollectionChangedHandler;
-        private volatile bool isDisposed;
+        private volatile int isDisposed;
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
@@ -153,8 +154,7 @@ namespace System.Waf.Foundation
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
-            if (isDisposed) return;
-            isDisposed = true;
+            if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
 
             OnDispose(disposing);
             if (disposing)

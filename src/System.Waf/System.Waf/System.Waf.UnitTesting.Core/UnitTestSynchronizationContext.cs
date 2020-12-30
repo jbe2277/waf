@@ -10,7 +10,7 @@ namespace System.Waf.UnitTesting
     {
         private readonly SynchronizationContext previousContext;
         private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object?>> messageQueue;
-        private volatile bool isDisposed;
+        private volatile int isDisposed;
 
         private UnitTestSynchronizationContext()
         {
@@ -20,6 +20,8 @@ namespace System.Waf.UnitTesting
 
         /// <summary>Gets the unit test synchronization context for the current thread.</summary>
         public new static UnitTestSynchronizationContext? Current => SynchronizationContext.Current as UnitTestSynchronizationContext;
+
+        private bool IsDisposed => isDisposed != 0;
 
         /// <summary>Creates a new instance of the unit test synchronization context and sets this instance as current synchronization context for this thread.</summary>
         /// <returns>The unit test synchronization context.</returns>
@@ -51,7 +53,7 @@ namespace System.Waf.UnitTesting
         public override void Send(SendOrPostCallback d, object? state)
         {
             if (d == null) throw new ArgumentNullException(nameof(d));
-            if (isDisposed) return;
+            if (IsDisposed) return;
             d(state);
         }
 
@@ -62,7 +64,7 @@ namespace System.Waf.UnitTesting
         public override void Post(SendOrPostCallback d, object? state)
         {
             if (d == null) throw new ArgumentNullException(nameof(d));
-            if (isDisposed) return;
+            if (IsDisposed) return;
             messageQueue.Add(new KeyValuePair<SendOrPostCallback, object?>(d, state));
         }
 
@@ -87,8 +89,7 @@ namespace System.Waf.UnitTesting
 
         private void Dispose(bool isDisposing)
         {
-            if (isDisposed) return;
-            isDisposed = true;
+            if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
 
             if (isDisposing)
             {
