@@ -238,6 +238,41 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void RelayEventsWithDefer()
+        {
+            using (var deferral = observableListView.DeferCollectionChangedNotifications())
+            {
+                // do nothing with the original list
+            }
+            Assert.AreEqual(0, eventArgsList.Count);
+            Assert.AreEqual(0, countChangedCount);
+            Assert.AreEqual(0, indexerChangedCount);
+
+            using (var deferral1 = observableListView.DeferCollectionChangedNotifications())
+            {
+                using (var deferral2 = observableListView.DeferCollectionChangedNotifications())
+                {
+                    originalList.Add("first");
+                    Assert.AreEqual(1, countChangedCount);
+                    Assert.AreEqual(1, indexerChangedCount);
+                    originalList.Add("second");
+                    Assert.AreEqual(2, countChangedCount);
+                    Assert.AreEqual(2, indexerChangedCount);
+                    originalList.Move(0, 1);
+                    originalList.RemoveAt(0);
+                    originalList.Add("third");
+
+                    countChangedCount = indexerChangedCount = 0;
+                    Assert.AreEqual(0, eventArgsList.Count);
+                }
+                Assert.AreEqual(0, eventArgsList.Count);
+            }
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            Assert.AreEqual(0, countChangedCount);
+            Assert.AreEqual(0, indexerChangedCount);
+        }
+
+        [TestMethod]
         public void RaiseEventsWithoutListener()
         {
             var originalList2 = new ObservableCollection<string>();

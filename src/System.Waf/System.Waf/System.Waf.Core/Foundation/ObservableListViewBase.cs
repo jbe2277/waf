@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 
 namespace System.Waf.Foundation
 {
@@ -13,6 +14,10 @@ namespace System.Waf.Foundation
         private const string indexerName = "Item[]";  // This must be equal to Binding.IndexerName
         private static readonly PropertyChangedEventArgs CountChangedEventArgs = new PropertyChangedEventArgs(nameof(Count));
         private static readonly PropertyChangedEventArgs IndexerChangedEventArgs = new PropertyChangedEventArgs(indexerName);
+        private static readonly NotifyCollectionChangedEventArgs CollectionResetEventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+        
+        private volatile int deferCount;
+        private int deferredChanges;
 
         /// <summary>Initializes a new instance of the ObservableListViewBase class.</summary>
         /// <param name="originalList">Initialize the list view with the items from this list.</param>
@@ -31,11 +36,26 @@ namespace System.Waf.Foundation
         /// <summary>Occurs when a property value changes.</summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>Defer collection changed notifications until Dispose is called on the returned object. If the collection was changed then a CollectionChanged Reset event will be raised.</summary>
+        /// <returns>Object used to stop the deferral.</returns>
+        public IDisposable DeferCollectionChangedNotifications()
+        {
+            Interlocked.Increment(ref deferCount);
+            return new DisposedNotifier(() =>
+            {
+                if (Interlocked.Decrement(ref deferCount) == 0 && Interlocked.Exchange(ref deferredChanges, 0) > 0)
+                {
+                    OnCollectionChanged(CollectionResetEventArgs);
+                }
+            });
+        }
+
         /// <summary>Raises the CollectionChanged event with the provided arguments.</summary>
         /// <param name="e">Arguments of the event being raised.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            CollectionChanged?.Invoke(this, e);
+            if (deferCount > 0) { Interlocked.Increment(ref deferredChanges); }
+            else { CollectionChanged?.Invoke(this, e); }
         }
 
         /// <summary>Raises the PropertyChanged event with the provided arguments.</summary>
@@ -75,7 +95,7 @@ namespace System.Waf.Foundation
             InnerList.AddRange(newList);
             OnPropertyChanged(CountChangedEventArgs);
             OnPropertyChanged(IndexerChangedEventArgs);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnCollectionChanged(CollectionResetEventArgs);
         }
 
         /// <summary>Moves the item at the specified index to a new location in the collection.</summary>
@@ -88,6 +108,23 @@ namespace System.Waf.Foundation
             InnerList.Insert(newIndex, item);
             OnPropertyChanged(IndexerChangedEventArgs);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, item, newIndex, oldIndex));
+        }
+
+        private sealed class DisposedNotifier : IDisposable
+        {
+            private readonly Action disposed;
+            private volatile int isDisposed;
+
+            public DisposedNotifier(Action disposed)
+            {
+                this.disposed = disposed;
+            }
+
+            public void Dispose()
+            {
+                if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
+                disposed();
+            }
         }
     }
 }
