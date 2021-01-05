@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - 'src/System.Waf/**'
+      - 'src/.github/workflows/**' 
 
 jobs:
   build:
