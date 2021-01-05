@@ -266,6 +266,7 @@ namespace Test.Waf.Foundation
                     Assert.AreEqual(0, eventArgsList.Count);
                 }
                 Assert.AreEqual(0, eventArgsList.Count);
+                deferral1.Dispose();  // call Dispose twice to see if this works too
             }
             Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
             Assert.AreEqual(0, countChangedCount);
