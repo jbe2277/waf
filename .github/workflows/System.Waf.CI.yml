@@ -12,7 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build ./src/System.Waf/System.Waf.sln --configuration Release
-    - name: Test with dotnet
-      run: dotnet test ./src/System.Waf/System.Waf.sln --configuration Release --no-build
+    
+    - name: Clean
+      run: dotnet clean -c Release && dotnet nuget locals all --clear
+    
+    - name: Build
+      run: dotnet build ./src/System.Waf/System.Waf.sln -c Release
+    
+    - name: Test
+      run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
