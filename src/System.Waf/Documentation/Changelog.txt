@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.3.0.1 (Alpha 1)
+- WAF: Add ObservableListViewBase.DeferCollectionChangedNotifications method
+
+
 Version 6.2.0.100 (Release)
 - WAF: TraceSourceExtensions improve nullable annotations.
 
