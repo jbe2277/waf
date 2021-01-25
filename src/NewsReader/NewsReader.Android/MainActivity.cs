@@ -15,6 +15,8 @@ namespace Waf.NewsReader.Android
     [Activity(Label = "NewsReader", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private App? application;
+
         public static MainActivity? Current { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,7 +38,14 @@ namespace Waf.NewsReader.Android
             builder.RegisterModule(new PresentationModule());
             builder.RegisterModule(new AndroidModule());
             var container = builder.Build();
-            LoadApplication(container.Resolve<App>());
+            application = container.Resolve<App>();
+            LoadApplication(application);
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            application.OnPause();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

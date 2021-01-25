@@ -12,6 +12,7 @@ using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Presentation.Services;
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
 
 namespace Waf.NewsReader.Presentation
 {
@@ -69,11 +70,16 @@ namespace Waf.NewsReader.Presentation
             appController.Start();
         }
 
-        protected override void OnSleep()
+        public void OnPause()
         {
             Log.Default.Info("App sleep");
             appController.Sleep();
             settingsService.Save();
+        }
+
+        protected override void OnSleep()
+        {
+            if (Device.RuntimePlatform != Device.Android) OnPause();
         }
 
         protected override void OnResume()
