@@ -79,6 +79,7 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(throttledAction.IsRunning);
             throttledAction.InvokeAccumulated();
             throttledAction.InvokeAccumulated();
+            Assert.AreEqual(0, actionCallCount);
 
             // Multiple calls of InvokeAccumulated within the delayTime should call the action just once.
             Task.Delay(200).Wait();
@@ -93,6 +94,7 @@ namespace Test.Waf.Foundation
             throttledAction.InvokeAccumulated();
             Task.Delay(60).Wait();
             throttledAction.InvokeAccumulated();
+            Assert.AreEqual(0, actionCallCount);
 
             // Calls just once: The waits between InvokeAccumulated are less than the idle (delay) time.
             Task.Delay(200).Wait();
@@ -128,7 +130,7 @@ namespace Test.Waf.Foundation
         {
             int actionCallCount = 0;
             var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeOnlyIfIdleForDelayTime, TimeSpan.FromMilliseconds(10));
-            for (int i = 0; i < 20000; i++)
+            for (int i = 0; i < 200000; i++)
             {
                 throttledAction.InvokeAccumulated();
             }
