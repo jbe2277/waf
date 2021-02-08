@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -24,7 +25,7 @@ namespace System.Waf.Foundation
         /// <returns>True if the value has changed, false if the old and new value were equal.</returns>
         protected bool SetProperty<T>([NotNullIfNotNull(parameterName: "value"), MaybeNull] ref T field, [AllowNull] T value, [CallerMemberName] string propertyName = null!)
         {
-            if (Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value!)) return false;
             field = value;
             RaisePropertyChanged(propertyName);
             return true;
