@@ -174,7 +174,6 @@ namespace Test.Waf.Foundation
             Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", null }), new ValidationResult("Test", new[] { "Name", null })));
             Assert.IsFalse(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Wrong" }), new ValidationResult("Test", new[] { "Name", "Age" })));
 
-            Assert.AreEqual(0, comparer.GetHashCode(null!));
             Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null)));
             Assert.AreEqual("".GetHashCode(), comparer.GetHashCode(new ValidationResult("")));
             Assert.AreEqual("Test".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test")));

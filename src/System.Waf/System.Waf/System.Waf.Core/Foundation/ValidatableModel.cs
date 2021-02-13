@@ -149,14 +149,13 @@ namespace System.Waf.Foundation
 
             public bool Equals(ValidationResult? x, ValidationResult? y)
             {
-                if (x == y) return true;
-                if (x == null || y == null) return false;
+                if (ReferenceEquals(x, y)) return true;
+                if (x is null || y is null) return false;
                 return Equals(x.ErrorMessage, y.ErrorMessage) && x.MemberNames.SequenceEqual(y.MemberNames);
             }
 
             public int GetHashCode(ValidationResult obj)
             {
-                if (obj == null) return 0;
                 return (obj.ErrorMessage?.GetHashCode() ?? 0) ^ obj.MemberNames.Select(x => x?.GetHashCode() ?? 0).Aggregate(0, (current, next) => current ^ next);
             }
         }
