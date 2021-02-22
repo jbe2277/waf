@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 6.3.0.100 (Release)
+- WAF Improve Model.SetProperty to avoid boxing of value types
+- WAF Improve ValidationResultComparer
+
+
 Version 6.3.0.1 (Alpha 1)
 - WAF: Add ObservableListViewBase.DeferCollectionChangedNotifications method
 
