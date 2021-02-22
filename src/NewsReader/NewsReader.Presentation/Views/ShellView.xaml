@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+<FlyoutPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.ShellView"
              x:DataType="vm:ShellViewModel">
-    <MasterDetailPage.Master>
+    <FlyoutPage.Flyout>
         <ContentPage Title="Menu" Padding="{OnPlatform iOS='0,30,0,0'}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
@@ -88,5 +88,5 @@
                           HeightRequest="125" VerticalScrollBarVisibility="Never" SeparatorVisibility="None" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
             </Grid>
         </ContentPage>
-    </MasterDetailPage.Master>
-</MasterDetailPage>
+    </FlyoutPage.Flyout>
+</FlyoutPage>

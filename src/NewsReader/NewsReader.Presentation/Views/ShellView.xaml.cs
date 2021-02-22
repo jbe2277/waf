@@ -61,7 +61,7 @@ namespace Waf.NewsReader.Presentation.Views
                 if (item.Command != null)
                 {
                     item.Command.Execute(null);
-                    if (MasterBehavior != MasterBehavior.Split) IsPresented = false;
+                    if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace Waf.NewsReader.Presentation.Views
         private void FeedsItemTapped(object sender, ItemTappedEventArgs e)
         {
             viewModel.ShowFeedViewCommand.Execute(e.Item);
-            if (MasterBehavior != MasterBehavior.Split) IsPresented = false;
+            if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
         }
     }
 }
