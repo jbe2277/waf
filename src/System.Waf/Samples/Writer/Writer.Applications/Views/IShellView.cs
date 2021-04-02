@@ -17,9 +17,9 @@ namespace Waf.Writer.Applications.Views
         bool IsMaximized { get; set; }
 
         
-        event CancelEventHandler Closing;
+        event CancelEventHandler? Closing;
 
-        event EventHandler Closed;
+        event EventHandler? Closed;
 
         
         void Show();
