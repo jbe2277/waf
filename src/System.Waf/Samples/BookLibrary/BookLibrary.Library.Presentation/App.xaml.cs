@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using NLog.Targets.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -42,18 +43,22 @@ namespace Waf.BookLibrary.Library.Presentation
             ProfileOptimization.SetProfileRoot(profileRoot);
             ProfileOptimization.StartProfile("Startup.profile");
 
-            var fileTarget = new FileTarget("fileTarget")
-            {
-                FileName = Path.Combine(AppDataPath, "Log", "App.log"),
-                Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}",
-                ArchiveAboveSize = 5_000_000,  // 5 MB
-                MaxArchiveFiles = 2,
-            };
-            var traceTarget = new TraceTarget("traceTarget")
-            {
-                Layout = fileTarget.Layout,
-                RawWrite = true
-            };
+            var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}";
+            var fileTarget = new AsyncTargetWrapper("fileTarget", new FileTarget()
+                {
+                    FileName = Path.Combine(AppDataPath, "Log", "BookLibrary.log"),
+                    Layout = layout,
+                    ArchiveAboveSize = 5_000_000,  // 5 MB
+                    MaxArchiveFiles = 1,
+                    ArchiveNumbering = ArchiveNumberingMode.Rolling
+                })
+            { OverflowAction = AsyncTargetWrapperOverflowAction.Block };
+            var traceTarget = new AsyncTargetWrapper("traceTarget", new TraceTarget()
+                {
+                    Layout = layout,
+                    RawWrite = true
+                })
+            { OverflowAction = AsyncTargetWrapperOverflowAction.Block };
 
             var logConfig = new LoggingConfiguration();
             logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
