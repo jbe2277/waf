@@ -7,13 +7,14 @@
     <PackageVersion>6.3.0</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <NoWarn>$(NoWarn);CA1014</NoWarn>
   </PropertyGroup>
 
   <Choose>
     <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
       <PropertyGroup>
         <IsPackable>false</IsPackable>
-        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../UnitTest.ruleset</CodeAnalysisRuleSet>
         <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
       </PropertyGroup>
       <ItemGroup>
@@ -24,14 +25,10 @@
     </When>
     <Otherwise>
       <PropertyGroup>
-        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" PrivateAssets="All" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-  </ItemGroup>
   
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)/NullableAttributes.cs" />

@@ -14,7 +14,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
         public SampleContactListViewModel(IContactListView view) : base(view)
         {
             Contacts = SampleDataProvider.CreateContacts();
-            SelectedContact = Contacts.First();
+            SelectedContact = Contacts[0];
             FilterText = "My filter text";
         }
         

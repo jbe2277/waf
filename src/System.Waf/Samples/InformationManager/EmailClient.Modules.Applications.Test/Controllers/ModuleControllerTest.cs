@@ -54,17 +54,17 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             var navigationService = Get<MockNavigationService>();
             Assert.AreEqual(5, navigationService.NavigationNodes.Count);
-            Assert.AreEqual("Inbox", navigationService.NavigationNodes.ElementAt(0).Name);
-            Assert.AreEqual("Outbox", navigationService.NavigationNodes.ElementAt(1).Name);
-            Assert.AreEqual("Sent", navigationService.NavigationNodes.ElementAt(2).Name);
-            Assert.AreEqual("Drafts", navigationService.NavigationNodes.ElementAt(3).Name);
-            Assert.AreEqual("Deleted", navigationService.NavigationNodes.ElementAt(4).Name);
+            Assert.AreEqual("Inbox", navigationService.NavigationNodes[0].Name);
+            Assert.AreEqual("Outbox", navigationService.NavigationNodes[1].Name);
+            Assert.AreEqual("Sent", navigationService.NavigationNodes[2].Name);
+            Assert.AreEqual("Drafts", navigationService.NavigationNodes[3].Name);
+            Assert.AreEqual("Deleted", navigationService.NavigationNodes[4].Name);
 
-            Assert.AreEqual(controller.Root.Inbox.Emails.Count, navigationService.NavigationNodes.ElementAt(0).ItemCount);
-            Assert.AreEqual(controller.Root.Outbox.Emails.Count, navigationService.NavigationNodes.ElementAt(1).ItemCount);
-            Assert.AreEqual(controller.Root.Sent.Emails.Count, navigationService.NavigationNodes.ElementAt(2).ItemCount);
-            Assert.AreEqual(controller.Root.Drafts.Emails.Count, navigationService.NavigationNodes.ElementAt(3).ItemCount);
-            Assert.AreEqual(controller.Root.Deleted.Emails.Count, navigationService.NavigationNodes.ElementAt(4).ItemCount);
+            Assert.AreEqual(controller.Root.Inbox.Emails.Count, navigationService.NavigationNodes[0].ItemCount);
+            Assert.AreEqual(controller.Root.Outbox.Emails.Count, navigationService.NavigationNodes[1].ItemCount);
+            Assert.AreEqual(controller.Root.Sent.Emails.Count, navigationService.NavigationNodes[2].ItemCount);
+            Assert.AreEqual(controller.Root.Drafts.Emails.Count, navigationService.NavigationNodes[3].ItemCount);
+            Assert.AreEqual(controller.Root.Deleted.Emails.Count, navigationService.NavigationNodes[4].ItemCount);
 
             // Run the controller
 
@@ -76,41 +76,41 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             Assert.IsNull(shellService.ContentView);
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
-            navigationService.NavigationNodes.ElementAt(0).ShowAction();
+            navigationService.NavigationNodes[0].ShowAction();
 
             Assert.IsNotNull(shellService.ContentView);
             Assert.AreEqual(3, shellService.ToolBarCommands.Count);
 
-            navigationService.NavigationNodes.ElementAt(0).CloseAction();
+            navigationService.NavigationNodes[0].CloseAction();
 
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Show the outbox
 
-            navigationService.NavigationNodes.ElementAt(1).ShowAction();
+            navigationService.NavigationNodes[1].ShowAction();
             Assert.IsTrue(shellService.ToolBarCommands.Any());
-            navigationService.NavigationNodes.ElementAt(1).CloseAction();
+            navigationService.NavigationNodes[1].CloseAction();
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Show the sent emails
 
-            navigationService.NavigationNodes.ElementAt(2).ShowAction();
+            navigationService.NavigationNodes[2].ShowAction();
             Assert.IsTrue(shellService.ToolBarCommands.Any());
-            navigationService.NavigationNodes.ElementAt(2).CloseAction();
+            navigationService.NavigationNodes[2].CloseAction();
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Show the drafts
 
-            navigationService.NavigationNodes.ElementAt(3).ShowAction();
+            navigationService.NavigationNodes[3].ShowAction();
             Assert.IsTrue(shellService.ToolBarCommands.Any());
-            navigationService.NavigationNodes.ElementAt(3).CloseAction();
+            navigationService.NavigationNodes[3].CloseAction();
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Show the deleted emails
 
-            navigationService.NavigationNodes.ElementAt(4).ShowAction();
+            navigationService.NavigationNodes[4].ShowAction();
             Assert.IsTrue(shellService.ToolBarCommands.Any());
-            navigationService.NavigationNodes.ElementAt(4).CloseAction();
+            navigationService.NavigationNodes[4].CloseAction();
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Shutdown the controller

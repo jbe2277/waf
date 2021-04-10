@@ -30,7 +30,7 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void PersonsListMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is FrameworkElement element && element?.DataContext is Person)
+            if (e.OriginalSource is FrameworkElement element && element.DataContext is Person)
             {
                 ViewModel.OkCommand.Execute(null);
             }

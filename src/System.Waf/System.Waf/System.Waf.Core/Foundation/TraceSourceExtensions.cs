@@ -11,6 +11,7 @@ namespace System.Waf.Foundation
         /// <returns>Indicates, if a log message of type Trace (Verbose) will be processed.</returns>
         public static bool IsTraceEnabled(this TraceSource traceSource)
         {
+            if (traceSource is null) throw new ArgumentNullException(nameof(traceSource));
             return traceSource.Switch.ShouldTrace(TraceEventType.Verbose);
         }
 
@@ -19,6 +20,7 @@ namespace System.Waf.Foundation
         /// <returns>Indicates, if a log message of type Information will be processed.</returns>
         public static bool IsInfoEnabled(this TraceSource traceSource)
         {
+            if (traceSource is null) throw new ArgumentNullException(nameof(traceSource));
             return traceSource.Switch.ShouldTrace(TraceEventType.Information);
         }
 
@@ -27,6 +29,7 @@ namespace System.Waf.Foundation
         /// <returns>Indicates, if a log message of type Warning will be processed.</returns>
         public static bool IsWarnEnabled(this TraceSource traceSource)
         {
+            if (traceSource is null) throw new ArgumentNullException(nameof(traceSource));
             return traceSource.Switch.ShouldTrace(TraceEventType.Warning);
         }
 
@@ -35,6 +38,7 @@ namespace System.Waf.Foundation
         /// <returns>Indicates, if a log message of type Error will be processed.</returns>
         public static bool IsErrorEnabled(this TraceSource traceSource)
         {
+            if (traceSource is null) throw new ArgumentNullException(nameof(traceSource));
             return traceSource.Switch.ShouldTrace(TraceEventType.Error);
         }
 

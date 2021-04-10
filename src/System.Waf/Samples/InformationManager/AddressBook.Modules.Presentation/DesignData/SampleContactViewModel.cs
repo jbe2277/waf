@@ -13,7 +13,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
 
         public SampleContactViewModel(IContactView view) : base(view)
         {
-            Contact = SampleDataProvider.CreateContacts().First();
+            Contact = SampleDataProvider.CreateContacts()[0];
         }
         
 

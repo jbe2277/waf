@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
+﻿using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.SampleData;
 
@@ -10,8 +9,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
         public SampleNewEmailViewModel() : base(new MockNewEmailView())
         {
             EmailAccounts = new[] { SampleDataProvider.CreateEmailAccount() };
-            SelectedEmailAccount = EmailAccounts.First();
-            Email = SampleDataProvider.CreateSentEmails().ElementAt(1);
+            SelectedEmailAccount = EmailAccounts[0];
+            Email = SampleDataProvider.CreateSentEmails()[1];
         }
         
 

@@ -18,8 +18,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             root.AddEmailAccount(new EmailAccount());
             root.AddEmailAccount(new EmailAccount());
             viewModel.EmailClientRoot = root;
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = root.EmailAccounts.ElementAt(1));
-            Assert.AreEqual(root.EmailAccounts.ElementAt(1), viewModel.SelectedEmailAccount);
+            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = root.EmailAccounts[1]);
+            Assert.AreEqual(root.EmailAccounts[1], viewModel.SelectedEmailAccount);
         }
 
         [TestMethod]

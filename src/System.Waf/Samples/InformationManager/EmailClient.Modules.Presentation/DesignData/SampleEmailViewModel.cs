@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Waf.InformationManager.EmailClient.Modules.Applications.SampleData;
+﻿using Waf.InformationManager.EmailClient.Modules.Applications.SampleData;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
@@ -13,7 +12,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         public SampleEmailViewModel(IEmailView view) : base(view)
         {
-            Email = SampleDataProvider.CreateInboxEmails().First();
+            Email = SampleDataProvider.CreateInboxEmails()[0];
         }
 
 
