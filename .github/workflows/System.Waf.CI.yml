@@ -1,24 +1,17 @@
 name: System.Waf.CI
-
 on: 
   push:
     paths: 
-      - 'src/System.Waf/**'
-      - '.github/workflows/**' 
-
+    - 'src/System.Waf/**'
+    - '.github/workflows/**' 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: Clean NuGet
+    - uses: actions/checkout@v2
+    - name: NuGet clear
       run: dotnet nuget locals all --clear
-    
     - name: Build
       run: dotnet build ./src/System.Waf/System.Waf.sln -c Release
-    
     - name: Test
       run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
