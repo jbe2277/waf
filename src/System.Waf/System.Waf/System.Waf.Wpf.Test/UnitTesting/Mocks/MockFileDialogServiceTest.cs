@@ -44,6 +44,32 @@ namespace Test.Waf.UnitTesting.Mocks
             Assert.AreEqual(fileTypes, fileDialogService.FileTypes);
             Assert.AreEqual(fileType, fileDialogService.DefaultFileType);
             Assert.AreEqual("defaultFileName", fileDialogService.DefaultFileName);
+
+            var showOpenFileDialogCalled = false;
+            fileDialogService.ShowOpenFileDialogStub = (view, fTypes, defaultFType, defaultFName) =>
+            {
+                showOpenFileDialogCalled = true;
+                Assert.AreSame(owner, view);
+                Assert.AreSame(fTypes, fileTypes);
+                Assert.AreSame(defaultFType, fileType);
+                Assert.AreEqual("defaultFileName", defaultFName);
+                return new FileDialogResult();
+            };
+            Assert.IsFalse(fileDialogService.ShowOpenFileDialog(owner, fileTypes, fileType, "defaultFileName").IsValid);
+            Assert.IsTrue(showOpenFileDialogCalled);
+
+            var showSaveFileDialogCalled = false;
+            fileDialogService.ShowSaveFileDialogStub = (view, fTypes, defaultFType, defaultFName) =>
+            {
+                showSaveFileDialogCalled = true;
+                Assert.AreSame(owner, view);
+                Assert.AreSame(fTypes, fileTypes);
+                Assert.AreSame(defaultFType, fileType);
+                Assert.AreEqual("defaultFileName", defaultFName);
+                return new FileDialogResult();
+            };
+            Assert.IsFalse(fileDialogService.ShowSaveFileDialog(owner, fileTypes, fileType, "defaultFileName").IsValid);
+            Assert.IsTrue(showSaveFileDialogCalled);
         }
     }
 }

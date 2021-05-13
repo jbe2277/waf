@@ -26,6 +26,12 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>The default file name of the last dialog.</summary>
         public string? DefaultFileName { get; private set; }
 
+        /// <summary>Gets or sets a delegate that is called when ShowOpenFileDialog is called.</summary>
+        public Func<object?, IEnumerable<FileType>, FileType?, string?, FileDialogResult>? ShowOpenFileDialogStub { get; set; }
+
+        /// <summary>Gets or sets a delegate that is called when ShowSaveFileDialog is called.</summary>
+        public Func<object?, IEnumerable<FileType>, FileType?, string?, FileDialogResult>? ShowSaveFileDialogStub { get; set; }
+
         /// <summary>Shows the open file dialog box that allows a user to specify a file that should be opened.</summary>
         /// <param name="owner">The window that owns this OpenFileDialog.</param>
         /// <param name="fileTypes">The supported file types.</param>
@@ -39,7 +45,7 @@ namespace System.Waf.UnitTesting.Mocks
             FileTypes = fileTypes;
             DefaultFileType = defaultFileType;
             DefaultFileName = defaultFileName;
-            return Result!;
+            return ShowOpenFileDialogStub?.Invoke(owner, fileTypes, defaultFileType, defaultFileName) ?? Result!;
         }
 
         /// <summary>Shows the save file dialog box that allows a user to specify a filename to save a file as.</summary>
@@ -55,7 +61,7 @@ namespace System.Waf.UnitTesting.Mocks
             FileTypes = fileTypes;
             DefaultFileType = defaultFileType;
             DefaultFileName = defaultFileName;
-            return Result!;
+            return ShowSaveFileDialogStub?.Invoke(owner, fileTypes, defaultFileType, defaultFileName) ?? Result!;
         }
 
         /// <summary>Clears the last remembered dialog.</summary>
