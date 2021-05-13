@@ -91,10 +91,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             settings.IsMaximized = ViewCore.IsMaximized;
         }
 
-        private void ShowAboutMessage()
-        {
-            messageService.ShowMessage(View, string.Format(CultureInfo.CurrentCulture, Resources.AboutText,
-                ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version));
-        }
+        private void ShowAboutMessage() => messageService.ShowMessage(View, Resources.AboutText, ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version);
     }
 }

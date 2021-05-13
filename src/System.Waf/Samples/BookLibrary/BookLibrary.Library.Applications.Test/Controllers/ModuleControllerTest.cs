@@ -66,7 +66,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Exit the application although we have unsaved changes.
             entityController.HasChangesResult = true;
             // When the question box asks us to save the changes we say "Yes" => true.
-            messageService.ShowQuestionAction = (message) =>
+            messageService.ShowQuestionStub = (_, message) =>
             {
                 Assert.AreEqual(Resources.SaveChangesQuestion, message);
                 return true;
@@ -83,7 +83,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             entityController.HasChangesResult = true;
             entityController.SaveCalled = false;
             // When the question box asks us to save the changes we say "Cancel" => null.
-            messageService.ShowQuestionAction = (message) => null;
+            messageService.ShowQuestionStub = (_, message) => null;
             // This time the Save method must not be called. Because we have chosen "Cancel" the ShellView must still
             // be visible.
             shellViewModel.ExitCommand.Execute(null);
@@ -94,7 +94,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             entityController.HasChangesResult = true;
             entityController.SaveCalled = false;
             // When the question box asks us to save the changes we say "No" => false.
-            messageService.ShowQuestionAction = (message) => false;
+            messageService.ShowQuestionStub = (_, message) => false;
             // This time the Save method must not be called. Because we have chosen "No" the ShellView must still
             // be closed.
             shellViewModel.ExitCommand.Execute(null);
@@ -119,7 +119,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Simulate UI errors.
             entityController.CanSaveResult = false;
             // When the question box asks us to loose our changes we say "No" => false.
-            messageService.ShowYesNoQuestionAction = (message) =>
+            messageService.ShowYesNoQuestionStub = (_, message) =>
             {
                 Assert.AreEqual(Resources.LoseChangesQuestion, message);
                 return false;
@@ -129,7 +129,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(shellView.IsVisible);
 
             // Exit the application again but this time we agree to loose our changes.
-            messageService.ShowYesNoQuestionAction = (message) => true;
+            messageService.ShowYesNoQuestionStub = (_, message) => true;
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsFalse(shellView.IsVisible);
         }

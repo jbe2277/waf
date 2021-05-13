@@ -75,9 +75,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         private void ShowAboutMessage()
         {
-            messageService.ShowMessage(View, string.Format(CultureInfo.CurrentCulture,
+            messageService.ShowMessage(View,
                 "{0} {1}\n\nThis software is a reference sample of the Win Application Framework (WAF).\n\nhttps://github.com/jbe2277/waf\n\n.NET Runtime: {2}",
-                ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version));
+                ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version);
         }
 
         public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)

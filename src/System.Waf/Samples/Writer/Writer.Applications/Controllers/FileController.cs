@@ -286,7 +286,7 @@ namespace Waf.Writer.Applications.Controllers
                     if (documentType == null)
                     {
                         Log.Default.Warn("The extension of the file '{0}' is not supported.", fileName);
-                        messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.FileExtensionNotSupported, fileName));
+                        messageService.ShowError(shellService.ShellView, Resources.FileExtensionNotSupported, fileName);
                         return null;
                     }
                 }
@@ -298,7 +298,7 @@ namespace Waf.Writer.Applications.Controllers
                 catch (Exception e)
                 {
                     Log.Default.Error(e, "Error in open document");
-                    messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.CannotOpenFile, fileName));
+                    messageService.ShowError(shellService.ShellView, Resources.CannotOpenFile, fileName);
                     if (e is FileNotFoundException)
                     {
                         RecentFile recentFile = recentFileList.RecentFiles.FirstOrDefault(x => x.Path == fileName);
@@ -326,7 +326,7 @@ namespace Waf.Writer.Applications.Controllers
             catch (Exception e)
             {
                 Log.Default.Error(e, "Error in save document");
-                messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.CannotSaveFile, fileName));
+                messageService.ShowError(shellService.ShellView, Resources.CannotSaveFile, fileName);
             }
 
             if (documentType.CanOpen()) { recentFileList.AddFile(fileName); }

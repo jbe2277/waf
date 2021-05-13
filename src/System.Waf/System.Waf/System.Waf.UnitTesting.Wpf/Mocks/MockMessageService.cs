@@ -16,10 +16,27 @@ namespace System.Waf.UnitTesting.Mocks
         /// <summary>Gets the message content of the last shown message.</summary>
         public string? Message { get; private set; }
 
+        /// <summary>Gets or sets a delegate that is called when ShowMessage is called.</summary>
+        public Action<object?, string>? ShowMessageStub { get; set; }
+
+        /// <summary>Gets or sets a delegate that is called when ShowWarning is called.</summary>
+        public Action<object?, string>? ShowWarningStub { get; set; }
+
+        /// <summary>Gets or sets a delegate that is called when ShowError is called.</summary>
+        public Action<object?, string>? ShowErrorStub { get; set; }
+
         /// <summary>Gets or sets a delegate that is called when ShowQuestion is called.</summary>
+        public Func<object?, string, bool?>? ShowQuestionStub { get; set; }
+
+        /// <summary>Gets or sets a delegate that is called when ShowYesNoQuestion is called.</summary>
+        public Func<object?, string, bool>? ShowYesNoQuestionStub { get; set; }
+
+        /// <summary>Gets or sets a delegate that is called when ShowQuestion is called.</summary>
+        [Obsolete("Use ShowQuestionStub instead")]
         public Func<string, bool?>? ShowQuestionAction { get; set; }
 
         /// <summary>Gets or sets a delegate that is called when ShowYesNoQuestion is called.</summary>
+        [Obsolete("Use ShowYesNoQuestionStub instead")]
         public Func<string, bool>? ShowYesNoQuestionAction { get; set; }
 
         /// <summary>Shows the message.</summary>
@@ -30,6 +47,7 @@ namespace System.Waf.UnitTesting.Mocks
             MessageType = MessageType.Message;
             Owner = owner;
             Message = message;
+            ShowMessageStub?.Invoke(owner, message);
         }
 
         /// <summary>Shows the message as warning.</summary>
@@ -40,6 +58,7 @@ namespace System.Waf.UnitTesting.Mocks
             MessageType = MessageType.Warning;
             Owner = owner;
             Message = message;
+            ShowWarningStub?.Invoke(owner, message);
         }
 
         /// <summary>Shows the message as error.</summary>
@@ -50,6 +69,7 @@ namespace System.Waf.UnitTesting.Mocks
             MessageType = MessageType.Error;
             Owner = owner;
             Message = message;
+            ShowErrorStub?.Invoke(owner, message);
         }
 
         /// <summary>Shows the specified question.</summary>
@@ -59,7 +79,11 @@ namespace System.Waf.UnitTesting.Mocks
         public bool? ShowQuestion(object? owner, string message)
         {
             Owner = owner;
-            return ShowQuestionAction!(message);
+            if (ShowQuestionStub != null) return ShowQuestionStub(owner, message);
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (ShowQuestionAction != null) return ShowQuestionAction(message);
+#pragma warning restore CS0618 // Type or member is obsolete
+            return null;
         }
 
         /// <summary>Shows the specified yes/no question.</summary>
@@ -69,7 +93,9 @@ namespace System.Waf.UnitTesting.Mocks
         public bool ShowYesNoQuestion(object? owner, string message)
         {
             Owner = owner;
-            return ShowYesNoQuestionAction!(message);
+#pragma warning disable CS0618 // Type or member is obsolete
+            return ShowYesNoQuestionStub?.Invoke(owner, message) ?? ShowYesNoQuestionAction?.Invoke(message) ?? false;
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         /// <summary>Clears the last remembered message.</summary>

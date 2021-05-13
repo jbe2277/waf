@@ -71,10 +71,8 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             var errors = entities.OfType<ValidatableModel>().Where(x => x.HasErrors).ToArray();
             if (errors.Any())
             {
-                var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture, Resources.EntityInvalid, EntityToString(x), 
-                    string.Join(Environment.NewLine, x.Errors)));
-                messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture,
-                    Resources.SaveErrorInvalidEntities, string.Join(Environment.NewLine, errorMessages)));
+                var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture, Resources.EntityInvalid, EntityToString(x), string.Join(Environment.NewLine, x.Errors)));
+                messageService.ShowError(shellService.ShellView, Resources.SaveErrorInvalidEntities, string.Join(Environment.NewLine, errorMessages));
                 return false;
             }
 
