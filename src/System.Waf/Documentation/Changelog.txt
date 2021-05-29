@@ -1,9 +1,15 @@
 Changelog
 ---------
 
+Version 6.4.0.1 (Alpha 1)
+- WAF: Add Model.RaisePropertyChanged overload to notify that multiple properties have changed.
+- WAF: WPF: Add new overloads for MessageServiceExtensions.
+- WAF: UnitTesting: Add new stub properties for MockMessageService and MockFileDialogService.
+
+
 Version 6.3.0.100 (Release)
-- WAF Improve Model.SetProperty to avoid boxing of value types
-- WAF Improve ValidationResultComparer
+- WAF: Improve Model.SetProperty to avoid boxing of value types
+- WAF: Improve ValidationResultComparer
 
 
 Version 6.3.0.1 (Alpha 1)
@@ -19,16 +25,16 @@ Version 6.2.0.1 (Alpha 1)
 
 
 Version 6.1.0.100 (Release)
-- WAF StringHelper.Truncate improve nullable annotation.
+- WAF: StringHelper.Truncate improve nullable annotation.
 
 
 Version 6.1.0.4 (Alpha 4)
-- WAF Add ValidationHelper class and use it in ValidatableModel instead of Validator. Now, the ValidatableModel lists all found validation errors and the validation method is faster.
+- WAF: Add ValidationHelper class and use it in ValidatableModel instead of Validator. Now, the ValidatableModel lists all found validation errors and the validation method is faster.
 
 
 Version 6.1.0.3 (Alpha 3)
-- WAF WeakEvent: multiple calls of Remove must remove handler just once.
-- WAF Use new WeakEvent implementation in ObservableListView and SynchronizingCollection.
+- WAF: WeakEvent: multiple calls of Remove must remove handler just once.
+- WAF: Use new WeakEvent implementation in ObservableListView and SynchronizingCollection.
 
 
 Version 6.1.0.2 (Alpha 2)

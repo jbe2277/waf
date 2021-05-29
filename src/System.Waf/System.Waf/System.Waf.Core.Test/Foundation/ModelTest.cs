@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Waf.Foundation;
 using System.IO;
 using System.Runtime.Serialization;
+using System;
 
 namespace Test.Waf.Foundation
 {
@@ -26,6 +27,19 @@ namespace Test.Waf.Foundation
 
             AssertHelper.PropertyChangedEvent(luke, x => x.Phone, () => luke.Phone = "42");
             Assert.AreEqual("42", luke.Phone);
+        }
+
+        [TestMethod]
+        public void RaisePropertiesChangedTest()
+        {
+            var luke = new Person();
+            AssertHelper.PropertyChangedEvent(luke, x => x.Name, () => luke.RaiseAllChanged());
+            AssertHelper.PropertyChangedEvent(luke, x => x.Email, () => luke.RaiseAllChanged());
+            AssertHelper.PropertyChangedEvent(luke, x => x.Phone, () => luke.RaiseAllChanged());
+
+            luke.InnerRaisePropertiesChanged();
+            AssertHelper.ExpectedException<ArgumentNullException>(() => luke.InnerRaisePropertiesChanged(null!));
+            AssertHelper.PropertyChangedEvent(luke, x => x.Name, () => luke.InnerRaisePropertiesChanged(nameof(luke.Name)));
         }
 
         [TestMethod]
@@ -65,7 +79,6 @@ namespace Test.Waf.Foundation
         }
 
 
-
         [DataContract]
         private class Person : Model
         {
@@ -84,11 +97,9 @@ namespace Test.Waf.Foundation
                 get => email;
                 set
                 {
-                    if (email != value)
-                    {
-                        email = value;
-                        RaisePropertyChanged();
-                    }
+                    if (email == value) return;
+                    email = value;
+                    RaisePropertyChanged();
                 }
             }
 
@@ -97,13 +108,15 @@ namespace Test.Waf.Foundation
                 get => phone;
                 set
                 {
-                    if (phone != value)
-                    {
-                        phone = value;
-                        RaisePropertyChanged(nameof(Phone));
-                    }
+                    if (phone == value) return;
+                    phone = value;
+                    RaisePropertyChanged(nameof(Phone));
                 }
             }
+
+            public void RaiseAllChanged() => RaisePropertyChanged(nameof(Name), nameof(Email), nameof(Phone));
+
+            public void InnerRaisePropertiesChanged(params string[] propertyNames) => RaisePropertyChanged(propertyNames);
         }
     }
 }

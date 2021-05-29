@@ -36,3 +36,5 @@
 [assembly: SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.WeakEvent.StaticEventHandler")]
 [assembly: SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>", Scope = "type", Target = "~T:System.Waf.Foundation.WeakEvent.StaticEventHandler`1")]
 [assembly: SuppressMessage("Security", "CA2109:Review visible event handlers", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Foundation.SynchronizingCollectionCore`2.OriginalCollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)")]
+[assembly: SuppressMessage("Design", "CA1030:Use events where appropriate", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Foundation.Model.RaisePropertyChanged(System.String[])")]
+[assembly: SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Foundation.Model.RaisePropertyChanged(System.String[])")]
