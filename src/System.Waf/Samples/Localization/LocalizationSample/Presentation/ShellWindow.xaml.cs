@@ -9,7 +9,6 @@ namespace LocalizationSample.Presentation
             InitializeComponent();
         }
 
-
         private void CloseClick(object sender, RoutedEventArgs e)
         {
             Close();

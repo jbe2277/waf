@@ -42,8 +42,9 @@ namespace LocalizationSample
                 CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Settings.Default.UICulture);
             }
 
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
-                XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            // Set XmlLanguage or use {waf:Bind}. The latter one supports also custom culture settings
+            //FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
+            //    XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
     }
 }
