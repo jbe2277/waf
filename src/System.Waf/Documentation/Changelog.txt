@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.4.0.2 (Alpha 2)
+- WAF: WPF: Add new Bind class which is a culture aware binding implementation.
+
+
 Version 6.4.0.1 (Alpha 1)
 - WAF: Add Model.RaisePropertyChanged overload to notify that multiple properties have changed.
 - WAF: WPF: Add new overloads for MessageServiceExtensions.
