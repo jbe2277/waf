@@ -12,8 +12,8 @@ namespace Waf.Writer.Applications.Documents
         public XpsExportDocumentType() : base(Resources.XpsDocuments, ".xps")
         {
         }
-        
-        public override bool CanSave(IDocument document) { return document is RichTextDocument; }
+
+        public override bool CanSave(IDocument document) => document is RichTextDocument;
 
         protected override void SaveCore(IDocument document, string fileName)
         {

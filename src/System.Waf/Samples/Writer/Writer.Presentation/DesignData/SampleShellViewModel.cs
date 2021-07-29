@@ -8,8 +8,7 @@ namespace Waf.Writer.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() 
-            : base(new MockShellView(), null!, null!, new MockShellService(), new MockFileService(), new MockSettingsService())
+        public SampleShellViewModel() : base(new MockShellView(), null!, null!, new MockShellService(), new MockFileService(), new MockSettingsService())
         {
             ContentView = new SampleMainViewModel(new MainView()).View;
         }
@@ -35,15 +34,9 @@ namespace Waf.Writer.Presentation.DesignData
             
             public void Close() { }
 
-            protected virtual void OnClosing(CancelEventArgs e)
-            {
-                Closing?.Invoke(this, e);
-            }
+            protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-            protected virtual void OnClosed(EventArgs e)
-            {
-                Closed?.Invoke(this, e);
-            }
+            protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
         }
     }
 }

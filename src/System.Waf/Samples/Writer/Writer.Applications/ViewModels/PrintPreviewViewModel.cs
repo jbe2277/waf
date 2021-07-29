@@ -9,8 +9,7 @@ namespace Waf.Writer.Applications.ViewModels
     public class PrintPreviewViewModel : ZoomViewModel<IPrintPreviewView>
     {
         [ImportingConstructor]
-        public PrintPreviewViewModel(IPrintPreviewView view, IShellService shellService)
-            : base(view, shellService)
+        public PrintPreviewViewModel(IPrintPreviewView view, IShellService shellService) : base(view, shellService)
         {
         }
 

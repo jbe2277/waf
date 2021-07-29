@@ -23,10 +23,7 @@ namespace Waf.Writer.Presentation.Views
 
         private void NewButtonIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (newButton.IsVisible)
-            {
-                newButton.Focus();
-            }
+            if (newButton.IsVisible) newButton.Focus();
         }
 
         private void OpenContextMenuHandler(object sender, RoutedEventArgs e)

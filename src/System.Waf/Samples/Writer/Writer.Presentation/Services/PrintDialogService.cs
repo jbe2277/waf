@@ -8,16 +8,10 @@ namespace Waf.Writer.Presentation.Services
     [Export(typeof(IPrintDialogService))]
     internal class PrintDialogService : IPrintDialogService
     {
-        private readonly PrintDialog printDialog = new PrintDialog();
+        private readonly PrintDialog printDialog = new();
 
-        public bool ShowDialog()
-        {
-            return printDialog.ShowDialog() == true;
-        }
+        public bool ShowDialog() => printDialog.ShowDialog() == true;
 
-        public void PrintDocument(DocumentPaginator documentPaginator, string description)
-        {
-            printDialog.PrintDocument(documentPaginator, description);
-        }
+        public void PrintDocument(DocumentPaginator documentPaginator, string description) => printDialog.PrintDocument(documentPaginator, description);
     }
 }

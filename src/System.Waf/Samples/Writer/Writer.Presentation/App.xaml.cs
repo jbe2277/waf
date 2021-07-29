@@ -29,8 +29,7 @@ namespace Waf.Writer.Presentation
             ProfileOptimization.StartProfile("Startup.profile");
         }
 
-        private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                ApplicationInfo.ProductName);
+        private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -42,51 +41,38 @@ namespace Waf.Writer.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
             catalog = new AggregateCatalog();
-            // Add the WinApplicationFramework assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
-            // Add the Writer.Presentation assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-            // Add the Writer.Applications assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
-
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Writer.Presentation
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Writer.Applications
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
             var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
-
             moduleControllers = container.GetExportedValues<IModuleController>();
-            foreach (var moduleController in moduleControllers) { moduleController.Initialize(); }
-            foreach (var moduleController in moduleControllers) { moduleController.Run(); }
+            foreach (var x in moduleControllers) x.Initialize();
+            foreach (var x in moduleControllers) x.Run();
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
+            if (moduleControllers is not null) foreach (var x in moduleControllers.Reverse()) x.Shutdown();
             container?.Dispose();
             catalog?.Dispose();
             Log.App.Info("{0} closed", ApplicationInfo.ProductName);
             base.OnExit(e);
         }
 
-        private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            HandleException(e.Exception, false);
-        }
+        private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => HandleException(e.Exception, false);
 
-        private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            HandleException(e.ExceptionObject as Exception, e.IsTerminating);
-        }
+        private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e) => HandleException(e.ExceptionObject as Exception, e.IsTerminating);
 
         private static void HandleException(Exception? e, bool isTerminating)
         {
             if (e == null) return;
-
             Log.App.Error(e, "Unhandled exception");
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), 
-                    ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

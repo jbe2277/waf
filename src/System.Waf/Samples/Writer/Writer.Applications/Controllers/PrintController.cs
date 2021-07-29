@@ -8,9 +8,7 @@ using Waf.Writer.Applications.ViewModels;
 
 namespace Waf.Writer.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the print related commands and the PrintPreview.
-    /// </summary>
+    /// <summary>Responsible for the print related commands and the PrintPreview.</summary>
     [Export]
     internal class PrintController
     {
@@ -24,8 +22,7 @@ namespace Waf.Writer.Applications.Controllers
         private object? previousView;
 
         [ImportingConstructor]
-        public PrintController(IFileService fileService, IPrintDialogService printDialogService, 
-            ShellViewModel shellViewModel, ExportFactory<PrintPreviewViewModel> printPreviewViewModelFactory)
+        public PrintController(IFileService fileService, IPrintDialogService printDialogService, ShellViewModel shellViewModel, ExportFactory<PrintPreviewViewModel> printPreviewViewModelFactory)
         {
             this.fileService = fileService;
             this.printDialogService = printDialogService;
@@ -34,7 +31,6 @@ namespace Waf.Writer.Applications.Controllers
             printPreviewCommand = new DelegateCommand(ShowPrintPreview, CanShowPrintPreview);
             printCommand = new DelegateCommand(PrintDocument, CanPrintDocument);
             closePrintPreviewCommand = new DelegateCommand(ClosePrintPreview);
-
             fileService.PropertyChanged += FileServicePropertyChanged;
         }
 
@@ -45,14 +41,11 @@ namespace Waf.Writer.Applications.Controllers
             shellViewModel.PrintCommand = printCommand;            
         }
 
-        private bool CanShowPrintPreview()
-        {
-            return fileService.ActiveDocument != null && !shellViewModel.IsPrintPreviewVisible;
-        }
+        private bool CanShowPrintPreview() => fileService.ActiveDocument != null && !shellViewModel.IsPrintPreviewVisible;
 
         private void ShowPrintPreview()
         {
-            PrintPreviewViewModel printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
+            var printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
             printPreviewViewModel.Document = (RichTextDocument)fileService.ActiveDocument!;
             previousView = shellViewModel.ContentView;
             shellViewModel.ContentView = printPreviewViewModel.View;
@@ -60,22 +53,15 @@ namespace Waf.Writer.Applications.Controllers
             printPreviewCommand.RaiseCanExecuteChanged();
         }
 
-        private bool CanPrintDocument()
-        {
-            return fileService.ActiveDocument != null;
-        }
+        private bool CanPrintDocument() => fileService.ActiveDocument != null;
 
         private void PrintDocument()
         {
-            if (printDialogService.ShowDialog())
-            {
-                // We have to clone the FlowDocument before we use different pagination settings for the export.        
-                RichTextDocument document = (RichTextDocument)fileService.ActiveDocument!;
-                FlowDocument clone = document.CloneContent();
-
-                printDialogService.PrintDocument(((IDocumentPaginatorSource)clone).DocumentPaginator, 
-                    fileService.ActiveDocument!.FileName);
-            }
+            if (!printDialogService.ShowDialog()) return;
+            // We have to clone the FlowDocument before we use different pagination settings for the export.        
+            var document = (RichTextDocument)fileService.ActiveDocument!;
+            var clone = document.CloneContent();
+            printDialogService.PrintDocument(((IDocumentPaginatorSource)clone).DocumentPaginator, fileService.ActiveDocument!.FileName);
         }
 
         private void ClosePrintPreview()

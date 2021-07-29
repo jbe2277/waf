@@ -8,8 +8,8 @@ namespace Waf.Writer.Presentation.Services
     [Export(typeof(IEnvironmentService))]
     internal class EnvironmentService : IEnvironmentService
     {
-        private readonly Lazy<string> documentFileName = new Lazy<string>(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
+        private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
 
-        public string DocumentFileName => documentFileName.Value;
+        public string? DocumentFileName => documentFileName.Value;
     }
 }

@@ -11,28 +11,11 @@ namespace Waf.Writer.Presentation.Converters
         
         public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            if (value is string fileName && !string.IsNullOrEmpty(fileName))
-            {
-                fileName = Path.GetFileName(fileName);
-                
-                if (fileName.Length <= MaxCharacters)
-                {
-                    return fileName;
-                }
-                else
-                {
-                    return fileName.Remove(MaxCharacters - 3) + "...";
-                }
-            }
-            else
-            {
-                return "";
-            }
+            if (value is not string fileName || string.IsNullOrEmpty(fileName)) return "";
+            fileName = Path.GetFileName(fileName);
+            return fileName.Length <= MaxCharacters ? fileName : fileName.Remove(MaxCharacters - 3) + "...";
         }
 
-        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture) => throw new NotSupportedException();
     }
 }

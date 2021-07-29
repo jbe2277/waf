@@ -23,8 +23,6 @@ namespace Waf.Writer.Applications.Properties
 
         [DataMember] public RecentFileList? RecentFileList { get; set; }
 
-        protected override void SetDefaultValues()
-        {
-        }
+        protected override void SetDefaultValues() { }
     }
 }

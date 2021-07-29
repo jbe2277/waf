@@ -32,17 +32,11 @@ namespace Waf.Writer.Presentation.Views
             }
         }
 
-        private void ZoomBoxDropDownClosedHandler(object sender, EventArgs e)
-        {
-            BindingOperations.GetBindingExpression(zoomBox, ComboBox.TextProperty).UpdateSource();
-        }
-        
+        private void ZoomBoxDropDownClosedHandler(object sender, EventArgs e) => BindingOperations.GetBindingExpression(zoomBox, ComboBox.TextProperty).UpdateSource();
+
         private void ZoomBoxKeyDownHandler(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                BindingOperations.GetBindingExpression(zoomBox, ComboBox.TextProperty).UpdateSource();
-            }
+            if (e.Key == Key.Return) BindingOperations.GetBindingExpression(zoomBox, ComboBox.TextProperty).UpdateSource();
         }
     }
 }

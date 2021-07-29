@@ -1,19 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Waf.Writer.Presentation</RootNamespace>
     <AssemblyName>Writer</AssemblyName>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Images\Writer.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\Writer\$(Configuration)\</OutputPath>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="ReachFramework" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Writer.Applications\Writer.Applications.csproj" />

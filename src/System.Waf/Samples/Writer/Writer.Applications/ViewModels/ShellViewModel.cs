@@ -20,8 +20,7 @@ namespace Waf.Writer.Applications.ViewModels
         private bool isPrintPreviewVisible;
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService, IShellService shellService, 
-            IFileService fileService, ISettingsService settingsService) : base(view)
+        public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService, IShellService shellService, IFileService fileService, ISettingsService settingsService) : base(view)
         {
             this.messageService = messageService;
             ShellService = shellService;
@@ -96,26 +95,16 @@ namespace Waf.Writer.Applications.ViewModels
         {
             if (!uiCulture.Equals(CultureInfo.CurrentUICulture))
             {
-                messageService.ShowMessage(ShellService.ShellView, Resources.RestartApplication + "\n\n" +
-                    Resources.ResourceManager.GetString("RestartApplication", uiCulture));
+                messageService.ShowMessage(ShellService.ShellView, Resources.RestartApplication + "\n\n" + Resources.ResourceManager.GetString("RestartApplication", uiCulture));
             }
             NewLanguage = uiCulture;
         }
 
-        private void ShowAboutMessage()
-        {
-            messageService.ShowMessage(ShellService.ShellView, Resources.AboutText, ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version);
-        }
+        private void ShowAboutMessage() => messageService.ShowMessage(ShellService.ShellView, Resources.AboutText, ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version);
 
-        protected virtual void OnClosing(CancelEventArgs e)
-        {
-            Closing?.Invoke(this, e);
-        }
+        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        private void ViewClosing(object? sender, CancelEventArgs e)
-        {
-            OnClosing(e);
-        }
+        private void ViewClosing(object? sender, CancelEventArgs e) => OnClosing(e);
 
         private void ViewClosed(object? sender, EventArgs e)
         {
