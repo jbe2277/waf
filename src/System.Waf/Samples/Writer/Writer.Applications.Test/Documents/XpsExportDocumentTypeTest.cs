@@ -18,7 +18,7 @@ namespace Test.Writer.Applications.Documents
         public void SaveDocumentTest()
         {
             var rtfDocumentType = new RichTextDocumentType();
-            IDocument document = rtfDocumentType.New();
+            var document = rtfDocumentType.New();
             Assert.AreEqual("Document 1.rtf", document.FileName);
 
             var xpsDocumentType = new XpsExportDocumentType();

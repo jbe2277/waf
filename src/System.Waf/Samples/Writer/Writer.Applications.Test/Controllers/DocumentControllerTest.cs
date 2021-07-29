@@ -22,21 +22,12 @@ namespace Test.Writer.Applications.Controllers
             public TestDocumentController(IFileService fileService) : base(fileService)
             {
             }
-            
-            protected override void OnDocumentAdded(IDocument document)
-            {
-                throw new NotSupportedException();
-            }
 
-            protected override void OnDocumentRemoved(IDocument document)
-            {
-                throw new NotSupportedException();
-            }
+            protected override void OnDocumentAdded(IDocument document) => throw new NotSupportedException();
 
-            protected override void OnActiveDocumentChanged(IDocument? activeDocument)
-            {
-                throw new NotSupportedException();
-            }
+            protected override void OnDocumentRemoved(IDocument document) => throw new NotSupportedException();
+
+            protected override void OnActiveDocumentChanged(IDocument? activeDocument) => throw new NotSupportedException();
         }
     }
 }

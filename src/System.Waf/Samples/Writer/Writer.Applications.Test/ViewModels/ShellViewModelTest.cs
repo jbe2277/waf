@@ -65,7 +65,7 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var presentationService = (MockPresentationService)Get<IPresentationService>();
+            var presentationService = Get<MockPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
@@ -74,7 +74,7 @@ namespace Test.Writer.Applications.ViewModels
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
             var shellViewModel = Get<ShellViewModel>();
-            var shellView = Get<MockShellView>();
+            var shellView = (MockShellView)shellViewModel.View;
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -94,9 +94,9 @@ namespace Test.Writer.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSizeSpecial()
         {
-            var messageService = (MockMessageService)Get<IMessageService>();
+            var messageService = Get<MockMessageService>();
             var fileService = Get<IFileService>();
-            var presentationService = (MockPresentationService)Get<IPresentationService>();
+            var presentationService = Get<MockPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 

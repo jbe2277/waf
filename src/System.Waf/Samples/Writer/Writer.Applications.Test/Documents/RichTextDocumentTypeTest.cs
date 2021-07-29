@@ -29,7 +29,7 @@ namespace Test.Writer.Applications.Documents
         public void SaveAndOpenDocumentTest()
         {
             var documentType = new RichTextDocumentType();
-            IDocument document = documentType.New();
+            var document = documentType.New();
             Assert.AreEqual("Document 1.rtf", document.FileName);
 
             Assert.IsTrue(documentType.CanSave(document));
@@ -37,7 +37,7 @@ namespace Test.Writer.Applications.Documents
             Assert.AreEqual("TestDocument1.rtf", document.FileName);
 
             Assert.IsTrue(documentType.CanOpen());
-            IDocument openedDocument = documentType.Open("TestDocument1.rtf");
+            var openedDocument = documentType.Open("TestDocument1.rtf");
             Assert.AreEqual("TestDocument1.rtf", openedDocument.FileName);
 
             // Note: What's missing is to compare the document content of both documents.
@@ -47,7 +47,7 @@ namespace Test.Writer.Applications.Documents
         public void DocumentTest()
         {
             var documentType = new RichTextDocumentType();
-            IDocument document = documentType.New();
+            var document = documentType.New();
 
             Assert.AreEqual(document.DocumentType, documentType);
 

@@ -23,7 +23,6 @@ namespace Test.Writer.Applications.Controllers
             base.OnCleanup();
         }
 
-
         [TestMethod]
         public void PrintPreviewTest()
         {
@@ -56,7 +55,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsTrue(shellViewModel.PrintCommand.CanExecute(null));
 
             var fileService = Get<IFileService>();
-            var printDialogService = (MockPrintDialogService)Get<IPrintDialogService>();
+            var printDialogService = Get<MockPrintDialogService>();
 
             printDialogService.ShowDialogResult = true;
             shellViewModel.PrintCommand.Execute(null);
@@ -79,10 +78,8 @@ namespace Test.Writer.Applications.Controllers
             fileService.NewCommand.Execute(null);
             fileService.ActiveDocument = null;
 
-            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintPreviewCommand, () =>
-                fileService.ActiveDocument = fileService.Documents.First());
-            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintCommand, () =>
-                fileService.ActiveDocument = fileService.Documents.Last());
+            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintPreviewCommand, () => fileService.ActiveDocument = fileService.Documents.First());
+            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintCommand, () => fileService.ActiveDocument = fileService.Documents.Last());
         }
     }
 }

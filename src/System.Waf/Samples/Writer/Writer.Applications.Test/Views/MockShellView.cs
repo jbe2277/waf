@@ -25,14 +25,11 @@ namespace Test.Writer.Applications.Views
 
         public event EventHandler? Closed;
 
-        public void Show()
-        {
-            IsVisible = true;
-        }
+        public void Show() => IsVisible = true;
 
         public void Close()
         {
-            CancelEventArgs e = new CancelEventArgs();
+            var e = new CancelEventArgs();
             OnClosing(e);
             if (!e.Cancel)
             {
@@ -49,14 +46,8 @@ namespace Test.Writer.Applications.Views
             Height = double.NaN;
         }
 
-        protected virtual void OnClosing(CancelEventArgs e)
-        {
-            Closing?.Invoke(this, e);
-        }
+        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        protected virtual void OnClosed(EventArgs e)
-        {
-            Closed?.Invoke(this, e);
-        }
+        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
     }
 }

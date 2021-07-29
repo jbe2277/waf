@@ -5,8 +5,7 @@ namespace Test.Writer.Applications.Documents
 {
     public class MockDocumentType : DocumentType
     {
-        public MockDocumentType(string description, string fileExtension)
-            : base(description, fileExtension)
+        public MockDocumentType(string description, string fileExtension) : base(description, fileExtension)
         {
             CanSaveResult = true;
         }
@@ -27,8 +26,8 @@ namespace Test.Writer.Applications.Documents
             FileName = null;
             Document = null;
         }
-        
-        public override bool CanNew() { return true; }
+
+        public override bool CanNew() => true;
 
         protected override IDocument NewCore()
         {
@@ -37,7 +36,7 @@ namespace Test.Writer.Applications.Documents
             return new MockDocument(this);
         }
 
-        public override bool CanOpen() { return true; }
+        public override bool CanOpen() => true;
 
         protected override IDocument OpenCore(string fileName)
         {
@@ -47,7 +46,7 @@ namespace Test.Writer.Applications.Documents
             return new MockDocument(this);
         }
 
-        public override bool CanSave(IDocument document) { return CanSaveResult && document is MockDocument; }
+        public override bool CanSave(IDocument document) => CanSaveResult && document is MockDocument;
 
         protected override void SaveCore(IDocument document, string fileName)
         {
@@ -59,7 +58,7 @@ namespace Test.Writer.Applications.Documents
 
         private void CheckThrowException()
         {
-            if (ThrowException) { throw new FileNotFoundException("ThrowException has been activated on the MockDocumentType."); }
+            if (ThrowException) throw new FileNotFoundException("ThrowException has been activated on the MockDocumentType.");
         }
     }
 

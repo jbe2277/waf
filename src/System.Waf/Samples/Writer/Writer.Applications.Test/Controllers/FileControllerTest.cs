@@ -10,7 +10,6 @@ using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Test.Writer.Applications.Documents;
 using Waf.Writer.Applications.Controllers;
-using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
@@ -45,7 +44,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsFalse(fileService.Documents.Any());
             Assert.IsNull(fileService.ActiveDocument);
 
-            IDocument document = fileController.New(documentType);
+            var document = fileController.New(documentType);
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
             Assert.AreEqual(document, fileService.ActiveDocument);
 
@@ -81,7 +80,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.AreEqual(DocumentOperation.Open, documentType.DocumentOperation);
             Assert.AreEqual("Document1.mock", documentType.FileName);
 
-            IDocument document = fileService.Documents.Last();
+            var document = fileService.Documents.Last();
             Assert.AreEqual("Document1.mock", document.FileName);
 
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
@@ -119,7 +118,7 @@ namespace Test.Writer.Applications.Controllers
 
             // Open is called with a fileName which might be a command line parameter.
             fileService.OpenCommand.Execute("Document1.mock");
-            IDocument document = fileService.Documents.Last();
+            var document = fileService.Documents.Last();
             Assert.AreEqual("Document1.mock", document.FileName);
 
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
@@ -157,10 +156,7 @@ namespace Test.Writer.Applications.Controllers
         {
             var fileController = Get<FileController>();
             var fileService = Get<IFileService>();
-            foreach (var recentFile in fileService.RecentFileList.RecentFiles.ToArray())
-            {
-                fileService.RecentFileList.Remove(recentFile);
-            }
+            foreach (var x in fileService.RecentFileList.RecentFiles.ToArray()) fileService.RecentFileList.Remove(x);
             
             var documentType = new MockDocumentType("Mock Document", ".mock") { ThrowException = true };
             fileController.Register(documentType);
@@ -184,7 +180,7 @@ namespace Test.Writer.Applications.Controllers
 
             fileController.Register(documentType);
             fileController.New(documentType);
-            IDocument document = fileService.Documents.Single();
+            var document = fileService.Documents.Single();
             document.FileName = "Document.mock";
 
             fileDialogService.Result = new FileDialogResult("Document1.mock", new FileType("Mock Document", ".mock"));
@@ -266,7 +262,7 @@ namespace Test.Writer.Applications.Controllers
             fileController.Register(documentType);
 
             var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic)!;
-            IDocument document = fileController.New(documentType);
+            var document = fileController.New(documentType);
             var exception = AssertHelper.ExpectedException<TargetInvocationException>(() => saveAsMethod.Invoke(fileController, new[] { document }));
             Assert.IsInstanceOfType(exception.InnerException, typeof(InvalidOperationException));
         }
@@ -314,7 +310,6 @@ namespace Test.Writer.Applications.Controllers
             var fileService = Get<IFileService>();
             var documentType = new MockDocumentType("Mock Document", ".mock");
             fileController.Register(documentType);
-
             fileController.New(documentType);
             fileService.CloseCommand.Execute(null);
             Assert.IsFalse(fileService.Documents.Any());
@@ -324,17 +319,12 @@ namespace Test.Writer.Applications.Controllers
         public void UpdateCommandsTest()
         {
             var documentManager = Get<IFileService>();
-
             documentManager.NewCommand.Execute(null);
             documentManager.NewCommand.Execute(null);
             documentManager.ActiveDocument = null;
-
-            AssertHelper.CanExecuteChangedEvent(documentManager.CloseCommand, () =>
-                documentManager.ActiveDocument = documentManager.Documents.First());
-            AssertHelper.CanExecuteChangedEvent(documentManager.SaveCommand, () =>
-                documentManager.ActiveDocument = documentManager.Documents.Last());
-            AssertHelper.CanExecuteChangedEvent(documentManager.SaveAsCommand, () =>
-                documentManager.ActiveDocument = documentManager.Documents.First());
+            AssertHelper.CanExecuteChangedEvent(documentManager.CloseCommand, () => documentManager.ActiveDocument = documentManager.Documents.First());
+            AssertHelper.CanExecuteChangedEvent(documentManager.SaveCommand, () => documentManager.ActiveDocument = documentManager.Documents.Last());
+            AssertHelper.CanExecuteChangedEvent(documentManager.SaveAsCommand, () => documentManager.ActiveDocument = documentManager.Documents.First());
         }
     }
 }
