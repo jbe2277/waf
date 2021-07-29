@@ -28,15 +28,10 @@ namespace Waf.Writer.Applications.Services
             get => activeDocument;
             set
             {
-                if (activeDocument != value)
-                {
-                    if (value != null && !documents.Contains(value))
-                    {
-                        throw new ArgumentException("value is not an item of the Documents collection.");
-                    }
-                    activeDocument = value;
-                    RaisePropertyChanged();
-                }
+                if (activeDocument == value) return;
+                if (value != null && !documents.Contains(value)) throw new ArgumentException("value is not an item of the Documents collection.");
+                activeDocument = value;
+                RaisePropertyChanged();                
             }
         }
 
@@ -52,14 +47,8 @@ namespace Waf.Writer.Applications.Services
 
         public ICommand SaveAsCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public void AddDocument(IDocument document)
-        {
-            documents.Add(document);
-        }
+        public void AddDocument(IDocument document) => documents.Add(document);
 
-        public void RemoveDocument(IDocument document)
-        {
-            documents.Remove(document);
-        }
+        public void RemoveDocument(IDocument document) => documents.Remove(document);
     }
 }

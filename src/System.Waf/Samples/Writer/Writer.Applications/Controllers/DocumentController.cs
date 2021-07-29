@@ -7,9 +7,7 @@ using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible to synchronize the Documents with the UI Elements that represent these Documents.
-    /// </summary>
+    /// <summary>Responsible to synchronize the Documents with the UI Elements that represent these Documents.</summary>
     internal abstract class DocumentController
     {
         private readonly IFileService fileService;
@@ -29,25 +27,14 @@ namespace Waf.Writer.Applications.Controllers
 
         private void FileServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(IFileService.ActiveDocument))
-            {
-                OnActiveDocumentChanged(fileService.ActiveDocument);
-            }
+            if (e.PropertyName == nameof(IFileService.ActiveDocument)) OnActiveDocumentChanged(fileService.ActiveDocument);
         }
 
         private void DocumentsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    OnDocumentAdded(e.NewItems.Cast<Document>().Single());
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    OnDocumentRemoved(e.OldItems.Cast<Document>().Single());
-                    break;
-                default:
-                    throw new NotSupportedException("This kind of documents collection change is not supported.");
-            }
+            if (e.Action == NotifyCollectionChangedAction.Add) OnDocumentAdded(e.NewItems!.Cast<Document>().Single());
+            else if (e.Action == NotifyCollectionChangedAction.Remove) OnDocumentRemoved(e.OldItems!.Cast<Document>().Single());
+            else throw new NotSupportedException("This kind of documents collection change is not supported.");
         }
     }
 }

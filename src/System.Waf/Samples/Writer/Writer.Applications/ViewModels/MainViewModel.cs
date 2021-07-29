@@ -19,13 +19,11 @@ namespace Waf.Writer.Applications.ViewModels
         private object? activeDocumentView;
 
         [ImportingConstructor]
-        public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) 
-            : base(view)
+        public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) : base(view)
         {
             this.shellService = shellService;
             FileService = fileService;
             DocumentViews = new ObservableCollection<object>();
-            
             DocumentViews.CollectionChanged += DocumentViewsCollectionChanged;
             fileService.PropertyChanged += FileServicePropertyChanged;
         }
@@ -51,19 +49,16 @@ namespace Waf.Writer.Applications.ViewModels
         {
             if (e.PropertyName == nameof(IFileService.ActiveDocument))
             {
-                if (activeDocument != null) { activeDocument.PropertyChanged -= ActiveDocumentPropertyChanged; }
+                if (activeDocument != null) activeDocument.PropertyChanged -= ActiveDocumentPropertyChanged;
                 activeDocument = FileService.ActiveDocument;
-                if (activeDocument != null) { activeDocument.PropertyChanged += ActiveDocumentPropertyChanged; }
+                if (activeDocument != null) activeDocument.PropertyChanged += ActiveDocumentPropertyChanged;
                 UpdateShellServiceDocumentName();
             }
         }
 
         private void ActiveDocumentPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Document.FileName))
-            {
-                UpdateShellServiceDocumentName();
-            }
+            if (e.PropertyName == nameof(Document.FileName)) UpdateShellServiceDocumentName();
         }
 
         private void UpdateShellServiceDocumentName()

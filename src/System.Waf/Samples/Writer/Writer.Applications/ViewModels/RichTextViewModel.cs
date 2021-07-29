@@ -66,10 +66,7 @@ namespace Waf.Writer.Applications.ViewModels
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.PropertyName == nameof(IsVisible))
-            {
-                shellService.ActiveEditingCommands = IsVisible ? this : null;
-            }
+            if (e.PropertyName == nameof(IsVisible)) shellService.ActiveEditingCommands = IsVisible ? this : null;
         }
     }
 }

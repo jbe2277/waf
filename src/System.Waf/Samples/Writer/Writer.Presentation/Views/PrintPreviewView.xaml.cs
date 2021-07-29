@@ -15,7 +15,7 @@ namespace Waf.Writer.Presentation.Views
     [Export(typeof(IPrintPreviewView)), PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class PrintPreviewView : IPrintPreviewView
     {
-        const string PackagePath = "pack://temp.xps";
+        private const string PackagePath = "pack://temp.xps";
         private readonly Lazy<PrintPreviewViewModel> viewModel;
         private Package? package;
         private XpsDocument? xpsDocument;
@@ -23,7 +23,6 @@ namespace Waf.Writer.Presentation.Views
         public PrintPreviewView()
         {
             InitializeComponent();
-
             viewModel = new Lazy<PrintPreviewViewModel>(() => ViewHelper.GetViewModel<PrintPreviewViewModel>(this)!);
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -32,15 +31,12 @@ namespace Waf.Writer.Presentation.Views
 
         private PrintPreviewViewModel ViewModel => viewModel.Value;
 
-        public void FitToWidth()
-        {
-            documentViewer.FitToWidth();
-        }
+        public void FitToWidth() => documentViewer.FitToWidth();
 
         private void LoadedHandler(object sender, RoutedEventArgs e)
         {
             // We have to clone the FlowDocument before we use different pagination settings for the export.        
-            FlowDocument clone = ViewModel.Document.CloneContent();
+            var clone = ViewModel.Document.CloneContent();
             clone.ColumnWidth = double.PositiveInfinity;
 
             var packageStream = new MemoryStream();
@@ -50,7 +46,7 @@ namespace Waf.Writer.Presentation.Views
             using (var policy = new XpsPackagingPolicy(xpsDocument))
             using (var serializer = new XpsSerializationManager(policy, false))
             {
-                DocumentPaginator paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
+                var paginator = ((IDocumentPaginatorSource)clone).DocumentPaginator;
                 serializer.SaveAsXaml(paginator);
             }
             documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
@@ -64,9 +60,6 @@ namespace Waf.Writer.Presentation.Views
             package?.Close();
         }
 
-        private void IsVisibleChangedHandler(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            ViewModel.IsVisible = IsVisible;
-        }
+        private void IsVisibleChangedHandler(object sender, DependencyPropertyChangedEventArgs e) => ViewModel.IsVisible = IsVisible;
     }
 }

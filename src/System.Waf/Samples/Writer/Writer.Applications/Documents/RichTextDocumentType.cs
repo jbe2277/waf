@@ -14,11 +14,11 @@ namespace Waf.Writer.Applications.Documents
         {
         }
 
-        public override bool CanNew() { return true; }
+        public override bool CanNew() => true;
 
-        public override bool CanOpen() { return true; }
+        public override bool CanOpen() => true;
 
-        public override bool CanSave(IDocument document) { return document is RichTextDocument; }
+        public override bool CanSave(IDocument document) => document is RichTextDocument;
 
         protected override IDocument NewCore()
         {
@@ -36,7 +36,6 @@ namespace Waf.Writer.Applications.Documents
             {
                 range.Load(stream, DataFormats.Rtf);
             }
-            
             var document = new RichTextDocument(this, flowDocument);
             documentCount++;
             return document;

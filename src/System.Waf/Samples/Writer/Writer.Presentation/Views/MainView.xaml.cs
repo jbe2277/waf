@@ -20,11 +20,9 @@ namespace Waf.Writer.Presentation.Views
             get => contentViewState;
             set
             {
-                if (contentViewState != value)
-                {
-                    contentViewState = value;
-                    VisualStateManager.GoToElementState(rootContainer, value.ToString(), true);
-                }
+                if (contentViewState == value) return;
+                contentViewState = value;
+                VisualStateManager.GoToElementState(rootContainer, value.ToString(), true);
             }
         }
     }

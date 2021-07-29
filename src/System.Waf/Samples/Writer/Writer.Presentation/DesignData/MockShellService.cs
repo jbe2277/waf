@@ -1,4 +1,5 @@
-﻿using System.Waf.Foundation;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Waf.Foundation;
 using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.DesignData
@@ -9,10 +10,10 @@ namespace Waf.Writer.Presentation.DesignData
 
         public string? DocumentName { get; set; } = "Document 1";
 
-#pragma warning disable CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
+        [AllowNull]
         public IEditingCommands ActiveEditingCommands { get; set; } = null!;
 
+        [AllowNull]
         public IZoomCommands ActiveZoomCommands { get; set; } = null!;
-#pragma warning restore CS8767
     }
 }

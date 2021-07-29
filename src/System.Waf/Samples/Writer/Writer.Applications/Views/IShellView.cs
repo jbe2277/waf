@@ -15,13 +15,11 @@ namespace Waf.Writer.Applications.Views
         double Height { get; set; }
 
         bool IsMaximized { get; set; }
-
         
         event CancelEventHandler? Closing;
 
         event EventHandler? Closed;
 
-        
         void Show();
 
         void Close();

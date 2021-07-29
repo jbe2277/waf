@@ -9,18 +9,10 @@ namespace Waf.Writer.Presentation.DesignData
 
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
-        public T Get<T>() where T : class, new()
-        {
-            return new T();
-        }
+        public T Get<T>() where T : class, new() => new T();
 
-        public void Save()
-        {
-        }
+        public void Save() { }
 
-        public void RaiseErrorOccurred(SettingsErrorEventArgs e)
-        {
-            ErrorOccurred?.Invoke(this, e);
-        }
+        public void RaiseErrorOccurred(SettingsErrorEventArgs e) => ErrorOccurred?.Invoke(this, e);
     }
 }
