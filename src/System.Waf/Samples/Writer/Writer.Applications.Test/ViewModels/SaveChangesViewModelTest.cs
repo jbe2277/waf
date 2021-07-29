@@ -24,14 +24,14 @@ namespace Test.Writer.Applications.ViewModels
             
             Assert.AreEqual(documents, viewModel.Documents);
             
-            object owner = new object();
+            var owner = new object();
             Assert.IsFalse(view.IsVisible);
             MockSaveChangesView.ShowDialogAction = v => 
             {
                 Assert.AreEqual(owner, v.Owner);
                 Assert.IsTrue(v.IsVisible);    
             };
-            bool? dialogResult = viewModel.ShowDialog(owner);
+            var dialogResult = viewModel.ShowDialog(owner);
             Assert.IsNull(dialogResult);
             Assert.IsFalse(view.IsVisible);
 

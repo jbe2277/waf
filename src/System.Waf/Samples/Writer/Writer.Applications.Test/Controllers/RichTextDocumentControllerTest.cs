@@ -27,7 +27,7 @@ namespace Test.Writer.Applications.Controllers
             // Create new documents
 
             fileService.NewCommand.Execute(null);
-            IDocument document = fileService.Documents.Last();
+            var document = fileService.Documents.Last();
 
             var richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
             var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;

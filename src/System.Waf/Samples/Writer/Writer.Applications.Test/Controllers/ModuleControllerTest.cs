@@ -16,14 +16,19 @@ namespace Test.Writer.Applications.Controllers
     [TestClass]
     public class ModuleControllerTest : TestClassBase
     {
+        protected override void OnCleanup()
+        {
+            MockSaveChangesView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void ControllerLifecycle()
         {
             var controller = Get<ModuleController>();
-            
             controller.Initialize();
             
-            var shellView = (MockShellView)Get<IShellView>();
+            var shellView = Get<MockShellView>();
             var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
             Assert.IsNotNull(shellViewModel.ExitCommand);
 
@@ -47,7 +52,6 @@ namespace Test.Writer.Applications.Controllers
 
             var controller = Get<ModuleController>();
             controller.Initialize();
-
             
             // Open the 'Document.mock' file
             controller.Run();
@@ -89,7 +93,7 @@ namespace Test.Writer.Applications.Controllers
             // modified document wasn't saved.
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsTrue(showDialogCalled);
-            var shellView = (MockShellView)Get<IShellView>();
+            var shellView = Get<MockShellView>();
             Assert.IsTrue(shellView.IsVisible);
 
             showDialogCalled = false;
@@ -99,7 +103,7 @@ namespace Test.Writer.Applications.Controllers
                 view.ViewModel.YesCommand.Execute(null);
             };
 
-            var fileDialogService = (MockFileDialogService)Get<IFileDialogService>();
+            var fileDialogService = Get<MockFileDialogService>();
             fileDialogService.Result = new FileDialogResult();
 
             // This time we let the SaveChangesView to save the modified document
@@ -107,8 +111,6 @@ namespace Test.Writer.Applications.Controllers
             Assert.IsTrue(showDialogCalled);
             Assert.AreEqual(FileDialogType.SaveFileDialog, fileDialogService.FileDialogType);
             Assert.IsFalse(shellView.IsVisible);
-
-            MockSaveChangesView.ShowDialogAction = null;
         }
 
         [TestMethod]

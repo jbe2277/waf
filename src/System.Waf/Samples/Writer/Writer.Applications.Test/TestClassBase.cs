@@ -21,13 +21,13 @@ namespace Test.Writer.Applications
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
             CultureInfo.CurrentUICulture = new CultureInfo("en-US");
 
-            AggregateCatalog catalog = new AggregateCatalog();
+            var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
 
             Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(Container);
             Container.Compose(batch);
 
@@ -44,15 +44,9 @@ namespace Test.Writer.Applications
             OnCleanup();
         }
 
-        public T Get<T>()
-        {
-            return Container.GetExportedValue<T>();
-        }
+        public T Get<T>() => Container.GetExportedValue<T>();
 
-        public Lazy<T> GetLazy<T>()
-        {
-            return new Lazy<T>(() => Container.GetExportedValue<T>());
-        }
+        public Lazy<T> GetLazy<T>() => new(() => Container.GetExportedValue<T>());
 
         protected virtual void OnInitialize() { }
 
@@ -65,9 +59,6 @@ namespace Test.Writer.Applications
             return printController;
         }
 
-        protected void ShutdownPrintController()
-        {
-            printController = null;
-        }
+        protected void ShutdownPrintController() => printController = null;
     }
 }

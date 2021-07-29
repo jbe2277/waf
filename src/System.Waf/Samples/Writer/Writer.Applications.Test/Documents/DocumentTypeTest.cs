@@ -30,8 +30,7 @@ namespace Test.Writer.Applications.Documents
             var documentType2 = new MockDocumentTypeBase("XPS Documents", ".xps");
             AssertHelper.ExpectedException<NotSupportedException>(() => documentType.New());
             AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Open("TestDocument1.rtf"));
-            AssertHelper.ExpectedException<NotSupportedException>(() => 
-                documentType.Save(new DocumentBaseMock(documentType2), "TestDocument1.rtf"));
+            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Save(new DocumentBaseMock(documentType2), "TestDocument1.rtf"));
 
             AssertHelper.ExpectedException<ArgumentException>(() => documentType.Open(""));
             AssertHelper.ExpectedException<ArgumentException>(() => documentType.Save(new DocumentBaseMock(documentType2), ""));

@@ -8,10 +8,7 @@ namespace Test.Writer.Applications.Views
     public class MockPrintPreviewView : MockView, IPrintPreviewView
     {
         public bool FitToWidthCalled { get; set; }
-        
-        public void FitToWidth()
-        {
-            FitToWidthCalled = true;
-        }
+
+        public void FitToWidth() => FitToWidthCalled = true;
     }
 }

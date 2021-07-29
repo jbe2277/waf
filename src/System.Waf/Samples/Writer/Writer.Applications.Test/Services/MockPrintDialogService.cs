@@ -4,7 +4,7 @@ using Waf.Writer.Applications.Services;
 
 namespace Test.Writer.Applications.Services
 {
-    [Export(typeof(IPrintDialogService))]
+    [Export(typeof(IPrintDialogService)), Export]
     public class MockPrintDialogService : IPrintDialogService
     {
         public bool ShowDialogResult { get; set; }

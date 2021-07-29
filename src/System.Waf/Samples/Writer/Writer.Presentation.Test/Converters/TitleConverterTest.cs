@@ -16,8 +16,7 @@ namespace Test.Writer.Presentation.Converters
             var converter = new TitleConverter();
 
             Assert.AreEqual("App Title", converter.Convert(new[] { "App Title", null }, null, null, CultureInfo.InvariantCulture));
-            Assert.AreEqual("Document1.rtf - App Title", 
-                converter.Convert(new[] { "App Title", "Document1.rtf" }, null, null, CultureInfo.InvariantCulture));
+            Assert.AreEqual("Document1.rtf - App Title", converter.Convert(new[] { "App Title", "Document1.rtf" }, null, null, CultureInfo.InvariantCulture));
 
             Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(null, null, null, null));
             Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { "Wrong" }, null, null, null));
