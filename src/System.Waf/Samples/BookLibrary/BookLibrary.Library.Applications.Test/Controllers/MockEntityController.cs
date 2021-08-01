@@ -18,22 +18,13 @@ namespace Test.BookLibrary.Library.Applications.Controllers
 
         public bool SaveCalled { get; set; }
 
-        public MockEntityController()
-        {
-            CanSaveResult = true;
-        }
-        
-        public void Initialize()
-        {
-            InitializeCalled = true;
-        }
+        public MockEntityController() => CanSaveResult = true;
 
-        public bool HasChanges()
-        {
-            return HasChangesResult;
-        }
+        public void Initialize() => InitializeCalled = true;
 
-        public bool CanSave() { return CanSaveResult; }
+        public bool HasChanges() => HasChangesResult;
+
+        public bool CanSave() => CanSaveResult;
 
         public bool Save()
         {
@@ -41,9 +32,6 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             return SaveResult;
         }
 
-        public void Shutdown()
-        {
-            ShutdownCalled = true;
-        }
+        public void Shutdown() => ShutdownCalled = true;
     }
 }

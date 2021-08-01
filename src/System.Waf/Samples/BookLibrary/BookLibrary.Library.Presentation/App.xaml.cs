@@ -73,8 +73,7 @@ namespace Waf.BookLibrary.Library.Presentation
             LogManager.Configuration = logConfig;
         }
 
-        private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                ApplicationInfo.ProductName);
+        private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -86,57 +85,44 @@ namespace Waf.BookLibrary.Library.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
             catalog = new AggregateCatalog();
-            // Add the WinApplicationFramework assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));
-            // Add the Waf.BookLibrary.Library.Presentation assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-            // Add the Waf.BookLibrary.Library.Applications assembly to the catalog
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
+            
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Waf.BookLibrary.Library.Presentation
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Waf.BookLibrary.Library.Applications
 
             // Load module assemblies as well (e.g. Reporting extension). See App.config file.
-            foreach(string moduleAssembly in Settings.Default.ModuleAssemblies)
-            {
-                catalog.Catalogs.Add(new AssemblyCatalog(moduleAssembly));
-            }
-
+            foreach (var x in Settings.Default.ModuleAssemblies) catalog.Catalogs.Add(new AssemblyCatalog(x));
+            
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
             var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
 
             moduleControllers = container.GetExportedValues<IModuleController>();
-            foreach (var moduleController in moduleControllers) { moduleController.Initialize(); }
-            foreach (var moduleController in moduleControllers) { moduleController.Run(); }
+            foreach (var x in moduleControllers) x.Initialize();
+            foreach (var x in moduleControllers) x.Run();
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
+            foreach (var x in moduleControllers!.Reverse()) x.Shutdown();
             container?.Dispose();
             catalog?.Dispose();
             Log.App.Info("{0} closed", ApplicationInfo.ProductName);
             base.OnExit(e);
         }
 
-        private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            HandleException(e.Exception, false);
-        }
+        private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => HandleException(e.Exception, false);
 
-        private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            HandleException(e.ExceptionObject as Exception, e.IsTerminating);
-        }
+        private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e) => HandleException(e.ExceptionObject as Exception, e.IsTerminating);
 
         private static void HandleException(Exception? e, bool isTerminating)
         {
             if (e == null) return;
-
             Log.App.Error(e, "Unhandled exception");
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), 
-                    ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e), ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

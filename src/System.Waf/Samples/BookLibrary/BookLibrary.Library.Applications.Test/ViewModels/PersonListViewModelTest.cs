@@ -9,7 +9,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
     [TestClass]
-    public class PersonListViewModelTest
+    public class PersonListViewModelTest : TestClassBase
     {
         [TestMethod]
         public void PersonListViewModelPersonsTest()
@@ -27,12 +27,11 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsFalse(personListViewModel.SelectedPersons.Any());
 
             // Select the first person
-            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.SelectedPerson,
-                () => personListViewModel.SelectedPerson = persons.First());
+            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.SelectedPerson, () => personListViewModel.SelectedPerson = persons.First());
             Assert.AreEqual(persons.First(), personListViewModel.SelectedPerson);
             
             personListViewModel.AddSelectedPerson(persons.First());
-            AssertHelper.SequenceEqual(new Person[] { persons.First() }, personListViewModel.SelectedPersons);
+            AssertHelper.SequenceEqual(new[] { persons.First() }, personListViewModel.SelectedPersons);
 
             // Select both persons
             personListViewModel.AddSelectedPerson(persons.Last());

@@ -10,8 +10,14 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
     [TestClass]
-    public class LendToViewModelTest
+    public class LendToViewModelTest : TestClassBase
     {
+        protected override void OnCleanup()
+        {
+            MockLendToView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void LendToViewModelLendToTest()
         {
@@ -28,7 +34,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.AreEqual(persons, lendToViewModel.Persons);
             
             // Show the dialog
-            object owner = new object();
+            var owner = new object();
             Action<MockLendToView> showDialogAction = (view) =>
             {
                 Assert.IsTrue(lendToView.IsVisible);
@@ -40,8 +46,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 Assert.AreEqual(persons.First(), lendToViewModel.SelectedPerson);
 
                 // Select the last person: Lend to Ron
-                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.SelectedPerson, () =>
-                    lendToViewModel.SelectedPerson = persons.Last());
+                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.SelectedPerson, () => lendToViewModel.SelectedPerson = persons.Last());
 
                 // Press Ok button
                 lendToViewModel.OkCommand.Execute(null);
@@ -51,8 +56,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsTrue(lendToViewModel.ShowDialog(owner));
             Assert.IsFalse(lendToView.IsVisible);
             Assert.AreEqual(persons.Last(), lendToViewModel.SelectedPerson);
-
-            MockLendToView.ShowDialogAction = null;
         }
 
         [TestMethod]
@@ -68,7 +71,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 
             // Show the dialog
-            object owner = new object();
+            var owner = new object();
             Action<MockLendToView> showDialogAction = (view) =>
             {
                 // Check the default values
@@ -76,14 +79,12 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 Assert.IsTrue(lendToViewModel.IsWasReturned);
 
                 // Change check boxes
-                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsLendTo, () => 
-                    lendToViewModel.IsLendTo = true);
+                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsLendTo, () => lendToViewModel.IsLendTo = true);
                 Assert.IsTrue(lendToViewModel.IsLendTo);
                 Assert.IsFalse(lendToViewModel.IsWasReturned);
 
                 // Restore the original check boxes state
-                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsWasReturned, () => 
-                    lendToViewModel.IsWasReturned = true);
+                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsWasReturned, () => lendToViewModel.IsWasReturned = true);
                 Assert.IsFalse(lendToViewModel.IsLendTo);
                 Assert.IsTrue(lendToViewModel.IsWasReturned);
 
@@ -94,8 +95,6 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsNotNull(lendToViewModel.SelectedPerson);
             Assert.IsTrue(lendToViewModel.ShowDialog(owner));
             Assert.IsNull(lendToViewModel.SelectedPerson);
-
-            MockLendToView.ShowDialogAction = null;
         }
     }
 }

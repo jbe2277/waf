@@ -11,9 +11,7 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the person management and the master / detail views.
-    /// </summary>
+    /// <summary>Responsible for the person management and the master / detail views.</summary>
     [Export]
     internal class PersonController
     {
@@ -28,8 +26,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand createNewEmailCommand;
 
         [ImportingConstructor]
-        public PersonController(IMessageService messageService, IShellService shellService,
-            IEntityService entityService, IEmailService emailService, 
+        public PersonController(IMessageService messageService, IShellService shellService, IEntityService entityService, IEmailService emailService, 
             PersonListViewModel personListViewModel, PersonViewModel personViewModel)
         {
             this.messageService = messageService;
@@ -49,46 +46,36 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         {
             personViewModel.CreateNewEmailCommand = createNewEmailCommand;
             personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
-
             PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
             personListViewModel.Persons = PersonsView;
             personListViewModel.AddNewCommand = addNewCommand;
             personListViewModel.RemoveCommand = removeCommand;
             personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
             personListViewModel.PropertyChanged += PersonListViewModelPropertyChanged;
-
             shellService.PersonListView = personListViewModel.View;
             shellService.PersonView = personViewModel.View;
-
             personListViewModel.SelectedPerson = personListViewModel.Persons.FirstOrDefault();
         }
 
-        private bool CanAddPerson() { return personListViewModel.IsValid && personViewModel.IsValid; }
+        private bool CanAddPerson() => personListViewModel.IsValid && personViewModel.IsValid;
 
         private void AddNewPerson()
         {
             var person = new Person();
             person.Validate();
             entityService.Persons.Add(person);
-            
             personListViewModel.SelectedPerson = person;
             personListViewModel.Focus();
         }
 
-        private bool CanRemovePerson() 
-        {
-            return personListViewModel.SelectedPerson != null; 
-        }
+        private bool CanRemovePerson() => personListViewModel.SelectedPerson != null;
 
         private void RemovePerson()
         {
             var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
-            var nextPerson = personListViewModel.Persons.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
-            foreach (Person person in personListViewModel.SelectedPersons.ToArray())
-            {
-                entityService.Persons.Remove(person);
-            }
-            personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons.LastOrDefault();
+            var nextPerson = personListViewModel.Persons!.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
+            foreach (var x in personListViewModel.SelectedPersons.ToArray()) entityService.Persons.Remove(x);
+            personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons!.LastOrDefault();
             personListViewModel.Focus();
         }
 
@@ -132,10 +119,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void PersonViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(PersonViewModel.IsValid))
-            {
-                UpdateCommands();
-            }
+            if (e.PropertyName == nameof(PersonViewModel.IsValid)) UpdateCommands();
         }
     }
 }

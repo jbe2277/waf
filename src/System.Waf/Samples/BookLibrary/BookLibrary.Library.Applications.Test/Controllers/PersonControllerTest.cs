@@ -75,8 +75,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(personListView.FirstCellHasFocus);
 
             // Simulate an invalid UI input state => the user can't add more persons
-            AssertHelper.CanExecuteChangedEvent(personListViewModel.AddNewCommand, () => 
-                personViewModel.IsValid = false);
+            AssertHelper.CanExecuteChangedEvent(personListViewModel.AddNewCommand, () => personViewModel.IsValid = false);
             Assert.IsFalse(personListViewModel.AddNewCommand.CanExecute(null));
 
             // Remove the last two Persons at once
@@ -151,7 +150,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             var personController = Get<PersonController>();
             personController.Initialize();
             var personListViewModel = Get<PersonListViewModel>();
-            personListViewModel.AddSelectedPerson(personListViewModel.Persons.Single());
+            personListViewModel.AddSelectedPerson(personListViewModel.Persons!.Single());
             var personViewModel = Get<PersonViewModel>();
 
             var addNewCommand = personListViewModel.AddNewCommand!;

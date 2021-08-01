@@ -13,10 +13,8 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 
 namespace Waf.BookLibrary.Library.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the database connection and the save operation.
-    /// </summary>
-    [Export(typeof(IEntityController))]
+    /// <summary>Responsible for the database connection and the save operation.</summary>
+    [Export(typeof(IEntityController)), Export]
     internal class EntityController : IEntityController
     {
         private readonly EntityService entityService;
@@ -51,18 +49,12 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             ShellViewModel.DatabasePath = dataSourcePath;
         }
 
-        public void Shutdown()
-        {
-            bookLibraryContext?.Dispose();
-        }
+        public void Shutdown() => bookLibraryContext?.Dispose();
 
-        public bool HasChanges()
-        {
-            return bookLibraryContext?.ChangeTracker.HasChanges() == true;
-        }
+        public bool HasChanges() => bookLibraryContext?.ChangeTracker.HasChanges() == true;
 
-        public bool CanSave() { return ShellViewModel.IsValid; }
-        
+        public bool CanSave() => ShellViewModel.IsValid;
+
         public bool Save()
         {
             if (!CanSave()) throw new InvalidOperationException("You must not call Save when CanSave returns false."); 
@@ -82,10 +74,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void ShellViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ShellViewModel.IsValid))
-            {
-                saveCommand.RaiseCanExecuteChanged();
-            }
+            if (e.PropertyName == nameof(ShellViewModel.IsValid)) saveCommand.RaiseCanExecuteChanged();
         }
 
         internal static string EntityToString(object entity)

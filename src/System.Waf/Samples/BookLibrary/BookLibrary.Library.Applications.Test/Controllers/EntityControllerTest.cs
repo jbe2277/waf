@@ -16,7 +16,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void ValidateBeforeSave()
         {
-            var controller = (EntityController)Get<IEntityController>();
+            var controller = Get<EntityController>();
             controller.Initialize();
             Assert.IsFalse(controller.HasChanges());
             var entityService = Get<EntityService>();
@@ -45,7 +45,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void DisableSaveWhenShellIsInvalid()
         {
-            var controller = (EntityController)Get<IEntityController>();
+            var controller = Get<EntityController>();
             controller.Initialize();
             var shellViewModel = Get<ShellViewModel>();
             Assert.IsTrue(shellViewModel.SaveCommand!.CanExecute(null));
@@ -69,17 +69,14 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         {
             public string? ToStringValue;
 
-            public override string? ToString() { return ToStringValue; }
+            public override string? ToString() => ToStringValue;
         }
 
         private class FormattableEntity : IFormattable
         {
             public string ToStringValue = "";
 
-            public string ToString(string? format, IFormatProvider? formatProvider)
-            {
-                return ToStringValue;
-            }
+            public string ToString(string? format, IFormatProvider? formatProvider) => ToStringValue;
         }
     }
 }

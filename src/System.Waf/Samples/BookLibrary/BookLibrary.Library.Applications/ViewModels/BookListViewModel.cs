@@ -59,27 +59,18 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref sort, value);
         }
 
-        public void Focus()
-        {
-            ViewCore.FocusFirstCell();
-        }
+        public void Focus() => ViewCore.FocusFirstCell();
 
         public bool Filter(BookDataModel bookDataModel)
         {
-            Book book = bookDataModel.Book;
+            var book = bookDataModel.Book;
             return string.IsNullOrEmpty(filterText)
                 || (!string.IsNullOrEmpty(book.Title) && book.Title.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
                 || (!string.IsNullOrEmpty(book.Author) && book.Author.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public void AddSelectedBook(BookDataModel bookDataModel)
-        {
-            selectedBooks.Add(bookDataModel);
-        }
+        public void AddSelectedBook(BookDataModel bookDataModel) => selectedBooks.Add(bookDataModel);
 
-        public void RemoveSelectedBook(BookDataModel bookDataModel)
-        {
-            selectedBooks.Remove(bookDataModel);
-        }
+        public void RemoveSelectedBook(BookDataModel bookDataModel) => selectedBooks.Remove(bookDataModel);
     }
 }

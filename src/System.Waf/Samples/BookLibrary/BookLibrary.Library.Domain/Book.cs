@@ -83,12 +83,9 @@ namespace Waf.BookLibrary.Library.Domain
             set => SetPropertyAndValidate(ref lendTo, value);
         }
 
-        public string ToString(string? format, IFormatProvider formatProvider)
-        {
-            return string.Format(formatProvider, Resources.BookToString, Title, Author);
-        }
+        public string ToString(string? format, IFormatProvider? formatProvider) => string.Format(formatProvider, Resources.BookToString, Title, Author);
 
-        public static ValidationResult ValidatePublishDate(DateTime value, ValidationContext context)
+        public static ValidationResult? ValidatePublishDate(DateTime value, ValidationContext context)
         {
             var minValue = new DateTime(1753, 1, 1);
             var maxValue = new DateTime(9999, 12, 31);

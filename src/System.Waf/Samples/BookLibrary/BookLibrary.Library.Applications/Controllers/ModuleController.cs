@@ -9,9 +9,7 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 
 namespace Waf.BookLibrary.Library.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the module lifecycle.
-    /// </summary>
+    /// <summary>Responsible for the module lifecycle.</summary>
     [Export(typeof(IModuleController)), Export]
     internal class ModuleController : IModuleController
     {
@@ -24,12 +22,10 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand exitCommand;
 
         [ImportingConstructor]
-        public ModuleController(IMessageService messageService, IPresentationService presentationService, 
-            IEntityController entityController, BookController bookController, PersonController personController, 
+        public ModuleController(IMessageService messageService, IPresentationService presentationService, IEntityController entityController, BookController bookController, PersonController personController, 
             ShellService shellService, Lazy<ShellViewModel> shellViewModel)
         {
             presentationService.InitializeCultures();
-            
             this.messageService = messageService;
             this.entityController = entityController;
             this.bookController = bookController;
@@ -46,51 +42,39 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             shellService.ShellView = ShellViewModel.View;
             ShellViewModel.ExitCommand = exitCommand;
             ShellViewModel.Closing += ShellViewModelClosing;
-
             entityController.Initialize();
             bookController.Initialize();
             personController.Initialize();
         }
 
-        public void Run()
-        {
-            ShellViewModel.Show();
-        }
+        public void Run() => ShellViewModel.Show();
 
-        public void Shutdown()
-        {
-            entityController.Shutdown();
-        }
+        public void Shutdown() => entityController.Shutdown();
 
         private void ShellViewModelClosing(object sender, CancelEventArgs e)
         {
-            if (entityController.HasChanges())
+            if (!entityController.HasChanges()) return;
+            if (entityController.CanSave())
             {
-                if (entityController.CanSave())
+                bool? result = messageService.ShowQuestion(shellService.ShellView, Resources.SaveChangesQuestion);
+                if (result == true)
                 {
-                    bool? result = messageService.ShowQuestion(shellService.ShellView, Resources.SaveChangesQuestion);
-                    if (result == true)
-                    {
-                        if (!entityController.Save())
-                        {
-                            e.Cancel = true;
-                        }
-                    }
-                    else if (result == null)
+                    if (!entityController.Save())
                     {
                         e.Cancel = true;
                     }
                 }
-                else
+                else if (result == null)
                 {
-                    e.Cancel = !messageService.ShowYesNoQuestion(shellService.ShellView, Resources.LoseChangesQuestion);
+                    e.Cancel = true;
                 }
+            }
+            else
+            {
+                e.Cancel = !messageService.ShowYesNoQuestion(shellService.ShellView, Resources.LoseChangesQuestion);
             }
         }
 
-        private void Close()
-        {
-            ShellViewModel.Close();
-        }
+        private void Close() => ShellViewModel.Close();
     }
 }

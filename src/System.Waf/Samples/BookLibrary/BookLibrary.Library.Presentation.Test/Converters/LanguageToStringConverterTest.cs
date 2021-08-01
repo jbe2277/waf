@@ -22,8 +22,7 @@ namespace Test.BookLibrary.Library.Presentation.Converters
             Assert.AreEqual(Resources.Spanish, converter.Convert(Language.Spanish, null, null, null));
             Assert.AreEqual(Resources.Chinese, converter.Convert(Language.Chinese, null, null, null));
             Assert.AreEqual(Resources.Japanese, converter.Convert(Language.Japanese, null, null, null));
-            AssertHelper.ExpectedException<InvalidOperationException>(() => 
-                converter.Convert((Language)(-1), null, null, null));
+            AssertHelper.ExpectedException<InvalidOperationException>(() => converter.Convert((Language)(-1), null, null, null));
 
             Assert.IsNull(converter.Convert(12, null, null, null));
             

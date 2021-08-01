@@ -25,10 +25,7 @@ namespace Test.BookLibrary.Library.Applications.Views
 
         public event EventHandler? Closed;
 
-        public void Show()
-        {
-            IsVisible = true;
-        }
+        public void Show() => IsVisible = true;
 
         public void Close()
         {
@@ -49,14 +46,8 @@ namespace Test.BookLibrary.Library.Applications.Views
             Height = double.NaN;
         }
 
-        protected virtual void OnClosing(CancelEventArgs e)
-        {
-            Closing?.Invoke(this, e);
-        }
+        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        protected virtual void OnClosed(EventArgs e)
-        {
-            Closed?.Invoke(this, e);
-        }
+        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
     }
 }

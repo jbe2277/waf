@@ -16,11 +16,9 @@ namespace Waf.BookLibrary.Library.Applications.Views
 
         bool IsMaximized { get; set; }
         
-        
         event CancelEventHandler? Closing;
 
         event EventHandler? Closed;
-
 
         void Show();
 

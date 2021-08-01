@@ -14,7 +14,7 @@ namespace Waf.BookLibrary.Library.Presentation.Converters
 
         public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            if (value is string s) { return s; }
+            if (value is string s) return s;
             return ((Uri?)value)?.OriginalString;
         }
     }

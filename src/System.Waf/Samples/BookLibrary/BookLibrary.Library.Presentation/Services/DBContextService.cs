@@ -19,13 +19,9 @@ namespace Waf.BookLibrary.Library.Presentation.Services
         public DbContext GetBookLibraryContext(out string dataSourcePath)
         {
             // Create directory for the database.
-            string dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                ApplicationInfo.Company, ApplicationInfo.ProductName);
-            if (!Directory.Exists(Path.Combine(dataDirectory, ResourcesDirectoryName)))
-            {
-                Directory.CreateDirectory(Path.Combine(dataDirectory, ResourcesDirectoryName));
-            }
-
+            string dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationInfo.Company, ApplicationInfo.ProductName);
+            if (!Directory.Exists(Path.Combine(dataDirectory, ResourcesDirectoryName))) Directory.CreateDirectory(Path.Combine(dataDirectory, ResourcesDirectoryName));
+            
             // Copy the template database file into the DataDirectory when it doesn't exists.
             var connectionString = ConfigurationManager.ConnectionStrings["BookLibraryContext"].ConnectionString;
             dataSourcePath = Path.Combine(dataDirectory, connectionString);
