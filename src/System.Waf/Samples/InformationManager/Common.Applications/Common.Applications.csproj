@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.Common.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Applications</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

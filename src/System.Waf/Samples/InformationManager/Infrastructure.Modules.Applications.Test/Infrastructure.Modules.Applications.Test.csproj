@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Test.InformationManager.Infrastructure.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Modules.Applications.Test</AssemblyName>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.Composition" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
