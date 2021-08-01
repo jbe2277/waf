@@ -1,19 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.Common.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.9" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="PresentationFramework.Aero" />
   </ItemGroup>
 
   <ItemGroup>

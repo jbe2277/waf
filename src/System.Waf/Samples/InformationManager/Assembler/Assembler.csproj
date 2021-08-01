@@ -1,21 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.Assembler</RootNamespace>
     <AssemblyName>InformationManager</AssemblyName>
     <UseWPF>true</UseWPF>
-    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>..\Common.Presentation\Resources\Images\InformationManager.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.9" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
 
   <ItemGroup>

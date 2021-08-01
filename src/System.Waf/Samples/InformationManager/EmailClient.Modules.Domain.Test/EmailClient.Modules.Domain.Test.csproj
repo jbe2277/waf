@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Domain.Test</AssemblyName>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,15 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.EmailClient.Modules.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.Composition" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
