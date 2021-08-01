@@ -20,7 +20,7 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
         private readonly DelegateCommand createBorrowedBooksReportCommand;
 
         [ImportingConstructor]
-        public ModuleController(IShellService shellService, IEntityService entityService, Lazy<ReportViewModel> reportViewModel,
+        public ModuleController(IShellService shellService, IEntityService entityService, Lazy<ReportViewModel> reportViewModel, 
             ExportFactory<IBookListReport> bookListReportFactory, ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory)
         {
             this.shellService = shellService;
@@ -40,13 +40,9 @@ namespace Waf.BookLibrary.Reporting.Applications.Controllers
             shellService.LazyReportingView = new Lazy<object>(InitializeReportView);
         }
 
-        public void Run()
-        {
-        }
+        public void Run() { }
 
-        public void Shutdown()
-        {
-        }
+        public void Shutdown() { }
 
         private object InitializeReportView()
         {

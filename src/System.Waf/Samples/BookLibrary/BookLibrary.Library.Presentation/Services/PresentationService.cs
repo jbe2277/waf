@@ -15,8 +15,7 @@ namespace Waf.BookLibrary.Library.Presentation.Services
         
         public void InitializeCultures()
         {
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
-                XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
     }
 }

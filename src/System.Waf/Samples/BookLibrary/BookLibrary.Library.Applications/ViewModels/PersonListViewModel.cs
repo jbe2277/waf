@@ -60,10 +60,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             set => SetProperty(ref sort, value);
         }
 
-        public void Focus()
-        {
-            ViewCore.FocusFirstCell();
-        }
+        public void Focus() => ViewCore.FocusFirstCell();
 
         public bool Filter(Person person)
         {
@@ -72,14 +69,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
                 || (!string.IsNullOrEmpty(person.Lastname) && person.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public void AddSelectedPerson(Person person)
-        {
-            selectedPersons.Add(person);
-        }
+        public void AddSelectedPerson(Person person) => selectedPersons.Add(person);
 
-        public void RemoveSelectedPerson(Person person)
-        {
-            selectedPersons.Remove(person);
-        }
+        public void RemoveSelectedPerson(Person person) => selectedPersons.Remove(person);
     }
 }

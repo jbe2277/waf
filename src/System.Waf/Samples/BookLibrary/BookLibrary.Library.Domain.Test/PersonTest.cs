@@ -34,8 +34,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.AreEqual(Resources.FirstnameMandatory, person.GetErrors(nameof(person.Firstname)).Single().ErrorMessage);
             
             person.Firstname = new string('A', 31);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.FirstnameMaxLength, "Firstname", 30), 
-                person.GetErrors(nameof(person.Firstname)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.FirstnameMaxLength, "Firstname", 30), person.GetErrors(nameof(person.Firstname)).Single().ErrorMessage);
 
             person.Firstname = new string('A', 30);
             Assert.IsFalse(person.GetErrors(nameof(person.Firstname)).Any());
@@ -51,8 +50,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.AreEqual(Resources.LastnameMandatory, person.GetErrors(nameof(person.Lastname)).Single().ErrorMessage);
 
             person.Lastname = new string('A', 31);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.LastnameMaxLength, "Lastname",30),
-                person.GetErrors(nameof(person.Lastname)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.LastnameMaxLength, "Lastname",30), person.GetErrors(nameof(person.Lastname)).Single().ErrorMessage);
 
             person.Lastname = new string('A', 30);
             Assert.IsFalse(person.GetErrors(nameof(person.Lastname)).Any());
@@ -72,8 +70,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());
 
             person.Email = new string('A', 92) + "@mail.com";
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.EmailMaxLength, "Email", 100),
-                person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.EmailMaxLength, "Email", 100), person.GetErrors(nameof(person.Email)).Single().ErrorMessage);
 
             person.Email = "my." + new string('A', 88) + "@mail.com";
             Assert.IsFalse(person.GetErrors(nameof(person.Email)).Any());

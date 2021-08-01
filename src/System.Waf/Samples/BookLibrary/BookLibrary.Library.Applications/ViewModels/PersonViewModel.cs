@@ -30,10 +30,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             get => person;
             set
             {
-                if (SetProperty(ref person, value))
-                {
-                    RaisePropertyChanged(nameof(IsEnabled));
-                }
+                if (!SetProperty(ref person, value)) return;
+                RaisePropertyChanged(nameof(IsEnabled));
             }
         }
 

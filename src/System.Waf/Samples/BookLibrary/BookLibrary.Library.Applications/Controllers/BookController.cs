@@ -10,9 +10,7 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the book management and the master / detail views.
-    /// </summary>
+    /// <summary>Responsible for the book management and the master / detail views.</summary>
     [Export]
     internal class BookController
     {
@@ -27,8 +25,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private SynchronizingCollection<BookDataModel, Book>? bookDataModels;
 
         [ImportingConstructor]
-        public BookController(IShellService shellService, IEntityService entityService,
-            BookListViewModel bookListViewModel, BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
+        public BookController(IShellService shellService, IEntityService entityService, BookListViewModel bookListViewModel, BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
         {
             this.shellService = shellService;
             this.entityService = entityService;
@@ -47,8 +44,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             bookViewModel.LendToCommand = lendToCommand;
             bookViewModel.PropertyChanged += BookViewModelPropertyChanged;
 
-            bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, 
-                b => new BookDataModel(b, lendToCommand));
+            bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, b => new BookDataModel(b, lendToCommand));
             BooksView = new ObservableListView<BookDataModel>(bookDataModels, null, bookListViewModel.Filter, null);
             bookListViewModel.Books = BooksView;
             bookListViewModel.AddNewCommand = addNewCommand;
@@ -61,7 +57,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             bookListViewModel.SelectedBook = bookListViewModel.Books.FirstOrDefault();
         }
 
-        private bool CanAddNewBook() { return bookListViewModel.IsValid && bookViewModel.IsValid; }
+        private bool CanAddNewBook() => bookListViewModel.IsValid && bookViewModel.IsValid;
 
         private void AddNewBook()
         {
@@ -69,26 +65,20 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
             book.Validate();
             entityService.Books.Add(book);
 
-            bookListViewModel.SelectedBook = bookDataModels.Single(b => b.Book == book);
+            bookListViewModel.SelectedBook = bookDataModels!.Single(b => b.Book == book);
             bookListViewModel.Focus();
         }
 
-        private bool CanRemoveBook() 
-        {
-            return bookListViewModel.SelectedBook != null;
-        }
+        private bool CanRemoveBook() => bookListViewModel.SelectedBook != null;
 
         private void RemoveBook()
         {
             var booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
-            var nextBook = bookListViewModel.Books.Except(booksToExclude).GetNextElementOrDefault(bookListViewModel.SelectedBook);
+            var nextBook = bookListViewModel.Books!.Except(booksToExclude).GetNextElementOrDefault(bookListViewModel.SelectedBook);
 
-            foreach (BookDataModel book in bookListViewModel.SelectedBooks.ToArray())
-            {
-                entityService.Books.Remove(book.Book);
-            }
-
-            bookListViewModel.SelectedBook = nextBook ?? bookListViewModel.Books.LastOrDefault();
+            foreach (var x in bookListViewModel.SelectedBooks.ToArray()) entityService.Books.Remove(x.Book);
+            
+            bookListViewModel.SelectedBook = nextBook ?? bookListViewModel.Books!.LastOrDefault();
             bookListViewModel.Focus();
         }
 
@@ -134,10 +124,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         private void BookViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(BookViewModel.IsValid))
-            {
-                UpdateCommands();
-            }
+            if (e.PropertyName == nameof(BookViewModel.IsValid)) UpdateCommands();
         }
     }
 }

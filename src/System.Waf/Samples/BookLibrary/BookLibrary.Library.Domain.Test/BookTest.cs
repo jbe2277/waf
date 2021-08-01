@@ -27,8 +27,7 @@ namespace Test.BookLibrary.Library.Domain
 
             Assert.IsTrue(book.Validate());
 
-            Assert.AreEqual("Star Wars - Heir to the Empire by Timothy Zahn", 
-                book.ToString(null, CultureInfo.InvariantCulture));
+            Assert.AreEqual("Star Wars - Heir to the Empire by Timothy Zahn", book.ToString(null, CultureInfo.InvariantCulture));
         }
 
         [TestMethod]
@@ -60,8 +59,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.AreEqual(Resources.TitleMandatory, book.GetErrors(nameof(book.Title)).Single().ErrorMessage);
 
             book.Title = new string('A', 101);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.TitleMaxLength, "Title", 100),
-                book.GetErrors(nameof(book.Title)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.TitleMaxLength, "Title", 100), book.GetErrors(nameof(book.Title)).Single().ErrorMessage);
 
             book.Title = new string('A', 100);
             Assert.IsFalse(book.GetErrors(nameof(book.Title)).Any());
@@ -77,8 +75,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.AreEqual(Resources.AuthorMandatory, book.GetErrors(nameof(book.Author)).Single().ErrorMessage);
 
             book.Author = new string('A', 101);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.AuthorMaxLength, "Author", 100),
-                book.GetErrors(nameof(book.Author)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.AuthorMaxLength, "Author", 100), book.GetErrors(nameof(book.Author)).Single().ErrorMessage);
 
             book.Author = new string('A', 100);
             Assert.IsFalse(book.GetErrors(nameof(book.Author)).Any());
@@ -94,8 +91,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.IsFalse(book.GetErrors(nameof(book.Publisher)).Any());
 
             book.Publisher = new string('A', 101);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PublisherMaxLength, "Publisher", 100),
-                book.GetErrors(nameof(book.Publisher)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PublisherMaxLength, "Publisher", 100), book.GetErrors(nameof(book.Publisher)).Single().ErrorMessage);
 
             book.Publisher = new string('A', 100);
             Assert.IsFalse(book.GetErrors(nameof(book.Publisher)).Any());
@@ -129,8 +125,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.IsFalse(book.GetErrors(nameof(book.Isbn)).Any());
 
             book.Isbn = new string('A', 15);
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.IsbnMaxLength, "Isbn", 14),
-                book.GetErrors(nameof(book.Isbn)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.IsbnMaxLength, "Isbn", 14), book.GetErrors(nameof(book.Isbn)).Single().ErrorMessage);
 
             book.Isbn = new string('A', 14);
             Assert.IsFalse(book.GetErrors(nameof(book.Isbn)).Any());
@@ -146,8 +141,7 @@ namespace Test.BookLibrary.Library.Domain
             Assert.IsFalse(book.GetErrors(nameof(book.Pages)).Any());
 
             book.Pages = -1;
-            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PagesEqualOrLarger, "Pages", 0),
-                book.GetErrors(nameof(book.Pages)).Single().ErrorMessage);
+            Assert.AreEqual(string.Format(CultureInfo.CurrentCulture, Resources.PagesEqualOrLarger, "Pages", 0), book.GetErrors(nameof(book.Pages)).Single().ErrorMessage);
 
             book.Pages = 400;
             Assert.IsFalse(book.GetErrors(nameof(book.Pages)).Any());

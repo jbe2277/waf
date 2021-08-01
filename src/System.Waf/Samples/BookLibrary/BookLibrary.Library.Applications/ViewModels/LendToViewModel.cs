@@ -34,11 +34,9 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             get => book;
             set
             {
-                if (SetProperty(ref book, value))
-                {
-                    if (value!.LendTo == null) { IsLendTo = true; }
-                    else { IsWasReturned = true; }
-                }
+                if (!SetProperty(ref book, value)) return;
+                if (value!.LendTo == null) IsLendTo = true;
+                else IsWasReturned = true;             
             }
         }
 
@@ -49,10 +47,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             get => isWasReturned;
             set
             {
-                if (SetProperty(ref isWasReturned, value))
-                {
-                    IsLendTo = !value;
-                }
+                if (!SetProperty(ref isWasReturned, value)) return;
+                IsLendTo = !value;
             }
         }
 
@@ -61,10 +57,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
             get => isLendTo;
             set
             {
-                if (SetProperty(ref isLendTo, value))
-                {
-                    IsWasReturned = !value;
-                }
+                if (!SetProperty(ref isLendTo, value)) return;
+                IsWasReturned = !value;
             }
         }
 
@@ -83,7 +77,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private void OkHandler() 
         {
             dialogResult = true;
-            if (IsWasReturned) { SelectedPerson = null; }
+            if (IsWasReturned) SelectedPerson = null;
             ViewCore.Close();
         }
     }

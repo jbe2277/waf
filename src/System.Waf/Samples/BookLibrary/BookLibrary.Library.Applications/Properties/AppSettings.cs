@@ -16,8 +16,6 @@ namespace Waf.BookLibrary.Library.Applications.Properties
 
         [DataMember] public bool IsMaximized { get; set; }
 
-        protected override void SetDefaultValues()
-        {
-        }
+        protected override void SetDefaultValues() { }
     }
 }

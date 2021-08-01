@@ -47,20 +47,11 @@ namespace Waf.BookLibrary.Library.Presentation.Views
 
         private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (Person? person in e.RemovedItems)
-            {
-                ViewModel.RemoveSelectedPerson(person!);
-            }
-            foreach (Person? person in e.AddedItems)
-            {
-                ViewModel.AddSelectedPerson(person!);
-            }
+            foreach (Person person in e.RemovedItems) ViewModel.RemoveSelectedPerson(person);
+            foreach (Person person in e.AddedItems) ViewModel.AddSelectedPerson(person);
         }
 
-        private void DataGridSorting(object sender, DataGridSortingEventArgs e)
-        {
-            ViewModel.Sort = DataGridHelper.HandleDataGridSorting<Person>(e);
-        }
+        private void DataGridSorting(object sender, DataGridSortingEventArgs e) => ViewModel.Sort = DataGridHelper.HandleDataGridSorting<Person>(e);
 
         private void EmailClick(object sender, RoutedEventArgs e)
         {

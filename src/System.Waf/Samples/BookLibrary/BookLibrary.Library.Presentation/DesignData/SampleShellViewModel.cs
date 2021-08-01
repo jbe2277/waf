@@ -40,15 +40,9 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
             public void Close() { }
 
-            protected virtual void OnClosing(CancelEventArgs e)
-            {
-                Closing?.Invoke(this, e);
-            }
+            protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-            protected virtual void OnClosed(EventArgs e)
-            {
-                Closed?.Invoke(this, e);
-            }
+            protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
         }
     }
 }

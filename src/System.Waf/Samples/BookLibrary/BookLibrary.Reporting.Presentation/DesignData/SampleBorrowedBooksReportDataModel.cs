@@ -6,7 +6,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData
 {
     public class SampleBorrowedBooksReportDataModel : BorrowedBooksReportDataModel
     {
-        private static readonly Person harryPotter = new Person() { Firstname = "Harry", Lastname = "Potter", Email = "harry.potter@hogwarts.edu" };
+        private static readonly Person harryPotter = new() { Firstname = "Harry", Lastname = "Potter", Email = "harry.potter@hogwarts.edu" };
         
         public SampleBorrowedBooksReportDataModel() : base(new List<Book>()
             {

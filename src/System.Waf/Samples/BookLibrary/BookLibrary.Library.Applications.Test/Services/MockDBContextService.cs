@@ -13,8 +13,7 @@ namespace Test.BookLibrary.Library.Applications.Services
         public DbContext GetBookLibraryContext(out string dataSourcePath)
         {
             dataSourcePath = @"C:\Test.db";
-            var options = new DbContextOptionsBuilder<BookLibraryContext>().UseInMemoryDatabase(databaseName: "TestDatabase", 
-                databaseRoot: new InMemoryDatabaseRoot()).Options;
+            var options = new DbContextOptionsBuilder<BookLibraryContext>().UseInMemoryDatabase(databaseName: "TestDatabase", databaseRoot: new InMemoryDatabaseRoot()).Options;
             var context = new BookLibraryContext(options, modelBuilder =>
             {
                 modelBuilder.Entity<Book>().Ignore(x => x.Errors).Ignore(x => x.HasErrors);

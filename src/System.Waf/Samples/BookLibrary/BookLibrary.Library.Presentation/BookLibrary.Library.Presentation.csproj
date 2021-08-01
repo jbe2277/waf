@@ -5,7 +5,6 @@
     <RootNamespace>Waf.BookLibrary.Library.Presentation</RootNamespace>
     <AssemblyName>BookLibrary</AssemblyName>
     <UseWPF>true</UseWPF>
-    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Images\BookLibrary.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
     <LangVersion>9.0</LangVersion>

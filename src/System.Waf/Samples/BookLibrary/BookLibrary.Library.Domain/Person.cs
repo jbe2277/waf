@@ -46,9 +46,6 @@ namespace Waf.BookLibrary.Library.Domain
             set => SetPropertyAndValidate(ref email, value == "" ? null : value);
         }
 
-        public string ToString(string? format, IFormatProvider formatProvider)
-        {
-            return string.Format(formatProvider, Resources.PersonToString, Firstname, Lastname);
-        }
+        public string ToString(string? format, IFormatProvider? formatProvider) => string.Format(formatProvider, Resources.PersonToString, Firstname, Lastname);
     }
 }

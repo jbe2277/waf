@@ -13,9 +13,6 @@ namespace Waf.BookLibrary.Reporting.Presentation.Views
             Loaded += LoadedHandler;
         }
 
-        private void LoadedHandler(object sender, RoutedEventArgs e)
-        {
-            createButton.Focus();
-        }
+        private void LoadedHandler(object sender, RoutedEventArgs e) => createButton.Focus();
     }
 }

@@ -51,15 +51,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             var shellViewModel = Get<ShellViewModel>();
 
             Assert.IsTrue(shellViewModel.IsValid);
-            AssertHelper.PropertyChangedEvent(shellViewModel, x => x.IsValid, () =>
-                shellViewModel.IsValid = false);
+            AssertHelper.PropertyChangedEvent(shellViewModel, x => x.IsValid, () => shellViewModel.IsValid = false);
             Assert.IsFalse(shellViewModel.IsValid);
         }
 
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var presentationService = (MockPresentationService)Get<IPresentationService>();
+            var presentationService = Get<MockPresentationService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
@@ -68,7 +67,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
             Get<ShellViewModel>();
-            var shellView = (MockShellView)Get<IShellView>();
+            var shellView = Get<MockShellView>();
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -89,12 +88,12 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         public void RestoreWindowLocationAndSizeSpecial()
         {
             var messageService = Get<IMessageService>();
-            var presentationService = (MockPresentationService)Get<IPresentationService>();
+            var presentationService = Get<MockPresentationService>();
             var shellService = Get<IShellService>();
             presentationService.VirtualScreenWidth = 1000;
             presentationService.VirtualScreenHeight = 700;
 
-            var shellViewMock = (MockShellView)Get<IShellView>();
+            var shellViewMock = Get<MockShellView>();
             var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             shellViewMock.SetNAForLocationAndSize();

@@ -5,7 +5,6 @@
     <RootNamespace>Waf.Writer.Presentation</RootNamespace>
     <AssemblyName>Writer</AssemblyName>
     <UseWPF>true</UseWPF>
-    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Images\Writer.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\Writer\$(Configuration)\</OutputPath>
     <LangVersion>9.0</LangVersion>

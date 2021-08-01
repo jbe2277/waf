@@ -19,8 +19,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private bool isValid = true;
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService,
-            IShellService shellService, ISettingsService settingsService) : base(view)
+        public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService, IShellService shellService, ISettingsService settingsService) : base(view)
         {
             this.messageService = messageService;
             ShellService = shellService;
@@ -62,25 +61,13 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         public event CancelEventHandler? Closing;
 
-        public void Show()
-        {
-            ViewCore.Show();
-        }
+        public void Show() => ViewCore.Show();
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
 
-        protected virtual void OnClosing(CancelEventArgs e)
-        {
-            Closing?.Invoke(this, e);
-        }
+        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        private void ViewClosing(object sender, CancelEventArgs e)
-        {
-            OnClosing(e);
-        }
+        private void ViewClosing(object sender, CancelEventArgs e) => OnClosing(e);
 
         private void ViewClosed(object? sender, EventArgs e)
         {

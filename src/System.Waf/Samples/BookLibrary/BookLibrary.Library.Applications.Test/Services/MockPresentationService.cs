@@ -12,9 +12,6 @@ namespace Test.BookLibrary.Library.Applications.Services
 
         public double VirtualScreenHeight { get; set; }
 
-        public void InitializeCultures()
-        {
-            InitializeCulturesCalled = true;
-        }
+        public void InitializeCultures() => InitializeCulturesCalled = true;
     }
 }
