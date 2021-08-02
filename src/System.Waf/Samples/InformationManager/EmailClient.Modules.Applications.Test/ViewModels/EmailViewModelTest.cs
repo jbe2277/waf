@@ -12,7 +12,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         public void PropertiesTest()
         {
             var viewModel = Get<EmailViewModel>();
-
             var email = new Email();
             AssertHelper.PropertyChangedEvent(viewModel, x => x.Email, () => viewModel.Email = email);
             Assert.AreEqual(email, viewModel.Email);

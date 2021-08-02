@@ -24,19 +24,10 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         
         private DocumentController DocumentController => documentController.Value;
 
-        public void Initialize()
-        {
-            DocumentController.Initialize();
-        }
+        public void Initialize() => DocumentController.Initialize();
 
-        public void Run()
-        {
-            ShellViewModel.Show();
-        }
+        public void Run() => ShellViewModel.Show();
 
-        public void Shutdown()
-        {
-            DocumentController.Shutdown();
-        }
+        public void Shutdown() => DocumentController.Shutdown();
     }
 }

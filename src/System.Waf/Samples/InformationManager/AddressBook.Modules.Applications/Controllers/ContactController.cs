@@ -10,9 +10,7 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the contact management and the master / detail views.
-    /// </summary>
+    /// <summary>Responsible for the contact management and the master / detail views.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     internal class ContactController
     {
@@ -47,17 +45,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             contactsView = new ObservableListView<Contact>(Root!.Contacts, null, ContactListViewModel.Filter, null);
             ContactListViewModel.Contacts = contactsView;
             ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
-
             WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
-
             contactLayoutViewModel.ContactListView = ContactListViewModel.View;
             contactLayoutViewModel.ContactView = ContactViewModel.View;
         }
 
-        public void Run()
-        {
-            shellService.ContentView = contactLayoutViewModel.View;
-        }
+        public void Run() => shellService.ContentView = contactLayoutViewModel.View;
 
         public void Shutdown()
         {
@@ -74,14 +67,12 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             ContactListViewModel.FocusItem();
         }
 
-        private bool CanDeleteContact() { return ContactListViewModel.SelectedContact != null; }
+        private bool CanDeleteContact() => ContactListViewModel.SelectedContact != null;
 
         private void DeleteContact()
         {
             var nextContact = ContactListViewModel.Contacts.GetNextElementOrDefault(ContactListViewModel.SelectedContact);
-            
             Root.RemoveContact(ContactListViewModel.SelectedContact!);
-
             ContactListViewModel.SelectedContact = nextContact ?? ContactListViewModel.Contacts.LastOrDefault();
             ContactListViewModel.FocusItem();
         }

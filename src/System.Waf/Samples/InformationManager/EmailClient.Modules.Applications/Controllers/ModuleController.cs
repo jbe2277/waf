@@ -14,9 +14,7 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the whole module. This controller delegates the tasks to other controllers.
-    /// </summary>
+    /// <summary>Responsible for the whole module. This controller delegates the tasks to other controllers.</summary>
     [Export(typeof(IModuleController)), Export]
     internal class ModuleController : IModuleController
     {
@@ -34,9 +32,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private EmailFolderController? activeEmailFolderController;
         
         [ImportingConstructor]
-        public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
-            EmailAccountsController emailAccountsController, ExportFactory<EmailFolderController> emailFolderControllerFactory,
-            ExportFactory<NewEmailController> newEmailControllerFactory)
+        public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService, EmailAccountsController emailAccountsController, 
+            ExportFactory<EmailFolderController> emailFolderControllerFactory, ExportFactory<NewEmailController> newEmailControllerFactory)
         {
             this.shellService = shellService;
             this.documentService = documentService;
@@ -65,12 +62,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 }
                 else
                 {
-                    Root = (EmailClientRoot)serializer.Value.ReadObject(stream);
+                    Root = (EmailClientRoot)serializer.Value.ReadObject(stream)!;
                 }
             }
             emailAccountsController.Root = Root;
             
-            INavigationNode node = navigationService.AddNavigationNode("Inbox", ShowInbox, CloseCurrentView, 1, 1);
+            var node = navigationService.AddNavigationNode("Inbox", ShowInbox, CloseCurrentView, 1, 1);
             itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Inbox));
             node = navigationService.AddNavigationNode("Outbox", ShowOutbox, CloseCurrentView, 1, 2);
             itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Outbox));
@@ -82,9 +79,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Deleted));
         }
 
-        public void Run()
-        {
-        }
+        public void Run() { }
 
         public void Shutdown()
         {
@@ -98,39 +93,21 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             activeEmailFolderController.EmailFolder = emailFolder;
             activeEmailFolderController.Initialize();
             activeEmailFolderController.Run();
-
             var uiNewEmailCommand = new ToolBarCommand(newEmailCommand, "_New email",  "Creates a new email.");
-            var uiDeleteEmailCommand = new ToolBarCommand(activeEmailFolderController.DeleteEmailCommand, "_Delete",
-                "Deletes the selected email.");
-            var uiEmailAccountsCommand = new ToolBarCommand(emailAccountsController.EmailAccountsCommand, "_Email accounts",
-                "Opens a window that shows the email accounts.");
+            var uiDeleteEmailCommand = new ToolBarCommand(activeEmailFolderController.DeleteEmailCommand, "_Delete", "Deletes the selected email.");
+            var uiEmailAccountsCommand = new ToolBarCommand(emailAccountsController.EmailAccountsCommand, "_Email accounts", "Opens a window that shows the email accounts.");
             shellService.AddToolBarCommands(new[] { uiNewEmailCommand, uiDeleteEmailCommand, uiEmailAccountsCommand });
         }
 
-        private void ShowInbox()
-        {
-            ShowEmails(Root.Inbox);
-        }
+        private void ShowInbox() => ShowEmails(Root.Inbox);
 
-        private void ShowOutbox()
-        {
-            ShowEmails(Root.Outbox);
-        }
+        private void ShowOutbox() => ShowEmails(Root.Outbox);
 
-        private void ShowSentEmails()
-        {
-            ShowEmails(Root.Sent);
-        }
+        private void ShowSentEmails() => ShowEmails(Root.Sent);
 
-        private void ShowDrafts()
-        {
-            ShowEmails(Root.Drafts);
-        }
+        private void ShowDrafts() => ShowEmails(Root.Drafts);
 
-        private void ShowDeletedEmails()
-        {
-            ShowEmails(Root.Deleted);
-        }
+        private void ShowDeletedEmails() => ShowEmails(Root.Deleted);
 
         private void CloseCurrentView()
         {
@@ -141,16 +118,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 
         private void NewEmail()
         {
-            NewEmailController newEmailController = newEmailControllerFactory.CreateExport().Value;
+            var newEmailController = newEmailControllerFactory.CreateExport().Value;
             newEmailController.Root = Root;
             newEmailController.Initialize();
             newEmailController.Run();
         }
 
-        private DataContractSerializer CreateDataContractSerializer()
-        {
-            return new DataContractSerializer(typeof(EmailClientRoot), new[] { typeof(ExchangeSettings), typeof(Pop3Settings) });
-        }
+        private DataContractSerializer CreateDataContractSerializer() => new(typeof(EmailClientRoot), new[] { typeof(ExchangeSettings), typeof(Pop3Settings) });
 
 
         private class ItemCountSynchronizer : Model
@@ -166,9 +140,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
                 UpdateItemCount();
             }
 
-            private void EmailsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) { UpdateItemCount(); }
+            private void EmailsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateItemCount();
 
-            private void UpdateItemCount() { node.ItemCount = folder.Emails.Count; }
+            private void UpdateItemCount() => node.ItemCount = folder.Emails.Count;
         }
     }
 }

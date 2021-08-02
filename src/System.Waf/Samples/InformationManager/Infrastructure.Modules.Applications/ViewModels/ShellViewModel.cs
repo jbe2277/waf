@@ -19,9 +19,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
         private readonly AppSettings settings;
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService,
-            ISettingsService settingsService)
-            : base(view)
+        public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService, ISettingsService settingsService) : base(view)
         {
             this.messageService = messageService;
             ShellService = shellService;
@@ -54,15 +52,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         public ICommand AboutCommand { get; }
 
-        public void Show()
-        {
-            ViewCore.Show();
-        }
+        public void Show() => ViewCore.Show();
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
 
         private void ViewClosed(object? sender, EventArgs e)
         {
@@ -75,19 +67,12 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels
 
         private void ShowAboutMessage()
         {
-            messageService.ShowMessage(View,
-                "{0} {1}\n\nThis software is a reference sample of the Win Application Framework (WAF).\n\nhttps://github.com/jbe2277/waf\n\n.NET Runtime: {2}",
+            messageService.ShowMessage(View, "{0} {1}\n\nThis software is a reference sample of the Win Application Framework (WAF).\n\nhttps://github.com/jbe2277/waf\n\n.NET Runtime: {2}",
                 ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.Version);
         }
 
-        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
-        {
-            ViewCore.AddToolBarCommands(commands);
-        }
+        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => ViewCore.AddToolBarCommands(commands);
 
-        public void ClearToolBarCommands()
-        {
-            ViewCore.ClearToolBarCommands();
-        }
+        public void ClearToolBarCommands() => ViewCore.ClearToolBarCommands();
     }
 }

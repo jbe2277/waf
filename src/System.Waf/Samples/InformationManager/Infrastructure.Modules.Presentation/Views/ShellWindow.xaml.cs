@@ -54,7 +54,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
             {
                 var accessText = new AccessText() { Text = command.Text };
                 var button = new Button() { Content = accessText, Command = command.Command };
-                if (!string.IsNullOrEmpty(command.ToolTip)) { button.ToolTip = command.ToolTip; }
+                if (!string.IsNullOrEmpty(command.ToolTip)) button.ToolTip = command.ToolTip;
 
                 toolBar.Items.Insert(index, button);
                 dynamicToolBarItems.Add(button);
@@ -71,7 +71,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views
         private void LoadedHandler(object sender, RoutedEventArgs e)
         {
             var firstNode = ViewModel.NavigationService.NavigationNodes.FirstOrDefault();
-            if (firstNode != null) { firstNode.IsSelected = true; }
+            if (firstNode != null) firstNode.IsSelected = true;
         }
     }
 }

@@ -11,15 +11,11 @@ namespace Test.InformationManager.Common.Domain
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
             CultureInfo.CurrentUICulture = new CultureInfo("en-US");
-
             OnInitialize();
         }
 
         [TestCleanup]
-        public void Cleanup()
-        {
-            OnCleanup();
-        }
+        public void Cleanup() => OnCleanup();
 
         protected virtual void OnInitialize() { }
 

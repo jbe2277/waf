@@ -61,8 +61,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.SampleData
         private static Email CreateEmail(string title, DateTime sent, string from, IReadOnlyList<string>? to, IReadOnlyList<string>? cc, string message)
         {
             var email = new Email() { Title = title, Message = message, Sent = sent, From = from };
-            if (to != null) { email.To = to; }
-            if (cc != null) { email.CC = cc; }
+            if (to != null) email.To = to;
+            if (cc != null) email.CC = cc;
             return email;
         }
     }

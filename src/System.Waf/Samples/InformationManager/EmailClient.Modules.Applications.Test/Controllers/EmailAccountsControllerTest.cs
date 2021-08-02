@@ -12,6 +12,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
     [TestClass]
     public class EmailAccountsControllerTest : EmailClientTest
     {
+        protected override void OnCleanup()
+        {
+            MockEmailAccountsView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void NewEditAndRemoveEmailAccount()
         {
@@ -28,7 +34,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             controller.EmailAccountsCommand.Execute(null);
             Assert.IsTrue(showDialogCalled);
-            MockEmailAccountsView.ShowDialogAction = null;
         }
 
         private static void EmailAccountsViewShowDialog(MockEmailAccountsView view)
@@ -53,8 +58,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             MockEditEmailAccountView.ShowDialogAction = null;
 
             var emailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
-            AssertHelper.CanExecuteChangedEvent(viewModel.RemoveAccountCommand, () =>
-                viewModel.SelectedEmailAccount = emailAccount);
+            AssertHelper.CanExecuteChangedEvent(viewModel.RemoveAccountCommand, () => viewModel.SelectedEmailAccount = emailAccount);
             Assert.IsTrue(viewModel.EditAccountCommand.CanExecute(null));
             Assert.IsTrue(viewModel.RemoveAccountCommand.CanExecute(null));
 
@@ -73,8 +77,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             var editedEmailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
             Assert.AreNotEqual(emailAccount, editedEmailAccount);
-            AssertHelper.CanExecuteChangedEvent(viewModel.EditAccountCommand, () => 
-                viewModel.SelectedEmailAccount = editedEmailAccount);
+            AssertHelper.CanExecuteChangedEvent(viewModel.EditAccountCommand, () => viewModel.SelectedEmailAccount = editedEmailAccount);
 
             // Remove the email account
 

@@ -17,14 +17,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
 
         public object? ContactListView { get; set; }
 
-        public void ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-        }
+        public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
     }
 }

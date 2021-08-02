@@ -61,7 +61,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
                 focusItemCalled = true;
             };
 
-            var emailToDelete = root.Inbox.Emails.First();
+            var emailToDelete = root.Inbox.Emails[0];
             AssertHelper.PropertyChangedEvent(emailViewModel, x => x.Email, () => emailListViewModel.SelectedEmail = emailToDelete);
             Assert.AreEqual(emailToDelete, emailViewModel.Email);
 

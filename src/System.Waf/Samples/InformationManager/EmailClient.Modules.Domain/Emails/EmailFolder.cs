@@ -19,10 +19,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         internal IEmailDeletionService EmailDeletionService { get; set; } = null!;
 
-        public void AddEmail(Email email)
-        {
-            emails.Add(email);
-        }
+        public void AddEmail(Email email) => emails.Add(email);
 
         public void RemoveEmail(Email email)
         {

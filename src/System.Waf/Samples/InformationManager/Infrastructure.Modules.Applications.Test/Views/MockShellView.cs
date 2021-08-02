@@ -37,10 +37,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
         
         public event EventHandler? Closed;
 
-        public void Show()
-        {
-            IsVisible = true;
-        }
+        public void Show() => IsVisible = true;
 
         public void Close()
         {
@@ -48,15 +45,9 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
             OnClosed(EventArgs.Empty);
         }
 
-        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
-        {
-            toolBarCommands.AddRange(commands);    
-        }
+        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => toolBarCommands.AddRange(commands);
 
-        public void ClearToolBarCommands()
-        {
-            toolBarCommands.Clear();
-        }
+        public void ClearToolBarCommands() => toolBarCommands.Clear();
 
         public void SetNAForLocationAndSize()
         {
@@ -66,9 +57,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views
             Height = double.NaN;
         }
 
-        protected virtual void OnClosed(EventArgs e)
-        {
-            Closed?.Invoke(this, e);
-        }
+        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
     }
 }

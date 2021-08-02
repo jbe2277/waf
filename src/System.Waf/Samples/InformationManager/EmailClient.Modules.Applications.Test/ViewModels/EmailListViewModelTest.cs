@@ -34,7 +34,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
         public void FilterTest()
         {
             var viewModel = Get<EmailListViewModel>();
-
             var email1 = new Email()
             {
                 Title = "Duis nunc",

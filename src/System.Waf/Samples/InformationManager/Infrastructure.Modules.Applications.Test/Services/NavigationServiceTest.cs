@@ -38,8 +38,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             Assert.IsNull(node.ItemCount);
             AssertHelper.PropertyChangedEvent(node, x => x.ItemCount, () => node.ItemCount = 5);
             Assert.AreEqual(5, node.ItemCount);
-            AssertHelper.ExpectedException<AssertException>(() =>
-                AssertHelper.PropertyChangedEvent(node, x => x.ItemCount, () => node.ItemCount = 5));
+            AssertHelper.ExpectedException<AssertException>(() => AssertHelper.PropertyChangedEvent(node, x => x.ItemCount, () => node.ItemCount = 5));
 
             Assert.IsFalse(node.IsSelected);
             Assert.IsFalse(showActionCalled);

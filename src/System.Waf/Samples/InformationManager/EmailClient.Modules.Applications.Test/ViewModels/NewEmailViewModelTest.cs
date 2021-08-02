@@ -24,8 +24,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
                 new EmailAccount()
             };
 
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts.First());
-            Assert.AreEqual(emailAccounts.First(), viewModel.SelectedEmailAccount);
+            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts[0]);
+            Assert.AreEqual(emailAccounts[0], viewModel.SelectedEmailAccount);
 
             // Email tests
 

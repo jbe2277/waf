@@ -45,9 +45,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         }
 
         [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
-        {
-            Validate();
-        }
+        private void OnDeserialized(StreamingContext context) => Validate();
     }
 }

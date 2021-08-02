@@ -45,14 +45,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => email;
             set
             {
-                if (email != value)
-                {
-                    emailPropertyChangedProxy?.Remove();
-                    email = value;
-                    emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(email, EmailPropertyChanged);
-                    UpdateProperties();
-                    RaisePropertyChanged();
-                }
+                if (email == value) return;
+                emailPropertyChangedProxy?.Remove();
+                email = value;
+                emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(email, EmailPropertyChanged);
+                UpdateProperties();
+                RaisePropertyChanged();
             }
         }
 
@@ -61,13 +59,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => to;
             set
             {
-                if (to != value)
-                {
-                    var emails = ParseEmails(value);
-                    to = FormatEmails(emails);
-                    Email.To = emails;
-                    RaisePropertyChanged();
-                }
+                if (to == value) return;
+                var emails = ParseEmails(value);
+                to = FormatEmails(emails);
+                Email.To = emails;
+                RaisePropertyChanged();
             }
         }
 
@@ -76,13 +72,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => cc;
             set
             {
-                if (cc != value)
-                {
-                    var emails = ParseEmails(value);
-                    cc = FormatEmails(emails);
-                    Email.CC = emails;
-                    RaisePropertyChanged();
-                }
+                if (cc == value) return;
+                var emails = ParseEmails(value);
+                cc = FormatEmails(emails);
+                Email.CC = emails;
+                RaisePropertyChanged();
             }
         }
 
@@ -91,35 +85,21 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => bcc;
             set
             {
-                if (bcc != value)
-                {
-                    var emails = ParseEmails(value);
-                    bcc = FormatEmails(emails);
-                    Email.Bcc = emails;
-                    RaisePropertyChanged();
-                }
+                if (bcc == value) return;
+                var emails = ParseEmails(value);
+                bcc = FormatEmails(emails);
+                Email.Bcc = emails;
+                RaisePropertyChanged();
             }
         }
 
-        public void Show(object owner)
-        {
-            ViewCore.Show(owner);
-        }
+        public void Show(object owner) => ViewCore.Show(owner);
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
 
-        private static IReadOnlyList<string> ParseEmails(string text)
-        {
-            return text.Trim().Split(new[] { ';', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        }
+        private static IReadOnlyList<string> ParseEmails(string text) => text.Trim().Split(new[] { ';', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-        private static string FormatEmails(IEnumerable<string> emailList)
-        {
-            return string.Join("; ", emailList);
-        }
+        private static string FormatEmails(IEnumerable<string> emailList) => string.Join("; ", emailList);
 
         private void UpdateProperties()
         {
@@ -130,18 +110,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         private void EmailPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Email.To))
-            {
-                To = FormatEmails(Email.To);
-            }
-            else if (e.PropertyName == nameof(CC))
-            {
-                CC = FormatEmails(Email.CC);
-            }
-            else if (e.PropertyName == nameof(Bcc))
-            {
-                Bcc = FormatEmails(Email.Bcc);
-            }
+            if (e.PropertyName == nameof(Email.To)) To = FormatEmails(Email.To);
+            else if (e.PropertyName == nameof(CC)) CC = FormatEmails(Email.CC);
+            else if (e.PropertyName == nameof(Bcc)) Bcc = FormatEmails(Email.Bcc);
         }
     }
 }

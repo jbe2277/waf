@@ -30,10 +30,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 
         private void ContactListViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is FrameworkElement element && element.DataContext is Contact)
-            {
-                ViewModel.OkCommand.Execute(null);
-            }
+            if (e.OriginalSource is FrameworkElement element && element.DataContext is Contact) ViewModel.OkCommand.Execute(null);
         }
     }
 }

@@ -55,13 +55,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => to;
             set
             {
-                if (value == null) { throw new ArgumentNullException("value"); }
-                if (to != value && !to.SequenceEqual(value))
-                {
-                    to = value;
-                    Validate();
-                    RaisePropertyChanged();
-                }
+                if (value == null) throw new ArgumentNullException("value");
+                if (to == value || to.SequenceEqual(value)) return;
+                to = value;
+                Validate();
+                RaisePropertyChanged();
             }
         }
 
@@ -70,13 +68,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => cc;
             set
             {
-                if (value == null) { throw new ArgumentNullException("value"); }
-                if (cc != value && !cc.SequenceEqual(value))
-                {
-                    cc = value;
-                    Validate();
-                    RaisePropertyChanged();
-                }
+                if (value == null) throw new ArgumentNullException("value");
+                if (cc == value || cc.SequenceEqual(value)) return;
+                cc = value;
+                Validate();
+                RaisePropertyChanged();
             }
         }
 
@@ -85,13 +81,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => bcc;
             set
             {
-                if (value == null) { throw new ArgumentNullException("value"); }
-                if (bcc != value && !bcc.SequenceEqual(value))
-                {
-                    bcc = value;
-                    Validate();
-                    RaisePropertyChanged();
-                }
+                if (value == null) throw new ArgumentNullException("value");
+                if (bcc == value || bcc.SequenceEqual(value)) return;
+                bcc = value;
+                Validate();
+                RaisePropertyChanged();
             }
         }
 
@@ -124,15 +118,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         {
             if (!emailAddress.IsValid(email))
             {
-                validationResults.Add(new ValidationResult(string.Format(CultureInfo.CurrentCulture, 
-                    "The email {0} in the {1} field is not valid.", email, displayName), new[] { field }));
+                validationResults.Add(new ValidationResult(string.Format(CultureInfo.CurrentCulture, "The email {0} in the {1} field is not valid.", email, displayName), new[] { field }));
             }
         }
 
         [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
-        {
-            Validate();
-        }
+        private void OnDeserialized(StreamingContext context) => Validate();
     }
 }

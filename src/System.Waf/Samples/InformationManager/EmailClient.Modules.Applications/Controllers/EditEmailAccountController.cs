@@ -8,9 +8,7 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for creating a new email account or modifying an existing one via a wizard.
-    /// </summary>
+    /// <summary>Responsible for creating a new email account or modifying an existing one via a wizard.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     internal class EditEmailAccountController
     {
@@ -25,8 +23,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         private bool result;
 
         [ImportingConstructor]
-        public EditEmailAccountController(EditEmailAccountViewModel editEmailAccountViewModel,
-            BasicEmailAccountViewModel basicEmailAccountViewModel, ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory, 
+        public EditEmailAccountController(EditEmailAccountViewModel editEmailAccountViewModel, BasicEmailAccountViewModel basicEmailAccountViewModel, ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory, 
             ExportFactory<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory)
         {
             this.editEmailAccountViewModel = editEmailAccountViewModel;
@@ -56,15 +53,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             return result;
         }
 
-        private void Close()
-        {
-            editEmailAccountViewModel.Close();
-        }
+        private void Close() => editEmailAccountViewModel.Close();
 
-        private bool CanBack()
-        {
-            return editEmailAccountViewModel.ContentView != basicEmailAccountViewModel.View;
-        }
+        private bool CanBack() => editEmailAccountViewModel.ContentView != basicEmailAccountViewModel.View;
 
         private void Back()
         {
@@ -73,7 +64,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             UpdateCommandsState();
         }
 
-        private bool CanNext() { return editEmailAccountViewModel.IsValid; }
+        private bool CanNext() => editEmailAccountViewModel.IsValid;
 
         private void Next()
         {
@@ -111,10 +102,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
         
         private void EditEmailAccountViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(EditEmailAccountViewModel.IsValid))
-            {
-                UpdateCommandsState();
-            }
+            if (e.PropertyName == nameof(EditEmailAccountViewModel.IsValid)) UpdateCommandsState();
         }
         
         private void ShowPop3SettingsView()

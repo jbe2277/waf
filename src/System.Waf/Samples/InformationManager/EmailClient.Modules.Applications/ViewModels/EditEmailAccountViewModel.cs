@@ -39,14 +39,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set => SetProperty(ref isLastPage, value);
         }
 
-        public void ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-        }
+        public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
     }
 }

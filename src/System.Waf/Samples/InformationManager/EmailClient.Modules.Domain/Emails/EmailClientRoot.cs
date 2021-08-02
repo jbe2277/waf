@@ -38,15 +38,9 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public EmailFolder Deleted => deleted;
 
-        public void AddEmailAccount(EmailAccount emailAccount)
-        {
-            emailAccounts.Add(emailAccount);
-        }
+        public void AddEmailAccount(EmailAccount emailAccount) => emailAccounts.Add(emailAccount);
 
-        public void RemoveEmailAccount(EmailAccount emailAccount)
-        {
-            emailAccounts.Remove(emailAccount);
-        }
+        public void RemoveEmailAccount(EmailAccount emailAccount) => emailAccounts.Remove(emailAccount);
 
         public void ReplaceEmailAccount(EmailAccount oldEmailAccount, EmailAccount newEmailAccount)
         {
@@ -56,10 +50,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
 
         public void NotifyEmailDeleted(EmailFolder emailFolder, Email email)
         {
-            if (emailFolder != Deleted)
-            {
-                Deleted.AddEmail(email);    
-            }
+            if (emailFolder != Deleted) Deleted.AddEmail(email);    
         }
 
         private void Initialize()
@@ -72,9 +63,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
         }
 
         [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
-        {
-            Initialize();
-        }
+        private void OnDeserialized(StreamingContext context) => Initialize();
     }
 }

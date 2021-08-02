@@ -10,14 +10,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Selectors
         {
             var element = (FrameworkElement)container;
             var email = (Email)item;
-            if (email.EmailType == EmailType.Received)
-            {
-                return (DataTemplate)element.FindResource("ReceivedEmailItemTemplate");
-            }
-            else
-            {
-                return (DataTemplate)element.FindResource("SentEmailItemTemplate");
-            }
+            return (DataTemplate)(email.EmailType == EmailType.Received ? element.FindResource("ReceivedEmailItemTemplate") : element.FindResource("SentEmailItemTemplate"));
         }
     }
 }

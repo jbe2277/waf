@@ -26,20 +26,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
             return contact;
         }
 
-        public void AddContact(Contact contact)
-        {
-            contacts.Add(contact);
-        }
+        public void AddContact(Contact contact) => contacts.Add(contact);
 
-        public void RemoveContact(Contact contact)
-        {
-            contacts.Remove(contact);
-        }
+        public void RemoveContact(Contact contact) => contacts.Remove(contact);
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            foreach (var contact in Contacts) contact.Validate();
+            foreach (var x in Contacts) x.Validate();
         }
     }
 }

@@ -7,9 +7,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications
     internal static class DtoFactory
     {
         [return: NotNullIfNotNull("contact")]
-        public static ContactDto? ToDto(this Contact? contact)
-        {
-            return contact != null ? new ContactDto(contact.Firstname, contact.Lastname, contact.Email) : null;
-        }
+        public static ContactDto? ToDto(this Contact? contact) => contact != null ? new ContactDto(contact.Firstname, contact.Lastname, contact.Email) : null;
     }
 }

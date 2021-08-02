@@ -30,9 +30,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set => SetProperty(ref selectedEmailAccount, value);
         }
 
-        public void ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-        }
+        public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
     }
 }
