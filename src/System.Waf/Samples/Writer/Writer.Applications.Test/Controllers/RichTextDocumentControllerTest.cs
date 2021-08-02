@@ -27,14 +27,14 @@ namespace Test.Writer.Applications.Controllers
             // Create new documents
 
             fileService.NewCommand.Execute(null);
-            var document = fileService.Documents.Last();
+            var document = fileService.Documents[^1];
 
             var richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
             var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;
             Assert.AreEqual(document, richTextViewModel.Document);
 
             fileService.NewCommand.Execute(null);
-            document = fileService.Documents.Last();
+            document = fileService.Documents[^1];
 
             Assert.AreEqual(2, mainViewModel.DocumentViews.Count);
             richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Last();
@@ -43,18 +43,18 @@ namespace Test.Writer.Applications.Controllers
 
             // Test ActiveDocument <-> ActiveDocumentView synchronization
 
-            Assert.AreEqual(fileService.Documents.Last(), fileService.ActiveDocument);
+            Assert.AreEqual(fileService.Documents[^1], fileService.ActiveDocument);
 
-            fileService.ActiveDocument = fileService.Documents.First();
-            Assert.AreEqual(mainViewModel.DocumentViews.First(), mainViewModel.ActiveDocumentView);
+            fileService.ActiveDocument = fileService.Documents[0];
+            Assert.AreEqual(mainViewModel.DocumentViews[0], mainViewModel.ActiveDocumentView);
 
-            mainViewModel.ActiveDocumentView = mainViewModel.DocumentViews.Last();
-            Assert.AreEqual(fileService.Documents.Last(), fileService.ActiveDocument);
+            mainViewModel.ActiveDocumentView = mainViewModel.DocumentViews[^1];
+            Assert.AreEqual(fileService.Documents[^1], fileService.ActiveDocument);
 
             // Close all documents
 
             fileService.CloseCommand.Execute(null);
-            fileService.ActiveDocument = fileService.Documents.First();
+            fileService.ActiveDocument = fileService.Documents[0];
             fileService.CloseCommand.Execute(null);
 
             Assert.IsFalse(fileService.Documents.Any());

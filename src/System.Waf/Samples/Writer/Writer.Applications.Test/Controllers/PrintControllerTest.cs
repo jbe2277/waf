@@ -78,8 +78,8 @@ namespace Test.Writer.Applications.Controllers
             fileService.NewCommand.Execute(null);
             fileService.ActiveDocument = null;
 
-            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintPreviewCommand, () => fileService.ActiveDocument = fileService.Documents.First());
-            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintCommand, () => fileService.ActiveDocument = fileService.Documents.Last());
+            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintPreviewCommand, () => fileService.ActiveDocument = fileService.Documents[0]);
+            AssertHelper.CanExecuteChangedEvent(shellViewModel.PrintCommand, () => fileService.ActiveDocument = fileService.Documents[^1]);
         }
     }
 }

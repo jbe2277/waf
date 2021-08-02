@@ -34,14 +34,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsFalse(bookListViewModel.SelectedBooks.Any());
 
             // Select the first book
-            AssertHelper.PropertyChangedEvent(bookListViewModel, x => x.SelectedBook, () => bookListViewModel.SelectedBook = bookDataModels.First());
-            Assert.AreEqual(books.First(), bookListViewModel.SelectedBook?.Book);
+            AssertHelper.PropertyChangedEvent(bookListViewModel, x => x.SelectedBook, () => bookListViewModel.SelectedBook = bookDataModels[0]);
+            Assert.AreEqual(books[0], bookListViewModel.SelectedBook?.Book);
 
-            bookListViewModel.AddSelectedBook(bookDataModels.First());
-            AssertHelper.SequenceEqual(new[] { bookDataModels.First() }, bookListViewModel.SelectedBooks);
+            bookListViewModel.AddSelectedBook(bookDataModels[0]);
+            AssertHelper.SequenceEqual(new[] { bookDataModels[0] }, bookListViewModel.SelectedBooks);
 
             // Select both books
-            bookListViewModel.AddSelectedBook(bookDataModels.Last());
+            bookListViewModel.AddSelectedBook(bookDataModels[^1]);
             AssertHelper.SequenceEqual(bookDataModels, bookListViewModel.SelectedBooks);
         }
 

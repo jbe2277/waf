@@ -27,14 +27,14 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             Assert.IsFalse(personListViewModel.SelectedPersons.Any());
 
             // Select the first person
-            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.SelectedPerson, () => personListViewModel.SelectedPerson = persons.First());
-            Assert.AreEqual(persons.First(), personListViewModel.SelectedPerson);
+            AssertHelper.PropertyChangedEvent(personListViewModel, x => x.SelectedPerson, () => personListViewModel.SelectedPerson = persons[0]);
+            Assert.AreEqual(persons[0], personListViewModel.SelectedPerson);
             
-            personListViewModel.AddSelectedPerson(persons.First());
-            AssertHelper.SequenceEqual(new[] { persons.First() }, personListViewModel.SelectedPersons);
+            personListViewModel.AddSelectedPerson(persons[0]);
+            AssertHelper.SequenceEqual(new[] { persons[0] }, personListViewModel.SelectedPersons);
 
             // Select both persons
-            personListViewModel.AddSelectedPerson(persons.Last());
+            personListViewModel.AddSelectedPerson(persons[^1]);
             AssertHelper.SequenceEqual(persons, personListViewModel.SelectedPersons);
         }
 

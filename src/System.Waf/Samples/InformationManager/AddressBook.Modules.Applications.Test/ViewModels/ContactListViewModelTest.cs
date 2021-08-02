@@ -25,8 +25,8 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
             viewModel.Contacts = contacts;
 
             Assert.IsNull(viewModel.SelectedContact);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedContact, () => viewModel.SelectedContact = contacts.First());
-            Assert.AreEqual(contacts.First(), viewModel.SelectedContact);
+            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedContact, () => viewModel.SelectedContact = contacts[0]);
+            Assert.AreEqual(contacts[0], viewModel.SelectedContact);
 
             Assert.AreEqual("", viewModel.FilterText);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.FilterText, () => viewModel.FilterText = "abc");

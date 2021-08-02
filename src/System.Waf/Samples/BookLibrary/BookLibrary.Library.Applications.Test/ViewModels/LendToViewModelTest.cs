@@ -43,10 +43,10 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 // Check the default values
                 Assert.IsTrue(lendToViewModel.IsLendTo);
                 Assert.IsFalse(lendToViewModel.IsWasReturned);
-                Assert.AreEqual(persons.First(), lendToViewModel.SelectedPerson);
+                Assert.AreEqual(persons[0], lendToViewModel.SelectedPerson);
 
                 // Select the last person: Lend to Ron
-                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.SelectedPerson, () => lendToViewModel.SelectedPerson = persons.Last());
+                AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.SelectedPerson, () => lendToViewModel.SelectedPerson = persons[^1]);
 
                 // Press Ok button
                 lendToViewModel.OkCommand.Execute(null);
@@ -55,7 +55,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             MockLendToView.ShowDialogAction = showDialogAction;
             Assert.IsTrue(lendToViewModel.ShowDialog(owner));
             Assert.IsFalse(lendToView.IsVisible);
-            Assert.AreEqual(persons.Last(), lendToViewModel.SelectedPerson);
+            Assert.AreEqual(persons[^1], lendToViewModel.SelectedPerson);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
                 new Person() { Firstname = "Harry" },
                 new Person() { Firstname = "Ron" }
             };
-            var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons.First() };
+            var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons[0] };
             var lendToView = new MockLendToView();
             var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
 

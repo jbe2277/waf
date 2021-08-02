@@ -58,7 +58,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(0, e.NewStartingIndex);
-                Assert.AreEqual(originalCollection.First(), e.NewItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(originalCollection[0], e.NewItems.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Insert(0, new MyModel());

@@ -80,7 +80,7 @@ namespace Test.Writer.Applications.Controllers
             Assert.AreEqual(DocumentOperation.Open, documentType.DocumentOperation);
             Assert.AreEqual("Document1.mock", documentType.FileName);
 
-            var document = fileService.Documents.Last();
+            var document = fileService.Documents[^1];
             Assert.AreEqual("Document1.mock", document.FileName);
 
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
@@ -118,7 +118,7 @@ namespace Test.Writer.Applications.Controllers
 
             // Open is called with a fileName which might be a command line parameter.
             fileService.OpenCommand.Execute("Document1.mock");
-            var document = fileService.Documents.Last();
+            var document = fileService.Documents[^1];
             Assert.AreEqual("Document1.mock", document.FileName);
 
             AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
@@ -322,9 +322,9 @@ namespace Test.Writer.Applications.Controllers
             documentManager.NewCommand.Execute(null);
             documentManager.NewCommand.Execute(null);
             documentManager.ActiveDocument = null;
-            AssertHelper.CanExecuteChangedEvent(documentManager.CloseCommand, () => documentManager.ActiveDocument = documentManager.Documents.First());
-            AssertHelper.CanExecuteChangedEvent(documentManager.SaveCommand, () => documentManager.ActiveDocument = documentManager.Documents.Last());
-            AssertHelper.CanExecuteChangedEvent(documentManager.SaveAsCommand, () => documentManager.ActiveDocument = documentManager.Documents.First());
+            AssertHelper.CanExecuteChangedEvent(documentManager.CloseCommand, () => documentManager.ActiveDocument = documentManager.Documents[0]);
+            AssertHelper.CanExecuteChangedEvent(documentManager.SaveCommand, () => documentManager.ActiveDocument = documentManager.Documents[^1]);
+            AssertHelper.CanExecuteChangedEvent(documentManager.SaveAsCommand, () => documentManager.ActiveDocument = documentManager.Documents[0]);
         }
     }
 }

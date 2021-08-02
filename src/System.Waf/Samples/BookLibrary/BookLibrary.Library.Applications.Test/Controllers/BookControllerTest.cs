@@ -44,12 +44,12 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Check that the first Book is selected
             var bookListView = Get<IBookListView>();
             var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
-            Assert.AreEqual(entityService.Books.First(), bookListViewModel.SelectedBook?.Book);
+            Assert.AreEqual(entityService.Books[0], bookListViewModel.SelectedBook?.Book);
 
             // Change the selection
             var bookViewModel = Get<BookViewModel>();
-            bookListViewModel.SelectedBook = bookListViewModel.Books!.Last();
-            Assert.AreEqual(entityService.Books.Last(), bookViewModel.Book);
+            bookListViewModel.SelectedBook = bookListViewModel.Books![^1];
+            Assert.AreEqual(entityService.Books[^1], bookViewModel.Book);
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.AreEqual(3, entityService.Books.Count);
 
             // Check that the new Book is selected and the first control gets the focus
-            Assert.AreEqual(entityService.Books.Last(), bookViewModel.Book);
+            Assert.AreEqual(entityService.Books[^1], bookViewModel.Book);
             Assert.IsTrue(bookListView.FirstCellHasFocus);
 
             // Simulate an invalid UI input state => the user can't add more books
@@ -85,7 +85,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             bookViewModel.IsValid = true;
             bookListView.FirstCellHasFocus = false;
             bookListViewModel.AddSelectedBook(bookListViewModel.Books!.Single(b => b.Book == twoTowers));
-            bookListViewModel.AddSelectedBook(bookListViewModel.Books!.Last());
+            bookListViewModel.AddSelectedBook(bookListViewModel.Books![^1]);
             Assert.IsTrue(bookListViewModel.RemoveCommand!.CanExecute(null));
             bookListViewModel.RemoveCommand.Execute(null);
             AssertHelper.SequenceEqual(new[] { fellowship }, entityService.Books);
@@ -198,8 +198,8 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Remove all books and check that nothing is selected anymore
             bookListViewModel.SelectedBook = bookListViewModel.Books!.Single(b => b.Book == fellowship);
             bookListViewModel.AddSelectedBook(bookListViewModel.SelectedBook);
-            bookListViewModel.AddSelectedBook(bookListViewModel.Books.Single(b => b.Book == twoTowers));
-            bookListViewModel.AddSelectedBook(bookListViewModel.Books.Single(b => b.Book == returnKing));
+            bookListViewModel.AddSelectedBook(bookListViewModel.Books!.Single(b => b.Book == twoTowers));
+            bookListViewModel.AddSelectedBook(bookListViewModel.Books!.Single(b => b.Book == returnKing));
             bookListViewModel.RemoveCommand!.Execute(null);
             Assert.IsFalse(entityService.Books.Any());
             Assert.IsNull(bookListViewModel.SelectedBook);
