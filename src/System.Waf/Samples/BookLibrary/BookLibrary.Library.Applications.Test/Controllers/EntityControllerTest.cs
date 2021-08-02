@@ -21,7 +21,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsFalse(controller.HasChanges());
             var entityService = Get<EntityService>();
             entityService.Persons.Add(new Person() { Firstname = "Harry", Lastname = "Potter" });
-            entityService.Persons.Last().Validate();
+            entityService.Persons[^1].Validate();
             Assert.IsTrue(controller.HasChanges());
 
             Assert.IsTrue(controller.CanSave());
@@ -32,7 +32,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.AreEqual(MessageType.None, messageService.MessageType);
 
             entityService.Persons.Add(new Person());
-            entityService.Persons.Last().Validate();
+            entityService.Persons[^1].Validate();
             Assert.IsTrue(controller.HasChanges());
             var shellViewModel = Get<ShellViewModel>();
             shellViewModel.SaveCommand!.Execute(null);

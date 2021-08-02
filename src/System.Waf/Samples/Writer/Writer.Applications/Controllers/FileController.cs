@@ -89,12 +89,12 @@ namespace Waf.Writer.Applications.Controllers
             ActiveDocument = null;
             while (Documents.Any())
             {
-                fileService.RemoveDocument(Documents.First());
+                fileService.RemoveDocument(Documents[0]);
             }
             return true;
         }
 
-        private void NewCommand() => New(documentTypes.First());
+        private void NewCommand() => New(documentTypes[0]);
 
         private void OpenCommand(object? commandParameter)
         {
@@ -185,7 +185,7 @@ namespace Waf.Writer.Applications.Controllers
                 var documentType = saveTypes.First(d => d.FileExtension == Path.GetExtension(document.FileName));
                 selectedFileType = fileTypes.First(f => f.Description == documentType.Description && f.FileExtensions.Contains(documentType.FileExtension));
             }
-            else selectedFileType = fileTypes.First();
+            else selectedFileType = fileTypes[0];
             var fileName = Path.GetFileNameWithoutExtension(document.FileName);
             var result = fileDialogService.ShowSaveFileDialog(shellService.ShellView, fileTypes, selectedFileType, fileName);
             if (result.IsValid)

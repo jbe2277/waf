@@ -29,10 +29,10 @@ namespace Test.Writer.Applications.ViewModels
 
             mainViewModel.FileService.NewCommand.Execute(null);
 
-            Assert.AreEqual(mainViewModel.DocumentViews.Last(), mainViewModel.ActiveDocumentView);
+            Assert.AreEqual(mainViewModel.DocumentViews[^1], mainViewModel.ActiveDocumentView);
             Assert.AreEqual(2, mainViewModel.DocumentViews.Count);
 
-            mainViewModel.ActiveDocumentView = mainViewModel.DocumentViews.First();
+            mainViewModel.ActiveDocumentView = mainViewModel.DocumentViews[0];
             mainViewModel.FileService.CloseCommand.Execute(null);
 
             Assert.AreEqual(1, mainViewModel.DocumentViews.Count);
@@ -52,7 +52,7 @@ namespace Test.Writer.Applications.ViewModels
             var shellService = Get<IShellService>();
 
             fileService.NewCommand.Execute(null);
-            fileService.ActiveDocument = fileService.Documents.First();
+            fileService.ActiveDocument = fileService.Documents[0];
             AssertHelper.PropertyChangedEvent(shellService, x => x.DocumentName, () => fileService.ActiveDocument.FileName = "Unit Test.rtf");
             Assert.AreEqual("Unit Test.rtf", shellService.DocumentName);
         }

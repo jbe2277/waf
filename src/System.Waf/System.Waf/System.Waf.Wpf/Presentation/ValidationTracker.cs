@@ -71,7 +71,7 @@ namespace System.Waf.Presentation
             if (errorsToRemove.Any())
             {
                 // It keeps alive because it listens to the Loaded event.
-                new ValidationReloadedTracker(this, errorsToRemove.First().Item1, errorsToRemove.Select(x => x.Item2));
+                new ValidationReloadedTracker(this, errorsToRemove[0].Item1, errorsToRemove.Select(x => x.Item2));
                 foreach (Tuple<object, ValidationError> error in errorsToRemove)
                 {
                     errors.Remove(error);

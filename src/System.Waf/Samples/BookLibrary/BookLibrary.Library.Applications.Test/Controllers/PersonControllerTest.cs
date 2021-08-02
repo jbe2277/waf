@@ -41,12 +41,12 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             // Check that the first Person is selected
             var personListView = Get<IPersonListView>();
             var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
-            Assert.AreEqual(entityService.Persons.First(), personListViewModel.SelectedPerson);
+            Assert.AreEqual(entityService.Persons[0], personListViewModel.SelectedPerson);
             
             // Change the selection
             var personViewModel = Get<PersonViewModel>();
-            personListViewModel.SelectedPerson = entityService.Persons.Last();
-            Assert.AreEqual(entityService.Persons.Last(), personViewModel.Person);
+            personListViewModel.SelectedPerson = entityService.Persons[^1];
+            Assert.AreEqual(entityService.Persons[^1], personViewModel.Person);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.AreEqual(3, entityService.Persons.Count);
 
             // Check that the new Person is selected and the first control gets the focus
-            Assert.AreEqual(entityService.Persons.Last(), personViewModel.Person);
+            Assert.AreEqual(entityService.Persons[^1], personViewModel.Person);
             Assert.IsTrue(personListView.FirstCellHasFocus);
 
             // Simulate an invalid UI input state => the user can't add more persons
@@ -82,7 +82,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             personViewModel.IsValid = true;
             personListView.FirstCellHasFocus = false;
             personListViewModel.AddSelectedPerson(ron);
-            personListViewModel.AddSelectedPerson(entityService.Persons.Last());
+            personListViewModel.AddSelectedPerson(entityService.Persons[^1]);
             Assert.IsTrue(personListViewModel.RemoveCommand!.CanExecute(null));
             personListViewModel.RemoveCommand.Execute(null);
             AssertHelper.SequenceEqual(new[] { harry }, entityService.Persons);

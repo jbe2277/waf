@@ -108,13 +108,13 @@ namespace Test.Waf.Applications
             recentFileList.AddFile("Doc2");
             recentFileList.AddFile("Doc3");
 
-            RecentFile lastAdded = recentFileList.RecentFiles.First();
+            RecentFile lastAdded = recentFileList.RecentFiles[0];
 
             recentFileList.Remove(recentFileList.RecentFiles.Last());
             AssertHelper.SequenceEqual(new[] { "Doc3", "Doc2" }, recentFileList.RecentFiles.Select(f => f.Path));
-            recentFileList.Remove(recentFileList.RecentFiles.First());
+            recentFileList.Remove(recentFileList.RecentFiles[0]);
             AssertHelper.SequenceEqual(new[] { "Doc2" }, recentFileList.RecentFiles.Select(f => f.Path));
-            recentFileList.Remove(recentFileList.RecentFiles.First());
+            recentFileList.Remove(recentFileList.RecentFiles[0]);
             Assert.IsTrue(!recentFileList.RecentFiles.Any());
 
             // Try to delete a RecentFile object which was already deleted.

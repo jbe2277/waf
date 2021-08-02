@@ -22,8 +22,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             };
             
             Assert.IsNull(viewModel.SelectedEmail);
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmail, () => viewModel.SelectedEmail = emails.First());
-            Assert.AreEqual(emails.First(), viewModel.SelectedEmail);
+            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmail, () => viewModel.SelectedEmail = emails[0]);
+            Assert.AreEqual(emails[0], viewModel.SelectedEmail);
 
             Assert.AreEqual("", viewModel.FilterText);
             AssertHelper.PropertyChangedEvent(viewModel, x => x.FilterText, () => viewModel.FilterText = "abc");
