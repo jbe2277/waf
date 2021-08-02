@@ -3,8 +3,8 @@
     <LangVersion>8.0</LangVersion>
     <Company>jbe2277</Company>
     <Copyright>Copyright © 2016-2021 jbe2277</Copyright>
-    <Version>6.4.0.2</Version>
-    <PackageVersion>6.4.0-alpha2</PackageVersion>
+    <Version>6.4.0.100</Version>
+    <PackageVersion>6.4.0</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>

@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 6.4.0.100 (Release)
+- WAF: Update version number.
+
+
 Version 6.4.0.2 (Alpha 2)
 - WAF: WPF: Add new Bind class which is a culture aware binding implementation.
 
