@@ -9,8 +9,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
     [Export(typeof(IEnvironmentService))]
     internal class EnvironmentService : IEnvironmentService
     {
-        private readonly Lazy<string> dataDirectory = new Lazy<string>(() => 
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationInfo.Company, ApplicationInfo.ProductName));
+        private readonly Lazy<string> dataDirectory = new(() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationInfo.Company, ApplicationInfo.ProductName));
         
         public string DataDirectory => dataDirectory.Value;
     }

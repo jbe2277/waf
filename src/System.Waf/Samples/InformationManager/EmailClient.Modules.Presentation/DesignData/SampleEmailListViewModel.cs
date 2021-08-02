@@ -13,8 +13,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
 
         public SampleEmailListViewModel(IEmailListView view) : base(view)
         {
-            EmailClientRoot root = new EmailClientRoot();
-            foreach (var email in SampleDataProvider.CreateInboxEmails()) { root.Inbox.AddEmail(email); }
+            var root = new EmailClientRoot();
+            foreach (var x in SampleDataProvider.CreateInboxEmails()) root.Inbox.AddEmail(x);
             Emails = root.Inbox.Emails;
             FilterText = "My filter text";
         }

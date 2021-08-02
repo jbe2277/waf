@@ -44,10 +44,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
         {
             ViewModel.SelectedContact = ViewModel.Contacts.FirstOrDefault();
             contactsBox.Focus();
-            if (ViewModel.SelectedContact != null)
-            {
-                FocusItem();
-            }
+            if (ViewModel.SelectedContact != null) FocusItem();
         }
     }
 }

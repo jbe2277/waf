@@ -9,10 +9,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Services
     public class MockAddressBookService : IAddressBookService
     {
         public Func<object, ContactDto?>? ShowSelectContactViewAction { get; set; }
-        
-        public ContactDto? ShowSelectContactView(object ownerView)
-        {
-            return ShowSelectContactViewAction?.Invoke(ownerView);
-        }
+
+        public ContactDto? ShowSelectContactView(object ownerView) => ShowSelectContactViewAction?.Invoke(ownerView);
     }
 }

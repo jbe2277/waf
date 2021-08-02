@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
-using System.Waf.Foundation;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using System.Windows.Input;
@@ -36,17 +35,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels
             set => SetProperty(ref filterText, value);
         }
 
-        public void FocusItem()
-        {
-            ViewCore.FocusItem();
-        }
+        public void FocusItem() => ViewCore.FocusItem();
 
         public bool Filter(Contact contact)
         {
             return string.IsNullOrEmpty(filterText)
-                || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-                || (!string.IsNullOrEmpty(contact.Email) && contact.Email!.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
+                || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                || (!string.IsNullOrEmpty(contact.Email) && contact.Email.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

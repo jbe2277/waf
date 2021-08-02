@@ -12,6 +12,12 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
     [TestClass]
     public class ModuleControllerTest : AddressBookTest
     {
+        protected override void OnCleanup()
+        {
+            MockSelectContactView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void SaveAndLoad()
         {
@@ -27,14 +33,14 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             controller.Initialize();
             controller.Run();
             var root1 = controller.Root;
-            root1.Contacts.First().Firstname = "Test name";
+            root1.Contacts[0].Firstname = "Test name";
             controller.Shutdown();
 
             controller.Initialize();
             controller.Run();
             var root2 = controller.Root;
             Assert.AreNotSame(root1, root2);
-            Assert.AreEqual("Test name", root2.Contacts.First().Firstname);
+            Assert.AreEqual("Test name", root2.Contacts[0].Firstname);
             controller.Shutdown();
 
             stream.MasterDispose();
@@ -76,7 +82,6 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             Assert.IsFalse(shellService.ToolBarCommands.Any());
 
             // Shutdown the controller
-
             controller.Shutdown();
         }
 
@@ -98,9 +103,6 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             var contactDto = controller.ShowSelectContactView(ownerView);
 
             Assert.IsNotNull(contactDto);
-
-            MockSelectContactView.ShowDialogAction = null;
-
             controller.Shutdown();
         }
 
@@ -112,10 +114,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
                 // Do not dispose the stream now.
             }
 
-            public void MasterDispose()
-            {
-                base.Dispose(true);
-            }
+            public void MasterDispose() => base.Dispose(true);
         }
     }
 }

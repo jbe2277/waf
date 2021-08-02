@@ -13,6 +13,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
     [TestClass]
     public class EditEmailAccountControllerTest : EmailClientTest
     {
+        protected override void OnCleanup()
+        {
+            MockEditEmailAccountView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void NewPop3EmailAccount()
         {
@@ -57,8 +63,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             };
             controller.Run();
             Assert.IsTrue(showDialogCalled);
-
-            MockEditEmailAccountView.ShowDialogAction = null;
         }
 
         private void EditPop3EmailAccountDialog(MockEditEmailAccountView editEmailAccountView)
@@ -74,8 +78,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             Assert.IsFalse(editEmailAccountViewModel.IsLastPage);
 
             // Simulate that a validation error occurred. We are not allowed to click on next.
-            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.NextCommand, () =>
-                editEmailAccountViewModel.IsValid = false);
+            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.NextCommand, () => editEmailAccountViewModel.IsValid = false);
             Assert.IsFalse(editEmailAccountViewModel.NextCommand.CanExecute(null));
 
             // Select a Pop3 account and call the next command
@@ -86,14 +89,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             // We are now on the Pop3 settings page; call the back command
             Assert.IsInstanceOfType(editEmailAccountViewModel.ContentView, typeof(MockPop3SettingsView));
             Assert.IsTrue(editEmailAccountViewModel.IsLastPage);
-            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () => 
-                editEmailAccountViewModel.BackCommand.Execute(null));
+            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () => editEmailAccountViewModel.BackCommand.Execute(null));
 
             // We are back on the first page; call the next command
             Assert.AreEqual(basicEmailAccountView, editEmailAccountViewModel.ContentView);
             Assert.IsFalse(editEmailAccountViewModel.IsLastPage);
-            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () =>
-                editEmailAccountViewModel.NextCommand.Execute(null));
+            AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () => editEmailAccountViewModel.NextCommand.Execute(null));
 
             // We are now again on the Pop3 settings page; call the next command
             Assert.IsInstanceOfType(editEmailAccountViewModel.ContentView, typeof(MockPop3SettingsView));

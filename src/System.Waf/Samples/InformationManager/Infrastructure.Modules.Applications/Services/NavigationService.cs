@@ -29,7 +29,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             if (sameGroup.Any())
             {
                 var nextNode = sameGroup.FirstOrDefault(x => x.Order > order);
-                int nextNodeIndex = nextNode != null ? navigationNodes.IndexOf(nextNode) : navigationNodes.IndexOf(sameGroup.Last()) + 1;
+                int nextNodeIndex = nextNode != null ? navigationNodes.IndexOf(nextNode) : navigationNodes.IndexOf(sameGroup[^1]) + 1;
                 navigationNodes.Insert(nextNodeIndex, navigationNode);
             }
             else
@@ -47,7 +47,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             }
 
             // Mark the first nodes of a new group. But don't mark the very first node.
-            double oldGroup = navigationNodes.First().Order;
+            double oldGroup = navigationNodes[0].Order;
             foreach (var node in navigationNodes.Skip(1))
             {
                 if (!DoubleEquals(oldGroup, node.Group, 1E-9))
@@ -60,13 +60,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
                     node.IsFirstItemOfNewGroup = false;
                 }
             }
-
             return navigationNode;
         }
 
-        private static bool DoubleEquals(double value1, double value2, double delta)
-        {
-            return Math.Abs(value1 - value2) <= delta;
-        }
+        private static bool DoubleEquals(double value1, double value2, double delta) => Math.Abs(value1 - value2) <= delta;
     }
 }

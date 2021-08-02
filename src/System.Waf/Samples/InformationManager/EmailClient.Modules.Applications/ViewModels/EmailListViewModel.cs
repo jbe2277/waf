@@ -37,10 +37,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             set => SetProperty(ref filterText, value);
         }
 
-        public void FocusItem()
-        {
-            ViewCore.FocusItem();
-        }
+        public void FocusItem() => ViewCore.FocusItem();
 
         public bool Filter(Email email)
         {

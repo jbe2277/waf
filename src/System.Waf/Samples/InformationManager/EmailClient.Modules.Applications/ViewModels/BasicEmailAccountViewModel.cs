@@ -24,19 +24,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => emailAccount;
             set
             {
-                if (emailAccount != value)
-                {
-                    emailAccount = value;
-                    if (emailAccount.EmailAccountSettings is Pop3Settings)
-                    {
-                        IsPop3Checked = true;
-                    }
-                    else if (emailAccount.EmailAccountSettings is ExchangeSettings)
-                    {
-                        IsExchangeChecked = true;
-                    }
-                    RaisePropertyChanged();
-                }
+                if (emailAccount == value) return;
+                emailAccount = value;
+                if (emailAccount.EmailAccountSettings is Pop3Settings) IsPop3Checked = true;
+                else if (emailAccount.EmailAccountSettings is ExchangeSettings) IsExchangeChecked = true;
+                RaisePropertyChanged();
             }
         }
 
@@ -45,10 +37,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => isPop3Checked;
             set
             {
-                if (SetProperty(ref isPop3Checked, value))
-                {
-                    IsExchangeChecked = !value;
-                }
+                if (!SetProperty(ref isPop3Checked, value)) return;
+                IsExchangeChecked = !value;
             }
         }
 
@@ -57,10 +47,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => isExchangeChecked;
             set
             {
-                if (SetProperty(ref isExchangeChecked, value))
-                {
-                    IsPop3Checked = !value;
-                }
+                if (!SetProperty(ref isExchangeChecked, value)) return;
+                IsPop3Checked = !value;
             }
         }
     }

@@ -23,10 +23,8 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => model;
             set
             {
-                if (SetProperty(ref model, value))
-                {
-                    WeakEvent.PropertyChanged.Add(model.Pop3UserCredits, Pop3UserCreditsPropertyChanged);
-                }
+                if (!SetProperty(ref model, value)) return;
+                WeakEvent.PropertyChanged.Add(model.Pop3UserCredits, Pop3UserCreditsPropertyChanged);
             }
         }
 
@@ -35,13 +33,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
             get => useSameUserCredits;
             set
             {
-                if (SetProperty(ref useSameUserCredits, value))
+                if (!SetProperty(ref useSameUserCredits, value)) return;
+                if (useSameUserCredits)
                 {
-                    if (useSameUserCredits)
-                    {
-                        Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
-                        Model.SmtpUserCredits.Password = Model.Pop3UserCredits.Password;
-                    }
+                    Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
+                    Model.SmtpUserCredits.Password = Model.Pop3UserCredits.Password;
                 }
             }
         }
@@ -50,17 +46,11 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
         {
             if (e.PropertyName == nameof(UserCredits.UserName))
             {
-                if (UseSameUserCredits)
-                {
-                    Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
-                }
+                if (UseSameUserCredits) Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
             }
             else if (e.PropertyName == nameof(UserCredits.Password))
             {
-                if (UseSameUserCredits)
-                {
-                    Model.SmtpUserCredits.Password = Model.Pop3UserCredits.Password;
-                }
+                if (UseSameUserCredits) Model.SmtpUserCredits.Password = Model.Pop3UserCredits.Password;
             }
         }
     }

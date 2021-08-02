@@ -10,6 +10,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
     [TestClass]
     public class ModuleControllerTest : EmailClientTest
     {
+        protected override void OnCleanup()
+        {
+            MockNewEmailView.ShowAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void SaveAndLoad()
         {
@@ -25,14 +31,14 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             controller.Initialize();
             controller.Run();
             var root1 = controller.Root;
-            root1.EmailAccounts.First().Name = "Test name";
+            root1.EmailAccounts[0].Name = "Test name";
             controller.Shutdown();
 
             controller.Initialize();
             controller.Run();
             var root2 = controller.Root;
             Assert.AreNotSame(root1, root2);
-            Assert.AreEqual("Test name", root2.EmailAccounts.First().Name);
+            Assert.AreEqual("Test name", root2.EmailAccounts[0].Name);
             controller.Shutdown();
 
             stream.MasterDispose();
@@ -126,10 +132,10 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
 
             var inbox = controller.Root.Inbox;
             var navigationService = Get<MockNavigationService>();
-            var inboxNode = navigationService.NavigationNodes.First();
+            var inboxNode = navigationService.NavigationNodes[0];
 
             Assert.AreEqual(inbox.Emails.Count, inboxNode.ItemCount);
-            inbox.RemoveEmail(inbox.Emails.First());
+            inbox.RemoveEmail(inbox.Emails[0]);
             Assert.AreEqual(inbox.Emails.Count, inboxNode.ItemCount);
         }
 
@@ -140,7 +146,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             controller.Initialize();
 
             var navigationService = Get<MockNavigationService>();
-            var inboxNode = navigationService.NavigationNodes.First();
+            var inboxNode = navigationService.NavigationNodes[0];
             
             inboxNode.ShowAction();
             
@@ -152,7 +158,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
                 isShowCalled = true;
             };
             
-            shellService.ToolBarCommands.First().Command.Execute(null);
+            shellService.ToolBarCommands[0].Command.Execute(null);
             Assert.IsTrue(isShowCalled);
         }
 
@@ -164,10 +170,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
                 // Do not dispose the stream now.
             }
 
-            public void MasterDispose()
-            {
-                base.Dispose(true);
-            }
+            public void MasterDispose() => base.Dispose(true);
         }
     }
 }

@@ -21,14 +21,8 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         
         public object? ContentView { get; set; }
 
-        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
-        {
-            toolBarCommands.AddRange(commands);
-        }
+        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => toolBarCommands.AddRange(commands);
 
-        public void ClearToolBarCommands()
-        {
-            toolBarCommands.Clear();
-        }
+        public void ClearToolBarCommands() => toolBarCommands.Clear();
     }
 }

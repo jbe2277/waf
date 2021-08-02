@@ -21,23 +21,18 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             Show();
         }
 
-        private void LoadedHandler(object sender, RoutedEventArgs e)
-        {
-            toBox.Focus();
-        }
+        private void LoadedHandler(object sender, RoutedEventArgs e) => toBox.Focus();
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            // This is a workaround. Without this line the main window might hide behind
-            // another running application.
+            // This is a workaround. Without this line the main window might hide behind another running application.
             Application.Current.MainWindow.Activate();
         }
 
         private void SendButtonClick(object sender, RoutedEventArgs e)
         {
-            // The Send button is a toolbar button which doesn't take the focus. Move the focus
-            // so that the Binding updates the source before calling the SendCommand.
+            // The Send button is a toolbar button which doesn't take the focus. Move the focus so that the Binding updates the source before calling the SendCommand.
             CommitChanges();
         }
 

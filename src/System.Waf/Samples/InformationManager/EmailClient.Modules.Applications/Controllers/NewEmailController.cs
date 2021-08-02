@@ -10,9 +10,7 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for creating a new email and sending it.
-    /// </summary>
+    /// <summary>Responsible for creating a new email and sending it.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     internal class NewEmailController
     {
@@ -63,23 +61,10 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             var selectedContact = addressBookService.ShowSelectContactView(NewEmailViewModel.View);
             if (selectedContact == null) return;
 
-            var parameter = commandParameter as string;
-            if (parameter == "To")
-            {
-                NewEmailViewModel.To += " " + selectedContact.Email;
-            }
-            else if (parameter == "CC")
-            {
-                NewEmailViewModel.CC += " " + selectedContact.Email;
-            }
-            else if (parameter == "Bcc")
-            {
-                NewEmailViewModel.Bcc += " " + selectedContact.Email;
-            }
-            else
-            {
-                throw new ArgumentException("Invalid commandParameter value");
-            }
+            if (commandParameter is "To") NewEmailViewModel.To += " " + selectedContact.Email;
+            else if (commandParameter is "CC") NewEmailViewModel.CC += " " + selectedContact.Email;
+            else if (commandParameter is "Bcc") NewEmailViewModel.Bcc += " " + selectedContact.Email;
+            else throw new ArgumentException("Invalid commandParameter value");
         }
 
         private void SendEmail()

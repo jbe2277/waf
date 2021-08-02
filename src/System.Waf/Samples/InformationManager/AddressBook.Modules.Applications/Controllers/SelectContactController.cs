@@ -39,14 +39,10 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             ContactListViewModel.SelectedContact = Root.Contacts.FirstOrDefault();
             selectContactViewModel.ContactListView = ContactListViewModel.View;
             selectContactViewModel.OkCommand = selectContactCommand;
-
             contactListViewModelPropertyChangedProxy = WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
         }
 
-        public void Run()
-        {
-            selectContactViewModel.ShowDialog(OwnerView);
-        }
+        public void Run() => selectContactViewModel.ShowDialog(OwnerView);
 
         public void Shutdown()
         {
@@ -54,7 +50,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             contactsView.Dispose();
         }
 
-        private bool CanSelectContact() { return ContactListViewModel.SelectedContact != null; }
+        private bool CanSelectContact() => ContactListViewModel.SelectedContact != null;
 
         private void SelectContact()
         {
@@ -64,14 +60,8 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 
         private void ContactListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ContactListViewModel.SelectedContact))
-            {
-                selectContactCommand.RaiseCanExecuteChanged();
-            }
-            else if (e.PropertyName == nameof(ContactListViewModel.FilterText))
-            {
-                contactsView.Update();
-            }
+            if (e.PropertyName == nameof(ContactListViewModel.SelectedContact)) selectContactCommand.RaiseCanExecuteChanged();
+            else if (e.PropertyName == nameof(ContactListViewModel.FilterText)) contactsView.Update();
         }
     }
 }

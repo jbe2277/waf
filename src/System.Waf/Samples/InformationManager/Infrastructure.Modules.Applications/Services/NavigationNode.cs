@@ -14,9 +14,9 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
 
         public NavigationNode(string name, Action showAction, Action closeAction, double group, double order)
         {
-            if (string.IsNullOrEmpty(name)) { throw new ArgumentException("name must not be null or empty.", nameof(name)); }
-            if (group < 0) { throw new ArgumentException("group must be equal or greater than 0.", nameof(group)); }
-            if (order < 0) { throw new ArgumentException("order must be equal or greater than 0.", nameof(order)); }
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("name must not be null or empty.", nameof(name));
+            if (group < 0) throw new ArgumentException("group must be equal or greater than 0.", nameof(group));
+            if (order < 0) throw new ArgumentException("order must be equal or greater than 0.", nameof(order));
             Name = name;
             this.showAction = showAction ?? throw new ArgumentNullException(nameof(showAction));
             this.closeAction = closeAction ?? throw new ArgumentNullException(nameof(closeAction));
@@ -41,19 +41,11 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             get => isSelected;
             set
             {
-                if (isSelected != value)
-                {
-                    if (isSelected)
-                    {
-                        closeAction();
-                    }
-                    isSelected = value;
-                    RaisePropertyChanged();
-                    if (isSelected)
-                    {
-                        showAction();
-                    }
-                }
+                if (isSelected == value) return;
+                if (isSelected) closeAction();
+                isSelected = value;
+                RaisePropertyChanged();
+                if (isSelected) showAction();
             }
         }
 

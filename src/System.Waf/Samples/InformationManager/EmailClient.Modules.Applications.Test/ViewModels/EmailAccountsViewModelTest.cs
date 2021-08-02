@@ -10,6 +10,12 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
     [TestClass]
     public class EmailAccountsViewModelTest : EmailClientTest
     {
+        protected override void OnCleanup()
+        {
+            MockEmailAccountsView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void PropertiesTest()
         {
@@ -36,8 +42,6 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             };
 
             viewModel.ShowDialog(ownerView);
-
-            MockEmailAccountsView.ShowDialogAction = null;
             Assert.IsTrue(showDialogCalled);
         }
     }

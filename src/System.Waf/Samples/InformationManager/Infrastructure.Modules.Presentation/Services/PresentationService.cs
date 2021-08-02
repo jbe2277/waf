@@ -12,8 +12,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services
     {
         public void Initialize()
         {
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
-                XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
             ResourceHelper.AddToApplicationResources(typeof(PresentationService).Assembly, "Resources/ConverterResources.xaml");
         }

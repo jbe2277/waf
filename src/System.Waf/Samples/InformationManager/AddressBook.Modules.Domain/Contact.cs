@@ -55,9 +55,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain
         public Address Address => address;
 
         [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
-        {
-            Address.Validate();
-        }
+        private void OnDeserialized(StreamingContext context) => Address.Validate();
     }
 }

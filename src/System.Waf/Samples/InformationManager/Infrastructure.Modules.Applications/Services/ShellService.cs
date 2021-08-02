@@ -26,14 +26,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
             set => SetProperty(ref contentView, value);
         }
 
-        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands)
-        {
-            shellViewModel.Value.AddToolBarCommands(commands);
-        }
+        public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => shellViewModel.Value.AddToolBarCommands(commands);
 
-        public void ClearToolBarCommands()
-        {
-            shellViewModel.Value.ClearToolBarCommands();
-        }
+        public void ClearToolBarCommands() => shellViewModel.Value.ClearToolBarCommands();
     }
 }

@@ -11,6 +11,12 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
     [TestClass]
     public class SelectContactControllerTest : AddressBookTest
     {
+        protected override void OnCleanup()
+        {
+            MockSelectContactView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void SelectContactTest()
         {
@@ -42,9 +48,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             };
 
             controller.Run();
-
             Assert.AreEqual(contact2, controller.SelectedContact);
-            MockSelectContactView.ShowDialogAction = null;
         }
 
         [TestMethod]
@@ -69,11 +73,8 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             };
 
             controller.Run();
-
             Assert.IsTrue(showDialogActionCalled);
             Assert.IsNull(controller.SelectedContact);
-
-            MockSelectContactView.ShowDialogAction = null;
         }
     }
 }

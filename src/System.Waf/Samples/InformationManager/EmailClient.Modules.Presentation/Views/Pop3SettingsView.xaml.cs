@@ -36,24 +36,13 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
             ViewModel.Model.SmtpUserCredits.PropertyChanged -= SmtpUserCreditsPropertyChanged;
         }
 
-        private void SmtpUserCreditsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SmtpUserCreditsPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(UserCredits.Password))
-            {
-                smtpPassword.Password = ViewModel.Model.SmtpUserCredits.Password;
-            }
+            if (e.PropertyName == nameof(UserCredits.Password)) smtpPassword.Password = ViewModel.Model.SmtpUserCredits.Password;
         }
 
-        private void Pop3PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var passwordBox = (PasswordBox)sender;
-            ViewModel.Model.Pop3UserCredits.Password = passwordBox.Password;
-        }
+        private void Pop3PasswordChanged(object sender, RoutedEventArgs e) => ViewModel.Model.Pop3UserCredits.Password = ((PasswordBox)sender).Password;
 
-        private void SmtpPasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var passwordBox = (PasswordBox)sender;
-            ViewModel.Model.SmtpUserCredits.Password = passwordBox.Password;
-        }
+        private void SmtpPasswordChanged(object sender, RoutedEventArgs e) => ViewModel.Model.SmtpUserCredits.Password = ((PasswordBox)sender).Password;
     }
 }

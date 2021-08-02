@@ -10,9 +10,7 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for a email folder. Synchronizes the master / detail view.
-    /// </summary>
+    /// <summary>Responsible for a email folder. Synchronizes the master / detail view.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     internal class EmailFolderController
     {
@@ -50,10 +48,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailLayoutViewModel.EmailView = EmailViewModel.View;
         }
 
-        public void Run()
-        {
-            shellService.ContentView = emailLayoutViewModel.View;
-        }
+        public void Run() => shellService.ContentView = emailLayoutViewModel.View;
 
         public void Shutdown()
         {
@@ -64,7 +59,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers
             emailsView.Dispose();
         }
 
-        private bool CanDeleteEmail() { return EmailListViewModel.SelectedEmail != null; }
+        private bool CanDeleteEmail() => EmailListViewModel.SelectedEmail != null;
 
         private void DeleteEmail()
         {

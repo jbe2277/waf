@@ -41,7 +41,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Controller
 
             using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
             {
-                var data = (Data)serializer.ReadObject(stream);
+                var data = (Data)serializer.ReadObject(stream)!;
                 Assert.AreEqual("Bill", data.Name);
             }
         }

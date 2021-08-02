@@ -12,9 +12,7 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
 {
-    /// <summary>
-    /// Responsible for the whole module. This controller delegates the tasks to other controllers.
-    /// </summary>
+    /// <summary>Responsible for the whole module. This controller delegates the tasks to other controllers.</summary>
     [Export(typeof(IModuleController)), Export(typeof(IAddressBookService)), Export]
     internal class ModuleController : IModuleController, IAddressBookService
     {
@@ -49,19 +47,14 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
                 if (stream.Length == 0)
                 {
                     Root = new AddressBookRoot();
-                    foreach (var contact in SampleDataProvider.CreateContacts()) { Root.AddContact(contact); }
+                    foreach (var x in SampleDataProvider.CreateContacts()) Root.AddContact(x);
                 }
-                else
-                {
-                    Root = (AddressBookRoot)serializer.Value.ReadObject(stream);
-                }
+                else Root = (AddressBookRoot)serializer.Value.ReadObject(stream)!;
             }
             navigationService.AddNavigationNode("Contacts", ShowAddressBook, CloseAddressBook, 2, 1);
         }
 
-        public void Run()
-        {   
-        }
+        public void Run() {    }
 
         public void Shutdown()
         {
@@ -99,9 +92,6 @@ namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers
             activeContactController = null;
         }
 
-        private static DataContractSerializer CreateDataContractSerializer()
-        {
-            return new DataContractSerializer(typeof(AddressBookRoot));
-        }
+        private static DataContractSerializer CreateDataContractSerializer() => new DataContractSerializer(typeof(AddressBookRoot));
     }
 }

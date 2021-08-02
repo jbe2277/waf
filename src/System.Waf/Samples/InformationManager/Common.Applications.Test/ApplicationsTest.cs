@@ -16,7 +16,7 @@ namespace Test.InformationManager.Common.Applications
         {
             base.OnInitialize();
             
-            AggregateCatalog catalog = new AggregateCatalog();
+            var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ApplicationsTest).Assembly));
 
@@ -34,15 +34,9 @@ namespace Test.InformationManager.Common.Applications
             base.OnCleanup();
         }
 
-        public T Get<T>()
-        {
-            return Container.GetExportedValue<T>();
-        }
+        public T Get<T>() => Container.GetExportedValue<T>();
 
-        public Lazy<T> GetLazy<T>()
-        {
-            return new Lazy<T>(() => Container.GetExportedValue<T>());
-        }
+        public Lazy<T> GetLazy<T>() => new Lazy<T>(() => Container.GetExportedValue<T>());
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }
     }

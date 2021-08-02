@@ -9,10 +9,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Views
     public class MockContactListView : MockView, IContactListView
     {
         public Action<MockContactListView>? FocusItemAction { get; set; }
-        
-        public void FocusItem()
-        {
-            FocusItemAction?.Invoke(this);
-        }
+
+        public void FocusItem() => FocusItemAction?.Invoke(this);
     }
 }

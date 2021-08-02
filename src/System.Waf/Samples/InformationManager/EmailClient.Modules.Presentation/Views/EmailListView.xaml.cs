@@ -44,10 +44,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
         {
             ViewModel.SelectedEmail = ViewModel.Emails.FirstOrDefault();
             emailsBox.Focus();
-            if (ViewModel.SelectedEmail != null)
-            {
-                FocusItem();
-            }
+            if (ViewModel.SelectedEmail != null) FocusItem();
         }
     }
 }

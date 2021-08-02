@@ -8,6 +8,12 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
     [TestClass]
     public class SelectContactViewModelTest : AddressBookTest
     {
+        protected override void OnCleanup()
+        {
+            MockSelectContactView.ShowDialogAction = null;
+            base.OnCleanup();
+        }
+
         [TestMethod]
         public void ShowDialogAndCloseTest()
         {
@@ -22,11 +28,9 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
                 Assert.IsFalse(view.IsVisible);
             };
 
-            object owner = new object();
+            var owner = new object();
             viewModel.ShowDialog(owner);
             Assert.IsTrue(showDialogActionCalled);
-
-            MockSelectContactView.ShowDialogAction = null;
         }
     }
 }

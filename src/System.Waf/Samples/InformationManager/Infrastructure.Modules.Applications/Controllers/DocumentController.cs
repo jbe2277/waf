@@ -27,30 +27,18 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
         public void Initialize()
         {
             var dataDirectory = environmentService.DataDirectory;
-            if (!Directory.Exists(dataDirectory))
-            {
-                Directory.CreateDirectory(dataDirectory);
-            }
+            if (!Directory.Exists(dataDirectory)) Directory.CreateDirectory(dataDirectory);
             package = Package.Open(PackagePath, FileMode.OpenOrCreate);
         }
 
-        public void Shutdown()
-        {
-            package?.Close();
-        }
+        public void Shutdown() => package?.Close();
 
         public Stream GetStream(string documentPartPath, string contentType, FileMode fileMode)
         {
-            Uri documentUri = PackUriHelper.CreatePartUri(new Uri(documentPartPath, UriKind.Relative));
-            PackagePart packagePart;
-            if (!package!.PartExists(documentUri))
-            {
-                packagePart = package.CreatePart(documentUri, contentType, CompressionOption.Normal);
-            }
-            else
-            {
-                packagePart = package.GetPart(documentUri);
-            }
+            var documentUri = PackUriHelper.CreatePartUri(new Uri(documentPartPath, UriKind.Relative));
+            var packagePart = package!.PartExists(documentUri)
+                ? package.GetPart(documentUri)
+                : package.CreatePart(documentUri, contentType, CompressionOption.Normal);
             return packagePart.GetStream(fileMode);
         }
     }

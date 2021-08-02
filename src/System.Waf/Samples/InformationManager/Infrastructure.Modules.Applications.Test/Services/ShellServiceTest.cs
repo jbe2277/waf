@@ -18,12 +18,12 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             var shellService = new ShellService(lazyShellViewModel);
 
             var mockShellViewModel = (MockShellViewModel)lazyShellViewModel.Value;
-            object shellView = new object();
+            var shellView = new object();
             mockShellViewModel.View = shellView;
             Assert.AreEqual(shellView, shellService.ShellView);
 
             Assert.IsNull(shellService.ContentView);
-            object contentView = new object();
+            var contentView = new object();
             AssertHelper.PropertyChangedEvent(shellService, x => x.ContentView, () => shellService.ContentView = contentView);
             Assert.AreEqual(contentView, shellService.ContentView);
         }
