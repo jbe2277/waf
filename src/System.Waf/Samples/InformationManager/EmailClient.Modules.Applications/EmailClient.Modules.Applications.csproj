@@ -5,6 +5,10 @@
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Applications</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Waf.Wpf" Version="*-*" />
+  </ItemGroup>
+  
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="WindowsBase" />
@@ -12,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
     <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj" />
     <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />

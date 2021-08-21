@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+    <PackageReference Include="System.Waf.Wpf" Version="*-*" />
   </ItemGroup>
   
   <ItemGroup>

@@ -4,6 +4,10 @@
     <RootNamespace>Test.Writer.Applications</RootNamespace>
     <AssemblyName>Waf.Writer.Applications.Test</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Waf.UnitTesting.Wpf" Version="*-*" />
+  </ItemGroup>
   
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
@@ -15,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
     <ProjectReference Include="..\Writer.Applications\Writer.Applications.csproj" />
   </ItemGroup>
 </Project>

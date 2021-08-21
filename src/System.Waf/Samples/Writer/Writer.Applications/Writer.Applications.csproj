@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.9" />
+    <PackageReference Include="System.Waf.Wpf" Version="*-*" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
@@ -16,11 +17,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
   </ItemGroup>
   
   <ItemGroup>

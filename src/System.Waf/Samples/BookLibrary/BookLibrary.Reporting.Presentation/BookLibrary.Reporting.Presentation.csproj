@@ -7,12 +7,15 @@
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Waf.Wpf" Version="*-*" />
+  </ItemGroup>
+  
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
     <ProjectReference Include="..\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj" />
     <ProjectReference Include="..\BookLibrary.Library.Presentation\BookLibrary.Library.Presentation.csproj" />
   </ItemGroup>

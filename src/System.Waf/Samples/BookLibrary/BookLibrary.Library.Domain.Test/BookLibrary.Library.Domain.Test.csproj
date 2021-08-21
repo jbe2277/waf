@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="*-*" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\BookLibrary.Library.Domain\BookLibrary.Library.Domain.csproj" />
   </ItemGroup>
 </Project>

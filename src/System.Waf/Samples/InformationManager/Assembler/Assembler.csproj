@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
     <ProjectReference Include="..\Common.Presentation\Common.Presentation.csproj" />
     <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
   </ItemGroup>
