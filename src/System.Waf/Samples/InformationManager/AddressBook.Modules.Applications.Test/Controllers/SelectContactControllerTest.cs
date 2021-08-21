@@ -66,7 +66,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             controller.Initialize();
 
             bool showDialogActionCalled = false;
-            MockSelectContactView.ShowDialogAction = view =>
+            MockSelectContactView.ShowDialogAction = _ =>
             {
                 showDialogActionCalled = true;
                 // Do nothing, this simulates that the user has closed the window.

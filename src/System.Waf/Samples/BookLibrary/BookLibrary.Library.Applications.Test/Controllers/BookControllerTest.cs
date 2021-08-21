@@ -43,7 +43,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
 
             // Check that the first Book is selected
             var bookListView = Get<IBookListView>();
-            var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+            var bookListViewModel = bookListView.GetViewModel<BookListViewModel>()!;
             Assert.AreEqual(entityService.Books[0], bookListViewModel.SelectedBook?.Book);
 
             // Change the selection

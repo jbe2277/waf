@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 

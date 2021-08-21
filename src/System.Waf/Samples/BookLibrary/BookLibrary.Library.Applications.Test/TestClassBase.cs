@@ -39,7 +39,7 @@ namespace Test.BookLibrary.Library.Applications
 
         public T Get<T>() => Container!.GetExportedValue<T>();
 
-        public Lazy<T> GetLazy<T>() => new Lazy<T>(() => Container!.GetExportedValue<T>());
+        public Lazy<T> GetLazy<T>() => new(() => Container!.GetExportedValue<T>());
 
         protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }
 

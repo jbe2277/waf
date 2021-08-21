@@ -12,18 +12,18 @@ namespace Test.Waf.Applications
             // This doesn't work because the Visual Studio Unit Testing Framework
             // doesn't have an entry assembly
             
-            string productName = ApplicationInfo.ProductName;
-            string version = ApplicationInfo.Version;
-            string company = ApplicationInfo.Company;
-            string copyright = ApplicationInfo.Copyright;
+            _ = ApplicationInfo.ProductName;
+            _ = ApplicationInfo.Version;
+            _ = ApplicationInfo.Company;
+            _ = ApplicationInfo.Copyright;
             Assert.IsNotNull(ApplicationInfo.ApplicationPath);
 
             // The second time it returns the cached values
 
-            productName = ApplicationInfo.ProductName;
-            version = ApplicationInfo.Version;
-            company = ApplicationInfo.Company;
-            copyright = ApplicationInfo.Copyright;
+            _ = ApplicationInfo.ProductName;
+            _ = ApplicationInfo.Version;
+            _ = ApplicationInfo.Company;
+            _ = ApplicationInfo.Copyright;
             Assert.IsNotNull(ApplicationInfo.ApplicationPath);
         }
     }

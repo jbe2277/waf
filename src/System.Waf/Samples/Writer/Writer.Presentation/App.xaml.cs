@@ -15,7 +15,7 @@ using Waf.Writer.Applications.ViewModels;
 
 namespace Waf.Writer.Presentation
 {
-    public partial class App : Application
+    public partial class App
     {
         private AggregateCatalog? catalog;
         private CompositionContainer? container;

@@ -20,7 +20,7 @@ using Waf.BookLibrary.Library.Presentation.Properties;
 
 namespace Waf.BookLibrary.Library.Presentation
 {
-    public partial class App : Application
+    public partial class App
     {
         private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
         {

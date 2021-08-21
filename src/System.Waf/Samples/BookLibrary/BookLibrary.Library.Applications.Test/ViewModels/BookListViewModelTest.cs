@@ -22,8 +22,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         {
             var books = new List<Book>()
             {
-                new Book() { Title = "The Fellowship of the Ring" },
-                new Book() { Title = "The Two Towers" }
+                new() { Title = "The Fellowship of the Ring" },
+                new() { Title = "The Two Towers" }
             };
             var bookListView = new MockBookListView();
             var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
@@ -50,8 +50,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         {
             var books = new ObservableCollection<Book>()
             {
-                new Book() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
-                new Book() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
+                new() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
+                new() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
             };
             var bookListView = new MockBookListView();
             var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));

@@ -30,7 +30,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels
 
         public ICommand SendCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-        public ICommand CloseCommand { get; } = DelegateCommand.DisabledCommand;
+        public ICommand CloseCommand { get; }
 
         public IReadOnlyList<EmailAccount> EmailAccounts { get; set; } = null!;
 

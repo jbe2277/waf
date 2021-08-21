@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Waf.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
@@ -17,8 +16,8 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
             var viewModel = Get<ContactListViewModel>();
             var contacts = new List<Contact>()
             {
-                new Contact(),
-                new Contact()
+                new(),
+                new()
             };
             
             Assert.IsNull(viewModel.Contacts);
@@ -65,7 +64,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.ViewModels
             var view = (MockContactListView)viewModel.View;
 
             bool focusItemActionCalled = false;
-            view.FocusItemAction = v =>
+            view.FocusItemAction = _ =>
             {
                 focusItemActionCalled = true;
             };

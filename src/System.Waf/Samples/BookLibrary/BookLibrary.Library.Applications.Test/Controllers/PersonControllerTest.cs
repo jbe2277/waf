@@ -3,7 +3,6 @@ using System.Linq;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
-using System.Windows.Input;
 using Test.BookLibrary.Library.Applications.Services;
 using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.Controllers;

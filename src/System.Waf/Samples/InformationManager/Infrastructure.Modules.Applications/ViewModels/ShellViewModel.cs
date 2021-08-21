@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;

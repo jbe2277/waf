@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
@@ -17,8 +16,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
             var viewModel = Get<EmailListViewModel>();
             var emails = new List<Email>()
             {
-                new Email(),
-                new Email(),
+                new(),
+                new(),
             };
             
             Assert.IsNull(viewModel.SelectedEmail);

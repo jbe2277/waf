@@ -35,14 +35,14 @@ namespace Test.Writer.Applications.ViewModels
             Assert.IsNull(dialogResult);
             Assert.IsFalse(view.IsVisible);
 
-            MockSaveChangesView.ShowDialogAction = v =>
+            MockSaveChangesView.ShowDialogAction = _ =>
             {
                 viewModel.YesCommand.Execute(null);
             };
             dialogResult = viewModel.ShowDialog(owner);            
             Assert.AreEqual(true, dialogResult);
 
-            MockSaveChangesView.ShowDialogAction = v =>
+            MockSaveChangesView.ShowDialogAction = _ =>
             {
                 viewModel.NoCommand.Execute(null);
             };

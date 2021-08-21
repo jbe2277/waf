@@ -7,7 +7,6 @@ using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
-using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Test.BookLibrary.Library.Applications.ViewModels
 {
@@ -36,7 +35,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
 
             // Close the ShellView
             bool closingEventRaised = false;
-            shellViewModel.Closing += (sender, e) =>
+            shellViewModel.Closing += (_, _) =>
             {
                 closingEventRaised = true;
             };

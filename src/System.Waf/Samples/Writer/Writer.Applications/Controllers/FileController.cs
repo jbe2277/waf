@@ -106,7 +106,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void CloseCommand() => Close(ActiveDocument!);
 
-        private bool CanSaveCommand() => ActiveDocument != null && ActiveDocument.Modified;
+        private bool CanSaveCommand() => ActiveDocument is { Modified: true };
 
         private void SaveCommand() => Save(ActiveDocument!);
 

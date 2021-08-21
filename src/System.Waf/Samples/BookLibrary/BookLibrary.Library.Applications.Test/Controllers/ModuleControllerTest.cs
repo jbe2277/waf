@@ -83,7 +83,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             entityController.HasChangesResult = true;
             entityController.SaveCalled = false;
             // When the question box asks us to save the changes we say "Cancel" => null.
-            messageService.ShowQuestionStub = (_, message) => null;
+            messageService.ShowQuestionStub = (_, _) => null;
             // This time the Save method must not be called. Because we have chosen "Cancel" the ShellView must still
             // be visible.
             shellViewModel.ExitCommand.Execute(null);
@@ -94,7 +94,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             entityController.HasChangesResult = true;
             entityController.SaveCalled = false;
             // When the question box asks us to save the changes we say "No" => false.
-            messageService.ShowQuestionStub = (_, message) => false;
+            messageService.ShowQuestionStub = (_, _) => false;
             // This time the Save method must not be called. Because we have chosen "No" the ShellView must still
             // be closed.
             shellViewModel.ExitCommand.Execute(null);
@@ -129,7 +129,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
             Assert.IsTrue(shellView.IsVisible);
 
             // Exit the application again but this time we agree to loose our changes.
-            messageService.ShowYesNoQuestionStub = (_, message) => true;
+            messageService.ShowYesNoQuestionStub = (_, _) => true;
             shellViewModel.ExitCommand.Execute(null);
             Assert.IsFalse(shellView.IsVisible);
         }

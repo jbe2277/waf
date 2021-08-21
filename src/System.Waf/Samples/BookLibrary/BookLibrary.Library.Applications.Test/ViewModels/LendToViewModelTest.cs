@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Waf.UnitTesting;
 using Test.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Applications.ViewModels;
@@ -24,8 +23,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             var book = new Book() { Title = "The Fellowship of the Ring" };
             var persons = new List<Person>()
             {
-                new Person() { Firstname = "Harry" },
-                new Person() { Firstname = "Ron" }
+                new() { Firstname = "Harry" },
+                new() { Firstname = "Ron" }
             };
             var lendToView = new MockLendToView();
             var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
@@ -35,7 +34,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
             
             // Show the dialog
             var owner = new object();
-            Action<MockLendToView> showDialogAction = (view) =>
+            Action<MockLendToView> showDialogAction = _ =>
             {
                 Assert.IsTrue(lendToView.IsVisible);
                 Assert.AreEqual(owner, lendToView.Owner);
@@ -63,8 +62,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         {
             var persons = new List<Person>()
             {
-                new Person() { Firstname = "Harry" },
-                new Person() { Firstname = "Ron" }
+                new() { Firstname = "Harry" },
+                new() { Firstname = "Ron" }
             };
             var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons[0] };
             var lendToView = new MockLendToView();
@@ -72,7 +71,7 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
 
             // Show the dialog
             var owner = new object();
-            Action<MockLendToView> showDialogAction = (view) =>
+            Action<MockLendToView> showDialogAction = _ =>
             {
                 // Check the default values
                 Assert.IsFalse(lendToViewModel.IsLendTo);

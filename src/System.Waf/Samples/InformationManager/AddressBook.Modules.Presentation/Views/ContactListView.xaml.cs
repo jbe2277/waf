@@ -11,7 +11,7 @@ using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 {
     [Export(typeof(IContactListView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ContactListView : UserControl, IContactListView
+    public partial class ContactListView : IContactListView
     {
         private readonly Lazy<ContactListViewModel> viewModel;
         

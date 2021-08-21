@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Windows.Documents;
 using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.ViewModels;

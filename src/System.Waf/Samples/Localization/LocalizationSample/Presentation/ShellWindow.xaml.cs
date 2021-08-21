@@ -2,7 +2,7 @@
 
 namespace LocalizationSample.Presentation
 {
-    public partial class ShellWindow : Window
+    public partial class ShellWindow
     {
         public ShellWindow()
         {
