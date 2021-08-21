@@ -29,8 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writer", "Writer", "{2D4983
 		Samples\Writer\Writer.docx = Samples\Writer\Writer.docx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Snippets", "Code Snippets", "{93CDC3EA-AB95-4537-8B66-46D0656EF265}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookLibrary", "BookLibrary", "{1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\BookLibrary\BookLibrary.docx = Samples\BookLibrary\BookLibrary.docx
@@ -64,8 +62,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer.Applications.Test", "Samples\Writer\Writer.Applications.Test\Writer.Applications.Test.csproj", "{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer.Presentation.Test", "Samples\Writer\Writer.Presentation.Test\Writer.Presentation.Test.csproj", "{03FE77F4-4C93-4139-8825-E0070EE3F860}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Code Snippets", "Code Snippets\Code Snippets.csproj", "{F0C5BD31-CFF7-4B0B-8483-7471447740D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Reporting.Applications", "Samples\BookLibrary\BookLibrary.Reporting.Applications\BookLibrary.Reporting.Applications.csproj", "{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}"
 EndProject
@@ -183,8 +179,6 @@ Global
 		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03FE77F4-4C93-4139-8825-E0070EE3F860}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0C5BD31-CFF7-4B0B-8483-7471447740D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -342,7 +336,6 @@ Global
 		{4746F5C7-ADC1-4E06-8365-9400AC0FB4A5} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
 		{C3D1FAC1-8C48-4E7B-93D1-6BBC4B749139} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
 		{03FE77F4-4C93-4139-8825-E0070EE3F860} = {2D498396-C10C-4A20-B24E-FD554FFC49EF}
-		{F0C5BD31-CFF7-4B0B-8483-7471447740D8} = {93CDC3EA-AB95-4537-8B66-46D0656EF265}
 		{A050ED65-BF3C-4CBC-9A9A-68CB5AA82BCC} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
 		{0257AACF-AE9A-4002-8E2E-C98D6FD17437} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
 		{0985021E-9AD0-455A-A26B-2B8CEBD26297} = {1617BA08-7FFF-4C8A-9C90-BC0EDB577FA3}
