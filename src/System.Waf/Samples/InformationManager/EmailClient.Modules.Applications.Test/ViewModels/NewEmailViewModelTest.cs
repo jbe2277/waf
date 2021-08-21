@@ -20,8 +20,8 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
 
             var emailAccounts = new List<EmailAccount>()
             {
-                new EmailAccount(),
-                new EmailAccount()
+                new(),
+                new()
             };
 
             AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts[0]);

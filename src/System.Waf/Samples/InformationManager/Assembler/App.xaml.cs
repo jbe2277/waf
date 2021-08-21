@@ -19,7 +19,7 @@ using Waf.InformationManager.Common.Applications.Services;
 
 namespace Waf.InformationManager.Assembler
 {
-    public partial class App : Application
+    public partial class App
     {
         private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
         {

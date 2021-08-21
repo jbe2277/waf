@@ -25,11 +25,11 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
             var navigationService = new NavigationService();
 
             bool showActionCalled = false;
-            void showAction() => showActionCalled = true;
+            void ShowAction() => showActionCalled = true;
             bool closeActionCalled = false;
-            void closeAction() => closeActionCalled = true;
+            void CloseAction() => closeActionCalled = true;
 
-            var node = (NavigationNode)navigationService.AddNavigationNode("Node 1", showAction, closeAction, 3, 7);
+            var node = (NavigationNode)navigationService.AddNavigationNode("Node 1", ShowAction, CloseAction, 3, 7);
 
             Assert.AreEqual("Node 1", node.Name);
             Assert.AreEqual(3, node.Group);
@@ -63,13 +63,13 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services
         {
             var navigationService = new NavigationService();
 
-            static void showAction() { }
-            static void closeAction() { }
+            static void ShowAction() { }
+            static void CloseAction() { }
 
-            var nodeB2 = navigationService.AddNavigationNode("Node B1", showAction, closeAction, 1, 1);
-            var nodeA1 = navigationService.AddNavigationNode("Node A1", showAction, closeAction, 0, 0);
-            var nodeA2 = navigationService.AddNavigationNode("Node A2", showAction, closeAction, 0, 1);
-            var nodeB1 = navigationService.AddNavigationNode("Node B1", showAction, closeAction, 1, 0);
+            var nodeB2 = navigationService.AddNavigationNode("Node B1", ShowAction, CloseAction, 1, 1);
+            var nodeA1 = navigationService.AddNavigationNode("Node A1", ShowAction, CloseAction, 0, 0);
+            var nodeA2 = navigationService.AddNavigationNode("Node A2", ShowAction, CloseAction, 0, 1);
+            var nodeB1 = navigationService.AddNavigationNode("Node B1", ShowAction, CloseAction, 1, 0);
 
             AssertHelper.SequenceEqual(new[] { nodeA1, nodeA2, nodeB1, nodeB2 }, navigationService.NavigationNodes);
             Assert.IsFalse(((NavigationNode)nodeA1).IsFirstItemOfNewGroup);

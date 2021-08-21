@@ -391,7 +391,9 @@
     <value>Macht die letzte Aktion rückgängig.</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
-    <value>Unbekannter Anwendungsfehler</value>
+    <value>Unbekannter Anwendungsfehler
+
+{0}</value>
   </data>
   <data name="UnpinFileMenu" xml:space="preserve">
     <value>Aus Liste _lösen</value>

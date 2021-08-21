@@ -35,7 +35,7 @@ namespace Test.Writer.Applications.ViewModels
 
             // Try to close the ShellView but cancel this operation through the closing event
             bool cancelClosing = true;
-            shellViewModel.Closing += (sender, e) =>
+            shellViewModel.Closing += (_, e) =>
             {
                 e.Cancel = cancelClosing;
             };

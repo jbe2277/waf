@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using System.Threading;
 using System.Windows;
-using System.Windows.Markup;
 using LocalizationSample.Domain;
 using LocalizationSample.Presentation;
 using LocalizationSample.Properties;
 
 namespace LocalizationSample
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
@@ -21,7 +19,7 @@ namespace LocalizationSample
         {
             base.OnStartup(e);
 
-            Person person = new Person() 
+            var person = new Person() 
             { 
                 Name = "Luke", 
                 Birthday = new DateTime(2080, 2, 6)

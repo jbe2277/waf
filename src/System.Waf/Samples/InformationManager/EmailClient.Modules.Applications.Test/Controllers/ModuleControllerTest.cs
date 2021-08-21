@@ -21,7 +21,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
         {
             using var stream = new MasterMemoryStream();
             var documentService = Get<MockDocumentService>();
-            documentService.GetStreamAction = (documentPartPath, contentType, fileMode) =>
+            documentService.GetStreamAction = (_, _, _) =>
             {
                 stream.Position = 0;
                 return stream;
@@ -153,10 +153,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             var shellService = Get<MockShellService>();
 
             bool isShowCalled = false;
-            MockNewEmailView.ShowAction = view =>
-            {
-                isShowCalled = true;
-            };
+            MockNewEmailView.ShowAction = _ => isShowCalled = true;
             
             shellService.ToolBarCommands[0].Command.Execute(null);
             Assert.IsTrue(isShowCalled);

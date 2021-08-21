@@ -10,7 +10,7 @@ namespace Waf.Writer.Presentation.DesignData
         public SampleMainViewModel() : this(null) { }
 
         public SampleMainViewModel(IMainView? view)
-            : base(view ?? new MockMainView() { ContentViewState = ContentViewState.DocumentViewVisible }, new MockShellService(), new MockFileService())
+            : base(view ?? new MockMainView { ContentViewState = ContentViewState.DocumentViewVisible }, new MockShellService(), new MockFileService())
         {
             DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\Document 1.rtf").View);
             DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\ReadMe.rtf").View);
@@ -19,7 +19,7 @@ namespace Waf.Writer.Presentation.DesignData
 
         private static RichTextViewModel CreateRichTextViewModel(string fileName)
         {
-            return new RichTextViewModel(new RichTextView(), new MockShellService()) { Document = new RichTextDocument(new RichTextDocumentType()) { FileName = fileName } };
+            return new(new RichTextView(), new MockShellService()) { Document = new RichTextDocument(new RichTextDocumentType()) { FileName = fileName } };
         }
 
 

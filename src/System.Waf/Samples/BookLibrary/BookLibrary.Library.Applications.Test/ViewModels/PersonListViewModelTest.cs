@@ -16,8 +16,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         {
             var persons = new List<Person>()
             {
-                new Person() { Firstname = "Harry" },
-                new Person() { Firstname = "Ron" }
+                new() { Firstname = "Harry" },
+                new() { Firstname = "Ron" }
             };
             var personListView = new MockPersonListView();
             var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
@@ -43,8 +43,8 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         {
             var persons = new List<Person>()
             {
-                new Person() { Firstname = "Harry", Lastname = "Potter" },
-                new Person() { Firstname = "Ron", Lastname = "Weasley" }
+                new() { Firstname = "Harry", Lastname = "Potter" },
+                new() { Firstname = "Ron", Lastname = "Weasley" }
             };
             var personListView = new MockPersonListView();
             var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };

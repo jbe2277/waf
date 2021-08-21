@@ -9,7 +9,7 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
 
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
-        public T Get<T>() where T : class, new() => new T();
+        public T Get<T>() where T : class, new() => new();
 
         public void Save() { }
 

@@ -2,6 +2,6 @@
 {
     internal class BuildFix
     {
-        public static void JustToCopyReferenceIntoOutput() => typeof(Applications.Views.IReportView).GetHashCode();
+        public static void JustToCopyReferenceIntoOutput() => _ = typeof(Applications.Views.IReportView).GetHashCode();
     }
 }

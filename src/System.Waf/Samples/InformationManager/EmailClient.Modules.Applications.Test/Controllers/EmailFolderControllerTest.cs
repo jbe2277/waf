@@ -56,7 +56,7 @@ namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
             // Select the first email and delete it
 
             bool focusItemCalled = false;
-            emailListView.FocusItemAction = view =>
+            emailListView.FocusItemAction = _ =>
             {
                 focusItemCalled = true;
             };

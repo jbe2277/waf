@@ -12,12 +12,12 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
         {
             Persons = new List<Person>
             {
-                new Person
+                new()
                 {
                     Firstname = "Harry",
                     Lastname = "Potter"
                 },
-                new Person
+                new()
                 {
                     Firstname = "Ron",
                     Lastname = "Weasley"

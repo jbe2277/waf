@@ -12,13 +12,13 @@ namespace Waf.BookLibrary.Library.Presentation.DesignData
             FilterText = "An example search text";
             Persons = new List<Person>
             {
-                new Person
+                new()
                 {
                     Firstname = "Harry",
                     Lastname = "Potter",
                     Email = "harry.potter@hogwarts.edu"
                 },
-                new Person
+                new()
                 {
                     Firstname = "Ron",
                     Lastname = "Weasley",

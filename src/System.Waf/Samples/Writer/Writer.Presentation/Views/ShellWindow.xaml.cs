@@ -9,7 +9,7 @@ using Waf.Writer.Applications.Views;
 namespace Waf.Writer.Presentation.Views
 {
     [Export(typeof(IShellView))]
-    public partial class ShellWindow : Window, IShellView
+    public partial class ShellWindow : IShellView
     {
         public ShellWindow()
         {

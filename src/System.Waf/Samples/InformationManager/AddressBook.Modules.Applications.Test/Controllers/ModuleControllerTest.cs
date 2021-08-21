@@ -23,7 +23,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
         {
             var stream = new MasterMemoryStream();
             var documentService = Get<MockDocumentService>();
-            documentService.GetStreamAction = (documentPartPath, contentType, fileMode) =>
+            documentService.GetStreamAction = (_, _, _) =>
             {
                 stream.Position = 0;
                 return stream;

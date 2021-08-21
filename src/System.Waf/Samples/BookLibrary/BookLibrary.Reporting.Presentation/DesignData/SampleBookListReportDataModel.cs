@@ -9,13 +9,13 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData
     {
         public SampleBookListReportDataModel() : base(new List<Book>
             {
-                new Book
+                new()
                 {
                     Title = "Serenity, Vol 1: Those Left Behind",
                     Author = "Joss Whedon, Brett Matthews, Will Conrad",
                     PublishDate = new DateTime(2006, 8, 2)
                 },
-                new Book
+                new()
                 {
                     Title = "Star Wars - Heir to the Empire",
                     Author = "Timothy Zahn",
@@ -26,7 +26,7 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData
                         Lastname = "Potter"
                     }
                 },
-                new Book
+                new()
                 {
                     Title = "The Lord of the Rings - The Fellowship of the Ring",
                     Author = "J.R.R. Tolkien",

@@ -12,7 +12,7 @@ namespace Test.Waf.Applications.Services
         public void ConstructorTest()
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SettingsErrorEventArgs(null!, SettingsServiceAction.Open, "file"));
-            var settings = new SettingsErrorEventArgs(new InvalidOperationException("Test"), SettingsServiceAction.Open, null);
+            _ = new SettingsErrorEventArgs(new InvalidOperationException("Test"), SettingsServiceAction.Open, null);
         }
     }
 }

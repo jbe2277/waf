@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
+﻿using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Applications.SampleData;
 

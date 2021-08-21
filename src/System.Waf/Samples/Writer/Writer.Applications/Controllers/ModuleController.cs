@@ -29,7 +29,7 @@ namespace Waf.Writer.Applications.Controllers
             Lazy<PrintController> printController, Lazy<ShellViewModel> shellViewModel, Lazy<MainViewModel> mainViewModel,  Lazy<StartViewModel> startViewModel)
         {
             // Initializing the cultures must be done first. Therefore, we inject the Controllers and ViewModels lazy.
-            settingsService.ErrorOccurred += (sender, e) => Log.Default.Error(e.Error, "Error in SettingsService");
+            settingsService.ErrorOccurred += (_, e) => Log.Default.Error(e.Error, "Error in SettingsService");
             InitializeCultures(settingsService.Get<AppSettings>());
             presentationService.InitializeCultures();
             this.environmentService = environmentService;

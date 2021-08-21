@@ -10,7 +10,7 @@ using Waf.InformationManager.AddressBook.Modules.Domain;
 namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views
 {
     [Export(typeof(ISelectContactView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class SelectContactWindow : Window, ISelectContactView
+    public partial class SelectContactWindow : ISelectContactView
     {
         private readonly Lazy<SelectContactViewModel> viewModel;
         

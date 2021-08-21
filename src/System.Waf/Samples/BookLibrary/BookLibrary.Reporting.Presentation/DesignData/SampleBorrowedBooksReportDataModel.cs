@@ -10,9 +10,9 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData
         
         public SampleBorrowedBooksReportDataModel() : base(new List<Book>()
             {
-                new Book() { LendTo = harryPotter, Title = "Serenity, Vol 1: Those Left Behind", Author = "Joss Whedon, Brett Matthews, Will Conrad" },
-                new Book() { LendTo = harryPotter, Title = "Star Wars - Heir to the Empire", Author = "Timothy Zahn" },
-                new Book() { LendTo = harryPotter, Title = "The Lord of the Rings - The Fellowship of the Ring", Author = "J.R.R. Tolkien" }
+                new() { LendTo = harryPotter, Title = "Serenity, Vol 1: Those Left Behind", Author = "Joss Whedon, Brett Matthews, Will Conrad" },
+                new() { LendTo = harryPotter, Title = "Star Wars - Heir to the Empire", Author = "Timothy Zahn" },
+                new() { LendTo = harryPotter, Title = "The Lord of the Rings - The Fellowship of the Ring", Author = "J.R.R. Tolkien" }
             })
         {
         }

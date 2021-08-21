@@ -50,7 +50,7 @@ namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
             // Add a new contact
 
             bool focusItemCalled = false;
-            contactListView.FocusItemAction = view => focusItemCalled = true;
+            contactListView.FocusItemAction = _ => focusItemCalled = true;
             controller.NewContactCommand.Execute(null);
 
             Assert.AreEqual(2, root.Contacts.Count);

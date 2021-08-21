@@ -9,7 +9,6 @@ using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Controllers;
 using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.ViewModels;
-using Waf.Writer.Applications.Views;
 
 namespace Test.Writer.Applications.Controllers
 {

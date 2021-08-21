@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Waf.Applications;
-using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;

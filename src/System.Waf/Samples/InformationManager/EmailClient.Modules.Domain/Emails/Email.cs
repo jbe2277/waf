@@ -12,7 +12,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
     [DataContract]
     public class Email : ValidatableModel, IValidatableObject
     {
-        private static readonly EmailAddressAttribute emailAddress = new EmailAddressAttribute();
+        private static readonly EmailAddressAttribute emailAddress = new();
 
         [DataMember] private EmailType emailType;
         [DataMember] private string title = "";
@@ -55,7 +55,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => to;
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
+                if (value == null) throw new ArgumentNullException(nameof(value));
                 if (to == value || to.SequenceEqual(value)) return;
                 to = value;
                 Validate();
@@ -68,7 +68,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => cc;
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
+                if (value == null) throw new ArgumentNullException(nameof(value));
                 if (cc == value || cc.SequenceEqual(value)) return;
                 cc = value;
                 Validate();
@@ -81,7 +81,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
             get => bcc;
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
+                if (value == null) throw new ArgumentNullException(nameof(value));
                 if (bcc == value || bcc.SequenceEqual(value)) return;
                 bcc = value;
                 Validate();
