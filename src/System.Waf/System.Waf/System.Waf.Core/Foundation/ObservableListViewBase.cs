@@ -112,19 +112,14 @@ namespace System.Waf.Foundation
 
         private sealed class DisposedNotifier : IDisposable
         {
-            private readonly Action disposed;
-            private volatile int isDisposed;
+            private Action? disposed;
 
             public DisposedNotifier(Action disposed)
             {
                 this.disposed = disposed;
             }
 
-            public void Dispose()
-            {
-                if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
-                disposed();
-            }
+            public void Dispose() => Interlocked.Exchange(ref disposed, null)?.Invoke();
         }
     }
 }
