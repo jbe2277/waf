@@ -19,7 +19,7 @@ namespace Waf.Writer.Presentation
     {
         private AggregateCatalog? catalog;
         private CompositionContainer? container;
-        private IEnumerable<IModuleController>? moduleControllers;
+        private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
 
         public App()
         {
@@ -55,7 +55,7 @@ namespace Waf.Writer.Presentation
 
         protected override void OnExit(ExitEventArgs e)
         {
-            if (moduleControllers is not null) foreach (var x in moduleControllers.Reverse()) x.Shutdown();
+            foreach (var x in moduleControllers.Reverse()) x.Shutdown();
             container?.Dispose();
             catalog?.Dispose();
             Log.App.Info("{0} closed", ApplicationInfo.ProductName);
