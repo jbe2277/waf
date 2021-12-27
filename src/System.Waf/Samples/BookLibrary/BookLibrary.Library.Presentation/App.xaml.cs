@@ -10,7 +10,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
@@ -39,11 +38,6 @@ namespace Waf.BookLibrary.Library.Presentation
 
         public App()
         {
-            var profileRoot = Path.Combine(AppDataPath, "ProfileOptimization");
-            Directory.CreateDirectory(profileRoot);
-            ProfileOptimization.SetProfileRoot(profileRoot);
-            ProfileOptimization.StartProfile("Startup.profile");
-
             var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}";
             var fileTarget = new AsyncTargetWrapper("fileTarget", new FileTarget()
                 {

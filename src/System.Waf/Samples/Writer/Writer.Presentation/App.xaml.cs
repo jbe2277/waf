@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
@@ -20,14 +19,6 @@ namespace Waf.Writer.Presentation
         private AggregateCatalog? catalog;
         private CompositionContainer? container;
         private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
-
-        public App()
-        {
-            var profileRoot = Path.Combine(AppDataPath, "ProfileOptimization");
-            Directory.CreateDirectory(profileRoot);
-            ProfileOptimization.SetProfileRoot(profileRoot);
-            ProfileOptimization.StartProfile("Startup.profile");
-        }
 
         private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
 
