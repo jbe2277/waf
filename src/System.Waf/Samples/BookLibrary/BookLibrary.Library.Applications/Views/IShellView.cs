@@ -6,6 +6,10 @@ namespace Waf.BookLibrary.Library.Applications.Views
 {
     public interface IShellView : IView
     {
+        double VirtualScreenWidth { get; }
+
+        double VirtualScreenHeight { get; }
+
         double Left { get; set; }
 
         double Top { get; set; }

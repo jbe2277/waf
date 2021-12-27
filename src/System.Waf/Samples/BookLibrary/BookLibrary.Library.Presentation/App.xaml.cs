@@ -14,6 +14,7 @@ using System.Runtime;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Threading;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Presentation.Properties;
@@ -97,6 +98,8 @@ namespace Waf.BookLibrary.Library.Presentation
             var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
+
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
             moduleControllers = container.GetExportedValues<IModuleController>();
             foreach (var x in moduleControllers) x.Initialize();

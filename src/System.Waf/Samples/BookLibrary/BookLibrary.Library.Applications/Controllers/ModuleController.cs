@@ -22,10 +22,9 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
         private readonly DelegateCommand exitCommand;
 
         [ImportingConstructor]
-        public ModuleController(IMessageService messageService, IPresentationService presentationService, IEntityController entityController, BookController bookController, PersonController personController, 
+        public ModuleController(IMessageService messageService, IEntityController entityController, BookController bookController, PersonController personController, 
             ShellService shellService, Lazy<ShellViewModel> shellViewModel)
         {
-            presentationService.InitializeCultures();
             this.messageService = messageService;
             this.entityController = entityController;
             this.bookController = bookController;

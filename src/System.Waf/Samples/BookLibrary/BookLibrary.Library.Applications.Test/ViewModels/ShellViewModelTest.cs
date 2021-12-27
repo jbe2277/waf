@@ -57,16 +57,15 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         [TestMethod]
         public void RestoreWindowLocationAndSize()
         {
-            var presentationService = Get<MockPresentationService>();
-            presentationService.VirtualScreenWidth = 1000;
-            presentationService.VirtualScreenHeight = 700;
-
             var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
             SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-            Get<ShellViewModel>();
             var shellView = Get<MockShellView>();
+            shellView.VirtualScreenWidth = 1000;
+            shellView.VirtualScreenHeight = 700;
+            Get<ShellViewModel>();
+            
             Assert.AreEqual(20, shellView.Left);
             Assert.AreEqual(10, shellView.Top);
             Assert.AreEqual(400, shellView.Width);
@@ -87,38 +86,37 @@ namespace Test.BookLibrary.Library.Applications.ViewModels
         public void RestoreWindowLocationAndSizeSpecial()
         {
             var messageService = Get<IMessageService>();
-            var presentationService = Get<MockPresentationService>();
             var shellService = Get<IShellService>();
-            presentationService.VirtualScreenWidth = 1000;
-            presentationService.VirtualScreenHeight = 700;
 
-            var shellViewMock = Get<MockShellView>();
+            var shellView = Get<MockShellView>();
+            shellView.VirtualScreenWidth = 1000;
+            shellView.VirtualScreenHeight = 700;
             var settingsService = Get<ISettingsService>();
             var settings = settingsService.Get<AppSettings>();
-            shellViewMock.SetNAForLocationAndSize();
+            shellView.SetNAForLocationAndSize();
 
             SetSettingsValues(settings);
-            new ShellViewModel(shellViewMock, messageService, presentationService, shellService, settingsService).Close();
+            new ShellViewModel(shellView, messageService, shellService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Height is 0 => don't apply the Settings values
             SetSettingsValues(settings, 0, 0, 1, 0);
-            new ShellViewModel(shellViewMock, messageService, presentationService, shellService, settingsService).Close();
+            new ShellViewModel(shellView, messageService, shellService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Left = 100 + Width = 901 > VirtualScreenWidth = 1000 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 901, 100);
-            new ShellViewModel(shellViewMock, messageService, presentationService, shellService, settingsService).Close();
+            new ShellViewModel(shellView, messageService, shellService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Top = 100 + Height = 601 > VirtualScreenWidth = 600 => don't apply the Settings values
             SetSettingsValues(settings, 100, 100, 100, 601);
-            new ShellViewModel(shellViewMock, messageService, presentationService, shellService, settingsService).Close();
+            new ShellViewModel(shellView, messageService, shellService, settingsService).Close();
             AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
             // Use the limit values => apply the Settings values
             SetSettingsValues(settings, 0, 0, 1000, 700);
-            new ShellViewModel(shellViewMock, messageService, presentationService, shellService, settingsService).Close();
+            new ShellViewModel(shellView, messageService, shellService, settingsService).Close();
             AssertSettingsValues(settings, 0, 0, 1000, 700, false);
         }
 

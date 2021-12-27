@@ -23,11 +23,8 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         [TestMethod]
         public void ModuleControllerLifecycleTest()
         {
-            var presentationService = Get<MockPresentationService>();
             var entityController = Get<MockEntityController>();
-            var moduleController = new ModuleController(Get<IMessageService>(), presentationService, entityController, Get<BookController>(),
-                Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
-            Assert.IsTrue(presentationService.InitializeCulturesCalled);
+            var moduleController = new ModuleController(Get<IMessageService>(), entityController, Get<BookController>(), Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
 
             // Initialize
             Assert.IsFalse(entityController.InitializeCalled);
@@ -56,8 +53,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         {
             var messageService = Get<MockMessageService>();
             var entityController = Get<MockEntityController>();
-            var moduleController = new ModuleController(messageService, Get<IPresentationService>(), entityController, Get<BookController>(),
-                Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
+            var moduleController = new ModuleController(messageService, entityController, Get<BookController>(), Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
             moduleController.Initialize();
             moduleController.Run();
             var shellView = Get<MockShellView>();
@@ -107,8 +103,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers
         {
             var messageService = Get<MockMessageService>();
             var entityController = Get<MockEntityController>();
-            var moduleController = new ModuleController(messageService, Get<IPresentationService>(), entityController, Get<BookController>(),
-                Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
+            var moduleController = new ModuleController(messageService, entityController, Get<BookController>(), Get<PersonController>(), Get<ShellService>(), GetLazy<ShellViewModel>());
             moduleController.Initialize();
             moduleController.Run();
             var shellView = Get<MockShellView>();

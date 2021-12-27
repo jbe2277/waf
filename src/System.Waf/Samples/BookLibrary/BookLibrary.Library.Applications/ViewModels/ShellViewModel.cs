@@ -18,7 +18,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
         private bool isValid = true;
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view, IMessageService messageService, IPresentationService presentationService, IShellService shellService, ISettingsService settingsService) : base(view)
+        public ShellViewModel(IShellView view, IMessageService messageService, IShellService shellService, ISettingsService settingsService) : base(view)
         {
             this.messageService = messageService;
             ShellService = shellService;
@@ -29,8 +29,8 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
             // Restore the window size when the values are valid.
             if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
-                && settings.Left + settings.Width <= presentationService.VirtualScreenWidth
-                && settings.Top + settings.Height <= presentationService.VirtualScreenHeight)
+                && settings.Left + settings.Width <= ViewCore.VirtualScreenWidth
+                && settings.Top + settings.Height <= ViewCore.VirtualScreenHeight)
             {
                 ViewCore.Left = settings.Left;
                 ViewCore.Top = settings.Top;

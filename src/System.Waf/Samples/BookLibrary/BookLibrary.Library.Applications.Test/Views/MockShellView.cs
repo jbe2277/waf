@@ -11,6 +11,10 @@ namespace Test.BookLibrary.Library.Applications.Views
     {
         public bool IsVisible { get; private set; }
 
+        public double VirtualScreenWidth { get; set; }
+
+        public double VirtualScreenHeight { get; set; }
+
         public double Left { get; set; }
 
         public double Top { get; set; }
