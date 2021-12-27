@@ -8,7 +8,7 @@ namespace Waf.Writer.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() : base(new MockShellView(), null!, null!, new MockShellService(), new MockFileService(), new MockSettingsService())
+        public SampleShellViewModel() : base(new MockShellView(), null!, new MockShellService(), new MockFileService(), new MockSettingsService())
         {
             ContentView = new SampleMainViewModel(new MainView()).View;
         }
@@ -16,6 +16,10 @@ namespace Waf.Writer.Presentation.DesignData
 
         private class MockShellView : MockView, IShellView
         {
+            public double VirtualScreenWidth { get; set; }
+
+            public double VirtualScreenHeight { get; set; }
+
             public double Left { get; set; }
 
             public double Top { get; set; }

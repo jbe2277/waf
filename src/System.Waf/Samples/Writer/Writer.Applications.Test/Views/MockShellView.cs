@@ -11,6 +11,10 @@ namespace Test.Writer.Applications.Views
     {
         public bool IsVisible { get; private set; }
 
+        public double VirtualScreenWidth { get; set; }
+
+        public double VirtualScreenHeight { get; set; }
+
         public double Left { get; set; }
         
         public double Top { get; set; }
@@ -20,7 +24,7 @@ namespace Test.Writer.Applications.Views
         public double Height { get; set; }
 
         public bool IsMaximized { get; set; }
-        
+
         public event CancelEventHandler? Closing;
 
         public event EventHandler? Closed;

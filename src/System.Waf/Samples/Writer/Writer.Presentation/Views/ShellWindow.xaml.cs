@@ -16,6 +16,10 @@ namespace Waf.Writer.Presentation.Views
             InitializeComponent();
         }
 
+        public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
+
+        public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
+
         public bool IsMaximized
         {
             get => WindowState == WindowState.Maximized;

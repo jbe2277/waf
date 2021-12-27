@@ -122,9 +122,6 @@ namespace Test.Writer.Applications.Controllers
 
             var controller = Get<ModuleController>();
             
-            Assert.AreEqual(new CultureInfo("de-DE"), CultureInfo.CurrentCulture);
-            Assert.AreEqual(new CultureInfo("de-AT"), CultureInfo.CurrentUICulture);
-
             controller.Initialize();
             controller.Run();
 
@@ -135,10 +132,6 @@ namespace Test.Writer.Applications.Controllers
             shellViewModel.Close();
             controller.Shutdown();
             Assert.AreEqual("en-US", settings.UICulture);
-
-            // Restore the culture settings
-            CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-            CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
         }
     }
 }

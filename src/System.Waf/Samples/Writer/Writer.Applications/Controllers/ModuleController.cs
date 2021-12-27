@@ -1,10 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Waf.Applications;
-using System.Waf.Applications.Services;
-using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
@@ -24,14 +21,9 @@ namespace Waf.Writer.Applications.Controllers
         private readonly DelegateCommand exitCommand;
 
         [ImportingConstructor]
-        public ModuleController(IEnvironmentService environmentService, ISettingsService settingsService, IPresentationService presentationService, 
-            ShellService shellService, Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController, 
+        public ModuleController(IEnvironmentService environmentService, ShellService shellService, Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController, 
             Lazy<PrintController> printController, Lazy<ShellViewModel> shellViewModel, Lazy<MainViewModel> mainViewModel,  Lazy<StartViewModel> startViewModel)
         {
-            // Initializing the cultures must be done first. Therefore, we inject the Controllers and ViewModels lazy.
-            settingsService.ErrorOccurred += (_, e) => Log.Default.Error(e.Error, "Error in SettingsService");
-            InitializeCultures(settingsService.Get<AppSettings>());
-            presentationService.InitializeCultures();
             this.environmentService = environmentService;
             this.fileController = fileController.Value;
             this.richTextDocumentController = richTextDocumentController.Value;
@@ -60,12 +52,6 @@ namespace Waf.Writer.Applications.Controllers
         }
 
         public void Shutdown() => fileController.Shutdown();
-
-        private static void InitializeCultures(AppSettings settings)
-        {
-            if (!string.IsNullOrEmpty(settings.Culture)) CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(settings.Culture);
-            if (!string.IsNullOrEmpty(settings.UICulture)) CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(settings.UICulture);
-        }
 
         private void Close() => shellViewModel.Close();
 
