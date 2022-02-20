@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.HandleException(System.Exception,System.Boolean)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDomainUnhandledException(System.Object,System.UnhandledExceptionEventArgs)")]

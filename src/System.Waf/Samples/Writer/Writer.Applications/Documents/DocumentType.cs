@@ -1,7 +1,4 @@
-﻿using System;
-using System.Waf.Foundation;
-
-namespace Waf.Writer.Applications.Documents
+﻿namespace Waf.Writer.Applications.Documents
 {
     public abstract class DocumentType : Model, IDocumentType
     {

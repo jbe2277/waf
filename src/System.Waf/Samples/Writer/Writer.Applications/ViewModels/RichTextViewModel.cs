@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;

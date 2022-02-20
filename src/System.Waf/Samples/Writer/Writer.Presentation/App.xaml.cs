@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;

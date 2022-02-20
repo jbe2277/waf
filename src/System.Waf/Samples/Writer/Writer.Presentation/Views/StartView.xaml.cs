@@ -2,7 +2,6 @@
 using System.Windows;
 using Waf.Writer.Applications.Views;
 using Waf.Writer.Applications.ViewModels;
-using System;
 using System.Waf.Applications;
 
 namespace Waf.Writer.Presentation.Views

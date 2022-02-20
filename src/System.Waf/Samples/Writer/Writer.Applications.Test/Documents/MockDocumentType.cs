@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Waf.Writer.Applications.Documents;
+﻿using Waf.Writer.Applications.Documents;
 
 namespace Test.Writer.Applications.Documents
 {

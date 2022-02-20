@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
-using System.Waf.Foundation;
 using System.Windows.Input;
 
 namespace Waf.Writer.Applications.Services

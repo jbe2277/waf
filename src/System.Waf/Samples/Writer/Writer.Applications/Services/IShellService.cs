@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Waf.Writer.Applications.Services
+﻿namespace Waf.Writer.Applications.Services
 {
     public interface IShellService : INotifyPropertyChanged
     {

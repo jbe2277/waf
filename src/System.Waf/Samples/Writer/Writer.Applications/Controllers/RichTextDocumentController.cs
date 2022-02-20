@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;

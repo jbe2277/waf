@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
-using System.Collections.Generic;
 
 namespace Waf.Writer.Presentation.Views
 {

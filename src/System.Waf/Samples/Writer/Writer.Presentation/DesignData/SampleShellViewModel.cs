@@ -1,7 +1,5 @@
-﻿using System;
-using Waf.Writer.Applications.ViewModels;
+﻿using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
-using System.ComponentModel;
 using Waf.Writer.Presentation.Views;
 
 namespace Waf.Writer.Presentation.DesignData

@@ -2,7 +2,6 @@
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting.Mocks;
-using Test.Writer.Applications.Services;
 using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.Services;

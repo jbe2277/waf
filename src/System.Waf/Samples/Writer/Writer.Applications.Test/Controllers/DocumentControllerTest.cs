@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Waf.UnitTesting;
 using Waf.Writer.Applications.Controllers;
 using Waf.Writer.Applications.Documents;

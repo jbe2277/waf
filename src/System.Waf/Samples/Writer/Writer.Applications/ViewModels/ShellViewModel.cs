@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;

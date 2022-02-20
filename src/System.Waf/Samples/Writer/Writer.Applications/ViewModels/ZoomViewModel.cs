@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.Writer.Applications.Services;

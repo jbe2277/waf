@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Collections.ObjectModel;
-using Waf.Writer.Applications.Documents;
+﻿using Waf.Writer.Applications.Documents;
 using System.Windows.Input;
 using System.Waf.Applications;
 

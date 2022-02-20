@@ -1,7 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.Services

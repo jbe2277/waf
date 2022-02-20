@@ -1,5 +1,4 @@
 ﻿using System.Windows.Documents;
-using System.IO;
 using System.Windows;
 using Waf.Writer.Applications.Properties;
 using System.Globalization;

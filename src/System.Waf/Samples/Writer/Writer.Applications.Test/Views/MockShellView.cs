@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.UnitTesting.Mocks;
 using Waf.Writer.Applications.Views;
 

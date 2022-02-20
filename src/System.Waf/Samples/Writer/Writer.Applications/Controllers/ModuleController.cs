@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -55,7 +53,7 @@ namespace Waf.Writer.Applications.Controllers
 
         private void Close() => shellViewModel.Close();
 
-        private void ShellViewModelClosing(object sender, CancelEventArgs e)
+        private void ShellViewModelClosing(object? sender, CancelEventArgs e)
         {
             // Try to close all documents and see if the user has already saved them.
             e.Cancel = !fileController.CloseAll();

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Waf.Writer.Applications.Documents
+﻿namespace Waf.Writer.Applications.Documents
 {
     public interface IDocument : INotifyPropertyChanged
     {

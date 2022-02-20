@@ -1,6 +1,5 @@
 ﻿using System.Windows.Documents;
 using System.IO.Packaging;
-using System.IO;
 using System.Windows.Xps.Packaging;
 using System.Windows.Xps.Serialization;
 using Waf.Writer.Applications.Properties;

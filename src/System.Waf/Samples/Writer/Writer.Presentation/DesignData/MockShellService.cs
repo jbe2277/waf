@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Waf.Foundation;
-using Waf.Writer.Applications.Services;
+﻿using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.DesignData
 {

@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "New", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.IDocumentType.New~Waf.Writer.Applications.Documents.IDocument")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Applications.Controllers.PrintController")]

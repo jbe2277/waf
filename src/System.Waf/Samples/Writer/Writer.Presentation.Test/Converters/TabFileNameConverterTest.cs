@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Waf.UnitTesting;
 using System.Windows;
 using Waf.Writer.Presentation.Converters;

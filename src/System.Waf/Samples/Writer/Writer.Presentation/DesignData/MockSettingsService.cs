@@ -1,5 +1,4 @@
-﻿using System;
-using System.Waf.Applications.Services;
+﻿using System.Waf.Applications.Services;
 
 namespace Waf.Writer.Presentation.DesignData
 {
