@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.Composition;
 using Waf.Writer.Applications.Services;
 
-namespace Waf.Writer.Presentation.Services
-{
-    [Export(typeof(IEnvironmentService))]
-    internal class EnvironmentService : IEnvironmentService
-    {
-        private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
+namespace Waf.Writer.Presentation.Services;
 
-        public string? DocumentFileName => documentFileName.Value;
-    }
+[Export(typeof(IEnvironmentService))]
+internal class EnvironmentService : IEnvironmentService
+{
+    private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
+
+    public string? DocumentFileName => documentFileName.Value;
 }

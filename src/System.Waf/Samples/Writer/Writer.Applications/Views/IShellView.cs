@@ -1,29 +1,28 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.Writer.Applications.Views
+namespace Waf.Writer.Applications.Views;
+
+public interface IShellView : IView
 {
-    public interface IShellView : IView
-    {
-        double VirtualScreenWidth { get; }
+    double VirtualScreenWidth { get; }
 
-        double VirtualScreenHeight { get; }
+    double VirtualScreenHeight { get; }
 
-        double Left { get; set; }
-        
-        double Top { get; set; }
+    double Left { get; set; }
 
-        double Width { get; set; }
+    double Top { get; set; }
 
-        double Height { get; set; }
+    double Width { get; set; }
 
-        bool IsMaximized { get; set; }
-        
-        event CancelEventHandler? Closing;
+    double Height { get; set; }
 
-        event EventHandler? Closed;
+    bool IsMaximized { get; set; }
 
-        void Show();
+    event CancelEventHandler? Closing;
 
-        void Close();
-    }
+    event EventHandler? Closed;
+
+    void Show();
+
+    void Close();
 }

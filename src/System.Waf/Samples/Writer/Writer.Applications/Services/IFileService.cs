@@ -2,24 +2,23 @@
 using System.Windows.Input;
 using System.Waf.Applications;
 
-namespace Waf.Writer.Applications.Services
+namespace Waf.Writer.Applications.Services;
+
+public interface IFileService : INotifyPropertyChanged
 {
-    public interface IFileService : INotifyPropertyChanged
-    {
-        ReadOnlyObservableCollection<IDocument> Documents { get; }
+    ReadOnlyObservableCollection<IDocument> Documents { get; }
 
-        IDocument? ActiveDocument { get; set; }
+    IDocument? ActiveDocument { get; set; }
 
-        RecentFileList RecentFileList { get; }
+    RecentFileList RecentFileList { get; }
 
-        ICommand NewCommand { get; }
+    ICommand NewCommand { get; }
 
-        ICommand OpenCommand { get; }
+    ICommand OpenCommand { get; }
 
-        ICommand CloseCommand { get; }
+    ICommand CloseCommand { get; }
 
-        ICommand SaveCommand { get; }
+    ICommand SaveCommand { get; }
 
-        ICommand SaveAsCommand { get; }
-    }
+    ICommand SaveAsCommand { get; }
 }

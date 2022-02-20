@@ -1,8 +1,7 @@
-﻿namespace Waf.Writer.Applications.Views
+﻿namespace Waf.Writer.Applications.Views;
+
+public enum ContentViewState
 {
-    public enum ContentViewState
-    {
-        StartViewVisible,
-        DocumentViewVisible
-    }
+    StartViewVisible,
+    DocumentViewVisible
 }

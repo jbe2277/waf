@@ -1,9 +1,8 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.Writer.Applications.Views
+namespace Waf.Writer.Applications.Views;
+
+public interface IPrintPreviewView : IView
 {
-    public interface IPrintPreviewView : IView
-    {
-        void FitToWidth();
-    }
+    void FitToWidth();
 }

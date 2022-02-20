@@ -3,22 +3,21 @@ using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
-namespace Waf.Writer.Applications.ViewModels
+namespace Waf.Writer.Applications.ViewModels;
+
+[Export, PartCreationPolicy(CreationPolicy.NonShared)]
+public class PrintPreviewViewModel : ZoomViewModel<IPrintPreviewView>
 {
-    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class PrintPreviewViewModel : ZoomViewModel<IPrintPreviewView>
+    [ImportingConstructor]
+    public PrintPreviewViewModel(IPrintPreviewView view, IShellService shellService) : base(view, shellService)
     {
-        [ImportingConstructor]
-        public PrintPreviewViewModel(IPrintPreviewView view, IShellService shellService) : base(view, shellService)
-        {
-        }
+    }
 
-        public RichTextDocument Document { get; set; } = null!;
+    public RichTextDocument Document { get; set; } = null!;
 
-        protected override void FitToWidthCore()
-        {
-            base.FitToWidthCore();
-            ViewCore.FitToWidth();
-        }
+    protected override void FitToWidthCore()
+    {
+        base.FitToWidthCore();
+        ViewCore.FitToWidth();
     }
 }

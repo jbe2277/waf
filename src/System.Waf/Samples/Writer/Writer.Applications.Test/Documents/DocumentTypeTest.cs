@@ -2,59 +2,58 @@
 using System.Waf.UnitTesting;
 using Waf.Writer.Applications.Documents;
 
-namespace Test.Writer.Applications.Documents
+namespace Test.Writer.Applications.Documents;
+
+[TestClass]
+public class DocumentTypeTest
 {
-    [TestClass]
-    public class DocumentTypeTest
+    [TestMethod]
+    public void ConstructorTest()
     {
-        [TestMethod]
-        public void ConstructorTest()
-        {
-            AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("", ".rtf"));
-            AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", null!));
-            AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", "rtf"));
+        AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("", ".rtf"));
+        AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", null!));
+        AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", "rtf"));
 
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new DocumentBaseMock(null!));
-        }
+        AssertHelper.ExpectedException<ArgumentNullException>(() => new DocumentBaseMock(null!));
+    }
 
-        [TestMethod]
-        public void CheckBaseImplementation()
-        {
-            var documentType = new MockDocumentTypeBase("RichText Documents", ".rtf");
-            var document = new DocumentBaseMock(documentType);
-            Assert.IsFalse(documentType.CanNew());
-            Assert.IsFalse(documentType.CanOpen());
-            Assert.IsFalse(documentType.CanSave(document));
+    [TestMethod]
+    public void CheckBaseImplementation()
+    {
+        var documentType = new MockDocumentTypeBase("RichText Documents", ".rtf");
+        var document = new DocumentBaseMock(documentType);
+        Assert.IsFalse(documentType.CanNew());
+        Assert.IsFalse(documentType.CanOpen());
+        Assert.IsFalse(documentType.CanSave(document));
 
-            var documentType2 = new MockDocumentTypeBase("XPS Documents", ".xps");
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.New());
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Open("TestDocument1.rtf"));
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Save(new DocumentBaseMock(documentType2), "TestDocument1.rtf"));
+        var documentType2 = new MockDocumentTypeBase("XPS Documents", ".xps");
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.New());
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Open("TestDocument1.rtf"));
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.Save(new DocumentBaseMock(documentType2), "TestDocument1.rtf"));
 
-            AssertHelper.ExpectedException<ArgumentException>(() => documentType.Open(""));
-            AssertHelper.ExpectedException<ArgumentException>(() => documentType.Save(new DocumentBaseMock(documentType2), ""));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => documentType.Save(null!, "TestDocument1.rtf"));
+        AssertHelper.ExpectedException<ArgumentException>(() => documentType.Open(""));
+        AssertHelper.ExpectedException<ArgumentException>(() => documentType.Save(new DocumentBaseMock(documentType2), ""));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => documentType.Save(null!, "TestDocument1.rtf"));
 
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallNewCore());
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallOpenCore(@"C:\test.tmp"));
-            AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallSaveCore(document, @"C:\test.tmp"));
-        }
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallNewCore());
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallOpenCore(@"C:\test.tmp"));
+        AssertHelper.ExpectedException<NotSupportedException>(() => documentType.CallSaveCore(document, @"C:\test.tmp"));
+    }
 
 
-        private class MockDocumentTypeBase : DocumentType
-        {
-            public MockDocumentTypeBase(string description, string fileExtension) : base(description, fileExtension) { }
+    private class MockDocumentTypeBase : DocumentType
+    {
+        public MockDocumentTypeBase(string description, string fileExtension) : base(description, fileExtension) { }
 
-            public IDocument CallNewCore() => NewCore();
+        public IDocument CallNewCore() => NewCore();
 
-            public IDocument CallOpenCore(string fileName) => OpenCore(fileName);
+        public IDocument CallOpenCore(string fileName) => OpenCore(fileName);
 
-            public void CallSaveCore(IDocument document, string fileName) => SaveCore(document, fileName);
-        }
+        public void CallSaveCore(IDocument document, string fileName) => SaveCore(document, fileName);
+    }
 
-        private class DocumentBaseMock : Document
-        {
-            public DocumentBaseMock(MockDocumentTypeBase documentType) : base(documentType) { }
-        }
+    private class DocumentBaseMock : Document
+    {
+        public DocumentBaseMock(MockDocumentTypeBase documentType) : base(documentType) { }
     }
 }

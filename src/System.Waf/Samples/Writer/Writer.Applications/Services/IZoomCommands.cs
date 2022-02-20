@@ -1,17 +1,16 @@
 ﻿using System.Windows.Input;
 
-namespace Waf.Writer.Applications.Services
+namespace Waf.Writer.Applications.Services;
+
+public interface IZoomCommands : INotifyPropertyChanged
 {
-    public interface IZoomCommands : INotifyPropertyChanged
-    {
-        IReadOnlyList<string> DefaultZooms { get; }
+    IReadOnlyList<string> DefaultZooms { get; }
 
-        double Zoom { get; set; }
-        
-        ICommand ZoomInCommand { get; }
+    double Zoom { get; set; }
 
-        ICommand ZoomOutCommand { get; }
+    ICommand ZoomInCommand { get; }
 
-        ICommand FitToWidthCommand { get; }
-    }
+    ICommand ZoomOutCommand { get; }
+
+    ICommand FitToWidthCommand { get; }
 }

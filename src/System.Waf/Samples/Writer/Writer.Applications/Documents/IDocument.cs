@@ -1,11 +1,10 @@
-﻿namespace Waf.Writer.Applications.Documents
+﻿namespace Waf.Writer.Applications.Documents;
+
+public interface IDocument : INotifyPropertyChanged
 {
-    public interface IDocument : INotifyPropertyChanged
-    {
-        IDocumentType DocumentType { get; }
+    IDocumentType DocumentType { get; }
 
-        string FileName { get; set; }
+    string FileName { get; set; }
 
-        bool Modified { get; set; }
-    }
+    bool Modified { get; set; }
 }

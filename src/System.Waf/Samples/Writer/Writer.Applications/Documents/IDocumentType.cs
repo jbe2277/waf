@@ -1,21 +1,20 @@
-﻿namespace Waf.Writer.Applications.Documents
+﻿namespace Waf.Writer.Applications.Documents;
+
+public interface IDocumentType
 {
-    public interface IDocumentType
-    {
-        string Description { get; }
+    string Description { get; }
 
-        string FileExtension { get; }
+    string FileExtension { get; }
 
-        bool CanNew();
-        
-        IDocument New();
+    bool CanNew();
 
-        bool CanOpen();
+    IDocument New();
 
-        IDocument Open(string fileName);
+    bool CanOpen();
 
-        bool CanSave(IDocument document);
+    IDocument Open(string fileName);
 
-        void Save(IDocument document, string fileName);
-    }
+    bool CanSave(IDocument document);
+
+    void Save(IDocument document, string fileName);
 }

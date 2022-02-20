@@ -3,29 +3,28 @@ using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 using Waf.Writer.Presentation.Views;
 
-namespace Waf.Writer.Presentation.DesignData
+namespace Waf.Writer.Presentation.DesignData;
+
+public class SampleMainViewModel : MainViewModel
 {
-    public class SampleMainViewModel : MainViewModel
+    public SampleMainViewModel() : this(null) { }
+
+    public SampleMainViewModel(IMainView? view)
+        : base(view ?? new MockMainView { ContentViewState = ContentViewState.DocumentViewVisible }, new MockShellService(), new MockFileService())
     {
-        public SampleMainViewModel() : this(null) { }
+        DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\Document 1.rtf").View);
+        DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\ReadMe.rtf").View);
+        ActiveDocumentView = DocumentViews[0];
+    }
 
-        public SampleMainViewModel(IMainView? view)
-            : base(view ?? new MockMainView { ContentViewState = ContentViewState.DocumentViewVisible }, new MockShellService(), new MockFileService())
-        {
-            DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\Document 1.rtf").View);
-            DocumentViews.Add(CreateRichTextViewModel(@"C:\Users\Admin\My Documents\ReadMe.rtf").View);
-            ActiveDocumentView = DocumentViews[0];
-        }
-
-        private static RichTextViewModel CreateRichTextViewModel(string fileName)
-        {
-            return new(new RichTextView(), new MockShellService()) { Document = new RichTextDocument(new RichTextDocumentType()) { FileName = fileName } };
-        }
+    private static RichTextViewModel CreateRichTextViewModel(string fileName)
+    {
+        return new(new RichTextView(), new MockShellService()) { Document = new RichTextDocument(new RichTextDocumentType()) { FileName = fileName } };
+    }
 
 
-        private class MockMainView : MockView, IMainView
-        {
-            public ContentViewState ContentViewState { get; set; }
-        }
+    private class MockMainView : MockView, IMainView
+    {
+        public ContentViewState ContentViewState { get; set; }
     }
 }

@@ -2,77 +2,76 @@
 using System.Waf.Applications;
 using System.Windows.Input;
 
-namespace Waf.Writer.Applications.Services
+namespace Waf.Writer.Applications.Services;
+
+[Export(typeof(IShellService)), Export]
+internal class ShellService : Model, IShellService
 {
-    [Export(typeof(IShellService)), Export]
-    internal class ShellService : Model, IShellService
+    private string? documentName;
+    private IEditingCommands activeEditingCommands;
+    private IZoomCommands activeZoomCommands;
+
+    [ImportingConstructor]
+    public ShellService()
     {
-        private string? documentName;
-        private IEditingCommands activeEditingCommands;
-        private IZoomCommands activeZoomCommands;
+        activeEditingCommands = new DisabledEditingCommands();
+        activeZoomCommands = new DisabledZoomCommands();
+    }
 
-        [ImportingConstructor]
-        public ShellService()
+    public object ShellView { get; set; } = null!;
+
+    public string? DocumentName
+    {
+        get => documentName;
+        set => SetProperty(ref documentName, value);
+    }
+
+    [AllowNull]
+    public IEditingCommands ActiveEditingCommands
+    {
+        get => activeEditingCommands;
+        set => SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands());
+    }
+
+    [AllowNull]
+    public IZoomCommands ActiveZoomCommands
+    {
+        get => activeZoomCommands;
+        set => SetProperty(ref activeZoomCommands, value ?? new DisabledZoomCommands());
+    }
+
+
+    private class DisabledEditingCommands : Model, IEditingCommands
+    {
+        public bool IsBold { get; set; }
+
+        public bool IsItalic { get; set; }
+
+        public bool IsUnderline { get; set; }
+
+        public bool IsNumberedList { get; set; }
+
+        public bool IsBulletList { get; set; }
+
+        public bool IsSpellCheckAvailable => false;
+
+        public bool IsSpellCheckEnabled { get; set; }
+    }
+
+    private class DisabledZoomCommands : Model, IZoomCommands
+    {
+        public IReadOnlyList<string> DefaultZooms => Array.Empty<string>();
+
+        public double Zoom
         {
-            activeEditingCommands = new DisabledEditingCommands();
-            activeZoomCommands = new DisabledZoomCommands();
+            get => 1;
+            set { }
         }
 
-        public object ShellView { get; set; } = null!;
+        public ICommand ZoomInCommand => DelegateCommand.DisabledCommand;
 
-        public string? DocumentName
-        {
-            get => documentName;
-            set => SetProperty(ref documentName, value);
-        }
+        public ICommand ZoomOutCommand => DelegateCommand.DisabledCommand;
 
-        [AllowNull]
-        public IEditingCommands ActiveEditingCommands
-        {
-            get => activeEditingCommands;
-            set => SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands());
-        }
-
-        [AllowNull]
-        public IZoomCommands ActiveZoomCommands
-        {
-            get => activeZoomCommands;
-            set => SetProperty(ref activeZoomCommands, value ?? new DisabledZoomCommands());
-        }
-
-
-        private class DisabledEditingCommands : Model, IEditingCommands
-        {
-            public bool IsBold { get; set; }
-            
-            public bool IsItalic { get; set; }
-            
-            public bool IsUnderline { get; set; }
-            
-            public bool IsNumberedList { get; set; }
-            
-            public bool IsBulletList { get; set; }
-
-            public bool IsSpellCheckAvailable => false;
-
-            public bool IsSpellCheckEnabled { get; set; }
-        }
-
-        private class DisabledZoomCommands : Model, IZoomCommands
-        {
-            public IReadOnlyList<string> DefaultZooms => Array.Empty<string>();
-
-            public double Zoom
-            {
-                get => 1;
-                set { }
-            }
-
-            public ICommand ZoomInCommand => DelegateCommand.DisabledCommand;
-            
-            public ICommand ZoomOutCommand => DelegateCommand.DisabledCommand;
-            
-            public ICommand FitToWidthCommand => DelegateCommand.DisabledCommand;
-        }
+        public ICommand FitToWidthCommand => DelegateCommand.DisabledCommand;
     }
 }

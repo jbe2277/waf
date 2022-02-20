@@ -2,43 +2,42 @@
 using Waf.Writer.Applications.Views;
 using Waf.Writer.Presentation.Views;
 
-namespace Waf.Writer.Presentation.DesignData
+namespace Waf.Writer.Presentation.DesignData;
+
+public class SampleShellViewModel : ShellViewModel
 {
-    public class SampleShellViewModel : ShellViewModel
+    public SampleShellViewModel() : base(new MockShellView(), null!, new MockShellService(), new MockFileService(), new MockSettingsService())
     {
-        public SampleShellViewModel() : base(new MockShellView(), null!, new MockShellService(), new MockFileService(), new MockSettingsService())
-        {
-            ContentView = new SampleMainViewModel(new MainView()).View;
-        }
-        
+        ContentView = new SampleMainViewModel(new MainView()).View;
+    }
 
-        private class MockShellView : MockView, IShellView
-        {
-            public double VirtualScreenWidth { get; set; }
 
-            public double VirtualScreenHeight { get; set; }
+    private class MockShellView : MockView, IShellView
+    {
+        public double VirtualScreenWidth { get; set; }
 
-            public double Left { get; set; }
+        public double VirtualScreenHeight { get; set; }
 
-            public double Top { get; set; }
+        public double Left { get; set; }
 
-            public double Width { get; set; }
+        public double Top { get; set; }
 
-            public double Height { get; set; }
+        public double Width { get; set; }
 
-            public bool IsMaximized { get; set; }
+        public double Height { get; set; }
 
-            public event CancelEventHandler? Closing;
+        public bool IsMaximized { get; set; }
 
-            public event EventHandler? Closed;
+        public event CancelEventHandler? Closing;
 
-            public void Show() { }
-            
-            public void Close() { }
+        public event EventHandler? Closed;
 
-            protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
+        public void Show() { }
 
-            protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
-        }
+        public void Close() { }
+
+        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
+
+        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
     }
 }

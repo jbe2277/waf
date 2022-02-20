@@ -1,8 +1,7 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.Writer.Applications.Views
+namespace Waf.Writer.Applications.Views;
+
+public interface IRichTextView : IView
 {
-    public interface IRichTextView : IView
-    {
-    }
 }

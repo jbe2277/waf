@@ -1,7 +1,6 @@
-﻿namespace Waf.Writer.Applications.Services
+﻿namespace Waf.Writer.Applications.Services;
+
+public interface IEnvironmentService
 {
-    public interface IEnvironmentService
-    {
-        string? DocumentFileName { get; }
-    }
+    string? DocumentFileName { get; }
 }

@@ -4,40 +4,39 @@ using System.Windows.Input;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Views;
 
-namespace Waf.Writer.Applications.ViewModels
+namespace Waf.Writer.Applications.ViewModels;
+
+[Export, PartCreationPolicy(CreationPolicy.NonShared)]
+public class SaveChangesViewModel : ViewModel<ISaveChangesView>
 {
-    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SaveChangesViewModel : ViewModel<ISaveChangesView>
+    private readonly DelegateCommand yesCommand;
+    private readonly DelegateCommand noCommand;
+    private bool? result;
+
+    [ImportingConstructor]
+    public SaveChangesViewModel(ISaveChangesView view) : base(view)
     {
-        private readonly DelegateCommand yesCommand;
-        private readonly DelegateCommand noCommand;
-        private bool? result;
+        yesCommand = new DelegateCommand(() => Close(true));
+        noCommand = new DelegateCommand(() => Close(false));
+    }
 
-        [ImportingConstructor]
-        public SaveChangesViewModel(ISaveChangesView view) : base(view)
-        {
-            yesCommand = new DelegateCommand(() => Close(true));
-            noCommand = new DelegateCommand(() => Close(false));
-        }
+    public string Title => ApplicationInfo.ProductName;
 
-        public string Title => ApplicationInfo.ProductName;
+    public ICommand YesCommand => yesCommand;
 
-        public ICommand YesCommand => yesCommand;
+    public ICommand NoCommand => noCommand;
 
-        public ICommand NoCommand => noCommand;
+    public IReadOnlyList<IDocument> Documents { get; set; } = Array.Empty<IDocument>();
 
-        public IReadOnlyList<IDocument> Documents { get; set; } = Array.Empty<IDocument>();
+    public bool? ShowDialog(object owner)
+    {
+        ViewCore.ShowDialog(owner);
+        return result;
+    }
 
-        public bool? ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-            return result;
-        }
-
-        private void Close(bool? dialogResult)
-        {
-            result = dialogResult;
-            ViewCore.Close();
-        }
+    private void Close(bool? dialogResult)
+    {
+        result = dialogResult;
+        ViewCore.Close();
     }
 }

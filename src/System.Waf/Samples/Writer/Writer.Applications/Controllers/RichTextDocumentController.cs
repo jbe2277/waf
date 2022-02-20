@@ -4,64 +4,63 @@ using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
-namespace Waf.Writer.Applications.Controllers
+namespace Waf.Writer.Applications.Controllers;
+
+/// <summary>Responsible to synchronize RTF Documents with RichTextViewModels.</summary>
+[Export]
+internal class RichTextDocumentController : DocumentController
 {
-    /// <summary>Responsible to synchronize RTF Documents with RichTextViewModels.</summary>
-    [Export]
-    internal class RichTextDocumentController : DocumentController
+    private readonly IFileService fileService;
+    private readonly MainViewModel mainViewModel;
+    private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
+    private readonly Dictionary<RichTextDocument, RichTextViewModel> richTextViewModels;
+
+    [ImportingConstructor]
+    public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) : base(fileService)
     {
-        private readonly IFileService fileService;
-        private readonly MainViewModel mainViewModel;
-        private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
-        private readonly Dictionary<RichTextDocument, RichTextViewModel> richTextViewModels;
+        this.fileService = fileService;
+        this.mainViewModel = mainViewModel;
+        this.richTextViewModelFactory = richTextViewModelFactory;
+        richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
+        mainViewModel.PropertyChanged += MainViewModelPropertyChanged;
+    }
 
-        [ImportingConstructor]
-        public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) : base(fileService)
+    protected override void OnDocumentAdded(IDocument document)
+    {
+        if (document is not RichTextDocument richTextDocument) return;
+        var richTextViewModel = richTextViewModelFactory.CreateExport().Value;
+        richTextViewModel.Document = richTextDocument;
+        richTextViewModels.Add(richTextDocument, richTextViewModel);
+        mainViewModel.DocumentViews.Add(richTextViewModel.View);
+    }
+
+    protected override void OnDocumentRemoved(IDocument document)
+    {
+        if (document is not RichTextDocument richTextDocument) return;
+        mainViewModel.DocumentViews.Remove(richTextViewModels[richTextDocument].View);
+        richTextViewModels.Remove(richTextDocument);
+    }
+
+    protected override void OnActiveDocumentChanged(IDocument? activeDocument)
+    {
+        if (activeDocument == null)
         {
-            this.fileService = fileService;
-            this.mainViewModel = mainViewModel;
-            this.richTextViewModelFactory = richTextViewModelFactory;
-            richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
-            mainViewModel.PropertyChanged += MainViewModelPropertyChanged;
+            mainViewModel.ActiveDocumentView = null;
         }
-
-        protected override void OnDocumentAdded(IDocument document)
+        else
         {
-            if (document is not RichTextDocument richTextDocument) return;
-            var richTextViewModel = richTextViewModelFactory.CreateExport().Value;
-            richTextViewModel.Document = richTextDocument;
-            richTextViewModels.Add(richTextDocument, richTextViewModel);
-            mainViewModel.DocumentViews.Add(richTextViewModel.View);
+            if (activeDocument is RichTextDocument x) mainViewModel.ActiveDocumentView = richTextViewModels[x].View;
         }
+    }
 
-        protected override void OnDocumentRemoved(IDocument document)
+    private void MainViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
         {
-            if (document is not RichTextDocument richTextDocument) return;
-            mainViewModel.DocumentViews.Remove(richTextViewModels[richTextDocument].View);
-            richTextViewModels.Remove(richTextDocument);
-        }
-
-        protected override void OnActiveDocumentChanged(IDocument? activeDocument)
-        {
-            if (activeDocument == null)
+            if (mainViewModel.ActiveDocumentView is IView richTextView)
             {
-                mainViewModel.ActiveDocumentView = null;
-            }
-            else
-            {
-                if (activeDocument is RichTextDocument x) mainViewModel.ActiveDocumentView = richTextViewModels[x].View;
-            }
-        }
-
-        private void MainViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(MainViewModel.ActiveDocumentView))
-            {
-                if (mainViewModel.ActiveDocumentView is IView richTextView)
-                {
-                    var richTextViewModel = richTextView.GetViewModel<RichTextViewModel>();
-                    if (richTextViewModel != null) fileService.ActiveDocument = richTextViewModel.Document;
-                }
+                var richTextViewModel = richTextView.GetViewModel<RichTextViewModel>();
+                if (richTextViewModel != null) fileService.ActiveDocument = richTextViewModel.Document;
             }
         }
     }

@@ -1,17 +1,16 @@
 ﻿using Waf.Writer.Applications.Services;
 
-namespace Waf.Writer.Presentation.DesignData
+namespace Waf.Writer.Presentation.DesignData;
+
+public class MockShellService : Model, IShellService
 {
-    public class MockShellService : Model, IShellService
-    {
-        public object ShellView { get; set; } = null!;
+    public object ShellView { get; set; } = null!;
 
-        public string? DocumentName { get; set; } = "Document 1";
+    public string? DocumentName { get; set; } = "Document 1";
 
-        [AllowNull]
-        public IEditingCommands ActiveEditingCommands { get; set; } = null!;
+    [AllowNull]
+    public IEditingCommands ActiveEditingCommands { get; set; } = null!;
 
-        [AllowNull]
-        public IZoomCommands ActiveZoomCommands { get; set; } = null!;
-    }
+    [AllowNull]
+    public IZoomCommands ActiveZoomCommands { get; set; } = null!;
 }

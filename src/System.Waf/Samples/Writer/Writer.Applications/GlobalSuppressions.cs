@@ -1,4 +1,3 @@
-
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "New", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.IDocumentType.New~Waf.Writer.Applications.Documents.IDocument")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Applications.Controllers.PrintController")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.Writer.Applications.Controllers.ModuleController.richTextDocumentController")]

@@ -1,11 +1,10 @@
 ﻿using System.Windows.Documents;
 
-namespace Waf.Writer.Applications.Services
+namespace Waf.Writer.Applications.Services;
+
+public interface IPrintDialogService
 {
-    public interface IPrintDialogService
-    {
-        bool ShowDialog();
-        
-        void PrintDocument(DocumentPaginator documentPaginator, string description);
-    }
+    bool ShowDialog();
+
+    void PrintDocument(DocumentPaginator documentPaginator, string description);
 }
