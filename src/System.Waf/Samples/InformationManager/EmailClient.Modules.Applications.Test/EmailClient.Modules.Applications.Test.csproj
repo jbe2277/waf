@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>Test.InformationManager.EmailClient.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.EmailClient.Modules.Applications.Test</AssemblyName>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

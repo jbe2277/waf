@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Waf.InformationManager.AddressBook.Interfaces.Domain;
+﻿using Waf.InformationManager.AddressBook.Interfaces.Domain;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications

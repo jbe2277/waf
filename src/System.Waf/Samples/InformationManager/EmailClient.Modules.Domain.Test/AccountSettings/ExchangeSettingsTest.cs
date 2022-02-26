@@ -2,7 +2,6 @@
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using System.Waf.UnitTesting;
 using Test.InformationManager.Common.Domain;
-using System.Linq;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.AccountSettings
 {

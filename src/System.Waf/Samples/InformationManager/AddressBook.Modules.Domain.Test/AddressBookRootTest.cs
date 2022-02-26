@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using Test.InformationManager.Common.Domain;
 using System.Waf.UnitTesting;

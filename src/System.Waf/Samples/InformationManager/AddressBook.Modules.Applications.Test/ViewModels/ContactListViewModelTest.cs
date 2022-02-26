@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Waf.UnitTesting;
+﻿using System.Waf.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;

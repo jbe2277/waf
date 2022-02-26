@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.IO;
+﻿using System.ComponentModel.Composition;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services

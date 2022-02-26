@@ -1,5 +1,4 @@
-﻿using System;
-using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
+﻿using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Test.InformationManager.EmailClient.Modules.Domain.Emails
 {

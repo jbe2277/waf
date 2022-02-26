@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Waf.InformationManager.Infrastructure.Interfaces</RootNamespace>
     <AssemblyName>Waf.InformationManager.Infrastructure.Interfaces</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 </Project>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Data;
+﻿using System.Windows.Data;
 using System.Globalization;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Converters

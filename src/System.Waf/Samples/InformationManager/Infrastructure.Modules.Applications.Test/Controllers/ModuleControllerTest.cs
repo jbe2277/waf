@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
-using System.IO;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers
 {

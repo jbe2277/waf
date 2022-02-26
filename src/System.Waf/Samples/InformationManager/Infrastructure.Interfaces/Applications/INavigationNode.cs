@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
+﻿namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
 {
     /// <summary>Represents a navigation node.</summary>
     public interface INavigationNode : INotifyPropertyChanged

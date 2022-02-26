@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.SampleData

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
+﻿using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services

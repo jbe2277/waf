@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
+﻿
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.InformationManager.EmailClient.Modules.Applications.Controllers.EditEmailAccountController")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.InformationManager.EmailClient.Modules.Applications.Controllers.EmailFolderController")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "~P:Waf.InformationManager.EmailClient.Modules.Applications.ViewModels.BasicEmailAccountViewModel.EmailAccount")]

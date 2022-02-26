@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
 namespace Waf.InformationManager.AddressBook.Modules.Domain

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;

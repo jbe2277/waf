@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-
-namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
+﻿namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
 {
     /// <summary>Exposes the functionality of the shell.</summary>
     public interface IShellService : INotifyPropertyChanged

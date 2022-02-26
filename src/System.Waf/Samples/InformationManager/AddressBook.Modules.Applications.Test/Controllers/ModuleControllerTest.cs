@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Linq;
 using System.Waf.Applications;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;

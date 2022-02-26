@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Views

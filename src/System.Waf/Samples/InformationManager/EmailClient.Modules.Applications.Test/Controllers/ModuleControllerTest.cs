@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Linq;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;

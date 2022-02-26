@@ -1,5 +1,4 @@
-﻿using System;
-using System.Waf.Foundation;
+﻿using System.Waf.Foundation;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services

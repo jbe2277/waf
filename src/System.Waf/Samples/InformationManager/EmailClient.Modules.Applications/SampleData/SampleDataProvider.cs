@@ -1,6 +1,4 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
+﻿using System.CodeDom.Compiler;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 

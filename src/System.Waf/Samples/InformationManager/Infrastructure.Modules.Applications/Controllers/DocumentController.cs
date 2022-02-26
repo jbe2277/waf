@@ -1,12 +1,10 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.IO;
+﻿using System.ComponentModel.Composition;
 using System.IO.Packaging;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers
-{    
+{
     [Export(typeof(IDocumentService)), Export]
     internal class DocumentController : IDocumentService
     {

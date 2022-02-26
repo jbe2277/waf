@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.ComponentModel.Composition.Hosting;
-using System.IO;
 using Test.InformationManager.Common.Applications;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;

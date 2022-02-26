@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
 namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails

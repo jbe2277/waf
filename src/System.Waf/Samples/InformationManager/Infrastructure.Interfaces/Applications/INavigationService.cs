@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
+﻿namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
 {
     /// <summary>Exposes the navigation functionality of the shell.</summary>
     public interface INavigationService

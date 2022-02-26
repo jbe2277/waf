@@ -3,5 +3,14 @@
 
   <PropertyGroup>
     <Product>Waf Information Manager</Product>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Collections.Specialized" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />
+  </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using System.Waf.UnitTesting;
 using Test.InformationManager.Common.Domain;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;

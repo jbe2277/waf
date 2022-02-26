@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;

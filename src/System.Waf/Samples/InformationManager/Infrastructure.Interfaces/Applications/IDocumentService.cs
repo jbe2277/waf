@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
+﻿namespace Waf.InformationManager.Infrastructure.Interfaces.Applications
 {
     /// <summary>Provides access to the Information Manager document.</summary>
     public interface IDocumentService

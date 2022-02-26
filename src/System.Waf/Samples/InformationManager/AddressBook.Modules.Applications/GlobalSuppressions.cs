@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
+﻿
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.InformationManager.AddressBook.Modules.Applications.Controllers.ContactController")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Waf.InformationManager.Infrastructure.Interfaces.Applications.ToolBarCommand.#ctor(System.Windows.Input.ICommand,System.String,System.String)", Scope = "member", Target = "~M:Waf.InformationManager.AddressBook.Modules.Applications.Controllers.ModuleController.ShowAddressBook")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "~M:Waf.InformationManager.AddressBook.Modules.Applications.ViewModels.ContactListViewModel.Filter(Waf.InformationManager.AddressBook.Modules.Domain.Contact)~System.Boolean")]
