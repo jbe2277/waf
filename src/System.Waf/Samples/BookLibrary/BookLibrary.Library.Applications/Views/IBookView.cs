@@ -1,8 +1,7 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.BookLibrary.Library.Applications.Views
+namespace Waf.BookLibrary.Library.Applications.Views;
+
+public interface IBookView : IView
 {
-    public interface IBookView : IView
-    {
-    }
 }

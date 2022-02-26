@@ -2,29 +2,28 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Presentation.Data
+namespace Waf.BookLibrary.Library.Presentation.Data;
+
+internal static class BookMapping
 {
-    internal static class BookMapping
+    public static void Builder(EntityTypeBuilder<Book> builder)
     {
-        public static void Builder(EntityTypeBuilder<Book> builder)
-        {
-            builder.Ignore(t => t.Errors);
-            builder.Ignore(t => t.HasErrors);
-            
-            builder.HasKey(t => t.Id);
+        builder.Ignore(t => t.Errors);
+        builder.Ignore(t => t.HasErrors);
 
-            builder.Property(t => t.Id).HasColumnName("Id").HasConversion(g => g.ToByteArray(), b => new Guid(b));
-            builder.Property(t => t.Title).HasColumnName("Title").HasMaxLength(100);
-            builder.Property(t => t.Author).HasColumnName("Author").HasMaxLength(100);
-            builder.Property(t => t.Publisher).HasColumnName("Publisher").HasMaxLength(100);
-            builder.Property(t => t.PublishDate).HasColumnName("PublishDate");
-            builder.Property(t => t.Isbn).HasColumnName("Isbn").HasMaxLength(14);
-            builder.Property(t => t.Language).HasColumnName("Language");
-            builder.Property(t => t.Pages).HasColumnName("Pages");
+        builder.HasKey(t => t.Id);
 
-            builder.HasOne(t => t.LendTo).WithMany().HasForeignKey("PersonId");
+        builder.Property(t => t.Id).HasColumnName("Id").HasConversion(g => g.ToByteArray(), b => new Guid(b));
+        builder.Property(t => t.Title).HasColumnName("Title").HasMaxLength(100);
+        builder.Property(t => t.Author).HasColumnName("Author").HasMaxLength(100);
+        builder.Property(t => t.Publisher).HasColumnName("Publisher").HasMaxLength(100);
+        builder.Property(t => t.PublishDate).HasColumnName("PublishDate");
+        builder.Property(t => t.Isbn).HasColumnName("Isbn").HasMaxLength(14);
+        builder.Property(t => t.Language).HasColumnName("Language");
+        builder.Property(t => t.Pages).HasColumnName("Pages");
 
-            builder.ToTable("Book");
-        }
+        builder.HasOne(t => t.LendTo).WithMany().HasForeignKey("PersonId");
+
+        builder.ToTable("Book");
     }
 }

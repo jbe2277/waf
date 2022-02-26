@@ -1,16 +1,15 @@
-﻿namespace Waf.BookLibrary.Library.Applications.Controllers
+﻿namespace Waf.BookLibrary.Library.Applications.Controllers;
+
+/// <summary>Responsible for the database persistence of the entities.</summary>
+internal interface IEntityController
 {
-    /// <summary>Responsible for the database persistence of the entities.</summary>
-    internal interface IEntityController
-    {
-        void Initialize();
+    void Initialize();
 
-        bool HasChanges();
+    bool HasChanges();
 
-        bool CanSave();
+    bool CanSave();
 
-        bool Save();
+    bool Save();
 
-        void Shutdown();
-    }
+    void Shutdown();
 }

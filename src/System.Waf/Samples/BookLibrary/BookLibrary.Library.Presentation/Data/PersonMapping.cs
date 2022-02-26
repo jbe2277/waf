@@ -2,23 +2,22 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Presentation.Data
+namespace Waf.BookLibrary.Library.Presentation.Data;
+
+internal static class PersonMapping
 {
-    internal static class PersonMapping
+    public static void Builder(EntityTypeBuilder<Person> builder)
     {
-        public static void Builder(EntityTypeBuilder<Person> builder)
-        {
-            builder.Ignore(t => t.Errors);
-            builder.Ignore(t => t.HasErrors);
+        builder.Ignore(t => t.Errors);
+        builder.Ignore(t => t.HasErrors);
 
-            builder.HasKey(t => t.Id);
+        builder.HasKey(t => t.Id);
 
-            builder.Property(t => t.Id).HasColumnName("Id").HasConversion(g => g.ToByteArray(), b => new Guid(b));
-            builder.Property(t => t.Firstname).HasMaxLength(30).HasColumnName("Firstname");
-            builder.Property(t => t.Lastname).HasMaxLength(30).HasColumnName("Lastname");
-            builder.Property(t => t.Email).HasMaxLength(100).HasColumnName("Email");
+        builder.Property(t => t.Id).HasColumnName("Id").HasConversion(g => g.ToByteArray(), b => new Guid(b));
+        builder.Property(t => t.Firstname).HasMaxLength(30).HasColumnName("Firstname");
+        builder.Property(t => t.Lastname).HasMaxLength(30).HasColumnName("Lastname");
+        builder.Property(t => t.Email).HasMaxLength(100).HasColumnName("Email");
 
-            builder.ToTable("Person");
-        }
+        builder.ToTable("Person");
     }
 }

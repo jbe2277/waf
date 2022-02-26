@@ -1,21 +1,20 @@
 ﻿using Waf.BookLibrary.Library.Applications.Services;
 
-namespace Waf.BookLibrary.Library.Presentation.DesignData
+namespace Waf.BookLibrary.Library.Presentation.DesignData;
+
+public class MockShellService : Model, IShellService
 {
-    public class MockShellService : Model, IShellService
-    {
-        public object? ShellView { get; set; }
-        
-        public object? BookListView { get; set; }
-        
-        public object? BookView { get; set; }
-        
-        public object? PersonListView { get; set; }
-        
-        public object? PersonView { get; set; }
+    public object? ShellView { get; set; }
 
-        public bool IsReportingEnabled { get; set; }
+    public object? BookListView { get; set; }
 
-        public Lazy<object>? LazyReportingView { get; set; }
-    }
+    public object? BookView { get; set; }
+
+    public object? PersonListView { get; set; }
+
+    public object? PersonView { get; set; }
+
+    public bool IsReportingEnabled { get; set; }
+
+    public Lazy<object>? LazyReportingView { get; set; }
 }

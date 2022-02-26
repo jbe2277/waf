@@ -1,9 +1,8 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.BookLibrary.Library.Applications.Views
+namespace Waf.BookLibrary.Library.Applications.Views;
+
+public interface IBookListView : IView
 {
-    public interface IBookListView : IView
-    {
-        void FocusFirstCell();
-    }
+    void FocusFirstCell();
 }

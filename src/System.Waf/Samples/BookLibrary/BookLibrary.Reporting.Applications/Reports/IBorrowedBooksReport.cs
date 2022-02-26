@@ -1,6 +1,5 @@
-﻿namespace Waf.BookLibrary.Reporting.Applications.Reports
+﻿namespace Waf.BookLibrary.Reporting.Applications.Reports;
+
+public interface IBorrowedBooksReport : IReport
 {
-    public interface IBorrowedBooksReport : IReport
-    {
-    }
 }

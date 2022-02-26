@@ -5,63 +5,62 @@ using Waf.BookLibrary.Reporting.Applications.DataModels;
 using Waf.BookLibrary.Reporting.Applications.Reports;
 using Waf.BookLibrary.Reporting.Applications.ViewModels;
 
-namespace Waf.BookLibrary.Reporting.Applications.Controllers
+namespace Waf.BookLibrary.Reporting.Applications.Controllers;
+
+[Export(typeof(IModuleController)), Export]
+internal class ModuleController : IModuleController
 {
-    [Export(typeof(IModuleController)), Export]
-    internal class ModuleController : IModuleController
+    private readonly IShellService shellService;
+    private readonly IEntityService entityService;
+    private readonly Lazy<ReportViewModel> reportViewModel;
+    private readonly ExportFactory<IBookListReport> bookListReportFactory;
+    private readonly ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory;
+    private readonly DelegateCommand createBookListReportCommand;
+    private readonly DelegateCommand createBorrowedBooksReportCommand;
+
+    [ImportingConstructor]
+    public ModuleController(IShellService shellService, IEntityService entityService, Lazy<ReportViewModel> reportViewModel,
+        ExportFactory<IBookListReport> bookListReportFactory, ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory)
     {
-        private readonly IShellService shellService;
-        private readonly IEntityService entityService;
-        private readonly Lazy<ReportViewModel> reportViewModel;
-        private readonly ExportFactory<IBookListReport> bookListReportFactory;
-        private readonly ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory;
-        private readonly DelegateCommand createBookListReportCommand;
-        private readonly DelegateCommand createBorrowedBooksReportCommand;
+        this.shellService = shellService;
+        this.entityService = entityService;
+        this.reportViewModel = reportViewModel;
+        this.bookListReportFactory = bookListReportFactory;
+        this.borrowedBooksReportFactory = borrowedBooksReportFactory;
+        createBookListReportCommand = new DelegateCommand(CreateBookListReport);
+        createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
+    }
 
-        [ImportingConstructor]
-        public ModuleController(IShellService shellService, IEntityService entityService, Lazy<ReportViewModel> reportViewModel, 
-            ExportFactory<IBookListReport> bookListReportFactory, ExportFactory<IBorrowedBooksReport> borrowedBooksReportFactory)
-        {
-            this.shellService = shellService;
-            this.entityService = entityService;
-            this.reportViewModel = reportViewModel;
-            this.bookListReportFactory = bookListReportFactory;
-            this.borrowedBooksReportFactory = borrowedBooksReportFactory;
-            createBookListReportCommand = new DelegateCommand(CreateBookListReport);
-            createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
-        }
+    private ReportViewModel ReportViewModel => reportViewModel.Value;
 
-        private ReportViewModel ReportViewModel => reportViewModel.Value;
+    public void Initialize()
+    {
+        shellService.IsReportingEnabled = true;
+        shellService.LazyReportingView = new Lazy<object>(InitializeReportView);
+    }
 
-        public void Initialize()
-        {
-            shellService.IsReportingEnabled = true;
-            shellService.LazyReportingView = new Lazy<object>(InitializeReportView);
-        }
+    public void Run() { }
 
-        public void Run() { }
+    public void Shutdown() { }
 
-        public void Shutdown() { }
+    private object InitializeReportView()
+    {
+        ReportViewModel.CreateBookListReportCommand = createBookListReportCommand;
+        ReportViewModel.CreateBorrowedBooksReportCommand = createBorrowedBooksReportCommand;
+        return ReportViewModel.View;
+    }
 
-        private object InitializeReportView()
-        {
-            ReportViewModel.CreateBookListReportCommand = createBookListReportCommand;
-            ReportViewModel.CreateBorrowedBooksReportCommand = createBorrowedBooksReportCommand;
-            return ReportViewModel.View;
-        }
+    private void CreateBookListReport()
+    {
+        var bookListReport = bookListReportFactory.CreateExport().Value;
+        bookListReport.ReportData = new BookListReportDataModel(entityService.Books);
+        ReportViewModel.Report = bookListReport.Report;
+    }
 
-        private void CreateBookListReport()
-        {
-            var bookListReport = bookListReportFactory.CreateExport().Value;
-            bookListReport.ReportData = new BookListReportDataModel(entityService.Books);
-            ReportViewModel.Report = bookListReport.Report;
-        }
-
-        private void CreateBorrowedBooksReport()
-        {
-            var borrowedBooksReport = borrowedBooksReportFactory.CreateExport().Value;
-            borrowedBooksReport.ReportData = new BorrowedBooksReportDataModel(entityService.Books);
-            ReportViewModel.Report = borrowedBooksReport.Report;
-        }
+    private void CreateBorrowedBooksReport()
+    {
+        var borrowedBooksReport = borrowedBooksReportFactory.CreateExport().Value;
+        borrowedBooksReport.ReportData = new BorrowedBooksReportDataModel(entityService.Books);
+        ReportViewModel.Report = borrowedBooksReport.Report;
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.BookLibrary.Reporting.Applications.Views
+namespace Waf.BookLibrary.Reporting.Applications.Views;
+
+public interface IReportView : IView
 {
-    public interface IReportView : IView
-    {
-    }
 }

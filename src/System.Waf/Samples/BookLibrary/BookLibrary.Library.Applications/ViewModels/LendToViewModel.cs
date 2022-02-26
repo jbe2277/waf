@@ -4,79 +4,78 @@ using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Applications.ViewModels
+namespace Waf.BookLibrary.Library.Applications.ViewModels;
+
+[Export, PartCreationPolicy(CreationPolicy.NonShared)]
+public class LendToViewModel : ViewModel<ILendToView>
 {
-    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class LendToViewModel : ViewModel<ILendToView>
+    private readonly DelegateCommand okCommand;
+    private Book? book;
+    private bool isWasReturned;
+    private bool isLendTo;
+    private Person? selectedPerson;
+    private bool dialogResult;
+
+    [ImportingConstructor]
+    public LendToViewModel(ILendToView view) : base(view)
     {
-        private readonly DelegateCommand okCommand;
-        private Book? book;
-        private bool isWasReturned;
-        private bool isLendTo;
-        private Person? selectedPerson;
-        private bool dialogResult;
+        okCommand = new DelegateCommand(OkHandler);
+    }
 
-        [ImportingConstructor]
-        public LendToViewModel(ILendToView view) : base(view)
+    public string Title => ApplicationInfo.ProductName;
+
+    public ICommand OkCommand => okCommand;
+
+    [DisallowNull]
+    public Book? Book
+    {
+        get => book;
+        set
         {
-            okCommand = new DelegateCommand(OkHandler);
+            if (!SetProperty(ref book, value)) return;
+            if (value!.LendTo == null) IsLendTo = true;
+            else IsWasReturned = true;
         }
+    }
 
-        public string Title => ApplicationInfo.ProductName;
+    public IReadOnlyList<Person>? Persons { get; set; }
 
-        public ICommand OkCommand => okCommand;
-
-        [DisallowNull]
-        public Book? Book
+    public bool IsWasReturned
+    {
+        get => isWasReturned;
+        set
         {
-            get => book;
-            set
-            {
-                if (!SetProperty(ref book, value)) return;
-                if (value!.LendTo == null) IsLendTo = true;
-                else IsWasReturned = true;             
-            }
+            if (!SetProperty(ref isWasReturned, value)) return;
+            IsLendTo = !value;
         }
+    }
 
-        public IReadOnlyList<Person>? Persons { get; set; }
-
-        public bool IsWasReturned
+    public bool IsLendTo
+    {
+        get => isLendTo;
+        set
         {
-            get => isWasReturned;
-            set
-            {
-                if (!SetProperty(ref isWasReturned, value)) return;
-                IsLendTo = !value;
-            }
+            if (!SetProperty(ref isLendTo, value)) return;
+            IsWasReturned = !value;
         }
+    }
 
-        public bool IsLendTo
-        {
-            get => isLendTo;
-            set
-            {
-                if (!SetProperty(ref isLendTo, value)) return;
-                IsWasReturned = !value;
-            }
-        }
+    public Person? SelectedPerson
+    {
+        get => selectedPerson;
+        set => SetProperty(ref selectedPerson, value);
+    }
 
-        public Person? SelectedPerson
-        {
-            get => selectedPerson;
-            set => SetProperty(ref selectedPerson, value);
-        }
+    public bool ShowDialog(object owner)
+    {
+        ViewCore.ShowDialog(owner);
+        return dialogResult;
+    }
 
-        public bool ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-            return dialogResult;
-        }
-
-        private void OkHandler() 
-        {
-            dialogResult = true;
-            if (IsWasReturned) SelectedPerson = null;
-            ViewCore.Close();
-        }
+    private void OkHandler()
+    {
+        dialogResult = true;
+        if (IsWasReturned) SelectedPerson = null;
+        ViewCore.Close();
     }
 }

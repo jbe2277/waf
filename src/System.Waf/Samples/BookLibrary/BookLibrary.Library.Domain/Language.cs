@@ -1,13 +1,12 @@
-﻿namespace Waf.BookLibrary.Library.Domain
+﻿namespace Waf.BookLibrary.Library.Domain;
+
+public enum Language
 {
-    public enum Language
-    {
-        Undefined,
-        English,
-        German,
-        French,
-        Spanish,
-        Chinese,
-        Japanese
-    }
+    Undefined,
+    English,
+    German,
+    French,
+    Spanish,
+    Chinese,
+    Japanese
 }

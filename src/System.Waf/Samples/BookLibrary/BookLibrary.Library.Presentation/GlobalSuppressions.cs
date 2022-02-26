@@ -1,4 +1,3 @@
-
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.personViewPresenter")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.bookViewPresenter")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Presentation.Views.BookListView")]

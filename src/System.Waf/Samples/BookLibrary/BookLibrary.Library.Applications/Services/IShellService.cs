@@ -1,19 +1,18 @@
-﻿namespace Waf.BookLibrary.Library.Applications.Services
+﻿namespace Waf.BookLibrary.Library.Applications.Services;
+
+public interface IShellService : INotifyPropertyChanged
 {
-    public interface IShellService : INotifyPropertyChanged
-    {
-        object? ShellView { get; }
+    object? ShellView { get; }
 
-        object? BookListView { get; set; }
+    object? BookListView { get; set; }
 
-        object? BookView { get; set; }
+    object? BookView { get; set; }
 
-        object? PersonListView { get; set; }
+    object? PersonListView { get; set; }
 
-        object? PersonView { get; set; }
+    object? PersonView { get; set; }
 
-        bool IsReportingEnabled { get; set; }
+    bool IsReportingEnabled { get; set; }
 
-        Lazy<object>? LazyReportingView { get; set; }
-    }
+    Lazy<object>? LazyReportingView { get; set; }
 }

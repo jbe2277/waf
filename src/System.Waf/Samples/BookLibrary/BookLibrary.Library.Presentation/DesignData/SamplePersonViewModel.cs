@@ -2,24 +2,23 @@
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Presentation.DesignData
+namespace Waf.BookLibrary.Library.Presentation.DesignData;
+
+public class SamplePersonViewModel : PersonViewModel
 {
-    public class SamplePersonViewModel : PersonViewModel
+    public SamplePersonViewModel() : base(new MockPersonView())
     {
-        public SamplePersonViewModel() : base(new MockPersonView())
+        Person = new Person
         {
-            Person = new Person
-            {
-                Firstname = "Harry",
-                Lastname = "Potter",
-                Email = "harry.potter@hogwarts.edu"
-            };
-        }
+            Firstname = "Harry",
+            Lastname = "Potter",
+            Email = "harry.potter@hogwarts.edu"
+        };
+    }
 
 
-        private class MockPersonView : IPersonView
-        {
-            public object? DataContext { get; set; }
-        }
+    private class MockPersonView : IPersonView
+    {
+        public object? DataContext { get; set; }
     }
 }

@@ -6,117 +6,116 @@ using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Applications.Controllers
+namespace Waf.BookLibrary.Library.Applications.Controllers;
+
+/// <summary>Responsible for the person management and the master / detail views.</summary>
+[Export]
+internal class PersonController
 {
-    /// <summary>Responsible for the person management and the master / detail views.</summary>
-    [Export]
-    internal class PersonController
+    private readonly IMessageService messageService;
+    private readonly IShellService shellService;
+    private readonly IEntityService entityService;
+    private readonly IEmailService emailService;
+    private readonly PersonListViewModel personListViewModel;
+    private readonly PersonViewModel personViewModel;
+    private readonly DelegateCommand addNewCommand;
+    private readonly DelegateCommand removeCommand;
+    private readonly DelegateCommand createNewEmailCommand;
+
+    [ImportingConstructor]
+    public PersonController(IMessageService messageService, IShellService shellService, IEntityService entityService, IEmailService emailService,
+        PersonListViewModel personListViewModel, PersonViewModel personViewModel)
     {
-        private readonly IMessageService messageService;
-        private readonly IShellService shellService;
-        private readonly IEntityService entityService;
-        private readonly IEmailService emailService;
-        private readonly PersonListViewModel personListViewModel;
-        private readonly PersonViewModel personViewModel;
-        private readonly DelegateCommand addNewCommand;
-        private readonly DelegateCommand removeCommand;
-        private readonly DelegateCommand createNewEmailCommand;
+        this.messageService = messageService;
+        this.shellService = shellService;
+        this.entityService = entityService;
+        this.emailService = emailService;
+        this.personListViewModel = personListViewModel;
+        this.personViewModel = personViewModel;
+        addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
+        removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
+        createNewEmailCommand = new DelegateCommand(CreateNewEmail!);
+    }
 
-        [ImportingConstructor]
-        public PersonController(IMessageService messageService, IShellService shellService, IEntityService entityService, IEmailService emailService, 
-            PersonListViewModel personListViewModel, PersonViewModel personViewModel)
+    internal ObservableListView<Person>? PersonsView { get; private set; }
+
+    public void Initialize()
+    {
+        personViewModel.CreateNewEmailCommand = createNewEmailCommand;
+        personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
+        PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
+        personListViewModel.Persons = PersonsView;
+        personListViewModel.AddNewCommand = addNewCommand;
+        personListViewModel.RemoveCommand = removeCommand;
+        personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
+        personListViewModel.PropertyChanged += PersonListViewModelPropertyChanged;
+        shellService.PersonListView = personListViewModel.View;
+        shellService.PersonView = personViewModel.View;
+        personListViewModel.SelectedPerson = personListViewModel.Persons.FirstOrDefault();
+    }
+
+    private bool CanAddPerson() => personListViewModel.IsValid && personViewModel.IsValid;
+
+    private void AddNewPerson()
+    {
+        var person = new Person();
+        person.Validate();
+        entityService.Persons.Add(person);
+        personListViewModel.SelectedPerson = person;
+        personListViewModel.Focus();
+    }
+
+    private bool CanRemovePerson() => personListViewModel.SelectedPerson != null;
+
+    private void RemovePerson()
+    {
+        var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
+        var nextPerson = personListViewModel.Persons!.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
+        foreach (var x in personListViewModel.SelectedPersons.ToArray()) entityService.Persons.Remove(x);
+        personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons!.LastOrDefault();
+        personListViewModel.Focus();
+    }
+
+    private void CreateNewEmail(object recipient)
+    {
+        var person = (Person)recipient;
+        if (string.IsNullOrEmpty(person.Email) || person.GetErrors(nameof(person.Email)).Any())
         {
-            this.messageService = messageService;
-            this.shellService = shellService;
-            this.entityService = entityService;
-            this.emailService = emailService;
-            this.personListViewModel = personListViewModel;
-            this.personViewModel = personViewModel;
-            addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
-            removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
-            createNewEmailCommand = new DelegateCommand(CreateNewEmail!);
+            messageService.ShowError(shellService.ShellView, Resources.CorrectEmailAddress);
+            return;
         }
+        emailService.CreateNewEmail(person.Email!);
+    }
 
-        internal ObservableListView<Person>? PersonsView { get; private set; }
+    private void UpdateCommands()
+    {
+        addNewCommand.RaiseCanExecuteChanged();
+        removeCommand.RaiseCanExecuteChanged();
+    }
 
-        public void Initialize()
+    private void PersonListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(PersonListViewModel.SelectedPerson))
         {
-            personViewModel.CreateNewEmailCommand = createNewEmailCommand;
-            personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
-            PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
-            personListViewModel.Persons = PersonsView;
-            personListViewModel.AddNewCommand = addNewCommand;
-            personListViewModel.RemoveCommand = removeCommand;
-            personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
-            personListViewModel.PropertyChanged += PersonListViewModelPropertyChanged;
-            shellService.PersonListView = personListViewModel.View;
-            shellService.PersonView = personViewModel.View;
-            personListViewModel.SelectedPerson = personListViewModel.Persons.FirstOrDefault();
+            personViewModel.Person = personListViewModel.SelectedPerson;
+            UpdateCommands();
         }
-
-        private bool CanAddPerson() => personListViewModel.IsValid && personViewModel.IsValid;
-
-        private void AddNewPerson()
+        else if (e.PropertyName == nameof(PersonListViewModel.IsValid))
         {
-            var person = new Person();
-            person.Validate();
-            entityService.Persons.Add(person);
-            personListViewModel.SelectedPerson = person;
-            personListViewModel.Focus();
+            UpdateCommands();
         }
-
-        private bool CanRemovePerson() => personListViewModel.SelectedPerson != null;
-
-        private void RemovePerson()
+        else if (e.PropertyName == nameof(PersonListViewModel.FilterText))
         {
-            var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
-            var nextPerson = personListViewModel.Persons!.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
-            foreach (var x in personListViewModel.SelectedPersons.ToArray()) entityService.Persons.Remove(x);
-            personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons!.LastOrDefault();
-            personListViewModel.Focus();
+            PersonsView!.Update();
         }
-
-        private void CreateNewEmail(object recipient)
+        else if (e.PropertyName == nameof(PersonListViewModel.Sort))
         {
-            var person = (Person)recipient;
-            if (string.IsNullOrEmpty(person.Email) || person.GetErrors(nameof(person.Email)).Any())
-            {
-                messageService.ShowError(shellService.ShellView, Resources.CorrectEmailAddress);
-                return;
-            }
-            emailService.CreateNewEmail(person.Email!);
+            PersonsView!.Sort = personListViewModel.Sort;
         }
+    }
 
-        private void UpdateCommands()
-        {
-            addNewCommand.RaiseCanExecuteChanged();
-            removeCommand.RaiseCanExecuteChanged();
-        }
-
-        private void PersonListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(PersonListViewModel.SelectedPerson))
-            {
-                personViewModel.Person = personListViewModel.SelectedPerson;
-                UpdateCommands();
-            }
-            else if (e.PropertyName == nameof(PersonListViewModel.IsValid))
-            {
-                UpdateCommands();
-            }
-            else if (e.PropertyName == nameof(PersonListViewModel.FilterText))
-            {
-                PersonsView!.Update();
-            }
-            else if (e.PropertyName == nameof(PersonListViewModel.Sort))
-            {
-                PersonsView!.Sort = personListViewModel.Sort;
-            }
-        }
-
-        private void PersonViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(PersonViewModel.IsValid)) UpdateCommands();
-        }
+    private void PersonViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(PersonViewModel.IsValid)) UpdateCommands();
     }
 }

@@ -1,9 +1,8 @@
 ﻿using NLog;
 
-namespace Waf.BookLibrary.Library.Domain
+namespace Waf.BookLibrary.Library.Domain;
+
+internal static class Log
 {
-    internal static class Log
-    {
-        public static Logger Default { get; } = LogManager.GetLogger("BookLib.Lib.D");
-    }
+    public static Logger Default { get; } = LogManager.GetLogger("BookLib.Lib.D");
 }

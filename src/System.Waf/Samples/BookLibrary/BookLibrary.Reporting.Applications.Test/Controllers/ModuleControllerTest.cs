@@ -7,64 +7,63 @@ using Waf.BookLibrary.Reporting.Applications.DataModels;
 using Waf.BookLibrary.Reporting.Applications.ViewModels;
 using Waf.BookLibrary.Reporting.Applications.Views;
 
-namespace Test.BookLibrary.Reporting.Applications.Controllers
+namespace Test.BookLibrary.Reporting.Applications.Controllers;
+
+[TestClass]
+public class ModuleControllerTest : ReportingTest
 {
-    [TestClass]
-    public class ModuleControllerTest : ReportingTest
+    protected override void OnInitialize()
     {
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-            Get<EntityService>().BookLibraryContext = Get<MockDBContextService>().GetBookLibraryContext(out _);
-        }
+        base.OnInitialize();
+        Get<EntityService>().BookLibraryContext = Get<MockDBContextService>().GetBookLibraryContext(out _);
+    }
 
-        private ModuleController InitializeModuleController()
-        {
-            var moduleController = Get<ModuleController>();
-            moduleController.Initialize();
-            moduleController.Run();
+    private ModuleController InitializeModuleController()
+    {
+        var moduleController = Get<ModuleController>();
+        moduleController.Initialize();
+        moduleController.Run();
 
-            var shellService = Get<IShellService>();
-            Assert.IsTrue(shellService.IsReportingEnabled);
+        var shellService = Get<IShellService>();
+        Assert.IsTrue(shellService.IsReportingEnabled);
 
-            var reportView = Get<IReportView>();
-            Assert.AreEqual(reportView, shellService.LazyReportingView?.Value);
+        var reportView = Get<IReportView>();
+        Assert.AreEqual(reportView, shellService.LazyReportingView?.Value);
 
-            return moduleController;
-        }
-        
-        [TestMethod]
-        public void CreateBookListReportTest()
-        {
-            var moduleController = InitializeModuleController();
+        return moduleController;
+    }
 
-            var reportViewModel = Get<ReportViewModel>();
-            reportViewModel.CreateBookListReportCommand!.Execute(null);
+    [TestMethod]
+    public void CreateBookListReportTest()
+    {
+        var moduleController = InitializeModuleController();
 
-            var bookListReport = (MockBookListReport)reportViewModel.Report!;
-            var bookListReportDataModel = (BookListReportDataModel)bookListReport.ReportData!;
+        var reportViewModel = Get<ReportViewModel>();
+        reportViewModel.CreateBookListReportCommand!.Execute(null);
 
-            Assert.IsNotNull(bookListReportDataModel.Books);
-            Assert.AreEqual(0, bookListReportDataModel.BookCount);
+        var bookListReport = (MockBookListReport)reportViewModel.Report!;
+        var bookListReportDataModel = (BookListReportDataModel)bookListReport.ReportData!;
 
-            moduleController.Shutdown();
-        }
+        Assert.IsNotNull(bookListReportDataModel.Books);
+        Assert.AreEqual(0, bookListReportDataModel.BookCount);
 
-        [TestMethod]
-        public void CreateBorrowedBooksReportTest()
-        {
-            var moduleController = InitializeModuleController();
+        moduleController.Shutdown();
+    }
 
-            var reportViewModel = Get<ReportViewModel>();
-            reportViewModel.CreateBorrowedBooksReportCommand!.Execute(null);
+    [TestMethod]
+    public void CreateBorrowedBooksReportTest()
+    {
+        var moduleController = InitializeModuleController();
 
-            var bookListReport = (MockBorrowedBooksReport)reportViewModel.Report!;
-            var bookListReportDataModel = (BorrowedBooksReportDataModel)bookListReport.ReportData!;
+        var reportViewModel = Get<ReportViewModel>();
+        reportViewModel.CreateBorrowedBooksReportCommand!.Execute(null);
 
-            Assert.IsNotNull(bookListReportDataModel.GroupedBooks);
-            Assert.AreEqual(0, bookListReportDataModel.GroupedBooks.Count);
+        var bookListReport = (MockBorrowedBooksReport)reportViewModel.Report!;
+        var bookListReportDataModel = (BorrowedBooksReportDataModel)bookListReport.ReportData!;
 
-            moduleController.Shutdown();
-        }
+        Assert.IsNotNull(bookListReportDataModel.GroupedBooks);
+        Assert.AreEqual(0, bookListReportDataModel.GroupedBooks.Count);
+
+        moduleController.Shutdown();
     }
 }

@@ -2,40 +2,39 @@
 using Microsoft.EntityFrameworkCore;
 using Waf.BookLibrary.Library.Domain;
 
-namespace Waf.BookLibrary.Library.Applications.Services
+namespace Waf.BookLibrary.Library.Applications.Services;
+
+[Export(typeof(IEntityService)), Export]
+internal class EntityService : IEntityService
 {
-    [Export(typeof(IEntityService)), Export]
-    internal class EntityService : IEntityService
+    private ObservableCollection<Book>? books;
+    private ObservableCollection<Person>? persons;
+
+    public DbContext? BookLibraryContext { get; set; }
+
+    public ObservableCollection<Book> Books
     {
-        private ObservableCollection<Book>? books;
-        private ObservableCollection<Person>? persons;
-
-        public DbContext? BookLibraryContext { get; set; }
-        
-        public ObservableCollection<Book> Books
+        get
         {
-            get 
+            if (books == null && BookLibraryContext != null)
             {
-                if (books == null && BookLibraryContext != null)
-                {
-                    BookLibraryContext.Set<Book>().Include(x => x.LendTo).Load();
-                    books = BookLibraryContext.Set<Book>().Local.ToObservableCollection();
-                }
-                return books!;
+                BookLibraryContext.Set<Book>().Include(x => x.LendTo).Load();
+                books = BookLibraryContext.Set<Book>().Local.ToObservableCollection();
             }
+            return books!;
         }
+    }
 
-        public ObservableCollection<Person> Persons
+    public ObservableCollection<Person> Persons
+    {
+        get
         {
-            get 
+            if (persons == null && BookLibraryContext != null)
             {
-                if (persons == null && BookLibraryContext != null)
-                {
-                    BookLibraryContext.Set<Person>().Load();
-                    persons = BookLibraryContext.Set<Person>().Local.ToObservableCollection();
-                }
-                return persons!;
+                BookLibraryContext.Set<Person>().Load();
+                persons = BookLibraryContext.Set<Person>().Local.ToObservableCollection();
             }
+            return persons!;
         }
     }
 }

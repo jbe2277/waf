@@ -2,10 +2,9 @@
 using System.Waf.UnitTesting.Mocks;
 using Waf.BookLibrary.Library.Applications.Views;
 
-namespace Test.BookLibrary.Library.Applications.Views
+namespace Test.BookLibrary.Library.Applications.Views;
+
+[Export(typeof(IPersonView)), Export]
+public class MockPersonView : MockView, IPersonView
 {
-    [Export(typeof(IPersonView)), Export]
-    public class MockPersonView : MockView, IPersonView
-    {
-    }
 }

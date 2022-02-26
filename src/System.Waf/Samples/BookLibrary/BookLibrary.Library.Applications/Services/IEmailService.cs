@@ -1,7 +1,6 @@
-﻿namespace Waf.BookLibrary.Library.Applications.Services
+﻿namespace Waf.BookLibrary.Library.Applications.Services;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        void CreateNewEmail(string toEmailAddress);
-    }
+    void CreateNewEmail(string toEmailAddress);
 }

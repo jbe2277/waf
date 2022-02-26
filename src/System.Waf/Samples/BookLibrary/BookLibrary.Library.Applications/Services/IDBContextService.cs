@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Waf.BookLibrary.Library.Applications.Services
+namespace Waf.BookLibrary.Library.Applications.Services;
+
+public interface IDBContextService
 {
-    public interface IDBContextService
-    {
-        DbContext GetBookLibraryContext(out string dataSourcePath);
-    }
+    DbContext GetBookLibraryContext(out string dataSourcePath);
 }
