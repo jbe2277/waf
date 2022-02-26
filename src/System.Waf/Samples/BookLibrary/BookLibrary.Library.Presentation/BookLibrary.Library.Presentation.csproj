@@ -1,17 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Library.Presentation</RootNamespace>
     <AssemblyName>BookLibrary</AssemblyName>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Images\BookLibrary.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SQLite" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SQLite" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>

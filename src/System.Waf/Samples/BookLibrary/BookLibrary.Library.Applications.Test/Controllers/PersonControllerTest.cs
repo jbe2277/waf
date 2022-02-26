@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;

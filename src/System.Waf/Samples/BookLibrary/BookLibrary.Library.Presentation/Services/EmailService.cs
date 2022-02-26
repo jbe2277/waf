@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.Services;

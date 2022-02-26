@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.Data

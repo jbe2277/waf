@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.Properties;
@@ -50,7 +48,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers
 
         public void Shutdown() => entityController.Shutdown();
 
-        private void ShellViewModelClosing(object sender, CancelEventArgs e)
+        private void ShellViewModelClosing(object? sender, CancelEventArgs e)
         {
             if (!entityController.HasChanges()) return;
             if (entityController.CanSave())

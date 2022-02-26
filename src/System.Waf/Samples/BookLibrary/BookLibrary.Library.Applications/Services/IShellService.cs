@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Waf.BookLibrary.Library.Applications.Services
+﻿namespace Waf.BookLibrary.Library.Applications.Services
 {
     public interface IShellService : INotifyPropertyChanged
     {

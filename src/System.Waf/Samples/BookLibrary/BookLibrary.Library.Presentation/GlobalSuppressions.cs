@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.personViewPresenter")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.bookViewPresenter")]

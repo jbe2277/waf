@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Presentation.Properties;

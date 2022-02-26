@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Globalization;
-using System.Linq;
 using System.Waf.UnitTesting;
 using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Library.Domain.Properties;

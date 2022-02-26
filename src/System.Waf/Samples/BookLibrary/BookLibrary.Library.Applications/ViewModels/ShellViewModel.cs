@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
@@ -66,7 +64,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels
 
         protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        private void ViewClosing(object sender, CancelEventArgs e) => OnClosing(e);
+        private void ViewClosing(object? sender, CancelEventArgs e) => OnClosing(e);
 
         private void ViewClosed(object? sender, EventArgs e)
         {

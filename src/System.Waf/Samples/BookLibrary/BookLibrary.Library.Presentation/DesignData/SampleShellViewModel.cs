@@ -1,7 +1,5 @@
-﻿using System;
-using Waf.BookLibrary.Library.Applications.ViewModels;
+﻿using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
-using System.ComponentModel;
 using Waf.BookLibrary.Library.Presentation.Views;
 
 namespace Waf.BookLibrary.Library.Presentation.DesignData

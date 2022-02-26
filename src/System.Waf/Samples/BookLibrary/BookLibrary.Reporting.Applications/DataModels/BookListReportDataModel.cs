@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Waf.Foundation;
-using Waf.BookLibrary.Library.Domain;
+﻿using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Reporting.Applications.DataModels
 {

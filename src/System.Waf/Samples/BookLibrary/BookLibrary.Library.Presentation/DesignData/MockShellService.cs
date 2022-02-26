@@ -1,6 +1,4 @@
-﻿using System;
-using Waf.BookLibrary.Library.Applications.Services;
-using System.Waf.Foundation;
+﻿using Waf.BookLibrary.Library.Applications.Services;
 
 namespace Waf.BookLibrary.Library.Presentation.DesignData
 {

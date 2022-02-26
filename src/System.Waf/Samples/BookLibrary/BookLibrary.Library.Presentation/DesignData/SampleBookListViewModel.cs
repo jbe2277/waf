@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;

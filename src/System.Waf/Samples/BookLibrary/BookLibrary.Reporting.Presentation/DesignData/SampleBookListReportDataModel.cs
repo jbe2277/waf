@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Waf.BookLibrary.Library.Domain;
+﻿using Waf.BookLibrary.Library.Domain;
 using Waf.BookLibrary.Reporting.Applications.DataModels;
 
 namespace Waf.BookLibrary.Reporting.Presentation.DesignData

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Waf.Foundation;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.DataModels

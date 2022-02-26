@@ -1,6 +1,4 @@
-﻿using System;
-using System.Waf.Applications;
-using System.ComponentModel;
+﻿using System.Waf.Applications;
 
 namespace Waf.BookLibrary.Library.Applications.Views
 {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Waf.BookLibrary.Library.Applications.DataModels;

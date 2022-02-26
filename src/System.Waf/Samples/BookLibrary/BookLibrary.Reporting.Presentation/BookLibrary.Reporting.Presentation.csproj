@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Reporting.Presentation</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Reporting.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

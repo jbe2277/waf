@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 [assembly: SuppressMessage("Microsoft.Portability", "CA1903:UseOnlyApiFromTargetedFramework", MessageId = "System.Data.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Applications.Controllers.EntityController")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Applications.ViewModels.BookListViewModel")]

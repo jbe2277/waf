@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
-using System.Waf.Foundation;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;

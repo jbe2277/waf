@@ -1,12 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Globalization;
-using System.Linq;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
-using System.Waf.Foundation;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;

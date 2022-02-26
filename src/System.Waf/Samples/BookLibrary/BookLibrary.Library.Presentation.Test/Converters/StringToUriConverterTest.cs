@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Waf.BookLibrary.Library.Presentation.Converters;
 
 namespace Test.BookLibrary.Library.Presentation.Converters

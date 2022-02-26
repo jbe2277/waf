@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Waf.Foundation;
+﻿using System.ComponentModel.Composition;
 
 namespace Waf.BookLibrary.Library.Applications.Services
 {

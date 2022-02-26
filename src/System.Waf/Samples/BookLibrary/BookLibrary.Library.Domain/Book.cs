@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Waf.Foundation;
 using Waf.BookLibrary.Library.Domain.Properties;
 
 namespace Waf.BookLibrary.Library.Domain

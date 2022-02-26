@@ -1,6 +1,4 @@
-﻿
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Microsoft.EntityFrameworkCore;
 using Waf.BookLibrary.Library.Domain;
 
