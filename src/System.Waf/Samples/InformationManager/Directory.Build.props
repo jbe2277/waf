@@ -3,7 +3,6 @@
 
   <PropertyGroup>
     <Product>Waf Information Manager</Product>
-    <LangVersion>10.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

@@ -1,6 +1,5 @@
 ﻿<Project>
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
     <Company>jbe2277</Company>
     <Copyright>Copyright © 2016-2021 jbe2277</Copyright>
     <Version>6.4.0.100</Version>
@@ -29,8 +28,4 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)/NullableAttributes.cs" />
-  </ItemGroup>
 </Project>
