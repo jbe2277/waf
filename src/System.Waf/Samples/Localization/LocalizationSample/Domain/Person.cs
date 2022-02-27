@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace LocalizationSample.Domain;
 
-namespace LocalizationSample.Domain
+internal class Person
 {
-    internal class Person
-    {
-        public string? Name { get; set; }
-        
-        public DateTime Birthday { get; set; }
-    }
+    public string? Name { get; set; }
+
+    public DateTime Birthday { get; set; }
 }
