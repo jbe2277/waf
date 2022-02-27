@@ -1,9 +1,8 @@
 ﻿using NLog;
 
-namespace Waf.InformationManager.EmailClient.Modules.Domain
+namespace Waf.InformationManager.EmailClient.Modules.Domain;
+
+internal static class Log
 {
-    internal static class Log
-    {
-        public static Logger Default { get; } = LogManager.GetLogger("InfoMan.Email.D");
-    }
+    public static Logger Default { get; } = LogManager.GetLogger("InfoMan.Email.D");
 }

@@ -1,11 +1,10 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.InformationManager.EmailClient.Modules.Applications.Views
-{
-    public interface IEditEmailAccountView : IView
-    {
-        void ShowDialog(object owner);
+namespace Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
-        void Close();
-    }
+public interface IEditEmailAccountView : IView
+{
+    void ShowDialog(object owner);
+
+    void Close();
 }

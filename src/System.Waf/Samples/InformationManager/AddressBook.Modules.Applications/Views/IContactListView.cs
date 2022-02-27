@@ -1,9 +1,8 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.InformationManager.AddressBook.Modules.Applications.Views
+namespace Waf.InformationManager.AddressBook.Modules.Applications.Views;
+
+public interface IContactListView : IView
 {
-    public interface IContactListView : IView
-    {
-        void FocusItem();
-    }
+    void FocusItem();
 }

@@ -4,44 +4,43 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using System.Waf.UnitTesting;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 
-namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
+namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels;
+
+[TestClass]
+public class EmailAccountsViewModelTest : EmailClientTest
 {
-    [TestClass]
-    public class EmailAccountsViewModelTest : EmailClientTest
+    protected override void OnCleanup()
     {
-        protected override void OnCleanup()
+        MockEmailAccountsView.ShowDialogAction = null;
+        base.OnCleanup();
+    }
+
+    [TestMethod]
+    public void PropertiesTest()
+    {
+        var viewModel = Get<EmailAccountsViewModel>();
+        var root = new EmailClientRoot();
+        root.AddEmailAccount(new EmailAccount());
+        root.AddEmailAccount(new EmailAccount());
+        viewModel.EmailClientRoot = root;
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = root.EmailAccounts[1]);
+        Assert.AreEqual(root.EmailAccounts[1], viewModel.SelectedEmailAccount);
+    }
+
+    [TestMethod]
+    public void ShowDialogTest()
+    {
+        var viewModel = Get<EmailAccountsViewModel>();
+        var ownerView = new object();
+
+        bool showDialogCalled = false;
+        MockEmailAccountsView.ShowDialogAction = view =>
         {
-            MockEmailAccountsView.ShowDialogAction = null;
-            base.OnCleanup();
-        }
+            showDialogCalled = true;
+            Assert.AreEqual(ownerView, view.Owner);
+        };
 
-        [TestMethod]
-        public void PropertiesTest()
-        {
-            var viewModel = Get<EmailAccountsViewModel>();
-            var root = new EmailClientRoot();
-            root.AddEmailAccount(new EmailAccount());
-            root.AddEmailAccount(new EmailAccount());
-            viewModel.EmailClientRoot = root;
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = root.EmailAccounts[1]);
-            Assert.AreEqual(root.EmailAccounts[1], viewModel.SelectedEmailAccount);
-        }
-
-        [TestMethod]
-        public void ShowDialogTest()
-        {
-            var viewModel = Get<EmailAccountsViewModel>();
-            var ownerView = new object();
-
-            bool showDialogCalled = false;
-            MockEmailAccountsView.ShowDialogAction = view =>
-            {
-                showDialogCalled = true;
-                Assert.AreEqual(ownerView, view.Owner);
-            };
-
-            viewModel.ShowDialog(ownerView);
-            Assert.IsTrue(showDialogCalled);
-        }
+        viewModel.ShowDialog(ownerView);
+        Assert.IsTrue(showDialogCalled);
     }
 }

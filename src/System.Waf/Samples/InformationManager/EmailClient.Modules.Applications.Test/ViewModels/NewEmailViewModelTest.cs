@@ -4,82 +4,81 @@ using System.Waf.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 
-namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels
+namespace Test.InformationManager.EmailClient.Modules.Applications.ViewModels;
+
+[TestClass]
+public class NewEmailViewModelTest : EmailClientTest
 {
-    [TestClass]
-    public class NewEmailViewModelTest : EmailClientTest
+    [TestMethod]
+    public void PropertiesTest()
     {
-        [TestMethod]
-        public void PropertiesTest()
+        var viewModel = Get<NewEmailViewModel>();
+
+        // Email accounts tests
+
+        var emailAccounts = new List<EmailAccount>()
         {
-            var viewModel = Get<NewEmailViewModel>();
+            new(),
+            new()
+        };
 
-            // Email accounts tests
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts[0]);
+        Assert.AreEqual(emailAccounts[0], viewModel.SelectedEmailAccount);
 
-            var emailAccounts = new List<EmailAccount>()
-            {
-                new(),
-                new()
-            };
+        // Email tests
 
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts[0]);
-            Assert.AreEqual(emailAccounts[0], viewModel.SelectedEmailAccount);
+        var email = new Email();
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.Email, () => viewModel.Email = email);
+        Assert.AreEqual(email, viewModel.Email);
 
-            // Email tests
+        string to = "user@adventure-works.com";
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => viewModel.To = to);
+        Assert.AreEqual(to, viewModel.To);
+        Assert.AreEqual(to, email.To.Single());
 
-            var email = new Email();
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.Email, () => viewModel.Email = email);
-            Assert.AreEqual(email, viewModel.Email);
+        string cc1 = "harry@example.com";
+        string cc2 = "admin@adventure-works.com";
+        string cc = cc1 + ", " + cc2;
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => viewModel.CC = cc);
+        Assert.AreEqual(cc1 + "; " + cc2, viewModel.CC);
+        AssertHelper.SequenceEqual(new[] { cc1, cc2 }, email.CC);
 
-            string to = "user@adventure-works.com";
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => viewModel.To = to);
-            Assert.AreEqual(to, viewModel.To);
-            Assert.AreEqual(to, email.To.Single());
+        string bcc1 = "user@adventure-works.com";
+        string bcc2 = "harry@example.com";
+        string bcc3 = "admin@adventure-works.com";
+        string bcc = bcc1 + "; " + bcc2 + "  " + bcc3;
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => viewModel.Bcc = bcc);
+        Assert.AreEqual(bcc1 + "; " + bcc2 + "; " + bcc3, viewModel.Bcc);
+        AssertHelper.SequenceEqual(new[] { bcc1, bcc2, bcc3 }, email.Bcc);
 
-            string cc1 = "harry@example.com";
-            string cc2 = "admin@adventure-works.com";
-            string cc = cc1 + ", " + cc2;
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => viewModel.CC = cc);
-            Assert.AreEqual(cc1 + "; " + cc2, viewModel.CC);
-            AssertHelper.SequenceEqual(new[] { cc1, cc2 }, email.CC);
+        string newEmail = "mike@adventure-works.com";
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => email.To = new[] { newEmail });
+        Assert.AreEqual(newEmail, viewModel.To);
 
-            string bcc1 = "user@adventure-works.com";
-            string bcc2 = "harry@example.com";
-            string bcc3 = "admin@adventure-works.com";
-            string bcc = bcc1 + "; " + bcc2 + "  " + bcc3;
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => viewModel.Bcc = bcc);
-            Assert.AreEqual(bcc1 + "; " + bcc2 + "; " + bcc3, viewModel.Bcc);
-            AssertHelper.SequenceEqual(new[] { bcc1, bcc2, bcc3 }, email.Bcc);
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => email.CC = new[] { newEmail });
+        Assert.AreEqual(newEmail, viewModel.CC);
 
-            string newEmail = "mike@adventure-works.com";
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => email.To = new[] { newEmail });
-            Assert.AreEqual(newEmail, viewModel.To);
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => email.Bcc = new[] { newEmail });
+        Assert.AreEqual(newEmail, viewModel.Bcc);
 
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => email.CC = new[] { newEmail });
-            Assert.AreEqual(newEmail, viewModel.CC);
+        viewModel.Email = new Email();
+    }
 
-            AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => email.Bcc = new[] { newEmail });
-            Assert.AreEqual(newEmail, viewModel.Bcc);
+    [TestMethod]
+    public void ShowAndCloseTest()
+    {
+        var viewModel = Get<NewEmailViewModel>();
+        var view = (MockNewEmailView)viewModel.View;
+        var ownerView = new object();
 
-            viewModel.Email = new Email();
-        }
+        viewModel.Show(ownerView);
 
-        [TestMethod]
-        public void ShowAndCloseTest()
-        {
-            var viewModel = Get<NewEmailViewModel>();
-            var view = (MockNewEmailView)viewModel.View;
-            var ownerView = new object();
+        Assert.IsTrue(view.IsVisible);
+        Assert.AreEqual(ownerView, view.Owner);
 
-            viewModel.Show(ownerView);
+        viewModel.CloseCommand.Execute(null);
 
-            Assert.IsTrue(view.IsVisible);
-            Assert.AreEqual(ownerView, view.Owner);
-
-            viewModel.CloseCommand.Execute(null);
-
-            Assert.IsFalse(view.IsVisible);
-            Assert.IsNull(view.Owner);
-        }
+        Assert.IsFalse(view.IsVisible);
+        Assert.IsNull(view.Owner);
     }
 }

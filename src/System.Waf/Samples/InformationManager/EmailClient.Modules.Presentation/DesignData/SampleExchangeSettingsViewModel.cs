@@ -2,19 +2,18 @@
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
-namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
+namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData;
+
+public class SampleExchangeSettingsViewModel : ExchangeSettingsViewModel
 {
-    public class SampleExchangeSettingsViewModel : ExchangeSettingsViewModel
+    public SampleExchangeSettingsViewModel() : base(new MockExchangeSettingsView())
     {
-        public SampleExchangeSettingsViewModel() : base(new MockExchangeSettingsView())
-        {
-            Model = new ExchangeSettings() { ServerPath = "exchange.example.com", UserName = "User42" };
-        }
+        Model = new ExchangeSettings() { ServerPath = "exchange.example.com", UserName = "User42" };
+    }
 
 
-        private class MockExchangeSettingsView : IExchangeSettingsView
-        {
-            public object? DataContext { get; set; }
-        }
+    private class MockExchangeSettingsView : IExchangeSettingsView
+    {
+        public object? DataContext { get; set; }
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails
+﻿namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails;
+
+public interface IEmailDeletionService
 {
-    public interface IEmailDeletionService
-    {
-        void NotifyEmailDeleted(EmailFolder emailFolder, Email email);
-    }
+    void NotifyEmailDeleted(EmailFolder emailFolder, Email email);
 }

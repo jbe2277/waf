@@ -1,13 +1,12 @@
 ﻿using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
-namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
+namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services;
+
+public interface IShellViewModel
 {
-    public interface IShellViewModel
-    {
-        object View { get; }
+    object View { get; }
 
-        void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands);
+    void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands);
 
-        void ClearToolBarCommands();
-    }
+    void ClearToolBarCommands();
 }

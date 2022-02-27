@@ -6,31 +6,30 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
-namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views
+namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views;
+
+[Export(typeof(IEmailAccountsView)), PartCreationPolicy(CreationPolicy.NonShared)]
+public partial class EmailAccountsWindow : IEmailAccountsView
 {
-    [Export(typeof(IEmailAccountsView)), PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class EmailAccountsWindow : IEmailAccountsView
+    private readonly Lazy<EmailAccountsViewModel> viewModel;
+
+    public EmailAccountsWindow()
     {
-        private readonly Lazy<EmailAccountsViewModel> viewModel;
+        InitializeComponent();
+        viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this)!);
+    }
 
-        public EmailAccountsWindow()
-        {
-            InitializeComponent();
-            viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this)!);
-        }
+    public void ShowDialog(object owner)
+    {
+        Owner = owner as Window;
+        ShowDialog();
+    }
 
-        public void ShowDialog(object owner)
+    private void EmailAccountsGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (e.OriginalSource is FrameworkElement element && element.DataContext is EmailAccount)
         {
-            Owner = owner as Window;
-            ShowDialog();
-        }
-
-        private void EmailAccountsGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (e.OriginalSource is FrameworkElement element && element.DataContext is EmailAccount)
-            {
-                viewModel.Value.EditAccountCommand.Execute(null);
-            }
+            viewModel.Value.EditAccountCommand.Execute(null);
         }
     }
 }

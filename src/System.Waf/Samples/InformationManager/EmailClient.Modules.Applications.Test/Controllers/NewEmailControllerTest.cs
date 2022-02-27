@@ -7,137 +7,136 @@ using Waf.InformationManager.AddressBook.Interfaces.Domain;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
-namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
+namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
+
+[TestClass]
+public class NewEmailControllerTest : EmailClientTest
 {
-    [TestClass]
-    public class NewEmailControllerTest : EmailClientTest
+    [TestMethod]
+    public void SendNewEmail()
     {
-        [TestMethod]
-        public void SendNewEmail()
+        var root = new EmailClientRoot();
+        var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
+        root.AddEmailAccount(emailAccount);
+
+        var controller = Get<NewEmailController>();
+        controller.Root = root;
+        controller.Initialize();
+
+        // Create a new email
+
+        var newEmailViewModel = controller.NewEmailViewModel;
+        var newEmailView = (MockNewEmailView)newEmailViewModel.View;
+
+        controller.Run();
+
+        Assert.IsTrue(newEmailView.IsVisible);
+        Assert.AreEqual(emailAccount, newEmailViewModel.SelectedEmailAccount);
+
+        // Select a contact for the To field and cancel the dialog
+
+        var addressBookService = Get<MockAddressBookService>();
+        ContactDto? contactResult = null;
+        addressBookService.ShowSelectContactViewAction = owner =>
         {
-            var root = new EmailClientRoot();
-            var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
-            root.AddEmailAccount(emailAccount);
+            Assert.AreEqual(newEmailView, owner);
+            return contactResult;
+        };
 
-            var controller = Get<NewEmailController>();
-            controller.Root = root;
-            controller.Initialize();
+        newEmailViewModel.SelectContactCommand.Execute("To");
 
-            // Create a new email
+        // Select a contact for the To field
 
-            var newEmailViewModel = controller.NewEmailViewModel;
-            var newEmailView = (MockNewEmailView)newEmailViewModel.View;
+        contactResult = new ContactDto("", "", "user@adventure-works.com");
+        newEmailViewModel.SelectContactCommand.Execute("To");
+        Assert.AreEqual("user@adventure-works.com", newEmailViewModel.To);
 
-            controller.Run();
+        // Select a contact for the CC field
 
-            Assert.IsTrue(newEmailView.IsVisible);
-            Assert.AreEqual(emailAccount, newEmailViewModel.SelectedEmailAccount);
+        contactResult = new ContactDto("", "", "harry@example.com");
+        newEmailViewModel.SelectContactCommand.Execute("CC");
+        Assert.AreEqual("harry@example.com", newEmailViewModel.CC);
 
-            // Select a contact for the To field and cancel the dialog
+        // Select a contact for the BCC field
 
-            var addressBookService = Get<MockAddressBookService>();
-            ContactDto? contactResult = null;
-            addressBookService.ShowSelectContactViewAction = owner =>
-            {
-                Assert.AreEqual(newEmailView, owner);
-                return contactResult;
-            };
+        contactResult = new ContactDto("", "", "admin@adventure-works.com");
+        newEmailViewModel.SelectContactCommand.Execute("Bcc");
+        Assert.AreEqual("admin@adventure-works.com", newEmailViewModel.Bcc);
 
-            newEmailViewModel.SelectContactCommand.Execute("To");
+        // Pass a wrong parameter to the command => exception
 
-            // Select a contact for the To field
+        AssertHelper.ExpectedException<ArgumentException>(() => newEmailViewModel.SelectContactCommand.Execute("Wrong field"));
 
-            contactResult = new ContactDto("", "", "user@adventure-works.com");
-            newEmailViewModel.SelectContactCommand.Execute("To");
-            Assert.AreEqual("user@adventure-works.com", newEmailViewModel.To);
+        // Send the email
 
-            // Select a contact for the CC field
+        newEmailViewModel.SendCommand.Execute(null);
 
-            contactResult = new ContactDto("", "", "harry@example.com");
-            newEmailViewModel.SelectContactCommand.Execute("CC");
-            Assert.AreEqual("harry@example.com", newEmailViewModel.CC);
+        var sendEmail = root.Sent.Emails.Single();
+        Assert.AreEqual("mike@adventure-works.com", sendEmail.From);
+        Assert.AreNotEqual(new DateTime(0), sendEmail.Sent);
 
-            // Select a contact for the BCC field
+        Assert.IsFalse(newEmailView.IsVisible);
+    }
 
-            contactResult = new ContactDto("", "", "admin@adventure-works.com");
-            newEmailViewModel.SelectContactCommand.Execute("Bcc");
-            Assert.AreEqual("admin@adventure-works.com", newEmailViewModel.Bcc);
+    [TestMethod]
+    public void TrySendNewEmailWithWrongEmailAddresses()
+    {
+        var root = new EmailClientRoot();
+        var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
+        root.AddEmailAccount(emailAccount);
 
-            // Pass a wrong parameter to the command => exception
-            
-            AssertHelper.ExpectedException<ArgumentException>(() => newEmailViewModel.SelectContactCommand.Execute("Wrong field"));
+        var controller = Get<NewEmailController>();
+        controller.Root = root;
+        controller.Initialize();
 
-            // Send the email
+        // Create a new email with a wrong address
 
-            newEmailViewModel.SendCommand.Execute(null);
+        var newEmailViewModel = controller.NewEmailViewModel;
+        var newEmailView = (MockNewEmailView)newEmailViewModel.View;
 
-            var sendEmail = root.Sent.Emails.Single();
-            Assert.AreEqual("mike@adventure-works.com", sendEmail.From);
-            Assert.AreNotEqual(new DateTime(0), sendEmail.Sent);
+        controller.Run();
 
-            Assert.IsFalse(newEmailView.IsVisible);
-        }
+        Assert.IsTrue(newEmailView.IsVisible);
 
-        [TestMethod]
-        public void TrySendNewEmailWithWrongEmailAddresses()
-        {
-            var root = new EmailClientRoot();
-            var emailAccount = new EmailAccount() { Email = "mike@adventure-works.com" };
-            root.AddEmailAccount(emailAccount);
+        newEmailViewModel.To = "wrong address";
 
-            var controller = Get<NewEmailController>();
-            controller.Root = root;
-            controller.Initialize();
+        // Try to send the email => error message occurs
 
-            // Create a new email with a wrong address
+        var messageService = Get<MockMessageService>();
+        messageService.Clear();
 
-            var newEmailViewModel = controller.NewEmailViewModel;
-            var newEmailView = (MockNewEmailView)newEmailViewModel.View;
+        newEmailViewModel.SendCommand.Execute(null);
 
-            controller.Run();
+        Assert.AreEqual(MessageType.Error, messageService.MessageType);
+        Assert.IsNotNull(messageService.Message);
+        Assert.IsFalse(root.Sent.Emails.Any());
 
-            Assert.IsTrue(newEmailView.IsVisible);
+        // The view stays open
 
-            newEmailViewModel.To = "wrong address";
+        Assert.IsTrue(newEmailView.IsVisible);
+    }
 
-            // Try to send the email => error message occurs
+    [TestMethod]
+    public void TryCreateNewEmailWithoutEmailAccounts()
+    {
+        var root = new EmailClientRoot();
 
-            var messageService = Get<MockMessageService>();
-            messageService.Clear();
+        var controller = Get<NewEmailController>();
+        controller.Root = root;
+        controller.Initialize();
 
-            newEmailViewModel.SendCommand.Execute(null);
+        // Create a new email but no email account was created => error message
 
-            Assert.AreEqual(MessageType.Error, messageService.MessageType);
-            Assert.IsNotNull(messageService.Message);
-            Assert.IsFalse(root.Sent.Emails.Any());
+        var messageService = Get<MockMessageService>();
+        messageService.Clear();
 
-            // The view stays open
+        controller.Run();
 
-            Assert.IsTrue(newEmailView.IsVisible);
-        }
+        Assert.AreEqual(MessageType.Error, messageService.MessageType);
+        Assert.IsNotNull(messageService.Message);
 
-        [TestMethod]
-        public void TryCreateNewEmailWithoutEmailAccounts()
-        {
-            var root = new EmailClientRoot();
-
-            var controller = Get<NewEmailController>();
-            controller.Root = root;
-            controller.Initialize();
-
-            // Create a new email but no email account was created => error message
-
-            var messageService = Get<MockMessageService>();
-            messageService.Clear();
-
-            controller.Run();
-
-            Assert.AreEqual(MessageType.Error, messageService.MessageType);
-            Assert.IsNotNull(messageService.Message);
-
-            var newEmailViewModel = controller.NewEmailViewModel;
-            var newEmailView = (MockNewEmailView)newEmailViewModel.View;
-            Assert.IsFalse(newEmailView.IsVisible);
-        }
+        var newEmailViewModel = controller.NewEmailViewModel;
+        var newEmailView = (MockNewEmailView)newEmailViewModel.View;
+        Assert.IsFalse(newEmailView.IsVisible);
     }
 }

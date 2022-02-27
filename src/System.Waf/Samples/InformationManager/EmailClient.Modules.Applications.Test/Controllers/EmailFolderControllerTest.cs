@@ -6,87 +6,86 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
-namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
+namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
+
+[TestClass]
+public class EmailFolderControllerTest : EmailClientTest
 {
-    [TestClass]
-    public class EmailFolderControllerTest : EmailClientTest
+    [TestMethod]
+    public void DeleteEmails()
     {
-        [TestMethod]
-        public void DeleteEmails()
+        var root = new EmailClientRoot();
+        root.Inbox.AddEmail(new Email());
+        root.Inbox.AddEmail(new Email());
+
+        // Create the controller
+
+        var controller = Get<EmailFolderController>();
+        var emailLayoutViewModel = Get<EmailLayoutViewModel>();
+        var emailListViewModel = controller.EmailListViewModel;
+        var emailListView = (MockEmailListView)emailListViewModel.View;
+        var emailViewModel = controller.EmailViewModel;
+        var emailView = (MockEmailView)emailViewModel.View;
+
+        // Initialize the controller
+
+        Assert.IsNull(emailLayoutViewModel.EmailListView);
+        Assert.IsNull(emailLayoutViewModel.EmailView);
+
+        controller.EmailFolder = root.Inbox;
+        controller.Initialize();
+
+        Assert.AreEqual(emailListView, emailLayoutViewModel.EmailListView);
+        Assert.AreEqual(emailView, emailLayoutViewModel.EmailView);
+
+        // Run the controller
+
+        var shellService = Get<MockShellService>();
+        Assert.IsNull(shellService.ContentView);
+
+        controller.Run();
+
+        Assert.AreEqual(emailLayoutViewModel.View, shellService.ContentView);
+
+        // Delete command is disabled when no Email is selected
+
+        Assert.IsNull(emailListViewModel.SelectedEmail);
+        Assert.IsFalse(controller.DeleteEmailCommand.CanExecute(null));
+
+        // Select the first email and delete it
+
+        bool focusItemCalled = false;
+        emailListView.FocusItemAction = _ =>
         {
-            var root = new EmailClientRoot();
-            root.Inbox.AddEmail(new Email()); 
-            root.Inbox.AddEmail(new Email());
+            focusItemCalled = true;
+        };
 
-            // Create the controller
+        var emailToDelete = root.Inbox.Emails[0];
+        AssertHelper.PropertyChangedEvent(emailViewModel, x => x.Email, () => emailListViewModel.SelectedEmail = emailToDelete);
+        Assert.AreEqual(emailToDelete, emailViewModel.Email);
 
-            var controller = Get<EmailFolderController>();
-            var emailLayoutViewModel = Get<EmailLayoutViewModel>();
-            var emailListViewModel = controller.EmailListViewModel;
-            var emailListView = (MockEmailListView)emailListViewModel.View;
-            var emailViewModel = controller.EmailViewModel;
-            var emailView = (MockEmailView)emailViewModel.View;
+        controller.DeleteEmailCommand.Execute(null);
 
-            // Initialize the controller
+        Assert.IsFalse(root.Inbox.Emails.Contains(emailToDelete));
+        Assert.IsTrue(focusItemCalled);
 
-            Assert.IsNull(emailLayoutViewModel.EmailListView);
-            Assert.IsNull(emailLayoutViewModel.EmailView);
+        // Remove selection => delete command gets disabled
 
-            controller.EmailFolder = root.Inbox;
-            controller.Initialize();
+        AssertHelper.CanExecuteChangedEvent(controller.DeleteEmailCommand, () => emailListViewModel.SelectedEmail = null);
+        Assert.IsFalse(controller.DeleteEmailCommand.CanExecute(null));
 
-            Assert.AreEqual(emailListView, emailLayoutViewModel.EmailListView);
-            Assert.AreEqual(emailView, emailLayoutViewModel.EmailView);
+        // Select the second and last email and delete it
 
-            // Run the controller
+        emailListViewModel.SelectedEmail = root.Inbox.Emails.Single();
+        controller.DeleteEmailCommand.Execute(null);
+        Assert.IsFalse(root.Inbox.Emails.Any());
+        Assert.IsNull(emailListViewModel.SelectedEmail);
 
-            var shellService = Get<MockShellService>();
-            Assert.IsNull(shellService.ContentView);
+        // Shutdown the controller
 
-            controller.Run();
+        controller.Shutdown();
 
-            Assert.AreEqual(emailLayoutViewModel.View, shellService.ContentView);
-
-            // Delete command is disabled when no Email is selected
-
-            Assert.IsNull(emailListViewModel.SelectedEmail);
-            Assert.IsFalse(controller.DeleteEmailCommand.CanExecute(null));
-            
-            // Select the first email and delete it
-
-            bool focusItemCalled = false;
-            emailListView.FocusItemAction = _ =>
-            {
-                focusItemCalled = true;
-            };
-
-            var emailToDelete = root.Inbox.Emails[0];
-            AssertHelper.PropertyChangedEvent(emailViewModel, x => x.Email, () => emailListViewModel.SelectedEmail = emailToDelete);
-            Assert.AreEqual(emailToDelete, emailViewModel.Email);
-
-            controller.DeleteEmailCommand.Execute(null);
-
-            Assert.IsFalse(root.Inbox.Emails.Contains(emailToDelete));
-            Assert.IsTrue(focusItemCalled);
-
-            // Remove selection => delete command gets disabled
-
-            AssertHelper.CanExecuteChangedEvent(controller.DeleteEmailCommand, () => emailListViewModel.SelectedEmail = null);
-            Assert.IsFalse(controller.DeleteEmailCommand.CanExecute(null));
-
-            // Select the second and last email and delete it
-
-            emailListViewModel.SelectedEmail = root.Inbox.Emails.Single();
-            controller.DeleteEmailCommand.Execute(null);
-            Assert.IsFalse(root.Inbox.Emails.Any());
-            Assert.IsNull(emailListViewModel.SelectedEmail);
-
-            // Shutdown the controller
-
-            controller.Shutdown();
-
-            Assert.IsNull(emailLayoutViewModel.EmailListView);
-            Assert.IsNull(emailLayoutViewModel.EmailView);
-        }
+        Assert.IsNull(emailLayoutViewModel.EmailListView);
+        Assert.IsNull(emailLayoutViewModel.EmailView);
     }
 }

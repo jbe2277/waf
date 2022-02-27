@@ -1,9 +1,8 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.InformationManager.EmailClient.Modules.Applications.Views
+namespace Waf.InformationManager.EmailClient.Modules.Applications.Views;
+
+public interface IEmailAccountsView : IView
 {
-    public interface IEmailAccountsView : IView
-    {
-        void ShowDialog(object owner);
-    }
+    void ShowDialog(object owner);
 }

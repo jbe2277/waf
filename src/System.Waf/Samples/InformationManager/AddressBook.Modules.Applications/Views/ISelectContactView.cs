@@ -1,11 +1,10 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.InformationManager.AddressBook.Modules.Applications.Views
-{
-    public interface ISelectContactView : IView
-    {
-        void ShowDialog(object owner);
+namespace Waf.InformationManager.AddressBook.Modules.Applications.Views;
 
-        void Close();
-    }
+public interface ISelectContactView : IView
+{
+    void ShowDialog(object owner);
+
+    void Close();
 }

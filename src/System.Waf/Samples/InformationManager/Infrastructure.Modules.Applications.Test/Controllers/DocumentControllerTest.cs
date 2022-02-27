@@ -3,54 +3,53 @@ using System.Net.Mime;
 using System.Runtime.Serialization;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 
-namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers
+namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers;
+
+[TestClass]
+public class DocumentControllerTest : InfrastructureTest
 {
-    [TestClass]
-    public class DocumentControllerTest : InfrastructureTest
+    private DocumentController controller = null!;
+
+    protected override void OnInitialize()
     {
-        private DocumentController controller = null!;
+        base.OnInitialize();
+        controller = Get<DocumentController>();
+        if (File.Exists(controller.PackagePath)) File.Delete(controller.PackagePath);
+        controller.Initialize();
+    }
 
-        protected override void OnInitialize()
+    protected override void OnCleanup()
+    {
+        controller.Shutdown();
+        base.OnCleanup();
+    }
+
+    [TestMethod]
+    public void GetStreamTest()
+    {
+        using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
         {
-            base.OnInitialize();
-            controller = Get<DocumentController>();
-            if (File.Exists(controller.PackagePath)) File.Delete(controller.PackagePath);
-            controller.Initialize();
+            Assert.AreEqual(0, stream.Length);  // File does not exist
         }
 
-        protected override void OnCleanup()
+        var serializer = new DataContractSerializer(typeof(Data));
+        using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Create))
         {
-            controller.Shutdown();
-            base.OnCleanup();
+            serializer.WriteObject(stream, new Data() { Name = "Bill" });
         }
 
-        [TestMethod]
-        public void GetStreamTest()
+        using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
         {
-            using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
-            {
-                Assert.AreEqual(0, stream.Length);  // File does not exist
-            }
-
-            var serializer = new DataContractSerializer(typeof(Data));
-            using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Create))
-            {
-                serializer.WriteObject(stream, new Data() { Name = "Bill" });
-            }
-
-            using (var stream = controller.GetStream("Test/MyFile.xml", MediaTypeNames.Text.Xml, FileMode.Open))
-            {
-                var data = (Data)serializer.ReadObject(stream)!;
-                Assert.AreEqual("Bill", data.Name);
-            }
+            var data = (Data)serializer.ReadObject(stream)!;
+            Assert.AreEqual("Bill", data.Name);
         }
+    }
 
 
-        [DataContract]
-        private class Data
-        {
-            [DataMember]
-            public string? Name { get; set; }
-        }
+    [DataContract]
+    private class Data
+    {
+        [DataMember]
+        public string? Name { get; set; }
     }
 }

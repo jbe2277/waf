@@ -6,91 +6,90 @@ using System.Waf.Applications;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using System.Waf.UnitTesting;
 
-namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers
+namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
+
+[TestClass]
+public class EmailAccountsControllerTest : EmailClientTest
 {
-    [TestClass]
-    public class EmailAccountsControllerTest : EmailClientTest
+    protected override void OnCleanup()
     {
-        protected override void OnCleanup()
+        MockEmailAccountsView.ShowDialogAction = null;
+        base.OnCleanup();
+    }
+
+    [TestMethod]
+    public void NewEditAndRemoveEmailAccount()
+    {
+        var root = new EmailClientRoot();
+        var controller = Get<EmailAccountsController>();
+        controller.Root = root;
+
+        bool showDialogCalled = false;
+        MockEmailAccountsView.ShowDialogAction = v =>
         {
-            MockEmailAccountsView.ShowDialogAction = null;
-            base.OnCleanup();
-        }
+            showDialogCalled = true;
+            EmailAccountsViewShowDialog(v);
+        };
 
-        [TestMethod]
-        public void NewEditAndRemoveEmailAccount()
+        controller.EmailAccountsCommand.Execute(null);
+        Assert.IsTrue(showDialogCalled);
+    }
+
+    private static void EmailAccountsViewShowDialog(MockEmailAccountsView view)
+    {
+        var viewModel = ViewHelper.GetViewModel<EmailAccountsViewModel>(view)!;
+        Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
+        Assert.IsNull(viewModel.SelectedEmailAccount);
+        Assert.IsFalse(viewModel.EditAccountCommand.CanExecute(null));
+        Assert.IsFalse(viewModel.RemoveAccountCommand.CanExecute(null));
+
+        // Create a new email account
+
+        bool showDialogCalled = false;
+        MockEditEmailAccountView.ShowDialogAction = v =>
         {
-            var root = new EmailClientRoot();
-            var controller = Get<EmailAccountsController>();
-            controller.Root = root;
+            showDialogCalled = true;
+            EditEmailAccountViewShowDialog(v);
+        };
 
-            bool showDialogCalled = false;
-            MockEmailAccountsView.ShowDialogAction = v =>
-            {
-                showDialogCalled = true;
-                EmailAccountsViewShowDialog(v);
-            };
+        viewModel.NewAccountCommand.Execute(null);
+        Assert.IsTrue(showDialogCalled);
+        MockEditEmailAccountView.ShowDialogAction = null;
 
-            controller.EmailAccountsCommand.Execute(null);
-            Assert.IsTrue(showDialogCalled);
-        }
+        var emailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
+        AssertHelper.CanExecuteChangedEvent(viewModel.RemoveAccountCommand, () => viewModel.SelectedEmailAccount = emailAccount);
+        Assert.IsTrue(viewModel.EditAccountCommand.CanExecute(null));
+        Assert.IsTrue(viewModel.RemoveAccountCommand.CanExecute(null));
 
-        private static void EmailAccountsViewShowDialog(MockEmailAccountsView view)
+        // Edit the email account
+
+        showDialogCalled = false;
+        MockEditEmailAccountView.ShowDialogAction = v =>
         {
-            var viewModel = ViewHelper.GetViewModel<EmailAccountsViewModel>(view)!;
-            Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
-            Assert.IsNull(viewModel.SelectedEmailAccount);
-            Assert.IsFalse(viewModel.EditAccountCommand.CanExecute(null));
-            Assert.IsFalse(viewModel.RemoveAccountCommand.CanExecute(null));
+            showDialogCalled = true;
+            EditEmailAccountViewShowDialog(v);
+        };
 
-            // Create a new email account
+        viewModel.EditAccountCommand.Execute(null);
+        Assert.IsTrue(showDialogCalled);
+        MockEditEmailAccountView.ShowDialogAction = null;
 
-            bool showDialogCalled = false;
-            MockEditEmailAccountView.ShowDialogAction = v =>
-            {
-                showDialogCalled = true;
-                EditEmailAccountViewShowDialog(v);
-            };
+        var editedEmailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
+        Assert.AreNotEqual(emailAccount, editedEmailAccount);
+        AssertHelper.CanExecuteChangedEvent(viewModel.EditAccountCommand, () => viewModel.SelectedEmailAccount = editedEmailAccount);
 
-            viewModel.NewAccountCommand.Execute(null);
-            Assert.IsTrue(showDialogCalled);
-            MockEditEmailAccountView.ShowDialogAction = null;
+        // Remove the email account
 
-            var emailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
-            AssertHelper.CanExecuteChangedEvent(viewModel.RemoveAccountCommand, () => viewModel.SelectedEmailAccount = emailAccount);
-            Assert.IsTrue(viewModel.EditAccountCommand.CanExecute(null));
-            Assert.IsTrue(viewModel.RemoveAccountCommand.CanExecute(null));
+        viewModel.RemoveAccountCommand.Execute(null);
+        Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
+    }
 
-            // Edit the email account
+    private static void EditEmailAccountViewShowDialog(MockEditEmailAccountView view)
+    {
+        var viewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(view)!;
 
-            showDialogCalled = false;
-            MockEditEmailAccountView.ShowDialogAction = v =>
-            {
-                showDialogCalled = true;
-                EditEmailAccountViewShowDialog(v);
-            };
-
-            viewModel.EditAccountCommand.Execute(null);
-            Assert.IsTrue(showDialogCalled);
-            MockEditEmailAccountView.ShowDialogAction = null;
-
-            var editedEmailAccount = viewModel.EmailClientRoot.EmailAccounts.Single();
-            Assert.AreNotEqual(emailAccount, editedEmailAccount);
-            AssertHelper.CanExecuteChangedEvent(viewModel.EditAccountCommand, () => viewModel.SelectedEmailAccount = editedEmailAccount);
-
-            // Remove the email account
-
-            viewModel.RemoveAccountCommand.Execute(null);
-            Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
-        }
-
-        private static void EditEmailAccountViewShowDialog(MockEditEmailAccountView view)
-        {
-            var viewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(view)!;
-            
-            // Just finish the wizard with default settings
-            viewModel.NextCommand.Execute(null);
-            viewModel.NextCommand.Execute(null);
-        }
+        // Just finish the wizard with default settings
+        viewModel.NextCommand.Execute(null);
+        viewModel.NextCommand.Execute(null);
     }
 }

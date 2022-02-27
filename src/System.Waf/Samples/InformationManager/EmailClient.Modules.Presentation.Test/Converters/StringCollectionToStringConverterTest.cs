@@ -2,20 +2,19 @@
 using Waf.InformationManager.EmailClient.Modules.Presentation.Converters;
 using System.Waf.UnitTesting;
 
-namespace Test.InformationManager.EmailClient.Modules.Presentation.Converters
+namespace Test.InformationManager.EmailClient.Modules.Presentation.Converters;
+
+[TestClass]
+public class StringCollectionToStringConverterTest
 {
-    [TestClass]
-    public class StringCollectionToStringConverterTest
+    [TestMethod]
+    public void ConvertTest()
     {
-        [TestMethod]
-        public void ConvertTest()
-        {
-            var converter = new StringCollectionToStringConverter();
+        var converter = new StringCollectionToStringConverter();
 
-            Assert.AreEqual("abc", converter.Convert(new[] { "abc" }, null, null, null));
-            Assert.AreEqual("abc; def; ghi", converter.Convert(new[] { "abc", "def", "ghi" }, null, null, null));
+        Assert.AreEqual("abc", converter.Convert(new[] { "abc" }, null, null, null));
+        Assert.AreEqual("abc; def; ghi", converter.Convert(new[] { "abc", "def", "ghi" }, null, null, null));
 
-            AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, null, null, null));
-        }
+        AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, null, null, null));
     }
 }

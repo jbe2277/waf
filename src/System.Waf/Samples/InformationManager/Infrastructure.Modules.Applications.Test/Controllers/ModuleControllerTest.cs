@@ -2,27 +2,26 @@
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 
-namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers
+namespace Test.InformationManager.Infrastructure.Modules.Applications.Controllers;
+
+[TestClass]
+public class ModuleControllerTest : InfrastructureTest
 {
-    [TestClass]
-    public class ModuleControllerTest : InfrastructureTest
+    [TestMethod]
+    public void ControllerLifecycle()
     {
-        [TestMethod]
-        public void ControllerLifecycle()
-        {
-            var shellView = Get<MockShellView>();
-            var moduleController = Get<ModuleController>();
-            var documentController = Get<DocumentController>();
-            if (File.Exists(documentController.PackagePath)) File.Delete(documentController.PackagePath);
+        var shellView = Get<MockShellView>();
+        var moduleController = Get<ModuleController>();
+        var documentController = Get<DocumentController>();
+        if (File.Exists(documentController.PackagePath)) File.Delete(documentController.PackagePath);
 
-            Assert.IsFalse(shellView.IsVisible);
+        Assert.IsFalse(shellView.IsVisible);
 
-            moduleController.Initialize();
-            moduleController.Run();
+        moduleController.Initialize();
+        moduleController.Run();
 
-            Assert.IsTrue(shellView.IsVisible);
-            
-            moduleController.Shutdown();
-        }
+        Assert.IsTrue(shellView.IsVisible);
+
+        moduleController.Shutdown();
     }
 }

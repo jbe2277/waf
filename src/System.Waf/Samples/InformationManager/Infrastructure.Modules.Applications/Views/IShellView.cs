@@ -1,32 +1,31 @@
 ﻿using System.Waf.Applications;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
-namespace Waf.InformationManager.Infrastructure.Modules.Applications.Views
+namespace Waf.InformationManager.Infrastructure.Modules.Applications.Views;
+
+public interface IShellView : IView
 {
-    public interface IShellView : IView
-    {
-        double VirtualScreenWidth { get; }
+    double VirtualScreenWidth { get; }
 
-        double VirtualScreenHeight { get; }
-        
-        double Left { get; set; }
+    double VirtualScreenHeight { get; }
 
-        double Top { get; set; }
+    double Left { get; set; }
 
-        double Width { get; set; }
+    double Top { get; set; }
 
-        double Height { get; set; }
+    double Width { get; set; }
 
-        bool IsMaximized { get; set; }
+    double Height { get; set; }
 
-        event EventHandler? Closed;
+    bool IsMaximized { get; set; }
 
-        void Show();
+    event EventHandler? Closed;
 
-        void Close();
+    void Show();
 
-        void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands);
+    void Close();
 
-        void ClearToolBarCommands();
-    }
+    void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands);
+
+    void ClearToolBarCommands();
 }

@@ -4,23 +4,22 @@ using Test.InformationManager.Common.Applications;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 
-namespace Test.InformationManager.Infrastructure.Modules.Applications
-{
-    [TestClass]
-    public abstract class InfrastructureTest : ApplicationsTest
-    {
-        protected override void OnCatalogInitialize(AggregateCatalog catalog)
-        {
-            base.OnCatalogInitialize(catalog);
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(InfrastructureTest).Assembly));
-        }
+namespace Test.InformationManager.Infrastructure.Modules.Applications;
 
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-            var environmentService = Get<MockEnvironmentService>();
-            environmentService.DataDirectory = Path.Combine(Environment.CurrentDirectory, "Data");
-        }
+[TestClass]
+public abstract class InfrastructureTest : ApplicationsTest
+{
+    protected override void OnCatalogInitialize(AggregateCatalog catalog)
+    {
+        base.OnCatalogInitialize(catalog);
+        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
+        catalog.Catalogs.Add(new AssemblyCatalog(typeof(InfrastructureTest).Assembly));
+    }
+
+    protected override void OnInitialize()
+    {
+        base.OnInitialize();
+        var environmentService = Get<MockEnvironmentService>();
+        environmentService.DataDirectory = Path.Combine(Environment.CurrentDirectory, "Data");
     }
 }

@@ -2,19 +2,18 @@
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Presentation.Views;
 
-namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData
-{
-    public class SampleContactLayoutViewModel : ContactLayoutViewModel
-    {
-        public SampleContactLayoutViewModel() : base(new MockContactLayoutView())
-        {
-            ContactListView = new SampleContactListViewModel(new ContactListView()).View;
-            ContactView = new SampleContactViewModel(new ContactView()).View;
-        }
+namespace Waf.InformationManager.AddressBook.Modules.Presentation.DesignData;
 
-        private class MockContactLayoutView : IContactLayoutView
-        {
-            public object? DataContext { get; set; }
-        }
+public class SampleContactLayoutViewModel : ContactLayoutViewModel
+{
+    public SampleContactLayoutViewModel() : base(new MockContactLayoutView())
+    {
+        ContactListView = new SampleContactListViewModel(new ContactListView()).View;
+        ContactView = new SampleContactViewModel(new ContactView()).View;
+    }
+
+    private class MockContactLayoutView : IContactLayoutView
+    {
+        public object? DataContext { get; set; }
     }
 }

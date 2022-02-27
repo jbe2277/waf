@@ -2,23 +2,22 @@
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Presentation.Views;
 
-namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData
+namespace Waf.InformationManager.EmailClient.Modules.Presentation.DesignData;
+
+public class SampleEditEmailAccountViewModel : EditEmailAccountViewModel
 {
-    public class SampleEditEmailAccountViewModel : EditEmailAccountViewModel
+    public SampleEditEmailAccountViewModel() : base(new MockEditEmailAccountView())
     {
-        public SampleEditEmailAccountViewModel() : base(new MockEditEmailAccountView())
-        {
-            ContentView = new SampleBasicEmailAccountViewModel(new BasicEmailAccountView()).View;
-        }
+        ContentView = new SampleBasicEmailAccountViewModel(new BasicEmailAccountView()).View;
+    }
 
 
-        private class MockEditEmailAccountView : IEditEmailAccountView
-        {
-            public object? DataContext { get; set; }
+    private class MockEditEmailAccountView : IEditEmailAccountView
+    {
+        public object? DataContext { get; set; }
 
-            public void Close() { }
+        public void Close() { }
 
-            public void ShowDialog(object owner) { }
-        }
+        public void ShowDialog(object owner) { }
     }
 }

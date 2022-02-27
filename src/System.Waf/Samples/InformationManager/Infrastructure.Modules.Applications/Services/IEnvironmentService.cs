@@ -1,8 +1,6 @@
-﻿
-namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services
+﻿namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services;
+
+public interface IEnvironmentService
 {
-    public interface IEnvironmentService
-    {
-        string DataDirectory { get; }
-    }
+    string DataDirectory { get; }
 }

@@ -6,85 +6,84 @@ using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
-namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers
+namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers;
+
+[TestClass]
+public class ContactControllerTest : AddressBookTest
 {
-    [TestClass]
-    public class ContactControllerTest : AddressBookTest
+    [TestMethod]
+    public void AddAndRemoveContacts()
     {
-        [TestMethod]
-        public void AddAndRemoveContacts()
-        {
-            var root = new AddressBookRoot();
-            var contact1 = root.AddNewContact();
-            
-            // Create the controller
-            
-            var controller = Get<ContactController>();
-            var contactLayoutViewModel = Get<ContactLayoutViewModel>();
-            var contactListViewModel = controller.ContactListViewModel;
-            var contactListView = (MockContactListView)contactListViewModel.View;
-            var contactViewModel = controller.ContactViewModel;
-            var contactView = (MockContactView)contactViewModel.View;
+        var root = new AddressBookRoot();
+        var contact1 = root.AddNewContact();
 
-            // Initialize the controller
-            
-            Assert.IsNull(contactLayoutViewModel.ContactListView);
-            Assert.IsNull(contactLayoutViewModel.ContactView);
+        // Create the controller
 
-            controller.Root = root;
-            controller.Initialize();
+        var controller = Get<ContactController>();
+        var contactLayoutViewModel = Get<ContactLayoutViewModel>();
+        var contactListViewModel = controller.ContactListViewModel;
+        var contactListView = (MockContactListView)contactListViewModel.View;
+        var contactViewModel = controller.ContactViewModel;
+        var contactView = (MockContactView)contactViewModel.View;
 
-            Assert.AreEqual(contactListView, contactLayoutViewModel.ContactListView);
-            Assert.AreEqual(contactView, contactLayoutViewModel.ContactView);
+        // Initialize the controller
 
-            // Run the controller
+        Assert.IsNull(contactLayoutViewModel.ContactListView);
+        Assert.IsNull(contactLayoutViewModel.ContactView);
 
-            var shellService = Get<MockShellService>();
-            Assert.IsNull(shellService.ContentView);
+        controller.Root = root;
+        controller.Initialize();
 
-            controller.Run();
+        Assert.AreEqual(contactListView, contactLayoutViewModel.ContactListView);
+        Assert.AreEqual(contactView, contactLayoutViewModel.ContactView);
 
-            Assert.AreEqual(contactLayoutViewModel.View, shellService.ContentView);
+        // Run the controller
 
-            // Add a new contact
+        var shellService = Get<MockShellService>();
+        Assert.IsNull(shellService.ContentView);
 
-            bool focusItemCalled = false;
-            contactListView.FocusItemAction = _ => focusItemCalled = true;
-            controller.NewContactCommand.Execute(null);
+        controller.Run();
 
-            Assert.AreEqual(2, root.Contacts.Count);
-            var contact2 = root.Contacts[^1];
-            Assert.AreEqual(contact2, contactViewModel.Contact);
-            Assert.IsTrue(focusItemCalled);
+        Assert.AreEqual(contactLayoutViewModel.View, shellService.ContentView);
 
-            // Remove the first contact
+        // Add a new contact
 
-            contactListViewModel.Contacts = root.Contacts;
-            
-            AssertHelper.CanExecuteChangedEvent(controller.DeleteContactCommand, () => contactListViewModel.SelectedContact = contact1);
-            
-            controller.DeleteContactCommand.Execute(null);
-            
-            Assert.AreEqual(contact2, root.Contacts.Single());
-            Assert.AreEqual(contact2, contactListViewModel.SelectedContact);
+        bool focusItemCalled = false;
+        contactListView.FocusItemAction = _ => focusItemCalled = true;
+        controller.NewContactCommand.Execute(null);
 
-            // Remove the second contact
+        Assert.AreEqual(2, root.Contacts.Count);
+        var contact2 = root.Contacts[^1];
+        Assert.AreEqual(contact2, contactViewModel.Contact);
+        Assert.IsTrue(focusItemCalled);
 
-            controller.DeleteContactCommand.Execute(null);
+        // Remove the first contact
 
-            Assert.IsFalse(root.Contacts.Any());
-            Assert.IsNull(contactListViewModel.SelectedContact);
+        contactListViewModel.Contacts = root.Contacts;
 
-            // Check that a delete is not possible because no contacts are left
+        AssertHelper.CanExecuteChangedEvent(controller.DeleteContactCommand, () => contactListViewModel.SelectedContact = contact1);
 
-            Assert.IsFalse(controller.DeleteContactCommand.CanExecute(null));
+        controller.DeleteContactCommand.Execute(null);
 
-            // Shutdown the controller
+        Assert.AreEqual(contact2, root.Contacts.Single());
+        Assert.AreEqual(contact2, contactListViewModel.SelectedContact);
 
-            controller.Shutdown();
+        // Remove the second contact
 
-            Assert.IsNull(contactLayoutViewModel.ContactListView);
-            Assert.IsNull(contactLayoutViewModel.ContactView);
-        }
+        controller.DeleteContactCommand.Execute(null);
+
+        Assert.IsFalse(root.Contacts.Any());
+        Assert.IsNull(contactListViewModel.SelectedContact);
+
+        // Check that a delete is not possible because no contacts are left
+
+        Assert.IsFalse(controller.DeleteContactCommand.CanExecute(null));
+
+        // Shutdown the controller
+
+        controller.Shutdown();
+
+        Assert.IsNull(contactLayoutViewModel.ContactListView);
+        Assert.IsNull(contactLayoutViewModel.ContactView);
     }
 }

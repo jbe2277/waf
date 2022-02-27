@@ -1,8 +1,7 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.InformationManager.EmailClient.Modules.Applications.Views
+namespace Waf.InformationManager.EmailClient.Modules.Applications.Views;
+
+public interface IEmailView : IView
 {
-    public interface IEmailView : IView
-    {
-    }
 }
