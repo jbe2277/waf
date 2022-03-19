@@ -132,19 +132,10 @@ https://github.com/jbe2277/waf
   <data name="CannotSaveFile" xml:space="preserve">
     <value>Die Anwendung kann die Datei '{0}' nicht speichern.</value>
   </data>
-  <data name="DocumentFileName" xml:space="preserve">
-    <value>Dokument {0}{1}</value>
-  </data>
   <data name="FileExtensionNotSupported" xml:space="preserve">
     <value>Die Datei '{0}' enthält eine nicht unterstütze Dateierweiterung.</value>
   </data>
   <data name="RestartApplication" xml:space="preserve">
     <value>Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</value>
-  </data>
-  <data name="RichTextDocuments" xml:space="preserve">
-    <value>RichText Dokumente (*.rtf)</value>
-  </data>
-  <data name="XpsDocuments" xml:space="preserve">
-    <value>XPS Dokumente (*.xps)</value>
   </data>
 </root>

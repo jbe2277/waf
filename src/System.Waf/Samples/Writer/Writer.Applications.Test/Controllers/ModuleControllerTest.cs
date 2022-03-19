@@ -13,7 +13,7 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.Controllers;
 
 [TestClass]
-public class ModuleControllerTest : TestClassBase
+public class ModuleControllerTest : ApplicationsTest
 {
     protected override void OnCleanup()
     {

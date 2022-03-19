@@ -458,4 +458,13 @@
   <data name="ZoomOutToolTipDescription" xml:space="preserve">
     <value>Verkleinert das Dokument.</value>
   </data>
+  <data name="RichTextDocuments" xml:space="preserve">
+    <value>RichText Dokumente (*.rtf)</value>
+  </data>
+  <data name="XpsDocuments" xml:space="preserve">
+    <value>XPS Dokumente (*.xps)</value>
+  </data>
+  <data name="DocumentFileName" xml:space="preserve">
+    <value>Dokument {0}{1}</value>
+  </data>
 </root>

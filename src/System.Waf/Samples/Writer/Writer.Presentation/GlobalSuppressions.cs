@@ -1,10 +1,8 @@
-
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.HandleException(System.Exception,System.Boolean)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDomainUnhandledException(System.Object,System.UnhandledExceptionEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDispatcherUnhandledException(System.Object,System.Windows.Threading.DispatcherUnhandledExceptionEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.Writer.Presentation.Views.ShellWindow.zoomBox")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Scope = "member", Target = "Waf.Writer.Presentation.App.#.cctor()")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Presentation.App")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Scope = "member", Target = "~P:Waf.Writer.Presentation.DesignData.MockFileService.Documents")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~P:Waf.Writer.Presentation.Log.Default")]
@@ -17,3 +15,5 @@
 [assembly: SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.Writer.Presentation.Views.PrintPreviewView")]
 [assembly: SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Converters.PercentConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)~System.Object")]
 [assembly: SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Converters.MenuFileNameConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)~System.Object")]
+[assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.RichTextDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]
+[assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.XpsExportDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]

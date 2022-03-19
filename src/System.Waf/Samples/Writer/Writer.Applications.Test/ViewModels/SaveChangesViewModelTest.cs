@@ -11,7 +11,7 @@ public class SaveChangesViewModelTest
     [TestMethod]
     public void SaveChangesViewModelCloseTest()
     {
-        var documentType = new MockDocumentType("Mock Document", ".mock");
+        var documentType = new MockRichTextDocumentType();
         var documents = new[]
         {
                 documentType.New(),

@@ -8,7 +8,7 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.ViewModels;
 
 [TestClass]
-public class ZoomViewModelTest : TestClassBase
+public class ZoomViewModelTest : ApplicationsTest
 {
     private IShellService shellService = null!;
     private MockZoomViewModel zoomViewModel = null!;

@@ -35,7 +35,7 @@ public partial class PrintPreviewView : IPrintPreviewView
     private void LoadedHandler(object sender, RoutedEventArgs e)
     {
         // We have to clone the FlowDocument before we use different pagination settings for the export.        
-        var clone = ViewModel.Document.CloneContent();
+        var clone = (FlowDocument)ViewModel.Document.CloneContent();
         clone.ColumnWidth = double.PositiveInfinity;
 
         var packageStream = new MemoryStream();

@@ -13,7 +13,7 @@ public class PrintPreviewViewModel : ZoomViewModel<IPrintPreviewView>
     {
     }
 
-    public RichTextDocument Document { get; set; } = null!;
+    public IRichTextDocument Document { get; set; } = null!;
 
     protected override void FitToWidthCore()
     {

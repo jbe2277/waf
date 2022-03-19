@@ -8,18 +8,12 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.Controllers;
 
 [TestClass]
-public class PrintControllerTest : TestClassBase
+public class PrintControllerTest : ApplicationsTest
 {
     protected override void OnInitialize()
     {
         base.OnInitialize();
         InitializePrintController();
-    }
-
-    protected override void OnCleanup()
-    {
-        ShutdownPrintController();
-        base.OnCleanup();
     }
 
     [TestMethod]
@@ -58,12 +52,12 @@ public class PrintControllerTest : TestClassBase
 
         printDialogService.ShowDialogResult = true;
         shellViewModel.PrintCommand.Execute(null);
-        Assert.IsNotNull(printDialogService.DocumentPaginator);
+        Assert.IsNotNull(printDialogService.DocumentPaginatorSource);
         Assert.AreEqual(fileService.ActiveDocument!.FileName, printDialogService.Description);
 
         printDialogService.ShowDialogResult = false;
         shellViewModel.PrintCommand.Execute(null);
-        Assert.IsNull(printDialogService.DocumentPaginator);
+        Assert.IsNull(printDialogService.DocumentPaginatorSource);
         Assert.IsNull(printDialogService.Description);
     }
 

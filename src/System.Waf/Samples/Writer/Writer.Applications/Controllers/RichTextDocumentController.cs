@@ -13,7 +13,7 @@ internal class RichTextDocumentController : DocumentController
     private readonly IFileService fileService;
     private readonly MainViewModel mainViewModel;
     private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
-    private readonly Dictionary<RichTextDocument, RichTextViewModel> richTextViewModels;
+    private readonly Dictionary<IRichTextDocument, RichTextViewModel> richTextViewModels;
 
     [ImportingConstructor]
     public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) : base(fileService)
@@ -21,13 +21,13 @@ internal class RichTextDocumentController : DocumentController
         this.fileService = fileService;
         this.mainViewModel = mainViewModel;
         this.richTextViewModelFactory = richTextViewModelFactory;
-        richTextViewModels = new Dictionary<RichTextDocument, RichTextViewModel>();
+        richTextViewModels = new Dictionary<IRichTextDocument, RichTextViewModel>();
         mainViewModel.PropertyChanged += MainViewModelPropertyChanged;
     }
 
     protected override void OnDocumentAdded(IDocument document)
     {
-        if (document is not RichTextDocument richTextDocument) return;
+        if (document is not IRichTextDocument richTextDocument) return;
         var richTextViewModel = richTextViewModelFactory.CreateExport().Value;
         richTextViewModel.Document = richTextDocument;
         richTextViewModels.Add(richTextDocument, richTextViewModel);
@@ -36,7 +36,7 @@ internal class RichTextDocumentController : DocumentController
 
     protected override void OnDocumentRemoved(IDocument document)
     {
-        if (document is not RichTextDocument richTextDocument) return;
+        if (document is not IRichTextDocument richTextDocument) return;
         mainViewModel.DocumentViews.Remove(richTextViewModels[richTextDocument].View);
         richTextViewModels.Remove(richTextDocument);
     }
@@ -49,7 +49,7 @@ internal class RichTextDocumentController : DocumentController
         }
         else
         {
-            if (activeDocument is RichTextDocument x) mainViewModel.ActiveDocumentView = richTextViewModels[x].View;
+            if (activeDocument is IRichTextDocument x) mainViewModel.ActiveDocumentView = richTextViewModels[x].View;
         }
     }
 

@@ -32,7 +32,7 @@ public partial class RichTextView : IRichTextView
         // Ensure that this handler is called only once.
         Loaded -= FirstTimeLoadedHandler;
         suppressTextChanged = true;
-        richTextBox.Document = ViewModel.Document.Content;
+        richTextBox.Document = (FlowDocument)ViewModel.Document.Content;
         suppressTextChanged = false;
     }
 

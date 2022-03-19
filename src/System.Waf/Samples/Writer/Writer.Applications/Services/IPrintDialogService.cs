@@ -1,10 +1,8 @@
-﻿using System.Windows.Documents;
-
-namespace Waf.Writer.Applications.Services;
+﻿namespace Waf.Writer.Applications.Services;
 
 public interface IPrintDialogService
 {
     bool ShowDialog();
 
-    void PrintDocument(DocumentPaginator documentPaginator, string description);
+    void PrintDocument(object documentPaginatorSource, string description);
 }

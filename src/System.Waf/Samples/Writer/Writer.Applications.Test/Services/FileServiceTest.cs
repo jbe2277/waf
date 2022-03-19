@@ -5,7 +5,7 @@ using Waf.Writer.Applications.Services;
 namespace Test.Writer.Applications.Services;
 
 [TestClass]
-public class FileServiceTest : TestClassBase
+public class FileServiceTest : ApplicationsTest
 {
     [TestMethod]
     public void RecentFileList()

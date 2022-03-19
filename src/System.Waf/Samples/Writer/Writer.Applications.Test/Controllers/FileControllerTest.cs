@@ -13,16 +13,14 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.Controllers;
 
 [TestClass]
-public class FileControllerTest : TestClassBase
+public class FileControllerTest : ApplicationsTest
 {
     [TestMethod]
     public void RegisterDocumentTypesTest()
     {
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
 
         Assert.IsFalse(fileService.Documents.Any());
         fileController.New(documentType);
@@ -34,9 +32,7 @@ public class FileControllerTest : TestClassBase
     {
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
 
         Assert.IsFalse(fileService.Documents.Any());
         Assert.IsNull(fileService.ActiveDocument);
@@ -46,7 +42,7 @@ public class FileControllerTest : TestClassBase
         Assert.AreEqual(document, fileService.ActiveDocument);
 
         AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.New(null!));
-        AssertHelper.ExpectedException<ArgumentException>(() => fileController.New(new MockDocumentType("Dummy", ".dmy")));
+        AssertHelper.ExpectedException<ArgumentException>(() => fileController.New(new MockRichTextDocumentType()));
 
         AssertHelper.PropertyChangedEvent(fileService, x => x.ActiveDocument, () => fileService.ActiveDocument = null);
         Assert.AreEqual(null, fileService.ActiveDocument);
@@ -60,25 +56,23 @@ public class FileControllerTest : TestClassBase
         var fileDialogService = Get<MockFileDialogService>();
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
 
         Assert.IsFalse(fileService.Documents.Any());
         Assert.IsNull(fileService.ActiveDocument);
 
-        fileDialogService.Result = new FileDialogResult("Document1.mock", new FileType("Mock Document", ".mock"));
+        fileDialogService.Result = new FileDialogResult("Document1.rtf", new FileType("Mock Document", ".rtf"));
         fileService.OpenCommand.Execute(null);
 
         Assert.AreEqual(FileDialogType.OpenFileDialog, fileDialogService.FileDialogType);
-        Assert.AreEqual("Mock Document", fileDialogService.FileTypes.Last().Description);
-        Assert.AreEqual(".mock", fileDialogService.FileTypes.Last().FileExtensions.Single());
+        Assert.AreEqual("Mock RTF", fileDialogService.FileTypes.First().Description);
+        Assert.AreEqual(".rtf", fileDialogService.FileTypes.First().FileExtensions.Single());
 
         Assert.AreEqual(DocumentOperation.Open, documentType.DocumentOperation);
-        Assert.AreEqual("Document1.mock", documentType.FileName);
+        Assert.AreEqual("Document1.rtf", documentType.FileName);
 
         var document = fileService.Documents[^1];
-        Assert.AreEqual("Document1.mock", document.FileName);
+        Assert.AreEqual("Document1.rtf", document.FileName);
 
         AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
@@ -86,7 +80,7 @@ public class FileControllerTest : TestClassBase
         // Open the same file again -> It's not opened again, just activated.
 
         fileService.ActiveDocument = null;
-        fileService.OpenCommand.Execute("Document1.mock");
+        fileService.OpenCommand.Execute("Document1.rtf");
         AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
 
@@ -107,16 +101,13 @@ public class FileControllerTest : TestClassBase
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
 
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
-
         Assert.IsFalse(fileService.Documents.Any());
         Assert.IsNull(fileService.ActiveDocument);
 
         // Open is called with a fileName which might be a command line parameter.
-        fileService.OpenCommand.Execute("Document1.mock");
+        fileService.OpenCommand.Execute("Document1.rtf");
         var document = fileService.Documents[^1];
-        Assert.AreEqual("Document1.mock", document.FileName);
+        Assert.AreEqual("Document1.rtf", document.FileName);
 
         AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
@@ -125,12 +116,6 @@ public class FileControllerTest : TestClassBase
         var messageService = Get<MockMessageService>();
         messageService.Clear();
         fileService.OpenCommand.Execute("Document.wrongextension");
-        Assert.AreEqual(MessageType.Error, messageService.MessageType);
-        Assert.IsFalse(string.IsNullOrEmpty(messageService.Message));
-
-        // Call open with a fileName that doesn't exist
-        messageService.Clear();
-        fileService.OpenCommand.Execute("2i0501fh-89f1-4197-a318-d5241135f4f6.rtf");
         Assert.AreEqual(MessageType.Error, messageService.MessageType);
         Assert.IsFalse(string.IsNullOrEmpty(messageService.Message));
     }
@@ -155,13 +140,13 @@ public class FileControllerTest : TestClassBase
         var fileService = Get<IFileService>();
         foreach (var x in fileService.RecentFileList.RecentFiles.ToArray()) fileService.RecentFileList.Remove(x);
 
-        var documentType = new MockDocumentType("Mock Document", ".mock") { ThrowException = true };
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
+        documentType.ThrowException = true;
 
-        fileService.RecentFileList.AddFile("Document1.mock");
+        fileService.RecentFileList.AddFile("Document1.rtf");
         Assert.IsTrue(fileService.RecentFileList.RecentFiles.Any());
 
-        fileService.OpenCommand.Execute("Document1.mock");
+        fileService.OpenCommand.Execute("Document1.rtf");
 
         // Ensure that the recent file is remove from the list.
         Assert.IsFalse(fileService.RecentFileList.RecentFiles.Any());
@@ -173,27 +158,25 @@ public class FileControllerTest : TestClassBase
         var fileDialogService = Get<MockFileDialogService>();
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
         fileController.New(documentType);
         var document = fileService.Documents.Single();
-        document.FileName = "Document.mock";
+        document.FileName = "Document.rtf";
 
-        fileDialogService.Result = new FileDialogResult("Document1.mock", new FileType("Mock Document", ".mock"));
+        fileDialogService.Result = new FileDialogResult("Document1.rtf", new FileType("Mock Document", ".rtf"));
         fileService.SaveAsCommand.Execute(null);
 
         Assert.AreEqual(FileDialogType.SaveFileDialog, fileDialogService.FileDialogType);
-        Assert.AreEqual("Mock Document", fileDialogService.FileTypes.Single().Description);
-        Assert.AreEqual(".mock", fileDialogService.FileTypes.Single().FileExtensions.Single());
-        Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType!.Description);
-        Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
+        Assert.AreEqual("Mock RTF", fileDialogService.FileTypes.First().Description);
+        Assert.AreEqual(".rtf", fileDialogService.FileTypes.First().FileExtensions.Single());
+        Assert.AreEqual("Mock RTF", fileDialogService.DefaultFileType!.Description);
+        Assert.AreEqual(".rtf", fileDialogService.DefaultFileType.FileExtensions.Single());
         Assert.AreEqual("Document", fileDialogService.DefaultFileName);
 
         Assert.AreEqual(DocumentOperation.Save, documentType.DocumentOperation);
         Assert.AreEqual(document, documentType.Document);
 
-        Assert.AreEqual("Document1.mock", documentType.FileName);
+        Assert.AreEqual("Document1.rtf", documentType.FileName);
 
         // Change the CanSave to return false so that no documentType is able to save the document anymore
 
@@ -215,20 +198,19 @@ public class FileControllerTest : TestClassBase
     public void SaveDocumentWhenFileExistsTest()
     {
         // Get the absolute file path
-        string fileName = Path.GetFullPath("SaveWhenFileExistsTest.mock");
+        string fileName = Path.GetFullPath("SaveWhenFileExistsTest.rtf");
 
         var fileDialogService = Get<MockFileDialogService>();
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
 
         using (var writer = new StreamWriter(fileName))
         {
             writer.WriteLine("Hello World");
         }
 
-        var document = (MockDocument)fileController.New(documentType);
+        var document = (MockRichTextDocument)fileController.New(documentType);
         document.Modified = true;
         // We set the absolute file path to simulate that we already saved the document
         document.FileName = fileName;
@@ -239,10 +221,10 @@ public class FileControllerTest : TestClassBase
         Assert.AreEqual(fileName, documentType.FileName);
 
         // Simulate the scenario when the user overwrites the existing file
-        fileDialogService.Result = new FileDialogResult(fileName, new FileType("Mock Document", ".mock"));
+        fileDialogService.Result = new FileDialogResult(fileName, new FileType("Mock Document", ".rtf"));
         fileService.SaveAsCommand.Execute(null);
-        Assert.AreEqual("Mock Document", fileDialogService.DefaultFileType!.Description);
-        Assert.AreEqual(".mock", fileDialogService.DefaultFileType.FileExtensions.Single());
+        Assert.AreEqual("Mock RTF", fileDialogService.DefaultFileType!.Description);
+        Assert.AreEqual(".rtf", fileDialogService.DefaultFileType.FileExtensions.Single());
         Assert.AreEqual(DocumentOperation.Save, documentType.DocumentOperation);
         Assert.AreEqual(document, documentType.Document);
         Assert.AreEqual(fileName, documentType.FileName);
@@ -252,11 +234,9 @@ public class FileControllerTest : TestClassBase
     public void SaveExceptionsTest()
     {
         var fileController = Get<FileController>();
-        var documentType = new MockDocumentType("Mock Document", ".mock") { CanSaveResult = false };
-
-        var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic)!;
-        ((IList)documentTypesField.GetValue(fileController)!).Clear();
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
+        documentType.CanSaveResult = false;
+        Get<MockXpsExportDocumentType>().CanSaveResult = false;
 
         var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic)!;
         var document = fileController.New(documentType);
@@ -305,8 +285,7 @@ public class FileControllerTest : TestClassBase
     {
         var fileController = Get<FileController>();
         var fileService = Get<IFileService>();
-        var documentType = new MockDocumentType("Mock Document", ".mock");
-        fileController.Register(documentType);
+        var documentType = Get<MockRichTextDocumentType>();
         fileController.New(documentType);
         fileService.CloseCommand.Execute(null);
         Assert.IsFalse(fileService.Documents.Any());

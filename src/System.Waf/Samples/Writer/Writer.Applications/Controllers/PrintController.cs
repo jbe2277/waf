@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
-using System.Windows.Documents;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -45,7 +44,7 @@ internal class PrintController
     private void ShowPrintPreview()
     {
         var printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
-        printPreviewViewModel.Document = (RichTextDocument)fileService.ActiveDocument!;
+        printPreviewViewModel.Document = (IRichTextDocument)fileService.ActiveDocument!;
         previousView = shellViewModel.ContentView;
         shellViewModel.ContentView = printPreviewViewModel.View;
         shellViewModel.IsPrintPreviewVisible = true;
@@ -58,9 +57,8 @@ internal class PrintController
     {
         if (!printDialogService.ShowDialog()) return;
         // We have to clone the FlowDocument before we use different pagination settings for the export.        
-        var document = (RichTextDocument)fileService.ActiveDocument!;
-        var clone = document.CloneContent();
-        printDialogService.PrintDocument(((IDocumentPaginatorSource)clone).DocumentPaginator, fileService.ActiveDocument!.FileName);
+        var document = (IRichTextDocument)fileService.ActiveDocument!;
+        printDialogService.PrintDocument(document.CloneContent(), fileService.ActiveDocument!.FileName);
     }
 
     private void ClosePrintPreview()

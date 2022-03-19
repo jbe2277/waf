@@ -10,7 +10,7 @@ using Waf.Writer.Applications.Views;
 namespace Test.Writer.Applications.Controllers;
 
 [TestClass]
-public class RichTextDocumentControllerTest : TestClassBase
+public class RichTextDocumentControllerTest : ApplicationsTest
 {
     [TestMethod]
     public void AddAndRemoveDocumentViewTest()

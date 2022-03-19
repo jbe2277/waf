@@ -22,7 +22,7 @@ public class RichTextViewModel : ZoomViewModel<IRichTextView>, IEditingCommands
         this.shellService = shellService;
     }
 
-    public RichTextDocument Document { get; set; } = null!;
+    public IRichTextDocument Document { get; set; } = null!;
 
     public bool IsBold
     {

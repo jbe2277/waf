@@ -12,5 +12,5 @@ internal class PrintDialogService : IPrintDialogService
 
     public bool ShowDialog() => printDialog.ShowDialog() == true;
 
-    public void PrintDocument(DocumentPaginator documentPaginator, string description) => printDialog.PrintDocument(documentPaginator, description);
+    public void PrintDocument(object documentPaginatorSource, string description) => printDialog.PrintDocument(((IDocumentPaginatorSource)documentPaginatorSource).DocumentPaginator, description);
 }

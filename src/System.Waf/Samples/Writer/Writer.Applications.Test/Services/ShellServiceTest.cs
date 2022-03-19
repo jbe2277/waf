@@ -4,7 +4,7 @@ using Waf.Writer.Applications.Services;
 namespace Test.Writer.Applications.Services;
 
 [TestClass]
-public class ShellServiceTest : TestClassBase
+public class ShellServiceTest : ApplicationsTest
 {
     [TestMethod]
     public void ZoomCommandsDisabled()

@@ -1,20 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
-using Waf.Writer.Applications.Documents;
+using Test.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
 namespace Test.Writer.Applications.ViewModels;
 
 [TestClass]
-public class RichTextViewModelTest : TestClassBase
+public class RichTextViewModelTest : ApplicationsTest
 {
     [TestMethod]
     public void PropertyChangedEventTest()
     {
         var viewModel = Get<RichTextViewModel>();
-        var documentType = new RichTextDocumentType();
-        var document = new RichTextDocument(documentType);
+        var documentType = new MockRichTextDocumentType();
+        var document = new MockRichTextDocument(documentType);
         viewModel.Document = document;
 
         Assert.AreEqual(document, viewModel.Document);

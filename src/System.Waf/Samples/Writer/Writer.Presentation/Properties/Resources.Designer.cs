@@ -19,7 +19,7 @@ namespace Waf.Writer.Presentation.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -300,6 +300,15 @@ namespace Waf.Writer.Presentation.Properties {
         public static string DeleteToolTipDescription {
             get {
                 return ResourceManager.GetString("DeleteToolTipDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document {0}{1}.
+        /// </summary>
+        public static string DocumentFileName {
+            get {
+                return ResourceManager.GetString("DocumentFileName", resourceCulture);
             }
         }
         
@@ -808,6 +817,15 @@ namespace Waf.Writer.Presentation.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RichText Documents (*.rtf).
+        /// </summary>
+        public static string RichTextDocuments {
+            get {
+                return ResourceManager.GetString("RichTextDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -1004,6 +1022,15 @@ namespace Waf.Writer.Presentation.Properties {
         public static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XPS Documents (*.xps).
+        /// </summary>
+        public static string XpsDocuments {
+            get {
+                return ResourceManager.GetString("XpsDocuments", resourceCulture);
             }
         }
         

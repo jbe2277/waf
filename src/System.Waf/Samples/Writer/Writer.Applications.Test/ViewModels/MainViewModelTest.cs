@@ -6,7 +6,7 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.ViewModels;
 
 [TestClass]
-public class MainViewModelTest : TestClassBase
+public class MainViewModelTest : ApplicationsTest
 {
     protected override void OnInitialize()
     {

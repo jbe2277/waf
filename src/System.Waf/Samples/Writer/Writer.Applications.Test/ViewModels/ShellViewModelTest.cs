@@ -10,7 +10,7 @@ using Waf.Writer.Applications.ViewModels;
 namespace Test.Writer.Applications.ViewModels;
 
 [TestClass]
-public class ShellViewModelTest : TestClassBase
+public class ShellViewModelTest : ApplicationsTest
 {
     [TestMethod]
     public void ShowAndClose()

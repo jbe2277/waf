@@ -39,7 +39,6 @@ internal class ModuleController : IModuleController
         shellViewModel.ExitCommand = exitCommand;
         mainViewModel.StartView = startViewModel.View;
         printController.Initialize();
-        fileController.Initialize();
     }
 
     public void Run()

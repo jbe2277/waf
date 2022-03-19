@@ -29,14 +29,14 @@ internal class FileController
 
     [ImportingConstructor]
     public FileController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, IShellService shellService, FileService fileService,
-        ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory)
+        ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory, IRichTextDocumentType richTextDocumentType, IXpsExportDocumentType xpsExportDocumentType)
     {
         this.messageService = messageService;
         this.fileDialogService = fileDialogService;
         this.shellService = shellService;
         this.fileService = fileService;
         this.saveChangesViewModelFactory = saveChangesViewModelFactory;
-        documentTypes = new List<IDocumentType>();
+        documentTypes = new() {  richTextDocumentType, xpsExportDocumentType };
         newCommand = new DelegateCommand(NewCommand);
         openCommand = new DelegateCommand(OpenCommand);
         closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
@@ -60,14 +60,6 @@ internal class FileController
         get => fileService.ActiveDocument;
         set => fileService.ActiveDocument = value;
     }
-
-    public void Initialize()
-    {
-        documentTypes.Add(new RichTextDocumentType());
-        documentTypes.Add(new XpsExportDocumentType());
-    }
-
-    internal void Register(DocumentType documentType) => documentTypes.Add(documentType);
 
     public void Shutdown() => settings.RecentFileList = recentFileList;
 
@@ -269,8 +261,5 @@ internal class FileController
         if (documentType.CanOpen()) recentFileList.AddFile(fileName);
     }
 
-    private IDocumentType GetDocumentType(FileType fileType) =>
-        (from d in documentTypes
-         where d.Description == fileType.Description && fileType.FileExtensions.Contains(d.FileExtension)
-         select d).First();
+    private IDocumentType GetDocumentType(FileType fileType) => documentTypes.First(x => fileType.FileExtensions.Contains(x.FileExtension));
 }
