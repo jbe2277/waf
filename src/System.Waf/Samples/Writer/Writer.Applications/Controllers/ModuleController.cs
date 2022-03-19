@@ -9,7 +9,7 @@ namespace Waf.Writer.Applications.Controllers;
 [Export(typeof(IModuleController)), Export]
 internal class ModuleController : IModuleController
 {
-    private readonly IEnvironmentService environmentService;
+    private readonly ISystemService systemService;
     private readonly FileController fileController;
     private readonly PrintController printController;
     private readonly ShellViewModel shellViewModel;
@@ -18,10 +18,10 @@ internal class ModuleController : IModuleController
     private readonly DelegateCommand exitCommand;
 
     [ImportingConstructor]
-    public ModuleController(IEnvironmentService environmentService, ShellService shellService, Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController,
+    public ModuleController(ISystemService systemService, ShellService shellService, Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController,
         Lazy<PrintController> printController, Lazy<ShellViewModel> shellViewModel, Lazy<MainViewModel> mainViewModel, Lazy<StartViewModel> startViewModel)
     {
-        this.environmentService = environmentService;
+        this.systemService = systemService;
         this.fileController = fileController.Value;
         _ = richTextDocumentController.Value;
         this.printController = printController.Value;
@@ -43,7 +43,7 @@ internal class ModuleController : IModuleController
     public void Run()
     {
         shellViewModel.ContentView = mainViewModel.View;
-        if (!string.IsNullOrEmpty(environmentService.DocumentFileName)) fileController.Open(environmentService.DocumentFileName!);
+        if (!string.IsNullOrEmpty(systemService.DocumentFileName)) fileController.Open(systemService.DocumentFileName!);
         shellViewModel.Show();
     }
 

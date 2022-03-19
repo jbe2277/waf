@@ -13,6 +13,7 @@ namespace Waf.Writer.Applications.Controllers;
 internal class FileController
 {
     private readonly IMessageService messageService;
+    private readonly ISystemService systemService;
     private readonly IFileDialogService fileDialogService;
     private readonly IShellService shellService;
     private readonly FileService fileService;
@@ -28,10 +29,11 @@ internal class FileController
     private IDocument? lastActiveDocument;
 
     [ImportingConstructor]
-    public FileController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, IShellService shellService, FileService fileService,
-        ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory, IRichTextDocumentType richTextDocumentType, IXpsExportDocumentType xpsExportDocumentType)
+    public FileController(IMessageService messageService, ISystemService systemService, IFileDialogService fileDialogService, ISettingsService settingsService, IShellService shellService, 
+        FileService fileService, ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory, IRichTextDocumentType richTextDocumentType, IXpsExportDocumentType xpsExportDocumentType)
     {
         this.messageService = messageService;
+        this.systemService = systemService;
         this.fileDialogService = fileDialogService;
         this.shellService = shellService;
         this.fileService = fileService;
@@ -159,7 +161,7 @@ internal class FileController
         if (!fileTypes.Any()) throw new InvalidOperationException("No DocumentType is registered that supports the Save operation.");
 
         FileType selectedFileType;
-        if (File.Exists(document.FileName))
+        if (systemService.FileExists(document.FileName))
         {
             var saveTypes = documentTypes.Where(d => d.CanSave(document)).ToArray();
             var documentType = saveTypes.First(d => d.FileExtension == Path.GetExtension(document.FileName));

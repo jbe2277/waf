@@ -46,8 +46,8 @@ public class ModuleControllerTest : ApplicationsTest
     [TestMethod]
     public void OpenFileViaCommandLine()
     {
-        var environmentService = Get<MockEnvironmentService>();
-        environmentService.DocumentFileName = "Document.mock";
+        var systemService = Get<MockSystemService>();
+        systemService.DocumentFileName = "Document.mock";
 
         var controller = Get<ModuleController>();
         controller.Initialize();
@@ -56,7 +56,7 @@ public class ModuleControllerTest : ApplicationsTest
         controller.Run();
 
         // Open a file with an unknown file extension and check if an error message is shown.
-        environmentService.DocumentFileName = "Unknown.fileExtension";
+        systemService.DocumentFileName = "Unknown.fileExtension";
         var messageService = Get<MockMessageService>();
         messageService.Clear();
 
