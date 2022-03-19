@@ -36,7 +36,7 @@ internal class FileController
         this.shellService = shellService;
         this.fileService = fileService;
         this.saveChangesViewModelFactory = saveChangesViewModelFactory;
-        documentTypes = new() {  richTextDocumentType, xpsExportDocumentType };
+        documentTypes = new() { richTextDocumentType, xpsExportDocumentType };
         newCommand = new DelegateCommand(NewCommand);
         openCommand = new DelegateCommand(OpenCommand);
         closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
@@ -135,10 +135,7 @@ internal class FileController
 
     private IDocument? Open()
     {
-        var fileTypes = (from d in documentTypes
-                         where d.CanOpen()
-                         select new FileType(d.Description, d.FileExtension)
-                        ).ToArray();
+        var fileTypes = documentTypes.Where(x => x.CanOpen()).Select(x => new FileType(x.Description, x.FileExtension)).ToArray();
         if (!fileTypes.Any()) throw new InvalidOperationException("No DocumentType is registered that supports the Open operation.");
         var result = fileDialogService.ShowOpenFileDialog(shellService.ShellView, fileTypes);
         if (result.IsValid) return OpenCore(result.FileName!, result.SelectedFileType);
@@ -158,10 +155,7 @@ internal class FileController
 
     private void SaveAs(IDocument document)
     {
-        var fileTypes = (from d in documentTypes
-                         where d.CanSave(document)
-                         select new FileType(d.Description, d.FileExtension)
-                        ).ToArray();
+        var fileTypes = documentTypes.Where(x => x.CanSave(document)).Select(x => new FileType(x.Description, x.FileExtension)).ToArray();
         if (!fileTypes.Any()) throw new InvalidOperationException("No DocumentType is registered that supports the Save operation.");
 
         FileType selectedFileType;

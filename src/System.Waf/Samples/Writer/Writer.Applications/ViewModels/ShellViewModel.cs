@@ -78,15 +78,9 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public event CancelEventHandler? Closing;
 
-    public void Show()
-    {
-        ViewCore.Show();
-    }
+    public void Show() => ViewCore.Show();
 
-    public void Close()
-    {
-        ViewCore.Close();
-    }
+    public void Close() => ViewCore.Close();
 
     private void SelectLanguage(CultureInfo uiCulture)
     {

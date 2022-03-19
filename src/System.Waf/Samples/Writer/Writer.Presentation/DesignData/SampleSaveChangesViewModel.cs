@@ -10,10 +10,10 @@ public class SampleSaveChangesViewModel : SaveChangesViewModel
     public SampleSaveChangesViewModel() : base(new MockSaveChangesView())
     {
         Documents = new List<IDocument>
-            {
-                new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\Document 1.rtf" },
-                new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\WAF Writer\Readme.rtf" }
-            };
+        {
+            new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\Document 1.rtf" },
+            new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\WAF Writer\Readme.rtf" }
+        };
     }
 
     private class MockSaveChangesView : ISaveChangesView

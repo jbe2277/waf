@@ -24,8 +24,8 @@ public partial class App
         Log.App.Info("{0} {1} is starting; OS: {2}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion);
 
 #if (!DEBUG)
-            DispatcherUnhandledException += AppDispatcherUnhandledException;
-            AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
+        DispatcherUnhandledException += AppDispatcherUnhandledException;
+        AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
         catalog = new AggregateCatalog();
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework

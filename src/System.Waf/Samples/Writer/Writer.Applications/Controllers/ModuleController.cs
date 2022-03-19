@@ -11,7 +11,6 @@ internal class ModuleController : IModuleController
 {
     private readonly IEnvironmentService environmentService;
     private readonly FileController fileController;
-    private readonly RichTextDocumentController richTextDocumentController;
     private readonly PrintController printController;
     private readonly ShellViewModel shellViewModel;
     private readonly MainViewModel mainViewModel;
@@ -24,7 +23,7 @@ internal class ModuleController : IModuleController
     {
         this.environmentService = environmentService;
         this.fileController = fileController.Value;
-        this.richTextDocumentController = richTextDocumentController.Value;
+        _ = richTextDocumentController.Value;
         this.printController = printController.Value;
         this.shellViewModel = shellViewModel.Value;
         this.mainViewModel = mainViewModel.Value;
@@ -52,9 +51,5 @@ internal class ModuleController : IModuleController
 
     private void Close() => shellViewModel.Close();
 
-    private void ShellViewModelClosing(object? sender, CancelEventArgs e)
-    {
-        // Try to close all documents and see if the user has already saved them.
-        e.Cancel = !fileController.CloseAll();
-    }
+    private void ShellViewModelClosing(object? sender, CancelEventArgs e) => e.Cancel = !fileController.CloseAll();
 }
