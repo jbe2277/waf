@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - 'src/NewsReader/**'
+      - '.github/workflows/**' 
 
 jobs:
   Android-UWP:
