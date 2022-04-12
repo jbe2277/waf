@@ -45,7 +45,7 @@ namespace Waf.NewsReader.Android
         protected override void OnPause()
         {
             base.OnPause();
-            application.OnPause();
+            application?.OnPause();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
