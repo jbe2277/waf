@@ -15,4 +15,7 @@ public interface IShellService : INotifyPropertyChanged
 
     /// <summary>Clears the tool bar commands.</summary>
     void ClearToolBarCommands();
+
+    /// <summary>Commit UI changes (e.g. of TextBox).</summary>
+    void CommitUIChanges();
 }

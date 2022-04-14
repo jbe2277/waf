@@ -23,4 +23,6 @@ public class MockShellService : Model, IShellService
     public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => toolBarCommands.AddRange(commands);
 
     public void ClearToolBarCommands() => toolBarCommands.Clear();
+
+    public void CommitUIChanges() { }
 }

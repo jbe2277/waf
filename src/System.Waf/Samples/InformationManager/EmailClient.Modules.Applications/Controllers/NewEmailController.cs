@@ -67,6 +67,9 @@ internal class NewEmailController
 
     private void SendEmail()
     {
+        // The Send button is a toolbar button which doesn't take the focus. Move the focus so that the Binding updates the source before reading the HasErrors property.
+        shellService.CommitUIChanges();
+
         var email = NewEmailViewModel.Email;
         if (email.HasErrors)
         {

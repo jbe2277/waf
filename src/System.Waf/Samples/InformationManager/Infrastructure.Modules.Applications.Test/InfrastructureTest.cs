@@ -19,7 +19,7 @@ public abstract class InfrastructureTest : ApplicationsTest
     protected override void OnInitialize()
     {
         base.OnInitialize();
-        var environmentService = Get<MockEnvironmentService>();
+        var environmentService = Get<MockSystemService>();
         environmentService.DataDirectory = Path.Combine(Environment.CurrentDirectory, "Data");
     }
 }

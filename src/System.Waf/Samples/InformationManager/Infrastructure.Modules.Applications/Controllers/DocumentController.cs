@@ -10,21 +10,21 @@ internal class DocumentController : IDocumentService
 {
     private const string fileName = "InformationManager.datx";
 
-    private readonly IEnvironmentService environmentService;
+    private readonly ISystemService systemService;
     private Package? package;
 
     [ImportingConstructor]
-    public DocumentController(IEnvironmentService environmentService)
+    public DocumentController(ISystemService systemService)
     {
-        this.environmentService = environmentService;
-        PackagePath = Path.Combine(environmentService.DataDirectory, fileName);
+        this.systemService = systemService;
+        PackagePath = Path.Combine(systemService.DataDirectory, fileName);
     }
 
     internal string PackagePath { get; }
 
     public void Initialize()
     {
-        var dataDirectory = environmentService.DataDirectory;
+        var dataDirectory = systemService.DataDirectory;
         if (!Directory.Exists(dataDirectory)) Directory.CreateDirectory(dataDirectory);
         package = Package.Open(PackagePath, FileMode.OpenOrCreate);
     }

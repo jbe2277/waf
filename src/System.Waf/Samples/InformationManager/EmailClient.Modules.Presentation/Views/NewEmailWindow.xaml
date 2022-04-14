@@ -9,7 +9,7 @@
     
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <Button Command="{Binding SendCommand}" Click="SendButtonClick" ToolTip="This does not really send the email. It just saves the email in the Sent items."><AccessText Text="_Send"/></Button>
+            <Button Command="{Binding SendCommand}" ToolTip="This does not really send the email. It just saves the email in the Sent items."><AccessText Text="_Send"/></Button>
             <Button Command="{Binding CloseCommand}" ToolTip="Close this window. The email will not be saved."><AccessText Text="_Close"/></Button>
         </ToolBar>
         

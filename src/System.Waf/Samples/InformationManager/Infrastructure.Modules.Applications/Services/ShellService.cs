@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Waf.Foundation;
+using System.Windows;
+using System.Windows.Input;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services;
@@ -27,4 +29,11 @@ public class ShellService : Model, IShellService
     public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => shellViewModel.Value.AddToolBarCommands(commands);
 
     public void ClearToolBarCommands() => shellViewModel.Value.ClearToolBarCommands();
+
+    public void CommitUIChanges()
+    {
+        var element = Keyboard.FocusedElement as FrameworkElement;
+        element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        element?.Focus();
+    }
 }
