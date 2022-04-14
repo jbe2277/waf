@@ -22,6 +22,10 @@ public partial class ShellWindow : IShellView
         Loaded += LoadedHandler;
     }
 
+    public double VirtualScreenLeft => SystemParameters.VirtualScreenLeft;
+
+    public double VirtualScreenTop => SystemParameters.VirtualScreenTop;
+
     public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
     public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;

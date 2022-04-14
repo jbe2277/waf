@@ -9,6 +9,10 @@ public class MockShellView : MockView, IShellView
 {
     public bool IsVisible { get; private set; }
 
+    public double VirtualScreenLeft { get; set; }
+
+    public double VirtualScreenTop { get; set; }
+
     public double VirtualScreenWidth { get; set; }
 
     public double VirtualScreenHeight { get; set; }

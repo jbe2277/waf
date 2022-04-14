@@ -20,6 +20,10 @@ public class SampleShellViewModel : ShellViewModel
     {
         public object? DataContext { get; set; }
 
+        public double VirtualScreenLeft { get; set; }
+
+        public double VirtualScreenTop { get; set; }
+
         public double VirtualScreenWidth { get; set; }
 
         public double VirtualScreenHeight { get; set; }

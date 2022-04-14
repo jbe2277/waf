@@ -14,6 +14,10 @@ public class SampleShellViewModel : ShellViewModel
 
     private class MockShellView : MockView, IShellView
     {
+        public double VirtualScreenLeft { get; set; }
+
+        public double VirtualScreenTop { get; set; }
+
         public double VirtualScreenWidth { get; set; }
 
         public double VirtualScreenHeight { get; set; }

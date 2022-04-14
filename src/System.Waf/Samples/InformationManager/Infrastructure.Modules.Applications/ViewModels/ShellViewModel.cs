@@ -27,16 +27,16 @@ public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
         view.Closed += ViewClosed;
 
         // Restore the window size when the values are valid.
-        if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
-            && settings.Left + settings.Width <= view.VirtualScreenWidth
-            && settings.Top + settings.Height <= view.VirtualScreenHeight)
+        if (settings.Left >= view.VirtualScreenLeft && settings.Top >= view.VirtualScreenTop
+            && settings.Width > 0 && settings.Left + settings.Width <= view.VirtualScreenLeft + view.VirtualScreenWidth
+            && settings.Height > 0 && settings.Top + settings.Height <= view.VirtualScreenTop + view.VirtualScreenHeight)
         {
-            ViewCore.Left = settings.Left;
-            ViewCore.Top = settings.Top;
-            ViewCore.Height = settings.Height;
-            ViewCore.Width = settings.Width;
+            view.Left = settings.Left;
+            view.Top = settings.Top;
+            view.Height = settings.Height;
+            view.Width = settings.Width;
         }
-        ViewCore.IsMaximized = settings.IsMaximized;
+        view.IsMaximized = settings.IsMaximized;
     }
 
     public string Title => ApplicationInfo.ProductName;
