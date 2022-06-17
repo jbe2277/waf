@@ -1,6 +1,5 @@
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "New", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.IDocumentType.New~Waf.Writer.Applications.Documents.IDocument")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Applications.Controllers.PrintController")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.Writer.Applications.Controllers.ModuleController.richTextDocumentController")]
 [assembly: SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "~M:Waf.Writer.Applications.Controllers.PrintController.ShowPrintPreview")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CanNew", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.DocumentType.New~Waf.Writer.Applications.Documents.IDocument")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CanOpen", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.DocumentType.Open(System.String)~Waf.Writer.Applications.Documents.IDocument")]

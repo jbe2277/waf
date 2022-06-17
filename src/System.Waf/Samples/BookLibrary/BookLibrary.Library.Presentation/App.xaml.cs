@@ -52,8 +52,7 @@ public partial class App
         })
         { OverflowAction = AsyncTargetWrapperOverflowAction.Block };
 
-        var logConfig = new LoggingConfiguration();
-        logConfig.DefaultCultureInfo = CultureInfo.InvariantCulture;
+        var logConfig = new LoggingConfiguration { DefaultCultureInfo = CultureInfo.InvariantCulture };
         logConfig.AddTarget(fileTarget);
         logConfig.AddTarget(traceTarget);
         foreach (var (loggerNamePattern, minLevel) in logSettings)
