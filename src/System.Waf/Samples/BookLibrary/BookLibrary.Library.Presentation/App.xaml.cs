@@ -1,5 +1,4 @@
 ﻿using NLog;
-using NLog.Config;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
 using System.ComponentModel.Composition;
@@ -21,13 +20,13 @@ public partial class App
 {
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
     {
-            ("App", LogLevel.Info),
-            ("BookLib.Lib.P", LogLevel.Warn),
-            ("BookLib.Lib.A", LogLevel.Warn),
-            ("BookLib.Lib.D", LogLevel.Warn),
-            ("BookLib.Rep.P", LogLevel.Warn),
-            ("BookLib.Rep.A", LogLevel.Warn),
-        };
+        ("App", LogLevel.Info),
+        ("BookLib.Lib.P", LogLevel.Warn),
+        ("BookLib.Lib.A", LogLevel.Warn),
+        ("BookLib.Lib.D", LogLevel.Warn),
+        ("BookLib.Rep.P", LogLevel.Warn),
+        ("BookLib.Rep.A", LogLevel.Warn),
+    };
 
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
@@ -35,33 +34,30 @@ public partial class App
 
     public App()
     {
-        var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message}  ${exception:format=tostring}";
-        var fileTarget = new AsyncTargetWrapper("fileTarget", new FileTarget()
+        LogManager.Setup().LoadConfiguration(c =>
         {
-            FileName = Path.Combine(AppDataPath, "Log", "BookLibrary.log"),
-            Layout = layout,
-            ArchiveAboveSize = 5_000_000,  // 5 MB
-            MaxArchiveFiles = 1,
-            ArchiveNumbering = ArchiveNumberingMode.Rolling
-        })
-        { OverflowAction = AsyncTargetWrapperOverflowAction.Block };
-        var traceTarget = new AsyncTargetWrapper("traceTarget", new TraceTarget()
-        {
-            Layout = layout,
-            RawWrite = true
-        })
-        { OverflowAction = AsyncTargetWrapperOverflowAction.Block };
+            c.Configuration.DefaultCultureInfo = CultureInfo.InvariantCulture;
+            var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message} ${exception}";
+            var fileTarget = c.ForTarget("fileTarget").WriteTo(new FileTarget
+            {
+                FileName = Path.Combine(AppDataPath, "Log", "BookLibrary.log"),
+                Layout = layout,
+                ConcurrentWrites = true,
+                ArchiveAboveSize = 5_000_000,  // 5 MB
+                MaxArchiveFiles = 1,
+                ArchiveNumbering = ArchiveNumberingMode.Rolling
+            }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
+            var traceTarget = c.ForTarget("traceTarget").WriteTo(new TraceTarget
+            {
+                Layout = layout,
+                RawWrite = true
+            }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
 
-        var logConfig = new LoggingConfiguration { DefaultCultureInfo = CultureInfo.InvariantCulture };
-        logConfig.AddTarget(fileTarget);
-        logConfig.AddTarget(traceTarget);
-        foreach (var (loggerNamePattern, minLevel) in logSettings)
-        {
-            var rule = new LoggingRule(loggerNamePattern, minLevel, fileTarget);
-            rule.Targets.Add(traceTarget);
-            logConfig.LoggingRules.Add(rule);
-        }
-        LogManager.Configuration = logConfig;
+            foreach (var (loggerNamePattern, minLevel) in logSettings)
+            {
+                c.ForLogger(loggerNamePattern).FilterMinLevel(minLevel).WriteTo(fileTarget).WriteTo(traceTarget);
+            }
+        });
     }
 
     private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
