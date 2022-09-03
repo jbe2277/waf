@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Xamarin.Forms;
+﻿using System.Globalization;
 
 namespace Waf.NewsReader.Presentation.Converters
 {

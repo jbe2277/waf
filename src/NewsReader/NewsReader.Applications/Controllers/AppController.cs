@@ -49,13 +49,13 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             dataController.Initialize();
             feedManager = await dataController.Load();
-            shellViewModel.Feeds = feedManager.Feeds;
             settingsController.FeedManager = feedManager;
-
             feedsController.FeedManager = feedManager;
             feedsController.Run();
             if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
             networkInfoService.PropertyChanged += NetworkInfoServicePropertyChanged;
+
+            shellViewModel.Feeds = feedManager.Feeds;
         }
 
         public void Sleep()

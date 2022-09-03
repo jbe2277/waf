@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Waf.NewsReader.Applications.DataModels;
-using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation.Converters
 {

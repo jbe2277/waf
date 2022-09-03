@@ -1,7 +1,5 @@
-﻿using System;
-using Waf.NewsReader.Applications.ViewModels;
+﻿using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
-using Xamarin.Forms.Xaml;
 
 namespace Waf.NewsReader.Presentation.Views
 {

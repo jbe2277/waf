@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              x:Class="Waf.NewsReader.Presentation.Views.AddEditFeedView"
@@ -16,7 +16,7 @@
                 <Label Text="Enter or paste the URL to a publication's RSS Feed below to add it to your list."/>
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding FeedUrl}" Placeholder="Feed Url" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused" HorizontalOptions="FillAndExpand"/>
-                    <Button Command="{Binding LoadFeedCommand}" Text="&#xf453;" FontFamily="{StaticResource MaterialFont}" HorizontalOptions="Start"/>
+                    <Button Command="{Binding LoadFeedCommand}" Text="&#xf453;" FontFamily="MaterialIcons" HorizontalOptions="Start"/>
                 </StackLayout>
                 <Label Text="{Binding LoadErrorMessage}" TextColor="DarkRed">
                     <Label.Triggers>
@@ -34,7 +34,7 @@
                             </DataTrigger>
                         </Entry.Triggers>
                     </Entry>
-                    <Button Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="{StaticResource MaterialFont}" HorizontalOptions="Start"/>
+                    <Button Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="MaterialIcons" HorizontalOptions="Start"/>
                 </StackLayout>
                 <Label Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}" TextColor="DarkRed"/>
                 <Button Text="Add" Command="{Binding AddUpdateCommand}">

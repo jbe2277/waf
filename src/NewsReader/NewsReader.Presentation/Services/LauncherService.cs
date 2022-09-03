@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Waf.NewsReader.Applications.Services;
-using Xamarin.Essentials;
+﻿using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services
 {

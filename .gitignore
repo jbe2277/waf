@@ -20,6 +20,9 @@
 # Unit test results
 [Tt]est[Rr]esults
 
+# Launch settings
+launchSettings.json
+
 # NuGet Packages Directory
 nuget.exe
 packages/
