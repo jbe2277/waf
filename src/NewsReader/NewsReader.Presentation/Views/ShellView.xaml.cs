@@ -47,8 +47,6 @@ namespace Waf.NewsReader.Presentation.Views
         {
             base.OnBindingContextChanged();
             viewModel = (ShellViewModel)BindingContext;
-            var navigationPage = new NavigationPage(new Page());  // Add empty page; needed by MasterDetailPage when shown
-            Detail = navigationPage;
         }
 
         private void NavigationItemTapped(object sender, ItemTappedEventArgs e)

@@ -89,4 +89,12 @@
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <ContentPage/>
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
 </FlyoutPage>
