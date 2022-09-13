@@ -56,7 +56,7 @@ namespace Waf.NewsReader.Presentation.Views
                 if (item.Command != null)
                 {
                     item.Command.Execute(null);
-                    if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
+                    CloseFlyout();
                 }
             }
         }
@@ -64,7 +64,12 @@ namespace Waf.NewsReader.Presentation.Views
         private void FeedsItemTapped(object sender, ItemTappedEventArgs e)
         {
             viewModel.ShowFeedViewCommand.Execute(e.Item);
-            if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
+            CloseFlyout();
+        }
+
+        private void CloseFlyout()
+        {
+            if (!((IFlyoutPageController)this).ShouldShowSplitMode) IsPresented = false;
         }
     }
 }
