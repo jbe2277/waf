@@ -29,7 +29,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="Microsoft.Graph" Version="4.24.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.43.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.46-preview2" />
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
   </ItemGroup>
 
