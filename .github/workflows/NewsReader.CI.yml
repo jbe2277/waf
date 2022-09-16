@@ -7,22 +7,53 @@ on:
       - '.github/workflows/**' 
 
 jobs:
-  Android-UWP:
+  Android:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v1
-    - name: Build Android
+    - uses: actions/checkout@v2
+    - name: Install .NET MAUI
+      shell: pwsh
       run: |
-        $Env:MSBUILD_PATH="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\msbuild.exe"
-        & $Env:MSBUILD_PATH ./src/NewsReader/NewsReader.sln -p:Configuration=Release -p:Platform="Any CPU" -m /restore
-    - name: Build UWP
+        & dotnet nuget locals all --clear
+        & dotnet workload install maui android
+    - name: Build
       run: |
-        $Env:MSBUILD_PATH="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\msbuild.exe"
-        & $Env:MSBUILD_PATH ./src/NewsReader/NewsReader.UWP/NewsReader.UWP.csproj -p:Configuration=Debug -p:Platform="x86" -m /restore
+        cd src/NewsReader/NewsReader.Presentation
+        dotnet publish -f:net6.0-android -c:Release
+
+  Windows:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install .NET MAUI
+      shell: pwsh
+      run: |
+        & dotnet nuget locals all --clear
+        & dotnet workload install maui
+    - name: Build
+      run: |
+        cd src/NewsReader/NewsReader.Presentation
+        dotnet publish -f:net6.0-windows10.0.19041.0 -c:Release
 
   iOS:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
-      - uses: actions/checkout@v1
-      - name: iOS
-        run: msbuild ./src/NewsReader/NewsReader.iOS/NewsReader.iOS.csproj -p:Configuration=Debug -p:Platform="iPhoneSimulator" /restore
+      - uses: actions/checkout@v2
+      - name: Install .NET MAUI
+        shell: bash
+        run: |
+          dotnet nuget locals all --clear 
+          dotnet workload install maui ios
+      - name: Build
+        run: |
+          cd src/NewsReader/NewsReader.Presentation
+          dotnet build -f net6.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
+        
+  Test:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v2
+    - name: Domain.Test
+      run: |
+        cd src/NewsReader/NewsReader.Domain.Test
+        dotnet test -c:Release
