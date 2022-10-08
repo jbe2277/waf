@@ -16,12 +16,12 @@ namespace Waf.NewsReader.Domain.Foundation
         private Predicate<TElement>? filter;
         private volatile bool isDisposed;
 
-        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping) 
+        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping)
             : this(originalList, createGrouping, null, null)
         {
         }
 
-        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping, 
+        public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping,
             IEqualityComparer<TKey>? keyComparer, IEqualityComparer<TElement>? elementComparer)
             : base(new List<ObservableGroupingView<TKey, TElement>>())
         {
@@ -56,7 +56,7 @@ namespace Waf.NewsReader.Domain.Foundation
         {
             UpdateInnerList();
         }
-        
+
         public void Dispose()
         {
             Dispose(true);
@@ -101,7 +101,7 @@ namespace Waf.NewsReader.Domain.Foundation
             }
             return createGrouping(filteredList).Select(x => new ObservableGroupingView<TKey, TElement>(x.Key, x)).ToArray();
         }
-        
+
         private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateInnerList();
@@ -116,7 +116,7 @@ namespace Waf.NewsReader.Domain.Foundation
             {
                 this.keyComparer = keyComparer;
             }
-            
+
             public bool Equals(ObservableGroupingView<TKey, TElement> x, ObservableGroupingView<TKey, TElement> y)
             {
                 if (x != null && y != null) { return keyComparer.Equals(x.Key, y.Key); }

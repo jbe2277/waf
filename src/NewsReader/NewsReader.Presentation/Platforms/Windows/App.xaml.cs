@@ -2,11 +2,11 @@
 
 public partial class App : MauiWinUIApplication
 {
-	public App()
-	{
-		this.InitializeComponent();
-	}
+    public App()
+    {
+        this.InitializeComponent();
+    }
 
-	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
 

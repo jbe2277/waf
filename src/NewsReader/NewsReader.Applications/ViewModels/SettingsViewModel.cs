@@ -23,7 +23,7 @@ namespace Waf.NewsReader.Applications.ViewModels
         private bool developerSettingsEnabled;
         private string selectedLanguage = null!;
 
-        public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, 
+        public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService,
             IAppInfoService appInfoService) : base(view, false)
         {
             this.messageService = messageService;

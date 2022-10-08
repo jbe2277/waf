@@ -8,7 +8,7 @@ namespace Waf.NewsReader.Presentation.Platforms.Android.Services
         public override void Write(string message) { }
 
         public override void WriteLine(string message) { }
-        
+
         public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
         {
             Log(eventType, "");

@@ -36,7 +36,7 @@ namespace Test.NewsReader.Domain
             feed1.StartLoading();
             Assert.IsNull(feed1.LoadError);
             Assert.IsNull(feed1.LoadErrorMessage);
-            
+
             Assert.IsFalse(feed2.IsLoading);
             feed2.StartLoading();
             Assert.IsTrue(feed2.IsLoading);
@@ -103,7 +103,7 @@ namespace Test.NewsReader.Domain
                 new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc"),
             });
             feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
-            
+
             Assert.AreEqual(2, feed.UnreadItemsCount);
 
             feed.Items[0].MarkAsRead = true;

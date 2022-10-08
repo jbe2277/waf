@@ -6,7 +6,7 @@ namespace Waf.NewsReader.Domain.Foundation
 {
     public class ObservableGroupingView<TKey, TElement> : ObservableListViewBase<TElement>, IGrouping<TKey, TElement>
     {
-        public ObservableGroupingView(TKey key, IEnumerable<TElement> originalList) 
+        public ObservableGroupingView(TKey key, IEnumerable<TElement> originalList)
             : base(originalList)
         {
             Key = key;

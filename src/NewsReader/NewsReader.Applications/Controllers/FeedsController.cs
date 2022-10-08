@@ -38,8 +38,8 @@ namespace Waf.NewsReader.Applications.Controllers
         private readonly AsyncDelegateCommand showFeedItemViewCommand;
         private readonly AsyncDelegateCommand launchBrowserCommand;
 
-        public FeedsController(IMessageService messageService, INavigationService navigationService, ISyndicationService syndicationService, 
-            INetworkInfoService networkInfoService, ILauncherService launcherService, ShellViewModel shellViewModel, 
+        public FeedsController(IMessageService messageService, INavigationService navigationService, ISyndicationService syndicationService,
+            INetworkInfoService networkInfoService, ILauncherService launcherService, ShellViewModel shellViewModel,
             Lazy<AddEditFeedViewModel> addEditFeedViewModel, Lazy<FeedViewModel> feedViewModel, Lazy<FeedItemViewModel> feedItemViewModel)
         {
             this.messageService = messageService;
@@ -175,7 +175,7 @@ namespace Waf.NewsReader.Applications.Controllers
 
         private bool CanAddUpdateFeed()
         {
-            return AddEditFeedViewModel.Feed?.HasErrors == false && AddEditFeedViewModel.Feed?.IsLoading == false 
+            return AddEditFeedViewModel.Feed?.HasErrors == false && AddEditFeedViewModel.Feed?.IsLoading == false
                 && string.IsNullOrEmpty(AddEditFeedViewModel.LoadErrorMessage);
         }
 
@@ -221,7 +221,7 @@ namespace Waf.NewsReader.Applications.Controllers
         }
 
         private bool CanMoveFeedUp(object? parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) > 0;
-        
+
         private void MoveFeedUp(object? parameter)
         {
             var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter!);
