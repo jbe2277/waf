@@ -5,7 +5,6 @@ using Waf.NewsReader.Applications.Views;
 
 namespace Waf.NewsReader.Presentation.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShellView : IShellView
     {
         private ShellViewModel viewModel = null!;

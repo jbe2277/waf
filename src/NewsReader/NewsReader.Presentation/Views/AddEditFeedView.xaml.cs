@@ -3,7 +3,6 @@ using Waf.NewsReader.Applications.Views;
 
 namespace Waf.NewsReader.Presentation.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddEditFeedView : IAddEditFeedView
     {
         private AddEditFeedViewModel viewModel = null!;
