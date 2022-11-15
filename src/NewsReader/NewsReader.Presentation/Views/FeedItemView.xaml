@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
         <Grid>
-            <WebView x:Name="webView" WidthRequest="1000" HeightRequest="1000" Navigating="WebViewNavigating" Navigated="WebViewNavigated"/>
+            <WebView x:Name="webView" Navigating="WebViewNavigating" Navigated="WebViewNavigated"/>
             <ActivityIndicator x:Name="activityIndicator" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="10"/>
         </Grid>
     </ContentPage.Content>
