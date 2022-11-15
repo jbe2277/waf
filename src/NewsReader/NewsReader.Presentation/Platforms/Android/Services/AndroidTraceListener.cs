@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.Presentation.Platforms.Android.Services
 {
-    internal class AndroidTraceListener : TraceListener
+    internal class AndroidTraceListener : SystemTraceListener
     {
         public override void Write(string message) { }
 

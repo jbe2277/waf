@@ -10,7 +10,6 @@ using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Presentation.Services;
 using Waf.NewsReader.Applications;
 using System.Waf.Foundation;
-using Device = Microsoft.Maui.Controls.Device;
 
 namespace Waf.NewsReader.Presentation;
 
@@ -29,33 +28,18 @@ public partial class App : Application
     private readonly IAppInfoService appInfoService;
     private readonly IAppController appController;
 
-    public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null)
+    public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null, 
+        SystemTraceListener systemTraceListener = null)
     {
         this.settingsService = settingsService;
         this.appInfoService = appInfoService;
+        InitializeLogging(Log.Default, systemTraceListener);
         localizationService?.Initialize();
         InitializeCultures(settingsService.Get<AppSettings>());
 
         InitializeComponent();
         this.appController = appController.Value;
         MainPage = (Page)this.appController.MainView;
-    }
-
-    public static void InitializeLogging(TraceSource system, TraceListener? systemListener = null)
-    {
-        system.Switch.Level = SourceLevels.All;
-        Log.Default.Switch.Level = SourceLevels.All;
-
-        var sources = new[]
-        {
-            system,
-            Log.Default
-        };
-        foreach (var source in sources)
-        {
-            source.Listeners.Clear();
-            source.Listeners.Add(systemListener ?? new AppTraceListener(showTime: false));
-        }
     }
 
     protected override void OnStart()
@@ -79,6 +63,23 @@ public partial class App : Application
     {
         Log.Default.Info("App resume");
         appController.Resume();
+    }
+
+    private static void InitializeLogging(TraceSource system, TraceListener? systemListener = null)
+    {
+        system.Switch.Level = SourceLevels.All;
+        Log.Default.Switch.Level = SourceLevels.All;
+
+        var sources = new[]
+        {
+            system,
+            Log.Default
+        };
+        foreach (var source in sources)
+        {
+            source.Listeners.Clear();
+            source.Listeners.Add(systemListener ?? new AppTraceListener(showTime: false));
+        }
     }
 
     private static void InitializeCultures(AppSettings appSettings)
