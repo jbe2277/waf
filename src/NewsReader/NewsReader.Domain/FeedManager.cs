@@ -20,7 +20,7 @@ namespace Waf.NewsReader.Domain
             // Note: Serializer does not call the constructor.
             feeds = new ObservableCollection<Feed>
             {
-                new Feed(new Uri("https://devblogs.microsoft.com/xamarin/feed/")),
+                new Feed(new Uri("https://devblogs.microsoft.com/dotnet/category/maui/feed/")),
             };
             ItemLifetime = TimeSpan.FromDays(365);
             MaxItemsLimit = 250;
