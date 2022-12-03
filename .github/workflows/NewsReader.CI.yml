@@ -10,7 +10,7 @@ jobs:
   Android:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install .NET MAUI
       shell: pwsh
       run: |
@@ -19,12 +19,12 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.Presentation
-        dotnet publish -f:net6.0-android -c:Release
+        dotnet publish -f:net7.0-android -c:Release
 
   Windows:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install .NET MAUI
       shell: pwsh
       run: |
@@ -33,12 +33,12 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.Presentation
-        dotnet publish -f:net6.0-windows10.0.19041.0 -c:Release
+        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release
 
   iOS:
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install .NET MAUI
         shell: bash
         run: |
@@ -47,12 +47,12 @@ jobs:
       - name: Build
         run: |
           cd src/NewsReader/NewsReader.Presentation
-          dotnet build -f net6.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
+          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
         
   Test:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Domain.Test
       run: |
         cd src/NewsReader/NewsReader.Domain.Test
