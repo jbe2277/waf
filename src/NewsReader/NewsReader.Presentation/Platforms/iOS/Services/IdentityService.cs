@@ -10,9 +10,5 @@ namespace Waf.NewsReader.Presentation.Platforms.iOS.Services
         {
             builder.WithIosKeychainSecurityGroup(NSBundle.MainBundle.BundleIdentifier);
         }
-
-        public void Build(AcquireTokenInteractiveParameterBuilder builder)
-        {
-        }
     }
 }

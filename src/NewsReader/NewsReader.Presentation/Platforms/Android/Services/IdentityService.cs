@@ -7,11 +7,7 @@ namespace Waf.NewsReader.Presentation.Platforms.Android.Services
     {
         public void Build(PublicClientApplicationBuilder builder)
         {
-        }
-
-        public void Build(AcquireTokenInteractiveParameterBuilder builder)
-        {
-            builder.WithParentActivityOrWindow(MainActivity.Current);
+            builder.WithParentActivityOrWindow(() => Platform.CurrentActivity);
         }
     }
 }
