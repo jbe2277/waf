@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.OS;
 using Microsoft.Identity.Client;
 
 namespace Waf.NewsReader.Presentation.Platforms.Android;
