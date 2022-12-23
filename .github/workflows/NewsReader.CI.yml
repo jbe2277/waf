@@ -12,24 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install .NET MAUI
-      shell: pwsh
       run: |
-        & dotnet nuget locals all --clear
-        & dotnet workload install maui android
+        dotnet nuget locals all --clear
+        dotnet workload install maui android
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.Presentation
-        dotnet publish -f:net7.0-android -c:Release
+        dotnet publish -f:net7.0-android -c:Debug             # Workaround for https://github.com/dotnet/linker/issues/3126
 
   Windows:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v3
     - name: Install .NET MAUI
-      shell: pwsh
       run: |
-        & dotnet nuget locals all --clear
-        & dotnet workload install maui
+        dotnet nuget locals all --clear
+        dotnet workload install maui
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.Presentation
@@ -39,8 +37,10 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
+      - name: Set Xcode version
+        run: |
+          sudo xcode-select -s "/Applications/Xcode_14.2.app"
       - name: Install .NET MAUI
-        shell: bash
         run: |
           dotnet nuget locals all --clear 
           dotnet workload install maui ios
