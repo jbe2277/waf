@@ -96,7 +96,7 @@ namespace Test.NewsReader.Domain
         private static void UnreadItemsCountCoreTest(bool useSerializer)
         {
             var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
-            var feedManager = new FeedManager();
+            var feedManager = new FeedManager() { MaxItemsLimit = null, ItemLifetime = null };
             feedManager.Feeds.Add(feed);
             feed.UpdateItems(new[] {
                 new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc"),
