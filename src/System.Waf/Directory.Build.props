@@ -1,9 +1,9 @@
 ﻿<Project>
   <PropertyGroup>
     <Company>jbe2277</Company>
-    <Copyright>Copyright © 2016-2021 jbe2277</Copyright>
-    <Version>6.4.0.100</Version>
-    <PackageVersion>6.4.0</PackageVersion>
+    <Copyright>Copyright © 2016-2022 jbe2277</Copyright>
+    <Version>6.4.1.100</Version>
+    <PackageVersion>6.4.1</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
