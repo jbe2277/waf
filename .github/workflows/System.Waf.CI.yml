@@ -12,6 +12,6 @@ jobs:
     - name: NuGet clear
       run: dotnet nuget locals all --clear
     - name: Build
-      run: dotnet build ./src/System.Waf/System.Waf.sln -c Release
+      run: dotnet build ./src/System.Waf/System.Waf.sln -c Release -v normal
     - name: Test
       run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
