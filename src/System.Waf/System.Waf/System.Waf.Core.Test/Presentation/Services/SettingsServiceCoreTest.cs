@@ -44,7 +44,7 @@ namespace Test.Waf.Presentation.Services
 
             var testSettings1 = settingsService.Get<TestSettings1>();
             Assert.AreNotEqual(default, testSettings1.UserId);
-            Assert.AreNotEqual(default(Guid), testSettings1.LastRun);
+            Assert.AreEqual(default, testSettings1.LastRun);
             testSettings1.LastRun = new DateTime(2000, 1, 1);
             testSettings1.LastOpenedFiles = new[] { "MruFile1", "MruFile2" };
             testSettings1.ReplaceFiles(new[] { "File1" });

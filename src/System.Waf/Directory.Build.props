@@ -1,9 +1,9 @@
 ﻿<Project>
   <PropertyGroup>
     <Company>jbe2277</Company>
-    <Copyright>Copyright © 2016-2021 jbe2277</Copyright>
-    <Version>6.4.0.100</Version>
-    <PackageVersion>6.4.0</PackageVersion>
+    <Copyright>Copyright © 2016-2022 jbe2277</Copyright>
+    <Version>6.4.1.100</Version>
+    <PackageVersion>6.4.1</PackageVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -17,9 +17,9 @@
         <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
       </PropertyGroup>
       <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
-        <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
-        <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.0.1" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.0.1" />
       </ItemGroup>
     </When>
     <Otherwise>

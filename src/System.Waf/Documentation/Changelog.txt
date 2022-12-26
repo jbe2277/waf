@@ -1,6 +1,18 @@
 Changelog
 ---------
 
+Version 6.4.1.100 (Release)
+- WAF: ObservableListViewBase.DeferCollectionChangedNotifications: Improve implementation.
+- Samples: Target framework .Net 6.0.
+- Samples: Update NuGet packages.
+- Samples: Simplify and modernize code.
+- Samples: Improve validation of window position and size before restoring them.
+- Writer: Writer: Refactor code base so that WPF and File IO based classes are now in Presentation layer.
+- InfoMan: Add ShellService.CommitUIChanges.
+- NewsReader: Migrate NewsReader to VS2022.
+- NewsReader: Update Android to target v12 SDK 31.
+
+
 Version 6.4.0.100 (Release)
 - WAF: Update version number.
 
