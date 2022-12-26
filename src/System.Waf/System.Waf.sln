@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{316D2E5D-61D2-403E-805B-F97F1C06BF46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E2A1FC8-F9B2-49AE-B6D7-0771D3F15368}"
 	ProjectSection(SolutionItems) = preProject
+		Documentation\Changelog.txt = Documentation\Changelog.txt
 		CodeCoverage.runsettings = CodeCoverage.runsettings
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
@@ -16,11 +17,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{ED400E91-5417-4177-89E4-6D6C30D7245C}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\Localization\LocalizationSample.docx = Samples\Localization\LocalizationSample.docx
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{2B4F71F9-E177-4B89-9612-4D29D65A9CB9}"
-	ProjectSection(SolutionItems) = preProject
-		Documentation\Changelog.txt = Documentation\Changelog.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writer", "Writer", "{2D498396-C10C-4A20-B24E-FD554FFC49EF}"
