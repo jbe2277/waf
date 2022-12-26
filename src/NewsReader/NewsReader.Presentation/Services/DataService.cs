@@ -55,7 +55,7 @@ namespace Waf.NewsReader.Presentation.Services
         public void Save(object data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-            
+
             using (var archiveStream = File.Create(containerFileName))
             using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
             {

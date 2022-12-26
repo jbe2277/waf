@@ -20,7 +20,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private FeedManager feedManager = null!;
         private DateTime lastUpdate;
 
-        public AppController(INetworkInfoService networkInfoService, DataController dataController, FeedsController feedsController, 
+        public AppController(INetworkInfoService networkInfoService, DataController dataController, FeedsController feedsController,
             SettingsController settingsController, ShellViewModel shellViewModel)
         {
             this.networkInfoService = networkInfoService;
@@ -36,7 +36,7 @@ namespace Waf.NewsReader.Applications.Controllers
             shellViewModel.FooterMenu = new[]
             {
                 new NavigationItem("Add Feed", "\uf412") { Command = feedsController.AddFeedCommand },
-                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() => 
+                new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() =>
                     shellViewModel.Navigate(this.settingsController.SettingsViewModel)) }
             };
             shellViewModel.Initialize();
@@ -49,13 +49,13 @@ namespace Waf.NewsReader.Applications.Controllers
         {
             dataController.Initialize();
             feedManager = await dataController.Load();
-            shellViewModel.Feeds = feedManager.Feeds;
             settingsController.FeedManager = feedManager;
-
             feedsController.FeedManager = feedManager;
             feedsController.Run();
             if (networkInfoService.InternetAccess) { lastUpdate = DateTime.Now; }
             networkInfoService.PropertyChanged += NetworkInfoServicePropertyChanged;
+
+            shellViewModel.Feeds = feedManager.Feeds;
         }
 
         public void Sleep()

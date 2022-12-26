@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              x:Class="Waf.NewsReader.Presentation.Views.FeedItemView"
@@ -7,14 +7,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding LaunchBrowserCommand}" Text="Browser">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="&#xf59f;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+                <FontImageSource Glyph="&#xf59f;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <Grid>
-            <WebView x:Name="webView" WidthRequest="1000" HeightRequest="1000" Navigating="WebViewNavigating" Navigated="WebViewNavigated"/>
+            <WebView x:Name="webView" Navigating="WebViewNavigating" Navigated="WebViewNavigated"/>
             <ActivityIndicator x:Name="activityIndicator" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="10"/>
         </Grid>
     </ContentPage.Content>

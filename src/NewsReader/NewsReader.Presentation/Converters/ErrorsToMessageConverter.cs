@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
-using Xamarin.Forms;
 
 namespace Waf.NewsReader.Presentation.Converters
 {

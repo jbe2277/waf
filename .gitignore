@@ -20,6 +20,10 @@
 # Unit test results
 [Tt]est[Rr]esults
 
+# Launch settings
+launchSettings.json
+!src/NewsReader/NewsReader.Presentation/Properties/launchSettings.json
+
 # NuGet Packages Directory
 nuget.exe
 packages/

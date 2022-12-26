@@ -26,7 +26,7 @@ namespace Waf.NewsReader.Applications.Controllers
         private bool isInitialized;
         private bool isInSync;
 
-        public DataController(ISettingsService settingsService, IDataService dataService, INetworkInfoService networkInfoService, 
+        public DataController(ISettingsService settingsService, IDataService dataService, INetworkInfoService networkInfoService,
             IWebStorageService webStorageService, IMessageService messageService)
         {
             appSettings = settingsService.Get<AppSettings>();

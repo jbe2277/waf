@@ -27,14 +27,12 @@ namespace Waf.NewsReader.Presentation.Services
         private const string dataFileName = "data.zip";
         private static readonly string[] scopes = { "User.Read", "Files.ReadWrite.AppFolder" };
 
-        private readonly IIdentityService? identityService;
         private readonly IPublicClientApplication? publicClient;
         private GraphServiceClient? graphClient;
         private UserAccount? currentAccount;
 
         public WebStorageService(IIdentityService? identityService = null)
         {
-            this.identityService = identityService;
             string? appId = null;
             GetApplicationId(ref appId);
             if (appId != null)
@@ -80,7 +78,6 @@ namespace Waf.NewsReader.Presentation.Services
                 try
                 {
                     var interactiveRequest = publicClient.AcquireTokenInteractive(scopes);
-                    identityService?.Build(interactiveRequest);
                     await interactiveRequest.ExecuteAsync();
                 }
                 catch (MsalClientException ex) when (ex.ErrorCode == MsalError.AuthenticationCanceledError)
@@ -98,7 +95,7 @@ namespace Waf.NewsReader.Presentation.Services
             if (publicClient != null)
             {
                 var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
-                await Task.WhenAll(accounts.Select(x => publicClient.RemoveAsync(x))).ConfigureAwait(false);
+                await Task.WhenAll(accounts.Select(publicClient.RemoveAsync)).ConfigureAwait(false);
             }
         }
 

@@ -54,13 +54,13 @@ namespace Waf.NewsReader.Domain
         }
 
         public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ??= new ReadOnlyObservableList<FeedItem>(items);
-        
+
         public int UnreadItemsCount
         {
             get => unreadItemsCount;
             private set => SetProperty(ref unreadItemsCount, value);
         }
-        
+
         public bool IsLoading
         {
             get => isLoading;
@@ -72,7 +72,7 @@ namespace Waf.NewsReader.Domain
             get => loadError;
             private set => SetProperty(ref loadError, value);
         }
-        
+
         public string? LoadErrorMessage
         {
             get => loadErrorMessage;
@@ -179,7 +179,7 @@ namespace Waf.NewsReader.Domain
                 UpdateUnreadItemsCount();
             }
         }
-        
+
         private void TrimItemsList()
         {
             uint i = 0;

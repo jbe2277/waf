@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
             Title="Settings" x:DataType="vm:SettingsViewModel">
     <ContentPage Title="General">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf493;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
@@ -22,7 +22,7 @@
 
     <ContentPage Title="Data Sync">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf4e6;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
@@ -49,7 +49,7 @@
     
     <ContentPage Title="Info">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf2fd;" FontFamily="{StaticResource MaterialFont}" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">

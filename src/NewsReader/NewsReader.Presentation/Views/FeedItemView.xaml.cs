@@ -1,14 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Waf.NewsReader.Applications.ViewModels;
+﻿using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Waf.NewsReader.Presentation.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FeedItemView : IFeedItemView
     {
         private FeedItemViewModel viewModel = null!;

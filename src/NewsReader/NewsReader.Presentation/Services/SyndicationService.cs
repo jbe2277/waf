@@ -54,7 +54,7 @@ namespace Waf.NewsReader.Presentation.Services
                 }
             }
 
-            return new FeedDto(title, items.Select(x => new FeedItemDto(x.Links.FirstOrDefault()?.Uri, x.Published, 
+            return new FeedDto(title, items.Select(x => new FeedItemDto(x.Links.FirstOrDefault()?.Uri, x.Published,
                 RemoveHtmlTags(x.Title), RemoveHtmlTags(x.Description))).ToArray(), errors);
         }
 

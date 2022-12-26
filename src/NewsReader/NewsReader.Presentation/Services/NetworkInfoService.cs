@@ -1,6 +1,5 @@
 ﻿using System.Waf.Foundation;
 using Waf.NewsReader.Applications.Services;
-using Xamarin.Essentials;
 
 namespace Waf.NewsReader.Presentation.Services
 {

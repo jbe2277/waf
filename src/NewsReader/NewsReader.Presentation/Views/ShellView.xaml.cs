@@ -1,14 +1,10 @@
-﻿using System.Threading.Tasks;
-using System.Waf.Foundation;
+﻿using System.Waf.Foundation;
 using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Waf.NewsReader.Presentation.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShellView : IShellView
     {
         private ShellViewModel viewModel = null!;
@@ -50,8 +46,6 @@ namespace Waf.NewsReader.Presentation.Views
         {
             base.OnBindingContextChanged();
             viewModel = (ShellViewModel)BindingContext;
-            var navigationPage = new NavigationPage(new Page());  // Add empty page; needed by MasterDetailPage when shown
-            Detail = navigationPage;
         }
 
         private void NavigationItemTapped(object sender, ItemTappedEventArgs e)
@@ -61,7 +55,7 @@ namespace Waf.NewsReader.Presentation.Views
                 if (item.Command != null)
                 {
                     item.Command.Execute(null);
-                    if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
+                    CloseFlyout();
                 }
             }
         }
@@ -69,7 +63,12 @@ namespace Waf.NewsReader.Presentation.Views
         private void FeedsItemTapped(object sender, ItemTappedEventArgs e)
         {
             viewModel.ShowFeedViewCommand.Execute(e.Item);
-            if (FlyoutLayoutBehavior != FlyoutLayoutBehavior.Split) IsPresented = false;
+            CloseFlyout();
+        }
+
+        private void CloseFlyout()
+        {
+            if (!((IFlyoutPageController)this).ShouldShowSplitMode) IsPresented = false;
         }
     }
 }
