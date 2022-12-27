@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace Waf.NewsReader.Presentation.Platforms.iOS;
+namespace Waf.NewsReader.MauiSystem.Platforms.iOS;
 
 public class Program
 {

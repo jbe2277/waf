@@ -1,4 +1,4 @@
-﻿namespace Waf.NewsReader.Presentation.Presentation.Windows;
+﻿namespace Waf.NewsReader.MauiSystem.Platform.Windows;
 
 public partial class App : MauiWinUIApplication
 {

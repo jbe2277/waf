@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Waf.NewsReader.Applications;
-using Waf.NewsReader.MauiSystem;
+using Waf.NewsReader.Presentation;
 
-namespace Waf.NewsReader.Presentation;
+namespace Waf.NewsReader.MauiSystem;
 
 public static class MauiProgram
 {

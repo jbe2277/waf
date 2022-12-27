@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Waf.NewsReader.Presentation.Platforms.Android;
+namespace Waf.NewsReader.MauiSystem.Platforms.Android;
 
 [Application]
 public class MainApplication : MauiApplication

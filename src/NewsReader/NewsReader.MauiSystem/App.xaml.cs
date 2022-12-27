@@ -11,7 +11,7 @@ using Waf.NewsReader.Presentation.Services;
 using Waf.NewsReader.Applications;
 using System.Waf.Foundation;
 
-namespace Waf.NewsReader.Presentation;
+namespace Waf.NewsReader.MauiSystem;
 
 // Add App.xaml.key.cs file with:
 //public partial class App

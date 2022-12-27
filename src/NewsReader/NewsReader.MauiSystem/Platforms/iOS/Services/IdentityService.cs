@@ -2,13 +2,12 @@
 using Microsoft.Identity.Client;
 using Waf.NewsReader.Presentation.Services;
 
-namespace Waf.NewsReader.Presentation.Platforms.iOS.Services
+namespace Waf.NewsReader.MauiSystem.Platforms.iOS.Services;
+
+public class IdentityService : IIdentityService
 {
-    public class IdentityService : IIdentityService
+    public void Build(PublicClientApplicationBuilder builder)
     {
-        public void Build(PublicClientApplicationBuilder builder)
-        {
-            builder.WithIosKeychainSecurityGroup(NSBundle.MainBundle.BundleIdentifier);
-        }
+        builder.WithIosKeychainSecurityGroup(NSBundle.MainBundle.BundleIdentifier);
     }
 }

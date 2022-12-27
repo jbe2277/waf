@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Waf.NewsReader.Presentation.Platforms.iOS;
+namespace Waf.NewsReader.MauiSystem.Platforms.iOS;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
