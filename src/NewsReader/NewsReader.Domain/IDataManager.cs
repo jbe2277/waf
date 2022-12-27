@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Waf.NewsReader.Domain
-{
-    public interface IDataManager : INotifyPropertyChanged
-    {
-        TimeSpan? ItemLifetime { get; }
+namespace Waf.NewsReader.Domain;
 
-        uint? MaxItemsLimit { get; }
-    }
+public interface IDataManager : INotifyPropertyChanged
+{
+    TimeSpan? ItemLifetime { get; }
+
+    uint? MaxItemsLimit { get; }
 }
