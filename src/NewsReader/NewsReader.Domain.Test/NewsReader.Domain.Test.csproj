@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Test.NewsReader.Domain</RootNamespace>
@@ -20,5 +19,4 @@
   <ItemGroup>
     <ProjectReference Include="..\NewsReader.Domain\NewsReader.Domain.csproj" />
   </ItemGroup>
-
 </Project>

@@ -22,7 +22,7 @@
 
 # Launch settings
 launchSettings.json
-!src/NewsReader/NewsReader.Presentation/Properties/launchSettings.json
+!src/NewsReader/NewsReader.MauiSystem/Properties/launchSettings.json
 
 # NuGet Packages Directory
 nuget.exe

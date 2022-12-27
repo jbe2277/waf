@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Waf.NewsReader.Domain</RootNamespace>
@@ -9,5 +8,4 @@
   <ItemGroup>
     <PackageReference Include="System.Waf.Core" Version="6.4.1" />
   </ItemGroup>
-
 </Project>
