@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Waf.NewsReader.Applications;
+using Waf.NewsReader.MauiSystem;
 
 namespace Waf.NewsReader.Presentation;
 
@@ -21,6 +22,7 @@ public static class MauiProgram
             {
                 x.RegisterModule(new ApplicationsModule());
                 x.RegisterModule(new PresentationModule());
+                x.RegisterModule(new MauiModule());
 #if ANDROID
                 x.RegisterModule(new Platforms.Android.AndroidModule());
 #elif IOS

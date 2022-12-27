@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Presentation", "NewsReader.Presentation\NewsReader.Presentation.csproj", "{1DC39D1F-1A76-4BE5-B1E8-055C75D71001}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.MauiSystem", "NewsReader.MauiSystem\NewsReader.MauiSystem.csproj", "{1DC39D1F-1A76-4BE5-B1E8-055C75D71001}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Domain", "NewsReader.Domain\NewsReader.Domain.csproj", "{EB2162D9-246D-43D8-AF6C-793679D23DFB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Domain.Test", "NewsReader.Domain.Test\NewsReader.Domain.Test.csproj", "{8ECD8169-20BB-4CBC-AE96-97A54AA12949}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Applications", "NewsReader.Applications\NewsReader.Applications.csproj", "{1CA663A0-FCA6-49CA-8D7E-67C853E5E343}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Presentation", "NewsReader.Presentation\NewsReader.Presentation.csproj", "{32B99A2A-76CE-411B-962C-F1BD0650C425}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Presentation.Test", "NewsReader.Presentation.Test\NewsReader.Presentation.Test.csproj", "{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{1CA663A0-FCA6-49CA-8D7E-67C853E5E343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CA663A0-FCA6-49CA-8D7E-67C853E5E343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CA663A0-FCA6-49CA-8D7E-67C853E5E343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32B99A2A-76CE-411B-962C-F1BD0650C425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B99A2A-76CE-411B-962C-F1BD0650C425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B99A2A-76CE-411B-962C-F1BD0650C425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B99A2A-76CE-411B-962C-F1BD0650C425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
