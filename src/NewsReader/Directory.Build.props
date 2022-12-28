@@ -3,6 +3,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+
+    <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
 
   <Choose>
@@ -24,6 +26,13 @@
     </Otherwise>
   </Choose>
 
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
   <ItemGroup>
     <Using Include="System.Collections.ObjectModel" />
     <Using Include="System.Collections.Specialized" />
