@@ -29,7 +29,7 @@ public partial class App : Application
     private readonly IAppController appController;
 
     public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null, 
-        SystemTraceListener systemTraceListener = null)
+        SystemTraceListener? systemTraceListener = null)
     {
         this.settingsService = settingsService;
         this.appInfoService = appInfoService;

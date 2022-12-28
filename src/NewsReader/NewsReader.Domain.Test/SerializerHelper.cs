@@ -10,6 +10,6 @@ public static class SerializerHelper
         using var stream = new MemoryStream();
         serializer.WriteObject(stream, orignalObject);
         stream.Position = 0;
-        return (T)serializer.ReadObject(stream);
+        return (T)(serializer.ReadObject(stream) ?? throw new InvalidOperationException("Deserialize returned null"));
     }
 }

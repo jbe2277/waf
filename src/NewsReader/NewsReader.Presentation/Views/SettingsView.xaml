@@ -10,7 +10,7 @@
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">
+            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
                 <Label Text="Data Management" Style="{StaticResource Title}"/>
                 <Label Text="Store feed items for:"/>
                 <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayItemLifetimeConverter}}"/>
@@ -26,7 +26,7 @@
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">
+            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
                 <Label Text="This feature synchronizes the feed list and read/unread status with multiple devices. A Microsoft account is required as the synchronization is using OneDrive." Margin="0,0,0,10"/>
                 <Label Text="Synchronization: Deactivated">
                     <Label.Triggers>
@@ -52,7 +52,7 @@
             <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
         </ContentPage.IconImageSource>
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, UWP=0\,7}">
+            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
                 <Label Text="{Binding AppInfo.AppName}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding AppInfo.VersionString}">
                     <Label.GestureRecognizers>

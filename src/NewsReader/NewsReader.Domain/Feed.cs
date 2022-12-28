@@ -128,16 +128,16 @@ public class Feed : ValidatableModel
         Validate();
     }
 
-    private void DataManagerPropertyChanged(object sender, PropertyChangedEventArgs e) => TrimItemsList();
+    private void DataManagerPropertyChanged(object? sender, PropertyChangedEventArgs e) => TrimItemsList();
 
-    private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         foreach (var x in e.OldItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>()) x.PropertyChanged -= FeedItemPropertyChanged;
         foreach (var x in e.NewItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>()) x.PropertyChanged += FeedItemPropertyChanged;
         UpdateUnreadItemsCount();
     }
 
-    private void FeedItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void FeedItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(FeedItem.MarkAsRead)) UpdateUnreadItemsCount();
     }

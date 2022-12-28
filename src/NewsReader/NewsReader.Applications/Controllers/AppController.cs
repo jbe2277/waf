@@ -69,11 +69,8 @@ internal class AppController : IAppController
         }
     }
 
-    private void NetworkInfoServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void NetworkInfoServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess)
-        {
-            Resume();
-        }
+        if (e.PropertyName is nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess) Resume();
     }
 }

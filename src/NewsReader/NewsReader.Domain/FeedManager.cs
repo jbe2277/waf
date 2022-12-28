@@ -50,7 +50,7 @@ public class FeedManager : Model, IDataManager
         foreach (var x in feeds) x.DataManager = this;
     }
 
-    private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action == NotifyCollectionChangedAction.Reset) throw new NotSupportedException("The Reset action is not supported.");
         foreach (var x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = this;
@@ -65,7 +65,7 @@ public class FeedManager : Model, IDataManager
     {
         public static FeedEqualityComparer Default { get; } = new FeedEqualityComparer();
 
-        public bool Equals(Feed x, Feed y) => x?.Uri == y?.Uri;
+        public bool Equals(Feed? x, Feed? y) => x?.Uri == y?.Uri;
 
         public int GetHashCode(Feed obj) => obj?.Uri?.GetHashCode() ?? 0;
     }

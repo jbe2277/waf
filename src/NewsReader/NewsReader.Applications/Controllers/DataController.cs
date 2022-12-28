@@ -151,7 +151,7 @@ internal class DataController
         }
     }
 
-    private void WebStorageServicePropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void WebStorageServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(webStorageService.CurrentAccount)) DownloadAndMerge().NoWait();
     }

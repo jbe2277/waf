@@ -43,7 +43,7 @@ internal class SettingsController
         return viewModel;
     }
 
-    private void DeveloperSettingsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void DeveloperSettingsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(ViewModels.SettingsViewModel.SelectedLanguage))
         {

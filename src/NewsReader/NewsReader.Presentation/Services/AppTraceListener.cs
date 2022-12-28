@@ -14,23 +14,23 @@ public sealed class AppTraceListener : TraceListener
         this.showTime = showTime;
     }
 
-    public override void Write(string message) { }
+    public override void Write(string? message) { }
 
-    public override void WriteLine(string message) { }
+    public override void WriteLine(string? message) { }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id)
     {
         log(TimeUtcNow() + Format(eventType));
     }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? message)
     {
         log(TimeUtcNow() + Format(eventType) + " " + message);
     }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
     {
-        log(TimeUtcNow() + Format(eventType) + " " + string.Format(CultureInfo.InvariantCulture, format, args));
+        log(TimeUtcNow() + Format(eventType) + " " + string.Format(CultureInfo.InvariantCulture, format ?? "", args ?? Array.Empty<object>()));
     }
 
     private string TimeUtcNow()

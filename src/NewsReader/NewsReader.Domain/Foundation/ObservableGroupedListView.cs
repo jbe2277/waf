@@ -77,7 +77,7 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
         return createGrouping(filteredList).Select(x => new ObservableGroupingView<TKey, TElement>(x.Key, x)).ToArray();
     }
 
-    private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => UpdateInnerList();
+    private void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateInnerList();
 
 
     private sealed class InnerListKeyComparer : IEqualityComparer<ObservableGroupingView<TKey, TElement>>
@@ -89,13 +89,13 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
             this.keyComparer = keyComparer;
         }
 
-        public bool Equals(ObservableGroupingView<TKey, TElement> x, ObservableGroupingView<TKey, TElement> y)
+        public bool Equals(ObservableGroupingView<TKey, TElement>? x, ObservableGroupingView<TKey, TElement>? y)
         {
             if (x != null && y != null) return keyComparer.Equals(x.Key, y.Key);
             if (x == null && y == null) return true;
             return false;
         }
 
-        public int GetHashCode(ObservableGroupingView<TKey, TElement> obj) => obj == null ? 0 : keyComparer.GetHashCode(obj.Key);
+        public int GetHashCode(ObservableGroupingView<TKey, TElement> obj) => obj.Key is null ? 0 : keyComparer.GetHashCode(obj.Key);
     }
 }

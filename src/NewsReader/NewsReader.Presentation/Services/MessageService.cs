@@ -4,13 +4,7 @@ namespace Waf.NewsReader.Presentation.Services;
 
 public class MessageService : IMessageService
 {
-    public Task ShowMessage(string message)
-    {
-        return Application.Current.MainPage.DisplayAlert("Info", message, "OK");
-    }
+    public Task ShowMessage(string message) => Application.Current!.MainPage!.DisplayAlert("Info", message, "OK");
 
-    public Task<bool> ShowYesNoQuestion(string message)
-    {
-        return Application.Current.MainPage.DisplayAlert("Question", message, "Yes", "No");
-    }
+    public Task<bool> ShowYesNoQuestion(string message) => Application.Current!.MainPage!.DisplayAlert("Question", message, "Yes", "No");
 }

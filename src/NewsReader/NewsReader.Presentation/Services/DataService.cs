@@ -17,11 +17,9 @@ public class DataService : IDataService
 
     public string GetHash()
     {
-        using (var stream = GetReadStream())
-        using (var sha1 = SHA1.Create())
-        {
-            return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "");
-        }
+        using var stream = GetReadStream();
+        using var sha1 = SHA1.Create();
+        return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "");
     }
 
     public T? Load<T>(Stream? dataStream = null) where T : class
@@ -39,32 +37,23 @@ public class DataService : IDataService
 
     private static T LoadItem<T>(Stream archiveStream, string fileName) where T : class
     {
-        using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
-        {
-            var entry = archive.GetEntry(fileName);
-            using (var stream = entry.Open())
-            {
-                var serializer = new DataContractSerializer(typeof(T));
-                return (T)serializer.ReadObject(stream);
-            }
-        }
+        using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true);
+        var entry = archive.GetEntry(fileName) ?? throw new InvalidOperationException($"Could not find {fileName} in archive.");
+        using var stream = entry.Open();
+        var serializer = new DataContractSerializer(typeof(T));
+        return (T)(serializer.ReadObject(stream) ?? throw new InvalidOperationException($"Deserialize returned null."));
     }
 
     public void Save(object data)
     {
-        if (data == null) throw new ArgumentNullException(nameof(data));
-
-        using (var archiveStream = File.Create(containerFileName))
-        using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true))
-        {
-            var entry = archive.CreateEntry(itemFileName, CompressionLevel.Optimal);
-            // Set always the same write time -> only content changes should result in a different hash.
-            entry.LastWriteTime = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
-            using (var stream = entry.Open())
-            {
-                var serializer = new DataContractSerializer(data.GetType());
-                serializer.WriteObject(stream, data);
-            }
-        }
+        if (data is null) throw new ArgumentNullException(nameof(data));
+        using var archiveStream = File.Create(containerFileName);
+        using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true);
+        var entry = archive.CreateEntry(itemFileName, CompressionLevel.Optimal);
+        // Set always the same write time -> only content changes should result in a different hash.
+        entry.LastWriteTime = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        using var stream = entry.Open();
+        var serializer = new DataContractSerializer(data.GetType());
+        serializer.WriteObject(stream, data);
     }
 }

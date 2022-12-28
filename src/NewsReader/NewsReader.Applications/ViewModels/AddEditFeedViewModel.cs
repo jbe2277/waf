@@ -78,12 +78,12 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
     {
         base.OnPropertyChanged(e);
         if (e.PropertyName == nameof(Feed)) useTitleAsNameCommand.RaiseCanExecuteChanged();
-        if (new[] { nameof(OldFeed), nameof(Feed) }.Contains(e.PropertyName)) RaisePropertyChanged(nameof(IsSameFeed));
+        if (e.PropertyName is nameof(OldFeed) or nameof(Feed)) RaisePropertyChanged(nameof(IsSameFeed));
     }
 
-    private void FeedPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void FeedPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         FeedChanged?.Invoke(sender, e);
-        if (new[] { nameof(Feed.Title), nameof(Feed.Name) }.Contains(e.PropertyName)) useTitleAsNameCommand.RaiseCanExecuteChanged();
+        if (e.PropertyName is nameof(Feed.Title) or nameof(Feed.Name)) useTitleAsNameCommand.RaiseCanExecuteChanged();
     }
 }

@@ -6,23 +6,23 @@ namespace Waf.NewsReader.MauiSystem.Platforms.Android.Services;
 
 internal class AndroidTraceListener : SystemTraceListener
 {
-    public override void Write(string message) { }
+    public override void Write(string? message) { }
 
-    public override void WriteLine(string message) { }
+    public override void WriteLine(string? message) { }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id)
     {
         Log(eventType, "");
     }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? message)
     {
-        Log(eventType, message);
+        Log(eventType, message ?? "");
     }
 
-    public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
+    public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
     {
-        Log(eventType, string.Format(CultureInfo.InvariantCulture, format, args));
+        Log(eventType, string.Format(CultureInfo.InvariantCulture, format ?? "", args ?? Array.Empty<object>()));
     }
 
     private static void Log(TraceEventType eventType, string message)

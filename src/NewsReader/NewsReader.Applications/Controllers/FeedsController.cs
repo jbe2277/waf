@@ -87,7 +87,7 @@ internal class FeedsController
         return Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
     }
 
-    private void FeedsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         foreach (Feed item in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
         {
@@ -152,7 +152,7 @@ internal class FeedsController
         else if (uriString.StartsWith("http://http://", StringComparison.CurrentCultureIgnoreCase)
             || uriString.StartsWith("http://https://", StringComparison.CurrentCultureIgnoreCase))
         {
-            uriString = uriString.Substring(7);
+            uriString = uriString[7..];
         }
         if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out var feedUri))
         {
@@ -285,33 +285,27 @@ internal class FeedsController
         return viewModel;
     }
 
-    private void AddEditFeedViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void AddEditFeedViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (new[] { nameof(AddEditFeedViewModel.LoadErrorMessage), nameof(AddEditFeedViewModel.Feed) }.Contains(e.PropertyName))
-        {
-            addUpdateFeedCommand.RaiseCanExecuteChanged();
-        }
+        if (e.PropertyName is nameof(AddEditFeedViewModel.LoadErrorMessage) or nameof(AddEditFeedViewModel.Feed)) addUpdateFeedCommand.RaiseCanExecuteChanged();
     }
 
-    private void AddEditFeedViewModelFeedChanged(object sender, PropertyChangedEventArgs e)
+    private void AddEditFeedViewModelFeedChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (new[] { nameof(Feed.HasErrors), nameof(Feed.IsLoading) }.Contains(e.PropertyName))
-        {
-            addUpdateFeedCommand.RaiseCanExecuteChanged();
-        }
+        if (e.PropertyName is nameof(Feed.HasErrors) or nameof(Feed.IsLoading)) addUpdateFeedCommand.RaiseCanExecuteChanged();
     }
 
-    private void FeedViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void FeedViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(FeedViewModel.Feed))
+        if (e.PropertyName is nameof(FeedViewModel.Feed))
         {
             if (feedItemViewModel.IsValueCreated) feedItemViewModel.Value.FeedItem = null;
         }
     }
 
-    private void FeedItemViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void FeedItemViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(FeedItemViewModel.FeedItem))
+        if (e.PropertyName is nameof(FeedItemViewModel.FeedItem))
         {
             launchBrowserCommand.RaiseCanExecuteChanged();
         }
