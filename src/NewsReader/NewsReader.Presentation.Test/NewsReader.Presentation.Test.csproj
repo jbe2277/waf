@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>Test.NewsReader.Presentation</RootNamespace>
+    <AssemblyName>Test.NewsReader.Presentation</AssemblyName>
     <UseMaui>true</UseMaui>
   </PropertyGroup>
 

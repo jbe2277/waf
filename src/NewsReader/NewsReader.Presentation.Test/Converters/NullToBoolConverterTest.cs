@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.NewsReader.Presentation.Converters;
 
-namespace NewsReader.Presentation.Test.Converters;
+namespace Test.Presentation.Converters;
 
 [TestClass]
 public class NullToBoolConverterTest
