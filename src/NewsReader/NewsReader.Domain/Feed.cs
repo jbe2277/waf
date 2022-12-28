@@ -155,6 +155,5 @@ public class Feed : ValidatableModel
 
     private void UpdateUnreadItemsCount() => UnreadItemsCount = Items.Count(x => !x.MarkAsRead);
 
-    [OnDeserialized]
-    private void OnDeserialized(StreamingContext context) => Initialize();
+    [OnDeserialized] private void OnDeserialized(StreamingContext context) => Initialize();
 }

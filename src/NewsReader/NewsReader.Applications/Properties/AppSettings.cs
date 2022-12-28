@@ -12,7 +12,5 @@ public sealed class AppSettings : UserSettingsBase
 
     [DataMember] public string? LastUploadedFileHash { get; set; }
 
-    protected override void SetDefaultValues() 
-    {
-    }
+    protected override void SetDefaultValues() { }
 }

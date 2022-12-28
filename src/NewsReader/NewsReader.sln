@@ -13,12 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Applications", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Presentation", "NewsReader.Presentation\NewsReader.Presentation.csproj", "{32B99A2A-76CE-411B-962C-F1BD0650C425}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsReader.Presentation.Test", "NewsReader.Presentation.Test\NewsReader.Presentation.Test.csproj", "{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsReader.Presentation.Test", "NewsReader.Presentation.Test\NewsReader.Presentation.Test.csproj", "{698FAC6A-B6C7-4E4A-A0EB-DD932B8276BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B396389-3C15-4AE5-ABD3-3A2725630193}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		CodeCoverage.runsettings = CodeCoverage.runsettings
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Global

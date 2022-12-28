@@ -48,12 +48,12 @@ public class FeedItem : Model
 
     public void ApplyValuesFrom(FeedItem item, bool excludeMarkAsRead = false)
     {
-        if (Uri != item.Uri) { throw new InvalidOperationException("The Uri must be the same."); }
+        if (Uri != item.Uri) throw new InvalidOperationException("The Uri must be the same.");
         Date = item.Date;
         Name = item.Name;
         Description = item.Description;
         if (!excludeMarkAsRead) MarkAsRead = item.MarkAsRead;
     }
 
-    public FeedItem Clone() => new FeedItem(Uri, Date, Name, Description) { MarkAsRead = MarkAsRead };
+    public FeedItem Clone() => new(Uri, Date, Name, Description) { MarkAsRead = MarkAsRead };
 }

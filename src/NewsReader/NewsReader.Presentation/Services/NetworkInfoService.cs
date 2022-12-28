@@ -20,9 +20,6 @@ public class NetworkInfoService : Model, INetworkInfoService
 
     private void ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            InternetAccess = e.NetworkAccess == NetworkAccess.Internet;
-        });
+        MainThread.BeginInvokeOnMainThread(() => InternetAccess = e.NetworkAccess == NetworkAccess.Internet);
     }
 }

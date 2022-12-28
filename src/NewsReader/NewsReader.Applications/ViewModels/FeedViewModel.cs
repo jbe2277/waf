@@ -31,11 +31,9 @@ public class FeedViewModel : ViewModelCore<IFeedView>
         get => feed;
         set
         {
-            if (SetProperty(ref feed, value))
-            {
-                SearchText = "";
-                UpdateItemsListView();
-            }
+            if (!SetProperty(ref feed, value)) return;
+            SearchText = "";
+            UpdateItemsListView();
         }
     }
 
@@ -44,34 +42,21 @@ public class FeedViewModel : ViewModelCore<IFeedView>
         get => searchText;
         set
         {
-            if (SetProperty(ref searchText, value))
-            {
-                updateSearchAction.InvokeAccumulated();
-            }
+            if (!SetProperty(ref searchText, value)) return;
+            updateSearchAction.InvokeAccumulated();
         }
     }
 
+    private void UpdateSearch() => ItemsListView.Refresh();
 
-    private void UpdateSearch()
-    {
-        ItemsListView.Refresh();
-    }
-
-    private bool FilterFeedItems(FeedItem item)
-    {
-        return string.IsNullOrEmpty(SearchText)
-            || (item.Name ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)
-            || (item.Description ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase);
-    }
+    private bool FilterFeedItems(FeedItem item) => string.IsNullOrEmpty(SearchText)
+        || (item.Name ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)
+        || (item.Description ?? "").Contains(SearchText, StringComparison.CurrentCultureIgnoreCase);
 
     private void UpdateItemsListView()
     {
-        ItemsListView = new ObservableGroupedListView<DateTime, FeedItem>(
-            Feed?.Items ?? (IReadOnlyList<FeedItem>)Array.Empty<FeedItem>(),
-            x => x.GroupBy(y => y.Date.LocalDateTime.Date))
-        {
-            Filter = FilterFeedItems
-        };
+        ItemsListView = new ObservableGroupedListView<DateTime, FeedItem>(Feed?.Items ?? (IReadOnlyList<FeedItem>)Array.Empty<FeedItem>(),
+            x => x.GroupBy(y => y.Date.LocalDateTime.Date)) { Filter = FilterFeedItems };
         RaisePropertyChanged(nameof(ItemsListView));
     }
 }

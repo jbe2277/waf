@@ -77,7 +77,7 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        if (e.PropertyName == nameof(Feed)) useTitleAsNameCommand.RaiseCanExecuteChanged();
+        if (e.PropertyName is nameof(Feed)) useTitleAsNameCommand.RaiseCanExecuteChanged();
         if (e.PropertyName is nameof(OldFeed) or nameof(Feed)) RaisePropertyChanged(nameof(IsSameFeed));
     }
 

@@ -50,10 +50,7 @@ internal class DataController
         FeedManager? feedManager = null;
         try
         {
-            await Task.Run(() =>
-            {
-                feedManager = dataService.Load<FeedManager>() ?? new FeedManager();
-            });
+            await Task.Run(() => { feedManager = dataService.Load<FeedManager>() ?? new FeedManager(); });
         }
         catch (Exception ex)
         {
@@ -66,10 +63,7 @@ internal class DataController
         return feedManager!;
     }
 
-    public Task Update()
-    {
-        return DownloadAndMerge();
-    }
+    public Task Update() => DownloadAndMerge();
 
     public Task Save()
     {
@@ -93,10 +87,7 @@ internal class DataController
         }
     }
 
-    private Task SignOutAsync()
-    {
-        return webStorageService.SignOut();
-    }
+    private Task SignOutAsync() => webStorageService.SignOut();
 
     private async Task DownloadAndMerge()
     {

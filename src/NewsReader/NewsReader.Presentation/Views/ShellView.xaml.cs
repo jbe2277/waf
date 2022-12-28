@@ -36,10 +36,7 @@ public partial class ShellView : IShellView
         if (wasFirstPage) navi.RemovePage(navi.NavigationStack[0]);  // Remove initial empty page from navigation stack
     }
 
-    public Task PopAsync()
-    {
-        return Detail.Navigation.PopAsync();
-    }
+    public Task PopAsync() => Detail.Navigation.PopAsync();
 
     protected override void OnBindingContextChanged()
     {

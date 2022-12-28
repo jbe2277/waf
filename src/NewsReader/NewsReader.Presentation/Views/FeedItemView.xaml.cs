@@ -79,8 +79,5 @@ public partial class FeedItemView : IFeedItemView
         catch (OperationCanceledException) { }
     }
 
-    private void WebViewNavigated(object sender, WebNavigatedEventArgs e)
-    {
-        webViewNavigated?.TrySetResult(null);
-    }
+    private void WebViewNavigated(object sender, WebNavigatedEventArgs e) => webViewNavigated?.TrySetResult(null);
 }

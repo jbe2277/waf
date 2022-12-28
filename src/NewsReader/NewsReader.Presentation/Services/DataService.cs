@@ -10,10 +10,7 @@ public class DataService : IDataService
     private static readonly string containerFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "data.zip");
     private const string itemFileName = "data.xml";
 
-    public Stream GetReadStream()
-    {
-        return File.OpenRead(containerFileName);
-    }
+    public Stream GetReadStream() => File.OpenRead(containerFileName);
 
     public string GetHash()
     {

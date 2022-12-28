@@ -5,37 +5,6 @@ public interface ISyndicationService
     Task<FeedDto> RetrieveFeed(Uri uri);
 }
 
-public sealed class FeedDto
-{
-    public FeedDto(string title, IReadOnlyList<FeedItemDto> items, IReadOnlyList<Exception> errors)
-    {
-        Title = title;
-        Items = items;
-        Errors = errors;
-    }
+public sealed record FeedDto(string Title, IReadOnlyList<FeedItemDto> Items, IReadOnlyList<Exception> Errors);
 
-    public string Title { get; }
-
-    public IReadOnlyList<FeedItemDto> Items { get; }
-
-    public IReadOnlyList<Exception> Errors { get; }
-}
-
-public sealed class FeedItemDto
-{
-    public FeedItemDto(Uri? uri, DateTimeOffset date, string name, string description)
-    {
-        Uri = uri;
-        Date = date;
-        Name = name;
-        Description = description;
-    }
-
-    public Uri? Uri { get; }
-
-    public DateTimeOffset Date { get; }
-
-    public string Name { get; }
-
-    public string Description { get; }
-}
+public sealed record FeedItemDto(Uri? Uri, DateTimeOffset Date, string Name, string Description);

@@ -68,8 +68,5 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
         return ViewCore.PushAsync(viewModel.View);
     }
 
-    public Task NavigateBack()
-    {
-        return ViewCore.PopAsync();
-    }
+    public Task NavigateBack() => ViewCore.PopAsync();
 }

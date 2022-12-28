@@ -11,8 +11,5 @@ public class LocalizeDisplayMaxItemsLimitConverter : IValueConverter
         return lifetime.ToValue()?.ToString(CultureInfo.CurrentCulture) ?? "Unlimited";
     }
 
-    public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
-    {
-        throw new NotSupportedException();
-    }
+    public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture) => throw new NotSupportedException();
 }

@@ -57,13 +57,12 @@ public class FeedManager : Model, IDataManager
         foreach (var x in e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = null;
     }
 
-    [OnDeserialized]
-    private void OnDeserialized(StreamingContext context) => Initialize();
+    [OnDeserialized] private void OnDeserialized(StreamingContext context) => Initialize();
 
 
     internal sealed class FeedEqualityComparer : IEqualityComparer<Feed>
     {
-        public static FeedEqualityComparer Default { get; } = new FeedEqualityComparer();
+        public static FeedEqualityComparer Default { get; } = new();
 
         public bool Equals(Feed? x, Feed? y) => x?.Uri == y?.Uri;
 

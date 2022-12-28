@@ -26,8 +26,8 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
         this.messageService = messageService;
         AppInfo = appInfoService;
         WebStorageService = webStorageService;
-        ItemLifetimes = Enum.GetValues(typeof(DisplayItemLifetime)).Cast<DisplayItemLifetime>().ToArray();
-        MaxItemsLimits = Enum.GetValues(typeof(DisplayMaxItemsLimit)).Cast<DisplayMaxItemsLimit>().ToArray();
+        ItemLifetimes = Enum.GetValues<DisplayItemLifetime>();
+        MaxItemsLimits = Enum.GetValues<DisplayMaxItemsLimit>();
     }
 
     public IAppInfoService AppInfo { get; }
@@ -91,13 +91,11 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
 
     private async void SetSelectedItemLifetime(DisplayItemLifetime value)
     {
-        if (selectedItemLifetime == value) { return; }
-
-        if (setSelectedItemLifetimeRunning) { return; }
+        if (selectedItemLifetime == value) return;
+        if (setSelectedItemLifetimeRunning) return;
         setSelectedItemLifetimeRunning = true;
 
-        var result = selectedItemLifetime < value
-            || await messageService.ShowYesNoQuestion(Resources.ReduceFeedItemLifetimeQuestion);
+        var result = selectedItemLifetime < value || await messageService.ShowYesNoQuestion(Resources.ReduceFeedItemLifetimeQuestion);
         if (result)
         {
             selectedItemLifetime = value;
@@ -110,13 +108,11 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
 
     private async void SetSelectedMaxItemsLimit(DisplayMaxItemsLimit value)
     {
-        if (selectedMaxItemsLimit == value) { return; }
-
-        if (setSelectedMaxItemsLimitRunning) { return; }
+        if (selectedMaxItemsLimit == value) return;
+        if (setSelectedMaxItemsLimitRunning) return;
         setSelectedMaxItemsLimitRunning = true;
 
-        var result = selectedMaxItemsLimit < value
-            || await messageService.ShowYesNoQuestion(Resources.ReduceMaxItemsLimitQuestion);
+        var result = selectedMaxItemsLimit < value || await messageService.ShowYesNoQuestion(Resources.ReduceMaxItemsLimitQuestion);
         if (result)
         {
             selectedMaxItemsLimit = value;

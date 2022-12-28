@@ -45,7 +45,7 @@ internal class SettingsController
 
     private void DeveloperSettingsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(ViewModels.SettingsViewModel.SelectedLanguage))
+        if (e.PropertyName is nameof(ViewModels.SettingsViewModel.SelectedLanguage))
         {
             appSettings.Language = settingsViewModel.Value.SelectedLanguage == "Auto" ? null : settingsViewModel.Value.SelectedLanguage;
         }

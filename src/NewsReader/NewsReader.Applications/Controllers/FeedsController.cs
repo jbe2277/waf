@@ -82,17 +82,11 @@ internal class FeedsController
         ShowFeedView(FeedManager.Feeds.FirstOrDefault()).NoWait();
     }
 
-    public Task Update()
-    {
-        return Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
-    }
+    public Task Update() => Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
 
     private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        foreach (Feed item in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>())
-        {
-            LoadFeed(item).NoWait();
-        }
+        foreach (Feed x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) LoadFeed(x).NoWait();
         if ((e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()).Any(x => x == feedViewModel.Value.Feed))
         {
             shellViewModel.SelectedFeed = feedViewModel.Value.Feed = null;
@@ -239,10 +233,7 @@ internal class FeedsController
         }
     }
 
-    private async Task RefreshFeed()
-    {
-        await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
-    }
+    private async Task RefreshFeed() => await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
 
     private void MarkAsReadUnread(object? parameter)
     {
@@ -250,15 +241,9 @@ internal class FeedsController
         feedItem.MarkAsRead = !feedItem.MarkAsRead;
     }
 
-    private bool CanLaunchBrowser()
-    {
-        return feedItemViewModel.Value.FeedItem != null;
-    }
+    private bool CanLaunchBrowser() => feedItemViewModel.Value.FeedItem != null;
 
-    private async Task LaunchBrowser()
-    {
-        await launcherService.LaunchBrowser(feedItemViewModel.Value.FeedItem!.Uri);
-    }
+    private async Task LaunchBrowser() => await launcherService.LaunchBrowser(feedItemViewModel.Value.FeedItem!.Uri);
 
     private AddEditFeedViewModel InitializeViewModel(AddEditFeedViewModel viewModel)
     {
@@ -305,9 +290,6 @@ internal class FeedsController
 
     private void FeedItemViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName is nameof(FeedItemViewModel.FeedItem))
-        {
-            launchBrowserCommand.RaiseCanExecuteChanged();
-        }
+        if (e.PropertyName is nameof(FeedItemViewModel.FeedItem)) launchBrowserCommand.RaiseCanExecuteChanged();
     }
 }

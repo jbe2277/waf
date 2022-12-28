@@ -24,8 +24,5 @@ public partial class AddEditFeedView : IAddEditFeedView
         viewModel = (AddEditFeedViewModel)BindingContext;
     }
 
-    private void FeedUrlUnfocused(object sender, FocusEventArgs e)
-    {
-        viewModel.LoadFeedCommand.Execute(null);
-    }
+    private void FeedUrlUnfocused(object sender, FocusEventArgs e) => viewModel.LoadFeedCommand.Execute(null);
 }
