@@ -1,9 +1,8 @@
-﻿namespace Waf.NewsReader.Applications.Services
-{
-    public interface IAppInfoService
-    {
-        string AppName { get; }
+﻿namespace Waf.NewsReader.Applications.Services;
 
-        string VersionString { get; }
-    }
+public interface IAppInfoService
+{
+    string AppName { get; }
+
+    string VersionString { get; }
 }

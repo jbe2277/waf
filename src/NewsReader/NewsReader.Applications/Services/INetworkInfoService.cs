@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace Waf.NewsReader.Applications.Services
+namespace Waf.NewsReader.Applications.Services;
+
+public interface INetworkInfoService : INotifyPropertyChanged
 {
-    public interface INetworkInfoService : INotifyPropertyChanged
-    {
-        bool InternetAccess { get; }
-    }
+    bool InternetAccess { get; }
 }

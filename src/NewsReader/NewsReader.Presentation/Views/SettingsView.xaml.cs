@@ -1,18 +1,17 @@
 ﻿using Waf.NewsReader.Applications.Views;
 
-namespace Waf.NewsReader.Presentation.Views
-{
-    public partial class SettingsView : TabbedPage, ISettingsView
-    {
-        public SettingsView()
-        {
-            InitializeComponent();
-        }
+namespace Waf.NewsReader.Presentation.Views;
 
-        public object? DataContext
-        {
-            get => BindingContext;
-            set => BindingContext = value;
-        }
+public partial class SettingsView : TabbedPage, ISettingsView
+{
+    public SettingsView()
+    {
+        InitializeComponent();
+    }
+
+    public object? DataContext
+    {
+        get => BindingContext;
+        set => BindingContext = value;
     }
 }

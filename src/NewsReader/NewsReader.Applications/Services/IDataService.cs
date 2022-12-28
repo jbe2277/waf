@@ -1,15 +1,14 @@
 ﻿using System.IO;
 
-namespace Waf.NewsReader.Applications.Services
+namespace Waf.NewsReader.Applications.Services;
+
+public interface IDataService
 {
-    public interface IDataService
-    {
-        Stream GetReadStream();
+    Stream GetReadStream();
 
-        string GetHash();
+    string GetHash();
 
-        T? Load<T>(Stream? dataStream = null) where T : class;
+    T? Load<T>(Stream? dataStream = null) where T : class;
 
-        void Save(object data);
-    }
+    void Save(object data);
 }

@@ -7,72 +7,71 @@ using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Domain;
 
-namespace Waf.NewsReader.Applications.ViewModels
+namespace Waf.NewsReader.Applications.ViewModels;
+
+public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
 {
-    public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
+    private NavigationItem? selectedFooterMenu;
+    private IReadOnlyList<Feed> feeds = null!;
+    private Feed? selectedFeed;
+
+    public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
     {
-        private NavigationItem? selectedFooterMenu;
-        private IReadOnlyList<Feed> feeds = null!;
-        private Feed? selectedFeed;
+        AppName = appInfoService.AppName;
+    }
 
-        public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
+    public string AppName { get; }
+
+    public ICommand EditFeedCommand { get; internal set; } = null!;
+
+    public ICommand MoveFeedUpCommand { get; internal set; } = null!;
+
+    public ICommand MoveFeedDownCommand { get; internal set; } = null!;
+
+    public ICommand RemoveFeedCommand { get; internal set; } = null!;
+
+    public ICommand ShowFeedViewCommand { get; internal set; } = null!;
+
+    public IReadOnlyList<NavigationItem> FooterMenu { get; internal set; } = null!;
+
+    public NavigationItem? SelectedFooterMenu
+    {
+        get => selectedFooterMenu;
+        set
         {
-            AppName = appInfoService.AppName;
-        }
-
-        public string AppName { get; }
-
-        public ICommand EditFeedCommand { get; internal set; } = null!;
-
-        public ICommand MoveFeedUpCommand { get; internal set; } = null!;
-
-        public ICommand MoveFeedDownCommand { get; internal set; } = null!;
-
-        public ICommand RemoveFeedCommand { get; internal set; } = null!;
-
-        public ICommand ShowFeedViewCommand { get; internal set; } = null!;
-
-        public IReadOnlyList<NavigationItem> FooterMenu { get; internal set; } = null!;
-
-        public NavigationItem? SelectedFooterMenu
-        {
-            get => selectedFooterMenu;
-            set
+            if (SetProperty(ref selectedFooterMenu, value) && selectedFooterMenu != null)
             {
-                if (SetProperty(ref selectedFooterMenu, value) && selectedFooterMenu != null)
-                {
-                    SelectedFeed = null;
-                }
+                SelectedFeed = null;
             }
         }
+    }
 
-        public IReadOnlyList<Feed> Feeds
-        {
-            get => feeds;
-            set => SetProperty(ref feeds, value);
-        }
+    public IReadOnlyList<Feed> Feeds
+    {
+        get => feeds;
+        set => SetProperty(ref feeds, value);
+    }
 
-        public Feed? SelectedFeed
+    public Feed? SelectedFeed
+    {
+        get => selectedFeed;
+        set
         {
-            get => selectedFeed;
-            set
+            if (SetProperty(ref selectedFeed, value) && SelectedFeed != null)
             {
-                if (SetProperty(ref selectedFeed, value) && SelectedFeed != null)
-                {
-                    SelectedFooterMenu = null;
-                }
+                SelectedFooterMenu = null;
             }
         }
+    }
 
-        public Task Navigate(IViewModelCore viewModel)
-        {
-            viewModel.Initialize();
-            return ViewCore.PushAsync(viewModel.View);
-        }
+    public Task Navigate(IViewModelCore viewModel)
+    {
+        viewModel.Initialize();
+        return ViewCore.PushAsync(viewModel.View);
+    }
 
-        public Task NavigateBack()
-        {
-            return ViewCore.PopAsync();
-        }
+    public Task NavigateBack()
+    {
+        return ViewCore.PopAsync();
     }
 }

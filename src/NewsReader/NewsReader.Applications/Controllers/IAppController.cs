@@ -1,13 +1,12 @@
-﻿namespace Waf.NewsReader.Applications.Controllers
+﻿namespace Waf.NewsReader.Applications.Controllers;
+
+public interface IAppController
 {
-    public interface IAppController
-    {
-        object MainView { get; }
+    object MainView { get; }
 
-        void Start();
+    void Start();
 
-        void Sleep();
+    void Sleep();
 
-        void Resume();
-    }
+    void Resume();
 }

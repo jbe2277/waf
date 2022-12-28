@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Waf.NewsReader.Applications.Services
+namespace Waf.NewsReader.Applications.Services;
+
+public interface ILauncherService
 {
-    public interface ILauncherService
-    {
-        Task LaunchBrowser(Uri uri);
-    }
+    Task LaunchBrowser(Uri uri);
 }

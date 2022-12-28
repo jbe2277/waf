@@ -1,32 +1,31 @@
 ﻿using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
 
-namespace Waf.NewsReader.Presentation.Views
+namespace Waf.NewsReader.Presentation.Views;
+
+public partial class AddEditFeedView : IAddEditFeedView
 {
-    public partial class AddEditFeedView : IAddEditFeedView
+    private AddEditFeedViewModel viewModel = null!;
+
+    public AddEditFeedView()
     {
-        private AddEditFeedViewModel viewModel = null!;
+        InitializeComponent();
+    }
 
-        public AddEditFeedView()
-        {
-            InitializeComponent();
-        }
+    public object? DataContext
+    {
+        get => BindingContext;
+        set => BindingContext = value;
+    }
 
-        public object? DataContext
-        {
-            get => BindingContext;
-            set => BindingContext = value;
-        }
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+        viewModel = (AddEditFeedViewModel)BindingContext;
+    }
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            viewModel = (AddEditFeedViewModel)BindingContext;
-        }
-
-        private void FeedUrlUnfocused(object sender, FocusEventArgs e)
-        {
-            viewModel.LoadFeedCommand.Execute(null);
-        }
+    private void FeedUrlUnfocused(object sender, FocusEventArgs e)
+    {
+        viewModel.LoadFeedCommand.Execute(null);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace Waf.NewsReader.Applications
+namespace Waf.NewsReader.Applications;
+
+public static class Log
 {
-    public static class Log
-    {
-        public static TraceSource Default { get; } = new TraceSource("App");
-    }
+    public static TraceSource Default { get; } = new TraceSource("App");
 }

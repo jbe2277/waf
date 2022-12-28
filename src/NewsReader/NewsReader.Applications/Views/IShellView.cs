@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Waf.Applications;
 
-namespace Waf.NewsReader.Applications.Views
-{
-    public interface IShellView : IView
-    {
-        Task PushAsync(object page);
+namespace Waf.NewsReader.Applications.Views;
 
-        Task PopAsync();
-    }
+public interface IShellView : IView
+{
+    Task PushAsync(object page);
+
+    Task PopAsync();
 }

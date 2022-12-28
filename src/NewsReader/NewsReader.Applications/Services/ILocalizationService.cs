@@ -1,7 +1,6 @@
-﻿namespace Waf.NewsReader.Applications.Services
+﻿namespace Waf.NewsReader.Applications.Services;
+
+public interface ILocalizationService
 {
-    public interface ILocalizationService
-    {
-        void Initialize();
-    }
+    void Initialize();
 }

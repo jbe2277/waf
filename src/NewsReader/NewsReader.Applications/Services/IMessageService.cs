@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-namespace Waf.NewsReader.Applications.Services
-{
-    public interface IMessageService
-    {
-        Task ShowMessage(string message);
+namespace Waf.NewsReader.Applications.Services;
 
-        Task<bool> ShowYesNoQuestion(string message);
-    }
+public interface IMessageService
+{
+    Task ShowMessage(string message);
+
+    Task<bool> ShowYesNoQuestion(string message);
 }

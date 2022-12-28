@@ -3,22 +3,21 @@ using System.Windows.Input;
 using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Domain;
 
-namespace Waf.NewsReader.Applications.ViewModels
+namespace Waf.NewsReader.Applications.ViewModels;
+
+public class FeedItemViewModel : ViewModelCore<IFeedItemView>
 {
-    public class FeedItemViewModel : ViewModelCore<IFeedItemView>
+    private FeedItem? feedItem;
+
+    public FeedItemViewModel(IFeedItemView view) : base(view, false)
     {
-        private FeedItem? feedItem;
+    }
 
-        public FeedItemViewModel(IFeedItemView view) : base(view, false)
-        {
-        }
+    public ICommand LaunchBrowserCommand { get; set; } = null!;
 
-        public ICommand LaunchBrowserCommand { get; set; } = null!;
-
-        public FeedItem? FeedItem
-        {
-            get => feedItem;
-            set => SetProperty(ref feedItem, value);
-        }
+    public FeedItem? FeedItem
+    {
+        get => feedItem;
+        set => SetProperty(ref feedItem, value);
     }
 }
