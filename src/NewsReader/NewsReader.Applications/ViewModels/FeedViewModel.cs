@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Waf.Applications;
-using System.Waf.Foundation;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Domain;

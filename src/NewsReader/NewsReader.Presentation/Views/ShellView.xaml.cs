@@ -1,5 +1,4 @@
-﻿using System.Waf.Foundation;
-using Waf.NewsReader.Applications.DataModels;
+﻿using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications.Views;
 

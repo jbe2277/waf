@@ -1,13 +1,8 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
-using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.Waf.Foundation;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Services;
 

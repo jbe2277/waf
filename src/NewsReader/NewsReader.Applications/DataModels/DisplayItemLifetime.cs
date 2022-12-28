@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waf.NewsReader.Applications.DataModels;
+﻿namespace Waf.NewsReader.Applications.DataModels;
 
 public enum DisplayItemLifetime
 {
@@ -13,48 +11,23 @@ public enum DisplayItemLifetime
 
 public static class DisplayItemLifetimeHelper
 {
-    public static TimeSpan? ToValue(this DisplayItemLifetime enumValue)
+    public static TimeSpan? ToValue(this DisplayItemLifetime enumValue) => enumValue switch
     {
-        switch (enumValue)
-        {
-            case DisplayItemLifetime._1Month:
-                return TimeSpan.FromDays(30);
-            case DisplayItemLifetime._3Month:
-                return TimeSpan.FromDays(90);
-            case DisplayItemLifetime._6Month:
-                return TimeSpan.FromDays(180);
-            case DisplayItemLifetime._1Year:
-                return TimeSpan.FromDays(365);
-            case DisplayItemLifetime.Forever:
-                return null;
-            default:
-                throw new NotSupportedException($"The value {enumValue} is not supported.");
-        }
-    }
+        DisplayItemLifetime._1Month => TimeSpan.FromDays(30),
+        DisplayItemLifetime._3Month => TimeSpan.FromDays(90),
+        DisplayItemLifetime._6Month => TimeSpan.FromDays(180),
+        DisplayItemLifetime._1Year => TimeSpan.FromDays(365),
+        DisplayItemLifetime.Forever => null,
+        _ => throw new NotSupportedException($"The value {enumValue} is not supported."),
+    };
 
     public static DisplayItemLifetime FromValue(TimeSpan? value)
     {
-        if (value == null)
-        {
-            return DisplayItemLifetime.Forever;
-        }
-        else if (value == TimeSpan.FromDays(30))
-        {
-            return DisplayItemLifetime._1Month;
-        }
-        else if (value == TimeSpan.FromDays(90))
-        {
-            return DisplayItemLifetime._3Month;
-        }
-        else if (value == TimeSpan.FromDays(180))
-        {
-            return DisplayItemLifetime._6Month;
-        }
-        else if (value == TimeSpan.FromDays(365))
-        {
-            return DisplayItemLifetime._1Year;
-        }
-
+        if (value is null) return DisplayItemLifetime.Forever;
+        else if (value == TimeSpan.FromDays(30)) return DisplayItemLifetime._1Month;
+        else if (value == TimeSpan.FromDays(90)) return DisplayItemLifetime._3Month;
+        else if (value == TimeSpan.FromDays(180)) return DisplayItemLifetime._6Month;
+        else if (value == TimeSpan.FromDays(365)) return DisplayItemLifetime._1Year;
         throw new NotSupportedException($"The value {value} is not supported.");
     }
 }

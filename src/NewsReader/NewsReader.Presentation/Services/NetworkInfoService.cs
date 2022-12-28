@@ -1,5 +1,4 @@
-﻿using System.Waf.Foundation;
-using Waf.NewsReader.Applications.Services;
+﻿using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
 
@@ -19,7 +18,7 @@ public class NetworkInfoService : Model, INetworkInfoService
         set => SetProperty(ref internetAccess, value);
     }
 
-    private void ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    private void ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {

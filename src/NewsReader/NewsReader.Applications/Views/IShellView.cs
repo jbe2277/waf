@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 
 namespace Waf.NewsReader.Applications.Views;
 

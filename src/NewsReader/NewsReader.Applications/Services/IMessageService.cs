@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Waf.NewsReader.Applications.Services;
+﻿namespace Waf.NewsReader.Applications.Services;
 
 public interface IMessageService
 {

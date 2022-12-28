@@ -11,6 +11,9 @@ indent_size = 4
 end_of_line = crlf
 indent_style = space
 
+# IDE0160: Convert to block scoped namespace
+csharp_style_namespace_declarations = file_scoped
+
 
 [*.csproj]
 

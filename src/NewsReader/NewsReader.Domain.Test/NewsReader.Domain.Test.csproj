@@ -3,16 +3,9 @@
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Test.NewsReader.Domain</RootNamespace>
     <AssemblyName>Test.NewsReader.Domain</AssemblyName>
-
-    <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../../UnitTest.ruleset</CodeAnalysisRuleSet>
-    <RunSettingsFilePath>$(MSBuildThisFileDirectory)../CodeCoverage.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.1" />
     <PackageReference Include="System.Waf.UnitTesting.Core" Version="6.4.1" />
   </ItemGroup>
 

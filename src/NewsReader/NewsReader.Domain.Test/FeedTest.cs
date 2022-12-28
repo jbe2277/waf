@@ -1,7 +1,5 @@
 ﻿using Waf.NewsReader.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 using Test.NewsReader.Domain.UnitTesting;
 
 namespace Test.NewsReader.Domain;

@@ -1,0 +1,34 @@
+﻿<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
+      <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.0.1" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.0.1" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <ItemGroup>
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Collections.Specialized" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />
+    <Using Include="System.Waf.Foundation" />
+  </ItemGroup>
+</Project>

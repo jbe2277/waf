@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Waf.NewsReader.Domain;
+﻿namespace Waf.NewsReader.Domain;
 
 public interface IDataManager : INotifyPropertyChanged
 {

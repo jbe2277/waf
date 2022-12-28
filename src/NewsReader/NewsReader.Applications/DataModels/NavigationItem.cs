@@ -1,6 +1,4 @@
-﻿using System;
-using System.Waf.Foundation;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace Waf.NewsReader.Applications.DataModels;
 
@@ -57,8 +55,5 @@ public class NavigationItem : Model
         set => SetProperty(ref isCommandEnabled, value);
     }
 
-    private void CommandCanExecuteChanged(object sender, EventArgs e)
-    {
-        IsCommandEnabled = command?.CanExecute(null) ?? false;
-    }
+    private void CommandCanExecuteChanged(object? sender, EventArgs e) => IsCommandEnabled = command?.CanExecute(null) ?? false;
 }

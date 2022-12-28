@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Waf.Foundation;
-
-namespace Waf.NewsReader.Domain.Foundation;
+﻿namespace Waf.NewsReader.Domain.Foundation;
 
 public class ObservableGroupingView<TKey, TElement> : ObservableListViewBase<TElement>, IGrouping<TKey, TElement>
 {

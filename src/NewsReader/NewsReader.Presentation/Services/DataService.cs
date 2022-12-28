@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using Waf.NewsReader.Applications.Services;

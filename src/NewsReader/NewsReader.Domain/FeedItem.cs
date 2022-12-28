@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Waf.Foundation;
+﻿using System.Runtime.Serialization;
 
 namespace Waf.NewsReader.Domain;
 

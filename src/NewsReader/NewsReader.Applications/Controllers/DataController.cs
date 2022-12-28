@@ -1,11 +1,6 @@
 ﻿using Microsoft.AppCenter.Crashes;
-using System;
-using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
-using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;

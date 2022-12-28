@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Waf.Applications;
-using System.Waf.Foundation;
+﻿using System.Waf.Applications;
 using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
