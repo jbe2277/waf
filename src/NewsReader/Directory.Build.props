@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
-	<NeutralLanguage>en</NeutralLanguage>
-	<Nullable>enable</Nullable>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
 
@@ -33,7 +33,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  
+
   <ItemGroup>
     <Using Include="System.Collections.ObjectModel" />
     <Using Include="System.Collections.Specialized" />
