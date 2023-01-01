@@ -1,6 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
-    <Nullable>enable</Nullable>
+	<NeutralLanguage>en</NeutralLanguage>
+	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
 

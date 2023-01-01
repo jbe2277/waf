@@ -5,7 +5,7 @@ using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.MauiSystem.Platforms.iOS;
 
-internal class IosModule : Module
+internal sealed class IosModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

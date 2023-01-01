@@ -6,7 +6,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers;
 
-internal class AppController : IAppController
+internal sealed class AppController : IAppController
 {
     private readonly INetworkInfoService networkInfoService;
     private readonly DataController dataController;

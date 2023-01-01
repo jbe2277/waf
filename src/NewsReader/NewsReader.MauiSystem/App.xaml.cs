@@ -9,7 +9,6 @@ using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Presentation.Services;
 using Waf.NewsReader.Applications;
-using System.Waf.Foundation;
 
 namespace Waf.NewsReader.MauiSystem;
 

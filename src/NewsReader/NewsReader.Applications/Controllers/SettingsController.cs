@@ -6,7 +6,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers;
 
-internal class SettingsController
+internal sealed class SettingsController
 {
     private readonly AppSettings appSettings;
     private readonly DataController dataController;

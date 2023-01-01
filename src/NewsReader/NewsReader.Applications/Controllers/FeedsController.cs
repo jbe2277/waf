@@ -8,7 +8,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers;
 
-internal class FeedsController
+internal sealed class FeedsController
 {
     private readonly IMessageService messageService;
     private readonly INavigationService navigationService;

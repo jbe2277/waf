@@ -4,7 +4,7 @@ using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.MauiSystem.Platforms.Android;
 
-internal class AndroidModule : Module
+internal sealed class AndroidModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

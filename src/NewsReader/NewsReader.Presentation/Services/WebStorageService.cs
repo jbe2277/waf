@@ -17,7 +17,7 @@ namespace Waf.NewsReader.Presentation.Services;
 //    }
 //}
 
-internal partial class WebStorageService : Model, IWebStorageService
+internal sealed partial class WebStorageService : Model, IWebStorageService
 {
     private const string dataFileName = "data.zip";
     private static readonly string[] scopes = { "User.Read", "Files.ReadWrite.AppFolder" };

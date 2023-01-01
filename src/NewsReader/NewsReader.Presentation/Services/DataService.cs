@@ -16,7 +16,7 @@ public class DataService : IDataService
     {
         using var stream = GetReadStream();
         using var sha1 = SHA1.Create();
-        return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "");
+        return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "", StringComparison.Ordinal);
     }
 
     public T? Load<T>(Stream? dataStream = null) where T : class

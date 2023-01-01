@@ -1,7 +1,13 @@
 ﻿[*.cs]
 
-# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
-dotnet_diagnostic.CS8632.severity = none
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = suggestion
+
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = suggestion
 
 
 ### Coding styles

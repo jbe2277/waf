@@ -4,7 +4,7 @@ using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.MauiSystem.Platforms.Android.Services;
 
-internal class AndroidTraceListener : SystemTraceListener
+internal sealed class AndroidTraceListener : SystemTraceListener
 {
     public override void Write(string? message) { }
 
