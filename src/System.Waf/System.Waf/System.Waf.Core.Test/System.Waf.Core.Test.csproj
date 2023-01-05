@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net472</TargetFrameworks>
+    <TargetFrameworks>net472;net6.0</TargetFrameworks>
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
+	  <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith(net4))">
