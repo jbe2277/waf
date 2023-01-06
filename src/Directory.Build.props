@@ -1,0 +1,38 @@
+﻿<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Build -->
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+    <PackageVersion Include="MinVer" Version="4.2.0" />
+
+    <!-- WAF -->
+    <PackageVersion Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageVersion Include="System.ComponentModel.Composition" Version="4.7.0" />
+    
+    <!-- Samples-->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.12" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="6.0.12" />
+    <PackageVersion Include="NLog" Version="5.1.0" />
+
+    <!-- Unit tests -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.0.2" />
+    
+    <!-- News Reader (MAUI) -->
+    <PackageVersion Include="Autofac" Version="6.5.0" />
+    <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.11.46" />
+    <PackageVersion Include="Microsoft.AppCenter.Analytics" Version="5.0.1" />
+    <PackageVersion Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
+    <PackageVersion Include="Microsoft.Graph" Version="4.49.0" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.49.1" />
+    <PackageVersion Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
+    <PackageVersion Include="System.Waf.Core" Version="6.4.1" />
+    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="6.4.1" />
+  </ItemGroup>
+</Project>

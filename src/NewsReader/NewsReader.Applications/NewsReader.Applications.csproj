@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.5.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
+    <PackageReference Include="Autofac" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" />
   </ItemGroup>
 
   <ItemGroup>

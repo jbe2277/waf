@@ -21,7 +21,7 @@ indent_style = space
 csharp_style_namespace_declarations = file_scoped
 
 
-[*.{csproj,props,targets}]
+[*.{xml,csproj,props,targets,config,resx,ruleset}]
 
 tab_width = 2
 indent_size = 2
