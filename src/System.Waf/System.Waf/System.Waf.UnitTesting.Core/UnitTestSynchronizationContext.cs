@@ -8,7 +8,7 @@ namespace System.Waf.UnitTesting
     /// <summary>Provides a synchronization context for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.</summary>
     public sealed class UnitTestSynchronizationContext : SynchronizationContext, IDisposable
     {
-        private readonly SynchronizationContext previousContext;
+        private readonly SynchronizationContext? previousContext;
         private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object?>> messageQueue;
         private volatile int isDisposed;
 
@@ -34,16 +34,13 @@ namespace System.Waf.UnitTesting
 
         /// <summary>Creates a copy of this <see cref="UnitTestSynchronizationContext"/>.</summary>
         /// <returns>The copy of this synchronization context.</returns>
-        public override SynchronizationContext CreateCopy()
-        {
-            return new UnitTestSynchronizationContext();
-        }
+        public override SynchronizationContext CreateCopy() => new UnitTestSynchronizationContext();
 
         /// <summary>Dispose this synchronization context and sets the previous context back as current synchronization context.</summary>
         public void Dispose()
         {
-            Dispose(true);
             GC.SuppressFinalize(this);
+            Dispose(true);
         }
 
         /// <summary>Invokes the callback in the synchronization context synchronously.</summary>
@@ -82,15 +79,11 @@ namespace System.Waf.UnitTesting
 
         /// <summary>Process the message queue for the specified time.</summary>
         /// <param name="time">Defines how long the message queue is processed.</param>
-        public void Wait(TimeSpan time)
-        {
-            ProcessMessageQueue(new CancellationTokenSource(time).Token);
-        }
+        public void Wait(TimeSpan time) => ProcessMessageQueue(new CancellationTokenSource(time).Token);
 
         private void Dispose(bool isDisposing)
         {
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
-
             if (isDisposing)
             {
                 FinishMessageQueue();
@@ -118,10 +111,7 @@ namespace System.Waf.UnitTesting
         private void FinishMessageQueue()
         {
             messageQueue.CompleteAdding();
-            foreach (var message in messageQueue)
-            {
-                message.Key(message.Value);
-            }
+            foreach (var x in messageQueue) x.Key(x.Value);
         }
     }
 }

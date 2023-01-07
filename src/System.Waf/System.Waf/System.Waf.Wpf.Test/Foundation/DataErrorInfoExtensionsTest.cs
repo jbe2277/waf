@@ -18,7 +18,7 @@ namespace Test.Waf.Foundation
 
             var entity = new MockEntity() { Error = "Test Error" };
             Assert.AreEqual("Test Error", entity.Validate());
-            entity.Error = null;
+            entity.Error = null!;
             Assert.AreEqual("", entity.Validate());
 
             entity.Errors.Add("Name", "Name Error");
@@ -32,9 +32,9 @@ namespace Test.Waf.Foundation
         {
             public readonly Dictionary<string, string?> Errors = new Dictionary<string, string?>();
 
-            public string? Error { get; set; }
+            public string Error { get; set; } = "";
 
-            public string? this[string columnName] => Errors[columnName];
+            public string this[string columnName] => Errors[columnName] ?? "";
         }
     }
 }

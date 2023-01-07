@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>net461;net6.0-windows</TargetFrameworks>
     <RootNamespace>System.Waf</RootNamespace>
     <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. Use this package for WPF (Windows Presentation Foundation) applications.</Description>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith(netcore))">
+  <ItemGroup Condition="$(TargetFramework.StartsWith(net6))">
     <PackageReference Include="System.ComponentModel.Composition" />
   </ItemGroup>
 

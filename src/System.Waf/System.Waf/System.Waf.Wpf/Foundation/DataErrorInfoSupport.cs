@@ -40,14 +40,12 @@ namespace System.Waf.Foundation
                 }
                 else
                 {
-                    PropertyDescriptor property = TypeDescriptor.GetProperties(instance)[memberName];
+                    var property = TypeDescriptor.GetProperties(instance)[memberName];
                     if (property == null)
                     {
-                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
-                            "The specified member {0} was not found on the instance {1}", memberName, instance.GetType()));
+                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "The specified member {0} was not found on the instance {1}", memberName, instance.GetType()));
                     }
-                    Validator.TryValidateProperty(property.GetValue(instance),
-                        new ValidationContext(instance, null, null) { MemberName = memberName }, validationResults);
+                    Validator.TryValidateProperty(property.GetValue(instance), new ValidationContext(instance, null, null) { MemberName = memberName }, validationResults);
                 }
                 return string.Join(Environment.NewLine, validationResults.Select(x => x.ErrorMessage));
             }
