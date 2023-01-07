@@ -24,17 +24,13 @@ namespace System.Waf.Foundation
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList) : this(originalList, null, null, null, false)
-        {
-        }
+        public ObservableListViewCore(IEnumerable<T> originalList) : this(originalList, null, null, null, false) { }
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
         /// <param name="comparer">Optional, a custom comparer used to compare the items.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer) : this(originalList, comparer, null, null, false)
-        {
-        }
+        public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer) : this(originalList, comparer, null, null, false) { }
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
@@ -43,9 +39,7 @@ namespace System.Waf.Foundation
         /// <param name="sort">Optional, a sorting used for this list view.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
         public ObservableListViewCore(IEnumerable<T> originalList, IEqualityComparer<T>? comparer, Predicate<T>? filter,
-            Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort) : this(originalList, comparer, filter, sort, false)
-        {
-        }
+            Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort) : this(originalList, comparer, filter, sort, false) { }
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
@@ -67,10 +61,7 @@ namespace System.Waf.Foundation
             if (!noCollectionChangedHandler)
             {
                 originalObservableCollection = originalList as INotifyCollectionChanged;
-                if (originalObservableCollection != null)
-                {
-                    originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
-                }
+                if (originalObservableCollection != null) originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
             }
         }
 
@@ -81,11 +72,9 @@ namespace System.Waf.Foundation
             get => filter;
             set
             {
-                if (filter != value)
-                {
-                    filter = value;
-                    UpdateInnerList();
-                }
+                if (filter == value) return;
+                filter = value;
+                UpdateInnerList();
             }
         }
 
@@ -95,19 +84,14 @@ namespace System.Waf.Foundation
             get => sort;
             set
             {
-                if (sort != value)
-                {
-                    sort = value;
-                    UpdateInnerList();
-                }
+                if (sort == value) return;
+                sort = value;
+                UpdateInnerList();
             }
         }
 
         /// <summary>Updates the list view and raises the appropriate collection changed events.</summary>
-        public void Update()
-        {
-            UpdateInnerList();
-        }
+        public void Update() => UpdateInnerList();
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
@@ -121,7 +105,6 @@ namespace System.Waf.Foundation
         protected void Dispose(bool disposing)
         {
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
-
             OnDispose(disposing);
             if (disposing)
             {
@@ -139,21 +122,12 @@ namespace System.Waf.Foundation
         private void UpdateInnerList()
         {
             var enumerable = originalList;
-            if (Filter != null)
-            {
-                enumerable = enumerable.Where(x => Filter(x));
-            }
-            if (Sort != null)
-            {
-                enumerable = Sort(enumerable);
-            }
+            if (Filter != null) enumerable = enumerable.Where(x => Filter(x));
+            if (Sort != null) enumerable = Sort(enumerable);
             var newList = enumerable.ToArray();
-            InnerList.Merge(newList.ToArray(), comparer, Insert, RemoveAt, () => Reset(newList), Move);
+            InnerList.Merge(newList, comparer, Insert, RemoveAt, () => Reset(newList), Move);
         }
 
-        private void OriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            UpdateInnerList();
-        }
+        private void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateInnerList();
     }
 }

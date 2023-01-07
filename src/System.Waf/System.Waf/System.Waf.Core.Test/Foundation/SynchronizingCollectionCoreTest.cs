@@ -43,7 +43,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(3, e.NewStartingIndex);
-                Assert.AreEqual(originalCollection.Last(), e.NewItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(originalCollection.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Add(new MyModel());
@@ -58,7 +58,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(0, e.NewStartingIndex);
-                Assert.AreEqual(originalCollection[0], e.NewItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(originalCollection[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Insert(0, new MyModel());
@@ -77,7 +77,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
                 Assert.AreEqual(2, e.OldStartingIndex);
-                Assert.AreEqual(itemToRemove, e.OldItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(itemToRemove, e.OldItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Remove(itemToRemove);
@@ -94,8 +94,8 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(NotifyCollectionChangedAction.Replace, e.Action);
                 Assert.AreEqual(1, e.NewStartingIndex);
                 Assert.AreEqual(1, e.OldStartingIndex);
-                Assert.AreEqual(originalCollection[1], e.NewItems.Cast<MyDataModel>().Single().Model);
-                Assert.AreEqual(itemToReplace, e.OldItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(originalCollection[1], e.NewItems!.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(itemToReplace, e.OldItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection[1] = new MyModel();
@@ -154,7 +154,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(3, e.NewStartingIndex);
-                Assert.AreEqual(originalCollection.Last(), e.NewItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(originalCollection.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Add(new MyModel());
@@ -173,7 +173,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
                 Assert.AreEqual(2, e.OldStartingIndex);
-                Assert.AreEqual(itemToRemove, e.OldItems.Cast<MyDataModel>().Single().Model);
+                Assert.AreEqual(itemToRemove, e.OldItems!.Cast<MyDataModel>().Single().Model);
             };
             synchronizingCollection.CollectionChanged += handler;
             originalCollection.Remove(itemToRemove);
@@ -189,12 +189,12 @@ namespace Test.Waf.Foundation
                 if (handlerCalledCount == 0)
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
-                    Assert.AreEqual(itemToReplace, e.OldItems.Cast<MyDataModel>().Single().Model);
+                    Assert.AreEqual(itemToReplace, e.OldItems!.Cast<MyDataModel>().Single().Model);
                 }
                 else
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
-                    Assert.AreEqual(originalCollection[1], e.NewItems.Cast<MyDataModel>().Single().Model);
+                    Assert.AreEqual(originalCollection[1], e.NewItems!.Cast<MyDataModel>().Single().Model);
                 }
                 handlerCalledCount++;
             };
@@ -340,10 +340,7 @@ namespace Test.Waf.Foundation
                     Clear();
                     if (newItems != null)
                     {
-                        foreach (T item in newItems)
-                        {
-                            Add(item);
-                        }
+                        foreach (var x in newItems) Add(x);
                     }
                 }
                 finally
@@ -367,7 +364,7 @@ namespace Test.Waf.Foundation
                             e = new NotifyCollectionChangedEventArgs(e.Action, e.OldItems);
                             break;
                         case NotifyCollectionChangedAction.Replace:
-                            e = new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.OldItems);
+                            e = new NotifyCollectionChangedEventArgs(e.Action, e.NewItems!, e.OldItems!);
                             break;
                         case NotifyCollectionChangedAction.Reset:
                             e = new NotifyCollectionChangedEventArgs(e.Action);
@@ -380,15 +377,11 @@ namespace Test.Waf.Foundation
 
         private class SubSynchronizingCollection<T, TOriginal> : SynchronizingCollectionCore<T, TOriginal>
         {
-            public SubSynchronizingCollection(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory)
-                : base(originalCollection, factory, true)
+            public SubSynchronizingCollection(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory) : base(originalCollection, factory, true)
             {
             }
 
-            public void NotifyOriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-            {
-                OriginalCollectionChanged(sender, e);
-            }
+            public void NotifyOriginalCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => OriginalCollectionChanged(sender, e);
         }
     }
 }

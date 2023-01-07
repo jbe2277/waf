@@ -45,9 +45,9 @@ namespace Test.Waf.Foundation
 
             public void RaiseEvent() => canExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-            public bool CanExecute(object parameter) => throw new NotImplementedException();
+            public bool CanExecute(object? parameter) => throw new NotImplementedException();
 
-            public void Execute(object parameter) =>throw new NotImplementedException();
+            public void Execute(object? parameter) => throw new NotImplementedException();
         }
 
         public class Subscriber : ISubscriber

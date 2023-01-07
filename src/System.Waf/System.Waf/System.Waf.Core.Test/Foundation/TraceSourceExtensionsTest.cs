@@ -75,7 +75,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual("TstMsg", listener.TraceEvents[0].Format);
             Assert.IsNull(listener.TraceEvents[0].Arguments);
             Assert.AreEqual("Tst{0}", listener.TraceEvents[1].Format);
-            Assert.AreEqual(42, listener.TraceEvents[1].Arguments.Single());
+            Assert.AreEqual(42, listener.TraceEvents[1].Arguments!.Single());
 
             log.Switch.Level = unsupported;
             logAction1(log, "NextMsg");
@@ -85,25 +85,25 @@ namespace Test.Waf.Foundation
 
         private class StubTraceListener : TraceListener
         {
-            public IList<string> Writes { get; } = new List<string>();
+            public IList<string?> Writes { get; } = new List<string?>();
 
             public IList<LogMessage> TraceEvents { get; } = new List<LogMessage>();
 
-            public override void Write(string message) => Writes.Add(message);
+            public override void Write(string? message) => Writes.Add(message);
 
-            public override void WriteLine(string message) => Writes.Add(message);
+            public override void WriteLine(string? message) => Writes.Add(message);
 
-            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
+            public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id)
             {
                 TraceEvents.Add(new LogMessage(eventCache, source, eventType, id));
             }
 
-            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+            public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? message)
             {
                 TraceEvents.Add(new LogMessage(eventCache, source, eventType, id, message));
             }
 
-            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object?[] args)
+            public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
             {
                 TraceEvents.Add(new LogMessage(eventCache, source, eventType, id, format, args));
             }
@@ -111,7 +111,7 @@ namespace Test.Waf.Foundation
 
         private class LogMessage
         {
-            public LogMessage(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string? format = null, object?[]? arguments = null)
+            public LogMessage(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format = null, object?[]? arguments = null)
             {
                 EventCache = eventCache;
                 Source = source;
@@ -121,7 +121,7 @@ namespace Test.Waf.Foundation
                 Arguments = arguments;
             }
 
-            public TraceEventCache EventCache { get; }
+            public TraceEventCache? EventCache { get; }
 
             public string Source { get; }
 

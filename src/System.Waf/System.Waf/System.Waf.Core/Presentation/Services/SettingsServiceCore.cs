@@ -53,10 +53,7 @@ namespace System.Waf.Presentation.Services
         /// </summary>
         /// <typeparam name="T">The type of the user settings object.</typeparam>
         /// <returns>The user settings object.</returns>
-        public T Get<T>() where T : class, new()
-        {
-            return (T)settings.GetOrAdd(typeof(T), key => new Lazy<object>(() => Load(key))).Value;
-        }
+        public T Get<T>() where T : class, new() => (T)settings.GetOrAdd(typeof(T), key => new Lazy<object>(() => Load(key))).Value;
 
         /// <summary>
         /// Saves all user setting objects. Save is also called when this service gets disposed to ensure that the latest changes are persisted.
@@ -83,7 +80,7 @@ namespace System.Waf.Presentation.Services
                 }
                 else
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(FileName));
+                    Directory.CreateDirectory(Path.GetDirectoryName(FileName) ?? throw new DirectoryNotFoundException("Directory not found: " + FileName));
                 }
 
                 document ??= CreateEmptyDocument();
@@ -116,14 +113,8 @@ namespace System.Waf.Presentation.Services
             {
                 var existingElement = GetSettingElement(document, setting.GetType());
                 var newElement = CreateSettingElement(setting);
-                if (existingElement != null)
-                {
-                    existingElement.ReplaceWith(newElement);
-                }
-                else
-                {
-                    document.Root.Add(newElement);
-                }
+                if (existingElement != null) existingElement.ReplaceWith(newElement);
+                else document.Root!.Add(newElement);
             }
         }
 
@@ -139,24 +130,15 @@ namespace System.Waf.Presentation.Services
         protected void Dispose(bool disposing)
         {
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
-
             OnDispose(disposing);
-            if (disposing)
-            {
-                Save();
-            }
+            if (disposing) Save();
         }
 
         /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
-        protected virtual void OnDispose(bool disposing)
-        {
-        }
+        protected virtual void OnDispose(bool disposing) { }
 
-        private void OnErrorOccurred(SettingsErrorEventArgs e)
-        {
-            ErrorOccurred?.Invoke(this, e);
-        }
+        private void OnErrorOccurred(SettingsErrorEventArgs e) => ErrorOccurred?.Invoke(this, e);
 
         private object Load(Type type)
         {
@@ -182,12 +164,12 @@ namespace System.Waf.Presentation.Services
             {
                 var serializer = new DataContractSerializer(typeof(List<object>), new[] { type });
                 var document = CreateEmptyDocument();
-                document.Root.Add(element);
+                document.Root!.Add(element);
                 using var memoryStream = new MemoryStream();
                 document.Save(memoryStream);
                 memoryStream.Position = 0;
                 var settingObject = serializer.ReadObject(memoryStream);
-                return ((List<object>)settingObject).Single();
+                return ((List<object>)settingObject!).Single();
             }
             return null;
         }
@@ -205,7 +187,7 @@ namespace System.Waf.Presentation.Services
             var settingTypeNamespace = dataContract?.Namespace ?? dcNamespace.NamespaceName + settingType.Namespace;
             var settingTypeName = dataContract?.Name ?? GetTypeName(settingType);
 
-            foreach (var element in document.Root.Elements())
+            foreach (var element in document.Root!.Elements())
             {
                 var typeValue = element.Attribute(xsiNamespace + "type")?.Value.Split(new[] { ':' }, 2);
                 if (typeValue == null) throw new XmlException("Wrong XML format. Cannot read type.");
@@ -214,10 +196,7 @@ namespace System.Waf.Presentation.Services
                 if (typeNamespace == null) throw new XmlException("Wrong XML format. Cannot read type namespace.");
 
                 var typeName = typeValue[1];
-                if (settingTypeNamespace == typeNamespace && settingTypeName == typeName)
-                {
-                    return element;
-                }
+                if (settingTypeNamespace == typeNamespace && settingTypeName == typeName) return element;
             }
             return null;
         }
@@ -242,7 +221,7 @@ namespace System.Waf.Presentation.Services
                 var dcs = new DataContractSerializer(typeof(List<object>), new[] { setting.GetType() });
                 dcs.WriteObject(writer, new List<object> { setting });
             }
-            return document.Root.Elements().Single();
+            return document.Root!.Elements().Single();
         }
     }
 }

@@ -48,10 +48,7 @@ namespace Test.Waf.Foundation
             var luke = new Person();
             bool eventRaised;
 
-            void EventHandler(object sender, PropertyChangedEventArgs e)
-            {
-                eventRaised = true;
-            }
+            void EventHandler(object? sender, PropertyChangedEventArgs e) => eventRaised = true;
 
             eventRaised = false;
             luke.PropertyChanged += EventHandler;
@@ -74,7 +71,7 @@ namespace Test.Waf.Foundation
             serializer.WriteObject(stream, person);
 
             stream.Position = 0;
-            var newPerson = (Person)serializer.ReadObject(stream);
+            var newPerson = (Person)serializer.ReadObject(stream)!;
             Assert.AreEqual(person.Name, newPerson.Name);
         }
 

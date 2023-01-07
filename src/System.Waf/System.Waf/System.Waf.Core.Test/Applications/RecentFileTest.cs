@@ -22,8 +22,8 @@ namespace Test.Waf.Applications
 
             IXmlSerializable serializable = recentFile;
             Assert.IsNull(serializable.GetSchema());
-            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.ReadXml(null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.WriteXml(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.ReadXml(null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.WriteXml(null!));
         }
     }
 }

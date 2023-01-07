@@ -31,10 +31,7 @@ namespace System.Waf.Foundation
         /// <param name="factory">The factory which is used to create new elements in this collection.</param>
         /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
         /// <exception cref="ArgumentNullException">The argument factory must not be null.</exception>
-        public SynchronizingCollectionCore(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory)
-            : this(originalCollection, factory, false)
-        {
-        }
+        public SynchronizingCollectionCore(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory) : this(originalCollection, factory, false) { }
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
@@ -55,17 +52,11 @@ namespace System.Waf.Foundation
             if (!noCollectionChangedHandler)
             {
                 originalObservableCollection = originalCollection as INotifyCollectionChanged;
-                if (originalObservableCollection != null)
-                {
-                    originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
-                }
+                if (originalObservableCollection != null) originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
             }
 
             innerCollection = (ObservableCollection<T>)Items;
-            foreach (TOriginal item in originalCollection)
-            {
-                innerCollection.Add(CreateItem(item));
-            }
+            foreach (TOriginal x in originalCollection) innerCollection.Add(CreateItem(x));
         }
 
         /// <summary>Call this method when the original collection has changed.</summary>
@@ -80,7 +71,7 @@ namespace System.Waf.Foundation
                 if (e.NewStartingIndex >= 0)
                 {
                     int i = e.NewStartingIndex;
-                    foreach (TOriginal item in e.NewItems)
+                    foreach (TOriginal item in e.NewItems ?? Array.Empty<TOriginal>())
                     {
                         innerCollection.Insert(i, CreateItem(item));
                         i++;
@@ -88,58 +79,43 @@ namespace System.Waf.Foundation
                 }
                 else
                 {
-                    foreach (TOriginal item in e.NewItems)
-                    {
-                        innerCollection.Add(CreateItem(item));
-                    }
+                    foreach (TOriginal x in e.NewItems ?? Array.Empty<TOriginal>()) innerCollection.Add(CreateItem(x));
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 if (e.OldStartingIndex >= 0)
                 {
-                    for (int i = 0; i < e.OldItems.Count; i++)
-                    {
-                        RemoveAtCore(e.OldStartingIndex);
-                    }
+                    for (int i = 0; i < e.OldItems?.Count; i++) RemoveAtCore(e.OldStartingIndex);
                 }
                 else
                 {
-                    foreach (TOriginal item in e.OldItems)
-                    {
-                        RemoveCore(item);
-                    }
+                    foreach (TOriginal x in e.OldItems ?? Array.Empty<TOriginal>()) RemoveCore(x);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Replace)
             {
                 if (e.NewStartingIndex >= 0)
                 {
-                    for (int i = 0; i < e.NewItems.Count; i++)
+                    for (int i = 0; i < e.NewItems?.Count; i++)
                     {
                         innerCollection[i + e.NewStartingIndex] = CreateItem((TOriginal)e.NewItems[i]);
                     }
                 }
                 else
                 {
-                    foreach (TOriginal item in e.OldItems) { RemoveCore(item); }
-                    foreach (TOriginal item in e.NewItems) { innerCollection.Add(CreateItem(item)); }
+                    foreach (TOriginal x in e.OldItems ?? Array.Empty<TOriginal>()) RemoveCore(x);
+                    foreach (TOriginal x in e.NewItems ?? Array.Empty<TOriginal>()) innerCollection.Add(CreateItem(x));
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Move)
             {
-                for (int i = 0; i < e.NewItems.Count; i++)
-                {
-                    innerCollection.Move(e.OldStartingIndex + i, e.NewStartingIndex + i);
-                }
+                for (int i = 0; i < e.NewItems?.Count; i++) innerCollection.Move(e.OldStartingIndex + i, e.NewStartingIndex + i);
             }
             else // Reset
             {
                 ClearCore();
-                foreach (TOriginal item in originalCollection)
-                {
-                    innerCollection.Add(CreateItem(item));
-                }
+                foreach (TOriginal x in originalCollection) innerCollection.Add(CreateItem(x));
             }
         }
 
@@ -155,7 +131,6 @@ namespace System.Waf.Foundation
         protected void Dispose(bool disposing)
         {
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
-
             OnDispose(disposing);
             if (disposing)
             {
@@ -168,20 +143,18 @@ namespace System.Waf.Foundation
 
         /// <summary>Override this method to free, release or reset any resources.</summary>
         /// <param name="disposing">if true then dispose unmanaged and managed resources; otherwise dispose only unmanaged resources.</param>
-        protected virtual void OnDispose(bool disposing)
-        {
-        }
+        protected virtual void OnDispose(bool disposing) { }
 
         private T CreateItem([AllowNull] TOriginal oldItem)
         {
             T newItem = factory(oldItem!);
-            mapping.Add(new Tuple<TOriginal, T>(oldItem!, newItem));
+            mapping.Add(Tuple.Create(oldItem!, newItem));
             return newItem;
         }
 
         private void RemoveCore([AllowNull] TOriginal oldItem)
         {
-            Tuple<TOriginal, T> tuple = mapping.First(t => originalItemComparer.Equals(t.Item1, oldItem!));
+            var tuple = mapping.First(t => originalItemComparer.Equals(t.Item1, oldItem!));
             mapping.Remove(tuple);
             innerCollection.Remove(tuple.Item2);
         }
@@ -189,7 +162,7 @@ namespace System.Waf.Foundation
         private void RemoveAtCore(int index)
         {
             T newItem = this[index];
-            Tuple<TOriginal, T> tuple = mapping.First(t => itemComparer.Equals(t.Item2, newItem));
+            var tuple = mapping.First(t => itemComparer.Equals(t.Item2, newItem));
             mapping.Remove(tuple);
             innerCollection.RemoveAt(index);
         }
