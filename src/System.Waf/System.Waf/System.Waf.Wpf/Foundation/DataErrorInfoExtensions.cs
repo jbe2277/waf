@@ -23,7 +23,7 @@ namespace System.Waf.Foundation
         public static string Validate(this IDataErrorInfo instance, string? memberName)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            return instance[memberName] ?? "";
+            return instance[memberName ?? ""] ?? "";
         }
     }
 }

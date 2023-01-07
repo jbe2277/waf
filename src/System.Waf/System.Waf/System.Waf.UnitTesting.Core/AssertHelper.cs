@@ -18,8 +18,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="AssertException">Thrown when the expected exception was not thrown by the action.</exception>
         public static T ExpectedException<T>(Action action) where T : Exception
         {
-            if (action == null) throw new ArgumentNullException(nameof(action));
-            
+            if (action == null) throw new ArgumentNullException(nameof(action));            
             T? expectedException = null;
             Exception? wrongException = null;
             try
@@ -40,8 +39,7 @@ namespace System.Waf.UnitTesting
 
             if (wrongException != null)
             {
-                throw new AssertException(string.Format(null, 
-                    "Test method threw exception {0}, but exception {1} was expected. Exception message: {0}: {2}",
+                throw new AssertException(string.Format(null, "Test method threw exception {0}, but exception {1} was expected. Exception message: {0}: {2}",
                     wrongException.GetType().Name, typeof(T).Name, wrongException.Message));
             }
             else if (expectedException == null)
@@ -77,7 +75,7 @@ namespace System.Waf.UnitTesting
             
             int canExecuteChangedCount = 0;
 
-            void CanExecuteChangedHandler(object sender, EventArgs e)
+            void CanExecuteChangedHandler(object? sender, EventArgs e)
             {
                 if (command != sender) throw new AssertException("The sender object of the event isn't the command");
                 canExecuteChangedCount++;
@@ -108,8 +106,7 @@ namespace System.Waf.UnitTesting
         /// <param name="raisePropertyChanged">An action that results in a property changed event of the observable.</param>
         /// <exception cref="AssertException">This exception is thrown when no or more than one property changed event was 
         /// raised by the observable or the sender object of the event was not the observable object.</exception>
-        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object?>> expression, Action raisePropertyChanged)
-            where T : class, INotifyPropertyChanged
+        public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object?>> expression, Action raisePropertyChanged) where T : class, INotifyPropertyChanged
         {
             PropertyChangedEvent(observable, expression, raisePropertyChanged, 1, ExpectedChangedCountMode.Exact);
         }
@@ -124,8 +121,7 @@ namespace System.Waf.UnitTesting
         /// <exception cref="AssertException">This exception is thrown when no or more than one property changed event was 
         /// raised by the observable or the sender object of the event was not the observable object.</exception>
         public static void PropertyChangedEvent<T>(T observable, Expression<Func<T, object?>> expression, Action raisePropertyChanged, int expectedChangedCount,
-            ExpectedChangedCountMode expectedChangedCountMode)
-            where T : class, INotifyPropertyChanged
+            ExpectedChangedCountMode expectedChangedCountMode) where T : class, INotifyPropertyChanged
         {
             if (observable == null) throw new ArgumentNullException(nameof(observable));
             if (expression == null) throw new ArgumentNullException(nameof(expression));
@@ -135,13 +131,10 @@ namespace System.Waf.UnitTesting
             string propertyName = GetProperty(expression).Name;
             int propertyChangedCount = 0;
 
-            void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
+            void PropertyChangedHandler(object? sender, PropertyChangedEventArgs e)
             {
                 if (observable != sender) throw new AssertException("The sender object of the event isn't the observable");
-                if (e.PropertyName == propertyName)
-                {
-                    propertyChangedCount++;
-                }
+                if (e.PropertyName == propertyName) propertyChangedCount++;
             }
 
             observable.PropertyChanged += PropertyChangedHandler;
@@ -150,15 +143,13 @@ namespace System.Waf.UnitTesting
 
             if (propertyChangedCount < expectedChangedCount && expectedChangedCountMode != ExpectedChangedCountMode.AtMost)
             {
-                throw new AssertException(string.Format(null, 
-                    "The PropertyChanged event for the property '{0}' was raised {1} times. Expected is {2} times{3}.",
+                throw new AssertException(string.Format(null, "The PropertyChanged event for the property '{0}' was raised {1} times. Expected is {2} times{3}.",
                     propertyName, propertyChangedCount, expectedChangedCount,
                     expectedChangedCountMode == ExpectedChangedCountMode.AtLeast ? " or more" : ""));
             }
             else if (propertyChangedCount > expectedChangedCount && expectedChangedCountMode != ExpectedChangedCountMode.AtLeast)
             {
-                throw new AssertException(string.Format(null,
-                    "The PropertyChanged event for the property '{0}' was raised {1} times. Expected is {2} times{3}.", 
+                throw new AssertException(string.Format(null, "The PropertyChanged event for the property '{0}' was raised {1} times. Expected is {2} times{3}.", 
                     propertyName, propertyChangedCount, expectedChangedCount,
                     expectedChangedCountMode == ExpectedChangedCountMode.AtMost ? " or less" : ""));
             }
@@ -170,10 +161,7 @@ namespace System.Waf.UnitTesting
         /// <param name="actual">An System.Collections.Generic.IEnumerable`1 to compare to the expected sequence.</param>
         /// <exception cref="ArgumentNullException">expected or actual is null.</exception>
         /// <exception cref="AssertException">expected is not equal to actual.</exception>
-        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual)
-        {
-            SequenceEqual(expected, actual, null);
-        }
+        public static void SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual) => SequenceEqual(expected, actual, null);
 
         /// <summary>
         /// Verifies that two sequences are equal by comparing their elements by using a specified System.Collections.Generic.IEqualityComparer`1. 
@@ -191,8 +179,7 @@ namespace System.Waf.UnitTesting
             if (actual == null) throw new ArgumentNullException(nameof(actual));
             if (!expected.SequenceEqual(actual, comparer))
             {
-                throw new AssertException(string.Format(null,
-                    "The actual sequence is not equal to the expected sequence." + Environment.NewLine
+                throw new AssertException(string.Format(null, "The actual sequence is not equal to the expected sequence." + Environment.NewLine
                     + "actual:   count: {0}; items (Take 20): [{1}]" + Environment.NewLine
                     + "expected: count: {2}; items (Take 20): [{3}]",
                     actual.Count(), string.Join(", ", actual.Take(20)), expected.Count(), string.Join(", ", expected.Take(20))));
@@ -210,10 +197,9 @@ namespace System.Waf.UnitTesting
             }
 
             // If this isn't a member access expression then the expression isn't valid
-            MemberExpression? memberExpression = expression as MemberExpression;
-            if (memberExpression == null) ThrowExpressionArgumentException();
+            var memberExpression = expression as MemberExpression ?? throw CreateExpressionArgumentException();
             
-            expression = memberExpression!.Expression;
+            expression = memberExpression!.Expression ?? throw CreateExpressionArgumentException();
 
             // If the Property returns a ValueType then a Convert is required => Remove it
             if (expression.NodeType == ExpressionType.Convert || expression.NodeType == ExpressionType.ConvertChecked)
@@ -222,20 +208,14 @@ namespace System.Waf.UnitTesting
             }
 
             // Check if the expression is the parameter itself
-            if (expression.NodeType != ExpressionType.Parameter) ThrowExpressionArgumentException();
-            
-            // Finally retrieve the PropertyInfo
-            PropertyInfo? propertyInfo = memberExpression.Member as PropertyInfo;
-            if (propertyInfo == null) ThrowExpressionArgumentException();
-            
-            return propertyInfo;
-        }
+            if (expression.NodeType != ExpressionType.Parameter) throw CreateExpressionArgumentException();
 
-        [DoesNotReturn]
-        private static void ThrowExpressionArgumentException()
-        {
-            throw new ArgumentException("Only the simple expression 'x => x.[Property]' is allowed. "
-                + "[Property] must be replaced with the property name that should be used.", "propertyExpression");
+            // Finally retrieve the PropertyInfo
+            var propertyInfo = memberExpression.Member as PropertyInfo ?? throw CreateExpressionArgumentException();
+            return propertyInfo;
+
+            static ArgumentException CreateExpressionArgumentException() => new ArgumentException("Only the simple expression 'x => x.[Property]' is allowed. "
+                    + "[Property] must be replaced with the property name that should be used.", "propertyExpression");
         }
     }
 }
