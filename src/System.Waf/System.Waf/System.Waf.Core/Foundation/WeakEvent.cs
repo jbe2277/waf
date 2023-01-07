@@ -78,7 +78,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, EventArgs e)
+                private void ProxyHandler(object? sender, EventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
@@ -136,7 +136,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, TArgs e)
+                private void ProxyHandler(object? sender, TArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
@@ -186,7 +186,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, EventArgs e)
+                private void ProxyHandler(object? sender, EventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
@@ -237,7 +237,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, TArgs e)
+                private void ProxyHandler(object? sender, TArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
@@ -287,7 +287,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, PropertyChangedEventArgs e)
+                private void ProxyHandler(object? sender, PropertyChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
@@ -337,7 +337,7 @@ namespace System.Waf.Foundation
                     return true;
                 }
 
-                private void ProxyHandler(object sender, NotifyCollectionChangedEventArgs e)
+                private void ProxyHandler(object? sender, NotifyCollectionChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();

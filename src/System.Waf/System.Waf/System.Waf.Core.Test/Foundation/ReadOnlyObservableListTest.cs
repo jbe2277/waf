@@ -16,17 +16,11 @@ namespace Test.Waf.Foundation
             var readOnlyList = new ReadOnlyObservableList<string>(list);
 
             int collectionChangedCalled = 0;
-            void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
-            {
-                collectionChangedCalled++;
-            }
+            void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => collectionChangedCalled++;
             int countPropertyChangedCalled = 0;
-            void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
+            void PropertyChangedHandler(object? sender, PropertyChangedEventArgs e)
             {
-                if (e.PropertyName == nameof(readOnlyList.Count))
-                {
-                    countPropertyChangedCalled++;
-                }
+                if (e.PropertyName == nameof(readOnlyList.Count)) countPropertyChangedCalled++;
             }
 
             readOnlyList.CollectionChanged += CollectionChangedHandler;

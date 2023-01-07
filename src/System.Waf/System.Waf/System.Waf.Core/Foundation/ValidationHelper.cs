@@ -46,7 +46,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        private static IEnumerable<ValidationResult> GetErrors(object value, ValidationContext context, IReadOnlyList<ValidationAttribute> attributes)
+        private static IEnumerable<ValidationResult> GetErrors(object? value, ValidationContext context, IReadOnlyList<ValidationAttribute> attributes)
         {
             var required = attributes.OfType<RequiredAttribute>().FirstOrDefault();
             if (required != null && TryGetError(value, context, required, out var result)) yield return result;
@@ -57,7 +57,7 @@ namespace System.Waf.Foundation
             }
         }
 
-        private static bool TryGetError(object value, ValidationContext context, ValidationAttribute attribute, [NotNullWhen(true)] out ValidationResult? result)
+        private static bool TryGetError(object? value, ValidationContext context, ValidationAttribute attribute, [NotNullWhen(true)] out ValidationResult? result)
         {
             var error = attribute.GetValidationResult(value, context);
             result = error == ValidationResult.Success ? null : error;

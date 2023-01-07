@@ -26,13 +26,10 @@ namespace Test.Waf.Foundation
             observableListView = new ObservableListViewCore<string>(originalList);
             eventArgsList = new List<NotifyCollectionChangedEventArgs>();
 
-            void CollectionHandler(object sender, NotifyCollectionChangedEventArgs e)
-            {
-                eventArgsList.Add(e);
-            }
+            void CollectionHandler(object? sender, NotifyCollectionChangedEventArgs e) => eventArgsList.Add(e);
             observableListView.CollectionChanged += CollectionHandler;
 
-            void PropertyHandler(object sender, PropertyChangedEventArgs e)
+            void PropertyHandler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(observableListView.Count))
                 {
@@ -334,7 +331,7 @@ namespace Test.Waf.Foundation
         private static void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
         {
             Assert.AreEqual(NotifyCollectionChangedAction.Add, eventArgs.Action);
-            Assert.AreEqual(newItem, eventArgs.NewItems.Cast<T>().Single());
+            Assert.AreEqual(newItem, eventArgs.NewItems!.Cast<T>().Single());
             Assert.AreEqual(newStartingIndex, eventArgs.NewStartingIndex);
             Assert.IsNull(eventArgs.OldItems);
             Assert.AreEqual(-1, eventArgs.OldStartingIndex);
@@ -343,7 +340,7 @@ namespace Test.Waf.Foundation
         private static void AssertElementRemoved<T>(T oldItem, int oldStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
         {
             Assert.AreEqual(NotifyCollectionChangedAction.Remove, eventArgs.Action);
-            Assert.AreEqual(oldItem, eventArgs.OldItems.Cast<T>().Single());
+            Assert.AreEqual(oldItem, eventArgs.OldItems!.Cast<T>().Single());
             Assert.AreEqual(oldStartingIndex, eventArgs.OldStartingIndex);
             Assert.IsNull(eventArgs.NewItems);
             Assert.AreEqual(-1, eventArgs.NewStartingIndex);
@@ -352,8 +349,8 @@ namespace Test.Waf.Foundation
         private static void AssertElementMoved<T>(T item, int oldIndex, int newIndex, NotifyCollectionChangedEventArgs eventArgs)
         {
             Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgs.Action);
-            Assert.AreEqual(item, eventArgs.NewItems.Cast<T>().Single());
-            Assert.AreEqual(item, eventArgs.OldItems.Cast<T>().Single());
+            Assert.AreEqual(item, eventArgs.NewItems!.Cast<T>().Single());
+            Assert.AreEqual(item, eventArgs.OldItems!.Cast<T>().Single());
             Assert.AreEqual(oldIndex, eventArgs.OldStartingIndex);
             Assert.AreEqual(newIndex, eventArgs.NewStartingIndex);
         }

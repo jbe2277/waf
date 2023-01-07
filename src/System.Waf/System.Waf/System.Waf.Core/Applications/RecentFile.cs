@@ -39,7 +39,7 @@ namespace System.Waf.Applications
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             if (reader == null) throw new ArgumentNullException(nameof(reader));
-            IsPinned = bool.Parse(reader.GetAttribute("IsPinned"));
+            IsPinned = bool.Parse(reader.GetAttribute("IsPinned") ?? "");
             Path = reader.ReadElementContentAsString();
         }
 

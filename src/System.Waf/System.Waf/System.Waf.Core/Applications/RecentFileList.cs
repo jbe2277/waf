@@ -36,15 +36,10 @@ namespace System.Waf.Applications
             get => maxFilesNumber;
             set
             {
-                if (maxFilesNumber != value)
-                {
-                    if (value <= 0) throw new ArgumentException("The value must be equal or larger than 1.");
-                    maxFilesNumber = value;
-                    if (recentFiles.Count - maxFilesNumber >= 1)
-                    {
-                        RemoveRange(maxFilesNumber, recentFiles.Count - maxFilesNumber);
-                    }
-                }
+                if (maxFilesNumber == value) return;
+                if (value <= 0) throw new ArgumentException("The value must be equal or larger than 1.");
+                maxFilesNumber = value;
+                if (recentFiles.Count - maxFilesNumber >= 1) RemoveRange(maxFilesNumber, recentFiles.Count - maxFilesNumber);
             }
         }
 
@@ -75,19 +70,13 @@ namespace System.Waf.Applications
             {
                 int oldIndex = recentFiles.IndexOf(recentFile);
                 int newIndex = recentFile.IsPinned ? 0 : PinCount;
-                if (oldIndex != newIndex)
-                {
-                    recentFiles.Move(oldIndex, newIndex);
-                }
+                if (oldIndex != newIndex) recentFiles.Move(oldIndex, newIndex);
             }
             else
             {
                 if (PinCount < maxFilesNumber)
                 {
-                    if (recentFiles.Count >= maxFilesNumber)
-                    {
-                        RemoveAt(recentFiles.Count - 1);
-                    }
+                    if (recentFiles.Count >= maxFilesNumber) RemoveAt(recentFiles.Count - 1);
                     Insert(PinCount, new RecentFile(fileName));
                 }
             }
@@ -100,17 +89,11 @@ namespace System.Waf.Applications
         public void Remove(RecentFile recentFile)
         {
             if (recentFile == null) throw new ArgumentNullException(nameof(recentFile));
-            if (recentFiles.Remove(recentFile))
-            {
-                recentFile.PropertyChanged -= RecentFilePropertyChanged;
-            }
-            else
-            {
-                throw new ArgumentException("The passed recentFile was not found in the recent files list.", nameof(recentFile));
-            }
+            if (!recentFiles.Remove(recentFile)) throw new ArgumentException("The passed recentFile was not found in the recent files list.", nameof(recentFile));
+            recentFile.PropertyChanged -= RecentFilePropertyChanged;
         }
 
-        XmlSchema IXmlSerializable.GetSchema() { return null!; }
+        XmlSchema IXmlSerializable.GetSchema() => null!;
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -122,7 +105,7 @@ namespace System.Waf.Applications
                 ((IXmlSerializable)recentFile).ReadXml(reader);
                 Add(recentFile);
             }
-            if (!reader.IsEmptyElement) { reader.ReadEndElement(); }
+            if (!reader.IsEmptyElement) reader.ReadEndElement();
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -148,13 +131,7 @@ namespace System.Waf.Applications
             recentFiles.Add(recentFile);
         }
 
-        private void AddRange(IEnumerable<RecentFile> recentFilesToAdd)
-        {
-            foreach (RecentFile recentFile in recentFilesToAdd)
-            {
-                Add(recentFile);
-            }
-        }
+        private void AddRange(IEnumerable<RecentFile> recentFilesToAdd) { foreach (RecentFile x in recentFilesToAdd) Add(x); }
 
         private void RemoveAt(int index)
         {
@@ -162,28 +139,19 @@ namespace System.Waf.Applications
             recentFiles.RemoveAt(index);
         }
 
-        private void RemoveRange(int index, int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                RemoveAt(index);
-            }
-        }
+        private void RemoveRange(int index, int count) { for (int i = 0; i < count; i++) RemoveAt(index); }
 
         private void Clear()
         {
-            foreach (RecentFile recentFile in recentFiles)
-            {
-                recentFile.PropertyChanged -= RecentFilePropertyChanged;
-            }
+            foreach (var x in recentFiles) x.PropertyChanged -= RecentFilePropertyChanged;
             recentFiles.Clear();
         }
 
-        private void RecentFilePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void RecentFilePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(RecentFile.IsPinned))
             {
-                var recentFile = (RecentFile)sender;
+                var recentFile = (RecentFile)sender!;
                 int oldIndex = recentFiles.IndexOf(recentFile);
                 if (recentFile.IsPinned)
                 {
@@ -192,10 +160,7 @@ namespace System.Waf.Applications
                 else
                 {
                     int newIndex = PinCount;
-                    if (oldIndex != newIndex)
-                    {
-                        recentFiles.Move(oldIndex, newIndex);
-                    }
+                    if (oldIndex != newIndex) recentFiles.Move(oldIndex, newIndex);
                 }
             }
         }

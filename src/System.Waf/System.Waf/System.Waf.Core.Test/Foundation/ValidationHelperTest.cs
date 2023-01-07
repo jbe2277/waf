@@ -27,9 +27,9 @@ namespace Test.Waf.Foundation
         [CustomValidation(typeof(TypeValidationClass), nameof(TestValidate))]
         public class TypeValidationClass : IValidatableObject
         {
-            public ValidationResult Result { get; set; } = ValidationResult.Success;
+            public ValidationResult? Result { get; set; } = ValidationResult.Success;
 
-            public static ValidationResult TestValidate(TypeValidationClass value, ValidationContext context)
+            public static ValidationResult? TestValidate(TypeValidationClass value, ValidationContext context)
             {
                 return value.Result;
             }

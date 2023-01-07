@@ -13,7 +13,7 @@ namespace System.Waf.Applications.Services
             SetDefaultValues();  // The call of the virtual method is correct in this case.
         }
 
-        ExtensionDataObject IExtensibleDataObject.ExtensionData { get; set; } = null!;
+        ExtensionDataObject? IExtensibleDataObject.ExtensionData { get; set; } = null!;
 
         /// <summary>
         /// Set the default values within this method. During deserialization the constructor is NOT called

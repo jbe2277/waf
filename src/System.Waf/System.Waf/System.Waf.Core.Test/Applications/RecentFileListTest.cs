@@ -131,7 +131,7 @@ namespace Test.Waf.Applications
             var recentFileList1 = new RecentFileList();
             serializer.Serialize(stream1, recentFileList1);
             stream1.Position = 0;
-            var recentFileList2 = (RecentFileList)serializer.Deserialize(stream1);
+            var recentFileList2 = (RecentFileList)serializer.Deserialize(stream1)!;
             Assert.AreEqual(recentFileList1.RecentFiles.Count, recentFileList2.RecentFiles.Count);
             AssertHelper.SequenceEqual(recentFileList1.RecentFiles.Select(f => f.Path), recentFileList2.RecentFiles.Select(f => f.Path));
 
@@ -142,7 +142,7 @@ namespace Test.Waf.Applications
             recentFileList2.AddFile("Doc1");
             serializer.Serialize(stream2, recentFileList2);
             stream2.Position = 0;
-            var recentFileList3 = (RecentFileList)serializer.Deserialize(stream2);
+            var recentFileList3 = (RecentFileList)serializer.Deserialize(stream2)!;
             AssertHelper.SequenceEqual(recentFileList2.RecentFiles.Select(f => f.Path), recentFileList3.RecentFiles.Select(f => f.Path));
 
             // Set MaxFilesNumber to a lower number
@@ -152,8 +152,8 @@ namespace Test.Waf.Applications
             // Check error handling of the serializable implementation
             IXmlSerializable serializable = recentFileList3;
             Assert.IsNull(serializable.GetSchema());
-            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.ReadXml(null));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.WriteXml(null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.ReadXml(null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => serializable.WriteXml(null!));
         }
 
         [TestMethod]

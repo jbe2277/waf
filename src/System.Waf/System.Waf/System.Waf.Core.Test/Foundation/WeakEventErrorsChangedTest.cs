@@ -49,7 +49,7 @@ namespace Test.Waf.Foundation
 
             public void RaiseEvent() => errorsChanged?.Invoke(this, args);
 
-            public IEnumerable GetErrors(string propertyName) => throw new NotImplementedException();
+            public IEnumerable GetErrors(string? propertyName) => throw new NotImplementedException();
         }
 
         public class Subscriber : ISubscriber

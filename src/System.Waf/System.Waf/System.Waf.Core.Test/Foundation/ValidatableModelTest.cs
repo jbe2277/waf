@@ -154,7 +154,7 @@ namespace Test.Waf.Foundation
             serializer.WriteObject(stream, person);
 
             stream.Position = 0;
-            var newPerson = (Person)serializer.ReadObject(stream);
+            var newPerson = (Person)serializer.ReadObject(stream)!;
             Assert.AreEqual(person.Name, newPerson.Name);
         }
 
@@ -171,7 +171,7 @@ namespace Test.Waf.Foundation
             Assert.IsFalse(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Bill")));
             Assert.IsTrue(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Test")));
             Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Age" }), new ValidationResult("Test", new[] { "Name", "Age" })));
-            Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", null }), new ValidationResult("Test", new[] { "Name", null })));
+            Assert.IsTrue(comparer.Equals(new ValidationResult("Test", new[] { "Name", null! }), new ValidationResult("Test", new[] { "Name", null! })));
             Assert.IsFalse(comparer.Equals(new ValidationResult("Test", new[] { "Name", "Wrong" }), new ValidationResult("Test", new[] { "Name", "Age" })));
 
             Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null)));
@@ -180,7 +180,7 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(0, comparer.GetHashCode(new ValidationResult(null, new string[0])));
             Assert.AreEqual("Test".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new string[0])));
             Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name" })));
-            Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", null })));
+            Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", null! })));
             Assert.AreEqual("Test".GetHashCode() ^ "Name".GetHashCode() ^ "Age".GetHashCode(), comparer.GetHashCode(new ValidationResult("Test", new[] { "Name", "Age" })));
         }
 
@@ -192,10 +192,7 @@ namespace Test.Waf.Foundation
             EventHandler<DataErrorsChangedEventArgs> handler = (sender, e) =>
             {
                 Assert.AreEqual(model, sender);
-                if (propertyName == null || e.PropertyName == propertyName)
-                {
-                    errorsChangedCount++;
-                }
+                if (propertyName == null || e.PropertyName == propertyName) errorsChangedCount++;
             };
 
             model.ErrorsChanged += handler;
@@ -246,7 +243,7 @@ namespace Test.Waf.Foundation
                 return base.SetPropertyAndValidate(ref field!, value, propertyName);
             }
 
-            public static ValidationResult ValidateAge(int value, ValidationContext context)
+            public static ValidationResult? ValidateAge(int value, ValidationContext context)
             {
                 if (value > 150) return new ValidationResult("Too old", new[] { nameof(Age) });
                 return ValidationResult.Success;

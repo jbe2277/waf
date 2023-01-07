@@ -96,7 +96,7 @@ namespace Test.Waf.Presentation.Services
 
             using var stream = File.OpenRead(settingsFileName);
             var dcs = new DataContractSerializer(typeof(List<object>), new[] { typeof(TestSettings1), typeof(TestSettings2) });
-            var settings = (List<object>)dcs.ReadObject(stream);
+            var settings = (List<object>)dcs.ReadObject(stream)!;
             Assert.AreEqual(2, settings.Count);
             Assert.AreEqual(testSettings1.UserId, settings.OfType<TestSettings1>().Single().UserId);
             Assert.AreEqual(testSettings2.Value, settings.OfType<TestSettings2>().Single().Value);
