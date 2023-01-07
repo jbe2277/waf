@@ -1,6 +1,4 @@
 ﻿<Project>
-  <Import Project="$([MSBuild]::GetPathOfFileAbove($(MSBuildThisFile), $(MSBuildThisFileDirectory)../))" />
-
   <PropertyGroup>
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
