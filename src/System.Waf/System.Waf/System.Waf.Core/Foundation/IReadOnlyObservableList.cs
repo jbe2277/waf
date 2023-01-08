@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace System.Waf.Foundation
 {
@@ -12,7 +13,7 @@ namespace System.Waf.Foundation
     /// That is, you can use either the type you specified or any type that is more
     /// derived.
     /// </typeparam>
-    public interface IReadOnlyObservableList<out T> : IReadOnlyList<T>, INotifyCollectionChanged
+    public interface IReadOnlyObservableList<out T> : IReadOnlyList<T>, INotifyCollectionChanged, INotifyPropertyChanged
     {
     }
 }
