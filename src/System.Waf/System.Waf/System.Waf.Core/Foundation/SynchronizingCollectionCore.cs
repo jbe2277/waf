@@ -17,7 +17,7 @@ namespace System.Waf.Foundation
     public class SynchronizingCollectionCore<T, TOriginal> : ReadOnlyObservableList<T>, IDisposable
     {
         private readonly ObservableCollection<T> innerCollection;
-        private readonly List<Tuple<TOriginal, T>> mapping;
+        private readonly List<(TOriginal original, T newItem)> mapping;
         private readonly IEnumerable<TOriginal> originalCollection;
         private readonly INotifyCollectionChanged? originalObservableCollection;
         private readonly Func<TOriginal, T> factory;
@@ -42,7 +42,7 @@ namespace System.Waf.Foundation
         protected SynchronizingCollectionCore(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory, bool noCollectionChangedHandler)
             : base(new ObservableCollection<T>())
         {
-            mapping = new List<Tuple<TOriginal, T>>();
+            mapping = new List<(TOriginal, T)>();
             this.originalCollection = originalCollection ?? throw new ArgumentNullException(nameof(originalCollection));
             this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
             itemComparer = EqualityComparer<T>.Default;
@@ -148,21 +148,21 @@ namespace System.Waf.Foundation
         private T CreateItem([AllowNull] TOriginal oldItem)
         {
             T newItem = factory(oldItem!);
-            mapping.Add(Tuple.Create(oldItem!, newItem));
+            mapping.Add((oldItem!, newItem));
             return newItem;
         }
 
         private void RemoveCore([AllowNull] TOriginal oldItem)
         {
-            var tuple = mapping.First(t => originalItemComparer.Equals(t.Item1, oldItem!));
+            var tuple = mapping.First(t => originalItemComparer.Equals(t.original, oldItem!));
             mapping.Remove(tuple);
-            innerCollection.Remove(tuple.Item2);
+            innerCollection.Remove(tuple.newItem);
         }
 
         private void RemoveAtCore(int index)
         {
             T newItem = this[index];
-            var tuple = mapping.First(t => itemComparer.Equals(t.Item2, newItem));
+            var tuple = mapping.First(t => itemComparer.Equals(t.newItem, newItem));
             mapping.Remove(tuple);
             innerCollection.RemoveAt(index);
         }
