@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,13 +8,13 @@ namespace System.Waf.UnitTesting
     public sealed class UnitTestSynchronizationContext : SynchronizationContext, IDisposable
     {
         private readonly SynchronizationContext? previousContext;
-        private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object?>> messageQueue;
+        private readonly BlockingCollection<(SendOrPostCallback callback, object? state)> messageQueue;
         private volatile int isDisposed;
 
         private UnitTestSynchronizationContext()
         {
             previousContext = SynchronizationContext.Current;
-            messageQueue = new BlockingCollection<KeyValuePair<SendOrPostCallback, object?>>();
+            messageQueue = new BlockingCollection<(SendOrPostCallback, object?)>();
         }
 
         /// <summary>Gets the unit test synchronization context for the current thread.</summary>
@@ -62,7 +61,7 @@ namespace System.Waf.UnitTesting
         {
             if (d == null) throw new ArgumentNullException(nameof(d));
             if (IsDisposed) return;
-            messageQueue.Add(new KeyValuePair<SendOrPostCallback, object?>(d, state));
+            messageQueue.Add((d, state));
         }
 
         /// <summary>Process the message queue until the specified task is completed.</summary>
@@ -98,8 +97,8 @@ namespace System.Waf.UnitTesting
             {
                 while (!token.IsCancellationRequested)
                 {
-                    var message = messageQueue.Take(token);
-                    message.Key(message.Value);
+                    var (callback, state) = messageQueue.Take(token);
+                    callback(state);
                 }
             }
             catch (OperationCanceledException)
@@ -111,7 +110,7 @@ namespace System.Waf.UnitTesting
         private void FinishMessageQueue()
         {
             messageQueue.CompleteAdding();
-            foreach (var x in messageQueue) x.Key(x.Value);
+            foreach (var (callback, state) in messageQueue) callback(state);
         }
     }
 }

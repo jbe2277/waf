@@ -9,28 +9,25 @@ namespace System.Waf.Presentation
     // the errors with its internal errors list and updates the ValidationHelper.
     internal sealed class ValidationTracker
     {
-        private readonly List<Tuple<object, ValidationError>> errors;
+        private readonly List<(object source, ValidationError error)> errors;
         private readonly DependencyObject owner;
 
         public ValidationTracker(DependencyObject owner)
         {
             this.owner = owner;
-            errors = new List<Tuple<object, ValidationError>>();
+            errors = new List<(object, ValidationError)>();
             Validation.AddErrorHandler(owner, ErrorChangedHandler);
         }
 
         internal void AddErrors(object validationSource, IEnumerable<ValidationError> errors)
         {
-            foreach (ValidationError error in errors)
-            {
-                AddError(validationSource, error);
-            }
+            foreach (ValidationError x in errors) AddError(validationSource, x);
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
 
         private void AddError(object validationSource, ValidationError error)
         {
-            errors.Add(Tuple.Create(validationSource, error));
+            errors.Add((validationSource, error));
             if (validationSource is FrameworkElement element)
             {
                 element.Unloaded += ValidationSourceUnloaded;
@@ -49,8 +46,8 @@ namespace System.Waf.Presentation
             }
             else
             {
-                var error = errors.FirstOrDefault(err => err.Item1 == e.OriginalSource && err.Item2 == e.Error);
-                if (error != null) { errors.Remove(error); }
+                var error = errors.FirstOrDefault(err => err.source == e.OriginalSource && err.error == e.Error);
+                if (error.source != null) errors.Remove(error);
             }
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
@@ -67,15 +64,12 @@ namespace System.Waf.Presentation
             }
 
             // An unloaded control might be loaded again. Then we need to restore the validation errors.
-            var errorsToRemove = errors.Where(err => err.Item1 == sender).ToArray();
+            var errorsToRemove = errors.Where(err => err.source == sender).ToArray();
             if (errorsToRemove.Any())
             {
                 // It keeps alive because it listens to the Loaded event.
-                new ValidationReloadedTracker(this, errorsToRemove[0].Item1, errorsToRemove.Select(x => x.Item2));
-                foreach (Tuple<object, ValidationError> error in errorsToRemove)
-                {
-                    errors.Remove(error);
-                }
+                new ValidationReloadedTracker(this, errorsToRemove[0].source, errorsToRemove.Select(x => x.error));
+                foreach (var x in errorsToRemove) errors.Remove(x);
             }
             ValidationHelper.InternalSetIsValid(owner, !errors.Any());
         }
