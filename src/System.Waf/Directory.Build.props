@@ -1,14 +1,21 @@
 ﻿<Project>
   <PropertyGroup>
     <Company>jbe2277</Company>
-    <Copyright>Copyright © 2016-2022 jbe2277</Copyright>
-    <Version>6.4.1.100</Version>
-    <PackageVersion>6.4.1</PackageVersion>
+    <Copyright>Copyright © 2016-2023 jbe2277</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <NoWarn>$(NoWarn);CA1014</NoWarn>
+  
+    <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <Choose>
     <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
