@@ -12,12 +12,6 @@ public partial class AddEditFeedView : IAddEditFeedView
         InitializeComponent();
     }
 
-    public object? DataContext
-    {
-        get => BindingContext;
-        set => BindingContext = value;
-    }
-
     protected override void OnBindingContextChanged()
     {
         base.OnBindingContextChanged();

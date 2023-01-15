@@ -8,10 +8,4 @@ public partial class SettingsView : TabbedPage, ISettingsView
     {
         InitializeComponent();
     }
-
-    public object? DataContext
-    {
-        get => BindingContext;
-        set => BindingContext = value;
-    }
 }

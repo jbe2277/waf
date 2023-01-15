@@ -14,12 +14,6 @@ public partial class ShellView : IShellView
         InitializeComponent();
     }
 
-    public object? DataContext
-    {
-        get => BindingContext;
-        set => BindingContext = value;
-    }
-
     public async Task PushAsync(object page)
     {
         bool wasFirstPage = isFirstPage;
