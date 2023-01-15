@@ -10,6 +10,13 @@
     <PackageReference Include="System.Waf.Wpf" Version="*-*" />
   </ItemGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith(netcoreapp3))">
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith(netcoreapp3))">
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="WindowsBase" />
