@@ -15,12 +15,6 @@ public partial class FeedItemView : IFeedItemView
         cancellationTokenSource = new CancellationTokenSource();
     }
 
-    public object? DataContext
-    {
-        get => BindingContext;
-        set => BindingContext = value;
-    }
-
     protected override void OnBindingContextChanged()
     {
         base.OnBindingContextChanged();

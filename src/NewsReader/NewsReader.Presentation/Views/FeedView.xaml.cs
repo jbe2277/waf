@@ -12,12 +12,6 @@ public partial class FeedView : IFeedView
         InitializeComponent();
     }
 
-    public object? DataContext
-    {
-        get => BindingContext;
-        set => BindingContext = value;
-    }
-
     protected override void OnBindingContextChanged()
     {
         base.OnBindingContextChanged();
