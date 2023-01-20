@@ -32,7 +32,7 @@ public partial class App : Application
     {
         this.settingsService = settingsService;
         this.appInfoService = appInfoService;
-        InitializeLogging(Log.Default, systemTraceListener);
+        InitializeLogging(Log.Default, systemTraceListener?.Create());
         localizationService?.Initialize();
         InitializeCultures(settingsService.Get<AppSettings>());
 
@@ -43,7 +43,7 @@ public partial class App : Application
 
     protected override void OnStart()
     {
-        Log.Default.Info("App started ({0}, {1}) on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
+        Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
         string? appSecret = null;
         GetAppCenterSecret(ref appSecret);
         if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));

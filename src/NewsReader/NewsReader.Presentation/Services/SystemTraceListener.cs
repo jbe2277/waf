@@ -2,6 +2,7 @@
 
 namespace Waf.NewsReader.Presentation.Services;
 
-public abstract class SystemTraceListener : TraceListener
+public abstract class SystemTraceListener
 {
+    public abstract TraceListener Create();
 }

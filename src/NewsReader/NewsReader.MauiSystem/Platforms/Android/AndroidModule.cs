@@ -9,6 +9,6 @@ internal sealed class AndroidModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterType<IdentityService>().As<IIdentityService>().SingleInstance();
-        builder.RegisterType<AndroidTraceListener>().As<SystemTraceListener>().SingleInstance();
+        builder.RegisterType<AndroidSystemTraceListener>().As<SystemTraceListener>().SingleInstance();
     }
 }

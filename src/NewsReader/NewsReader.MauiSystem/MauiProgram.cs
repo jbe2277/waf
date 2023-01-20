@@ -27,6 +27,8 @@ public static class MauiProgram
                 x.RegisterModule(new Platforms.Android.AndroidModule());
 #elif IOS
                 x.RegisterModule(new Platforms.iOS.IosModule());
+#elif WINDOWS
+                x.RegisterModule(new Platforms.Windows.WindowsModule());
 #endif
             }));
         return builder.Build();
