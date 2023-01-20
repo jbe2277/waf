@@ -7,6 +7,5 @@ public class MauiModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<App>().SingleInstance();
     }
 }

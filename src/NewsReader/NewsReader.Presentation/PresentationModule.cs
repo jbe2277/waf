@@ -12,6 +12,8 @@ public class PresentationModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
+        builder.RegisterType<App>().SingleInstance();
+
         builder.RegisterType<AppInfoService>().As<IAppInfoService>().SingleInstance();
         builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
         builder.RegisterType<LauncherService>().As<ILauncherService>().SingleInstance();
