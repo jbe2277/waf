@@ -22,6 +22,8 @@ public partial class ShellView : IShellView
         var idx = navi.NavigationStack.IndexOf(page);
         if (idx >= 0)
         {
+            // Pushing of a page which already exists in the navigation stack is not allowed -> InvalidOperationException: 'Page must not already have a parent.'
+            // If the specified page already exists in the navigaton stack then remove all pages after the page and pop to it.
             if (idx == navi.NavigationStack.Count - 1) return;
             for (int i = 0; i < navi.NavigationStack.Count - idx - 2; i++) navi.RemovePage(navi.NavigationStack[navi.NavigationStack.Count - 2]);
             await navi.PopAsync();
