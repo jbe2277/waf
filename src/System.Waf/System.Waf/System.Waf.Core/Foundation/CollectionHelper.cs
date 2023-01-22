@@ -18,10 +18,11 @@ namespace System.Waf.Foundation
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             if (collection is IList<T> list) return list.IndexOf(item!);
 
+            var comparer = EqualityComparer<T>.Default;
             int i = 0;
             foreach (T localItem in collection)
             {
-                if (Equals(localItem, item)) return i;
+                if (comparer.Equals(localItem, item!)) return i;
                 i++;
             }
             return -1;
@@ -38,11 +39,12 @@ namespace System.Waf.Foundation
         public static T GetNextElementOrDefault<T>(this IEnumerable<T> collection, [AllowNull] T current)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
+            var comparer = EqualityComparer<T>.Default;
             using var enumerator = collection.GetEnumerator();
             bool found = false;
             while (enumerator.MoveNext())
             {
-                if (EqualityComparer<T>.Default.Equals(enumerator.Current, current!))
+                if (comparer.Equals(enumerator.Current, current!))
                 {
                     found = true;
                     break;
