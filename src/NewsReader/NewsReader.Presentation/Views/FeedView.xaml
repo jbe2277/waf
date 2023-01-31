@@ -12,28 +12,39 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout Spacing="0">
-            <StackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
+        <Grid RowDefinitions="Auto,Auto,Auto,*">
+            <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
                 <Label Text="Load Error" Style="{StaticResource Title}"/>
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
-            </StackLayout>
-            <SearchBar x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
-            <StackLayout IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
+            </VerticalStackLayout>
+            
+            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
+            
+            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
                 <Label Text="Please select a feed."/>
-            </StackLayout>
-            <RefreshView IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
+            </VerticalStackLayout>
+            
+            <RefreshView  Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
-                            <StackLayout Padding="10,3" BackgroundColor="LightGray">
+                            <Border Padding="10,3" BackgroundColor="LightGray">
                                 <Label Text="{Binding Key, StringFormat='{0:D}'}" FontAttributes="Italic"/>
-                            </StackLayout>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:FeedItem">
                             <SwipeView>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
+                                            Text="{Binding MarkAsRead, Converter={StaticResource MarkAsReadConverter}}"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
@@ -44,10 +55,11 @@
                                         </SwipeItem>
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
-                                <StackLayout Orientation="Vertical" Padding="10,5,10,10" Spacing="3">
-                                    <StackLayout.GestureRecognizers>
+                                
+                                <VerticalStackLayout Padding="10,5,10,10" Spacing="3">
+                                    <VerticalStackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding BindingContext.ShowFeedItemViewCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
-                                    </StackLayout.GestureRecognizers>
+                                    </VerticalStackLayout.GestureRecognizers>
 
                                     <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
                                         <Label.Triggers>
@@ -57,12 +69,12 @@
                                         </Label.Triggers>
                                     </Label>
                                     <Label Text="{Binding Description}" MaxLines="3"/>
-                                </StackLayout>
+                                </VerticalStackLayout>
                             </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
