@@ -67,11 +67,11 @@ internal sealed class FeedsController
 
     private AddEditFeedViewModel AddEditFeedViewModel => addEditFeedViewModel.Value;
 
-    public void Run()
+    public async void Run()
     {
-        Update();
         FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
-        ShowFeedView(FeedManager.Feeds.FirstOrDefault()).NoWait();
+        await ShowFeedView(FeedManager.Feeds.FirstOrDefault());
+        await Update();
     }
 
     public Task Update() => Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
