@@ -6,28 +6,28 @@
             Title="Settings" x:DataType="vm:SettingsViewModel">
     <ContentPage Title="General">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
+            <VerticalStackLayout Spacing="10" Margin="15,10">
                 <Label Text="Data Management" Style="{StaticResource Title}"/>
                 <Label Text="Store feed items for:"/>
                 <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayItemLifetimeConverter}}"/>
                 <Label Text="Store at maximum feed items per feed:"/>
                 <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayMaxItemsLimitConverter}}"/>
-            </StackLayout>
+            </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
 
     <ContentPage Title="Data Sync">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
-                <Label Text="This feature synchronizes the feed list and read/unread status with multiple devices. A Microsoft account is required as the synchronization is using OneDrive." Margin="0,0,0,10"/>
+            <VerticalStackLayout Spacing="10" Margin="15,10">
+                <Label Text="This feature synchronizes the feed list and read/unread status with multiple devices. A Microsoft account is required as the synchronization is using OneDrive."/>
                 <Label Text="Synchronization: Deactivated">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" Binding="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}" Value="True">
@@ -39,20 +39,20 @@
                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
                 <Label Text="{Binding WebStorageService.CurrentAccount.Email, StringFormat='Email: {0}'}" 
                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
-                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start" Margin="0,10,0,0"
+                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start"
                         IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}"/>
-                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start" Margin="0,10,0,0"
+                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start"
                         IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
-            </StackLayout>
+            </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
     
     <ContentPage Title="Info">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+            <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
         <ContentPage.Content>
-            <StackLayout Margin="{x:OnPlatform 10\,7, WinUI=0\,7}">
+            <VerticalStackLayout Spacing="10" Margin="15,10">
                 <Label Text="{Binding AppInfo.AppName}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding AppInfo.VersionString}">
                     <Label.GestureRecognizers>
@@ -60,7 +60,7 @@
                     </Label.GestureRecognizers>
                 </Label>
 
-                <StackLayout Margin="0,10,0,0" IsVisible="{Binding DeveloperSettingsEnabled}">
+                <VerticalStackLayout Spacing="10" Margin="0,10,0,0" IsVisible="{Binding DeveloperSettingsEnabled}">
                     <Label Text="Developer" Style="{StaticResource Title}"/>
                     <Label Text="Language"/>
                     <Picker ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"/>
@@ -68,8 +68,8 @@
                     <Label Text="{Binding Culture, StringFormat='Culture: {0}'}"/>
                     <Label Text="{Binding Now, StringFormat='DateTime (now): {0:F}'}"/>
                     <Label Text="{Binding CurrencyValue, StringFormat='Currency value: {0:C}'}"/>
-                </StackLayout>
-            </StackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
   
