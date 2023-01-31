@@ -11,18 +11,8 @@
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
                     <ViewCell>
-                        <Grid VerticalOptions="Center" HeightRequest="60" RowSpacing="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-
-                            <Label Grid.RowSpan="2" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="30,*" VerticalOptions="Center" HeightRequest="60" RowSpacing="0">
+                            <Label Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding IsCommandEnabled}" Value="False">
                                         <Setter Property="TextColor" Value="LightGray"/>
@@ -37,28 +27,12 @@
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
-
-                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Details}" IsVisible="False">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Details, Converter={StaticResource NullToBoolConverter}}" Value="True">
-                                        <Setter Property="IsVisible" Value="True"/>
-                                        <Setter Property="Margin" Value="5,0,0,7"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ContentPage.Resources>
 
-            <Grid Padding="10" BackgroundColor="#FFF9F9F9">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
+            <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="#FFF9F9F9">
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
                 <ListView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" ItemTapped="FeedsItemTapped" RowHeight="70" 
