@@ -10,63 +10,109 @@
         <ContentPage Title="Menu" Padding="{OnPlatform iOS='0,30,0,0'}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
-                    <ViewCell>
-                        <Grid ColumnDefinitions="30,*" VerticalOptions="Center" HeightRequest="60" RowSpacing="0">
-                            <Label Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding IsCommandEnabled}" Value="False">
-                                        <Setter Property="TextColor" Value="LightGray"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
+                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="VisualStateManager.VisualStateGroups">
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="LightGray"/>
+                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="LightGray"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="Blue"/>
+                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="Blue"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </Setter>
+                            </Style>
+                        </Grid.Style>
 
-                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding IsCommandEnabled}" Value="False">
-                                        <Setter Property="TextColor" Value="LightGray"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                        </Grid>
-                    </ViewCell>
+                        <Label x:Name="iconLabel" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" Margin="12,0,7,0" />
+
+                        <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" />
+                    </Grid>
                 </DataTemplate>
             </ContentPage.Resources>
 
             <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="#FFF9F9F9">
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
-                <ListView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" ItemTapped="FeedsItemTapped" RowHeight="70" 
-                          SeparatorVisibility="None">
-                    <ListView.ItemTemplate>
+                <!-- TODO: Reorder does not work on Android but on Windows -->
+                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" SelectionMode="Single" 
+                                CanReorderItems="True">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
-                            <ViewCell>
-                                <ViewCell.ContextActions>
-                                    <MenuItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding .}" Text="Edit"/>
-                                    <MenuItem Command="{Binding BindingContext.MoveFeedUpCommand, Source={Reference listView}}" CommandParameter="{Binding .}" Text="Move Up"/>
-                                    <MenuItem Command="{Binding BindingContext.MoveFeedDownCommand, Source={Reference listView}}" CommandParameter="{Binding .}" Text="Move Down"/>
-                                    <MenuItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding .}" Text="Remove" IsDestructive="True"/>
-                                </ViewCell.ContextActions>
+                            <SwipeView Margin="0,5">
+                                <SwipeView.Style>
+                                    <Style TargetType="SwipeView">
+                                        <Setter Property="VisualStateManager.VisualStateGroups">
+                                            <VisualStateGroupList>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal"/>
+                                                    <VisualState x:Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                                            <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="Blue"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateGroupList>
+                                        </Setter>
+                                    </Style>
+                                </SwipeView.Style>
 
-                                <Border Background="#FFF0F0F0" Margin="0,0,0,10">
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Edit" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                        <MenuFlyoutItem Text="Remove" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <!-- TODO: Clipped text on Android: https://github.com/dotnet/maui/pull/11931 -->
+                                        <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="Edit">
+                                            <SwipeItem.IconImageSource>
+                                                <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
+                                            </SwipeItem.IconImageSource>
+                                        </SwipeItem>
+                                        <SwipeItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="Remove" IsDestructive="True" BackgroundColor="Red">
+                                            <SwipeItem.IconImageSource>
+                                                <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
+                                            </SwipeItem.IconImageSource>
+                                        </SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+
+                                <Border x:Name="feedItemBorder" Background="#FFF0F0F0" StrokeThickness="1">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="4"/>
                                     </Border.StrokeShape>
-                                    
-                                    <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="10,0">
+
+                                    <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
                                         <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
-                                        <StackLayout Orientation="Horizontal">
+                                        <HorizontalStackLayout Spacing="15">
                                             <Label Text="{Binding Items.Count, StringFormat='Items: {0}'}"/>
-                                            <Label Text="{Binding UnreadItemsCount, StringFormat='Unread: {0}'}" Margin="11,0,0,0"/>
-                                        </StackLayout>
-                                    </StackLayout>
+                                            <Label Text="{Binding UnreadItemsCount, StringFormat='Unread: {0}'}"/>
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
                                 </Border>
-                            </ViewCell>
+                            </SwipeView>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                
-                <ListView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu, Mode=TwoWay}" ItemTapped="NavigationItemTapped" HasUnevenRows="True"
-                          HeightRequest="125" VerticalScrollBarVisibility="Never" SeparatorVisibility="None" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu, Mode=TwoWay}" SelectionMode="Single"
+                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>

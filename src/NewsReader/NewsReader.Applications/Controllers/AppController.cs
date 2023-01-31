@@ -26,8 +26,6 @@ internal sealed class AppController : IAppController
         this.shellViewModel = shellViewModel;
         shellViewModel.ShowFeedViewCommand = feedsController.ShowFeedViewCommand;
         shellViewModel.EditFeedCommand = feedsController.EditFeedCommand;
-        shellViewModel.MoveFeedUpCommand = feedsController.MoveFeedUpCommand;
-        shellViewModel.MoveFeedDownCommand = feedsController.MoveFeedDownCommand;
         shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
         shellViewModel.FooterMenu = new[]
         {

@@ -24,8 +24,6 @@ internal sealed class FeedsController
     private readonly AsyncDelegateCommand addUpdateFeedCommand;
     private readonly AsyncDelegateCommand showFeedViewCommand;
     private readonly AsyncDelegateCommand editFeedCommand;
-    private readonly DelegateCommand moveFeedUpCommand;
-    private readonly DelegateCommand moveFeedDownCommand;
     private readonly AsyncDelegateCommand removeFeedCommand;
     private readonly AsyncDelegateCommand refreshFeedCommand;
     private readonly DelegateCommand readUnreadCommand;
@@ -50,8 +48,6 @@ internal sealed class FeedsController
         addUpdateFeedCommand = new AsyncDelegateCommand(AddUpdateFeed, CanAddUpdateFeed);
         showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
         editFeedCommand = new AsyncDelegateCommand(EditFeed);
-        moveFeedUpCommand = new DelegateCommand(MoveFeedUp, CanMoveFeedUp);
-        moveFeedDownCommand = new DelegateCommand(MoveFeedDown, CanMoveFeedDown);
         removeFeedCommand = new AsyncDelegateCommand(RemoveFeed);
         refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed);
         readUnreadCommand = new DelegateCommand(MarkAsReadUnread);
@@ -66,10 +62,6 @@ internal sealed class FeedsController
     public ICommand ShowFeedViewCommand => showFeedViewCommand;
 
     public ICommand EditFeedCommand => editFeedCommand;
-
-    public ICommand MoveFeedUpCommand => moveFeedUpCommand;
-
-    public ICommand MoveFeedDownCommand => moveFeedDownCommand;
 
     public ICommand RemoveFeedCommand => removeFeedCommand;
 
@@ -91,8 +83,6 @@ internal sealed class FeedsController
         {
             shellViewModel.SelectedFeed = feedViewModel.Value.Feed = null;
         }
-        moveFeedUpCommand.RaiseCanExecuteChanged();
-        moveFeedDownCommand.RaiseCanExecuteChanged();
     }
 
     private async Task LoadFeed(Feed feed, bool ignoreInternetAccessStatus = false)
@@ -206,22 +196,6 @@ internal sealed class FeedsController
         AddEditFeedViewModel.OldFeed = feed;
         AddEditFeedViewModel.Feed = feed;
         return navigationService.Navigate(AddEditFeedViewModel);
-    }
-
-    private bool CanMoveFeedUp(object? parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) > 0;
-
-    private void MoveFeedUp(object? parameter)
-    {
-        var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter!);
-        FeedManager.Feeds.Move(oldIndex, oldIndex - 1);
-    }
-
-    private bool CanMoveFeedDown(object? parameter) => parameter is Feed feed && FeedManager.Feeds.IndexOf(feed) < FeedManager.Feeds.Count - 1;
-
-    private void MoveFeedDown(object? parameter)
-    {
-        var oldIndex = FeedManager.Feeds.IndexOf((Feed)parameter!);
-        FeedManager.Feeds.Move(oldIndex, oldIndex + 1);
     }
 
     private async Task RemoveFeed(object? parameter)

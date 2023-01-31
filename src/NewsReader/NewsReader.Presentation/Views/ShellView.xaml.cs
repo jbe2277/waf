@@ -1,12 +1,9 @@
-﻿using Waf.NewsReader.Applications.DataModels;
-using Waf.NewsReader.Applications.ViewModels;
-using Waf.NewsReader.Applications.Views;
+﻿using Waf.NewsReader.Applications.Views;
 
 namespace Waf.NewsReader.Presentation.Views;
 
 public partial class ShellView : IShellView
 {
-    private ShellViewModel viewModel = null!;
     private bool isFirstPage = true;
 
     public ShellView()
@@ -34,31 +31,7 @@ public partial class ShellView : IShellView
 
     public Task PopAsync() => Detail.Navigation.PopAsync();
 
-    protected override void OnBindingContextChanged()
-    {
-        base.OnBindingContextChanged();
-        viewModel = (ShellViewModel)BindingContext;
-    }
-
-    private void NavigationItemTapped(object sender, ItemTappedEventArgs e)
-    {
-        if (e.Item is NavigationItem item)
-        {
-            if (item.Command != null)
-            {
-                item.Command.Execute(null);
-                CloseFlyout();
-            }
-        }
-    }
-
-    private void FeedsItemTapped(object sender, ItemTappedEventArgs e)
-    {
-        viewModel.ShowFeedViewCommand.Execute(e.Item);
-        CloseFlyout();
-    }
-
-    private void CloseFlyout()
+    public void CloseFlyout()
     {
         if (!((IFlyoutPageController)this).ShouldShowSplitMode) IsPresented = false;
     }

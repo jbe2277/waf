@@ -7,4 +7,6 @@ public interface IShellView : IView
     Task PushAsync(object page);
 
     Task PopAsync();
+
+    void CloseFlyout();
 }

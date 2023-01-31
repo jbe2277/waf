@@ -10,7 +10,7 @@ namespace Waf.NewsReader.Applications.ViewModels;
 public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
 {
     private NavigationItem? selectedFooterMenu;
-    private IReadOnlyList<Feed> feeds = null!;
+    private ObservableCollection<Feed> feeds = null!;
     private Feed? selectedFeed;
 
     public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
@@ -21,10 +21,6 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
     public string AppName { get; }
 
     public ICommand EditFeedCommand { get; internal set; } = null!;
-
-    public ICommand MoveFeedUpCommand { get; internal set; } = null!;
-
-    public ICommand MoveFeedDownCommand { get; internal set; } = null!;
 
     public ICommand RemoveFeedCommand { get; internal set; } = null!;
 
@@ -37,17 +33,19 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
         get => selectedFooterMenu;
         set
         {
-            if (SetProperty(ref selectedFooterMenu, value) && selectedFooterMenu != null)
+            if (!SetProperty(ref selectedFooterMenu, value)) return;
+            if (selectedFooterMenu is not null)
             {
                 SelectedFeed = null;
+                selectedFooterMenu.Command?.Execute(null);
             }
         }
     }
 
-    public IReadOnlyList<Feed> Feeds
+    public ObservableCollection<Feed> Feeds
     {
         get => feeds;
-        set => SetProperty(ref feeds, value);
+        internal set => SetProperty(ref feeds, value);
     }
 
     public Feed? SelectedFeed
@@ -55,15 +53,18 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
         get => selectedFeed;
         set
         {
-            if (SetProperty(ref selectedFeed, value) && SelectedFeed != null)
+            if (!SetProperty(ref selectedFeed, value)) return;
+            if (selectedFeed is not null)
             {
                 SelectedFooterMenu = null;
+                ShowFeedViewCommand.Execute(selectedFeed);
             }
         }
     }
 
     public Task Navigate(IViewModelCore viewModel)
     {
+        ViewCore.CloseFlyout();
         viewModel.Initialize();
         return ViewCore.PushAsync(viewModel.View);
     }
