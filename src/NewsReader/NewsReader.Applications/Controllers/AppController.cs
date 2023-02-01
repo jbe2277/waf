@@ -57,13 +57,13 @@ internal sealed class AppController : IAppController
         Task.Run(dataController.Save).GetAwaiter().GetResult();  // Task.Run needed to avoid dead-lock when Save uses await.
     }
 
-    public void Resume()
+    public async void Resume()
     {
         if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(1))
         {
-            dataController.Update().NoWait();
-            feedsController.Update().NoWait();
             lastUpdate = DateTime.Now;
+            await dataController.Update();
+            await feedsController.Update();
         }
     }
 

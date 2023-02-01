@@ -49,7 +49,7 @@ internal sealed class FeedsController
         showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
         editFeedCommand = new AsyncDelegateCommand(EditFeed);
         removeFeedCommand = new AsyncDelegateCommand(RemoveFeed);
-        refreshFeedCommand = new AsyncDelegateCommand(RefreshFeed);
+        refreshFeedCommand = new AsyncDelegateCommand(Update);
         readUnreadCommand = new DelegateCommand(MarkAsReadUnread);
         showFeedItemViewCommand = new AsyncDelegateCommand(ShowFeedItemView);
         launchBrowserCommand = new AsyncDelegateCommand(LaunchBrowser, CanLaunchBrowser);
@@ -88,6 +88,7 @@ internal sealed class FeedsController
     private async Task LoadFeed(Feed feed, bool ignoreInternetAccessStatus = false)
     {
         if (!ignoreInternetAccessStatus && !networkInfoService.InternetAccess) return;
+        if (feed.IsLoading) return;
         try
         {
             feed.StartLoading();
@@ -206,8 +207,6 @@ internal sealed class FeedsController
             FeedManager.Feeds.Remove(feed);
         }
     }
-
-    private async Task RefreshFeed() => await Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
 
     private void MarkAsReadUnread(object? parameter)
     {
