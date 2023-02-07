@@ -14,7 +14,7 @@ jobs:
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
-        dotnet workload install maui android
+        dotnet workload install maui-android
     - name: Install MinVer
       run: |
         dotnet tool install minver-cli -g
@@ -41,7 +41,7 @@ jobs:
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
-        dotnet workload install maui
+        dotnet workload install maui-windows
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
@@ -59,7 +59,7 @@ jobs:
       - name: Install .NET MAUI
         run: |
           dotnet nuget locals all --clear 
-          dotnet workload install maui ios
+          dotnet workload install maui-ios
       - name: Build
         run: |
           cd src/NewsReader/NewsReader.MauiSystem
