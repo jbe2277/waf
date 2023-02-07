@@ -31,7 +31,7 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=$versionCode -p:ApplicationDisplayVersion=$version     # Workaround for https://github.com/dotnet/linker/issues/3126
+        dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=${{ env.versionCode }} -p:ApplicationDisplayVersion=${{ env.version }}   # Workaround for https://github.com/dotnet/linker/issues/3126
 
   Windows:
     runs-on: windows-2022
