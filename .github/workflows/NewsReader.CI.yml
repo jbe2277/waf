@@ -11,6 +11,8 @@ jobs:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
@@ -24,6 +26,8 @@ jobs:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
@@ -37,6 +41,8 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set Xcode version
         run: |
           XCODE_ROOT=/Applications/Xcode_14.2.app
@@ -55,6 +61,8 @@ jobs:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Domain.Test
       run: |
         cd src/NewsReader/NewsReader.Domain.Test
