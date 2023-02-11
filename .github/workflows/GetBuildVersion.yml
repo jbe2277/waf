@@ -18,6 +18,9 @@ jobs:
       version: ${{ steps.getVersionStep.outputs.version }}
       versionCode: ${{ steps.getVersionStep.outputs.versionCode }}
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install MinVer
         run: |
           dotnet tool install minver-cli -g
