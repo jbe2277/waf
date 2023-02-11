@@ -36,7 +36,7 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
 
   iOS:
     runs-on: macos-12
