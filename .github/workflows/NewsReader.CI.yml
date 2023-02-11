@@ -7,8 +7,12 @@ on:
       - '.github/workflows/**' 
 
 jobs:
+  GetVersion:
+    uses: ./.github/workflows/GetBuildVersion.yml
+
   Android:
     runs-on: windows-2022
+    needs: GetVersion
     steps:
     - uses: actions/checkout@v3
       with:
@@ -17,23 +21,10 @@ jobs:
       run: |
         dotnet nuget locals all --clear
         dotnet workload install maui android
-    - name: Install MinVer
-      run: |
-        dotnet tool install minver-cli -g
-    - name: Get Build Version
-      run: |
-        $verOut=minver -t v
-        $metaSplit=$verOut.Split('+', 2)
-        $preSplit=$metaSplit[0].Split('-', 2)
-        $rtmSplit=$preSplit[0].Split('.')
-        echo version=$($preSplit[0]) | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-        $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $rtmSplit[2].PadLeft(4, '0'))
-        echo versionCode=$versionCode | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-      shell: pwsh
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=${{ env.versionCode }} -p:ApplicationDisplayVersion=${{ env.version }}   # Workaround for https://github.com/dotnet/linker/issues/3126
+        dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}   # Workaround for https://github.com/dotnet/linker/issues/3126
 
   Windows:
     runs-on: windows-2022
