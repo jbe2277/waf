@@ -36,7 +36,7 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
 
   iOS:
     runs-on: macos-12
@@ -55,10 +55,11 @@ jobs:
       - name: Build
         run: |
           cd src/NewsReader/NewsReader.MauiSystem
-          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
     runs-on: windows-2022
+    needs: GetVersion
     steps:
     - uses: actions/checkout@v3
     - name: Domain.Test
