@@ -7,12 +7,14 @@ on:
       - '.github/workflows/**' 
 
 jobs:
+  GetVersion:
+    uses: ./.github/workflows/GetBuildVersion.yml
+
   Android:
     runs-on: windows-2022
+    needs: GetVersion
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
@@ -20,14 +22,13 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-android -c:Debug             # Workaround for https://github.com/dotnet/linker/issues/3126
+        dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}   # Workaround for https://github.com/dotnet/linker/issues/3126
 
   Windows:
     runs-on: windows-2022
+    needs: GetVersion
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Install .NET MAUI
       run: |
         dotnet nuget locals all --clear
@@ -35,14 +36,13 @@ jobs:
     - name: Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release
+        dotnet publish -f:net7.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
 
   iOS:
     runs-on: macos-12
+    needs: GetVersion
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Set Xcode version
         run: |
           XCODE_ROOT=/Applications/Xcode_14.2.app
@@ -55,19 +55,18 @@ jobs:
       - name: Build
         run: |
           cd src/NewsReader/NewsReader.MauiSystem
-          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
+          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
     runs-on: windows-2022
+    needs: GetVersion
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Domain.Test
       run: |
         cd src/NewsReader/NewsReader.Domain.Test
-        dotnet test -c:Release
+        dotnet test -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
     - name: Presentation.Test
       run: |
         cd src/NewsReader/NewsReader.Presentation.Test
-        dotnet test -c:Release
+        dotnet test -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
