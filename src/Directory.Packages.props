@@ -6,7 +6,7 @@
   <ItemGroup>
     <!-- Build -->
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
-    <PackageVersion Include="MinVer" Version="4.2.0" />
+    <PackageVersion Include="MinVer" Version="4.3.0" />
 
     <!-- WAF -->
     <PackageVersion Include="System.ComponentModel.Annotations" Version="4.5.0" />
@@ -29,10 +29,10 @@
     <PackageVersion Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageVersion Include="Microsoft.AppCenter.Analytics" Version="5.0.1" />
     <PackageVersion Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
-    <PackageVersion Include="Microsoft.Graph" Version="4.49.0" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.49.1" />
+    <PackageVersion Include="Microsoft.Graph" Version="4.53.0" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.50.0" />
     <PackageVersion Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
-    <PackageVersion Include="System.Waf.Core" Version="7.0.0-alpha.11" />
-    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="7.0.0-alpha.11" />
+    <PackageVersion Include="System.Waf.Core" Version="7.0.0-alpha.28" />
+    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="7.0.0-alpha.28" />
   </ItemGroup>
 </Project>
