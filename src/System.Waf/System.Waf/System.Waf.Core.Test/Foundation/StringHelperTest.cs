@@ -19,7 +19,9 @@ namespace Test.Waf.Foundation
             Assert.IsTrue("Hello".Contains("Ll", StringComparison.OrdinalIgnoreCase));
             Assert.IsFalse("Hello".Contains("lll", StringComparison.OrdinalIgnoreCase));
 
+#if !NET6_0_OR_GREATER
             AssertHelper.ExpectedException<ArgumentNullException>(() => StringHelper.Contains(null!, "ll", StringComparison.Ordinal));
+#endif
         }
 
         [TestMethod]

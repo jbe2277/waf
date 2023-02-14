@@ -5,6 +5,7 @@ namespace System.Waf.Foundation
     /// <summary>Provides helper methods for working with strings.</summary>
     public static class StringHelper
     {
+#if !NET6_0_OR_GREATER
         /// <summary>Returns a value indicating whether a specified substring occurs within this string.</summary>
         /// <param name="s">The string to search for the value.</param>
         /// <param name="value">The string to seek.</param>
@@ -15,6 +16,7 @@ namespace System.Waf.Foundation
             if (s == null) throw new ArgumentNullException(nameof(s));
             return s.IndexOf(value, comparisonType) >= 0;
         }
+#endif
 
         /// <summary>Truncates the string to the specified maximum length.</summary>
         /// <param name="s">The string to truncate.</param>
