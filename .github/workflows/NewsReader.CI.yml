@@ -27,9 +27,10 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: newsreader-android
+        if-no-files-found: error
         path: |
-          ./**/*.aab
-          ./**/*.apk
+          ./**/publish/*.aab
+          ./**/publish/*.apk
 
   Windows:
     runs-on: windows-2022
