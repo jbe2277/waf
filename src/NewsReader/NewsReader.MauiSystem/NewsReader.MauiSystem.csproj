@@ -8,7 +8,7 @@
     <SingleProject>true</SingleProject>
 
     <!-- Display name -->
-    <ApplicationTitle>NewsReader.Presentation</ApplicationTitle>
+    <ApplicationTitle>NewsReader</ApplicationTitle>
 
     <!-- App Identifier -->
     <ApplicationId>waf.newsreader</ApplicationId>
