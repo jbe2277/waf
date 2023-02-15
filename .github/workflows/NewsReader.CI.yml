@@ -23,6 +23,14 @@ jobs:
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
         dotnet publish -f:net7.0-android -c:Debug -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}   # Workaround for https://github.com/dotnet/linker/issues/3126
+    - name: Upload AAB, APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: newsreader-android
+        if-no-files-found: error
+        path: |
+          ./**/publish/*.aab
+          ./**/publish/*.apk
 
   Windows:
     runs-on: windows-2022
