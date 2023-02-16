@@ -1,11 +1,12 @@
-﻿using HtmlAgilityPack;
-using System.ServiceModel.Syndication;
+﻿using System.ServiceModel.Syndication;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Xml;
 using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
 
-public class SyndicationService : ISyndicationService
+public partial class SyndicationService : ISyndicationService
 {
     public async Task<FeedDto> RetrieveFeed(Uri uri)
     {
@@ -21,8 +22,10 @@ public class SyndicationService : ISyndicationService
     private static string RemoveHtmlTags(string message)
     {
         if (string.IsNullOrEmpty(message)) return message;
-        var htmlDoc = new HtmlDocument();
-        htmlDoc.LoadHtml(message);
-        return htmlDoc.DocumentNode.InnerText.Trim();
+        message = HtmlTagsRegex().Replace(message, "");
+        return HttpUtility.HtmlDecode(message);
     }
+
+    [GeneratedRegex("<.*?>")]
+    private static partial Regex HtmlTagsRegex();
 }

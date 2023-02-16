@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Microsoft.Graph" />
     <PackageReference Include="Microsoft.Identity.Client" />
     <PackageReference Include="System.ServiceModel.Syndication" />

@@ -26,7 +26,6 @@
     <!-- News Reader (MAUI) -->
     <PackageVersion Include="Autofac" Version="6.5.0" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageVersion Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageVersion Include="Microsoft.AppCenter.Analytics" Version="5.0.1" />
     <PackageVersion Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
     <PackageVersion Include="Microsoft.Graph" Version="4.53.0" />
