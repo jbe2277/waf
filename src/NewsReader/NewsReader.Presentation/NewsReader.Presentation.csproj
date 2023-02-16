@@ -19,7 +19,7 @@
     <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Microsoft.Graph" />
     <PackageReference Include="Microsoft.Identity.Client" />
-    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" />
+    <PackageReference Include="System.ServiceModel.Syndication" />
   </ItemGroup>
 
   <ItemGroup>

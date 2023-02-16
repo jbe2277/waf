@@ -98,11 +98,6 @@ internal sealed class FeedsController
                 var items = syndicationFeed.Items.Where(x => x.Uri != null).Select(x => new FeedItem(x.Uri!, x.Date, x.Name, x.Description)).ToArray();
                 feed.Title = syndicationFeed.Title;
                 feed.UpdateItems(items, excludeMarkAsRead: true);
-                foreach (var error in syndicationFeed.Errors)
-                {
-                    Log.Default.Error("Load Feed item failed: {0}", error);
-                    Crashes.TrackError(error);
-                }
             }
             else
             {
