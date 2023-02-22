@@ -1,3 +1,12 @@
+# Version samples
+#
+# minver          | version   | versionCode
+# ----------------|-----------|------------
+# 7.0.0-alpha.38  | 7.0.0038  | 7000038
+# 7.0.0           | 7.0.0990  | 7000990
+# 7.1.2-alpha.9   | 7.1.2009  | 7012009
+# 7.1.2           | 7.1.2990  | 7012990
+
 name: 'GetBuildVersion'
 
 on:
@@ -31,9 +40,9 @@ jobs:
           $metaSplit=$verOut.Split('+', 2)
           $preSplit=$metaSplit[0].Split('-', 2)
           $rtmSplit=$preSplit[0].Split('.')
-          $heightSplit=$preSplit[1].Split('.')
-          $version = [string]::Format("{0}.{1}.{2}", $rtmSplit[0], $rtmSplit[1], $heightSplit[1])
-          $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $heightSplit[1].PadLeft(4, '0'))
+          $heightSplit=$preSplit[1]?.Split('.') ?? @("", "990")
+          $version = [string]::Format("{0}.{1}.{2}", $rtmSplit[0], $rtmSplit[1], $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
+          $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
           echo version=$version | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
           echo versionCode=$versionCode | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
           echo version=$version
