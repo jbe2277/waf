@@ -1,13 +1,15 @@
 Changelog
 ---------
 
-Version 7.0.x.x (In development)
-- WAF: Add .NET 6.0 target for all libaries. Some new features will only be available for .NET 6 or newer applications.
+Version 7.0.0 (Release)
+- WAF: Add .NET 6.0 target for all libraries. Some new features will only be available for .NET 6 or newer applications.
 - WAF: Replace target net461 with netstandard2.0 for the Core libraries.
 - WAF: Replace target net461 with net472 for the WPF libraries. Breaking change as .NET Framework 4.61 up to 4.71 is not supported anymore.
 - WAF: Remove .NET Core 3.1 target from WPF libraries. Breaking change for .NET Core 3.1 and .NET 5: WPF libraries do not provide the transitive dependency to WPF and Composition anymore. These references must be set explicitly.
-- WAF: IView: add property BindingContext (for MAUI) with a default implementation (requires .NET 6).
+- WAF: Remove StringHelper.Contains method for the .NET 6 target and greater. Those targets support this method already out of the box.
+- WAF: IView: Add property BindingContext (for MAUI) with a default implementation (requires .NET 6).
 - WAF: IReadOnlyObservableList inherit from INotifyPropertyChanged.
+- WAF: Improve performance of CollectionHelper.IndexOf by using EqualityComparer<T>.
 - WAF: Improve performance by replacing Tuple(s) with ValueTuple(s).
 
 

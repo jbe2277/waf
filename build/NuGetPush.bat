@@ -1,6 +1,6 @@
 setlocal
 set Params=-s https://api.nuget.org/v3/index.json --force-english-output
-set Version=7.0.0-alpha.11
+set Version=7.0.0
 
 cd %~dp0..\src\System.Waf\System.Waf\
 
