@@ -1,4 +1,4 @@
-# Run to test version: 7.0.0-alpha.11
+# Run to test version: 7.0.0
 
 name: System.Waf.CI
 on: 
