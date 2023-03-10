@@ -19,15 +19,15 @@
                                             <VisualState x:Name="Normal" />
                                             <VisualState x:Name="Disabled">
                                                 <VisualState.Setters>
-                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="LightGray"/>
-                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="LightGray"/>
+                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="{StaticResource Gray200}"/>
+                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="{StaticResource Gray200}"/>
                                                 </VisualState.Setters>
                                             </VisualState>
                                             <VisualState x:Name="Selected">
                                                 <VisualState.Setters>
                                                     <Setter Property="BackgroundColor" Value="Transparent" />
-                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="Blue"/>
-                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="Blue"/>
+                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="{StaticResource Primary}"/>
+                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="{StaticResource Primary}"/>
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
@@ -43,7 +43,7 @@
                 </DataTemplate>
             </ContentPage.Resources>
 
-            <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="#FFF9F9F9">
+            <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="White">
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
                 <!-- TODO: Reorder does not work on Android but on Windows -->
@@ -60,7 +60,7 @@
                                                     <VisualState x:Name="Selected">
                                                         <VisualState.Setters>
                                                             <Setter Property="BackgroundColor" Value="Transparent" />
-                                                            <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="Blue"/>
+                                                            <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="{StaticResource Primary}"/>
                                                         </VisualState.Setters>
                                                     </VisualState>
                                                 </VisualStateGroup>
@@ -92,7 +92,7 @@
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
 
-                                <Border x:Name="feedItemBorder" Background="#FFF0F0F0" StrokeThickness="1">
+                                <Border x:Name="feedItemBorder" Background="{StaticResource Gray100}" StrokeThickness="1">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="4"/>
                                     </Border.StrokeShape>
@@ -117,7 +117,7 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage BarBackgroundColor="{OnPlatform WinUI=#FFF9F9F9}" BarTextColor="{OnPlatform WinUI=#FF222222, Android=#FFF9F9F9}">
+        <NavigationPage BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform WinUI={StaticResource Gray900}, Android=White}">
             <x:Arguments>
                 <ContentPage/>
             </x:Arguments>

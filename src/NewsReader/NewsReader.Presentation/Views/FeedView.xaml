@@ -31,9 +31,9 @@
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
-                            <Border Padding="10,3" BackgroundColor="LightGray">
+                            <VerticalStackLayout Padding="10,3" BackgroundColor="{StaticResource Gray100}">
                                 <Label Text="{Binding Key, StringFormat='{0:D}'}" FontAttributes="Italic"/>
-                            </Border>
+                            </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
