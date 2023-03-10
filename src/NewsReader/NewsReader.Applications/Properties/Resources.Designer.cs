@@ -19,7 +19,7 @@ namespace Waf.NewsReader.Applications.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,6 +61,15 @@ namespace Waf.NewsReader.Applications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Feed.
+        /// </summary>
+        internal static string AddFeed {
+            get {
+                return ResourceManager.GetString("AddFeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not load the RSS Feed from the provided URL..
         /// </summary>
         internal static string ErrorLoadRssFeed {
@@ -96,6 +105,15 @@ namespace Waf.NewsReader.Applications.Properties {
         internal static string RemoveFeedQuestion {
             get {
                 return ResourceManager.GetString("RemoveFeedQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

@@ -117,35 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
   <data name="AddFeed" xml:space="preserve">
-    <value>Add Feed</value>
+    <value>Feed hinzufügen</value>
   </data>
-  <data name="ErrorLoadRssFeed" xml:space="preserve">
-    <value>Could not load the RSS Feed from the provided URL.</value>
+  <data name="Browser" xml:space="preserve">
+    <value>Browser</value>
   </data>
-  <data name="ReduceFeedItemLifetimeQuestion" xml:space="preserve">
-    <value>Do you want to reduce the feed item lifetime? 
-This might remove older feed items.</value>
+  <data name="DataManagement" xml:space="preserve">
+    <value>Datenverwaltung</value>
   </data>
-  <data name="ReduceMaxItemsLimitQuestion" xml:space="preserve">
-    <value>Do you want to reduce the maximum number of feed items per feed? 
-This might remove older feed items.</value>
+  <data name="DataSync" xml:space="preserve">
+    <value>Daten synchronisieren</value>
   </data>
-  <data name="RemoveFeedQuestion" xml:space="preserve">
-    <value>Do you want to remove the Feeds?
-{0}</value>
+  <data name="DataSyncDescription" xml:space="preserve">
+    <value>Diese Funktion synchronisiert die Feed-Liste und den Status "gelesen/ungelesen" mit mehreren Geräten. Ein Microsoft-Konto ist erforderlich, da die Synchronisierung über OneDrive erfolgt.</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Entwickler</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editieren</value>
+  </data>
+  <data name="EditFeed" xml:space="preserve">
+    <value>Feed editieren</value>
+  </data>
+  <data name="EnterOrPasteFeedUrlBelow" xml:space="preserve">
+    <value>Geben Sie die Adresse des RSS-Feeds ein, um diesen zur Liste hinzuzufügen.</value>
+  </data>
+  <data name="FeedName" xml:space="preserve">
+    <value>Feed Namen</value>
+  </data>
+  <data name="FeedUrl" xml:space="preserve">
+    <value>Feed Adresse</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ItemsWithCount" xml:space="preserve">
+    <value>Einträge: {0}</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="LoadError" xml:space="preserve">
+    <value>Fehler beim Laden</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menü</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OneMonth" xml:space="preserve">
+    <value>1 Monat</value>
+  </data>
+  <data name="OneYear" xml:space="preserve">
+    <value>1 Jahr</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Frage</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Gelesen</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="SelectFeedInfo" xml:space="preserve">
+    <value>Bitte einen Feed auswählen.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
-  <data name="SignInError" xml:space="preserve">
-    <value>An error occurred during the sign-in process. 
-Details: {0}</value>
+  <data name="SignIn" xml:space="preserve">
+    <value>Anmelden</value>
   </data>
-  <data name="SynchronizationDownloadError" xml:space="preserve">
-    <value>Synchronization failed. Error: {0}</value>
+  <data name="SignOut" xml:space="preserve">
+    <value>Abmelden</value>
   </data>
-  <data name="UrlMustBeginWithHttp" xml:space="preserve">
-    <value>The URL must begin with http:// or https://</value>
+  <data name="SixMonth" xml:space="preserve">
+    <value>6 Monate</value>
+  </data>
+  <data name="StoreAtMaximumFeedItemsPerFeed" xml:space="preserve">
+    <value>Maximale Anzahl der Einträge pro Feed:</value>
+  </data>
+  <data name="StoreFeedItemsFor" xml:space="preserve">
+    <value>Speichere Feed-Einträge für:</value>
+  </data>
+  <data name="SynchronizationActivated" xml:space="preserve">
+    <value>Synchronisierung: Aktiviert</value>
+  </data>
+  <data name="SynchronizationDeactivated" xml:space="preserve">
+    <value>Synchronisierung: Deaktiviert</value>
+  </data>
+  <data name="ThreeMonth" xml:space="preserve">
+    <value>3 Monate</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel:</value>
+  </data>
+  <data name="TitleWithParam" xml:space="preserve">
+    <value>Titel: {0}</value>
+  </data>
+  <data name="Unlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <data name="Unread" xml:space="preserve">
+    <value>Ungelesen</value>
+  </data>
+  <data name="UnreadWithCount" xml:space="preserve">
+    <value>Ungelesen: {0}</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
   </data>
 </root>

@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
              Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="SearchClicked" Text="Search">
+        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
             </ToolbarItem.IconImageSource>
@@ -16,14 +17,14 @@
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,*">
             <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
-                <Label Text="Load Error" Style="{StaticResource Title}"/>
+                <Label Text="{x:Static p:Resources.LoadError}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </VerticalStackLayout>
             
             <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
             
             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
-                <Label Text="Please select a feed."/>
+                <Label Text="{x:Static p:Resources.SelectFeedInfo}"/>
             </VerticalStackLayout>
             
             <RefreshView  Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">

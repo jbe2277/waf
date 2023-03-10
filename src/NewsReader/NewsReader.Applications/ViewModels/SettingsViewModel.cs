@@ -20,8 +20,7 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
     private bool developerSettingsEnabled;
     private string selectedLanguage = null!;
 
-    public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService,
-        IAppInfoService appInfoService) : base(view, false)
+    public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, IAppInfoService appInfoService) : base(view, false)
     {
         this.messageService = messageService;
         AppInfo = appInfoService;

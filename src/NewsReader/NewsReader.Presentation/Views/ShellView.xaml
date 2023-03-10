@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
-             x:Class="Waf.NewsReader.Presentation.Views.ShellView"
-             x:DataType="vm:ShellViewModel">
+             x:Class="Waf.NewsReader.Presentation.Views.ShellView" x:DataType="vm:ShellViewModel">
     <FlyoutPage.Flyout>
-        <ContentPage Title="Menu" Padding="{OnPlatform iOS='0,30,0,0'}">
+        <ContentPage Title="{x:Static p:Resources.Menu}" Padding="{OnPlatform iOS='0,30,0,0'}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
                     <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60">
@@ -47,8 +47,7 @@
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
                 <!-- TODO: Reorder does not work on Android but on Windows -->
-                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" SelectionMode="Single" 
-                                CanReorderItems="True">
+                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" SelectionMode="Single" CanReorderItems="True">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
                             <SwipeView Margin="0,5">
@@ -72,20 +71,20 @@
 
                                 <FlyoutBase.ContextFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Edit" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
-                                        <MenuFlyoutItem Text="Remove" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                        <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                        <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
                                     </MenuFlyout>
                                 </FlyoutBase.ContextFlyout>
 
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <!-- TODO: Clipped text on Android: https://github.com/dotnet/maui/pull/11931 -->
-                                        <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="Edit">
+                                        <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
                                             </SwipeItem.IconImageSource>
                                         </SwipeItem>
-                                        <SwipeItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="Remove" IsDestructive="True" BackgroundColor="Red">
+                                        <SwipeItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
                                             </SwipeItem.IconImageSource>
@@ -101,8 +100,8 @@
                                     <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
                                         <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
                                         <HorizontalStackLayout Spacing="15">
-                                            <Label Text="{Binding Items.Count, StringFormat='Items: {0}'}"/>
-                                            <Label Text="{Binding UnreadItemsCount, StringFormat='Unread: {0}'}"/>
+                                            <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
+                                            <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
                                 </Border>

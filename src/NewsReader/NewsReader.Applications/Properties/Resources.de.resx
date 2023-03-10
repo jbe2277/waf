@@ -118,34 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddFeed" xml:space="preserve">
-    <value>Add Feed</value>
+    <value>Feed hinzufügen</value>
   </data>
   <data name="ErrorLoadRssFeed" xml:space="preserve">
-    <value>Could not load the RSS Feed from the provided URL.</value>
+    <value>Der Feed konnte nicht von der angegebenen URL geladen werden.</value>
   </data>
   <data name="ReduceFeedItemLifetimeQuestion" xml:space="preserve">
-    <value>Do you want to reduce the feed item lifetime? 
-This might remove older feed items.</value>
+    <value>Möchten Sie die Lebensdauer der Einträge reduzieren? 
+
+Dadurch könnten ältere Einträge entfernt werden.</value>
   </data>
   <data name="ReduceMaxItemsLimitQuestion" xml:space="preserve">
-    <value>Do you want to reduce the maximum number of feed items per feed? 
-This might remove older feed items.</value>
+    <value>Möchten Sie die maximale Anzahl der Einträge reduzieren? 
+
+Dadurch könnten ältere Einträge entfernt werden.</value>
   </data>
   <data name="RemoveFeedQuestion" xml:space="preserve">
-    <value>Do you want to remove the Feeds?
+    <value>Möchten Sie die Feeds entfernen?
+
 {0}</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="SignInError" xml:space="preserve">
-    <value>An error occurred during the sign-in process. 
-Details: {0}</value>
+    <value>Während des Anmeldevorgangs ist ein Fehler aufgetreten. 
+
+Einzelheiten: {0}</value>
   </data>
   <data name="SynchronizationDownloadError" xml:space="preserve">
-    <value>Synchronization failed. Error: {0}</value>
+    <value>Synchronisierung fehlgeschlagen. Fehler: {0}</value>
   </data>
   <data name="UrlMustBeginWithHttp" xml:space="preserve">
-    <value>The URL must begin with http:// or https://</value>
+    <value>Die Adresse muss mit http:// oder https:// beginnen</value>
   </data>
 </root>

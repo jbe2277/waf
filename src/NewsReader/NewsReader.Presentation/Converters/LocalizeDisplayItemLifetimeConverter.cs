@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Waf.NewsReader.Applications.DataModels;
+using Waf.NewsReader.Presentation.Properties;
 
 namespace Waf.NewsReader.Presentation.Converters;
 
@@ -7,11 +8,11 @@ public class LocalizeDisplayItemLifetimeConverter : IValueConverter
 {
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture) => value switch
     {
-        DisplayItemLifetime._1Month => "1 Month",
-        DisplayItemLifetime._3Month => "3 Month",
-        DisplayItemLifetime._6Month => "6 Month",
-        DisplayItemLifetime._1Year => "1 Year",
-        DisplayItemLifetime.Forever => "Forever",
+        DisplayItemLifetime._1Month => Resources.OneMonth,
+        DisplayItemLifetime._3Month => Resources.ThreeMonth,
+        DisplayItemLifetime._6Month => Resources.SixMonth,
+        DisplayItemLifetime._1Year => Resources.OneYear,
+        DisplayItemLifetime.Forever => Resources.Unlimited,
         _ => throw new InvalidOperationException($"{nameof(DisplayItemLifetime)} is not supported: {value}"),
     };
 

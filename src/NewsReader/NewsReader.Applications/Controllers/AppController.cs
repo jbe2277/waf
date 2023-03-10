@@ -1,5 +1,6 @@
 ﻿using System.Waf.Applications;
 using Waf.NewsReader.Applications.DataModels;
+using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Domain;
@@ -29,8 +30,8 @@ internal sealed class AppController : IAppController
         shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
         shellViewModel.FooterMenu = new[]
         {
-            new NavigationItem("Add Feed", "\uf412") { Command = feedsController.AddFeedCommand },
-            new NavigationItem("Settings", "\uf493") { Command = new AsyncDelegateCommand(() =>
+            new NavigationItem(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand },
+            new NavigationItem(Resources.Settings, "\uf493") { Command = new AsyncDelegateCommand(() =>
                 shellViewModel.Navigate(this.settingsController.SettingsViewModel)) }
         };
         shellViewModel.Initialize();

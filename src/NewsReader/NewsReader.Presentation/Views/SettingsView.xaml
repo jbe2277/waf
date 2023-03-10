@@ -1,37 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
-            Title="Settings" x:DataType="vm:SettingsViewModel">
-    <ContentPage Title="General">
+            Title="{x:Static p:Resources.Settings}" x:DataType="vm:SettingsViewModel">
+    <ContentPage Title="{x:Static p:Resources.General}">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
             <VerticalStackLayout Spacing="10" Margin="15,10">
-                <Label Text="Data Management" Style="{StaticResource Title}"/>
-                <Label Text="Store feed items for:"/>
+                <Label Text="{x:Static p:Resources.DataManagement}" Style="{StaticResource Title}"/>
+                <Label Text="{x:Static p:Resources.StoreFeedItemsFor}"/>
                 <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayItemLifetimeConverter}}"/>
-                <Label Text="Store at maximum feed items per feed:"/>
+                <Label Text="{x:Static p:Resources.StoreAtMaximumFeedItemsPerFeed}"/>
                 <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayMaxItemsLimitConverter}}"/>
             </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
 
-    <ContentPage Title="Data Sync">
+    <ContentPage Title="{x:Static p:Resources.DataSync}">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
         <ContentPage.Content>
             <VerticalStackLayout Spacing="10" Margin="15,10">
-                <Label Text="This feature synchronizes the feed list and read/unread status with multiple devices. A Microsoft account is required as the synchronization is using OneDrive."/>
-                <Label Text="Synchronization: Deactivated">
+                <Label Text="{x:Static p:Resources.DataSyncDescription}"/>
+                <Label Text="{x:Static p:Resources.SynchronizationDeactivated}">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" Binding="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}" Value="True">
-                            <Setter Property="Text" Value="Synchronization: Activated"/>
+                            <Setter Property="Text" Value="{x:Static p:Resources.SynchronizationActivated}"/>
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
@@ -39,15 +40,15 @@
                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
                 <Label Text="{Binding WebStorageService.CurrentAccount.Email, StringFormat='Email: {0}'}" 
                        IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
-                <Button Command="{Binding SignInCommand}" Text="Sign in" HorizontalOptions="Start"
+                <Button Command="{Binding SignInCommand}" Text="{x:Static p:Resources.SignIn}" HorizontalOptions="Start"
                         IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}"/>
-                <Button Command="{Binding SignOutCommand}" Text="Sign out" HorizontalOptions="Start"
+                <Button Command="{Binding SignOutCommand}" Text="{x:Static p:Resources.SignOut}" HorizontalOptions="Start"
                         IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
             </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
-    
-    <ContentPage Title="Info">
+
+    <ContentPage Title="{x:Static p:Resources.Info}">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
@@ -61,8 +62,8 @@
                 </Label>
 
                 <VerticalStackLayout Spacing="10" Margin="0,10,0,0" IsVisible="{Binding DeveloperSettingsEnabled}">
-                    <Label Text="Developer" Style="{StaticResource Title}"/>
-                    <Label Text="Language"/>
+                    <Label Text="{x:Static p:Resources.Developer}" Style="{StaticResource Title}"/>
+                    <Label Text="{x:Static p:Resources.Language}"/>
                     <Picker ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"/>
                     <Label Text="{Binding UICulture, StringFormat='UICulture: {0}'}"/>
                     <Label Text="{Binding Culture, StringFormat='Culture: {0}'}"/>
@@ -72,5 +73,4 @@
             </VerticalStackLayout>
         </ContentPage.Content>
     </ContentPage>
-  
 </TabbedPage>
