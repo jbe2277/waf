@@ -41,34 +41,41 @@ public partial class App : Application
         MainPage = (Page)this.appController.MainView;
     }
 
-    protected override void OnStart()
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        var window = base.CreateWindow(activationState);
+        window.Created += (_, _) => OnCreated();
+        window.Deactivated += (_, _) => OnDeactivated();
+        window.Resumed += (_, _) => OnResumed();
+        return window;
+    }
+
+    private void OnCreated()
     {
         Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
         string? appSecret = null;
         GetAppCenterSecret(ref appSecret);
         if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
-
         appController.Start();
     }
 
-    protected override void OnSleep()
+    private void OnDeactivated()
     {
-        Log.Default.Info("App sleep");
-        appController.Sleep();
+        Log.Default.Info("App deactivated");
+        appController.Save();
         settingsService.Save();
     }
 
-    protected override void OnResume()
+    private void OnResumed()
     {
-        Log.Default.Info("App resume");
-        appController.Resume();
+        Log.Default.Info("App resumed");
+        appController.Update();
     }
 
     private static void InitializeLogging(TraceSource system, TraceListener? systemListener = null)
     {
         system.Switch.Level = SourceLevels.All;
         Log.Default.Switch.Level = SourceLevels.All;
-
         var sources = new[]
         {
             system,

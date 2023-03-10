@@ -53,12 +53,12 @@ internal sealed class AppController : IAppController
         shellViewModel.Feeds = feedManager.Feeds;
     }
 
-    public void Sleep()
+    public void Save()
     {
         Task.Run(dataController.Save).GetAwaiter().GetResult();  // Task.Run needed to avoid dead-lock when Save uses await.
     }
 
-    public async void Resume()
+    public async void Update()
     {
         if (networkInfoService.InternetAccess && DateTime.Now - lastUpdate > TimeSpan.FromMinutes(1))
         {
@@ -70,6 +70,6 @@ internal sealed class AppController : IAppController
 
     private void NetworkInfoServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName is nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess) Resume();
+        if (e.PropertyName is nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess) Update();
     }
 }

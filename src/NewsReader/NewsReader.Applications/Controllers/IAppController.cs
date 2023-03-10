@@ -6,7 +6,7 @@ public interface IAppController
 
     void Start();
 
-    void Sleep();
+    void Save();
 
-    void Resume();
+    void Update();
 }
