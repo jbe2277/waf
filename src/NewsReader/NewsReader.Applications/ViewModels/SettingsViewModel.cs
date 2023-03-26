@@ -11,7 +11,6 @@ namespace Waf.NewsReader.Applications.ViewModels;
 
 public class SettingsViewModel : ViewModelCore<ISettingsView>
 {
-    private readonly IMessageService messageService;
     private DisplayItemLifetime selectedItemLifetime;
     private DisplayMaxItemsLimit selectedMaxItemsLimit;
     private FeedManager feedManager = null!;
@@ -20,18 +19,17 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
     private bool developerSettingsEnabled;
     private string selectedLanguage = null!;
 
-    public SettingsViewModel(ISettingsView view, IMessageService messageService, IWebStorageService webStorageService, IAppInfoService appInfoService) : base(view, false)
+    public SettingsViewModel(ISettingsView view) : base(view, false)
     {
-        this.messageService = messageService;
-        AppInfo = appInfoService;
-        WebStorageService = webStorageService;
         ItemLifetimes = Enum.GetValues<DisplayItemLifetime>();
         MaxItemsLimits = Enum.GetValues<DisplayMaxItemsLimit>();
     }
 
-    public IAppInfoService AppInfo { get; }
+    public required IAppInfoService AppInfo { get; init; }
 
-    public IWebStorageService WebStorageService { get; }
+    public required IWebStorageService WebStorageService { get; init; }
+
+    public required IMessageService MessageService { protected get; init; }
 
     public IReadOnlyList<DisplayItemLifetime> ItemLifetimes { get; }
 
@@ -94,7 +92,7 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
         if (setSelectedItemLifetimeRunning) return;
         setSelectedItemLifetimeRunning = true;
 
-        var result = selectedItemLifetime < value || await messageService.ShowYesNoQuestion(Resources.ReduceFeedItemLifetimeQuestion);
+        var result = selectedItemLifetime < value || await MessageService.ShowYesNoQuestion(Resources.ReduceFeedItemLifetimeQuestion);
         if (result)
         {
             selectedItemLifetime = value;
@@ -111,7 +109,7 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
         if (setSelectedMaxItemsLimitRunning) return;
         setSelectedMaxItemsLimitRunning = true;
 
-        var result = selectedMaxItemsLimit < value || await messageService.ShowYesNoQuestion(Resources.ReduceMaxItemsLimitQuestion);
+        var result = selectedMaxItemsLimit < value || await MessageService.ShowYesNoQuestion(Resources.ReduceMaxItemsLimitQuestion);
         if (result)
         {
             selectedMaxItemsLimit = value;

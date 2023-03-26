@@ -15,3 +15,4 @@
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.NewsReader.Applications.ViewModels.SettingsViewModel.#Culture")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.NewsReader.Applications.ViewModels.SettingsViewModel.#Now")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.NewsReader.Applications.ViewModels.SettingsViewModel.#CurrencyValue")]
+[assembly: SuppressMessage("Design", "CA1044:Properties should not be write only", Justification = "<Pending>", Scope = "member", Target = "~P:Waf.NewsReader.Applications.ViewModels.SettingsViewModel.MessageService")]
