@@ -51,7 +51,7 @@
                                     </SwipeItems>
                                 </SwipeView.LeftItems>-->
                                 
-                                <VerticalStackLayout Padding="10,5,10,10" Spacing="3">
+                                <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
                                     <FlyoutBase.ContextFlyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 

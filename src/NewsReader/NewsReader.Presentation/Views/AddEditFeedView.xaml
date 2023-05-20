@@ -40,7 +40,7 @@
 
             <Label Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}" TextColor="DarkRed"/>
 
-            <Button Grid.Row="6" Text="{x:Static p:Resources.Add}" Command="{Binding AddUpdateCommand}" HorizontalOptions="Start" WidthRequest="100">
+            <Button Grid.Row="6" Text="{x:Static p:Resources.Add}" Command="{Binding AddUpdateCommand}" HorizontalOptions="Start" WidthRequest="120">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
                         <Setter Property="Text" Value="{x:Static p:Resources.Update}"/>

@@ -116,7 +116,7 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform WinUI={StaticResource Gray900}, Android=White}">
+        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform White, WinUI={StaticResource Gray900}}">
             <x:Arguments>
                 <ContentPage/>
             </x:Arguments>
