@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set Xcode version
         run: |
-          XCODE_ROOT=/Applications/Xcode_14.2.app
+          XCODE_ROOT=/Applications/Xcode_14.3.app
           echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
           sudo xcode-select -s $XCODE_ROOT
       - name: Install .NET MAUI
