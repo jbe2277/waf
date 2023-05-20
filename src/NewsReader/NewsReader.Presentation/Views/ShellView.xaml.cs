@@ -1,21 +1,32 @@
-﻿using Waf.NewsReader.Applications.Views;
+﻿using Waf.NewsReader.Applications.ViewModels;
+using Waf.NewsReader.Applications.Views;
 
 namespace Waf.NewsReader.Presentation.Views;
 
 public partial class ShellView : IShellView
 {
+    private ShellViewModel? viewModel;
     private bool isFirstPage = true;
 
     public ShellView()
     {
         InitializeComponent();
+        navigationPage.Pushed += Navigated;
+        navigationPage.Popped += Navigated;
+    }
+
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+        if (viewModel is not null) return;
+        viewModel = (ShellViewModel)BindingContext;
     }
 
     public async Task PushAsync(object page)
     {
         bool wasFirstPage = isFirstPage;
         isFirstPage = false;
-        var navi = Detail.Navigation;
+        var navi = navigationPage.Navigation;
         var idx = navi.NavigationStack.IndexOf(page);
         if (idx >= 0)
         {
@@ -29,10 +40,15 @@ public partial class ShellView : IShellView
         if (wasFirstPage) navi.RemovePage(navi.NavigationStack[0]);  // Remove initial empty page from navigation stack
     }
 
-    public Task PopAsync() => Detail.Navigation.PopAsync();
+    public Task PopAsync() => navigationPage.Navigation.PopAsync();
 
     public void CloseFlyout()
     {
         if (!((IFlyoutPageController)this).ShouldShowSplitMode) IsPresented = false;
+    }
+
+    private void Navigated(object? sender, NavigationEventArgs e)
+    {
+        viewModel?.InternalSetCurrentPage(navigationPage.CurrentPage);
     }
 }

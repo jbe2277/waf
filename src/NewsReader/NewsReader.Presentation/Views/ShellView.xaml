@@ -16,18 +16,12 @@
                                 <Setter Property="VisualStateManager.VisualStateGroups">
                                     <VisualStateGroupList>
                                         <VisualStateGroup x:Name="CommonStates">
-                                            <VisualState x:Name="Normal" />
-                                            <VisualState x:Name="Disabled">
-                                                <VisualState.Setters>
-                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="{StaticResource Gray200}"/>
-                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="{StaticResource Gray200}"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="Disabled"/>
                                             <VisualState x:Name="Selected">
                                                 <VisualState.Setters>
-                                                    <Setter Property="BackgroundColor" Value="Transparent" />
-                                                    <Setter TargetName="iconLabel" Property="Label.TextColor" Value="{StaticResource Primary}"/>
-                                                    <Setter TargetName="titleLabel" Property="Label.TextColor" Value="{StaticResource Primary}"/>
+                                                    <!-- Overwrite default Selected background (orange) --> 
+                                                    <Setter Property="BackgroundColor" Value="{StaticResource Blue300Accent}"/>
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
@@ -37,7 +31,6 @@
                         </Grid.Style>
 
                         <Label x:Name="iconLabel" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" Margin="12,0,7,0" />
-
                         <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>
@@ -47,7 +40,7 @@
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
                 <!-- TODO: Reorder does not work on Android but on Windows -->
-                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed, Mode=TwoWay}" SelectionMode="Single" CanReorderItems="True">
+                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
                             <SwipeView Margin="0,5">
@@ -61,6 +54,7 @@
                                                         <VisualState.Setters>
                                                             <Setter Property="BackgroundColor" Value="Transparent" />
                                                             <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="{StaticResource Primary}"/>
+                                                            <Setter TargetName="feedItemBorder" Property="Border.BackgroundColor" Value="{StaticResource Blue300Accent}"/>
                                                         </VisualState.Setters>
                                                     </VisualState>
                                                 </VisualStateGroup>
@@ -92,10 +86,15 @@
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
 
-                                <Border x:Name="feedItemBorder" Background="{StaticResource Gray100}" StrokeThickness="1">
+                                <Border x:Name="feedItemBorder" StrokeThickness="1">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="4"/>
                                     </Border.StrokeShape>
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
+                                        </Style>
+                                    </Border.Style>
 
                                     <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
                                         <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
@@ -110,14 +109,14 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu, Mode=TwoWay}" SelectionMode="Single"
+                <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
                           HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform WinUI={StaticResource Gray900}, Android=White}">
+        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform WinUI={StaticResource Gray900}, Android=White}">
             <x:Arguments>
                 <ContentPage/>
             </x:Arguments>

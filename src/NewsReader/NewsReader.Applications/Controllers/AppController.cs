@@ -3,6 +3,7 @@ using Waf.NewsReader.Applications.DataModels;
 using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
 using Waf.NewsReader.Applications.ViewModels;
+using Waf.NewsReader.Applications.Views;
 using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.Controllers;
@@ -14,6 +15,8 @@ internal sealed class AppController : IAppController
     private readonly SettingsController settingsController;
     private readonly FeedsController feedsController;
     private readonly ShellViewModel shellViewModel;
+    private readonly NavigationItem addFeedNavigationItem;
+    private readonly NavigationItem settingsNavigationItem;
     private FeedManager feedManager = null!;
     private DateTime lastUpdate;
 
@@ -25,15 +28,16 @@ internal sealed class AppController : IAppController
         this.feedsController = feedsController;
         this.settingsController = settingsController;
         this.shellViewModel = shellViewModel;
+        addFeedNavigationItem = new NavigationItem(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand };
+        settingsNavigationItem = new NavigationItem(Resources.Settings, "\uf493")
+        {
+            Command = new DelegateCommand(() => shellViewModel.Navigate(this.settingsController.SettingsViewModel))
+        };
         shellViewModel.ShowFeedViewCommand = feedsController.ShowFeedViewCommand;
         shellViewModel.EditFeedCommand = feedsController.EditFeedCommand;
         shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
-        shellViewModel.FooterMenu = new[]
-        {
-            new NavigationItem(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand },
-            new NavigationItem(Resources.Settings, "\uf493") { Command = new AsyncDelegateCommand(() =>
-                shellViewModel.Navigate(this.settingsController.SettingsViewModel)) }
-        };
+        shellViewModel.FooterMenu = new[] { addFeedNavigationItem, settingsNavigationItem };
+        shellViewModel.PropertyChanged += ShellViewModelPropertyChanged;
         shellViewModel.Initialize();
         MainView = shellViewModel.View;
     }
@@ -72,5 +76,27 @@ internal sealed class AppController : IAppController
     private void NetworkInfoServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName is nameof(networkInfoService.InternetAccess) && networkInfoService.InternetAccess) Update();
+    }
+
+    private void ShellViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ShellViewModel.CurrentPage))
+        {
+            if (shellViewModel.CurrentPage is IAddEditFeedView)
+            {
+                shellViewModel.SelectedFeed = null;
+                shellViewModel.SelectedFooterMenu = addFeedNavigationItem;
+            }
+            else if (shellViewModel.CurrentPage is ISettingsView)
+            {
+                shellViewModel.SelectedFeed = null;
+                shellViewModel.SelectedFooterMenu = settingsNavigationItem;
+            }
+            else if (shellViewModel.CurrentPage is IFeedView feedView)
+            {
+                shellViewModel.SelectedFeed = ((FeedViewModel)feedView.BindingContext!).Feed;
+                shellViewModel.SelectedFooterMenu = null;
+            }
+        }
     }
 }

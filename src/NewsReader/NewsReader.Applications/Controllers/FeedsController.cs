@@ -19,7 +19,7 @@ internal sealed class FeedsController
     private readonly Lazy<AddEditFeedViewModel> addEditFeedViewModel;
     private readonly Lazy<FeedViewModel> feedViewModel;
     private readonly Lazy<FeedItemViewModel> feedItemViewModel;
-    private readonly AsyncDelegateCommand addFeedCommand;
+    private readonly DelegateCommand addFeedCommand;
     private readonly AsyncDelegateCommand addEditLoadFeedCommand;
     private readonly AsyncDelegateCommand addUpdateFeedCommand;
     private readonly AsyncDelegateCommand showFeedViewCommand;
@@ -43,7 +43,7 @@ internal sealed class FeedsController
         this.addEditFeedViewModel = new Lazy<AddEditFeedViewModel>(() => InitializeViewModel(addEditFeedViewModel.Value));
         this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
         this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeViewModel(feedItemViewModel.Value));
-        addFeedCommand = new AsyncDelegateCommand(AddFeed);
+        addFeedCommand = new DelegateCommand(AddFeed);
         addEditLoadFeedCommand = new AsyncDelegateCommand(AddEditLoadFeed);
         addUpdateFeedCommand = new AsyncDelegateCommand(AddUpdateFeed, CanAddUpdateFeed);
         showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
@@ -112,13 +112,13 @@ internal sealed class FeedsController
         }
     }
 
-    private Task AddFeed()
+    private void AddFeed()
     {
         AddEditFeedViewModel.IsEditMode = false;
         AddEditFeedViewModel.FeedUrl = null;
         AddEditFeedViewModel.OldFeed = null;
         AddEditFeedViewModel.Feed = null;
-        return navigationService.Navigate(AddEditFeedViewModel);
+        navigationService.Navigate(AddEditFeedViewModel);
     }
 
     private async Task AddEditLoadFeed()

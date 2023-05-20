@@ -12,6 +12,7 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
     private NavigationItem? selectedFooterMenu;
     private ObservableCollection<Feed> feeds = null!;
     private Feed? selectedFeed;
+    private object? currentPage;
 
     public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
     {
@@ -27,6 +28,8 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
     public ICommand ShowFeedViewCommand { get; internal set; } = null!;
 
     public IReadOnlyList<NavigationItem> FooterMenu { get; internal set; } = null!;
+
+    public object? CurrentPage { get => currentPage; private set => SetProperty(ref currentPage, value); }
 
     public NavigationItem? SelectedFooterMenu
     {
@@ -70,4 +73,7 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
     }
 
     public Task NavigateBack() => ViewCore.PopAsync();
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void InternalSetCurrentPage(object? currentPage) => CurrentPage = currentPage;
 }
