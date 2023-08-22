@@ -11,4 +11,8 @@
     <ProjectReference Include="..\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Waf.InformationManager.AddressBook.Modules.Applications.Test"/>
+  </ItemGroup>
 </Project>

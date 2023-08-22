@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Waf.BookLibrary.Library.Applications.Test"/>
+    <InternalsVisibleTo Include="Waf.BookLibrary.Reporting.Applications.Test"/>
+
     <EmbeddedResource Update="Properties\Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
     <Compile Update="Properties\Resources.Designer.cs" AutoGen="True" DependentUpon="Resources.resx" DesignTime="True" />
   </ItemGroup>

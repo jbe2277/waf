@@ -11,4 +11,8 @@
     <ProjectReference Include="..\EmailClient.Modules.Domain\EmailClient.Modules.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.Interfaces\Infrastructure.Interfaces.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Waf.InformationManager.EmailClient.Modules.Applications.Test"/>
+  </ItemGroup>
 </Project>

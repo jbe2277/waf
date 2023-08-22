@@ -12,4 +12,8 @@
   <ItemGroup Condition="$(TargetFramework.StartsWith(netstandard))">
     <PackageReference Include="System.ComponentModel.Annotations" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="System.Waf.Core.Test"/>
+  </ItemGroup>
 </Project>

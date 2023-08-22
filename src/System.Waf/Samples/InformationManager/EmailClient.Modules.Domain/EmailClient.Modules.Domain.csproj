@@ -12,4 +12,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.Core\System.Waf.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Waf.InformationManager.EmailClient.Modules.Domain.Test"/>
+  </ItemGroup>
 </Project>

@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Waf.BookLibrary.Library.Domain.Test"/>
+
     <None Include="Resources\BookLibrary.db" CopyToOutputDirectory="PreserveNewest" />
 
     <EmbeddedResource Update="Properties\Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />

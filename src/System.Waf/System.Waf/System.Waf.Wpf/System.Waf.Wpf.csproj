@@ -22,4 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\System.Waf.Core\System.Waf.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="System.Waf.Wpf.Test"/>
+  </ItemGroup>
 </Project>
