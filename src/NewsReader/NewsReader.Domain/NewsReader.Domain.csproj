@@ -8,4 +8,8 @@
   <ItemGroup>
     <PackageReference Include="System.Waf.Core" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Test.NewsReader.Domain"/>
+  </ItemGroup>
 </Project>
