@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Waf.NewsReader.Presentation;
 
 namespace Waf.NewsReader.MauiSystem;
 

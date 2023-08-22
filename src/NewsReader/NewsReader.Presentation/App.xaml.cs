@@ -33,6 +33,8 @@ public partial class App : Application
         this.settingsService = settingsService;
         this.appInfoService = appInfoService;
         InitializeLogging(Log.Default, systemTraceListener?.Create());
+
+        settingsService.ErrorOccurred += (_, e) => Log.Default.Error("SettingsService error: {0}" + e.Error);
         localizationService?.Initialize();
         InitializeCultures(settingsService.Get<AppSettings>());
 
@@ -44,6 +46,9 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var window = base.CreateWindow(activationState);
+        window.Title = AppInfo.Name;
+        window.MinimumWidth = 300;
+        window.MinimumHeight = 400;
         window.Created += (_, _) => OnCreated();
         window.Deactivated += (_, _) => OnDeactivated();
         window.Resumed += (_, _) => OnResumed();
@@ -53,6 +58,7 @@ public partial class App : Application
     private void OnCreated()
     {
         Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
+        Log.Default.Info("Device: {0} {1} {2}; Platform: {3} {4}", DeviceInfo.Idiom, DeviceInfo.Manufacturer, DeviceInfo.Model, DeviceInfo.Platform, DeviceInfo.Version);
         string? appSecret = null;
         GetAppCenterSecret(ref appSecret);
         if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
