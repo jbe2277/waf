@@ -3,8 +3,9 @@ name: NewsReader.CI
 on: 
   push:
     paths: 
-      - 'src/NewsReader/**'
-      - '.github/workflows/**' 
+    - 'src/*'
+    - 'src/NewsReader/**'
+    - '.github/workflows/**' 
 
 jobs:
   GetVersion:

@@ -2,6 +2,7 @@ name: System.Waf.CI
 on: 
   push:
     paths: 
+    - 'src/*'
     - 'src/System.Waf/**'
     - '.github/workflows/**' 
 jobs:
