@@ -12,12 +12,13 @@ using Waf.NewsReader.Applications;
 
 namespace Waf.NewsReader.Presentation;
 
-// Add App.xaml.key.cs file with:
+// Telemetry data collection with https://appcenter.ms  
+// Provide the secrets via separate file 'App.xaml.keys.cs' which will be excluded from GIT:
 //public partial class App
 //{
-//    static partial void GetAppCenterSecret(ref string appSecret)
+//    static partial void GetAppCenterSecret(ref string? appSecret)
 //    {
-//        appSecret = "android={key};uwp={key};ios={key}";
+//        appSecret = "android={secret};windowsdesktop={secret};ios={secret}";
 //    }
 //}
 
