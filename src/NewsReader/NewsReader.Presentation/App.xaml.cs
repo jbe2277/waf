@@ -28,12 +28,11 @@ public partial class App : Application
     private readonly IAppInfoService appInfoService;
     private readonly IAppController appController;
 
-    public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null, 
-        SystemTraceListener? systemTraceListener = null)
+    public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null)
     {
         this.settingsService = settingsService;
         this.appInfoService = appInfoService;
-        InitializeLogging(Log.Default, systemTraceListener?.Create());
+        InitializeLogging();
 
         settingsService.ErrorOccurred += (_, e) => Log.Default.Error("SettingsService error: {0}" + e.Error);
         localizationService?.Initialize();
@@ -82,19 +81,17 @@ public partial class App : Application
         appController.Update();
     }
 
-    private static void InitializeLogging(TraceSource system, TraceListener? systemListener = null)
+    private static void InitializeLogging()
     {
-        system.Switch.Level = SourceLevels.All;
         Log.Default.Switch.Level = SourceLevels.All;
         var sources = new[]
         {
-            system,
             Log.Default
         };
         foreach (var source in sources)
         {
             source.Listeners.Clear();
-            source.Listeners.Add(systemListener ?? new AppTraceListener(showTime: false));
+            source.Listeners.Add(new AppTraceListener());
         }
     }
 
