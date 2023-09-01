@@ -8,7 +8,7 @@ using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
 
-// Add App.xaml.key.cs file with:
+// Add WebStorageService.keys.cs file with:
 //partial class WebStorageService
 //{
 //    static partial void GetApplicationId(ref string applicationId)

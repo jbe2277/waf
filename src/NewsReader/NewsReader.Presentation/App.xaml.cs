@@ -52,6 +52,9 @@ public partial class App : Application
         window.MinimumHeight = 400;
         window.Created += (_, _) => OnCreated();
         window.Deactivated += (_, _) => OnDeactivated();
+#if WINDOWS
+        window.Destroying += (_, _) => OnDeactivated();
+#endif
         window.Resumed += (_, _) => OnResumed();
         return window;
     }
