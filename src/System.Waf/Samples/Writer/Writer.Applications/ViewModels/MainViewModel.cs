@@ -18,7 +18,7 @@ public class MainViewModel : ViewModel<IMainView>
     {
         this.shellService = shellService;
         FileService = fileService;
-        DocumentViews = new ObservableCollection<object>();
+        DocumentViews = new();
         DocumentViews.CollectionChanged += DocumentViewsCollectionChanged;
         fileService.PropertyChanged += FileServicePropertyChanged;
     }
@@ -27,7 +27,7 @@ public class MainViewModel : ViewModel<IMainView>
 
     public object StartView { get; set; } = null!;
 
-    public ObservableCollection<object> DocumentViews { get; }
+    public ObservableList<object> DocumentViews { get; }
 
     public object? ActiveDocumentView
     {

@@ -9,7 +9,7 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels;
 [Export]
 public class PersonListViewModel : ViewModel<IPersonListView>
 {
-    private readonly ObservableCollection<Person> selectedPersons;
+    private readonly ObservableList<Person> selectedPersons;
     private bool isValid = true;
     private Person? selectedPerson;
     private string filterText = "";
@@ -18,7 +18,7 @@ public class PersonListViewModel : ViewModel<IPersonListView>
     [ImportingConstructor]
     public PersonListViewModel(IPersonListView view) : base(view)
     {
-        selectedPersons = new ObservableCollection<Person>();
+        selectedPersons = new();
     }
 
     public IReadOnlyList<Person> SelectedPersons => selectedPersons;

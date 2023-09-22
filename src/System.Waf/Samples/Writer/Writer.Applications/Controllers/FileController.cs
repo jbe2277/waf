@@ -55,7 +55,7 @@ internal class FileController
         fileService.PropertyChanged += FileServicePropertyChanged;
     }
 
-    private ReadOnlyObservableCollection<IDocument> Documents => fileService.Documents;
+    private IReadOnlyObservableList<IDocument> Documents => fileService.Documents;
 
     private IDocument? ActiveDocument
     {

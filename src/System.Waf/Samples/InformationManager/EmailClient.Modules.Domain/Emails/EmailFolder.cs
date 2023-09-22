@@ -6,12 +6,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 [DataContract]
 public class EmailFolder : ValidatableModel
 {
-    [DataMember] private readonly ObservableCollection<Email> emails;
+    [DataMember] private readonly ObservableList<Email> emails;
     private ReadOnlyObservableList<Email>? readOnlyEmails;
 
     public EmailFolder()
     {
-        emails = new ObservableCollection<Email>();
+        emails = new();
     }
 
     public IReadOnlyObservableList<Email> Emails => readOnlyEmails ??= new ReadOnlyObservableList<Email>(emails);

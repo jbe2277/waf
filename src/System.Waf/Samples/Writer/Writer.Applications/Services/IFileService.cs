@@ -6,7 +6,7 @@ namespace Waf.Writer.Applications.Services;
 
 public interface IFileService : INotifyPropertyChanged
 {
-    ReadOnlyObservableCollection<IDocument> Documents { get; }
+    IReadOnlyObservableList<IDocument> Documents { get; }
 
     IDocument? ActiveDocument { get; set; }
 

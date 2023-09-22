@@ -7,11 +7,11 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain;
 public class AddressBookRoot : ValidatableModel
 {
     [DataMember]
-    private readonly ObservableCollection<Contact> contacts;
+    private readonly ObservableList<Contact> contacts;
 
     public AddressBookRoot()
     {
-        contacts = new ObservableCollection<Contact>();
+        contacts = new();
     }
 
     public IReadOnlyList<Contact> Contacts => contacts;

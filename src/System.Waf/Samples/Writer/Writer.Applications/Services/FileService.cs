@@ -8,17 +8,17 @@ namespace Waf.Writer.Applications.Services;
 [Export(typeof(IFileService)), Export]
 internal class FileService : Model, IFileService
 {
-    private readonly ObservableCollection<IDocument> documents;
+    private readonly ObservableList<IDocument> documents;
     private IDocument? activeDocument;
 
     [ImportingConstructor]
     public FileService()
     {
-        documents = new ObservableCollection<IDocument>();
-        Documents = new ReadOnlyObservableCollection<IDocument>(documents);
+        documents = new();
+        Documents = new ReadOnlyObservableList<IDocument>(documents);
     }
 
-    public ReadOnlyObservableCollection<IDocument> Documents { get; }
+    public IReadOnlyObservableList<IDocument> Documents { get; }
 
     public IDocument? ActiveDocument
     {

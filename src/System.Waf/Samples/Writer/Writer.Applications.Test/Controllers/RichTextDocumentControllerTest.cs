@@ -67,7 +67,7 @@ public class RichTextDocumentControllerTest : ApplicationsTest
 
         // We have to use reflection to get the private documents collection field
         var documentsInfo = typeof(FileService).GetField("documents", BindingFlags.Instance | BindingFlags.NonPublic)!;
-        var documents = (ObservableCollection<IDocument>)documentsInfo.GetValue(fileService)!;
+        var documents = (ObservableList<IDocument>)documentsInfo.GetValue(fileService)!;
 
         // Now we call a method that is not supported by the DocumentController base class
         AssertHelper.ExpectedException<NotSupportedException>(() => documents.Clear());

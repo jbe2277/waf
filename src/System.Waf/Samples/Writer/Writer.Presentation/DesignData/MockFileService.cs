@@ -7,7 +7,7 @@ namespace Waf.Writer.Presentation.DesignData;
 
 public class MockFileService : Model, IFileService
 {
-    public ReadOnlyObservableCollection<IDocument> Documents { get; set; } = null!;
+    public IReadOnlyObservableList<IDocument> Documents { get; set; } = null!;
 
     public IDocument? ActiveDocument { get; set; }
 

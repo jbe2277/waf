@@ -45,7 +45,7 @@ public class BookListViewModelTest
     [TestMethod]
     public void BookListViewModelFilterTest()
     {
-        var books = new ObservableCollection<Book>()
+        var books = new ObservableList<Book>()
             {
                 new() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
                 new() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
