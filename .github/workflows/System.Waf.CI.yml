@@ -18,3 +18,11 @@ jobs:
       run: dotnet build ./src/System.Waf/System.Waf.sln -c Release -p:ContinuousIntegrationBuild=true
     - name: Test
       run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
+    - name: Upload NuGet packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: packages
+        if-no-files-found: error
+        path: |
+          ./**/*.nupkg
+          ./**/*.snupkg
