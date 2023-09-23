@@ -99,7 +99,7 @@ namespace System.Waf.Foundation
                 {
                     for (int i = 0; i < e.NewItems?.Count; i++)
                     {
-                        innerCollection[i + e.NewStartingIndex] = CreateItem((TOriginal)e.NewItems[i]);
+                        innerCollection[i + e.NewStartingIndex] = CreateItem((TOriginal)e.NewItems[i]!);
                     }
                 }
                 else
