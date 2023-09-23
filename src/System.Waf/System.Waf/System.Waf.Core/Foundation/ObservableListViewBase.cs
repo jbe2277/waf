@@ -11,11 +11,6 @@ namespace System.Waf.Foundation
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, INotifyPropertyChanged, IReadOnlyObservableList<T>
     {
-        private const string indexerName = "Item[]";  // This must be equal to Binding.IndexerName
-        private static readonly PropertyChangedEventArgs CountChangedEventArgs = new PropertyChangedEventArgs(nameof(Count));
-        private static readonly PropertyChangedEventArgs IndexerChangedEventArgs = new PropertyChangedEventArgs(indexerName);
-        private static readonly NotifyCollectionChangedEventArgs CollectionResetEventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
-        
         private volatile int deferCount;
         private int deferredChanges;
 
@@ -45,7 +40,7 @@ namespace System.Waf.Foundation
             {
                 if (Interlocked.Decrement(ref deferCount) == 0 && Interlocked.Exchange(ref deferredChanges, 0) > 0)
                 {
-                    OnCollectionChanged(CollectionResetEventArgs);
+                    OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
                 }
             });
         }
@@ -71,8 +66,8 @@ namespace System.Waf.Foundation
         protected void Insert(int newItemIndex, [AllowNull] T newItem)
         {
             InnerList.Insert(newItemIndex, newItem!);
-            OnPropertyChanged(CountChangedEventArgs);
-            OnPropertyChanged(IndexerChangedEventArgs);
+            OnPropertyChanged(EventArgsCache.CountPropertyChanged);
+            OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, newItemIndex));
         }
 
@@ -82,8 +77,8 @@ namespace System.Waf.Foundation
         {
             var oldItem = InnerList[oldItemIndex];
             InnerList.RemoveAt(oldItemIndex);
-            OnPropertyChanged(CountChangedEventArgs);
-            OnPropertyChanged(IndexerChangedEventArgs);
+            OnPropertyChanged(EventArgsCache.CountPropertyChanged);
+            OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, oldItem, oldItemIndex));
         }
 
@@ -93,9 +88,9 @@ namespace System.Waf.Foundation
         {
             InnerList.Clear();
             InnerList.AddRange(newList);
-            OnPropertyChanged(CountChangedEventArgs);
-            OnPropertyChanged(IndexerChangedEventArgs);
-            OnCollectionChanged(CollectionResetEventArgs);
+            OnPropertyChanged(EventArgsCache.CountPropertyChanged);
+            OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
+            OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
         }
 
         /// <summary>Moves the item at the specified index to a new location in the collection.</summary>
@@ -106,7 +101,7 @@ namespace System.Waf.Foundation
             T item = InnerList[oldIndex];
             InnerList.RemoveAt(oldIndex);
             InnerList.Insert(newIndex, item);
-            OnPropertyChanged(IndexerChangedEventArgs);
+            OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, item, newIndex, oldIndex));
         }
 

@@ -31,7 +31,7 @@ namespace System.Waf.Foundation
         /// <inheritdoc />
         protected override void ClearItems()
         {
-            OnCollectionChanging(EventArgsCache.ResetCollectionChanging);
+            OnCollectionChanging(EventArgsCache.ResetCollectionChanged);
             base.ClearItems();
         }
 
@@ -69,10 +69,5 @@ namespace System.Waf.Foundation
         /// <summary>Raises the CollectionChanged event with the provided arguments.</summary>
         /// <param name="e">Arguments of the event being raised.</param>
         protected virtual void OnCollectionChanging(NotifyCollectionChangedEventArgs e) => CollectionChanging?.Invoke(this, e);
-    }
-
-    internal static class EventArgsCache
-    {
-        internal static readonly NotifyCollectionChangedEventArgs ResetCollectionChanging = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
     }
 }
