@@ -9,7 +9,7 @@ namespace System.Waf.UnitTesting
     {
         private readonly SynchronizationContext? previousContext;
         private readonly BlockingCollection<(SendOrPostCallback callback, object? state)> messageQueue;
-        private volatile int isDisposed;
+        private int isDisposed;
 
         private UnitTestSynchronizationContext()
         {

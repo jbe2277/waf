@@ -19,7 +19,7 @@ namespace System.Waf.Foundation
         private readonly bool noCollectionChangedHandler;
         private Predicate<T>? filter;
         private Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort;
-        private volatile int isDisposed;
+        private int isDisposed;
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>

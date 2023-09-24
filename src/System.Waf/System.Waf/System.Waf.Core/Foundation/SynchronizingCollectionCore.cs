@@ -24,7 +24,7 @@ namespace System.Waf.Foundation
         private readonly IEqualityComparer<T> itemComparer;
         private readonly IEqualityComparer<TOriginal> originalItemComparer;
         private readonly bool noCollectionChangedHandler;
-        private volatile int isDisposed;
+        private int isDisposed;
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingCollectionCore{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>

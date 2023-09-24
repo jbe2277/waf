@@ -21,7 +21,7 @@ namespace System.Waf.Presentation.Services
 
         private readonly ConcurrentDictionary<Type, Lazy<object>> settings;
         private string fileName;
-        private volatile int isDisposed;
+        private int isDisposed;
 
         /// <summary>Initializes a new instance of the SettingsService.</summary>
         public SettingsServiceCore()
