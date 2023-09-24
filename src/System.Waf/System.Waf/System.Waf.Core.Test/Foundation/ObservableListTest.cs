@@ -108,5 +108,59 @@ namespace Test.Waf.Foundation
                 static IEnumerable<object> ToGeneric(IList? list) => list?.OfType<object>() ?? Array.Empty<object>();
             }
         }
+
+        [TestMethod]
+        public void CollectionItemChangedTest()
+        {
+            var collectionItemChangedList = new List<(object? item, string? propertyName)>();
+            var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() });
+            var item1 = list[0];
+            item1.Name = "Empty";
+
+            list.CollectionItemChanged += CollectionItemChangedHandler;
+
+            item1.Name = "First";
+            Assert.AreEqual((item1, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
+            Assert.AreEqual(1, collectionItemChangedList.Count);
+
+            var item2 = new CollectionEventsTestModel();
+            list.Add(item2);
+            item2.Name = "Second";
+            Assert.AreEqual((item2, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
+            Assert.AreEqual(2, collectionItemChangedList.Count);
+
+            var item2b = new CollectionEventsTestModel();
+            list[1] = item2b;
+            item2b.Name = "Second B";
+            Assert.AreEqual((item2b, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
+            Assert.AreEqual(3, collectionItemChangedList.Count);
+
+            item2.Name = "Removed 2";
+            Assert.AreEqual(3, collectionItemChangedList.Count);
+
+            list.Remove(item2b);
+            item2b.Name = "Removed 2B";
+            Assert.AreEqual(3, collectionItemChangedList.Count);
+
+            list.Clear();
+            item1.Name = "Cleared 1";
+            Assert.AreEqual(3, collectionItemChangedList.Count);
+
+            void CollectionItemChangedHandler(object? item, PropertyChangedEventArgs e) => collectionItemChangedList.Add((item, e.PropertyName));
+        }
+
+        [TestMethod]
+        public void CollectionItemChangedSpecialTest()
+        {
+            var list1 = new ObservableList<int> { 1 };
+            list1.Clear();
+            list1.Add(2);
+            AssertHelper.SequenceEqual(new[] { 2 }, list1);
+
+            var list2 = new ObservableList<object> { new object() };
+            list2.Clear();
+            list2.Add(new object());
+            Assert.AreEqual(1, list2.Count);
+        }
     }
 }
