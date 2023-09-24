@@ -1,6 +1,7 @@
 ﻿using Waf.NewsReader.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.NewsReader.Domain.UnitTesting;
+using System.Waf.UnitTesting;
 
 namespace Test.NewsReader.Domain;
 
@@ -105,6 +106,19 @@ public class FeedTest : DomainTest
         Assert.AreEqual(2, feed.UnreadItemsCount);
 
         feed.Items[0].MarkAsRead = true;
+
+        Assert.AreEqual(1, feed.UnreadItemsCount);
+
+        AssertHelper.PropertyChangedEvent(feed, x => x.UnreadItemsCount, () =>
+        {
+            feed.UpdateItems(new[] {
+                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 5, 12, 0, 3, new TimeSpan(1, 0, 0)), "name3", "desc"),
+            });
+        });
+
+        Assert.AreEqual(2, feed.UnreadItemsCount);
+
+        AssertHelper.PropertyChangedEvent(feed, x => x.UnreadItemsCount, () => feed.Items[2].MarkAsRead = true);
 
         Assert.AreEqual(1, feed.UnreadItemsCount);
     }

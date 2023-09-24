@@ -5,20 +5,20 @@ namespace Waf.NewsReader.Domain;
 [DataContract]
 public class FeedManager : Model, IDataManager
 {
-    [DataMember] private readonly ObservableCollection<Feed> feeds;
+    [DataMember] private readonly ObservableList<Feed> feeds;
     [DataMember] private TimeSpan? itemLifetime;
     [DataMember] private uint? maxItemsLimit;
 
     public FeedManager()
     {
         // Note: Serializer does not call the constructor.
-        feeds = new ObservableCollection<Feed> { new Feed(new Uri("https://devblogs.microsoft.com/dotnet/category/maui/feed/")) };
+        feeds = new() { new Feed(new Uri("https://devblogs.microsoft.com/dotnet/category/maui/feed/")) };
         ItemLifetime = TimeSpan.FromDays(365);
         MaxItemsLimit = 250;
         Initialize();
     }
 
-    public ObservableCollection<Feed> Feeds => feeds;
+    public ObservableList<Feed> Feeds => feeds;
 
     public TimeSpan? ItemLifetime
     {
@@ -46,15 +46,21 @@ public class FeedManager : Model, IDataManager
 
     private void Initialize()
     {
+        feeds.CollectionChanging += FeedsCollectionChanging;
         feeds.CollectionChanged += FeedsCollectionChanged;
         foreach (var x in feeds) x.DataManager = this;
     }
 
+    private void FeedsCollectionChanging(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? feeds : e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>();
+        foreach (var x in oldItems) x.DataManager = null;        
+    }
+
     private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (e.Action == NotifyCollectionChangedAction.Reset) throw new NotSupportedException("The Reset action is not supported.");
-        foreach (var x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = this;
-        foreach (var x in e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = null;
+        var newItems = e.Action == NotifyCollectionChangedAction.Reset ? feeds : e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>();
+        foreach (var x in newItems) x.DataManager = this;
     }
 
     [OnDeserialized] private void OnDeserialized(StreamingContext context) => Initialize();

@@ -7,7 +7,7 @@ namespace Waf.NewsReader.Domain;
 public class Feed : ValidatableModel
 {
     [DataMember] private readonly Uri uri;
-    [DataMember] private readonly ObservableCollection<FeedItem> items;
+    [DataMember] private readonly ObservableList<FeedItem> items;
     [DataMember] private string? name;
     private string? title;
     private ReadOnlyObservableList<FeedItem>? readOnlyItems;
@@ -21,7 +21,7 @@ public class Feed : ValidatableModel
     {
         // Note: Serializer does not call the constructor.
         this.uri = uri;
-        items = new ObservableCollection<FeedItem>();
+        items = new();
         Initialize();
     }
 
@@ -123,6 +123,7 @@ public class Feed : ValidatableModel
     private void Initialize()
     {
         items.CollectionChanged += ItemsCollectionChanged;
+        items.CollectionChanging += ItemsCollectionChanging;
         foreach (var x in items) x.PropertyChanged += FeedItemPropertyChanged;
         UpdateUnreadItemsCount();
         Validate();
@@ -130,10 +131,16 @@ public class Feed : ValidatableModel
 
     private void DataManagerPropertyChanged(object? sender, PropertyChangedEventArgs e) => TrimItemsList();
 
+    private void ItemsCollectionChanging(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? items : e.OldItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>();
+        foreach (var x in oldItems) x.PropertyChanged -= FeedItemPropertyChanged;
+    }
+
     private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        foreach (var x in e.OldItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>()) x.PropertyChanged -= FeedItemPropertyChanged;
-        foreach (var x in e.NewItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>()) x.PropertyChanged += FeedItemPropertyChanged;
+        var newItems = e.Action == NotifyCollectionChangedAction.Reset ? items : e.NewItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>();
+        foreach (var x in newItems) x.PropertyChanged += FeedItemPropertyChanged;
         UpdateUnreadItemsCount();
     }
 
