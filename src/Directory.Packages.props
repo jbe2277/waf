@@ -31,7 +31,7 @@
     <PackageVersion Include="Microsoft.Graph" Version="4.54.0" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.55.0" />
     <PackageVersion Include="System.ServiceModel.Syndication" Version="7.0.0" />
-    <PackageVersion Include="System.Waf.Core" Version="7.0.1-alpha.0.30" />
-    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.30" />
+    <PackageVersion Include="System.Waf.Core" Version="7.0.1-alpha.0.37" />
+    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.37" />
   </ItemGroup>
 </Project>

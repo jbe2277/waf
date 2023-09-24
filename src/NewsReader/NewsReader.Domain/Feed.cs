@@ -123,28 +123,16 @@ public class Feed : ValidatableModel
     private void Initialize()
     {
         items.CollectionChanged += ItemsCollectionChanged;
-        items.CollectionChanging += ItemsCollectionChanging;
-        foreach (var x in items) x.PropertyChanged += FeedItemPropertyChanged;
+        items.CollectionItemChanged += ItemsCollectionItemChanged;
         UpdateUnreadItemsCount();
         Validate();
     }
 
     private void DataManagerPropertyChanged(object? sender, PropertyChangedEventArgs e) => TrimItemsList();
 
-    private void ItemsCollectionChanging(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? items : e.OldItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>();
-        foreach (var x in oldItems) x.PropertyChanged -= FeedItemPropertyChanged;
-    }
+    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateUnreadItemsCount();
 
-    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        var newItems = e.Action == NotifyCollectionChangedAction.Reset ? items : e.NewItems?.Cast<FeedItem>() ?? Array.Empty<FeedItem>();
-        foreach (var x in newItems) x.PropertyChanged += FeedItemPropertyChanged;
-        UpdateUnreadItemsCount();
-    }
-
-    private void FeedItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ItemsCollectionItemChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(FeedItem.MarkAsRead)) UpdateUnreadItemsCount();
     }
