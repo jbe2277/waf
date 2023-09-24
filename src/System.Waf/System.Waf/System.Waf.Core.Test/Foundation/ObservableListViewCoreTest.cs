@@ -13,32 +13,31 @@ namespace Test.Waf.Foundation
     [TestClass]
     public class ObservableListViewCoreTest
     {
-        private ObservableCollection<string> originalList = null!;
+        private ObservableList<string> originalList = null!;
         private ObservableListViewCore<string> observableListView = null!;
-        private List<NotifyCollectionChangedEventArgs> eventArgsList = null!;
+        private List<NotifyCollectionChangedEventArgs> collectionChangingList = null!;
+        private List<NotifyCollectionChangedEventArgs> collectionChangedList = null!;
         private int countChangedCount;
         private int indexerChangedCount;
 
         [TestInitialize]
         public void Initialize()
         {
-            originalList = new ObservableCollection<string>();
-            observableListView = new ObservableListViewCore<string>(originalList);
-            eventArgsList = new List<NotifyCollectionChangedEventArgs>();
+            originalList = new();
+            observableListView = new(originalList);
+            collectionChangingList = new();
+            collectionChangedList = new();
 
-            void CollectionHandler(object? sender, NotifyCollectionChangedEventArgs e) => eventArgsList.Add(e);
-            observableListView.CollectionChanged += CollectionHandler;
+            void CollectionChangingHandler(object? sender, NotifyCollectionChangedEventArgs e) => collectionChangingList.Add(e);
+            observableListView.CollectionChanging += CollectionChangingHandler;
+
+            void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => collectionChangedList.Add(e);
+            observableListView.CollectionChanged += CollectionChangedHandler;
 
             void PropertyHandler(object? sender, PropertyChangedEventArgs e)
             {
-                if (e.PropertyName == nameof(observableListView.Count))
-                {
-                    countChangedCount++;
-                }
-                else if (e.PropertyName == "Item[]")
-                {
-                    indexerChangedCount++;
-                }
+                if (e.PropertyName == nameof(observableListView.Count)) countChangedCount++;
+                else if (e.PropertyName == "Item[]") indexerChangedCount++;
             }
             observableListView.PropertyChanged += PropertyHandler;
         }
@@ -57,79 +56,81 @@ namespace Test.Waf.Foundation
         public void RelayEventsWithoutFilter()
         {
             originalList.Add("first");
-            AssertElementAdded("first", 0, eventArgsList.Single());
+            AssertElementAdded("first", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Add("second");
-            AssertElementAdded("second", 1, eventArgsList.Single());
+            AssertElementAdded("second", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Add("third");
-            AssertElementAdded("third", 2, eventArgsList.Single());
+            AssertElementAdded("third", 2, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Add("four");
-            AssertElementAdded("four", 3, eventArgsList.Single());
+            AssertElementAdded("four", 3, collectionChangingList.Single(), collectionChangedList.Single());
 
             AssertNoEventsRaised(() => observableListView.Update());  // Collection has not changed.
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Move(0, 3);
-            AssertElementMoved("first", 0, 3, eventArgsList.Single());
-            eventArgsList.Clear();
+            AssertElementMoved("first", 0, 3, collectionChangingList.Single(), collectionChangedList.Single());
+            ClearCollectionChangeLists();
             originalList.Move(3, 0);
-            AssertElementMoved("first", 3, 0, eventArgsList.Single());
+            AssertElementMoved("first", 3, 0, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Move(3, 1);
-            AssertElementMoved("four", 3, 1, eventArgsList.Single());
-            eventArgsList.Clear();
+            AssertElementMoved("four", 3, 1, collectionChangingList.Single(), collectionChangedList.Single());
+            ClearCollectionChangeLists();
             originalList.Move(1, 3);
-            AssertElementMoved("four", 1, 3, eventArgsList.Single());
+            AssertElementMoved("four", 1, 3, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Move(2, 3);
-            AssertElementMoved("third", 2, 3, eventArgsList.Single());
-            eventArgsList.Clear();
+            AssertElementMoved("third", 2, 3, collectionChangingList.Single(), collectionChangedList.Single());
+            ClearCollectionChangeLists();
             originalList.Move(3, 2);
-            AssertElementMoved("four", 2, 3, eventArgsList.Single());
+            AssertElementMoved("four", 2, 3, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             countChangedCount = indexerChangedCount = 0;
             originalList.Clear();
-            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangingList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangedList.Single().Action);
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Insert(0, "1");
-            AssertElementAdded("1", 0, eventArgsList.Single());
+            AssertElementAdded("1", 0, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Insert(1, "3");
-            AssertElementAdded("3", 1, eventArgsList.Single());
+            AssertElementAdded("3", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Insert(1, "2");
-            AssertElementAdded("2", 1, eventArgsList.Single());
+            AssertElementAdded("2", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             countChangedCount = indexerChangedCount = 0;
             originalList.Remove("1");
-            AssertElementRemoved("1", 0, eventArgsList.Single());
+            AssertElementRemoved("1", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.RemoveAt(1);
-            AssertElementRemoved("3", 1, eventArgsList.Single());
+            AssertElementRemoved("3", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
             observableListView.Dispose();
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             AssertNoEventsRaised(() => originalList.Clear());
-            Assert.AreEqual(0, eventArgsList.Count);
+            Assert.AreEqual(0, collectionChangingList.Count);
+            Assert.AreEqual(0, collectionChangedList.Count);
 
             observableListView.Dispose();
         }
@@ -139,51 +140,52 @@ namespace Test.Waf.Foundation
         {
             observableListView.Filter = item => item != "second" && item != "2";
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Add("first");
-            AssertElementAdded("first", 0, eventArgsList.Single());
+            AssertElementAdded("first", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
             AssertNoEventsRaised(() => originalList.Add("second"));
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Add("third");
-            AssertElementAdded("third", 1, eventArgsList.Single());
+            AssertElementAdded("third", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
             AssertNoEventsRaised(() => observableListView.Update());  // Collection has not changed.
 
             AssertHelper.SequenceEqual(new[] { "first", "third" }, observableListView);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             countChangedCount = indexerChangedCount = 0;
             originalList.Clear();
-            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangingList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangedList.Single().Action);
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Insert(0, "1");
-            AssertElementAdded("1", 0, eventArgsList.Single());
+            AssertElementAdded("1", 0, collectionChangingList.Single(), collectionChangedList.Single());
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.Insert(1, "3");
-            AssertElementAdded("3", 1, eventArgsList.Single());
+            AssertElementAdded("3", 1, collectionChangingList.Single(), collectionChangedList.Single());
 
             AssertNoEventsRaised(() => originalList.Insert(1, "2"));
 
             AssertHelper.SequenceEqual(new[] { "1", "3" }, observableListView);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             countChangedCount = indexerChangedCount = 0;
             originalList.Remove("1");
-            AssertElementRemoved("1", 0, eventArgsList.Single());
+            AssertElementRemoved("1", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
-            eventArgsList.Clear();
+            ClearCollectionChangeLists();
             originalList.RemoveAt(1);
-            AssertElementRemoved("3", 0, eventArgsList.Single());  // Index 0 because "2" is hidden by filter
+            AssertElementRemoved("3", 0, collectionChangingList.Single(), collectionChangedList.Single());  // Index 0 because "2" is hidden by filter
         }
 
         [TestMethod]
@@ -193,19 +195,19 @@ namespace Test.Waf.Foundation
 
             ClearAll();
             originalList.Add("c");
-            AssertElementAdded("c", 0, eventArgsList.Single());
+            AssertElementAdded("c", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
             ClearAll();
             originalList.Add("a");
-            AssertElementAdded("a", 0, eventArgsList.Single());
+            AssertElementAdded("a", 0, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
             ClearAll();
             originalList.Add("b");
-            AssertElementAdded("b", 1, eventArgsList.Single());
+            AssertElementAdded("b", 1, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
@@ -215,20 +217,22 @@ namespace Test.Waf.Foundation
 
             ClearAll();
             observableListView.Sort = x => x.OrderByDescending(y => y);
-            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangingList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangedList.Single().Action);
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
             AssertHelper.SequenceEqual(new[] { "c", "b", "a" }, observableListView);
 
             ClearAll();
             originalList.Remove("b");
-            AssertElementRemoved("b", 1, eventArgsList.Single());
+            AssertElementRemoved("b", 1, collectionChangingList.Single(), collectionChangedList.Single());
             Assert.AreEqual(1, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
 
             ClearAll();
             observableListView.Sort = x => x.OrderBy(y => y);
-            Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgsList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Move, collectionChangingList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Move, collectionChangedList.Single().Action);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(1, indexerChangedCount);
             AssertHelper.SequenceEqual(new[] { "a", "c" }, observableListView);
@@ -241,7 +245,8 @@ namespace Test.Waf.Foundation
             {
                 // do nothing with the original list
             }
-            Assert.AreEqual(0, eventArgsList.Count);
+            Assert.AreEqual(0, collectionChangingList.Count);
+            Assert.AreEqual(0, collectionChangedList.Count);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(0, indexerChangedCount);
 
@@ -260,14 +265,26 @@ namespace Test.Waf.Foundation
                     originalList.Add("third");
 
                     countChangedCount = indexerChangedCount = 0;
-                    Assert.AreEqual(0, eventArgsList.Count);
+                    Assert.AreEqual(5, collectionChangingList.Count);
+                    Assert.AreEqual(0, collectionChangedList.Count);
                 }
-                Assert.AreEqual(0, eventArgsList.Count);
+                Assert.AreEqual(5, collectionChangingList.Count);
+                Assert.AreEqual(0, collectionChangedList.Count);
                 deferral1.Dispose();  // call Dispose twice to see if this works too
             }
-            Assert.AreEqual(NotifyCollectionChangedAction.Reset, eventArgsList.Single().Action);
+            AssertHelper.SequenceEqual(new[] { NotifyCollectionChangedAction.Add, NotifyCollectionChangedAction.Add, NotifyCollectionChangedAction.Move, 
+                NotifyCollectionChangedAction.Remove, NotifyCollectionChangedAction.Add }, collectionChangedList.Select(x => x.Action));
+            AssertHelper.SequenceEqual(collectionChangedList, collectionChangingList);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(0, indexerChangedCount);
+        }
+
+        [TestMethod]
+        public void CollectionEventsTest()
+        {
+            var list = new ObservableList<CollectionEventsTestModel>();
+            var listView = new ObservableListViewCore<CollectionEventsTestModel>(list);
+            ObservableListTest.CollectionEventsTestCore(list, listView);
         }
 
         [TestMethod]
@@ -321,48 +338,60 @@ namespace Test.Waf.Foundation
             AssertHelper.ExpectedException<ArgumentNullException>(() => new ObservableListViewCore<string>(null!));
         }
 
-        private void ClearAll()
+        private void ClearAll() { ClearCollectionChangeLists(); (countChangedCount, indexerChangedCount) = (0, 0); }
+
+        private void ClearCollectionChangeLists() { collectionChangingList.Clear(); collectionChangedList.Clear(); }
+
+        private static void AssertElementAdded<T>(T newItem, int newStartingIndex, params NotifyCollectionChangedEventArgs[] eventArgsList)
         {
-            eventArgsList.Clear();
-            countChangedCount = 0;
-            indexerChangedCount = 0;
+            foreach (var x in eventArgsList) AssertElementAddedCore(newItem, newStartingIndex, x);
+
+            static void AssertElementAddedCore(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Add, eventArgs.Action);
+                Assert.AreEqual(newItem, eventArgs.NewItems!.Cast<T>().Single());
+                Assert.AreEqual(newStartingIndex, eventArgs.NewStartingIndex);
+                Assert.IsNull(eventArgs.OldItems);
+                Assert.AreEqual(-1, eventArgs.OldStartingIndex);
+            }
         }
 
-        private static void AssertElementAdded<T>(T newItem, int newStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+        private static void AssertElementRemoved<T>(T oldItem, int oldStartingIndex, params NotifyCollectionChangedEventArgs[] eventArgsList)
         {
-            Assert.AreEqual(NotifyCollectionChangedAction.Add, eventArgs.Action);
-            Assert.AreEqual(newItem, eventArgs.NewItems!.Cast<T>().Single());
-            Assert.AreEqual(newStartingIndex, eventArgs.NewStartingIndex);
-            Assert.IsNull(eventArgs.OldItems);
-            Assert.AreEqual(-1, eventArgs.OldStartingIndex);
+            foreach (var x in eventArgsList) AssertElementRemovedCore(oldItem, oldStartingIndex, x);
+
+            static void AssertElementRemovedCore(T oldItem, int oldStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Remove, eventArgs.Action);
+                Assert.AreEqual(oldItem, eventArgs.OldItems!.Cast<T>().Single());
+                Assert.AreEqual(oldStartingIndex, eventArgs.OldStartingIndex);
+                Assert.IsNull(eventArgs.NewItems);
+                Assert.AreEqual(-1, eventArgs.NewStartingIndex);
+            }
         }
 
-        private static void AssertElementRemoved<T>(T oldItem, int oldStartingIndex, NotifyCollectionChangedEventArgs eventArgs)
+        private static void AssertElementMoved<T>(T item, int oldIndex, int newIndex, params NotifyCollectionChangedEventArgs[] eventArgsList)
         {
-            Assert.AreEqual(NotifyCollectionChangedAction.Remove, eventArgs.Action);
-            Assert.AreEqual(oldItem, eventArgs.OldItems!.Cast<T>().Single());
-            Assert.AreEqual(oldStartingIndex, eventArgs.OldStartingIndex);
-            Assert.IsNull(eventArgs.NewItems);
-            Assert.AreEqual(-1, eventArgs.NewStartingIndex);
-        }
+            foreach (var x in eventArgsList) AssertElementMovedCore(item, oldIndex, newIndex, x);
 
-        private static void AssertElementMoved<T>(T item, int oldIndex, int newIndex, NotifyCollectionChangedEventArgs eventArgs)
-        {
-            Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgs.Action);
-            Assert.AreEqual(item, eventArgs.NewItems!.Cast<T>().Single());
-            Assert.AreEqual(item, eventArgs.OldItems!.Cast<T>().Single());
-            Assert.AreEqual(oldIndex, eventArgs.OldStartingIndex);
-            Assert.AreEqual(newIndex, eventArgs.NewStartingIndex);
+            static void AssertElementMovedCore(T item, int oldIndex, int newIndex, NotifyCollectionChangedEventArgs eventArgs)
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Move, eventArgs.Action);
+                Assert.AreEqual(item, eventArgs.NewItems!.Cast<T>().Single());
+                Assert.AreEqual(item, eventArgs.OldItems!.Cast<T>().Single());
+                Assert.AreEqual(oldIndex, eventArgs.OldStartingIndex);
+                Assert.AreEqual(newIndex, eventArgs.NewStartingIndex);
+            }
         }
 
         private void AssertNoEventsRaised(Action action)
         {
-            eventArgsList.Clear();
-            countChangedCount = indexerChangedCount = 0;
+            ClearAll();
 
             action();
 
-            Assert.IsFalse(eventArgsList.Any());
+            Assert.AreEqual(0, collectionChangingList.Count);
+            Assert.AreEqual(0, collectionChangedList.Count);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(0, indexerChangedCount);
         }
