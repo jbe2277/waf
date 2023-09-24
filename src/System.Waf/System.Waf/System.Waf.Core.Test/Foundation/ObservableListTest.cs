@@ -112,25 +112,31 @@ namespace Test.Waf.Foundation
         [TestMethod]
         public void CollectionItemChangedTest()
         {
-            var collectionItemChangedList = new List<(object? item, string? propertyName)>();
             var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() });
-            var item1 = list[0];
+            CollectionItemChangedTestCore(list, list);
+        }
+
+        internal static void CollectionItemChangedTestCore(ObservableCollection<CollectionEventsTestModel> source, object observable)
+        {
+            var collectionItemChangedList = new List<(object? item, string? propertyName)>();
+            
+            var item1 = source[0];
             item1.Name = "Empty";
 
-            list.CollectionItemChanged += CollectionItemChangedHandler;
+            ((INotifyCollectionItemChanged)observable).CollectionItemChanged += CollectionItemChangedHandler;
 
             item1.Name = "First";
             Assert.AreEqual((item1, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
             Assert.AreEqual(1, collectionItemChangedList.Count);
 
             var item2 = new CollectionEventsTestModel();
-            list.Add(item2);
+            source.Add(item2);
             item2.Name = "Second";
             Assert.AreEqual((item2, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
             Assert.AreEqual(2, collectionItemChangedList.Count);
 
             var item2b = new CollectionEventsTestModel();
-            list[1] = item2b;
+            source[1] = item2b;
             item2b.Name = "Second B";
             Assert.AreEqual((item2b, nameof(CollectionEventsTestModel.Name)), collectionItemChangedList.Last());
             Assert.AreEqual(3, collectionItemChangedList.Count);
@@ -138,11 +144,11 @@ namespace Test.Waf.Foundation
             item2.Name = "Removed 2";
             Assert.AreEqual(3, collectionItemChangedList.Count);
 
-            list.Remove(item2b);
+            source.Remove(item2b);
             item2b.Name = "Removed 2B";
             Assert.AreEqual(3, collectionItemChangedList.Count);
 
-            list.Clear();
+            source.Clear();
             item1.Name = "Cleared 1";
             Assert.AreEqual(3, collectionItemChangedList.Count);
 
