@@ -51,6 +51,14 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void CollectionEventsTest()
+        {
+            var list = new ObservableList<CollectionEventsTestModel>();
+            var readOnlyList = new ReadOnlyObservableList<CollectionEventsTestModel>(list);
+            ObservableListTest.CollectionEventsTestCore(list, readOnlyList);
+        }
+
+        [TestMethod]
         public void EmptyPropertyTest()
         {
             var readOnlyList = ReadOnlyObservableList<string>.Empty;
