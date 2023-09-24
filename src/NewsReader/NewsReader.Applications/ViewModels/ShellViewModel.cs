@@ -10,7 +10,7 @@ namespace Waf.NewsReader.Applications.ViewModels;
 public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
 {
     private NavigationItem? selectedFooterMenu;
-    private ObservableCollection<Feed> feeds = null!;
+    private ObservableList<Feed> feeds = null!;
     private Feed? selectedFeed;
     private object? currentPage;
 
@@ -45,7 +45,7 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
         }
     }
 
-    public ObservableCollection<Feed> Feeds
+    public ObservableList<Feed> Feeds
     {
         get => feeds;
         internal set => SetProperty(ref feeds, value);
