@@ -255,6 +255,8 @@ namespace Test.Waf.Foundation
                 using (var deferral2 = observableListView.DeferCollectionChangedNotifications())
                 {
                     originalList.Add("first");
+                    Assert.AreEqual(1, collectionChangingList.Count);
+                    Assert.AreEqual(0, collectionChangedList.Count);
                     Assert.AreEqual(1, countChangedCount);
                     Assert.AreEqual(1, indexerChangedCount);
                     originalList.Add("second");
@@ -265,16 +267,15 @@ namespace Test.Waf.Foundation
                     originalList.Add("third");
 
                     countChangedCount = indexerChangedCount = 0;
-                    Assert.AreEqual(5, collectionChangingList.Count);
+                    Assert.AreEqual(1, collectionChangingList.Count);
                     Assert.AreEqual(0, collectionChangedList.Count);
                 }
-                Assert.AreEqual(5, collectionChangingList.Count);
+                Assert.AreEqual(1, collectionChangingList.Count);
                 Assert.AreEqual(0, collectionChangedList.Count);
                 deferral1.Dispose();  // call Dispose twice to see if this works too
             }
-            AssertHelper.SequenceEqual(new[] { NotifyCollectionChangedAction.Add, NotifyCollectionChangedAction.Add, NotifyCollectionChangedAction.Move, 
-                NotifyCollectionChangedAction.Remove, NotifyCollectionChangedAction.Add }, collectionChangedList.Select(x => x.Action));
-            AssertHelper.SequenceEqual(collectionChangedList, collectionChangingList);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangingList.Single().Action);
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, collectionChangedList.Single().Action);
             Assert.AreEqual(0, countChangedCount);
             Assert.AreEqual(0, indexerChangedCount);
         }

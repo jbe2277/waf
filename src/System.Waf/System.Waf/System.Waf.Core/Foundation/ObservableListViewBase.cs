@@ -11,10 +11,9 @@ namespace System.Waf.Foundation
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, IReadOnlyObservableList<T>, INotifyCollectionChanging
     {
-        private readonly object deferredChangesLock = new();
-        private List<NotifyCollectionChangedEventArgs>? deferredChanges;
+        private int deferredChanges;
         private int deferCount;
-        
+
         /// <summary>Initializes a new instance of the ObservableListViewBase class.</summary>
         /// <param name="originalList">Initialize the list view with the items from this list.</param>
         protected ObservableListViewBase(IEnumerable<T>? originalList) : base(new List<T>())
@@ -42,39 +41,27 @@ namespace System.Waf.Foundation
             Interlocked.Increment(ref deferCount);
             return new DisposedNotifier(() =>
             {
-                if (Interlocked.Decrement(ref deferCount) == 0)
+                if (Interlocked.Decrement(ref deferCount) == 0 && Interlocked.Exchange(ref deferredChanges, 0) > 0)
                 {
-                    List<NotifyCollectionChangedEventArgs>? replayChanges;
-                    lock (deferredChangesLock)
-                    {
-                        replayChanges = deferredChanges;
-                        deferredChanges = null;
-                    }
-                    if (replayChanges is not null)
-                    {
-                        foreach (var x in replayChanges) OnCollectionChanged(x);
-                    }
+                    OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
                 }
             });
         }
 
         /// <summary>Raises the CollectionChanged event with the provided arguments.</summary>
         /// <param name="e">Arguments of the event being raised.</param>
-        protected virtual void OnCollectionChanging(NotifyCollectionChangedEventArgs e) => CollectionChanging?.Invoke(this, e);
+        protected virtual void OnCollectionChanging(NotifyCollectionChangedEventArgs e)
+        {
+            if (deferCount <= 0) CollectionChanging?.Invoke(this, e);
+            else if (deferredChanges == 0) CollectionChanging?.Invoke(this, EventArgsCache.ResetCollectionChanged);
+        }
 
         /// <summary>Raises the CollectionChanged event with the provided arguments.</summary>
         /// <param name="e">Arguments of the event being raised.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (deferCount > 0) 
-            { 
-                lock (deferredChangesLock)
-                {
-                    deferredChanges ??= new();
-                    deferredChanges.Add(e);
-                }
-            }
-            else { CollectionChanged?.Invoke(this, e); }
+            if (deferCount <= 0) CollectionChanged?.Invoke(this, e);
+            else Interlocked.Increment(ref deferredChanges);
         }
 
         /// <summary>Raises the PropertyChanged event with the provided arguments.</summary>
