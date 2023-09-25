@@ -17,13 +17,13 @@ public class BookListViewModelTest
     [TestMethod]
     public void BookListViewModelBooksTest()
     {
-        var books = new List<Book>()
+        var books = new ObservableList<Book>()
             {
                 new() { Title = "The Fellowship of the Ring" },
                 new() { Title = "The Two Towers" }
             };
         var bookListView = new MockBookListView();
-        var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
+        var bookDataModels = new SynchronizingList<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
         var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
 
         Assert.AreEqual(bookDataModels, bookListViewModel.Books);
@@ -51,7 +51,7 @@ public class BookListViewModelTest
                 new() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
             };
         var bookListView = new MockBookListView();
-        var bookDataModels = new SynchronizingCollection<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
+        var bookDataModels = new SynchronizingList<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
         var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
 
         Assert.IsTrue(bookListViewModel.Filter(bookDataModels[0]));

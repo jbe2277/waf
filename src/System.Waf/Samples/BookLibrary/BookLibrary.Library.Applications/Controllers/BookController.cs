@@ -19,7 +19,7 @@ internal class BookController
     private readonly DelegateCommand addNewCommand;
     private readonly DelegateCommand removeCommand;
     private readonly DelegateCommand lendToCommand;
-    private SynchronizingCollection<BookDataModel, Book>? bookDataModels;
+    private SynchronizingList<BookDataModel, Book>? bookDataModels;
 
     [ImportingConstructor]
     public BookController(IShellService shellService, IEntityService entityService, BookListViewModel bookListViewModel, BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
@@ -41,8 +41,8 @@ internal class BookController
         bookViewModel.LendToCommand = lendToCommand;
         bookViewModel.PropertyChanged += BookViewModelPropertyChanged;
 
-        bookDataModels = new SynchronizingCollection<BookDataModel, Book>(entityService.Books, b => new BookDataModel(b, lendToCommand));
-        BooksView = new ObservableListView<BookDataModel>(bookDataModels, null, bookListViewModel.Filter, null);
+        bookDataModels = new(entityService.Books, b => new BookDataModel(b, lendToCommand));
+        BooksView = new(bookDataModels, null, bookListViewModel.Filter, null);
         bookListViewModel.Books = BooksView;
         bookListViewModel.AddNewCommand = addNewCommand;
         bookListViewModel.RemoveCommand = removeCommand;
