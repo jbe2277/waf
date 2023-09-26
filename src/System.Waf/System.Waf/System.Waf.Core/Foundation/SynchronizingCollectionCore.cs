@@ -14,6 +14,7 @@ namespace System.Waf.Foundation
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     /// <typeparam name="TOriginal">The type of elements in the original collection.</typeparam>
+    [Obsolete("Use System.Waf.Foundation.SynchronizingList instead.")]
     public class SynchronizingCollectionCore<T, TOriginal> : ReadOnlyObservableList<T>, IDisposable
     {
         private readonly ObservableCollection<T> innerCollection;

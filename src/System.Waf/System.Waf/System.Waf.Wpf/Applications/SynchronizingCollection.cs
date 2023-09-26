@@ -15,6 +15,7 @@ namespace System.Waf.Applications
     /// </remarks>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     /// <typeparam name="TOriginal">The type of elements in the original collection.</typeparam>
+    [Obsolete("Use System.Waf.Foundation.SynchronizingList instead.")]
     public class SynchronizingCollection<T, TOriginal> : SynchronizingCollectionCore<T, TOriginal>
     {
         private readonly IWeakEventProxy? originalCollectionChangedProxy;

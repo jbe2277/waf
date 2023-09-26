@@ -10,7 +10,7 @@ using System.Waf.UnitTesting;
 
 namespace Test.Waf.Foundation
 {
-    [TestClass]
+    [TestClass, Obsolete]
     public class SynchronizingCollectionCoreTest
     {
         [TestMethod]
