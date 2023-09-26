@@ -229,6 +229,35 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void ReadOnlyListErrorTest()
+        {
+            var originalList = new ObservableList<MyModel>()
+            {
+                new MyModel(),
+                new MyModel(),
+                new MyModel()
+            };
+
+            var readOnlyList = (IReadOnlyList<MyModel>)originalList;
+            var synchronizingList = new SynchronizingList<MyDataModel, MyModel>(readOnlyList, m => new MyDataModel(m));
+            CoreTest();
+
+            synchronizingList = new SynchronizingList<MyDataModel, MyModel>(originalList, m => new MyDataModel(m), isReadOnly: true);
+            CoreTest();
+
+            void CoreTest()
+            {
+                AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));
+                AssertHelper.ExpectedException<NotSupportedException>(() => synchronizingList.RemoveAt(1));
+                AssertHelper.ExpectedException<NotSupportedException>(() => synchronizingList.Move(0, 1));
+                AssertHelper.ExpectedException<NotSupportedException>(() => synchronizingList.Clear());
+                var newModel = new MyModel();
+                originalList.Add(newModel);
+                Assert.AreSame(newModel, synchronizingList.Last().Model);
+            }
+        }
+
+        [TestMethod]
         public void PropertyChangedTest()
         {
             var originalList = new ObservableList<MyModel>();

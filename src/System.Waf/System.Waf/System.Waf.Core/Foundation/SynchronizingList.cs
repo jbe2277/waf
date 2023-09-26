@@ -18,24 +18,37 @@ namespace System.Waf.Foundation
         private readonly List<(TOriginal original, T newItem)> mapping = new();
         private readonly IEqualityComparer<T> itemComparer = EqualityComparer<T>.Default;
         private readonly IEqualityComparer<TOriginal> originalItemComparer = EqualityComparer<TOriginal>.Default;
-        private readonly ObservableCollection<TOriginal> originalList;
+        private readonly IEnumerable<TOriginal> originalCollection;
+        private readonly ObservableCollection<TOriginal>? originalList;
         private readonly Func<TOriginal, T> factory;
+        private readonly bool isReadOnly;
         private bool innerChange;
 
-        /// <summary>Initializes a new instance of the <see cref="SynchronizingList{T, TOriginal}"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SynchronizingList{T, TOriginal}"/> class with two-way synchronization support.</summary>
         /// <param name="originalList">The original list.</param>
         /// <param name="factory">The factory which is used to create new elements in this collection.</param>
-        /// <exception cref="ArgumentNullException">The argument originalCollection must not be null.</exception>
-        /// <exception cref="ArgumentNullException">The argument factory must not be null.</exception>
-        public SynchronizingList(ObservableCollection<TOriginal> originalList, Func<TOriginal, T> factory)
-        {
-            this.originalList = originalList ?? throw new ArgumentNullException(nameof(originalList));
-            this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
+        /// <param name="isReadOnly">Set true to define a read-only synchronizing list, otherwise set false.</param>
+        /// <exception cref="ArgumentNullException">The arguments originalCollection and factory must not be null.</exception>
+        public SynchronizingList(ObservableCollection<TOriginal> originalList, Func<TOriginal, T> factory, bool isReadOnly = false) : this(originalList, originalList, factory, isReadOnly) { }
 
-            WeakEvent.CollectionChanged.Add(originalList, OriginalCollectionChanged);
+        /// <summary>Initializes a new instance of the <see cref="SynchronizingList{T, TOriginal}"/> class with one-way synchronization support. The instance is read-only.</summary>
+        /// <param name="originalCollection">The original collection.</param>
+        /// <param name="factory">The factory which is used to create new elements in this collection.</param>
+        /// <exception cref="ArgumentNullException">The arguments originalCollection and factory must not be null.</exception>
+        public SynchronizingList(IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory) : this(null, originalCollection, factory) { }
+
+        private SynchronizingList(ObservableCollection<TOriginal>? originalList, IEnumerable<TOriginal> originalCollection, Func<TOriginal, T> factory, bool isReadOnly = false)
+        {
+            this.originalList = originalList;
+            this.originalCollection = originalCollection ?? throw new ArgumentNullException(nameof(originalCollection));
+            this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            this.isReadOnly = originalList is null || isReadOnly;
+
+            INotifyCollectionChanged? observableCollection = originalList ?? originalCollection as INotifyCollectionChanged;
+            if (observableCollection is not null) WeakEvent.CollectionChanged.Add(observableCollection, OriginalCollectionChanged);
 
             innerChange = true;
-            foreach (TOriginal x in originalList) Add(CreateItem(x));
+            foreach (TOriginal x in originalCollection) Add(CreateItem(x));
             innerChange = false;
         }
 
@@ -94,7 +107,7 @@ namespace System.Waf.Foundation
                 else // Reset
                 {
                     ClearCore();
-                    foreach (TOriginal x in originalList) Add(CreateItem(x));
+                    foreach (TOriginal x in originalCollection) Add(CreateItem(x));
                 }
             }
             finally
@@ -121,21 +134,27 @@ namespace System.Waf.Foundation
         protected override void RemoveItem(int index)
         {
             if (innerChange) base.RemoveItem(index);
-            else originalList.RemoveAt(index);
+            else ModifyOriginalList().RemoveAt(index);
         }
 
         /// <inheritdoc />
         protected override void ClearItems()
         {
             if (innerChange) base.ClearItems();
-            else originalList.Clear();
+            else ModifyOriginalList().Clear();
         }
 
         /// <inheritdoc />
         protected override void MoveItem(int oldIndex, int newIndex)
         {
             if (innerChange) base.MoveItem(oldIndex, newIndex);
-            else originalList.Move(oldIndex, newIndex);
+            else ModifyOriginalList().Move(oldIndex, newIndex);
+        }
+
+        private ObservableCollection<TOriginal> ModifyOriginalList()
+        {
+            if (isReadOnly) throw new NotSupportedException("IsReadOnly is true. Modifications are not allowed.");
+            return originalList!;
         }
 
         private T CreateItem([AllowNull] TOriginal oldItem)
