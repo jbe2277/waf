@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -18,23 +19,18 @@ namespace Test.Waf.Foundation
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingList<MyDataModel, MyModel>(null!, null!));
             AssertHelper.ExpectedException<ArgumentNullException>(() => new SynchronizingList<MyDataModel, MyModel>(new ObservableList<MyModel>(), null!));
+            AssertHelper.ExpectedException<ArgumentException>(() => new SynchronizingList<MyDataModel, MyModel>(new ObservableList<MyModel>(), x => new MyDataModel(x), x => x.Model, true));
         }
 
         [TestMethod]
         public void SynchronizeTest()
         {
-            var originalList = new ObservableList<MyModel>()
-            {
-                new MyModel(),
-                new MyModel(),
-                new MyModel()
-            };
+            var originalList = new ObservableList<MyModel> { new MyModel(), new MyModel(), new MyModel() };
 
             var synchronizingList = new SynchronizingList<MyDataModel, MyModel>(originalList, m => new MyDataModel(m));
             AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));
 
             // Check add operation with collection changed event.
-            int handlerCalled = 0;
             NotifyCollectionChangedEventHandler handler = (sender, e) =>
             {
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
@@ -105,40 +101,54 @@ namespace Test.Waf.Foundation
 
             Assert.IsFalse(synchronizingList.Any());
 
-            void AssertCollectionChangeEventsCalled(NotifyCollectionChangedEventHandler handler, Action action)
-            {
-                handlerCalled = 0;
-                synchronizingList!.CollectionChanging += OuterHandler;
-                synchronizingList.CollectionChanged += OuterHandler;
-                action();
-                synchronizingList.CollectionChanging -= OuterHandler;
-                synchronizingList.CollectionChanged -= OuterHandler;
-                Assert.AreEqual(2, handlerCalled);
+            void AssertCollectionChangeEventsCalled(NotifyCollectionChangedEventHandler handler, Action action) => AssertCollectionChangeEvents(handler, action, synchronizingList);
+        }
 
-                void OuterHandler(object? sender, NotifyCollectionChangedEventArgs e)
-                {
-                    handlerCalled++;
-                    Assert.AreEqual(synchronizingList, sender);
-                    handler(sender, e);
-                }
-            }
+        [TestMethod]
+        public void SynchronizeWithGetOriginalItemTest()
+        {
+            var originalList = new ObservableList<MyModel> { new MyModel(), new MyModel(), new MyModel() };
+
+            var synchronizingList = new SynchronizingList<MyDataModel, MyModel>(originalList, m => new MyDataModel(m), dm => dm.Model);
+            AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));
+
+            // Check add operation with collection changed event.
+            NotifyCollectionChangedEventHandler handler = (sender, e) =>
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
+                Assert.AreEqual(3, e.NewStartingIndex);
+                Assert.AreEqual(originalList.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
+            };
+            AssertCollectionChangeEventsCalled(handler, () => originalList.Add(new MyModel()));
+            originalList.Remove(originalList.Last());
+            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Add(new MyDataModel(new MyModel())));
+
+            // Check insert at index 0 operation with collection changed event.
+            handler = (sender, e) =>
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
+                Assert.AreEqual(0, e.NewStartingIndex);
+                Assert.AreEqual(originalList[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
+            };
+            AssertCollectionChangeEventsCalled(handler, () => originalList.Insert(0, new MyModel()));
+            originalList.RemoveAt(0);
+            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Insert(0, new MyDataModel(new MyModel())));
+
+            // Compare the collections
+            AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));
+
+            void AssertCollectionChangeEventsCalled(NotifyCollectionChangedEventHandler handler, Action action) => AssertCollectionChangeEvents(handler, action, synchronizingList);
         }
 
         [TestMethod]
         public void SynchronizeCustomCollectionTest()
         {
-            var originalList = new CustomCollection<MyModel>
-            {
-                new MyModel(),
-                new MyModel(),
-                new MyModel()
-            };
+            var originalList = new CustomCollection<MyModel> { new MyModel(), new MyModel(), new MyModel() };
 
             var synchronizingList = new SynchronizingList<MyDataModel, MyModel>(originalList, m => new MyDataModel(m));
             AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));
 
             // Check add operation with collection changed event.
-            int handlerCalled = 0;
             NotifyCollectionChangedEventHandler handler = (sender, e) =>
             {
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
@@ -209,34 +219,31 @@ namespace Test.Waf.Foundation
             Assert.AreEqual(3, customHandlerCalled);
             AssertHelper.SequenceEqual(newItems, synchronizingList.Select(dm => dm.Model));
 
-            void AssertCollectionChangeEventsCalled(NotifyCollectionChangedEventHandler handler, Action action)
-            {
-                handlerCalled = 0;
-                synchronizingList!.CollectionChanging += OuterHandler;
-                synchronizingList.CollectionChanged += OuterHandler;
-                action();
-                synchronizingList.CollectionChanging -= OuterHandler;
-                synchronizingList.CollectionChanged -= OuterHandler;
-                Assert.AreEqual(2, handlerCalled);
+            void AssertCollectionChangeEventsCalled(NotifyCollectionChangedEventHandler handler, Action action) => AssertCollectionChangeEvents(handler, action, synchronizingList);
+        }
 
-                void OuterHandler(object? sender, NotifyCollectionChangedEventArgs e)
-                {
-                    handlerCalled++;
-                    Assert.AreEqual(synchronizingList, sender);
-                    handler(sender, e);
-                }
+        private static void AssertCollectionChangeEvents(NotifyCollectionChangedEventHandler handler, Action action, IList synchronizingList)
+        {
+            int handlerCalled = 0;
+            ((INotifyCollectionChanging)synchronizingList).CollectionChanging += OuterHandler;
+            ((INotifyCollectionChanged)synchronizingList).CollectionChanged += OuterHandler;
+            action();
+            ((INotifyCollectionChanging)synchronizingList).CollectionChanging -= OuterHandler;
+            ((INotifyCollectionChanged)synchronizingList).CollectionChanged -= OuterHandler;
+            Assert.AreEqual(2, handlerCalled);
+
+            void OuterHandler(object? sender, NotifyCollectionChangedEventArgs e)
+            {
+                handlerCalled++;
+                Assert.AreEqual(synchronizingList, sender);
+                handler(sender, e);
             }
         }
 
         [TestMethod]
         public void ReadOnlyListErrorTest()
         {
-            var originalList = new ObservableList<MyModel>()
-            {
-                new MyModel(),
-                new MyModel(),
-                new MyModel()
-            };
+            var originalList = new ObservableList<MyModel> { new MyModel(), new MyModel(), new MyModel() };
 
             var readOnlyList = (IReadOnlyList<MyModel>)originalList;
             var synchronizingList = new SynchronizingList<MyDataModel, MyModel>(readOnlyList, m => new MyDataModel(m));
