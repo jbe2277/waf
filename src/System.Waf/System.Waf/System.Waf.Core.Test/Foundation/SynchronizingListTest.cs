@@ -121,7 +121,9 @@ namespace Test.Waf.Foundation
             };
             AssertCollectionChangeEventsCalled(handler, () => originalList.Add(new MyModel()));
             originalList.Remove(originalList.Last());
-            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Add(new MyDataModel(new MyModel())));
+            var dataModelToAdd = new MyDataModel(new MyModel());
+            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Add(dataModelToAdd));
+            Assert.AreSame(dataModelToAdd, synchronizingList.Last());
 
             // Check insert at index 0 operation with collection changed event.
             handler = (sender, e) =>
@@ -132,7 +134,21 @@ namespace Test.Waf.Foundation
             };
             AssertCollectionChangeEventsCalled(handler, () => originalList.Insert(0, new MyModel()));
             originalList.RemoveAt(0);
-            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Insert(0, new MyDataModel(new MyModel())));
+            var dataModelToInsert = new MyDataModel(new MyModel());
+            AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Insert(0, dataModelToInsert));
+            Assert.AreSame(dataModelToInsert, synchronizingList[0]);
+
+            // Check replace operation with collection changed event.
+            handler = (sender, e) =>
+            {
+                Assert.AreEqual(NotifyCollectionChangedAction.Replace, e.Action);
+                Assert.AreEqual(0, e.NewStartingIndex);
+                Assert.AreEqual(originalList[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
+            };
+            AssertCollectionChangeEventsCalled(handler, () => originalList[0] = new MyModel());
+            var dataModelToReplace = new MyDataModel(new MyModel());
+            AssertCollectionChangeEventsCalled(handler, () => synchronizingList[0] = dataModelToReplace);
+            Assert.AreSame(dataModelToReplace, synchronizingList[0]);
 
             // Compare the collections
             AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));

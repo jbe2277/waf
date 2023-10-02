@@ -23,6 +23,7 @@ namespace System.Waf.Foundation
         private readonly Func<T, TOriginal>? getOriginalItem;
         private readonly bool isReadOnly;
         private bool innerChange;
+        private bool outerChange;
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingList{T, TOriginal}"/> class with two-way synchronization support.</summary>
         /// <param name="originalList">The original list.</param>
@@ -61,6 +62,7 @@ namespace System.Waf.Foundation
         private void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
+            if (outerChange) return;
             innerChange = true;
             try
             {
@@ -116,24 +118,32 @@ namespace System.Waf.Foundation
                     foreach (TOriginal x in originalCollection) Add(CreateItem(x));
                 }
             }
-            finally
-            {
-                innerChange = false;
-            }
+            finally { innerChange = false; }
         }
 
         /// <inheritdoc />
         protected override void InsertItem(int index, T item)
         {
-            if (innerChange) base.InsertItem(index, item);
-            else ModifyOriginalList().Insert(index, GetOriginalItem(item));
+            if (!innerChange)
+            {
+                outerChange = true;
+                try { ModifyOriginalList().Insert(index, GetOriginalItem(item)); }
+                finally { outerChange = false; }
+            }
+            base.InsertItem(index, item);
+
         }
 
         /// <inheritdoc />
         protected override void SetItem(int index, T item)
         {
-            if (innerChange) base.SetItem(index, item);
-            else ModifyOriginalList()[index] = GetOriginalItem(item);
+            if (!innerChange)
+            {
+                outerChange = true;
+                try { ModifyOriginalList()[index] = GetOriginalItem(item); }
+                finally { outerChange = false; }
+            }
+            base.SetItem(index, item);
         }
 
         /// <inheritdoc />
