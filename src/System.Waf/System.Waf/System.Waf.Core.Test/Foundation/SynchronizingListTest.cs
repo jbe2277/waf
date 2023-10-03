@@ -119,11 +119,13 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(3, e.NewStartingIndex);
                 Assert.AreEqual(originalList.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
-            AssertCollectionChangeEventsCalled(handler, () => originalList.Add(new MyModel()));
-            originalList.Remove(originalList.Last());
             var dataModelToAdd = new MyDataModel(new MyModel());
             AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Add(dataModelToAdd));
             Assert.AreSame(dataModelToAdd, synchronizingList.Last());
+            Assert.AreEqual(3, originalList.IndexOf(dataModelToAdd.Model));
+            originalList.Remove(originalList.Last());
+            Assert.AreEqual(-1, originalList.IndexOf(dataModelToAdd.Model));
+            AssertCollectionChangeEventsCalled(handler, () => originalList.Add(new MyModel()));
 
             // Check insert at index 0 operation with collection changed event.
             handler = (sender, e) =>
@@ -132,11 +134,13 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(0, e.NewStartingIndex);
                 Assert.AreEqual(originalList[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
-            AssertCollectionChangeEventsCalled(handler, () => originalList.Insert(0, new MyModel()));
-            originalList.RemoveAt(0);
             var dataModelToInsert = new MyDataModel(new MyModel());
             AssertCollectionChangeEventsCalled(handler, () => synchronizingList.Insert(0, dataModelToInsert));
             Assert.AreSame(dataModelToInsert, synchronizingList[0]);
+            Assert.AreEqual(0, originalList.IndexOf(dataModelToInsert.Model));
+            originalList.RemoveAt(0);
+            Assert.AreEqual(-1, originalList.IndexOf(dataModelToInsert.Model));
+            AssertCollectionChangeEventsCalled(handler, () => originalList.Insert(0, new MyModel()));
 
             // Check replace operation with collection changed event.
             handler = (sender, e) =>
@@ -145,10 +149,12 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(0, e.NewStartingIndex);
                 Assert.AreEqual(originalList[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
             };
-            AssertCollectionChangeEventsCalled(handler, () => originalList[0] = new MyModel());
             var dataModelToReplace = new MyDataModel(new MyModel());
             AssertCollectionChangeEventsCalled(handler, () => synchronizingList[0] = dataModelToReplace);
             Assert.AreSame(dataModelToReplace, synchronizingList[0]);
+            Assert.AreEqual(0, originalList.IndexOf(dataModelToReplace.Model));
+            AssertCollectionChangeEventsCalled(handler, () => originalList[0] = new MyModel());
+            Assert.AreEqual(-1, originalList.IndexOf(dataModelToReplace.Model));
 
             // Compare the collections
             AssertHelper.SequenceEqual(originalList, synchronizingList.Select(dm => dm.Model));

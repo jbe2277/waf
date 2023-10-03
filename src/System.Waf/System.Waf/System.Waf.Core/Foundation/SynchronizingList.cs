@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace System.Waf.Foundation
@@ -127,7 +126,7 @@ namespace System.Waf.Foundation
             if (!innerChange)
             {
                 outerChange = true;
-                try { ModifyOriginalList().Insert(index, GetOriginalItem(item)); }
+                try { ModifyOriginalList().Insert(index, GetOriginalItemToAdd(item)); }
                 finally { outerChange = false; }
             }
             base.InsertItem(index, item);
@@ -140,7 +139,7 @@ namespace System.Waf.Foundation
             if (!innerChange)
             {
                 outerChange = true;
-                try { ModifyOriginalList()[index] = GetOriginalItem(item); }
+                try { ModifyOriginalList()[index] = GetOriginalItemToAdd(item); }
                 finally { outerChange = false; }
             }
             base.SetItem(index, item);
@@ -173,20 +172,22 @@ namespace System.Waf.Foundation
             return originalList!;
         }
 
-        private TOriginal GetOriginalItem(T item)
+        private TOriginal GetOriginalItemToAdd(T item)
         {
             if (getOriginalItem is null) throw new NotSupportedException("Operation is not supported because getOriginalItem parameter was not set.");
-            return getOriginalItem(item);
+            var originalItem = getOriginalItem(item);
+            mapping.Add((originalItem, item));
+            return originalItem;
         }
 
-        private T CreateItem([AllowNull] TOriginal oldItem)
+        private T CreateItem(TOriginal originalItem)
         {
-            T newItem = factory(oldItem!);
-            mapping.Add((oldItem!, newItem));
+            T newItem = factory(originalItem);
+            mapping.Add((originalItem, newItem));
             return newItem;
         }
 
-        private void RemoveCore([AllowNull] TOriginal oldItem)
+        private void RemoveCore(TOriginal oldItem)
         {
             var tuple = mapping.First(t => originalItemComparer.Equals(t.original, oldItem!));
             mapping.Remove(tuple);
