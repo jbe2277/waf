@@ -19,7 +19,7 @@ public class PresentationModule : Module
         builder.RegisterType<LauncherService>().As<ILauncherService>().SingleInstance();
         builder.RegisterType<MessageService>().As<IMessageService>().SingleInstance();
         builder.RegisterType<NetworkInfoService>().As<INetworkInfoService>().SingleInstance();
-        builder.RegisterType<SettingsServiceCore>().As<ISettingsService>().SingleInstance();
+        builder.RegisterType<SettingsService>().As<ISettingsService>().SingleInstance();
         builder.RegisterType<SyndicationService>().As<ISyndicationService>().SingleInstance();
         builder.RegisterType<WebStorageService>().As<IWebStorageService>().SingleInstance();
 
