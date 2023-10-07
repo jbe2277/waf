@@ -10,17 +10,17 @@ using System.Waf.Presentation.Services;
 using System.Waf.UnitTesting;
 using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static Test.Waf.Presentation.Services.SettingsServiceCoreTest.DoubleNestedTypeTest;
+using static Test.Waf.Presentation.Services.SettingsServiceTest.DoubleNestedTypeTest;
 
 namespace Test.Waf.Presentation.Services
 {
     [TestClass]
-    public class SettingsServiceCoreTest
+    public class SettingsServiceTest
     {
         [TestMethod]
         public void GetAndSaveTest()
         {
-            var settingsService = new SettingsServiceCore();
+            var settingsService = new SettingsService();
             AssertNoErrorOccurred(settingsService);
             Assert.AreEqual(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 ApplicationInfo.ProductName, "Settings", "Settings.xml"), settingsService.FileName);
@@ -45,7 +45,7 @@ namespace Test.Waf.Presentation.Services
             var testSettings1 = settingsService.Get<TestSettings1>();
             Assert.AreNotEqual(default, testSettings1.UserId);
             Assert.AreEqual(default, testSettings1.LastRun);
-            testSettings1.LastRun = new DateTime(2000, 1, 1);
+            testSettings1.LastRun = new(2000, 1, 1);
             testSettings1.LastOpenedFiles = new[] { "MruFile1", "MruFile2" };
             testSettings1.ReplaceFiles(new[] { "File1" });
 
@@ -53,7 +53,7 @@ namespace Test.Waf.Presentation.Services
             Assert.IsTrue(File.Exists(settingsFileName));
 
             // Now read just one setting from the file with another instance -> the other setting must stay "untouched" in the file
-            settingsService = new SettingsServiceCore();
+            settingsService = new SettingsService();
             AssertNoErrorOccurred(settingsService);
             settingsService.FileName = settingsFileName;
             testSettings2 = settingsService.Get<TestSettings2>();
@@ -63,7 +63,7 @@ namespace Test.Waf.Presentation.Services
             settingsService.Dispose();
 
             // Read the saved values with another instance
-            settingsService = new SettingsServiceCore();
+            settingsService = new SettingsService();
             AssertNoErrorOccurred(settingsService);
             settingsService.FileName = settingsFileName;
             testSettings2 = settingsService.Get<TestSettings2>();
@@ -72,7 +72,7 @@ namespace Test.Waf.Presentation.Services
 
             testSettings1 = settingsService.Get<TestSettings1>();
             Assert.AreNotEqual(default, testSettings1.UserId);
-            Assert.AreEqual(new DateTime(2000, 1, 1), testSettings1.LastRun);
+            Assert.AreEqual(new(2000, 1, 1), testSettings1.LastRun);
             AssertHelper.SequenceEqual(new[] { "MruFile1", "MruFile2" }, testSettings1.LastOpenedFiles);
             AssertHelper.SequenceEqual(new[] { "File1" }, testSettings1.FileNames);
             settingsService.Dispose();
@@ -86,7 +86,7 @@ namespace Test.Waf.Presentation.Services
 
             TestSettings1 testSettings1;
             TestSettings2 testSettings2;
-            using (var settingsService = new SettingsServiceCore())
+            using (var settingsService = new SettingsService())
             {
                 AssertNoErrorOccurred(settingsService);
                 settingsService.FileName = settingsFileName;
@@ -113,7 +113,7 @@ namespace Test.Waf.Presentation.Services
                 Assert.AreEqual(expectedFileName, error.FileName);
             }
 
-            var settingsService = new SettingsServiceCore();
+            var settingsService = new SettingsService();
             var settingsFileName = Path.Combine(Environment.CurrentDirectory, "Settings4.xml");
             settingsService.FileName = settingsFileName;
             if (File.Exists(settingsFileName)) File.Delete(settingsFileName);
@@ -132,7 +132,7 @@ namespace Test.Waf.Presentation.Services
             void AssertCorruptFile(string corruptContent)
             {
                 File.WriteAllText(settingsFileName, corruptContent);
-                settingsService = new SettingsServiceCore();
+                settingsService = new SettingsService();
                 settingsService.ErrorOccurred += (sender, e) => error = e;
                 settingsService.FileName = settingsFileName;
                 error = null;
@@ -143,7 +143,7 @@ namespace Test.Waf.Presentation.Services
                 AssertErrorEventArgs<XmlException>(SettingsServiceAction.Save, settingsService.FileName);
 
                 // Now it is repaired with default values
-                settingsService = new SettingsServiceCore();
+                settingsService = new SettingsService();
                 settingsService.ErrorOccurred += (sender, e) => error = e;
                 settingsService.FileName = settingsFileName;
                 error = null;
@@ -153,7 +153,7 @@ namespace Test.Waf.Presentation.Services
             AssertCorruptFile("<WrongFormat xmlns=\"http://schemas.datacontract.org/2004/07/Dummy\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MyEnum i:nil=\"true\"/></WrongFormat>");
             AssertCorruptFile("WrongFormat");
 
-            settingsService = new SettingsServiceCore();
+            settingsService = new SettingsService();
             settingsService.ErrorOccurred += (sender, e) => error = e;
             settingsService.FileName = settingsFileName;
             settingsService.Get<NotSerializableTest>();
@@ -173,7 +173,7 @@ namespace Test.Waf.Presentation.Services
             public class TestSettings1 : UserSettingsBase
             {
                 [DataMember(Name = "FileNames")]
-                private readonly List<string> fileNames = new List<string>();
+                private readonly List<string> fileNames = new();
 
                 [DataMember]
                 public Guid UserId { get; private set; }
