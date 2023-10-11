@@ -9,8 +9,9 @@ namespace System.Waf.Foundation
 {
     /// <summary>Provides the base class for a generic observable read-only collection.</summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, IReadOnlyObservableList<T>, INotifyCollectionChanging
+    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, IReadOnlyObservableList<T>, INotifyCollectionChanging, INotifyCollectionItemChanged
     {
+        private readonly Dictionary<object, IWeakEventProxy> weakEventProxies = new();
         private int deferredChanges;
         private int deferCount;
 
@@ -19,7 +20,11 @@ namespace System.Waf.Foundation
         protected ObservableListViewBase(IEnumerable<T>? originalList) : base(new List<T>())
         {
             InnerList = (List<T>)Items;
-            if (originalList != null) InnerList.AddRange(originalList);
+            if (originalList != null)
+            {
+                InnerList.AddRange(originalList);
+                foreach (var x in InnerList) TryAddItemPropertyChanged(x);
+            }
         }
 
         /// <summary>The inner list of this list view.</summary>
@@ -30,6 +35,9 @@ namespace System.Waf.Foundation
 
         /// <inheritdoc />
         [field: NonSerialized] public event NotifyCollectionChangedEventHandler? CollectionChanged;
+
+        /// <inheritdoc />
+        [field: NonSerialized] public event PropertyChangedEventHandler? CollectionItemChanged;
 
         /// <inheritdoc />
         [field: NonSerialized] public event PropertyChangedEventHandler? PropertyChanged;
@@ -64,6 +72,11 @@ namespace System.Waf.Foundation
             else Interlocked.Increment(ref deferredChanges);
         }
 
+        /// <summary>Raise the CollectionItemChanged event with the provided arguments.</summary>
+        /// <param name="item">The collection item that raised the PropertyChanged event.</param>
+        /// <param name="e">The PropertyChanged event argument.</param>
+        protected virtual void OnCollectionItemChanged(object? item, PropertyChangedEventArgs e) => CollectionItemChanged?.Invoke(item, e);
+
         /// <summary>Raises the PropertyChanged event with the provided arguments.</summary>
         /// <param name="e">Arguments of the event being raised.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
@@ -76,6 +89,7 @@ namespace System.Waf.Foundation
             var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, newItemIndex);
             OnCollectionChanging(e);
             InnerList.Insert(newItemIndex, newItem!);
+            TryAddItemPropertyChanged(newItem);
             OnPropertyChanged(EventArgsCache.CountPropertyChanged);
             OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(e);
@@ -89,6 +103,7 @@ namespace System.Waf.Foundation
             var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, oldItem, oldItemIndex);
             OnCollectionChanging(e);
             InnerList.RemoveAt(oldItemIndex);
+            TryRemoveItemPropertyChanged(oldItem);
             OnPropertyChanged(EventArgsCache.CountPropertyChanged);
             OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(e);
@@ -99,8 +114,10 @@ namespace System.Waf.Foundation
         protected void Reset(IEnumerable<T> newList)
         {
             OnCollectionChanging(EventArgsCache.ResetCollectionChanged);
+            foreach (var x in InnerList) TryRemoveItemPropertyChanged(x);
             InnerList.Clear();
             InnerList.AddRange(newList);
+            foreach (var x in InnerList) TryAddItemPropertyChanged(x);
             OnPropertyChanged(EventArgsCache.CountPropertyChanged);
             OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
@@ -118,6 +135,23 @@ namespace System.Waf.Foundation
             InnerList.Insert(newIndex, item);
             OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
             OnCollectionChanged(e);
+        }
+
+        private void ItemPropertyChanged(object? sender, PropertyChangedEventArgs e) => OnCollectionItemChanged(sender, e);
+
+        private void TryAddItemPropertyChanged(T? item) 
+        { 
+            if (item is INotifyPropertyChanged x) weakEventProxies.Add(x, WeakEvent.PropertyChanged.Add(x, ItemPropertyChanged)); 
+        }
+
+        private void TryRemoveItemPropertyChanged(T? item) 
+        {
+            if (item is null) return;
+            if (weakEventProxies.TryGetValue(item, out var proxy))
+            {
+                proxy.Remove();
+                weakEventProxies.Remove(item);
+            }
         }
 
         private sealed class DisposedNotifier : IDisposable

@@ -12,7 +12,7 @@
         object? DataContext { get => BindingContext; set => BindingContext = value; }
 
         /// <summary>Gets or sets the binding context of the view.</summary>
-        object? BindingContext  { get => null; set { } }
+        object? BindingContext { get => null; set { } }
 #else
         object? DataContext { get; set; }
 #endif

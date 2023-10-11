@@ -289,6 +289,14 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void CollectionItemChangedTest()
+        {
+            var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() });
+            var listView = new ObservableListViewCore<CollectionEventsTestModel>(list);
+            ObservableListTest.CollectionItemChangedTestCore(list, listView);
+        }
+
+        [TestMethod]
         public void RaiseEventsWithoutListener()
         {
             var originalList2 = new ObservableCollection<string>();
