@@ -35,6 +35,7 @@ public partial class App : Application
         InitializeLogging();
 
         settingsService.ErrorOccurred += (_, e) => Log.Default.Error("SettingsService error: {0}" + e.Error);
+        settingsService.FileName = Path.Combine(FileSystem.AppDataDirectory, "Settings.xml");
         localizationService?.Initialize();
         InitializeCultures(settingsService.Get<AppSettings>());
 

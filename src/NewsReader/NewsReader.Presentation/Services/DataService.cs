@@ -7,7 +7,7 @@ namespace Waf.NewsReader.Presentation.Services;
 
 public class DataService : IDataService
 {
-    private static readonly string containerFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "data.zip");
+    private static readonly string containerFileName = Path.Combine(FileSystem.AppDataDirectory, "data.zip");
     private const string itemFileName = "data.xml";
 
     public Stream GetReadStream() => File.OpenRead(containerFileName);
