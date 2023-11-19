@@ -8,7 +8,7 @@ namespace System.Waf.Foundation
     /// <summary>Represents a dynamic data collection that provides notifications when items get added or removed, or when the whole list is refreshed.
     /// It extends the <see cref="ObservableCollection{T}"/> by implementing the <see cref="INotifyCollectionChanging"/> interface.</summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    public class ObservableList<T> : ObservableCollection<T>, INotifyCollectionChanging, INotifyCollectionItemChanged, IReadOnlyObservableList<T>
+    public class ObservableList<T> : ObservableCollection<T>, IReadOnlyObservableList<T>
     {
         /// <summary>Initializes a new instance of the <see cref="ObservableCollection{T}"/> class.</summary>
         public ObservableList() { }

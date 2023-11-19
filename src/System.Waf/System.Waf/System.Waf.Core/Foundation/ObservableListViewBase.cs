@@ -9,7 +9,7 @@ namespace System.Waf.Foundation
 {
     /// <summary>Provides the base class for a generic observable read-only collection.</summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, IReadOnlyObservableList<T>, INotifyCollectionChanging, INotifyCollectionItemChanged
+    public abstract class ObservableListViewBase<T> : ReadOnlyCollection<T>, IReadOnlyObservableList<T>
     {
         private readonly Dictionary<object, IWeakEventProxy> weakEventProxies = new();
         private int deferredChanges;

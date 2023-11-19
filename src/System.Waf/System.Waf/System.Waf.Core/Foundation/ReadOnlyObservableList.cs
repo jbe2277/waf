@@ -9,7 +9,7 @@ namespace System.Waf.Foundation
     /// This class implements the IReadOnlyObservableList interface and provides public CollectionChanging, CollectionChanged, CollectionItemChanged and PropertyChanged events.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    public class ReadOnlyObservableList<T> : ReadOnlyObservableCollection<T>, INotifyCollectionChanging, INotifyCollectionItemChanged, IReadOnlyObservableList<T>
+    public class ReadOnlyObservableList<T> : ReadOnlyObservableCollection<T>, IReadOnlyObservableList<T>
     {
         private readonly bool collectionChangingSupported;
         private readonly bool collectionItemChangedSupported;

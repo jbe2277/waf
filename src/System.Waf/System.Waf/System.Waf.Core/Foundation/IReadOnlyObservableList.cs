@@ -13,7 +13,7 @@ namespace System.Waf.Foundation
     /// That is, you can use either the type you specified or any type that is more
     /// derived.
     /// </typeparam>
-    public interface IReadOnlyObservableList<out T> : IReadOnlyList<T>, INotifyCollectionChanged, INotifyPropertyChanged
+    public interface IReadOnlyObservableList<out T> : IReadOnlyList<T>, INotifyCollectionChanged, INotifyPropertyChanged, INotifyCollectionChanging, INotifyCollectionItemChanged
     {
     }
 }
