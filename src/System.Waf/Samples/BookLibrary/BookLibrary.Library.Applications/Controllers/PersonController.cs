@@ -87,11 +87,7 @@ internal class PersonController
         emailService.CreateNewEmail(person.Email!);
     }
 
-    private void UpdateCommands()
-    {
-        addNewCommand.RaiseCanExecuteChanged();
-        removeCommand.RaiseCanExecuteChanged();
-    }
+    private void UpdateCommands() => DelegateCommand.RaiseCanExecuteChanged(addNewCommand, removeCommand);
 
     private void PersonListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {

@@ -118,12 +118,7 @@ internal class FileController
         if (e.PropertyName == nameof(Document.Modified)) UpdateCommands();
     }
 
-    private void UpdateCommands()
-    {
-        closeCommand.RaiseCanExecuteChanged();
-        saveCommand.RaiseCanExecuteChanged();
-        saveAsCommand.RaiseCanExecuteChanged();
-    }
+    private void UpdateCommands() => DelegateCommand.RaiseCanExecuteChanged(closeCommand, saveCommand, saveAsCommand);
 
     internal IDocument New(IDocumentType documentType)
     {

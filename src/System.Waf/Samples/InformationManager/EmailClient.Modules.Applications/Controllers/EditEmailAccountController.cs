@@ -93,11 +93,7 @@ internal class EditEmailAccountController
         UpdateCommandsState();
     }
 
-    private void UpdateCommandsState()
-    {
-        backCommand.RaiseCanExecuteChanged();
-        nextCommand.RaiseCanExecuteChanged();
-    }
+    private void UpdateCommandsState() => DelegateCommand.RaiseCanExecuteChanged(backCommand, nextCommand);
 
     private void EditEmailAccountViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {

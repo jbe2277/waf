@@ -53,8 +53,7 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
             zoom = Math.Max(value, minZoom);
             zoom = Math.Min(zoom, maxZoom);
             RaisePropertyChanged();
-            zoomInCommand.RaiseCanExecuteChanged();
-            zoomOutCommand.RaiseCanExecuteChanged();
+            DelegateCommand.RaiseCanExecuteChanged(zoomInCommand, zoomOutCommand);
         }
     }
 

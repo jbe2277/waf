@@ -73,8 +73,7 @@ internal class PrintController
     {
         if (e.PropertyName == nameof(IFileService.ActiveDocument))
         {
-            printPreviewCommand.RaiseCanExecuteChanged();
-            printCommand.RaiseCanExecuteChanged();
+            DelegateCommand.RaiseCanExecuteChanged(printPreviewCommand, printCommand);
         }
     }
 }

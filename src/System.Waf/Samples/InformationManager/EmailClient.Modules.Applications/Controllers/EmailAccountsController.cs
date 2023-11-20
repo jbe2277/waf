@@ -89,8 +89,7 @@ internal class EmailAccountsController
     {
         if (e.PropertyName == nameof(EmailAccountsViewModel.SelectedEmailAccount))
         {
-            removeEmailAccountCommand!.RaiseCanExecuteChanged();
-            editEmailAccountCommand!.RaiseCanExecuteChanged();
+            DelegateCommand.RaiseCanExecuteChanged(removeEmailAccountCommand!, editEmailAccountCommand!);
         }
     }
 }

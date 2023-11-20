@@ -91,12 +91,7 @@ internal class BookController
         }
     }
 
-    private void UpdateCommands()
-    {
-        addNewCommand.RaiseCanExecuteChanged();
-        removeCommand.RaiseCanExecuteChanged();
-        lendToCommand.RaiseCanExecuteChanged();
-    }
+    private void UpdateCommands() => DelegateCommand.RaiseCanExecuteChanged(addNewCommand, removeCommand, lendToCommand);
 
     private void BookListViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
