@@ -87,6 +87,10 @@ namespace Test.Waf.Applications
 
             AssertHelper.CanExecuteChangedEvent(command, () => DelegateCommand.RaiseCanExecuteChanged(command, command2));
             AssertHelper.CanExecuteChangedEvent(command2, () => DelegateCommand.RaiseCanExecuteChanged(command, command2));
+
+            AssertHelper.ExpectedException<ArgumentException>(() => DelegateCommand.RaiseCanExecuteChanged());
+            AssertHelper.ExpectedException<ArgumentException>(() => DelegateCommand.RaiseCanExecuteChanged(Array.Empty<IDelegateCommand>()));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => DelegateCommand.RaiseCanExecuteChanged(null!));
         }
 
         [TestMethod]

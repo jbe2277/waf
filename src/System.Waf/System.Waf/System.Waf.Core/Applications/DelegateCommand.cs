@@ -67,6 +67,13 @@ namespace System.Waf.Applications
 
         /// <summary>Raises the <see cref="ICommand.CanExecuteChanged"/> event of the specified commands.</summary>
         /// <param name="commands">The commands.</param>
-        public static void RaiseCanExecuteChanged(params IDelegateCommand[] commands) { foreach (var x in commands ?? Array.Empty<IDelegateCommand>()) x.RaiseCanExecuteChanged(); }
+        /// <exception cref="ArgumentNullException">commands must not be null.</exception>
+        /// <exception cref="ArgumentException">commands must not be an empty list.</exception>
+        public static void RaiseCanExecuteChanged(params IDelegateCommand[] commands) 
+        {
+            if (commands is null) throw new ArgumentNullException(nameof(commands));
+            if (commands.Length < 1) throw new ArgumentException("commands must not be an empty list.", nameof(commands));
+            foreach (var x in commands) x.RaiseCanExecuteChanged(); 
+        }
     }
 }
