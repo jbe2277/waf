@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Threading.Tasks;
 using System.Waf.Applications;
 using System.Waf.UnitTesting;
 
@@ -70,8 +71,7 @@ namespace Test.Waf.Applications
         [TestMethod]
         public void RaiseCanExecuteChangedTest()
         {
-            var executed = false;
-            var canExecute = false;
+            var (executed, canExecute) = (false, false);
             var command = new DelegateCommand(() => executed = true, () => canExecute);
             
             Assert.IsFalse(command.CanExecute(null));
@@ -81,6 +81,12 @@ namespace Test.Waf.Applications
             AssertHelper.CanExecuteChangedEvent(command, () => command.RaiseCanExecuteChanged());
             
             Assert.IsFalse(executed);
+
+            var (executed2, canExecute2) = (false, false);
+            var command2 = new AsyncDelegateCommand(() => { executed2 = true; return Task.CompletedTask; }, () => canExecute2);
+
+            AssertHelper.CanExecuteChangedEvent(command, () => DelegateCommand.RaiseCanExecuteChanged(command, command2));
+            AssertHelper.CanExecuteChangedEvent(command2, () => DelegateCommand.RaiseCanExecuteChanged(command, command2));
         }
 
         [TestMethod]

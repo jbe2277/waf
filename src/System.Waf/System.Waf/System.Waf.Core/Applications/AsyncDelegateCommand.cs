@@ -8,7 +8,7 @@ namespace System.Waf.Applications
     /// method to the specified delegates.
     /// This implementation disables the command during the async command execution.
     /// </summary>
-    public class AsyncDelegateCommand : ICommand
+    public class AsyncDelegateCommand : IDelegateCommand
     {
         private readonly Func<object?, Task> execute;
         private readonly Func<object?, bool>? canExecute;
@@ -32,7 +32,7 @@ namespace System.Waf.Applications
         {
             if (execute == null) throw new ArgumentNullException(nameof(execute));
             this.execute = p => execute();
-            this.canExecute = canExecute == null ? (Func<object?, bool>?)null : p => canExecute!();
+            this.canExecute = canExecute == null ? null : p => canExecute!();
         }
 
         /// <summary>Initializes a new instance of the <see cref="AsyncDelegateCommand"/> class.</summary>
@@ -46,7 +46,7 @@ namespace System.Waf.Applications
         }
 
         /// <summary>Returns a disabled command.</summary>
-        public static AsyncDelegateCommand DisabledCommand { get; } = new AsyncDelegateCommand(() => Task.CompletedTask, () => false);
+        public static AsyncDelegateCommand DisabledCommand { get; } = new(() => Task.CompletedTask, () => false);
 
         private bool IsExecuting
         {
@@ -61,19 +61,13 @@ namespace System.Waf.Applications
             }
         }
 
-        /// <summary>Occurs when changes occur that affect whether or not the command should execute.</summary>
+        /// <inheritdoc />
         public event EventHandler? CanExecuteChanged;
 
-        /// <summary>Defines the method that determines whether the command can execute in its current state.</summary>
-        /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        /// <returns>true if this command can be executed; otherwise, false.</returns>
-        public bool CanExecute(object? parameter)
-        {
-            return !IsExecuting && (canExecute == null || canExecute(parameter));
-        }
+        /// <inheritdoc />
+        public bool CanExecute(object? parameter) => !IsExecuting && (canExecute == null || canExecute(parameter));
 
-        /// <summary>Defines the method to be called when the command is invoked.</summary>
-        /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+        /// <inheritdoc />
         public async void Execute(object? parameter)
         {
             if (!CanExecute(parameter)) return;
@@ -89,17 +83,11 @@ namespace System.Waf.Applications
             }
         }
 
-        /// <summary>Raises the <see cref="CanExecuteChanged"/> event.</summary>
-        public void RaiseCanExecuteChanged()
-        {
-            OnCanExecuteChanged(EventArgs.Empty);
-        }
+        /// <inheritdoc />
+        public void RaiseCanExecuteChanged() => OnCanExecuteChanged(EventArgs.Empty);
 
         /// <summary>Raises the <see cref="CanExecuteChanged"/> event.</summary>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnCanExecuteChanged(EventArgs e)
-        {
-            CanExecuteChanged?.Invoke(this, e);
-        }
+        protected virtual void OnCanExecuteChanged(EventArgs e) => CanExecuteChanged?.Invoke(this, e);
     }
 }
