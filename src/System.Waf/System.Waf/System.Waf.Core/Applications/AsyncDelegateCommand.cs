@@ -68,10 +68,15 @@ namespace System.Waf.Applications
         public bool CanExecute(object? parameter) => !IsExecuting && (canExecute == null || canExecute(parameter));
 
         /// <inheritdoc />
-        public async void Execute(object? parameter)
+        public void Execute(object? parameter) => _ = ExecuteAsync(parameter);
+
+        /// <summary>Defines the method to be called when the command is invoked.</summary>
+        /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+        /// <returns>A task that represents an asynchronous operation.</returns>
+        public async Task ExecuteAsync(object? parameter)
         {
             if (!CanExecute(parameter)) return;
-            
+
             IsExecuting = true;
             try
             {

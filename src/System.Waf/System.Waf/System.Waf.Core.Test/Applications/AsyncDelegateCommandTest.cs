@@ -10,7 +10,7 @@ namespace Test.Waf.Applications
     public class AsyncDelegateCommandTest
     {
         [TestMethod]
-        public void CanExecuteDuringAsyncExecute()
+        public async Task CanExecuteDuringAsyncExecute()
         {
             AssertHelper.ExpectedException<ArgumentNullException>(() => new AsyncDelegateCommand((Func<Task>)null!));
 
@@ -24,14 +24,16 @@ namespace Test.Waf.Applications
             });
 
             Assert.IsTrue(command.CanExecute(null));
-            command.Execute(null);
+            var task = command.ExecuteAsync(null);
 
             executeCalled = false;
             Assert.IsFalse(command.CanExecute(null));
-            command.Execute(null);
+            command.Execute(null);  // second call will be ignored
             Assert.IsFalse(executeCalled);
 
+            Assert.IsFalse(task.IsCompleted);
             tcs.SetResult(null);
+            await task;
             Assert.IsTrue(command.CanExecute(null));
             command.Execute(null);
             Assert.IsTrue(executeCalled);

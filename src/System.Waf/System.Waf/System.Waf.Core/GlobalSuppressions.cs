@@ -42,3 +42,4 @@
 [assembly: SuppressMessage("Security", "CA2109:Review visible event handlers", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Foundation.ObservableListViewBase`1.OnCollectionItemChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)")]
 [assembly: SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Presentation.Services.SettingsService.Dispose(System.Boolean)")]
 [assembly: SuppressMessage("Design", "CA1030:Use events where appropriate", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.IDelegateCommand.RaiseCanExecuteChanged")]
+[assembly: SuppressMessage("Design", "CA1030:Use events where appropriate", Justification = "<Pending>", Scope = "member", Target = "~M:System.Waf.Applications.DelegateCommand.RaiseCanExecuteChanged(System.Waf.Applications.IDelegateCommand[])")]
