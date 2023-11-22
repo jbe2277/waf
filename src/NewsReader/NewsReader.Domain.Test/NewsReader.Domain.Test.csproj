@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Test.NewsReader.Domain</RootNamespace>
     <AssemblyName>Test.NewsReader.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.UnitTesting.Core" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.49" />
   </ItemGroup>
 
   <ItemGroup>

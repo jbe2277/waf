@@ -22,16 +22,5 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.1.1" />
-
-    <!-- News Reader (MAUI) -->
-    <PackageVersion Include="Autofac" Version="7.1.0" />
-    <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AppCenter.Analytics" Version="5.0.2" />
-    <PackageVersion Include="Microsoft.AppCenter.Crashes" Version="5.0.2" />
-    <PackageVersion Include="Microsoft.Graph" Version="4.54.0" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.55.0" />
-    <PackageVersion Include="System.ServiceModel.Syndication" Version="7.0.0" />
-    <PackageVersion Include="System.Waf.Core" Version="7.0.1-alpha.0.49" />
-    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.49" />
   </ItemGroup>
 </Project>
