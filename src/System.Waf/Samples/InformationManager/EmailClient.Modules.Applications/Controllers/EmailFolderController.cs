@@ -50,7 +50,7 @@ internal class EmailFolderController
 
     public void Shutdown()
     {
-        emailListViewModelPropertyChangedProxy?.Remove();
+        WeakEvent.TryRemove(ref emailListViewModelPropertyChangedProxy);
         // Set the views to null so that the garbage collector can collect them.
         emailLayoutViewModel.EmailListView = null;
         emailLayoutViewModel.EmailView = null;

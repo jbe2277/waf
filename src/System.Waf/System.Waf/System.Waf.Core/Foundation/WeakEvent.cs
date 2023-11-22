@@ -370,5 +370,13 @@ namespace System.Waf.Foundation
                 return EventHandler<DataErrorsChangedEventArgs>.Add(source, targetHandler, (s, h) => s.ErrorsChanged += h, (s, h) => s.ErrorsChanged -= h);
             }
         }
+
+        /// <summary>Remove the weak event handler if the passed proxy is not null. And set the proxy to null.</summary>
+        /// <param name="proxy">The weak event proxy.</param>
+        public static void TryRemove(ref IWeakEventProxy? proxy)
+        {
+            proxy?.Remove();
+            proxy = null;
+        }
     }
 }

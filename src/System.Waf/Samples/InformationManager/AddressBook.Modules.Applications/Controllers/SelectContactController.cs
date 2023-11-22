@@ -12,7 +12,7 @@ internal class SelectContactController
     private readonly SelectContactViewModel selectContactViewModel;
     private readonly DelegateCommand selectContactCommand;
     private ObservableListView<Contact> contactsView = null!;
-    private IWeakEventProxy contactListViewModelPropertyChangedProxy = null!;
+    private IWeakEventProxy? contactListViewModelPropertyChangedProxy;
 
     [ImportingConstructor]
     public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
@@ -44,7 +44,7 @@ internal class SelectContactController
 
     public void Shutdown()
     {
-        contactListViewModelPropertyChangedProxy.Remove();
+        WeakEvent.TryRemove(ref contactListViewModelPropertyChangedProxy);
         contactsView.Dispose();
     }
 

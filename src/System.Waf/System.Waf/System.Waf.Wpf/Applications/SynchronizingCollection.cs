@@ -18,7 +18,7 @@ namespace System.Waf.Applications
     [Obsolete("Use System.Waf.Foundation.SynchronizingList instead.")]
     public class SynchronizingCollection<T, TOriginal> : SynchronizingCollectionCore<T, TOriginal>
     {
-        private readonly IWeakEventProxy? originalCollectionChangedProxy;
+        private IWeakEventProxy? originalCollectionChangedProxy;
 
         /// <summary>Initializes a new instance of the <see cref="SynchronizingCollection{T, TOriginal}"/> class.</summary>
         /// <param name="originalCollection">The original collection.</param>
@@ -40,7 +40,7 @@ namespace System.Waf.Applications
         {
             if (disposing)
             {
-                originalCollectionChangedProxy?.Remove();
+                WeakEvent.TryRemove(ref originalCollectionChangedProxy);
             }
             base.OnDispose(disposing);
         }

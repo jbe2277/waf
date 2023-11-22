@@ -17,7 +17,7 @@ namespace System.Waf.Applications
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableListView<T> : ObservableListViewCore<T>
     {
-        private readonly IWeakEventProxy? originalCollectionChangedProxy;
+        private IWeakEventProxy? originalCollectionChangedProxy;
 
         /// <summary>Initializes a new instance of the ObservableListView class that represents a view of the specified list.</summary>
         /// <param name="originalList">The original list.</param>
@@ -55,7 +55,7 @@ namespace System.Waf.Applications
         {
             if (disposing)
             {
-                originalCollectionChangedProxy?.Remove();
+                WeakEvent.TryRemove(ref originalCollectionChangedProxy);
             }
             base.OnDispose(disposing);
         }

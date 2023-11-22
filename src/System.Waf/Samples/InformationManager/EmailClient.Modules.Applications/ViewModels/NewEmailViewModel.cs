@@ -43,7 +43,7 @@ public class NewEmailViewModel : ViewModel<INewEmailView>
         set
         {
             if (email == value) return;
-            emailPropertyChangedProxy?.Remove();
+            WeakEvent.TryRemove(ref emailPropertyChangedProxy);
             email = value;
             emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(email, EmailPropertyChanged);
             UpdateProperties();

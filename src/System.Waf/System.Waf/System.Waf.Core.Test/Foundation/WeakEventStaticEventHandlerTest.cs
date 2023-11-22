@@ -80,6 +80,25 @@ namespace Test.Waf.Foundation
             AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.StaticEventHandler.Add(subscriber.Handler, h => StaticPublisher.Event1 += h, null!));
         }
 
+        [TestMethod]
+        public void WeakEventRemoveTest()
+        {
+            var subscriber = new Subscriber();
+            var proxy = WeakEvent.StaticEventHandler.Add(subscriber.Handler, h => StaticPublisher.Event1 += h, h => StaticPublisher.Event1 -= h);
+            StaticPublisher.RaiseEvent();
+            Assert.AreEqual(1, subscriber.HandlerCallCount);
+            
+            WeakEvent.TryRemove(ref proxy);
+            StaticPublisher.RaiseEvent();
+            Assert.AreEqual(1, subscriber.HandlerCallCount);
+            Assert.IsNull(proxy);
+
+            WeakEvent.TryRemove(ref proxy);
+            StaticPublisher.RaiseEvent();
+            Assert.AreEqual(1, subscriber.HandlerCallCount);
+            Assert.IsNull(proxy);
+        }
+
         private static (WeakReference<Manager>, WeakReference<Subscriber>) WeakEventHandlerCore(Manager? manager, Subscriber? subscriber,
             int raiseCount = 1, int addCount = 1, bool remove = false, bool removeTwice = false)
         {
