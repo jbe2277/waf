@@ -43,7 +43,7 @@ public class DataService : IDataService
 
     public void Save(object data)
     {
-        if (data is null) throw new ArgumentNullException(nameof(data));
+        ArgumentNullException.ThrowIfNull(data);
         using var archiveStream = File.Create(containerFileName);
         using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true);
         var entry = archive.CreateEntry(itemFileName, CompressionLevel.Optimal);
