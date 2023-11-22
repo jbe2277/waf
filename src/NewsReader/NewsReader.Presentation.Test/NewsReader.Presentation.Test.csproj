@@ -3,11 +3,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Test.NewsReader.Presentation</RootNamespace>
     <AssemblyName>Test.NewsReader.Presentation</AssemblyName>
-    <UseMaui>true</UseMaui>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.49" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="7.0.1-alpha.0.58" />
   </ItemGroup>
 
   <ItemGroup>
