@@ -12,7 +12,7 @@ public class FeedManager : Model, IDataManager
     public FeedManager()
     {
         // Note: Serializer does not call the constructor.
-        feeds = new() { new Feed(new Uri("https://devblogs.microsoft.com/dotnet/category/maui/feed/")) };
+        feeds = [new Feed(new Uri("https://devblogs.microsoft.com/dotnet/category/maui/feed/"))];
         ItemLifetime = TimeSpan.FromDays(365);
         MaxItemsLimit = 250;
         Initialize();

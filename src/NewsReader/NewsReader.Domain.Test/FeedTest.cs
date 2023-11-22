@@ -16,8 +16,8 @@ public class FeedTest : DomainTest
 
     private static void IsLoadingCoreTest(bool useSerializer)
     {
-        var feed1 = new Feed(new Uri("http://www.test.com/rss/feed"));
-        var feed2 = new Feed(new Uri("http://www.test.com/rss/feed"));
+        var feed1 = new Feed(new("http://www.test.com/rss/feed"));
+        var feed2 = new Feed(new("http://www.test.com/rss/feed"));
         feed1 = !useSerializer ? feed1 : SerializerHelper.Clone(feed1);
         feed2 = !useSerializer ? feed2 : SerializerHelper.Clone(feed2);
 
@@ -39,7 +39,7 @@ public class FeedTest : DomainTest
         Assert.IsFalse(feed2.IsLoading);
         feed2.StartLoading();
         Assert.IsTrue(feed2.IsLoading);
-        feed2.UpdateItems(new FeedItem[0]);
+        feed2.UpdateItems([]);
         Assert.IsFalse(feed2.IsLoading);
     }
 
@@ -57,11 +57,11 @@ public class FeedTest : DomainTest
 
     private static void UpdateItemsCoreTest(bool cloneItemsBeforeInsert, bool useSerializer)
     {
-        var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
-        feed.UpdateItems(new[] {
-            new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc"),
-            new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc"),
-        });
+        var feed = new Feed(new("http://www.test.com/rss/feed"));
+        feed.UpdateItems([
+            new FeedItem(new("http://www.test.com/rss/feed/1"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name1", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/2"), new(2020, 5, 7, 12, 0, 0, new(1, 0, 0)), "name2", "desc"),
+        ]);
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
         Assert.AreEqual(2, feed.Items.Count);
@@ -69,8 +69,8 @@ public class FeedTest : DomainTest
 
         var newItems = new[]
         {
-            new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 7, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2b", "desc"),
-            new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 6, 12, 0, 0, new TimeSpan(1, 0, 0)), "name3", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/2"), new(2020, 5, 7, 12, 0, 0, new(1, 0, 0)), "name2b", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/3"), new(2020, 5, 6, 12, 0, 0, new(1, 0, 0)), "name3", "desc"),
         };
         feed.UpdateItems(newItems, cloneItemsBeforeInsert: cloneItemsBeforeInsert);
 
@@ -94,13 +94,13 @@ public class FeedTest : DomainTest
 
     private static void UnreadItemsCountCoreTest(bool useSerializer)
     {
-        var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
+        var feed = new Feed(new("http://www.test.com/rss/feed"));
         var feedManager = new FeedManager() { MaxItemsLimit = null, ItemLifetime = null };
         feedManager.Feeds.Add(feed);
-        feed.UpdateItems(new[] {
-            new FeedItem(new Uri("http://www.test.com/rss/feed/1"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name1", "desc"),
-            new FeedItem(new Uri("http://www.test.com/rss/feed/2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc"),
-        });
+        feed.UpdateItems([
+            new FeedItem(new("http://www.test.com/rss/feed/1"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name1", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/2"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name2", "desc"),
+        ]);
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
         Assert.AreEqual(2, feed.UnreadItemsCount);
@@ -111,9 +111,7 @@ public class FeedTest : DomainTest
 
         AssertHelper.PropertyChangedEvent(feed, x => x.UnreadItemsCount, () =>
         {
-            feed.UpdateItems(new[] {
-                new FeedItem(new Uri("http://www.test.com/rss/feed/3"), new DateTimeOffset(2020, 5, 5, 12, 0, 3, new TimeSpan(1, 0, 0)), "name3", "desc"),
-            });
+            feed.UpdateItems([new FeedItem(new("http://www.test.com/rss/feed/3"), new(2020, 5, 5, 12, 0, 3, new(1, 0, 0)), "name3", "desc")]);
         });
 
         Assert.AreEqual(2, feed.UnreadItemsCount);
@@ -131,7 +129,7 @@ public class FeedTest : DomainTest
 
     private static void TrimItemsListWithMaxItemsLimitTest(bool useSerializer)
     {
-        var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
+        var feed = new Feed(new("http://www.test.com/rss/feed"));
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
         var feedManager = new FeedManager();
@@ -165,7 +163,7 @@ public class FeedTest : DomainTest
 
     private static void TrimItemsListWithItemLifetimeTest(bool useSerializer)
     {
-        var feed = new Feed(new Uri("http://www.test.com/rss/feed"));
+        var feed = new Feed(new("http://www.test.com/rss/feed"));
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
         var feedManager = new FeedManager();
@@ -193,10 +191,10 @@ public class FeedTest : DomainTest
 
     private static void UpdateFeedItems(Feed feed)
     {
-        feed.UpdateItems(new[] {
-            new FeedItem(new Uri("http://www.test.com/rss/feed/1"), DateTimeOffset.Now - TimeSpan.FromDays(10), "name1", "desc"),
-            new FeedItem(new Uri("http://www.test.com/rss/feed/2"), DateTimeOffset.Now - TimeSpan.FromDays(5), "name2", "desc"),
-            new FeedItem(new Uri("http://www.test.com/rss/feed/3"), DateTimeOffset.Now - TimeSpan.FromDays(1), "name3", "desc"),
-        });
+        feed.UpdateItems([
+            new FeedItem(new("http://www.test.com/rss/feed/1"), DateTimeOffset.Now - TimeSpan.FromDays(10), "name1", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/2"), DateTimeOffset.Now - TimeSpan.FromDays(5), "name2", "desc"),
+            new FeedItem(new("http://www.test.com/rss/feed/3"), DateTimeOffset.Now - TimeSpan.FromDays(1), "name3", "desc"),
+        ]);
     }
 }

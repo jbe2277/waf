@@ -21,7 +21,7 @@ public class Feed : ValidatableModel
     {
         // Note: Serializer does not call the constructor.
         this.uri = uri;
-        items = new();
+        items = [];
         Initialize();
     }
 

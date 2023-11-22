@@ -80,15 +80,8 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
     private void OriginalCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateInnerList();
 
 
-    private sealed class InnerListKeyComparer : IEqualityComparer<ObservableGroupingView<TKey, TElement>>
+    private sealed class InnerListKeyComparer(IEqualityComparer<TKey> keyComparer) : IEqualityComparer<ObservableGroupingView<TKey, TElement>>
     {
-        private readonly IEqualityComparer<TKey> keyComparer;
-
-        public InnerListKeyComparer(IEqualityComparer<TKey> keyComparer)
-        {
-            this.keyComparer = keyComparer;
-        }
-
         public bool Equals(ObservableGroupingView<TKey, TElement>? x, ObservableGroupingView<TKey, TElement>? y)
         {
             if (x != null && y != null) return keyComparer.Equals(x.Key, y.Key);
