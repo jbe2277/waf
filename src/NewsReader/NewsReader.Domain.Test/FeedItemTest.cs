@@ -13,33 +13,33 @@ public class FeedItemTest : DomainTest
     {
         AssertHelper.ExpectedException<ArgumentNullException>(() => new FeedItem(null!, DateTimeOffset.Now, "test", "test"));
 
-        var itemA1 = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
-        Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), itemA1.Date);
+        var itemA1 = new FeedItem(new("http://www.test.com/rss/feed"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name", "desc");
+        Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), itemA1.Date);
         Assert.AreEqual("name", itemA1.Name);
         Assert.AreEqual("desc", itemA1.Description);
         Assert.IsFalse(itemA1.MarkAsRead);
 
-        var itemA2 = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2022, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name2", "desc2");
+        var itemA2 = new FeedItem(new("http://www.test.com/rss/feed"), new(2022, 5, 5, 12, 0, 0, new(1, 0, 0)), "name2", "desc2");
         itemA2.MarkAsRead = true;
         itemA1.ApplyValuesFrom(itemA2);
-        Assert.AreEqual(new DateTimeOffset(2022, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), itemA1.Date);
+        Assert.AreEqual(new DateTimeOffset(2022, 5, 5, 12, 0, 0, new(1, 0, 0)), itemA1.Date);
         Assert.AreEqual("name2", itemA1.Name);
         Assert.AreEqual("desc2", itemA1.Description);
         Assert.IsTrue(itemA1.MarkAsRead);
 
-        var itemB1 = new FeedItem(new Uri("http://www.test.com/rss/feed2"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
+        var itemB1 = new FeedItem(new("http://www.test.com/rss/feed2"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name", "desc");
         AssertHelper.ExpectedException<InvalidOperationException>(() => itemA1.ApplyValuesFrom(itemB1));
     }
 
     [TestMethod]
     public void CloneTest()
     {
-        var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
+        var item = new FeedItem(new("http://www.test.com/rss/feed"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name", "desc");
         item.MarkAsRead = true;
         var clone = item.Clone();
 
         Assert.AreNotSame(item, clone);
-        Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), clone.Date);
+        Assert.AreEqual(new DateTimeOffset(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), clone.Date);
         Assert.AreEqual("name", clone.Name);
         Assert.AreEqual("desc", clone.Description);
         Assert.IsTrue(clone.MarkAsRead);
@@ -48,7 +48,7 @@ public class FeedItemTest : DomainTest
     [TestMethod]
     public void SupportNull()
     {
-        var item = new FeedItem(new Uri("http://www.test.com/rss/feed"), new DateTimeOffset(2020, 5, 5, 12, 0, 0, new TimeSpan(1, 0, 0)), "name", "desc");
+        var item = new FeedItem(new("http://www.test.com/rss/feed"), new(2020, 5, 5, 12, 0, 0, new(1, 0, 0)), "name", "desc");
         item.Name = null;
         item.Description = null;
         Assert.IsNull(item.Name);

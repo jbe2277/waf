@@ -12,7 +12,7 @@ public partial class FeedItemView : IFeedItemView
     public FeedItemView()
     {
         InitializeComponent();
-        cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource = new();
     }
 
     protected override void OnBindingContextChanged()
@@ -24,7 +24,7 @@ public partial class FeedItemView : IFeedItemView
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource = new();
         webView.Source = viewModel.FeedItem?.Uri;
     }
 
@@ -47,7 +47,7 @@ public partial class FeedItemView : IFeedItemView
 
     private async void WebViewNavigating(object sender, WebNavigatingEventArgs e)
     {
-        webViewNavigated = new TaskCompletionSource<object?>();
+        webViewNavigated = new();
         activityIndicator.IsVisible = true;
         activityIndicator.IsRunning = true;
         var delayTask = Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token);

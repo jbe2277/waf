@@ -1,13 +1,8 @@
 ﻿namespace Waf.NewsReader.Domain.Foundation;
 
-public class ObservableGroupingView<TKey, TElement> : ObservableListViewBase<TElement>, IGrouping<TKey, TElement>
+public class ObservableGroupingView<TKey, TElement>(TKey key, IEnumerable<TElement> originalList) : ObservableListViewBase<TElement>(originalList), IGrouping<TKey, TElement>
 {
-    public ObservableGroupingView(TKey key, IEnumerable<TElement> originalList) : base(originalList)
-    {
-        Key = key;
-    }
-
-    public TKey Key { get; }
+    public TKey Key { get; } = key;
 
     internal new List<TElement> InnerList => base.InnerList;
 
