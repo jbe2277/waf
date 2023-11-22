@@ -27,6 +27,7 @@ public partial class App : Application
     private readonly ISettingsService settingsService;
     private readonly IAppInfoService appInfoService;
     private readonly IAppController appController;
+    private bool isCreated;
 
     public App(ISettingsService settingsService, IAppInfoService appInfoService, Lazy<IAppController> appController, ILocalizationService? localizationService = null)
     {
@@ -52,15 +53,17 @@ public partial class App : Application
         window.MinimumHeight = 400;
         window.Created += (_, _) => OnCreated();
         window.Deactivated += (_, _) => OnDeactivated();
-#if WINDOWS
-        window.Destroying += (_, _) => OnDeactivated();
-#endif
+        window.Stopped += (_, _) => OnStopped();
+        window.Destroying += (_, _) => OnDestroying();
         window.Resumed += (_, _) => OnResumed();
         return window;
     }
 
     private void OnCreated()
     {
+        if (isCreated) return;   // On Android it seems that this might be called more than once
+        isCreated = true;
+
         Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
         Log.Default.Info("Device: {0} {1} {2}; Platform: {3} {4}", DeviceInfo.Idiom, DeviceInfo.Manufacturer, DeviceInfo.Model, DeviceInfo.Platform, DeviceInfo.Version);
         string? appSecret = null;
@@ -72,6 +75,23 @@ public partial class App : Application
     private void OnDeactivated()
     {
         Log.Default.Info("App deactivated");
+        Save();
+    }
+
+    private void OnStopped()
+    {
+        Log.Default.Info("App stopped");
+        Save();
+    }
+
+    private void OnDestroying()
+    {
+        Log.Default.Info("App destroying");
+        Save();
+    }
+
+    private void Save()
+    {
         appController.Save();
         settingsService.Save();
     }
