@@ -57,6 +57,9 @@ jobs:
           XCODE_ROOT=/Applications/Xcode_14.3.app
           echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
           sudo xcode-select -s $XCODE_ROOT
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
       - name: Install .NET MAUI
         run: |
           dotnet nuget locals all --clear 
