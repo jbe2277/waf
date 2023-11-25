@@ -20,7 +20,7 @@ public class SampleEmailListViewModel : EmailListViewModel
     }
 
 
-    private class MockEmailListView : IEmailListView
+    private sealed class MockEmailListView : IEmailListView
     {
         public object? DataContext { get; set; }
 

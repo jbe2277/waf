@@ -11,7 +11,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Waf.BookLibrary.Library.Presentation.Services;
 
 [Export(typeof(IDBContextService))]
-internal class DBContextService : IDBContextService
+internal sealed class DBContextService : IDBContextService
 {
     private const string ResourcesDirectoryName = "Resources";
 

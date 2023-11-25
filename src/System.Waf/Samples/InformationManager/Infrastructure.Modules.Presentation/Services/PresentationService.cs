@@ -8,7 +8,7 @@ using Waf.InformationManager.Common.Applications.Services;
 namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services;
 
 [Export(typeof(IPresentationService))]
-internal class PresentationService : IPresentationService
+internal sealed class PresentationService : IPresentationService
 {
     public void Initialize()
     {

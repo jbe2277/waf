@@ -14,7 +14,7 @@ public class SampleNewEmailViewModel : NewEmailViewModel
     }
 
 
-    private class MockNewEmailView : INewEmailView
+    private sealed class MockNewEmailView : INewEmailView
     {
         public object? DataContext { get; set; }
 

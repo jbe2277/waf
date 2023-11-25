@@ -12,7 +12,7 @@ public class SampleSelectContactViewModel : SelectContactViewModel
     }
 
 
-    private class MockSelectContactView : ISelectContactView
+    private sealed class MockSelectContactView : ISelectContactView
     {
         public object? DataContext { get; set; }
 

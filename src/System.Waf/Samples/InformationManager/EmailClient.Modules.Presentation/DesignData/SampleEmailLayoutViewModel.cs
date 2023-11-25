@@ -13,7 +13,7 @@ public class SampleEmailLayoutViewModel : EmailLayoutViewModel
     }
 
 
-    private class MockEmailLayoutView : IEmailLayoutView
+    private sealed class MockEmailLayoutView : IEmailLayoutView
     {
         public object? DataContext { get; set; }
     }

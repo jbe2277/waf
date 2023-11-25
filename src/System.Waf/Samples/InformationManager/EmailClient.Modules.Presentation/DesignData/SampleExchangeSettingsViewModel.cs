@@ -12,7 +12,7 @@ public class SampleExchangeSettingsViewModel : ExchangeSettingsViewModel
     }
 
 
-    private class MockExchangeSettingsView : IExchangeSettingsView
+    private sealed class MockExchangeSettingsView : IExchangeSettingsView
     {
         public object? DataContext { get; set; }
     }

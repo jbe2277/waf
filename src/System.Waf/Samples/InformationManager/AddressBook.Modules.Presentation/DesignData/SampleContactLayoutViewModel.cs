@@ -12,7 +12,7 @@ public class SampleContactLayoutViewModel : ContactLayoutViewModel
         ContactView = new SampleContactViewModel(new ContactView()).View;
     }
 
-    private class MockContactLayoutView : IContactLayoutView
+    private sealed class MockContactLayoutView : IContactLayoutView
     {
         public object? DataContext { get; set; }
     }

@@ -12,7 +12,7 @@ public class SampleEditEmailAccountViewModel : EditEmailAccountViewModel
     }
 
 
-    private class MockEditEmailAccountView : IEditEmailAccountView
+    private sealed class MockEditEmailAccountView : IEditEmailAccountView
     {
         public object? DataContext { get; set; }
 

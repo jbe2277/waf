@@ -6,7 +6,7 @@ using Waf.Writer.Applications.Services;
 namespace Waf.Writer.Presentation.Services;
 
 [Export(typeof(IPrintDialogService))]
-internal class PrintDialogService : IPrintDialogService
+internal sealed class PrintDialogService : IPrintDialogService
 {
     private readonly PrintDialog printDialog = new();
 

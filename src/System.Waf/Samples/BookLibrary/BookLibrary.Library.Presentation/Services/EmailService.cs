@@ -7,7 +7,7 @@ using Waf.BookLibrary.Library.Presentation.Properties;
 namespace Waf.BookLibrary.Library.Presentation.Services;
 
 [Export(typeof(IEmailService))]
-internal class EmailService : IEmailService
+internal sealed class EmailService : IEmailService
 {
     private readonly IMessageService messageService;
     private readonly IShellService shellService;

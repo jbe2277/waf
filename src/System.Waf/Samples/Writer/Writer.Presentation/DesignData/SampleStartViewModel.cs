@@ -16,7 +16,7 @@ public class SampleStartViewModel : StartViewModel
     }
 
 
-    private class MockStartView : MockView, IStartView
+    private sealed class MockStartView : MockView, IStartView
     {
     }
 }
