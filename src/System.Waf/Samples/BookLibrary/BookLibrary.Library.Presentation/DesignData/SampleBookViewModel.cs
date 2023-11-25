@@ -26,7 +26,7 @@ public class SampleBookViewModel : BookViewModel
     }
 
 
-    private class MockBookView : IBookView
+    private sealed class MockBookView : IBookView
     {
         public object? DataContext { get; set; }
     }

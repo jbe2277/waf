@@ -18,7 +18,7 @@ public class SampleContactListViewModel : ContactListViewModel
     }
 
 
-    private class MockContactListView : IContactListView
+    private sealed class MockContactListView : IContactListView
     {
         public object? DataContext { get; set; }
 

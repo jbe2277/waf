@@ -38,7 +38,7 @@ public abstract class DocumentType : Model, IDocumentType
 
     public void Save(IDocument document, string fileName)
     {
-        if (document == null) throw new ArgumentNullException(nameof(document));
+        ArgumentNullException.ThrowIfNull(document);
         if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("fileName must not be null or empty.", nameof(fileName));
         if (!CanSave(document)) throw new NotSupportedException("The Save operation is not supported. CanSave returned false.");
 

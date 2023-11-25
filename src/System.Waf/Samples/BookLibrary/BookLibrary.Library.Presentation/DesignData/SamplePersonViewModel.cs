@@ -17,7 +17,7 @@ public class SamplePersonViewModel : PersonViewModel
     }
 
 
-    private class MockPersonView : IPersonView
+    private sealed class MockPersonView : IPersonView
     {
         public object? DataContext { get; set; }
     }

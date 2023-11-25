@@ -16,7 +16,7 @@ public class SampleReportViewModel : ReportViewModel
     }
 
 
-    private class MockReportView : IReportView
+    private sealed class MockReportView : IReportView
     {
         public object? DataContext { get; set; }
     }

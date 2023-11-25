@@ -16,7 +16,7 @@ public class SampleSaveChangesViewModel : SaveChangesViewModel
         };
     }
 
-    private class MockSaveChangesView : ISaveChangesView
+    private sealed class MockSaveChangesView : ISaveChangesView
     {
         public object? DataContext { get; set; }
 

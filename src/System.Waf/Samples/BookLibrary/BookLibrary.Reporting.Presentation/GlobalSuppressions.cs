@@ -10,3 +10,4 @@
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Reporting.Presentation.Reports.BookListReport")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Reporting.Presentation.DesignData.SampleBookListReportDataModel")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~P:Waf.BookLibrary.Reporting.Presentation.Log.Default")]
+[assembly: SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.BookLibrary.Reporting.Presentation.BuildFix")]

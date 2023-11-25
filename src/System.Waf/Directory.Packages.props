@@ -5,7 +5,7 @@
 
   <ItemGroup>
     <!-- Build -->
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="MinVer" Version="4.3.0" />
 
     <!-- WAF -->
@@ -13,13 +13,13 @@
     <PackageVersion Include="System.ComponentModel.Composition" Version="4.7.0" />
 
     <!-- Samples-->
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.12" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="6.0.12" />
-    <PackageVersion Include="NLog" Version="5.2.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="8.0.0" />
+    <PackageVersion Include="NLog" Version="5.2.6" />
 
     <!-- Unit tests -->
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.1.1" />
   </ItemGroup>

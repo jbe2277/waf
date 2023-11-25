@@ -15,7 +15,7 @@ public class SamplePop3SettingsViewModel : Pop3SettingsViewModel
     }
 
 
-    private class MockPop3SettingsView : IPop3SettingsView
+    private sealed class MockPop3SettingsView : IPop3SettingsView
     {
         public object? DataContext { get; set; }
     }

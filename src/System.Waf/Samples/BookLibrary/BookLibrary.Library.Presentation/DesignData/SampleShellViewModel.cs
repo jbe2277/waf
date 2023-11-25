@@ -16,7 +16,7 @@ public class SampleShellViewModel : ShellViewModel
 
     public new string Title => "WAF Book Library";
 
-    private class MockShellView : IShellView
+    private sealed class MockShellView : IShellView
     {
         public object? DataContext { get; set; }
 
@@ -46,8 +46,8 @@ public class SampleShellViewModel : ShellViewModel
 
         public void Close() { }
 
-        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
+        public void RaiseClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
+        public void RaiseClosed() => Closed?.Invoke(this, EventArgs.Empty);
     }
 }

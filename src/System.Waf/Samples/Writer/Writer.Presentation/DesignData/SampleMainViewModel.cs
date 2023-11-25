@@ -23,7 +23,7 @@ public class SampleMainViewModel : MainViewModel
     }
 
 
-    private class MockMainView : MockView, IMainView
+    private sealed class MockMainView : MockView, IMainView
     {
         public ContentViewState ContentViewState { get; set; }
     }

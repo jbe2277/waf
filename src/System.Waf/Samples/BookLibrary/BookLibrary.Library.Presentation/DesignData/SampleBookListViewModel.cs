@@ -41,7 +41,7 @@ public class SampleBookListViewModel : BookListViewModel
     }
 
 
-    private class MockBookListView : IBookListView
+    private sealed class MockBookListView : IBookListView
     {
         public object? DataContext { get; set; }
 

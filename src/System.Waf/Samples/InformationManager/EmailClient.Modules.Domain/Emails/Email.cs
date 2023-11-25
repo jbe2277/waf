@@ -51,7 +51,7 @@ public class Email : ValidatableModel, IValidatableObject
         get => to;
         set
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
             if (to == value || to.SequenceEqual(value)) return;
             to = value;
             Validate();
@@ -64,7 +64,7 @@ public class Email : ValidatableModel, IValidatableObject
         get => cc;
         set
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
             if (cc == value || cc.SequenceEqual(value)) return;
             cc = value;
             Validate();
@@ -77,7 +77,7 @@ public class Email : ValidatableModel, IValidatableObject
         get => bcc;
         set
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
             if (bcc == value || bcc.SequenceEqual(value)) return;
             bcc = value;
             Validate();

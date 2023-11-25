@@ -36,7 +36,7 @@ public class SampleLendToViewModel : LendToViewModel
     }
 
 
-    private class MockLendToView : ILendToView
+    private sealed class MockLendToView : ILendToView
     {
         public object? DataContext { get; set; }
 

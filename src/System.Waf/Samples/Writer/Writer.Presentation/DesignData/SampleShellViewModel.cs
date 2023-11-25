@@ -12,7 +12,7 @@ public class SampleShellViewModel : ShellViewModel
     }
 
 
-    private class MockShellView : MockView, IShellView
+    private sealed class MockShellView : MockView, IShellView
     {
         public double VirtualScreenLeft { get; set; }
 
@@ -40,8 +40,8 @@ public class SampleShellViewModel : ShellViewModel
 
         public void Close() { }
 
-        protected virtual void OnClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
+        public void RaiseClosing(CancelEventArgs e) => Closing?.Invoke(this, e);
 
-        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
+        public void RaiseClosed() => Closed?.Invoke(this, EventArgs.Empty);
     }
 }

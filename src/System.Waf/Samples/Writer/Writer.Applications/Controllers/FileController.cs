@@ -122,7 +122,7 @@ internal class FileController
 
     internal IDocument New(IDocumentType documentType)
     {
-        if (documentType == null) throw new ArgumentNullException(nameof(documentType));
+        ArgumentNullException.ThrowIfNull(documentType);
         if (!documentTypes.Contains(documentType)) throw new ArgumentException("documentType is not an item of the DocumentTypes collection.");
         var document = documentType.New();
         fileService.AddDocument(document);

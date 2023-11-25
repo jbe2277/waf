@@ -94,7 +94,7 @@ public class NewEmailViewModel : ViewModel<INewEmailView>
 
     public void Close() => ViewCore.Close();
 
-    private static IReadOnlyList<string> ParseEmails(string text) => text.Trim().Split(new[] { ';', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    private static IReadOnlyList<string> ParseEmails(string text) => text.Trim().Split((char[])[ ';', ',', ' ' ], StringSplitOptions.RemoveEmptyEntries);
 
     private static string FormatEmails(IEnumerable<string> emailList) => string.Join("; ", emailList);
 

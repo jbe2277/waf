@@ -5,7 +5,7 @@ using Waf.Writer.Applications.Services;
 namespace Waf.Writer.Presentation.Services;
 
 [Export(typeof(ISystemService))]
-internal class SystemService : ISystemService
+internal sealed class SystemService : ISystemService
 {
     private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
 

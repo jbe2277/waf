@@ -16,7 +16,7 @@ public class SampleContactViewModel : ContactViewModel
     }
 
 
-    private class MockContactView : IContactView
+    private sealed class MockContactView : IContactView
     {
         public object? DataContext { get; set; }
     }

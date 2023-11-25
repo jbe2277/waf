@@ -16,7 +16,7 @@ public class SampleBasicEmailAccountViewModel : BasicEmailAccountViewModel
     }
 
 
-    private class MockBasicEmailAccountView : IBasicEmailAccountView
+    private sealed class MockBasicEmailAccountView : IBasicEmailAccountView
     {
         public object? DataContext { get; set; }
     }
