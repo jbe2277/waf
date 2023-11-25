@@ -14,7 +14,7 @@ public partial class StartView : IStartView
     public StartView()
     {
         InitializeComponent();
-        viewModel = new Lazy<StartViewModel>(() => ViewHelper.GetViewModel<StartViewModel>(this)!);
+        viewModel = new(() => ViewHelper.GetViewModel<StartViewModel>(this)!);
         newButton.IsVisibleChanged += NewButtonIsVisibleChanged;
     }
 

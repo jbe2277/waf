@@ -14,10 +14,10 @@ public class SaveChangesViewModelTest
         var documentType = new MockRichTextDocumentType();
         var documents = new[]
         {
-                documentType.New(),
-                documentType.New(),
-                documentType.New()
-            };
+            documentType.New(),
+            documentType.New(),
+            documentType.New()
+        };
 
         var view = new MockSaveChangesView();
         var viewModel = new SaveChangesViewModel(view) { Documents = documents };

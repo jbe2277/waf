@@ -26,9 +26,9 @@ internal class PrintController
         this.printDialogService = printDialogService;
         this.shellViewModel = shellViewModel;
         this.printPreviewViewModelFactory = printPreviewViewModelFactory;
-        printPreviewCommand = new DelegateCommand(ShowPrintPreview, CanShowPrintPreview);
-        printCommand = new DelegateCommand(PrintDocument, CanPrintDocument);
-        closePrintPreviewCommand = new DelegateCommand(ClosePrintPreview);
+        printPreviewCommand = new(ShowPrintPreview, CanShowPrintPreview);
+        printCommand = new(PrintDocument, CanPrintDocument);
+        closePrintPreviewCommand = new(ClosePrintPreview);
         fileService.PropertyChanged += FileServicePropertyChanged;
     }
 

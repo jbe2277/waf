@@ -4,16 +4,11 @@ using Waf.Writer.Applications.Documents;
 namespace Test.Writer.Applications.Documents;
 
 [Export(typeof(IRichTextDocumentType)), Export]
-public class MockRichTextDocumentType : DocumentType, IRichTextDocumentType
+public class MockRichTextDocumentType(string description, string fileExtension) : DocumentType(description, fileExtension), IRichTextDocumentType
 {
     public MockRichTextDocumentType() : this("Mock RTF", ".rtf") { }
 
-    public MockRichTextDocumentType(string description, string fileExtension) : base(description, fileExtension)
-    {
-        CanSaveResult = true;
-    }
-
-    public bool CanSaveResult { get; set; }
+    public bool CanSaveResult { get; set; } = true;
 
     public DocumentOperation DocumentOperation { get; private set; }
 

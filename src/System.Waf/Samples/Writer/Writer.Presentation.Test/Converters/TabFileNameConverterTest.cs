@@ -13,11 +13,11 @@ public class TabFileNameConverterTest
     {
         var converter = new TabFileNameConverter();
 
-        Assert.AreEqual("Document 1.rtf", converter.Convert(new object[] { "Document 1.rtf", false }, null, null, null));
-        Assert.AreEqual("Document 1.rtf*", converter.Convert(new object[] { "Document 1.rtf", true }, null, null, null));
-        Assert.AreEqual("This is a document with a very long f...", converter.Convert(new object[] { "This is a document with a very long file name.rtf", false }, null, null, null));
+        Assert.AreEqual("Document 1.rtf", converter.Convert([ "Document 1.rtf", false ], null, null, null));
+        Assert.AreEqual("Document 1.rtf*", converter.Convert([ "Document 1.rtf", true ], null, null, null));
+        Assert.AreEqual("This is a document with a very long f...", converter.Convert([ "This is a document with a very long file name.rtf", false ], null, null, null));
 
-        Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert(new[] { new object(), new object() }, typeof(string), null, null));
+        Assert.AreEqual(DependencyProperty.UnsetValue, converter.Convert([ new object(), new object() ], typeof(string), null, null));
 
         AssertHelper.ExpectedException<NotSupportedException>(() => converter.ConvertBack(null, null, null, null));
     }

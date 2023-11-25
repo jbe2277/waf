@@ -23,7 +23,7 @@ public class ZoomViewModelTest : ApplicationsTest
     [TestMethod]
     public void DefaultZoomsTest()
     {
-        AssertHelper.SequenceEqual(new[] { "200%", "150%", "125%", "100%", "75%", "50%" }, zoomViewModel.DefaultZooms);
+        AssertHelper.SequenceEqual([ "200%", "150%", "125%", "100%", "75%", "50%" ], zoomViewModel.DefaultZooms);
     }
 
     [TestMethod]
@@ -68,12 +68,8 @@ public class ZoomViewModelTest : ApplicationsTest
     }
 
 
-    private class MockZoomViewModel : ZoomViewModel<IView>
+    private class MockZoomViewModel(IView view, IShellService shellService) : ZoomViewModel<IView>(view, shellService)
     {
-        public MockZoomViewModel(IView view, IShellService shellService) : base(view, shellService)
-        {
-        }
-
         public bool FitToWidthCalled { get; set; }
 
         protected override void FitToWidthCore()
