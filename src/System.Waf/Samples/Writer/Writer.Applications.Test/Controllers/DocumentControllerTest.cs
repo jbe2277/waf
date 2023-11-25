@@ -16,12 +16,8 @@ public class DocumentControllerTest
     }
 
 
-    private class TestDocumentController : DocumentController
+    private class TestDocumentController(IFileService fileService) : DocumentController(fileService)
     {
-        public TestDocumentController(IFileService fileService) : base(fileService)
-        {
-        }
-
         protected override void OnDocumentAdded(IDocument document) => throw new NotSupportedException();
 
         protected override void OnDocumentRemoved(IDocument document) => throw new NotSupportedException();

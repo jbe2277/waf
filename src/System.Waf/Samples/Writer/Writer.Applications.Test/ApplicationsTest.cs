@@ -23,7 +23,7 @@ public abstract class ApplicationsTest
         var catalog = new AggregateCatalog();
         OnCatalogInitialize(catalog);
 
-        Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+        Container = new(catalog, CompositionOptions.DisableSilentRejection);
         var batch = new CompositionBatch();
         batch.AddExportedValue(Container);
         Container.Compose(batch);

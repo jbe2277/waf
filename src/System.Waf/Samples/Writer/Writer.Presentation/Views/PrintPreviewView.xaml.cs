@@ -22,7 +22,7 @@ public partial class PrintPreviewView : IPrintPreviewView
     public PrintPreviewView()
     {
         InitializeComponent();
-        viewModel = new Lazy<PrintPreviewViewModel>(() => ViewHelper.GetViewModel<PrintPreviewViewModel>(this)!);
+        viewModel = new(() => ViewHelper.GetViewModel<PrintPreviewViewModel>(this)!);
         Loaded += LoadedHandler;
         Unloaded += UnloadedHandler;
         IsVisibleChanged += IsVisibleChangedHandler;

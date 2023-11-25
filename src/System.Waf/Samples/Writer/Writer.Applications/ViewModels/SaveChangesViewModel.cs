@@ -16,8 +16,8 @@ public class SaveChangesViewModel : ViewModel<ISaveChangesView>
     [ImportingConstructor]
     public SaveChangesViewModel(ISaveChangesView view) : base(view)
     {
-        yesCommand = new DelegateCommand(() => Close(true));
-        noCommand = new DelegateCommand(() => Close(false));
+        yesCommand = new(() => Close(true));
+        noCommand = new(() => Close(false));
     }
 
     public string Title => ApplicationInfo.ProductName;
@@ -26,7 +26,7 @@ public class SaveChangesViewModel : ViewModel<ISaveChangesView>
 
     public ICommand NoCommand => noCommand;
 
-    public IReadOnlyList<IDocument> Documents { get; set; } = Array.Empty<IDocument>();
+    public IReadOnlyList<IDocument> Documents { get; set; } = [];
 
     public bool? ShowDialog(object owner)
     {

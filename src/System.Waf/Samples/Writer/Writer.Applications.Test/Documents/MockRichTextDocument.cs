@@ -2,13 +2,9 @@
 
 namespace Test.Writer.Applications.Documents;
 
-public class MockRichTextDocument : Document, IRichTextDocument
+public class MockRichTextDocument(MockRichTextDocumentType documentType) : Document(documentType), IRichTextDocument
 {
-    public MockRichTextDocument(MockRichTextDocumentType documentType) : base(documentType)
-    {
-    }
+    public object Content { get; } = new();
 
-    public object Content { get; } = new object();
-
-    public object CloneContent() => new object();
+    public object CloneContent() => new();
 }

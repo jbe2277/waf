@@ -70,6 +70,6 @@ public class RichTextDocumentControllerTest : ApplicationsTest
         var documents = (ObservableList<IDocument>)documentsInfo.GetValue(fileService)!;
 
         // Now we call a method that is not supported by the DocumentController base class
-        AssertHelper.ExpectedException<NotSupportedException>(() => documents.Clear());
+        AssertHelper.ExpectedException<NotSupportedException>(documents.Clear);
     }
 }

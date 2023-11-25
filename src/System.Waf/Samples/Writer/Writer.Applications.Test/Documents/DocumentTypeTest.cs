@@ -41,10 +41,8 @@ public class DocumentTypeTest
     }
 
 
-    private class MockDocumentTypeBase : DocumentType
+    private sealed class MockDocumentTypeBase(string description, string fileExtension) : DocumentType(description, fileExtension)
     {
-        public MockDocumentTypeBase(string description, string fileExtension) : base(description, fileExtension) { }
-
         public IDocument CallNewCore() => NewCore();
 
         public IDocument CallOpenCore(string fileName) => OpenCore(fileName);
@@ -52,8 +50,7 @@ public class DocumentTypeTest
         public void CallSaveCore(IDocument document, string fileName) => SaveCore(document, fileName);
     }
 
-    private class DocumentBaseMock : Document
+    private sealed class DocumentBaseMock(MockDocumentTypeBase documentType) : Document(documentType)
     {
-        public DocumentBaseMock(MockDocumentTypeBase documentType) : base(documentType) { }
     }
 }

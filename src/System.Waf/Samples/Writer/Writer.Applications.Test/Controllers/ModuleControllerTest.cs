@@ -103,7 +103,7 @@ public class ModuleControllerTest : ApplicationsTest
         };
 
         var fileDialogService = Get<MockFileDialogService>();
-        fileDialogService.Result = new FileDialogResult();
+        fileDialogService.Result = new();
 
         // This time we let the SaveChangesView to save the modified document
         shellViewModel.ExitCommand.Execute(null);

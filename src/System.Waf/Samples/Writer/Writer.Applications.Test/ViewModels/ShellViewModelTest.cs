@@ -43,7 +43,7 @@ public class ShellViewModelTest : ApplicationsTest
 
         // Close the ShellView via the ExitCommand
         cancelClosing = false;
-        shellViewModel.ExitCommand = new DelegateCommand(() => shellViewModel.Close());
+        shellViewModel.ExitCommand = new DelegateCommand(shellViewModel.Close);
         shellViewModel.ExitCommand.Execute(null);
         Assert.IsFalse(shellView.IsVisible);
     }

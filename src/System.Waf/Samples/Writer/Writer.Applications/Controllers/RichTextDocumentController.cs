@@ -13,7 +13,7 @@ internal class RichTextDocumentController : DocumentController
     private readonly IFileService fileService;
     private readonly MainViewModel mainViewModel;
     private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
-    private readonly Dictionary<IRichTextDocument, RichTextViewModel> richTextViewModels;
+    private readonly Dictionary<IRichTextDocument, RichTextViewModel> richTextViewModels = [];
 
     [ImportingConstructor]
     public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) : base(fileService)
@@ -21,7 +21,6 @@ internal class RichTextDocumentController : DocumentController
         this.fileService = fileService;
         this.mainViewModel = mainViewModel;
         this.richTextViewModelFactory = richTextViewModelFactory;
-        richTextViewModels = new Dictionary<IRichTextDocument, RichTextViewModel>();
         mainViewModel.PropertyChanged += MainViewModelPropertyChanged;
     }
 

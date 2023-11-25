@@ -12,7 +12,7 @@ internal abstract class DocumentController
     {
         this.fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         fileService.PropertyChanged += FileServicePropertyChanged;
-        ((INotifyCollectionChanged)fileService.Documents).CollectionChanged += DocumentsCollectionChanged;
+        fileService.Documents.CollectionChanged += DocumentsCollectionChanged;
     }
 
     protected abstract void OnDocumentAdded(IDocument document);

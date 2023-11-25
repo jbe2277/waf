@@ -30,7 +30,7 @@ internal class ModuleController : IModuleController
         this.startViewModel = startViewModel.Value;
         shellService.ShellView = this.shellViewModel.View;
         this.shellViewModel.Closing += ShellViewModelClosing;
-        exitCommand = new DelegateCommand(Close);
+        exitCommand = new(Close);
     }
 
     public void Initialize()

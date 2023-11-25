@@ -13,12 +13,11 @@ namespace Test.Writer.Presentation
     public class PresentationTest : ApplicationsTest
     {
         // List of exports which must use the real implementation instead of the mock (integration test)
-        private static readonly Type[] exportNames = new[]
-        {
+        private static readonly Type[] exportNames = [
             typeof(IRichTextDocumentType), typeof(RichTextDocumentType),
             typeof(IRichTextDocument), typeof(RichTextDocument),
             typeof(IXpsExportDocumentType), typeof(XpsExportDocumentType)
-        };
+        ];
 
         protected override void OnCatalogInitialize(AggregateCatalog catalog)
         {

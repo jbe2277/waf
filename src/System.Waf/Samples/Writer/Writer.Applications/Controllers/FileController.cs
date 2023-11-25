@@ -38,19 +38,14 @@ internal class FileController
         this.shellService = shellService;
         this.fileService = fileService;
         this.saveChangesViewModelFactory = saveChangesViewModelFactory;
-        documentTypes = new() { richTextDocumentType, xpsExportDocumentType };
-        newCommand = new DelegateCommand(NewCommand);
-        openCommand = new DelegateCommand(OpenCommand);
-        closeCommand = new DelegateCommand(CloseCommand, CanCloseCommand);
-        saveCommand = new DelegateCommand(SaveCommand, CanSaveCommand);
-        saveAsCommand = new DelegateCommand(SaveAsCommand, CanSaveAsCommand);
+        documentTypes = [ richTextDocumentType, xpsExportDocumentType ];
+        fileService.NewCommand = newCommand = new(NewCommand);
+        fileService.OpenCommand = openCommand = new(OpenCommand);
+        fileService.CloseCommand = closeCommand = new(CloseCommand, CanCloseCommand);
+        fileService.SaveCommand = saveCommand = new(SaveCommand, CanSaveCommand);
+        fileService.SaveAsCommand = saveAsCommand = new(SaveAsCommand, CanSaveAsCommand);
         settings = settingsService.Get<AppSettings>();
-        this.fileService.NewCommand = newCommand;
-        this.fileService.OpenCommand = openCommand;
-        this.fileService.CloseCommand = closeCommand;
-        this.fileService.SaveCommand = saveCommand;
-        this.fileService.SaveAsCommand = saveAsCommand;
-        recentFileList = settings.RecentFileList ?? new RecentFileList();
+        recentFileList = settings.RecentFileList ?? new();
         this.fileService.RecentFileList = recentFileList;
         fileService.PropertyChanged += FileServicePropertyChanged;
     }
@@ -67,7 +62,7 @@ internal class FileController
 
     public IDocument? Open(string fileName)
     {
-        if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The argument fileName must not be null or empty.");
+        if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName));
         return OpenCore(fileName!);
     }
 

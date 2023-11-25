@@ -13,14 +13,12 @@ public partial class RichTextView : IRichTextView
 {
     private readonly Lazy<RichTextViewModel> viewModel;
     private bool suppressTextChanged;
-    private IReadOnlyList<Control> dynamicContextMenuItems;
+    private IReadOnlyList<Control> dynamicContextMenuItems = [];
 
     public RichTextView()
     {
         InitializeComponent();
-
-        viewModel = new Lazy<RichTextViewModel>(() => ViewHelper.GetViewModel<RichTextViewModel>(this)!);
-        dynamicContextMenuItems = Array.Empty<Control>();
+        viewModel = new(() => ViewHelper.GetViewModel<RichTextViewModel>(this)!);
         Loaded += FirstTimeLoadedHandler;
         IsVisibleChanged += IsVisibleChangedHandler;
     }

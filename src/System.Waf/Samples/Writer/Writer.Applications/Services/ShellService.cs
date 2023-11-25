@@ -41,7 +41,7 @@ internal class ShellService : Model, IShellService
     }
 
 
-    private class DisabledEditingCommands : Model, IEditingCommands
+    private sealed class DisabledEditingCommands : Model, IEditingCommands
     {
         public bool IsBold { get; set; }
 
@@ -58,9 +58,9 @@ internal class ShellService : Model, IShellService
         public bool IsSpellCheckEnabled { get; set; }
     }
 
-    private class DisabledZoomCommands : Model, IZoomCommands
+    private sealed class DisabledZoomCommands : Model, IZoomCommands
     {
-        public IReadOnlyList<string> DefaultZooms => Array.Empty<string>();
+        public IReadOnlyList<string> DefaultZooms => [];
 
         public double Zoom
         {

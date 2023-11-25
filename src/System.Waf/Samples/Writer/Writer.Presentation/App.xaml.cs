@@ -27,11 +27,11 @@ public partial class App
         DispatcherUnhandledException += AppDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
-        catalog = new AggregateCatalog();
+        catalog = new();
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
         catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Writer.Presentation
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Writer.Applications
-        container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+        container = new(catalog, CompositionOptions.DisableSilentRejection);
         var batch = new CompositionBatch();
         batch.AddExportedValue(container);
         container.Compose(batch);
