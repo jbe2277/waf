@@ -13,10 +13,10 @@ public class PersonListViewModelTest : TestClassBase
     public void PersonListViewModelPersonsTest()
     {
         var persons = new List<Person>()
-            {
-                new() { Firstname = "Harry" },
-                new() { Firstname = "Ron" }
-            };
+        {
+            new() { Firstname = "Harry" },
+            new() { Firstname = "Ron" }
+        };
         var personListView = new MockPersonListView();
         var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
 
@@ -40,10 +40,10 @@ public class PersonListViewModelTest : TestClassBase
     public void PersonListViewModelFilterTest()
     {
         var persons = new List<Person>()
-            {
-                new() { Firstname = "Harry", Lastname = "Potter" },
-                new() { Firstname = "Ron", Lastname = "Weasley" }
-            };
+        {
+            new() { Firstname = "Harry", Lastname = "Potter" },
+            new() { Firstname = "Ron", Lastname = "Weasley" }
+        };
         var personListView = new MockPersonListView();
         var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
 

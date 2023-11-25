@@ -18,10 +18,10 @@ public class BookListViewModelTest
     public void BookListViewModelBooksTest()
     {
         var books = new ObservableList<Book>()
-            {
-                new() { Title = "The Fellowship of the Ring" },
-                new() { Title = "The Two Towers" }
-            };
+        {
+            new() { Title = "The Fellowship of the Ring" },
+            new() { Title = "The Two Towers" }
+        };
         var bookListView = new MockBookListView();
         var bookDataModels = new SynchronizingList<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
         var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
@@ -46,10 +46,10 @@ public class BookListViewModelTest
     public void BookListViewModelFilterTest()
     {
         var books = new ObservableList<Book>()
-            {
-                new() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
-                new() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
-            };
+        {
+            new() { Title = "The Fellowship of the Ring", Author = "J.R.R. Tolkien" },
+            new() { Title = "The Two Towers", Author = "J.R.R. Tolkien" }
+        };
         var bookListView = new MockBookListView();
         var bookDataModels = new SynchronizingList<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
         var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };

@@ -17,7 +17,7 @@ public partial class BookListView : IBookListView
     public BookListView()
     {
         InitializeComponent();
-        viewModel = new Lazy<BookListViewModel>(() => this.GetViewModel<BookListViewModel>()!);
+        viewModel = new(() => this.GetViewModel<BookListViewModel>()!);
         Loaded += FirstTimeLoadedHandler;
     }
 
@@ -26,7 +26,7 @@ public partial class BookListView : IBookListView
     public void FocusFirstCell()
     {
         bookTable.Focus();
-        bookTable.CurrentCell = new DataGridCellInfo(bookTable.SelectedItem, bookTable.Columns[0]);
+        bookTable.CurrentCell = new(bookTable.SelectedItem, bookTable.Columns[0]);
     }
 
     private void FirstTimeLoadedHandler(object sender, RoutedEventArgs e)

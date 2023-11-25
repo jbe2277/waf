@@ -29,7 +29,7 @@ internal class ModuleController : IModuleController
         this.personController = personController;
         this.shellService = shellService;
         this.shellViewModel = shellViewModel;
-        exitCommand = new DelegateCommand(Close);
+        exitCommand = new(Close);
     }
 
     private ShellViewModel ShellViewModel => shellViewModel.Value;

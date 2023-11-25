@@ -32,9 +32,9 @@ internal class PersonController
         this.emailService = emailService;
         this.personListViewModel = personListViewModel;
         this.personViewModel = personViewModel;
-        addNewCommand = new DelegateCommand(AddNewPerson, CanAddPerson);
-        removeCommand = new DelegateCommand(RemovePerson, CanRemovePerson);
-        createNewEmailCommand = new DelegateCommand(CreateNewEmail!);
+        addNewCommand = new(AddNewPerson, CanAddPerson);
+        removeCommand = new(RemovePerson, CanRemovePerson);
+        createNewEmailCommand = new(CreateNewEmail!);
     }
 
     internal ObservableListView<Person>? PersonsView { get; private set; }
@@ -43,7 +43,7 @@ internal class PersonController
     {
         personViewModel.CreateNewEmailCommand = createNewEmailCommand;
         personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
-        PersonsView = new ObservableListView<Person>(entityService.Persons, null, personListViewModel.Filter, null);
+        PersonsView = new(entityService.Persons, null, personListViewModel.Filter, null);
         personListViewModel.Persons = PersonsView;
         personListViewModel.AddNewCommand = addNewCommand;
         personListViewModel.RemoveCommand = removeCommand;

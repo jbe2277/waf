@@ -2,14 +2,9 @@
 
 namespace Waf.BookLibrary.Reporting.Applications.DataModels;
 
-public class BookListReportDataModel : Model
+public class BookListReportDataModel(IReadOnlyList<Book> books) : Model
 {
-    public BookListReportDataModel(IReadOnlyList<Book> books)
-    {
-        Books = books;
-    }
-
-    public IReadOnlyList<Book> Books { get; }
+    public IReadOnlyList<Book> Books { get; } = books;
 
     public int BookCount => Books.Count;
 }

@@ -27,8 +27,8 @@ internal class ModuleController : IModuleController
         this.reportViewModel = reportViewModel;
         this.bookListReportFactory = bookListReportFactory;
         this.borrowedBooksReportFactory = borrowedBooksReportFactory;
-        createBookListReportCommand = new DelegateCommand(CreateBookListReport);
-        createBorrowedBooksReportCommand = new DelegateCommand(CreateBorrowedBooksReport);
+        createBookListReportCommand = new(CreateBookListReport);
+        createBorrowedBooksReportCommand = new(CreateBorrowedBooksReport);
     }
 
     private ReportViewModel ReportViewModel => reportViewModel.Value;
@@ -36,7 +36,7 @@ internal class ModuleController : IModuleController
     public void Initialize()
     {
         shellService.IsReportingEnabled = true;
-        shellService.LazyReportingView = new Lazy<object>(InitializeReportView);
+        shellService.LazyReportingView = new(InitializeReportView);
     }
 
     public void Run() { }

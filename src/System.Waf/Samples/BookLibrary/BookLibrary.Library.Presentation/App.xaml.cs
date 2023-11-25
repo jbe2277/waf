@@ -71,8 +71,7 @@ public partial class App
         DispatcherUnhandledException += AppDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
-        catalog = new AggregateCatalog();
-
+        catalog = new();
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
         catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Waf.BookLibrary.Library.Presentation
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Waf.BookLibrary.Library.Applications

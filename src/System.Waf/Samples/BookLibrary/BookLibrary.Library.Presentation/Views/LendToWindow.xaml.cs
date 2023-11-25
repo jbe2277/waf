@@ -16,7 +16,7 @@ public partial class LendToWindow : ILendToView
     public LendToWindow()
     {
         InitializeComponent();
-        viewModel = new Lazy<LendToViewModel>(() => this.GetViewModel<LendToViewModel>()!);
+        viewModel = new(() => this.GetViewModel<LendToViewModel>()!);
     }
 
     private LendToViewModel ViewModel => viewModel.Value;

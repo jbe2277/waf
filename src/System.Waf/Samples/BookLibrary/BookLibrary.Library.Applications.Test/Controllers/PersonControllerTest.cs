@@ -83,7 +83,7 @@ public class PersonControllerTest : TestClassBase
         personListViewModel.AddSelectedPerson(entityService.Persons[^1]);
         Assert.IsTrue(personListViewModel.RemoveCommand!.CanExecute(null));
         personListViewModel.RemoveCommand.Execute(null);
-        AssertHelper.SequenceEqual(new[] { harry }, entityService.Persons);
+        AssertHelper.SequenceEqual([ harry ], entityService.Persons);
         Assert.AreEqual(harry, personViewModel.Person);
         Assert.IsTrue(personListView.FirstCellHasFocus);
 
@@ -189,7 +189,7 @@ public class PersonControllerTest : TestClassBase
         personListViewModel.SelectedPerson = ginny;
         personListViewModel.AddSelectedPerson(personListViewModel.SelectedPerson);
         personListViewModel.RemoveCommand!.Execute(null);
-        AssertHelper.SequenceEqual(new[] { harry, ron }, entityService.Persons);
+        AssertHelper.SequenceEqual([ harry, ron ], entityService.Persons);
         Assert.AreEqual(harry, personListViewModel.SelectedPerson);
     }
 
@@ -214,7 +214,7 @@ public class PersonControllerTest : TestClassBase
         personListViewModel.SelectedPerson = ron;
         personListViewModel.AddSelectedPerson(personListViewModel.SelectedPerson);
         personListViewModel.RemoveCommand!.Execute(null);
-        AssertHelper.SequenceEqual(new[] { harry, ginny }, entityService.Persons);
+        AssertHelper.SequenceEqual([ harry, ginny ], entityService.Persons);
         Assert.AreEqual(harry, personListViewModel.SelectedPerson);
     }
 

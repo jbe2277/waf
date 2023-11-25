@@ -19,7 +19,7 @@ public class LendToViewModel : ViewModel<ILendToView>
     [ImportingConstructor]
     public LendToViewModel(ILendToView view) : base(view)
     {
-        okCommand = new DelegateCommand(OkHandler);
+        okCommand = new(OkHandler);
     }
 
     public string Title => ApplicationInfo.ProductName;
