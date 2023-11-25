@@ -6,7 +6,7 @@ namespace Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 [DataContract]
 public class EmailClientRoot : ValidatableModel, IEmailDeletionService
 {
-    [DataMember] private readonly ObservableList<EmailAccount> emailAccounts;
+    [DataMember] private readonly ObservableList<EmailAccount> emailAccounts = [];
     [DataMember] private readonly EmailFolder inbox;
     [DataMember] private readonly EmailFolder outbox;
     [DataMember] private readonly EmailFolder sent;
@@ -15,12 +15,11 @@ public class EmailClientRoot : ValidatableModel, IEmailDeletionService
 
     public EmailClientRoot()
     {
-        emailAccounts = new();
-        inbox = new EmailFolder();
-        outbox = new EmailFolder();
-        sent = new EmailFolder();
-        drafts = new EmailFolder();
-        deleted = new EmailFolder();
+        inbox = new();
+        outbox = new();
+        sent = new();
+        drafts = new();
+        deleted = new();
         Initialize();
     }
 

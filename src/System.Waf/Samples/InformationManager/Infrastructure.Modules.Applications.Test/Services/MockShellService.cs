@@ -7,12 +7,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 [Export(typeof(IShellService)), Export]
 public class MockShellService : Model, IShellService
 {
-    private readonly List<ToolBarCommand> toolBarCommands;
-
-    public MockShellService()
-    {
-        toolBarCommands = new List<ToolBarCommand>();
-    }
+    private readonly List<ToolBarCommand> toolBarCommands = [];
 
     public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
 

@@ -25,7 +25,7 @@ internal class EmailFolderController
         this.emailLayoutViewModel = emailLayoutViewModel;
         EmailListViewModel = emailListViewModel;
         EmailViewModel = emailViewModel;
-        deleteEmailCommand = new DelegateCommand(DeleteEmail, CanDeleteEmail);
+        deleteEmailCommand = new(DeleteEmail, CanDeleteEmail);
     }
 
     public EmailFolder EmailFolder { get; set; } = null!;
@@ -38,7 +38,7 @@ internal class EmailFolderController
 
     public void Initialize()
     {
-        emailsView = new ObservableListView<Email>(EmailFolder.Emails, null, EmailListViewModel.Filter, x => x.OrderByDescending(y => y.Sent));
+        emailsView = new(EmailFolder.Emails, null, EmailListViewModel.Filter, x => x.OrderByDescending(y => y.Sent));
         EmailListViewModel.Emails = emailsView;
         EmailListViewModel.DeleteEmailCommand = DeleteEmailCommand;
         emailListViewModelPropertyChangedProxy = WeakEvent.PropertyChanged.Add(EmailListViewModel, EmailListViewModelPropertyChanged);

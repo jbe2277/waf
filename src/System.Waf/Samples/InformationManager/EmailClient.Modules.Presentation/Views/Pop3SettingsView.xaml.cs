@@ -16,7 +16,7 @@ public partial class Pop3SettingsView : IPop3SettingsView
     public Pop3SettingsView()
     {
         InitializeComponent();
-        viewModel = new Lazy<Pop3SettingsViewModel>(() => this.GetViewModel<Pop3SettingsViewModel>()!);
+        viewModel = new(() => this.GetViewModel<Pop3SettingsViewModel>()!);
         Loaded += LoadedHandler;
         Unloaded += UnloadedHandler;
     }

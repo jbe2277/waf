@@ -8,7 +8,7 @@ public class SampleNewEmailViewModel : NewEmailViewModel
 {
     public SampleNewEmailViewModel() : base(new MockNewEmailView())
     {
-        EmailAccounts = new[] { SampleDataProvider.CreateEmailAccount() };
+        EmailAccounts = [ SampleDataProvider.CreateEmailAccount() ];
         SelectedEmailAccount = EmailAccounts[0];
         Email = SampleDataProvider.CreateSentEmails()[1];
     }

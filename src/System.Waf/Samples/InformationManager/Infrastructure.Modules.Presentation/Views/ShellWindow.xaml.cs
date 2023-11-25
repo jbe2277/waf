@@ -12,13 +12,12 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views;
 public partial class ShellWindow : IShellView
 {
     private readonly Lazy<ShellViewModel> viewModel;
-    private readonly List<Control> dynamicToolBarItems;
+    private readonly List<Control> dynamicToolBarItems = [];
 
     public ShellWindow()
     {
         InitializeComponent();
-        viewModel = new Lazy<ShellViewModel>(() => this.GetViewModel<ShellViewModel>()!);
-        dynamicToolBarItems = new List<Control>();
+        viewModel = new(() => this.GetViewModel<ShellViewModel>()!);
         Loaded += LoadedHandler;
     }
 
@@ -65,7 +64,7 @@ public partial class ShellWindow : IShellView
 
     public void ClearToolBarCommands()
     {
-        dynamicToolBarItems.ForEach(x => toolBar.Items.Remove(x));
+        dynamicToolBarItems.ForEach(toolBar.Items.Remove);
         dynamicToolBarItems.Clear();
     }
 

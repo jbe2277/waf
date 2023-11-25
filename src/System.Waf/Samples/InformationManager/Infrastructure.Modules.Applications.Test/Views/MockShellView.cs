@@ -8,12 +8,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Views;
 [Export(typeof(IShellView)), Export]
 public class MockShellView : MockView, IShellView
 {
-    private readonly List<ToolBarCommand> toolBarCommands;
-
-    public MockShellView()
-    {
-        toolBarCommands = new List<ToolBarCommand>();
-    }
+    private readonly List<ToolBarCommand> toolBarCommands = [];
 
     public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
 

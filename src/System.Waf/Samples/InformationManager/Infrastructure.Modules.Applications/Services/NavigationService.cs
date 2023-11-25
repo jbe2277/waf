@@ -7,12 +7,7 @@ namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 [Export(typeof(INavigationService)), Export]
 public class NavigationService : Model, INavigationService
 {
-    private readonly ObservableList<NavigationNode> navigationNodes;
-
-    public NavigationService()
-    {
-        navigationNodes = new();
-    }
+    private readonly ObservableList<NavigationNode> navigationNodes = [];
 
     public IReadOnlyObservableList<NavigationNode> NavigationNodes => navigationNodes;
 

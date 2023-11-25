@@ -16,7 +16,7 @@ public partial class EmailListView : IEmailListView
     public EmailListView()
     {
         InitializeComponent();
-        viewModel = new Lazy<EmailListViewModel>(() => this.GetViewModel<EmailListViewModel>()!);
+        viewModel = new(() => this.GetViewModel<EmailListViewModel>()!);
         Loaded += LoadedHandler;
     }
 
@@ -29,13 +29,13 @@ public partial class EmailListView : IEmailListView
             emailsBox.Focus();
             return;
         }
-        Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
+        Dispatcher.BeginInvoke(DispatcherPriority.Background, () =>
         {
-                // It is necessary to delay this code because data binding updates the values asynchronously.
-                emailsBox.ScrollIntoView(ViewModel.SelectedEmail);
+            // It is necessary to delay this code because data binding updates the values asynchronously.
+            emailsBox.ScrollIntoView(ViewModel.SelectedEmail);
             var selectedListBoxItem = (ListBoxItem)emailsBox.ItemContainerGenerator.ContainerFromItem(ViewModel.SelectedEmail);
             selectedListBoxItem?.Focus();
-        }));
+        });
     }
 
     private void LoadedHandler(object sender, RoutedEventArgs e)

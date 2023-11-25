@@ -10,13 +10,12 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 public class BasicEmailAccountViewModel : ViewModel<IBasicEmailAccountView>
 {
     private EmailAccount emailAccount = null!;
-    private bool isPop3Checked;
+    private bool isPop3Checked = true;
     private bool isExchangeChecked;
 
     [ImportingConstructor]
     public BasicEmailAccountViewModel(IBasicEmailAccountView view) : base(view)
     {
-        isPop3Checked = true;
     }
 
     public EmailAccount EmailAccount

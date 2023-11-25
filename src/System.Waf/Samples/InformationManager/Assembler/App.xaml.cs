@@ -34,7 +34,7 @@ public partial class App
 
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
-    private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
+    private IEnumerable<IModuleController> moduleControllers = [];
 
     public App()
     {
@@ -81,7 +81,7 @@ public partial class App
         // Load module assemblies as well. See App.config file.
         foreach (var x in Settings.Default.ModuleAssemblies) catalog.Catalogs.Add(new AssemblyCatalog(x));
 
-        container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+        container = new(catalog, CompositionOptions.DisableSilentRejection);
         var batch = new CompositionBatch();
         batch.AddExportedValue(container);
         container.Compose(batch);

@@ -33,7 +33,7 @@ internal class ModuleController : IModuleController, IAddressBookService
         this.navigationService = navigationService;
         this.contactControllerFactory = contactControllerFactory;
         this.selectContactControllerFactory = selectContactControllerFactory;
-        serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
+        serializer = new(CreateDataContractSerializer);
     }
 
     internal AddressBookRoot Root { get; private set; } = null!;
@@ -44,7 +44,7 @@ internal class ModuleController : IModuleController, IAddressBookService
         {
             if (stream.Length == 0)
             {
-                Root = new AddressBookRoot();
+                Root = new();
                 foreach (var x in SampleDataProvider.CreateContacts()) Root.AddContact(x);
             }
             else Root = (AddressBookRoot)serializer.Value.ReadObject(stream)!;
@@ -80,7 +80,7 @@ internal class ModuleController : IModuleController, IAddressBookService
 
         var uiNewContactCommand = new ToolBarCommand(activeContactController.NewContactCommand, "_New contact", "Creates a new contact.");
         var uiDeleteCommand = new ToolBarCommand(activeContactController.DeleteContactCommand, "_Delete", "Deletes the selected contact.");
-        shellService.AddToolBarCommands(new[] { uiNewContactCommand, uiDeleteCommand });
+        shellService.AddToolBarCommands([ uiNewContactCommand, uiDeleteCommand ]);
     }
 
     private void CloseAddressBook()

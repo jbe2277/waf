@@ -29,8 +29,8 @@ internal class EditEmailAccountController
         this.basicEmailAccountViewModel = basicEmailAccountViewModel;
         this.pop3SettingsViewModelFactory = pop3SettingsViewModelFactory;
         this.exchangeSettingsViewModelFactory = exchangeSettingsViewModelFactory;
-        backCommand = new DelegateCommand(Back, CanBack);
-        nextCommand = new DelegateCommand(Next, CanNext);
+        backCommand = new(Back, CanBack);
+        nextCommand = new(Next, CanNext);
     }
 
     public object OwnerWindow { get; set; } = null!;

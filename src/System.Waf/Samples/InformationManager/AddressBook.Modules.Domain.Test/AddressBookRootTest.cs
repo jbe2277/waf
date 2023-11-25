@@ -16,13 +16,13 @@ public class AddressBookRootTest : DomainTest
         Assert.IsFalse(root.Contacts.Any());
 
         var contact1 = root.AddNewContact();
-        AssertHelper.SequenceEqual(new[] { contact1 }, root.Contacts);
+        AssertHelper.SequenceEqual([ contact1 ], root.Contacts);
 
         var contact2 = new Contact();
         root.AddContact(contact2);
-        AssertHelper.SequenceEqual(new[] { contact1, contact2 }, root.Contacts);
+        AssertHelper.SequenceEqual([ contact1, contact2 ], root.Contacts);
 
         root.RemoveContact(contact1);
-        AssertHelper.SequenceEqual(new[] { contact2 }, root.Contacts);
+        AssertHelper.SequenceEqual([ contact2 ], root.Contacts);
     }
 }

@@ -19,7 +19,7 @@ internal class SelectContactController
     {
         this.selectContactViewModel = selectContactViewModel;
         ContactListViewModel = contactListViewModel;
-        selectContactCommand = new DelegateCommand(SelectContact, CanSelectContact);
+        selectContactCommand = new(SelectContact, CanSelectContact);
     }
 
     public object OwnerView { get; set; } = null!;
@@ -32,7 +32,7 @@ internal class SelectContactController
 
     public void Initialize()
     {
-        contactsView = new ObservableListView<Contact>(Root.Contacts, null, ContactListViewModel.Filter, null);
+        contactsView = new(Root.Contacts, null, ContactListViewModel.Filter, null);
         ContactListViewModel.Contacts = contactsView;
         ContactListViewModel.SelectedContact = Root.Contacts.FirstOrDefault();
         selectContactViewModel.ContactListView = ContactListViewModel.View;

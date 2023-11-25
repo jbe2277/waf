@@ -16,7 +16,7 @@ public partial class SelectContactWindow : ISelectContactView
     public SelectContactWindow()
     {
         InitializeComponent();
-        viewModel = new Lazy<SelectContactViewModel>(() => ViewHelper.GetViewModel<SelectContactViewModel>(this)!);
+        viewModel = new(() => ViewHelper.GetViewModel<SelectContactViewModel>(this)!);
     }
 
     public SelectContactViewModel ViewModel => viewModel.Value;
