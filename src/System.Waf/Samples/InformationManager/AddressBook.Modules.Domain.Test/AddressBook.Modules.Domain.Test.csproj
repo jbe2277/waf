@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Test.InformationManager.AddressBook.Modules.Domain</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Domain.Test</AssemblyName>
   </PropertyGroup>
