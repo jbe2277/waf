@@ -24,7 +24,7 @@ internal class ModuleController : IModuleController
     private readonly ExportFactory<NewEmailController> newEmailControllerFactory;
     private readonly DelegateCommand newEmailCommand;
     private readonly Lazy<DataContractSerializer> serializer;
-    private readonly List<ItemCountSynchronizer> itemCountSynchronizers;
+    private readonly List<ItemCountSynchronizer> itemCountSynchronizers = [];
     private EmailFolderController? activeEmailFolderController;
 
     [ImportingConstructor]
@@ -37,9 +37,8 @@ internal class ModuleController : IModuleController
         this.emailAccountsController = emailAccountsController;
         this.emailFolderControllerFactory = emailFolderControllerFactory;
         this.newEmailControllerFactory = newEmailControllerFactory;
-        newEmailCommand = new DelegateCommand(NewEmail);
-        itemCountSynchronizers = new List<ItemCountSynchronizer>();
-        serializer = new Lazy<DataContractSerializer>(CreateDataContractSerializer);
+        newEmailCommand = new(NewEmail);
+        serializer = new(CreateDataContractSerializer);
     }
 
     internal EmailClientRoot Root { get; private set; } = null!;
@@ -50,7 +49,7 @@ internal class ModuleController : IModuleController
         {
             if (stream.Length == 0)
             {
-                Root = new EmailClientRoot();
+                Root = new();
                 Root.AddEmailAccount(SampleDataProvider.CreateEmailAccount());
                 foreach (var email in SampleDataProvider.CreateInboxEmails()) { Root.Inbox.AddEmail(email); }
                 foreach (var email in SampleDataProvider.CreateSentEmails()) { Root.Sent.AddEmail(email); }
@@ -64,15 +63,15 @@ internal class ModuleController : IModuleController
         emailAccountsController.Root = Root;
 
         var node = navigationService.AddNavigationNode("Inbox", ShowInbox, CloseCurrentView, 1, 1);
-        itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Inbox));
+        itemCountSynchronizers.Add(new(node, Root.Inbox));
         node = navigationService.AddNavigationNode("Outbox", ShowOutbox, CloseCurrentView, 1, 2);
-        itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Outbox));
+        itemCountSynchronizers.Add(new(node, Root.Outbox));
         node = navigationService.AddNavigationNode("Sent", ShowSentEmails, CloseCurrentView, 1, 3);
-        itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Sent));
+        itemCountSynchronizers.Add(new(node, Root.Sent));
         node = navigationService.AddNavigationNode("Drafts", ShowDrafts, CloseCurrentView, 1, 4);
-        itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Drafts));
+        itemCountSynchronizers.Add(new(node, Root.Drafts));
         node = navigationService.AddNavigationNode("Deleted", ShowDeletedEmails, CloseCurrentView, 1, 5);
-        itemCountSynchronizers.Add(new ItemCountSynchronizer(node, Root.Deleted));
+        itemCountSynchronizers.Add(new(node, Root.Deleted));
     }
 
     public void Run() { }
@@ -92,7 +91,7 @@ internal class ModuleController : IModuleController
         var uiNewEmailCommand = new ToolBarCommand(newEmailCommand, "_New email", "Creates a new email.");
         var uiDeleteEmailCommand = new ToolBarCommand(activeEmailFolderController.DeleteEmailCommand, "_Delete", "Deletes the selected email.");
         var uiEmailAccountsCommand = new ToolBarCommand(emailAccountsController.EmailAccountsCommand, "_Email accounts", "Opens a window that shows the email accounts.");
-        shellService.AddToolBarCommands(new[] { uiNewEmailCommand, uiDeleteEmailCommand, uiEmailAccountsCommand });
+        shellService.AddToolBarCommands([ uiNewEmailCommand, uiDeleteEmailCommand, uiEmailAccountsCommand ]);
     }
 
     private void ShowInbox() => ShowEmails(Root.Inbox);
@@ -120,7 +119,7 @@ internal class ModuleController : IModuleController
         newEmailController.Run();
     }
 
-    private DataContractSerializer CreateDataContractSerializer() => new(typeof(EmailClientRoot), new[] { typeof(ExchangeSettings), typeof(Pop3Settings) });
+    private DataContractSerializer CreateDataContractSerializer() => new(typeof(EmailClientRoot), [ typeof(ExchangeSettings), typeof(Pop3Settings) ]);
 
 
     private class ItemCountSynchronizer : Model

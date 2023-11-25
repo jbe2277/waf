@@ -25,7 +25,7 @@ internal class ContactController
         ContactListViewModel = contactListViewModel;
         ContactViewModel = contactViewModel;
         NewContactCommand = new DelegateCommand(NewContact);
-        deleteContactCommand = new DelegateCommand(DeleteContact, CanDeleteContact);
+        deleteContactCommand = new(DeleteContact, CanDeleteContact);
     }
 
     public AddressBookRoot Root { get; set; } = null!;
@@ -40,7 +40,7 @@ internal class ContactController
 
     public void Initialize()
     {
-        contactsView = new ObservableListView<Contact>(Root!.Contacts, null, ContactListViewModel.Filter, null);
+        contactsView = new(Root!.Contacts, null, ContactListViewModel.Filter, null);
         ContactListViewModel.Contacts = contactsView;
         ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
         WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
@@ -60,7 +60,7 @@ internal class ContactController
 
     private void NewContact()
     {
-        Contact newContact = Root.AddNewContact();
+        var newContact = Root.AddNewContact();
         ContactListViewModel.SelectedContact = newContact;
         ContactListViewModel.FocusItem();
     }

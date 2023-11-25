@@ -25,8 +25,8 @@ internal class NewEmailController
         this.shellService = shellService;
         this.addressBookService = addressBookService;
         NewEmailViewModel = newEmailViewModel;
-        selectContactCommand = new DelegateCommand(SelectContact);
-        sendCommand = new DelegateCommand(SendEmail);
+        selectContactCommand = new(SelectContact);
+        sendCommand = new(SendEmail);
     }
 
     public EmailClientRoot Root { get; set; } = null!;

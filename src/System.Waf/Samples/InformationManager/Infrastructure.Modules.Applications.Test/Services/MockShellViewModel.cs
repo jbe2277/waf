@@ -5,12 +5,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 
 public class MockShellViewModel : IShellViewModel
 {
-    private readonly List<ToolBarCommand> toolBarCommands;
-
-    public MockShellViewModel()
-    {
-        toolBarCommands = new List<ToolBarCommand>();
-    }
+    private readonly List<ToolBarCommand> toolBarCommands = [];
 
     public IReadOnlyList<ToolBarCommand> ToolBarCommands => toolBarCommands;
 

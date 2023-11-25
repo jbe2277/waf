@@ -13,11 +13,7 @@ public class EmailListViewModelTest : EmailClientTest
     public void PropertiesTest()
     {
         var viewModel = Get<EmailListViewModel>();
-        var emails = new List<Email>()
-            {
-                new(),
-                new(),
-            };
+        var emails = new List<Email>() { new(), new() };
 
         Assert.IsNull(viewModel.SelectedEmail);
         AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmail, () => viewModel.SelectedEmail = emails[0]);

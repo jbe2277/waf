@@ -16,11 +16,7 @@ public class NewEmailViewModelTest : EmailClientTest
 
         // Email accounts tests
 
-        var emailAccounts = new List<EmailAccount>()
-        {
-            new(),
-            new()
-        };
+        var emailAccounts = new List<EmailAccount>() { new(), new() };
 
         AssertHelper.PropertyChangedEvent(viewModel, x => x.SelectedEmailAccount, () => viewModel.SelectedEmailAccount = emailAccounts[0]);
         Assert.AreEqual(emailAccounts[0], viewModel.SelectedEmailAccount);
@@ -41,7 +37,7 @@ public class NewEmailViewModelTest : EmailClientTest
         string cc = cc1 + ", " + cc2;
         AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => viewModel.CC = cc);
         Assert.AreEqual(cc1 + "; " + cc2, viewModel.CC);
-        AssertHelper.SequenceEqual(new[] { cc1, cc2 }, email.CC);
+        AssertHelper.SequenceEqual([ cc1, cc2 ], email.CC);
 
         string bcc1 = "user@adventure-works.com";
         string bcc2 = "harry@example.com";
@@ -49,16 +45,16 @@ public class NewEmailViewModelTest : EmailClientTest
         string bcc = bcc1 + "; " + bcc2 + "  " + bcc3;
         AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => viewModel.Bcc = bcc);
         Assert.AreEqual(bcc1 + "; " + bcc2 + "; " + bcc3, viewModel.Bcc);
-        AssertHelper.SequenceEqual(new[] { bcc1, bcc2, bcc3 }, email.Bcc);
+        AssertHelper.SequenceEqual([ bcc1, bcc2, bcc3 ], email.Bcc);
 
         string newEmail = "mike@adventure-works.com";
-        AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => email.To = new[] { newEmail });
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.To, () => email.To = [ newEmail ]);
         Assert.AreEqual(newEmail, viewModel.To);
 
-        AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => email.CC = new[] { newEmail });
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.CC, () => email.CC = [ newEmail ]);
         Assert.AreEqual(newEmail, viewModel.CC);
 
-        AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => email.Bcc = new[] { newEmail });
+        AssertHelper.PropertyChangedEvent(viewModel, x => x.Bcc, () => email.Bcc = [ newEmail ]);
         Assert.AreEqual(newEmail, viewModel.Bcc);
 
         viewModel.Email = new Email();

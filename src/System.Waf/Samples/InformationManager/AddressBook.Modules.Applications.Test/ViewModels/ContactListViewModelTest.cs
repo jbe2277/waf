@@ -13,11 +13,7 @@ public class ContactListViewModelTest : AddressBookTest
     public void PropertiesTest()
     {
         var viewModel = Get<ContactListViewModel>();
-        var contacts = new List<Contact>()
-        {
-            new(),
-            new()
-        };
+        var contacts = new List<Contact>() { new(), new() };
 
         Assert.IsNull(viewModel.Contacts);
         viewModel.Contacts = contacts;

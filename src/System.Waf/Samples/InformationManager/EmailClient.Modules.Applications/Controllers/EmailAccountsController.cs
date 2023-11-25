@@ -33,8 +33,8 @@ internal class EmailAccountsController
 
     private void ShowEmailAccounts()
     {
-        removeEmailAccountCommand = new DelegateCommand(RemoveEmailAccount, CanRemoveEmailAccount);
-        editEmailAccountCommand = new DelegateCommand(EditEmailAccount, CanEditEmailAccount);
+        removeEmailAccountCommand = new(RemoveEmailAccount, CanRemoveEmailAccount);
+        editEmailAccountCommand = new(EditEmailAccount, CanEditEmailAccount);
 
         emailAccountsViewModel = emailAccountsViewModelFactory.CreateExport().Value;
         emailAccountsViewModel.EmailClientRoot = Root;

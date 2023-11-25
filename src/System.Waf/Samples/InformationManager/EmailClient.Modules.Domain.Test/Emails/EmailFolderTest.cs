@@ -22,7 +22,7 @@ public class EmailFolderTest : DomainTest
 
         var email2 = new Email();
         emailFolder.AddEmail(email2);
-        AssertHelper.SequenceEqual(new[] { email1, email2 }, emailFolder.Emails);
+        AssertHelper.SequenceEqual([ email1, email2 ], emailFolder.Emails);
 
         bool deleteEmailCalled = false;
         emailDeletionService.DeleteEmailAction = (folder, email) =>

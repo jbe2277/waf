@@ -16,7 +16,7 @@ public partial class EmailAccountsWindow : IEmailAccountsView
     public EmailAccountsWindow()
     {
         InitializeComponent();
-        viewModel = new Lazy<EmailAccountsViewModel>(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this)!);
+        viewModel = new(() => ViewHelper.GetViewModel<EmailAccountsViewModel>(this)!);
     }
 
     public void ShowDialog(object owner)

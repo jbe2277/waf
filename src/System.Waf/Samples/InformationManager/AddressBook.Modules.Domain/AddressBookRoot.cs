@@ -7,12 +7,7 @@ namespace Waf.InformationManager.AddressBook.Modules.Domain;
 public class AddressBookRoot : ValidatableModel
 {
     [DataMember]
-    private readonly ObservableList<Contact> contacts;
-
-    public AddressBookRoot()
-    {
-        contacts = new();
-    }
+    private readonly ObservableList<Contact> contacts = [];
 
     public IReadOnlyList<Contact> Contacts => contacts;
 

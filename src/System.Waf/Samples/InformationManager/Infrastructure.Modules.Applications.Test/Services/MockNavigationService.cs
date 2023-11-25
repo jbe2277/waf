@@ -6,12 +6,7 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 [Export(typeof(INavigationService)), Export]
 public class MockNavigationService : INavigationService
 {
-    private readonly List<MockNavigationNode> navigationNodes;
-
-    public MockNavigationService()
-    {
-        navigationNodes = new List<MockNavigationNode>();
-    }
+    private readonly List<MockNavigationNode> navigationNodes = [];
 
     public IReadOnlyList<MockNavigationNode> NavigationNodes => navigationNodes;
 

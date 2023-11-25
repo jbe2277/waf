@@ -16,7 +16,7 @@ public partial class ContactListView : IContactListView
     public ContactListView()
     {
         InitializeComponent();
-        viewModel = new Lazy<ContactListViewModel>(() => ViewHelper.GetViewModel<ContactListViewModel>(this)!);
+        viewModel = new(() => ViewHelper.GetViewModel<ContactListViewModel>(this)!);
         Loaded += LoadedHandler;
     }
 
@@ -30,13 +30,13 @@ public partial class ContactListView : IContactListView
             return;
         }
 
-        Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
+        Dispatcher.BeginInvoke(DispatcherPriority.Background, () =>
         {
             // It is necessary to delay this code because data binding updates the values asynchronously.
             contactsBox.ScrollIntoView(ViewModel.SelectedContact);
             var selectedListBoxItem = (ListBoxItem)contactsBox.ItemContainerGenerator.ContainerFromItem(ViewModel.SelectedContact);
             selectedListBoxItem?.Focus();
-        }));
+        });
     }
 
     private void LoadedHandler(object sender, RoutedEventArgs e)
