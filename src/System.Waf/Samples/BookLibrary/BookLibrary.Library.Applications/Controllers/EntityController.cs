@@ -22,15 +22,14 @@ internal class EntityController : IEntityController
     private DbContext? bookLibraryContext;
 
     [ImportingConstructor]
-    public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService,
-        IDBContextService dBContextService, Lazy<ShellViewModel> shellViewModel)
+    public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService, IDBContextService dBContextService, Lazy<ShellViewModel> shellViewModel)
     {
         this.entityService = entityService;
         this.messageService = messageService;
         this.shellService = shellService;
         this.dBContextService = dBContextService;
         this.shellViewModel = shellViewModel;
-        saveCommand = new DelegateCommand(() => Save(), CanSave);
+        saveCommand = new(() => Save(), CanSave);
     }
 
     private ShellViewModel ShellViewModel => shellViewModel.Value;

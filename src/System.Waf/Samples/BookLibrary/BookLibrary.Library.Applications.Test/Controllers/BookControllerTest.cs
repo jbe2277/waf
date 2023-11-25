@@ -87,7 +87,7 @@ public class BookControllerTest : TestClassBase
         bookListViewModel.AddSelectedBook(bookListViewModel.Books![^1]);
         Assert.IsTrue(bookListViewModel.RemoveCommand!.CanExecute(null));
         bookListViewModel.RemoveCommand.Execute(null);
-        AssertHelper.SequenceEqual(new[] { fellowship }, entityService.Books);
+        AssertHelper.SequenceEqual([ fellowship ], entityService.Books);
         Assert.AreEqual(fellowship, bookViewModel.Book);
         Assert.IsTrue(bookListView.FirstCellHasFocus);
 
@@ -175,7 +175,7 @@ public class BookControllerTest : TestClassBase
         bookListViewModel.SelectedBook = bookListViewModel.Books!.Single(b => b.Book == twoTowers);
         bookListViewModel.AddSelectedBook(bookListViewModel.SelectedBook);
         bookListViewModel.RemoveCommand!.Execute(null);
-        AssertHelper.SequenceEqual(new[] { fellowship, returnKing }, entityService.Books);
+        AssertHelper.SequenceEqual([ fellowship, returnKing ], entityService.Books);
         Assert.AreEqual(returnKing, bookListViewModel.SelectedBook.Book);
     }
 
@@ -239,8 +239,8 @@ public class BookControllerTest : TestClassBase
             Assert.AreEqual(fellowship, viewModel.Book);
             Assert.AreEqual(entityService.Persons, viewModel.Persons);
 
-                // Lend the book to Ron
-                viewModel.SelectedPerson = ron;
+            // Lend the book to Ron
+            viewModel.SelectedPerson = ron;
             viewModel.OkCommand.Execute(null);
         };
         bookViewModel.LendToCommand!.Execute(fellowship);

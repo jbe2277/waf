@@ -6,8 +6,8 @@ namespace Waf.BookLibrary.Library.Domain;
 
 public class Book : ValidatableModel, IFormattable
 {
-    private string title;
-    private string author;
+    private string title = "";
+    private string author = "";
     private string? publisher;
     private DateTime publishDate;
     private string? isbn;
@@ -18,8 +18,6 @@ public class Book : ValidatableModel, IFormattable
     public Book()
     {
         Id = Guid.NewGuid();
-        title = "";
-        author = "";
         publishDate = DateTime.Now;
     }
 
@@ -89,7 +87,7 @@ public class Book : ValidatableModel, IFormattable
         var maxValue = new DateTime(9999, 12, 31);
         if (value < minValue || value > maxValue)
         {
-            return new ValidationResult(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue), new[] { nameof(PublishDate) });
+            return new(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue), new[] { nameof(PublishDate) });
         }
         return ValidationResult.Success;
     }

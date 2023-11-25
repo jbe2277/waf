@@ -18,7 +18,7 @@ public partial class PersonListView : IPersonListView
     public PersonListView()
     {
         InitializeComponent();
-        viewModel = new Lazy<PersonListViewModel>(() => this.GetViewModel<PersonListViewModel>()!);
+        viewModel = new(() => this.GetViewModel<PersonListViewModel>()!);
         Loaded += FirstTimeLoadedHandler;
     }
 
@@ -27,7 +27,7 @@ public partial class PersonListView : IPersonListView
     public void FocusFirstCell()
     {
         personTable.Focus();
-        personTable.CurrentCell = new DataGridCellInfo(personTable.SelectedItem, personTable.Columns[0]);
+        personTable.CurrentCell = new(personTable.SelectedItem, personTable.Columns[0]);
     }
 
     private void FirstTimeLoadedHandler(object sender, RoutedEventArgs e)

@@ -7,15 +7,13 @@ namespace Waf.BookLibrary.Library.Domain;
 [DebuggerDisplay("Person: {Firstname} {Lastname}")]
 public class Person : ValidatableModel, IFormattable
 {
-    private string firstname;
-    private string lastname;
+    private string firstname = "";
+    private string lastname = "";
     private string? email;
 
     public Person()
     {
         Id = Guid.NewGuid();
-        firstname = "";
-        lastname = "";
     }
 
     public Guid Id { get; private set; }

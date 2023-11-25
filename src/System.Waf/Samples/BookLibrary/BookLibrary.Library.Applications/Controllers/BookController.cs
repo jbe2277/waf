@@ -29,9 +29,9 @@ internal class BookController
         this.bookListViewModel = bookListViewModel;
         this.bookViewModel = bookViewModel;
         this.lendToViewModelFactory = lendToViewModelFactory;
-        addNewCommand = new DelegateCommand(AddNewBook, CanAddNewBook);
-        removeCommand = new DelegateCommand(RemoveBook, CanRemoveBook);
-        lendToCommand = new DelegateCommand(p => LendTo((Book)p!));
+        addNewCommand = new(AddNewBook, CanAddNewBook);
+        removeCommand = new(RemoveBook, CanRemoveBook);
+        lendToCommand = new(p => LendTo((Book)p!));
     }
 
     internal ObservableListView<BookDataModel>? BooksView { get; private set; }
@@ -70,7 +70,7 @@ internal class BookController
 
     private void RemoveBook()
     {
-        var booksToExclude = bookListViewModel.SelectedBooks.Except(new[] { bookListViewModel.SelectedBook });
+        var booksToExclude = bookListViewModel.SelectedBooks.Except([ bookListViewModel.SelectedBook ]);
         var nextBook = bookListViewModel.Books!.Except(booksToExclude).GetNextElementOrDefault(bookListViewModel.SelectedBook);
 
         foreach (var x in bookListViewModel.SelectedBooks.ToArray()) entityService.Books.Remove(x.Book);
