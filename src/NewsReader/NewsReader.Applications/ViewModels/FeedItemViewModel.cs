@@ -5,19 +5,11 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels;
 
-public class FeedItemViewModel : ViewModelCore<IFeedItemView>
+public class FeedItemViewModel(IFeedItemView view) : ViewModelCore<IFeedItemView>(view, false)
 {
     private FeedItem? feedItem;
 
-    public FeedItemViewModel(IFeedItemView view) : base(view, false)
-    {
-    }
-
     public ICommand LaunchBrowserCommand { get; set; } = null!;
 
-    public FeedItem? FeedItem
-    {
-        get => feedItem;
-        set => SetProperty(ref feedItem, value);
-    }
+    public FeedItem? FeedItem { get => feedItem; set => SetProperty(ref feedItem, value); }
 }

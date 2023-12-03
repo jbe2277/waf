@@ -27,11 +27,7 @@ public class Feed : ValidatableModel
 
     public Uri Uri => uri;
 
-    [Required] public string? Name
-    {
-        get => name;
-        set => SetPropertyAndValidate(ref name, value);
-    }
+    [Required] public string? Name { get => name; set => SetPropertyAndValidate(ref name, value); }
 
     public string? Title
     {
@@ -45,29 +41,13 @@ public class Feed : ValidatableModel
 
     public IReadOnlyObservableList<FeedItem> Items => readOnlyItems ??= new ReadOnlyObservableList<FeedItem>(items);
 
-    public int UnreadItemsCount
-    {
-        get => unreadItemsCount;
-        private set => SetProperty(ref unreadItemsCount, value);
-    }
+    public int UnreadItemsCount { get => unreadItemsCount; private set => SetProperty(ref unreadItemsCount, value); }
 
-    public bool IsLoading
-    {
-        get => isLoading;
-        private set => SetProperty(ref isLoading, value);
-    }
+    public bool IsLoading { get => isLoading; private set => SetProperty(ref isLoading, value); }
 
-    public Exception? LoadError
-    {
-        get => loadError;
-        private set => SetProperty(ref loadError, value);
-    }
+    public Exception? LoadError { get => loadError; private set => SetProperty(ref loadError, value); }
 
-    public string? LoadErrorMessage
-    {
-        get => loadErrorMessage;
-        private set => SetProperty(ref loadErrorMessage, value);
-    }
+    public string? LoadErrorMessage { get => loadErrorMessage; private set => SetProperty(ref loadErrorMessage, value); }
 
     internal IDataManager? DataManager
     {
@@ -88,8 +68,7 @@ public class Feed : ValidatableModel
     public void StartLoading()
     {
         IsLoading = true;
-        LoadError = null;
-        LoadErrorMessage = null;
+        (LoadError, LoadErrorMessage) = (null, null);
     }
 
     public void UpdateItems(IReadOnlyList<FeedItem> newFeedItems, bool excludeMarkAsRead = false, bool cloneItemsBeforeInsert = false)

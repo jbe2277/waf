@@ -18,8 +18,8 @@ internal sealed class SettingsController
     {
         appSettings = settingsService.Get<AppSettings>();
         this.dataController = dataController;
-        this.settingsViewModel = new Lazy<SettingsViewModel>(() => InitializeViewModel(settingsViewModel.Value));
-        enableDeveloperSettingsCommand = new DelegateCommand(() =>
+        this.settingsViewModel = new(() => InitializeViewModel(settingsViewModel.Value));
+        enableDeveloperSettingsCommand = new(() =>
         {
             enableDeveloperSettingsCallCount++;
             if (enableDeveloperSettingsCallCount > 2) settingsViewModel.Value.DeveloperSettingsEnabled = true;
@@ -30,17 +30,17 @@ internal sealed class SettingsController
 
     public IViewModelCore SettingsViewModel => settingsViewModel.Value;
 
-    private SettingsViewModel InitializeViewModel(SettingsViewModel viewModel)
+    private SettingsViewModel InitializeViewModel(SettingsViewModel vm)
     {
-        viewModel.FeedManager = FeedManager;
-        viewModel.EnableDeveloperSettingsCommand = enableDeveloperSettingsCommand;
-        viewModel.SignInCommand = dataController.SignInCommand;
-        viewModel.SignOutCommand = dataController.SignOutCommand;
-        viewModel.Languages = new[] { "Auto", "en-US", "de-DE" };
-        viewModel.SelectedLanguage = appSettings.Language ?? "Auto";
-        viewModel.PropertyChanged += DeveloperSettingsViewModelPropertyChanged;
-        viewModel.Initialize();
-        return viewModel;
+        vm.FeedManager = FeedManager;
+        vm.EnableDeveloperSettingsCommand = enableDeveloperSettingsCommand;
+        vm.SignInCommand = dataController.SignInCommand;
+        vm.SignOutCommand = dataController.SignOutCommand;
+        vm.Languages = [ "Auto", "en-US", "de-DE" ];
+        vm.SelectedLanguage = appSettings.Language ?? "Auto";
+        vm.PropertyChanged += DeveloperSettingsViewModelPropertyChanged;
+        vm.Initialize();
+        return vm;
     }
 
     private void DeveloperSettingsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

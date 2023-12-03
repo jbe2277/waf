@@ -20,17 +20,9 @@ public class FeedManager : Model, IDataManager
 
     public ObservableList<Feed> Feeds => feeds;
 
-    public TimeSpan? ItemLifetime
-    {
-        get => itemLifetime;
-        set => SetProperty(ref itemLifetime, value);
-    }
+    public TimeSpan? ItemLifetime { get => itemLifetime; set => SetProperty(ref itemLifetime, value); }
 
-    public uint? MaxItemsLimit
-    {
-        get => maxItemsLimit;
-        set => SetProperty(ref maxItemsLimit, value);
-    }
+    public uint? MaxItemsLimit { get => maxItemsLimit; set => SetProperty(ref maxItemsLimit, value); }
 
     public void Merge(FeedManager newFeedManager)
     {
@@ -59,8 +51,7 @@ public class FeedManager : Model, IDataManager
 
     private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        var newItems = e.Action == NotifyCollectionChangedAction.Reset ? feeds : e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>();
-        foreach (var x in newItems) x.DataManager = this;
+        foreach (var x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = this;
     }
 
     [OnDeserialized] private void OnDeserialized(StreamingContext context) => Initialize();

@@ -28,15 +28,15 @@ internal sealed class AppController : IAppController
         this.feedsController = feedsController;
         this.settingsController = settingsController;
         this.shellViewModel = shellViewModel;
-        addFeedNavigationItem = new NavigationItem(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand };
-        settingsNavigationItem = new NavigationItem(Resources.Settings, "\uf493")
+        addFeedNavigationItem = new(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand };
+        settingsNavigationItem = new(Resources.Settings, "\uf493")
         {
             Command = new DelegateCommand(() => shellViewModel.Navigate(this.settingsController.SettingsViewModel))
         };
         shellViewModel.ShowFeedViewCommand = feedsController.ShowFeedViewCommand;
         shellViewModel.EditFeedCommand = feedsController.EditFeedCommand;
         shellViewModel.RemoveFeedCommand = feedsController.RemoveFeedCommand;
-        shellViewModel.FooterMenu = new[] { addFeedNavigationItem, settingsNavigationItem };
+        shellViewModel.FooterMenu = [ addFeedNavigationItem, settingsNavigationItem ];
         shellViewModel.PropertyChanged += ShellViewModelPropertyChanged;
         shellViewModel.Initialize();
         MainView = shellViewModel.View;

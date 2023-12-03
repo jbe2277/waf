@@ -55,8 +55,7 @@ public class FeedViewModel : ViewModelCore<IFeedView>
 
     private void UpdateItemsListView()
     {
-        ItemsListView = new ObservableGroupedListView<DateTime, FeedItem>(Feed?.Items ?? (IReadOnlyList<FeedItem>)Array.Empty<FeedItem>(),
-            x => x.GroupBy(y => y.Date.LocalDateTime.Date)) { Filter = FilterFeedItems };
+        ItemsListView = new(Feed?.Items ?? (IReadOnlyList<FeedItem>)[], x => x.GroupBy(y => y.Date.LocalDateTime.Date)) { Filter = FilterFeedItems };
         RaisePropertyChanged(nameof(ItemsListView));
     }
 }

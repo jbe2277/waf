@@ -2,30 +2,14 @@
 
 namespace Waf.NewsReader.Applications.DataModels;
 
-public class NavigationItem : Model
+public class NavigationItem(string title, string iconGlyph) : Model
 {
-    private string title;
     private ICommand? command;
     private bool isCommandEnabled;
-    private string iconGlyph;
 
-    public NavigationItem(string title, string iconGlyph)
-    {
-        this.title = title;
-        this.iconGlyph = iconGlyph;
-    }
+    public string Title { get => title; set => SetProperty(ref title, value); }
 
-    public string Title
-    {
-        get => title;
-        set => SetProperty(ref title, value);
-    }
-
-    public string IconGlyph
-    {
-        get => iconGlyph;
-        set => SetProperty(ref iconGlyph, value);
-    }
+    public string IconGlyph { get => iconGlyph; set => SetProperty(ref iconGlyph, value); }
 
     public ICommand? Command
     {
@@ -42,11 +26,7 @@ public class NavigationItem : Model
         }
     }
 
-    public bool IsCommandEnabled
-    {
-        get => isCommandEnabled;
-        set => SetProperty(ref isCommandEnabled, value);
-    }
+    public bool IsCommandEnabled { get => isCommandEnabled; set => SetProperty(ref isCommandEnabled, value); }
 
     private void CommandCanExecuteChanged(object? sender, EventArgs e) => IsCommandEnabled = command?.CanExecute(null) ?? false;
 }

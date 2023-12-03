@@ -22,29 +22,13 @@ public class FeedItem : Model
 
     public Uri Uri => uri;
 
-    public DateTimeOffset Date
-    {
-        get => date;
-        set => SetProperty(ref date, value);
-    }
+    public DateTimeOffset Date { get => date; set => SetProperty(ref date, value); }
 
-    public string? Name
-    {
-        get => name;
-        set => SetProperty(ref name, value?.Truncate(200).Trim());
-    }
+    public string? Name { get => name; set => SetProperty(ref name, value?.Truncate(200).Trim()); }
 
-    public string? Description
-    {
-        get => description;
-        set => SetProperty(ref description, value?.Truncate(500).Trim());
-    }
+    public string? Description { get => description; set => SetProperty(ref description, value?.Truncate(500).Trim()); }
 
-    public bool MarkAsRead
-    {
-        get => markAsRead;
-        set => SetProperty(ref markAsRead, value);
-    }
+    public bool MarkAsRead { get => markAsRead; set => SetProperty(ref markAsRead, value); }
 
     public void ApplyValuesFrom(FeedItem item, bool excludeMarkAsRead = false)
     {

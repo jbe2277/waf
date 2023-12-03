@@ -17,7 +17,7 @@ internal sealed class DataController
     private readonly IMessageService messageService;
     private readonly AsyncDelegateCommand signInCommand;
     private readonly AsyncDelegateCommand signOutCommand;
-    private readonly TaskCompletionSource<FeedManager> loadCompletion;
+    private readonly TaskCompletionSource<FeedManager> loadCompletion = new();
     private bool isInitialized;
     private bool isInSync;
 
@@ -29,9 +29,8 @@ internal sealed class DataController
         this.networkInfoService = networkInfoService;
         this.webStorageService = webStorageService;
         this.messageService = messageService;
-        signInCommand = new AsyncDelegateCommand(SignIn, () => isInitialized);
-        signOutCommand = new AsyncDelegateCommand(SignOutAsync);
-        loadCompletion = new TaskCompletionSource<FeedManager>();
+        signInCommand = new(SignIn, () => isInitialized);
+        signOutCommand = new(SignOutAsync);
         webStorageService.PropertyChanged += WebStorageServicePropertyChanged;
     }
 

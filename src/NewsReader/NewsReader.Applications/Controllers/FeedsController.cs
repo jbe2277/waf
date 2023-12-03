@@ -40,19 +40,19 @@ internal sealed class FeedsController
         this.networkInfoService = networkInfoService;
         this.launcherService = launcherService;
         this.shellViewModel = shellViewModel;
-        this.addEditFeedViewModel = new Lazy<AddEditFeedViewModel>(() => InitializeViewModel(addEditFeedViewModel.Value));
-        this.feedViewModel = new Lazy<FeedViewModel>(() => InitializeViewModel(feedViewModel.Value));
-        this.feedItemViewModel = new Lazy<FeedItemViewModel>(() => InitializeViewModel(feedItemViewModel.Value));
-        addFeedCommand = new DelegateCommand(AddFeed);
-        addEditLoadFeedCommand = new AsyncDelegateCommand(AddEditLoadFeed);
-        addUpdateFeedCommand = new AsyncDelegateCommand(AddUpdateFeed, CanAddUpdateFeed);
-        showFeedViewCommand = new AsyncDelegateCommand(ShowFeedView);
-        editFeedCommand = new AsyncDelegateCommand(EditFeed);
-        removeFeedCommand = new AsyncDelegateCommand(RemoveFeed);
-        refreshFeedCommand = new AsyncDelegateCommand(Update);
-        readUnreadCommand = new DelegateCommand(MarkAsReadUnread);
-        showFeedItemViewCommand = new AsyncDelegateCommand(ShowFeedItemView);
-        launchBrowserCommand = new AsyncDelegateCommand(LaunchBrowser, CanLaunchBrowser);
+        this.addEditFeedViewModel = new(() => InitializeViewModel(addEditFeedViewModel.Value));
+        this.feedViewModel = new(() => InitializeViewModel(feedViewModel.Value));
+        this.feedItemViewModel = new(() => InitializeViewModel(feedItemViewModel.Value));
+        addFeedCommand = new(AddFeed);
+        addEditLoadFeedCommand = new(AddEditLoadFeed);
+        addUpdateFeedCommand = new(AddUpdateFeed, CanAddUpdateFeed);
+        showFeedViewCommand = new(ShowFeedView);
+        editFeedCommand = new(EditFeed);
+        removeFeedCommand = new(RemoveFeed);
+        refreshFeedCommand = new(Update);
+        readUnreadCommand = new(MarkAsReadUnread);
+        showFeedItemViewCommand = new(ShowFeedItemView);
+        launchBrowserCommand = new(LaunchBrowser, CanLaunchBrowser);
     }
 
     public FeedManager FeedManager { get; set; } = null!;
@@ -69,6 +69,7 @@ internal sealed class FeedsController
 
     public async void Run()
     {
+        FeedManager.Feeds.CollectionChanging += FeedsCollectionChanging;
         FeedManager.Feeds.CollectionChanged += FeedsCollectionChanged;
         await ShowFeedView(FeedManager.Feeds.FirstOrDefault());
         await Update();
@@ -76,13 +77,18 @@ internal sealed class FeedsController
 
     public Task Update() => Task.WhenAll(FeedManager.Feeds.Select(x => LoadFeed(x)));
 
-    private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void FeedsCollectionChanging(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        foreach (Feed x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) LoadFeed(x).NoWait();
-        if ((e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>()).Any(x => x == feedViewModel.Value.Feed))
+        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? FeedManager.Feeds : e.OldItems?.Cast<Feed>();
+        if (oldItems?.Any(x => x == feedViewModel.Value.Feed) == true)
         {
             shellViewModel.SelectedFeed = feedViewModel.Value.Feed = null;
         }
+    }
+
+    private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        foreach (Feed x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) LoadFeed(x).NoWait();
     }
 
     private async Task LoadFeed(Feed feed, bool ignoreInternetAccessStatus = false)
@@ -213,29 +219,29 @@ internal sealed class FeedsController
 
     private async Task LaunchBrowser() => await launcherService.LaunchBrowser(feedItemViewModel.Value.FeedItem!.Uri);
 
-    private AddEditFeedViewModel InitializeViewModel(AddEditFeedViewModel viewModel)
+    private AddEditFeedViewModel InitializeViewModel(AddEditFeedViewModel vm)
     {
-        viewModel.LoadFeedCommand = addEditLoadFeedCommand;
-        viewModel.AddUpdateCommand = addUpdateFeedCommand;
-        viewModel.PropertyChanged += AddEditFeedViewModelPropertyChanged;
-        viewModel.FeedChanged += AddEditFeedViewModelFeedChanged;
-        return viewModel;
+        vm.LoadFeedCommand = addEditLoadFeedCommand;
+        vm.AddUpdateCommand = addUpdateFeedCommand;
+        vm.PropertyChanged += AddEditFeedViewModelPropertyChanged;
+        vm.FeedChanged += AddEditFeedViewModelFeedChanged;
+        return vm;
     }
 
-    private FeedViewModel InitializeViewModel(FeedViewModel viewModel)
+    private FeedViewModel InitializeViewModel(FeedViewModel vm)
     {
-        viewModel.RefreshCommand = refreshFeedCommand;
-        viewModel.ReadUnreadCommand = readUnreadCommand;
-        viewModel.ShowFeedItemViewCommand = showFeedItemViewCommand;
-        viewModel.PropertyChanged += FeedViewModelPropertyChanged;
-        return viewModel;
+        vm.RefreshCommand = refreshFeedCommand;
+        vm.ReadUnreadCommand = readUnreadCommand;
+        vm.ShowFeedItemViewCommand = showFeedItemViewCommand;
+        vm.PropertyChanged += FeedViewModelPropertyChanged;
+        return vm;
     }
 
-    private FeedItemViewModel InitializeViewModel(FeedItemViewModel viewModel)
+    private FeedItemViewModel InitializeViewModel(FeedItemViewModel vm)
     {
-        viewModel.LaunchBrowserCommand = launchBrowserCommand;
-        viewModel.PropertyChanged += FeedItemViewModelPropertyChanged;
-        return viewModel;
+        vm.LaunchBrowserCommand = launchBrowserCommand;
+        vm.PropertyChanged += FeedItemViewModelPropertyChanged;
+        return vm;
     }
 
     private void AddEditFeedViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

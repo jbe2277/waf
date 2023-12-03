@@ -9,7 +9,7 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels;
 
-public class SettingsViewModel : ViewModelCore<ISettingsView>
+public class SettingsViewModel(ISettingsView view) : ViewModelCore<ISettingsView>(view, false)
 {
     private DisplayItemLifetime selectedItemLifetime;
     private DisplayMaxItemsLimit selectedMaxItemsLimit;
@@ -19,33 +19,19 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
     private bool developerSettingsEnabled;
     private string selectedLanguage = null!;
 
-    public SettingsViewModel(ISettingsView view) : base(view, false)
-    {
-        ItemLifetimes = Enum.GetValues<DisplayItemLifetime>();
-        MaxItemsLimits = Enum.GetValues<DisplayMaxItemsLimit>();
-    }
-
     public required IAppInfoService AppInfo { get; init; }
 
     public required IWebStorageService WebStorageService { get; init; }
 
     public required IMessageService MessageService { protected get; init; }
 
-    public IReadOnlyList<DisplayItemLifetime> ItemLifetimes { get; }
+    public IReadOnlyList<DisplayItemLifetime> ItemLifetimes { get; } = Enum.GetValues<DisplayItemLifetime>();
 
-    public DisplayItemLifetime SelectedItemLifetime
-    {
-        get => selectedItemLifetime;
-        set => SetSelectedItemLifetime(value);
-    }
+    public DisplayItemLifetime SelectedItemLifetime { get => selectedItemLifetime; set => SetSelectedItemLifetime(value); }
 
-    public IReadOnlyList<DisplayMaxItemsLimit> MaxItemsLimits { get; }
+    public IReadOnlyList<DisplayMaxItemsLimit> MaxItemsLimits { get; } = Enum.GetValues<DisplayMaxItemsLimit>();
 
-    public DisplayMaxItemsLimit SelectedMaxItemsLimit
-    {
-        get => selectedMaxItemsLimit;
-        set => SetSelectedMaxItemsLimit(value);
-    }
+    public DisplayMaxItemsLimit SelectedMaxItemsLimit { get => selectedMaxItemsLimit; set => SetSelectedMaxItemsLimit(value); }
 
     public ICommand SignInCommand { get; set; } = null!;
 
@@ -53,19 +39,11 @@ public class SettingsViewModel : ViewModelCore<ISettingsView>
 
     public ICommand EnableDeveloperSettingsCommand { get; set; } = null!;
 
-    public bool DeveloperSettingsEnabled
-    {
-        get => developerSettingsEnabled;
-        set => SetProperty(ref developerSettingsEnabled, value);
-    }
+    public bool DeveloperSettingsEnabled { get => developerSettingsEnabled; set => SetProperty(ref developerSettingsEnabled, value); }
 
     public IReadOnlyList<string> Languages { get; set; } = null!;
 
-    public string SelectedLanguage
-    {
-        get => selectedLanguage;
-        set => SetProperty(ref selectedLanguage, value);
-    }
+    public string SelectedLanguage { get => selectedLanguage; set => SetProperty(ref selectedLanguage, value); }
 
     public string UICulture => CultureInfo.CurrentUICulture.ToString();
 

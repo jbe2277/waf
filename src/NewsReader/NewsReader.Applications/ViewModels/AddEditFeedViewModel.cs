@@ -16,7 +16,7 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
 
     public AddEditFeedViewModel(IAddEditFeedView view) : base(view, false)
     {
-        useTitleAsNameCommand = new DelegateCommand(() => Feed!.Name = Feed.Title, () => !string.IsNullOrEmpty(Feed?.Title) && Feed!.Name != Feed.Title);
+        useTitleAsNameCommand = new(() => Feed!.Name = Feed.Title, () => !string.IsNullOrEmpty(Feed?.Title) && Feed!.Name != Feed.Title);
     }
 
     public ICommand LoadFeedCommand { get; internal set; } = null!;
@@ -27,30 +27,20 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
 
     public event PropertyChangedEventHandler? FeedChanged;
 
-    public bool IsEditMode
-    {
-        get => isEditMode;
-        set => SetProperty(ref isEditMode, value);
-    }
+    public bool IsEditMode { get => isEditMode; set => SetProperty(ref isEditMode, value); }
 
     public string? FeedUrl
     {
         get => feedUrl;
         set
         {
-            if (SetProperty(ref feedUrl, value))
-            {
-                Feed = null;
-                LoadErrorMessage = null;
-            }
+            if (!SetProperty(ref feedUrl, value)) return;
+            Feed = null;
+            LoadErrorMessage = null;
         }
     }
 
-    public Feed? OldFeed
-    {
-        get => oldFeed;
-        set => SetProperty(ref oldFeed, value);
-    }
+    public Feed? OldFeed { get => oldFeed; set => SetProperty(ref oldFeed, value); }
 
     public Feed? Feed
     {
@@ -58,19 +48,13 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
         set
         {
             var oldFeed = feed;
-            if (SetProperty(ref feed, value))
-            {
-                if (oldFeed != null) oldFeed.PropertyChanged -= FeedPropertyChanged;
-                if (feed != null) feed.PropertyChanged += FeedPropertyChanged;
-            }
+            if (!SetProperty(ref feed, value)) return;
+            if (oldFeed != null) oldFeed.PropertyChanged -= FeedPropertyChanged;
+            if (feed != null) feed.PropertyChanged += FeedPropertyChanged;
         }
     }
 
-    public string? LoadErrorMessage
-    {
-        get => loadErrorMessage;
-        set => SetProperty(ref loadErrorMessage, value);
-    }
+    public string? LoadErrorMessage { get => loadErrorMessage; set => SetProperty(ref loadErrorMessage, value); }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
