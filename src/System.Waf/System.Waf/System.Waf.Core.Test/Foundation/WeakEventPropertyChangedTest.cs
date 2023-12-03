@@ -25,7 +25,7 @@ namespace Test.Waf.Foundation
 
         public class Publisher : IPublisher, INotifyPropertyChanged
         {
-            private static readonly PropertyChangedEventArgs args = new PropertyChangedEventArgs("Test");
+            private static readonly PropertyChangedEventArgs args = new("Test");
             private PropertyChangedEventHandler? propertyChanged;
 
             public int EventHandlerCount { get; private set; }

@@ -124,7 +124,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
 
-            return (new WeakReference<TManager>(manager), new WeakReference<TPublisher>(publisher), new WeakReference<TSubscriber>(subscriber));
+            return (new(manager), new(publisher), new(subscriber));
         }
     }
 }

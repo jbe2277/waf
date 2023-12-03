@@ -29,7 +29,7 @@ namespace Test.Waf.Foundation
 
         public class Publisher : IPublisher
         {
-            private static readonly PropertyChangedEventArgs args = new PropertyChangedEventArgs("Test");
+            private static readonly PropertyChangedEventArgs args = new("Test");
             private EventHandler<PropertyChangedEventArgs>? event1;
 
             public int EventHandlerCount { get; private set; }

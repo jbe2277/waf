@@ -26,7 +26,7 @@ namespace Test.Waf.Foundation
 
         public class Publisher : IPublisher, INotifyDataErrorInfo
         {
-            private static readonly DataErrorsChangedEventArgs args = new DataErrorsChangedEventArgs("Test");
+            private static readonly DataErrorsChangedEventArgs args = new("Test");
             private EventHandler<DataErrorsChangedEventArgs>? errorsChanged;
 
             public int EventHandlerCount { get; private set; }

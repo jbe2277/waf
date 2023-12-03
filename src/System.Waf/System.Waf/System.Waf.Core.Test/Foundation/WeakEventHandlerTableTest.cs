@@ -20,7 +20,7 @@ namespace Test.Waf.Foundation
             {
                 var subscriber = new Subscriber();
                 table.Add((PropertyChangedEventHandler)subscriber.Handler1);
-                return new WeakReference<Subscriber>(subscriber);
+                return new(subscriber);
             }
         }
 
@@ -37,7 +37,7 @@ namespace Test.Waf.Foundation
                 var subscriber = new Subscriber();
                 table.Add((PropertyChangedEventHandler)subscriber.Handler1);
                 table.Remove((PropertyChangedEventHandler)subscriber.Handler1);
-                return new WeakReference<Subscriber>(subscriber);
+                return new(subscriber);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Test.Waf.Foundation
                 table.Remove((PropertyChangedEventHandler)subscriber.Handler1);
                 table.Remove((PropertyChangedEventHandler)subscriber.Handler2);
                 table.Remove((PropertyChangedEventHandler)Subscriber.StaticHandler);
-                return new WeakReference<Subscriber>(subscriber);
+                return new(subscriber);
             }
         }
 

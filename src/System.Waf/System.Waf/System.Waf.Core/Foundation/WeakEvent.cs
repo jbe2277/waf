@@ -27,7 +27,7 @@ namespace System.Waf.Foundation
     /// </remarks>
     public static class WeakEvent
     {
-        private static readonly WeakEventHandlerTable weakTable = new WeakEventHandlerTable();
+        private static readonly WeakEventHandlerTable weakTable = new();
 
         /// <summary>Supports listening to EventHandler events via a weak reference.</summary>
         public static class EventHandler
@@ -57,8 +57,8 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(TSource source, S.EventHandler targetHandler, Action<TSource, S.EventHandler> subscribe, Action<TSource, S.EventHandler> unsubscribe)
                 {
-                    this.source = new WeakReference<TSource>(source);
-                    weakTargetHandler = new WeakReference<S.EventHandler>(targetHandler);
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
                     weakTable.Add(targetHandler);
@@ -114,8 +114,8 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(TSource source, S.EventHandler<TArgs> targetHandler, Action<TSource, S.EventHandler<TArgs>> subscribe, Action<TSource, S.EventHandler<TArgs>> unsubscribe)
                 {
-                    this.source = new WeakReference<TSource>(source);
-                    weakTargetHandler = new WeakReference<S.EventHandler<TArgs>>(targetHandler);
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
                     weakTable.Add(targetHandler);
@@ -165,7 +165,7 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(S.EventHandler targetHandler, Action<S.EventHandler> subscribe, Action<S.EventHandler> unsubscribe)
                 {
-                    weakTargetHandler = new WeakReference<S.EventHandler>(targetHandler);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(ProxyHandler);
                     weakTable.Add(targetHandler);
@@ -216,7 +216,7 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(S.EventHandler<TArgs> targetHandler, Action<S.EventHandler<TArgs>> subscribe, Action<S.EventHandler<TArgs>> unsubscribe)
                 {
-                    weakTargetHandler = new WeakReference<S.EventHandler<TArgs>>(targetHandler);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(ProxyHandler);
                     weakTable.Add(targetHandler);
@@ -265,8 +265,8 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(INotifyPropertyChanged source, PropertyChangedEventHandler targetHandler, Action<INotifyPropertyChanged, PropertyChangedEventHandler> subscribe, Action<INotifyPropertyChanged, PropertyChangedEventHandler> unsubscribe)
                 {
-                    this.source = new WeakReference<INotifyPropertyChanged>(source);
-                    weakTargetHandler = new WeakReference<PropertyChangedEventHandler>(targetHandler);
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
                     weakTable.Add(targetHandler);

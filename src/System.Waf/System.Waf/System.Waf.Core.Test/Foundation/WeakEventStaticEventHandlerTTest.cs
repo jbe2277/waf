@@ -114,7 +114,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
 
-            return (new WeakReference<Manager>(manager), new WeakReference<Subscriber>(subscriber));
+            return (new(manager), new(subscriber));
         }
 
         public class Manager
@@ -126,7 +126,7 @@ namespace Test.Waf.Foundation
 
         public static class StaticPublisher
         {
-            private static readonly PropertyChangedEventArgs args = new PropertyChangedEventArgs("Test");
+            private static readonly PropertyChangedEventArgs args = new("Test");
             private static EventHandler<PropertyChangedEventArgs>? event1;
 
             public static int EventHandlerCount { get; private set; }

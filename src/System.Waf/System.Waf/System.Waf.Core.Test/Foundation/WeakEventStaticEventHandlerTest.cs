@@ -132,7 +132,7 @@ namespace Test.Waf.Foundation
                 Assert.AreEqual(count, subscriber.HandlerCallCount);
             }
 
-            return (new WeakReference<Manager>(manager), new WeakReference<Subscriber>(subscriber));
+            return (new(manager), new(subscriber));
         }
 
         public class Manager
