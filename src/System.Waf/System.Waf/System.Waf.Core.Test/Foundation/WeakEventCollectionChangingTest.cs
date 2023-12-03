@@ -7,44 +7,44 @@ using System.Waf.UnitTesting;
 namespace Test.Waf.Foundation
 {
     [TestClass]
-    public class WeakEventCollectionChangedTest : WeakEventTestBase<WeakEventCollectionChangedTest.Manager, WeakEventCollectionChangedTest.Publisher, WeakEventCollectionChangedTest.Subscriber>
+    public class WeakEventCollectionChangingTest : WeakEventTestBase<WeakEventCollectionChangingTest.Manager, WeakEventCollectionChangingTest.Publisher, WeakEventCollectionChangingTest.Subscriber>
     {
         [TestMethod]
         public void WeakEventAddArgumentException()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CollectionChanged.Add(null!, (s, h) => { }));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CollectionChanged.Add(new Publisher(), null!));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CollectionChanging.Add(null!, (s, h) => { }));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => WeakEvent.CollectionChanging.Add(new Publisher(), null!));
         }
 
         public class Manager : IManager<Publisher, Subscriber>
         {
             public IWeakEventProxy? Proxy { get; set; }
 
-            public void Add(Publisher publisher, Subscriber subscriber) => Proxy = WeakEvent.CollectionChanged.Add(publisher, subscriber.Handler);
+            public void Add(Publisher publisher, Subscriber subscriber) => Proxy = WeakEvent.CollectionChanging.Add(publisher, subscriber.Handler);
         }
 
-        public class Publisher : IPublisher, INotifyCollectionChanged
+        public class Publisher : IPublisher, INotifyCollectionChanging
         {
             private static readonly NotifyCollectionChangedEventArgs args = new(NotifyCollectionChangedAction.Reset);
-            private NotifyCollectionChangedEventHandler? collectionChanged;
+            private NotifyCollectionChangedEventHandler? collectionChanging;
 
             public int EventHandlerCount { get; private set; }
 
-            public event NotifyCollectionChangedEventHandler? CollectionChanged
+            public event NotifyCollectionChangedEventHandler? CollectionChanging
             {
                 add
                 {
-                    collectionChanged += value;
+                    collectionChanging += value;
                     EventHandlerCount++;
                 }
                 remove
                 {
-                    collectionChanged -= value;
+                    collectionChanging -= value;
                     EventHandlerCount--;
                 }
             }
 
-            public void RaiseEvent() => collectionChanged?.Invoke(this, args);
+            public void RaiseEvent() => collectionChanging?.Invoke(this, args);
         }
 
         public class Subscriber : ISubscriber

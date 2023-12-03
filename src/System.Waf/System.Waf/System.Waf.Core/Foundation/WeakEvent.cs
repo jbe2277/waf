@@ -49,8 +49,7 @@ namespace System.Waf.Foundation
                 return new WeakEventProxy<TSource>(source, targetHandler, subscribe, unsubscribe);
             }
 
-            private sealed class WeakEventProxy<TSource> : IWeakEventProxy
-                where TSource : class
+            private sealed class WeakEventProxy<TSource> : IWeakEventProxy where TSource : class
             {
                 private readonly WeakReference<TSource> source;
                 private readonly WeakReference<S.EventHandler> weakTargetHandler;
@@ -107,8 +106,7 @@ namespace System.Waf.Foundation
                 return new WeakEventProxy<TSource>(source, targetHandler, subscribe, unsubscribe);
             }
 
-            private sealed class WeakEventProxy<TSource> : IWeakEventProxy
-                where TSource : class
+            private sealed class WeakEventProxy<TSource> : IWeakEventProxy where TSource : class
             {
                 private readonly WeakReference<TSource> source;
                 private readonly WeakReference<S.EventHandler<TArgs>> weakTargetHandler;
@@ -295,6 +293,56 @@ namespace System.Waf.Foundation
             }
         }
 
+        /// <summary>Supports listening to INotifyCollectionChanging.CollectionChanging events via a weak reference.</summary>
+        public static class CollectionChanging
+        {
+            /// <summary>Add an event handler which is kept only by a weak reference.</summary>
+            /// <param name="source">The source (publisher).</param>
+            /// <param name="targetHandler">The target event handler of the subscriber.</param>
+            /// <returns>The created proxy object.</returns>
+            public static IWeakEventProxy Add(INotifyCollectionChanging source, NotifyCollectionChangedEventHandler targetHandler)
+            {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
+                return new WeakEventProxy(source, targetHandler, (s, h) => s.CollectionChanging += h, (s, h) => s.CollectionChanging -= h);
+            }
+
+            private sealed class WeakEventProxy : IWeakEventProxy
+            {
+                private readonly WeakReference<INotifyCollectionChanging> source;
+                private readonly WeakReference<NotifyCollectionChangedEventHandler> weakTargetHandler;
+                private Action<INotifyCollectionChanging, NotifyCollectionChangedEventHandler>? unsubscribe;
+
+                public WeakEventProxy(INotifyCollectionChanging source, NotifyCollectionChangedEventHandler targetHandler, Action<INotifyCollectionChanging, NotifyCollectionChangedEventHandler> subscribe, Action<INotifyCollectionChanging, NotifyCollectionChangedEventHandler> unsubscribe)
+                {
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
+                    this.unsubscribe = unsubscribe;
+                    subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
+                }
+
+                public void Remove()
+                {
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private bool RemoveCore()
+                {
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;
+                }
+
+                private void ProxyHandler(object? sender, NotifyCollectionChangedEventArgs e)
+                {
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
+                    else RemoveCore();
+                }
+            }
+        }
+
         /// <summary>Supports listening to INotifyCollectionChanged.CollectionChanged events via a weak reference.</summary>
         public static class CollectionChanged
         {
@@ -317,8 +365,8 @@ namespace System.Waf.Foundation
 
                 public WeakEventProxy(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler targetHandler, Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> subscribe, Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> unsubscribe)
                 {
-                    this.source = new WeakReference<INotifyCollectionChanged>(source);
-                    weakTargetHandler = new WeakReference<NotifyCollectionChangedEventHandler>(targetHandler);
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
                     this.unsubscribe = unsubscribe;
                     subscribe(source, ProxyHandler);
                     weakTable.Add(targetHandler);
@@ -338,6 +386,56 @@ namespace System.Waf.Foundation
                 }
 
                 private void ProxyHandler(object? sender, NotifyCollectionChangedEventArgs e)
+                {
+                    if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
+                    else RemoveCore();
+                }
+            }
+        }
+
+        /// <summary>Supports listening to INotifyCollectionItemChanged.CollectionItemChanged events via a weak reference.</summary>
+        public static class CollectionItemChanged
+        {
+            /// <summary>Add an event handler which is kept only by a weak reference.</summary>
+            /// <param name="source">The source (publisher).</param>
+            /// <param name="targetHandler">The target event handler of the subscriber.</param>
+            /// <returns>The created proxy object.</returns>
+            public static IWeakEventProxy Add(INotifyCollectionItemChanged source, PropertyChangedEventHandler targetHandler)
+            {
+                if (source is null) throw new ArgumentNullException(nameof(source));
+                if (targetHandler is null) throw new ArgumentNullException(nameof(targetHandler));
+                return new WeakEventProxy(source, targetHandler, (s, h) => s.CollectionItemChanged += h, (s, h) => s.CollectionItemChanged -= h);
+            }
+
+            private sealed class WeakEventProxy : IWeakEventProxy
+            {
+                private readonly WeakReference<INotifyCollectionItemChanged> source;
+                private readonly WeakReference<PropertyChangedEventHandler> weakTargetHandler;
+                private Action<INotifyCollectionItemChanged, PropertyChangedEventHandler>? unsubscribe;
+
+                public WeakEventProxy(INotifyCollectionItemChanged source, PropertyChangedEventHandler targetHandler, Action<INotifyCollectionItemChanged, PropertyChangedEventHandler> subscribe, Action<INotifyCollectionItemChanged, PropertyChangedEventHandler> unsubscribe)
+                {
+                    this.source = new(source);
+                    weakTargetHandler = new(targetHandler);
+                    this.unsubscribe = unsubscribe;
+                    subscribe(source, ProxyHandler);
+                    weakTable.Add(targetHandler);
+                }
+
+                public void Remove()
+                {
+                    if (RemoveCore() && weakTargetHandler.TryGetTarget(out var targetHandler)) weakTable.Remove(targetHandler);
+                }
+
+                private bool RemoveCore()
+                {
+                    var unsub = Interlocked.Exchange(ref unsubscribe, null);
+                    if (unsub is null) return false;
+                    if (source.TryGetTarget(out var src)) unsub.Invoke(src, ProxyHandler);
+                    return true;
+                }
+
+                private void ProxyHandler(object? sender, PropertyChangedEventArgs e)
                 {
                     if (weakTargetHandler.TryGetTarget(out var targetHandler)) targetHandler(sender, e);
                     else RemoveCore();
