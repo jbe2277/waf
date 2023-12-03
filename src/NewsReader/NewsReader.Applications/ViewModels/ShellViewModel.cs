@@ -7,19 +7,16 @@ using Waf.NewsReader.Domain;
 
 namespace Waf.NewsReader.Applications.ViewModels;
 
-public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
+public class ShellViewModel(IShellView view, IAppInfoService appInfoService) : ViewModelCore<IShellView>(view, false), INavigationService
 {
     private NavigationItem? selectedFooterMenu;
     private ObservableList<Feed> feeds = null!;
     private Feed? selectedFeed;
     private object? currentPage;
+    private bool suppressSelectedFooterMenuCommand;
+    private bool suppressSelectedFeedCommand;
 
-    public ShellViewModel(IShellView view, IAppInfoService appInfoService) : base(view, false)
-    {
-        AppName = appInfoService.AppName;
-    }
-
-    public string AppName { get; }
+    public string AppName { get; } = appInfoService.AppName;
 
     public ICommand EditFeedCommand { get; internal set; } = null!;
 
@@ -40,16 +37,12 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
             if (selectedFooterMenu is not null)
             {
                 SelectedFeed = null;
-                selectedFooterMenu.Command?.Execute(null);
+                if (!suppressSelectedFooterMenuCommand) selectedFooterMenu.Command?.Execute(null);
             }
         }
     }
 
-    public ObservableList<Feed> Feeds
-    {
-        get => feeds;
-        internal set => SetProperty(ref feeds, value);
-    }
+    public ObservableList<Feed> Feeds { get => feeds; internal set => SetProperty(ref feeds, value); }
 
     public Feed? SelectedFeed
     {
@@ -60,9 +53,23 @@ public class ShellViewModel : ViewModelCore<IShellView>, INavigationService
             if (selectedFeed is not null)
             {
                 SelectedFooterMenu = null;
-                ShowFeedViewCommand.Execute(selectedFeed);
+                if (!suppressSelectedFeedCommand) ShowFeedViewCommand.Execute(selectedFeed);
             }
         }
+    }
+
+    public void SetSelectedFooterMenuCore(NavigationItem? value)
+    {
+        suppressSelectedFooterMenuCommand = true;
+        SelectedFooterMenu = value;
+        suppressSelectedFooterMenuCommand = false;
+    }
+
+    public void SetSelectedFeedCore(Feed? value)
+    {
+        suppressSelectedFeedCommand = true;
+        SelectedFeed = value;
+        suppressSelectedFeedCommand = false;
     }
 
     public Task Navigate(IViewModelCore viewModel)

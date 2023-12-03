@@ -84,18 +84,15 @@ internal sealed class AppController : IAppController
         {
             if (shellViewModel.CurrentPage is IAddEditFeedView)
             {
-                shellViewModel.SelectedFeed = null;
-                shellViewModel.SelectedFooterMenu = addFeedNavigationItem;
+                shellViewModel.SetSelectedFooterMenuCore(addFeedNavigationItem);
             }
             else if (shellViewModel.CurrentPage is ISettingsView)
             {
-                shellViewModel.SelectedFeed = null;
-                shellViewModel.SelectedFooterMenu = settingsNavigationItem;
+                shellViewModel.SetSelectedFooterMenuCore(settingsNavigationItem);
             }
             else if (shellViewModel.CurrentPage is IFeedView feedView)
             {
-                shellViewModel.SelectedFeed = ((FeedViewModel)feedView.BindingContext!).Feed;
-                shellViewModel.SelectedFooterMenu = null;
+                shellViewModel.SetSelectedFeedCore(((FeedViewModel)feedView.BindingContext!).Feed);
             }
         }
     }
