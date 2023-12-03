@@ -10,15 +10,15 @@
             <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
-        <ContentPage.Content>
-            <VerticalStackLayout Spacing="10" Margin="15,10">
+        <ScrollView>
+            <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{x:Static p:Resources.DataManagement}" Style="{StaticResource Title}"/>
                 <Label Text="{x:Static p:Resources.StoreFeedItemsFor}"/>
                 <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayItemLifetimeConverter}}"/>
                 <Label Text="{x:Static p:Resources.StoreAtMaximumFeedItemsPerFeed}"/>
                 <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={StaticResource LocalizeDisplayMaxItemsLimitConverter}}"/>
             </VerticalStackLayout>
-        </ContentPage.Content>
+        </ScrollView>
     </ContentPage>
 
     <ContentPage Title="{x:Static p:Resources.DataSync}">
@@ -26,8 +26,8 @@
             <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
 
-        <ContentPage.Content>
-            <VerticalStackLayout Spacing="10" Margin="15,10">
+        <ScrollView>
+            <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{x:Static p:Resources.DataSyncDescription}"/>
                 <Label Text="{x:Static p:Resources.SynchronizationDeactivated}">
                     <Label.Triggers>
@@ -45,15 +45,16 @@
                 <Button Command="{Binding SignOutCommand}" Text="{x:Static p:Resources.SignOut}" HorizontalOptions="Start"
                         IsVisible="{Binding WebStorageService.CurrentAccount, Converter={StaticResource NullToBoolConverter}}"/>
             </VerticalStackLayout>
-        </ContentPage.Content>
+        </ScrollView>
     </ContentPage>
 
     <ContentPage Title="{x:Static p:Resources.Info}">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
-        <ContentPage.Content>
-            <VerticalStackLayout Spacing="10" Margin="15,10">
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{Binding AppInfo.AppName}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding AppInfo.VersionString}">
                     <Label.GestureRecognizers>
@@ -71,6 +72,6 @@
                     <Label Text="{Binding CurrencyValue, StringFormat='Currency value: {0:C}'}"/>
                 </VerticalStackLayout>
             </VerticalStackLayout>
-        </ContentPage.Content>
+        </ScrollView>
     </ContentPage>
 </TabbedPage>

@@ -20,7 +20,7 @@
                                             <VisualState x:Name="Disabled"/>
                                             <VisualState x:Name="Selected">
                                                 <VisualState.Setters>
-                                                    <!-- Overwrite default Selected background (orange) --> 
+                                                    <!-- Overwrite default Selected background (orange) -->
                                                     <Setter Property="BackgroundColor" Value="{StaticResource Blue300Accent}"/>
                                                 </VisualState.Setters>
                                             </VisualState>
@@ -39,7 +39,6 @@
             <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="White">
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
-                <!-- TODO: Reorder does not work on Android but on Windows -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
@@ -65,6 +64,7 @@
 
                                 <FlyoutBase.ContextFlyout>
                                     <MenuFlyout>
+                                        <!-- TODO: CommandParameter Binding is not called (Windows); for SwipeItem this works (Android) -->
                                         <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
                                         <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
                                     </MenuFlyout>
@@ -72,7 +72,6 @@
 
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
-                                        <!-- TODO: Clipped text on Android: https://github.com/dotnet/maui/pull/11931 -->
                                         <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>

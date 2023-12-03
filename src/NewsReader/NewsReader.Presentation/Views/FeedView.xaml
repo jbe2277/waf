@@ -13,20 +13,20 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,*">
             <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
                 <Label Text="{x:Static p:Resources.LoadError}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </VerticalStackLayout>
-            
+
             <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
-            
+
             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
                 <Label Text="{x:Static p:Resources.SelectFeedInfo}"/>
             </VerticalStackLayout>
-            
+
             <RefreshView  Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
@@ -38,9 +38,8 @@
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:FeedItem">
-                            <!-- TODO: Remove SwipeView as it is responsible for a crash on the Windows platform. See https://github.com/dotnet/maui/issues/8870
-                            <SwipeView>-->
-                                <!--<SwipeView.LeftItems>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
                                                    Text="{Binding MarkAsRead, Converter={StaticResource MarkAsReadConverter}}" BackgroundColor="LightBlue">
@@ -49,8 +48,8 @@
                                             </SwipeItem.IconImageSource>
                                         </SwipeItem>
                                     </SwipeItems>
-                                </SwipeView.LeftItems>-->
-                                
+                                </SwipeView.LeftItems>
+
                                 <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
                                     <FlyoutBase.ContextFlyout>
                                         <MenuFlyout>
@@ -72,7 +71,7 @@
                                     </Label>
                                     <Label Text="{Binding Description}" MaxLines="3"/>
                                 </VerticalStackLayout>
-                            <!--</SwipeView>-->
+                            </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

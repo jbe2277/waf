@@ -185,7 +185,7 @@ internal sealed class FeedsController
 
     private Task EditFeed(object? parameter)
     {
-        var feed = (Feed)parameter!;
+        var feed = (Feed)(parameter ?? throw new InvalidOperationException("parameter of the edit command must not be null"));
         shellViewModel.SelectedFeed = feedViewModel.Value.Feed = feed;
         AddEditFeedViewModel.IsEditMode = true;
         AddEditFeedViewModel.FeedUrl = feed.Uri.ToString();
@@ -196,7 +196,7 @@ internal sealed class FeedsController
 
     private async Task RemoveFeed(object? parameter)
     {
-        var feed = (Feed)parameter!;
+        var feed = (Feed)(parameter ?? throw new InvalidOperationException("parameter of the remove command must not be null"));
         if (await messageService.ShowYesNoQuestion(Resources.RemoveFeedQuestion, feed.Name))
         {
             FeedManager.Feeds.Remove(feed);
