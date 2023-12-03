@@ -39,9 +39,6 @@
                     <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
                         <Setter Property="Text" Value="{x:Static p:Resources.Update}"/>
                     </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsSameFeed}" Value="True">
-                        <Setter Property="IsEnabled" Value="False"/>
-                    </DataTrigger>
                 </Button.Triggers>
             </Button>
 

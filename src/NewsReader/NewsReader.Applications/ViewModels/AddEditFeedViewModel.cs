@@ -66,8 +66,6 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
         }
     }
 
-    public bool IsSameFeed => OldFeed == Feed;
-
     public string? LoadErrorMessage
     {
         get => loadErrorMessage;
@@ -78,7 +76,6 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
     {
         base.OnPropertyChanged(e);
         if (e.PropertyName is nameof(Feed)) useTitleAsNameCommand.RaiseCanExecuteChanged();
-        if (e.PropertyName is nameof(OldFeed) or nameof(Feed)) RaisePropertyChanged(nameof(IsSameFeed));
     }
 
     private void FeedPropertyChanged(object? sender, PropertyChangedEventArgs e)
