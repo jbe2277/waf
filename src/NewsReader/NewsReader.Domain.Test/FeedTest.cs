@@ -1,17 +1,15 @@
 ﻿using Waf.NewsReader.Domain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.NewsReader.Domain.UnitTesting;
 using System.Waf.UnitTesting;
+using Xunit;
 
 namespace Test.NewsReader.Domain;
 
-[TestClass]
-public class FeedTest : DomainTest
+public class FeedTest
 {
-    [TestMethod]
+    [Fact]
     public void IsLoadingTest1() => IsLoadingCoreTest(false);
 
-    [TestMethod]
+    [Fact]
     public void IsLoadingTest2() => IsLoadingCoreTest(true);
 
     private static void IsLoadingCoreTest(bool useSerializer)
@@ -25,34 +23,34 @@ public class FeedTest : DomainTest
         feedManager.Feeds.Add(feed1);
         feedManager.Feeds.Add(feed2);
 
-        Assert.IsFalse(feed1.IsLoading);
+        Assert.False(feed1.IsLoading);
         feed1.StartLoading();
-        Assert.IsTrue(feed1.IsLoading);
+        Assert.True(feed1.IsLoading);
         feed1.SetLoadError(new InvalidOperationException("test"), "display test");
-        Assert.IsFalse(feed1.IsLoading);
-        Assert.AreEqual("test", feed1.LoadError!.Message);
-        Assert.AreEqual("display test", feed1.LoadErrorMessage);
+        Assert.False(feed1.IsLoading);
+        Assert.Equal("test", feed1.LoadError!.Message);
+        Assert.Equal("display test", feed1.LoadErrorMessage);
         feed1.StartLoading();
-        Assert.IsNull(feed1.LoadError);
-        Assert.IsNull(feed1.LoadErrorMessage);
+        Assert.Null(feed1.LoadError);
+        Assert.Null(feed1.LoadErrorMessage);
 
-        Assert.IsFalse(feed2.IsLoading);
+        Assert.False(feed2.IsLoading);
         feed2.StartLoading();
-        Assert.IsTrue(feed2.IsLoading);
+        Assert.True(feed2.IsLoading);
         feed2.UpdateItems([]);
-        Assert.IsFalse(feed2.IsLoading);
+        Assert.False(feed2.IsLoading);
     }
 
-    [TestMethod]
+    [Fact]
     public void UpdateItemsTest1() => UpdateItemsCoreTest(false, false);
 
-    [TestMethod]
+    [Fact]
     public void UpdateItemsTest2() => UpdateItemsCoreTest(false, true);
 
-    [TestMethod]
+    [Fact]
     public void UpdateItemsTest3() => UpdateItemsCoreTest(true, false);
 
-    [TestMethod]
+    [Fact]
     public void UpdateItemsTest4() => UpdateItemsCoreTest(true, true);
 
     private static void UpdateItemsCoreTest(bool cloneItemsBeforeInsert, bool useSerializer)
@@ -64,8 +62,8 @@ public class FeedTest : DomainTest
         ]);
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
-        Assert.AreEqual(2, feed.Items.Count);
-        Assert.IsTrue(new[] { "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal(2, feed.Items.Count);
+        Assert.Equal([ "name2", "name1" ], feed.Items.Select(x => x.Name));
 
         var newItems = new[]
         {
@@ -74,22 +72,22 @@ public class FeedTest : DomainTest
         };
         feed.UpdateItems(newItems, cloneItemsBeforeInsert: cloneItemsBeforeInsert);
 
-        Assert.AreEqual(3, feed.Items.Count);
-        Assert.IsTrue(new[] { "name2b", "name3", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal(3, feed.Items.Count);
+        Assert.Equal([ "name2b", "name3", "name1" ], feed.Items.Select(x => x.Name));
         if (cloneItemsBeforeInsert)
         {
-            Assert.AreNotSame(feed.Items[1], newItems[1]);
+            Assert.NotSame(feed.Items[1], newItems[1]);
         }
         else
         {
-            Assert.AreSame(feed.Items[1], newItems[1]);
+            Assert.Same(feed.Items[1], newItems[1]);
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void UnreadItemsCountTest1() => UnreadItemsCountCoreTest(false);
 
-    [TestMethod]
+    [Fact]
     public void UnreadItemsCountTest2() => UnreadItemsCountCoreTest(true);
 
     private static void UnreadItemsCountCoreTest(bool useSerializer)
@@ -103,28 +101,28 @@ public class FeedTest : DomainTest
         ]);
         feed = !useSerializer ? feed : SerializerHelper.Clone(feed);
 
-        Assert.AreEqual(2, feed.UnreadItemsCount);
+        Assert.Equal(2, feed.UnreadItemsCount);
 
         feed.Items[0].MarkAsRead = true;
 
-        Assert.AreEqual(1, feed.UnreadItemsCount);
+        Assert.Equal(1, feed.UnreadItemsCount);
 
         AssertHelper.PropertyChangedEvent(feed, x => x.UnreadItemsCount, () =>
         {
             feed.UpdateItems([new FeedItem(new("http://www.test.com/rss/feed/3"), new(2020, 5, 5, 12, 0, 3, new(1, 0, 0)), "name3", "desc")]);
         });
 
-        Assert.AreEqual(2, feed.UnreadItemsCount);
+        Assert.Equal(2, feed.UnreadItemsCount);
 
         AssertHelper.PropertyChangedEvent(feed, x => x.UnreadItemsCount, () => feed.Items[2].MarkAsRead = true);
 
-        Assert.AreEqual(1, feed.UnreadItemsCount);
+        Assert.Equal(1, feed.UnreadItemsCount);
     }
 
-    [TestMethod]
+    [Fact]
     public void TrimItemsListWithMaxItemsLimitTest1() => TrimItemsListWithMaxItemsLimitTest(false);
 
-    [TestMethod]
+    [Fact]
     public void TrimItemsListWithMaxItemsLimitTest2() => TrimItemsListWithMaxItemsLimitTest(true);
 
     private static void TrimItemsListWithMaxItemsLimitTest(bool useSerializer)
@@ -136,29 +134,29 @@ public class FeedTest : DomainTest
         feedManager.Feeds.Add(feed);
 
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2", "name1" ], feed.Items.Select(x => x.Name));
 
         feedManager.MaxItemsLimit = 2;
-        Assert.IsTrue(new[] { "name3", "name2" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2" ], feed.Items.Select(x => x.Name));
 
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2" ], feed.Items.Select(x => x.Name));
 
         feedManager.MaxItemsLimit = 3;
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2", "name1" ], feed.Items.Select(x => x.Name));
 
         feedManager.MaxItemsLimit = 1;
-        Assert.IsTrue(new[] { "name3" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3" ], feed.Items.Select(x => x.Name));
 
         feedManager.MaxItemsLimit = 0;
-        Assert.IsTrue(new string[0].SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Empty(feed.Items.Select(x => x.Name));
     }
 
-    [TestMethod]
+    [Fact]
     public void TrimItemsListWithItemLifetimeTest1() => TrimItemsListWithItemLifetimeTest(false);
 
-    [TestMethod]
+    [Fact]
     public void TrimItemsListWithItemLifetimeTest2() => TrimItemsListWithItemLifetimeTest(false);
 
     private static void TrimItemsListWithItemLifetimeTest(bool useSerializer)
@@ -170,23 +168,23 @@ public class FeedTest : DomainTest
         feedManager.Feeds.Add(feed);
 
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2", "name1" ], feed.Items.Select(x => x.Name));
 
         feedManager.ItemLifetime = TimeSpan.FromDays(6);
-        Assert.IsTrue(new[] { "name3", "name2" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2" ], feed.Items.Select(x => x.Name));
 
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2" ], feed.Items.Select(x => x.Name));
 
         feedManager.ItemLifetime = TimeSpan.FromDays(11);
         UpdateFeedItems(feed);
-        Assert.IsTrue(new[] { "name3", "name2", "name1" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3", "name2", "name1" ], feed.Items.Select(x => x.Name));
 
         feedManager.ItemLifetime = TimeSpan.FromDays(2);
-        Assert.IsTrue(new[] { "name3" }.SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Equal([ "name3" ], feed.Items.Select(x => x.Name));
 
         feedManager.ItemLifetime = TimeSpan.FromDays(0.5);
-        Assert.IsTrue(new string[0].SequenceEqual(feed.Items.Select(x => x.Name)));
+        Assert.Empty(feed.Items.Select(x => x.Name));
     }
 
     private static void UpdateFeedItems(Feed feed)

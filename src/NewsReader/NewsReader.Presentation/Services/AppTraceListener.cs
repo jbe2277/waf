@@ -21,7 +21,7 @@ internal sealed class AppTraceListener : TraceListener
 
     public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
     {
-        Log(eventType, source, TimeNow() + Format(eventType) + " " + string.Format(CultureInfo.InvariantCulture, format ?? "", args ?? Array.Empty<object>()));
+        Log(eventType, source, TimeNow() + Format(eventType) + " " + string.Format(CultureInfo.InvariantCulture, format ?? "", args ?? []));
     }
 
     private static string TimeNow()

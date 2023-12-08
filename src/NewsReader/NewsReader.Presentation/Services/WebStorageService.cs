@@ -20,7 +20,7 @@ namespace Waf.NewsReader.Presentation.Services;
 internal sealed partial class WebStorageService : Model, IWebStorageService
 {
     private const string dataFileName = "data.zip";
-    private static readonly string[] scopes = { "User.Read", "Files.ReadWrite.AppFolder" };
+    private static readonly string[] scopes = [ "User.Read", "Files.ReadWrite.AppFolder" ];
 
     private readonly IPublicClientApplication? publicClient;
     private GraphServiceClient? graphClient;
@@ -125,7 +125,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
                 requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
             }));
         var user = await graphClient.Me.Request().GetAsync();
-        CurrentAccount = new UserAccount(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName, user.Mail);
+        CurrentAccount = new(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName, user.Mail);
     }
 
     public async Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag)

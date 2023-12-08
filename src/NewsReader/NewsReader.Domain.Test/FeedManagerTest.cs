@@ -1,45 +1,43 @@
 ﻿using Waf.NewsReader.Domain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.NewsReader.Domain.UnitTesting;
-using static Waf.NewsReader.Domain.FeedManager;
+using Xunit;
+using Comparer = Waf.NewsReader.Domain.FeedManager.FeedEqualityComparer;
 
 namespace Test.NewsReader.Domain;
 
-[TestClass]
-public class FeedManagerTest : DomainTest
+public class FeedManagerTest
 {
-    [TestMethod]
+    [Fact]
     public void SetDataManager()
     {
         var feedManagerA = new FeedManager();
-        Assert.AreSame(feedManagerA, feedManagerA.Feeds.Single().DataManager);
+        Assert.Same(feedManagerA, feedManagerA.Feeds.Single().DataManager);
 
         var feedA1 = new Feed(new("http://www.test.com/rss/feed"));
-        Assert.IsNull(feedA1.DataManager);
+        Assert.Null(feedA1.DataManager);
 
         feedManagerA.Feeds.Add(feedA1);
-        Assert.AreSame(feedManagerA, feedA1.DataManager);
+        Assert.Same(feedManagerA, feedA1.DataManager);
 
         feedManagerA.Feeds.Remove(feedA1);
-        Assert.IsNull(feedA1.DataManager);
+        Assert.Null(feedA1.DataManager);
 
         // Now use the serialzer with one Feed added
 
         feedManagerA.Feeds.Add(feedA1);
         var feedManagerB = SerializerHelper.Clone(feedManagerA);
-        Assert.AreSame(feedManagerB, feedManagerB.Feeds.First().DataManager);
+        Assert.Same(feedManagerB, feedManagerB.Feeds.First().DataManager);
 
         var feedB1 = feedManagerB.Feeds.Last();
-        Assert.AreSame(feedManagerB, feedB1.DataManager);
+        Assert.Same(feedManagerB, feedB1.DataManager);
 
         feedManagerB.Feeds.Remove(feedB1);
-        Assert.IsNull(feedB1.DataManager);
+        Assert.Null(feedB1.DataManager);
 
         feedManagerB.Feeds.Add(feedB1);
-        Assert.AreSame(feedManagerB, feedB1.DataManager);
+        Assert.Same(feedManagerB, feedB1.DataManager);
     }
 
-    [TestMethod]
+    [Fact]
     public void MergeTest()
     {
         var feedManagerA = new FeedManager();
@@ -49,8 +47,8 @@ public class FeedManagerTest : DomainTest
         feedManagerA.Feeds.Add(feedA1);
         feedManagerA.Feeds.Add(feedA2);
         var item = new FeedItem(new("http://www.test.com/rss/feed"), new(2120, 5, 5, 12, 0, 0, new(1, 0, 0)), "name", "desc");
-        feedA2.UpdateItems(new[] { item });
-        Assert.IsFalse(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
+        feedA2.UpdateItems([ item ]);
+        Assert.False(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
 
         var feedManagerB = new FeedManager()
         {
@@ -62,15 +60,15 @@ public class FeedManagerTest : DomainTest
         var feedB2 = new Feed(new("http://www.test.com/rss/feedA2"));
         feedManagerB.Feeds.Add(feedB1);
         feedManagerB.Feeds.Add(feedB2);
-        feedB2.UpdateItems(new[] { item }, cloneItemsBeforeInsert: true);
+        feedB2.UpdateItems([ item ], cloneItemsBeforeInsert: true);
         feedB2.Items.Single().MarkAsRead = true;
 
         feedManagerA.Merge(feedManagerB);
 
-        Assert.AreEqual(42, feedManagerA.ItemLifetime!.Value.Days);
-        Assert.AreEqual(43u, feedManagerA.MaxItemsLimit!.Value);
-        Assert.IsTrue(new[] { "http://www.test.com/rss/feedB1", "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
-        Assert.IsTrue(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
+        Assert.Equal(42, feedManagerA.ItemLifetime!.Value.Days);
+        Assert.Equal(43u, feedManagerA.MaxItemsLimit!.Value);
+        Assert.Equal([ "http://www.test.com/rss/feedB1", "http://www.test.com/rss/feedA2" ], feedManagerA.Feeds.Select(x => x.Uri.ToString()));
+        Assert.True(feedManagerA.Feeds.Last().Items.Single().MarkAsRead);
 
 
         // Just remove one element => this way the Merge does not create new instances
@@ -78,30 +76,30 @@ public class FeedManagerTest : DomainTest
         feedManagerC.Feeds.Remove(feedManagerC.Feeds.Single());
         var feedC2 = new Feed(new("http://www.test.com/rss/feedA2"));
         feedManagerC.Feeds.Add(feedC2);
-        feedC2.UpdateItems(new[] { item }, cloneItemsBeforeInsert: true);
+        feedC2.UpdateItems([ item ], cloneItemsBeforeInsert: true);
         feedC2.Items.Single().MarkAsRead = false;
         var itemA = feedManagerA.Feeds.Last().Items.Single();
 
         feedManagerA.Merge(feedManagerC);
 
-        Assert.IsTrue(new[] { "http://www.test.com/rss/feedA2" }.SequenceEqual(feedManagerA.Feeds.Select(x => x.Uri.ToString())));
-        Assert.AreSame(itemA, feedManagerA.Feeds.Last().Items.Single());
-        Assert.IsFalse(itemA.MarkAsRead);
+        Assert.Equal([ "http://www.test.com/rss/feedA2" ], feedManagerA.Feeds.Select(x => x.Uri.ToString()));
+        Assert.Same(itemA, feedManagerA.Feeds.Last().Items.Single());
+        Assert.False(itemA.MarkAsRead);
     }
 
-    [TestMethod]
+    [Fact]
     public void FeedEqualityComparerTest()
     {
-        Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(new("http://microsoft.com")), new Feed(new("http://microsoft.com"))));
-        Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new("http://microsoft.com")), new Feed(new("http://google.com"))));
-        Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new("http://microsoft.com")), new Feed(null!)));
-        Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(null!), new Feed(new("http://microsoft.com"))));
-        Assert.IsFalse(FeedEqualityComparer.Default.Equals(new Feed(new("http://microsoft.com")), null!));
-        Assert.IsFalse(FeedEqualityComparer.Default.Equals(null!, new Feed(new("http://microsoft.com"))));
-        Assert.IsTrue(FeedEqualityComparer.Default.Equals(new Feed(null!), new Feed(null!)));
-        Assert.IsTrue(FeedEqualityComparer.Default.Equals(null!, null!));
+        Assert.True(Comparer.Default.Equals(new(new("http://microsoft.com")), new(new("http://microsoft.com"))));
+        Assert.False(Comparer.Default.Equals(new(new("http://microsoft.com")), new(new("http://google.com"))));
+        Assert.False(Comparer.Default.Equals(new(new("http://microsoft.com")), new(null!)));
+        Assert.False(Comparer.Default.Equals(new(null!), new(new("http://microsoft.com"))));
+        Assert.False(Comparer.Default.Equals(new(new("http://microsoft.com")), null!));
+        Assert.False(Comparer.Default.Equals(null!, new(new("http://microsoft.com"))));
+        Assert.True(Comparer.Default.Equals(new(null!), new(null!)));
+        Assert.True(Comparer.Default.Equals(null!, null!));
 
-        Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(new Feed(null!)));
-        Assert.AreEqual(0, FeedEqualityComparer.Default.GetHashCode(null!));
+        Assert.Equal(0, Comparer.Default.GetHashCode(new(null!)));
+        Assert.Equal(0, Comparer.Default.GetHashCode(null!));
     }
 }

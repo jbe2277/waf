@@ -12,11 +12,7 @@ public class NetworkInfoService : Model, INetworkInfoService
         internetAccess = Connectivity.NetworkAccess == NetworkAccess.Internet;
     }
 
-    public bool InternetAccess
-    {
-        get => internetAccess;
-        set => SetProperty(ref internetAccess, value);
-    }
+    public bool InternetAccess { get => internetAccess; set => SetProperty(ref internetAccess, value); }
 
     private void ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
