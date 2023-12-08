@@ -4,6 +4,7 @@ using Waf.NewsReader.Applications.ViewModels;
 using Waf.NewsReader.Applications;
 using Waf.NewsReader.Applications.Controllers;
 using Test.NewsReader.Applications.Views;
+using System.Waf.UnitTesting;
 
 namespace Test.NewsReader.Applications;
 
@@ -12,15 +13,18 @@ public record ViewPair<TView, TViewModel>(TView View) where TView : IView where 
     public TViewModel ViewModel => (TViewModel)View.DataContext!;
 }
 
-public abstract class TestBase
+public abstract class TestBase : IDisposable
 {
     protected TestBase()
     {
+        Context = UnitTestSynchronizationContext.Create();
         var builder = new ContainerBuilder();
         builder.RegisterModule(new ApplicationsModule());
         builder.RegisterModule(new MockPresentationModule());
         Container = builder.Build();
     }
+
+    public UnitTestSynchronizationContext Context { get; }
 
     public Autofac.IContainer Container { get; }
 
@@ -39,4 +43,12 @@ public abstract class TestBase
         AppController.Start();
         Shell = new((MockShellView)AppController.MainView);
     }
+
+    public void Dispose()
+    {
+        OnDispose();
+        Context.Dispose();
+    }
+
+    protected virtual void OnDispose() { }
 }

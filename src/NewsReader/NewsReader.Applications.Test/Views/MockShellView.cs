@@ -26,6 +26,9 @@ public class MockShellView : MockView, IShellView
 
     public void CloseFlyout() { }
 
-    public ViewPair<TView, TViewModel> GetCurrentView<TView, TViewModel>() where TView : IView where TViewModel : IViewModelCore => new((TView)CurrentPage!);
+    public ViewPair<TView, TViewModel> GetCurrentView<TView, TViewModel>() where TView : IView where TViewModel : IViewModelCore 
+            => GetCurrentViewOrNull<TView, TViewModel>() ?? throw new InvalidOperationException($"Wrong current view. Expected: {typeof(TView).Name}, Actual: {CurrentPage?.GetType().Name ?? "null"}");
+
+    public ViewPair<TView, TViewModel>? GetCurrentViewOrNull<TView, TViewModel>() where TView : IView where TViewModel : IViewModelCore => CurrentPage is TView v ? new(v) : null;
 }
 

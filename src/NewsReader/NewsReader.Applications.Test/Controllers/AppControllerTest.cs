@@ -7,11 +7,10 @@ namespace Test.NewsReader.Applications.Controllers;
 public class AppControllerTest : TestBase
 {
     [Fact]
-    public async Task OpenSettingsView()
+    public void OpenSettingsView()
     {
         StartApp();
-        await Task.Delay(50);  // TODO: Waiting for some time is not the best way to solve this
-        var feed = Shell.View.GetCurrentView<MockFeedView, FeedViewModel>();
+        var feed = Context.WaitForNotNull(Shell.View.GetCurrentViewOrNull<MockFeedView, FeedViewModel>);
         Assert.Equal(FeedsController.FeedManager.Feeds.Single(), feed.ViewModel.Feed);
 
         Shell.ViewModel.SelectedFooterMenu = Shell.ViewModel.FooterMenu[1];
