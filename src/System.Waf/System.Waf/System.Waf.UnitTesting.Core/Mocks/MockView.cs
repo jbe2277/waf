@@ -5,7 +5,14 @@ namespace System.Waf.UnitTesting.Mocks
     /// <summary>Mock class that implements the IView interface.</summary>
     public class MockView : IView
     {
-        /// <summary>Gets or sets the data context of the view.</summary>
+        /// <inheritdoc/>
+#if NET6_0_OR_GREATER
+        public object? DataContext { get => BindingContext; set => BindingContext = value; }
+
+        /// <inheritdoc/>
+        public object? BindingContext { get; set; }
+#else
         public object? DataContext { get; set; }
+#endif
     }
 }
