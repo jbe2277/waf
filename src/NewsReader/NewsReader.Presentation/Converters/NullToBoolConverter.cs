@@ -4,6 +4,8 @@ namespace Waf.NewsReader.Presentation.Converters;
 
 public class NullToBoolConverter : IValueConverter
 {
+    public static NullToBoolConverter Instance { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (string.Equals(parameter as string, "invert", StringComparison.OrdinalIgnoreCase))

@@ -6,6 +6,8 @@ namespace Waf.NewsReader.Presentation.Converters;
 
 public class LocalizeDisplayItemLifetimeConverter : IValueConverter
 {
+    public static LocalizeDisplayItemLifetimeConverter Instance { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture) => value switch
     {
         DisplayItemLifetime._1Month => Resources.OneMonth,

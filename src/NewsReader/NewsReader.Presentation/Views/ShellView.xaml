@@ -7,7 +7,7 @@
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.ShellView" x:DataType="vm:ShellViewModel">
     <FlyoutPage.Flyout>
-        <ContentPage Title="{x:Static p:Resources.Menu}" Padding="{OnPlatform iOS='0,30,0,0'}">
+        <ContentPage Title="{x:Static p:Resources.Menu}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
                     <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60">
@@ -115,7 +115,7 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{OnPlatform WinUI=White}" BarTextColor="{OnPlatform White, WinUI={StaticResource Gray900}}">
+        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{StaticResource Gray200}" BarTextColor="{StaticResource Gray900}">
             <x:Arguments>
                 <ContentPage/>
             </x:Arguments>

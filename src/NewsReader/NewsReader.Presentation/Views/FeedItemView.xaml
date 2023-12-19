@@ -8,7 +8,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding LaunchBrowserCommand}" Text="{x:Static p:Resources.Browser}">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="&#xf59f;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+                <FontImageSource Glyph="&#xf59f;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

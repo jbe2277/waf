@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
+             xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
@@ -9,25 +10,25 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="{x:OnPlatform Black, Android=White}" Size="20"/>
+                <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,*">
-            <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={StaticResource NullToBoolConverter}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
+            <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={Static c:NullToBoolConverter.Instance}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
                 <Label Text="{x:Static p:Resources.LoadError}" Style="{StaticResource Title}"/>
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </VerticalStackLayout>
 
-            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False"/>
+            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False" Background="{StaticResource Gray100}"/>
 
-            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={StaticResource NullToBoolConverter}, ConverterParameter=invert}" Padding="10,5">
+            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={Static c:NullToBoolConverter.Instance}, ConverterParameter=invert}" Padding="10,5">
                 <Label Text="{x:Static p:Resources.SelectFeedInfo}"/>
             </VerticalStackLayout>
 
-            <RefreshView  Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
+            <RefreshView Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
@@ -42,7 +43,7 @@
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
-                                                   Text="{Binding MarkAsRead, Converter={StaticResource MarkAsReadConverter}}" BackgroundColor="LightBlue">
+                                                   Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
                                             </SwipeItem.IconImageSource>
@@ -54,7 +55,7 @@
                                     <FlyoutBase.ContextFlyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
-                                                Text="{Binding MarkAsRead, Converter={StaticResource MarkAsReadConverter}}"/>
+                                                Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
                                         </MenuFlyout>
                                     </FlyoutBase.ContextFlyout>
 

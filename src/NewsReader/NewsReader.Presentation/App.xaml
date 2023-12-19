@@ -1,7 +1,6 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters;assembly=NewsReader.Presentation"
              x:Class="Waf.NewsReader.Presentation.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,26 +8,6 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <Color x:Key="ErrorBackgroundColor">#FFDA8A8A</Color>
-
-            <c:ErrorsToMessageConverter x:Key="ErrorsToMessageConverter"/>
-            <c:LocalizeDisplayItemLifetimeConverter x:Key="LocalizeDisplayItemLifetimeConverter"/>
-            <c:LocalizeDisplayMaxItemsLimitConverter x:Key="LocalizeDisplayMaxItemsLimitConverter"/>
-            <c:MarkAsReadConverter x:Key="MarkAsReadConverter"/>
-            <c:NullToBoolConverter x:Key="NullToBoolConverter"/>
-
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="15"/>
-            </Style>
-            <Style x:Key="Title" TargetType="Label">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-            </Style>
-            <Style x:Key="Subtitle" TargetType="Label">
-                <Setter Property="FontSize" Value="16"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

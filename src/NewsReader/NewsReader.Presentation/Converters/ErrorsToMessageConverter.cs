@@ -5,6 +5,8 @@ namespace Waf.NewsReader.Presentation.Converters;
 
 public class ErrorsToMessageConverter : IValueConverter
 {
+    public static ErrorsToMessageConverter Instance { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (value is not IEnumerable<ValidationResult> errors) return null;

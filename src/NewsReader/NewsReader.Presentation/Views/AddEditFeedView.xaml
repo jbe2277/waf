@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
+             xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              x:Class="Waf.NewsReader.Presentation.Views.AddEditFeedView"
              Title="{x:Static p:Resources.AddFeed}" x:DataType="vm:AddEditFeedViewModel">
@@ -32,7 +33,7 @@
 
             <Button Grid.Row="4" Grid.Column="1" Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="MaterialIcons"/>
 
-            <Label Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Feed.Errors, Converter={StaticResource ErrorsToMessageConverter}, ConverterParameter=Name}" TextColor="DarkRed"/>
+            <Label Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Feed.Errors, Converter={Static c:ErrorsToMessageConverter.Instance}, ConverterParameter=Name}" TextColor="DarkRed"/>
 
             <Button Grid.Row="6" Text="{x:Static p:Resources.Add}" Command="{Binding AddUpdateCommand}" HorizontalOptions="Start" WidthRequest="120">
                 <Button.Triggers>

@@ -6,6 +6,8 @@ namespace Waf.NewsReader.Presentation.Converters;
 
 public class LocalizeDisplayMaxItemsLimitConverter : IValueConverter
 {
+    public static LocalizeDisplayMaxItemsLimitConverter Instance { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         var lifetime = (DisplayMaxItemsLimit)value!;
