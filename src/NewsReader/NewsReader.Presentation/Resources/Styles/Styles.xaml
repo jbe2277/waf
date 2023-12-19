@@ -7,11 +7,13 @@
 
     <Style TargetType="Label">
         <Setter Property="FontSize" Value="15"/>
+        <Setter Property="TextColor" Value="{StaticResource Gray900}"/>
     </Style>
     
     <Style x:Key="Title" TargetType="Label">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
     </Style>
     
     <Style x:Key="Subtitle" TargetType="Label">
