@@ -115,7 +115,7 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{StaticResource Gray200}" BarTextColor="{StaticResource Gray900}">
+        <NavigationPage x:Name="navigationPage" BarBackgroundColor="{StaticResource Gray200}" BarTextColor="{StaticResource Gray900}" Background="White">
             <x:Arguments>
                 <ContentPage/>
             </x:Arguments>
