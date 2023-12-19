@@ -36,7 +36,7 @@ internal sealed class SettingsController
         vm.EnableDeveloperSettingsCommand = enableDeveloperSettingsCommand;
         vm.SignInCommand = dataController.SignInCommand;
         vm.SignOutCommand = dataController.SignOutCommand;
-        vm.Languages = [ "Auto", "en-US", "de-DE" ];
+        vm.Languages = new[] { "Auto", "en-US", "de-DE" };
         vm.SelectedLanguage = appSettings.Language ?? "Auto";
         vm.PropertyChanged += DeveloperSettingsViewModelPropertyChanged;
         vm.Initialize();
