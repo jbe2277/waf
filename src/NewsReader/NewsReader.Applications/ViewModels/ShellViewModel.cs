@@ -36,7 +36,7 @@ public class ShellViewModel(IShellView view, IAppInfoService appInfoService) : V
             if (!SetProperty(ref selectedFooterMenu, value)) return;
             if (selectedFooterMenu is not null)
             {
-                SelectedFeed = null;
+                SelectedFeed = null;  // TODO: CollectionView shows this still as selected! Also initial Feed selection not shown (Windows)
                 if (!suppressSelectedFooterMenuCommand) selectedFooterMenu.Command?.Execute(null);
             }
         }
