@@ -30,8 +30,8 @@ jobs:
         name: newsreader-android
         if-no-files-found: error
         path: |
-          ./**/publish/*.aab
-          ./**/publish/*.apk
+          ./**/publish/*Signed.aab
+          ./**/publish/*Signed.apk
 
   Windows:
     runs-on: windows-2022
