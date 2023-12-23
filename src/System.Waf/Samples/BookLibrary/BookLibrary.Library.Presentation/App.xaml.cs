@@ -40,7 +40,7 @@ public partial class App
             var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message} ${exception}";
             var fileTarget = c.ForTarget("fileTarget").WriteTo(new FileTarget
             {
-                FileName = Path.Combine(AppDataPath, "Log", "BookLibrary.log"),
+                FileName = LogFileName,
                 Layout = layout,
                 ConcurrentWrites = true,
                 ArchiveAboveSize = 5_000_000,  // 5 MB
@@ -62,10 +62,12 @@ public partial class App
 
     private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
 
+    public static string LogFileName { get; } = Path.Combine(AppDataPath, "Log", "BookLibrary.log");
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        Log.App.Info("{0} {1} is starting; OS: {2}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion);
+        Log.App.Info("{0} {1} is starting; OS: {2}; .NET: {3}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion, Environment.Version);
 
 #if (!DEBUG)
         DispatcherUnhandledException += AppDispatcherUnhandledException;

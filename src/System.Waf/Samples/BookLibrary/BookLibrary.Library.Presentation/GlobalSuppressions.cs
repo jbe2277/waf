@@ -1,3 +1,4 @@
+
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.personViewPresenter")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.BookLibrary.Library.Presentation.Views.ShellWindow.bookViewPresenter")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Presentation.Views.BookListView")]
@@ -17,4 +18,4 @@
 [assembly: SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Presentation.App.#ctor")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Presentation.DesignData.MockSettingsService.RaiseErrorOccurred(System.Waf.Applications.Services.SettingsErrorEventArgs)")]
 [assembly: SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
-
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
