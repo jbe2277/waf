@@ -9,6 +9,8 @@
     <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.3" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.3" />
+    <!-- TODO: Workaround for an iOS Simulator issue because of AppCenter. Update the referenced SQLite packages to a fixed version. See: https://github.com/microsoft/appcenter-sdk-dotnet/issues/1755 -->
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />    
   </ItemGroup>
 
   <ItemGroup>
