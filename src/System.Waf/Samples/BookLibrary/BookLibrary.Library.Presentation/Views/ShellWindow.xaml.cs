@@ -39,15 +39,15 @@ public partial class ShellWindow : IShellView
         }
     }
 
-    public static void ShowLog()
+    private static void ShowLog()
     {
         try
         {
             Process.Start(new ProcessStartInfo(App.LogFileName) { UseShellExecute = true });
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            Log.Default.Error(exception, "ShowLog");
+            Log.Default.Error(ex, "ShowLog");
         }
     }
 }

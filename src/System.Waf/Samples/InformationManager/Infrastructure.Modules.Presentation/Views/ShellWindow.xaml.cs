@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
+using Waf.InformationManager.Common.Applications.Services;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
@@ -17,6 +19,7 @@ public partial class ShellWindow : IShellView
     public ShellWindow()
     {
         InitializeComponent();
+        showLogKeyBinding.Command = new DelegateCommand(ShowLog);
         viewModel = new(() => this.GetViewModel<ShellViewModel>()!);
         Loaded += LoadedHandler;
     }
@@ -72,5 +75,17 @@ public partial class ShellWindow : IShellView
     {
         var firstNode = ViewModel.NavigationService.NavigationNodes.FirstOrDefault();
         if (firstNode != null) firstNode.IsSelected = true;
+    }
+
+    private static void ShowLog()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(AppInfo.LogFileName) { UseShellExecute = true });
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "ShowLog");
+        }
     }
 }

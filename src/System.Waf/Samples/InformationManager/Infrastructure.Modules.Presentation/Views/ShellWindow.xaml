@@ -9,6 +9,7 @@
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
+        <KeyBinding x:Name="showLogKeyBinding" Key="L" Modifiers="Control+Shift"/>
     </Window.InputBindings>
 
     <Grid>

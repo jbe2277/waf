@@ -9,4 +9,8 @@
   <ItemGroup>
     <PackageReference Include="NLog" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
+  </ItemGroup>
 </Project>
