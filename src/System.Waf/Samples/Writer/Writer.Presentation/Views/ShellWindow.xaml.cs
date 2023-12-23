@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.Composition;
+using System.Diagnostics;
+using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,6 +15,7 @@ public partial class ShellWindow : IShellView
     public ShellWindow()
     {
         InitializeComponent();
+        showLogKeyBinding.Command = new DelegateCommand(ShowLog);
     }
 
     public double VirtualScreenLeft => SystemParameters.VirtualScreenLeft;
@@ -36,6 +39,18 @@ public partial class ShellWindow : IShellView
             {
                 WindowState = WindowState.Normal;
             }
+        }
+    }
+
+    public static void ShowLog()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(App.LogFileName) { UseShellExecute = true });
+        }
+        catch (Exception exception)
+        {
+            Log.Default.Error(exception, "ShowLog");
         }
     }
 

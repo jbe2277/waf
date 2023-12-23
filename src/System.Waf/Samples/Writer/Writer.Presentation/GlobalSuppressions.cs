@@ -1,3 +1,4 @@
+
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.HandleException(System.Exception,System.Boolean)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDomainUnhandledException(System.Object,System.UnhandledExceptionEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDispatcherUnhandledException(System.Object,System.Windows.Threading.DispatcherUnhandledExceptionEventArgs)")]
@@ -17,3 +18,4 @@
 [assembly: SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Converters.MenuFileNameConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)~System.Object")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.RichTextDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.XpsExportDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]

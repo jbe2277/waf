@@ -23,8 +23,9 @@
         <KeyBinding Command="{Binding FileService.SaveCommand}" Key="S" Modifiers="Control"/>
         <KeyBinding Command="{Binding PrintCommand}" Key="P" Modifiers="Control"/>
         <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
+        <KeyBinding x:Name="showLogKeyBinding" Key="L" Modifiers="Control+Shift"/>
     </Window.InputBindings>
-
+    
     <DockPanel>
         <Ribbon DockPanel.Dock="Top" Margin="0,-22,0,2">
             <!-- QuickAccessToolBar requires the RibbonWindow. The sample does not use the RibbonWindow anymore because it has a lot issues -->

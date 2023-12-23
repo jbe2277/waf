@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.Composition;
+﻿using NLog.Targets.Wrappers;
+using NLog.Targets;
+using NLog;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
 using System.Reflection;
@@ -14,14 +17,17 @@ namespace Waf.Writer.Presentation;
 
 public partial class App
 {
+    private static readonly Lazy<string> logFileName = new(() => ((FileTarget)((AsyncTargetWrapper)LogManager.Configuration.FindTargetByName("fileTarget")).WrappedTarget).FileName.Render(new LogEventInfo()));
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
     private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
 
+    public static string LogFileName => logFileName.Value;
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        Log.App.Info("{0} {1} is starting; OS: {2}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion);
+        Log.App.Info("{0} {1} is starting; OS: {2}; .NET: {3}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion, Environment.Version);
 
 #if (!DEBUG)
         DispatcherUnhandledException += AppDispatcherUnhandledException;
