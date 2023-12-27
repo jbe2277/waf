@@ -19,14 +19,14 @@ namespace Waf.BookLibrary.Library.Presentation;
 public partial class App
 {
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
-    {
+    [
         ("App", LogLevel.Info),
         ("BookLib.Lib.P", LogLevel.Warn),
         ("BookLib.Lib.A", LogLevel.Warn),
         ("BookLib.Lib.D", LogLevel.Warn),
         ("BookLib.Rep.P", LogLevel.Warn),
         ("BookLib.Rep.A", LogLevel.Warn),
-    };
+    ];
 
     private AggregateCatalog? catalog;
     private CompositionContainer? container;

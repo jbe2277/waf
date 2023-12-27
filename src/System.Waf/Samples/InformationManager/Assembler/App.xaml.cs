@@ -16,7 +16,7 @@ namespace Waf.InformationManager.Assembler;
 public partial class App
 {
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
-    {
+    [
         ("App", LogLevel.Info),
         ("InfoMan.Common.P", LogLevel.Warn),
         ("InfoMan.Common.A", LogLevel.Warn),
@@ -28,7 +28,7 @@ public partial class App
         ("InfoMan.Email.P", LogLevel.Warn),
         ("InfoMan.Email.A", LogLevel.Warn),
         ("InfoMan.Email.D", LogLevel.Warn),
-    };
+    ];
 
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
