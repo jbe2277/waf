@@ -1,19 +1,22 @@
 ﻿using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter;
-using System.Diagnostics;
 using System.Globalization;
 using System.Waf.Applications.Services;
 using Waf.NewsReader.Applications.Controllers;
 using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;
+using NLog;
+using NLog.Targets;
+using NLog.Targets.Wrappers;
+using LogLevel = NLog.LogLevel;
 using Waf.NewsReader.Presentation.Services;
-using Waf.NewsReader.Applications;
 
 namespace Waf.NewsReader.Presentation;
 
 // Telemetry data collection with https://appcenter.ms  
-// Provide the secrets via separate file 'App.xaml.keys.cs' which will be excluded from GIT:
+// Provide the secrets via separate file 'App.xaml.keys.cs' which is excluded from GIT:
+//
 //public partial class App
 //{
 //    static partial void GetAppCenterSecret(ref string? appSecret)
@@ -24,6 +27,16 @@ namespace Waf.NewsReader.Presentation;
 
 public partial class App : Application
 {
+    // TODO: Share log file in Debug view
+
+    private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
+    [
+        ("Dom", LogLevel.Info),
+        ("App", LogLevel.Info),
+        ("Pre", LogLevel.Info),
+        ("Sys", LogLevel.Info),
+    ];
+
     private readonly ISettingsService settingsService;
     private readonly IAppInfoService appInfoService;
     private readonly IAppController appController;
@@ -44,6 +57,8 @@ public partial class App : Application
         this.appController = appController.Value;
         MainPage = (Page)this.appController.MainView;
     }
+
+    public static string LogFileName { get; } = Path.Combine(FileSystem.Current.CacheDirectory, "Logging", "AppLog.txt");
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
@@ -69,6 +84,7 @@ public partial class App : Application
         string? appSecret = null;
         GetAppCenterSecret(ref appSecret);
         if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
+        Analytics.TrackEvent("App started");
         appController.Start();
     }
 
@@ -104,16 +120,34 @@ public partial class App : Application
 
     private static void InitializeLogging()
     {
-        Log.Default.Switch.Level = SourceLevels.All;
-        var sources = new[]
+        LogManager.Setup().LoadConfiguration(c =>
         {
-            Log.Default
-        };
-        foreach (var source in sources)
-        {
-            source.Listeners.Clear();
-            source.Listeners.Add(new AppTraceListener());
-        }
+            c.Configuration.DefaultCultureInfo = CultureInfo.InvariantCulture;
+            var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${logger} ${message} ${exception}";
+            var fileTarget = c.ForTarget("fileTarget").WriteTo(new FileTarget
+            {
+                FileName = LogFileName,
+                Layout = layout,
+                ArchiveAboveSize = 5_000_000,  // 5 MB
+                MaxArchiveFiles = 1,
+                ArchiveNumbering = ArchiveNumberingMode.Rolling
+            }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
+#if DEBUG
+            var traceTarget = c.ForTarget("traceTarget").WriteTo(new AppTraceTarget
+            {
+                Layout = layout,
+            }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
+#endif
+
+            foreach (var (loggerNamePattern, minLevel) in logSettings)
+            {
+                c.ForLogger(loggerNamePattern).FilterMinLevel(minLevel).WriteTo(fileTarget)
+#if DEBUG
+                    .WriteTo(traceTarget)
+#endif
+                ;
+            }
+        });
     }
 
     private static void InitializeCultures(AppSettings appSettings)

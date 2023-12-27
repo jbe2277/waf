@@ -58,8 +58,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         }
         catch (Exception ex)
         {
-            Log.Default.Warn("Silent login failed: {0}", ex);
-            Crashes.TrackError(ex);
+            Log.Default.TrackError(ex, "Silent login failed");
             // Ignore (e.g. no internet access)
         }
         return false;

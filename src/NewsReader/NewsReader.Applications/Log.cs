@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+﻿using NLog;
 
 namespace Waf.NewsReader.Applications;
 
-public static class Log
+internal static class Log
 {
-    public static TraceSource Default { get; } = new TraceSource("App");
+    public static Logger Default { get; } = LogManager.GetLogger("App");
 }

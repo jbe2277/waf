@@ -112,8 +112,7 @@ internal sealed class FeedsController
         }
         catch (Exception ex)
         {
-            Log.Default.Error("Load Feed failed: {0}", ex);
-            Crashes.TrackError(ex);
+            Log.Default.TrackError(ex, "Load Feed failed");
             feed.SetLoadError(ex, Resources.ErrorLoadRssFeed + " " + ex.Message);
         }
     }
