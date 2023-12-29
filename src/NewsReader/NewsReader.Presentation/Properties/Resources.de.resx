@@ -201,6 +201,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="ShareDiagnosticsFile" xml:space="preserve">
+    <value>Diagnose Datei teilen</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>Anmelden</value>
   </data>

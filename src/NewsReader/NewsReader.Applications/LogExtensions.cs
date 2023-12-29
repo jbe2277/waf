@@ -1,7 +1,7 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using NLog;
 
-namespace Waf.NewsReader.Applications;
+namespace Waf.NewsReader;  // Use here the root namespace - as this should be available in all upper layers.
 
 public static class LogExtensions
 {

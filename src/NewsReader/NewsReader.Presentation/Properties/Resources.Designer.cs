@@ -313,6 +313,15 @@ namespace Waf.NewsReader.Presentation.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share diagnostics file.
+        /// </summary>
+        internal static string ShareDiagnosticsFile {
+            get {
+                return ResourceManager.GetString("ShareDiagnosticsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
         internal static string SignIn {
