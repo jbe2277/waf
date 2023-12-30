@@ -15,4 +15,4 @@ public interface IWebStorageService : INotifyPropertyChanged
     Task<string?> UploadFile(Stream source);
 }
 
-public sealed record UserAccount(string UserName, string Email);
+public sealed record UserAccount(string UserName, string? Email);

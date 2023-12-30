@@ -1,9 +1,6 @@
-﻿using Microsoft.AppCenter.Crashes;
-using Microsoft.Graph;
+﻿using Microsoft.Graph;
 using Microsoft.Identity.Client;
-using System.Net;
-using System.Net.Http.Headers;
-using Waf.NewsReader.Applications;
+using Microsoft.Kiota.Abstractions.Authentication;
 using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
@@ -26,7 +23,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     private GraphServiceClient? graphClient;
     private UserAccount? currentAccount;
 
-    public WebStorageService(IIdentityService? identityService = null)
+    public WebStorageService()
     {
         string? appId = null;
         GetApplicationId(ref appId);
@@ -34,7 +31,11 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         {
             var builder = PublicClientApplicationBuilder.Create(appId);
             builder.WithRedirectUri("wafe5b8cee6-8ba0-46c5-96ef-a3c8a1e2bb26://auth");
-            identityService?.Build(builder);
+#if ANDROID
+            builder.WithParentActivityOrWindow(() => Platform.CurrentActivity);
+#elif IOS
+            builder.WithIosKeychainSecurityGroup(Foundation.NSBundle.MainBundle.BundleIdentifier);
+#endif
             publicClient = builder.Build();
         }
     }
@@ -58,8 +59,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         }
         catch (Exception ex)
         {
-            Log.Default.TrackError(ex, "Silent login failed");
-            // Ignore (e.g. no internet access)
+            Log.Default.TrackError(ex, "Silent login failed");   // Ignore (e.g. no internet access)
         }
         return false;
     }
@@ -71,8 +71,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         {
             try
             {
-                var interactiveRequest = publicClient.AcquireTokenInteractive(scopes);
-                await interactiveRequest.ExecuteAsync();
+                await publicClient.AcquireTokenInteractive(scopes).ExecuteAsync();
             }
             catch (MsalClientException ex) when (ex.ErrorCode == MsalError.AuthenticationCanceledError)
             {
@@ -95,7 +94,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
 
     private async Task<string?> TrySilentSignInCore()
     {
-        if (publicClient == null) return null;
+        if (publicClient is null) return null;
         try
         {
             var accounts = await publicClient.GetAccountsAsync();
@@ -114,42 +113,60 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
 
     private async Task InitGraphClient()
     {
-        graphClient = new GraphServiceClient(new DelegateAuthenticationProvider(
-            async requestMessage =>
-            {
-                if (publicClient == null) return;
-                var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
-                if (!accounts.Any()) return;
-                var result = await publicClient.AcquireTokenSilent(scopes, accounts.First()).ExecuteAsync().ConfigureAwait(false);
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-            }));
-        var user = await graphClient.Me.Request().GetAsync();
-        CurrentAccount = new(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName, user.Mail);
+        if (publicClient is null) return;
+        var authenticationProvider = new BaseBearerTokenAuthenticationProvider(new TokenProvider(publicClient));
+        graphClient = new GraphServiceClient(authenticationProvider);            
+        var user = await graphClient.Me.GetAsync();
+        ArgumentNullException.ThrowIfNull(user);
+        CurrentAccount = new(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName ?? "", user.Mail);
     }
 
     public async Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag)
     {
         if (graphClient == null) return default;
-        var item = graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName);
-        try
+        var item = await GetItem(dataFileName).ConfigureAwait(false);
+        var metaItem = await item.GetAsync().ConfigureAwait(false);
+        ArgumentNullException.ThrowIfNull(metaItem);
+        if (metaItem.CTag != cTag)
         {
-            var metaItem = await item.Request().GetAsync().ConfigureAwait(false);
-            if (metaItem.CTag != cTag)
-            {
-                return (await item.Content.Request().GetAsync().ConfigureAwait(false), metaItem.CTag);
-            }
+            return (await item.Content.GetAsync().ConfigureAwait(false), metaItem.CTag);
         }
-        catch (ServiceException ex) when (ex.StatusCode == HttpStatusCode.NotFound) { }
+        // TODO: catch (ServiceException ex) when (ex.StatusCode == HttpStatusCode.NotFound) { }
         return default;
     }
 
     public async Task<string?> UploadFile(Stream source)
     {
         if (graphClient == null) return null;
-        var driveItem = await graphClient.Me.Drive.Special.AppRoot.ItemWithPath(dataFileName)
-            .Content.Request().PutAsync<DriveItem>(source).ConfigureAwait(false);
-        return driveItem.CTag;
+        var item = await GetItem(dataFileName).ConfigureAwait(false);
+        var newItem = await item.Content.PutAsync(source).ConfigureAwait(false);
+        ArgumentNullException.ThrowIfNull(newItem);
+        return newItem.CTag;
+    }
+
+    private async Task<CustomDriveItemItemRequestBuilder> GetItem(string fileName)
+    {
+        if (graphClient is null) throw new InvalidOperationException("graphClient is null");
+        var driveItem = await graphClient.Me.Drive.GetAsync().ConfigureAwait(false);
+        ArgumentNullException.ThrowIfNull(driveItem);
+        var appRootFolder = await graphClient.Drives[driveItem.Id].Special["AppRoot"].GetAsync().ConfigureAwait(false);
+        ArgumentNullException.ThrowIfNull(appRootFolder);
+        return graphClient.Drives[driveItem.Id].Items[appRootFolder.Id].ItemWithPath(fileName);
     }
 
     static partial void GetApplicationId(ref string? applicationId);
+
+
+    private sealed class TokenProvider(IPublicClientApplication publicClient) : IAccessTokenProvider
+    {
+        public AllowedHostsValidator AllowedHostsValidator { get; } = new();
+
+        public async Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object>? additionalAuthenticationContext = null, CancellationToken cancellationToken = default)
+        {
+            var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
+            if (!accounts.Any()) return "";
+            var result = await publicClient.AcquireTokenSilent(scopes, accounts.First()).ExecuteAsync(cancellationToken).ConfigureAwait(false);
+            return result.AccessToken;
+        }
+    }
 }
