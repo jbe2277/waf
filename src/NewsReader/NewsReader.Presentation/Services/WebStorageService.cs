@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Waf.NewsReader.Applications.Services;
 
@@ -46,8 +47,21 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         private set => SetProperty(ref currentAccount, value);
     }
 
+#if WINDOWS
+    private bool cacheInitialized;
+#endif
     public async Task<bool> TrySilentSignIn()
     {
+#if WINDOWS
+        if (!cacheInitialized && publicClient is not null)
+        {
+            cacheInitialized = true;
+            var storageProperties = new StorageCreationPropertiesBuilder("msal.dat", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)).Build();
+            var cacheHelper = await MsalCacheHelper.CreateAsync(storageProperties);
+            cacheHelper.RegisterCache(publicClient.UserTokenCache);
+        }
+#endif
+
         try
         {
             var accessToken = await TrySilentSignInCore();

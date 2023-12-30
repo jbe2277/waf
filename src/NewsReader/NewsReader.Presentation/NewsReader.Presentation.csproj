@@ -18,6 +18,7 @@
 
     <PackageReference Include="Microsoft.Graph" Version="5.37.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.58.1" />
+    <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.58.1" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
   </ItemGroup>
 
