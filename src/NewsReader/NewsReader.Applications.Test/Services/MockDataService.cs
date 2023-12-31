@@ -8,7 +8,7 @@ public class MockDataService : IDataService
 
     public Stream GetReadStream() => throw new NotImplementedException();
 
-    public T? Load<T>(Stream? dataStream = null) where T : class => null;
+    public Task<T?> Load<T>(Stream? dataStream = null) where T : class => Task.FromResult<T?>(null);
 
     public void Save(object data) => throw new NotImplementedException();
 }

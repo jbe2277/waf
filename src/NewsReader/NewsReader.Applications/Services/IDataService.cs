@@ -6,7 +6,7 @@ public interface IDataService
 
     string GetHash();
 
-    T? Load<T>(Stream? dataStream = null) where T : class;
+    Task<T?> Load<T>(Stream? dataStream = null) where T : class;
 
     void Save(object data);
 }

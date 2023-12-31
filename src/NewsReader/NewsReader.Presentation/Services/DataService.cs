@@ -19,12 +19,17 @@ public class DataService : IDataService
         return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "", StringComparison.Ordinal);
     }
 
-    public T? Load<T>(Stream? dataStream = null) where T : class
+    public async Task<T?> Load<T>(Stream? dataStream = null) where T : class
     {
         try
         {
-            using var archiveStream = dataStream ?? GetReadStream();
-            return LoadItem<T>(archiveStream, itemFileName);
+            return await Task.Run(() =>   // Use background thread -> otherwise, a Android.OS.NetworkOnMainThreadException occurs for network streams.
+            {
+                using var archiveStream = dataStream ?? GetReadStream();
+                var result = LoadItem<T>(archiveStream, itemFileName);
+                Log.Default.Info("DataService.Load completed. From {0}.", dataStream is null ? containerFileName : "stream");
+                return result;
+            }).ConfigureAwait(false);
         }
         catch (FileNotFoundException)
         {
@@ -52,5 +57,6 @@ public class DataService : IDataService
         using var stream = entry.Open();
         var serializer = new DataContractSerializer(data.GetType());
         serializer.WriteObject(stream, data);
+        Log.Default.Info("DataService.Save completed. To {0}.", containerFileName);
     }
 }

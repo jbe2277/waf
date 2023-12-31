@@ -56,7 +56,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         if (!cacheInitialized && publicClient is not null)
         {
             cacheInitialized = true;
-            var storageProperties = new StorageCreationPropertiesBuilder("msal.dat", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)).Build();
+            var storageProperties = new StorageCreationPropertiesBuilder("msal.dat", FileSystem.CacheDirectory).Build();
             var cacheHelper = await MsalCacheHelper.CreateAsync(storageProperties);
             cacheHelper.RegisterCache(publicClient.UserTokenCache);
         }
@@ -143,8 +143,11 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         ArgumentNullException.ThrowIfNull(metaItem);
         if (metaItem.CTag != cTag)
         {
-            return (await item.Content.GetAsync().ConfigureAwait(false), metaItem.CTag);
+            var result = (await item.Content.GetAsync().ConfigureAwait(false), metaItem.CTag);
+            Log.Default.Info("WebStorageService.DownloadFile completed. CTag: {0}", metaItem.CTag);
+            return result;
         }
+        else Log.Default.Info("WebStorageService.DownloadFile: Same CTag: {0}", cTag);
         // TODO: catch (ServiceException ex) when (ex.StatusCode == HttpStatusCode.NotFound) { }
         return default;
     }
@@ -155,6 +158,7 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         var item = await GetItem(dataFileName).ConfigureAwait(false);
         var newItem = await item.Content.PutAsync(source).ConfigureAwait(false);
         ArgumentNullException.ThrowIfNull(newItem);
+        Log.Default.Info("WebStorageService.UploadFile completed. CTag: {0}", newItem.CTag);
         return newItem.CTag;
     }
 

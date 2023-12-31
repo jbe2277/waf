@@ -31,10 +31,10 @@ public partial class App : Application
 
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
     [
-        ("Dom", LogLevel.Info),
-        ("App", LogLevel.Info),
-        ("Pre", LogLevel.Info),
-        ("Sys", LogLevel.Info),
+        ("Dom", LogLevel.Trace),
+        ("App", LogLevel.Trace),
+        ("Pre", LogLevel.Trace),
+        ("Sys", LogLevel.Trace),
     ];
 
     private readonly ISettingsService settingsService;
@@ -58,7 +58,7 @@ public partial class App : Application
         MainPage = (Page)this.appController.MainView;
     }
 
-    public static string LogFileName { get; } = Path.Combine(FileSystem.Current.CacheDirectory, "Logging", "AppLog.txt");
+    public static string LogFileName { get; } = Path.Combine(FileSystem.CacheDirectory, "Logging", "AppLog.txt");
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

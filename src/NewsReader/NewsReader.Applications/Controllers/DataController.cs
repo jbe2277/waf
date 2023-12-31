@@ -45,10 +45,10 @@ internal sealed class DataController
 
     public async Task<FeedManager> Load()
     {
-        FeedManager? feedManager = null;
+        FeedManager? feedManager;
         try
         {
-            await Task.Run(() => { feedManager = dataService.Load<FeedManager>() ?? new FeedManager(); });
+            feedManager = (await dataService.Load<FeedManager>()) ?? new FeedManager();
         }
         catch (Exception ex)
         {
@@ -96,7 +96,7 @@ internal sealed class DataController
             if (!string.IsNullOrEmpty(cTag))
             {
                 appSettings.WebStorageCTag = cTag;
-                feedManagerFromWeb = dataService.Load<FeedManager>(stream);
+                feedManagerFromWeb = await dataService.Load<FeedManager>(stream);
             }
             else
             {
