@@ -27,8 +27,6 @@ namespace Waf.NewsReader.Presentation;
 
 public partial class App : Application
 {
-    // TODO: Share log file in Debug view
-
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
     [
         ("Dom", LogLevel.Trace),

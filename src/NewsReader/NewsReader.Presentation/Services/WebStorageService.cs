@@ -1,4 +1,6 @@
 ﻿using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.ODataErrors;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.Kiota.Abstractions.Authentication;
@@ -138,31 +140,41 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     public async Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag)
     {
         if (graphClient == null) return default;
-        var item = await GetItem(dataFileName).ConfigureAwait(false);
-        var metaItem = await item.GetAsync().ConfigureAwait(false);
-        ArgumentNullException.ThrowIfNull(metaItem);
-        if (metaItem.CTag != cTag)
+        Log.Default.Trace("WebStorageService.DownloadFile started");
+        var itemRequest = await GetItemRequest(dataFileName).ConfigureAwait(false);
+        DriveItem? item;
+        try
         {
-            var result = (await item.Content.GetAsync().ConfigureAwait(false), metaItem.CTag);
-            Log.Default.Info("WebStorageService.DownloadFile completed. CTag: {0}", metaItem.CTag);
+            item = await itemRequest.GetAsync().ConfigureAwait(false);
+        }
+        catch (ODataError odataError) when (odataError.Error?.Code?.Equals(GraphErrorCode.ItemNotFound.ToString(), StringComparison.OrdinalIgnoreCase) == true)
+        {
+            Log.Default.Info("WebStorageService.DownloadFile: Item not found");
+            return default;
+        }
+        ArgumentNullException.ThrowIfNull(item);
+        if (item.CTag != cTag)
+        {
+            var result = (await itemRequest.Content.GetAsync().ConfigureAwait(false), item.CTag);
+            Log.Default.Info("WebStorageService.DownloadFile completed. CTag: {0}", item.CTag);
             return result;
         }
         else Log.Default.Info("WebStorageService.DownloadFile: Same CTag: {0}", cTag);
-        // TODO: catch (ServiceException ex) when (ex.StatusCode == HttpStatusCode.NotFound) { }
         return default;
     }
 
     public async Task<string?> UploadFile(Stream source)
     {
         if (graphClient == null) return null;
-        var item = await GetItem(dataFileName).ConfigureAwait(false);
-        var newItem = await item.Content.PutAsync(source).ConfigureAwait(false);
+        Log.Default.Trace("WebStorageService.UploadFile started");
+        var itemRequest = await GetItemRequest(dataFileName).ConfigureAwait(false);
+        var newItem = await itemRequest.Content.PutAsync(source).ConfigureAwait(false);
         ArgumentNullException.ThrowIfNull(newItem);
         Log.Default.Info("WebStorageService.UploadFile completed. CTag: {0}", newItem.CTag);
         return newItem.CTag;
     }
 
-    private async Task<CustomDriveItemItemRequestBuilder> GetItem(string fileName)
+    private async Task<CustomDriveItemItemRequestBuilder> GetItemRequest(string fileName)
     {
         if (graphClient is null) throw new InvalidOperationException("graphClient is null");
         var driveItem = await graphClient.Me.Drive.GetAsync().ConfigureAwait(false);
