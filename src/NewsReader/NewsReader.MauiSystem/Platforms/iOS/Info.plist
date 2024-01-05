@@ -28,5 +28,9 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>wafe5b8cee6-8ba0-46c5-96ef-a3c8a1e2bb26</string>
+  </array>
 </dict>
 </plist>

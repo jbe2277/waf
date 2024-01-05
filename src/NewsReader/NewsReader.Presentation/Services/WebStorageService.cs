@@ -8,6 +8,9 @@ using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
 
+// Microsoft Azure / Microsoft Entry ID / App registration
+// - Redirect URI: wafe5b8cee6-8ba0-46c5-96ef-a3c8a1e2bb26://auth
+//
 // Add WebStorageService.keys.cs file with:
 //partial class WebStorageService
 //{
