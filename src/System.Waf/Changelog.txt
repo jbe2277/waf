@@ -1,6 +1,29 @@
 Changelog
 ---------
 
+Version 8.0.0 (Beta 1)
+- WAF: Add INotifyCollectionItemChanged interface.
+- WAF: Add IDelegateCommand interface for the RaiseCanExecuteChanged method.
+- WAF: [Breaking Change] IReadOnlyObservableList interface inherits additional from INotifyCollectionChanging and INotifyCollectionItemChanged.
+- WAF: ReadOnlyObservableList implements INotifyCollectionChanging and INotifyCollectionItemChanged.
+- WAF: ObservableListViewBase implements INotifyCollectionChanging and INotifyCollectionItemChanged.
+- WAF: Add ObservableList class which inherits from ObservableCollection and provides support for INotifyCollectionChanging and INotifyCollectionItemChanged.
+- WAF: Add SynchronizingList which is an improved version of SynchronizingCollectionCore. It supports full two-way synchronization.
+- WAF: [Obsolete] Mark SynchronizingCollectionCore and SynchronizingCollection as obsolete. 
+- WAF: Rename SettingsServiceCore to SettingsService; keep old class name for backward compatibility and mark it as obsolete.
+- WAF: Add static DelegateCommand.RaiseCanExecuteChanged(..) method.
+- WAF: Add AsyncDelegateCommand.ExecuteAsync method.
+- WAF: WeakEvent adds support for the events CollectionChanging and CollectionItemChanged.
+- WAF: Add static WeakEvent.TryRemove method.
+- WAF: MockView adds support for BindingContext.
+- WAF: Move MockSettingsService to UnitTesting.Core.
+- Samples: Migrate to .NET 8.0.
+- Samples: Use new ObservableList and DelegateCommand.RaiseCanExecuteChanged.
+- Samples: Add shortcut to open log file (CTRL+SHIFT+L).
+- NewsReader: Migrate to MAUI 8 / .NET 8.
+- NewsReader: Extend unit testing and migrate to xUnit.
+
+
 Version 7.0.0 (Release)
 - WAF: Add .NET 6.0 target for all libraries. Some new features will only be available for .NET 6 or newer applications.
 - WAF: Replace target net461 with netstandard2.0 for the Core libraries.

@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <Company>jbe2277</Company>
-    <Copyright>Copyright © 2016-2023 jbe2277</Copyright>
+    <Copyright>Copyright © 2016-2024 jbe2277</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
