@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/jbe2277/waf</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>https://github.com/jbe2277/waf/releases</PackageReleaseNotes>
-    <PackageTags>WAF; WPF; MVVM; XAML; UWP; Model-View-ViewModel; UI; MVC; ViewModel; PresentationModel; Architecture; Module; Layered</PackageTags>
+    <PackageTags>WAF; MAUI; WinUI; WPF; MVVM; XAML; UWP; Model-View-ViewModel; UI; MVC; ViewModel; PresentationModel; Architecture; Module; Layered</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
 	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
