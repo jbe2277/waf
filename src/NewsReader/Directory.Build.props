@@ -1,5 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
+    <MauiVersion>8.0.6</MauiVersion>
+    
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
