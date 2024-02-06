@@ -32,7 +32,7 @@ Package | Usage | Successor of
     - `Model`: Base class that implements [INotifyPropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged).
     - `ObservableList`: Extends the `ObservableCollection` with support for `INotifyCollectionChanging` and `INotifyCollectionItemChanged`.
     - `ObservableListViewCore`: [Provide change notifications for sorting and filtering.](https://github.com/jbe2277/waf/wiki/ObservableListView%3A-Provide-change-notifications-for-sorting-and-filtering)
-    - `SynchronizingCollection`: Represents a collection that synchronizes all its items with the items of the specified original collection.
+    - `SynchronizingList`: Represents a collection that synchronizes all its items with the items of the specified original collection.
     - `ThrottledAction`: [Throttling](https://github.com/jbe2277/waf/wiki/Throttling-to-improve-responsiveness) of multiple method calls to improve the responsiveness of an application.
     - `ValidatableModel`: Base class for a model that supports validation by implementing [INotifyDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo).
     - `WeakEvent`: Supports listening to events via a weak reference. This can prevent memory leaks. See [WeakEvent](https://github.com/jbe2277/waf/wiki/Weak-Event) page for more details.
