@@ -30,8 +30,9 @@ Package | Usage | Successor of
  - *Foundation*
     - `Cache`: Provides support for [caching](https://github.com/jbe2277/waf/wiki/Cache-Pattern) a value.
     - `Model`: Base class that implements [INotifyPropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged).
+    - `ObservableList`: Extends the `ObservableCollection` with support for `INotifyCollectionChanging` and `INotifyCollectionItemChanged`.
     - `ObservableListViewCore`: [Provide change notifications for sorting and filtering.](https://github.com/jbe2277/waf/wiki/ObservableListView%3A-Provide-change-notifications-for-sorting-and-filtering)
-    - `SynchronizingCollectionCore`: Represents a collection that synchronizes all its items with the items of the specified original collection.
+    - `SynchronizingCollection`: Represents a collection that synchronizes all its items with the items of the specified original collection.
     - `ThrottledAction`: [Throttling](https://github.com/jbe2277/waf/wiki/Throttling-to-improve-responsiveness) of multiple method calls to improve the responsiveness of an application.
     - `ValidatableModel`: Base class for a model that supports validation by implementing [INotifyDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo).
     - `WeakEvent`: Supports listening to events via a weak reference. This can prevent memory leaks. See [WeakEvent](https://github.com/jbe2277/waf/wiki/Weak-Event) page for more details.
@@ -39,6 +40,8 @@ Package | Usage | Successor of
     - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
     - `RecentFileList`: Most recently used (MRU) file list.
     - `ViewModelCore`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class with a simple approach to set the DataContext.
+ -	*Presentation*
+    -	`SettingsService`: Load and save user settings as an XML file.
 
 *System.Waf.Wpf*
  - *Foundation*
