@@ -37,7 +37,8 @@ Package | Usage | Successor of
     - `ValidatableModel`: Base class for a model that supports validation by implementing [INotifyDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo).
     - `WeakEvent`: Supports listening to events via a weak reference. This can prevent memory leaks. See [WeakEvent](https://github.com/jbe2277/waf/wiki/Weak-Event) page for more details.
  -	*Applications*
-    - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
+    -	`ApplicationInfo`: Provides information about the running application.
+  	 - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
     - `RecentFileList`: Most recently used (MRU) file list.
     - `ViewModelCore`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class with a simple approach to set the DataContext.
  -	*Presentation*
@@ -46,10 +47,8 @@ Package | Usage | Successor of
 *System.Waf.Wpf*
  - *Foundation*
     - `DataErrorInfoSupport`: Helper class for working with the legacy [IDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.idataerrorinfo) interface.
- - *Applications*
-    -	`ApplicationInfo`: Provides information about the running application.
+ - *Applications*    
     - `ObservableListView`: [Same as ObservableListViewCore but using weak event handlers.](https://github.com/jbe2277/waf/wiki/ObservableListView%3A-Provide-change-notifications-for-sorting-and-filtering)
-    - `SynchronizingCollection`: Same as SynchronizingCollectionCore but using [weak event](https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/weak-event-patterns) handlers.
     - `ViewModel`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class which sets the DataContext delayed via the Dispatcher.
  - *Presentation*
     - `DispatcherHelper`: Implementation for DoEvents.
