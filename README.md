@@ -2,13 +2,13 @@
 #### Successor of the WPF Application Framework
 
 The Win Application Framework (WAF) is a lightweight Framework that helps you to create well-structured XAML Applications (MAUI, Xamarin, WPF, WinUI). It supports you in applying various architectural patterns:
-* [Layered Architecture](https://github.com/jbe2277/waf/wiki/Layered-Architecture)
-* [Modular Architecture](https://github.com/jbe2277/waf/wiki/Modular-Architecture)
-* [Model-View-ViewModel pattern](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)
+- [Layered Architecture](https://github.com/jbe2277/waf/wiki/Layered-Architecture)
+- [Model-View-ViewModel Pattern](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)
+- [DataModel View ViewModel Pattern](https://github.com/jbe2277/waf/wiki/DataModel-View-ViewModel-Pattern)
 
 **How to get started?**
-* WAF comes with realistic real-world sample applications. Please have a look at them. See Sample Applications below.
-* The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
+- WAF comes with realistic real-world sample applications. Please have a look at them. See Sample Applications below.
+- The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
 
 ## Supported Platforms
 
@@ -27,7 +27,7 @@ Package | Usage | Successor of
 ## Features
 
 *System.Waf.Core*
- - *Foundation*
+- *Foundation*
     - `Cache`: Provides support for [caching](https://github.com/jbe2277/waf/wiki/Cache-Pattern) a value.
     - `Model`: Base class that implements [INotifyPropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged).
     - `ObservableList`: Extends the `ObservableCollection` with support for `INotifyCollectionChanging` and `INotifyCollectionItemChanged`.
@@ -36,37 +36,37 @@ Package | Usage | Successor of
     - `ThrottledAction`: [Throttling](https://github.com/jbe2277/waf/wiki/Throttling-to-improve-responsiveness) of multiple method calls to improve the responsiveness of an application.
     - `ValidatableModel`: Base class for a model that supports validation by implementing [INotifyDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo).
     - `WeakEvent`: Supports listening to events via a weak reference. This can prevent memory leaks. See [WeakEvent](https://github.com/jbe2277/waf/wiki/Weak-Event) page for more details.
- -	*Applications*
+-	*Applications*
     -	`ApplicationInfo`: Provides information about the running application.
-  	 - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
+    - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
     - `RecentFileList`: Most recently used (MRU) file list.
     - `ViewModelCore`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class with a simple approach to set the DataContext.
- -	*Presentation*
+-	*Presentation*
     -	`SettingsService`: Load and save user settings as an XML file.
 
 *System.Waf.Wpf*
- - *Foundation*
+- *Foundation*
     - `DataErrorInfoSupport`: Helper class for working with the legacy [IDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.idataerrorinfo) interface.
- - *Applications*    
+- *Applications*    
     - `ObservableListView`: [Same as ObservableListViewCore but using weak event handlers.](https://github.com/jbe2277/waf/wiki/ObservableListView%3A-Provide-change-notifications-for-sorting-and-filtering)
     - `ViewModel`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class which sets the DataContext delayed via the Dispatcher.
- - *Presentation*
+- *Presentation*
     - `DispatcherHelper`: Implementation for DoEvents.
     - `ResourceHelper`: Helper methods to manage resources in WPF.
     - `ValidationHelper`: Support for data validation tracking.
     - *Converters*
-       - `BoolToVisibilityConverter`: Converts a boolean value to and from a Visibility value.
-       - `InvertBooleanConverter`: Inverts a boolean value.
-       - `NullToVisibilityConverter`: Null condition to return the associated Visibility value.
-       - `StringFormatConverter`: Converts an object into a formatted string.
-       - `ValidationErrorsConverter`: Converts a ValidationError collection to a multi-line string error message.
+        - `BoolToVisibilityConverter`: Converts a boolean value to and from a Visibility value.
+        - `InvertBooleanConverter`: Inverts a boolean value.
+        - `NullToVisibilityConverter`: Null condition to return the associated Visibility value.
+        - `StringFormatConverter`: Converts an object into a formatted string.
+        - `ValidationErrorsConverter`: Converts a ValidationError collection to a multi-line string error message.
     - *Services*
-       - `FileDialogService`: Shows an open or save file dialog box.
-       - `MessageService`: Shows messages via the MessageBox.
+        - `FileDialogService`: Shows an open or save file dialog box.
+        - `MessageService`: Shows messages via the MessageBox.
        
 *System.Waf.UnitTesting.Core*
- -	`AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
- -	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.
+-	`AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
+-	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.
 
 ## Sample Applications
 Name | Type | Description
