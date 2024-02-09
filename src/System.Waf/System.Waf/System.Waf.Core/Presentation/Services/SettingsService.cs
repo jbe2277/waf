@@ -35,7 +35,7 @@ namespace System.Waf.Presentation.Services
             get => fileName;
             set
             {
-                if (settings.Any()) throw new InvalidOperationException("Setter must not be called anymore if one of the methods was used before.");
+                if (!settings.IsEmpty) throw new InvalidOperationException("Setter must not be called anymore if one of the methods was used before.");
                 fileName = value;
             }
         }
@@ -50,7 +50,7 @@ namespace System.Waf.Presentation.Services
         public void Save()
         {
             var settingsList = settings.Values.Select(x => x.Value).ToArray();
-            if (!settingsList.Any()) return;
+            if (settingsList.Length < 1) return;
             try
             {
                 XDocument? document = null;
