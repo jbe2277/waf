@@ -19,7 +19,7 @@ jobs:
     - name: Test
       run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
     - name: Upload NuGet packages
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: packages
         if-no-files-found: error
