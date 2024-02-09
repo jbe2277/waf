@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 8.0.0 (Beta 2)
+- WAF: ObservableList uses weak events to listen for the PropertyChanged event of its items.
+
+
 Version 8.0.0 (Beta 1)
 - WAF: Add INotifyCollectionChanging and INotifyCollectionItemChanged interface.
 - WAF: Add IDelegateCommand interface for the RaiseCanExecuteChanged method.
