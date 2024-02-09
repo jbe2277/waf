@@ -6,10 +6,12 @@ using System.ComponentModel;
 namespace System.Waf.Foundation
 {
     /// <summary>Represents a dynamic data collection that provides notifications when items get added or removed, or when the whole list is refreshed.
-    /// It extends the <see cref="ObservableCollection{T}"/> by implementing the <see cref="INotifyCollectionChanging"/> interface.</summary>
+    /// It extends the <see cref="ObservableCollection{T}"/> by implementing the <see cref="INotifyCollectionChanging"/> and the <see cref="INotifyCollectionItemChanged"/> interface.</summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableList<T> : ObservableCollection<T>, IReadOnlyObservableList<T>
     {
+        private readonly Dictionary<object, IWeakEventProxy> weakEventProxies = new();
+
         /// <summary>Initializes a new instance of the <see cref="ObservableCollection{T}"/> class.</summary>
         public ObservableList() { }
 
@@ -88,8 +90,19 @@ namespace System.Waf.Foundation
 
         private void ItemPropertyChanged(object? sender, PropertyChangedEventArgs e) => OnCollectionItemChanged(sender, e);
 
-        private void TryAddItemPropertyChanged(T item) { if (item is INotifyPropertyChanged x) x.PropertyChanged += ItemPropertyChanged; }
+        private void TryAddItemPropertyChanged(T? item) 
+        { 
+            if (item is INotifyPropertyChanged x) weakEventProxies.Add(x, WeakEvent.PropertyChanged.Add(x, ItemPropertyChanged));
+        }
 
-        private void TryRemoveItemPropertyChanged(T item) { if (item is INotifyPropertyChanged x) x.PropertyChanged -= ItemPropertyChanged; }
+        private void TryRemoveItemPropertyChanged(T? item) 
+        {
+            if (item is null) return;
+            if (weakEventProxies.TryGetValue(item, out var proxy))
+            {
+                proxy.Remove();
+                weakEventProxies.Remove(item);
+            }
+        }
     }
 }

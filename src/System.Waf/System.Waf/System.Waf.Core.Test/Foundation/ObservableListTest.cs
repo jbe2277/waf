@@ -156,6 +156,26 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void CollectionItemChangedWeakTest()
+        {
+            CollectionItemChangedWeakCoreTest(() => new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() }));
+        }
+
+        internal static void CollectionItemChangedWeakCoreTest(Func<IList<CollectionEventsTestModel>> factory)
+        {
+            var (weakList, item1) = Core();
+            GC.Collect();
+            Assert.IsNotNull(item1);
+            Assert.IsFalse(weakList.TryGetTarget(out _));
+
+            (WeakReference<IList<CollectionEventsTestModel>> weakList, CollectionEventsTestModel item1) Core()
+            {
+                var list = factory();
+                return (new(list), list[0]);
+            }
+        }
+
+        [TestMethod]
         public void CollectionItemChangedSpecialTest()
         {
             var list1 = new ObservableList<int> { 1 };

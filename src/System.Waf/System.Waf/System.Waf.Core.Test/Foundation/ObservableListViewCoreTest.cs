@@ -297,6 +297,16 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void CollectionItemChangedWeakTest()
+        {
+            ObservableListTest.CollectionItemChangedWeakCoreTest(() =>
+            {
+                var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() });
+                return new ObservableListViewCore<CollectionEventsTestModel>(list);
+            });
+        }
+
+        [TestMethod]
         public void RaiseEventsWithoutListener()
         {
             var originalList2 = new ObservableCollection<string>();
