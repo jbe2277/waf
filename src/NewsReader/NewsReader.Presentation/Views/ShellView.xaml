@@ -42,6 +42,8 @@
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
+                            <Grid Margin="0,5">
+                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
                             <SwipeView Margin="0,5">
                                 <SwipeView.Style>
                                     <Style TargetType="SwipeView">
@@ -60,7 +62,7 @@
                                             </VisualStateGroupList>
                                         </Setter>
                                     </Style>
-                                </SwipeView.Style>
+                                </SwipeView.Style>-->
 
                                 <FlyoutBase.ContextFlyout>
                                     <MenuFlyout>
@@ -70,7 +72,7 @@
                                     </MenuFlyout>
                                 </FlyoutBase.ContextFlyout>
 
-                                <SwipeView.LeftItems>
+                                <!--<SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
                                             <SwipeItem.IconImageSource>
@@ -83,7 +85,7 @@
                                             </SwipeItem.IconImageSource>
                                         </SwipeItem>
                                     </SwipeItems>
-                                </SwipeView.LeftItems>
+                                </SwipeView.LeftItems>-->
 
                                 <Border x:Name="feedItemBorder" StrokeThickness="1">
                                     <Border.StrokeShape>
@@ -103,7 +105,8 @@
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
                                 </Border>
-                            </SwipeView>
+                            <!--</SwipeView>-->
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

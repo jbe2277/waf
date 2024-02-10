@@ -39,7 +39,7 @@
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:FeedItem">
-                            <!-- Issue: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
+                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
                             <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
