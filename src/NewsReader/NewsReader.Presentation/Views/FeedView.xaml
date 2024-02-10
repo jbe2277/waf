@@ -39,6 +39,7 @@
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:FeedItem">
+                            <!-- Issue: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
                             <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
@@ -49,7 +50,7 @@
                                             </SwipeItem.IconImageSource>
                                         </SwipeItem>
                                     </SwipeItems>
-                                </SwipeView.LeftItems>
+                                </SwipeView.LeftItems>-->
 
                                 <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
                                     <FlyoutBase.ContextFlyout>
@@ -72,7 +73,7 @@
                                     </Label>
                                     <Label Text="{Binding Description}" MaxLines="3"/>
                                 </VerticalStackLayout>
-                            </SwipeView>
+                            <!--</SwipeView>-->
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
