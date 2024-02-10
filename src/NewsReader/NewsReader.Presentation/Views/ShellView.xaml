@@ -43,10 +43,8 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="do:Feed">
                             <Grid Margin="0,5">
-                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
-                            <SwipeView Margin="0,5">
-                                <SwipeView.Style>
-                                    <Style TargetType="SwipeView">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
                                         <Setter Property="VisualStateManager.VisualStateGroups">
                                             <VisualStateGroupList>
                                                 <VisualStateGroup x:Name="CommonStates">
@@ -62,8 +60,10 @@
                                             </VisualStateGroupList>
                                         </Setter>
                                     </Style>
-                                </SwipeView.Style>-->
+                                </Grid.Style>
 
+                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
+                            <SwipeView>-->
                                 <FlyoutBase.ContextFlyout>
                                     <MenuFlyout>
                                         <!-- TODO: CommandParameter Binding is not called (Windows); for SwipeItem this works (Android) -->
