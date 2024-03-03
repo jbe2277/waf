@@ -37,79 +37,87 @@
             </ContentPage.Resources>
 
             <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="White">
+                <Grid.Resources>
+                    <DataTemplate x:Key="MobileItemTemplate" x:DataType="do:Feed">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                    <SwipeItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                        </SwipeView>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="DesktopItemTemplate" x:DataType="do:Feed">
+                        <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                    </DataTemplate>
+
+                    <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
+                        <Grid Margin="0,5">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="VisualStateManager.VisualStateGroups">
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                                        <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="{StaticResource Primary}"/>
+                                                        <Setter TargetName="feedItemBorder" Property="Border.BackgroundColor" Value="{StaticResource Blue300Accent}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </Setter>
+                                </Style>
+                            </Grid.Style>
+
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+
+                            <Border x:Name="feedItemBorder" StrokeThickness="1">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="4"/>
+                                </Border.StrokeShape>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
+                                    </Style>
+                                </Border.Style>
+
+                                <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
+                                    <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
+                                    <HorizontalStackLayout Spacing="15">
+                                        <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
+                                        <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Grid.Resources>
+                
                 <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
 
-                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="do:Feed">
-                            <Grid Margin="0,5">
-                                <Grid.Style>
-                                    <Style TargetType="Grid">
-                                        <Setter Property="VisualStateManager.VisualStateGroups">
-                                            <VisualStateGroupList>
-                                                <VisualStateGroup x:Name="CommonStates">
-                                                    <VisualState x:Name="Normal"/>
-                                                    <VisualState x:Name="Selected">
-                                                        <VisualState.Setters>
-                                                            <Setter Property="BackgroundColor" Value="Transparent" />
-                                                            <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="{StaticResource Primary}"/>
-                                                            <Setter TargetName="feedItemBorder" Property="Border.BackgroundColor" Value="{StaticResource Blue300Accent}"/>
-                                                        </VisualState.Setters>
-                                                    </VisualState>
-                                                </VisualStateGroup>
-                                            </VisualStateGroupList>
-                                        </Setter>
-                                    </Style>
-                                </Grid.Style>
-
-                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
-                            <SwipeView>-->
-                                <FlyoutBase.ContextFlyout>
-                                    <MenuFlyout>
-                                        <!-- TODO: CommandParameter Binding is not called (Windows); for SwipeItem this works (Android) -->
-                                        <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
-                                        <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.ContextFlyout>
-
-                                <!--<SwipeView.LeftItems>
-                                    <SwipeItems>
-                                        <SwipeItem Command="{Binding BindingContext.EditFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
-                                            <SwipeItem.IconImageSource>
-                                                <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
-                                            </SwipeItem.IconImageSource>
-                                        </SwipeItem>
-                                        <SwipeItem Command="{Binding BindingContext.RemoveFeedCommand, Source={Reference listView}}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
-                                            <SwipeItem.IconImageSource>
-                                                <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
-                                            </SwipeItem.IconImageSource>
-                                        </SwipeItem>
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>-->
-
-                                <Border x:Name="feedItemBorder" StrokeThickness="1">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="4"/>
-                                    </Border.StrokeShape>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
-                                        </Style>
-                                    </Border.Style>
-
-                                    <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
-                                        <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
-                                        <HorizontalStackLayout Spacing="15">
-                                            <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
-                                            <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
-                                        </HorizontalStackLayout>
-                                    </VerticalStackLayout>
-                                </Border>
-                            <!--</SwipeView>-->
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
+                <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}"/>
 
                 <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
                           HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}"/>

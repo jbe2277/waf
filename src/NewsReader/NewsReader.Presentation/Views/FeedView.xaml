@@ -29,7 +29,56 @@
             </VerticalStackLayout>
 
             <RefreshView Grid.Row="3" IsRefreshing="{Binding Feed.IsLoading, Mode=OneWay}" Command="{Binding RefreshCommand}">
-                <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True">
+                <RefreshView.Resources>
+                    <DataTemplate x:Key="MobileItemTemplate" x:DataType="do:FeedItem">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
+                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                        </SwipeView>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="DesktopItemTemplate" x:DataType="do:FeedItem">
+                        <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                    </DataTemplate>
+
+                    <ControlTemplate x:Key="ItemTemplate" x:DataType="do:FeedItem">
+                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
+                                        Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ShowFeedItemViewCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+
+                            <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding MarkAsRead}" Value="True">
+                                        <Setter Property="FontAttributes" Value="None"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Label Text="{Binding Description}" MaxLines="3"/>
+                        </VerticalStackLayout>
+                    </ControlTemplate>
+                </RefreshView.Resources>
+
+                <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
+                <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True"
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
                             <VerticalStackLayout Padding="10,3" BackgroundColor="{StaticResource Gray100}">
@@ -37,45 +86,6 @@
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.GroupHeaderTemplate>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="do:FeedItem">
-                            <!-- TODO: Remove SwipeView as it creates a crash on Windows. https://github.com/dotnet/maui/issues/8870
-                            <SwipeView>
-                                <SwipeView.LeftItems>
-                                    <SwipeItems>
-                                        <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
-                                                   Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
-                                            <SwipeItem.IconImageSource>
-                                                <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
-                                            </SwipeItem.IconImageSource>
-                                        </SwipeItem>
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>-->
-
-                                <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
-                                    <FlyoutBase.ContextFlyout>
-                                        <MenuFlyout>
-                                            <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
-                                                Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
-                                        </MenuFlyout>
-                                    </FlyoutBase.ContextFlyout>
-
-                                    <VerticalStackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.ShowFeedItemViewCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
-                                    </VerticalStackLayout.GestureRecognizers>
-
-                                    <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding MarkAsRead}" Value="True">
-                                                <Setter Property="FontAttributes" Value="None"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label Text="{Binding Description}" MaxLines="3"/>
-                                </VerticalStackLayout>
-                            <!--</SwipeView>-->
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
         </Grid>
