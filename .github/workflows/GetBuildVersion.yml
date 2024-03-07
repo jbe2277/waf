@@ -35,6 +35,7 @@ jobs:
           dotnet tool install minver-cli -g
       - id: getVersionStep
         name: Get Build Version
+        shell: pwsh
         run: |
           $verOut=minver -t v
           $metaSplit=$verOut.Split('+', 2)
@@ -43,8 +44,7 @@ jobs:
           $heightSplit=$preSplit[1]?.Split('.') ?? @("", "990")
           $version = [string]::Format("{0}.{1}.{2}", $rtmSplit[0], $rtmSplit[1], $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
           $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
-          echo version=$version | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
-          echo versionCode=$versionCode | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
-          echo version=$version
-          echo versionCode=$versionCode
-        shell: pwsh
+          "version=$version" >> $Env:GITHUB_OUTPUT
+          "versionCode=$versionCode" >> $Env:GITHUB_OUTPUT
+          "version=$version"
+          "versionCode=$versionCode"
