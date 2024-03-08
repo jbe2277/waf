@@ -2,10 +2,12 @@
 #
 # minver          | version   | versionCode
 # ----------------|-----------|------------
-# 7.0.0-alpha.38  | 7.0.0038  | 7000038
-# 7.0.0           | 7.0.0990  | 7000990
-# 7.1.2-alpha.9   | 7.1.2009  | 7012009
-# 7.1.2           | 7.1.2990  | 7012990
+# 7.0.0-alpha.38  | 7.0.00038  | 70000038
+# 7.0.0           | 7.0.09990  | 70009990
+# 7.1.2-alpha.9   | 7.1.20009  | 70120009
+# 7.1.2           | 7.1.29990  | 70129990
+# 8.0.3-beta.2.56 | 8.0.32056  | 80032056
+# 8.0.3           | 8.0.39990  | 80039990
 
 name: 'GetBuildVersion'
 
@@ -41,9 +43,10 @@ jobs:
           $metaSplit=$verOut.Split('+', 2)
           $preSplit=$metaSplit[0].Split('-', 2)
           $rtmSplit=$preSplit[0].Split('.')
-          $heightSplit=$preSplit[1]?.Split('.') ?? @("", "990")
-          $version = [string]::Format("{0}.{1}.{2}", $rtmSplit[0], $rtmSplit[1], $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
-          $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $rtmSplit[2] + $heightSplit[1].PadLeft(3, '0'))
+          $heightSplit=$preSplit[1]?.Split('.') ?? @("", "9990")
+          $build=$rtmSplit[2] + ($heightSplit.Count -ge 3 ? $heightSplit[1] + $heightSplit[2].PadLeft(3, '0') : $heightSplit[1].PadLeft(4, '0'))
+          $version = [string]::Format("{0}.{1}.{2}", $rtmSplit[0], $rtmSplit[1], $build)
+          $versionCode = [string]::Format("{0}{1}{2}", $rtmSplit[0], $rtmSplit[1].PadLeft(2, '0'), $build)
           "version=$version" >> $Env:GITHUB_OUTPUT
           "versionCode=$versionCode" >> $Env:GITHUB_OUTPUT
           "version=$version"
