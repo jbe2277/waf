@@ -43,9 +43,10 @@ jobs:
         dotnet nuget locals all --clear
         dotnet workload install maui
     - name: Build
+      # -p:ApplicationVersion=0 because of https://github.com/dotnet/maui/issues/18571
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net8.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f:net8.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
 
   iOS:
     runs-on: macos-13
