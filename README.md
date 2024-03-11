@@ -4,7 +4,7 @@
 The Win Application Framework (WAF) is a lightweight Framework that helps you to create well-structured XAML Applications (MAUI, Xamarin, WPF, WinUI). It supports you in applying various architectural patterns:
 - [Layered Architecture](https://github.com/jbe2277/waf/wiki/Layered-Architecture)
 - [Model-View-ViewModel Pattern](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)
-- [DataModel View ViewModel Pattern](https://github.com/jbe2277/waf/wiki/DataModel-View-ViewModel-Pattern)
+- [DataModel-View-ViewModel Pattern](https://github.com/jbe2277/waf/wiki/DataModel-View-ViewModel-Pattern)
 
 **How to get started?**
 - WAF comes with realistic real-world sample applications. Please have a look at them. See Sample Applications below.
@@ -42,7 +42,7 @@ Package | Usage | Successor of
     - `RecentFileList`: Most recently used (MRU) file list.
     - `ViewModelCore`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class with a simple approach to set the DataContext.
 -	*Presentation*
-    -	`SettingsService`: Load and save user settings as an XML file.
+    -	`SettingsService`: Load and save user settings as a XML file.
 
 *System.Waf.Wpf*
 - *Foundation*
@@ -57,7 +57,7 @@ Package | Usage | Successor of
     - *Converters*
         - `BoolToVisibilityConverter`: Converts a boolean value to and from a Visibility value.
         - `InvertBooleanConverter`: Inverts a boolean value.
-        - `NullToVisibilityConverter`: Null condition to return the associated Visibility value.
+        - `NullToVisibilityConverter`: Check for null and return the associated Visibility value.
         - `StringFormatConverter`: Converts an object into a formatted string.
         - `ValidationErrorsConverter`: Converts a ValidationError collection to a multi-line string error message.
     - *Services*
@@ -66,7 +66,7 @@ Package | Usage | Successor of
        
 *System.Waf.UnitTesting.Core*
 -	`AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
--	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of the WPF or Windows Forms synchronization context.
+-	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of a UI synchronization context.
 
 ## Sample Applications
 Name | Type | Description
@@ -76,5 +76,5 @@ Name | Type | Description
 [Waf Book Library](https://github.com/jbe2277/waf/tree/master/src/System.Waf/Samples/BookLibrary) | WPF<br/>.NET 8 | Supports the user to manage his books. Borrowed books can be tracked by this application.<br/><ul><li>Architecture: [Layering](https://github.com/jbe2277/waf/wiki/Layered-Architecture), [Extensions](https://github.com/jbe2277/waf/wiki/Modular-Architecture#4-alternative-extensions), [MVVM](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern), [DMVVM](https://github.com/jbe2277/waf/wiki/DataModel-View-ViewModel-Pattern)</li><li>Entity Framework with SQLite</li><li>Validation rules</li><li>Sort & Filter in the DataGrid</li><li>Reporting via WPF FlowDocument & Print support</li></ul>
 [Waf Information Manager](https://github.com/jbe2277/waf/tree/master/src/System.Waf/Samples/InformationManager) | WPF<br/>.NET 8 | A modular application that comes with a fake email client and an address book.<br/><ul><li>Architecture: [Layering](https://github.com/jbe2277/waf/wiki/Layered-Architecture), [Modularization](https://github.com/jbe2277/waf/wiki/Modular-Architecture), [MVVM](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)</li><li>Office format ZIP container shared with all modules (Package API and DataContractSerializer)</li><li>Validation rules</li><li>Extensible navigation view & context sensitive toolbar</li><li>Wizard dialog</li></ul>
 [Waf Music Manager](https://jbe2277.github.io/musicmanager/) | WPF<br/>.NET 8 | Fast application that makes fun to manage the local music collection.<br/>*MS Store (MSIX), WinRT, Media playback, File queries & properties, Async/await, Drag & Drop*
-[Waf DotNetPad](https://jbe2277.github.io/dotnetpad) | WPF<br/>.NET 8 | Code editor to program with C# or Visual Basic.<br/>*MS Store (MSIX), .NET Compiler Platform, Roslyn, AvalonEdit, Auto completion, Async/await*
+[Waf DotNetPad](https://jbe2277.github.io/dotnetpad) | WPF<br/>.NET 8 | Code editor to program with C# or Visual Basic.<br/>*MS Store (MSIX), .NET Compiler Platform (Roslyn), AvalonEdit, Auto completion, Async/await*
 [Waf File Hash Generator](https://jbe2277.github.io/fhg/) | WinUI 3<br/>.NET 8 | Simple tool that generates the hash values of one or more files.<br/>*MS Store (MSIX), Async, Progress, Drag & Drop*
