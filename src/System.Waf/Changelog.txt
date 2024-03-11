@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+Version 8.0.0 (Beta 3)
+- WAF: ObservableListViewCore uses weak events to listen for the CollectionChanged event.
+- WAF: [Obsolete] Mark ObservableListView (WPF) as obsolete.
+
+
 Version 8.0.0 (Beta 2)
 - WAF: ObservableList uses weak events to listen for the PropertyChanged event of its items.
 

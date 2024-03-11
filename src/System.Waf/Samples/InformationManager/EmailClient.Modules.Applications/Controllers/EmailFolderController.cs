@@ -15,7 +15,7 @@ internal class EmailFolderController
     private readonly IShellService shellService;
     private readonly EmailLayoutViewModel emailLayoutViewModel;
     private readonly DelegateCommand deleteEmailCommand;
-    private ObservableListView<Email> emailsView = null!;
+    private ObservableListViewCore<Email> emailsView = null!;
     private IWeakEventProxy? emailListViewModelPropertyChangedProxy;
 
     [ImportingConstructor]

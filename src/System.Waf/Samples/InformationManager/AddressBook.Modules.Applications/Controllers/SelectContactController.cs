@@ -11,7 +11,7 @@ internal class SelectContactController
 {
     private readonly SelectContactViewModel selectContactViewModel;
     private readonly DelegateCommand selectContactCommand;
-    private ObservableListView<Contact> contactsView = null!;
+    private ObservableListViewCore<Contact> contactsView = null!;
     private IWeakEventProxy? contactListViewModelPropertyChangedProxy;
 
     [ImportingConstructor]

@@ -34,7 +34,7 @@ internal class BookController
         lendToCommand = new(p => LendTo((Book)p!));
     }
 
-    internal ObservableListView<BookDataModel>? BooksView { get; private set; }
+    internal ObservableListViewCore<BookDataModel>? BooksView { get; private set; }
 
     public void Initialize()
     {

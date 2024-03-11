@@ -37,7 +37,7 @@ internal class PersonController
         createNewEmailCommand = new(CreateNewEmail!);
     }
 
-    internal ObservableListView<Person>? PersonsView { get; private set; }
+    internal ObservableListViewCore<Person>? PersonsView { get; private set; }
 
     public void Initialize()
     {

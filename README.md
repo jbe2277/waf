@@ -48,7 +48,6 @@ Package | Usage | Successor of
 - *Foundation*
     - `DataErrorInfoSupport`: Helper class for working with the legacy [IDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.idataerrorinfo) interface.
 - *Applications*    
-    - `ObservableListView`: [Same as ObservableListViewCore but using weak event handlers.](https://github.com/jbe2277/waf/wiki/ObservableListView%3A-Provide-change-notifications-for-sorting-and-filtering)
     - `ViewModel`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class which sets the DataContext delayed via the Dispatcher.
 - *Presentation*
     - `DispatcherHelper`: Implementation for DoEvents.

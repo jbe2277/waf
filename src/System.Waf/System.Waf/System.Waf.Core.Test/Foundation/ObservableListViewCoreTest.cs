@@ -289,6 +289,24 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void WeakCollectionEventsTest()
+        {
+            var list = new ObservableCollection<CollectionEventsTestModel>();
+            var weakListView = WeakTest(list);
+            GC.Collect();
+            Assert.IsFalse(weakListView.IsAlive);
+
+            static WeakReference WeakTest(ObservableCollection<CollectionEventsTestModel> list)
+            {
+                var listView = new ObservableListViewCore<CollectionEventsTestModel>(list);
+                var weakListView = new WeakReference(listView);
+                list.Add(new CollectionEventsTestModel());
+                Assert.IsTrue(weakListView.IsAlive);
+                return weakListView;
+            }
+        }
+
+        [TestMethod]
         public void CollectionItemChangedTest()
         {
             var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel() });

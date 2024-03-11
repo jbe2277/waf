@@ -15,7 +15,7 @@ internal class ContactController
     private readonly IShellService shellService;
     private readonly ContactLayoutViewModel contactLayoutViewModel;
     private readonly DelegateCommand deleteContactCommand;
-    private ObservableListView<Contact>? contactsView;
+    private ObservableListViewCore<Contact>? contactsView;
 
     [ImportingConstructor]
     public ContactController(IShellService shellService, ContactLayoutViewModel contactLayoutViewModel, ContactListViewModel contactListViewModel, ContactViewModel contactViewModel)

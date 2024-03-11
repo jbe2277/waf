@@ -10,13 +10,13 @@ namespace System.Waf.Foundation
     /// When the original collection notifies a change via the <see cref="INotifyCollectionChanged"/> interface then
     /// this view updates automatically.
     /// </summary>
+    /// <remarks>This implementation uses weak event handlers to listen for collection changed events. Therefore, it does not produce a memory leak if Dispose is not called.</remarks>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableListViewCore<T> : ObservableListViewBase<T>, IDisposable
     {
         private readonly IEnumerable<T> originalList;
         private readonly IEqualityComparer<T> comparer;
-        private readonly INotifyCollectionChanged? originalObservableCollection;
-        private readonly bool noCollectionChangedHandler;
+        private readonly IWeakEventProxy? originalCollectionChangedProxy;
         private Predicate<T>? filter;
         private Func<IEnumerable<T>, IOrderedEnumerable<T>>? sort;
         private int isDisposed;
@@ -55,13 +55,11 @@ namespace System.Waf.Foundation
             this.comparer = comparer ?? EqualityComparer<T>.Default;
             this.filter = filter;
             this.sort = sort;
-            this.noCollectionChangedHandler = noCollectionChangedHandler;
             if (this.filter != null || this.sort != null) UpdateInnerList();
 
-            if (!noCollectionChangedHandler)
+            if (!noCollectionChangedHandler && originalList is INotifyCollectionChanged originalObservableCollection)
             {
-                originalObservableCollection = originalList as INotifyCollectionChanged;
-                if (originalObservableCollection != null) originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
+                originalCollectionChangedProxy = WeakEvent.CollectionChanged.Add(originalObservableCollection, OriginalCollectionChanged);
             }
         }
 
@@ -108,10 +106,7 @@ namespace System.Waf.Foundation
             OnDispose(disposing);
             if (disposing)
             {
-                if (!noCollectionChangedHandler && originalObservableCollection != null)
-                {
-                    originalObservableCollection.CollectionChanged -= OriginalCollectionChanged;
-                }
+                originalCollectionChangedProxy?.Remove();
             }
         }
 

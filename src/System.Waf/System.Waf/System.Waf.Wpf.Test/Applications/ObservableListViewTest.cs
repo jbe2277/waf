@@ -10,7 +10,7 @@ using System.Waf.UnitTesting;
 
 namespace Test.Waf.Applications
 {
-    [TestClass]
+    [TestClass, Obsolete]
     public class ObservableListViewTest
     {
         [TestMethod]
