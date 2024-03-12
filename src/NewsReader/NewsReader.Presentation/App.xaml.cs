@@ -89,7 +89,9 @@ public partial class App : Application
     private void OnDeactivated()
     {
         Log.Default.Info("App deactivated");
+#if !ANDROID   // Android: don't use onPause to save data. See: https://developer.android.com/guide/components/activities/activity-lifecycle
         Save();
+#endif
     }
 
     private void OnStopped()
