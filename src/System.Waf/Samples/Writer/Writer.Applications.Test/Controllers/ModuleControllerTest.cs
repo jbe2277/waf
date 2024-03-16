@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
-using System.Waf.Applications;
-using System.Waf.Applications.Services;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Test.Writer.Applications.Services;
@@ -28,14 +26,13 @@ public class ModuleControllerTest : ApplicationsTest
         controller.Initialize();
 
         var shellView = Get<MockShellView>();
-        var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
+        var shellViewModel = shellView.ViewModel;
         Assert.IsNotNull(shellViewModel.ExitCommand);
 
         controller.Run();
 
         Assert.IsTrue(shellView.IsVisible);
-        var mainViewModel = Get<MainViewModel>();
-        Assert.AreEqual(mainViewModel.View, shellViewModel.ContentView);
+        Assert.IsInstanceOfType<MockMainView>(shellViewModel.ContentView);
 
         shellViewModel.ExitCommand.Execute(null);
         Assert.IsFalse(shellView.IsVisible);
@@ -76,15 +73,15 @@ public class ModuleControllerTest : ApplicationsTest
         var shellViewModel = Get<ShellViewModel>();
         shellViewModel.FileService.NewCommand.Execute(null);
 
-        var mainViewModel = Get<MainViewModel>();
-        var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView!)!;
+        var mainViewModel = ((MockMainView)shellViewModel.ContentView).ViewModel;
+        var richTextViewModel = ((MockRichTextView)mainViewModel.ActiveDocumentView!).ViewModel;
         richTextViewModel.Document.Modified = true;
 
         bool showDialogCalled = false;
         MockSaveChangesView.ShowDialogAction = view =>
         {
             showDialogCalled = true;
-            AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, ViewHelper.GetViewModel<SaveChangesViewModel>(view)!.Documents);
+            AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, view.ViewModel.Documents);
             view.Close();
         };
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Test.Writer.Applications.Services;
+using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
@@ -35,7 +35,7 @@ public class PrintControllerTest : ApplicationsTest
 
         // Execute the Close command and check that the MainView is visible again
         shellViewModel.ClosePrintPreviewCommand.Execute(null);
-        Assert.AreEqual(ViewHelper.GetViewModel<MainViewModel>((IView)shellViewModel.ContentView), mainViewModel);
+        Assert.AreEqual(((MockMainView)shellViewModel.ContentView).ViewModel, mainViewModel);
     }
 
     [TestMethod]

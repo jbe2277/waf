@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using System.Waf.Applications;
 using System.Waf.UnitTesting;
+using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
-using Waf.Writer.Applications.Views;
 
 namespace Test.Writer.Applications.Controllers;
 
@@ -26,16 +25,16 @@ public class RichTextDocumentControllerTest : ApplicationsTest
         fileService.NewCommand.Execute(null);
         var document = fileService.Documents[^1];
 
-        var richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Single();
-        var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;
+        var richTextView = mainViewModel.DocumentViews.OfType<MockRichTextView>().Single();
+        var richTextViewModel = richTextView.ViewModel;
         Assert.AreEqual(document, richTextViewModel.Document);
 
         fileService.NewCommand.Execute(null);
         document = fileService.Documents[^1];
 
         Assert.AreEqual(2, mainViewModel.DocumentViews.Count);
-        richTextView = mainViewModel.DocumentViews.OfType<IRichTextView>().Last();
-        richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>(richTextView)!;
+        richTextView = mainViewModel.DocumentViews.OfType<MockRichTextView>().Last();
+        richTextViewModel = richTextView.ViewModel;
         Assert.AreEqual(document, richTextViewModel.Document);
 
         // Test ActiveDocument <-> ActiveDocumentView synchronization

@@ -2,7 +2,7 @@
 
 namespace System.Waf.UnitTesting.Mocks
 {
-    /// <summary>Mock class that implements the IView interface.</summary>
+    /// <summary>Mock view that implements the IView interface.</summary>
     public class MockView : IView
     {
         /// <inheritdoc/>
@@ -14,5 +14,13 @@ namespace System.Waf.UnitTesting.Mocks
 #else
         public object? DataContext { get; set; }
 #endif
+    }
+
+    /// <summary>Mock view that implements the IView interface.</summary>
+    /// <typeparam name="TViewModel">Type of the associated view model.</typeparam>
+    public class MockView<TViewModel> : MockView where TViewModel : class
+    {
+        /// <summary>The view model.</summary>
+        public TViewModel ViewModel => (TViewModel)(DataContext ?? throw new InvalidOperationException("ViewModel is not set."));
     }
 }

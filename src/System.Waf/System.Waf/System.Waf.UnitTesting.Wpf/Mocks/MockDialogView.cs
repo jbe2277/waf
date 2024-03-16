@@ -59,6 +59,14 @@ namespace System.Waf.UnitTesting.Mocks
         }
     }
 
+    /// <summary>Base class for a mock dialog view implementation.</summary>
+    /// <typeparam name="TMockView">The type of the concrete mock dialog view.</typeparam>
+    /// <typeparam name="TViewModel">Type of the associated view model.</typeparam>
+    public abstract class MockDialogView<TMockView, TViewModel> : MockDialogView<TMockView> where TMockView : MockDialogView<TMockView> where TViewModel : class
+    {
+        /// <summary>The view model.</summary>
+        public TViewModel ViewModel => (TViewModel)(DataContext ?? throw new InvalidOperationException("ViewModel is not set."));
+    }
 
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
     internal sealed class ContainerDisposedNotifier : IDisposable

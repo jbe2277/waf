@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections;
 using System.Reflection;
-using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Test.Writer.Applications.Documents;
+using Test.Writer.Applications.Views;
 using Waf.Writer.Applications.Controllers;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -54,7 +54,7 @@ public class FileControllerTest : ApplicationsTest
     public void OpenDocumentTest()
     {
         var fileDialogService = Get<MockFileDialogService>();
-        var fileController = Get<FileController>();
+        _ = Get<FileController>();
         var fileService = Get<IFileService>();
         var documentType = Get<MockRichTextDocumentType>();
 
@@ -98,7 +98,7 @@ public class FileControllerTest : ApplicationsTest
     [TestMethod]
     public void OpenDocumentViaCommandLineTest()
     {
-        var fileController = Get<FileController>();
+        _ = Get<FileController>();
         var fileService = Get<IFileService>();
 
         Assert.IsFalse(fileService.Documents.Any());
@@ -136,7 +136,7 @@ public class FileControllerTest : ApplicationsTest
     [TestMethod]
     public void OpenExceptionTestWithRecentFileList()
     {
-        var fileController = Get<FileController>();
+        _ = Get<FileController>();
         var fileService = Get<IFileService>();
         foreach (var x in fileService.RecentFileList.RecentFiles.ToArray()) fileService.RecentFileList.Remove(x);
 
@@ -263,7 +263,7 @@ public class FileControllerTest : ApplicationsTest
         Assert.IsTrue(fileService.SaveAsCommand.CanExecute(null));
 
         var mainViewModel = Get<MainViewModel>();
-        var richTextViewModel = ViewHelper.GetViewModel<RichTextViewModel>((IView)mainViewModel.ActiveDocumentView!)!;
+        var richTextViewModel = ((MockRichTextView)mainViewModel.ActiveDocumentView!).ViewModel;
 
         AssertHelper.CanExecuteChangedEvent(fileService.SaveCommand, () => richTextViewModel.Document.Modified = true);
 
