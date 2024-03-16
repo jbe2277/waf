@@ -6,13 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Waf.Writer.Applications.ViewModels;assembly=Waf.Writer.Applications"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:RichTextViewModel}"
-    d:DesignWidth="300" d:DesignHeight="200">
+    d:DesignWidth="300" d:DesignHeight="200" AutomationProperties.AutomationId="RichTextView">
     
     <ScrollViewer>
         <RichTextBox x:Name="richTextBox" TextChanged="RichTextBoxTextChanged" SelectionChanged="RichTextBoxSelectionChanged" 
                      IsVisibleChanged="RichTextBoxIsVisibleChanged"
                      ContextMenuOpening="RichTextBoxContextMenuOpening" ContextMenuClosing="RichTextBoxContextMenuClosing"
-                     SpellCheck.IsEnabled="{Binding IsSpellCheckEnabled}" AcceptsTab="True" BorderThickness="0">
+                     SpellCheck.IsEnabled="{Binding IsSpellCheckEnabled}" AcceptsTab="True" BorderThickness="0" AutomationProperties.AutomationId="RichTextBox">
             <RichTextBox.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Zoom}" ScaleY="{Binding Zoom}"/>
             </RichTextBox.LayoutTransform>

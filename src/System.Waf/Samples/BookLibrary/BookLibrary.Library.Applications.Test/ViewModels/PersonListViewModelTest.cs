@@ -29,7 +29,7 @@ public class PersonListViewModelTest : TestClassBase
         Assert.AreEqual(persons[0], personListViewModel.SelectedPerson);
 
         personListViewModel.AddSelectedPerson(persons[0]);
-        AssertHelper.SequenceEqual(new[] { persons[0] }, personListViewModel.SelectedPersons);
+        AssertHelper.SequenceEqual([ persons[0] ], personListViewModel.SelectedPersons);
 
         // Select both persons
         personListViewModel.AddSelectedPerson(persons[^1]);

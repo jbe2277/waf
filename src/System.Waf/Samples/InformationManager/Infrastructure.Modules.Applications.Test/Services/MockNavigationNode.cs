@@ -3,26 +3,17 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 
-public class MockNavigationNode : Model, INavigationNode
+public class MockNavigationNode(string name, Action showAction, Action closeAction, double group, double order) : Model, INavigationNode
 {
-    public MockNavigationNode(string name, Action showAction, Action closeAction, double group, double order)
-    {
-        Name = name;
-        ShowAction = showAction;
-        CloseAction = closeAction;
-        Group = group;
-        Order = order;
-    }
+    public string Name { get; } = name;
 
-    public string Name { get; }
+    public Action ShowAction { get; } = showAction;
 
-    public Action ShowAction { get; }
+    public Action CloseAction { get; } = closeAction;
 
-    public Action CloseAction { get; }
+    public double Group { get; } = group;
 
-    public double Group { get; }
-
-    public double Order { get; }
+    public double Order { get; } = order;
 
     public int? ItemCount { get; set; }
 }

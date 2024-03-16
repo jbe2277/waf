@@ -30,8 +30,8 @@ public class BookControllerTest : TestClassBase
     public void SelectionTest()
     {
         var entityService = Get<IEntityService>();
-        entityService.Books.Add(new Book() { Title = "The Fellowship of the Ring" });
-        entityService.Books.Add(new Book() { Title = "The Two Towers" });
+        entityService.Books.Add(new() { Title = "The Fellowship of the Ring" });
+        entityService.Books.Add(new() { Title = "The Two Towers" });
         var bookController = Get<BookController>();
         bookController.Initialize();
 
@@ -41,8 +41,8 @@ public class BookControllerTest : TestClassBase
         Assert.IsInstanceOfType(shellService.BookView, typeof(IBookView));
 
         // Check that the first Book is selected
-        var bookListView = Get<IBookListView>();
-        var bookListViewModel = bookListView.GetViewModel<BookListViewModel>()!;
+        var bookListView = Get<MockBookListView>();
+        var bookListViewModel = bookListView.ViewModel;
         Assert.AreEqual(entityService.Books[0], bookListViewModel.SelectedBook?.Book);
 
         // Change the selection
@@ -62,9 +62,9 @@ public class BookControllerTest : TestClassBase
         var bookController = Get<BookController>();
         bookController.Initialize();
         var bookListView = Get<MockBookListView>();
-        var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+        var bookListViewModel = bookListView.ViewModel;
         var bookView = Get<MockBookView>();
-        var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView)!;
+        var bookViewModel = bookView.ViewModel;
 
         // Add a new Book
         Assert.AreEqual(2, entityService.Books.Count);
@@ -142,7 +142,7 @@ public class BookControllerTest : TestClassBase
         var bookController = Get<BookController>();
         bookController.Initialize();
         var bookListView = Get<MockBookListView>();
-        var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+        var bookListViewModel = bookListView.ViewModel;
         // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
         bookController.BooksView!.Sort = x => x.OrderBy(b => b.Book.Title);
 
@@ -150,7 +150,7 @@ public class BookControllerTest : TestClassBase
         bookListViewModel.SelectedBook = bookListViewModel.Books!.Single(b => b.Book == fellowship);
         bookListViewModel.AddSelectedBook(bookListViewModel.SelectedBook);
         bookListViewModel.RemoveCommand!.Execute(null);
-        AssertHelper.SequenceEqual(new[] { twoTowers, returnKing }, entityService.Books);
+        AssertHelper.SequenceEqual([ twoTowers, returnKing ], entityService.Books);
         Assert.AreEqual(returnKing, bookListViewModel.SelectedBook.Book);
     }
 
@@ -167,7 +167,7 @@ public class BookControllerTest : TestClassBase
         var bookController = Get<BookController>();
         bookController.Initialize();
         var bookListView = Get<MockBookListView>();
-        var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+        var bookListViewModel = bookListView.ViewModel;
         // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
         bookController.BooksView!.Sort = x => x.OrderBy(b => b.Book.Title);
 
@@ -192,7 +192,7 @@ public class BookControllerTest : TestClassBase
         var bookController = Get<BookController>();
         bookController.Initialize();
         var bookListView = Get<MockBookListView>();
-        var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+        var bookListViewModel = bookListView.ViewModel;
 
         // Remove all books and check that nothing is selected anymore
         bookListViewModel.SelectedBook = bookListViewModel.Books!.Single(b => b.Book == fellowship);
@@ -221,9 +221,9 @@ public class BookControllerTest : TestClassBase
         var bookController = Get<BookController>();
         bookController.Initialize();
         var bookListView = Get<MockBookListView>();
-        var bookListViewModel = ViewHelper.GetViewModel<BookListViewModel>(bookListView)!;
+        var bookListViewModel = bookListView.ViewModel;
         var bookView = Get<MockBookView>();
-        var bookViewModel = ViewHelper.GetViewModel<BookViewModel>(bookView)!;
+        var bookViewModel = bookView.ViewModel;
 
         // Check that the LendTo Button is enabled
         Assert.IsNull(fellowship.LendTo);
@@ -235,7 +235,7 @@ public class BookControllerTest : TestClassBase
         {
             Assert.AreEqual(Get<IShellView>(), view.Owner);
             Assert.IsTrue(view.IsVisible);
-            LendToViewModel viewModel = (LendToViewModel)view.DataContext!;
+            LendToViewModel viewModel = view.ViewModel;
             Assert.AreEqual(fellowship, viewModel.Book);
             Assert.AreEqual(entityService.Persons, viewModel.Persons);
 

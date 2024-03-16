@@ -26,8 +26,8 @@ public class PersonControllerTest : TestClassBase
     public void SelectionTest()
     {
         var entityService = Get<IEntityService>();
-        entityService.Persons.Add(new Person() { Firstname = "Harry" });
-        entityService.Persons.Add(new Person() { Firstname = "Ron" });
+        entityService.Persons.Add(new() { Firstname = "Harry" });
+        entityService.Persons.Add(new() { Firstname = "Ron" });
         var personController = Get<PersonController>();
         personController.Initialize();
 
@@ -58,9 +58,9 @@ public class PersonControllerTest : TestClassBase
         var personController = Get<PersonController>();
         personController.Initialize();
         var personListView = Get<MockPersonListView>();
-        var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
+        var personListViewModel = personListView.ViewModel;
         var personView = Get<MockPersonView>();
-        var personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView)!;
+        var personViewModel = personView.ViewModel;
 
         // Add a new Person
         Assert.AreEqual(2, entityService.Persons.Count);
@@ -107,9 +107,9 @@ public class PersonControllerTest : TestClassBase
         var personController = Get<PersonController>();
         personController.Initialize();
         var personListView = Get<MockPersonListView>();
-        var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
+        var personListViewModel = personListView.ViewModel;
         var personView = Get<MockPersonView>();
-        var personViewModel = ViewHelper.GetViewModel<PersonViewModel>(personView)!;
+        var personViewModel = personView.ViewModel;
 
         var command = personListViewModel.CreateNewEmailCommand!;
         Assert.AreEqual(command, personViewModel.CreateNewEmailCommand);
@@ -181,7 +181,7 @@ public class PersonControllerTest : TestClassBase
         var personController = Get<PersonController>();
         personController.Initialize();
         var personListView = Get<MockPersonListView>();
-        var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
+        var personListViewModel = personListView.ViewModel;
         // Set the sorting to: "Ginny", "Harry", "Ron"
         personController.PersonsView!.Sort = x => x.OrderBy(p => p.Firstname);
 
@@ -206,7 +206,7 @@ public class PersonControllerTest : TestClassBase
         var personController = Get<PersonController>();
         personController.Initialize();
         var personListView = Get<MockPersonListView>();
-        var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
+        var personListViewModel = personListView.ViewModel;
         // Set the sorting to: "Ginny", "Harry", "Ron"
         personController.PersonsView!.Sort = x => x.OrderBy(p => p.Firstname);
 
@@ -231,7 +231,7 @@ public class PersonControllerTest : TestClassBase
         var personController = Get<PersonController>();
         personController.Initialize();
         var personListView = Get<MockPersonListView>();
-        var personListViewModel = ViewHelper.GetViewModel<PersonListViewModel>(personListView)!;
+        var personListViewModel = personListView.ViewModel;
 
         // Remove all persons and check that nothing is selected anymore
         personListViewModel.SelectedPerson = harry;

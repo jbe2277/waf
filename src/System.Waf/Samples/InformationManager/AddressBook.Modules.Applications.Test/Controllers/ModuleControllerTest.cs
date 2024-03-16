@@ -94,8 +94,7 @@ public class ModuleControllerTest : AddressBookTest
 
         MockSelectContactView.ShowDialogAction = view =>
         {
-            var viewModel = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
-            viewModel.OkCommand.Execute(null);
+            view.ViewModel.OkCommand.Execute(null);
         };
         var ownerView = new object();
         var contactDto = controller.ShowSelectContactView(ownerView);

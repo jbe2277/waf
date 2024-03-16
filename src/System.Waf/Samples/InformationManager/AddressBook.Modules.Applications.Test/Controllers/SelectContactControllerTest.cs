@@ -33,7 +33,7 @@ public class SelectContactControllerTest : AddressBookTest
 
         MockSelectContactView.ShowDialogAction = view =>
         {
-            var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
+            var vm = view.ViewModel;
             Assert.AreEqual(contact1, controller.ContactListViewModel.SelectedContact);
 
             AssertHelper.CanExecuteChangedEvent(vm.OkCommand, () => controller.ContactListViewModel.SelectedContact = null);

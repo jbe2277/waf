@@ -18,7 +18,7 @@ public class EntityControllerTest : TestClassBase
         controller.Initialize();
         Assert.IsFalse(controller.HasChanges());
         var entityService = Get<EntityService>();
-        entityService.Persons.Add(new Person() { Firstname = "Harry", Lastname = "Potter" });
+        entityService.Persons.Add(new() { Firstname = "Harry", Lastname = "Potter" });
         entityService.Persons[^1].Validate();
         Assert.IsTrue(controller.HasChanges());
 
@@ -29,7 +29,7 @@ public class EntityControllerTest : TestClassBase
         var messageService = Get<MockMessageService>();
         Assert.AreEqual(MessageType.None, messageService.MessageType);
 
-        entityService.Persons.Add(new Person());
+        entityService.Persons.Add(new());
         entityService.Persons[^1].Validate();
         Assert.IsTrue(controller.HasChanges());
         var shellViewModel = Get<ShellViewModel>();

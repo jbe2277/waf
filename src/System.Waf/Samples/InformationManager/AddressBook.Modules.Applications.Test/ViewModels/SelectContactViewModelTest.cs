@@ -23,7 +23,7 @@ public class SelectContactViewModelTest : AddressBookTest
         MockSelectContactView.ShowDialogAction = view =>
         {
             showDialogActionCalled = true;
-            var vm = ViewHelper.GetViewModel<SelectContactViewModel>(view)!;
+            var vm = view.ViewModel;
             vm.Close();
             Assert.IsFalse(view.IsVisible);
         };

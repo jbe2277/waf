@@ -35,7 +35,7 @@ public class BookListViewModelTest
         Assert.AreEqual(books[0], bookListViewModel.SelectedBook?.Book);
 
         bookListViewModel.AddSelectedBook(bookDataModels[0]);
-        AssertHelper.SequenceEqual(new[] { bookDataModels[0] }, bookListViewModel.SelectedBooks);
+        AssertHelper.SequenceEqual([ bookDataModels[0] ], bookListViewModel.SelectedBooks);
 
         // Select both books
         bookListViewModel.AddSelectedBook(bookDataModels[^1]);

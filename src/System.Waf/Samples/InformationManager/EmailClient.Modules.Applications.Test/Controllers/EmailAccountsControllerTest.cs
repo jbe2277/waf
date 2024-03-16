@@ -37,7 +37,7 @@ public class EmailAccountsControllerTest : EmailClientTest
 
     private static void EmailAccountsViewShowDialog(MockEmailAccountsView view)
     {
-        var viewModel = ViewHelper.GetViewModel<EmailAccountsViewModel>(view)!;
+        var viewModel = view.ViewModel;
         Assert.IsFalse(viewModel.EmailClientRoot.EmailAccounts.Any());
         Assert.IsNull(viewModel.SelectedEmailAccount);
         Assert.IsFalse(viewModel.EditAccountCommand.CanExecute(null));
@@ -86,7 +86,7 @@ public class EmailAccountsControllerTest : EmailClientTest
 
     private static void EditEmailAccountViewShowDialog(MockEditEmailAccountView view)
     {
-        var viewModel = ViewHelper.GetViewModel<EditEmailAccountViewModel>(view)!;
+        var viewModel = view.ViewModel;
 
         // Just finish the wizard with default settings
         viewModel.NextCommand.Execute(null);

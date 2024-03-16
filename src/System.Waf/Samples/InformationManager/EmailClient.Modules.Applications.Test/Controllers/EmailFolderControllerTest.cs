@@ -15,8 +15,8 @@ public class EmailFolderControllerTest : EmailClientTest
     public void DeleteEmails()
     {
         var root = new EmailClientRoot();
-        root.Inbox.AddEmail(new Email());
-        root.Inbox.AddEmail(new Email());
+        root.Inbox.AddEmail(new());
+        root.Inbox.AddEmail(new());
 
         // Create the controller
 

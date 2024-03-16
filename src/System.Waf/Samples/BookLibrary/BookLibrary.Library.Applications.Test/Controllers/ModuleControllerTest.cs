@@ -38,7 +38,7 @@ public class ModuleControllerTest : TestClassBase
         Assert.IsTrue(shellView.IsVisible);
 
         // Exit the ShellView
-        var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
+        var shellViewModel = shellView.ViewModel;
         shellViewModel.ExitCommand!.Execute(null);
         Assert.IsFalse(shellView.IsVisible);
 
@@ -57,7 +57,7 @@ public class ModuleControllerTest : TestClassBase
         moduleController.Initialize();
         moduleController.Run();
         var shellView = Get<MockShellView>();
-        var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
+        var shellViewModel = shellView.ViewModel;
 
         // Exit the application although we have unsaved changes.
         entityController.HasChangesResult = true;
@@ -107,7 +107,7 @@ public class ModuleControllerTest : TestClassBase
         moduleController.Initialize();
         moduleController.Run();
         var shellView = Get<MockShellView>();
-        var shellViewModel = ViewHelper.GetViewModel<ShellViewModel>(shellView)!;
+        var shellViewModel = shellView.ViewModel;
 
         // Exit the application although we have unsaved changes.
         entityController.HasChangesResult = true;
