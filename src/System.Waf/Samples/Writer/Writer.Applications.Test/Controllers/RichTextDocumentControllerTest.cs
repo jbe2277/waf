@@ -11,6 +11,12 @@ namespace Test.Writer.Applications.Controllers;
 [TestClass]
 public class RichTextDocumentControllerTest : ApplicationsTest
 {
+    protected override void OnInitialize()
+    {
+        base.OnInitialize();
+        StartApp();
+    }
+
     [TestMethod]
     public void AddAndRemoveDocumentViewTest()
     {

@@ -1,25 +1,25 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
-using Waf.Writer.Applications.Services;
+using Test.Writer.Applications.Services;
 
-namespace Test.Writer.Presentation.Controllers;
+namespace Test.Writer.Presentation;
 
 [TestClass]
-public class FileControllerIntegrationTest : PresentationTest
+public class IntegrationTest : PresentationTest
 {
     [TestMethod]
     public void OpenDocumentViaCommandLineIntegrationTest()
     {
-        var fileService = Get<IFileService>();
-
-        Assert.IsFalse(fileService.Documents.Any());
-        Assert.IsNull(fileService.ActiveDocument);
+        var systemService = Get<MockSystemService>();
+        systemService.DocumentFileName = "2i0501fh-89f1-4197-a318-d5241135f4f6.rtf";
 
         var messageService = Get<MockMessageService>();
 
         // Call open with a fileName that doesn't exist
         messageService.Clear();
-        fileService.OpenCommand.Execute("2i0501fh-89f1-4197-a318-d5241135f4f6.rtf");
+
+        StartApp();
+
         Assert.AreEqual(MessageType.Error, messageService.MessageType);
         Assert.IsFalse(string.IsNullOrEmpty(messageService.Message));
     }

@@ -11,7 +11,7 @@ public class MainViewModelTest : ApplicationsTest
     protected override void OnInitialize()
     {
         base.OnInitialize();
-        InitializePrintController();
+        StartApp();
     }
 
     [TestMethod]

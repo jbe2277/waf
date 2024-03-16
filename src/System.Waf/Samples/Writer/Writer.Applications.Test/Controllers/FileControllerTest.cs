@@ -15,6 +15,12 @@ namespace Test.Writer.Applications.Controllers;
 [TestClass]
 public class FileControllerTest : ApplicationsTest
 {
+    protected override void OnInitialize()
+    {
+        base.OnInitialize();
+        StartApp();
+    }
+
     [TestMethod]
     public void RegisterDocumentTypesTest()
     {

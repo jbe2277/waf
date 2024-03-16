@@ -13,7 +13,7 @@ public class PrintControllerTest : ApplicationsTest
     protected override void OnInitialize()
     {
         base.OnInitialize();
-        InitializePrintController();
+        StartApp();
     }
 
     [TestMethod]

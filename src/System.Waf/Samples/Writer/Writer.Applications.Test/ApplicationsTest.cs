@@ -10,7 +10,7 @@ namespace Test.Writer.Applications;
 [TestClass]
 public abstract class ApplicationsTest
 {
-    private PrintController? printController;
+    private ModuleController? moduleController;
 
     protected CompositionContainer Container { get; private set; } = null!;
 
@@ -28,9 +28,6 @@ public abstract class ApplicationsTest
         batch.AddExportedValue(Container);
         Container.Compose(batch);
 
-        Get<RichTextDocumentController>();
-        Get<FileController>();
-
         OnInitialize();
     }
 
@@ -47,7 +44,10 @@ public abstract class ApplicationsTest
 
     protected virtual void OnInitialize() { }
 
-    protected virtual void OnCleanup() { }
+    protected virtual void OnCleanup() 
+    {
+        moduleController?.Shutdown();
+    }
 
     protected virtual void OnCatalogInitialize(AggregateCatalog catalog)
     {
@@ -56,10 +56,10 @@ public abstract class ApplicationsTest
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(ApplicationsTest).Assembly));
     }
 
-    internal PrintController InitializePrintController()
+    protected void StartApp()
     {
-        printController = Get<PrintController>();
-        printController.Initialize();
-        return printController;
+        moduleController = Get<ModuleController>();
+        moduleController.Initialize();
+        moduleController.Run();
     }
 }
