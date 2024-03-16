@@ -10,6 +10,12 @@ namespace Test.Writer.Presentation;
 [TestClass]
 public class IntegrationTest : PresentationTest
 {
+    protected override void OnCleanup()
+    {
+        MockSaveChangesView.ShowDialogAction = null;
+        base.OnCleanup();
+    }
+
     [TestMethod]
     public void OpenDocumentViaCommandLineIntegrationTest()
     {
