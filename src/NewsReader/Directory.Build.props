@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <MauiVersion>8.0.10</MauiVersion>
+    <MauiVersion>8.0.14</MauiVersion>
     
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
