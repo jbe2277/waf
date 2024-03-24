@@ -44,43 +44,43 @@
             </Ribbon.QuickAccessToolBar>
             
             <Ribbon.ApplicationMenu>
-                <RibbonApplicationMenu KeyTip="F">
+                <RibbonApplicationMenu KeyTip="F" AutomationProperties.AutomationId="FileRibbonMenu">
                     <RibbonApplicationMenuItem Command="{Binding FileService.NewCommand}" IsEnabled="{Binding IsPrintPreviewVisible, Converter={StaticResource InvertBooleanConverter}}" 
-                                               Header="{x:Static p:Resources.NewMenu}" ImageSource="{StaticResource NewLargeImageSource}" 
+                                               Header="{x:Static p:Resources.NewMenu}" ImageSource="{StaticResource NewLargeImageSource}" AutomationProperties.AutomationId="NewMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.NewToolTip}" ToolTipDescription="{x:Static p:Resources.NewToolTipDescription}"/>
                     <RibbonApplicationMenuItem Command="{Binding FileService.OpenCommand}" IsEnabled="{Binding IsPrintPreviewVisible, Converter={StaticResource InvertBooleanConverter}}" 
-                                               Header="{x:Static p:Resources.OpenMenu}" ImageSource="{StaticResource OpenLargeImageSource}" 
+                                               Header="{x:Static p:Resources.OpenMenu}" ImageSource="{StaticResource OpenLargeImageSource}" AutomationProperties.AutomationId="OpenMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.OpenToolTip}" ToolTipDescription="{x:Static p:Resources.OpenToolTipDescription}"/>
                     <RibbonApplicationMenuItem Command="{Binding FileService.CloseCommand}" IsEnabled="{Binding IsPrintPreviewVisible, Converter={StaticResource InvertBooleanConverter}}" 
-                                               Header="{x:Static p:Resources.CloseMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" 
+                                               Header="{x:Static p:Resources.CloseMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" AutomationProperties.AutomationId="CloseMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.CloseToolTip}" ToolTipDescription="{x:Static p:Resources.CloseToolTipDescription}"/>
                     <RibbonApplicationMenuItem Command="{Binding FileService.SaveCommand}" IsEnabled="{Binding IsPrintPreviewVisible, Converter={StaticResource InvertBooleanConverter}}" 
-                                               Header="{x:Static p:Resources.SaveMenu}" ImageSource="{StaticResource SaveLargeImageSource}" 
+                                               Header="{x:Static p:Resources.SaveMenu}" ImageSource="{StaticResource SaveLargeImageSource}" AutomationProperties.AutomationId="SaveMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.SaveToolTip}" ToolTipDescription="{x:Static p:Resources.SaveToolTipDescription}"/>
                     <RibbonApplicationMenuItem Command="{Binding FileService.SaveAsCommand}" IsEnabled="{Binding IsPrintPreviewVisible, Converter={StaticResource InvertBooleanConverter}}" 
-                                               Header="{x:Static p:Resources.SaveAsMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" 
+                                               Header="{x:Static p:Resources.SaveAsMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" AutomationProperties.AutomationId="SaveAsMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.SaveAsToolTip}" ToolTipDescription="{x:Static p:Resources.SaveAsToolTipDescription}"/>
                     <RibbonSeparator/>
                     <RibbonApplicationMenuItem Command="{Binding PrintCommand}" 
-                                               Header="{x:Static p:Resources.PrintMenu}" ImageSource="{StaticResource PrintLargeImageSource}" 
+                                               Header="{x:Static p:Resources.PrintMenu}" ImageSource="{StaticResource PrintLargeImageSource}" AutomationProperties.AutomationId="PrintMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.PrintToolTip}" ToolTipDescription="{x:Static p:Resources.PrintToolTipDescription}"/>
                     <RibbonApplicationMenuItem Command="{Binding PrintPreviewCommand}" 
-                                               Header="{x:Static p:Resources.PrintPreviewMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" 
+                                               Header="{x:Static p:Resources.PrintPreviewMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" AutomationProperties.AutomationId="PrintPreviewMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.PrintPreviewToolTip}" ToolTipDescription="{x:Static p:Resources.PrintPreviewToolTipDescription}"/>
                     <RibbonSeparator/>
                     <RibbonApplicationMenuItem Command="{Binding ExitCommand}" 
-                                               Header="{x:Static p:Resources.ExitMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" 
+                                               Header="{x:Static p:Resources.ExitMenu}" ImageSource="{StaticResource EmptyLargeImageSource}" AutomationProperties.AutomationId="ExitMenuItem"
                                                ToolTipTitle="{x:Static p:Resources.ExitToolTip}" ToolTipDescription="{x:Static p:Resources.ExitToolTipDescription}"/>
                     
                     <RibbonApplicationMenu.AuxiliaryPaneContent>
                         <StackPanel Visibility="{Binding IsPrintPreviewVisible, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
                             <Label Content="{x:Static p:Resources.RecentDocuments}" FontWeight="SemiBold" Margin="0"/>
                             <RibbonSeparator/>
-                            <ItemsControl ItemsSource="{Binding FileService.RecentFileList.RecentFiles}" Focusable="False" Margin="0,1,0,0">
+                            <ItemsControl ItemsSource="{Binding FileService.RecentFileList.RecentFiles}" Focusable="False" Margin="0,1,0,0" AutomationProperties.AutomationId="RecentFileList">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <DockPanel Margin="0,0,0,1">
-                                            <ToggleButton IsChecked="{Binding IsPinned}" Margin="2,0,0,0" DockPanel.Dock="Right">
+                                            <ToggleButton IsChecked="{Binding IsPinned}" Margin="2,0,0,0" DockPanel.Dock="Right" AutomationProperties.AutomationId="PinToggleButton">
                                                 <ToggleButton.Style>
                                                     <Style TargetType="ToggleButton" BasedOn="{StaticResource PinRibbonToggleButton}">
                                                         <Setter Property="Content" Value="{StaticResource PinImageSource}"/>
@@ -97,8 +97,7 @@
 
                                             <RibbonButton Command="{Binding DataContext.FileService.OpenCommand, ElementName=shellWindow}" CommandParameter="{Binding Path}"
                                                           Content="{Binding Path, Converter={StaticResource MenuFileNameConverter}, Mode=OneWay}"
-                                                          ToolTip="{Binding Path}"
-                                                          Style="{StaticResource RecentDocumentRibbonButton}"/>                                                
+                                                          ToolTip="{Binding Path}" Style="{StaticResource RecentDocumentRibbonButton}" AutomationProperties.AutomationId="OpenItemButton"/>
                                         </DockPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -110,21 +109,21 @@
 
             <Ribbon.HelpPaneContent>
                 <RibbonButton Command="{Binding AboutCommand}" 
-                              SmallImageSource="{StaticResource HelpImageSource}" 
+                              SmallImageSource="{StaticResource HelpImageSource}" AutomationProperties.AutomationId="AboutButton"
                               ToolTipTitle="{x:Static p:Resources.HelpToolTip}" ToolTipDescription="{x:Static p:Resources.HelpToolTipDescription}"/>
             </Ribbon.HelpPaneContent>
 
-            <RibbonTab Header="{x:Static p:Resources.Home}" KeyTip="H" 
+            <RibbonTab Header="{x:Static p:Resources.Home}" KeyTip="H" AutomationProperties.AutomationId="HomeTab"
                        Visibility="{Binding IsPrintPreviewVisible, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}"
                        IsSelected="{Binding IsVisible, RelativeSource={RelativeSource Self}, Mode=OneWay}">
                 <RibbonGroup Header="{x:Static p:Resources.Clipboard}">
-                    <RibbonButton Command="ApplicationCommands.Paste" 
+                    <RibbonButton Command="ApplicationCommands.Paste" AutomationProperties.AutomationId="PasteButton"
                                   Label="{x:Static p:Resources.Paste}" KeyTip="V" LargeImageSource="{StaticResource PasteLargeImageSource}" 
                                   ToolTipTitle="{x:Static p:Resources.PasteToolTip}" ToolTipDescription="{x:Static p:Resources.PasteToolTipDescription}"/>
-                    <RibbonButton Command="ApplicationCommands.Cut" 
+                    <RibbonButton Command="ApplicationCommands.Cut" AutomationProperties.AutomationId="CutButton"
                                   Label="{x:Static p:Resources.Cut}" KeyTip="X" SmallImageSource="{StaticResource CutImageSource}" 
                                   ToolTipTitle="{x:Static p:Resources.CutToolTip}" ToolTipDescription="{x:Static p:Resources.CutToolTipDescription}"/>
-                    <RibbonButton Command="ApplicationCommands.Copy" 
+                    <RibbonButton Command="ApplicationCommands.Copy" AutomationProperties.AutomationId="CopyButton"
                                   Label="{x:Static p:Resources.Copy}" KeyTip="C" SmallImageSource="{StaticResource CopyImageSource}" 
                                   ToolTipTitle="{x:Static p:Resources.CopyToolTip}" ToolTipDescription="{x:Static p:Resources.CopyToolTipDescription}"/>
                 </RibbonGroup>
@@ -139,31 +138,31 @@
 
                         <RibbonControlGroup HorizontalAlignment="Left">
                             <RibbonToggleButton Command="EditingCommands.ToggleBold" IsChecked="{Binding ShellService.ActiveEditingCommands.IsBold}"
-                                                SmallImageSource="{StaticResource BoldImageSource}" KeyTip="B" 
+                                                SmallImageSource="{StaticResource BoldImageSource}" KeyTip="B" AutomationProperties.AutomationId="ToggleBoldButton"
                                                 ToolTipTitle="{x:Static p:Resources.BoldToolTip}" ToolTipDescription="{x:Static p:Resources.BoldToolTipDescription}"/>
                             <RibbonToggleButton Command="EditingCommands.ToggleItalic" IsChecked="{Binding ShellService.ActiveEditingCommands.IsItalic}" 
-                                                SmallImageSource="{StaticResource ItalicImageSource}" KeyTip="I" 
+                                                SmallImageSource="{StaticResource ItalicImageSource}" KeyTip="I" AutomationProperties.AutomationId="ToggleItalicButton"
                                                 ToolTipTitle="{x:Static p:Resources.ItalicToolTip}" ToolTipDescription="{x:Static p:Resources.ItalicToolTipDescription}"/>
                             <RibbonToggleButton Command="EditingCommands.ToggleUnderline" IsChecked="{Binding ShellService.ActiveEditingCommands.IsUnderline}" 
-                                                SmallImageSource="{StaticResource UnderlineImageSource}" KeyTip="U" 
+                                                SmallImageSource="{StaticResource UnderlineImageSource}" KeyTip="U" AutomationProperties.AutomationId="ToggleUnderlineButton"
                                                 ToolTipTitle="{x:Static p:Resources.UnderlineToolTip}" ToolTipDescription="{x:Static p:Resources.UnderlineToolTipDescription}"/>
                         </RibbonControlGroup>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="2">
                             <RibbonControlGroup>
                                 <RibbonToggleButton Command="EditingCommands.ToggleNumbering" IsChecked="{Binding ShellService.ActiveEditingCommands.IsNumberedList}" 
-                                                    SmallImageSource="{StaticResource NumberingImageSource}" KeyTip="N" 
+                                                    SmallImageSource="{StaticResource NumberingImageSource}" KeyTip="N" AutomationProperties.AutomationId="ToggleNumberingButton"
                                                     ToolTipTitle="{x:Static p:Resources.NumberedList}" ToolTipDescription="{x:Static p:Resources.NumberedListToolTipDescription}"/>
                                 <RibbonToggleButton Command="EditingCommands.ToggleBullets" IsChecked="{Binding ShellService.ActiveEditingCommands.IsBulletList}" 
-                                                    SmallImageSource="{StaticResource BulletsImageSource}" KeyTip="L" 
+                                                    SmallImageSource="{StaticResource BulletsImageSource}" KeyTip="L" AutomationProperties.AutomationId="ToggleBulletsButton"
                                                     ToolTipTitle="{x:Static p:Resources.BulletedList}" ToolTipDescription="{x:Static p:Resources.BulletedListToolTipDescription}"/>
                             </RibbonControlGroup>
                             
                             <RibbonControlGroup Margin="7,0,3,0">
-                                <RibbonButton Command="EditingCommands.DecreaseIndentation" 
+                                <RibbonButton Command="EditingCommands.DecreaseIndentation" AutomationProperties.AutomationId="DecreaseIndentationButton"
                                               SmallImageSource="{StaticResource DecreaseIndentationImageSource}" KeyTip="E" 
                                               ToolTipTitle="{x:Static p:Resources.DecreaseIndentToolTip}" ToolTipDescription="{x:Static p:Resources.DecreaseIndentToolTipDescription}"/>
-                                <RibbonButton Command="EditingCommands.IncreaseIndentation" 
+                                <RibbonButton Command="EditingCommands.IncreaseIndentation" AutomationProperties.AutomationId="IncreaseIndentationButton"
                                               SmallImageSource="{StaticResource IncreaseIndentationImageSource}" KeyTip="I" 
                                               ToolTipTitle="{x:Static p:Resources.IncreaseIndentToolTip}" ToolTipDescription="{x:Static p:Resources.IncreaseIndentToolTipDescription}"/>
                             </RibbonControlGroup>
@@ -172,10 +171,10 @@
                 </RibbonGroup>
                 
                 <RibbonGroup Header="{x:Static p:Resources.Editing}">
-                    <RibbonButton Command="ApplicationCommands.SelectAll" 
+                    <RibbonButton Command="ApplicationCommands.SelectAll" AutomationProperties.AutomationId="SelectAllButton"
                                   Label="{x:Static p:Resources.SelectAll}" SmallImageSource="{StaticResource SelectAllImageSource}" KeyTip="A" 
                                   ToolTipTitle="{x:Static p:Resources.SelectAllToolTip}" ToolTipDescription="{x:Static p:Resources.SelectAllToolTipDescription}"/>
-                    <RibbonButton Command="EditingCommands.Delete" 
+                    <RibbonButton Command="EditingCommands.Delete" AutomationProperties.AutomationId="DeleteButton"
                                   Label="{x:Static p:Resources.Delete}" SmallImageSource="{StaticResource DeleteImageSource}" KeyTip="D" 
                                   ToolTipTitle="{x:Static p:Resources.DeleteToolTip}" ToolTipDescription="{x:Static p:Resources.DeleteToolTipDescription}"/>
                 </RibbonGroup>
@@ -183,32 +182,33 @@
                 <RibbonGroup Header="{x:Static p:Resources.Proofing}">
                     <RibbonToggleButton IsEnabled="{Binding ShellService.ActiveEditingCommands.IsSpellCheckAvailable}" IsChecked="{Binding ShellService.ActiveEditingCommands.IsSpellCheckEnabled}" 
                                         Label="{x:Static p:Resources.CheckSpelling}" LargeImageSource="{StaticResource CheckSpellingLargeImageSource}" KeyTip="S" 
-                                        ToolTipTitle="{x:Static p:Resources.CheckSpelling}" ToolTipDescription="{x:Static p:Resources.CheckSpellingToolTipDescription}"/>
+                                        ToolTipTitle="{x:Static p:Resources.CheckSpelling}" ToolTipDescription="{x:Static p:Resources.CheckSpellingToolTipDescription}"
+                                        AutomationProperties.AutomationId="IsSpellCheckEnabledToggleButton"/>
                 </RibbonGroup>
             </RibbonTab>
 
-            <RibbonTab Header="{x:Static p:Resources.View}" KeyTip="V" 
+            <RibbonTab Header="{x:Static p:Resources.View}" KeyTip="V" AutomationProperties.AutomationId="ViewTab"
                        Visibility="{Binding IsPrintPreviewVisible, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}">
                 <RibbonGroup Header="{x:Static p:Resources.Language}">
-                    <RibbonButton Command="{Binding EnglishCommand}" 
+                    <RibbonButton Command="{Binding EnglishCommand}" AutomationProperties.AutomationId="EnglishButton"
                                   Label="{x:Static p:Resources.English}" SmallImageSource="{StaticResource FlagEnImageSource}" KeyTip="E" 
                                   ToolTipTitle="{x:Static p:Resources.English}" ToolTipDescription="{x:Static p:Resources.EnglishToolTipDescription}"/>
-                    <RibbonButton Command="{Binding GermanCommand}" 
+                    <RibbonButton Command="{Binding GermanCommand}" AutomationProperties.AutomationId="GermanButton"
                                   Label="{x:Static p:Resources.German}" SmallImageSource="{StaticResource FlagDeImageSource}" KeyTip="G" 
                                   ToolTipTitle="{x:Static p:Resources.German}" ToolTipDescription="{x:Static p:Resources.GermanToolTipDescription}"/>
                 </RibbonGroup>
 
                 <RibbonGroup Header="{x:Static p:Resources.Zoom}">
-                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomInCommand}" 
+                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomInCommand}" AutomationProperties.AutomationId="ZoomInButton"
                                   Label="{x:Static p:Resources.ZoomIn}" LargeImageSource="{StaticResource ZoomInLargeImageSource}" KeyTip="I"
                                   ToolTipTitle="{x:Static p:Resources.ZoomInToolTip}" ToolTipDescription="{x:Static p:Resources.ZoomInToolTipDescription}"/>
-                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomOutCommand}" 
+                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomOutCommand}" AutomationProperties.AutomationId="ZoomOutButton"
                                   Label="{x:Static p:Resources.ZoomOut}" LargeImageSource="{StaticResource ZoomOutLargeImageSource}" KeyTip="O"
                                   ToolTipTitle="{x:Static p:Resources.ZoomOutToolTip}" ToolTipDescription="{x:Static p:Resources.ZoomOutToolTipDescription}"/>
                 </RibbonGroup>
             </RibbonTab>
-            
-            <RibbonTab Header="{x:Static p:Resources.PrintPreview}" KeyTip="P"
+
+            <RibbonTab Header="{x:Static p:Resources.PrintPreview}" KeyTip="P" AutomationProperties.AutomationId="PrintPreviewTab"
                        Visibility="{Binding IsPrintPreviewVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                 <RibbonTab.Style>
                     <Style TargetType="RibbonTab">
@@ -223,25 +223,25 @@
                 </RibbonTab.Style>
                 
                 <RibbonGroup>
-                    <RibbonButton Command="{Binding ClosePrintPreviewCommand}" 
+                    <RibbonButton Command="{Binding ClosePrintPreviewCommand}" AutomationProperties.AutomationId="ClosePrintPreviewButton"
                                   Label="{x:Static p:Resources.ClosePreview}" LargeImageSource="{StaticResource CloseLargeImageSource}" KeyTip="C"
                                   ToolTipTitle="{x:Static p:Resources.ClosePreviewToolTip}" ToolTipDescription="{x:Static p:Resources.ClosePreviewToolTipDescription}"/>
                 </RibbonGroup>
 
                 <RibbonGroup Header="{x:Static p:Resources.Print}">
-                    <RibbonButton Command="{Binding PrintCommand}" 
+                    <RibbonButton Command="{Binding PrintCommand}" AutomationProperties.AutomationId="PrintButton" 
                                   Label="{x:Static p:Resources.Print}" LargeImageSource="{StaticResource PrintLargeImageSource}" KeyTip="P"
                                   ToolTipTitle="{x:Static p:Resources.PrintToolTip}" ToolTipDescription="{x:Static p:Resources.PrintToolTipDescription}"/>
                 </RibbonGroup>
 
                 <RibbonGroup Header="{x:Static p:Resources.Zoom}">
-                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomInCommand}" 
+                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomInCommand}" AutomationProperties.AutomationId="ZoomInButton"
                                   Label="{x:Static p:Resources.ZoomIn}" LargeImageSource="{StaticResource ZoomInLargeImageSource}" KeyTip="I"
                                   ToolTipTitle="{x:Static p:Resources.ZoomInToolTip}" ToolTipDescription="{x:Static p:Resources.ZoomInToolTipDescription}"/>
-                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomOutCommand}" 
+                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.ZoomOutCommand}" AutomationProperties.AutomationId="ZoomOutButton"
                                   Label="{x:Static p:Resources.ZoomOut}" LargeImageSource="{StaticResource ZoomOutLargeImageSource}" KeyTip="O"
                                   ToolTipTitle="{x:Static p:Resources.ZoomOutToolTip}" ToolTipDescription="{x:Static p:Resources.ZoomOutToolTipDescription}"/>
-                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.FitToWidthCommand}" 
+                    <RibbonButton Command="{Binding ShellService.ActiveZoomCommands.FitToWidthCommand}" AutomationProperties.AutomationId="FitToWidthButton"
                                   Label="{x:Static p:Resources.PageWidth}" SmallImageSource="{StaticResource ZoomPageWidthImageSource}" KeyTip="W"
                                   ToolTipTitle="{x:Static p:Resources.PageWidthToolTip}" ToolTipDescription="{x:Static p:Resources.PageWidthToolTipDescription}"/>
                 </RibbonGroup>
@@ -253,7 +253,7 @@
             <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding ShellService.ActiveZoomCommands.DefaultZooms, Converter={StaticResource NullToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{x:Static p:Resources.ZoomMenu}" Target="{Binding ElementName=zoomBox}" VerticalAlignment="Center" Padding="0" Margin="0"/>
-                    <ComboBox x:Name="zoomBox" ItemsSource="{Binding ShellService.ActiveZoomCommands.DefaultZooms}"
+                    <ComboBox x:Name="zoomBox" ItemsSource="{Binding ShellService.ActiveZoomCommands.DefaultZooms}" AutomationProperties.AutomationId="ZoomComboBox"
                               Text="{Binding ShellService.ActiveZoomCommands.Zoom, UpdateSourceTrigger=LostFocus, Converter={StaticResource PercentConverter}}" 
                               IsEditable="True" DropDownClosed="ZoomBoxDropDownClosedHandler" KeyDown="ZoomBoxKeyDownHandler" Margin="7,0,0,0" Width="65"
                               Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">

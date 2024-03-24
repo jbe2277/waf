@@ -57,28 +57,23 @@
                         <Setter.Value>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center">
-                                    <TextBlock.Text>
-                                        <MultiBinding Converter="{StaticResource TabFileNameConverter}">
-                                            <Binding Path="Document.FileName"/>
-                                            <Binding Path="Document.Modified"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
+                                    <TextBlock VerticalAlignment="Center" AutomationProperties.AutomationId="TabName">
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource TabFileNameConverter}">
+                                                <Binding Path="Document.FileName"/>
+                                                <Binding Path="Document.Modified"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                     <Button Command="{Binding DataContext.FileService.CloseCommand, ElementName=rootContainer}" Content="{StaticResource CloseSmallImage}"
-                                        Visibility="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}},
-                                            Converter={StaticResource BoolToVisibilityConverter}}"
-                                        Width="16" Height="16" BorderThickness="0"
-                                        MinWidth="0" MinHeight="0" Padding="0" Margin="7,0,0,0">
+                                        Visibility="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}, Converter={StaticResource BoolToVisibilityConverter}}"
+                                        Width="16" Height="16" BorderThickness="0" MinWidth="0" MinHeight="0" Padding="0" Margin="7,0,0,0" AutomationProperties.AutomationId="CloseButton">
                                         <Button.Template>
                                             <ControlTemplate TargetType="{x:Type Button}">
                                                 <ContentPresenter Margin="{TemplateBinding Control.Padding}" 
-                                                                HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                                                                VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
-                                                                SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
-                                                                ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
-                                                                RecognizesAccessKey="True"
-                                                                Content="{TemplateBinding ContentControl.Content}"/>
+                                                        HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                                                        SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                                        RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}"/>
                                             </ControlTemplate>
                                         </Button.Template>
                                     </Button>

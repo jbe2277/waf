@@ -38,14 +38,15 @@
             </StackPanel>
         </Button>
 
-        <Button Command="{Binding FileService.OpenCommand}" Width="100" Height="50" Margin="33,22,0,0" Grid.Row="2" UseLayoutRounding="True">
+        <Button Command="{Binding FileService.OpenCommand}" Width="100" Height="50" Margin="33,22,0,0" Grid.Row="2" UseLayoutRounding="True" AutomationProperties.AutomationId="OpenButton">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{StaticResource OpenImageSource}" Width="16" Height="16"/>
                 <Label Content="{x:Static p:Resources.Open}" Margin="3"/>
             </StackPanel>
         </Button>
 
-        <ItemsControl ItemsSource="{Binding FileService.RecentFileList.RecentFiles}" Focusable="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="100,22,22,22">
+        <ItemsControl ItemsSource="{Binding FileService.RecentFileList.RecentFiles}" Focusable="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="100,22,22,22" 
+                AutomationProperties.AutomationId="RecentFilesList">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="0,0,0,15">
@@ -60,7 +61,7 @@
                             </ContextMenu>
                         </DockPanel.ContextMenu>
 
-                        <ToggleButton IsChecked="{Binding IsPinned}" DockPanel.Dock="Left">
+                        <ToggleButton IsChecked="{Binding IsPinned}" DockPanel.Dock="Left" AutomationProperties.AutomationId="PinToggleButton">
                             <ToggleButton.Style>
                                 <Style TargetType="ToggleButton">
                                     <Setter Property="Content" Value="{StaticResource PinImage}"/>
@@ -76,7 +77,7 @@
                         </ToggleButton>
 
                         <TextBlock TextTrimming="CharacterEllipsis" Padding="11,3" ToolTip="{Binding Path}">
-                            <Hyperlink Command="{Binding DataContext.FileService.OpenCommand, ElementName=startView}" CommandParameter="{Binding Path}">
+                            <Hyperlink Command="{Binding DataContext.FileService.OpenCommand, ElementName=startView}" CommandParameter="{Binding Path}" AutomationProperties.AutomationId="RecentItemOpenLink">
                                 <Run Text="{Binding Path, Converter={StaticResource MenuFileNameConverter}, Mode=OneWay}"/>
                             </Hyperlink>
                         </TextBlock>
