@@ -45,7 +45,7 @@
             </ContentControl.RenderTransform>
         </ContentControl>
 
-        <TabControl x:Name="documentView" ItemsSource="{Binding DocumentViews}" SelectedItem="{Binding ActiveDocumentView}">
+        <TabControl x:Name="documentView" ItemsSource="{Binding DocumentViews}" SelectedItem="{Binding ActiveDocumentView}" AutomationProperties.AutomationId="DocumentTabControl">
             <TabControl.RenderTransform>
                 <TranslateTransform/>
             </TabControl.RenderTransform>
