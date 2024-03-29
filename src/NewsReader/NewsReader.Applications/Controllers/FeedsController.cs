@@ -1,5 +1,4 @@
-﻿using Microsoft.AppCenter.Crashes;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.NewsReader.Applications.Properties;
 using Waf.NewsReader.Applications.Services;

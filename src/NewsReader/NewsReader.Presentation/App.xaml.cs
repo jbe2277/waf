@@ -1,7 +1,4 @@
-﻿using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Waf.Applications.Services;
 using Waf.NewsReader.Applications.Controllers;
 using Waf.NewsReader.Applications.Properties;
@@ -13,17 +10,6 @@ using LogLevel = NLog.LogLevel;
 using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.Presentation;
-
-// Telemetry data collection with https://appcenter.ms  
-// Provide the secrets via separate file 'App.xaml.keys.cs' which is excluded from GIT:
-//
-//public partial class App
-//{
-//    static partial void GetAppCenterSecret(ref string? appSecret)
-//    {
-//        appSecret = "android={secret};windowsdesktop={secret};ios={secret}";
-//    }
-//}
 
 public partial class App : Application
 {
@@ -79,10 +65,6 @@ public partial class App : Application
 
         Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
         Log.Default.Info("Device: {0} {1} {2}; Platform: {3} {4}", DeviceInfo.Idiom, DeviceInfo.Manufacturer, DeviceInfo.Model, DeviceInfo.Platform, DeviceInfo.Version);
-        string? appSecret = null;
-        GetAppCenterSecret(ref appSecret);
-        if (appSecret != null) AppCenter.Start(appSecret, typeof(Analytics), typeof(Crashes));
-        Analytics.TrackEvent("App started");
         appController.Start();
     }
 
@@ -159,6 +141,4 @@ public partial class App : Application
             CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = culture;
         }
     }
-
-    static partial void GetAppCenterSecret(ref string? appSecret);
 }
