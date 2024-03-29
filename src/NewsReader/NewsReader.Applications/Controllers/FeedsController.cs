@@ -87,7 +87,7 @@ internal sealed class FeedsController
 
     private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        foreach (Feed x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) LoadFeed(x).NoWait();
+        foreach (Feed x in e.NewItems ?? Array.Empty<Feed>()) LoadFeed(x).NoWait();
     }
 
     private async Task LoadFeed(Feed feed, bool ignoreInternetAccessStatus = false)
