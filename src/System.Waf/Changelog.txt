@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+Version 8.0.0 (Release)
+- WAF: Add generic version of MockView and MockDialogView for the view model.
+- Writer: Added an integration unit test.
+- NewsReader: Remove AppCenter support as this service is beeing discontinued by Microsoft.
+
+
 Version 8.0.0 (Beta 3)
 - WAF: ObservableListViewCore uses weak events to listen for the CollectionChanged event.
 - WAF: [Obsolete] Mark ObservableListView (WPF) as obsolete.
