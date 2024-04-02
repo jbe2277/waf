@@ -10,7 +10,7 @@ using Waf.Writer.Presentation.Services;
 namespace Test.Writer.Presentation
 {
     [TestClass]
-    public class PresentationTest : ApplicationsTest
+    public abstract class PresentationTest : ApplicationsTest
     {
         // List of exports which must use the real implementation instead of the mock (integration test)
         private static readonly Type[] exportNames = [
