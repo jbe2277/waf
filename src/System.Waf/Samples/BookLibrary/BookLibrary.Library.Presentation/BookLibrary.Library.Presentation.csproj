@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <RootNamespace>Waf.BookLibrary.Library.Presentation</RootNamespace>
     <AssemblyName>BookLibrary</AssemblyName>
     <UseWPF>true</UseWPF>

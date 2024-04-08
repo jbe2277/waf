@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <RootNamespace>Waf.BookLibrary.Reporting.Presentation</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Reporting.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
