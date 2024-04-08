@@ -13,8 +13,6 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var app = Launch();
         var window = GetShellWindow(app);
 
-        Log.WriteLine(window.Element.GetTree());
-
         window.AboutButton.Click();
 
         var messageBox = new MessageBox(window.Element.FirstModalWindow());
