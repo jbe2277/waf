@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <RootNamespace>Waf.BookLibrary.Reporting.Applications</RootNamespace>
     <AssemblyName>Waf.BookLibrary.Reporting.Applications</AssemblyName>
   </PropertyGroup>
