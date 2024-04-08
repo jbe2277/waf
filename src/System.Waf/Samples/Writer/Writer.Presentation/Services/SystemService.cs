@@ -7,7 +7,7 @@ namespace Waf.Writer.Presentation.Services;
 [Export(typeof(ISystemService))]
 internal sealed class SystemService : ISystemService
 {
-    private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().ElementAtOrDefault(1));
+    private readonly Lazy<string?> documentFileName = new(() => Environment.GetCommandLineArgs().Skip(1).FirstOrDefault(x => !x.StartsWith('-')));
 
     public string? DocumentFileName => documentFileName.Value;
 

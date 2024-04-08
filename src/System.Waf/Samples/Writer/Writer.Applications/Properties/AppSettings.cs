@@ -17,8 +17,6 @@ public sealed class AppSettings : UserSettingsBase
 
     [DataMember] public bool IsMaximized { get; set; }
 
-    [DataMember] public string? Culture { get; set; }
-
     [DataMember] public string? UICulture { get; set; }
 
     [DataMember] public RecentFileList? RecentFileList { get; set; }

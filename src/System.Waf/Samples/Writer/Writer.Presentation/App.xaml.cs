@@ -12,6 +12,8 @@ using System.Windows.Markup;
 using System.Windows.Threading;
 using Waf.Writer.Applications.Properties;
 using Waf.Writer.Applications.ViewModels;
+using Microsoft.Extensions.Configuration;
+using Waf.Writer.Presentation.Properties;
 
 namespace Waf.Writer.Presentation;
 
@@ -33,6 +35,18 @@ public partial class App
         DispatcherUnhandledException += AppDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
+        AppConfig appConfig;
+        try
+        {
+            var config = new ConfigurationBuilder().AddCommandLine(Environment.GetCommandLineArgs()).Build();
+            appConfig = config.Get<AppConfig>() ?? new AppConfig();
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "Command line parsing error");
+            appConfig = new AppConfig();
+        }
+
         catalog = new();
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
         catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Writer.Presentation
@@ -44,7 +58,7 @@ public partial class App
 
         var settingsService = container.GetExportedValue<ISettingsService>();
         settingsService.ErrorOccurred += (_, e) => Log.Default.Error(e.Error, "Error in SettingsService");
-        InitializeCultures(settingsService.Get<AppSettings>());
+        InitializeCultures(appConfig, settingsService.Get<AppSettings>());
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
         moduleControllers = container.GetExportedValues<IModuleController>();
@@ -61,10 +75,19 @@ public partial class App
         base.OnExit(e);
     }
 
-    private static void InitializeCultures(AppSettings settings)
+    private static void InitializeCultures(AppConfig appConfig, AppSettings settings)
     {
-        if (!string.IsNullOrEmpty(settings.Culture)) CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(settings.Culture);
-        if (!string.IsNullOrEmpty(settings.UICulture)) CultureInfo.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(settings.UICulture);
+        try
+        {
+            if (!string.IsNullOrEmpty(appConfig.Culture)) Thread.CurrentThread.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(appConfig.Culture);
+
+            var uiCulture = !string.IsNullOrEmpty(appConfig.UICulture) ? appConfig.UICulture : settings.UICulture;
+            if (!string.IsNullOrEmpty(uiCulture)) Thread.CurrentThread.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(uiCulture);
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "The specified culture code is invalid");
+        }
     }
 
     private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => HandleException(e.Exception, false);

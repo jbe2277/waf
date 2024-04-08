@@ -114,7 +114,6 @@ public class ModuleControllerTest : ApplicationsTest
     {
         var settingsService = Get<MockSettingsService>();
         var settings = settingsService.Get<AppSettings>();
-        settings.Culture = "de-DE";
         settings.UICulture = "de-AT";
 
         var controller = Get<ModuleController>();
