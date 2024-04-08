@@ -1,13 +1,10 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Tools;
 
 namespace UITest.Writer.Views;
 
 public record ShellWindow(Window Element)
 {
-    public Window FirstModalWindow => Retry.WhileEmpty(() => Element.ModalWindows).Result[0];
-
     public FileRibbonMenu FileRibbonMenu => new(Element.Find("FileRibbonMenu"));
 
     public ViewTab ViewTab => new(Element.Find("ViewTab").AsTabItem());
