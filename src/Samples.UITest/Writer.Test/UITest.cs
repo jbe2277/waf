@@ -19,7 +19,7 @@ public class UITest(ITestOutputHelper log) : IDisposable
     {
         var assemblyPath = Assembly.GetAssembly(typeof(UITest))!.Location;
         Log.WriteLine($"AssemblyPath: {assemblyPath}");
-        var writerPath = Path.Combine(assemblyPath, "../../../../../../../out/Writer/Release/net8.0-windows/writer.exe");
+        var writerPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../out/Writer/Release/net8.0-windows/writer.exe"));
         Log.WriteLine($"WriterPath: {writerPath}");
         return Application.Launch(writerPath, "--UICulture=en-US"); 
     }
