@@ -29,6 +29,12 @@ public static class UITestHelper
                 + Environment.NewLine + Environment.NewLine + element.GetTree());
     }
 
+    public static Window FirstModalWindow(this Window window, TimeSpan? timeout = null)
+    {
+        var result = Retry.WhileEmpty(() => window.ModalWindows, timeout);
+        return result?.Result?.FirstOrDefault() ?? throw new ElementNotFoundException($"First modal dialog was not found for window '{window.AutomationId}'");
+    }
+
     public static string GetTree(this AutomationElement element)
     {
         var sb = new StringBuilder();

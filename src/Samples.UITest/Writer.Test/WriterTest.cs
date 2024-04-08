@@ -17,7 +17,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
 
         window.AboutButton.Click();
 
-        var messageBox = new MessageBox(window.Element.ModalWindows[0]);
+        var messageBox = new MessageBox(window.Element.FirstModalWindow());
         Assert.Equal("Waf Writer", messageBox.Title);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
         messageBox.OkButton.Click();
@@ -67,7 +67,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Invoke();
 
-        var saveChangesWindow = new SaveChangesWindow(window.Element.ModalWindows[0]);
+        var saveChangesWindow = new SaveChangesWindow(window.Element.FirstModalWindow());
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
@@ -97,7 +97,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Assert.True(tab1.Element.IsSelected);
         tab1.CloseButton.Invoke();
 
-        var saveChangesWindow = new SaveChangesWindow(window.FirstModalWindow);
+        var saveChangesWindow = new SaveChangesWindow(window.Element.FirstModalWindow());
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
