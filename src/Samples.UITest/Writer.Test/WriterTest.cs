@@ -17,6 +17,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
 
         var messageBox = new MessageBox(window.Element.FirstModalWindow());
         Assert.Equal("Waf Writer", messageBox.Title);
+        Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
         messageBox.OkButton.Click();
 
