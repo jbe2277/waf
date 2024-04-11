@@ -10,7 +10,7 @@ namespace System.Waf.Foundation
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class ObservableList<T> : ObservableCollection<T>, IReadOnlyObservableList<T>
     {
-        private readonly Dictionary<object, IWeakEventProxy> weakEventProxies = new();
+        private readonly Dictionary<INotifyPropertyChanged, (int count, IWeakEventProxy proxy)> weakEventProxies = new();
 
         /// <summary>Initializes a new instance of the <see cref="ObservableCollection{T}"/> class.</summary>
         public ObservableList() { }
@@ -18,7 +18,7 @@ namespace System.Waf.Foundation
         /// <summary>Initializes a new instance of the <see cref="ObservableCollection{T}"/> class that contains elements copied from the specified collection.</summary>
         /// <param name="collection">The collection from which the elements are copied.</param>
         /// <exception cref="ArgumentNullException">The collection parameter cannot be null.</exception>
-        public ObservableList(IEnumerable<T> collection) : base(collection) 
+        public ObservableList(IEnumerable<T> collection) : base(collection)
         {
             foreach (var x in this) TryAddItemPropertyChanged(x);
         }
@@ -39,7 +39,7 @@ namespace System.Waf.Foundation
         /// <inheritdoc />
         protected override void ClearItems()
         {
-            foreach (var x in this) TryRemoveItemPropertyChanged(x);
+            ClearItemPropertyChanged();
             OnCollectionChanging(EventArgsCache.ResetCollectionChanged);
             base.ClearItems();
         }
@@ -90,19 +90,37 @@ namespace System.Waf.Foundation
 
         private void ItemPropertyChanged(object? sender, PropertyChangedEventArgs e) => OnCollectionItemChanged(sender, e);
 
-        private void TryAddItemPropertyChanged(T? item) 
-        { 
-            if (item is INotifyPropertyChanged x) weakEventProxies.Add(x, WeakEvent.PropertyChanged.Add(x, ItemPropertyChanged));
+        private void TryAddItemPropertyChanged(T? item)
+        {
+            if (item is not INotifyPropertyChanged observable) return;
+            if (weakEventProxies.TryGetValue(observable, out var x))
+            {
+                weakEventProxies[observable] = (x.count + 1, x.proxy);
+            }
+            else
+            {
+                weakEventProxies.Add(observable, (1, WeakEvent.PropertyChanged.Add(observable, ItemPropertyChanged)));
+            }
         }
 
-        private void TryRemoveItemPropertyChanged(T? item) 
+        private void TryRemoveItemPropertyChanged(T? item)
         {
-            if (item is null) return;
-            if (weakEventProxies.TryGetValue(item, out var proxy))
+            if (item is not INotifyPropertyChanged observable) return;
+            if (weakEventProxies.TryGetValue(observable, out var x))
             {
-                proxy.Remove();
-                weakEventProxies.Remove(item);
+                if (x.count <= 1)
+                {
+                    x.proxy.Remove();
+                    weakEventProxies.Remove(observable);
+                }
+                else weakEventProxies[observable] = (x.count - 1, x.proxy);
             }
+        }
+
+        private void ClearItemPropertyChanged()
+        {
+            foreach (var x in weakEventProxies.Values) x.proxy.Remove();
+            weakEventProxies.Clear();
         }
     }
 }

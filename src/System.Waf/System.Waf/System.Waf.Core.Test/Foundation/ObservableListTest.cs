@@ -23,6 +23,54 @@ namespace Test.Waf.Foundation
     public class ObservableListTest
     {
         [TestMethod]
+        public void AddSameObjectTwiceTest()
+        {
+            var collectionItemChangedList = new List<(object? item, string? propertyName)>();
+
+            var item = new CollectionEventsTestModel { Name = "1" };
+            var list = new ObservableList<CollectionEventsTestModel?>(new[] { item, item });
+            list.CollectionItemChanged += CollectionItemChangedHandler;
+            list.Add(item);
+            list.Add(null);
+            list[list.Count - 1] = item;
+            item.Name = "2";
+            Assert.AreEqual(nameof(item.Name), collectionItemChangedList.Single().propertyName);
+            collectionItemChangedList.Clear();
+
+            list[list.Count - 1] = null;
+            list.Remove(item);
+            item.Name = "3";
+            Assert.AreEqual(nameof(item.Name), collectionItemChangedList.Single().propertyName);
+            collectionItemChangedList.Clear();
+
+            list.Clear();
+            item.Name = "4";
+            Assert.AreEqual(0, collectionItemChangedList.Count);
+
+            void CollectionItemChangedHandler(object? item, PropertyChangedEventArgs e) => collectionItemChangedList.Add((item, e.PropertyName));
+        }
+
+        [TestMethod]
+        public void UseNullAsItemTest()
+        {
+            var list = new ObservableList<CollectionEventsTestModel?>(new CollectionEventsTestModel?[] { null });
+            AssertHelper.SequenceEqual(new CollectionEventsTestModel?[] { null }, list);
+            list.Remove(null);
+            Assert.AreEqual(0, list.Count);
+
+            list.Add(null);
+            AssertHelper.SequenceEqual(new CollectionEventsTestModel?[] { null }, list);
+            list.RemoveAt(0);
+            Assert.AreEqual(0, list.Count);
+
+            list.Add(new());
+            list[0] = null;
+            AssertHelper.SequenceEqual(new CollectionEventsTestModel?[] { null }, list);
+            list.Clear();
+            Assert.AreEqual(0, list.Count);
+        }
+
+        [TestMethod]
         public void PropertyChangedEventTest()
         {
             var list = new ObservableList<CollectionEventsTestModel>(new[] { new CollectionEventsTestModel { Name = "first" } });
@@ -50,7 +98,7 @@ namespace Test.Waf.Foundation
             var list = new ObservableList<CollectionEventsTestModel>();
             CollectionEventsTestCore(list, list);
         }
-        
+
         internal static void CollectionEventsTestCore(ObservableCollection<CollectionEventsTestModel> source, object observable)
         {
             var collectionChangingArgs = new List<NotifyCollectionChangedEventArgs>();
@@ -119,7 +167,7 @@ namespace Test.Waf.Foundation
         internal static void CollectionItemChangedTestCore(ObservableCollection<CollectionEventsTestModel> source, object observable)
         {
             var collectionItemChangedList = new List<(object? item, string? propertyName)>();
-            
+
             var item1 = source[0];
             item1.Name = "Empty";
 
