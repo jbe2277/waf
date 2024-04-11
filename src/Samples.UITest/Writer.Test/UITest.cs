@@ -9,20 +9,32 @@ using Xunit.Abstractions;
 
 namespace UITest.Writer;
 
-public class UITest(ITestOutputHelper log) : IDisposable
+public class UITest : IDisposable
 {
-    public ITestOutputHelper Log => log;
+    private const string arguments = "--UICulture=en-US";
+    private readonly string executable;
+
+    public UITest(ITestOutputHelper log)
+    {
+        Log = log;
+        var assemblyPath = Assembly.GetAssembly(typeof(UITest))!.Location;
+        executable = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../out/Writer/Release/net8.0-windows/writer.exe"));
+
+        Log.WriteLine($"OSVersion:       {Environment.OSVersion}");
+        Log.WriteLine($"ProcessorCount:  {Environment.ProcessorCount}");
+        Log.WriteLine($"MachineName:     {Environment.MachineName}");
+        Log.WriteLine($"UserInteractive: {Environment.UserInteractive}");
+        Log.WriteLine($"AssemblyPath:    {assemblyPath}");
+        Log.WriteLine($"Executable:      {executable}");
+        Log.WriteLine($"Arguments:       {arguments}");
+        Log.WriteLine("");
+    }
+
+    public ITestOutputHelper Log { get; }
 
     public UIA3Automation Automation { get; } = new();
 
-    public Application Launch() 
-    {
-        var assemblyPath = Assembly.GetAssembly(typeof(UITest))!.Location;
-        Log.WriteLine($"AssemblyPath: {assemblyPath}");
-        var writerPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../out/Writer/Release/net8.0-windows/writer.exe"));
-        Log.WriteLine($"WriterPath: {writerPath}");
-        return Application.Launch(writerPath, "--UICulture=en-US"); 
-    }
+    public Application Launch() => Application.Launch(executable, arguments); 
 
     public ShellWindow GetShellWindow(Application app) => new(app.GetMainWindow(Automation));
 
