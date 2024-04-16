@@ -18,21 +18,21 @@ public static class UITestHelper
     public static AutomationElement Find(this AutomationElement element, string automationId, TimeSpan? timeout = null)
     {
         var result = Retry.WhileNull(() => element.TryFind(automationId), timeout);
-        return result.Result ?? throw new ElementNotFoundException($"Element '{automationId}' was not found as descendant of element '{element.AutomationId}'"
+        return result.Result ?? throw new ElementNotFoundException($"Element '{automationId}' was not found as descendant of element '{element.TryAutomationId()}'"
                 + Environment.NewLine + Environment.NewLine + element.GetTree());
     }
 
     public static AutomationElement Find(this AutomationElement element, Func<ConditionFactory, ConditionBase> conditionFunc, TimeSpan? timeout = null)
     {
         var result = Retry.WhileNull(() => element.FindFirstDescendant(conditionFunc), timeout);
-        return result.Result ?? throw new ElementNotFoundException($"Element was not found as descendant of element '{element.AutomationId}'"
+        return result.Result ?? throw new ElementNotFoundException($"Element was not found as descendant of element '{element.TryAutomationId()}'"
                 + Environment.NewLine + Environment.NewLine + element.GetTree());
     }
 
     public static Window FirstModalWindow(this Window window, TimeSpan? timeout = null)
     {
         var result = Retry.WhileEmpty(() => window.ModalWindows, timeout);
-        return result?.Result?.FirstOrDefault() ?? throw new ElementNotFoundException($"First modal dialog was not found for window '{window.AutomationId}'");
+        return result?.Result?.FirstOrDefault() ?? throw new ElementNotFoundException($"First modal dialog was not found for window '{window.TryAutomationId()}'");
     }
 
     public static string GetTree(this AutomationElement element)
@@ -43,7 +43,7 @@ public static class UITestHelper
 
         static void GetTreeCore(StringBuilder sb, AutomationElement element, string padding)
         {
-            var automationId = element.Properties.AutomationId.ValueOrDefault;
+            var automationId = element.TryAutomationId();
             if (!string.IsNullOrEmpty(automationId))
             {
                 sb.AppendLine($"{padding}{automationId}: {element.ControlType}");
@@ -51,5 +51,11 @@ public static class UITestHelper
 
             foreach (var x in element.FindAllChildren()) GetTreeCore(sb, x, padding + "  ");
         }
+    }
+
+    private static string? TryAutomationId(this AutomationElement element) 
+    { 
+        try { return element.Properties.AutomationId.ValueOrDefault; } 
+        catch { } return null; 
     }
 }
