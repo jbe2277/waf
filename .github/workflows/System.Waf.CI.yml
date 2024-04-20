@@ -26,3 +26,6 @@ jobs:
         path: |
           src/System.Waf/System.Waf/**/*.nupkg
           src/System.Waf/System.Waf/**/*.snupkg
+
+    - name: UI Test
+      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger "console;verbosity=detailed"
