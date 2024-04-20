@@ -14,7 +14,7 @@ namespace UITest.Writer;
 
 public class UITest : IDisposable
 {
-    private const string arguments = "--UICulture=en-US";
+    private const string arguments = "--UICulture=en-US --Culture=en-US";
     private readonly string executable;
     private Application? app;
 
