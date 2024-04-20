@@ -28,4 +28,4 @@ jobs:
           src/System.Waf/System.Waf/**/*.snupkg
 
     - name: UI Test
-      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --filter AboutTest
+      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --filter AboutTest --logger "console;verbosity=detailed"
