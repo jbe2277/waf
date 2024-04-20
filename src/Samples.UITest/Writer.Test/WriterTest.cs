@@ -45,7 +45,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Assert.True(zoomInButton.IsEnabled);
         zoomInButton.Click();
         var zoomComboBox = window.ZoomComboBox;
-        Assert.Equal("110 %", zoomComboBox.EditableText);
+        Assert.Equal("110%", zoomComboBox.EditableText);
 
         var richTextView = window.DocumentTabItems.Single().RichTextView;
         richTextView.RichTextBox.Text = "Hello World";
@@ -57,7 +57,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var printPreviewTab = window.PrintPreviewTab;
         Assert.True(printPreviewTab.Element.IsSelected);
         printPreviewTab.ZoomOutButton.Click();
-        Assert.Equal("90 %", zoomComboBox.EditableText);
+        Assert.Equal("90%", zoomComboBox.EditableText);
         printPreviewTab.ClosePrintPreviewButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
