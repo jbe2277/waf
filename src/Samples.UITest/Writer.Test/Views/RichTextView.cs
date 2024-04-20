@@ -1,8 +1,9 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 
 namespace UITest.Writer.Views;
 
-public class RichTextView(AutomationElement Element)
+public class RichTextView(FrameworkAutomationElementBase element) : AutomationElement(element)
 {
-    public TextBox RichTextBox => Element.Find("RichTextBox").AsTextBox();
+    public TextBox RichTextBox => this.Find("RichTextBox").AsTextBox();
 }

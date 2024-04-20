@@ -1,10 +1,11 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 
 namespace UITest.Writer.Views;
 
-public record SaveChangesWindow(Window Element)
+public class SaveChangesWindow(FrameworkAutomationElementBase element) : Window(element)
 {
-    public ListBox FilesToSaveList => Element.Find("FilesToSaveList").AsListBox();
+    public ListBox FilesToSaveList => this.Find("FilesToSaveList").AsListBox();
 
-    public Button NoButton => Element.Find("NoButton").AsButton();
+    public Button NoButton => this.Find("NoButton").AsButton();
 }

@@ -1,8 +1,9 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 
 namespace UITest.Writer.Views;
 
-public record StartView(AutomationElement Element)
+public class StartView(FrameworkAutomationElementBase element) : AutomationElement(element)
 {
-    public Button NewButton => Element.Find("NewButton").AsButton();
+    public Button NewButton => this.Find("NewButton").AsButton();
 }

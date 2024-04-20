@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -55,7 +56,7 @@ public class UITest : IDisposable
     { 
         var x = app!.GetMainWindow(Automation);
         if (maximize) x.Patterns.Window.Pattern.SetWindowVisualState(WindowVisualState.Maximized);
-        return new(x);
+        return x.As<ShellWindow>();
     }
 
     public void Dispose()

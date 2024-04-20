@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Tools;
 using UITest.Writer.Views;
 using Xunit;
 using Xunit.Abstractions;
@@ -15,7 +16,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
 
         window.AboutButton.Click();
 
-        var messageBox = new MessageBox(window.Element.FirstModalWindow());
+        var messageBox = window.FirstModalWindow().As<MessageBox>();
         Assert.Equal("Waf Writer", messageBox.Title);
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
@@ -33,15 +34,15 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var window = GetShellWindow(maximize: true);
 
         var viewTab = window.ViewTab;
-        viewTab.Element.Select();
+        viewTab.Select();
         var zoomInButton = viewTab.ZoomInButton;
         Assert.False(zoomInButton.IsEnabled);
 
         var startView = window.StartView;
-        Assert.False(startView.Element.IsOffscreen);
+        Assert.False(startView.IsOffscreen);
         startView.NewButton.Click();
 
-        Retry.WhileTrue(() => startView.Element.IsOffscreen);
+        Retry.WhileTrue(() => startView.IsOffscreen);
         Assert.True(zoomInButton.IsEnabled);
         zoomInButton.Click();
         var zoomComboBox = window.ZoomComboBox;
@@ -55,7 +56,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         fileRibbonMenu.PrintPreviewMenuItem.Invoke();
         
         var printPreviewTab = window.PrintPreviewTab;
-        Assert.True(printPreviewTab.Element.IsSelected);
+        Assert.True(printPreviewTab.IsSelected);
         printPreviewTab.ZoomOutButton.Click();
         Assert.Equal("90%", zoomComboBox.EditableText);
         printPreviewTab.ClosePrintPreviewButton.Click();
@@ -66,7 +67,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Invoke();
 
-        var saveChangesWindow = new SaveChangesWindow(window.Element.FirstModalWindow());
+        var saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
@@ -79,7 +80,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var window = GetShellWindow();
 
         var startView = window.StartView;
-        Assert.False(startView.Element.IsOffscreen);
+        Assert.False(startView.IsOffscreen);
         startView.NewButton.Click();
 
         var tab1 = window.DocumentTabItems.Single();
@@ -90,13 +91,13 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         fileRibbonMenu.NewMenuItem.Invoke();
 
         var tab2 = window.DocumentTabItems[1];
-        Assert.Equal("Document 2.rtf", tab2.Name);
+        Assert.Equal("Document 2.rtf", tab2.TabName);
         tab2.CloseButton.Invoke();
 
-        Assert.True(tab1.Element.IsSelected);
+        Assert.True(tab1.IsSelected);
         tab1.CloseButton.Invoke();
 
-        var saveChangesWindow = new SaveChangesWindow(window.Element.FirstModalWindow());
+        var saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
