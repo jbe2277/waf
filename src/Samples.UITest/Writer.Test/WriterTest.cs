@@ -10,8 +10,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
     [Fact]
     public void AboutTest()
     {
-        var app = Launch();
-        var window = GetShellWindow(app);
+        Launch();
+        var window = GetShellWindow();
 
         window.AboutButton.Click();
 
@@ -29,8 +29,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
     [Fact]
     public void NewZoomWritePrintPreviewExitWithoutSave()
     {
-        var app = Launch();
-        var window = GetShellWindow(app);
+        Launch();
+        var window = GetShellWindow(maximize: true);
 
         var viewTab = window.ViewTab;
         viewTab.Element.Select();
@@ -75,8 +75,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
     [Fact]
     public void NewSaveTodo()
     {
-        var app = Launch();
-        var window = GetShellWindow(app);
+        Launch();
+        var window = GetShellWindow();
 
         var startView = window.StartView;
         Assert.False(startView.Element.IsOffscreen);

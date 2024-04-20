@@ -1,4 +1,7 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3;
 using System.Reflection;
 using UITest.Writer.Views;
@@ -13,6 +16,14 @@ public class UITest : IDisposable
 {
     private const string arguments = "--UICulture=en-US";
     private readonly string executable;
+    private Application? app;
+
+    static UITest()
+    {
+        Mouse.MovePixelsPerMillisecond = 2;
+        Retry.DefaultTimeout = TimeSpan.FromSeconds(5);
+        Retry.DefaultInterval = TimeSpan.FromMilliseconds(250);
+    }
 
     public UITest(ITestOutputHelper log)
     {
@@ -28,15 +39,29 @@ public class UITest : IDisposable
         Log.WriteLine($"Executable:      {executable}");
         Log.WriteLine($"Arguments:       {arguments}");
         Log.WriteLine("");
+        Automation = new()
+        {
+            ConnectionTimeout = TimeSpan.FromSeconds(5)
+        };
     }
 
     public ITestOutputHelper Log { get; }
 
-    public UIA3Automation Automation { get; } = new();
+    public UIA3Automation Automation { get; }
 
-    public Application Launch() => Application.Launch(executable, arguments); 
+    public Application Launch() => app = Application.Launch(executable, arguments);
 
-    public ShellWindow GetShellWindow(Application app) => new(app.GetMainWindow(Automation));
+    public ShellWindow GetShellWindow(bool maximize = false) 
+    { 
+        var x = app!.GetMainWindow(Automation);
+        if (maximize) x.Patterns.Window.Pattern.SetWindowVisualState(WindowVisualState.Maximized);
+        return new(x);
+    }
 
-    public void Dispose() => Automation.Dispose();
+    public void Dispose()
+    {
+        app?.Close();
+        app?.Dispose();
+        Automation.Dispose();
+    }
 }
