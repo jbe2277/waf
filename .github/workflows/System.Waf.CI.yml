@@ -4,6 +4,7 @@ on:
     paths: 
     - 'src/*'
     - 'src/System.Waf/**'
+    - 'src/Samples.UITest/**'
     - '.github/workflows/**' 
 jobs:
   build:
