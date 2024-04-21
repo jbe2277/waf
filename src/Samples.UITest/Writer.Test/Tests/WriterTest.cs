@@ -118,8 +118,9 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         window = GetShellWindow();
         startView = window.StartView;
         var firstFileItem = startView.RecentFilesListItems.Single();
-        Assert.Equal(Path.GetFileName(fileName), firstFileItem.FileName);
-        firstFileItem.OpenFile.Click();
+        Assert.Equal(fileName, firstFileItem.ToolTip);
+        Assert.False(firstFileItem.PinButton.IsToggled);
+        firstFileItem.OpenFileButton.Click();
 
         tab1 = window.DocumentTabItems.Single();
         Assert.Equal(Path.GetFileName(fileName), tab1.TabName);

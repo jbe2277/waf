@@ -76,7 +76,7 @@
                             </ToggleButton.Style>
                         </ToggleButton>
 
-                        <TextBlock TextTrimming="CharacterEllipsis" Padding="11,3" ToolTip="{Binding Path}">
+                        <TextBlock TextTrimming="CharacterEllipsis" Padding="11,3" ToolTip="{Binding Path}" AutomationProperties.AutomationId="RecentItemLabel">
                             <Hyperlink Command="{Binding DataContext.FileService.OpenCommand, ElementName=startView}" CommandParameter="{Binding Path}" AutomationProperties.AutomationId="RecentItemOpenLink">
                                 <Run Text="{Binding Path, Converter={StaticResource MenuFileNameConverter}, Mode=OneWay}"/>
                             </Hyperlink>

@@ -14,7 +14,13 @@ public class StartView(FrameworkAutomationElementBase element) : AutomationEleme
 
 public class RecentFilesListItem(FrameworkAutomationElementBase element) : ListBoxItem(element)
 {
-    public string FileName => OpenFile.Name;
+    public string FileName => Label.Name;
 
-    public Button OpenFile => this.Find("RecentItemOpenLink").AsButton();
+    public string ToolTip => Label.HelpText;
+
+    public Label Label => this.Find("RecentItemLabel").AsLabel();
+
+    public Button OpenFileButton => this.Find("RecentItemOpenLink").AsButton();
+
+    public ToggleButton PinButton => this.Find("PinToggleButton").AsToggleButton();
 }
