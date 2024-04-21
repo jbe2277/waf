@@ -15,7 +15,7 @@ namespace UITest.Writer;
 
 public class UITest : IDisposable
 {
-    private const string arguments = "--UICulture=en-US --Culture=en-US";
+    private const string arguments = "--UICulture=en-US --Culture=en-US --DefaultSettings=true";
     private readonly string executable;
     private Application? app;
 
@@ -50,7 +50,18 @@ public class UITest : IDisposable
 
     public UIA3Automation Automation { get; }
 
-    public Application Launch() => app = Application.Launch(executable, arguments);
+    public bool SkipAppClose { get; set; } = false;
+
+    public Application Launch(string? additionalArguments = null)
+    {
+        var args = arguments;
+        if (!string.IsNullOrEmpty(additionalArguments))
+        {
+            args += " " + additionalArguments;
+            Log.WriteLine($"LaunchArguments: {args}");
+        }
+        return app = Application.Launch(executable, args);
+    }
 
     public ShellWindow GetShellWindow(bool maximize = false) 
     { 
@@ -61,7 +72,7 @@ public class UITest : IDisposable
 
     public void Dispose()
     {
-        app?.Close();
+        if (!SkipAppClose) app?.Close();
         app?.Dispose();
         Automation.Dispose();
     }

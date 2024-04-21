@@ -58,7 +58,9 @@ public partial class App
 
         var settingsService = container.GetExportedValue<ISettingsService>();
         settingsService.ErrorOccurred += (_, e) => Log.Default.Error(e.Error, "Error in SettingsService");
-        InitializeCultures(appConfig, settingsService.Get<AppSettings>());
+        var appSettings = settingsService.Get<AppSettings>();
+        if (appConfig.DefaultSettings) appSettings.ResetToDefault();
+        InitializeCultures(appConfig, appSettings);
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
         moduleControllers = container.GetExportedValues<IModuleController>();
