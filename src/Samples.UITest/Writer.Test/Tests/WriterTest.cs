@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using UITest.Writer.Views;
 using Xunit;
@@ -31,7 +32,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
     public void NewZoomWritePrintPreviewExitWithoutSave()
     {
         Launch();
-        var window = GetShellWindow(maximize: true);
+        var window = GetShellWindow();
+        window.SetState(WindowVisualState.Maximized);
 
         var viewTab = window.ViewTab;
         viewTab.Select();
