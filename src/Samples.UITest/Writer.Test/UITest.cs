@@ -15,8 +15,9 @@ namespace UITest.Writer;
 public class UITest : IDisposable
 {
     private readonly string executable;
+    private readonly List<string> usedFiles = [];
     private Application? app;
-
+    
     static UITest()
     {
         Mouse.MovePixelsPerMillisecond = 2;
@@ -57,10 +58,23 @@ public class UITest : IDisposable
 
     public ShellWindow GetShellWindow() => app!.GetMainWindow(Automation).As<ShellWindow>();
 
+    public string GetTempFileName(string fileExtension)
+    {
+        var file = $"UITest_{Path.GetRandomFileName()}.{fileExtension}";
+        file = Path.Combine(Path.GetTempPath(), file);
+        usedFiles.Add(file);
+        Log.WriteLine($"TempFile:        {file}");
+        return file;
+    }
+
     public void Dispose()
     {
         if (!SkipAppClose) app?.Close();
         app?.Dispose();
         Automation.Dispose();
+        foreach (var file in usedFiles)
+        {
+            if (File.Exists(file)) File.Delete(file);
+        }
     }
 }

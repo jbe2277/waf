@@ -76,7 +76,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
     }
 
     [Fact]
-    public void NewSaveTodo()
+    public void NewSaveRestartOpenChangeAskToSave()
     {
         Launch();
         var window = GetShellWindow();
@@ -102,9 +102,39 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
-        saveChangesWindow.NoButton.Click();
+        saveChangesWindow.YesButton.Click();
+
+        var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
+        var fileName = GetTempFileName("rtf");
+        saveFileDialog.FileName.EditableText = fileName;
+        saveFileDialog.SaveButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Invoke();
+
+        // Restart the app
+
+        Launch(new LaunchArguments(DefaultSettings: false));
+        window = GetShellWindow();
+        startView = window.StartView;
+        var firstFileItem = startView.RecentFilesListItems.Single();
+        Assert.Equal(Path.GetFileName(fileName), firstFileItem.FileName);
+        firstFileItem.OpenFile.Click();
+
+        tab1 = window.DocumentTabItems.Single();
+        Assert.Equal(Path.GetFileName(fileName), tab1.TabName);
+        Assert.Equal("Hello World", tab1.RichTextView.RichTextBox.Text);
+        tab1.RichTextView.RichTextBox.Text = "- ";
+
+        Assert.Equal(Path.GetFileName(fileName) + "*", tab1.TabName);
+
+        fileRibbonMenu = window.FileRibbonMenu;
+        fileRibbonMenu.MenuButton.Click();
+        fileRibbonMenu.ExitMenuItem.Invoke();
+
+        saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
+        firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
+        Assert.Equal(fileName, firstItem.Text);
+        saveChangesWindow.NoButton.Click();
     }
 }

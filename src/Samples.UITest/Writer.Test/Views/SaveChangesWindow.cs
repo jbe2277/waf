@@ -7,5 +7,7 @@ public class SaveChangesWindow(FrameworkAutomationElementBase element) : Window(
 {
     public ListBox FilesToSaveList => this.Find("FilesToSaveList").AsListBox();
 
+    public Button YesButton => this.Find("YesButton").AsButton();
+
     public Button NoButton => this.Find("NoButton").AsButton();
 }
