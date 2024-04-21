@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
@@ -15,7 +14,6 @@ namespace UITest.Writer;
 
 public class UITest : IDisposable
 {
-    private const string arguments = "--UICulture=en-US --Culture=en-US --DefaultSettings=true";
     private readonly string executable;
     private Application? app;
 
@@ -38,8 +36,6 @@ public class UITest : IDisposable
         Log.WriteLine($"UserInteractive: {Environment.UserInteractive}");
         Log.WriteLine($"AssemblyPath:    {assemblyPath}");
         Log.WriteLine($"Executable:      {executable}");
-        Log.WriteLine($"Arguments:       {arguments}");
-        Log.WriteLine("");
         Automation = new()
         {
             ConnectionTimeout = TimeSpan.FromSeconds(5)
@@ -52,23 +48,14 @@ public class UITest : IDisposable
 
     public bool SkipAppClose { get; set; } = false;
 
-    public Application Launch(string? additionalArguments = null)
+    public Application Launch(LaunchArguments? arguments = null)
     {
-        var args = arguments;
-        if (!string.IsNullOrEmpty(additionalArguments))
-        {
-            args += " " + additionalArguments;
-            Log.WriteLine($"LaunchArguments: {args}");
-        }
+        var args = (arguments ?? new LaunchArguments()).ToArguments();
+        Log.WriteLine($"LaunchArguments: {args}");
         return app = Application.Launch(executable, args);
     }
 
-    public ShellWindow GetShellWindow(bool maximize = false) 
-    { 
-        var x = app!.GetMainWindow(Automation);
-        if (maximize) x.Patterns.Window.Pattern.SetWindowVisualState(WindowVisualState.Maximized);
-        return x.As<ShellWindow>();
-    }
+    public ShellWindow GetShellWindow() => app!.GetMainWindow(Automation).As<ShellWindow>();
 
     public void Dispose()
     {

@@ -21,6 +21,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
     public IReadOnlyList<DocumentTabItem> DocumentTabItems => DocumentTab.FindAll(x => x.ByControlType(ControlType.TabItem)).Select(x => x.As<DocumentTabItem>()).ToArray();
 
     public ComboBox ZoomComboBox => this.Find("ZoomComboBox").AsComboBox();
+
+    public void SetState(WindowVisualState state) => Patterns.Window.Pattern.SetWindowVisualState(state);
 }
 
 public class FileRibbonMenu(FrameworkAutomationElementBase element) : AutomationElement(element)
