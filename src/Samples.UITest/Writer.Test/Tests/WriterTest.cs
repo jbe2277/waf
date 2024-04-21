@@ -105,6 +105,9 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         saveChangesWindow.YesButton.Click();
 
         var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
+        Log.WriteLine("---------");
+        Log.WriteLine(saveFileDialog.GetTree());
+        Log.WriteLine("---------");
         var fileName = GetTempFileName("rtf");
         saveFileDialog.FileName.EditableText = fileName;
         saveFileDialog.SaveButton.Click();
