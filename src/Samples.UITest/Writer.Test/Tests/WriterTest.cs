@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Capturing;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using UITest.Writer.Views;
@@ -56,7 +57,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.PrintPreviewMenuItem.Invoke();
-        
+
         var printPreviewTab = window.PrintPreviewTab;
         Assert.True(printPreviewTab.IsSelected);
         printPreviewTab.ZoomOutButton.Click();
@@ -109,7 +110,9 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Log.WriteLine(saveFileDialog.GetTree());
         Log.WriteLine("---------");
         var fileName = GetTempFileName("rtf");
-        saveFileDialog.FileName.EditableText = fileName;
+        saveFileDialog.FileNameBox.EditableText = fileName;
+        Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen.png"));
+        saveFileDialog.CaptureToFile(GetScreenshotFile("SaveFileDialog.png"));
         saveFileDialog.SaveButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
