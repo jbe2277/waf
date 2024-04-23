@@ -113,7 +113,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         saveFileDialog.FileNameBox.EditableText = fileName;
         Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen.png"));
         saveFileDialog.CaptureToFile(GetScreenshotFile("SaveFileDialog.png"));
-        saveFileDialog.SaveButton.Click();
+        saveFileDialog.SaveButton.CaptureToFile("SaveButton.png");
+        saveFileDialog.SaveButton.Invoke();
         Capture.Screen().ToFile(GetScreenshotFile("AfterSaveFile.png"));
 
         fileRibbonMenu.MenuButton.Click();
