@@ -106,15 +106,10 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         saveChangesWindow.YesButton.Click();
 
         var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
-        Log.WriteLine("---------");
-        Log.WriteLine(saveFileDialog.GetTree());
-        Log.WriteLine("---------");
         var fileName = GetTempFileName("rtf");
-        saveFileDialog.FileNameBox.EditableText = fileName;
+        saveFileDialog.SetFileName(fileName);
         Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen.png"));
-        saveFileDialog.CaptureToFile(GetScreenshotFile("SaveFileDialog.png"));
-        saveFileDialog.SaveButton.CaptureToFile("SaveButton.png");
-        saveFileDialog.SaveButton.Invoke();
+        saveFileDialog.SaveButton.Click();
         Capture.Screen().ToFile(GetScreenshotFile("AfterSaveFile.png"));
 
         fileRibbonMenu.MenuButton.Click();
