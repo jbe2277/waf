@@ -32,6 +32,7 @@ jobs:
       run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger "console;verbosity=detailed"
     - name: Upload UI Test results
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: UITestResults
         if-no-files-found: ignore
