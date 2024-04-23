@@ -114,6 +114,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen.png"));
         saveFileDialog.CaptureToFile(GetScreenshotFile("SaveFileDialog.png"));
         saveFileDialog.SaveButton.Click();
+        Capture.Screen().ToFile(GetScreenshotFile("AfterSaveFile.png"));
 
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Invoke();
@@ -123,6 +124,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Launch(new LaunchArguments(DefaultSettings: false));
         window = GetShellWindow();
         startView = window.StartView;
+        Capture.Screen().ToFile(GetScreenshotFile("RestartScreen.png"));
         var firstFileItem = startView.RecentFilesListItems.Single();
         Assert.Equal(fileName, firstFileItem.ToolTip);
         Assert.False(firstFileItem.PinButton.IsToggled);
