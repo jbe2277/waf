@@ -6,6 +6,7 @@ on:
     - 'src/*'
     - 'src/NewsReader/**'
     - '.github/workflows/**' 
+    - '!.github/workflows/System.Waf.CI.yml' 
 
 jobs:
   GetVersion:
