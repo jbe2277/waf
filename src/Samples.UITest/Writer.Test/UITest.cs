@@ -4,6 +4,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UITest.Writer.Views;
 using Xunit;
 using Xunit.Abstractions;
@@ -72,7 +73,8 @@ public class UITest : IDisposable
         return file;
     }
 
-    public string GetScreenshotFile(string fileName) => Path.Combine(testOutPath, fileName);
+    public string GetScreenshotFile(string fileName, [CallerMemberName]string? memberName = null) 
+            => Path.Combine(testOutPath, string.Join("-", new[] { memberName, fileName }.Where(x => !string.IsNullOrEmpty(x))));
 
     public void Dispose()
     {
