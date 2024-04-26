@@ -13,8 +13,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: NuGet clear
-      run: dotnet nuget locals all --clear
     - name: Build
       run: dotnet build ./src/System.Waf/System.Waf.sln -c Release -p:ContinuousIntegrationBuild=true
     - name: Test
