@@ -22,6 +22,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("Waf Writer", messageBox.Title);
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
+        Capture.Screen().ToFile(GetScreenshotFile("About.png"));
         messageBox.OkButton.Click();
 
         var fileRibbonMenu = window.FileRibbonMenu;
