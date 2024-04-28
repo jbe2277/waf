@@ -34,6 +34,21 @@ public class FileRibbonMenu(FrameworkAutomationElementBase element) : Automation
     public MenuItem PrintPreviewMenuItem => this.Find("PrintPreviewMenuItem").AsMenuItem();
 
     public MenuItem ExitMenuItem => this.Find("ExitMenuItem").AsMenuItem();
+
+    public ListBox RecentFileList => this.Find("RecentFileList").AsListBox();
+
+    public RecentFileMenuItem[] RecentFileListItems => RecentFileList.Items.Select(x => x.As<RecentFileMenuItem>()).ToArray();
+}
+
+public class RecentFileMenuItem(FrameworkAutomationElementBase element) : ListBoxItem(element)
+{
+    public string FileName => OpenFileButton.Name;
+
+    public string ToolTip => OpenFileButton.HelpText;
+
+    public Button OpenFileButton => this.Find("OpenItemButton").AsButton();
+
+    public ToggleButton PinButton => this.Find("PinToggleButton").AsToggleButton();
 }
 
 public class ViewTab(FrameworkAutomationElementBase element) : TabItem(element)
