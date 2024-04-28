@@ -11,7 +11,7 @@ public class DocumentTypeTest
     public void ConstructorTest()
     {
         AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("", ".rtf"));
-        AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", null!));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => new MockDocumentTypeBase("RichText Documents", null!));
         AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", "rtf"));
 
         AssertHelper.ExpectedException<ArgumentNullException>(() => new DocumentBaseMock(null!));
