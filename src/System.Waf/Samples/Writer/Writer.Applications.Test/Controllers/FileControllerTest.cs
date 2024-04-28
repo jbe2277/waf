@@ -133,7 +133,7 @@ public class FileControllerTest : ApplicationsTest
         var documentTypesField = typeof(FileController).GetField("documentTypes", BindingFlags.Instance | BindingFlags.NonPublic)!;
         ((IList)documentTypesField.GetValue(fileController)!).Clear();
 
-        AssertHelper.ExpectedException<ArgumentException>(() => fileController.Open(null!));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.Open(null!));
 
         var fileService = Get<IFileService>();
         AssertHelper.ExpectedException<InvalidOperationException>(() => fileService.OpenCommand.Execute(null));
