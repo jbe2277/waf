@@ -22,7 +22,7 @@ public partial class App
     private static readonly Lazy<string> logFileName = new(() => ((FileTarget)((AsyncTargetWrapper)LogManager.Configuration.FindTargetByName("fileTarget")).WrappedTarget).FileName.Render(new LogEventInfo()));
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
-    private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
+    private IEnumerable<IModuleController> moduleControllers = [];
 
     public static string LogFileName => logFileName.Value;
 

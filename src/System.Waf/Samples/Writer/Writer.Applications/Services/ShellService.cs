@@ -62,11 +62,7 @@ internal class ShellService : Model, IShellService
     {
         public IReadOnlyList<string> DefaultZooms => [];
 
-        public double Zoom
-        {
-            get => 1;
-            set { }
-        }
+        public double Zoom { get => 1; set { } }
 
         public ICommand ZoomInCommand => DelegateCommand.DisabledCommand;
 
