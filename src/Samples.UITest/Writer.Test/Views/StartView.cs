@@ -7,12 +7,12 @@ public class StartView(FrameworkAutomationElementBase element) : AutomationEleme
 {
     public Button NewButton => this.Find("NewButton").AsButton();
 
-    public ListBox RecentFilesList => this.Find("RecentFilesList").AsListBox();
+    public ListBox RecentFileList => this.Find("RecentFileList").AsListBox();
 
-    public RecentFilesListItem[] RecentFilesListItems => RecentFilesList.Items.Select(x => x.As<RecentFilesListItem>()).ToArray();
+    public RecentFileListItem[] RecentFileListItems => RecentFileList.Items.Select(x => x.As<RecentFileListItem>()).ToArray();
 }
 
-public class RecentFilesListItem(FrameworkAutomationElementBase element) : ListBoxItem(element)
+public class RecentFileListItem(FrameworkAutomationElementBase element) : ListBoxItem(element)
 {
     public string FileName => Label.Name;
 
