@@ -20,8 +20,6 @@ internal class FileController
     private readonly ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory;
     private readonly List<IDocumentType> documentTypes;
     private readonly RecentFileList recentFileList;
-    private readonly DelegateCommand newCommand;
-    private readonly DelegateCommand openCommand;
     private readonly DelegateCommand closeCommand;
     private readonly DelegateCommand saveCommand;
     private readonly DelegateCommand saveAsCommand;
@@ -39,8 +37,8 @@ internal class FileController
         this.fileService = fileService;
         this.saveChangesViewModelFactory = saveChangesViewModelFactory;
         documentTypes = [ richTextDocumentType, xpsExportDocumentType ];
-        fileService.NewCommand = newCommand = new(NewCommand);
-        fileService.OpenCommand = openCommand = new(OpenCommand);
+        fileService.NewCommand = new DelegateCommand(NewCommand);
+        fileService.OpenCommand = new DelegateCommand(OpenCommand);
         fileService.CloseCommand = closeCommand = new(CloseCommand, CanCloseCommand);
         fileService.SaveCommand = saveCommand = new(SaveCommand, CanSaveCommand);
         fileService.SaveAsCommand = saveAsCommand = new(SaveAsCommand, CanSaveAsCommand);
@@ -62,7 +60,7 @@ internal class FileController
 
     public IDocument? Open(string fileName)
     {
-        if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The argument fileName must not be null or empty.", nameof(fileName));
+        ArgumentException.ThrowIfNullOrEmpty(fileName);
         return OpenCore(fileName!);
     }
 
@@ -169,7 +167,7 @@ internal class FileController
 
     private void Close(IDocument document)
     {
-        if (!CanDocumentsClose(new[] { document })) return;
+        if (!CanDocumentsClose([ document ])) return;
         if (ActiveDocument == document) ActiveDocument = null;
         fileService.RemoveDocument(document);
     }

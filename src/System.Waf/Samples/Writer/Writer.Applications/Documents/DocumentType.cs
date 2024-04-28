@@ -4,8 +4,8 @@ public abstract class DocumentType : Model, IDocumentType
 {
     protected DocumentType(string description, string fileExtension)
     {
-        if (string.IsNullOrEmpty(description)) throw new ArgumentException("description must not be null or empty.", nameof(description));
-        if (string.IsNullOrEmpty(fileExtension)) throw new ArgumentException("fileExtension must not be null or empty", nameof(fileExtension));
+        ArgumentException.ThrowIfNullOrEmpty(description);
+        ArgumentException.ThrowIfNullOrEmpty(fileExtension);
         if (fileExtension[0] != '.') throw new ArgumentException("The argument fileExtension must start with the '.' character.", nameof(fileExtension));
         Description = description;
         FileExtension = fileExtension;
@@ -27,7 +27,7 @@ public abstract class DocumentType : Model, IDocumentType
 
     public IDocument Open(string fileName)
     {
-        if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("fileName must not be null or empty.", nameof(fileName));
+        ArgumentException.ThrowIfNullOrEmpty(fileName);
         if (!CanOpen()) throw new NotSupportedException("The Open operation is not supported. CanOpen returned false.");
         var document = OpenCore(fileName);
         document.FileName = fileName;
@@ -39,7 +39,7 @@ public abstract class DocumentType : Model, IDocumentType
     public void Save(IDocument document, string fileName)
     {
         ArgumentNullException.ThrowIfNull(document);
-        if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("fileName must not be null or empty.", nameof(fileName));
+        ArgumentException.ThrowIfNullOrEmpty(fileName);
         if (!CanSave(document)) throw new NotSupportedException("The Save operation is not supported. CanSave returned false.");
 
         SaveCore(document, fileName);
