@@ -8,8 +8,18 @@ using Xunit.Abstractions;
 
 namespace UITest.Writer;
 
-public class WriterTest(ITestOutputHelper log) : UITest(log)
+public class WriterTest : UITest
 {
+    public WriterTest(ITestOutputHelper log) : base(log)
+    {
+        // SkipTextBoxReadText = true;  // Workaround: Uncomment this line if your machine provides empty strings for RichTextBox.Text.
+    }
+
+    /// <summary>Workaround: On some machines reading the RichTextBox.Text returns always an empty string. Use this property to skip the step.</summary>
+    public bool SkipTextBoxReadText { get; set; }
+
+    protected void AssertTextEqual(string expected, TextBox actual) { if (!SkipTextBoxReadText) Assert.Equal(expected, actual.Text); }
+
     [Fact]
     public void AboutTest()
     {
@@ -158,7 +168,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         startView.RecentFileListItems[0].OpenFileButton.Invoke();
         tab1 = window.DocumentTabItems.Single();
         Assert.Equal(Path.GetFileName(fileName), tab1.TabName);
-        Assert.Equal("Hello World", tab1.RichTextView.RichTextBox.Text);
+        AssertTextEqual("Hello World", tab1.RichTextView.RichTextBox);
         tab1.RichTextView.RichTextBox.Text = "- ";
         Assert.Equal(Path.GetFileName(fileName) + "*", tab1.TabName);
 
@@ -167,7 +177,7 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         fileRibbonMenu.RecentFileListItems[^1].OpenFileButton.Click();
         tab2 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab2.TabName);
-        Assert.Equal("Hello World 2", tab2.RichTextView.RichTextBox.Text);
+        AssertTextEqual("Hello World 2", tab2.RichTextView.RichTextBox);
 
         // Close app, save dialog shows just file #1, don't save
         fileRibbonMenu = window.FileRibbonMenu;
@@ -186,10 +196,12 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal([ fileName, fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
         Assert.True(startView.RecentFileListItems[0].PinButton.IsToggled);
         var contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
+        UIAssert.NotExists(() => _ = contextMenu.PinFileMenuItem);        
         contextMenu.UnpinFileMenuItem.Invoke();
         Assert.False(startView.RecentFileListItems[0].PinButton.IsToggled);
         
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
+        UIAssert.NotExists(() => _ = contextMenu.UnpinFileMenuItem);
         contextMenu.RemoveFileMenuItem.Invoke();
         Assert.Equal([ fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
 
@@ -197,6 +209,6 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         contextMenu.OpenFileMenuItem.Invoke();
         tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
-        Assert.Equal("Hello World 2", tab1.RichTextView.RichTextBox.Text);
+        AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
     }
 }
