@@ -188,6 +188,8 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         var contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         contextMenu.UnpinFileMenuItem.Invoke();
         Assert.False(startView.RecentFileListItems[0].PinButton.IsToggled);
+        
+        contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         contextMenu.RemoveFileMenuItem.Invoke();
         Assert.Equal([ fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
 
