@@ -16,6 +16,8 @@ public static class UITestHelper
 
     public static AutomationElement? TryFind(this AutomationElement element, string automationId) => element.FindFirstDescendant(automationId);
 
+    public static AutomationElement? TryFind(this AutomationElement element, Func<ConditionFactory, ConditionBase> conditionFunc) => element.FindFirstDescendant(conditionFunc);
+
     public static AutomationElement Find(this AutomationElement element, string automationId, TimeSpan? timeout = null)
     {
         var result = Retry.WhileNull(() => element.TryFind(automationId), timeout);
@@ -25,7 +27,7 @@ public static class UITestHelper
 
     public static AutomationElement Find(this AutomationElement element, Func<ConditionFactory, ConditionBase> conditionFunc, TimeSpan? timeout = null)
     {
-        var result = Retry.WhileNull(() => element.FindFirstDescendant(conditionFunc), timeout);
+        var result = Retry.WhileNull(() => element.TryFind(conditionFunc), timeout);
         return result.Result ?? throw new ElementNotFoundException($"Element was not found as descendant of element '{element.TryAutomationId()}'"
                 + Environment.NewLine + Environment.NewLine + element.GetTree());
     }
