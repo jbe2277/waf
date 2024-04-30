@@ -14,7 +14,6 @@ public static class UIAssert
         Retry.DefaultTimeout = TimeSpan.Zero;
         try
         {
-            
             accessElement();
         }
         catch (ElementNotFoundException)
