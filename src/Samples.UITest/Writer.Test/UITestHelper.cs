@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using System.Text;
 
@@ -27,6 +28,23 @@ public static class UITestHelper
         var result = Retry.WhileNull(() => element.FindFirstDescendant(conditionFunc), timeout);
         return result.Result ?? throw new ElementNotFoundException($"Element was not found as descendant of element '{element.TryAutomationId()}'"
                 + Environment.NewLine + Environment.NewLine + element.GetTree());
+    }
+
+    public static Window GetWindow(this AutomationElement element)
+    {
+        var e = element;
+        while (true)
+        {
+            if (e.ControlType == ControlType.Window) return e.AsWindow();
+            e = e.Parent;
+            if (e is null) throw new ElementNotFoundException($"The owner window was not found of the element '{element.TryAutomationId()}'");
+        }
+    }
+
+    public static Menu ShowContextMenu(this AutomationElement element)
+    {
+        element.RightClick();
+        return element.GetWindow().ContextMenu.AsMenu();
     }
 
     public static Window FirstModalWindow(this Window window, TimeSpan? timeout = null)
