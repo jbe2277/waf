@@ -197,6 +197,6 @@ public class WriterTest(ITestOutputHelper log) : UITest(log)
         contextMenu.OpenFileMenuItem.Invoke();
         tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
-        Assert.Equal("Hello World 2", tab2.RichTextView.RichTextBox.Text);
+        Assert.Equal("Hello World 2", tab1.RichTextView.RichTextBox.Text);
     }
 }
