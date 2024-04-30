@@ -23,4 +23,17 @@ public class RecentFileListItem(FrameworkAutomationElementBase element) : ListBo
     public Button OpenFileButton => this.Find("RecentItemOpenLink").AsButton();
 
     public ToggleButton PinButton => this.Find("PinToggleButton").AsToggleButton();
+
+    public RecentFileListItemContextMenu ShowContextMenu() => OpenFileButton.ShowContextMenu().As<RecentFileListItemContextMenu>();
+}
+
+public class RecentFileListItemContextMenu(FrameworkAutomationElementBase element) : Menu(element)
+{
+    public MenuItem OpenFileMenuItem => this.Find("OpenFileMenuItem").AsMenuItem();
+    
+    public MenuItem PinFileMenuItem => this.Find("PinFileMenuItem").AsMenuItem();
+    
+    public MenuItem UnpinFileMenuItem => this.Find("UnpinFileMenuItem").AsMenuItem();
+
+    public MenuItem RemoveFileMenuItem => this.Find("RemoveFileMenuItem").AsMenuItem();
 }

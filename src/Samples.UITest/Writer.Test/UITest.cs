@@ -58,7 +58,7 @@ public class UITest : IDisposable
     public Application Launch(LaunchArguments? arguments = null)
     {
         var args = (arguments ?? new LaunchArguments()).ToArguments();
-        Log.WriteLine($"LaunchArguments: {args}");
+        Log.WriteLine($"Launch:          {args}");
         return app = Application.Launch(executable, args);
     }
 

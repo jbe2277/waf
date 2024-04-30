@@ -52,12 +52,12 @@
                     <DockPanel Margin="0,0,0,15">
                         <DockPanel.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="{x:Static p:Resources.OpenFileMenu}" Click="OpenContextMenuHandler"/>
-                                <MenuItem Header="{x:Static p:Resources.PinFileMenu}" Click="PinContextMenuHandler" 
+                                <MenuItem Header="{x:Static p:Resources.OpenFileMenu}" Click="OpenContextMenuHandler" AutomationProperties.AutomationId="OpenFileMenuItem"/>
+                                <MenuItem Header="{x:Static p:Resources.PinFileMenu}" Click="PinContextMenuHandler" AutomationProperties.AutomationId="PinFileMenuItem"
                                           Visibility="{Binding IsPinned, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
-                                <MenuItem Header="{x:Static p:Resources.UnpinFileMenu}" Click="UnpinContextMenuHandler"
+                                <MenuItem Header="{x:Static p:Resources.UnpinFileMenu}" Click="UnpinContextMenuHandler" AutomationProperties.AutomationId="UnpinFileMenuItem"
                                           Visibility="{Binding IsPinned, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                                <MenuItem Header="{x:Static p:Resources.RemoveFileMenu}" Click="RemoveContextMenuHandler"/>
+                                <MenuItem Header="{x:Static p:Resources.RemoveFileMenu}" Click="RemoveContextMenuHandler" AutomationProperties.AutomationId="RemoveFileMenuItem"/>
                             </ContextMenu>
                         </DockPanel.ContextMenu>
 
