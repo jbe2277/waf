@@ -4,7 +4,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using System.Text;
 
-namespace UITest.Writer;
+namespace UITest;
 
 public class ElementNotFoundException(string message, Exception? innerException = null) : Exception(message, innerException) { }
 
