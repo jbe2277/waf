@@ -1,30 +1,28 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
-using UITest.Writer.Views;
-using Xunit;
+using UITest.BookLibrary.Views;
 using Xunit.Abstractions;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+namespace UITest.BookLibrary;
 
-namespace UITest.Writer;
-
-public class UITest(ITestOutputHelper log) : UITestBase(log, "Writer/Release/net8.0-windows/Writer.exe", "Samples.UITest/Writer/")
+public class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibrary/Release/net8.0-windows/BookLibrary.exe", "Samples.UITest/BookLibrary/")
 {
     public Application Launch(LaunchArguments? arguments = null)
     {
         var args = (arguments ?? new LaunchArguments()).ToArguments();
         Log.WriteLine($"Launch:          {args}");
+        Environment.CurrentDirectory = Path.GetDirectoryName(Executable)!;  // TODO: Bug in App that CurrentDir must be Exe dir
         return App = Application.Launch(Executable, args);
     }
 
     public ShellWindow GetShellWindow() => App!.GetMainWindow(Automation).As<ShellWindow>();
 }
 
-public record LaunchArguments(string? UICulture = "en-US", string? Culture = "en-US", bool? DefaultSettings = true, string? AdditionalArguments = null) : LaunchArgumentsBase
+public record LaunchArguments(string? AdditionalArguments = null) : LaunchArgumentsBase
 {
     public override string ToArguments()
     {
-        string?[] args = [CreateArg(UICulture), CreateArg(Culture), CreateArg(DefaultSettings), CreateArg(AdditionalArguments)];
+        string?[] args = [CreateArg(AdditionalArguments)];
         return string.Join(" ", args.Where(x => !string.IsNullOrEmpty(x)));
     }
 }
