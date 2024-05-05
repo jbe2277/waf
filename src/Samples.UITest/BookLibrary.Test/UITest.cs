@@ -11,7 +11,6 @@ public class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibrary/Releas
     {
         var args = (arguments ?? new LaunchArguments()).ToArguments();
         Log.WriteLine($"Launch:          {args}");
-        Environment.CurrentDirectory = Path.GetDirectoryName(Executable)!;  // TODO: Bug in App that CurrentDir must be Exe dir
         return App = Application.Launch(Executable, args);
     }
 

@@ -30,7 +30,7 @@ public partial class App
 
     private AggregateCatalog? catalog;
     private CompositionContainer? container;
-    private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
+    private IEnumerable<IModuleController> moduleControllers = [];
 
     public App()
     {
@@ -79,7 +79,11 @@ public partial class App
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Waf.BookLibrary.Library.Applications
 
         // Load module assemblies as well (e.g. Reporting extension). See App.config file.
-        foreach (var x in Settings.Default.ModuleAssemblies) catalog.Catalogs.Add(new AssemblyCatalog(x));
+        var baseDir = AppContext.BaseDirectory;
+        foreach (var x in Settings.Default.ModuleAssemblies)
+        {            
+            catalog.Catalogs.Add(new AssemblyCatalog(Path.Combine(baseDir, x!)));
+        }
 
         container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
         var batch = new CompositionBatch();
