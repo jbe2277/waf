@@ -2,7 +2,7 @@
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 
-namespace UITest.Writer.Views;
+namespace UITest.SystemViews;
 
 public class MessageBox(FrameworkAutomationElementBase element) : AutomationElement(element)
 {

@@ -2,6 +2,7 @@
 using FlaUI.Core.Capturing;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
+using UITest.SystemViews;
 using UITest.Writer.Views;
 using Xunit;
 using Xunit.Abstractions;

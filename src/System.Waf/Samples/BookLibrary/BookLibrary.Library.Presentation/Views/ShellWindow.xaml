@@ -19,11 +19,11 @@
     
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="{x:Static p:Resources.DataMenu}">
+            <MenuItem Header="{x:Static p:Resources.DataMenu}" AutomationProperties.AutomationId="DataMenu">
                 <MenuItem Command="{Binding SaveCommand}" Header="{x:Static p:Resources.SaveMenu}" Icon="{StaticResource SaveImage}" 
-                          InputGestureText="{x:Static p:Resources.ControlS}"/>
+                          InputGestureText="{x:Static p:Resources.ControlS}" AutomationProperties.AutomationId="SaveMenuItem"/>
                 <Separator/>
-                <MenuItem Command="{Binding ExitCommand}" Header="{x:Static p:Resources.ExitMenu}"/>
+                <MenuItem Command="{Binding ExitCommand}" Header="{x:Static p:Resources.ExitMenu}" AutomationProperties.AutomationId="ExitMenuItem"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.EditMenu}">
                 <MenuItem Command="ApplicationCommands.Undo" Header="{x:Static p:Resources.UndoMenu}" Icon="{StaticResource UndoImage}"
@@ -43,9 +43,9 @@
                 <MenuItem Command="ApplicationCommands.SelectAll" Header="{x:Static p:Resources.SelectAllMenu}"
                           InputGestureText="{x:Static p:Resources.ControlA}"/>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.HelpMenu}">
+            <MenuItem Header="{x:Static p:Resources.HelpMenu}" AutomationProperties.AutomationId="HelpMenu">
                 <MenuItem Command="{Binding AboutCommand}" Header="{x:Static p:Resources.AboutMenu}"
-                          InputGestureText="{x:Static p:Resources.F1}"/>
+                          InputGestureText="{x:Static p:Resources.F1}" AutomationProperties.AutomationId="AboutMenuItem"/>
             </MenuItem>
         </Menu>
 

@@ -4,7 +4,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
 
-namespace UITest.Writer.Views;
+namespace UITest.SystemViews;
 
 public class SaveFileDialog(FrameworkAutomationElementBase element) : Window(element)
 {
