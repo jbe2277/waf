@@ -27,7 +27,7 @@ jobs:
           src/System.Waf/System.Waf/**/*.snupkg
 
     - name: UI Test
-      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger "console;verbosity=detailed"
+      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger "console;verbosity=detailed" -maxCpuCount:1
     - name: Upload UI Test results
       uses: actions/upload-artifact@v4
       if: always()
