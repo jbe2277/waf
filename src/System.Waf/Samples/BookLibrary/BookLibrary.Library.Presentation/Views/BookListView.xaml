@@ -7,7 +7,7 @@
     xmlns:waf="http://waf.codeplex.com/schemas"
     xmlns:dd="clr-namespace:Waf.BookLibrary.Library.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleBookListViewModel, IsDesignTimeCreatable=True}"
-    d:DesignWidth="550" d:DesignHeight="150"
+    d:DesignWidth="550" d:DesignHeight="150" AutomationProperties.AutomationId="BookListView"
     waf:ValidationHelper.IsEnabled="true" waf:ValidationHelper.IsValid="{Binding IsValid, Mode=OneWayToSource}">
     
     <DockPanel>
@@ -23,12 +23,12 @@
                 <Label Content="{x:Static p:Resources.SearchMenu}" Target="{Binding ElementName=searchBox}" Padding="5,0,7,0" Margin="0" 
                        VerticalAlignment="Center"/>
                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
-                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="SearchBox"/>
             </ToolBar>
         </ToolBarTray>
 
         <DataGrid x:Name="bookTable" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook, ValidatesOnNotifyDataErrors=False}" 
-                  SelectionChanged="DataGridSelectionChanged" Sorting="DataGridSorting" CanUserDeleteRows="False" BorderThickness="0">
+                  SelectionChanged="DataGridSelectionChanged" Sorting="DataGridSorting" CanUserDeleteRows="False" BorderThickness="0" AutomationProperties.AutomationId="BookDataGrid">
             <DataGrid.InputBindings>
                 <KeyBinding Command="{Binding RemoveCommand}" Key="Del"/>
             </DataGrid.InputBindings>
@@ -51,7 +51,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Padding="4,2,4,3">
+                                <TextBlock Padding="4,2,4,3" AutomationProperties.AutomationId="LendToLabel">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
                                             <Binding Path="Book.LendTo.Firstname" ValidatesOnNotifyDataErrors="False"/>
@@ -60,7 +60,7 @@
                                     </TextBlock.Text>
                                 </TextBlock>
                                 <TextBlock Grid.Column="1" Padding="4,2,4,3">
-                                    <Hyperlink Command="{Binding LendToCommand}" CommandParameter="{Binding Book}">
+                                    <Hyperlink Command="{Binding LendToCommand}" CommandParameter="{Binding Book}" AutomationProperties.AutomationId="LendToButton">
                                         <Run Text="{x:Static p:Resources.MoreButton}"/>
                                     </Hyperlink>
                                 </TextBlock>

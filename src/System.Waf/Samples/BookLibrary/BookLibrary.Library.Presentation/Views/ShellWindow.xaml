@@ -65,8 +65,8 @@
             <StatusBarItem Content="{Binding DatabasePath}" ContentStringFormat="{x:Static p:Resources.DatabasePath}"/>
         </StatusBar>
 
-        <TabControl Padding="0">
-            <TabItem Header="{x:Static p:Resources.BookLibrary}">
+        <TabControl Padding="0" AutomationProperties.AutomationId="TabControl">
+            <TabItem Header="{x:Static p:Resources.BookLibrary}" AutomationProperties.AutomationId="BookLibraryTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -83,7 +83,7 @@
                     <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="4" Grid.Row="0" Grid.Column="0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.AddressBook}">
+            <TabItem Header="{x:Static p:Resources.AddressBook}" AutomationProperties.AutomationId="AddressBookTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -100,7 +100,8 @@
                     <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="4" Grid.Row="0" Grid.Column="0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.Reporting}" Visibility="{Binding ShellService.IsReportingEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TabItem Header="{x:Static p:Resources.Reporting}" Visibility="{Binding ShellService.IsReportingEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+                    AutomationProperties.AutomationId="ReportingTabItem">
                 <ContentControl>
                     <ContentControl.Style>
                         <Style TargetType="ContentControl">
