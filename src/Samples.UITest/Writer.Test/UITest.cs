@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace UITest.Writer;
 
-public class UITest(ITestOutputHelper log) : UITestBase(log, "Writer/Release/net8.0-windows/Writer.exe", "Samples.UITest/Writer/")
+public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "Writer/Release/net8.0-windows/Writer.exe", "Samples.UITest/Writer/")
 {
     public Application Launch(LaunchArguments? arguments = null)
     {
@@ -24,7 +24,7 @@ public record LaunchArguments(string? UICulture = "en-US", string? Culture = "en
 {
     public override string ToArguments()
     {
-        string?[] args = [CreateArg(UICulture), CreateArg(Culture), CreateArg(DefaultSettings), CreateArg(AdditionalArguments)];
+        string?[] args = [CreateArg(UICulture), CreateArg(Culture), CreateArg(DefaultSettings), AdditionalArguments];
         return string.Join(" ", args.Where(x => !string.IsNullOrEmpty(x)));
     }
 }
