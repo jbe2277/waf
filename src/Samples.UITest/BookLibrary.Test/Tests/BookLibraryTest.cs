@@ -37,6 +37,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Launch();
         var window = GetShellWindow();
         var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        var bookView = window.TabControl.BookLibraryTabItem.BookView;
         
         Assert.Equal(41, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Ha";
@@ -46,11 +47,22 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
         bookRow2.Select();
 
-        Assert.Equal("Harry Potter and the Deathly Hallows", bookRow2.TitleCell.Name);
-        Assert.Equal("J.K. Rowling", bookRow2.AuthorCell.Name);
+        AssertEqual("Harry Potter and the Deathly Hallows", bookRow2.TitleCell.Name, bookView.TitleTextBox.Text);
+        AssertEqual("J.K. Rowling", bookRow2.AuthorCell.Name, bookView.AuthorTextBox.Text);
+        Assert.Equal("Bloomsbury", bookView.PublisherTextBox.Text);
         Assert.Equal("1/1/2007", bookRow2.PublishDateCell.Name);
-        Assert.Equal("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name);
+        Assert.Equal(new DateTime(2007, 1, 1), bookView.PublishDatePicker.SelectedDate);
+        Assert.Equal("9780747591054", bookView.IsbnTextBox.Text);
+        Assert.Equal("English", bookView.LanguageComboBox.SelectedItem.Text);
+        Assert.Equal("607", bookView.PagesTextBox.Text);
+        AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.Close();
+
+        void AssertEqual(string expected, string actual1, string actual2)
+        {
+            Assert.Equal(expected, actual1);
+            Assert.Equal(expected, actual2);
+        }
     }
 }

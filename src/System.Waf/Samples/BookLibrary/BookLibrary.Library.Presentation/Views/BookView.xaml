@@ -7,7 +7,7 @@
     xmlns:waf="http://waf.codeplex.com/schemas"
     xmlns:dd="clr-namespace:Waf.BookLibrary.Library.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleBookViewModel, IsDesignTimeCreatable=True}"
-    MinWidth="250" MinHeight="270" IsEnabled="{Binding IsEnabled}"
+    MinWidth="250" MinHeight="270" IsEnabled="{Binding IsEnabled}" AutomationProperties.AutomationId="BookView"
     waf:ValidationHelper.IsEnabled="true" waf:ValidationHelper.IsValid="{Binding IsValid, Mode=OneWayToSource}">
 
     <Grid Margin="11,11,22,11">
@@ -40,30 +40,30 @@
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.TitleMenu}" Target="{Binding ElementName=titleBox}"/>
         <TextBox x:Name="titleBox" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" 
                  Text="{Binding Book.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}"
-                 MaxLength="100" HorizontalAlignment="Stretch"/>
+                 MaxLength="100" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="TitleTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static p:Resources.Author}"/>
         <TextBox Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3"
                  Text="{Binding Book.Author, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
-                 MaxLength="100" HorizontalAlignment="Stretch"/>
+                 MaxLength="100" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="AuthorTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="{x:Static p:Resources.Publisher}"/>
         <TextBox Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="3" 
                  Text="{Binding Book.Publisher, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
-                 MaxLength="100" HorizontalAlignment="Stretch"/>
+                 MaxLength="100" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="PublisherTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="{x:Static p:Resources.PublishDate}"/>
         <DatePicker Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" SelectedDate="{Binding Book.PublishDate}" 
-                    HorizontalAlignment="Stretch"/>
+                    HorizontalAlignment="Stretch" AutomationProperties.AutomationId="PublishDatePicker"/>
 
         <Label Grid.Column="0" Grid.Row="8" Content="{x:Static p:Resources.Isbn}"/>
         <TextBox Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="3" 
                  Text="{Binding Book.Isbn, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
-                 MaxLength="14" HorizontalAlignment="Stretch"/>
+                 MaxLength="14" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="IsbnTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="10" Content="{x:Static p:Resources.Language}"/>
         <ComboBox Grid.Column="2" Grid.Row="10" Grid.ColumnSpan="3" ItemsSource="{Binding Source={StaticResource LanguageValues}}"
-                  SelectedItem="{Binding Book.Language}" Height="24">
+                  SelectedItem="{Binding Book.Language}" Height="24" AutomationProperties.AutomationId="LanguageComboBox">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource LanguageToStringConverter}}"/>
@@ -74,10 +74,10 @@
         <Label Grid.Column="0" Grid.Row="12" Content="{x:Static p:Resources.Pages}"/>
         <TextBox Grid.Column="2" Grid.Row="12" Grid.ColumnSpan="3" 
                  Text="{Binding Book.Pages, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
-                 HorizontalAlignment="Stretch"/>
+                 HorizontalAlignment="Stretch" AutomationProperties.AutomationId="PagesTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="14" Content="{x:Static p:Resources.LendTo}"/>
-        <TextBox Grid.Column="2" Grid.Row="14" IsReadOnly="True" HorizontalAlignment="Stretch">
+        <TextBox Grid.Column="2" Grid.Row="14" IsReadOnly="True" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="LendToTextBox">
             <TextBox.Text>
                 <MultiBinding StringFormat="{}{0} {1}" ValidatesOnNotifyDataErrors="False">
                     <Binding Path="Book.LendTo.Firstname"/>
@@ -87,7 +87,7 @@
         </TextBox>
         <Button Grid.Column="4" Grid.Row="14"
             Command="{Binding LendToCommand}" CommandParameter="{Binding Book, ValidatesOnNotifyDataErrors=False}" Content="{x:Static p:Resources.MoreButton}"
-            MinWidth="25"/>
+            MinWidth="25" AutomationProperties.AutomationId="LendToButton"/>
     </Grid>
 
 </UserControl>
