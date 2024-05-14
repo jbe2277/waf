@@ -36,4 +36,6 @@ public class TabControl(FrameworkAutomationElementBase element) : Tab(element)
 public class BookLibraryTabItem(FrameworkAutomationElementBase element) : TabItem(element)
 {
     public BookListView BookListView => this.Find("BookListView").As<BookListView>();
+
+    public BookView BookView => this.Find("BookView").As<BookView>();
 }
