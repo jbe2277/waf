@@ -2,6 +2,7 @@
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit.Abstractions;
@@ -14,6 +15,8 @@ public abstract class UITestBase : IDisposable
 
     static UITestBase()
     {
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
         Mouse.MovePixelsPerMillisecond = 2;
         Retry.DefaultTimeout = TimeSpan.FromSeconds(5);
         Retry.DefaultInterval = TimeSpan.FromMilliseconds(250);
