@@ -62,7 +62,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         bookView.AuthorTextBox.Text = "TAuthor";
         Assert.Equal("TAuthor", bookRow2.AuthorCell.Name);
         bookView.PublishDatePicker.SelectedDate = new DateTime(2024, 3, 2);
-        Assert.Equal("2/3/2024", bookRow2.PublishDateCell.Name);
+        Assert.Equal("3/2/2024", bookRow2.PublishDateCell.Name);
         Assert.Equal(["Undefined", "English", "German", "French", "Spanish", "Chinese", "Japanese"], bookView.LanguageComboBox.Items.Select(x => x.Name));
         bookView.LanguageComboBox.Select(2);
         bookView.LanguageComboBox.Click();  // To close the combo box popup
