@@ -11,19 +11,21 @@
 
     <DockPanel Margin="11,7,11,11">
         <Label Content="{Binding Book.Title, ValidatesOnNotifyDataErrors=False}" ContentStringFormat="{x:Static p:Resources.BookTitle}" 
-               Padding="0" DockPanel.Dock="Top" Style="{StaticResource HeaderLabel}"/>
-        <RadioButton IsChecked="{Binding IsWasReturned}" Content="{x:Static p:Resources.WasReturnedCheck}" TabIndex="0" DockPanel.Dock="Top" Margin="0,11,0,0"/>
-        <RadioButton IsChecked="{Binding IsLendTo}" Content="{x:Static p:Resources.LendToCheck}" TabIndex="1" DockPanel.Dock="Top" Margin="0,7,0,0"/>
+                Padding="0" DockPanel.Dock="Top" Style="{StaticResource HeaderLabel}"/>
+        <RadioButton IsChecked="{Binding IsWasReturned}" Content="{x:Static p:Resources.WasReturnedCheck}" TabIndex="0" DockPanel.Dock="Top" Margin="0,11,0,0" 
+                AutomationProperties.AutomationId="WasReturnedRadioButton"/>
+        <RadioButton IsChecked="{Binding IsLendTo}" Content="{x:Static p:Resources.LendToCheck}" TabIndex="1" DockPanel.Dock="Top" Margin="0,7,0,0"
+                AutomationProperties.AutomationId="LendToRadioButton"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Bottom" Margin="0,11,0,0">
             <Button Command="{Binding OkCommand}" Content="{x:Static p:Resources.Ok}" IsDefault="True" TabIndex="3" 
-                    Style="{StaticResource DialogButton}"/>
+                    Style="{StaticResource DialogButton}" AutomationProperties.AutomationId="OkButton"/>
             <Button Content="{x:Static p:Resources.Cancel}" IsCancel="True" TabIndex="4" 
-                    Style="{StaticResource DialogButton}" Margin="11,0,0,0"/>
+                    Style="{StaticResource DialogButton}" Margin="11,0,0,0" AutomationProperties.AutomationId="CancelButton"/>
         </StackPanel>
 
         <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson, ValidatesOnNotifyDataErrors=False}" IsEnabled="{Binding IsLendTo}"
-                  MouseDoubleClick="PersonsListMouseDoubleClick" TabIndex="2" Margin="0,11,0,0">
+                  MouseDoubleClick="PersonsListMouseDoubleClick" TabIndex="2" Margin="0,11,0,0" AutomationProperties.AutomationId="PersonListBox">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Firstname, ValidatesOnNotifyDataErrors=False}" Header="{x:Static p:Resources.Firstname}" Width="125"/>

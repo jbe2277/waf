@@ -32,7 +32,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
     }
 
     [Fact]
-    public void SearchBookListTest()
+    public void SearchBookListAndChangeEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -59,6 +59,26 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
 
         bookView.TitleTextBox.Text = "Test Title";
         Assert.Equal("Test Title", bookRow2.TitleCell.Name);
+        bookView.AuthorTextBox.Text = "TAuthor";
+        Assert.Equal("TAuthor", bookRow2.AuthorCell.Name);
+        bookView.PublishDatePicker.SelectedDate = new DateTime(2024, 3, 2);
+        Assert.Equal("2/3/2024", bookRow2.PublishDateCell.Name);
+        Assert.Equal(["Undefined", "English", "German", "French", "Spanish", "Chinese", "Japanese"], bookView.LanguageComboBox.Items.Select(x => x.Name));
+        bookView.LanguageComboBox.Select(2);
+        bookView.LanguageComboBox.Click();  // To close the combo box popup
+        Assert.Equal("German", bookView.LanguageComboBox.SelectedItem.Text);
+
+        bookView.LendToButton.Click();
+        var lendToWindow = window.FirstModalWindow().As<LendToWindow>();
+        Assert.True(lendToWindow.WasReturnedRadioButton.IsChecked);
+        Assert.False(lendToWindow.LendToRadioButton.IsChecked);
+        Assert.False(lendToWindow.PersonListBox.IsEnabled);
+        lendToWindow.LendToRadioButton.Click();
+        Assert.True(lendToWindow.PersonListBox.IsEnabled);
+        Assert.Equal(["Ginny", "Hermione", "Harry", "Ron"], lendToWindow.PersonListBox.Items.Select(x => x.Text));
+        lendToWindow.PersonListBox.Items[2].Select();
+        lendToWindow.OkButton.Click();
+        AssertEqual("Harry Potter", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
