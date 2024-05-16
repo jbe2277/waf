@@ -34,7 +34,7 @@ public class WriterTest : UITest
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
         Capture.Screen().ToFile(GetScreenshotFile("About.png"));
-        messageBox.OkButton.Click();
+        messageBox.Buttons[0].Click();
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();

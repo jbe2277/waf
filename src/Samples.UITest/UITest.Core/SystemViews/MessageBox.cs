@@ -10,5 +10,5 @@ public class MessageBox(FrameworkAutomationElementBase element) : AutomationElem
 
     public string Message => this.Find(x => x.ByControlType(ControlType.Text)).Name;
 
-    public Button OkButton => this.Find(x => x.ByControlType(ControlType.Button)).AsButton();
+    public Button[] Buttons => this.FindAll(x => x.ByControlType(ControlType.Button)).Select(x => x.AsButton()).ToArray();
 }

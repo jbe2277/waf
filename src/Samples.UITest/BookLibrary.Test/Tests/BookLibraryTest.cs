@@ -24,7 +24,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Book Library ", messageBox.Message);
         Capture.Screen().ToFile(GetScreenshotFile("About.png"));
-        messageBox.OkButton.Click();
+        messageBox.Buttons[0].Click();
 
         var dataMenu = window.DataMenu;
         dataMenu.Click();
@@ -57,8 +57,13 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("607", bookView.PagesTextBox.Text);
         AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
-        window.Close();
+        bookView.TitleTextBox.Text = "Test Title";
+        Assert.Equal("Test Title", bookRow2.TitleCell.Name);
 
+        window.Close();
+        var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
+        messageBox.Buttons[1].Click();  // No button
+        
         void AssertEqual(string expected, string actual1, string actual2)
         {
             Assert.Equal(expected, actual1);
