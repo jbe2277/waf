@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <MauiVersion>8.0.21</MauiVersion>
+    <MauiVersion>8.0.40</MauiVersion>
     
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
@@ -30,7 +30,7 @@
   </Choose>
 
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="4.3.0" >
+    <PackageReference Include="MinVer" Version="5.0.0" >
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
