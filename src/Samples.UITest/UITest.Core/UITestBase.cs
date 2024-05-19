@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Capturing;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
@@ -12,6 +13,7 @@ namespace UITest;
 public abstract class UITestBase : IDisposable
 {
     private readonly List<string> usedFiles = [];
+    private string? testMethodName;
 
     static UITestBase()
     {
@@ -22,13 +24,13 @@ public abstract class UITestBase : IDisposable
         Retry.DefaultInterval = TimeSpan.FromMilliseconds(250);
     }
 
-    protected UITestBase(ITestOutputHelper log, string relativeExecutablePath, string relativeTestOutputPath)
+    protected UITestBase(ITestOutputHelper log, string executableFileName, string executablePath, string testOutputPath)
     {
         Log = log;
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
-        var outPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../out/"));
-        Executable = Path.GetFullPath(Path.Combine(outPath, relativeExecutablePath));
-        TestOutPath = Path.GetFullPath(Path.Combine(outPath, relativeTestOutputPath));
+        var rootPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../"));
+        Executable = Path.GetFullPath(Path.Combine(Path.IsPathFullyQualified(executablePath) ? executablePath : Path.Combine(rootPath, executablePath), executableFileName));
+        TestOutPath = Path.GetFullPath(Path.IsPathFullyQualified(testOutputPath) ? testOutputPath : Path.Combine(rootPath, testOutputPath));
         Directory.CreateDirectory(TestOutPath);
         Log.WriteLine($"OSVersion:       {Environment.OSVersion}");
         Log.WriteLine($"ProcessorCount:  {Environment.ProcessorCount}");
@@ -44,15 +46,44 @@ public abstract class UITestBase : IDisposable
 
     public ITestOutputHelper Log { get; }
 
-    public string Executable {  get; }
+    public string Executable { get; }
 
     public string TestOutPath { get; }
+
+    public string TestMethodName => testMethodName ?? throw new InvalidOperationException("Test context not available. Use the Run method for your test code.");
 
     public UIA3Automation Automation { get; }
 
     public Application? App { get; protected set; }
 
     public bool SkipAppClose { get; set; } = false;
+
+    public void Run(Action action, [CallerMemberName] string? memberName = null)
+    {
+        try
+        {
+            testMethodName = memberName;
+            action();
+        }
+        catch (Exception)
+        {
+            TryGetScreenshot();
+            throw;
+        }
+        finally
+        {
+            testMethodName = null;
+        }
+
+        void TryGetScreenshot()
+        {
+            try
+            {
+                Capture.Screen().ToFile(GetScreenshotFile("Fail"));
+            }
+            catch { }
+        }
+    }
 
     public string GetTempFileName(string fileExtension)
     {
@@ -63,8 +94,12 @@ public abstract class UITestBase : IDisposable
         return file;
     }
 
-    public string GetScreenshotFile(string fileName, [CallerMemberName] string? memberName = null)
-            => Path.Combine(TestOutPath, string.Join("-", new[] { memberName, fileName }.Where(x => !string.IsNullOrEmpty(x))));
+    public string GetScreenshotFile(string fileName)
+    {
+        var file = Path.Combine(TestOutPath, string.Join("-", TestMethodName, fileName));
+        if (string.IsNullOrEmpty(Path.GetExtension(file))) file += ".png";
+        return file;
+    }
 
     public void Dispose()
     {
