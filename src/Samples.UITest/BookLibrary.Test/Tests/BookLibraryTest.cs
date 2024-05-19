@@ -10,7 +10,7 @@ namespace UITest.BookLibrary.Tests;
 public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
 {
     [Fact]
-    public void AboutTest()
+    public void AboutTest() => Run(() =>
     {
         Launch();
         var window = GetShellWindow();
@@ -29,16 +29,16 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var dataMenu = window.DataMenu;
         dataMenu.Click();
         dataMenu.ExitMenuItem.Click();
-    }
+    });
 
     [Fact]
-    public void SearchBookListAndChangeEntriesTest()
+    public void SearchBookListAndChangeEntriesTest() => Run(() =>
     {
         Launch();
         var window = GetShellWindow();
         var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
         var bookView = window.TabControl.BookLibraryTabItem.BookView;
-        
+
         Assert.Equal(41, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Ha";
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
@@ -83,11 +83,11 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-        
+
         void AssertEqual(string expected, string actual1, string actual2)
         {
             Assert.Equal(expected, actual1);
             Assert.Equal(expected, actual2);
         }
-    }
+    });
 }

@@ -22,7 +22,7 @@ public class WriterTest : UITest
     protected void AssertTextEqual(string expected, TextBox actual) { if (!SkipTextBoxReadText) Assert.Equal(expected, actual.Text); }
 
     [Fact]
-    public void AboutTest()
+    public void AboutTest() => Run(() =>
     {
         Launch();
         var window = GetShellWindow();
@@ -39,10 +39,10 @@ public class WriterTest : UITest
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Invoke();
-    }
+    });
 
     [Fact]
-    public void NewZoomWritePrintPreviewExitWithoutSave()
+    public void NewZoomWritePrintPreviewExitWithoutSave() => Run(() =>
     {
         Launch();
         var window = GetShellWindow();
@@ -86,17 +86,17 @@ public class WriterTest : UITest
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
-    }
+    });
 
     [Fact]
-    public void MultipleNewSaveRestartOpenRecentChangeAskToSave()
+    public void MultipleNewSaveRestartOpenRecentChangeAskToSave() => Run(() =>
     {
         Launch();
         var window = GetShellWindow();
 
         var startView = window.StartView;
         Assert.False(startView.IsOffscreen);
-        
+
         // Create new document, add text, check tab name with dirty flag indicator '*'
         startView.NewButton.Click();
         var tab1 = window.DocumentTabItems.Single();
@@ -147,20 +147,20 @@ public class WriterTest : UITest
 
 
         // Restart the app and check recent file list, pin second item -> moved to top
-        Launch(new LaunchArguments(DefaultSettings: false));
+        Launch(resetSettings: false);
         window = GetShellWindow();
         startView = window.StartView;
         Capture.Screen().ToFile(GetScreenshotFile("RestartScreen.png"));
-        Assert.Equal([ fileName2, fileName ], startView.RecentFileListItems.Select(x => x.ToolTip));
+        Assert.Equal([fileName2, fileName], startView.RecentFileListItems.Select(x => x.ToolTip));
         startView.RecentFileListItems[1].PinButton.Click();
-        Assert.Equal([ fileName, fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
+        Assert.Equal([fileName, fileName2], startView.RecentFileListItems.Select(x => x.ToolTip));
         Assert.True(startView.RecentFileListItems[0].PinButton.IsToggled);
         Assert.False(startView.RecentFileListItems[1].PinButton.IsToggled);
 
         // Check that the recent file list within the ribbon menu has the same content
         fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        Assert.Equal([ fileName, fileName2 ], fileRibbonMenu.RecentFileListItems.Select(x => x.ToolTip));
+        Assert.Equal([fileName, fileName2], fileRibbonMenu.RecentFileListItems.Select(x => x.ToolTip));
         Assert.True(fileRibbonMenu.RecentFileListItems[0].PinButton.IsToggled);
         Assert.False(fileRibbonMenu.RecentFileListItems[1].PinButton.IsToggled);
         fileRibbonMenu.MenuButton.Toggle();
@@ -189,27 +189,27 @@ public class WriterTest : UITest
         Assert.Equal(fileName, firstItem.Text);
         saveChangesWindow.NoButton.Click();
 
-        
+
         // Restart the app and check recent file list, use context menu to unpin, remove and open
-        Launch(new LaunchArguments(DefaultSettings: false));
+        Launch(resetSettings: false);
         window = GetShellWindow();
         startView = window.StartView;
-        Assert.Equal([ fileName, fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
+        Assert.Equal([fileName, fileName2], startView.RecentFileListItems.Select(x => x.ToolTip));
         Assert.True(startView.RecentFileListItems[0].PinButton.IsToggled);
         var contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
-        UIAssert.NotExists(() => _ = contextMenu.PinFileMenuItem);        
+        UIAssert.NotExists(() => _ = contextMenu.PinFileMenuItem);
         contextMenu.UnpinFileMenuItem.Invoke();
         Assert.False(startView.RecentFileListItems[0].PinButton.IsToggled);
-        
+
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         UIAssert.NotExists(() => _ = contextMenu.UnpinFileMenuItem);
         contextMenu.RemoveFileMenuItem.Invoke();
-        Assert.Equal([ fileName2 ], startView.RecentFileListItems.Select(x => x.ToolTip));
+        Assert.Equal([fileName2], startView.RecentFileListItems.Select(x => x.ToolTip));
 
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         contextMenu.OpenFileMenuItem.Invoke();
         tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
         AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
-    }
+    });
 }

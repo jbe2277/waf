@@ -21,12 +21,7 @@ public sealed class AppSettings : UserSettingsBase
 
     [DataMember] public RecentFileList? RecentFileList { get; set; }
 
-    public void ResetToDefault() => SetDefaultValues();
-
     protected override void SetDefaultValues() 
     {
-        (Left, Top, Height, Width) = (0, 0, 0, 0);
-        IsMaximized = false;
-        (UICulture, RecentFileList) = (null, null);
     }
 }
