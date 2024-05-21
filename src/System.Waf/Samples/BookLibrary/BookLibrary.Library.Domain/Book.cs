@@ -21,7 +21,7 @@ public class Book : ValidatableModel, IFormattable
         publishDate = DateTime.Now;
     }
 
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     [Required(ErrorMessageResourceName = nameof(Resources.TitleMandatory), ErrorMessageResourceType = typeof(Resources))]
     [StringLength(100, ErrorMessageResourceName = nameof(Resources.TitleMaxLength), ErrorMessageResourceType = typeof(Resources))]
@@ -81,13 +81,13 @@ public class Book : ValidatableModel, IFormattable
 
     public string ToString(string? format, IFormatProvider? formatProvider) => string.Format(formatProvider, Resources.BookToString, Title, Author);
 
-    public static ValidationResult? ValidatePublishDate(DateTime value, ValidationContext context)
+    public static ValidationResult? ValidatePublishDate(DateTime value, ValidationContext _)
     {
         var minValue = new DateTime(1753, 1, 1);
         var maxValue = new DateTime(9999, 12, 31);
         if (value < minValue || value > maxValue)
         {
-            return new(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue), new[] { nameof(PublishDate) });
+            return new(string.Format(CultureInfo.CurrentCulture, Resources.ValueMustBeBetween, value, minValue, maxValue), [nameof(PublishDate)]);
         }
         return ValidationResult.Success;
     }

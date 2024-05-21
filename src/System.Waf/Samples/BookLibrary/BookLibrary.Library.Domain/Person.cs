@@ -16,7 +16,7 @@ public class Person : ValidatableModel, IFormattable
         Id = Guid.NewGuid();
     }
 
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     [Required(ErrorMessageResourceName = nameof(Resources.FirstnameMandatory), ErrorMessageResourceType = typeof(Resources))]
     [StringLength(30, ErrorMessageResourceName = nameof(Resources.FirstnameMaxLength), ErrorMessageResourceType = typeof(Resources))]
