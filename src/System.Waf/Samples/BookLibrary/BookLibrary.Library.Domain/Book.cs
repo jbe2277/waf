@@ -21,7 +21,7 @@ public class Book : ValidatableModel, IFormattable
         publishDate = DateTime.Now;
     }
 
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
 
     [Required(ErrorMessageResourceName = nameof(Resources.TitleMandatory), ErrorMessageResourceType = typeof(Resources))]
     [StringLength(100, ErrorMessageResourceName = nameof(Resources.TitleMaxLength), ErrorMessageResourceType = typeof(Resources))]
