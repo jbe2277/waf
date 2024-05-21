@@ -18,14 +18,15 @@ public class LendToViewModelTest : TestClassBase
     [TestMethod]
     public void LendToViewModelLendToTest()
     {
-        var book = new Book() { Title = "The Fellowship of the Ring" };
         var persons = new List<Person>()
         {
             new() { Firstname = "Harry" },
             new() { Firstname = "Ron" }
         };
+        var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons[0] };
+        
         var lendToView = new MockLendToView();
-        var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
+        var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = book.LendTo };
 
         Assert.AreEqual(book, lendToViewModel.Book);
         Assert.AreEqual(persons, lendToViewModel.Persons);
@@ -39,8 +40,7 @@ public class LendToViewModelTest : TestClassBase
 
             // Check the default values
             Assert.IsTrue(lendToViewModel.IsLendTo);
-            Assert.IsFalse(lendToViewModel.IsWasReturned);
-            Assert.AreEqual(persons[0], lendToViewModel.SelectedPerson);
+            Assert.AreSame(persons[0], lendToViewModel.SelectedPerson);
 
             // Select the last person: Lend to Ron
             AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.SelectedPerson, () => lendToViewModel.SelectedPerson = persons[^1]);
@@ -65,25 +65,15 @@ public class LendToViewModelTest : TestClassBase
         };
         var book = new Book() { Title = "The Fellowship of the Ring", LendTo = persons[0] };
         var lendToView = new MockLendToView();
-        var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = persons[0] };
+        var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = book.LendTo };
 
-        // Show the dialog
         var owner = new object();
         Action<MockLendToView> showDialogAction = _ =>
         {
-            // Check the default values
-            Assert.IsFalse(lendToViewModel.IsLendTo);
-            Assert.IsTrue(lendToViewModel.IsWasReturned);
-
-            // Change check boxes
-            AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsLendTo, () => lendToViewModel.IsLendTo = true);
             Assert.IsTrue(lendToViewModel.IsLendTo);
-            Assert.IsFalse(lendToViewModel.IsWasReturned);
 
-            // Restore the original check boxes state
-            AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsWasReturned, () => lendToViewModel.IsWasReturned = true);
+            AssertHelper.PropertyChangedEvent(lendToViewModel, x => x.IsLendTo, () => lendToViewModel.IsLendTo = false);
             Assert.IsFalse(lendToViewModel.IsLendTo);
-            Assert.IsTrue(lendToViewModel.IsWasReturned);
 
             lendToViewModel.OkCommand.Execute(null);
         };

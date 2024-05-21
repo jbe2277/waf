@@ -238,6 +238,8 @@ public class BookControllerTest : TestClassBase
             LendToViewModel viewModel = view.ViewModel;
             Assert.AreEqual(fellowship, viewModel.Book);
             Assert.AreEqual(entityService.Persons, viewModel.Persons);
+            Assert.IsFalse(viewModel.IsLendTo);
+            viewModel.IsLendTo = true;
 
             // Lend the book to Ron
             viewModel.SelectedPerson = ron;

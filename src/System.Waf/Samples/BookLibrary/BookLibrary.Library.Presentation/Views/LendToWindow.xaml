@@ -2,6 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:p="clr-namespace:Waf.BookLibrary.Library.Presentation.Properties"
+    xmlns:waf="http://waf.codeplex.com/schemas"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.BookLibrary.Library.Presentation.DesignData"
@@ -12,7 +13,7 @@
     <DockPanel Margin="11,7,11,11">
         <Label Content="{Binding Book.Title, ValidatesOnNotifyDataErrors=False}" ContentStringFormat="{x:Static p:Resources.BookTitle}" 
                 Padding="0" DockPanel.Dock="Top" Style="{StaticResource HeaderLabel}"/>
-        <RadioButton IsChecked="{Binding IsWasReturned}" Content="{x:Static p:Resources.WasReturnedCheck}" TabIndex="0" DockPanel.Dock="Top" Margin="0,11,0,0" 
+        <RadioButton IsChecked="{Binding IsLendTo, Converter={x:Static waf:InvertBooleanConverter.Default}}" Content="{x:Static p:Resources.WasReturnedCheck}" TabIndex="0" DockPanel.Dock="Top" Margin="0,11,0,0" 
                 AutomationProperties.AutomationId="WasReturnedRadioButton"/>
         <RadioButton IsChecked="{Binding IsLendTo}" Content="{x:Static p:Resources.LendToCheck}" TabIndex="1" DockPanel.Dock="Top" Margin="0,7,0,0"
                 AutomationProperties.AutomationId="LendToRadioButton"/>

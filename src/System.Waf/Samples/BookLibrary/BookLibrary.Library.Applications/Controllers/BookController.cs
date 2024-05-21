@@ -84,7 +84,7 @@ internal class BookController
         var lendToViewModel = lendToViewModelFactory.CreateExport().Value;
         lendToViewModel.Book = book;
         lendToViewModel.Persons = entityService.Persons;
-        lendToViewModel.SelectedPerson = entityService.Persons.FirstOrDefault();
+        lendToViewModel.SelectedPerson = book.LendTo;
         if (lendToViewModel.ShowDialog(shellService.ShellView!))
         {
             book.LendTo = lendToViewModel.SelectedPerson;

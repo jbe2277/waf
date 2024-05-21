@@ -70,9 +70,21 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
 
         bookView.LendToButton.Click();
         var lendToWindow = window.FirstModalWindow().As<LendToWindow>();
+        Assert.False(lendToWindow.WasReturnedRadioButton.IsChecked);
+        Assert.True(lendToWindow.LendToRadioButton.IsChecked);
+        Assert.True(lendToWindow.PersonListBox.IsEnabled);
+        Assert.Equal("Ginny", lendToWindow.PersonListBox.SelectedItem.Text);
+        lendToWindow.WasReturnedRadioButton.Click();
+        Assert.False(lendToWindow.PersonListBox.IsEnabled);
+        lendToWindow.OkButton.Click();
+        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+
+        bookRow2.LendToCell.LendToButton.Click();
+        lendToWindow = window.FirstModalWindow().As<LendToWindow>();
         Assert.True(lendToWindow.WasReturnedRadioButton.IsChecked);
         Assert.False(lendToWindow.LendToRadioButton.IsChecked);
         Assert.False(lendToWindow.PersonListBox.IsEnabled);
+        Assert.Null(lendToWindow.PersonListBox.SelectedItem);
         lendToWindow.LendToRadioButton.Click();
         Assert.True(lendToWindow.PersonListBox.IsEnabled);
         Assert.Equal(["Ginny", "Hermione", "Harry", "Ron"], lendToWindow.PersonListBox.Items.Select(x => x.Text));
@@ -84,7 +96,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
 
-        void AssertEqual(string expected, string actual1, string actual2)
+        static void AssertEqual(string expected, string actual1, string actual2)
         {
             Assert.Equal(expected, actual1);
             Assert.Equal(expected, actual2);

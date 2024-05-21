@@ -11,7 +11,6 @@ public class LendToViewModel : ViewModel<ILendToView>
 {
     private readonly DelegateCommand okCommand;
     private Book? book;
-    private bool isWasReturned;
     private bool isLendTo;
     private Person? selectedPerson;
     private bool dialogResult;
@@ -33,31 +32,16 @@ public class LendToViewModel : ViewModel<ILendToView>
         set
         {
             if (!SetProperty(ref book, value)) return;
-            if (value!.LendTo == null) IsLendTo = true;
-            else IsWasReturned = true;
+            IsLendTo = value.LendTo != null;
         }
     }
 
-    public IReadOnlyList<Person>? Persons { get; set; }
-
-    public bool IsWasReturned
-    {
-        get => isWasReturned;
-        set
-        {
-            if (!SetProperty(ref isWasReturned, value)) return;
-            IsLendTo = !value;
-        }
-    }
+    public IReadOnlyList<Person> Persons { get; set; } = [];
 
     public bool IsLendTo
     {
         get => isLendTo;
-        set
-        {
-            if (!SetProperty(ref isLendTo, value)) return;
-            IsWasReturned = !value;
-        }
+        set => SetProperty(ref isLendTo, value);
     }
 
     public Person? SelectedPerson
@@ -75,7 +59,7 @@ public class LendToViewModel : ViewModel<ILendToView>
     private void OkHandler()
     {
         dialogResult = true;
-        if (IsWasReturned) SelectedPerson = null;
+        if (!IsLendTo) SelectedPerson = null;
         ViewCore.Close();
     }
 }
