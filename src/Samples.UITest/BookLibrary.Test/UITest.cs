@@ -13,7 +13,7 @@ public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibra
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/BookLibrary/")
 {
-    public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true)
+    public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true, bool resetDatabase = true)
     {
         Log.WriteLine("");
         if (resetSettings)
@@ -22,6 +22,14 @@ public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibra
             var settingsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), productName, "Settings", "Settings.xml");
             if (File.Exists(settingsFile)) File.Delete(settingsFile);
             Log.WriteLine($"Delete settings: {settingsFile}");
+        }
+        if (resetDatabase)
+        {
+            var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");
+            var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
+            var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), companyName, productName, "Resources", "BookLibrary.db");
+            if (File.Exists(dbFile)) File.Delete(dbFile);
+            Log.WriteLine($"Delete database: {dbFile}");
         }
         var args = (arguments ?? new LaunchArguments()).ToArguments();
         Log.WriteLine($"Launch:          {args}");

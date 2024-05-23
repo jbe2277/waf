@@ -13,10 +13,10 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" Margin="0,1,0,1">
             <ToolBar>
-                <Button Command="{Binding AddNewCommand}">
+                <Button Command="{Binding AddNewCommand}" AutomationProperties.AutomationId="AddButton">
                     <AccessText Text="{x:Static p:Resources.AddMenu}"/>
                 </Button>
-                <Button Command="{Binding RemoveCommand}">
+                <Button Command="{Binding RemoveCommand}" AutomationProperties.AutomationId="RemoveButton">
                     <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
                 </Button>
                 <Separator/>
