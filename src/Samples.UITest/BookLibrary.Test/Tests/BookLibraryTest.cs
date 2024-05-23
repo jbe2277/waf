@@ -102,8 +102,8 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         AssertEqual("Author is mandatory.", bookView.AuthorTextBox.ItemStatus, newRow.AuthorCell.Label.ItemStatus);
         Assert.Equal("", bookView.PublisherTextBox.ItemStatus);
 
-        bookView.TitleTextBox.Text = "TTitle";
-        Assert.Equal("TTitle", newRow.TitleCell.Name);
+        bookView.TitleTextBox.Text = "ATitle";
+        Assert.Equal("ATitle", newRow.TitleCell.Name);
         AssertEqual("", bookView.TitleTextBox.ItemStatus, newRow.TitleCell.Label.ItemStatus);
         bookView.AuthorTextBox.Text = "TAuthor";
         Assert.Equal("TAuthor", newRow.AuthorCell.Name);
@@ -113,10 +113,31 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.False(lastRow.IsOffscreen);
         Assert.StartsWith("WPF", lastRow.TitleCell.Name);
 
+        var lastNotRemovedRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 3);
         bookListView.BookDataGrid.Select(bookListView.BookDataGrid.RowCount - 2);
         bookListView.BookDataGrid.AddToSelection(bookListView.BookDataGrid.RowCount - 1);
         bookListView.RemoveButton.Click();
         Assert.Equal(40, bookListView.BookDataGrid.RowCount);
+        Assert.Equal(lastNotRemovedRow, bookListView.BookDataGrid.SelectedItem);
+        Assert.Equal(lastNotRemovedRow, bookListView.BookDataGrid.Rows[^1]);
+
+        window.DataMenu.Click();
+        window.DataMenu.SaveMenuItem.Click();
+        window.Close();
+
+
+        Launch(resetSettings: false, resetDatabase: false);
+        window = GetShellWindow();
+        bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        Assert.Equal(40, bookListView.BookDataGrid.RowCount);
+
+        bookListView.BookDataGrid.Select(0);
+        for (int i = 1; i < bookListView.BookDataGrid.RowCount; i++) bookListView.BookDataGrid.AddToSelection(i);
+        Assert.Equal(40, bookListView.BookDataGrid.SelectedItems.Length);
+        Assert.True(bookListView.RemoveButton.IsEnabled);
+        bookListView.RemoveButton.Click();
+        Assert.False(bookListView.RemoveButton.IsEnabled);
+        Assert.Null(bookListView.BookDataGrid.SelectedItem);
 
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
