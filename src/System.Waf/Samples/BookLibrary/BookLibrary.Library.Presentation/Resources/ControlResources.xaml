@@ -45,6 +45,14 @@
     <Style TargetType="TextBox">
         <Setter Property="Padding" Value="1,3"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
+        <Setter Property="AutomationProperties.ItemStatus">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
+                    <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="DatePicker">
@@ -67,6 +75,14 @@
     <Style x:Key="TextCellElementStyle" TargetType="TextBlock">
         <Setter Property="Padding" Value="4,2,4,3"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource DataGridErrorTemplate}"/>
+        <Setter Property="AutomationProperties.ItemStatus">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
+                    <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="TextCellEditingStyle" TargetType="TextBox">

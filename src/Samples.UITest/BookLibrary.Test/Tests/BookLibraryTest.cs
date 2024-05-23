@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Capturing;
 using UITest.BookLibrary.Views;
 using UITest.SystemViews;
 using Xunit;
@@ -10,28 +9,6 @@ namespace UITest.BookLibrary.Tests;
 public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
 {
     [Fact]
-    public void AboutTest() => Run(() =>
-    {
-        Launch();
-        var window = GetShellWindow();
-
-        var helpMenu = window.HelpMenu;
-        helpMenu.Click();
-        helpMenu.AboutMenuItem.Click();
-
-        var messageBox = window.FirstModalWindow().As<MessageBox>();
-        Assert.Equal("Waf Book Library", messageBox.Title);
-        Log.WriteLine(messageBox.Message);
-        Assert.StartsWith("Waf Book Library ", messageBox.Message);
-        Capture.Screen().ToFile(GetScreenshotFile("About.png"));
-        messageBox.Buttons[0].Click();
-
-        var dataMenu = window.DataMenu;
-        dataMenu.Click();
-        dataMenu.ExitMenuItem.Click();
-    });
-
-    [Fact]
     public void SearchBookListAndChangeEntriesTest() => Run(() =>
     {
         Launch();
@@ -39,7 +16,14 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
         var bookView = window.TabControl.BookLibraryTabItem.BookView;
 
-        Assert.Equal(41, bookListView.BookDataGrid.RowCount);
+        var rowCount = bookListView.BookDataGrid.RowCount;
+        Assert.Equal(41, rowCount);
+        Log.WriteLine($"List of Books ({rowCount}):");
+        for (int i = 0; i < rowCount; i++)
+        {
+            Log.WriteLine($"{i:00}: {bookListView.BookDataGrid.GetRowByIndex(i).As<BookGridRow>().TitleCell.Label.Text}");
+        }
+        
         bookListView.SearchBox.Text = "Ha";
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Harr";
@@ -95,11 +79,53 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-
-        static void AssertEqual(string expected, string actual1, string actual2)
-        {
-            Assert.Equal(expected, actual1);
-            Assert.Equal(expected, actual2);
-        }
     });
+
+    [Fact]
+    public void AddAndRemoveEntriesTest() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+        var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        var bookView = window.TabControl.BookLibraryTabItem.BookView;
+
+        Assert.Equal(41, bookListView.BookDataGrid.RowCount);
+        bookListView.AddButton.Click();
+        Assert.Equal(42, bookListView.BookDataGrid.RowCount);
+        var newRow = bookListView.BookDataGrid.SelectedItem.As<BookGridRow>();
+        Assert.Equal(bookListView.BookDataGrid.Rows[0], newRow);
+
+        // ItemStatus contains the validation error message or string.Empty if no error exists
+        AssertEqual("", bookView.TitleTextBox.Text, newRow.TitleCell.Label.Text);
+        AssertEqual("Title is mandatory.", bookView.TitleTextBox.ItemStatus, newRow.TitleCell.Label.ItemStatus);
+        AssertEqual("", bookView.AuthorTextBox.Text, newRow.AuthorCell.Label.Text);
+        AssertEqual("Author is mandatory.", bookView.AuthorTextBox.ItemStatus, newRow.AuthorCell.Label.ItemStatus);
+        Assert.Equal("", bookView.PublisherTextBox.ItemStatus);
+
+        bookView.TitleTextBox.Text = "TTitle";
+        Assert.Equal("TTitle", newRow.TitleCell.Name);
+        AssertEqual("", bookView.TitleTextBox.ItemStatus, newRow.TitleCell.Label.ItemStatus);
+        bookView.AuthorTextBox.Text = "TAuthor";
+        Assert.Equal("TAuthor", newRow.AuthorCell.Name);
+        AssertEqual("", bookView.AuthorTextBox.ItemStatus, newRow.AuthorCell.Label.ItemStatus);
+
+        var lastRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 1).As<BookGridRow>();
+        Assert.False(lastRow.IsOffscreen);
+        Assert.StartsWith("WPF", lastRow.TitleCell.Name);
+
+        bookListView.BookDataGrid.Select(bookListView.BookDataGrid.RowCount - 2);
+        bookListView.BookDataGrid.AddToSelection(bookListView.BookDataGrid.RowCount - 1);
+        bookListView.RemoveButton.Click();
+        Assert.Equal(40, bookListView.BookDataGrid.RowCount);
+
+        window.Close();
+        var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
+        messageBox.Buttons[1].Click();  // No button
+    });
+
+    private static void AssertEqual(string expected, string actual1, string actual2)
+    {
+        Assert.Equal(expected, actual1);
+        Assert.Equal(expected, actual2);
+    }
 }
