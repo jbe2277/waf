@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net" modified="2024-05-25T18:00:47.217Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="7NUTwz_iWbtpZWzH_D-n" version="24.4.8" type="device">
+  <diagram name="Seite-1" id="8hW-1tOHINiaxMO7ZgL0">
+    <mxGraphModel dx="1562" dy="846" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5sKKSs10YbSOhv4jpS6--1" value="Presentation" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="280" y="110" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-1" value="Applications" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="280" y="190" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-3" value="Domain" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="280" y="270" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-4" value="Foundation" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="280" y="350" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-5" value="dependency" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="500" y="140" as="sourcePoint" />
+            <mxPoint x="500" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-8" value="Width implies range of applicability" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.0435" width="80" relative="1" as="geometry">
+            <mxPoint x="260" y="450" as="sourcePoint" />
+            <mxPoint x="490" y="450" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-9" value="more app specific" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.3333" width="80" relative="1" as="geometry">
+            <mxPoint x="580" y="380" as="sourcePoint" />
+            <mxPoint x="580" y="140" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-10" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="240" y="110" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-11" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="240" y="190" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-12" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="240" y="270" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-13" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;size=0.5;" parent="1" vertex="1">
+          <mxGeometry x="240" y="350" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-14" value="Windows, Pages, Views, ValueConverters, Resources, Images, Sounds, Reports,&lt;br&gt;System Services, Web Services" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="110" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-15" value="Controllers, ViewModels, DataModels, Services " style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="190" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-16" value="Business Objects (e.g. Person, AddressBook), Domain Services" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="270" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Yh4MZi326M7NcBiQr_-6-17" value="Frameworks, Technical Services, &lt;br&gt;Data Structures, Collection classes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="350" width="190" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
