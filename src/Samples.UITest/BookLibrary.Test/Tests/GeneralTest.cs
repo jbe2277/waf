@@ -22,7 +22,7 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("Waf Book Library", messageBox.Title);
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Book Library ", messageBox.Message);
-        Capture.Screen().ToFile(GetScreenshotFile("About.png"));
+        Capture.Screen().ToFile(GetScreenshotFile("About"));
         messageBox.Buttons[0].Click();
 
         var dataMenu = window.DataMenu;

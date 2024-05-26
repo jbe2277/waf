@@ -33,7 +33,7 @@ public class WriterTest : UITest
         Assert.Equal("Waf Writer", messageBox.Title);
         Log.WriteLine(messageBox.Message);
         Assert.StartsWith("Waf Writer ", messageBox.Message);
-        Capture.Screen().ToFile(GetScreenshotFile("About.png"));
+        Capture.Screen().ToFile(GetScreenshotFile("About"));
         messageBox.Buttons[0].Click();
 
         var fileRibbonMenu = window.FileRibbonMenu;
@@ -129,9 +129,9 @@ public class WriterTest : UITest
         var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
         var fileName = GetTempFileName("rtf");
         saveFileDialog.SetFileName(fileName);
-        Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen.png"));
+        Capture.Screen().ToFile(GetScreenshotFile("FullSaveScreen"));
         saveFileDialog.SaveButton.Click();
-        Capture.Screen().ToFile(GetScreenshotFile("AfterSaveFile.png"));
+        Capture.Screen().ToFile(GetScreenshotFile("AfterSaveFile"));
 
         // Exit app, save the document, define custom filename and save
         fileRibbonMenu.MenuButton.Click();
@@ -150,7 +150,7 @@ public class WriterTest : UITest
         Launch(resetSettings: false);
         window = GetShellWindow();
         startView = window.StartView;
-        Capture.Screen().ToFile(GetScreenshotFile("RestartScreen.png"));
+        Capture.Screen().ToFile(GetScreenshotFile("RestartScreen"));
         Assert.Equal([fileName2, fileName], startView.RecentFileListItems.Select(x => x.ToolTip));
         startView.RecentFileListItems[1].PinButton.Click();
         Assert.Equal([fileName, fileName2], startView.RecentFileListItems.Select(x => x.ToolTip));
