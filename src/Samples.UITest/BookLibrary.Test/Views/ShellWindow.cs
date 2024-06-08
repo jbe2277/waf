@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 
 namespace UITest.BookLibrary.Views;
 
@@ -10,6 +11,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
     public HelpMenu HelpMenu => this.Find("HelpMenu").As<HelpMenu>();
 
     public TabControl TabControl => this.Find("TabControl").As<TabControl>();
+
+    public void SetState(WindowVisualState state) => Patterns.Window.Pattern.SetWindowVisualState(state);
 }
 
 public class DataMenu(FrameworkAutomationElementBase element) : Menu(element)
@@ -30,7 +33,7 @@ public class TabControl(FrameworkAutomationElementBase element) : Tab(element)
 
     public AddressBookTabItem AddressBookTabItem => this.Find("AddressBookTabItem").As<AddressBookTabItem>();
 
-    public TabItem ReportingTabItem => this.Find("ReportingTabItem").AsTabItem();
+    public ReportTabItem ReportingTabItem => this.Find("ReportingTabItem").As<ReportTabItem>();
 }
 
 public class BookLibraryTabItem(FrameworkAutomationElementBase element) : TabItem(element)
@@ -45,4 +48,9 @@ public class AddressBookTabItem(FrameworkAutomationElementBase element) : TabIte
     public PersonListView PersonListView => this.Find("PersonListView").As<PersonListView>();
 
     public PersonView PersonView => this.Find("PersonView").As<PersonView>();
+}
+
+public class ReportTabItem(FrameworkAutomationElementBase element) : TabItem(element)
+{
+    public ReportView ReportView => this.Find("ReportView").As<ReportView>();
 }
