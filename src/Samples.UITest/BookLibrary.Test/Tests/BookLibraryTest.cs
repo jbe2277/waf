@@ -184,13 +184,53 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         messageBox.Buttons[0].Click();  // Yes button
     });
 
+    [Fact]
+    public void RemoveLendToPersonTest() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+        var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        var bookView = window.TabControl.BookLibraryTabItem.BookView;
+
+        bookListView.SearchBox.Text = "Harr";
+        var bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
+        bookRow2.Select();
+
+        AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+
+        window.TabControl.AddressBookTabItem.Select();
+        var personListView = window.TabControl.AddressBookTabItem.PersonListView;
+        personListView.SearchBox.Text = "Ginny";
+        var personRow = personListView.PersonDataGrid.GetRowByIndex(0).As<PersonGridRow>();
+        personRow.Select();
+        personListView.RemoveButton.Click();
+
+        window.TabControl.BookLibraryTabItem.Select();
+        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+
+        window.DataMenu.Click();
+        window.DataMenu.SaveMenuItem.Click();
+        window.Close();
+
+
+        Launch(resetSettings: false, resetDatabase: false);
+        window = GetShellWindow();
+        bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        bookView = window.TabControl.BookLibraryTabItem.BookView;
+
+        bookListView.SearchBox.Text = "Harr";
+        bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
+        bookRow2.Select();
+
+        window.TabControl.BookLibraryTabItem.Select();
+        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+
+        window.Close();
+    });
+
     private static void AssertEqual(string expected, string actual1, string actual2)
     {
         Assert.Equal(expected, actual1);
         Assert.Equal(expected, actual2);
     }
-
-
-
-    // TODO: remove Person that was assigned for "Lend To"
 }
