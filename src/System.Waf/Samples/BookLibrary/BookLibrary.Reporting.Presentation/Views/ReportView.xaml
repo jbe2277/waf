@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="Waf.BookLibrary.Reporting.Presentation.Views.ReportView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:p="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Properties"
-             xmlns:dd="clr-namespace:Waf.BookLibrary.Reporting.Presentation.DesignData"
-             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="700"
-             d:DataContext="{d:DesignInstance dd:SampleReportViewModel, IsDesignTimeCreatable=True}">
-    
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:p="clr-namespace:Waf.BookLibrary.Reporting.Presentation.Properties"
+        xmlns:dd="clr-namespace:Waf.BookLibrary.Reporting.Presentation.DesignData"
+        mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="700" AutomationProperties.AutomationId="ReportView"
+        d:DataContext="{d:DesignInstance dd:SampleReportViewModel, IsDesignTimeCreatable=True}">
+
     <DockPanel>
         <Border DockPanel.Dock="Left" Background="{x:Static SystemColors.ControlBrush}">
             <StackPanel Width="140" Margin="11,11,16,11">
@@ -17,19 +17,19 @@
                     <TextBlock Text="{x:Static p:Resources.ListAllBooks}" TextWrapping="Wrap"/>
                 </Label>
                 <Button x:Name="createButton" Command="{Binding CreateBookListReportCommand}" Content="{x:Static p:Resources.Create}" 
-                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}" AutomationProperties.AutomationId="CreateBookListReportButton"/>
 
                 <Label Margin="0,22,0,0">
                     <TextBlock Text="{x:Static p:Resources.ListBorrowedBooks}" TextWrapping="Wrap"/>
                 </Label>
                 <Button Command="{Binding CreateBorrowedBooksReportCommand}" Content="{x:Static p:Resources.Create}" 
-                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}" AutomationProperties.AutomationId="CreateBorrowedBooksReportButton"/>
 
                 <Label Margin="0,44,0,0">
                     <TextBlock Text="Print the report" TextWrapping="Wrap"/>
                 </Label>
                 <Button Command="ApplicationCommands.Print" CommandTarget="{Binding ElementName=reportReader}" Content="{x:Static p:Resources.Print}" 
-                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}"/>
+                        HorizontalAlignment="Right" Margin="0,11,0,0" Style="{StaticResource DialogButton}" AutomationProperties.AutomationId="PrintButton"/>
             </StackPanel>
         </Border>
 
