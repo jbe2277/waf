@@ -28,7 +28,7 @@ public class TabControl(FrameworkAutomationElementBase element) : Tab(element)
 {
     public BookLibraryTabItem BookLibraryTabItem => this.Find("BookLibraryTabItem").As<BookLibraryTabItem>();
 
-    public TabItem AddressBookTabItem => this.Find("AddressBookTabItem").AsTabItem();
+    public AddressBookTabItem AddressBookTabItem => this.Find("AddressBookTabItem").As<AddressBookTabItem>();
 
     public TabItem ReportingTabItem => this.Find("ReportingTabItem").AsTabItem();
 }
@@ -38,4 +38,11 @@ public class BookLibraryTabItem(FrameworkAutomationElementBase element) : TabIte
     public BookListView BookListView => this.Find("BookListView").As<BookListView>();
 
     public BookView BookView => this.Find("BookView").As<BookView>();
+}
+
+public class AddressBookTabItem(FrameworkAutomationElementBase element) : TabItem(element)
+{
+    public PersonListView PersonListView => this.Find("PersonListView").As<PersonListView>();
+
+    public PersonView PersonView => this.Find("PersonView").As<PersonView>();
 }

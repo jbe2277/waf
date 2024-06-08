@@ -23,7 +23,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         {
             Log.WriteLine($"{i:00}: {bookListView.BookDataGrid.GetRowByIndex(i).As<BookGridRow>().TitleCell.Label.Text}");
         }
-        
+
         bookListView.SearchBox.Text = "Ha";
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Harr";
@@ -144,9 +144,53 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         messageBox.Buttons[1].Click();  // No button
     });
 
+    [Fact]
+    public void ValidateFieldsTest() => Run(() =>
+    {        
+        Launch();
+        var window = GetShellWindow();
+        var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        var bookView = window.TabControl.BookLibraryTabItem.BookView;
+        var row1 = bookListView.BookDataGrid.SelectedItem.As<BookGridRow>();
+
+        var text101 = new string('a', 101);
+
+        // Note: "Required" validation of Title and Author are covered by the AddAndRemoveEntriesTest test
+        // ItemStatus contains the validation error message or string.Empty if no error exists
+        bookView.TitleTextBox.Text = text101;
+        AssertEqual("Title can contain 100 characters at maximum.", bookView.TitleTextBox.ItemStatus, row1.TitleCell.Label.ItemStatus);
+        
+        bookView.AuthorTextBox.Text = text101;
+        AssertEqual("Author can contain 100 characters at maximum.", bookView.AuthorTextBox.ItemStatus, row1.AuthorCell.Label.ItemStatus);
+        
+        bookView.PublisherTextBox.Text = text101;
+        Assert.Equal("Publisher can contain 100 characters at maximum.", bookView.PublisherTextBox.ItemStatus);
+        
+        bookView.PublishDatePicker.SelectedDate = new DateTime(1752, 12, 31);
+        Assert.Equal("Value for 12/31/1752 12:00:00 AM must be between 1/1/1753 12:00:00 AM and 12/31/9999 12:00:00 AM.", bookView.PublishDatePicker.ItemStatus);
+        bookView.PublishDatePicker.SelectedDate = new DateTime(2025, 1, 1);
+        Assert.Empty(bookView.PublishDatePicker.ItemStatus);
+        bookView.PublishDatePicker.SelectedDate = new DateTime(9999, 12, 31, 23, 59, 59);
+        Assert.Equal("Value for 12/31/9999 11:59:59 PM must be between 1/1/1753 12:00:00 AM and 12/31/9999 12:00:00 AM.", bookView.PublishDatePicker.ItemStatus);
+
+        bookView.IsbnTextBox.Text = new string('a', 15);
+        Assert.Equal("Isbn can contain 14 characters at maximum.", bookView.IsbnTextBox.ItemStatus);
+
+        bookView.PagesTextBox.Text = "-1";
+        Assert.Equal("Pages must be equal or larger than 0.", bookView.PagesTextBox.ItemStatus);
+
+        window.Close();
+        var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to really close the app although unsafed changes exist
+        messageBox.Buttons[0].Click();  // Yes button
+    });
+
     private static void AssertEqual(string expected, string actual1, string actual2)
     {
         Assert.Equal(expected, actual1);
         Assert.Equal(expected, actual2);
     }
+
+
+
+    // TODO: remove Person that was assigned for "Lend To"
 }

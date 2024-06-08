@@ -7,28 +7,28 @@
     xmlns:waf="http://waf.codeplex.com/schemas"
     xmlns:dd="clr-namespace:Waf.BookLibrary.Library.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SamplePersonListViewModel, IsDesignTimeCreatable=True}"
-    d:DesignWidth="500" d:DesignHeight="150"
+    d:DesignWidth="500" d:DesignHeight="150" AutomationProperties.AutomationId="PersonListView"
     waf:ValidationHelper.IsEnabled="true" waf:ValidationHelper.IsValid="{Binding IsValid, Mode=OneWayToSource}">
     
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" Margin="0,1,0,1">
             <ToolBar>
-                <Button Command="{Binding AddNewCommand}">
+                <Button Command="{Binding AddNewCommand}" AutomationProperties.AutomationId="AddButton">
                     <AccessText Text="{x:Static p:Resources.AddMenu}"/>
                 </Button>
-                <Button Command="{Binding RemoveCommand}">
+                <Button Command="{Binding RemoveCommand}" AutomationProperties.AutomationId="RemoveButton">
                     <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
                 </Button>
                 <Separator/>
                 <Label Content="{x:Static p:Resources.SearchMenu}" Target="{Binding ElementName=searchBox}" Padding="5,0,7,0" Margin="0" 
                        VerticalAlignment="Center"/>
                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
-                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="SearchBox"/>
             </ToolBar>
         </ToolBarTray>
 
         <DataGrid x:Name="personTable" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson, ValidatesOnNotifyDataErrors=False}" 
-                  SelectionChanged="DataGridSelectionChanged" Sorting="DataGridSorting" CanUserDeleteRows="False" BorderThickness="0">
+                  SelectionChanged="DataGridSelectionChanged" Sorting="DataGridSorting" CanUserDeleteRows="False" BorderThickness="0" AutomationProperties.AutomationId="PersonDataGrid">
             <DataGrid.InputBindings>
                 <KeyBinding Command="{Binding RemoveCommand}" Key="Del"/>
             </DataGrid.InputBindings>
