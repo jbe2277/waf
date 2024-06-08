@@ -57,6 +57,14 @@
 
     <Style TargetType="DatePicker">
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
+        <Setter Property="AutomationProperties.ItemStatus">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
+                    <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
     </Style>
     
     <Style TargetType="ToolBarTray">
