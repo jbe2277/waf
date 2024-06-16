@@ -40,10 +40,19 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
             if (File.Exists(fileName)) File.Delete(fileName);
 
             reportView.PrintButton.Click();
-            var printDialog = PrintDialog.GetDialog(Automation);
-            printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
-            Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
-            printDialog.PrintButton.Invoke();
+            var version = new Version(10, 0, 22621, 0);  // Windows 11 22H2
+            if (Environment.OSVersion.Version >= version)
+            {
+                var printDialog = PrintDialog.GetDialog(Automation);
+                printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
+                Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
+                printDialog.PrintButton.Invoke();
+            }
+            else
+            {
+                var printDialog = window.FirstModalWindow().As<LegacyPrintDialog>();
+                printDialog.PrintButton.Click();
+            }
 
             var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
             saveFileDialog.SetFileName(fileName);
