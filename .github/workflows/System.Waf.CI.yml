@@ -35,5 +35,13 @@ jobs:
         name: UITestResults
         if-no-files-found: ignore
         path: |
-          out/Samples.UITest/
-
+          out/Samples.UITest/          
+    - name: Upload UI Test App logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: UITestAppLogs
+        if-no-files-found: ignore
+        path: |
+          ~/AppData/Local/Waf Writer/Log/
+          ~/AppData/Local/Waf Book Library/Log/
