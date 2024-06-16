@@ -8,6 +8,8 @@ public class LegacyPrintDialog(FrameworkAutomationElementBase element) : Window(
 {
     public ListBox PrinterList => this.Find(x => x.ByControlType(ControlType.List).And(x.ByAutomationId("1"))).AsListBox();
 
+    public ListBoxItem PrintToPdf => PrinterList.Items.First(x => x.Name == "Microsoft Print to PDF");
+
     public Button PrintButton => this.Find(x => x.ByControlType(ControlType.Button).And(x.ByAutomationId("1"))).AsButton();
 
     public Button CancelButton => this.Find(x => x.ByControlType(ControlType.Button).And(x.ByAutomationId("2"))).AsButton();

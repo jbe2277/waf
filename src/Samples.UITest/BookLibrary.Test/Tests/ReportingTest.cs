@@ -53,6 +53,7 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
                 var printDialog = window.FirstModalWindow().As<LegacyPrintDialog>();
                 Log.WriteLine("Printers:");
                 foreach (var x in printDialog.PrinterList.Items) Log.WriteLine($"- {x.Text}");
+                printDialog.PrinterList.Select(printDialog.PrintToPdf.Text);
                 printDialog.PrintButton.Click();
             }
 
