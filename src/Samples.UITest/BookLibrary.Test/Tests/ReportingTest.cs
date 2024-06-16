@@ -1,5 +1,8 @@
-﻿using FlaUI.Core.Capturing;
+﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Capturing;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Tools;
+using UITest.SystemViews;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -21,10 +24,30 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
         reportView.CreateBookListReportButton.Click();
         Assert.True(reportView.PrintButton.IsEnabled);
         Capture.Screen().ToFile(GetScreenshotFile("BookListReport"));
+        PrintAsPdf(GetScreenshotFile("BookListReport.pdf"));
 
         reportView.CreateBorrowedBooksReportButton.Click();
         Capture.Screen().ToFile(GetScreenshotFile("BorrowedBooksReport"));
+        PrintAsPdf(GetScreenshotFile("BorrowedBooksReport.pdf"));
 
-        window.Close();
+        var dataMenu = window.DataMenu;
+        dataMenu.Click();
+        dataMenu.ExitMenuItem.Click();
+
+
+        void PrintAsPdf(string fileName)
+        {
+            if (File.Exists(fileName)) File.Delete(fileName);
+
+            reportView.PrintButton.Click();
+            var printDialog = PrintDialog.GetDialog(Automation);
+            printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
+            Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
+            printDialog.PrintButton.Invoke();
+
+            var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
+            saveFileDialog.SetFileName(fileName);
+            saveFileDialog.SaveButton.Click();
+        }
     });
 }
