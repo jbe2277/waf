@@ -52,7 +52,6 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
             {
                 var printDialog = window.FirstModalWindow().As<LegacyPrintDialog>();
                 printDialog.PrintButton.Click();
-                Thread.Sleep(1000);
             }
 
             var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
