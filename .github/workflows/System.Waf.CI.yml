@@ -35,5 +35,6 @@ jobs:
         name: UITestResults
         if-no-files-found: ignore
         path: |
-          out/Samples.UITest/
-
+          out/Samples.UITest/          
+          ${{ env.LocalAppData }}/Waf Writer/Log/
+          ${{ env.LocalAppData }}/Waf Book Library/Log/
