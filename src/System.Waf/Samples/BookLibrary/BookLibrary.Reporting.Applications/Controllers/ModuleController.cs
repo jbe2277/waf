@@ -52,6 +52,7 @@ internal class ModuleController : IModuleController
 
     private void CreateBookListReport()
     {
+        Log.Default.Info("Create book list report");
         var bookListReport = bookListReportFactory.CreateExport().Value;
         bookListReport.ReportData = new BookListReportDataModel(entityService.Books);
         ReportViewModel.Report = bookListReport.Report;
@@ -59,6 +60,7 @@ internal class ModuleController : IModuleController
 
     private void CreateBorrowedBooksReport()
     {
+        Log.Default.Info("Create borrowed books report");
         var borrowedBooksReport = borrowedBooksReportFactory.CreateExport().Value;
         borrowedBooksReport.ReportData = new BorrowedBooksReportDataModel(entityService.Books);
         ReportViewModel.Report = borrowedBooksReport.Report;

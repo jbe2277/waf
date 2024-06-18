@@ -22,11 +22,11 @@ public partial class App
     private static readonly (string loggerNamePattern, LogLevel minLevel)[] logSettings =
     [
         ("App", LogLevel.Info),
-        ("BookLib.Lib.P", LogLevel.Warn),
-        ("BookLib.Lib.A", LogLevel.Warn),
-        ("BookLib.Lib.D", LogLevel.Warn),
-        ("BookLib.Rep.P", LogLevel.Warn),
-        ("BookLib.Rep.A", LogLevel.Warn),
+        ("BookLib.Lib.P", LogLevel.Info),
+        ("BookLib.Lib.A", LogLevel.Info),
+        ("BookLib.Lib.D", LogLevel.Info),
+        ("BookLib.Rep.P", LogLevel.Info),
+        ("BookLib.Rep.A", LogLevel.Info),
     ];
 
     private AggregateCatalog? catalog;

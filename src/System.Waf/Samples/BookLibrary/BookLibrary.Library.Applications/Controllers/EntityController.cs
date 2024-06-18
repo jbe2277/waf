@@ -59,10 +59,12 @@ internal class EntityController : IEntityController
         if (errors.Any())
         {
             var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture, Resources.EntityInvalid, EntityToString(x), string.Join(Environment.NewLine, x.Errors)));
+            Log.Default.Warn("Abort save changes because of errors: {0}", string.Join("; ", errorMessages));
             messageService.ShowError(shellService.ShellView, Resources.SaveErrorInvalidEntities, string.Join(Environment.NewLine, errorMessages));
             return false;
         }
 
+        Log.Default.Info("Save changes in database.");
         bookLibraryContext.SaveChanges();
         return true;
     }

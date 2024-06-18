@@ -23,6 +23,7 @@ internal sealed class EmailService : IEmailService
     {
         try
         {
+            Log.Default.Info("Create email for: {0}", toEmailAddress);
             Process.Start(new ProcessStartInfo("mailto:" + toEmailAddress) { UseShellExecute = true });
         }
         catch (Exception e)

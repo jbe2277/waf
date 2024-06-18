@@ -1,3 +1,4 @@
+
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Applications.Controllers.EntityController")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Applications.ViewModels.BookListViewModel")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "BookList", Scope = "type", Target = "~T:Waf.BookLibrary.Library.Applications.Views.IBookListView")]
@@ -15,3 +16,4 @@
 [assembly: SuppressMessage("Performance", "CA1826:Do not use Enumerable methods on indexable collections", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Applications.Controllers.PersonController.Initialize")]
 [assembly: SuppressMessage("Performance", "CA1826:Do not use Enumerable methods on indexable collections", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Applications.Controllers.PersonController.RemovePerson")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Applications.ViewModels.ShellViewModel.#ctor(Waf.BookLibrary.Library.Applications.Views.IShellView,System.Waf.Applications.Services.IMessageService,Waf.BookLibrary.Library.Applications.Services.IShellService,System.Waf.Applications.Services.ISettingsService)")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.BookLibrary.Library.Applications.Controllers.EntityController.Save~System.Boolean")]
