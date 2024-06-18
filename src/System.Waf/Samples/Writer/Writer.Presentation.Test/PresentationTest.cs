@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NLog;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Waf.UnitTesting.Mocks;
@@ -18,6 +19,11 @@ namespace Test.Writer.Presentation
             typeof(IRichTextDocument), typeof(RichTextDocument),
             typeof(IXpsExportDocumentType), typeof(XpsExportDocumentType)
         ];
+
+        protected PresentationTest()
+        {
+            LogManager.LogFactory.Dispose();  // Disable logging in unit tests
+        }
 
         protected override void OnCatalogInitialize(AggregateCatalog catalog)
         {
