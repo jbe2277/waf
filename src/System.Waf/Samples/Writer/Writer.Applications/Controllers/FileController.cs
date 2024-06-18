@@ -211,6 +211,7 @@ internal class FileController
             }
             try
             {
+                Log.Default.Info("Open file: {0}", fileName);
                 document = documentType.Open(fileName);
             }
             catch (Exception e)
@@ -235,6 +236,7 @@ internal class FileController
     {
         try
         {
+            Log.Default.Info("Save file: {0}", fileName);
             documentType.Save(document, fileName);
         }
         catch (Exception e)

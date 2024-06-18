@@ -1,3 +1,4 @@
+
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "New", Scope = "member", Target = "~M:Waf.Writer.Applications.Documents.IDocumentType.New~Waf.Writer.Applications.Documents.IDocument")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Applications.Controllers.PrintController")]
 [assembly: SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "~M:Waf.Writer.Applications.Controllers.PrintController.ShowPrintPreview")]
@@ -22,3 +23,4 @@
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Applications.ViewModels.MainViewModel.#ctor(Waf.Writer.Applications.Views.IMainView,Waf.Writer.Applications.Services.IShellService,Waf.Writer.Applications.Services.IFileService)")]
 [assembly: SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Applications.Controllers.FileController.OpenCommand(System.Object)")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Applications.ViewModels.ShellViewModel.#ctor(Waf.Writer.Applications.Views.IShellView,System.Waf.Applications.Services.IMessageService,Waf.Writer.Applications.Services.IShellService,Waf.Writer.Applications.Services.IFileService,System.Waf.Applications.Services.ISettingsService)")]
+[assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Applications.Controllers.FileController.SaveCore(Waf.Writer.Applications.Documents.IDocumentType,Waf.Writer.Applications.Documents.IDocument,System.String)")]

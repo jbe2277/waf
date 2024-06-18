@@ -56,6 +56,7 @@ internal class PrintController
     private void PrintDocument()
     {
         if (!printDialogService.ShowDialog()) return;
+        Log.Default.Info("Print document");
         // We have to clone the FlowDocument before we use different pagination settings for the export.        
         var document = (IRichTextDocument)fileService.ActiveDocument!;
         printDialogService.PrintDocument(document.CloneContent(), fileService.ActiveDocument!.FileName);
