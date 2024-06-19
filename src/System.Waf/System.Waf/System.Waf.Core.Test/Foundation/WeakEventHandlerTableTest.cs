@@ -35,8 +35,9 @@ namespace Test.Waf.Foundation
             WeakReference<Subscriber> Core()
             {
                 var subscriber = new Subscriber();
-                table.Add((PropertyChangedEventHandler)subscriber.Handler1);
-                table.Remove((PropertyChangedEventHandler)subscriber.Handler1);
+                var h1 = (PropertyChangedEventHandler)subscriber.Handler1;
+                table.Add(h1);
+                table.Remove(h1);
                 return new(subscriber);
             }
         }
@@ -52,12 +53,15 @@ namespace Test.Waf.Foundation
             WeakReference<Subscriber> Core()
             {
                 var subscriber = new Subscriber();
-                table.Add((PropertyChangedEventHandler)subscriber.Handler1);
-                table.Add((PropertyChangedEventHandler)subscriber.Handler2);
-                table.Add((PropertyChangedEventHandler)Subscriber.StaticHandler);
-                table.Remove((PropertyChangedEventHandler)subscriber.Handler1);
-                table.Remove((PropertyChangedEventHandler)subscriber.Handler2);
-                table.Remove((PropertyChangedEventHandler)Subscriber.StaticHandler);
+                var h1 = (PropertyChangedEventHandler)subscriber.Handler1;
+                var h2 = (PropertyChangedEventHandler)subscriber.Handler2;
+                var sh = (PropertyChangedEventHandler)Subscriber.StaticHandler;
+                table.Add(h1);
+                table.Add(h2);
+                table.Add(sh);
+                table.Remove(h1);
+                table.Remove(h2);
+                table.Remove(sh);
                 return new(subscriber);
             }
         }
@@ -104,10 +108,10 @@ namespace Test.Waf.Foundation
         {
             private string? name;
 
-            public string? Name 
-            { 
-                get => name; 
-                set => SetProperty(ref name, value); 
+            public string? Name
+            {
+                get => name;
+                set => SetProperty(ref name, value);
             }
         }
 

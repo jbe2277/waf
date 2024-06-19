@@ -47,11 +47,13 @@ namespace System.Waf.Foundation
                 if (!table.TryGetValue(target, out var value)) return;
                 if (value is List<Delegate> list)
                 {
-                    list.Remove(targetHandler);
+                    var index = list.FindIndex(x => ReferenceEquals(x, targetHandler));
+                    list.RemoveAt(index);
                     if (list.Count == 0) table.Remove(target);
                 }
                 else
                 {
+                    if (!ReferenceEquals(value, targetHandler)) throw new InvalidOperationException("targetHandler instance to remove is not the one that was set.");
                     table.Remove(target);
                 }
             }

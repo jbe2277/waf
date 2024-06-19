@@ -84,6 +84,28 @@ namespace Test.Waf.Foundation
         }
 
         [TestMethod]
+        public void WeakEventRemove2()
+        {
+            var (manager1, manager2) = (new TManager(), new TManager());
+            var (publisher1, publisher2) = (new TPublisher(), new TPublisher());
+            var subscriber = new TSubscriber();
+            manager1.Add(publisher1, subscriber);
+            manager2.Add(publisher2, subscriber);
+
+            Assert.AreEqual(0, subscriber.HandlerCallCount);
+            publisher1.RaiseEvent();
+            publisher2.RaiseEvent();
+            Assert.AreEqual(2, subscriber.HandlerCallCount);
+
+            manager2.Proxy!.Remove();
+
+            // Verify that the correct weakTable targetHandler is removed from the list because we had a bug here
+            GC.Collect();
+            publisher1.RaiseEvent();
+            Assert.AreEqual(3, subscriber.HandlerCallCount);
+        }
+
+        [TestMethod]
         public void WeakEventPerformance()
         {
             var publisher = new TPublisher();
