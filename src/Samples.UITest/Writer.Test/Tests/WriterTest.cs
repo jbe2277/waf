@@ -65,6 +65,19 @@ public class WriterTest : UITest
 
         var richTextView = window.DocumentTabItems.Single().RichTextView;
         richTextView.RichTextBox.Text = "Hello World";
+        var range = richTextView.RichTextBox.Patterns.Text.Pattern.DocumentRange;
+        range.Select();
+        var homeTab = window.HomeTab;
+        homeTab.Select();
+        Assert.False(homeTab.ToggleBoldButton.IsToggled);
+        Assert.False(homeTab.ToggleItalicButton.IsToggled);
+        Assert.False(homeTab.ToggleUnderlineButton.IsToggled);
+        homeTab.ToggleBoldButton.Click();
+        Assert.True(homeTab.ToggleBoldButton.IsToggled);
+        homeTab.ToggleItalicButton.Click();
+        Assert.True(homeTab.ToggleItalicButton.IsToggled);
+        homeTab.ToggleUnderlineButton.Click();
+        Assert.True(homeTab.ToggleUnderlineButton.IsToggled);
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();

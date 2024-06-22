@@ -8,6 +8,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 {
     public FileRibbonMenu FileRibbonMenu => this.Find("FileRibbonMenu").As<FileRibbonMenu>();
 
+    public HomeTab HomeTab => this.Find("HomeTab").As<HomeTab>();
+
     public ViewTab ViewTab => this.Find("ViewTab").As<ViewTab>();
 
     public PrintPreviewTab PrintPreviewTab => this.Find("PrintPreviewTab").As<PrintPreviewTab>();
@@ -49,6 +51,15 @@ public class RecentFileMenuItem(FrameworkAutomationElementBase element) : ListBo
     public Button OpenFileButton => this.Find("OpenItemButton").AsButton();
 
     public ToggleButton PinButton => this.Find("PinToggleButton").AsToggleButton();
+}
+
+public class HomeTab(FrameworkAutomationElementBase element) : TabItem(element)
+{
+    public ToggleButton ToggleBoldButton => this.Find("ToggleBoldButton").AsToggleButton();
+
+    public ToggleButton ToggleItalicButton => this.Find("ToggleItalicButton").AsToggleButton();
+
+    public ToggleButton ToggleUnderlineButton => this.Find("ToggleUnderlineButton").AsToggleButton();
 }
 
 public class ViewTab(FrameworkAutomationElementBase element) : TabItem(element)
