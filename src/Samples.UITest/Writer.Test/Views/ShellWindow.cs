@@ -62,6 +62,8 @@ public class PrintPreviewTab(FrameworkAutomationElementBase element) : TabItem(e
 {
     public Button ClosePrintPreviewButton => this.Find("ClosePrintPreviewButton").AsButton();
 
+    public Button PrintButton => this.Find("PrintButton").AsButton();
+
     public Button ZoomInButton => this.Find("ZoomInButton").AsButton();
 
     public Button ZoomOutButton => this.Find("ZoomOutButton").AsButton();
