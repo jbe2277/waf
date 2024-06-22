@@ -74,6 +74,7 @@ public class WriterTest : UITest
         Assert.True(printPreviewTab.IsSelected);
         printPreviewTab.ZoomOutButton.Click();
         Assert.Equal("90%", zoomComboBox.EditableText);
+        PrintAsPdf(GetScreenshotFile("HelloWorld.pdf"));
         printPreviewTab.ClosePrintPreviewButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
@@ -86,6 +87,32 @@ public class WriterTest : UITest
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
+
+
+        void PrintAsPdf(string fileName)
+        {
+            if (File.Exists(fileName)) File.Delete(fileName);
+
+            printPreviewTab.PrintButton.Click();
+            var version = new Version(10, 0, 22621, 0);  // Windows 11 22H2
+            if (Environment.OSVersion.Version >= version)
+            {
+                var printDialog = PrintDialog.GetDialog(Automation);
+                printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
+                Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
+                printDialog.PrintButton.Invoke();
+            }
+            else
+            {
+                var printDialog = window.FirstModalWindow().As<LegacyPrintDialog>();
+                printDialog.PrinterList.Select(printDialog.PrintToPdf.Text);
+                printDialog.PrintButton.Click();
+            }
+
+            var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
+            saveFileDialog.SetFileName(fileName);
+            saveFileDialog.SaveButton.Click();
+        }
     });
 
     [Fact]
