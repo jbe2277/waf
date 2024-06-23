@@ -28,7 +28,11 @@ public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibra
             var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");
             var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
             var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), companyName, productName, "Resources", "BookLibrary.db");
-            if (File.Exists(dbFile)) File.Delete(dbFile);
+            if (File.Exists(dbFile))
+            {
+                Thread.Sleep(500);  // Needed so that the previous process has no lock on the file anymore
+                File.Delete(dbFile);
+            }
             Log.WriteLine($"Delete database: {dbFile}");
         }
         var args = (arguments ?? new LaunchArguments()).ToArguments();
