@@ -51,66 +51,69 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
     [Fact]
     public void AddAndRemoveEntriesTest() => Run(() =>
     {
-        Launch();
-        var window = GetShellWindow();
-        window.TabControl.AddressBookTabItem.Select();
-        var personListView = window.TabControl.AddressBookTabItem.PersonListView;
-        var personView = window.TabControl.AddressBookTabItem.PersonView;
+        using (Launch())
+        {
+            var window = GetShellWindow();
+            window.TabControl.AddressBookTabItem.Select();
+            var personListView = window.TabControl.AddressBookTabItem.PersonListView;
+            var personView = window.TabControl.AddressBookTabItem.PersonView;
 
-        Assert.Equal(4, personListView.PersonDataGrid.RowCount);
-        personListView.AddButton.Click();
-        Assert.Equal(5, personListView.PersonDataGrid.RowCount);
-        var newRow = personListView.PersonDataGrid.SelectedItem.As<PersonGridRow>();
-        Assert.Equal(personListView.PersonDataGrid.Rows[0], newRow);
+            Assert.Equal(4, personListView.PersonDataGrid.RowCount);
+            personListView.AddButton.Click();
+            Assert.Equal(5, personListView.PersonDataGrid.RowCount);
+            var newRow = personListView.PersonDataGrid.SelectedItem.As<PersonGridRow>();
+            Assert.Equal(personListView.PersonDataGrid.Rows[0], newRow);
 
-        // ItemStatus contains the validation error message or string.Empty if no error exists
-        AssertEqual("", personView.FirstnameTextBox.Text, newRow.FirstnameCell.Label.Text);
-        AssertEqual("Firstname is mandatory.", personView.FirstnameTextBox.ItemStatus, newRow.FirstnameCell.Label.ItemStatus);
-        AssertEqual("", personView.LastnameTextBox.Text, newRow.LastnameCell.Label.Text);
-        AssertEqual("Lastname is mandatory.", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
-        AssertEqual("", personView.EmailTextBox.ItemStatus, newRow.EmailCell.Label.Text);
+            // ItemStatus contains the validation error message or string.Empty if no error exists
+            AssertEqual("", personView.FirstnameTextBox.Text, newRow.FirstnameCell.Label.Text);
+            AssertEqual("Firstname is mandatory.", personView.FirstnameTextBox.ItemStatus, newRow.FirstnameCell.Label.ItemStatus);
+            AssertEqual("", personView.LastnameTextBox.Text, newRow.LastnameCell.Label.Text);
+            AssertEqual("Lastname is mandatory.", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
+            AssertEqual("", personView.EmailTextBox.ItemStatus, newRow.EmailCell.Label.Text);
 
-        personView.FirstnameTextBox.Text = "AFirstname";
-        Assert.Equal("AFirstname", newRow.FirstnameCell.Name);
-        AssertEqual("", personView.FirstnameTextBox.ItemStatus, newRow.FirstnameCell.Label.ItemStatus);
-        personView.LastnameTextBox.Text = "ALastname";
-        Assert.Equal("ALastname", newRow.LastnameCell.Name);
-        AssertEqual("", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
+            personView.FirstnameTextBox.Text = "AFirstname";
+            Assert.Equal("AFirstname", newRow.FirstnameCell.Name);
+            AssertEqual("", personView.FirstnameTextBox.ItemStatus, newRow.FirstnameCell.Label.ItemStatus);
+            personView.LastnameTextBox.Text = "ALastname";
+            Assert.Equal("ALastname", newRow.LastnameCell.Name);
+            AssertEqual("", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
 
-        var lastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 1).As<PersonGridRow>();
-        Assert.False(lastRow.IsOffscreen);
-        Assert.StartsWith("Ron", lastRow.FirstnameCell.Name);
+            var lastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 1).As<PersonGridRow>();
+            Assert.False(lastRow.IsOffscreen);
+            Assert.StartsWith("Ron", lastRow.FirstnameCell.Name);
 
-        var lastNotRemovedRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 3);
-        personListView.PersonDataGrid.Select(personListView.PersonDataGrid.RowCount - 2);
-        personListView.PersonDataGrid.AddToSelection(personListView.PersonDataGrid.RowCount - 1);
-        personListView.RemoveButton.Click();
-        Assert.Equal(3, personListView.PersonDataGrid.RowCount);
-        Assert.Equal(lastNotRemovedRow, personListView.PersonDataGrid.SelectedItem);
-        Assert.Equal(lastNotRemovedRow, personListView.PersonDataGrid.Rows[^1]);
+            var lastNotRemovedRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 3);
+            personListView.PersonDataGrid.Select(personListView.PersonDataGrid.RowCount - 2);
+            personListView.PersonDataGrid.AddToSelection(personListView.PersonDataGrid.RowCount - 1);
+            personListView.RemoveButton.Click();
+            Assert.Equal(3, personListView.PersonDataGrid.RowCount);
+            Assert.Equal(lastNotRemovedRow, personListView.PersonDataGrid.SelectedItem);
+            Assert.Equal(lastNotRemovedRow, personListView.PersonDataGrid.Rows[^1]);
 
-        window.DataMenu.Click();
-        window.DataMenu.SaveMenuItem.Click();
-        window.Close();
+            window.DataMenu.Click();
+            window.DataMenu.SaveMenuItem.Click();
+            window.Close();
+        }
 
+        using (Launch(resetSettings: false, resetDatabase: false))
+        {
+            var window = GetShellWindow();
+            window.TabControl.AddressBookTabItem.Select();
+            var personListView = window.TabControl.AddressBookTabItem.PersonListView;
+            Assert.Equal(3, personListView.PersonDataGrid.RowCount);
 
-        Launch(resetSettings: false, resetDatabase: false);
-        window = GetShellWindow();
-        window.TabControl.AddressBookTabItem.Select();
-        personListView = window.TabControl.AddressBookTabItem.PersonListView;
-        Assert.Equal(3, personListView.PersonDataGrid.RowCount);
+            personListView.PersonDataGrid.Select(0);
+            for (int i = 1; i < personListView.PersonDataGrid.RowCount; i++) personListView.PersonDataGrid.AddToSelection(i);
+            Assert.Equal(3, personListView.PersonDataGrid.SelectedItems.Length);
+            Assert.True(personListView.RemoveButton.IsEnabled);
+            personListView.RemoveButton.Click();
+            Assert.False(personListView.RemoveButton.IsEnabled);
+            Assert.Null(personListView.PersonDataGrid.SelectedItem);
 
-        personListView.PersonDataGrid.Select(0);
-        for (int i = 1; i < personListView.PersonDataGrid.RowCount; i++) personListView.PersonDataGrid.AddToSelection(i);
-        Assert.Equal(3, personListView.PersonDataGrid.SelectedItems.Length);
-        Assert.True(personListView.RemoveButton.IsEnabled);
-        personListView.RemoveButton.Click();
-        Assert.False(personListView.RemoveButton.IsEnabled);
-        Assert.Null(personListView.PersonDataGrid.SelectedItem);
-
-        window.Close();
-        var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
-        messageBox.Buttons[1].Click();  // No button
+            window.Close();
+            var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
+            messageBox.Buttons[1].Click();  // No button
+        }
     });
 
     [Fact]
