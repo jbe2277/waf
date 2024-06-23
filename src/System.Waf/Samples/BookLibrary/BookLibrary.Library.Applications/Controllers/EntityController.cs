@@ -52,8 +52,6 @@ internal class EntityController : IEntityController
 
     public bool Save()
     {
-        if (!CanSave()) throw new InvalidOperationException("You must not call Save when CanSave returns false.");
-
         var entities = bookLibraryContext!.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).Select(x => x.Entity).ToArray();
         var errors = entities.OfType<ValidatableModel>().Where(x => x.HasErrors).ToArray();
         if (errors.Any())
