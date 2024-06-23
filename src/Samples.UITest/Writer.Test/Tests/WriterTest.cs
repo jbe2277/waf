@@ -63,21 +63,44 @@ public class WriterTest : UITest
         var zoomComboBox = window.ZoomComboBox;
         Assert.Equal("110%", zoomComboBox.EditableText);
 
-        var richTextView = window.DocumentTabItems.Single().RichTextView;
-        richTextView.RichTextBox.Text = "Hello World";
-        var range = richTextView.RichTextBox.Patterns.Text.Pattern.DocumentRange;
-        range.Select();
         var homeTab = window.HomeTab;
         homeTab.Select();
-        Assert.False(homeTab.ToggleBoldButton.IsToggled);
-        Assert.False(homeTab.ToggleItalicButton.IsToggled);
-        Assert.False(homeTab.ToggleUnderlineButton.IsToggled);
+        var richTextView = window.DocumentTabItems.Single().RichTextView;
+        var range = richTextView.RichTextBox.Patterns.Text.Pattern.DocumentRange;
+        var nl = Environment.NewLine;
+        richTextView.RichTextBox.Enter($"Title{nl}");
+        richTextView.RichTextBox.Enter($"Heading 1{nl}");
+        richTextView.RichTextBox.Enter($"Paragraph{nl}");
+        richTextView.RichTextBox.Enter($"Paragraph (Increase indentation){nl}");
+        richTextView.RichTextBox.Enter($"Paragraph{nl}");
+
+        SelectLine(0);        
         homeTab.ToggleBoldButton.Click();
-        Assert.True(homeTab.ToggleBoldButton.IsToggled);
         homeTab.ToggleItalicButton.Click();
-        Assert.True(homeTab.ToggleItalicButton.IsToggled);
         homeTab.ToggleUnderlineButton.Click();
-        Assert.True(homeTab.ToggleUnderlineButton.IsToggled);
+        SelectLine(1);
+        homeTab.ToggleItalicButton.Click();
+        homeTab.ToggleUnderlineButton.Click();
+        SelectLine(2);
+        homeTab.IncreaseIndentationButton.Click();
+
+        SelectLine(int.MaxValue);
+        homeTab.ToggleNumberingButton.Click();
+        richTextView.RichTextBox.Enter($"Numbering list first{nl}Numbering list second{nl}{nl}");
+        homeTab.ToggleBulletsButton.Click();
+        richTextView.RichTextBox.Enter($"Bullet list first{nl}Bullet list second");
+
+        // Select the lines again the check the correct toggle button state
+        SelectLine(int.MinValue);
+        AssertFormatState(true, true, true, false, false);
+        SelectLine(1);
+        AssertFormatState(false, true, true, false, false);
+        SelectLine(1);
+        AssertFormatState(false, false, false, false, false);
+        SelectLine(3);
+        AssertFormatState(false, false, false, true, false);
+        SelectLine(2);
+        AssertFormatState(false, false, false, false, true);
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
@@ -101,6 +124,18 @@ public class WriterTest : UITest
         Assert.Equal("Document 1.rtf", firstItem.Text);
         saveChangesWindow.NoButton.Click();
 
+        void SelectLine(int line)
+        {
+            range.Move(TextUnit.Line, line);
+            range.ExpandToEnclosingUnit(TextUnit.Line);
+            range.Select();
+        }
+
+        void AssertFormatState(bool isBold, bool isItalic, bool isUnderline, bool isNumbering, bool isBullets)
+        {
+            Assert.Equal((isBold, isItalic, isUnderline), (homeTab.ToggleBoldButton.IsToggled, homeTab.ToggleItalicButton.IsToggled, homeTab.ToggleUnderlineButton.IsToggled));
+            Assert.Equal((isNumbering, isBullets), (homeTab.ToggleNumberingButton.IsToggled, homeTab.ToggleBulletsButton.IsToggled));
+        }
 
         void PrintAsPdf(string fileName)
         {

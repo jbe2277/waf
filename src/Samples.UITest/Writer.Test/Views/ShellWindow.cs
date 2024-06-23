@@ -60,6 +60,14 @@ public class HomeTab(FrameworkAutomationElementBase element) : TabItem(element)
     public ToggleButton ToggleItalicButton => this.Find("ToggleItalicButton").AsToggleButton();
 
     public ToggleButton ToggleUnderlineButton => this.Find("ToggleUnderlineButton").AsToggleButton();
+
+    public ToggleButton ToggleNumberingButton => this.Find("ToggleNumberingButton").AsToggleButton();
+
+    public ToggleButton ToggleBulletsButton => this.Find("ToggleBulletsButton").AsToggleButton();
+
+    public Button DecreaseIndentationButton => this.Find("DecreaseIndentationButton").AsButton();
+
+    public Button IncreaseIndentationButton => this.Find("IncreaseIndentationButton").AsButton();
 }
 
 public class ViewTab(FrameworkAutomationElementBase element) : TabItem(element)
