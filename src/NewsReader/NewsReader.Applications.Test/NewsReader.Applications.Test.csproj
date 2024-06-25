@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.UnitTesting.Core" Version="8.0.1-alpha.0.72" />
+    <PackageReference Include="System.Waf.UnitTesting.Core" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>

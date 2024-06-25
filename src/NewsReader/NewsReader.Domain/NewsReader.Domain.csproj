@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="5.3.2" />
-    <PackageReference Include="System.Waf.Core" Version="8.0.1-alpha.0.72" />
+    <PackageReference Include="System.Waf.Core" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>

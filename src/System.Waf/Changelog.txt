@@ -6,7 +6,7 @@ Version 8.0.1 (Release)
 - WAF: ObservableList: Fixed adding the same item multiple times.
 - Writer: Supports command line language settings.
 - BookLibrary: Fixed loading of assemblies when CurrentDirectory is not the application folder.
-- BookLib: Supports command line language settings.
+- BookLibrary: Supports command line language settings.
 - UITest: Automated UI tests for the Writer and Book Library sample application using the FlaUI library.
 
 
