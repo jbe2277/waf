@@ -3,6 +3,7 @@ using UITest.BookLibrary.Views;
 using Xunit.Abstractions;
 using Xunit;
 using UITest.SystemViews;
+using FlaUI.Core.Input;
 
 namespace UITest.BookLibrary.Tests;
 
@@ -36,8 +37,8 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         AssertEqual("Potter", personRow1.LastnameCell.Name, personView.LastnameTextBox.Text);
         AssertEqual("harry.potter@hogwarts.edu", personRow1.EmailCell.Label.Text, personView.EmailTextBox.Text);
 
-        personView.FirstnameTextBox.Text = "TFirstname";
-        Assert.Equal("TFirstname", personRow1.FirstnameCell.Name);
+        personRow1.FirstnameCell.Text = "TFirstname";
+        Assert.Equal("TFirstname", personView.FirstnameTextBox.Text);
         personView.LastnameTextBox.Text = "TLastname";
         Assert.Equal("TLastname", personRow1.LastnameCell.Name);
         personView.EmailTextBox.Text = "TEmail@mail.com";
@@ -73,8 +74,8 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         personView.FirstnameTextBox.Text = "AFirstname";
         Assert.Equal("AFirstname", newRow.FirstnameCell.Name);
         AssertEqual("", personView.FirstnameTextBox.ItemStatus, newRow.FirstnameCell.Label.ItemStatus);
-        personView.LastnameTextBox.Text = "ALastname";
-        Assert.Equal("ALastname", newRow.LastnameCell.Name);
+        newRow.LastnameCell.Text = "ALastname";
+        Assert.Equal("ALastname", personView.LastnameTextBox.Text);
         AssertEqual("", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
 
         var lastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 1).As<PersonGridRow>();
@@ -131,7 +132,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         personView.FirstnameTextBox.Text = text31;
         AssertEqual("Firstname can contain 30 characters at maximum.", personView.FirstnameTextBox.ItemStatus, row1.FirstnameCell.Label.ItemStatus);
 
-        personView.LastnameTextBox.Text = text31;
+        row1.LastnameCell.Text = text31;
         AssertEqual("Lastname can contain 30 characters at maximum.", personView.LastnameTextBox.ItemStatus, row1.LastnameCell.Label.ItemStatus);
 
         personView.EmailTextBox.Text = text101;
