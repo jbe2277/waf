@@ -41,8 +41,8 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("607", bookView.PagesTextBox.Text);
         AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
-        bookView.TitleTextBox.Text = "Test Title";
-        Assert.Equal("Test Title", bookRow2.TitleCell.Name);
+        bookRow2.TitleCell.Text = "Test Title";
+        Assert.Equal("Test Title", bookView.TitleTextBox.Text);
         bookView.AuthorTextBox.Text = "TAuthor";
         Assert.Equal("TAuthor", bookRow2.AuthorCell.Name);
         bookView.PublishDatePicker.SelectedDate = new DateTime(2024, 3, 2);
@@ -105,8 +105,8 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         bookView.TitleTextBox.Text = "ATitle";
         Assert.Equal("ATitle", newRow.TitleCell.Name);
         AssertEqual("", bookView.TitleTextBox.ItemStatus, newRow.TitleCell.Label.ItemStatus);
-        bookView.AuthorTextBox.Text = "TAuthor";
-        Assert.Equal("TAuthor", newRow.AuthorCell.Name);
+        newRow.AuthorCell.Text = "TAuthor";
+        Assert.Equal("TAuthor", bookView.AuthorTextBox.Text);
         AssertEqual("", bookView.AuthorTextBox.ItemStatus, newRow.AuthorCell.Label.ItemStatus);
 
         var lastRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 1).As<BookGridRow>();
@@ -160,7 +160,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         bookView.TitleTextBox.Text = text101;
         AssertEqual("Title can contain 100 characters at maximum.", bookView.TitleTextBox.ItemStatus, row1.TitleCell.Label.ItemStatus);
         
-        bookView.AuthorTextBox.Text = text101;
+        row1.AuthorCell.Text = text101;
         AssertEqual("Author can contain 100 characters at maximum.", bookView.AuthorTextBox.ItemStatus, row1.AuthorCell.Label.ItemStatus);
         
         bookView.PublisherTextBox.Text = text101;
