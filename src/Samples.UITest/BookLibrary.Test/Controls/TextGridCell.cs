@@ -19,7 +19,7 @@ public class TextGridCell(FrameworkAutomationElementBase element) : GridCell(ele
         {
             Label.DoubleClick();
             TextBox.Text = value;
-            Keyboard.TypeSimultaneously(VirtualKeyShort.ENTER, VirtualKeyShort.CONTROL);
+            Keyboard.TypeSimultaneously(VirtualKeyShort.CONTROL, VirtualKeyShort.ENTER);
         }
     }    
 }
