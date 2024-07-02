@@ -33,6 +33,16 @@ public class FileRibbonMenu(FrameworkAutomationElementBase element) : Automation
 
     public MenuItem NewMenuItem => this.Find("NewMenuItem").AsMenuItem();
 
+    public MenuItem OpenMenuItem => this.Find("OpenMenuItem").AsMenuItem();
+
+    public MenuItem CloseMenuItem => this.Find("CloseMenuItem").AsMenuItem();
+
+    public MenuItem SaveMenuItem => this.Find("SaveMenuItem").AsMenuItem();
+
+    public MenuItem SaveAsMenuItem => this.Find("SaveAsMenuItem").AsMenuItem();
+
+    public MenuItem PrintMenuItem => this.Find("PrintMenuItem").AsMenuItem();
+
     public MenuItem PrintPreviewMenuItem => this.Find("PrintPreviewMenuItem").AsMenuItem();
 
     public MenuItem ExitMenuItem => this.Find("ExitMenuItem").AsMenuItem();
