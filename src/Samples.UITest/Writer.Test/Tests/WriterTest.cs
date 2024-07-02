@@ -287,4 +287,45 @@ public class WriterTest : UITest
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
         AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
     });
+
+    [Fact]
+    public void SaveCloseAndOpen() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+
+        var startView = window.StartView;
+        Assert.False(startView.IsOffscreen);
+
+        startView.NewButton.Invoke();
+        var tab1 = window.DocumentTabItems.Single();
+        tab1.RichTextView.RichTextBox.Text = "Hello World";
+        Assert.Equal("Document 1.rtf*", tab1.TabName);
+
+        var fileRibbonMenu = window.FileRibbonMenu;
+        fileRibbonMenu.MenuButton.Click();
+        fileRibbonMenu.SaveMenuItem.Invoke();
+
+        var saveDialog = window.FirstModalWindow().As<SaveFileDialog>();
+        var fileName = GetTempFileName("rtf");
+        saveDialog.SetFileName(fileName);
+        saveDialog.SaveButton.Click();
+
+        fileRibbonMenu.MenuButton.Click();
+        fileRibbonMenu.CloseMenuItem.Invoke();
+
+        Assert.Empty(window.DocumentTabItems);
+
+        fileRibbonMenu.MenuButton.Click();
+        fileRibbonMenu.OpenMenuItem.Invoke();
+
+        var openDialog = window.FirstModalWindow().As<OpenFileDialog>();
+        openDialog.SetFileName(fileName);
+        openDialog.OpenButton.Click();
+
+        tab1 = window.DocumentTabItems.Single();
+        AssertTextEqual("Hello World", tab1.RichTextView.RichTextBox);
+
+        window.Close();
+    });
 }
