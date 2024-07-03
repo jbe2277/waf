@@ -4,7 +4,7 @@ using FlaUI.Core.Definitions;
 
 namespace UITest.SystemViews;
 
-public class MessageBox(FrameworkAutomationElementBase element) : AutomationElement(element)
+public class MessageBox(FrameworkAutomationElementBase element) : Window(element)
 {
     public string Title => Name;
 
