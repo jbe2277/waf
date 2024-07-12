@@ -7,7 +7,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.ViewModels;
 
 [TestClass]
-public class LendToViewModelTest : TestClassBase
+public class LendToViewModelTest : ApplicationsTest
 {
     protected override void OnCleanup()
     {

@@ -6,7 +6,7 @@ using Waf.BookLibrary.Reporting.Applications.Controllers;
 namespace Test.BookLibrary.Reporting.Applications;
 
 [TestClass]
-public class ReportingTest : TestClassBase
+public class ReportingTest : ApplicationsTest
 {
     protected override void OnCatalogInitialize(AggregateCatalog catalog)
     {

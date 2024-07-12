@@ -12,7 +12,7 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 namespace Test.BookLibrary.Library.Applications.Controllers;
 
 [TestClass]
-public class ModuleControllerTest : TestClassBase
+public class ModuleControllerTest : ApplicationsTest
 {
     protected override void OnInitialize()
     {

@@ -9,7 +9,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.Controllers;
 
 [TestClass]
-public class EntityControllerTest : TestClassBase
+public class EntityControllerTest : ApplicationsTest
 {
     [TestMethod]
     public void ValidateBeforeSave()

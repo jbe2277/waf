@@ -7,7 +7,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.ViewModels;
 
 [TestClass]
-public class PersonListViewModelTest : TestClassBase
+public class PersonListViewModelTest : ApplicationsTest
 {
     [TestMethod]
     public void PersonListViewModelPersonsTest()

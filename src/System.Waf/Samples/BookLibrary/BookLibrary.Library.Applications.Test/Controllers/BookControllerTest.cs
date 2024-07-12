@@ -12,7 +12,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.Controllers;
 
 [TestClass]
-public class BookControllerTest : TestClassBase
+public class BookControllerTest : ApplicationsTest
 {
     protected override void OnInitialize()
     {

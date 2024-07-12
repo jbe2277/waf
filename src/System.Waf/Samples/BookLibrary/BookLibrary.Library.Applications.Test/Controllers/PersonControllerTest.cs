@@ -14,7 +14,7 @@ using Waf.BookLibrary.Library.Domain;
 namespace Test.BookLibrary.Library.Applications.Controllers;
 
 [TestClass]
-public class PersonControllerTest : TestClassBase
+public class PersonControllerTest : ApplicationsTest
 {
     protected override void OnInitialize()
     {

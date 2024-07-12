@@ -10,7 +10,7 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 namespace Test.BookLibrary.Library.Applications.ViewModels;
 
 [TestClass]
-public class ShellViewModelTest : TestClassBase
+public class ShellViewModelTest : ApplicationsTest
 {
     [TestMethod]
     public void ShellViewModelBasicTest()
