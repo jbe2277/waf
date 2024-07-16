@@ -6,6 +6,7 @@ using FlaUI.UIA3;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit.Abstractions;
 
 namespace UITest;
@@ -17,6 +18,7 @@ public abstract class UITestBase : IDisposable
 
     static UITestBase()
     {
+        NativeMethods.SetProcessDPIAware();
         CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
 
         Mouse.MovePixelsPerMillisecond = 2;
@@ -110,5 +112,12 @@ public abstract class UITestBase : IDisposable
         {
             if (File.Exists(file)) File.Delete(file);
         }
+    }
+
+
+    private static class NativeMethods
+    {
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool SetProcessDPIAware();
     }
 }
