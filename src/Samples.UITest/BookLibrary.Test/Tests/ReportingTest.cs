@@ -46,7 +46,7 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
                 var printDialog = PrintDialog.GetDialog(Automation);
                 printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
                 Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
-                printDialog.PrintButton.Invoke();
+                printDialog.PrintButton.Click();
             }
             else
             {

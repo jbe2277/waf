@@ -38,7 +38,7 @@ public class WriterTest : UITest
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.ExitMenuItem.Invoke();
+        fileRibbonMenu.ExitMenuItem.Click();
     });
 
     [Fact]
@@ -104,7 +104,7 @@ public class WriterTest : UITest
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.PrintPreviewMenuItem.Invoke();
+        fileRibbonMenu.PrintPreviewMenuItem.Click();
 
         var printPreviewTab = window.PrintPreviewTab;
         Assert.True(printPreviewTab.IsSelected);
@@ -114,10 +114,10 @@ public class WriterTest : UITest
         printPreviewTab.ClosePrintPreviewButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.NewMenuItem.Invoke();
+        fileRibbonMenu.NewMenuItem.Click();
 
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.ExitMenuItem.Invoke();
+        fileRibbonMenu.ExitMenuItem.Click();
 
         var saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
@@ -148,7 +148,7 @@ public class WriterTest : UITest
                 var printDialog = PrintDialog.GetDialog(Automation);
                 printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
                 Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
-                printDialog.PrintButton.Invoke();
+                printDialog.PrintButton.Click();
             }
             else
             {
@@ -181,22 +181,22 @@ public class WriterTest : UITest
         // Create new document #2, add text, check tab name with dirty flag indicator '*'
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.NewMenuItem.Invoke();
+        fileRibbonMenu.NewMenuItem.Click();
         var tab2 = window.DocumentTabItems[1];
         tab2.RichTextView.RichTextBox.Text = "Hello World 2";
         Assert.Equal("Document 2.rtf*", tab2.TabName);
 
         // Create new document #3, check tab name, close tab - no save dialog comes as text has not been changed
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.NewMenuItem.Invoke();
+        fileRibbonMenu.NewMenuItem.Click();
         var tab3 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal("Document 3.rtf", tab3.TabName);
-        tab3.CloseButton.Invoke();
+        tab3.CloseButton.Click();
 
         // Select tab #1, close tab, save the document, define custom filename and save
         Retry.WhileFalse(() => tab2.IsSelected, throwOnTimeout: true);
         tab1.Select();
-        tab1.CloseButton.Invoke();
+        tab1.CloseButton.Click();
         var saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         var firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 1.rtf", firstItem.Text);
@@ -210,7 +210,7 @@ public class WriterTest : UITest
 
         // Exit app, save the document, define custom filename and save
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.ExitMenuItem.Invoke();
+        fileRibbonMenu.ExitMenuItem.Click();
         saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal("Document 2.rtf", firstItem.Text);
@@ -241,7 +241,7 @@ public class WriterTest : UITest
         fileRibbonMenu.MenuButton.Toggle();
 
         // Open recent file #1, modify text, check tab name with dirty flag indicator '*'
-        startView.RecentFileListItems[0].OpenFileButton.Invoke();
+        startView.RecentFileListItems[0].OpenFileButton.Click();
         tab1 = window.DocumentTabItems.Single();
         Assert.Equal(Path.GetFileName(fileName), tab1.TabName);
         AssertTextEqual("Hello World", tab1.RichTextView.RichTextBox);
@@ -258,7 +258,7 @@ public class WriterTest : UITest
         // Close app, save dialog shows just file #1, don't save
         fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.ExitMenuItem.Invoke();
+        fileRibbonMenu.ExitMenuItem.Click();
         saveChangesWindow = window.FirstModalWindow().As<SaveChangesWindow>();
         firstItem = saveChangesWindow.FilesToSaveList.Items.Single();
         Assert.Equal(fileName, firstItem.Text);
@@ -273,16 +273,16 @@ public class WriterTest : UITest
         Assert.True(startView.RecentFileListItems[0].PinButton.IsToggled);
         var contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         UIAssert.NotExists(() => _ = contextMenu.PinFileMenuItem);
-        contextMenu.UnpinFileMenuItem.Invoke();
+        contextMenu.UnpinFileMenuItem.Click();
         Assert.False(startView.RecentFileListItems[0].PinButton.IsToggled);
 
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         UIAssert.NotExists(() => _ = contextMenu.UnpinFileMenuItem);
-        contextMenu.RemoveFileMenuItem.Invoke();
+        contextMenu.RemoveFileMenuItem.Click();
         Assert.Equal([fileName2], startView.RecentFileListItems.Select(x => x.ToolTip));
 
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
-        contextMenu.OpenFileMenuItem.Invoke();
+        contextMenu.OpenFileMenuItem.Click();
         tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
         AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
@@ -297,14 +297,14 @@ public class WriterTest : UITest
         var startView = window.StartView;
         Assert.False(startView.IsOffscreen);
 
-        startView.NewButton.Invoke();
+        startView.NewButton.Click();
         var tab1 = window.DocumentTabItems.Single();
         tab1.RichTextView.RichTextBox.Text = "Hello World";
         Assert.Equal("Document 1.rtf*", tab1.TabName);
 
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.SaveMenuItem.Invoke();
+        fileRibbonMenu.SaveMenuItem.Click();
 
         var saveDialog = window.FirstModalWindow().As<SaveFileDialog>();
         var fileName = GetTempFileName("rtf");
@@ -312,12 +312,12 @@ public class WriterTest : UITest
         saveDialog.SaveButton.Click();
 
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.CloseMenuItem.Invoke();
+        fileRibbonMenu.CloseMenuItem.Click();
 
         Assert.Empty(window.DocumentTabItems);
 
         fileRibbonMenu.MenuButton.Click();
-        fileRibbonMenu.OpenMenuItem.Invoke();
+        fileRibbonMenu.OpenMenuItem.Click();
 
         var openDialog = window.FirstModalWindow().As<OpenFileDialog>();
         openDialog.SetFileName(fileName);
