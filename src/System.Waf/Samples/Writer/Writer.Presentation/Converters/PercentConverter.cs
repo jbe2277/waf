@@ -6,6 +6,8 @@ namespace Waf.Writer.Presentation.Converters;
 
 public class PercentConverter : IValueConverter
 {
+    public static PercentConverter Default { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture) => string.Format(culture, "{0:P0}", value);
 
     public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)

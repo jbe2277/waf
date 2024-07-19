@@ -8,6 +8,8 @@ public class MenuFileNameConverter : IValueConverter
 {
     private const int MaxCharacters = 40;
 
+    public static MenuFileNameConverter Default { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (value is not string fileName || string.IsNullOrEmpty(fileName)) return "";

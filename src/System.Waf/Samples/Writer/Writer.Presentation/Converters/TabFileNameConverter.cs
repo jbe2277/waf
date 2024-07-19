@@ -9,6 +9,8 @@ public class TabFileNameConverter : IMultiValueConverter
 {
     private const int MaxCharacters = 40;
 
+    public static TabFileNameConverter Default { get; } = new();
+
     public object? Convert(object?[]? values, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (values == null || values.Length != 2 || values[0] is not string || values[1] is not bool)

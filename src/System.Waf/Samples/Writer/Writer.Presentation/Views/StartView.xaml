@@ -1,7 +1,9 @@
 ﻿<UserControl x:Class="Waf.Writer.Presentation.Views.StartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:waf="http://waf.codeplex.com/schemas"
              xmlns:p="clr-namespace:Waf.Writer.Presentation.Properties"
+             xmlns:c="clr-namespace:Waf.Writer.Presentation.Converters"
              xmlns:dd="clr-namespace:Waf.Writer.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -54,9 +56,9 @@
                             <ContextMenu>
                                 <MenuItem Header="{x:Static p:Resources.OpenFileMenu}" Click="OpenContextMenuHandler" AutomationProperties.AutomationId="OpenFileMenuItem"/>
                                 <MenuItem Header="{x:Static p:Resources.PinFileMenu}" Click="PinContextMenuHandler" AutomationProperties.AutomationId="PinFileMenuItem"
-                                          Visibility="{Binding IsPinned, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+                                          Visibility="{Binding IsPinned, Converter={x:Static waf:BoolToVisibilityConverter.Default}, ConverterParameter=Invert}"/>
                                 <MenuItem Header="{x:Static p:Resources.UnpinFileMenu}" Click="UnpinContextMenuHandler" AutomationProperties.AutomationId="UnpinFileMenuItem"
-                                          Visibility="{Binding IsPinned, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                          Visibility="{Binding IsPinned, Converter={x:Static waf:BoolToVisibilityConverter.Default}}"/>
                                 <MenuItem Header="{x:Static p:Resources.RemoveFileMenu}" Click="RemoveContextMenuHandler" AutomationProperties.AutomationId="RemoveFileMenuItem"/>
                             </ContextMenu>
                         </DockPanel.ContextMenu>
@@ -78,7 +80,7 @@
 
                         <TextBlock TextTrimming="CharacterEllipsis" Padding="11,3" ToolTip="{Binding Path}" AutomationProperties.AutomationId="RecentItemLabel">
                             <Hyperlink Command="{Binding DataContext.FileService.OpenCommand, ElementName=startView}" CommandParameter="{Binding Path}" AutomationProperties.AutomationId="RecentItemOpenLink">
-                                <Run Text="{Binding Path, Converter={StaticResource MenuFileNameConverter}, Mode=OneWay}"/>
+                                <Run Text="{Binding Path, Converter={x:Static c:MenuFileNameConverter.Default}, Mode=OneWay}"/>
                             </Hyperlink>
                         </TextBlock>
                     </DockPanel>
