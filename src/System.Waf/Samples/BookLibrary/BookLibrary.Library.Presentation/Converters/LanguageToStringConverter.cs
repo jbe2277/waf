@@ -7,6 +7,8 @@ namespace Waf.BookLibrary.Library.Presentation.Converters;
 
 public class LanguageToStringConverter : IValueConverter
 {
+    public static LanguageToStringConverter Default { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (value is not Language language) return null;

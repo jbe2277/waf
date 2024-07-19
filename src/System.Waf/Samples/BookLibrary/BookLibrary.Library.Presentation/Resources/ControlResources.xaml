@@ -1,12 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:waf="http://waf.codeplex.com/schemas">
 
     <ControlTemplate x:Key="ErrorTemplate">
         <Grid>
             <AdornedElementPlaceholder x:Name="controlWithError"/>
             <Border BorderThickness="1" BorderBrush="#FFDB000C" SnapsToDevicePixels="True">
                 <Border.ToolTip>
-                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
                     </MultiBinding>
@@ -24,7 +25,7 @@
             <AdornedElementPlaceholder x:Name="controlWithError" Margin="1"/>
             <Border BorderThickness="1" BorderBrush="#FFDB000C" SnapsToDevicePixels="True">
                 <Border.ToolTip>
-                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
                     </MultiBinding>
@@ -47,7 +48,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="AutomationProperties.ItemStatus">
             <Setter.Value>
-                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                     <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
                     <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
                 </MultiBinding>
@@ -59,7 +60,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="AutomationProperties.ItemStatus">
             <Setter.Value>
-                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                     <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
                     <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
                 </MultiBinding>
@@ -85,7 +86,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource DataGridErrorTemplate}"/>
         <Setter Property="AutomationProperties.ItemStatus">
             <Setter.Value>
-                <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                     <Binding Path="(Validation.Errors)" RelativeSource="{RelativeSource Self}"/>
                     <Binding Path="(Validation.Errors).Count" RelativeSource="{RelativeSource Self}"/>
                 </MultiBinding>

@@ -6,6 +6,8 @@ namespace Waf.BookLibrary.Library.Presentation.Converters;
 
 public class StringToUriConverter : IValueConverter
 {
+    public static StringToUriConverter Default { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         return Uri.TryCreate(value as string ?? "", UriKind.RelativeOrAbsolute, out Uri? uri) ? uri : DependencyProperty.UnsetValue;

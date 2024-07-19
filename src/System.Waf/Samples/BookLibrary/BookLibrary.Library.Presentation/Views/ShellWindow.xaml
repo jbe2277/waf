@@ -100,7 +100,7 @@
                     <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="4" Grid.Row="0" Grid.Column="0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.Reporting}" Visibility="{Binding ShellService.IsReportingEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+            <TabItem Header="{x:Static p:Resources.Reporting}" Visibility="{Binding ShellService.IsReportingEnabled, Converter={x:Static waf:BoolToVisibilityConverter.Default}}"
                     AutomationProperties.AutomationId="ReportingTabItem">
                 <ContentControl>
                     <ContentControl.Style>
