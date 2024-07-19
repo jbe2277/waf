@@ -5,6 +5,8 @@ namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Converters;
 
 public class ItemCountToStringConverter : IValueConverter
 {
+    public static ItemCountToStringConverter Default { get; } = new();
+
     public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
         if (value == null) return "";

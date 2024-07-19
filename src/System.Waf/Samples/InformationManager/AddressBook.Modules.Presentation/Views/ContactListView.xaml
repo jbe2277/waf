@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrl="clr-namespace:Waf.InformationManager.Common.Presentation.Controls;assembly=Waf.InformationManager.Common.Presentation"
+             xmlns:cc="clr-namespace:Waf.InformationManager.Common.Presentation.Converters;assembly=Waf.InformationManager.Common.Presentation"
              xmlns:dd="clr-namespace:Waf.InformationManager.AddressBook.Modules.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -34,13 +35,13 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, Converter={StaticResource TargetStringEmptyValueConverter}}" Margin="7"/>
+                        <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Margin="7"/>
 
-                        <TextBlock Text="{Binding Email, ValidatesOnNotifyDataErrors=False, Converter={StaticResource TargetStringEmptyValueConverter}}" Grid.Column="1" Margin="7"/>
+                        <TextBlock Text="{Binding Email, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Column="1" Margin="7"/>
 
-                        <TextBlock Text="{Binding Lastname, ValidatesOnNotifyDataErrors=False, Converter={StaticResource TargetStringEmptyValueConverter}}" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Text="{Binding Lastname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Row="1" Margin="7,0,7,7"/>
 
-                        <TextBlock Text="{Binding Phone, ValidatesOnNotifyDataErrors=False, Converter={StaticResource TargetStringEmptyValueConverter}}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Text="{Binding Phone, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

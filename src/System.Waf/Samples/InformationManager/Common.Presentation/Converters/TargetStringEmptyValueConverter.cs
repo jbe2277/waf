@@ -6,6 +6,9 @@ namespace Waf.InformationManager.Common.Presentation.Converters;
 /// <summary>Value converter that returns a special string if the (string) value is null or empty.</summary>
 public class TargetStringEmptyValueConverter : IValueConverter
 {
+    /// <summary>Default instance of the TargetStringEmptyValueConverter.</summary>
+    public static TargetStringEmptyValueConverter Default { get; } = new();
+
     /// <summary>Returns a special string if the (string) value is null or empty. Otherwise it returns value.</summary>
     /// <param name="value">The string value to convert.</param>
     /// <param name="targetType">The type of the binding target property. This parameter will be ignored.</param>

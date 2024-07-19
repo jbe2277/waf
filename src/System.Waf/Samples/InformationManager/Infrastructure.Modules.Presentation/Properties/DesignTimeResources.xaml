@@ -2,11 +2,8 @@
     
 	<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ImageResources.xaml"/>
-        <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ConverterResources.xaml"/>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ControlResources.xaml"/>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/ToolBarResources.xaml"/>
         <ResourceDictionary Source="/Waf.InformationManager.Common.Presentation;Component/Resources/LayoutResources.xaml"/>
-        
-        <ResourceDictionary Source="/Waf.InformationManager.Infrastructure.Modules.Presentation;Component/Resources/ConverterResources.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

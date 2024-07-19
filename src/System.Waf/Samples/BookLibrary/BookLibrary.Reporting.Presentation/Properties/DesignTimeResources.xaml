@@ -4,7 +4,6 @@
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/BookLibrary;Component/Resources/ImageResources.xaml"/>
-        <ResourceDictionary Source="/BookLibrary;Component/Resources/ConverterResources.xaml"/>
         <ResourceDictionary Source="/BookLibrary;Component/Resources/ControlResources.xaml"/>
         <ResourceDictionary Source="/BookLibrary;Component/Resources/DataResources.xaml"/>
         <ResourceDictionary Source="/BookLibrary;Component/Resources/LayoutResources.xaml"/>

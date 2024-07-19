@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:waf="http://waf.codeplex.com/schemas">
 
     <SolidColorBrush x:Key="HeaderTextBrush" Color="#003399"/>
 
@@ -8,7 +9,7 @@
             <AdornedElementPlaceholder x:Name="controlWithError"/>
             <Border BorderThickness="1" BorderBrush="#FFDB000C" SnapsToDevicePixels="True">
                 <Border.ToolTip>
-                    <MultiBinding Converter="{StaticResource ValidationErrorsConverter}">
+                    <MultiBinding Converter="{x:Static waf:ValidationErrorsConverter.Default}">
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors)"/>
                         <Binding ElementName="controlWithError" Path="AdornedElement.(Validation.Errors).Count"/>
                     </MultiBinding>

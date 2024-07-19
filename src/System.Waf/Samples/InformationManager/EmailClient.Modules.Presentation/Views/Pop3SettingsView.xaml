@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Waf.InformationManager.EmailClient.Modules.Presentation.Views.Pop3SettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:waf="http://waf.codeplex.com/schemas"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
@@ -54,11 +55,11 @@
         <Label Grid.Column="0" Grid.Row="10" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="10" Width="150" 
             Text="{Binding Model.SmtpUserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" 
-            IsEnabled="{Binding UseSameUserCredits, Converter={StaticResource InvertBooleanConverter}}"/>
+            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}"/>
 
         <Label Grid.Column="0" Grid.Row="12" Content="Password"/>
         <PasswordBox x:Name="smtpPassword" Grid.Column="2" Grid.Row="12" LostFocus="SmtpPasswordChanged" Width="150"
-            IsEnabled="{Binding UseSameUserCredits, Converter={StaticResource InvertBooleanConverter}}"/>
+            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}"/>
 
         <CheckBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="14" Content="Use same user name and password as for my POP3 server" IsChecked="{Binding UseSameUserCredits}"/>
     </Grid>
