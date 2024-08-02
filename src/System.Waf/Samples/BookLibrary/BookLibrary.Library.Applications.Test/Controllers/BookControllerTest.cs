@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using Test.BookLibrary.Library.Applications.Services;
 using Test.BookLibrary.Library.Applications.Views;
