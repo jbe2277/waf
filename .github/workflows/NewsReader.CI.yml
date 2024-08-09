@@ -48,7 +48,7 @@ jobs:
         dotnet publish -f:net8.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
 
   iOS:
-    runs-on: macos-13
+    runs-on: macos-14
     needs: GetVersion
     steps:
       - uses: actions/checkout@v4
