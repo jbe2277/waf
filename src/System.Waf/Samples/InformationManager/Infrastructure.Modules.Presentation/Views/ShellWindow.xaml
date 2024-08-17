@@ -24,8 +24,8 @@
         </Grid.RowDefinitions>
         
         <ToolBar x:Name="toolBar" Grid.ColumnSpan="2" Grid.Row="0">
-            <Button Command="{Binding AboutCommand}" ToolTip="Shows the about dialog."><AccessText Text="_About"/></Button>
-            <Button Command="{Binding ExitCommand}" ToolTip="Close the application."><AccessText Text="E_xit"/></Button>
+            <Button Command="{Binding AboutCommand}" ToolTip="Shows the about dialog." AutomationProperties.AutomationId="AboutButton"><AccessText Text="_About"/></Button>
+            <Button Command="{Binding ExitCommand}" ToolTip="Close the application." AutomationProperties.AutomationId="ExitButton"><AccessText Text="E_xit"/></Button>
         </ToolBar>
         
         <TreeView x:Name="navigationView" Grid.Column="0" Grid.Row="1" BorderThickness="0" Margin="0,0,4,0">

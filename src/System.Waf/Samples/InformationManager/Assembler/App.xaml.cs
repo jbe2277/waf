@@ -4,6 +4,7 @@ using NLog.Targets.Wrappers;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
+using System.IO;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
@@ -75,18 +76,20 @@ public partial class App
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));   // WinApplicationFramework
 
         // Load module assemblies as well. See App.config file.
-        foreach (var x in Settings.Default.ModuleAssemblies) catalog.Catalogs.Add(new AssemblyCatalog(x));
+        var baseDir = AppContext.BaseDirectory;
+        foreach (var x in Settings.Default.ModuleAssemblies)
+        {
+            catalog.Catalogs.Add(new AssemblyCatalog(Path.Combine(baseDir, x!)));
+        }
 
         container = new(catalog, CompositionOptions.DisableSilentRejection);
         var batch = new CompositionBatch();
         batch.AddExportedValue(container);
         container.Compose(batch);
 
-        // Initialize all presentation services
         var presentationServices = container.GetExportedValues<IPresentationService>();
         foreach (var x in presentationServices) x.Initialize();
 
-        // Initialize and run all module controllers
         moduleControllers = container.GetExportedValues<IModuleController>();
         foreach (var x in moduleControllers) x.Initialize();
         foreach (var x in moduleControllers) x.Run();
