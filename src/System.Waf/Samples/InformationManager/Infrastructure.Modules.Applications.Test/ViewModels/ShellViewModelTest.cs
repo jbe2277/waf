@@ -50,8 +50,8 @@ public class ShellViewModelTest : InfrastructureTest
         var emptyCommand = new DelegateCommand(() => { });
         var newToolBarCommands = new[]
         {
-            new ToolBarCommand(emptyCommand, "Command 1"),
-            new ToolBarCommand(emptyCommand, "Command 2")
+            new ToolBarCommand("C1", emptyCommand, "Command 1"),
+            new ToolBarCommand("C2", emptyCommand, "Command 2")
         };
 
         Assert.IsFalse(shellView.ToolBarCommands.Any());

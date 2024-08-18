@@ -24,25 +24,25 @@
         </Grid.RowDefinitions>
         
         <ToolBar x:Name="toolBar" Grid.ColumnSpan="2" Grid.Row="0">
-            <Button Command="{Binding AboutCommand}" ToolTip="Shows the about dialog." AutomationProperties.AutomationId="AboutButton"><AccessText Text="_About"/></Button>
-            <Button Command="{Binding ExitCommand}" ToolTip="Close the application." AutomationProperties.AutomationId="ExitButton"><AccessText Text="E_xit"/></Button>
+            <Button Command="{Binding AboutCommand}" ToolTip="Shows the about dialog." AutomationProperties.AutomationId="AboutCommand"><AccessText Text="_About"/></Button>
+            <Button Command="{Binding ExitCommand}" ToolTip="Close the application." AutomationProperties.AutomationId="ExitCommand"><AccessText Text="E_xit"/></Button>
         </ToolBar>
         
-        <TreeView x:Name="navigationView" Grid.Column="0" Grid.Row="1" BorderThickness="0" Margin="0,0,4,0">
-            <TreeView.Resources>
-                <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                    <Setter Property="Padding" Value="5"/>
-                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsFirstItemOfNewGroup}" Value="True">
-                            <Setter Property="Margin" Value="0,11,0,0"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TreeView.Resources>
-
+        <TreeView x:Name="navigationView" Grid.Column="0" Grid.Row="1" BorderThickness="0" Margin="0,0,4,0" AutomationProperties.AutomationId="NavigationTree">
             <TreeViewItem x:Name="rootItem" Header="Information Manager" ItemsSource="{Binding NavigationService.NavigationNodes}" IsExpanded="True"
-                          Padding="5" Style="{x:Null}">
+                          Padding="5" AutomationProperties.AutomationId="RootTreeItem">
+                <TreeViewItem.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                        <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFirstItemOfNewGroup}" Value="True">
+                                <Setter Property="Margin" Value="0,11,0,0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeViewItem.ItemContainerStyle>
                 <TreeViewItem.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>

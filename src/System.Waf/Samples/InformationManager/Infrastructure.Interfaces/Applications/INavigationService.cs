@@ -4,6 +4,7 @@
 public interface INavigationService
 {
     /// <summary>Adds a navigation node in the navigation view of the shell.</summary>
+    /// <param name="automationId">ID used for UI Automation.</param>
     /// <param name="name">The name of the node.</param>
     /// <param name="showAction">The show action which is called when the user selects the node.</param>
     /// <param name="closeAction">The close action which is called when the node is deselected.</param>
@@ -11,5 +12,5 @@ public interface INavigationService
     /// to be in the same group. The navigation list is ordered from lower to higher numbers.</param>
     /// <param name="order">The order defines the position in the group. The navigation list is ordered from lower to higher numbers.</param>
     /// <returns>The created navigation node.</returns>
-    INavigationNode AddNavigationNode(string name, Action showAction, Action closeAction, double group, double order);
+    INavigationNode AddNavigationNode(string automationId, string name, Action showAction, Action closeAction, double group, double order);
 }

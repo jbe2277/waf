@@ -11,17 +11,21 @@ public class NavigationNode : Model, INavigationNode
     private bool isSelected;
     private bool isFirstItemOfNewGroup;
 
-    public NavigationNode(string name, Action showAction, Action closeAction, double group, double order)
+    public NavigationNode(string automationId, string name, Action showAction, Action closeAction, double group, double order)
     {
-        if (string.IsNullOrEmpty(name)) throw new ArgumentException("name must not be null or empty.", nameof(name));
-        if (group < 0) throw new ArgumentException("group must be equal or greater than 0.", nameof(group));
-        if (order < 0) throw new ArgumentException("order must be equal or greater than 0.", nameof(order));
+        ArgumentException.ThrowIfNullOrEmpty(automationId);
+        ArgumentException.ThrowIfNullOrEmpty(name);
+        ArgumentOutOfRangeException.ThrowIfLessThan(group, 0);
+        ArgumentOutOfRangeException.ThrowIfLessThan(order, 0);
+        AutomationId = automationId;
         Name = name;
         this.showAction = showAction ?? throw new ArgumentNullException(nameof(showAction));
         this.closeAction = closeAction ?? throw new ArgumentNullException(nameof(closeAction));
         Group = group;
         Order = order;
     }
+
+    public string AutomationId { get; }
 
     public string Name { get; }
 

@@ -4,7 +4,7 @@
              xmlns:dd="clr-namespace:Waf.InformationManager.AddressBook.Modules.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" AutomationProperties.AutomationId="ContactView"
              d:DataContext="{d:DesignInstance dd:SampleContactViewModel, IsDesignTimeCreatable=True}">
     
     <Grid Margin="11,11,22,11">

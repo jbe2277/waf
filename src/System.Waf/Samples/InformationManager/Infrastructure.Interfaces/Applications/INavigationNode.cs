@@ -3,6 +3,9 @@
 /// <summary>Represents a navigation node.</summary>
 public interface INavigationNode : INotifyPropertyChanged
 {
+    /// <summary>ID used for UI Automation.</summary>
+    string AutomationId { get; }
+
     /// <summary>Gets the name.</summary>
     string Name { get; }
 

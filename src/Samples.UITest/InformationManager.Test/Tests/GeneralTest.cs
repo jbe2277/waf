@@ -13,7 +13,7 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
     {
         Launch();
         var window = GetShellWindow();
-        window.AboutButton.Click();
+        window.AboutCommand.Click();
 
         var messageBox = window.FirstModalWindow().As<MessageBox>();
         Assert.Equal("Waf Information Manager", messageBox.Title);
@@ -22,6 +22,6 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
         Capture.Screen().ToFile(GetScreenshotFile("About"));
         messageBox.Buttons[0].Click();
 
-        window.ExitButton.Click();
+        window.ExitCommand.Click();
     });
 }

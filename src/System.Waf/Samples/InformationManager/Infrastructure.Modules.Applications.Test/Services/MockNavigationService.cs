@@ -10,9 +10,9 @@ public class MockNavigationService : INavigationService
 
     public IReadOnlyList<MockNavigationNode> NavigationNodes => navigationNodes;
 
-    public INavigationNode AddNavigationNode(string name, Action showAction, Action closeAction, double group, double order)
+    public INavigationNode AddNavigationNode(string automationId, string name, Action showAction, Action closeAction, double group, double order)
     {
-        var node = new MockNavigationNode(name, showAction, closeAction, group, order);
+        var node = new MockNavigationNode(automationId, name, showAction, closeAction, group, order);
         navigationNodes.Add(node);
         return node;
     }

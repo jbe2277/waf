@@ -62,15 +62,15 @@ internal class ModuleController : IModuleController
         }
         emailAccountsController.Root = Root;
 
-        var node = navigationService.AddNavigationNode("Inbox", ShowInbox, CloseCurrentView, 1, 1);
+        var node = navigationService.AddNavigationNode("InboxNode", "Inbox", ShowInbox, CloseCurrentView, 1, 1);
         itemCountSynchronizers.Add(new(node, Root.Inbox));
-        node = navigationService.AddNavigationNode("Outbox", ShowOutbox, CloseCurrentView, 1, 2);
+        node = navigationService.AddNavigationNode("OutboxNode", "Outbox", ShowOutbox, CloseCurrentView, 1, 2);
         itemCountSynchronizers.Add(new(node, Root.Outbox));
-        node = navigationService.AddNavigationNode("Sent", ShowSentEmails, CloseCurrentView, 1, 3);
+        node = navigationService.AddNavigationNode("SentNode", "Sent", ShowSentEmails, CloseCurrentView, 1, 3);
         itemCountSynchronizers.Add(new(node, Root.Sent));
-        node = navigationService.AddNavigationNode("Drafts", ShowDrafts, CloseCurrentView, 1, 4);
+        node = navigationService.AddNavigationNode("DraftsNode", "Drafts", ShowDrafts, CloseCurrentView, 1, 4);
         itemCountSynchronizers.Add(new(node, Root.Drafts));
-        node = navigationService.AddNavigationNode("Deleted", ShowDeletedEmails, CloseCurrentView, 1, 5);
+        node = navigationService.AddNavigationNode("DeletedNode", "Deleted", ShowDeletedEmails, CloseCurrentView, 1, 5);
         itemCountSynchronizers.Add(new(node, Root.Deleted));
     }
 
@@ -88,9 +88,9 @@ internal class ModuleController : IModuleController
         activeEmailFolderController.EmailFolder = emailFolder;
         activeEmailFolderController.Initialize();
         activeEmailFolderController.Run();
-        var uiNewEmailCommand = new ToolBarCommand(newEmailCommand, "_New email", "Creates a new email.");
-        var uiDeleteEmailCommand = new ToolBarCommand(activeEmailFolderController.DeleteEmailCommand, "_Delete", "Deletes the selected email.");
-        var uiEmailAccountsCommand = new ToolBarCommand(emailAccountsController.EmailAccountsCommand, "_Email accounts", "Opens a window that shows the email accounts.");
+        var uiNewEmailCommand = new ToolBarCommand("NewEmailCommand", newEmailCommand, "_New email", "Creates a new email.");
+        var uiDeleteEmailCommand = new ToolBarCommand("DeleteEmailCommand", activeEmailFolderController.DeleteEmailCommand, "_Delete", "Deletes the selected email.");
+        var uiEmailAccountsCommand = new ToolBarCommand("EmailAccountsCommand", emailAccountsController.EmailAccountsCommand, "_Email accounts", "Opens a window that shows the email accounts.");
         shellService.AddToolBarCommands([ uiNewEmailCommand, uiDeleteEmailCommand, uiEmailAccountsCommand ]);
     }
 

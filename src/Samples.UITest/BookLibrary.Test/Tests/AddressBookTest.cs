@@ -3,7 +3,6 @@ using UITest.BookLibrary.Views;
 using Xunit.Abstractions;
 using Xunit;
 using UITest.SystemViews;
-using FlaUI.Core.Input;
 
 namespace UITest.BookLibrary.Tests;
 

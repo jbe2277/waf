@@ -6,7 +6,7 @@
              xmlns:dd="clr-namespace:Waf.InformationManager.AddressBook.Modules.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="500"
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="500" AutomationProperties.AutomationId="ContactListView"
              d:DataContext="{d:DesignInstance dd:SampleContactListViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
 
         <ListBox x:Name="contactsBox" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" HorizontalContentAlignment="Stretch"
                      BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.AutomationId="ContactList">
             <ListBox.InputBindings>
                 <KeyBinding Command="{Binding DeleteContactCommand}" Key="Del"/>
             </ListBox.InputBindings>

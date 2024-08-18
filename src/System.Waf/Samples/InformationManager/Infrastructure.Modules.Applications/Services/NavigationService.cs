@@ -11,9 +11,9 @@ public class NavigationService : Model, INavigationService
 
     public IReadOnlyObservableList<NavigationNode> NavigationNodes => navigationNodes;
 
-    public INavigationNode AddNavigationNode(string name, Action showAction, Action closeAction, double group, double order)
+    public INavigationNode AddNavigationNode(string automationId, string name, Action showAction, Action closeAction, double group, double order)
     {
-        var navigationNode = new NavigationNode(name, showAction, closeAction, group, order);
+        var navigationNode = new NavigationNode(automationId, name, showAction, closeAction, group, order);
 
         // Insert the new navigation node at the right index.
         var sameGroup = navigationNodes.Where(x => DoubleEquals(x.Group, group, 1E-9)).ToArray();

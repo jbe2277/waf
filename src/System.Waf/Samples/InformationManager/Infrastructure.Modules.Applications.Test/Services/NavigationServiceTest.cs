@@ -11,11 +11,14 @@ public class NavigationServiceTest
     public void AddNavigationNodesWithWrongParameters()
     {
         var navigationService = new NavigationService();
-        AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode(null!, null!, null!, 0, 0));
-        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", null!, null!, 0, 0));
-        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("Node 1", () => { }, null!, 0, 0));
-        AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("Node 1", () => { }, () => { }, -1, -1));
-        AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("Node 1", () => { }, () => { }, 0, -1));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode(null!, null!, null!, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("", null!, null!, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("N1", null!, null!, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentException>(() => navigationService.AddNavigationNode("N1", "", null!, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("N1", "Node 1", null!, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentNullException>(() => navigationService.AddNavigationNode("N1", "Node 1", () => { }, null!, 0, 0));
+        AssertHelper.ExpectedException<ArgumentOutOfRangeException>(() => navigationService.AddNavigationNode("N1", "Node 1", () => { }, () => { }, -1, -1));
+        AssertHelper.ExpectedException<ArgumentOutOfRangeException>(() => navigationService.AddNavigationNode("N1", "Node 1", () => { }, () => { }, 0, -1));
     }
 
     [TestMethod]
@@ -28,7 +31,7 @@ public class NavigationServiceTest
         bool closeActionCalled = false;
         void CloseAction() => closeActionCalled = true;
 
-        var node = (NavigationNode)navigationService.AddNavigationNode("Node 1", ShowAction, CloseAction, 3, 7);
+        var node = (NavigationNode)navigationService.AddNavigationNode("N1", "Node 1", ShowAction, CloseAction, 3, 7);
 
         Assert.AreEqual("Node 1", node.Name);
         Assert.AreEqual(3, node.Group);
@@ -65,10 +68,10 @@ public class NavigationServiceTest
         static void ShowAction() { }
         static void CloseAction() { }
 
-        var nodeB2 = navigationService.AddNavigationNode("Node B1", ShowAction, CloseAction, 1, 1);
-        var nodeA1 = navigationService.AddNavigationNode("Node A1", ShowAction, CloseAction, 0, 0);
-        var nodeA2 = navigationService.AddNavigationNode("Node A2", ShowAction, CloseAction, 0, 1);
-        var nodeB1 = navigationService.AddNavigationNode("Node B1", ShowAction, CloseAction, 1, 0);
+        var nodeB2 = navigationService.AddNavigationNode("B2", "Node B2", ShowAction, CloseAction, 1, 1);
+        var nodeA1 = navigationService.AddNavigationNode("A1", "Node A1", ShowAction, CloseAction, 0, 0);
+        var nodeA2 = navigationService.AddNavigationNode("A2", "Node A2", ShowAction, CloseAction, 0, 1);
+        var nodeB1 = navigationService.AddNavigationNode("B1", "Node B1", ShowAction, CloseAction, 1, 0);
 
         AssertHelper.SequenceEqual(new[] { nodeA1, nodeA2, nodeB1, nodeB2 }, navigationService.NavigationNodes);
         Assert.IsFalse(((NavigationNode)nodeA1).IsFirstItemOfNewGroup);

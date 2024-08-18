@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Waf.Applications;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using Waf.InformationManager.Common.Applications.Services;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
@@ -57,6 +58,7 @@ public partial class ShellWindow : IShellView
         {
             var accessText = new AccessText() { Text = command.Text };
             var button = new Button() { Content = accessText, Command = command.Command };
+            AutomationProperties.SetAutomationId(button, command.AutomationId);
             if (!string.IsNullOrEmpty(command.ToolTip)) button.ToolTip = command.ToolTip;
 
             toolBar.Items.Insert(index, button);

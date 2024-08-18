@@ -49,7 +49,7 @@ internal class ModuleController : IModuleController, IAddressBookService
             }
             else Root = (AddressBookRoot)serializer.Value.ReadObject(stream)!;
         }
-        navigationService.AddNavigationNode("Contacts", ShowAddressBook, CloseAddressBook, 2, 1);
+        navigationService.AddNavigationNode("ContactsNode", "Contacts", ShowAddressBook, CloseAddressBook, 2, 1);
     }
 
     public void Run() { }
@@ -78,8 +78,8 @@ internal class ModuleController : IModuleController, IAddressBookService
         activeContactController.Initialize();
         activeContactController.Run();
 
-        var uiNewContactCommand = new ToolBarCommand(activeContactController.NewContactCommand, "_New contact", "Creates a new contact.");
-        var uiDeleteCommand = new ToolBarCommand(activeContactController.DeleteContactCommand, "_Delete", "Deletes the selected contact.");
+        var uiNewContactCommand = new ToolBarCommand("NewContactCommand", activeContactController.NewContactCommand, "_New contact", "Creates a new contact.");
+        var uiDeleteCommand = new ToolBarCommand("DeleteCommand", activeContactController.DeleteContactCommand, "_Delete", "Deletes the selected contact.");
         shellService.AddToolBarCommands([ uiNewContactCommand, uiDeleteCommand ]);
     }
 
