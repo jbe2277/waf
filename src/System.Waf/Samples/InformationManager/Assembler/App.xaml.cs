@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Configuration;
+using NLog;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
 using System.ComponentModel.Composition;
@@ -72,6 +73,18 @@ public partial class App
         DispatcherUnhandledException += AppDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
+        AppConfig appConfig;
+        try
+        {
+            var config = new ConfigurationBuilder().AddCommandLine(Environment.GetCommandLineArgs()).Build();
+            appConfig = config.Get<AppConfig>() ?? new AppConfig();
+        }
+        catch (Exception ex)
+        {
+            Log.App.Error(ex, "Command line parsing error");
+            appConfig = new AppConfig();
+        }
+
         catalog = new AggregateCatalog();
         catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));   // WinApplicationFramework
 
@@ -87,6 +100,7 @@ public partial class App
         batch.AddExportedValue(container);
         container.Compose(batch);
 
+        InitializeCultures(appConfig);
         var presentationServices = container.GetExportedValues<IPresentationService>();
         foreach (var x in presentationServices) x.Initialize();
 
@@ -102,6 +116,19 @@ public partial class App
         catalog?.Dispose();
         Log.App.Info("{0} closed", ApplicationInfo.ProductName);
         base.OnExit(e);
+    }
+
+    private static void InitializeCultures(AppConfig appConfig)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(appConfig.Culture)) Thread.CurrentThread.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(appConfig.Culture);
+            if (!string.IsNullOrEmpty(appConfig.UICulture)) Thread.CurrentThread.CurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(appConfig.UICulture);
+        }
+        catch (Exception ex)
+        {
+            Log.App.Error(ex, "The specified culture code is invalid");
+        }
     }
 
     private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => HandleException(e.Exception, false);
