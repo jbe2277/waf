@@ -51,7 +51,7 @@ public static class UITestHelper
 
     public static Window FirstModalWindow(this Window window, TimeSpan? timeout = null)
     {
-        var result = Retry.WhileEmpty(() => window.ModalWindows, timeout);
+        var result = Retry.WhileEmpty(() => window.ModalWindows, timeout ?? Retry.DefaultTimeout * 2);
         return result?.Result?.FirstOrDefault() ?? throw new ElementNotFoundException($"First modal dialog was not found for window '{window.TryAutomationId()}'");
     }
 
