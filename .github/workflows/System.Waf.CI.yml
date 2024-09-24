@@ -45,3 +45,4 @@ jobs:
         path: |
           ~/AppData/Local/Waf Writer/Log/
           ~/AppData/Local/Waf Book Library/Log/
+          ~/AppData/Local/Waf Information Manager/Log/
