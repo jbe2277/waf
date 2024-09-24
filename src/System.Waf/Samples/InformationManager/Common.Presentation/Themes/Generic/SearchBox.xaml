@@ -10,7 +10,7 @@
                 <ControlTemplate TargetType="{x:Type ctrl:SearchBox}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <Label Content="{TemplateBinding HintText}" Target="{Binding ElementName=searchBox}" Padding="0" Margin="5,3">
+                            <Label Content="{TemplateBinding HintText}" Target="{Binding ElementName=searchBox}" Padding="0" Margin="5,3" AutomationProperties.AutomationId="SearchHintLabel">
                                 <Label.Style>
                                     <Style TargetType="Label">
                                         <Style.Triggers>
@@ -23,7 +23,7 @@
                                 </Label.Style>
                             </Label>
                             <TextBox x:Name="searchBox" Text="{Binding SearchText, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" 
-                                     Background="Transparent" HorizontalAlignment="Stretch" Margin="0"/>
+                                     Background="Transparent" HorizontalAlignment="Stretch" Margin="0" AutomationProperties.AutomationId="SearchTextBox"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

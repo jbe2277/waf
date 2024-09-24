@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ctrl:SearchBox SearchText="{Binding FilterText}"/>
+        <ctrl:SearchBox SearchText="{Binding FilterText}" AutomationProperties.AutomationId="SearchBox"/>
 
         <ListBox x:Name="contactsBox" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" HorizontalContentAlignment="Stretch"
                      BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}"
@@ -35,13 +35,17 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Margin="7"/>
+                        <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" 
+                                Margin="7" AutomationProperties.AutomationId="FirstnameLabel"/>
 
-                        <TextBlock Text="{Binding Email, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Column="1" Margin="7"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Email, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" 
+                                Margin="7" AutomationProperties.AutomationId="EmailLabel"/>
 
-                        <TextBlock Text="{Binding Lastname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Lastname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" 
+                                Margin="7,0,7,7" AutomationProperties.AutomationId="LastnameLabel"/>
 
-                        <TextBlock Text="{Binding Phone, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" Grid.Column="1" Grid.Row="1" Margin="7,0,7,7"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Phone, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" 
+                                Margin="7,0,7,7" AutomationProperties.AutomationId="PhoneLabel"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

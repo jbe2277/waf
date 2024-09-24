@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 
 namespace Waf.InformationManager.Common.Presentation.Controls;
@@ -29,5 +30,14 @@ public class SearchBox : Control
     {
         get => (string)GetValue(HintTextProperty);
         set => SetValue(HintTextProperty, value);
+    }
+
+    /// <inheritdoc />
+    protected override AutomationPeer OnCreateAutomationPeer() => new ControlAutomationPeer(this);
+
+
+    private sealed class ControlAutomationPeer(FrameworkElement owner) : FrameworkElementAutomationPeer(owner)
+    {
+        protected override bool IsControlElementCore() => true;
     }
 }

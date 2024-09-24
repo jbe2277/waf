@@ -38,42 +38,42 @@
 
         <Label Grid.Column="0" Grid.Row="0" Content="_Firstname" Target="{Binding ElementName=firstnameBox}"/>
         <TextBox x:Name="firstnameBox" Grid.Column="2" Grid.Row="0" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Firstname, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Contact.Firstname, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="FirstnameBox"/>
 
         <Label Grid.Column="0" Grid.Row="2" Content="Lastname"/>
         <TextBox Grid.Column="2" Grid.Row="2" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Lastname, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Lastname, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="LastnameBox"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="Company"/>
         <TextBox Grid.Column="2" Grid.Row="4" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Company, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Company, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="CompanyBox"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="Email"/>
         <TextBox Grid.Column="2" Grid.Row="6" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Email, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="EmailBox"/>
 
         <Label Grid.Column="0" Grid.Row="8" Content="Phone"/>
         <TextBox Grid.Column="2" Grid.Row="8" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Phone, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Phone, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="PhoneBox"/>
 
         <Label Grid.Column="0" Grid.Row="10" Content="Street"/>
         <TextBox Grid.Column="2" Grid.Row="10" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.Street, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Address.Street, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="StreetBox"/>
 
         <Label Grid.Column="0" Grid.Row="12" Content="City"/>
         <TextBox Grid.Column="2" Grid.Row="12" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.City, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Address.City, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="CityBox"/>
 
         <Label Grid.Column="0" Grid.Row="14" Content="State"/>
         <TextBox Grid.Column="2" Grid.Row="14" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.State, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Address.State, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="StateBox"/>
 
         <Label Grid.Column="0" Grid.Row="16" Content="Postal Code"/>
         <TextBox Grid.Column="2" Grid.Row="16" MaxLength="100" HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.PostalCode, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Address.PostalCode, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="PostalCodeBox"/>
 
         <Label Grid.Column="0" Grid.Row="18" Content="Country"/>
         <TextBox Grid.Column="2" Grid.Row="18" MaxLength="100"  HorizontalAlignment="Stretch"
-                 Text="{Binding Contact.Address.Country, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Contact.Address.Country, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="CountryBox"/>
     </Grid>
 </UserControl>
