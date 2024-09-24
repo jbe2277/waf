@@ -23,8 +23,7 @@ public class ContactListItem(FrameworkAutomationElementBase element) : ListBoxIt
 
     public Label PhoneLabel => this.Find("PhoneLabel").AsLabel();
 
-    public void Deconstruct(out string firstname, out string lastname, out string email, out string phone)
-    {
-        (firstname, lastname, email, phone) = (FirstnameLabel.Text, LastnameLabel.Text, EmailLabel.Text, PhoneLabel.Text);
-    }
+    public void Deconstruct(out string firstname, out string lastname, out string email, out string phone) => (firstname, lastname, email, phone) = ToTuple();
+
+    public (string firstname, string lastname, string email, string phone) ToTuple() => (FirstnameLabel.Text, LastnameLabel.Text, EmailLabel.Text, PhoneLabel.Text);
 }
