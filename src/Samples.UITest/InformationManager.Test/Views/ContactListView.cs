@@ -22,4 +22,9 @@ public class ContactListItem(FrameworkAutomationElementBase element) : ListBoxIt
     public Label EmailLabel => this.Find("EmailLabel").AsLabel();
 
     public Label PhoneLabel => this.Find("PhoneLabel").AsLabel();
+
+    public void Deconstruct(out string firstname, out string lastname, out string email, out string phone)
+    {
+        (firstname, lastname, email, phone) = (FirstnameLabel.Text, LastnameLabel.Text, EmailLabel.Text, PhoneLabel.Text);
+    }
 }

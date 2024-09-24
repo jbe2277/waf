@@ -13,7 +13,7 @@ public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "Informati
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/InformationManager/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/InformationManager/")
 {
-    public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true)
+    public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true, bool resetContainer = true)
     {
         Log.WriteLine("");
         if (resetSettings)
@@ -22,6 +22,14 @@ public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "Informati
             var settingsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), productName, "Settings", "Settings.xml");
             if (File.Exists(settingsFile)) File.Delete(settingsFile);
             Log.WriteLine($"Delete settings: {settingsFile}");
+        }
+        if (resetContainer)
+        {
+            var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");
+            var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
+            var containerFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), companyName, productName, "InformationManager.datx");
+            if (File.Exists(containerFile)) File.Delete(containerFile);
+            Log.WriteLine($"Delete file:     {containerFile}");
         }
         var args = (arguments ?? new LaunchArguments()).ToArguments();
         Log.WriteLine($"Launch:          {args}");

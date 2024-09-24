@@ -16,7 +16,15 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
 
         var contactListView = window.ContactLayoutView.ContactListView;
         var contactView = window.ContactLayoutView.ContactView;
-        Assert.Equal(5, contactListView.ContactItems.Count);
+        var count = contactListView.ContactItems.Count;
+        Assert.Equal(5, count);
+        Log.WriteLine($"List of Contacts ({count})");
+        for (int i = 0; i < count; i++) 
+        {
+            var (f, l, e, p) = contactListView.ContactItems[i];
+            Log.WriteLine($"{i:00}: {f} {l}; {e} {p}");
+        }
+        
         Assert.Equal(contactListView.ContactList.SelectedItem.As<ContactListItem>().FirstnameLabel.Text, contactListView.ContactItems[0].FirstnameLabel.Text);
         AssertContactItem(contactListView.ContactItems[0], contactView, "Jesper", "Aaberg", "jesper.aaberg@example.com", "(111) 555-0100");
         AssertContactItem(contactListView.ContactItems[^1], null, "Miles", "Reid", "miles.reid@adventure-works.com", "(444) 555-0123");
@@ -36,17 +44,11 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
 
     private static void AssertContactItem(ContactListItem contactItem, ContactView? contactView, string firstName, string lastName, string email, string phone)
     {
-        Assert.Equal(firstName, contactItem.FirstnameLabel.Text);        
-        Assert.Equal(lastName, contactItem.LastnameLabel.Text);
-        Assert.Equal(email, contactItem.EmailLabel.Text);
-        Assert.Equal(phone, contactItem.PhoneLabel.Text);
-
+        var (f, l, e, p) = contactItem;
+        Assert.Equal((firstName, lastName, email, phone), (f, l, e, p));
         if (contactView is not null)
         {
-            Assert.Equal(firstName, contactView.FirstnameBox.Text);
-            Assert.Equal(lastName, contactView.LastnameBox.Text);
-            Assert.Equal(email, contactView.EmailBox.Text);
-            Assert.Equal(phone, contactView.PhoneBox.Text);
+            Assert.Equal((f, l, e, p), (contactView.FirstnameBox.Text, contactView.LastnameBox.Text, contactView.EmailBox.Text, contactView.PhoneBox.Text));
         }    
     }
 }
