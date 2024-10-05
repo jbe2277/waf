@@ -52,8 +52,6 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
     [Fact]
     public void AddAndRemoveEntriesTest() => Run(() =>
     {
-        SkipAppClose = true;
-
         Launch();
         var window = GetShellWindow();
         window.WindowState = WindowVisualState.Maximized;
