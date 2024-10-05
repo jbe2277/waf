@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 
 namespace UITest.InformationManager.Views;
 
@@ -23,6 +24,13 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
     public NavigationRootTreeItem RootTreeItem => this.Find("RootTreeItem").As<NavigationRootTreeItem>();
 
     public ContactLayoutView ContactLayoutView => this.Find("ContactLayoutView").As<ContactLayoutView>();
+
+    
+    public WindowVisualState WindowState
+    {
+        get => Patterns.Window.Pattern.WindowVisualState;
+        set => Patterns.Window.Pattern.SetWindowVisualState(value);
+    }
 }
 
 public class NavigationRootTreeItem(FrameworkAutomationElementBase element) : TreeItem(element)
