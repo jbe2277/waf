@@ -71,9 +71,8 @@ public partial class App
         Log.App.Info("{0} {1} is starting; OS: {2}; .NET: {3}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion, Environment.Version);
 
 #if (!DEBUG)
-        DispatcherUnhandledException += (_, ea) => HandleException(ea.Exception, "Dispatcher", true);
-        AppDomain.CurrentDomain.UnhandledException += (_, ea) => HandleException(ea.ExceptionObject as Exception, "AppDomain", !ea.IsTerminating);
-        TaskScheduler.UnobservedTaskException += (_, ea) => HandleException(ea.Exception, "TaskScheduler", false);
+        AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        TaskScheduler.UnobservedTaskException += (_, ea) => Log.Default.Warn(ea.Exception, "UnobservedTaskException");
 #endif
         AppConfig appConfig;
         try
@@ -134,12 +133,10 @@ public partial class App
         }
     }
 
-    private void HandleException(Exception? ex, string source, bool showError)
+    private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        if (ex is null) return;
-        Log.App.Error(ex, "Unhandled exception: {0}", source);
-
-        if (!showError) return;
+        var ex = e.ExceptionObject as Exception ?? throw new InvalidOperationException("Unknown exception object");
+        Log.Default.Error(ex, "UnhandledException; IsTerminating={0}", e.IsTerminating);
 
         var message = string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, ex);
         if (MainWindow?.IsVisible == true)
