@@ -70,8 +70,9 @@ public partial class App
         Log.App.Info("{0} {1} is starting; OS: {2}; .NET: {3}", ApplicationInfo.ProductName, ApplicationInfo.Version, Environment.OSVersion, Environment.Version);
 
 #if (!DEBUG)
-        DispatcherUnhandledException += AppDispatcherUnhandledException;
-        AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
+        DispatcherUnhandledException += (_, ea) => HandleException(ea.Exception, "Dispatcher", true);
+        AppDomain.CurrentDomain.UnhandledException += (_, ea) => HandleException(ea.ExceptionObject as Exception, "AppDomain", !ea.IsTerminating);
+        TaskScheduler.UnobservedTaskException += (_, ea) => HandleException(ea.Exception, "TaskScheduler", false);
 #endif
         AppConfig appConfig;
         try
@@ -131,17 +132,21 @@ public partial class App
         }
     }
 
-    private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => HandleException(e.Exception, false);
-
-    private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e) => HandleException(e.ExceptionObject as Exception, e.IsTerminating);
-
-    private static void HandleException(Exception? e, bool isTerminating)
+    private void HandleException(Exception? ex, string source, bool showError)
     {
-        if (e == null) return;
-        Log.App.Error(e, "Unhandled exception");
-        if (!isTerminating)
+        if (ex is null) return;
+        Log.App.Error(ex, "Unhandled exception: {0}", source);
+
+        if (!showError) return;
+
+        var message = string.Format(CultureInfo.CurrentCulture, "Unknown application error\n\n{0}", ex);
+        if (MainWindow?.IsVisible == true)
         {
-            MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "Unknown application error\n\n{0}", e), ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(message, ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else
+        {
+            MessageBox.Show(message, ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
         }
     }
 }
