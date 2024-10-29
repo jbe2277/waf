@@ -4,7 +4,7 @@
              xmlns:c="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.Converters"
              xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" AutomationProperties.AutomationId="EmailView" 
              mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleEmailViewModel, IsDesignTimeCreatable=True}" 
              d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
@@ -59,28 +59,28 @@
                         </Grid.Resources>
 
                         <Label Content="Title:" Grid.Row="0" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Content="{Binding Title}" FontWeight="SemiBold" Grid.Row="0" Grid.Column="1"/>
+                        <Label Content="{Binding Title}" FontWeight="SemiBold" Grid.Row="0" Grid.Column="1" AutomationProperties.AutomationId="TitleLabel"/>
 
                         <Label Content="From:" Grid.Row="1" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Content="{Binding From}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Content="{Binding From}" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="FromLabel"/>
 
                         <Label Content="To:" Grid.Row="2" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Grid.Row="2" Grid.Column="1">
-                            <TextBlock Text="{Binding To, Converter={x:Static c:StringCollectionToStringConverter.Default}}" TextTrimming="CharacterEllipsis" />
+                        <Label Grid.Row="2" Grid.Column="1" AutomationProperties.AutomationId="ToLabel">
+                            <TextBlock Text="{Binding To, Converter={x:Static c:StringCollectionToStringConverter.Default}}" TextTrimming="CharacterEllipsis"/>
                         </Label>
 
                         <Label Content="CC:" Grid.Row="3" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Grid.Row="3" Grid.Column="1">
+                        <Label Grid.Row="3" Grid.Column="1" AutomationProperties.AutomationId="CCLabel">
                             <TextBlock Text="{Binding CC, Converter={x:Static c:StringCollectionToStringConverter.Default}}" TextTrimming="CharacterEllipsis"/>
                         </Label>
 
                         <Label Content="BCC:" Grid.Row="4" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Grid.Row="4" Grid.Column="1">
+                        <Label Grid.Row="4" Grid.Column="1" AutomationProperties.AutomationId="BccLabel">
                             <TextBlock Text="{Binding Bcc, Converter={x:Static c:StringCollectionToStringConverter.Default}}" TextTrimming="CharacterEllipsis"/>
                         </Label>
 
                         <Label Content="Sent:" Grid.Row="5" Grid.Column="0" Margin="11,0,0,0"/>
-                        <Label Content="{Binding Sent}" Grid.Row="5" Grid.Column="1"/>
+                        <Label Content="{Binding Sent}" Grid.Row="5" Grid.Column="1" AutomationProperties.AutomationId="SentLabel"/>
                     </Grid>
                 </DataTemplate>
             </ContentControl.ContentTemplate>

@@ -85,15 +85,34 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
 
         window.ExitCommand.Click();
 
+        // Restart application and assert that new contact was saved
+        Launch(resetSettings: false, resetContainer: false);
+        window = GetShellWindow();
+        Assert.Equal(WindowVisualState.Maximized, window.WindowState);
+        window.RootTreeItem.ContactsNode.Click();
+        contactListView = window.ContactLayoutView.ContactListView;
+        contactView = window.ContactLayoutView.ContactView;
+        Assert.Equal(5, contactListView.ContactItems.Count);
+        newItem = contactListView.ContactItems[^1];
+        Assert.Equal("AFirstname", newItem.FirstnameLabel.Text);
+        contactListView.ContactList.Select(contactListView.ContactItems.Count - 1);
+        AssertContactItem(newItem, contactView, "AFirstname", "ALastname", "AEmail@mail.com", "1234");
+
+        // Invalid Firstname > Save > Restart > Validation error should be here again
+        contactView.FirstnameBox.Text = "";
+        window.ExitCommand.Click();
 
         Launch(resetSettings: false, resetContainer: false);
         window = GetShellWindow();
         Assert.Equal(WindowVisualState.Maximized, window.WindowState);
         window.RootTreeItem.ContactsNode.Click();
         contactListView = window.ContactLayoutView.ContactListView;
-        Assert.Equal(5, contactListView.ContactItems.Count);
-        Assert.Equal("AFirstname", contactListView.ContactItems[^1].FirstnameLabel.Text);
+        contactView = window.ContactLayoutView.ContactView;
+        newItem = contactListView.ContactItems[^1];
+        contactListView.ContactList.Select(contactListView.ContactItems.Count - 1);
+        Assert.Equal("The Firstname field is required.", contactView.FirstnameBox.ItemStatus);
 
+        // Remove all contact items
         var count = contactListView.ContactItems.Count;
         for (int i = 0; i < count; i++) window.DeleteCommand.Click();
         Assert.False(window.DeleteCommand.IsEnabled);

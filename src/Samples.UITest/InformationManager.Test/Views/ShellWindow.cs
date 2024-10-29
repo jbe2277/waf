@@ -23,6 +23,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
     public NavigationRootTreeItem RootTreeItem => this.Find("RootTreeItem").As<NavigationRootTreeItem>();
 
+    public EmailLayoutView EmailLayoutView => this.Find("EmailLayoutView").As<EmailLayoutView>();
+
     public ContactLayoutView ContactLayoutView => this.Find("ContactLayoutView").As<ContactLayoutView>();
 
     
@@ -35,5 +37,15 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
 public class NavigationRootTreeItem(FrameworkAutomationElementBase element) : TreeItem(element)
 {
+    public TreeItem InboxNode => this.Find("InboxNode").AsTreeItem();
+
+    public TreeItem OutboxNode => this.Find("OutboxNode").AsTreeItem();
+
+    public TreeItem SentNode => this.Find("SentNode").AsTreeItem();
+
+    public TreeItem DraftsNode => this.Find("DraftsNode").AsTreeItem();
+
+    public TreeItem DeletedNode => this.Find("DeletedNode").AsTreeItem();
+
     public TreeItem ContactsNode => this.Find("ContactsNode").AsTreeItem();
 }

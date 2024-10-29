@@ -8,7 +8,7 @@
              xmlns:domain="clr-namespace:Waf.InformationManager.EmailClient.Modules.Domain.Emails;assembly=Waf.InformationManager.EmailClient.Modules.Domain"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" AutomationProperties.AutomationId="EmailListView"
              d:DataContext="{d:DesignInstance dd:SampleEmailListViewModel, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <s:EmailItemTemplateSelector x:Key="EmailItemTemplateSelector"/>
@@ -24,11 +24,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding From, ValidatesOnNotifyDataErrors=False}" Margin="7"/>
+                <TextBlock Text="{Binding From, ValidatesOnNotifyDataErrors=False}" Margin="7" AutomationProperties.AutomationId="FromLabel"/>
 
-                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7"/>
+                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7" AutomationProperties.AutomationId="SentLabel"/>
 
-                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7" AutomationProperties.AutomationId="TitleLabel"/>
             </Grid>
         </DataTemplate>
 
@@ -44,11 +44,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="{Binding To, ValidatesOnNotifyDataErrors=False, Converter={x:Static c:StringCollectionToStringConverter.Default}}"
-                           Margin="7" TextTrimming="CharacterEllipsis" />
+                           Margin="7" TextTrimming="CharacterEllipsis" AutomationProperties.AutomationId="ToLabel"/>
 
-                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7"/>
+                <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7" AutomationProperties.AutomationId="SentLabel"/>
 
-                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7"/>
+                <TextBlock Text="{Binding Title, ValidatesOnNotifyDataErrors=False}" Grid.Row="1" Grid.ColumnSpan="2" Margin="7,0,7,7" AutomationProperties.AutomationId="TitleLabel"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -57,14 +57,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-        </Grid.RowDefinitions>        
-        
-        <ctrl:SearchBox SearchText="{Binding FilterText}"/>
+        </Grid.RowDefinitions>
+
+        <ctrl:SearchBox SearchText="{Binding FilterText}" AutomationProperties.AutomationId="SearchBox"/>
         
         <ListBox x:Name="emailsBox" ItemsSource="{Binding Emails}" SelectedItem="{Binding SelectedEmail}" Grid.Row="1" HorizontalContentAlignment="Stretch"
                  ItemTemplateSelector="{StaticResource EmailItemTemplateSelector}"
                  BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.AutomationId="EmailList">
             <ListBox.InputBindings>
                 <KeyBinding Command="{Binding DeleteEmailCommand}" Key="Del"/>
             </ListBox.InputBindings>

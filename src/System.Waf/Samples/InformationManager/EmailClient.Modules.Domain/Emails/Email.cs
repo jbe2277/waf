@@ -13,18 +13,11 @@ public class Email : ValidatableModel, IValidatableObject
     [DataMember] private EmailType emailType;
     [DataMember] private string title = "";
     [DataMember] private string from = "";
-    [DataMember] private IEnumerable<string> to;
-    [DataMember] private IEnumerable<string> cc;
-    [DataMember] private IEnumerable<string> bcc;
+    [DataMember] private IEnumerable<string> to = [];
+    [DataMember] private IEnumerable<string> cc = [];
+    [DataMember] private IEnumerable<string> bcc = [];
     [DataMember] private DateTime sent;
     [DataMember] private string? message;
-
-    public Email()
-    {
-        to = Array.Empty<string>();
-        cc = Array.Empty<string>();
-        bcc = Array.Empty<string>();
-    }
 
     public EmailType EmailType
     {
@@ -105,7 +98,7 @@ public class Email : ValidatableModel, IValidatableObject
         foreach (var email in Bcc) { ValidateEmail(validationResults, email, nameof(Bcc), "BCC"); }
         if (!To.Any() && !CC.Any() && !Bcc.Any())
         {
-            validationResults.Add(new ValidationResult("This email doesn't define a recipient.", new[] { nameof(To) }));
+            validationResults.Add(new ValidationResult("This email doesn't define a recipient.", [nameof(To)]));
         }
         return validationResults;
     }
@@ -114,7 +107,7 @@ public class Email : ValidatableModel, IValidatableObject
     {
         if (!emailAddress.IsValid(email))
         {
-            validationResults.Add(new ValidationResult(string.Format(CultureInfo.CurrentCulture, "The email {0} in the {1} field is not valid.", email, displayName), new[] { field }));
+            validationResults.Add(new ValidationResult(string.Format(CultureInfo.CurrentCulture, "The email {0} in the {1} field is not valid.", email, displayName), [field]));
         }
     }
 
