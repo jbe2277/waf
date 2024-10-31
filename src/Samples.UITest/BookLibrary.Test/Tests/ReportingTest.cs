@@ -25,9 +25,8 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
         Assert.True(reportView.PrintButton.IsEnabled);
         Capture.Screen().ToFile(GetScreenshotFile("BookListReport"));
         PrintAsPdf(GetScreenshotFile("BookListReport.pdf"));
-        // Note: It might take some time until PDF print has been completed
 
-        reportView.CreateBorrowedBooksReportButton.Invoke();
+        reportView.CreateBorrowedBooksReportButton.Click();
         Capture.Screen().ToFile(GetScreenshotFile("BorrowedBooksReport"));
         PrintAsPdf(GetScreenshotFile("BorrowedBooksReport.pdf"));
 
@@ -61,6 +60,9 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
             var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
             saveFileDialog.SetFileName(fileName);
             saveFileDialog.SaveButton.Click();
+
+            // Wait until the button is enabled again -> indication that the PDF print is completed
+            Retry.WhileFalse(() => reportView.PrintButton.IsEnabled, throwOnTimeout: true);
         }
     });
 }
