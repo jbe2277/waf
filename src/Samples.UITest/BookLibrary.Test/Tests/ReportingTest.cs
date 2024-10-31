@@ -25,8 +25,9 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
         Assert.True(reportView.PrintButton.IsEnabled);
         Capture.Screen().ToFile(GetScreenshotFile("BookListReport"));
         PrintAsPdf(GetScreenshotFile("BookListReport.pdf"));
+        // Note: It might take some time until PDF print has been completed
 
-        reportView.CreateBorrowedBooksReportButton.Click();
+        reportView.CreateBorrowedBooksReportButton.Invoke();
         Capture.Screen().ToFile(GetScreenshotFile("BorrowedBooksReport"));
         PrintAsPdf(GetScreenshotFile("BorrowedBooksReport.pdf"));
 
