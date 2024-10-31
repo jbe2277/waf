@@ -314,7 +314,7 @@ public class WriterTest : UITest
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.CloseMenuItem.Click();
 
-        Assert.Empty(window.DocumentTabItems);
+        Assert.False(startView.IsOffscreen);
 
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.OpenMenuItem.Click();
