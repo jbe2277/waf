@@ -11,10 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MinVer">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="MinVer" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
   </ItemGroup>
 
   <Choose>
@@ -24,6 +21,7 @@
         <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
       </PropertyGroup>
       <ItemGroup>
+        <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="MSTest.TestAdapter" />
         <PackageReference Include="MSTest.TestFramework" />
