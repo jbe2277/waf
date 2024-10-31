@@ -60,6 +60,9 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
             var saveFileDialog = window.FirstModalWindow().As<SaveFileDialog>();
             saveFileDialog.SetFileName(fileName);
             saveFileDialog.SaveButton.Click();
+
+            // Wait until the button is enabled again -> indication that the PDF print is completed
+            Retry.WhileFalse(() => reportView.PrintButton.IsEnabled, throwOnTimeout: true);
         }
     });
 }
