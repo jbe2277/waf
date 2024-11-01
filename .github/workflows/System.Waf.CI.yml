@@ -27,7 +27,9 @@ jobs:
       run: dotnet build ./src/System.Waf/System.Waf.sln -c Release -p:ContinuousIntegrationBuild=true
 
     - name: 🕵️ Test
-      run: dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build
+      run: |
+        echo "## 🕵️ Test Results - System.Waf.sln" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build --logger GitHubActions
 
     - name: 📦 Upload NuGet Packages
       uses: actions/upload-artifact@v4
@@ -39,7 +41,9 @@ jobs:
           src/System.Waf/System.Waf/**/*.snupkg
 
     - name: 🖥️ UI Test
-      run: dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger "console;verbosity=detailed" -maxCpuCount:1
+      run: |
+        echo "## 🕵️ Test Results - Samples.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger GitHubActions -maxCpuCount:1
     
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4

@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.Test", "BookLib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UITest.Core", "UITest.Core\UITest.Core.csproj", "{4B2174D9-B723-42AA-90DA-2F556409F19A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationManager.Test", "InformationManager.Test\InformationManager.Test.csproj", "{18006BE9-7056-48FB-97CF-F7B25C43358B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InformationManager.Test", "InformationManager.Test\InformationManager.Test.csproj", "{18006BE9-7056-48FB-97CF-F7B25C43358B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DAAFA839-8A98-4353-9AAD-CD1484DFEDE5}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
