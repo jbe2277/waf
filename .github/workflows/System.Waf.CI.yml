@@ -28,7 +28,7 @@ jobs:
 
     - name: 🕵️ Test
       run: |
-        echo "##🕵️ Test Results - System.Waf.sln" >> $Env:$GITHUB_STEP_SUMMARY
+        echo "##🕵️ Test Results - System.Waf.sln" >> $Env:GITHUB_STEP_SUMMARY
         dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build --logger GitHubActions
 
     - name: 📦 Upload NuGet Packages
@@ -42,7 +42,7 @@ jobs:
 
     - name: 🖥️ UI Test
       run: |
-        echo "##🕵️ Test Results - Samples.UITest.sln" >> $Env:$GITHUB_STEP_SUMMARY
+        echo "##🕵️ Test Results - Samples.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
         dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger GitHubActions -maxCpuCount:1
     
     - name: 📦 Upload UI Test results
