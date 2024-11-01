@@ -23,20 +23,22 @@ on:
 
 jobs:
   getVersionJob:
-    name: 'Get Build Version'
+    name: 🔢 Get Build Version
     runs-on: windows-latest
     outputs:
       version: ${{ steps.getVersionStep.outputs.version }}
       versionCode: ${{ steps.getVersionStep.outputs.versionCode }}
     steps:
-      - uses: actions/checkout@v4
+      - name: 🔖 Check-out
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install MinVer
-        run: |
-          dotnet tool install minver-cli -g
+      
+      - name: ⚙️ Install MinVer
+        run: dotnet tool update minver-cli -g
+      
       - id: getVersionStep
-        name: Get Build Version
+        name: 🔢 Get Build Version
         shell: pwsh
         run: |
           $verOut=minver -t v
