@@ -1,5 +1,7 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
 
 namespace UITest.SystemViews;
 
@@ -8,7 +10,7 @@ public class PrintDialog(FrameworkAutomationElementBase element) : Window(elemen
     public static PrintDialog GetDialog(AutomationBase automation)
     {
         var desktop = automation.GetDesktop();
-        return desktop.Find(x => x.ByName("Windows Print")).As<PrintDialog>();
+        return desktop.Find(x => new AndCondition(x.ByControlType(ControlType.Window), x.ByName("Windows Print"))).As<PrintDialog>();
     }
 
     public ComboBox PrinterSelector => this.Find("printerSelector").AsComboBox();
