@@ -21,12 +21,12 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
 
         Assert.False(reportView.PrintButton.IsEnabled);  // No report available
         
-        reportView.CreateBookListReportButton.Click();
+        reportView.CreateBookListReportButton.Invoke();
         Assert.True(reportView.PrintButton.IsEnabled);
         Capture.Screen().ToFile(GetScreenshotFile("BookListReport"));
         PrintAsPdf(GetScreenshotFile("BookListReport.pdf"));
 
-        reportView.CreateBorrowedBooksReportButton.Click();
+        reportView.CreateBorrowedBooksReportButton.Invoke();
         Capture.Screen().ToFile(GetScreenshotFile("BorrowedBooksReport"));
         PrintAsPdf(GetScreenshotFile("BorrowedBooksReport.pdf"));
 
