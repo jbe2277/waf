@@ -4,6 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace UITest.InformationManager.Tests;
+
 public class EmailTest(ITestOutputHelper log) : UITest(log)
 {
     [Fact]
