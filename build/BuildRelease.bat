@@ -2,7 +2,8 @@ setlocal
 set DOTNET_CLI_UI_LANGUAGE=en
 cd %~dp0../src
 
-dotnet build System.Waf/System.Waf.sln -c Release -p:ContinuousIntegrationBuild=true
+rem Skip parameter -p:ContinuousIntegrationBuild=true because of https://github.com/microsoft/codecoverage/issues/141
+dotnet build System.Waf/System.Waf.sln -c Release 
 
 pwsh -c "Get-ChildItem -Recurse | Where-Object {$_.Name -eq 'TestResults'} | Remove-Item -Force -Recurse"
 dotnet test System.Waf/System.Waf.sln -c Release --no-build --collect "Code Coverage"
