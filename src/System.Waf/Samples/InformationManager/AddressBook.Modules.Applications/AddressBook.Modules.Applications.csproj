@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.AddressBook.Modules.Applications</RootNamespace>
     <AssemblyName>Waf.InformationManager.AddressBook.Modules.Applications</AssemblyName>
   </PropertyGroup>
