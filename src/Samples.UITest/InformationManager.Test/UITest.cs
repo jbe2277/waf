@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 namespace UITest.InformationManager;
 
 public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "InformationManager.exe",
-        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/InformationManager/Release/net8.0-windows/",
+        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/InformationManager/Release/net9.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/InformationManager/")
 {
     public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true, bool resetContainer = true)

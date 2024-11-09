@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 namespace UITest.BookLibrary;
 
 public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibrary.exe",
-        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net8.0-windows/",
+        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net9.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/BookLibrary/")
 {
     public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true, bool resetDatabase = true)
