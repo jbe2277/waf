@@ -23,6 +23,12 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         {
             Log.WriteLine($"{i:00}: {bookListView.BookDataGrid.GetRowByIndex(i).As<BookGridRow>().TitleCell.Label.Text}");
         }
+        var firstBook = bookListView.BookDataGrid.GetRowByIndex(0).As<BookGridRow>();
+        var lastBook = bookListView.BookDataGrid.GetRowByIndex(rowCount - 1).As<BookGridRow>();
+        // GetRowByIndex scrolls to the item -> let's scroll back to the first book
+        Assert.True(firstBook.IsOffscreen);
+        firstBook.ScrollIntoView();
+        Assert.False(firstBook.IsOffscreen);
 
         bookListView.SearchBox.Text = "Ha";
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
