@@ -95,6 +95,11 @@ jobs:
     - name: 🔖 Check-out
       uses: actions/checkout@v4
 
+    - name: ⚙️ Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9'
+      
     - name: 🕵️ Test - Domain.Test
       run: |
         cd src/NewsReader/NewsReader.Domain.Test
