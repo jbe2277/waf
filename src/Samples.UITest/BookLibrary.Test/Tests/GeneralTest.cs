@@ -34,6 +34,7 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
     public void LoadCorruptDatabaseTest() => Run(() =>
     {
         if (File.Exists(AppInfo.DatabaseFile)) File.Delete(AppInfo.DatabaseFile);
+        Directory.CreateDirectory(Path.GetDirectoryName(AppInfo.DatabaseFile)!);
         File.AppendAllText(AppInfo.DatabaseFile, "42");
 
         Launch(resetDatabase: false);
@@ -42,11 +43,11 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal(0, bookListView.BookDataGrid.RowCount);
 
         var messageBox = window.FirstModalWindow().As<MessageBox>();
-        Assert.Equal("Could not load the Persons from the database.", messageBox.Message);
+        Assert.Equal("Could not load the Books from the database.", messageBox.Message);
         messageBox.Buttons[0].Click();
 
         messageBox = window.FirstModalWindow().As<MessageBox>();
-        Assert.Equal("Could not load the Books from the database.", messageBox.Message);
+        Assert.Equal("Could not load the Persons from the database.", messageBox.Message);
         messageBox.Buttons[0].Click();
 
         Assert.Equal(0, bookListView.BookDataGrid.RowCount);
