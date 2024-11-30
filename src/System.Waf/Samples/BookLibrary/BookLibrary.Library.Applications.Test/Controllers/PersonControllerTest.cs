@@ -30,6 +30,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(new() { Firstname = "Ron" });
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
 
         // Check that Initialize shows the PersonListView and PersonView
         var shellService = Get<ShellService>();
@@ -57,6 +58,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(ron);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListView = Get<MockPersonListView>();
         var personListViewModel = personListView.ViewModel;
         var personView = Get<MockPersonView>();
@@ -106,6 +108,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(ron);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListView = Get<MockPersonListView>();
         var personListViewModel = personListView.ViewModel;
         var personView = Get<MockPersonView>();
@@ -147,6 +150,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(harry);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListViewModel = Get<PersonListViewModel>();
         personListViewModel.AddSelectedPerson(personListViewModel.Persons!.Single());
         var personViewModel = Get<PersonViewModel>();
@@ -180,6 +184,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(ginny);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListView = Get<MockPersonListView>();
         var personListViewModel = personListView.ViewModel;
         // Set the sorting to: "Ginny", "Harry", "Ron"
@@ -205,6 +210,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(ginny);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListView = Get<MockPersonListView>();
         var personListViewModel = personListView.ViewModel;
         // Set the sorting to: "Ginny", "Harry", "Ron"
@@ -230,6 +236,7 @@ public class PersonControllerTest : ApplicationsTest
         entityService.Persons.Add(ginny);
         var personController = Get<PersonController>();
         personController.Initialize();
+        personController.Run();
         var personListView = Get<MockPersonListView>();
         var personListViewModel = personListView.ViewModel;
 

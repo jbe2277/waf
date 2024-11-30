@@ -44,7 +44,12 @@ internal class ModuleController : IModuleController
         personController.Initialize();
     }
 
-    public void Run() => ShellViewModel.Show();
+    public void Run()
+    {
+        ShellViewModel.Show();
+        bookController.Run();
+        personController.Run();
+    }
 
     public void Shutdown() => entityController.Shutdown();
 
