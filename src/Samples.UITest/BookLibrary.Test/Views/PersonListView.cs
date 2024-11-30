@@ -22,4 +22,6 @@ public class PersonGridRow(FrameworkAutomationElementBase element) : GridRow(ele
     public TextGridCell LastnameCell => Cells[1].As<TextGridCell>();
 
     public HyperlinkGridCell EmailCell => Cells[2].As<HyperlinkGridCell>();
+
+    public (string firstname, string lastname, string email) ToTuple() => (FirstnameCell.Text, LastnameCell.Text, EmailCell.Name);
 }

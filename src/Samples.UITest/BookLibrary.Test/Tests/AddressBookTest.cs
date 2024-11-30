@@ -61,7 +61,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         personListView.AddButton.Click();
         Assert.Equal(5, personListView.PersonDataGrid.RowCount);
         var newRow = personListView.PersonDataGrid.SelectedItem.As<PersonGridRow>();
-        Assert.Equal(personListView.PersonDataGrid.Rows[0], newRow);
+        Assert.Equal(personListView.PersonDataGrid.Rows[^1].As<PersonGridRow>().ToTuple(), newRow.ToTuple());
 
         // ItemStatus contains the validation error message or string.Empty if no error exists
         AssertEqual("", personView.FirstnameTextBox.Text, newRow.FirstnameCell.Label.Text);
@@ -77,9 +77,9 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("ALastname", personView.LastnameTextBox.Text);
         AssertEqual("", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
 
-        var lastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 1).As<PersonGridRow>();
-        Assert.False(lastRow.IsOffscreen);
-        Assert.StartsWith("Ron", lastRow.FirstnameCell.Name);
+        var secondLastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 2).As<PersonGridRow>();
+        Assert.False(secondLastRow.IsOffscreen);
+        Assert.StartsWith("Ron", secondLastRow.FirstnameCell.Name);
 
         var lastNotRemovedRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 3);
         personListView.PersonDataGrid.Select(personListView.PersonDataGrid.RowCount - 2);

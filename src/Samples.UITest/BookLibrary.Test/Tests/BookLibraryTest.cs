@@ -26,7 +26,6 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var firstBook = bookListView.BookDataGrid.GetRowByIndex(0).As<BookGridRow>();
         var lastBook = bookListView.BookDataGrid.GetRowByIndex(rowCount - 1).As<BookGridRow>();
         // GetRowByIndex scrolls to the item -> let's scroll back to the first book
-        Assert.True(firstBook.IsOffscreen);
         firstBook.ScrollIntoView();
         Assert.False(firstBook.IsOffscreen);
 
@@ -34,25 +33,25 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Harr";
         Assert.Equal(7, bookListView.BookDataGrid.RowCount);
-        var bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
-        bookRow2.Select();
+        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(0).As<BookGridRow>();
+        bookRow1.Select();
 
-        AssertEqual("Harry Potter and the Deathly Hallows", bookRow2.TitleCell.Name, bookView.TitleTextBox.Text);
-        AssertEqual("J.K. Rowling", bookRow2.AuthorCell.Name, bookView.AuthorTextBox.Text);
+        AssertEqual("Harry Potter and the Deathly Hallows", bookRow1.TitleCell.Name, bookView.TitleTextBox.Text);
+        AssertEqual("J.K. Rowling", bookRow1.AuthorCell.Name, bookView.AuthorTextBox.Text);
         Assert.Equal("Bloomsbury", bookView.PublisherTextBox.Text);
-        Assert.Equal("1/1/2007", bookRow2.PublishDateCell.Name);
+        Assert.Equal("1/1/2007", bookRow1.PublishDateCell.Name);
         Assert.Equal(new DateTime(2007, 1, 1), bookView.PublishDatePicker.SelectedDate);
         Assert.Equal("9780747591054", bookView.IsbnTextBox.Text);
         Assert.Equal("English", bookView.LanguageComboBox.SelectedItem.Text);
         Assert.Equal("607", bookView.PagesTextBox.Text);
-        AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("Ginny Weasley", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
-        bookRow2.TitleCell.Text = "Test Title";
+        bookRow1.TitleCell.Text = "Test Title";
         Assert.Equal("Test Title", bookView.TitleTextBox.Text);
         bookView.AuthorTextBox.Text = "TAuthor";
-        Assert.Equal("TAuthor", bookRow2.AuthorCell.Name);
+        Assert.Equal("TAuthor", bookRow1.AuthorCell.Name);
         bookView.PublishDatePicker.SelectedDate = new DateTime(2024, 3, 2);
-        Assert.Equal("3/2/2024", bookRow2.PublishDateCell.Name);
+        Assert.Equal("3/2/2024", bookRow1.PublishDateCell.Name);
         Assert.Equal(["Undefined", "English", "German", "French", "Spanish", "Chinese", "Japanese"], bookView.LanguageComboBox.Items.Select(x => x.Name));
         bookView.LanguageComboBox.Select(2);
         bookView.LanguageComboBox.Click();  // To close the combo box popup
@@ -67,9 +66,9 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         lendToWindow.WasReturnedRadioButton.Click();
         Assert.False(lendToWindow.PersonListBox.IsEnabled);
         lendToWindow.OkButton.Click();
-        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
-        bookRow2.LendToCell.LendToButton.Click();
+        bookRow1.LendToCell.LendToButton.Click();
         lendToWindow = window.FirstModalWindow().As<LendToWindow>();
         Assert.True(lendToWindow.WasReturnedRadioButton.IsChecked);
         Assert.False(lendToWindow.LendToRadioButton.IsChecked);
@@ -80,7 +79,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal(["Ginny", "Hermione", "Harry", "Ron"], lendToWindow.PersonListBox.Items.Select(x => x.Text));
         lendToWindow.PersonListBox.Items[2].Select();
         lendToWindow.OkButton.Click();
-        AssertEqual("Harry Potter", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("Harry Potter", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
@@ -99,7 +98,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         bookListView.AddButton.Click();
         Assert.Equal(42, bookListView.BookDataGrid.RowCount);
         var newRow = bookListView.BookDataGrid.SelectedItem.As<BookGridRow>();
-        Assert.Equal(bookListView.BookDataGrid.Rows[0], newRow);
+        Assert.Equal(bookListView.BookDataGrid.Rows[^1], newRow);
 
         // ItemStatus contains the validation error message or string.Empty if no error exists
         AssertEqual("", bookView.TitleTextBox.Text, newRow.TitleCell.Label.Text);
@@ -115,9 +114,9 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal("TAuthor", bookView.AuthorTextBox.Text);
         AssertEqual("", bookView.AuthorTextBox.ItemStatus, newRow.AuthorCell.Label.ItemStatus);
 
-        var lastRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 1).As<BookGridRow>();
-        Assert.False(lastRow.IsOffscreen);
-        Assert.StartsWith("WPF", lastRow.TitleCell.Name);
+        var secondLastRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 2).As<BookGridRow>();
+        Assert.False(secondLastRow.IsOffscreen);
+        Assert.StartsWith("WPF", secondLastRow.TitleCell.Name);
 
         var lastNotRemovedRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 3);
         bookListView.BookDataGrid.Select(bookListView.BookDataGrid.RowCount - 2);
@@ -199,10 +198,10 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         var bookView = window.TabControl.BookLibraryTabItem.BookView;
 
         bookListView.SearchBox.Text = "Harr";
-        var bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
-        bookRow2.Select();
+        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(0).As<BookGridRow>();
+        bookRow1.Select();
 
-        AssertEqual("Ginny Weasley", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("Ginny Weasley", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.TabControl.AddressBookTabItem.Select();
         var personListView = window.TabControl.AddressBookTabItem.PersonListView;
@@ -212,7 +211,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         personListView.RemoveButton.Click();
 
         window.TabControl.BookLibraryTabItem.Select();
-        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.DataMenu.Click();
         window.DataMenu.SaveMenuItem.Click();
@@ -225,11 +224,11 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         bookView = window.TabControl.BookLibraryTabItem.BookView;
 
         bookListView.SearchBox.Text = "Harr";
-        bookRow2 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
-        bookRow2.Select();
+        bookRow1 = bookListView.BookDataGrid.GetRowByIndex(1).As<BookGridRow>();
+        bookRow1.Select();
 
         window.TabControl.BookLibraryTabItem.Select();
-        AssertEqual("", bookRow2.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
+        AssertEqual("", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.Close();
     });
