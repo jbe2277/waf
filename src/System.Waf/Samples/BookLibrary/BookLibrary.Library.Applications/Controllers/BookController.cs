@@ -41,7 +41,7 @@ internal class BookController
 
     internal ObservableListViewCore<BookDataModel>? BooksView { get; private set; }
 
-    public async void Initialize()
+    public void Initialize()
     {
         bookViewModel.LendToCommand = lendToCommand;
         bookViewModel.PropertyChanged += BookViewModelPropertyChanged;
@@ -55,7 +55,10 @@ internal class BookController
 
         shellService.BookListView = bookListViewModel.View;
         shellService.BookView = bookViewModel.View;
+    }
 
+    public async void Run()
+    {
         try
         {
             await entityService.LoadBooks();
@@ -65,7 +68,7 @@ internal class BookController
             Log.Default.Error(ex, "LoadBooks");
             messageService.ShowError(shellService.ShellView, Resources.LoadErrorBooks);
         }
-        bookListViewModel.SelectedBook = bookListViewModel.Books.FirstOrDefault();
+        bookListViewModel.SelectedBook = bookListViewModel.Books?.FirstOrDefault();
     }
 
     private bool CanAddNewBook() => bookListViewModel.IsValid && bookViewModel.IsValid;

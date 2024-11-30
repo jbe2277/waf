@@ -39,7 +39,7 @@ internal class PersonController
 
     internal ObservableListViewCore<Person>? PersonsView { get; private set; }
 
-    public async void Initialize()
+    public void Initialize()
     {
         personViewModel.CreateNewEmailCommand = createNewEmailCommand;
         personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
@@ -53,7 +53,10 @@ internal class PersonController
         
         shellService.PersonListView = personListViewModel.View;
         shellService.PersonView = personViewModel.View;
+    }
 
+    public async void Run()
+    {
         try
         {
             await entityService.LoadPersons();
@@ -63,7 +66,7 @@ internal class PersonController
             Log.Default.Error(ex, "LoadPersons");
             messageService.ShowError(shellService.ShellView, Resources.LoadErrorPersons);
         }
-        personListViewModel.SelectedPerson = personListViewModel.Persons.FirstOrDefault();
+        personListViewModel.SelectedPerson = personListViewModel.Persons?.FirstOrDefault();
     }
 
     private bool CanAddPerson() => personListViewModel.IsValid && personViewModel.IsValid;

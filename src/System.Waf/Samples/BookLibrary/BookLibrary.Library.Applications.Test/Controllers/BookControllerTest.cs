@@ -33,6 +33,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(new() { Title = "The Two Towers" });
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
 
         // Check that Initialize shows the BookListView and BookView
         var shellService = Get<ShellService>();
@@ -60,6 +61,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(twoTowers);
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListView = Get<MockBookListView>();
         var bookListViewModel = bookListView.ViewModel;
         var bookView = Get<MockBookView>();
@@ -107,6 +109,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(fellowship);
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListViewModel = Get<BookListViewModel>();
         bookListViewModel.AddSelectedBook(bookListViewModel.Books!.Single());
         var bookViewModel = Get<BookViewModel>();
@@ -140,6 +143,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(returnKing);
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListView = Get<MockBookListView>();
         var bookListViewModel = bookListView.ViewModel;
         // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
@@ -165,6 +169,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(returnKing);
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListView = Get<MockBookListView>();
         var bookListViewModel = bookListView.ViewModel;
         // Set the sorting to: "The Fell...", "The Retu...", "The Two..."
@@ -190,6 +195,7 @@ public class BookControllerTest : ApplicationsTest
         entityService.Books.Add(returnKing);
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListView = Get<MockBookListView>();
         var bookListViewModel = bookListView.ViewModel;
 
@@ -219,6 +225,7 @@ public class BookControllerTest : ApplicationsTest
         shellService.ShellView = Get<IShellView>();
         var bookController = Get<BookController>();
         bookController.Initialize();
+        bookController.Run();
         var bookListView = Get<MockBookListView>();
         var bookListViewModel = bookListView.ViewModel;
         var bookView = Get<MockBookView>();
