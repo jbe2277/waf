@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.DataModels;
+using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Domain;
@@ -11,6 +13,7 @@ namespace Waf.BookLibrary.Library.Applications.Controllers;
 [Export]
 internal class BookController
 {
+    private readonly IMessageService messageService;
     private readonly IShellService shellService;
     private readonly IEntityService entityService;
     private readonly BookListViewModel bookListViewModel;
@@ -22,8 +25,10 @@ internal class BookController
     private SynchronizingList<BookDataModel, Book>? bookDataModels;
 
     [ImportingConstructor]
-    public BookController(IShellService shellService, IEntityService entityService, BookListViewModel bookListViewModel, BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
+    public BookController(IMessageService messageService, IShellService shellService, IEntityService entityService, BookListViewModel bookListViewModel, 
+        BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
     {
+        this.messageService = messageService;
         this.shellService = shellService;
         this.entityService = entityService;
         this.bookListViewModel = bookListViewModel;
@@ -36,7 +41,7 @@ internal class BookController
 
     internal ObservableListViewCore<BookDataModel>? BooksView { get; private set; }
 
-    public void Initialize()
+    public async void Initialize()
     {
         bookViewModel.LendToCommand = lendToCommand;
         bookViewModel.PropertyChanged += BookViewModelPropertyChanged;
@@ -51,6 +56,15 @@ internal class BookController
         shellService.BookListView = bookListViewModel.View;
         shellService.BookView = bookViewModel.View;
 
+        try
+        {
+            await entityService.LoadBooks();
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "LoadBooks");
+            messageService.ShowError(shellService.ShellView, Resources.LoadErrorBooks);
+        }
         bookListViewModel.SelectedBook = bookListViewModel.Books.FirstOrDefault();
     }
 

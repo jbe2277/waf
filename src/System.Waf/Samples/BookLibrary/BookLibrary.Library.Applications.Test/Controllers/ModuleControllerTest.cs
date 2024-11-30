@@ -67,33 +67,35 @@ public class ModuleControllerTest : ApplicationsTest
             return true;
         };
         // Then we simulate that the EntityController wasn't able to save the changes.
-        entityController.SaveResult = false;
+        var saveCalled = false;
+        entityController.SaveCoreStub = () =>
+        {
+            saveCalled = true;
+            return Task.FromResult(false);
+        };
         shellViewModel.ExitCommand!.Execute(null);
-        // The Save method must be called. Because the save operation failed the expect the ShellView to be
-        // still visible.
-        Assert.IsTrue(entityController.SaveCalled);
+        // The Save method must be called. Because the save operation failed the expect the ShellView to be still visible.
+        Assert.IsTrue(saveCalled);
         Assert.IsTrue(shellView.IsVisible);
 
         // Exit the application although we have unsaved changes.
         entityController.HasChangesResult = true;
-        entityController.SaveCalled = false;
+        saveCalled = false;
         // When the question box asks us to save the changes we say "Cancel" => null.
         messageService.ShowQuestionStub = (_, _) => null;
-        // This time the Save method must not be called. Because we have chosen "Cancel" the ShellView must still
-        // be visible.
+        // This time the Save method must not be called. Because we have chosen "Cancel" the ShellView must still be visible.
         shellViewModel.ExitCommand.Execute(null);
-        Assert.IsFalse(entityController.SaveCalled);
+        Assert.IsFalse(saveCalled);
         Assert.IsTrue(shellView.IsVisible);
 
         // Exit the application although we have unsaved changes.
         entityController.HasChangesResult = true;
-        entityController.SaveCalled = false;
+        saveCalled = false;
         // When the question box asks us to save the changes we say "No" => false.
         messageService.ShowQuestionStub = (_, _) => false;
-        // This time the Save method must not be called. Because we have chosen "No" the ShellView must still
-        // be closed.
+        // This time the Save method must not be called. Because we have chosen "No" the ShellView must still be closed.
         shellViewModel.ExitCommand.Execute(null);
-        Assert.IsFalse(entityController.SaveCalled);
+        Assert.IsFalse(saveCalled);
         Assert.IsFalse(shellView.IsVisible);
     }
 

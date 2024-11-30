@@ -19,7 +19,7 @@ namespace Waf.BookLibrary.Library.Applications.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -96,6 +96,24 @@ namespace Waf.BookLibrary.Library.Applications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load the Books from the database..
+        /// </summary>
+        internal static string LoadErrorBooks {
+            get {
+                return ResourceManager.GetString("LoadErrorBooks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not load the Persons from the database..
+        /// </summary>
+        internal static string LoadErrorPersons {
+            get {
+                return ResourceManager.GetString("LoadErrorPersons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to close the application and lose the changes you made?.
         /// </summary>
         internal static string LoseChangesQuestion {
@@ -119,6 +137,15 @@ namespace Waf.BookLibrary.Library.Applications.Properties {
         internal static string SaveChangesQuestion {
             get {
                 return ResourceManager.GetString("SaveChangesQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The save operation failed..
+        /// </summary>
+        internal static string SaveErrorDatabase {
+            get {
+                return ResourceManager.GetString("SaveErrorDatabase", resourceCulture);
             }
         }
         

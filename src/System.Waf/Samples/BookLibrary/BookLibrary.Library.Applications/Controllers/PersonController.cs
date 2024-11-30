@@ -39,18 +39,30 @@ internal class PersonController
 
     internal ObservableListViewCore<Person>? PersonsView { get; private set; }
 
-    public void Initialize()
+    public async void Initialize()
     {
         personViewModel.CreateNewEmailCommand = createNewEmailCommand;
         personViewModel.PropertyChanged += PersonViewModelPropertyChanged;
+        
         PersonsView = new(entityService.Persons, null, personListViewModel.Filter, null);
         personListViewModel.Persons = PersonsView;
         personListViewModel.AddNewCommand = addNewCommand;
         personListViewModel.RemoveCommand = removeCommand;
         personListViewModel.CreateNewEmailCommand = createNewEmailCommand;
         personListViewModel.PropertyChanged += PersonListViewModelPropertyChanged;
+        
         shellService.PersonListView = personListViewModel.View;
         shellService.PersonView = personViewModel.View;
+
+        try
+        {
+            await entityService.LoadPersons();
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "LoadPersons");
+            messageService.ShowError(shellService.ShellView, Resources.LoadErrorPersons);
+        }
         personListViewModel.SelectedPerson = personListViewModel.Persons.FirstOrDefault();
     }
 

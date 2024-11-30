@@ -148,4 +148,13 @@ https://github.com/jbe2277/waf
 
 {0}</value>
   </data>
+  <data name="SaveErrorDatabase" xml:space="preserve">
+    <value>The save operation failed.</value>
+  </data>
+  <data name="LoadErrorBooks" xml:space="preserve">
+    <value>Could not load the Books from the database.</value>
+  </data>
+  <data name="LoadErrorPersons" xml:space="preserve">
+    <value>Could not load the Persons from the database.</value>
+  </data>
 </root>
