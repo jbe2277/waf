@@ -12,13 +12,11 @@ public class MockEntityController : IEntityController
 
     public bool HasChangesResult { get; set; }
 
-    public bool CanSaveResult { get; set; }
+    public bool CanSaveResult { get; set; } = true;
 
-    public bool SaveResult { get; set; }
+    public Func<Task<bool>>? SaveCoreStub { get; set; }
 
-    public bool SaveCalled { get; set; }
-
-    public MockEntityController() => CanSaveResult = true;
+    public bool SaveCoreCalled { get; set; }
 
     public void Initialize() => InitializeCalled = true;
 
@@ -26,11 +24,7 @@ public class MockEntityController : IEntityController
 
     public bool CanSave() => CanSaveResult;
 
-    public bool Save()
-    {
-        SaveCalled = true;
-        return SaveResult;
-    }
+    public Task<bool> SaveCore() => SaveCoreStub?.Invoke() ?? Task.FromResult(true);
 
     public void Shutdown() => ShutdownCalled = true;
 }

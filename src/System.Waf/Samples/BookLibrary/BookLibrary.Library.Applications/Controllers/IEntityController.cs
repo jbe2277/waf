@@ -9,7 +9,7 @@ internal interface IEntityController
 
     bool CanSave();
 
-    bool Save();
+    Task<bool> SaveCore();
 
     void Shutdown();
 }

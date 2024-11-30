@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Waf.Applications;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
 using Waf.BookLibrary.Library.Applications.Controllers;
 using Waf.BookLibrary.Library.Applications.Services;
 using Waf.BookLibrary.Library.Applications.ViewModels;
-using Waf.BookLibrary.Library.Domain;
 
 namespace Test.BookLibrary.Library.Applications.Controllers;
 
@@ -12,7 +12,7 @@ namespace Test.BookLibrary.Library.Applications.Controllers;
 public class EntityControllerTest : ApplicationsTest
 {
     [TestMethod]
-    public void ValidateBeforeSave()
+    public async Task ValidateBeforeSave()
     {
         var controller = Get<EntityController>();
         controller.Initialize();
@@ -23,7 +23,7 @@ public class EntityControllerTest : ApplicationsTest
         Assert.IsTrue(controller.HasChanges());
 
         Assert.IsTrue(controller.CanSave());
-        controller.Save();
+        Assert.IsTrue(await controller.SaveCore());
         Assert.IsFalse(controller.HasChanges());
 
         var messageService = Get<MockMessageService>();
@@ -33,7 +33,7 @@ public class EntityControllerTest : ApplicationsTest
         entityService.Persons[^1].Validate();
         Assert.IsTrue(controller.HasChanges());
         var shellViewModel = Get<ShellViewModel>();
-        shellViewModel.SaveCommand!.Execute(null);
+        await ((AsyncDelegateCommand)shellViewModel.SaveCommand!).ExecuteAsync(null);
 
         Assert.AreEqual(MessageType.Error, messageService.MessageType);
         Assert.IsTrue(controller.HasChanges());

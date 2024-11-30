@@ -18,7 +18,7 @@ internal class EntityController : IEntityController
     private readonly IShellService shellService;
     private readonly IDBContextService dBContextService;
     private readonly Lazy<ShellViewModel> shellViewModel;
-    private readonly DelegateCommand saveCommand;
+    private readonly AsyncDelegateCommand saveCommand;
     private DbContext? bookLibraryContext;
 
     [ImportingConstructor]
@@ -29,7 +29,7 @@ internal class EntityController : IEntityController
         this.shellService = shellService;
         this.dBContextService = dBContextService;
         this.shellViewModel = shellViewModel;
-        saveCommand = new(() => Save(), CanSave);
+        saveCommand = new(Save, CanSave);
     }
 
     private ShellViewModel ShellViewModel => shellViewModel.Value;
@@ -50,7 +50,22 @@ internal class EntityController : IEntityController
 
     public bool CanSave() => ShellViewModel.IsValid;
 
-    public bool Save()
+    public async Task<bool> SaveCore()
+    {
+        Log.Default.Info("Save changes in database.");
+        try
+        {
+            await entityService.SaveChanges().ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "SaveChangesAsync");            
+        }
+        return false;
+    }
+
+    private async Task Save()
     {
         var entities = bookLibraryContext!.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).Select(x => x.Entity).ToArray();
         var errors = entities.OfType<ValidatableModel>().Where(x => x.HasErrors).ToArray();
@@ -59,12 +74,13 @@ internal class EntityController : IEntityController
             var errorMessages = errors.Select(x => string.Format(CultureInfo.CurrentCulture, Resources.EntityInvalid, EntityToString(x), string.Join(Environment.NewLine, x.Errors)));
             Log.Default.Warn("Abort save changes because of errors: {0}", string.Join("; ", errorMessages));
             messageService.ShowError(shellService.ShellView, Resources.SaveErrorInvalidEntities, string.Join(Environment.NewLine, errorMessages));
-            return false;
+            return;
         }
 
-        Log.Default.Info("Save changes in database.");
-        bookLibraryContext.SaveChanges();
-        return true;
+        if (!await SaveCore())
+        {
+            messageService.ShowError(shellService.ShellView, Resources.SaveErrorDatabase);
+        }
     }
 
     private void ShellViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

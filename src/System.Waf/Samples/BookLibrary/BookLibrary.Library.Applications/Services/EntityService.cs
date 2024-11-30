@@ -12,29 +12,31 @@ internal class EntityService : IEntityService
 
     public DbContext? BookLibraryContext { get; set; }
 
-    public ObservableCollection<Book> Books
+    public ObservableCollection<Book> Books => books ??= BookLibraryContext!.Set<Book>().Local.ToObservableCollection();
+
+    public ObservableCollection<Person> Persons => persons ??= BookLibraryContext!.Set<Person>().Local.ToObservableCollection();
+
+    public async Task LoadBooks(CancellationToken cancellation = default)
     {
-        get
-        {
-            if (books == null && BookLibraryContext != null)
-            {
-                BookLibraryContext.Set<Book>().Include(x => x.LendTo).Load();
-                books = BookLibraryContext.Set<Book>().Local.ToObservableCollection();
-            }
-            return books!;
-        }
+        // Simulate a delay or an error
+        //await Task.Delay(2000, cancellation);
+        //throw new InvalidOperationException("Loading failed");
+        await BookLibraryContext!.Set<Book>().Include(x => x.LendTo).LoadAsync(cancellation);
     }
 
-    public ObservableCollection<Person> Persons
+    public async Task LoadPersons(CancellationToken cancellation = default)
     {
-        get
-        {
-            if (persons == null && BookLibraryContext != null)
-            {
-                BookLibraryContext.Set<Person>().Load();
-                persons = BookLibraryContext.Set<Person>().Local.ToObservableCollection();
-            }
-            return persons!;
-        }
+        // Simulate a delay or an error
+        //await Task.Delay(2000, cancellation);
+        //throw new InvalidOperationException("Loading failed");
+        await BookLibraryContext!.Set<Person>().LoadAsync(cancellation);
+    }
+
+    public async Task SaveChanges(CancellationToken cancellation = default)
+    {
+        // Simulate a delay or an error
+        //await Task.Delay(2000, cancellation).ConfigureAwait(false);
+        //throw new InvalidOperationException("Loading failed");
+        await BookLibraryContext!.SaveChangesAsync(cancellation);
     }
 }

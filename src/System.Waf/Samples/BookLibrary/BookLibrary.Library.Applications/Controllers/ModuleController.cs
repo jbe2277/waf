@@ -56,8 +56,9 @@ internal class ModuleController : IModuleController
             bool? result = messageService.ShowQuestion(shellService.ShellView, Resources.SaveChangesQuestion);
             if (result == true)
             {
-                if (!entityController.Save())
+                if (!entityController.SaveCore().GetAwaiter().GetResult())
                 {
+                    messageService.ShowError(shellService.ShellView, Resources.SaveErrorDatabase);
                     e.Cancel = true;
                 }
             }
