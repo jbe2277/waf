@@ -29,4 +29,32 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
         dataMenu.Click();
         dataMenu.ExitMenuItem.Click();
     });
+
+    [Fact]
+    public void LoadCorruptDatabaseTest() => Run(() =>
+    {
+        if (File.Exists(AppInfo.DatabaseFile)) File.Delete(AppInfo.DatabaseFile);
+        File.AppendAllText(AppInfo.DatabaseFile, "42");
+
+        Launch(resetDatabase: false);
+        var window = GetShellWindow();
+        var bookListView = window.TabControl.BookLibraryTabItem.BookListView;
+        Assert.Equal(0, bookListView.BookDataGrid.RowCount);
+
+        var messageBox = window.FirstModalWindow().As<MessageBox>();
+        Assert.Equal("Could not load the Persons from the database.", messageBox.Message);
+        messageBox.Buttons[0].Click();
+
+        messageBox = window.FirstModalWindow().As<MessageBox>();
+        Assert.Equal("Could not load the Books from the database.", messageBox.Message);
+        messageBox.Buttons[0].Click();
+
+        Assert.Equal(0, bookListView.BookDataGrid.RowCount);
+
+        window.TabControl.AddressBookTabItem.Select();
+        var personListView = window.TabControl.AddressBookTabItem.PersonListView;
+        Assert.Equal(0, personListView.PersonDataGrid.RowCount);
+
+        window.Close();
+    });
 }

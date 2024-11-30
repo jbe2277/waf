@@ -9,27 +9,35 @@ using Xunit.Abstractions;
 
 namespace UITest.BookLibrary;
 
-public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "BookLibrary.exe",
+public record AppInfo(string CompanyName, string ProductName, string SettingsFile, string DatabaseFile);
+
+public abstract class UITest : UITestBase
+{
+    protected UITest(ITestOutputHelper log) : base(log, "BookLibrary.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/BookLibrary/")
-{
+    {
+        var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");
+        var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
+        AppInfo = new(companyName, productName,
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), productName, "Settings", "Settings.xml"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), companyName, productName, "Resources", "BookLibrary.db"));
+    }
+
+    protected AppInfo AppInfo { get; }
+
     public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true, bool resetDatabase = true)
     {
         Log.WriteLine("");
         if (resetSettings)
         {
-            var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
-            var settingsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), productName, "Settings", "Settings.xml");
-            if (File.Exists(settingsFile)) File.Delete(settingsFile);
-            Log.WriteLine($"Delete settings: {settingsFile}");
+            if (File.Exists(AppInfo.SettingsFile)) File.Delete(AppInfo.SettingsFile);
+            Log.WriteLine($"Delete settings: {AppInfo.SettingsFile}");
         }
         if (resetDatabase)
         {
-            var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");
-            var productName = FileVersionInfo.GetVersionInfo(Executable).ProductName ?? throw new InvalidOperationException("Could not read the ProductName from the exe.");
-            var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), companyName, productName, "Resources", "BookLibrary.db");
-            if (File.Exists(dbFile)) File.Delete(dbFile);
-            Log.WriteLine($"Delete database: {dbFile}");
+            if (File.Exists(AppInfo.DatabaseFile)) File.Delete(AppInfo.DatabaseFile);
+            Log.WriteLine($"Delete database: {AppInfo.DatabaseFile}");
         }
         var args = (arguments ?? new LaunchArguments()).ToArguments();
         Log.WriteLine($"Launch:          {args}");
