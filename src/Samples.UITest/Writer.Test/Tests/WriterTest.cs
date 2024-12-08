@@ -26,7 +26,7 @@ public class WriterTest : UITest
     {
         Launch();
         var window = GetShellWindow();
-
+        window.SetState(WindowVisualState.Maximized);
         window.AboutButton.Click();
 
         var messageBox = window.FirstModalWindow().As<MessageBox>();
