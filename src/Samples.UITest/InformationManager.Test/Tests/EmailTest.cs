@@ -65,6 +65,44 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         window.ExitCommand.Click();
     });
 
+    [Fact]
+    public void RemoveEmailsTest() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+        var emailListView = window.EmailLayoutView.EmailListView;
+        var emailView = window.EmailLayoutView.EmailView;
+        Assert.Equal(10, emailListView.EmailItems.Count);
+
+        Assert.True(window.DeleteEmailCommand.IsEnabled);
+        window.DeleteEmailCommand.Click();
+        Assert.Equal(9, emailListView.EmailItems.Count);
+        AssertEmail(true, emailListView.EmailItems[0], emailView, "user-2@fabrikam.com", "harry@example.com", "1/19/2010", "7:13:04 AM", "Egestas nisi mattis");
+
+        window.RootTreeItem.SentNode.Select();
+        emailListView = window.EmailLayoutView.EmailListView;
+        emailView = window.EmailLayoutView.EmailView;
+        Assert.Equal(5, emailListView.EmailItems.Count);
+        for (int i = 0; i < 5; i++) window.DeleteEmailCommand.Click();
+        Assert.Empty(emailListView.EmailItems);
+
+        window.ExitCommand.Click();
+
+        
+        // Restart application and assert that first email was deleted
+        Launch(resetSettings: false, resetContainer: false);
+        window = GetShellWindow();
+        emailListView = window.EmailLayoutView.EmailListView;
+        emailView = window.EmailLayoutView.EmailView;
+        Assert.Equal(9, emailListView.EmailItems.Count);
+        AssertEmail(true, emailListView.EmailItems[0], emailView, "user-2@fabrikam.com", "harry@example.com", "1/19/2010", "7:13:04 AM", "Egestas nisi mattis");
+
+        window.RootTreeItem.SentNode.Select();
+        emailListView = window.EmailLayoutView.EmailListView;
+        emailView = window.EmailLayoutView.EmailView;
+        Assert.Empty(emailListView.EmailItems);
+    });
+
     private static void AssertEmail(bool received, EmailListItem? emailItem, EmailView? emailView, string from, string to, string sentDate, string sentTime, string title)
     {
         if (emailItem is not null)
