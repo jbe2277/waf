@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements;
+using UITest.InformationManager.Controls;
 using UITest.InformationManager.Views;
 using Xunit;
 using Xunit.Abstractions;
@@ -22,6 +23,7 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         for (int i = 0; i < count; i++) Log.WriteLine($"{i:00}: {emailListView.EmailItems[i].ToReceivedTuple()}");
 
         AssertEmail(true, emailListView.EmailItems[0], emailView, "user-2@fabrikam.com", "harry@example.com", "8/9/2012", "5:58:21 AM", "Nunc sed dis suscipit");
+        Assert.Equal("Scelerisque est odio", emailView.Document.As<Document>().GetText(20));
 
         Assert.Equal("Search", emailListView.SearchBox.SearchHintLabel.Text);
         emailListView.SearchBox.SearchTextBox.Text = "!";
@@ -33,7 +35,6 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         emailListView.EmailList.Select(1);
         var item = emailListView.EmailList.SelectedItem.As<EmailListItem>();
         AssertEmail(true, item, emailView, "someone-2@adventure-works.com", "harry@example.com", "9/5/2005", "4:34:45 PM", "Taciti enim");
-
 
         window.RootTreeItem.OutboxNode.Select();
         emailListView = window.EmailLayoutView.EmailListView;
