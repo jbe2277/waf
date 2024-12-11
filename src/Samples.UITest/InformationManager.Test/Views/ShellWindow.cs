@@ -4,7 +4,6 @@ using FlaUI.Core.Definitions;
 
 namespace UITest.InformationManager.Views;
 
-// TODO: Consider to rename ..Command to ..Button
 public class ShellWindow(FrameworkAutomationElementBase element) : Window(element)
 {
     public Button NewEmailCommand => this.Find("NewEmailCommand").AsButton();
@@ -17,9 +16,9 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
     public Button DeleteCommand => this.Find("DeleteCommand").AsButton();
 
-    public Button AboutCommand => this.Find("AboutCommand").AsButton();
+    public Button AboutButton => this.Find("AboutButton").AsButton();
 
-    public Button ExitCommand => this.Find("ExitCommand").AsButton();
+    public Button ExitButton => this.Find("ExitButton").AsButton();
 
 
     public NavigationRootTreeItem RootTreeItem => this.Find("RootTreeItem").As<NavigationRootTreeItem>();

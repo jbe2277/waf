@@ -63,7 +63,7 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         Assert.Empty(emailListView.EmailItems);
         Assert.Empty(emailView.TitleLabel.Text);
 
-        window.ExitCommand.Click();
+        window.ExitButton.Click();
     });
 
     [Fact]
@@ -87,7 +87,7 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         for (int i = 0; i < 5; i++) window.DeleteEmailCommand.Click();
         Assert.Empty(emailListView.EmailItems);
 
-        window.ExitCommand.Click();
+        window.ExitButton.Click();
 
         
         // Restart application and assert that first email was deleted

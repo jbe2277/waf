@@ -46,7 +46,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         contactView.PhoneBox.Text = "TPhone";
         Assert.Equal("TPhone", item.PhoneLabel.Text);
 
-        window.ExitCommand.Click();
+        window.ExitButton.Click();
     });
 
     [Fact]
@@ -83,7 +83,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         Assert.Equal(5, contactListView.ContactItems.Count);
         Assert.Equal(secondItem.FirstnameLabel.Text, contactListView.ContactList.SelectedItem.As<ContactListItem>().FirstnameLabel.Text);
 
-        window.ExitCommand.Click();
+        window.ExitButton.Click();
 
         // Restart application and assert that new contact was saved
         Launch(resetSettings: false, resetContainer: false);
@@ -100,7 +100,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
 
         // Invalid Firstname > Save > Restart > Validation error should be here again
         contactView.FirstnameBox.Text = "";
-        window.ExitCommand.Click();
+        window.ExitButton.Click();
 
         Launch(resetSettings: false, resetContainer: false);
         window = GetShellWindow();
