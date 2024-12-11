@@ -5,12 +5,14 @@
         mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         Title="New email" Icon="{StaticResource InformationManagerImageSource}" Height="370" Width="550"
-        d:DataContext="{d:DesignInstance dd:SampleNewEmailViewModel, IsDesignTimeCreatable=True}">
+        d:DataContext="{d:DesignInstance dd:SampleNewEmailViewModel, IsDesignTimeCreatable=True}" AutomationProperties.AutomationId="NewEmailWindow">
     
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <Button Command="{Binding SendCommand}" ToolTip="This does not really send the email. It just saves the email in the Sent items."><AccessText Text="_Send"/></Button>
-            <Button Command="{Binding CloseCommand}" ToolTip="Close this window. The email will not be saved."><AccessText Text="_Close"/></Button>
+            <Button Command="{Binding SendCommand}" ToolTip="This does not really send the email. It just saves the email in the Sent items."
+                    AutomationProperties.AutomationId="SendButton"><AccessText Text="_Send"/></Button>
+            <Button Command="{Binding CloseCommand}" ToolTip="Close this window. The email will not be saved."
+                    AutomationProperties.AutomationId="CloseButton"><AccessText Text="_Close"/></Button>
         </ToolBar>
         
         <Grid Margin="11,11,11,11">
@@ -51,25 +53,27 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="From: "/>
-            <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name"/>
+            <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding EmailAccounts}" SelectedItem="{Binding SelectedEmailAccount}" DisplayMemberPath="Name"
+                    AutomationProperties.AutomationId="EmailAccountsComboBox"/>
 
             <Label Grid.Row="2" Grid.Column="0" Content="To:"/>
             <!-- Use Tag with Binding to domain object for validation -->
-            <TextBox x:Name="toBox" Grid.Row="2" Grid.Column="2" Text="{Binding To}" Tag="{Binding Email.To}"/>
-            <Button Grid.Row="2" Grid.Column="4" Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..."/>
+            <TextBox x:Name="toBox" Grid.Row="2" Grid.Column="2" Text="{Binding To}" Tag="{Binding Email.To}" AutomationProperties.AutomationId="ToTextBox"/>
+            <Button Grid.Row="2" Grid.Column="4" Command="{Binding SelectContactCommand}" CommandParameter="To" Content="..." AutomationProperties.AutomationId="ToSelectContactButton"/>
 
             <Label Grid.Row="0" Grid.Column="8" Content="CC:"/>
-            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding CC}" Tag="{Binding Email.CC}"/>
-            <Button Grid.Row="0" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..."/>
+            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding CC}" Tag="{Binding Email.CC}" AutomationProperties.AutomationId="CCTextBox"/>
+            <Button Grid.Row="0" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="CC" Content="..." AutomationProperties.AutomationId="CCSelectContactButton"/>
 
             <Label Grid.Row="2" Grid.Column="8" Content="BCC:"/>
-            <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Bcc}" Tag="{Binding Email.Bcc}"/>
-            <Button Grid.Row="2" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..."/>
+            <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Bcc}" Tag="{Binding Email.Bcc}" AutomationProperties.AutomationId="BccTextBox"/>
+            <Button Grid.Row="2" Grid.Column="12" Command="{Binding SelectContactCommand}" CommandParameter="Bcc" Content="..." AutomationProperties.AutomationId="BccSelectContactButton"/>
 
             <Label Grid.Row="4" Grid.Column="0" Content="Title:"/>
-            <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="11" Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="11" Text="{Binding Email.Title, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="TitleTextBox"/>
 
-            <TextBox Grid.Row="6" Grid.ColumnSpan="13" Text="{Binding Email.Message}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
+            <TextBox Grid.Row="6" Grid.ColumnSpan="13" Text="{Binding Email.Message}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"
+                    AutomationProperties.AutomationId="MessageTextBox"/>
         </Grid>
     </DockPanel>
 </Window>

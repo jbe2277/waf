@@ -2,7 +2,7 @@
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 
-namespace UITest.BookLibrary.Controls;
+namespace UITest.Controls;
 
 public class HyperlinkGridCell(FrameworkAutomationElementBase element) : GridCell(element)
 {

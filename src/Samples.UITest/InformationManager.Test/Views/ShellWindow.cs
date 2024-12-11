@@ -4,6 +4,7 @@ using FlaUI.Core.Definitions;
 
 namespace UITest.InformationManager.Views;
 
+// TODO: Consider to rename ..Command to ..Button
 public class ShellWindow(FrameworkAutomationElementBase element) : Window(element)
 {
     public Button NewEmailCommand => this.Find("NewEmailCommand").AsButton();
@@ -27,6 +28,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
     public ContactLayoutView ContactLayoutView => this.Find("ContactLayoutView").As<ContactLayoutView>();
 
+
+    public IReadOnlyList<NewEmailWindow> NewEmailWindows => this.FindAll("NewEmailWindow").Select(x => x.As<NewEmailWindow>()).ToArray();
     
     public WindowVisualState WindowState
     {

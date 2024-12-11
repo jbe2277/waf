@@ -4,7 +4,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
 
-namespace UITest.BookLibrary.Controls;
+namespace UITest.Controls;
 
 public class TextGridCell(FrameworkAutomationElementBase element) : GridCell(element)
 {
@@ -21,5 +21,5 @@ public class TextGridCell(FrameworkAutomationElementBase element) : GridCell(ele
             TextBox.Text = value;
             Keyboard.TypeSimultaneously(VirtualKeyShort.CONTROL, VirtualKeyShort.ENTER);
         }
-    }    
+    }
 }

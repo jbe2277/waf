@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
-using UITest.InformationManager.Controls;
 using UITest.InformationManager.Views;
+using UITest.SystemViews;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,7 +23,7 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         for (int i = 0; i < count; i++) Log.WriteLine($"{i:00}: {emailListView.EmailItems[i].ToReceivedTuple()}");
 
         AssertEmail(true, emailListView.EmailItems[0], emailView, "user-2@fabrikam.com", "harry@example.com", "8/9/2012", "5:58:21 AM", "Nunc sed dis suscipit");
-        Assert.Equal("Scelerisque est odio", emailView.Document.As<Document>().GetText(20));
+        Assert.Equal("Scelerisque est odio", emailView.Document.GetText(20));
 
         Assert.Equal("Search", emailListView.SearchBox.SearchHintLabel.Text);
         emailListView.SearchBox.SearchTextBox.Text = "!";
@@ -104,7 +104,89 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         Assert.Empty(emailListView.EmailItems);
     });
 
-    private static void AssertEmail(bool received, EmailListItem? emailItem, EmailView? emailView, string from, string to, string sentDate, string sentTime, string title)
+    [Fact]
+    public void NewEmailTest() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+        window.RootTreeItem.SentNode.Select();
+        var emailListView = window.EmailLayoutView.EmailListView;
+        var emailView = window.EmailLayoutView.EmailView;
+        Assert.Equal(5, emailListView.EmailItems.Count);
+
+        window.NewEmailCommand.Click();
+        var newEmailWindow = window.NewEmailWindows[0];
+        newEmailWindow.SendButton.Click();
+
+        // ItemStatus contains the validation error message or string.Empty if no error exists
+        Assert.Equal("", newEmailWindow.ToTextBox.Text);
+        Assert.Equal("This email doesn't define a recipient.", newEmailWindow.ToTextBox.ItemStatus);
+        Assert.Equal("", newEmailWindow.CCTextBox.Text);
+        Assert.Empty(newEmailWindow.CCTextBox.ItemStatus);
+
+        newEmailWindow.SendButton.Click();
+        var errorBox = newEmailWindow.FirstModalWindow().As<MessageBox>();
+        Assert.Contains("One or more fields are not valid.", errorBox.Message);
+        errorBox.Buttons[0].Click();
+
+        newEmailWindow.ToTextBox.Text = "luke@example.com";
+        newEmailWindow.CCTextBox.Click();
+        Assert.Empty(newEmailWindow.ToTextBox.ItemStatus);
+
+        newEmailWindow.CCSelectContactButton.Click();
+        var contactWindow = newEmailWindow.FirstModalWindow().As<SelectContactWindow>();
+        Assert.Equal(5, contactWindow.ContactListView.ContactItems.Count);
+        Assert.True(contactWindow.ContactListView.ContactItems[0].IsSelected);
+        contactWindow.ContactListView.SearchBox.SearchTextBox.Text = "Mi";
+        Assert.Equal(2, contactWindow.ContactListView.ContactItems.Count);
+        Assert.False(contactWindow.ContactListView.ContactItems[0].IsSelected);
+        contactWindow.ContactListView.ContactList.Items[0].Select();
+        contactWindow.OkButton.Click();
+        Assert.Equal("michael.pfeiffer@fabrikam.com", newEmailWindow.CCTextBox.Text);
+
+        newEmailWindow.BccSelectContactButton.Click();
+        contactWindow = newEmailWindow.FirstModalWindow().As<SelectContactWindow>();
+        contactWindow.CancelButton.Click();
+        Assert.Empty(newEmailWindow.BccTextBox.Text);
+        newEmailWindow.BccSelectContactButton.Click();
+        contactWindow = newEmailWindow.FirstModalWindow().As<SelectContactWindow>();
+        contactWindow.OkButton.Click();
+        Assert.Equal("jesper.aaberg@example.com", newEmailWindow.BccTextBox.Text);
+
+        newEmailWindow.TitleTextBox.Text = "ATitle";
+        newEmailWindow.MessageTextBox.Text = "AMessage";
+        newEmailWindow.SendButton.Click();
+
+        Assert.Equal(6, emailListView.EmailItems.Count);
+        emailListView.EmailItems[0].Select();
+        AssertEmail(false, emailListView.EmailItems[0], emailView, "harry@example.com", "luke@example.com", DateTime.Now.ToShortDateString(), null, "ATitle");
+        Assert.Equal("AMessage", emailView.Document.GetText(20));
+
+
+        // Create email but do not send it -> Close
+        window.NewEmailCommand.Click();
+        newEmailWindow = window.NewEmailWindows[0];
+        newEmailWindow.ToTextBox.Text = "luke@example.com";
+        newEmailWindow.TitleTextBox.Text = "Don't send";
+        newEmailWindow.CloseButton.Click();
+        Assert.Equal(6, emailListView.EmailItems.Count);
+    });
+
+    [Fact]
+    public void EmailAccountsTest() => Run(() =>
+    {
+        Launch();
+        var window = GetShellWindow();
+        window.EmailAccountsCommand.Click();
+        var emailAccountsWindow = window.FirstModalWindow().As<EmailAccountsWindow>();
+        var row0 = emailAccountsWindow.EmailAccountsDataGrid.Rows[0].As<EmailAccountGridRow>();
+
+        // TODO: Add test EmailAccountsTest()
+        //       2. Select email account (just one in ComboBox)
+
+    });
+    
+    private static void AssertEmail(bool received, EmailListItem? emailItem, EmailView? emailView, string from, string to, string sentDate, string? sentTime, string title)
     {
         if (emailItem is not null)
         {
@@ -113,6 +195,13 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         }
         if (emailView is not null)
         {
-            Assert.Equal((from, to, sentDate + " " + sentTime, title), (emailView.FromLabel.Text, emailView.ToLabel.Text, emailView.SentLabel.Text, emailView.TitleLabel.Text));        }
+            var expectedDate = sentTime is null ? "" : sentDate + " " + sentTime;
+            var actualDate = sentTime is null ? "" : emailView.SentLabel.Text;
+            Assert.Equal((from, to, expectedDate, title), (emailView.FromLabel.Text, emailView.ToLabel.Text, actualDate, emailView.TitleLabel.Text));        
+            if (sentTime is null)
+            {
+                Assert.Contains(expectedDate, actualDate);
+            }
+        }
     }
 }
