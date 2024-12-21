@@ -16,9 +16,9 @@
     <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 
-    <PackageReference Include="Microsoft.Graph" Version="5.58.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.64.1" />
-    <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.64.1" />
+    <PackageReference Include="Microsoft.Graph" Version="5.67.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.66.2" />
+    <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.66.2" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
   </ItemGroup>
 
