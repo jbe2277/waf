@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core;
+using UITest.InformationManager.Controls;
 
 namespace UITest.InformationManager.Views;
 
@@ -18,5 +19,5 @@ public class EmailView(FrameworkAutomationElementBase element) : AutomationEleme
 
     public Label SentLabel => this.Find("SentLabel").AsLabel();
 
-    public AutomationElement Document => this.Find(x => x.ByControlType(ControlType.Document));
+    public Document Document => this.Find(x => x.ByControlType(ControlType.Document)).As<Document>();
 }

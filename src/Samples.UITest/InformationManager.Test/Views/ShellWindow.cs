@@ -16,9 +16,9 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
     public Button DeleteCommand => this.Find("DeleteCommand").AsButton();
 
-    public Button AboutCommand => this.Find("AboutCommand").AsButton();
+    public Button AboutButton => this.Find("AboutButton").AsButton();
 
-    public Button ExitCommand => this.Find("ExitCommand").AsButton();
+    public Button ExitButton => this.Find("ExitButton").AsButton();
 
 
     public NavigationRootTreeItem RootTreeItem => this.Find("RootTreeItem").As<NavigationRootTreeItem>();
@@ -27,6 +27,8 @@ public class ShellWindow(FrameworkAutomationElementBase element) : Window(elemen
 
     public ContactLayoutView ContactLayoutView => this.Find("ContactLayoutView").As<ContactLayoutView>();
 
+
+    public IReadOnlyList<NewEmailWindow> NewEmailWindows => this.FindAll("NewEmailWindow").Select(x => x.As<NewEmailWindow>()).ToArray();
     
     public WindowVisualState WindowState
     {

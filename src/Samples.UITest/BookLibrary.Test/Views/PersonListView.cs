@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core;
-using UITest.BookLibrary.Controls;
+using UITest.Controls;
 
 namespace UITest.BookLibrary.Views;
 
