@@ -11,7 +11,7 @@
         <ToolBar DockPanel.Dock="Top">
             <Button Command="{Binding NewAccountCommand}" ToolTip="Creates a new email account." AutomationProperties.AutomationId="NewButton"><AccessText Text="_New account"/></Button>
             <Button Command="{Binding RemoveAccountCommand}" ToolTip="Deletes the selected email account." AutomationProperties.AutomationId="RemoveButton"><AccessText Text="_Delete"/></Button>
-            <Button Command="{Binding EditAccountCommand}" ToolTip="Edits the selected email account."><AccessText Text="_Edit" AutomationProperties.AutomationId="EditButton"/></Button>
+            <Button Command="{Binding EditAccountCommand}" ToolTip="Edits the selected email account." AutomationProperties.AutomationId="EditButton"><AccessText Text="_Edit"/></Button>
             <Button IsCancel="True" ToolTip="Close this window." AutomationProperties.AutomationId="CloseButton"><AccessText Text="_Close"/></Button>
         </ToolBar>
         

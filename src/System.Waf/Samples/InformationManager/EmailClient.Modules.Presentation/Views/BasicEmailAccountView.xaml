@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleBasicEmailAccountViewModel, IsDesignTimeCreatable=True}"
-    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="400">
+    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="400" AutomationProperties.AutomationId="BasicEmailAccountView">
 
     <Grid Margin="11">
         <Grid.ColumnDefinitions>
@@ -29,15 +29,15 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="Name"/>
         <TextBox x:Name="nameBox" Grid.Column="2" Grid.Row="2" Width="150"
-                 Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+                 Text="{Binding EmailAccount.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="NameTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="Email address"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150" 
-                 Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+                 Text="{Binding EmailAccount.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="EmailTextBox"/>
 
-        <RadioButton Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="_Internet Email (POP3, SMTP)" IsChecked="{Binding IsPop3Checked}"/>
+        <RadioButton Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="_Internet Email (POP3, SMTP)" IsChecked="{Binding IsPop3Checked}" AutomationProperties.AutomationId="Pop3RadioButton"/>
 
-        <RadioButton Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8" Content="_Microsoft Exchange" IsChecked="{Binding IsExchangeChecked}"/>
+        <RadioButton Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8" Content="_Microsoft Exchange" IsChecked="{Binding IsExchangeChecked}" AutomationProperties.AutomationId="ExchangeRadioButton"/>
     </Grid>
 
 </UserControl>
