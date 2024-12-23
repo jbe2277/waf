@@ -9,6 +9,8 @@ public class EditEmailAccountWindow(FrameworkAutomationElementBase element) : Wi
 
     public ExchangeSettingsView ExchangeSettingsView => this.Find("ExchangeSettingsView").As<ExchangeSettingsView>();
 
+    public Pop3SettingsView Pop3SettingsView => this.Find("Pop3SettingsView").As<Pop3SettingsView>();
+
     public Button BackButton => this.Find("BackButton").AsButton();
 
     public Button NextButton => this.Find("NextButton").AsButton();

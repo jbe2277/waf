@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SamplePop3SettingsViewModel, IsDesignTimeCreatable=True}"
-    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="500">
+    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="500" AutomationProperties.AutomationId="Pop3SettingsView">
 
     <Grid Margin="11">
         <Grid.ColumnDefinitions>
@@ -38,29 +38,30 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="POP3 server"/>
         <TextBox x:Name="serverPathBox" Grid.Column="2" Grid.Row="2" Width="150"
-            Text="{Binding Model.Pop3ServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.Pop3ServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="Pop3ServerPathTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150"
-            Text="{Binding Model.Pop3UserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.Pop3UserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="Pop3UserNameTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="Password"/>
-        <PasswordBox Grid.Column="2" Grid.Row="6" LostFocus="Pop3PasswordChanged" Width="150"/>
+        <PasswordBox Grid.Column="2" Grid.Row="6" LostFocus="Pop3PasswordChanged" Width="150" AutomationProperties.AutomationId="Pop3PasswordBox"/>
 
 
         <Label Grid.Column="0" Grid.Row="8" Content="SMTP server"/>
         <TextBox Grid.Column="2" Grid.Row="8" Width="150" 
-            Text="{Binding Model.SmtpServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.SmtpServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="SmtpServerPathTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="10" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="10" Width="150" 
             Text="{Binding Model.SmtpUserCredits.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" 
-            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}"/>
+            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}" AutomationProperties.AutomationId="SmtpUserNameTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="12" Content="Password"/>
         <PasswordBox x:Name="smtpPassword" Grid.Column="2" Grid.Row="12" LostFocus="SmtpPasswordChanged" Width="150"
-            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}"/>
+            IsEnabled="{Binding UseSameUserCredits, Converter={x:Static waf:InvertBooleanConverter.Default}}" AutomationProperties.AutomationId="SmtpPasswordBox"/>
 
-        <CheckBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="14" Content="Use same user name and password as for my POP3 server" IsChecked="{Binding UseSameUserCredits}"/>
+        <CheckBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="14" Content="Use same user name and password as for my POP3 server" IsChecked="{Binding UseSameUserCredits}"
+                  AutomationProperties.AutomationId="UseSameUserCreditsCheckBox"/>
     </Grid>
 </UserControl>
