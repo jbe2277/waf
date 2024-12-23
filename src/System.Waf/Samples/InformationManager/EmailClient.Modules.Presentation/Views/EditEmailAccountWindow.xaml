@@ -12,7 +12,7 @@
     <DockPanel>
         <Border DockPanel.Dock="Bottom" Background="{x:Static SystemColors.ControlBrush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="11">
-                <Button Content="&lt; _Back" Command="{Binding BackCommand}" ToolTipService.ShowOnDisabled="True">
+                <Button Content="&lt; _Back" Command="{Binding BackCommand}" ToolTipService.ShowOnDisabled="True" AutomationProperties.AutomationId="BackButton">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource DialogButton}">
                             <Style.Triggers>
@@ -23,7 +23,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Command="{Binding NextCommand}" IsDefault="True" ToolTipService.ShowOnDisabled="True" Margin="11,0,0,0">
+                <Button Command="{Binding NextCommand}" IsDefault="True" ToolTipService.ShowOnDisabled="True" Margin="11,0,0,0" AutomationProperties.AutomationId="NextButton">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource DialogButton}">
                             <Setter Property="Content" Value="_Next &gt;"/>
@@ -38,7 +38,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="_Cancel" IsCancel="True" Style="{StaticResource DialogButton}" Margin="22,0,0,0"/>
+                <Button Content="_Cancel" IsCancel="True" Style="{StaticResource DialogButton}" Margin="22,0,0,0" AutomationProperties.AutomationId="CancelButton"/>
             </StackPanel>
         </Border>
 

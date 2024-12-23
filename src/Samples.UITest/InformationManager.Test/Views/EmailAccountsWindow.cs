@@ -22,4 +22,6 @@ public class EmailAccountGridRow(FrameworkAutomationElementBase element) : GridR
     public TextGridCell NameCell => Cells[0].As<TextGridCell>();
 
     public TextGridCell EmailCell => Cells[1].As<TextGridCell>();
+
+    public (string name, string email) ToTuple() => (NameCell.Text, EmailCell.Name);
 }

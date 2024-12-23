@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dd="clr-namespace:Waf.InformationManager.EmailClient.Modules.Presentation.DesignData"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance dd:SampleExchangeSettingsViewModel, IsDesignTimeCreatable=True}"
-    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="400">
+    HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignHeight="300" d:DesignWidth="400" AutomationProperties.AutomationId="ExchangeSettingsView">
 
     <Grid Margin="11">
         <Grid.ColumnDefinitions>
@@ -25,10 +25,10 @@
 
         <Label Grid.Column="0" Grid.Row="2" Content="Exchange server" />
         <TextBox x:Name="serverPathBox" Grid.Column="2" Grid.Row="2" Width="150"
-            Text="{Binding Model.ServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.ServerPath, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="ServerPathTextBox"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="User name"/>
         <TextBox Grid.Column="2" Grid.Row="4" Width="150"
-            Text="{Binding Model.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}"/>
+            Text="{Binding Model.UserName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=true}" AutomationProperties.AutomationId="UserNameTextBox"/>
     </Grid>
 </UserControl>

@@ -180,10 +180,105 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         window.EmailAccountsCommand.Click();
         var emailAccountsWindow = window.FirstModalWindow().As<EmailAccountsWindow>();
         var row0 = emailAccountsWindow.EmailAccountsDataGrid.Rows[0].As<EmailAccountGridRow>();
+        Assert.Equal(("Harry Thompson", "harry@example.com"), row0.ToTuple());
+        emailAccountsWindow.EditButton.Click();
+        var editAccountWindow = emailAccountsWindow.FirstModalWindow().As<EditEmailAccountWindow>();
+        
+        var accountView = editAccountWindow.BasicEmailAccountView;
+        Assert.Equal("Harry Thompson", accountView.NameTextBox.Text);
+        Assert.Equal("harry@example.com", accountView.EmailTextBox.Text);
+        Assert.False(accountView.Pop3RadioButton.IsChecked);
+        Assert.True(accountView.ExchangeRadioButton.IsChecked);
+        accountView.NameTextBox.Text = "Luke Thompson";
+        accountView.EmailTextBox.Text = "luke@example.com";
+        editAccountWindow.NextButton.Click();
 
-        // TODO: Add test EmailAccountsTest()
-        //       2. Select email account (just one in ComboBox)
+        var exchangeSettingsView = editAccountWindow.ExchangeSettingsView;
+        Assert.Equal("exchange.example.com", exchangeSettingsView.ServerPathTextBox.Text);
+        Assert.Equal("harry", exchangeSettingsView.UserNameTextBox.Text);
+        exchangeSettingsView.UserNameTextBox.Text = "luke";
+        editAccountWindow.NextButton.Click();
 
+        row0 = emailAccountsWindow.EmailAccountsDataGrid.Rows[0].As<EmailAccountGridRow>();
+        Assert.Equal(("Luke Thompson", "luke@example.com"), row0.ToTuple());
+
+        Assert.False(row0.IsSelected);
+        Assert.False(emailAccountsWindow.EditButton.IsEnabled);
+        Assert.False(emailAccountsWindow.RemoveButton.IsEnabled);
+        row0.Select();
+
+        // Edit again but Cancel this time
+        emailAccountsWindow.EditButton.Click();
+        editAccountWindow = emailAccountsWindow.FirstModalWindow().As<EditEmailAccountWindow>();
+        accountView = editAccountWindow.BasicEmailAccountView;
+        accountView.NameTextBox.Text = "Han Thompson";
+        accountView.EmailTextBox.Text = "han@example.com";
+        editAccountWindow.CancelButton.Click();
+        row0 = emailAccountsWindow.EmailAccountsDataGrid.Rows[0].As<EmailAccountGridRow>();
+        Assert.Equal(("Luke Thompson", "luke@example.com"), row0.ToTuple());
+
+        // Add a second email account with POP3
+        emailAccountsWindow.NewButton.Click();
+        editAccountWindow = emailAccountsWindow.FirstModalWindow().As<EditEmailAccountWindow>();
+        Assert.False(editAccountWindow.NextButton.IsEnabled);
+        accountView = editAccountWindow.BasicEmailAccountView;
+        Assert.Equal("The Name field is required.", accountView.NameTextBox.ItemStatus);
+        Assert.Equal("The Email Address field is required.", accountView.EmailTextBox.ItemStatus);
+        accountView.NameTextBox.Text = "Lea Thompson";
+        Assert.Empty(accountView.NameTextBox.ItemStatus);
+        accountView.EmailTextBox.Text = "lea@example.com";
+        Assert.Empty(accountView.EmailTextBox.ItemStatus);
+        editAccountWindow.NextButton.Click();
+
+        var pop3SettingsView = editAccountWindow.Pop3SettingsView;
+        Assert.Equal("The POP3 Server field is required.", pop3SettingsView.Pop3ServerPathTextBox.ItemStatus);
+        Assert.Equal("The Username field is required.", pop3SettingsView.Pop3UserNameTextBox.ItemStatus);
+        Assert.Equal("The SMTP Server field is required.", pop3SettingsView.SmtpServerPathTextBox.ItemStatus);
+        Assert.Equal("The Username field is required.", pop3SettingsView.SmtpUserNameTextBox.ItemStatus);
+        Assert.False(editAccountWindow.NextButton.IsEnabled);
+        Assert.Equal("Please correct the invalid fields first.", editAccountWindow.NextButton.HelpText);
+        
+        pop3SettingsView.Pop3ServerPathTextBox.Text = "pop3.example.com";
+        Assert.Empty(pop3SettingsView.Pop3ServerPathTextBox.ItemStatus);
+        pop3SettingsView.Pop3UserNameTextBox.Text = "lea";
+        Assert.Empty(pop3SettingsView.Pop3UserNameTextBox.ItemStatus);
+        pop3SettingsView.Pop3PasswordBox.Text = "secret";
+        pop3SettingsView.SmtpServerPathTextBox.Text = "smtp.example.com";
+        Assert.Empty(pop3SettingsView.SmtpServerPathTextBox.ItemStatus);
+        pop3SettingsView.UseSameUserCreditsCheckBox.IsChecked = true;        
+        Assert.Empty(pop3SettingsView.SmtpUserNameTextBox.ItemStatus);
+        Assert.True(editAccountWindow.NextButton.IsEnabled);
+        editAccountWindow.NextButton.Click();
+
+        var row1 = emailAccountsWindow.EmailAccountsDataGrid.Rows[1].As<EmailAccountGridRow>();
+        Assert.Equal(("Lea Thompson", "lea@example.com"), row1.ToTuple());
+        emailAccountsWindow.CloseButton.Click();
+
+        // Create email and select new email account
+        window.NewEmailCommand.Click();
+        var newEmailWindow = window.NewEmailWindows[0];
+        Assert.Equal(2, newEmailWindow.EmailAccountsComboBox.Items.Length);
+        newEmailWindow.EmailAccountsComboBox.Select(1);
+        newEmailWindow.EmailAccountsComboBox.Click();  // To close the combo box popup
+        Assert.Equal("Lea Thompson", newEmailWindow.EmailAccountsComboBox.SelectedItem.Text);
+        newEmailWindow.CloseButton.Click();
+
+        // Email accounts -> remove all of them
+        window.EmailAccountsCommand.Click();
+        emailAccountsWindow = window.FirstModalWindow().As<EmailAccountsWindow>();
+        Assert.Equal(2, emailAccountsWindow.EmailAccountsDataGrid.RowCount);
+        emailAccountsWindow.RemoveButton.Click();
+        emailAccountsWindow.EmailAccountsDataGrid.Rows[0].Select();
+        emailAccountsWindow.RemoveButton.Click();
+        Assert.Equal(0, emailAccountsWindow.EmailAccountsDataGrid.RowCount);
+        emailAccountsWindow.CloseButton.Click();
+
+        window.NewEmailCommand.Click();
+        var errorMessage = window.FirstModalWindow().As<MessageBox>();
+        Assert.Equal("Please create an email account first.", errorMessage.Message);
+        errorMessage.Buttons[0].Click();
+
+        window.ExitButton.Click();
     });
     
     private static void AssertEmail(bool received, EmailListItem? emailItem, EmailView? emailView, string from, string to, string sentDate, string? sentTime, string title)
