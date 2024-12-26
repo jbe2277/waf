@@ -44,7 +44,16 @@ jobs:
       run: |
         echo "## 🕵️ Test Results - Samples.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
         dotnet test ./src/Samples.UITest/Samples.UITest.sln --logger GitHubActions -maxCpuCount:1
-    
+
+    - name: 🕵️ Code Coverage
+      run: |
+        dotnet tool update -g dotnet-coverage
+        dotnet-coverage merge --output ./out/CodeCoverage/System.Waf.cobertura.xml --output-format cobertura "./src/**/TestResults/**/*.coverage"
+        dotnet tool update -g dotnet-reportgenerator-globaltool
+        reportgenerator -reports:./out/CodeCoverage/System.Waf.cobertura.xml -targetdir:./out/CodeCoverage -reporttypes:"MarkdownSummaryGithub"
+        echo "## 🕵️ Code Coverage" >> $Env:GITHUB_STEP_SUMMARY
+        cat ./out/CodeCoverage/SummaryGithub.md >> $Env:GITHUB_STEP_SUMMARY
+        
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
       if: always()
