@@ -51,7 +51,8 @@ jobs:
         dotnet-coverage merge --output ./out/CodeCoverage/System.Waf.cobertura.xml --output-format cobertura "./src/**/TestResults/**/*.coverage"
         dotnet tool update -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:./out/CodeCoverage/System.Waf.cobertura.xml -targetdir:./out/CodeCoverage -reporttypes:"MarkdownSummaryGithub"
-        cat ./out/CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+        echo "## 🕵️ Code Coverage" >> $Env:GITHUB_STEP_SUMMARY
+        cat ./out/CodeCoverage/SummaryGithub.md >> $Env:GITHUB_STEP_SUMMARY
         
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
