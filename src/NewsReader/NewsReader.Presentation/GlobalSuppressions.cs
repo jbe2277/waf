@@ -10,3 +10,4 @@
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.NewsReader.Presentation.Services.DataService.Save(System.Object)")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.NewsReader.Presentation.Services.WebStorageService.DownloadFile(System.String)~System.Threading.Tasks.Task{System.ValueTuple{System.IO.Stream,System.String}}")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.NewsReader.Presentation.Services.WebStorageService.UploadFile(System.IO.Stream)~System.Threading.Tasks.Task{System.String}")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.NewsReader.Presentation.App.OnDeactivated")]

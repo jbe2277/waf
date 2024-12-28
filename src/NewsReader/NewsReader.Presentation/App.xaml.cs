@@ -39,17 +39,18 @@ public partial class App : Application
 
         InitializeComponent();
         this.appController = appController.Value;
-        MainPage = (Page)this.appController.MainView;
     }
 
     public static string LogFileName { get; } = Path.Combine(FileSystem.CacheDirectory, "Logging", "AppLog.txt");
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        var window = base.CreateWindow(activationState);
-        window.Title = AppInfo.Name;
-        window.MinimumWidth = 300;
-        window.MinimumHeight = 400;
+        var window = new Window((Page)appController.MainView)
+        {
+            Title = AppInfo.Name,
+            MinimumWidth = 300,
+            MinimumHeight = 400
+        };
         window.Created += (_, _) => OnCreated();
         window.Deactivated += (_, _) => OnDeactivated();
         window.Stopped += (_, _) => OnStopped();
