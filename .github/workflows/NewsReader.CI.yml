@@ -22,7 +22,7 @@ jobs:
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8'
+        dotnet-version: '9'
 
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui android
@@ -30,7 +30,7 @@ jobs:
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net8.0-android -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f:net9.0-android -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
     
     - name: 📦 Upload AAB, APK
       uses: actions/upload-artifact@v4
@@ -51,7 +51,7 @@ jobs:
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8'
+        dotnet-version: '9'
       
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui
@@ -60,7 +60,7 @@ jobs:
       # -p:ApplicationVersion=0 because of https://github.com/dotnet/maui/issues/18571
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net8.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
+        dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
 
   iOS:
     runs-on: macos-14
@@ -71,14 +71,14 @@ jobs:
 
       - name: ⚙️ Set Xcode version
         run: |
-          XCODE_ROOT=/Applications/Xcode_15.4.app
+          XCODE_ROOT=/Applications/Xcode_16.1.app
           echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
           sudo xcode-select -s $XCODE_ROOT
       
       - name: ⚙️ Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8'
+          dotnet-version: '9'
       
       - name: ⚙️ Install .NET MAUI
         run: dotnet workload install maui ios
@@ -86,7 +86,7 @@ jobs:
       - name: 🛠️ Build
         run: |
           cd src/NewsReader/NewsReader.MauiSystem
-          dotnet build -f net8.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+          dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
     runs-on: windows-2022
