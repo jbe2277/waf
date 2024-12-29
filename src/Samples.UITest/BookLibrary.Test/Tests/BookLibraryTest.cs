@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UITest.BookLibrary.Tests;
 
-public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
+public class BookLibraryTest() : UITest()
 {
     [Fact]
     public void SearchBookListAndChangeEntriesTest() => Run(() =>

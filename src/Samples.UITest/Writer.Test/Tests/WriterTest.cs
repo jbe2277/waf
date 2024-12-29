@@ -10,7 +10,7 @@ namespace UITest.Writer;
 
 public class WriterTest : UITest
 {
-    public WriterTest(ITestOutputHelper log) : base(log)
+    public WriterTest()
     {
         // SkipTextBoxReadText = true;  // Workaround: Uncomment this line if your machine provides empty strings for RichTextBox.Text.
     }

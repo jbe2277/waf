@@ -7,7 +7,7 @@ using Xunit;
 
 namespace UITest.BookLibrary.Tests;
 
-public class ReportingTest(ITestOutputHelper log) : UITest(log)
+public class ReportingTest() : UITest()
 {
     [Fact]
     public void CreateReportTest() => Run(() =>

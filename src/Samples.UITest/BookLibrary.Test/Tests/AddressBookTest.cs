@@ -5,7 +5,7 @@ using UITest.SystemViews;
 
 namespace UITest.BookLibrary.Tests;
 
-public class AddressBookTest(ITestOutputHelper log) : UITest(log)
+public class AddressBookTest() : UITest()
 {
     [Fact]
     public void SearchPersonListAndChangeEntriesTest() => Run(() =>

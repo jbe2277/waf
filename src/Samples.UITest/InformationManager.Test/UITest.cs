@@ -8,7 +8,7 @@ using Xunit;
 
 namespace UITest.InformationManager;
 
-public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "InformationManager.exe",
+public abstract class UITest() : UITestBase("InformationManager.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/InformationManager/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/InformationManager/")
 {

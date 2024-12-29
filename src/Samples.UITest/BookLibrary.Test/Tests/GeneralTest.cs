@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UITest.BookLibrary.Tests;
 
-public class GeneralTest(ITestOutputHelper log) : UITest(log)
+public class GeneralTest() : UITest()
 {
     [Fact]
     public void AboutTest() => Run(() =>

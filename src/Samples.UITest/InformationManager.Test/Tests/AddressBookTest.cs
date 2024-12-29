@@ -5,7 +5,7 @@ using FlaUI.Core.Definitions;
 
 namespace UITest.InformationManager.Tests;
 
-public class AddressBookTest(ITestOutputHelper log) : UITest(log)
+public class AddressBookTest() : UITest()
 {
     [Fact]
     public void SearchContactsAndChangeEntriesTest() => Run(() =>

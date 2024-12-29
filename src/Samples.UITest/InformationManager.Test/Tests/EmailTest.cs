@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UITest.InformationManager.Tests;
 
-public class EmailTest(ITestOutputHelper log) : UITest(log)
+public class EmailTest() : UITest()
 {
     [Fact]
     public void SearchEmailsAndAssertLists() => Run(() =>

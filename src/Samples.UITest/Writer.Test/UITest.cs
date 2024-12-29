@@ -8,7 +8,7 @@ using Xunit;
 
 namespace UITest.Writer;
 
-public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "Writer.exe",
+public abstract class UITest() : UITestBase("Writer.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/Writer/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/Writer/")
 {
