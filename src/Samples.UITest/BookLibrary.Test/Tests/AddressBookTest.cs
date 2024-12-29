@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements;
 using UITest.BookLibrary.Views;
-using Xunit.Abstractions;
 using Xunit;
 using UITest.SystemViews;
 

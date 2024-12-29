@@ -2,7 +2,6 @@
 using UITest.InformationManager.Views;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.InformationManager.Tests;
 

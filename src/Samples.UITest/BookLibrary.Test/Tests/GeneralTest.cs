@@ -2,7 +2,6 @@
 using FlaUI.Core.Capturing;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.BookLibrary.Tests;
 

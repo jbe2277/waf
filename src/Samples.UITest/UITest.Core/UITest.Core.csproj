@@ -6,6 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="FlaUI.UIA3" />
-    <PackageReference Include="xunit.abstractions" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 </Project>

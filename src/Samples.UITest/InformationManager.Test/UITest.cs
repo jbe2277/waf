@@ -3,7 +3,6 @@ using FlaUI.Core.AutomationElements;
 using System.Diagnostics;
 using UITest.InformationManager.Views;
 using Xunit;
-using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 

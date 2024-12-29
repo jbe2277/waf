@@ -4,7 +4,6 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.BookLibrary.Tests;
 

@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements;
-using Xunit.Abstractions;
 using Xunit;
 using UITest.InformationManager.Views;
 using FlaUI.Core.Definitions;
