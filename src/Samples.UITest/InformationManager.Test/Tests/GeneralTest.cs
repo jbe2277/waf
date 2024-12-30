@@ -8,7 +8,7 @@ namespace UITest.InformationManager.Tests;
 public class GeneralTest() : UITest()
 {
     [Fact]
-    public void AboutTest() => Run(() =>
+    public void AboutTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -22,5 +22,5 @@ public class GeneralTest() : UITest()
         messageBox.Buttons[0].Click();
 
         window.ExitButton.Click();
-    });
+    }
 }

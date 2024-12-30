@@ -57,28 +57,6 @@ public abstract class UITestBase : IDisposable
 
     public bool SkipAppClose { get; set; } = false;
 
-    public void Run(Action action)
-    {
-        try
-        {
-            action();
-        }
-        catch (Exception)
-        {
-            TryGetScreenshot();
-            throw;
-        }
-
-        void TryGetScreenshot()
-        {
-            try
-            {
-                Capture.Screen().ToFile(GetScreenshotFile("Fail"));
-            }
-            catch { }
-        }
-    }
-
     public string GetTempFileName(string fileExtension)
     {
         var file = $"UITest_{Path.GetRandomFileName()}.{fileExtension}";
@@ -97,12 +75,23 @@ public abstract class UITestBase : IDisposable
 
     public void Dispose()
     {
+        if (TestContext.Current.TestState?.Result == TestResult.Failed) TryGetScreenshot();
+        
         if (!SkipAppClose) App?.Close();
         App?.Dispose();
         Automation.Dispose();
         foreach (var file in usedFiles)
         {
             if (File.Exists(file)) File.Delete(file);
+        }
+
+        void TryGetScreenshot()
+        {
+            try
+            {
+                Capture.Screen().ToFile(GetScreenshotFile("Fail"));
+            }
+            catch { }
         }
     }
 

@@ -8,7 +8,7 @@ namespace UITest.InformationManager.Tests;
 public class AddressBookTest() : UITest()
 {
     [Fact]
-    public void SearchContactsAndChangeEntriesTest() => Run(() =>
+    public void SearchContactsAndChangeEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -46,10 +46,10 @@ public class AddressBookTest() : UITest()
         Assert.Equal("TPhone", item.PhoneLabel.Text);
 
         window.ExitButton.Click();
-    });
+    }
 
     [Fact]
-    public void AddAndRemoveEntriesTest() => Run(() =>
+    public void AddAndRemoveEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -117,7 +117,7 @@ public class AddressBookTest() : UITest()
         Assert.False(window.DeleteCommand.IsEnabled);
         Assert.Null(contactListView.ContactList.SelectedItem);
         window.Close();
-    });
+    }
 
     private static void AssertContactItem(ContactListItem? contactItem, ContactView? contactView, string firstName, string lastName, string email, string phone)
     {

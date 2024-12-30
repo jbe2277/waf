@@ -8,7 +8,7 @@ namespace UITest.BookLibrary.Tests;
 public class GeneralTest() : UITest()
 {
     [Fact]
-    public void AboutTest() => Run(() =>
+    public void AboutTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -27,10 +27,10 @@ public class GeneralTest() : UITest()
         var dataMenu = window.DataMenu;
         dataMenu.Click();
         dataMenu.ExitMenuItem.Click();
-    });
+    }
 
     [Fact]
-    public void LoadCorruptDatabaseTest() => Run(() =>
+    public void LoadCorruptDatabaseTest()
     {
         if (File.Exists(AppInfo.DatabaseFile)) File.Delete(AppInfo.DatabaseFile);
         Directory.CreateDirectory(Path.GetDirectoryName(AppInfo.DatabaseFile)!);
@@ -56,5 +56,5 @@ public class GeneralTest() : UITest()
         Assert.Equal(0, personListView.PersonDataGrid.RowCount);
 
         window.Close();
-    });
+    }
 }

@@ -10,7 +10,7 @@ namespace UITest.BookLibrary.Tests;
 public class ReportingTest() : UITest()
 {
     [Fact]
-    public void CreateReportTest() => Run(() =>
+    public void CreateReportTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -65,5 +65,5 @@ public class ReportingTest() : UITest()
             // Wait until the button is enabled again -> indication that the PDF print is completed
             Retry.WhileFalse(() => reportView.PrintButton.IsEnabled, throwOnTimeout: true);
         }
-    });
+    }
 }
