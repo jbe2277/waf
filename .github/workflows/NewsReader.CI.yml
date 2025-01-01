@@ -97,4 +97,5 @@ jobs:
 
     - name: 🕵️ Test
       run: |
-        dotnet test ./src/NewsReader/NewsReader.sln -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
+        echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/NewsReader/NewsReader.sln -c:Release -p:Version=${{ needs.GetVersion.outputs.version }} --logger GitHubActions
