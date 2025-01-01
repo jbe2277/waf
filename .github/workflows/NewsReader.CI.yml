@@ -95,12 +95,6 @@ jobs:
     - name: 🔖 Check-out
       uses: actions/checkout@v4
 
-    - name: 🕵️ Test - Domain.Test
+    - name: 🕵️ Test
       run: |
-        cd src/NewsReader/NewsReader.Domain.Test
-        dotnet test -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
-    
-    - name: 🕵️ Test - Presentation.Test
-      run: |
-        cd src/NewsReader/NewsReader.Presentation.Test
-        dotnet test -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
+        dotnet test ./src/NewsReader/NewsReader.sln -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
