@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0</TargetFrameworks>
+    <TargetFrameworks>net48;net8.0</TargetFrameworks>
     <RootNamespace>Test.Waf</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
@@ -12,8 +12,4 @@
   <ItemGroup>
 	  <ProjectReference Include="..\System.Waf.UnitTesting.Core\System.Waf.UnitTesting.Core.csproj" />
   </ItemGroup>
-
-  <PropertyGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <NoWarn>$(NoWarn);8625</NoWarn>
-  </PropertyGroup>
 </Project>
