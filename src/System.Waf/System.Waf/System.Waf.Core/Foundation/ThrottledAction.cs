@@ -23,7 +23,6 @@ namespace System.Waf.Foundation
     public class ThrottledAction
     {
         private readonly TaskScheduler taskScheduler;
-        private readonly object cancellationTokenSourceLock = new object();
         private readonly Action action;
         private readonly ThrottledActionMode mode;
         private readonly TimeSpan delayTime;
@@ -44,50 +43,42 @@ namespace System.Waf.Foundation
         /// <exception cref="ArgumentNullException">The argument action must not be null.</exception>
         public ThrottledAction(Action action, ThrottledActionMode mode, TimeSpan delayTime)
         {
-            taskScheduler = SynchronizationContext.Current != null ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
+            taskScheduler = SynchronizationContext.Current is not null ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.mode = mode;
             this.delayTime = delayTime;
         }
 
         /// <summary>Indicates that an execution of the action delegate is requested.</summary>
-        public bool IsRunning => cancellationTokenSource != null;
+        public bool IsRunning => cancellationTokenSource is not null;
 
         /// <summary>Requests the execution of the action delegate.</summary>
         public void InvokeAccumulated()
         {
-            CancellationToken? token = null;
-            lock (cancellationTokenSourceLock)
-            {
-                if (mode == ThrottledActionMode.InvokeOnlyIfIdleForDelayTime || cancellationTokenSource == null)
-                {
-                    cancellationTokenSource?.Cancel();
-                    cancellationTokenSource = new CancellationTokenSource();
-                    token = cancellationTokenSource.Token;
-                }
-            }
+            if (mode is not ThrottledActionMode.InvokeOnlyIfIdleForDelayTime && cancellationTokenSource is not null) return;
 
-            if (token != null)
-            {
-                Task.Delay(delayTime, token.Value).ContinueWith(t =>
-                {
-                    lock (cancellationTokenSourceLock)
-                    {
-                        cancellationTokenSource = null;
-                    }
-                    TaskHelper.Run(action, taskScheduler);
-                }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
+            var cts = new CancellationTokenSource();
+            if (mode is ThrottledActionMode.InvokeOnlyIfIdleForDelayTime)
+            {                
+                Interlocked.Exchange(ref cancellationTokenSource, cts)?.Cancel();                
             }
+            else // mode is InvokeMaxEveryDelayTime
+            {
+                var old = Interlocked.CompareExchange(ref cancellationTokenSource, cts, null);
+                if (old is not null) return;
+            }
+            
+            Task.Delay(delayTime, cts.Token).ContinueWith(t =>
+            {
+                Interlocked.Exchange(ref cancellationTokenSource, null);
+                TaskHelper.Run(action, taskScheduler);
+            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
         }
 
         /// <summary>Cancel the execution of the action delegate that was requested.</summary>
         public void Cancel()
         {
-            lock (cancellationTokenSourceLock)
-            {
-                cancellationTokenSource?.Cancel();
-                cancellationTokenSource = null;
-            }
+            Interlocked.Exchange(ref cancellationTokenSource, null)?.Cancel();
         }
     }
 }
