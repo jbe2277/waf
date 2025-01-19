@@ -21,6 +21,10 @@
     <PackageReference Include="System.ServiceModel.Syndication" />
   </ItemGroup>
 
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <PackageReference Include="Microsoft.Identity.Client.Desktop" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\NewsReader.Applications\NewsReader.Applications.csproj" />
   </ItemGroup>

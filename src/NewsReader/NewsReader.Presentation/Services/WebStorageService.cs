@@ -2,7 +2,6 @@
 using Microsoft.Graph.Models;
 using Microsoft.Graph.Models.ODataErrors;
 using Microsoft.Identity.Client;
-using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Waf.NewsReader.Applications.Services;
 
@@ -41,6 +40,8 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
             builder.WithParentActivityOrWindow(() => Platform.CurrentActivity);
 #elif IOS
             builder.WithIosKeychainSecurityGroup(Foundation.NSBundle.MainBundle.BundleIdentifier);
+#elif WINDOWS
+            Microsoft.Identity.Client.Desktop.DesktopExtensions.WithWindowsEmbeddedBrowserSupport(builder);
 #endif
             publicClient = builder.Build();
         }
@@ -61,8 +62,8 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         if (!cacheInitialized && publicClient is not null)
         {
             cacheInitialized = true;
-            var storageProperties = new StorageCreationPropertiesBuilder("msal.dat", FileSystem.CacheDirectory).Build();
-            var cacheHelper = await MsalCacheHelper.CreateAsync(storageProperties);
+            var storageProperties = new Microsoft.Identity.Client.Extensions.Msal.StorageCreationPropertiesBuilder("msal.dat", FileSystem.CacheDirectory).Build();
+            var cacheHelper = await Microsoft.Identity.Client.Extensions.Msal.MsalCacheHelper.CreateAsync(storageProperties);
             cacheHelper.RegisterCache(publicClient.UserTokenCache);
         }
 #endif
