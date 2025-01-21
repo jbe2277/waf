@@ -185,11 +185,14 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     private async Task<CustomDriveItemItemRequestBuilder> GetItemRequest(string fileName)
     {
         if (graphClient is null) throw new InvalidOperationException("graphClient is null");
-        var driveItem = await graphClient.Me.Drive.GetAsync().ConfigureAwait(false);
-        ArgumentNullException.ThrowIfNull(driveItem);
-        var appRootFolder = await graphClient.Drives[driveItem.Id].Special["AppRoot"].GetAsync().ConfigureAwait(false);
-        ArgumentNullException.ThrowIfNull(appRootFolder);
-        return graphClient.Drives[driveItem.Id].Items[appRootFolder.Id].ItemWithPath(fileName);
+
+        // Using workaround to get the driveId because AppFolder scope does not allow to the read Drive directly. https://github.com/microsoftgraph/msgraph-sdk-dotnet/issues/2624
+        var result = await graphClient.Me.Drive.WithUrl($"{graphClient.RequestAdapter.BaseUrl}/drive/special/approot:/{fileName}").GetAsync().ConfigureAwait(false);
+        var driveId = result?.Id?.Split("!")[0] ?? throw new InvalidOperationException("graphClient: not able to get the driveId");
+        
+        var appRootFolder = await graphClient.Drives[driveId].Special["AppRoot"].GetAsync().ConfigureAwait(false)
+                ?? throw new InvalidOperationException("graphClient: not able to get the appRootFolder");
+        return graphClient.Drives[driveId].Items[appRootFolder.Id].ItemWithPath(fileName);
     }
 
     static partial void GetApplicationId(ref string? applicationId);
