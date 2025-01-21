@@ -41,7 +41,11 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
 #elif IOS
             builder.WithIosKeychainSecurityGroup(Foundation.NSBundle.MainBundle.BundleIdentifier);
 #elif WINDOWS
-            Microsoft.Identity.Client.Desktop.DesktopExtensions.WithWindowsEmbeddedBrowserSupport(builder);
+            Microsoft.Identity.Client.Broker.BrokerExtension.WithBroker(builder, new BrokerOptions(BrokerOptions.OperatingSystems.Windows)
+            {
+                Title = AppInfo.Name
+            });
+            builder.WithParentActivityOrWindow(() => WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentWindow!.Handler.PlatformView!));
 #endif
             publicClient = builder.Build();
         }

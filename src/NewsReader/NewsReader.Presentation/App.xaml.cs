@@ -43,6 +43,8 @@ public partial class App : Application
 
     public static string LogFileName { get; } = Path.Combine(FileSystem.CacheDirectory, "Logging", "AppLog.txt");
 
+    public static Window? CurrentWindow { get; private set; }
+
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var window = new Window((Page)appController.MainView)
@@ -56,6 +58,7 @@ public partial class App : Application
         window.Stopped += (_, _) => OnStopped();
         window.Destroying += (_, _) => OnDestroying();
         window.Resumed += (_, _) => OnResumed();
+        CurrentWindow = window;
         return window;
     }
 

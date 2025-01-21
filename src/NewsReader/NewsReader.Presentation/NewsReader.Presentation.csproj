@@ -16,13 +16,9 @@
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
 
     <PackageReference Include="Microsoft.Graph" />
-    <PackageReference Include="Microsoft.Identity.Client" />
+    <PackageReference Include="Microsoft.Identity.Client.Broker" />
     <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" />
     <PackageReference Include="System.ServiceModel.Syndication" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-    <PackageReference Include="Microsoft.Identity.Client.Desktop" />
   </ItemGroup>
 
   <ItemGroup>
