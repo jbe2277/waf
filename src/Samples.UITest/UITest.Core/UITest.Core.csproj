@@ -6,6 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="FlaUI.UIA3" />
-    <PackageReference Include="xunit.v3.core" />
+    <PackageReference Include="xunit.v3.extensibility.core" />
   </ItemGroup>
 </Project>
