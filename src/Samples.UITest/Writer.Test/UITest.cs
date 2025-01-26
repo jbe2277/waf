@@ -3,13 +3,12 @@ using FlaUI.Core.AutomationElements;
 using System.Diagnostics;
 using UITest.Writer.Views;
 using Xunit;
-using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace UITest.Writer;
 
-public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "Writer.exe",
+public abstract class UITest() : UITestBase("Writer.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/Writer/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/Writer/")
 {

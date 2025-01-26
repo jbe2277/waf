@@ -5,13 +5,12 @@ using FlaUI.Core.Tools;
 using UITest.SystemViews;
 using UITest.Writer.Views;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.Writer;
 
 public class WriterTest : UITest
 {
-    public WriterTest(ITestOutputHelper log) : base(log)
+    public WriterTest()
     {
         // SkipTextBoxReadText = true;  // Workaround: Uncomment this line if your machine provides empty strings for RichTextBox.Text.
     }
@@ -22,7 +21,7 @@ public class WriterTest : UITest
     protected void AssertTextEqual(string expected, TextBox actual) { if (!SkipTextBoxReadText) Assert.Equal(expected, actual.Text); }
 
     [Fact]
-    public void AboutTest() => Run(() =>
+    public void AboutTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -39,10 +38,10 @@ public class WriterTest : UITest
         var fileRibbonMenu = window.FileRibbonMenu;
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.ExitMenuItem.Click();
-    });
+    }
 
     [Fact]
-    public void NewZoomWritePrintPreviewExitWithoutSave() => Run(() =>
+    public void NewZoomWritePrintPreviewExitWithoutSave()
     {
         Launch();
         var window = GetShellWindow();
@@ -161,10 +160,10 @@ public class WriterTest : UITest
             saveFileDialog.SetFileName(fileName);
             saveFileDialog.SaveButton.Click();
         }
-    });
+    }
 
     [Fact]
-    public void MultipleNewSaveRestartOpenRecentChangeAskToSave() => Run(() =>
+    public void MultipleNewSaveRestartOpenRecentChangeAskToSave()
     {
         Launch();
         var window = GetShellWindow();
@@ -286,10 +285,10 @@ public class WriterTest : UITest
         tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
         AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
-    });
+    }
 
     [Fact]
-    public void SaveCloseAndOpen() => Run(() =>
+    public void SaveCloseAndOpen()
     {
         Launch();
         var window = GetShellWindow();
@@ -327,5 +326,5 @@ public class WriterTest : UITest
         AssertTextEqual("Hello World", tab1.RichTextView.RichTextBox);
 
         window.Close();
-    });
+    }
 }

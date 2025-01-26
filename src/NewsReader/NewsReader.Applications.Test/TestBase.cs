@@ -21,20 +21,17 @@ public abstract class TestBase : IDisposable
         builder.RegisterModule(new ApplicationsModule());
         builder.RegisterModule(new MockPresentationModule());
         Container = builder.Build();
+        Context = UnitTestSynchronizationContext.Create();
     }
 
     public Autofac.IContainer Container { get; }
+
+    public UnitTestSynchronizationContext Context { get; }
 
     internal AppController AppController { get; private set; } = null!;
     internal FeedsController FeedsController { get; private set; } = null!;
     internal SettingsController SettingsController { get; private set; } = null!;
     public ViewPair<MockShellView, ShellViewModel> Shell { get; private set; } = null!;
-
-    public void Run(Action<UnitTestSynchronizationContext> action)
-    {
-        using var context = UnitTestSynchronizationContext.Create();
-        action(context);
-    }
 
     public T Resolve<T>() where T : notnull => Container.Resolve<T>();
 
@@ -50,6 +47,7 @@ public abstract class TestBase : IDisposable
     public void Dispose()
     {
         OnDispose();
+        Context.Dispose();
     }
 
     protected virtual void OnDispose() { }

@@ -10,10 +10,6 @@
     <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MinVer" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-  </ItemGroup>
-
   <Choose>
     <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
       <PropertyGroup>

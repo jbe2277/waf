@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>UITest.Writer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit.runner.visualstudio" />
-    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,14 +2,13 @@
 using FlaUI.Core.Capturing;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.InformationManager.Tests;
 
-public class GeneralTest(ITestOutputHelper log) : UITest(log)
+public class GeneralTest() : UITest()
 {
     [Fact]
-    public void AboutTest() => Run(() =>
+    public void AboutTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -23,5 +22,5 @@ public class GeneralTest(ITestOutputHelper log) : UITest(log)
         messageBox.Buttons[0].Click();
 
         window.ExitButton.Click();
-    });
+    }
 }

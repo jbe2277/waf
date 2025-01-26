@@ -2,14 +2,13 @@
 using UITest.BookLibrary.Views;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.BookLibrary.Tests;
 
-public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
+public class BookLibraryTest() : UITest()
 {
     [Fact]
-    public void SearchBookListAndChangeEntriesTest() => Run(() =>
+    public void SearchBookListAndChangeEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -84,10 +83,10 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-    });
+    }
 
     [Fact]
-    public void AddAndRemoveEntriesTest() => Run(() =>
+    public void AddAndRemoveEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -147,10 +146,10 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-    });
+    }
 
     [Fact]
-    public void ValidateFieldsTest() => Run(() =>
+    public void ValidateFieldsTest()
     {        
         Launch();
         var window = GetShellWindow();
@@ -187,10 +186,10 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to really close the app although unsafed changes exist
         messageBox.Buttons[0].Click();  // Yes button
-    });
+    }
 
     [Fact]
-    public void RemoveLendToPersonTest() => Run(() =>
+    public void RemoveLendToPersonTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -231,7 +230,7 @@ public class BookLibraryTest(ITestOutputHelper log) : UITest(log)
         AssertEqual("", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
 
         window.Close();
-    });
+    }
 
     private static void AssertEqual(string expected, string actual1, string actual2)
     {

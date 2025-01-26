@@ -3,7 +3,6 @@ using FlaUI.Core.AutomationElements;
 using System.Diagnostics;
 using UITest.BookLibrary.Views;
 using Xunit;
-using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
@@ -13,7 +12,7 @@ public record AppInfo(string CompanyName, string ProductName, string SettingsFil
 
 public abstract class UITest : UITestBase
 {
-    protected UITest(ITestOutputHelper log) : base(log, "BookLibrary.exe",
+    protected UITest() : base("BookLibrary.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/BookLibrary/")
     {

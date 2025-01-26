@@ -4,10 +4,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <!-- Build -->    
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageVersion Include="MinVer" Version="6.0.0" />
-    
     <!-- WAF -->
     <PackageVersion Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageVersion Include="System.ComponentModel.Composition" Version="4.7.0" />
@@ -25,5 +21,10 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.6.4" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <GlobalPackageReference Include="MinVer" Version="6.0.0" />    
   </ItemGroup>
 </Project>

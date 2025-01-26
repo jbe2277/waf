@@ -2,14 +2,13 @@
 using UITest.InformationManager.Views;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.InformationManager.Tests;
 
-public class EmailTest(ITestOutputHelper log) : UITest(log)
+public class EmailTest() : UITest()
 {
     [Fact]
-    public void SearchEmailsAndAssertLists() => Run(() =>
+    public void SearchEmailsAndAssertLists()
     {
         Launch();
         var window = GetShellWindow();
@@ -64,10 +63,10 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         Assert.Empty(emailView.TitleLabel.Text);
 
         window.ExitButton.Click();
-    });
+    }
 
     [Fact]
-    public void RemoveEmailsTest() => Run(() =>
+    public void RemoveEmailsTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -102,10 +101,10 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         emailListView = window.EmailLayoutView.EmailListView;
         emailView = window.EmailLayoutView.EmailView;
         Assert.Empty(emailListView.EmailItems);
-    });
+    }
 
     [Fact]
-    public void NewEmailTest() => Run(() =>
+    public void NewEmailTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -170,10 +169,10 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         newEmailWindow.TitleTextBox.Text = "Don't send";
         newEmailWindow.CloseButton.Click();
         Assert.Equal(6, emailListView.EmailItems.Count);
-    });
+    }
 
     [Fact]
-    public void EmailAccountsTest() => Run(() =>
+    public void EmailAccountsTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -279,7 +278,7 @@ public class EmailTest(ITestOutputHelper log) : UITest(log)
         errorMessage.Buttons[0].Click();
 
         window.ExitButton.Click();
-    });
+    }
     
     private static void AssertEmail(bool received, EmailListItem? emailItem, EmailView? emailView, string from, string to, string sentDate, string? sentTime, string title)
     {

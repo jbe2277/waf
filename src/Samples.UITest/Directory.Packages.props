@@ -5,10 +5,13 @@
   
   <ItemGroup>
     <PackageVersion Include="FlaUI.UIA3" Version="4.0.0" />
-    <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageVersion Include="xunit" Version="2.9.2" />
-    <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />    
+    <PackageVersion Include="xunit.v3" Version="1.0.1" />
+    <PackageVersion Include="xunit.v3.extensibility.core" Version="1.0.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <GlobalPackageReference Include="GitHubActionsTestLogger" Version="2.4.1" />
   </ItemGroup>
 </Project>

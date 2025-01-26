@@ -1,15 +1,14 @@
 ﻿using FlaUI.Core.AutomationElements;
 using UITest.BookLibrary.Views;
-using Xunit.Abstractions;
 using Xunit;
 using UITest.SystemViews;
 
 namespace UITest.BookLibrary.Tests;
 
-public class AddressBookTest(ITestOutputHelper log) : UITest(log)
+public class AddressBookTest() : UITest()
 {
     [Fact]
-    public void SearchPersonListAndChangeEntriesTest() => Run(() =>
+    public void SearchPersonListAndChangeEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -46,10 +45,10 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-    });
+    }
 
     [Fact]
-    public void AddAndRemoveEntriesTest() => Run(() =>
+    public void AddAndRemoveEntriesTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -111,10 +110,10 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to save the changes
         messageBox.Buttons[1].Click();  // No button
-    });
+    }
 
     [Fact]
-    public void ValidateFieldsTest() => Run(() =>
+    public void ValidateFieldsTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -144,7 +143,7 @@ public class AddressBookTest(ITestOutputHelper log) : UITest(log)
         window.Close();
         var messageBox = window.FirstModalWindow().As<MessageBox>();  // MessageBox that asks user to really close the app although unsafed changes exist
         messageBox.Buttons[0].Click();  // Yes button
-    });
+    }
 
     private static void AssertEqual(string expected, string actual1, string actual2)
     {

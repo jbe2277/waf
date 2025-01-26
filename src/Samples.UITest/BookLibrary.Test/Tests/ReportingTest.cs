@@ -4,14 +4,13 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using UITest.SystemViews;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace UITest.BookLibrary.Tests;
 
-public class ReportingTest(ITestOutputHelper log) : UITest(log)
+public class ReportingTest() : UITest()
 {
     [Fact]
-    public void CreateReportTest() => Run(() =>
+    public void CreateReportTest()
     {
         Launch();
         var window = GetShellWindow();
@@ -66,5 +65,5 @@ public class ReportingTest(ITestOutputHelper log) : UITest(log)
             // Wait until the button is enabled again -> indication that the PDF print is completed
             Retry.WhileFalse(() => reportView.PrintButton.IsEnabled, throwOnTimeout: true);
         }
-    });
+    }
 }

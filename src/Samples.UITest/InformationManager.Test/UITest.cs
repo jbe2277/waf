@@ -3,13 +3,12 @@ using FlaUI.Core.AutomationElements;
 using System.Diagnostics;
 using UITest.InformationManager.Views;
 using Xunit;
-using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace UITest.InformationManager;
 
-public abstract class UITest(ITestOutputHelper log) : UITestBase(log, "InformationManager.exe",
+public abstract class UITest() : UITestBase("InformationManager.exe",
         Environment.GetEnvironmentVariable("UITestExePath") ?? "out/InformationManager/Release/net8.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/InformationManager/")
 {
