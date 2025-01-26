@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Waf.Foundation;
+using System.Waf.UnitTesting;
 
 namespace Test.Waf.Foundation
 {
@@ -14,6 +16,23 @@ namespace Test.Waf.Foundation
             await TaskHelper.Run(() => { }, TaskScheduler.Current);
             var result = await TaskHelper.Run(() => 42, TaskScheduler.Current);
             Assert.AreEqual(42, result);
+        }
+
+        [TestMethod]
+        public void RunWithCancellationTest()
+        {
+            using var context = UnitTestSynchronizationContext.Create();
+
+            var task = TaskHelper.Run(() => 42, TaskScheduler.FromCurrentSynchronizationContext());
+            var result = task.GetResult(context);
+            Assert.AreEqual(42, result);
+
+            bool called = false;
+            var cts = new CancellationTokenSource();
+            var task2 = TaskHelper.Run(() => called = true, TaskScheduler.FromCurrentSynchronizationContext(), cts.Token);
+            cts.Cancel();
+            AssertHelper.ExpectedException<TaskCanceledException>(() => task2.Wait(context));
+            Assert.IsFalse(called);
         }
 
         [TestMethod]

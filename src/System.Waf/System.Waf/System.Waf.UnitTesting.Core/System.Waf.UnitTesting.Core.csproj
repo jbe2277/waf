@@ -5,10 +5,6 @@
     <Description>System.Waf is a lightweight framework that helps you to create well-structured XAML applications. This package supports writing unit tests. It can be used in various application types.</Description>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith(net4))">
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-  </ItemGroup>
-
   <ItemGroup Condition="$(TargetFramework.StartsWith(netstandard))">
     <PackageReference Include="System.ComponentModel.Annotations" />
   </ItemGroup>

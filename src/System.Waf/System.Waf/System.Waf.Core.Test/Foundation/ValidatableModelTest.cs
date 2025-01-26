@@ -164,9 +164,9 @@ namespace Test.Waf.Foundation
             var comparerType = typeof(ValidatableModel).GetNestedType("ValidationResultComparer", BindingFlags.NonPublic)!;
             var comparer = (IEqualityComparer<ValidationResult>)comparerType.GetProperty("Default", BindingFlags.Static | BindingFlags.Public)!.GetValue(null)!;
 
-            Assert.IsTrue(comparer.Equals(null, null));
-            Assert.IsFalse(comparer.Equals(new ValidationResult(null), null));
-            Assert.IsFalse(comparer.Equals(null, new ValidationResult(null)));
+            Assert.IsTrue(comparer.Equals(null!, null!));
+            Assert.IsFalse(comparer.Equals(new ValidationResult(null), null!));
+            Assert.IsFalse(comparer.Equals(null!, new ValidationResult(null)));
             Assert.IsTrue(comparer.Equals(new ValidationResult(null), new ValidationResult(null)));
             Assert.IsFalse(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Bill")));
             Assert.IsTrue(comparer.Equals(new ValidationResult("Test"), new ValidationResult("Test")));

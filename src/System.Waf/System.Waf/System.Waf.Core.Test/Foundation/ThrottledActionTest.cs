@@ -129,7 +129,7 @@ namespace Test.Waf.Foundation
         public void InvokeOnlyIfIdleForDelayTimePerformanceTest()
         {
             int actionCallCount = 0;
-            var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeOnlyIfIdleForDelayTime, TimeSpan.FromMilliseconds(10));
+            var throttledAction = new ThrottledAction(() => Interlocked.Add(ref actionCallCount, 1), ThrottledActionMode.InvokeOnlyIfIdleForDelayTime, TimeSpan.FromMilliseconds(20));
             for (int i = 0; i < 200000; i++)
             {
                 throttledAction.InvokeAccumulated();

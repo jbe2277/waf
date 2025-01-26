@@ -12,7 +12,7 @@ namespace System.Waf.Foundation
         /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
         public static Task Run(Action action, TaskScheduler scheduler)
         {
-            return Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, scheduler);
+            return Run(action, scheduler, CancellationToken.None);
         }
 
         /// <summary>Queues the specified work to run on the thread pool and returns a proxy for the task returned by function.</summary>
@@ -22,7 +22,28 @@ namespace System.Waf.Foundation
         /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
         public static Task<T> Run<T>(Func<T> action, TaskScheduler scheduler)
         {
-            return Task<T>.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, scheduler);
+            return Run(action, scheduler, CancellationToken.None);
+        }
+
+        /// <summary>Queues the specified work to run on the thread pool and returns a Task object that represents that work.</summary>
+        /// <param name="action">The work to execute asynchronously</param>
+        /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
+        /// <param name="cancellation">The cancellation token that will be assigned to the new task.</param>
+        /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
+        public static Task Run(Action action, TaskScheduler scheduler, CancellationToken cancellation)
+        {
+            return Task.Factory.StartNew(action, cancellation, TaskCreationOptions.DenyChildAttach, scheduler);
+        }
+
+        /// <summary>Queues the specified work to run on the thread pool and returns a proxy for the task returned by function.</summary>
+        /// <typeparam name="T">The type of the result produced by this task.</typeparam>
+        /// <param name="action">The work to execute asynchronously</param>
+        /// <param name="scheduler">The TaskScheduler that is used to schedule the created Task.</param>
+        /// <param name="cancellation">The cancellation token that will be assigned to the new task.</param>
+        /// <returns>A task that represents the work queued to execute in the ThreadPool.</returns>
+        public static Task<T> Run<T>(Func<T> action, TaskScheduler scheduler, CancellationToken cancellation)
+        {
+            return Task<T>.Factory.StartNew(action, cancellation, TaskCreationOptions.DenyChildAttach, scheduler);
         }
 
         /// <summary>

@@ -2,7 +2,6 @@
 using Microsoft.Graph.Models;
 using Microsoft.Graph.Models.ODataErrors;
 using Microsoft.Identity.Client;
-using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Waf.NewsReader.Applications.Services;
 
@@ -41,6 +40,12 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
             builder.WithParentActivityOrWindow(() => Platform.CurrentActivity);
 #elif IOS
             builder.WithIosKeychainSecurityGroup(Foundation.NSBundle.MainBundle.BundleIdentifier);
+#elif WINDOWS
+            Microsoft.Identity.Client.Broker.BrokerExtension.WithBroker(builder, new BrokerOptions(BrokerOptions.OperatingSystems.Windows)
+            {
+                Title = AppInfo.Name
+            });
+            builder.WithParentActivityOrWindow(() => WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentWindow!.Handler.PlatformView!));
 #endif
             publicClient = builder.Build();
         }
@@ -61,8 +66,8 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         if (!cacheInitialized && publicClient is not null)
         {
             cacheInitialized = true;
-            var storageProperties = new StorageCreationPropertiesBuilder("msal.dat", FileSystem.CacheDirectory).Build();
-            var cacheHelper = await MsalCacheHelper.CreateAsync(storageProperties);
+            var storageProperties = new Microsoft.Identity.Client.Extensions.Msal.StorageCreationPropertiesBuilder("msal.dat", FileSystem.CacheDirectory).Build();
+            var cacheHelper = await Microsoft.Identity.Client.Extensions.Msal.MsalCacheHelper.CreateAsync(storageProperties);
             cacheHelper.RegisterCache(publicClient.UserTokenCache);
         }
 #endif
@@ -180,11 +185,14 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     private async Task<CustomDriveItemItemRequestBuilder> GetItemRequest(string fileName)
     {
         if (graphClient is null) throw new InvalidOperationException("graphClient is null");
-        var driveItem = await graphClient.Me.Drive.GetAsync().ConfigureAwait(false);
-        ArgumentNullException.ThrowIfNull(driveItem);
-        var appRootFolder = await graphClient.Drives[driveItem.Id].Special["AppRoot"].GetAsync().ConfigureAwait(false);
-        ArgumentNullException.ThrowIfNull(appRootFolder);
-        return graphClient.Drives[driveItem.Id].Items[appRootFolder.Id].ItemWithPath(fileName);
+
+        // Using workaround to get the driveId because AppFolder scope does not allow to the read Drive directly. https://github.com/microsoftgraph/msgraph-sdk-dotnet/issues/2624
+        var result = await graphClient.Me.Drive.WithUrl($"{graphClient.RequestAdapter.BaseUrl}/drive/special/approot:/{fileName}").GetAsync().ConfigureAwait(false);
+        var driveId = result?.Id?.Split("!")[0] ?? throw new InvalidOperationException("graphClient: not able to get the driveId");
+        
+        var appRootFolder = await graphClient.Drives[driveId].Special["AppRoot"].GetAsync().ConfigureAwait(false)
+                ?? throw new InvalidOperationException("graphClient: not able to get the appRootFolder");
+        return graphClient.Drives[driveId].Items[appRootFolder.Id].ItemWithPath(fileName);
     }
 
     static partial void GetApplicationId(ref string? applicationId);
