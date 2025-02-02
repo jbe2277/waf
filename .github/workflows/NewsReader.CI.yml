@@ -63,7 +63,7 @@ jobs:
         dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
 
   iOS:
-    runs-on: macos-14
+    runs-on: macos-15
     needs: GetVersion
     steps:
       - name: 🔖 Check-out
@@ -71,7 +71,7 @@ jobs:
 
       - name: ⚙️ Set Xcode version
         run: |
-          XCODE_ROOT=/Applications/Xcode_16.1.app
+          XCODE_ROOT=/Applications/Xcode_16.2.app
           echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
           sudo xcode-select -s $XCODE_ROOT
       

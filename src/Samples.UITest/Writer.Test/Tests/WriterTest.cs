@@ -142,14 +142,19 @@ public class WriterTest : UITest
 
             printPreviewTab.PrintButton.Click();
             var version = new Version(10, 0, 22621, 0);  // Windows 11 22H2
+            bool printCompleted = false;
             if (Environment.OSVersion.Version >= version)
             {
-                var printDialog = PrintDialog.GetDialog(Automation);
-                printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
-                Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
-                printDialog.PrintButton.Click();
+                var printDialog = PrintDialog.TryGetDialog(Automation);
+                if (printDialog is not null)  // Windows 2025 Server uses legacy print dialog
+                {
+                    printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
+                    Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
+                    printDialog.PrintButton.Invoke();
+                    printCompleted = true;
+                }
             }
-            else
+            if (!printCompleted)
             {
                 var printDialog = window.FirstModalWindow().As<LegacyPrintDialog>();
                 printDialog.PrinterList.Select(printDialog.PrintToPdf.Text);

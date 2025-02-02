@@ -1,16 +1,25 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
+using System.Diagnostics;
 
 namespace UITest.SystemViews;
 
 public class PrintDialog(FrameworkAutomationElementBase element) : Window(element)
 {
-    public static PrintDialog GetDialog(AutomationBase automation)
+    public static PrintDialog? TryGetDialog(AutomationBase automation)
     {
+        var p = Process.GetProcesses().FirstOrDefault(x => x.ProcessName.Contains("PrintDialog", StringComparison.OrdinalIgnoreCase));
+        if (p is null) return null;
         var desktop = automation.GetDesktop();
-        return desktop.Find(x => new AndCondition(x.ByControlType(ControlType.Window), x.ByName("Windows Print"))).As<PrintDialog>();
+        var topLevel = desktop.FindAllChildren(x => x.ByControlType(ControlType.Window));
+        AutomationElement? printDialog = null;
+        foreach (var x in topLevel)
+        {
+            printDialog = x.FindFirstChild(x => x.ByProcessId(p.Id));  // It is a Window on the second level with process name "PrintDialog"
+            if (printDialog is not null) break;
+        }
+        return printDialog?.As<PrintDialog>();
     }
 
     public ComboBox PrinterSelector => this.Find("printerSelector").AsComboBox();
