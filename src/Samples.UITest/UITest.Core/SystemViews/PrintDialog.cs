@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using System.Diagnostics;
 
@@ -11,12 +12,13 @@ public class PrintDialog(FrameworkAutomationElementBase element) : Window(elemen
     {
         var p = Process.GetProcesses().FirstOrDefault(x => x.ProcessName.Contains("PrintDialog", StringComparison.OrdinalIgnoreCase));
         if (p is null) return null;
+        Thread.Sleep(500);
         var desktop = automation.GetDesktop();
         var topLevel = desktop.FindAllChildren(x => x.ByControlType(ControlType.Window));
         AutomationElement? printDialog = null;
         foreach (var x in topLevel)
         {
-            printDialog = x.FindFirstChild(x => x.ByProcessId(p.Id));  // It is a Window on the second level with process name "PrintDialog"
+            printDialog = x.FindFirstChild(x => new AndCondition(x.ByControlType(ControlType.Window), x.ByProcessId(p.Id)));  // It is a Window on the second level with process name "PrintDialog"
             if (printDialog is not null) break;
         }
         return printDialog?.As<PrintDialog>();
