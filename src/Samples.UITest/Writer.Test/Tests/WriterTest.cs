@@ -149,6 +149,7 @@ public class WriterTest : UITest
                 if (printDialog is not null)  // Windows 2025 Server uses legacy print dialog
                 {
                     printDialog.PrinterSelector.Select(printDialog.PrintToPdf.Name);
+                    Thread.Sleep(100);
                     Retry.WhileFalse(() => printDialog.PrintButton.IsEnabled, throwOnTimeout: true);
                     printDialog.PrintButton.Invoke();
                     printCompleted = true;
