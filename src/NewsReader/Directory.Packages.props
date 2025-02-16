@@ -7,18 +7,18 @@
     <!-- App -->
     <PackageVersion Include="Autofac" Version="8.2.0" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
-    <PackageVersion Include="NLog" Version="5.3.4" />
-    <PackageVersion Include="Microsoft.Graph" Version="5.68.0" />
-    <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.67.2" />
-    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.67.2" />
-    <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.1" />
+    <PackageVersion Include="NLog" Version="5.4.0" />
+    <PackageVersion Include="Microsoft.Graph" Version="5.70.0" />
+    <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.68.0" />
+    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.68.0" />
+    <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.2" />
     <PackageVersion Include="System.Waf.Core" Version="8.0.2-alpha.0.81" />
 
     <!-- Unit tests -->
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageVersion Include="xunit.v3" Version="1.0.1" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="xunit.v3" Version="1.1.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
     <PackageVersion Include="System.Waf.UnitTesting.Core" Version="8.0.2-alpha.0.81" />
   </ItemGroup>
 
