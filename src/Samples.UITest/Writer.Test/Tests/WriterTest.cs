@@ -6,7 +6,7 @@ using UITest.SystemViews;
 using UITest.Writer.Views;
 using Xunit;
 
-namespace UITest.Writer;
+namespace UITest.Writer.Tests;
 
 public class WriterTest : UITest
 {
@@ -194,7 +194,7 @@ public class WriterTest : UITest
         // Create new document #3, check tab name, close tab - no save dialog comes as text has not been changed
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.NewMenuItem.Click();
-        var tab3 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
+        var tab3 = window.DocumentTab.SelectedTabItem!.As<DocumentTabItem>();
         Assert.Equal("Document 3.rtf", tab3.TabName);
         tab3.CloseButton.Click();
 
@@ -256,7 +256,7 @@ public class WriterTest : UITest
         // Open recent file #2
         fileRibbonMenu.MenuButton.Click();
         fileRibbonMenu.RecentFileListItems[^1].OpenFileButton.Click();
-        tab2 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
+        tab2 = window.DocumentTab.SelectedTabItem!.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab2.TabName);
         AssertTextEqual("Hello World 2", tab2.RichTextView.RichTextBox);
 
@@ -288,7 +288,7 @@ public class WriterTest : UITest
 
         contextMenu = startView.RecentFileListItems[0].ShowContextMenu();
         contextMenu.OpenFileMenuItem.Click();
-        tab1 = window.DocumentTab.SelectedTabItem.As<DocumentTabItem>();
+        tab1 = window.DocumentTab.SelectedTabItem!.As<DocumentTabItem>();
         Assert.Equal(Path.GetFileName(fileName2), tab1.TabName);
         AssertTextEqual("Hello World 2", tab1.RichTextView.RichTextBox);
     }

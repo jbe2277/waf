@@ -23,7 +23,7 @@ public class AddressBookTest() : UITest()
         
         AssertContactItem(contactListView.ContactItems[0], contactView, "Jesper", "Aaberg", "jesper.aaberg@example.com", "(111) 555-0100");
         AssertContactItem(contactListView.ContactItems[^1], null, "Miles", "Reid", "miles.reid@adventure-works.com", "(444) 555-0123");
-        Assert.Equal(contactListView.ContactList.SelectedItem.As<ContactListItem>().ToTuple(), contactListView.ContactItems[0].ToTuple());
+        Assert.Equal(contactListView.ContactList.SelectedItem!.As<ContactListItem>().ToTuple(), contactListView.ContactItems[0].ToTuple());
         Assert.Equal("Main St. 4567", contactView.StreetBox.Text);
         Assert.Equal("Buffalo", contactView.CityBox.Text);
         Assert.Equal("New York", contactView.StateBox.Text);
@@ -38,7 +38,7 @@ public class AddressBookTest() : UITest()
         Assert.Equal(2, contactListView.ContactItems.Count);
         Assert.Null(contactListView.ContactList.SelectedItem);
         contactListView.ContactList.Select(0);
-        var item = contactListView.ContactList.SelectedItem.As<ContactListItem>();
+        var item = contactListView.ContactList.SelectedItem!.As<ContactListItem>();
         AssertContactItem(item, contactView, "Michael", "Pfeiffer", "michael.pfeiffer@fabrikam.com", "(222) 555-0105");
         contactView.FirstnameBox.Text = "TFirstname";
         Assert.Equal("TFirstname", item.FirstnameLabel.Text);
@@ -61,7 +61,7 @@ public class AddressBookTest() : UITest()
         Assert.Equal(5, contactListView.ContactItems.Count);
         window.NewContactCommand.Click();
         Assert.Equal(6, contactListView.ContactItems.Count);
-        var newItem = contactListView.ContactList.SelectedItem.As<ContactListItem>();
+        var newItem = contactListView.ContactList.SelectedItem!.As<ContactListItem>();
 
         // ItemStatus contains the validation error message or string.Empty if no error exists
         AssertContactItem(null, contactView, "", "", "", "");
@@ -80,7 +80,7 @@ public class AddressBookTest() : UITest()
         contactListView.ContactList.Select(0);
         window.DeleteCommand.Click();
         Assert.Equal(5, contactListView.ContactItems.Count);
-        Assert.Equal(secondItem.FirstnameLabel.Text, contactListView.ContactList.SelectedItem.As<ContactListItem>().FirstnameLabel.Text);
+        Assert.Equal(secondItem.FirstnameLabel.Text, contactListView.ContactList.SelectedItem!.As<ContactListItem>().FirstnameLabel.Text);
 
         window.ExitButton.Click();
 
@@ -107,7 +107,6 @@ public class AddressBookTest() : UITest()
         window.RootTreeItem.ContactsNode.Click();
         contactListView = window.ContactLayoutView.ContactListView;
         contactView = window.ContactLayoutView.ContactView;
-        newItem = contactListView.ContactItems[^1];
         contactListView.ContactList.Select(contactListView.ContactItems.Count - 1);
         Assert.Equal("The Firstname field is required.", contactView.FirstnameBox.ItemStatus);
 

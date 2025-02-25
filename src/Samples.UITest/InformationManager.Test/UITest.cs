@@ -35,7 +35,7 @@ public abstract class UITest() : UITestBase("InformationManager.exe",
         return App = Application.Launch(Executable, args);
     }
 
-    public ShellWindow GetShellWindow() => App!.GetMainWindow(Automation).As<ShellWindow>();
+    public ShellWindow GetShellWindow() => (App!.GetMainWindow(Automation) ?? throw new ElementFoundException("MainWindow not found")).As<ShellWindow>();
 }
 
 public record LaunchArguments(string? UICulture = "en-US", string? Culture = "en-US", string? AdditionalArguments = null) : LaunchArgumentsBase
