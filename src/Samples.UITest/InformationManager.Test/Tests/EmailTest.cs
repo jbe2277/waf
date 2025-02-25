@@ -81,7 +81,6 @@ public class EmailTest() : UITest()
 
         window.RootTreeItem.SentNode.Select();
         emailListView = window.EmailLayoutView.EmailListView;
-        emailView = window.EmailLayoutView.EmailView;
         Assert.Equal(5, emailListView.EmailItems.Count);
         for (int i = 0; i < 5; i++) window.DeleteEmailCommand.Click();
         Assert.Empty(emailListView.EmailItems);
@@ -99,7 +98,6 @@ public class EmailTest() : UITest()
 
         window.RootTreeItem.SentNode.Select();
         emailListView = window.EmailLayoutView.EmailListView;
-        emailView = window.EmailLayoutView.EmailView;
         Assert.Empty(emailListView.EmailItems);
     }
 
@@ -259,7 +257,7 @@ public class EmailTest() : UITest()
         Assert.Equal(2, newEmailWindow.EmailAccountsComboBox.Items.Length);
         newEmailWindow.EmailAccountsComboBox.Select(1);
         newEmailWindow.EmailAccountsComboBox.Click();  // To close the combo box popup
-        Assert.Equal("Lea Thompson", newEmailWindow.EmailAccountsComboBox.SelectedItem.Text);
+        Assert.Equal("Lea Thompson", newEmailWindow.EmailAccountsComboBox.SelectedItem?.Text);
         newEmailWindow.CloseButton.Click();
 
         // Email accounts -> remove all of them

@@ -46,7 +46,7 @@ public static class UITestHelper
     public static Menu ShowContextMenu(this AutomationElement element)
     {
         element.RightClick();
-        return element.GetWindow().ContextMenu.AsMenu();
+        return (element.GetWindow().ContextMenu ?? throw new ElementFoundException("The ContextMenu was not found.")).AsMenu();
     }
 
     public static Window FirstModalWindow(this Window window, TimeSpan? timeout = null)
@@ -76,6 +76,7 @@ public static class UITestHelper
     private static string? TryAutomationId(this AutomationElement element) 
     { 
         try { return element.Properties.AutomationId.ValueOrDefault; } 
-        catch { } return null; 
+        catch { /* ignore exception */ } 
+        return null; 
     }
 }

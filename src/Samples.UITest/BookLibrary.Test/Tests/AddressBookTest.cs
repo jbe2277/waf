@@ -21,14 +21,14 @@ public class AddressBookTest() : UITest()
         Log.WriteLine($"List of Persons ({rowCount}):");
         for (int i = 0; i < rowCount; i++)
         {
-            Log.WriteLine($"{i:00}: {personListView.PersonDataGrid.GetRowByIndex(i).As<PersonGridRow>().FirstnameCell.Label.Text}");
+            Log.WriteLine($"{i:00}: {personListView.PersonDataGrid.GetRowByIndex(i)!.As<PersonGridRow>().FirstnameCell.Label.Text}");
         }
 
         personListView.SearchBox.Text = "H";
         Assert.Equal(2, personListView.PersonDataGrid.RowCount);
         personListView.SearchBox.Text = "Ha";
         Assert.Equal(1, personListView.PersonDataGrid.RowCount);
-        var personRow1 = personListView.PersonDataGrid.GetRowByIndex(0).As<PersonGridRow>();
+        var personRow1 = personListView.PersonDataGrid.GetRowByIndex(0)!.As<PersonGridRow>();
         personRow1.Select();
 
         AssertEqual("Harry", personRow1.FirstnameCell.Name, personView.FirstnameTextBox.Text);
@@ -59,7 +59,7 @@ public class AddressBookTest() : UITest()
         Assert.Equal(4, personListView.PersonDataGrid.RowCount);
         personListView.AddButton.Click();
         Assert.Equal(5, personListView.PersonDataGrid.RowCount);
-        var newRow = personListView.PersonDataGrid.SelectedItem.As<PersonGridRow>();
+        var newRow = personListView.PersonDataGrid.SelectedItem!.As<PersonGridRow>();
         Assert.Equal(personListView.PersonDataGrid.Rows[^1].As<PersonGridRow>().ToTuple(), newRow.ToTuple());
 
         // ItemStatus contains the validation error message or string.Empty if no error exists
@@ -76,7 +76,7 @@ public class AddressBookTest() : UITest()
         Assert.Equal("ALastname", personView.LastnameTextBox.Text);
         AssertEqual("", personView.LastnameTextBox.ItemStatus, newRow.LastnameCell.Label.ItemStatus);
 
-        var secondLastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 2).As<PersonGridRow>();
+        var secondLastRow = personListView.PersonDataGrid.GetRowByIndex(personListView.PersonDataGrid.RowCount - 2)!.As<PersonGridRow>();
         Assert.False(secondLastRow.IsOffscreen);
         Assert.StartsWith("Ron", secondLastRow.FirstnameCell.Name);
 
@@ -120,7 +120,7 @@ public class AddressBookTest() : UITest()
         window.TabControl.AddressBookTabItem.Select();
         var personListView = window.TabControl.AddressBookTabItem.PersonListView;
         var personView = window.TabControl.AddressBookTabItem.PersonView;
-        var row1 = personListView.PersonDataGrid.SelectedItem.As<PersonGridRow>();
+        var row1 = personListView.PersonDataGrid.SelectedItem!.As<PersonGridRow>();
 
         var text31 = new string('a', 31);
         var text101 = new string('a', 101);
