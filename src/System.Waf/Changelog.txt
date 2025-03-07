@@ -1,6 +1,16 @@
 Changelog
 ---------
 
+Version 8.1.0 (Release)
+- WAF: Add TaskHelper.Run overloads with CancellationToken support.
+- WAF: ThrottledAction: Improve performance of the implementation.
+- NewsReader: Migrate to MAUI 9 / .NET 9.
+- BookLib: Use async methods for database access and improve the error handling.
+- Samples: Improve logging of unhandled exceptions.
+- Samples: Reference ValueConverters via Static instead of StaticResource.
+- UITest: Migrate to FlaUI 5 and extend the UI tests.
+
+
 Version 8.0.1 (Release)
 - WAF: WeakEvent: Fixed removing of the target handler. Under certain circumstances, the wrong weak handler was collected by the garbage collector.
 - WAF: ObservableList: Fixed adding the same item multiple times.
