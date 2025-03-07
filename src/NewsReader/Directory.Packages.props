@@ -12,14 +12,14 @@
     <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.68.0" />
     <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.68.0" />
     <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.2" />
-    <PackageVersion Include="System.Waf.Core" Version="8.0.2-alpha.0.92" />
+    <PackageVersion Include="System.Waf.Core" Version="8.1.0" />
 
     <!-- Unit tests -->
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="xunit.v3" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3" Version="2.0.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
-    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="8.0.2-alpha.0.92" />
+    <PackageVersion Include="System.Waf.UnitTesting.Core" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>
