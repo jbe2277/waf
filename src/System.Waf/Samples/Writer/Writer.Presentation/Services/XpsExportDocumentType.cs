@@ -5,11 +5,9 @@ using System.Windows.Xps.Serialization;
 using Waf.Writer.Applications.Documents;
 using System.IO;
 using Waf.Writer.Presentation.Properties;
-using System.ComponentModel.Composition;
 
 namespace Waf.Writer.Presentation.Services;
 
-[Export(typeof(IXpsExportDocumentType))]
 public class XpsExportDocumentType : DocumentType, IXpsExportDocumentType
 {
     public XpsExportDocumentType() : base(Resources.XpsDocuments, ".xps")

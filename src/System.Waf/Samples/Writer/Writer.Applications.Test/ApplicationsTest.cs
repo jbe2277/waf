@@ -1,18 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
+﻿using Autofac;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
-using System.Waf.UnitTesting.Mocks;
+using Waf.Writer.Applications;
 using Waf.Writer.Applications.Controllers;
+using IContainer = Autofac.IContainer;
 
 namespace Test.Writer.Applications;
 
-[TestClass]
 public abstract class ApplicationsTest
 {
     private ModuleController? moduleController;
 
-    protected CompositionContainer Container { get; private set; } = null!;
+    protected IContainer Container { get; private set; } = null!;
 
     [TestInitialize]
     public void Initialize()
@@ -20,13 +19,9 @@ public abstract class ApplicationsTest
         CultureInfo.CurrentCulture = new CultureInfo("en-US");
         CultureInfo.CurrentUICulture = new CultureInfo("en-US");
 
-        var catalog = new AggregateCatalog();
-        OnCatalogInitialize(catalog);
-
-        Container = new(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(Container);
-        Container.Compose(batch);
+        var builder = new ContainerBuilder();
+        OnSetupBuilder(builder);
+        Container = builder.Build();
 
         OnInitialize();
     }
@@ -38,22 +33,21 @@ public abstract class ApplicationsTest
         OnCleanup();
     }
 
-    public T Get<T>() => Container.GetExportedValue<T>();
+    public T Get<T>() where T : notnull => Container.Resolve<T>();
 
-    public Lazy<T> GetLazy<T>() => new(() => Container.GetExportedValue<T>());
+    public Lazy<T> GetLazy<T>() where T : notnull => new(Get<T>);
+
+    protected virtual void OnSetupBuilder(ContainerBuilder builder)
+    {
+        builder.RegisterModule(new ApplicationsModule());
+        builder.RegisterModule(new MockPresentationModule());
+    }
 
     protected virtual void OnInitialize() { }
 
     protected virtual void OnCleanup() 
     {
         moduleController?.Shutdown();
-    }
-
-    protected virtual void OnCatalogInitialize(AggregateCatalog catalog)
-    {
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ApplicationsTest).Assembly));
     }
 
     protected void StartApp()

@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using Waf.Writer.Applications.Documents;
+﻿using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class RichTextViewModel : ZoomViewModel<IRichTextView>, IEditingCommands
 {
     private readonly IShellService shellService;
@@ -16,7 +14,6 @@ public class RichTextViewModel : ZoomViewModel<IRichTextView>, IEditingCommands
     private bool isBulletList;
     private bool isSpellCheckEnabled;
 
-    [ImportingConstructor]
     public RichTextViewModel(IRichTextView view, IShellService shellService) : base(view, shellService)
     {
         this.shellService = shellService;

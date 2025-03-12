@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
@@ -9,7 +8,6 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-[Export]
 public class ShellViewModel : ViewModel<IShellView>
 {
     private readonly IMessageService messageService;
@@ -17,7 +15,6 @@ public class ShellViewModel : ViewModel<IShellView>
     private object contentView = null!;
     private bool isPrintPreviewVisible;
 
-    [ImportingConstructor]
     public ShellViewModel(IShellView view, IMessageService messageService, IShellService shellService, IFileService fileService, ISettingsService settingsService) : base(view)
     {
         this.messageService = messageService;

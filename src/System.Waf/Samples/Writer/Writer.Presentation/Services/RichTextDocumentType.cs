@@ -4,11 +4,9 @@ using System.Globalization;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Presentation.Properties;
 using System.IO;
-using System.ComponentModel.Composition;
 
 namespace Waf.Writer.Presentation.Services;
 
-[Export(typeof(IRichTextDocumentType))]
 public class RichTextDocumentType : DocumentType, IRichTextDocumentType
 {
     private int documentCount;

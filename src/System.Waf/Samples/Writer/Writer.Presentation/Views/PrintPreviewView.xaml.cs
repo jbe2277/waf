@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.IO;
+﻿using System.IO;
 using System.IO.Packaging;
 using System.Waf.Applications;
 using System.Windows;
@@ -11,7 +10,6 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Presentation.Views;
 
-[Export(typeof(IPrintPreviewView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class PrintPreviewView : IPrintPreviewView
 {
     private const string PackagePath = "pack://temp.xps";

@@ -1,19 +1,16 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-[Export]
 public class MainViewModel : ViewModel<IMainView>
 {
     private readonly IShellService shellService;
     private IDocument? activeDocument;
     private object? activeDocumentView;
 
-    [ImportingConstructor]
     public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) : base(view)
     {
         this.shellService = shellService;

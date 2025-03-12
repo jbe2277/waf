@@ -9,6 +9,7 @@
     <PackageVersion Include="System.ComponentModel.Composition" Version="4.7.0" />
     
     <!-- Samples-->
+    <PackageVersion Include="Autofac" Version="8.2.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.13" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="8.0.13" />
