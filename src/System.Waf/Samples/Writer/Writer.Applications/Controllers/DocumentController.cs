@@ -10,7 +10,7 @@ internal abstract class DocumentController
 
     protected DocumentController(IFileService fileService)
     {
-        this.fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
+        this.fileService = fileService;
         fileService.PropertyChanged += FileServicePropertyChanged;
         fileService.Documents.CollectionChanged += DocumentsCollectionChanged;
     }

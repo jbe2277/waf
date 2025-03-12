@@ -4,12 +4,7 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-public class StartViewModel : ViewModel<IStartView>
+public class StartViewModel(IStartView view, IFileService fileService) : ViewModel<IStartView>(view)
 {
-    public StartViewModel(IStartView view, IFileService fileService) : base(view)
-    {
-        FileService = fileService;
-    }
-
-    public IFileService FileService { get; }
+    public IFileService FileService { get; } = fileService;
 }

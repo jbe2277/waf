@@ -4,20 +4,14 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-public class RichTextViewModel : ZoomViewModel<IRichTextView>, IEditingCommands
+public class RichTextViewModel(IRichTextView view, IShellService shellService) : ZoomViewModel<IRichTextView>(view, shellService), IEditingCommands
 {
-    private readonly IShellService shellService;
     private bool isBold;
     private bool isItalic;
     private bool isUnderline;
     private bool isNumberedList;
     private bool isBulletList;
     private bool isSpellCheckEnabled;
-
-    public RichTextViewModel(IRichTextView view, IShellService shellService) : base(view, shellService)
-    {
-        this.shellService = shellService;
-    }
 
     public IRichTextDocument Document { get; set; } = null!;
 
@@ -62,6 +56,6 @@ public class RichTextViewModel : ZoomViewModel<IRichTextView>, IEditingCommands
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        if (e.PropertyName == nameof(IsVisible)) shellService.ActiveEditingCommands = IsVisible ? this : null;
+        if (e.PropertyName == nameof(IsVisible)) ShellService.ActiveEditingCommands = IsVisible ? this : null;
     }
 }

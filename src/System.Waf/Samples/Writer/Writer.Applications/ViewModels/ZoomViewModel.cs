@@ -9,7 +9,6 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
 {
     private const double minZoom = 0.2;
     private const double maxZoom = 16;
-    private readonly IShellService shellService;
     private readonly DelegateCommand zoomInCommand;
     private readonly DelegateCommand zoomOutCommand;
     private readonly DelegateCommand fitToWidthCommand;
@@ -18,7 +17,7 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
 
     protected ZoomViewModel(T view, IShellService shellService) : base(view)
     {
-        this.shellService = shellService;
+        ShellService = shellService;
         DefaultZooms = new ReadOnlyCollection<string>(new[] { 2, 1.5, 1.25, 1, 0.75, 0.5 }.Select(d => string.Format(CultureInfo.CurrentCulture, "{0:P0}", d)).ToArray());
         zoomInCommand = new DelegateCommand(ZoomIn, CanZoomIn);
         zoomOutCommand = new DelegateCommand(ZoomOut, CanZoomOut);
@@ -40,7 +39,7 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
         set
         {
             if (!SetProperty(ref isVisible, value)) return;
-            shellService.ActiveZoomCommands = isVisible ? this : null;
+            ShellService.ActiveZoomCommands = isVisible ? this : null;
         }
     }
 
@@ -56,6 +55,8 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
             DelegateCommand.RaiseCanExecuteChanged(zoomInCommand, zoomOutCommand);
         }
     }
+
+    protected IShellService ShellService { get; }
 
     protected virtual void FitToWidthCore() { }
 

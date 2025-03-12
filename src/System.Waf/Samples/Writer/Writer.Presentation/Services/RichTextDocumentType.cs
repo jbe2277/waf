@@ -7,13 +7,9 @@ using System.IO;
 
 namespace Waf.Writer.Presentation.Services;
 
-public class RichTextDocumentType : DocumentType, IRichTextDocumentType
+public class RichTextDocumentType() : DocumentType(Resources.RichTextDocuments, ".rtf"), IRichTextDocumentType
 {
     private int documentCount;
-
-    public RichTextDocumentType() : base(Resources.RichTextDocuments, ".rtf")
-    {
-    }
 
     public override bool CanNew() => true;
 

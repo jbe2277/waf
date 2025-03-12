@@ -8,12 +8,8 @@ using Waf.Writer.Presentation.Properties;
 
 namespace Waf.Writer.Presentation.Services;
 
-public class XpsExportDocumentType : DocumentType, IXpsExportDocumentType
+public class XpsExportDocumentType() : DocumentType(Resources.XpsDocuments, ".xps"), IXpsExportDocumentType
 {
-    public XpsExportDocumentType() : base(Resources.XpsDocuments, ".xps")
-    {
-    }
-
     public override bool CanSave(IDocument document) => document is RichTextDocument;
 
     protected override void SaveCore(IDocument document, string fileName)
