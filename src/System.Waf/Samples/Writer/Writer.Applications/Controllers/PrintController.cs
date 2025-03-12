@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -7,20 +6,18 @@ using Waf.Writer.Applications.ViewModels;
 namespace Waf.Writer.Applications.Controllers;
 
 /// <summary>Responsible for the print related commands and the PrintPreview.</summary>
-[Export]
 internal class PrintController
 {
     private readonly IFileService fileService;
     private readonly IPrintDialogService printDialogService;
     private readonly ShellViewModel shellViewModel;
-    private readonly ExportFactory<PrintPreviewViewModel> printPreviewViewModelFactory;
+    private readonly Func<PrintPreviewViewModel> printPreviewViewModelFactory;
     private readonly DelegateCommand printPreviewCommand;
     private readonly DelegateCommand printCommand;
     private readonly DelegateCommand closePrintPreviewCommand;
     private object? previousView;
 
-    [ImportingConstructor]
-    public PrintController(IFileService fileService, IPrintDialogService printDialogService, ShellViewModel shellViewModel, ExportFactory<PrintPreviewViewModel> printPreviewViewModelFactory)
+    public PrintController(IFileService fileService, IPrintDialogService printDialogService, ShellViewModel shellViewModel, Func<PrintPreviewViewModel> printPreviewViewModelFactory)
     {
         this.fileService = fileService;
         this.printDialogService = printDialogService;
@@ -43,7 +40,7 @@ internal class PrintController
 
     private void ShowPrintPreview()
     {
-        var printPreviewViewModel = printPreviewViewModelFactory.CreateExport().Value;
+        var printPreviewViewModel = printPreviewViewModelFactory();
         printPreviewViewModel.Document = (IRichTextDocument)fileService.ActiveDocument!;
         previousView = shellViewModel.ContentView;
         shellViewModel.ContentView = printPreviewViewModel.View;

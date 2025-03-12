@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 
 namespace Waf.Writer.Applications.Services;
 
-[Export(typeof(IShellService)), Export]
 internal class ShellService : Model, IShellService
 {
     private string? documentName;
     private IEditingCommands activeEditingCommands;
     private IZoomCommands activeZoomCommands;
 
-    [ImportingConstructor]
     public ShellService()
     {
         activeEditingCommands = new DisabledEditingCommands();

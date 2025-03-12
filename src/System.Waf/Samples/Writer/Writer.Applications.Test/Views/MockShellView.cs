@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.UnitTesting.Mocks;
+﻿using System.Waf.UnitTesting.Mocks;
 using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 
 namespace Test.Writer.Applications.Views;
 
-[Export(typeof(IShellView)), Export]
 public class MockShellView : MockView<ShellViewModel>, IShellView
 {
     public bool IsVisible { get; private set; }

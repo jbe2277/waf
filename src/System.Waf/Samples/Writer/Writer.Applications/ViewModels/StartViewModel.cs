@@ -1,18 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
 
-[Export]
-public class StartViewModel : ViewModel<IStartView>
+public class StartViewModel(IStartView view, IFileService fileService) : ViewModel<IStartView>(view)
 {
-    [ImportingConstructor]
-    public StartViewModel(IStartView view, IFileService fileService) : base(view)
-    {
-        FileService = fileService;
-    }
-
-    public IFileService FileService { get; }
+    public IFileService FileService { get; } = fileService;
 }

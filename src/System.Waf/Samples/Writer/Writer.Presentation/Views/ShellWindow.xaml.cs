@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +8,6 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Presentation.Views;
 
-[Export(typeof(IShellView))]
 public partial class ShellWindow : IShellView
 {
     public ShellWindow()

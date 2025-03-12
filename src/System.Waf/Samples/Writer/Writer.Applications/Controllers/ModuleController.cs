@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 
 namespace Waf.Writer.Applications.Controllers;
 
 /// <summary>Responsible for the application lifecycle.</summary>
-[Export(typeof(IModuleController)), Export]
 internal class ModuleController : IModuleController
 {
     private readonly ISystemService systemService;
@@ -17,7 +15,6 @@ internal class ModuleController : IModuleController
     private readonly StartViewModel startViewModel;
     private readonly DelegateCommand exitCommand;
 
-    [ImportingConstructor]
     public ModuleController(ISystemService systemService, ShellService shellService, Lazy<FileController> fileController, Lazy<RichTextDocumentController> richTextDocumentController,
         Lazy<PrintController> printController, Lazy<ShellViewModel> shellViewModel, Lazy<MainViewModel> mainViewModel, Lazy<StartViewModel> startViewModel)
     {

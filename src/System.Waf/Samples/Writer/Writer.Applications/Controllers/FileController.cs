@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Properties;
@@ -9,7 +8,6 @@ using Waf.Writer.Applications.ViewModels;
 namespace Waf.Writer.Applications.Controllers;
 
 /// <summary>Responsible for the file related commands.</summary>
-[Export]
 internal class FileController
 {
     private readonly IMessageService messageService;
@@ -17,7 +15,7 @@ internal class FileController
     private readonly IFileDialogService fileDialogService;
     private readonly IShellService shellService;
     private readonly FileService fileService;
-    private readonly ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory;
+    private readonly Func<SaveChangesViewModel> saveChangesViewModelFactory;
     private readonly List<IDocumentType> documentTypes;
     private readonly RecentFileList recentFileList;
     private readonly DelegateCommand closeCommand;
@@ -26,9 +24,8 @@ internal class FileController
     private readonly AppSettings settings;
     private IDocument? lastActiveDocument;
 
-    [ImportingConstructor]
     public FileController(IMessageService messageService, ISystemService systemService, IFileDialogService fileDialogService, ISettingsService settingsService, IShellService shellService, 
-        FileService fileService, ExportFactory<SaveChangesViewModel> saveChangesViewModelFactory, IRichTextDocumentType richTextDocumentType, IXpsExportDocumentType xpsExportDocumentType)
+        FileService fileService, Func<SaveChangesViewModel> saveChangesViewModelFactory, IRichTextDocumentType richTextDocumentType, IXpsExportDocumentType xpsExportDocumentType)
     {
         this.messageService = messageService;
         this.systemService = systemService;
@@ -178,7 +175,7 @@ internal class FileController
         if (!modifiedDocuments.Any()) return true;
 
         // Show the save changes view to the user
-        var saveChangesViewModel = saveChangesViewModelFactory.CreateExport().Value;
+        var saveChangesViewModel = saveChangesViewModelFactory();
         saveChangesViewModel.Documents = modifiedDocuments;
         var dialogResult = saveChangesViewModel.ShowDialog(shellService.ShellView);
         if (dialogResult == true)

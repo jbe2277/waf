@@ -4,18 +4,12 @@ using System.Globalization;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Presentation.Properties;
 using System.IO;
-using System.ComponentModel.Composition;
 
 namespace Waf.Writer.Presentation.Services;
 
-[Export(typeof(IRichTextDocumentType))]
-public class RichTextDocumentType : DocumentType, IRichTextDocumentType
+public class RichTextDocumentType() : DocumentType(Resources.RichTextDocuments, ".rtf"), IRichTextDocumentType
 {
     private int documentCount;
-
-    public RichTextDocumentType() : base(Resources.RichTextDocuments, ".rtf")
-    {
-    }
 
     public override bool CanNew() => true;
 

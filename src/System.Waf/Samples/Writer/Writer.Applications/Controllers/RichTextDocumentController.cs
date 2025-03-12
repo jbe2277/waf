@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
@@ -7,16 +6,14 @@ using Waf.Writer.Applications.ViewModels;
 namespace Waf.Writer.Applications.Controllers;
 
 /// <summary>Responsible to synchronize RTF Documents with RichTextViewModels.</summary>
-[Export]
 internal class RichTextDocumentController : DocumentController
 {
     private readonly IFileService fileService;
     private readonly MainViewModel mainViewModel;
-    private readonly ExportFactory<RichTextViewModel> richTextViewModelFactory;
+    private readonly Func<RichTextViewModel> richTextViewModelFactory;
     private readonly Dictionary<IRichTextDocument, RichTextViewModel> richTextViewModels = [];
 
-    [ImportingConstructor]
-    public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, ExportFactory<RichTextViewModel> richTextViewModelFactory) : base(fileService)
+    public RichTextDocumentController(IFileService fileService, MainViewModel mainViewModel, Func<RichTextViewModel> richTextViewModelFactory) : base(fileService)
     {
         this.fileService = fileService;
         this.mainViewModel = mainViewModel;
@@ -27,7 +24,7 @@ internal class RichTextDocumentController : DocumentController
     protected override void OnDocumentAdded(IDocument document)
     {
         if (document is not IRichTextDocument richTextDocument) return;
-        var richTextViewModel = richTextViewModelFactory.CreateExport().Value;
+        var richTextViewModel = richTextViewModelFactory();
         richTextViewModel.Document = richTextDocument;
         richTextViewModels.Add(richTextDocument, richTextViewModel);
         mainViewModel.DocumentViews.Add(richTextViewModel.View);

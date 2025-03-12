@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Documents;
 using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.Services;
 
-[Export(typeof(IPrintDialogService))]
 internal sealed class PrintDialogService : IPrintDialogService
 {
     private readonly PrintDialog printDialog = new();

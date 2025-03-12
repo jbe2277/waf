@@ -1,16 +1,11 @@
 ﻿namespace Waf.Writer.Applications.Documents;
 
-public abstract class Document : Model, IDocument
+public abstract class Document(IDocumentType documentType) : Model, IDocument
 {
     private string fileName = null!;
     private bool modified;
 
-    protected Document(IDocumentType documentType)
-    {
-        DocumentType = documentType ?? throw new ArgumentNullException(nameof(documentType));
-    }
-
-    public IDocumentType DocumentType { get; }
+    public IDocumentType DocumentType { get; } = documentType;
 
     public string FileName
     {

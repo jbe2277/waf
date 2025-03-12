@@ -1,27 +1,25 @@
 ﻿using NLog.Targets.Wrappers;
 using NLog.Targets;
 using NLog;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
-using System.Reflection;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
 using System.Windows.Markup;
 using Waf.Writer.Applications.Properties;
-using Waf.Writer.Applications.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Waf.Writer.Presentation.Properties;
+using Autofac;
+using Waf.Writer.Applications;
+using IContainer = Autofac.IContainer;
 
 namespace Waf.Writer.Presentation;
 
 public partial class App
 {
     private static readonly Lazy<string> logFileName = new(() => ((FileTarget)((AsyncTargetWrapper)LogManager.Configuration.FindTargetByName("fileTarget")).WrappedTarget).FileName.Render(new LogEventInfo()));
-    private AggregateCatalog? catalog;
-    private CompositionContainer? container;
-    private IEnumerable<IModuleController> moduleControllers = [];
+    private IContainer? container;
+    private IReadOnlyList<IModuleController> moduleControllers = [];
 
     public static string LogFileName => logFileName.Value;
 
@@ -46,22 +44,18 @@ public partial class App
             appConfig = new AppConfig();
         }
 
-        catalog = new();
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
-        catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Writer.Presentation
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Writer.Applications
-        container = new(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(container);
-        container.Compose(batch);
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new ApplicationsModule());
+        builder.RegisterModule(new PresentationModule());
+        container = builder.Build();
 
-        var settingsService = container.GetExportedValue<ISettingsService>();
+        var settingsService = container.Resolve<ISettingsService>();
         settingsService.ErrorOccurred += (_, e) => Log.Default.Error(e.Error, "Error in SettingsService");
         var appSettings = settingsService.Get<AppSettings>();
         InitializeCultures(appConfig, appSettings);
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        moduleControllers = container.GetExportedValues<IModuleController>();
+        moduleControllers = container.Resolve<IReadOnlyList<IModuleController>>();
         foreach (var x in moduleControllers) x.Initialize();
         foreach (var x in moduleControllers) x.Run();
     }
@@ -70,7 +64,6 @@ public partial class App
     {
         foreach (var x in moduleControllers.Reverse()) x.Shutdown();
         container?.Dispose();
-        catalog?.Dispose();
         Log.App.Info("{0} closed", ApplicationInfo.ProductName);
         base.OnExit(e);
     }

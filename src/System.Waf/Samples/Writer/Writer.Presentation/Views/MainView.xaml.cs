@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Waf.Writer.Applications.Views;
+﻿using Waf.Writer.Applications.Views;
 using System.Windows;
 
 namespace Waf.Writer.Presentation.Views;
 
-[Export(typeof(IMainView))]
 public partial class MainView : IMainView
 {
     private ContentViewState contentViewState;

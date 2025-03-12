@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.Writer.Applications.Documents;
 
 namespace Waf.Writer.Applications.Services;
 
-[Export(typeof(IFileService)), Export]
 internal class FileService : Model, IFileService
 {
     private readonly ObservableList<IDocument> documents = [];
     private IDocument? activeDocument;
 
-    [ImportingConstructor]
     public FileService()
     {
         Documents = new ReadOnlyObservableList<IDocument>(documents);

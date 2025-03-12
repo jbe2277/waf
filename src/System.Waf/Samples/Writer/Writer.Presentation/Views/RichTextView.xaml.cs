@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -8,7 +7,6 @@ using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Presentation.Views;
 
-[Export(typeof(IRichTextView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class RichTextView : IRichTextView
 {
     private readonly Lazy<RichTextViewModel> viewModel;
