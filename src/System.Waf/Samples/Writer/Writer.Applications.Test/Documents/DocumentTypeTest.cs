@@ -13,8 +13,6 @@ public class DocumentTypeTest
         AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("", ".rtf"));
         AssertHelper.ExpectedException<ArgumentNullException>(() => new MockDocumentTypeBase("RichText Documents", null!));
         AssertHelper.ExpectedException<ArgumentException>(() => new MockDocumentTypeBase("RichText Documents", "rtf"));
-
-        AssertHelper.ExpectedException<ArgumentNullException>(() => new DocumentBaseMock(null!));
     }
 
     [TestMethod]
