@@ -1,7 +1,4 @@
 
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.HandleException(System.Exception,System.Boolean)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDomainUnhandledException(System.Object,System.UnhandledExceptionEventArgs)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.AppDispatcherUnhandledException(System.Object,System.Windows.Threading.DispatcherUnhandledExceptionEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Scope = "member", Target = "~F:Waf.Writer.Presentation.Views.ShellWindow.zoomBox")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Scope = "type", Target = "~T:Waf.Writer.Presentation.App")]
@@ -19,5 +16,5 @@
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.RichTextDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.Services.XpsExportDocumentType.SaveCore(Waf.Writer.Applications.Documents.IDocument,System.String)")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Waf.Writer.Presentation.App.OnStartup(System.Windows.StartupEventArgs)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.Writer.Presentation.Services.PrintDialogService")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.Writer.Presentation.Services.SystemService")]
+[assembly: SuppressMessage("Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.Writer.Presentation.Services.PrintDialogService")]
+[assembly: SuppressMessage("Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.Writer.Presentation.Services.SystemService")]

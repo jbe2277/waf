@@ -2,7 +2,7 @@
 
 namespace Waf.NewsReader.MauiSystem;
 
-public class MauiModule : Module
+internal sealed class MauiModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

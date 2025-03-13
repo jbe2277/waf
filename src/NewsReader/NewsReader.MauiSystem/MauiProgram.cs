@@ -5,7 +5,7 @@ using Waf.NewsReader.Presentation;
 
 namespace Waf.NewsReader.MauiSystem;
 
-public static class MauiProgram
+internal static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {

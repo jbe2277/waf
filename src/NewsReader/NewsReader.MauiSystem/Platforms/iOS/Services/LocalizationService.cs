@@ -5,7 +5,7 @@ using Waf.NewsReader.Applications.Services;
 namespace Waf.NewsReader.MauiSystem.Platforms.iOS.Services;
 
 // See https://github.com/mono/mono/issues/16827
-public class LocalizationService : ILocalizationService
+internal sealed class LocalizationService : ILocalizationService
 {
     public void Initialize()
     {
@@ -16,7 +16,7 @@ public class LocalizationService : ILocalizationService
         var supportedCultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
 
         // Note: This is a very simple approach to find the first culture with the country code -> might come with the wrong language
-        var culture = supportedCultures.FirstOrDefault(x => x.Name.Substring(3) == cultureCode);
+        var culture = supportedCultures.FirstOrDefault(x => x.Name[3..] == cultureCode);
         if (culture != null)
         {
             CultureInfo.CurrentCulture = CultureInfo.DefaultThreadCurrentCulture = culture;

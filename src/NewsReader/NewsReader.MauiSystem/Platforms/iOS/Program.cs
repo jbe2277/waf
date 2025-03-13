@@ -2,7 +2,7 @@
 
 namespace Waf.NewsReader.MauiSystem.Platforms.iOS;
 
-public class Program
+internal sealed class Program
 {
     private static void Main(string[] args)
     {
