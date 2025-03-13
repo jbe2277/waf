@@ -34,7 +34,7 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
+                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
                                             Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
                                         <SwipeItem.IconImageSource>
                                             <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
@@ -55,13 +55,13 @@
                         <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
-                                    <MenuFlyoutItem Command="{Binding BindingContext.ReadUnreadCommand, Source={Reference listView}}" CommandParameter="{Binding}" 
+                                    <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
                                         Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
                             <VerticalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.ShowFeedItemViewCommand, Source={Reference listView}}" CommandParameter="{Binding}"/>
+                                <TapGestureRecognizer Command="{Binding ShowFeedItemViewCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"/>
                             </VerticalStackLayout.GestureRecognizers>
 
                             <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
