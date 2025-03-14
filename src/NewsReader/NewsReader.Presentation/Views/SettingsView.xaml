@@ -4,6 +4,7 @@
             xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
             xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
+            xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
             Title="{x:Static p:Resources.Settings}" x:DataType="vm:SettingsViewModel">
     <ContentPage Title="{x:Static p:Resources.General}">
@@ -15,9 +16,9 @@
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{x:Static p:Resources.DataManagement}" Style="{StaticResource Title}"/>
                 <Label Text="{x:Static p:Resources.StoreFeedItemsFor}"/>
-                <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={Static c:LocalizeDisplayItemLifetimeConverter.Instance}}"/>
+                <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={Static c:LocalizeDisplayItemLifetimeConverter.Instance}, x:DataType=dm:DisplayItemLifetime}"/>
                 <Label Text="{x:Static p:Resources.StoreAtMaximumFeedItemsPerFeed}"/>
-                <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={Static c:LocalizeDisplayMaxItemsLimitConverter.Instance}}"/>
+                <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={Static c:LocalizeDisplayMaxItemsLimitConverter.Instance}, x:DataType=dm:DisplayMaxItemsLimit}"/>
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage>
