@@ -5,8 +5,8 @@
     <Setting Name="ModuleAssemblies" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;string&gt;Waf.BookLibrary.Reporting.Applications.dll&lt;/string&gt;
-  &lt;string&gt;Waf.BookLibrary.Reporting.Presentation.dll&lt;/string&gt;
+  &lt;string&gt;Waf.BookLibrary.Reporting.Applications.ReportingApplicationsModule, Waf.BookLibrary.Reporting.Applications&lt;/string&gt;
+  &lt;string&gt;Waf.BookLibrary.Reporting.Presentation.ReportingPresentationModule, Waf.BookLibrary.Reporting.Presentation&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>

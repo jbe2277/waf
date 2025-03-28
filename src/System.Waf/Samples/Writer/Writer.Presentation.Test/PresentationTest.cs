@@ -14,7 +14,7 @@ public abstract class PresentationTest : ApplicationsTest
         LogManager.LogFactory.Dispose();  // Disable logging in unit tests
     }
 
-    protected override void OnSetupBuilder(ContainerBuilder builder)
+    protected override void ConfigureContainer(ContainerBuilder builder)
     {
         builder.RegisterModule(new ApplicationsModule());
         builder.RegisterModule(new MockPresentationModule(useMockDocument: false));

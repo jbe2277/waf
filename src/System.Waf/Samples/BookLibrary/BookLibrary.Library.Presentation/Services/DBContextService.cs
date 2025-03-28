@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
 using System.Waf.Applications;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +9,6 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.Services;
 
-[Export(typeof(IDBContextService))]
 internal sealed class DBContextService : IDBContextService
 {
     private const string ResourcesDirectoryName = "Resources";

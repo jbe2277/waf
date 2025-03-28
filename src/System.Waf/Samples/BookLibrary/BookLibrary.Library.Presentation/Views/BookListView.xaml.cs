@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Presentation.Controls;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +8,6 @@ using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Waf.BookLibrary.Library.Presentation.Views;
 
-[Export(typeof(IBookListView))]
 public partial class BookListView : IBookListView
 {
     private readonly Lazy<BookListViewModel> viewModel;

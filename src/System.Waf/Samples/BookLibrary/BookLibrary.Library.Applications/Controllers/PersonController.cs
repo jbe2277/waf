@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
@@ -9,7 +8,6 @@ using Waf.BookLibrary.Library.Domain;
 namespace Waf.BookLibrary.Library.Applications.Controllers;
 
 /// <summary>Responsible for the person management and the master / detail views.</summary>
-[Export]
 internal class PersonController
 {
     private readonly IMessageService messageService;
@@ -22,7 +20,6 @@ internal class PersonController
     private readonly DelegateCommand removeCommand;
     private readonly DelegateCommand createNewEmailCommand;
 
-    [ImportingConstructor]
     public PersonController(IMessageService messageService, IShellService shellService, IEntityService entityService, IEmailService emailService,
         PersonListViewModel personListViewModel, PersonViewModel personViewModel)
     {

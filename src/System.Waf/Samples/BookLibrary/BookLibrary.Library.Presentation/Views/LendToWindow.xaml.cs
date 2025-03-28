@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.ViewModels;
@@ -8,7 +7,6 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.Views;
 
-[Export(typeof(ILendToView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class LendToWindow : ILendToView
 {
     private readonly Lazy<LendToViewModel> viewModel;

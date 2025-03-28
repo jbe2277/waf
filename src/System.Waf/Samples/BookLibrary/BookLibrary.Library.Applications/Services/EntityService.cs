@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.Services;
 
-[Export(typeof(IEntityService)), Export]
 internal class EntityService : IEntityService
 {
     private ObservableCollection<Book>? books;

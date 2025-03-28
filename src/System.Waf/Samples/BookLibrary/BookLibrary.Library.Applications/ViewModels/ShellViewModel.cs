@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Properties;
@@ -8,14 +7,12 @@ using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-[Export]
 public class ShellViewModel : ViewModel<IShellView>
 {
     private readonly IMessageService messageService;
     private readonly AppSettings settings;
     private bool isValid = true;
 
-    [ImportingConstructor]
     public ShellViewModel(IShellView view, IMessageService messageService, IShellService shellService, ISettingsService settingsService) : base(view)
     {
         this.messageService = messageService;
