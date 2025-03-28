@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class LendToViewModel : ViewModel<ILendToView>
 {
     private readonly DelegateCommand okCommand;
@@ -15,7 +13,6 @@ public class LendToViewModel : ViewModel<ILendToView>
     private Person? selectedPerson;
     private bool dialogResult;
 
-    [ImportingConstructor]
     public LendToViewModel(ILendToView view) : base(view)
     {
         okCommand = new(OkHandler);

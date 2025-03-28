@@ -20,7 +20,7 @@ public abstract class ApplicationsTest
         CultureInfo.CurrentUICulture = new CultureInfo("en-US");
 
         var builder = new ContainerBuilder();
-        OnSetupBuilder(builder);
+        ConfigureContainer(builder);
         Container = builder.Build();
 
         OnInitialize();
@@ -28,16 +28,16 @@ public abstract class ApplicationsTest
 
     [TestCleanup]
     public void Cleanup()
-    {
-        Container?.Dispose();
+    {        
         OnCleanup();
+        Container?.Dispose();
     }
 
     public T Get<T>() where T : notnull => Container.Resolve<T>();
 
     public Lazy<T> GetLazy<T>() where T : notnull => new(Get<T>);
 
-    protected virtual void OnSetupBuilder(ContainerBuilder builder)
+    protected virtual void ConfigureContainer(ContainerBuilder builder)
     {
         builder.RegisterModule(new ApplicationsModule());
         builder.RegisterModule(new MockPresentationModule());

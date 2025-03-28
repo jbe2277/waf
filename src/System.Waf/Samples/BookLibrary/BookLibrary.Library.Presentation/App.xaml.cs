@@ -1,19 +1,24 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Autofac;
+using Autofac.Core;
+using Microsoft.Extensions.Configuration;
 using NLog;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
-using System.ComponentModel.Composition;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
+using Waf.BookLibrary.Library.Applications;
 using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Presentation.Properties;
+using IContainer = Autofac.IContainer;
 
 namespace Waf.BookLibrary.Library.Presentation;
 
@@ -29,9 +34,8 @@ public partial class App
         ("BookLib.Rep.A", LogLevel.Info),
     ];
 
-    private AggregateCatalog? catalog;
-    private CompositionContainer? container;
-    private IEnumerable<IModuleController> moduleControllers = [];
+    private IContainer? container;
+    private IReadOnlyList<IModuleController> moduleControllers = [];
 
     public App()
     {
@@ -86,36 +90,41 @@ public partial class App
             appConfig = new AppConfig();
         }
 
-        catalog = new();
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(IMessageService).Assembly));  // WinApplicationFramework
-        catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));   // Waf.BookLibrary.Library.Presentation
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));   // Waf.BookLibrary.Library.Applications
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new ApplicationsModule());
+        builder.RegisterModule(new PresentationModule());
 
         // Load module assemblies as well (e.g. Reporting extension). See App.config file.
         var baseDir = AppContext.BaseDirectory;
+        AssemblyLoadContext.Default.Resolving += ResolvingExtensions;
         foreach (var x in Settings.Default.ModuleAssemblies)
-        {            
-            catalog.Catalogs.Add(new AssemblyCatalog(Path.Combine(baseDir, x!)));
+        {
+            var module = Type.GetType(x ?? "") ?? throw new InvalidOperationException("Type not found: " + x);
+            builder.RegisterModule((IModule)Activator.CreateInstance(module)!);
         }
 
-        container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(container);
-        container.Compose(batch);
+        container = builder.Build();
 
         InitializeCultures(appConfig);
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        moduleControllers = container.GetExportedValues<IModuleController>();
+        moduleControllers = container.Resolve<IReadOnlyList<IModuleController>>();
         foreach (var x in moduleControllers) x.Initialize();
         foreach (var x in moduleControllers) x.Run();
+
+
+        static Assembly? ResolvingExtensions(AssemblyLoadContext context, AssemblyName name)
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, name.Name + ".dll");
+            if (!File.Exists(path)) return null;
+            return context.LoadFromAssemblyPath(path);
+        }
     }
 
     protected override void OnExit(ExitEventArgs e)
     {
         foreach (var x in moduleControllers.Reverse()) x.Shutdown();
         container?.Dispose();
-        catalog?.Dispose();
         Log.App.Info("{0} closed", ApplicationInfo.ProductName);
         base.OnExit(e);
     }

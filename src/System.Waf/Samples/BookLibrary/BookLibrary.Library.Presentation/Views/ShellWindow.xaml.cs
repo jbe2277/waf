@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Waf.Applications;
 using System.Windows;
 using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Waf.BookLibrary.Library.Presentation.Views;
 
-[Export(typeof(IShellView))]
 public partial class ShellWindow : IShellView
 {
     public ShellWindow()

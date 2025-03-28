@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-[Export]
 public class BookViewModel : ViewModel<IBookView>
 {
     private bool isValid = true;
     private Book? book;
 
-    [ImportingConstructor]
     public BookViewModel(IBookView view) : base(view)
     {
     }

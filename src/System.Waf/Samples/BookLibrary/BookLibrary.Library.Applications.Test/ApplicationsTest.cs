@@ -1,30 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Waf.UnitTesting.Mocks;
-using Waf.BookLibrary.Library.Applications.Controllers;
+﻿using Autofac;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Waf.BookLibrary.Library.Applications;
+using IContainer = Autofac.IContainer;
 
 namespace Test.BookLibrary.Library.Applications;
 
 [TestClass]
 public abstract class ApplicationsTest
 {
-    public CompositionContainer? Container { get; private set; }
+    public IContainer Container { get; private set; } = null!;
 
     [TestInitialize]
     public void Initialize()
     {
-        var catalog = new AggregateCatalog();
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ApplicationsTest).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
-
-        OnCatalogInitialize(catalog);
-
-        Container = new(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(Container);
-        Container.Compose(batch);
+        var builder = new ContainerBuilder();
+        ConfigureContainer(builder);
+        Container = builder.Build();
 
         OnInitialize();
     }
@@ -36,11 +27,15 @@ public abstract class ApplicationsTest
         Container?.Dispose();
     }
 
-    public T Get<T>() => Container!.GetExportedValue<T>();
+    public T Get<T>() where T : notnull => Container.Resolve<T>();
 
-    public Lazy<T> GetLazy<T>() => new(() => Container!.GetExportedValue<T>());
+    public Lazy<T> GetLazy<T>() where T : notnull => new(Get<T>);
 
-    protected virtual void OnCatalogInitialize(AggregateCatalog catalog) { }
+    protected virtual void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.RegisterModule(new ApplicationsModule());
+        builder.RegisterModule(new MockPresentationModule());
+    }
 
     protected virtual void OnInitialize() { }
 

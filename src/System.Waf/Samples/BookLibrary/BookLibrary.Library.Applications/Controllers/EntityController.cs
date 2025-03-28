@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
@@ -10,7 +9,6 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 namespace Waf.BookLibrary.Library.Applications.Controllers;
 
 /// <summary>Responsible for the database connection and the save operation.</summary>
-[Export(typeof(IEntityController)), Export]
 internal class EntityController : IEntityController
 {
     private readonly EntityService entityService;
@@ -21,7 +19,6 @@ internal class EntityController : IEntityController
     private readonly AsyncDelegateCommand saveCommand;
     private DbContext? bookLibraryContext;
 
-    [ImportingConstructor]
     public EntityController(EntityService entityService, IMessageService messageService, IShellService shellService, IDBContextService dBContextService, Lazy<ShellViewModel> shellViewModel)
     {
         this.entityService = entityService;

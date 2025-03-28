@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.BookLibrary.Library.Applications.Views;
 using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-[Export]
 public class PersonListViewModel : ViewModel<IPersonListView>
 {
     private readonly ObservableList<Person> selectedPersons = [];
@@ -15,7 +13,6 @@ public class PersonListViewModel : ViewModel<IPersonListView>
     private string filterText = "";
     private Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? sort;
 
-    [ImportingConstructor]
     public PersonListViewModel(IPersonListView view) : base(view)
     {
     }

@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿namespace Waf.BookLibrary.Library.Applications.Services;
 
-namespace Waf.BookLibrary.Library.Applications.Services;
-
-[Export(typeof(IShellService)), Export]
 internal class ShellService : Model, IShellService
 {
     public object? ShellView { get; set; }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.DataModels;
 using Waf.BookLibrary.Library.Applications.Properties;
@@ -10,7 +9,6 @@ using Waf.BookLibrary.Library.Domain;
 namespace Waf.BookLibrary.Library.Applications.Controllers;
 
 /// <summary>Responsible for the book management and the master / detail views.</summary>
-[Export]
 internal class BookController
 {
     private readonly IMessageService messageService;
@@ -18,15 +16,14 @@ internal class BookController
     private readonly IEntityService entityService;
     private readonly BookListViewModel bookListViewModel;
     private readonly BookViewModel bookViewModel;
-    private readonly ExportFactory<LendToViewModel> lendToViewModelFactory;
+    private readonly Func<LendToViewModel> lendToViewModelFactory;
     private readonly DelegateCommand addNewCommand;
     private readonly DelegateCommand removeCommand;
     private readonly DelegateCommand lendToCommand;
     private SynchronizingList<BookDataModel, Book>? bookDataModels;
 
-    [ImportingConstructor]
     public BookController(IMessageService messageService, IShellService shellService, IEntityService entityService, BookListViewModel bookListViewModel, 
-        BookViewModel bookViewModel, ExportFactory<LendToViewModel> lendToViewModelFactory)
+        BookViewModel bookViewModel, Func<LendToViewModel> lendToViewModelFactory)
     {
         this.messageService = messageService;
         this.shellService = shellService;
@@ -98,7 +95,7 @@ internal class BookController
 
     private void LendTo(Book book)
     {
-        var lendToViewModel = lendToViewModelFactory.CreateExport().Value;
+        var lendToViewModel = lendToViewModelFactory();
         lendToViewModel.Book = book;
         lendToViewModel.Persons = entityService.Persons;
         lendToViewModel.SelectedPerson = book.LendTo;

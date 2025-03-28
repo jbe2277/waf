@@ -1,17 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.Composition.Hosting;
+﻿using Autofac;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.BookLibrary.Library.Applications;
-using Waf.BookLibrary.Reporting.Applications.Controllers;
+using Waf.BookLibrary.Reporting.Applications;
 
 namespace Test.BookLibrary.Reporting.Applications;
 
 [TestClass]
 public class ReportingTest : ApplicationsTest
 {
-    protected override void OnCatalogInitialize(AggregateCatalog catalog)
+    protected override void ConfigureContainer(ContainerBuilder builder)
     {
-        base.OnCatalogInitialize(catalog);
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ReportingTest).Assembly));
+        base.ConfigureContainer(builder);
+        builder.RegisterModule(new ReportingApplicationsModule());
+        builder.RegisterModule(new MockReportingPresentationModule());
     }
 }

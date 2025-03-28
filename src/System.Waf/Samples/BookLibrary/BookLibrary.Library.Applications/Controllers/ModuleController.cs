@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.BookLibrary.Library.Applications.Properties;
 using Waf.BookLibrary.Library.Applications.Services;
@@ -8,7 +7,6 @@ using Waf.BookLibrary.Library.Applications.ViewModels;
 namespace Waf.BookLibrary.Library.Applications.Controllers;
 
 /// <summary>Responsible for the module lifecycle.</summary>
-[Export(typeof(IModuleController)), Export]
 internal class ModuleController : IModuleController
 {
     private readonly IMessageService messageService;
@@ -19,7 +17,6 @@ internal class ModuleController : IModuleController
     private readonly Lazy<ShellViewModel> shellViewModel;
     private readonly DelegateCommand exitCommand;
 
-    [ImportingConstructor]
     public ModuleController(IMessageService messageService, IEntityController entityController, BookController bookController, PersonController personController,
         ShellService shellService, Lazy<ShellViewModel> shellViewModel)
     {
