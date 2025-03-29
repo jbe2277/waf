@@ -32,7 +32,7 @@ public class BookLibraryTest() : UITest()
         Assert.Equal(13, bookListView.BookDataGrid.RowCount);
         bookListView.SearchBox.Text = "Harr";
         Assert.Equal(7, bookListView.BookDataGrid.RowCount);
-        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(0)!.As<BookGridRow>();
+        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(1)!.As<BookGridRow>();
         bookRow1.Select();
 
         AssertEqual("Harry Potter and the Deathly Hallows", bookRow1.TitleCell.Name, bookView.TitleTextBox.Text);
@@ -97,7 +97,7 @@ public class BookLibraryTest() : UITest()
         bookListView.AddButton.Click();
         Assert.Equal(42, bookListView.BookDataGrid.RowCount);
         var newRow = bookListView.BookDataGrid.SelectedItem!.As<BookGridRow>();
-        Assert.Equal(bookListView.BookDataGrid.Rows[^1], newRow);
+        Assert.Equal(bookListView.BookDataGrid.Rows[0], newRow);
 
         // ItemStatus contains the validation error message or string.Empty if no error exists
         AssertEqual("", bookView.TitleTextBox.Text, newRow.TitleCell.Label.Text);
@@ -115,7 +115,7 @@ public class BookLibraryTest() : UITest()
 
         var secondLastRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 2)!.As<BookGridRow>();
         Assert.False(secondLastRow.IsOffscreen);
-        Assert.StartsWith("WPF", secondLastRow.TitleCell.Name);
+        Assert.StartsWith("The Lord of the Rings - The Two Towers", secondLastRow.TitleCell.Name);
 
         var lastNotRemovedRow = bookListView.BookDataGrid.GetRowByIndex(bookListView.BookDataGrid.RowCount - 3);
         bookListView.BookDataGrid.Select(bookListView.BookDataGrid.RowCount - 2);
@@ -197,7 +197,7 @@ public class BookLibraryTest() : UITest()
         var bookView = window.TabControl.BookLibraryTabItem.BookView;
 
         bookListView.SearchBox.Text = "Harr";
-        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(0)!.As<BookGridRow>();
+        var bookRow1 = bookListView.BookDataGrid.GetRowByIndex(1)!.As<BookGridRow>();
         bookRow1.Select();
 
         AssertEqual("Ginny Weasley", bookRow1.LendToCell.LendToLabel.Name, bookView.LendToTextBox.Text);
