@@ -5,6 +5,7 @@ using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
+using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
@@ -57,7 +58,7 @@ public class ModuleControllerTest : AddressBookTest
         controller.Initialize();
 
         Assert.IsTrue(controller.Root.Contacts.Any());
-        var navigationService = Get<MockNavigationService>();
+        var navigationService = Get<NavigationService>();
         var node = navigationService.NavigationNodes.Single();
         Assert.AreEqual("Contacts", node.Name);
 
@@ -67,19 +68,19 @@ public class ModuleControllerTest : AddressBookTest
 
         // Show the address book
 
-        var shellService = Get<ShellService>();
+        var shellService = Get<IShellService>();
         var shellView = Get<MockShellView>();
         Assert.IsNull(shellService.ContentView);
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
-        node.ShowAction();
+        node.IsSelected = true;
 
         Assert.IsNotNull(shellService.ContentView);
         Assert.AreEqual(2, shellView.ToolBarCommands.Count);
 
         // Close the address book
 
-        node.CloseAction();
+        node.IsSelected = false;
 
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 

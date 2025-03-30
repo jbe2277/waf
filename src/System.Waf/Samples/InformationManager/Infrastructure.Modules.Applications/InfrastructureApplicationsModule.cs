@@ -14,8 +14,7 @@ public sealed class InfrastructureApplicationsModule : Module
         builder.RegisterType<ModuleController>().As<IModuleController>().AsSelf().SingleInstance();
 
         builder.RegisterType<NavigationService>().As<INavigationService>().AsSelf().SingleInstance();
-        builder.RegisterType<ShellService>().As<IShellService>().AsSelf().SingleInstance();
 
-        builder.RegisterType<ShellViewModel>().As<IShellViewModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ShellViewModel>().As<IShellService>().AsSelf().SingleInstance();
     }
 }

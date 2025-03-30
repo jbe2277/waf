@@ -5,4 +5,6 @@ namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 public class MockSystemService : ISystemService
 {
     public string DataDirectory { get; set; } = null!;
+
+    public void CommitUIChanges() { }
 }
