@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using System.IO.Packaging;
+﻿using System.IO.Packaging;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Controllers;
 
-[Export(typeof(IDocumentService)), Export]
 internal class DocumentController : IDocumentService
 {
     private const string fileName = "InformationManager.datx";
@@ -13,7 +11,6 @@ internal class DocumentController : IDocumentService
     private readonly ISystemService systemService;
     private Package? package;
 
-    [ImportingConstructor]
     public DocumentController(ISystemService systemService)
     {
         this.systemService = systemService;

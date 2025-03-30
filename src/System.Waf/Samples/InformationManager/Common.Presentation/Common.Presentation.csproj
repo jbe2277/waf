@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" />
     <PackageReference Include="NLog" />
   </ItemGroup>
 

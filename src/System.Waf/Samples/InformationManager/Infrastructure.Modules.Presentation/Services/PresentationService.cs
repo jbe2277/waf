@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 using Waf.InformationManager.Common.Applications.Services;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Services;
 
-[Export(typeof(IPresentationService))]
 internal sealed class PresentationService : IPresentationService
 {
     public void Initialize()

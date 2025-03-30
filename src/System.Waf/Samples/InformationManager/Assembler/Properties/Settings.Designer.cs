@@ -12,7 +12,7 @@ namespace Waf.InformationManager.Assembler.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,13 +26,13 @@ namespace Waf.InformationManager.Assembler.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>Waf.InformationManager.Infrastructure.Modules.Presentation.dll</string>
-  <string>Waf.InformationManager.Infrastructure.Modules.Applications.dll</string>
-  <string>Waf.InformationManager.AddressBook.Modules.Presentation.dll</string>
-  <string>Waf.InformationManager.AddressBook.Modules.Applications.dll</string>
-  <string>Waf.InformationManager.EmailClient.Modules.Presentation.dll</string>
-  <string>Waf.InformationManager.EmailClient.Modules.Applications.dll</string>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>Waf.InformationManager.Infrastructure.Modules.Presentation.InfrastructurePresentationModule, Waf.InformationManager.Infrastructure.Modules.Presentation</string>
+  <string>Waf.InformationManager.Infrastructure.Modules.Applications.InfrastructureApplicationsModule, Waf.InformationManager.Infrastructure.Modules.Applications</string>
+  <string>Waf.InformationManager.AddressBook.Modules.Presentation.AddressBookPresentationModule, Waf.InformationManager.AddressBook.Modules.Presentation</string>
+  <string>Waf.InformationManager.AddressBook.Modules.Applications.AddressBookApplicationsModule, Waf.InformationManager.AddressBook.Modules.Applications</string>
+  <string>Waf.InformationManager.EmailClient.Modules.Presentation.EmailClientPresentationModule, Waf.InformationManager.EmailClient.Modules.Presentation</string>
+  <string>Waf.InformationManager.EmailClient.Modules.Applications.EmailClientApplicationsModule, Waf.InformationManager.EmailClient.Modules.Applications</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection ModuleAssemblies {
             get {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
@@ -8,18 +7,16 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 
 /// <summary>Responsible for an email account.</summary>
-[Export]
 internal class EmailAccountsController
 {
     private readonly IShellService shellService;
-    private readonly ExportFactory<EditEmailAccountController> editEmailAccountControllerFactory;
-    private readonly ExportFactory<EmailAccountsViewModel> emailAccountsViewModelFactory;
+    private readonly Func<EditEmailAccountController> editEmailAccountControllerFactory;
+    private readonly Func<EmailAccountsViewModel> emailAccountsViewModelFactory;
     private DelegateCommand? removeEmailAccountCommand;
     private DelegateCommand? editEmailAccountCommand;
     private EmailAccountsViewModel emailAccountsViewModel = null!;
 
-    [ImportingConstructor]
-    public EmailAccountsController(IShellService shellService, ExportFactory<EditEmailAccountController> editEmailAccountControllerFactory, ExportFactory<EmailAccountsViewModel> emailAccountsViewModelFactory)
+    public EmailAccountsController(IShellService shellService, Func<EditEmailAccountController> editEmailAccountControllerFactory, Func<EmailAccountsViewModel> emailAccountsViewModelFactory)
     {
         this.shellService = shellService;
         this.editEmailAccountControllerFactory = editEmailAccountControllerFactory;
@@ -36,7 +33,7 @@ internal class EmailAccountsController
         removeEmailAccountCommand = new(RemoveEmailAccount, CanRemoveEmailAccount);
         editEmailAccountCommand = new(EditEmailAccount, CanEditEmailAccount);
 
-        emailAccountsViewModel = emailAccountsViewModelFactory.CreateExport().Value;
+        emailAccountsViewModel = emailAccountsViewModelFactory();
         emailAccountsViewModel.EmailClientRoot = Root;
         emailAccountsViewModel.SelectedEmailAccount = Root.EmailAccounts.FirstOrDefault();
         emailAccountsViewModel.NewAccountCommand = new DelegateCommand(NewEmailAccount);
@@ -53,7 +50,7 @@ internal class EmailAccountsController
 
     private void NewEmailAccount()
     {
-        var editEmailAccountController = editEmailAccountControllerFactory.CreateExport().Value;
+        var editEmailAccountController = editEmailAccountControllerFactory();
         editEmailAccountController.OwnerWindow = emailAccountsViewModel.View;
         var emailAccount = new EmailAccount();
         emailAccount.Validate();
@@ -75,7 +72,7 @@ internal class EmailAccountsController
     private void EditEmailAccount()
     {
         var originalAccount = emailAccountsViewModel.SelectedEmailAccount!;
-        var editEmailAccountController = editEmailAccountControllerFactory.CreateExport().Value;
+        var editEmailAccountController = editEmailAccountControllerFactory();
         editEmailAccountController.OwnerWindow = emailAccountsViewModel.View;
         editEmailAccountController.EmailAccount = originalAccount.Clone();
         editEmailAccountController.Initialize();

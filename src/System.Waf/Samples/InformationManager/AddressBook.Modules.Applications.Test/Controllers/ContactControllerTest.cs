@@ -5,6 +5,7 @@ using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Domain;
+using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers;
 
@@ -39,7 +40,7 @@ public class ContactControllerTest : AddressBookTest
 
         // Run the controller
 
-        var shellService = Get<MockShellService>();
+        var shellService = Get<ShellService>();
         Assert.IsNull(shellService.ContentView);
 
         controller.Run();

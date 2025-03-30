@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
@@ -8,7 +7,6 @@ using System.Windows.Threading;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views;
 
-[Export(typeof(IEmailListView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class EmailListView : IEmailListView
 {
     private readonly Lazy<EmailListViewModel> viewModel;

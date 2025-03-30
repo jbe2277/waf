@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
@@ -8,7 +7,6 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views;
 
-[Export(typeof(IPop3SettingsView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class Pop3SettingsView : IPop3SettingsView
 {
     private readonly Lazy<Pop3SettingsViewModel> viewModel;

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
@@ -9,7 +8,6 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 
 /// <summary>Responsible for a email folder. Synchronizes the master / detail view.</summary>
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class EmailFolderController
 {
     private readonly IShellService shellService;
@@ -18,7 +16,6 @@ internal class EmailFolderController
     private ObservableListViewCore<Email> emailsView = null!;
     private IWeakEventProxy? emailListViewModelPropertyChangedProxy;
 
-    [ImportingConstructor]
     public EmailFolderController(IShellService shellService, EmailLayoutViewModel emailLayoutViewModel, EmailListViewModel emailListViewModel, EmailViewModel emailViewModel)
     {
         this.shellService = shellService;

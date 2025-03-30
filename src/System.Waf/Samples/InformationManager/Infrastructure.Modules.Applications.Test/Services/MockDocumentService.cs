@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Waf.InformationManager.Infrastructure.Interfaces.Applications;
+﻿using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 
-[Export(typeof(IDocumentService)), Export]
+// TODO: Review this design
 public class MockDocumentService : IDocumentService
 {
     public Func<string, string, FileMode, Stream>? GetStreamAction { get; set; }

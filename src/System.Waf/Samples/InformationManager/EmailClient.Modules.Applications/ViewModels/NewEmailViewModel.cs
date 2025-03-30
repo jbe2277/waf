@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
@@ -7,7 +6,6 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class NewEmailViewModel : ViewModel<INewEmailView>
 {
     private EmailAccount? selectedEmailAccount;
@@ -17,7 +15,6 @@ public class NewEmailViewModel : ViewModel<INewEmailView>
     private string bcc = "";
     private IWeakEventProxy? emailPropertyChangedProxy;
 
-    [ImportingConstructor]
     public NewEmailViewModel(INewEmailView view) : base(view)
     {
         CloseCommand = new DelegateCommand(Close);

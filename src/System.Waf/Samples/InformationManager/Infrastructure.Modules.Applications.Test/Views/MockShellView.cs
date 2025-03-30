@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.UnitTesting.Mocks;
+﻿using System.Waf.UnitTesting.Mocks;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Views;
 
-[Export(typeof(IShellView)), Export]
 public class MockShellView : MockView, IShellView
 {
     private readonly List<ToolBarCommand> toolBarCommands = [];

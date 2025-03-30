@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Foundation;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class SelectContactController
 {
     private readonly SelectContactViewModel selectContactViewModel;
@@ -14,7 +12,6 @@ internal class SelectContactController
     private ObservableListViewCore<Contact> contactsView = null!;
     private IWeakEventProxy? contactListViewModelPropertyChangedProxy;
 
-    [ImportingConstructor]
     public SelectContactController(SelectContactViewModel selectContactViewModel, ContactListViewModel contactListViewModel)
     {
         this.selectContactViewModel = selectContactViewModel;

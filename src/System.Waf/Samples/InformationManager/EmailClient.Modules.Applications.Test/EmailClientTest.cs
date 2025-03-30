@@ -1,21 +1,22 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using Autofac;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.InformationManager.AddressBook.Modules.Applications;
 using Test.InformationManager.Common.Applications;
 using Test.InformationManager.Infrastructure.Modules.Applications;
-using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
+using Waf.InformationManager.EmailClient.Modules.Applications;
+using Waf.InformationManager.Infrastructure.Modules.Applications;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications;
 
 [TestClass]
 public abstract class EmailClientTest : ApplicationsTest
 {
-    protected override void OnCatalogInitialize(AggregateCatalog catalog)
+    protected override void ConfigureContainer(ContainerBuilder builder)
     {
-        base.OnCatalogInitialize(catalog);
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleController).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(InfrastructureTest).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(AddressBookTest).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmailClientTest).Assembly));
+        base.ConfigureContainer(builder);
+        builder.RegisterModule(new InfrastructureApplicationsModule());
+        builder.RegisterModule(new MockInfrastructurePresentationModule());
+
+        builder.RegisterModule(new EmailClientApplicationsModule());
+        builder.RegisterModule(new MockEmailClientPresentationModule());
     }
 }

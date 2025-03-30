@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Foundation;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
@@ -8,22 +7,20 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 
 /// <summary>Responsible for creating a new email account or modifying an existing one via a wizard.</summary>
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class EditEmailAccountController
 {
     private readonly DelegateCommand backCommand;
     private readonly DelegateCommand nextCommand;
     private readonly EditEmailAccountViewModel editEmailAccountViewModel;
     private readonly BasicEmailAccountViewModel basicEmailAccountViewModel;
-    private readonly ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory;
-    private readonly ExportFactory<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory;
+    private readonly Func<Pop3SettingsViewModel> pop3SettingsViewModelFactory;
+    private readonly Func<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory;
     private Pop3SettingsViewModel? pop3SettingsViewModel;
     private ExchangeSettingsViewModel? exchangeSettingsViewModel;
     private bool result;
 
-    [ImportingConstructor]
-    public EditEmailAccountController(EditEmailAccountViewModel editEmailAccountViewModel, BasicEmailAccountViewModel basicEmailAccountViewModel, ExportFactory<Pop3SettingsViewModel> pop3SettingsViewModelFactory,
-        ExportFactory<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory)
+    public EditEmailAccountController(EditEmailAccountViewModel editEmailAccountViewModel, BasicEmailAccountViewModel basicEmailAccountViewModel, Func<Pop3SettingsViewModel> pop3SettingsViewModelFactory,
+        Func<ExchangeSettingsViewModel> exchangeSettingsViewModelFactory)
     {
         this.editEmailAccountViewModel = editEmailAccountViewModel;
         this.basicEmailAccountViewModel = basicEmailAccountViewModel;
@@ -104,7 +101,7 @@ internal class EditEmailAccountController
     {
         var pop3Settings = EmailAccount.EmailAccountSettings is Pop3Settings settings ? settings : new Pop3Settings();
         pop3Settings.Validate();
-        pop3SettingsViewModel = pop3SettingsViewModelFactory.CreateExport().Value;
+        pop3SettingsViewModel = pop3SettingsViewModelFactory();
         pop3SettingsViewModel.Model = pop3Settings;
         editEmailAccountViewModel.ContentView = pop3SettingsViewModel.View;
     }
@@ -113,7 +110,7 @@ internal class EditEmailAccountController
     {
         var exchangeSettings = EmailAccount.EmailAccountSettings is ExchangeSettings settings ? settings : new ExchangeSettings();
         exchangeSettings.Validate();
-        exchangeSettingsViewModel = exchangeSettingsViewModelFactory.CreateExport().Value;
+        exchangeSettingsViewModel = exchangeSettingsViewModelFactory();
         exchangeSettingsViewModel.Model = exchangeSettings;
         editEmailAccountViewModel.ContentView = exchangeSettingsViewModel.View;
     }

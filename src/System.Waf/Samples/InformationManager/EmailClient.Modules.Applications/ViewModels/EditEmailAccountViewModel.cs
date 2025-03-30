@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class EditEmailAccountViewModel : ViewModel<IEditEmailAccountView>
 {
     private object contentView = null!;
     private bool isValid = true;
     private bool isLastPage;
 
-    [ImportingConstructor]
     public EditEmailAccountViewModel(IEditEmailAccountView view) : base(view)
     {
     }

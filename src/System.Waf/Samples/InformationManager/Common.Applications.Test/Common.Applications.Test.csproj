@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.UnitTesting.Wpf\System.Waf.UnitTesting.Wpf.csproj" />
     <ProjectReference Include="..\Common.Domain.Test\Common.Domain.Test.csproj" />
     <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />

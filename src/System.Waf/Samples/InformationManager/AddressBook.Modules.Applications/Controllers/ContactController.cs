@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Foundation;
 using System.Windows.Input;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
@@ -9,7 +8,6 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 
 /// <summary>Responsible for the contact management and the master / detail views.</summary>
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class ContactController
 {
     private readonly IShellService shellService;
@@ -17,7 +15,6 @@ internal class ContactController
     private readonly DelegateCommand deleteContactCommand;
     private ObservableListViewCore<Contact>? contactsView;
 
-    [ImportingConstructor]
     public ContactController(IShellService shellService, ContactLayoutViewModel contactLayoutViewModel, ContactListViewModel contactListViewModel, ContactViewModel contactViewModel)
     {
         this.shellService = shellService;

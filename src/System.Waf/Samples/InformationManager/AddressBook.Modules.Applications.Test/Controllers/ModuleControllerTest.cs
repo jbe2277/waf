@@ -2,8 +2,11 @@
 using System.Waf.Applications;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
+using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
+using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
+using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
 namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers;
 
@@ -64,20 +67,21 @@ public class ModuleControllerTest : AddressBookTest
 
         // Show the address book
 
-        var shellService = Get<MockShellService>();
+        var shellService = Get<ShellService>();
+        var shellView = Get<MockShellView>();
         Assert.IsNull(shellService.ContentView);
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         node.ShowAction();
 
         Assert.IsNotNull(shellService.ContentView);
-        Assert.AreEqual(2, shellService.ToolBarCommands.Count);
+        Assert.AreEqual(2, shellView.ToolBarCommands.Count);
 
         // Close the address book
 
         node.CloseAction();
 
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Shutdown the controller
         controller.Shutdown();
