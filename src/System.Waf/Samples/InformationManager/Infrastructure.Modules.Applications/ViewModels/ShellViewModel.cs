@@ -8,15 +8,17 @@ using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
-public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
+public class ShellViewModel : ViewModel<IShellView>, IShellService
 {
     private readonly IMessageService messageService;
+    private readonly ISystemService systemService;
     private readonly AppSettings settings;
+    private object? contentView;
 
-    public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService, ISettingsService settingsService) : base(view)
+    public ShellViewModel(IShellView view, IMessageService messageService, ISystemService systemService, NavigationService navigationService, ISettingsService settingsService) : base(view)
     {
         this.messageService = messageService;
-        ShellService = shellService;
+        this.systemService = systemService;
         NavigationService = navigationService;
         ExitCommand = new DelegateCommand(Close);
         AboutCommand = new DelegateCommand(ShowAboutMessage);
@@ -38,13 +40,19 @@ public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
 
     public string Title => ApplicationInfo.ProductName;
 
-    public IShellService ShellService { get; }
-
     public NavigationService NavigationService { get; }
 
     public ICommand ExitCommand { get; }
 
     public ICommand AboutCommand { get; }
+
+    public object ShellView => ViewCore;
+
+    public object? ContentView
+    {
+        get => contentView;
+        set => SetProperty(ref contentView, value);
+    }
 
     public void Show() => ViewCore.Show();
 
@@ -68,4 +76,6 @@ public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
     public void AddToolBarCommands(IReadOnlyList<ToolBarCommand> commands) => ViewCore.AddToolBarCommands(commands);
 
     public void ClearToolBarCommands() => ViewCore.ClearToolBarCommands();
+
+    public void CommitUIChanges() => systemService.CommitUIChanges();
 }

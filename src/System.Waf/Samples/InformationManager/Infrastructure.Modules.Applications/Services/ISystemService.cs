@@ -3,4 +3,7 @@
 public interface ISystemService
 {
     string DataDirectory { get; }
+
+    /// <summary>Commit UI changes (e.g. of TextBox).</summary>
+    void CommitUIChanges();
 }

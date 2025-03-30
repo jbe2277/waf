@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using System.Waf.UnitTesting.Mocks;
-using Test.InformationManager.AddressBook.Modules.Applications.Services;
+using Test.InformationManager.EmailClient.Modules.Applications.Services;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Interfaces.Domain;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;

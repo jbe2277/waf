@@ -27,7 +27,6 @@ public class ShellViewModelTest : InfrastructureTest
         Assert.IsTrue(shellView.IsVisible);
 
         // Check the services
-        Assert.AreEqual(Get<ShellService>(), shellViewModel.ShellService);
         Assert.AreEqual(Get<NavigationService>(), shellViewModel.NavigationService);
 
         // Show the About Dialog
@@ -97,34 +96,34 @@ public class ShellViewModelTest : InfrastructureTest
         shellView.VirtualScreenHeight = 700;
 
         var messageService = Get<IMessageService>();
-        var shellService = Get<ShellService>();
+        var systemService = Get<ISystemService>();
         var navigationService = Get<NavigationService>();
         var settingsService = Get<ISettingsService>();
         var settings = settingsService.Get<AppSettings>();
         shellView.SetNAForLocationAndSize();
 
         SetSettingsValues(settings);
-        new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
+        new ShellViewModel(shellView, messageService, systemService, navigationService, settingsService).Close();
         AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
         // Height is 0 => don't apply the Settings values
         SetSettingsValues(settings, 0, 0, 1, 0);
-        new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
+        new ShellViewModel(shellView, messageService, systemService, navigationService, settingsService).Close();
         AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
         // Left = 100 + Width = 901 > VirtualScreenWidth = 1000 => don't apply the Settings values
         SetSettingsValues(settings, 100, 100, 901, 100);
-        new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
+        new ShellViewModel(shellView, messageService, systemService, navigationService, settingsService).Close();
         AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
         // Top = 100 + Height = 601 > VirtualScreenWidth = 600 => don't apply the Settings values
         SetSettingsValues(settings, 100, 100, 100, 601);
-        new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
+        new ShellViewModel(shellView, messageService, systemService, navigationService, settingsService).Close();
         AssertSettingsValues(settings, double.NaN, double.NaN, double.NaN, double.NaN, false);
 
         // Use the limit values => apply the Settings values
         SetSettingsValues(settings, 0, 0, 1000, 700);
-        new ShellViewModel(shellView, messageService, shellService, navigationService, settingsService).Close();
+        new ShellViewModel(shellView, messageService, systemService, navigationService, settingsService).Close();
         AssertSettingsValues(settings, 0, 0, 1000, 700, false);
     }
 

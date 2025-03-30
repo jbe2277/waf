@@ -4,6 +4,7 @@ using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
+using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
@@ -40,7 +41,7 @@ public class EmailFolderControllerTest : EmailClientTest
 
         // Run the controller
 
-        var shellService = Get<ShellService>();
+        var shellService = Get<IShellService>();
         Assert.IsNull(shellService.ContentView);
 
         controller.Run();

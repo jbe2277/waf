@@ -3,6 +3,7 @@ using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
+using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
@@ -58,7 +59,7 @@ public class ModuleControllerTest : EmailClientTest
         Assert.IsTrue(controller.Root.Sent.Emails.Any());
         Assert.IsTrue(controller.Root.Drafts.Emails.Any());
 
-        var navigationService = Get<MockNavigationService>();
+        var navigationService = Get<NavigationService>();
         Assert.AreEqual(5, navigationService.NavigationNodes.Count);
         Assert.AreEqual("Inbox", navigationService.NavigationNodes[0].Name);
         Assert.AreEqual("Outbox", navigationService.NavigationNodes[1].Name);
@@ -78,46 +79,46 @@ public class ModuleControllerTest : EmailClientTest
 
         // Show the inbox
 
-        var shellService = Get<ShellService>();
+        var shellService = Get<IShellService>();
         var shellView = Get<MockShellView>();
         Assert.IsNull(shellService.ContentView);
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
-        navigationService.NavigationNodes[0].ShowAction();
+        navigationService.NavigationNodes[0].IsSelected = true;
 
         Assert.IsNotNull(shellService.ContentView);
         Assert.AreEqual(3, shellView.ToolBarCommands.Count);
 
-        navigationService.NavigationNodes[0].CloseAction();
+        navigationService.NavigationNodes[0].IsSelected = false;
 
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the outbox
 
-        navigationService.NavigationNodes[1].ShowAction();
+        navigationService.NavigationNodes[1].IsSelected = true;
         Assert.IsTrue(shellView.ToolBarCommands.Any());
-        navigationService.NavigationNodes[1].CloseAction();
+        navigationService.NavigationNodes[1].IsSelected = false;
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the sent emails
 
-        navigationService.NavigationNodes[2].ShowAction();
+        navigationService.NavigationNodes[2].IsSelected = true;
         Assert.IsTrue(shellView.ToolBarCommands.Any());
-        navigationService.NavigationNodes[2].CloseAction();
+        navigationService.NavigationNodes[2].IsSelected = false;
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the drafts
 
-        navigationService.NavigationNodes[3].ShowAction();
+        navigationService.NavigationNodes[3].IsSelected = true;
         Assert.IsTrue(shellView.ToolBarCommands.Any());
-        navigationService.NavigationNodes[3].CloseAction();
+        navigationService.NavigationNodes[3].IsSelected = false;
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the deleted emails
 
-        navigationService.NavigationNodes[4].ShowAction();
+        navigationService.NavigationNodes[4].IsSelected = true;
         Assert.IsTrue(shellView.ToolBarCommands.Any());
-        navigationService.NavigationNodes[4].CloseAction();
+        navigationService.NavigationNodes[4].IsSelected = false;
         Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Shutdown the controller
@@ -132,7 +133,7 @@ public class ModuleControllerTest : EmailClientTest
         controller.Initialize();
 
         var inbox = controller.Root.Inbox;
-        var navigationService = Get<MockNavigationService>();
+        var navigationService = Get<NavigationService>();
         var inboxNode = navigationService.NavigationNodes[0];
 
         Assert.AreEqual(inbox.Emails.Count, inboxNode.ItemCount);
@@ -146,10 +147,10 @@ public class ModuleControllerTest : EmailClientTest
         var controller = Get<ModuleController>();
         controller.Initialize();
 
-        var navigationService = Get<MockNavigationService>();
+        var navigationService = Get<NavigationService>();
         var inboxNode = navigationService.NavigationNodes[0];
 
-        inboxNode.ShowAction();
+        inboxNode.IsSelected = true;
 
         var shellView = Get<MockShellView>();
 

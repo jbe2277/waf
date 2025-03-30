@@ -56,6 +56,6 @@
 
         <GridSplitter Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="4"/>
         
-        <ContentControl Content="{Binding ShellService.ContentView}" Focusable="False" Grid.Column="1" Grid.Row="1"/>
+        <ContentControl Content="{Binding ContentView}" Focusable="False" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
