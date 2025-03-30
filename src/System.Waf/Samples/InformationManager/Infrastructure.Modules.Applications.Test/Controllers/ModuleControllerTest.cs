@@ -12,8 +12,6 @@ public class ModuleControllerTest : InfrastructureTest
     {
         var shellView = Get<MockShellView>();
         var moduleController = Get<ModuleController>();
-        var documentController = Get<DocumentController>();
-        if (File.Exists(documentController.PackagePath)) File.Delete(documentController.PackagePath);
 
         Assert.IsFalse(shellView.IsVisible);
 

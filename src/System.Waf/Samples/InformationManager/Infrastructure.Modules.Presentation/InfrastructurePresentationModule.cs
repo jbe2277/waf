@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Waf.InformationManager.Common.Applications.Services;
+using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.Infrastructure.Modules.Presentation.Services;
@@ -11,6 +12,7 @@ public sealed class InfrastructurePresentationModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
+        builder.RegisterType<DocumentService>().As<IDocumentService>().SingleInstance();
         builder.RegisterType<PresentationService>().As<IPresentationService>().SingleInstance();
         builder.RegisterType<SystemService>().As<ISystemService>().SingleInstance();
 

@@ -11,7 +11,6 @@ public sealed class InfrastructureApplicationsModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<DocumentController>().As<IDocumentService>().AsSelf().SingleInstance();
         builder.RegisterType<ModuleController>().As<IModuleController>().AsSelf().SingleInstance();
 
         builder.RegisterType<NavigationService>().As<INavigationService>().AsSelf().SingleInstance();
