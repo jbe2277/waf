@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Input;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
@@ -8,7 +7,6 @@ using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views;
 
-[Export(typeof(ISelectContactView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class SelectContactWindow : ISelectContactView
 {
     private readonly Lazy<SelectContactViewModel> viewModel;

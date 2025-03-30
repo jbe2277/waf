@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using System.Windows.Input;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class ContactListViewModel : ViewModel<IContactListView>
 {
     private Contact? selectedContact;
     private string filterText = "";
 
-    [ImportingConstructor]
     public ContactListViewModel(IContactListView view) : base(view)
     {
     }

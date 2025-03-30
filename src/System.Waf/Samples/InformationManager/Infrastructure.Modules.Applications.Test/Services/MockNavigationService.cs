@@ -1,9 +1,7 @@
 ﻿using Waf.InformationManager.Infrastructure.Interfaces.Applications;
-using System.ComponentModel.Composition;
 
 namespace Test.InformationManager.Infrastructure.Modules.Applications.Services;
 
-[Export(typeof(INavigationService)), Export]
 public class MockNavigationService : INavigationService
 {
     private readonly List<MockNavigationNode> navigationNodes = [];

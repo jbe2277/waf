@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Net.Mime;
+﻿using System.Net.Mime;
 using System.Runtime.Serialization;
 using System.Waf.Applications;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;
@@ -11,7 +10,6 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 
 /// <summary>Responsible for the whole module. This controller delegates the tasks to other controllers.</summary>
-[Export(typeof(IModuleController)), Export(typeof(IAddressBookService)), Export]
 internal class ModuleController : IModuleController, IAddressBookService
 {
     private const string documentPartPath = "AddressBook/Content.xml";
@@ -19,14 +17,13 @@ internal class ModuleController : IModuleController, IAddressBookService
     private readonly IShellService shellService;
     private readonly IDocumentService documentService;
     private readonly INavigationService navigationService;
-    private readonly ExportFactory<ContactController> contactControllerFactory;
-    private readonly ExportFactory<SelectContactController> selectContactControllerFactory;
+    private readonly Func<ContactController> contactControllerFactory;
+    private readonly Func<SelectContactController> selectContactControllerFactory;
     private readonly Lazy<DataContractSerializer> serializer;
     private ContactController? activeContactController;
 
-    [ImportingConstructor]
     public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
-        ExportFactory<ContactController> contactControllerFactory, ExportFactory<SelectContactController> selectContactControllerFactory)
+        Func<ContactController> contactControllerFactory, Func<SelectContactController> selectContactControllerFactory)
     {
         this.shellService = shellService;
         this.documentService = documentService;
@@ -62,7 +59,7 @@ internal class ModuleController : IModuleController, IAddressBookService
 
     public ContactDto? ShowSelectContactView(object ownerView)
     {
-        var selectContactController = selectContactControllerFactory.CreateExport().Value;
+        var selectContactController = selectContactControllerFactory();
         selectContactController.OwnerView = ownerView;
         selectContactController.Root = Root;
         selectContactController.Initialize();
@@ -73,7 +70,7 @@ internal class ModuleController : IModuleController, IAddressBookService
 
     private void ShowAddressBook()
     {
-        activeContactController = contactControllerFactory.CreateExport().Value;
+        activeContactController = contactControllerFactory();
         activeContactController.Root = Root;
         activeContactController.Initialize();
         activeContactController.Run();

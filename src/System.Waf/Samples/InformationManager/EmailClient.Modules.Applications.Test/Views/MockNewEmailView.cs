@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.UnitTesting.Mocks;
+﻿using System.Waf.UnitTesting.Mocks;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Views;
 
-[Export(typeof(INewEmailView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public class MockNewEmailView : MockView, INewEmailView
 {
     public static Action<MockNewEmailView>? ShowAction { get; set; }

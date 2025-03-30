@@ -1,16 +1,13 @@
 ﻿using System.Waf.Applications;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
-using System.ComponentModel.Composition;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-[Export]
 public class ContactLayoutViewModel : ViewModel<IContactLayoutView>
 {
     private object? contactListView;
     private object? contactView;
 
-    [ImportingConstructor]
     public ContactLayoutViewModel(IContactLayoutView view) : base(view)
     {
     }

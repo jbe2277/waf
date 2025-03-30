@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.InformationManager.AddressBook.Interfaces.Applications;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
@@ -9,7 +8,6 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 
 /// <summary>Responsible for creating a new email and sending it.</summary>
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class NewEmailController
 {
     private readonly IMessageService messageService;
@@ -18,7 +16,6 @@ internal class NewEmailController
     private readonly DelegateCommand selectContactCommand;
     private readonly DelegateCommand sendCommand;
 
-    [ImportingConstructor]
     public NewEmailController(IMessageService messageService, IShellService shellService, IAddressBookService addressBookService, NewEmailViewModel newEmailViewModel)
     {
         this.messageService = messageService;

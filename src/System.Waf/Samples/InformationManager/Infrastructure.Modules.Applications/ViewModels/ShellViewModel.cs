@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
@@ -9,13 +8,11 @@ using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
-[Export, Export(typeof(IShellViewModel))]
 public class ShellViewModel : ViewModel<IShellView>, IShellViewModel
 {
     private readonly IMessageService messageService;
     private readonly AppSettings settings;
 
-    [ImportingConstructor]
     public ShellViewModel(IShellView view, IMessageService messageService, ShellService shellService, NavigationService navigationService, ISettingsService settingsService) : base(view)
     {
         this.messageService = messageService;

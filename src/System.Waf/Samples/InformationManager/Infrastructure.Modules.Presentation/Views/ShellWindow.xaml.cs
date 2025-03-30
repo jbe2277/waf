@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Automation;
@@ -11,7 +10,6 @@ using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Presentation.Views;
 
-[Export(typeof(IShellView))]
 public partial class ShellWindow : IShellView
 {
     private readonly Lazy<ShellViewModel> viewModel;

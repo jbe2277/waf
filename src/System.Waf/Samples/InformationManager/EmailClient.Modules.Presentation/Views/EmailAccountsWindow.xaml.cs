@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
@@ -8,7 +7,6 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Waf.InformationManager.EmailClient.Modules.Presentation.Views;
 
-[Export(typeof(IEmailAccountsView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class EmailAccountsWindow : IEmailAccountsView
 {
     private readonly Lazy<EmailAccountsViewModel> viewModel;

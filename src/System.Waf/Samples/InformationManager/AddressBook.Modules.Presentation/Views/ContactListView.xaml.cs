@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -8,7 +7,6 @@ using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 
 namespace Waf.InformationManager.AddressBook.Modules.Presentation.Views;
 
-[Export(typeof(IContactListView)), PartCreationPolicy(CreationPolicy.NonShared)]
 public partial class ContactListView : IContactListView
 {
     private readonly Lazy<ContactListViewModel> viewModel;

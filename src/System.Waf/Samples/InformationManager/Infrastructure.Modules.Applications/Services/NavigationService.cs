@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Foundation;
+﻿using System.Waf.Foundation;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 
 namespace Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
-[Export(typeof(INavigationService)), Export]
 public class NavigationService : Model, INavigationService
 {
     private readonly ObservableList<NavigationNode> navigationNodes = [];

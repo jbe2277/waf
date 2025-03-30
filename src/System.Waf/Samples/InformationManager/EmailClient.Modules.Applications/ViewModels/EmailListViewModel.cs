@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class EmailListViewModel : ViewModel<IEmailListView>
 {
     private Email? selectedEmail;
     private string filterText = "";
 
-    [ImportingConstructor]
     public EmailListViewModel(IEmailListView view) : base(view)
     {
     }

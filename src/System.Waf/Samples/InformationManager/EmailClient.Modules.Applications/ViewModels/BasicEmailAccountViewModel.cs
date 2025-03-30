@@ -1,19 +1,16 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class BasicEmailAccountViewModel : ViewModel<IBasicEmailAccountView>
 {
     private EmailAccount emailAccount = null!;
     private bool isPop3Checked = true;
     private bool isExchangeChecked;
 
-    [ImportingConstructor]
     public BasicEmailAccountViewModel(IBasicEmailAccountView view) : base(view)
     {
     }

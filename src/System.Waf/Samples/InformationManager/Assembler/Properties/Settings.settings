@@ -4,13 +4,13 @@
   <Settings>
     <Setting Name="ModuleAssemblies" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;Waf.InformationManager.Infrastructure.Modules.Presentation.dll&lt;/string&gt;
-  &lt;string&gt;Waf.InformationManager.Infrastructure.Modules.Applications.dll&lt;/string&gt;
-  &lt;string&gt;Waf.InformationManager.AddressBook.Modules.Presentation.dll&lt;/string&gt;
-  &lt;string&gt;Waf.InformationManager.AddressBook.Modules.Applications.dll&lt;/string&gt;
-  &lt;string&gt;Waf.InformationManager.EmailClient.Modules.Presentation.dll&lt;/string&gt;
-  &lt;string&gt;Waf.InformationManager.EmailClient.Modules.Applications.dll&lt;/string&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;Waf.InformationManager.Infrastructure.Modules.Presentation.InfrastructurePresentationModule, Waf.InformationManager.Infrastructure.Modules.Presentation&lt;/string&gt;
+  &lt;string&gt;Waf.InformationManager.Infrastructure.Modules.Applications.InfrastructureApplicationsModule, Waf.InformationManager.Infrastructure.Modules.Applications&lt;/string&gt;
+  &lt;string&gt;Waf.InformationManager.AddressBook.Modules.Presentation.AddressBookPresentationModule, Waf.InformationManager.AddressBook.Modules.Presentation&lt;/string&gt;
+  &lt;string&gt;Waf.InformationManager.AddressBook.Modules.Applications.AddressBookApplicationsModule, Waf.InformationManager.AddressBook.Modules.Applications&lt;/string&gt;
+  &lt;string&gt;Waf.InformationManager.EmailClient.Modules.Presentation.EmailClientPresentationModule, Waf.InformationManager.EmailClient.Modules.Presentation&lt;/string&gt;
+  &lt;string&gt;Waf.InformationManager.EmailClient.Modules.Applications.EmailClientApplicationsModule, Waf.InformationManager.EmailClient.Modules.Applications&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>

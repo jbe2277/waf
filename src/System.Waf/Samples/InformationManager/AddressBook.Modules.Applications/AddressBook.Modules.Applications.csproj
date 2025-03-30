@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj" />
     <ProjectReference Include="..\AddressBook.Interfaces\AddressBook.Interfaces.csproj" />
     <ProjectReference Include="..\AddressBook.Modules.Domain\AddressBook.Modules.Domain.csproj" />

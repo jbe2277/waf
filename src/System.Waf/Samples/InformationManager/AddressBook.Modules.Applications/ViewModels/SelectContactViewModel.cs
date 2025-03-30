@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class SelectContactViewModel : ViewModel<ISelectContactView>
 {
-    [ImportingConstructor]
     public SelectContactViewModel(ISelectContactView view) : base(view)
     {
     }

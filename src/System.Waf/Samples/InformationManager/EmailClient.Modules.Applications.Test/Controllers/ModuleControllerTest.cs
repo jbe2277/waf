@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
+using Test.InformationManager.Infrastructure.Modules.Applications.Views;
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
+using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
 
@@ -76,46 +78,47 @@ public class ModuleControllerTest : EmailClientTest
 
         // Show the inbox
 
-        var shellService = Get<MockShellService>();
+        var shellService = Get<ShellService>();
+        var shellView = Get<MockShellView>();
         Assert.IsNull(shellService.ContentView);
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         navigationService.NavigationNodes[0].ShowAction();
 
         Assert.IsNotNull(shellService.ContentView);
-        Assert.AreEqual(3, shellService.ToolBarCommands.Count);
+        Assert.AreEqual(3, shellView.ToolBarCommands.Count);
 
         navigationService.NavigationNodes[0].CloseAction();
 
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the outbox
 
         navigationService.NavigationNodes[1].ShowAction();
-        Assert.IsTrue(shellService.ToolBarCommands.Any());
+        Assert.IsTrue(shellView.ToolBarCommands.Any());
         navigationService.NavigationNodes[1].CloseAction();
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the sent emails
 
         navigationService.NavigationNodes[2].ShowAction();
-        Assert.IsTrue(shellService.ToolBarCommands.Any());
+        Assert.IsTrue(shellView.ToolBarCommands.Any());
         navigationService.NavigationNodes[2].CloseAction();
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the drafts
 
         navigationService.NavigationNodes[3].ShowAction();
-        Assert.IsTrue(shellService.ToolBarCommands.Any());
+        Assert.IsTrue(shellView.ToolBarCommands.Any());
         navigationService.NavigationNodes[3].CloseAction();
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Show the deleted emails
 
         navigationService.NavigationNodes[4].ShowAction();
-        Assert.IsTrue(shellService.ToolBarCommands.Any());
+        Assert.IsTrue(shellView.ToolBarCommands.Any());
         navigationService.NavigationNodes[4].CloseAction();
-        Assert.IsFalse(shellService.ToolBarCommands.Any());
+        Assert.IsFalse(shellView.ToolBarCommands.Any());
 
         // Shutdown the controller
 
@@ -148,12 +151,12 @@ public class ModuleControllerTest : EmailClientTest
 
         inboxNode.ShowAction();
 
-        var shellService = Get<MockShellService>();
+        var shellView = Get<MockShellView>();
 
         bool isShowCalled = false;
         MockNewEmailView.ShowAction = _ => isShowCalled = true;
 
-        shellService.ToolBarCommands[0].Command.Execute(null);
+        shellView.ToolBarCommands[0].Command.Execute(null);
         Assert.IsTrue(isShowCalled);
     }
 

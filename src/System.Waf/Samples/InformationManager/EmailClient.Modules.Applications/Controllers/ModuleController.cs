@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Net.Mime;
+﻿using System.Net.Mime;
 using System.Runtime.Serialization;
 using System.Waf.Applications;
 using System.Waf.Foundation;
@@ -11,7 +10,6 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 
 /// <summary>Responsible for the whole module. This controller delegates the tasks to other controllers.</summary>
-[Export(typeof(IModuleController)), Export]
 internal class ModuleController : IModuleController
 {
     private const string documentPartPath = "EmailClient/Content.xml";
@@ -20,16 +18,15 @@ internal class ModuleController : IModuleController
     private readonly IDocumentService documentService;
     private readonly INavigationService navigationService;
     private readonly EmailAccountsController emailAccountsController;
-    private readonly ExportFactory<EmailFolderController> emailFolderControllerFactory;
-    private readonly ExportFactory<NewEmailController> newEmailControllerFactory;
+    private readonly Func<EmailFolderController> emailFolderControllerFactory;
+    private readonly Func<NewEmailController> newEmailControllerFactory;
     private readonly DelegateCommand newEmailCommand;
     private readonly Lazy<DataContractSerializer> serializer;
     private readonly List<ItemCountSynchronizer> itemCountSynchronizers = [];
     private EmailFolderController? activeEmailFolderController;
 
-    [ImportingConstructor]
     public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService, EmailAccountsController emailAccountsController,
-        ExportFactory<EmailFolderController> emailFolderControllerFactory, ExportFactory<NewEmailController> newEmailControllerFactory)
+        Func<EmailFolderController> emailFolderControllerFactory, Func<NewEmailController> newEmailControllerFactory)
     {
         this.shellService = shellService;
         this.documentService = documentService;
@@ -84,7 +81,7 @@ internal class ModuleController : IModuleController
 
     private void ShowEmails(EmailFolder emailFolder)
     {
-        activeEmailFolderController = emailFolderControllerFactory.CreateExport().Value;
+        activeEmailFolderController = emailFolderControllerFactory();
         activeEmailFolderController.EmailFolder = emailFolder;
         activeEmailFolderController.Initialize();
         activeEmailFolderController.Run();
@@ -113,7 +110,7 @@ internal class ModuleController : IModuleController
 
     private void NewEmail()
     {
-        var newEmailController = newEmailControllerFactory.CreateExport().Value;
+        var newEmailController = newEmailControllerFactory();
         newEmailController.Root = Root;
         newEmailController.Initialize();
         newEmailController.Run();
