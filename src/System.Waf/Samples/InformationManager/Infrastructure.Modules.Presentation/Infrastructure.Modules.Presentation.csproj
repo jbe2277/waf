@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Common.Applications\Common.Applications.csproj" />
     <ProjectReference Include="..\Infrastructure.Modules.Applications\Infrastructure.Modules.Applications.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Waf.InformationManager.Infrastructure.Modules.Presentation.Test"/>
+  </ItemGroup>
 </Project>
