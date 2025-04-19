@@ -61,7 +61,7 @@ jobs:
       env:
         MSStoreLocalCert64: ${{ secrets.MS_STORE_LOCAL_CERT64 }} 
       run: |
-        [IO.File]::WriteAllBytes("MSStoreLocalCert.p12", [Convert]::FromBase64String($env:MSStoreLocalCert64))
+        [IO.File]::WriteAllBytes((Join-Path $pwd "src/NewsReader/NewsReader.MauiSystem" "MSStoreLocalCert.p12"), [Convert]::FromBase64String($env:MSStoreLocalCert64))
 
     - name: 🛠️ Build
       # -p:ApplicationVersion=0 because of https://github.com/dotnet/maui/issues/18571
