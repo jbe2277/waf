@@ -29,6 +29,12 @@
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
 
+  <!--TODO: Workaround for https://github.com/microsoft/WindowsAppSDK/issues/3337; 
+      See: https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/publish-cli?view=net-maui-9.0#configure-the-project-build-settings -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
+    <RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
     
