@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/GetBuildVersion.yml
 
   Android:    
-    runs-on: windows-2022
+    runs-on: ubuntu-24.04
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
@@ -42,7 +42,7 @@ jobs:
           ./**/publish/*Signed.apk
 
   Windows:
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
@@ -109,7 +109,7 @@ jobs:
           dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
