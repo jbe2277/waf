@@ -91,7 +91,7 @@ jobs:
 
       - name: ⚙️ Set Xcode version
         run: |
-          XCODE_ROOT=/Applications/Xcode_16.2.app
+          XCODE_ROOT=/Applications/Xcode_16.3.app
           echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
           sudo xcode-select -s $XCODE_ROOT
       
