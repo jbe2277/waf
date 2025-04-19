@@ -55,12 +55,19 @@ jobs:
       
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui
-    
+
+    - name: Prepare certificate
+      shell: pwsh
+      env:
+        MSStoreLocalCert64: ${{ secrets.MS_STORE_LOCAL_CERT64 }} 
+      run: |
+        [IO.File]::WriteAllBytes("MSStoreLocalCert.p12", [Convert]::FromBase64String($env:MSStoreLocalCert64))
+
     - name: 🛠️ Build
       # -p:ApplicationVersion=0 because of https://github.com/dotnet/maui/issues/18571
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0
+        dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
 
   iOS:
     runs-on: macos-15
