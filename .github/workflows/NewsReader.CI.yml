@@ -75,7 +75,7 @@ jobs:
         name: newsreader-windows
         if-no-files-found: error
         path: |
-          ./**/AppPackages/*.msix
+          ./**/AppPackages/**/*.msix
 
   iOS:
     runs-on: macos-15
