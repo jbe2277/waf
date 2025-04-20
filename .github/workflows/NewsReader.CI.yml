@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/GetBuildVersion.yml
 
   Android:    
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
@@ -25,7 +25,7 @@ jobs:
         dotnet-version: '9'
 
     - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui android
+      run: dotnet workload install maui-android maui-ios
     
     - name: 🛠️ Build
       run: |
@@ -42,7 +42,7 @@ jobs:
           ./**/publish/*Signed.apk
 
   Windows:
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
@@ -54,7 +54,7 @@ jobs:
         dotnet-version: '9'
       
     - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui
+      run: dotnet workload install maui-windows
 
     - name: 📜 Prepare certificate
       shell: pwsh
@@ -101,7 +101,7 @@ jobs:
           dotnet-version: '9'
       
       - name: ⚙️ Install .NET MAUI
-        run: dotnet workload install maui ios
+        run: dotnet workload install maui-android maui-ios
       
       - name: 🛠️ Build
         run: |
@@ -109,7 +109,7 @@ jobs:
           dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
