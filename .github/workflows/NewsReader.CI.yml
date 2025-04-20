@@ -27,6 +27,13 @@ jobs:
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-android maui-ios
     
+    - name: 📜 Prepare WebStorageService AppId
+      shell: pwsh
+      env:
+        WebStorageServiceKeys64: ${{ secrets.WEB_STORAGE_SERVICE_KEYS64 }} 
+      run: |
+        [IO.File]::WriteAllBytes((Join-Path $pwd "src/NewsReader/NewsReader.Presentation/Services" "WebStorageService.keys.cs"), [Convert]::FromBase64String($env:WebStorageServiceKeys64))
+
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
@@ -55,6 +62,13 @@ jobs:
       
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-windows
+
+    - name: 📜 Prepare WebStorageService AppId
+      shell: pwsh
+      env:
+        WebStorageServiceKeys64: ${{ secrets.WEB_STORAGE_SERVICE_KEYS64 }} 
+      run: |
+        [IO.File]::WriteAllBytes((Join-Path $pwd "src/NewsReader/NewsReader.Presentation/Services" "WebStorageService.keys.cs"), [Convert]::FromBase64String($env:WebStorageServiceKeys64))
 
     - name: 📜 Prepare certificate
       shell: pwsh
@@ -86,27 +100,34 @@ jobs:
     runs-on: macos-15
     needs: GetVersion
     steps:
-      - name: 🔖 Check-out
-        uses: actions/checkout@v4
+    - name: 🔖 Check-out
+      uses: actions/checkout@v4
 
-      - name: ⚙️ Set Xcode version
-        run: |
-          XCODE_ROOT=/Applications/Xcode_16.3.app
-          echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
-          sudo xcode-select -s $XCODE_ROOT
-      
-      - name: ⚙️ Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9'
-      
-      - name: ⚙️ Install .NET MAUI
-        run: dotnet workload install maui-android maui-ios
-      
-      - name: 🛠️ Build
-        run: |
-          cd src/NewsReader/NewsReader.MauiSystem
-          dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+    - name: ⚙️ Set Xcode version
+      run: |
+        XCODE_ROOT=/Applications/Xcode_16.3.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
+        sudo xcode-select -s $XCODE_ROOT
+    
+    - name: ⚙️ Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9'
+    
+    - name: ⚙️ Install .NET MAUI
+      run: dotnet workload install maui-android maui-ios
+
+    - name: 📜 Prepare WebStorageService AppId
+      shell: pwsh
+      env:
+        WebStorageServiceKeys64: ${{ secrets.WEB_STORAGE_SERVICE_KEYS64 }} 
+      run: |
+        [IO.File]::WriteAllBytes((Join-Path $pwd "src/NewsReader/NewsReader.Presentation/Services" "WebStorageService.keys.cs"), [Convert]::FromBase64String($env:WebStorageServiceKeys64))
+
+    - name: 🛠️ Build
+      run: |
+        cd src/NewsReader/NewsReader.MauiSystem
+        dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
     runs-on: windows-2025
