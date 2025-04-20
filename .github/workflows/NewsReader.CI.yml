@@ -24,8 +24,8 @@ jobs:
       with:
         dotnet-version: '9'
 
-    - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui-android maui-ios
+    - name: ⚙️ .NET MAUI Version info
+      run: dotnet workload list
     
     - name: 📜 Prepare WebStorageService AppId
       shell: pwsh
@@ -60,8 +60,8 @@ jobs:
       with:
         dotnet-version: '9'
       
-    - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui-windows
+    - name: ⚙️ .NET MAUI Version info
+      run: dotnet workload list
 
     - name: 📜 Prepare WebStorageService AppId
       shell: pwsh
@@ -136,6 +136,11 @@ jobs:
     - name: 🔖 Check-out
       uses: actions/checkout@v4
 
+    - name: ⚙️ Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9'
+  
     - name: 🕵️ Test
       run: |
         echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
