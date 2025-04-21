@@ -38,6 +38,10 @@ public partial class EmailListView : IEmailListView
 
     private void LoadedHandler(object sender, RoutedEventArgs e)
     {
+        // TODO: UI Tests show a NullRefEx sometimes here
+        if (ViewModel is null) throw new InvalidOperationException("EmailListView.LoadedHandler: ViewModel is null");
+        if (ViewModel.Emails is null) throw new InvalidOperationException("EmailListView.LoadedHandler: ViewModel.Emails is null");
+
         ViewModel.SelectedEmail = ViewModel.Emails.FirstOrDefault();
         emailsBox.Focus();
         if (ViewModel.SelectedEmail != null) FocusItem();
