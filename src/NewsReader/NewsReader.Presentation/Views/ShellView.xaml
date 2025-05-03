@@ -6,30 +6,30 @@
              xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.ShellView" x:DataType="vm:ShellViewModel">
+
+    <FlyoutPage.Resources>
+        <Style x:Key="NavigationItemStyle" TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Disabled"/>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="Background" Value="{StaticResource Blue300Accent}"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </FlyoutPage.Resources>
+    
     <FlyoutPage.Flyout>
         <ContentPage Title="{x:Static p:Resources.Menu}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
-                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60">
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Setter Property="VisualStateManager.VisualStateGroups">
-                                    <VisualStateGroupList>
-                                        <VisualStateGroup x:Name="CommonStates">
-                                            <VisualState x:Name="Normal"/>
-                                            <VisualState x:Name="Disabled"/>
-                                            <VisualState x:Name="Selected">
-                                                <VisualState.Setters>
-                                                    <!-- Overwrite default Selected background (orange) -->
-                                                    <Setter Property="BackgroundColor" Value="{StaticResource Blue300Accent}"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateGroupList>
-                                </Setter>
-                            </Style>
-                        </Grid.Style>
-
+                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}">
                         <Label x:Name="iconLabel" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" Margin="12,0,7,0" />
                         <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" />
                     </Grid>
@@ -39,51 +39,36 @@
             <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="White">
                 <Grid.Resources>
                     <DataTemplate x:Key="MobileItemTemplate" x:DataType="do:Feed">
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
-                                        <SwipeItem.IconImageSource>
-                                            <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
-                                        </SwipeItem.IconImageSource>
-                                    </SwipeItem>
-                                    <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
-                                        <SwipeItem.IconImageSource>
-                                            <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
-                                        </SwipeItem.IconImageSource>
-                                    </SwipeItem>
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
+                        <Grid Style="{StaticResource NavigationItemStyle}">
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
+                                            <SwipeItem.IconImageSource>
+                                                <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
+                                            </SwipeItem.IconImageSource>
+                                        </SwipeItem>
+                                        <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
+                                            <SwipeItem.IconImageSource>
+                                                <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
+                                            </SwipeItem.IconImageSource>
+                                        </SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
 
-                            <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
-                        </SwipeView>
+                                <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                            </SwipeView>
+                        </Grid>
                     </DataTemplate>
 
                     <DataTemplate x:Key="DesktopItemTemplate" x:DataType="do:Feed">
-                        <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                        <Grid Style="{StaticResource NavigationItemStyle}">
+                            <ContentView ControlTemplate="{StaticResource ItemTemplate}" />
+                        </Grid>
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
                         <Grid Margin="0,5">
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Setter Property="VisualStateManager.VisualStateGroups">
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal"/>
-                                                <VisualState x:Name="Selected">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="Transparent" />
-                                                        <Setter TargetName="feedItemBorder" Property="Border.Stroke" Value="{StaticResource Primary}"/>
-                                                        <Setter TargetName="feedItemBorder" Property="Border.BackgroundColor" Value="{StaticResource Blue300Accent}"/>
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </Setter>
-                                </Style>
-                            </Grid.Style>
-
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
@@ -91,24 +76,13 @@
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
-                            <Border x:Name="feedItemBorder" StrokeThickness="1">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="4"/>
-                                </Border.StrokeShape>
-                                <Border.Style>
-                                    <Style TargetType="Border">
-                                        <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
-                                    </Style>
-                                </Border.Style>
-
-                                <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
-                                    <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
-                                    <HorizontalStackLayout Spacing="15">
-                                        <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
-                                        <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                            </Border>
+                            <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
+                                <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
+                                <HorizontalStackLayout Spacing="15">
+                                    <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
+                                    <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
                         </Grid>
                     </ControlTemplate>
                 </Grid.Resources>
