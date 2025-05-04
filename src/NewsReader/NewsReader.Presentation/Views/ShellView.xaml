@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
+             xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
+             xmlns:ct="clr-namespace:Waf.NewsReader.Presentation.Controls"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
@@ -36,7 +37,7 @@
                 </DataTemplate>
             </ContentPage.Resources>
 
-            <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10" BackgroundColor="White">
+            <Grid RowDefinitions="Auto,Auto,*,Auto" BackgroundColor="White">
                 <Grid.Resources>
                     <DataTemplate x:Key="MobileItemTemplate" x:DataType="do:Feed">
                         <Grid Style="{StaticResource NavigationItemStyle}">
@@ -76,7 +77,7 @@
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
-                            <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
+                            <VerticalStackLayout VerticalOptions="Center" Padding="10,5,10,10" Spacing="5">
                                 <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
                                 <HorizontalStackLayout Spacing="15">
                                     <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
@@ -87,14 +88,14 @@
                     </ControlTemplate>
                 </Grid.Resources>
                 
-                <Label Grid.Row="0" Text="{Binding AppName}" Style="{StaticResource Title}" Margin="0,0,0,10"/>
+                <ct:HeaderView Grid.Row="0" Title="{Binding AppName}" Margin="0,0,2,0"/>
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}"/>
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" Margin="5"/>
 
                 <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
-                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
+                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}" Margin="5"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>

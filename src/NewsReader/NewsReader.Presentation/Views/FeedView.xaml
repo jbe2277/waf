@@ -1,21 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ct:LayoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
              xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
+             xmlns:ct="clr-namespace:Waf.NewsReader.Presentation.Controls"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
              Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel">
-    <ContentPage.ToolbarItems>
+    <ct:LayoutPage.ToolbarItems>
         <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-    </ContentPage.ToolbarItems>
+    </ct:LayoutPage.ToolbarItems>
 
-    <ContentPage.Content>
+    <ct:LayoutPage.Header>
+        <ct:HeaderView Title="{Binding Title, Source={RelativeSource AncestorType=ct:LayoutPage}, x:DataType=ct:LayoutPage}"/>
+    </ct:LayoutPage.Header>
+    
+    <ct:LayoutPage.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,*">
             <VerticalStackLayout IsVisible="{Binding Feed.LoadError, FallbackValue=false, Converter={Static c:NullToBoolConverter.Instance}}" Padding="10,5" BackgroundColor="{StaticResource ErrorBackgroundColor}">
                 <Label Text="{x:Static p:Resources.LoadError}" Style="{StaticResource Title}"/>
@@ -89,5 +94,5 @@
                 </CollectionView>
             </RefreshView>
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    </ct:LayoutPage.Content>
+</ct:LayoutPage>

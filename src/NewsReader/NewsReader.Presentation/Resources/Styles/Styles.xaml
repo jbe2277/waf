@@ -3,7 +3,8 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters;assembly=NewsReader.Presentation">
+    xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
+    xmlns:ct="clr-namespace:Waf.NewsReader.Presentation.Controls">
 
     <Style TargetType="Label">
         <Setter Property="FontSize" Value="15"/>
@@ -19,6 +20,23 @@
     <Style x:Key="Subtitle" TargetType="Label">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="ct:HeaderView">
+        <Setter Property="TextColor" Value="{StaticResource Gray100}"/>
+        <Setter Property="Background" Value="{StaticResource Tertiary}"/>
+        <Setter Property="ControlTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="*,Auto,*">
+                        <Label Grid.Column="1" Text="{TemplateBinding Title, x:DataType=ct:HeaderView}" TextColor="{TemplateBinding TextColor, x:DataType=ct:HeaderView}" 
+                               Style="{StaticResource Title}" Margin="10"/>
+
+                        <BoxView Grid.ColumnSpan="3" HeightRequest="2" Background="White" VerticalOptions="End"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
