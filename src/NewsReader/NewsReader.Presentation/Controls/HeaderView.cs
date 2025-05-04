@@ -8,13 +8,11 @@ public class HeaderView : ContentView
 
     public string? Title
     {
-        get => (string?)GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
+        get => (string?)GetValue(TitleProperty); set => SetValue(TitleProperty, value);
     }
 
     public Color TextColor
     {
-        get { return (Color)GetValue(TextColorProperty); }
-        set { SetValue(TextColorProperty, value); }
+        get => (Color)GetValue(TextColorProperty); set => SetValue(TextColorProperty, value);
     }
 }

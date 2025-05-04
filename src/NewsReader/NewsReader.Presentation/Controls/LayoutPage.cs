@@ -22,14 +22,12 @@ public class LayoutPage : ContentPage
 
     public View? Header
     {
-        get => (View?)GetValue(HeaderProperty);
-        set => SetValue(HeaderProperty, value);
+        get => (View?)GetValue(HeaderProperty); set => SetValue(HeaderProperty, value);
     }
 
     public View? Footer
     {
-        get => (View?)GetValue(FooterProperty);
-        set => SetValue(FooterProperty, value);
+        get => (View?)GetValue(FooterProperty); set => SetValue(FooterProperty, value);
     }
 
     protected private LayoutPageGrid PageGrid => pageGrid ?? throw new InvalidOperationException("ControlTemplate was not yet applied. PageGrid is null.");

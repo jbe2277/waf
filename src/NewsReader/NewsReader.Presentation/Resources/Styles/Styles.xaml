@@ -14,6 +14,7 @@
     <Style x:Key="Title" TargetType="Label">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="CharacterSpacing" Value="0.1"/>
         <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
     </Style>
     

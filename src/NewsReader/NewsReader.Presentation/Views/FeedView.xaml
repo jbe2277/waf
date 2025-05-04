@@ -4,6 +4,7 @@
              xmlns:p="clr-namespace:Waf.NewsReader.Presentation.Properties"
              xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
              xmlns:ct="clr-namespace:Waf.NewsReader.Presentation.Controls"
+             xmlns:v="clr-namespace:Waf.NewsReader.Presentation.Views"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
@@ -17,7 +18,7 @@
     </ct:LayoutPage.ToolbarItems>
 
     <ct:LayoutPage.Header>
-        <ct:HeaderView Title="{Binding Title, Source={RelativeSource AncestorType=ct:LayoutPage}, x:DataType=ct:LayoutPage}"/>
+        <ct:HeaderView Title="{Binding Title, Source={RelativeSource AncestorType={Type v:FeedView}}, x:DataType=v:FeedView}"/>
     </ct:LayoutPage.Header>
     
     <ct:LayoutPage.Content>
@@ -39,7 +40,7 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
+                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
                                             Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
                                         <SwipeItem.IconImageSource>
                                             <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
@@ -60,13 +61,13 @@
                         <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
-                                    <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
+                                    <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
                                         Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
                             <VerticalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ShowFeedItemViewCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"/>
+                                <TapGestureRecognizer Command="{Binding ShowFeedItemViewCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"/>
                             </VerticalStackLayout.GestureRecognizers>
 
                             <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
