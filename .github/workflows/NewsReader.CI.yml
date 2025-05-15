@@ -95,6 +95,16 @@ jobs:
         if-no-files-found: error
         path: |
           ./**/AppPackages/**/NewsReader*.msix
+    
+    - name: ⚙️ Install App
+      shell: pwsh
+      run: |
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\bin\Release\net9.0-windows10.0.19041.0\win10-x64\"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
+        Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
+        Add-AppxPackage -Path $msixFile
+        Get-AppxPackage | Select Name, PackageFullName
 
   iOS:
     runs-on: macos-15
