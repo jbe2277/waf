@@ -7,14 +7,8 @@
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
 
-    <!-- Display name -->
     <ApplicationTitle>NewsReader</ApplicationTitle>
-
-    <!-- App Identifier -->
-    <ApplicationId>waf.newsreader</ApplicationId>
-    <ApplicationIdGuid>34CB2AD5-F69E-46EE-B823-8084CEF92A4D</ApplicationIdGuid>
-
-    <!-- Versions -->
+    <ApplicationId>Waf.NewsReader</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
 
@@ -24,6 +18,8 @@
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 
     <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+
+    <WindowsAppSDKSelfContained>True</WindowsAppSDKSelfContained>
 
     <!-- Workaround for https://github.com/xamarin/xamarin-macios/issues/21013 -->
     <MtouchLink>SdkOnly</MtouchLink>
