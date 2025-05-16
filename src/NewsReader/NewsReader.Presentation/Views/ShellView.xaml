@@ -88,7 +88,7 @@
                     </ControlTemplate>
                 </Grid.Resources>
                 
-                <ct:HeaderView Grid.Row="0" Title="{Binding AppName}" Margin="0,0,2,0"/>
+                <ct:HeaderView Grid.Row="0" Title="{Binding AppName}" Margin="0,0,1,0"/>
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
