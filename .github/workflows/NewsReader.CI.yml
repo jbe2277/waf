@@ -104,7 +104,21 @@ jobs:
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
         Add-AppxPackage -Path $msixFile
-        Get-AppxPackage | Select Name, PackageFullName
+        Get-AppxPackage -Name Waf.NewsReader
+    
+    - name: 🖥️ UI Test
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --logger GitHubActions -maxCpuCount:1
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: UITestResultsNewsReader
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
 
   iOS:
     runs-on: macos-15
