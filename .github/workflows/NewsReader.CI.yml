@@ -5,6 +5,7 @@ on:
     paths: 
     - 'src/*'
     - 'src/NewsReader/**'
+    - 'src/NewsReader.UITest/**'
     - '.github/workflows/**' 
     - '!.github/workflows/System.Waf.CI.yml' 
 
