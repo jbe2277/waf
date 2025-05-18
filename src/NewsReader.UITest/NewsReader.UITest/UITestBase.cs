@@ -1,29 +1,13 @@
-﻿using FlaUI.Core;
-using FlaUI.Core.Capturing;
-using FlaUI.Core.Input;
-using FlaUI.Core.Tools;
-using FlaUI.UIA3;
-using System.Globalization;
+﻿using OpenQA.Selenium.Appium.Enums;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Appium;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using Xunit;
 
 namespace UITest.NewsReader;
 
 public abstract class UITestBase : IDisposable
 {
-    private readonly List<string> usedFiles = [];
-
-    static UITestBase()
-    {
-        NativeMethods.SetProcessDPIAware();
-        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-
-        Mouse.MovePixelsPerMillisecond = 2;
-        Retry.DefaultTimeout = TimeSpan.FromSeconds(5);
-        Retry.DefaultInterval = TimeSpan.FromMilliseconds(250);
-    }
-
     protected UITestBase(string appId, string testOutputPath)
     {
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
@@ -37,10 +21,9 @@ public abstract class UITestBase : IDisposable
         Log.WriteLine($"UserInteractive: {Environment.UserInteractive}");
         Log.WriteLine($"AppId:           {AppId}");
         Log.WriteLine($"TestOutPath:     {TestOutPath}");
-        Automation = new()
-        {
-            ConnectionTimeout = TimeSpan.FromSeconds(5)
-        };
+
+        Driver = SetupWindows(new Uri("http://localhost:4723"));
+        Log.WriteLine("");
     }
 
     public ITestOutputHelper Log { get; } = TestContext.Current.TestOutputHelper ?? throw new InvalidOperationException("Test context not available.");
@@ -49,56 +32,50 @@ public abstract class UITestBase : IDisposable
 
     public string TestOutPath { get; }
 
-    public string TestMethodName { get; } = TestContext.Current.TestMethod?.MethodName ?? throw new InvalidOperationException("Test context not available.");
+    public AppiumDriver Driver { get; }
 
-    public UIA3Automation Automation { get; }
-
-    public Application? App { get; protected set; }
-
-    public bool SkipAppClose { get; set; } = false;
-
-    public string GetTempFileName(string fileExtension)
+    private WindowsDriver SetupWindows(Uri serverUri)
     {
-        var file = $"UITest_{Path.GetRandomFileName()}.{fileExtension}";
-        file = Path.Combine(Path.GetTempPath(), file);
-        usedFiles.Add(file);
-        Log.WriteLine($"TempFile:        {file}");
-        return file;
+        // See: https://github.com/appium/appium-windows-driver
+        var driverOptions = new AppiumOptions()
+        {
+            AutomationName = "Windows",
+            PlatformName = MobilePlatform.Windows,
+            App = AppId
+        };
+
+        return new WindowsDriver(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 
-    public string GetScreenshotFile(string fileName)
+    public void CreateScreenshot(string name)
     {
-        var file = Path.Combine(TestOutPath, string.Join("-", TestMethodName, fileName));
+        var fileName = GetScreenshotFile(name);
+        Log.WriteLine("Screenshot: " + fileName);
+        Driver.GetScreenshot().SaveAsFile(fileName);
+    }
+
+    private string GetScreenshotFile(string fileName)
+    {
+        var file = Path.Combine(TestOutPath, string.Join("-", TestContext.Current.TestClass!.TestClassSimpleName, TestContext.Current.TestMethod!.MethodName, fileName));
         if (string.IsNullOrEmpty(Path.GetExtension(file))) file += ".png";
         return file;
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         if (TestContext.Current.TestState?.Result == TestResult.Failed) TryGetScreenshot();
-
-        if (!SkipAppClose) App?.Close();
-        App?.Dispose();
-        Automation.Dispose();
-        foreach (var file in usedFiles)
-        {
-            if (File.Exists(file)) File.Delete(file);
-        }
+        Driver.Dispose();
 
         void TryGetScreenshot()
         {
             try
             {
-                Capture.Screen().ToFile(GetScreenshotFile("Fail"));
+                CreateScreenshot("Fail");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Log.WriteLine($"ERROR: Dispose: Failed to create a screenshot: {ex.Message}");
+            }
         }
-    }
-
-
-    private static class NativeMethods
-    {
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetProcessDPIAware();
     }
 }
