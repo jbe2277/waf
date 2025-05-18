@@ -108,10 +108,11 @@ jobs:
         Get-AppxPackage -Name Waf.NewsReader
     
     - name: ⚙️ Install and start Appium
+      shell: pwsh  
       run: |
         npm install -g appium
         appium driver install windows
-        start cmd /k appium
+        Start-Process -NoNewWindow -FilePath "appium"
 
     - name: 🖥️ UI Test
       run: |
