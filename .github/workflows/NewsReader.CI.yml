@@ -107,6 +107,17 @@ jobs:
         Add-AppxPackage -Path $msixFile
         Get-AppxPackage -Name Waf.NewsReader
     
+    - name: ⚙️ Install Appium Server
+      shell: pwsh  
+      run: |
+        npm install -g appium
+        appium driver install windows
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      shell: bash
+      run: appium &
+      
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
