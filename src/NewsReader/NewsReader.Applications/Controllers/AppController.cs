@@ -28,8 +28,8 @@ internal sealed class AppController : IAppController
         this.feedsController = feedsController;
         this.settingsController = settingsController;
         this.shellViewModel = shellViewModel;
-        addFeedNavigationItem = new(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand };
-        settingsNavigationItem = new(Resources.Settings, "\uf493")
+        addFeedNavigationItem = new(Resources.AddFeed, "\uf412", "AddFeedItem") { Command = feedsController.AddFeedCommand };
+        settingsNavigationItem = new(Resources.Settings, "\uf493", "SettingsItem")
         {
             Command = new DelegateCommand(() => shellViewModel.Navigate(this.settingsController.SettingsViewModel))
         };

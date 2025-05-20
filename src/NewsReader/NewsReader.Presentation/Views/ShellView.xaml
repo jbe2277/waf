@@ -29,9 +29,9 @@
         <ContentPage Title="{x:Static p:Resources.Menu}">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
-                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}">
+                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}" AutomationId="{Binding AutomationId, Mode=OneTime}">
                         <Label x:Name="iconLabel" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" Margin="12,0,7,0" />
-                        <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" />
+                        <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" AutomationId="TitleLabel"/>
                     </Grid>
                 </DataTemplate>
             </ContentPage.Resources>
@@ -68,7 +68,7 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
-                        <Grid Margin="0,5">
+                        <Grid Margin="0,5" AutomationId="NavigationItem">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
@@ -77,7 +77,7 @@
                             </FlyoutBase.ContextFlyout>
 
                             <VerticalStackLayout VerticalOptions="Center" Padding="10" Spacing="5">
-                                <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
+                                <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1" AutomationId="TitleLabel"/>
                                 <HorizontalStackLayout Spacing="15">
                                     <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
                                     <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
@@ -91,10 +91,10 @@
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}"/>
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" AutomationId="FeedsList"/>
 
                 <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
-                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}"/>
+                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}" AutomationId="FooterMenu"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>

@@ -6,8 +6,8 @@
             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
             xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
-            Title="{x:Static p:Resources.Settings}" x:DataType="vm:SettingsViewModel">
-    <ContentPage Title="{x:Static p:Resources.General}">
+            Title="{x:Static p:Resources.Settings}" x:DataType="vm:SettingsViewModel" AutomationId="SettingsView">
+    <ContentPage Title="{x:Static p:Resources.General}" AutomationId="GeneralView">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
@@ -23,7 +23,7 @@
         </ScrollView>
     </ContentPage>
 
-    <ContentPage Title="{x:Static p:Resources.DataSync}">
+    <ContentPage Title="{x:Static p:Resources.DataSync}" AutomationId="DataSyncView">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
@@ -50,7 +50,7 @@
         </ScrollView>
     </ContentPage>
 
-    <ContentPage Title="{x:Static p:Resources.Info}">
+    <ContentPage Title="{x:Static p:Resources.Info}" AutomationId="InfoView">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
         </ContentPage.IconImageSource>
@@ -58,7 +58,7 @@
         <ScrollView>
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{Binding AppInfo.AppName}" Style="{StaticResource Title}"/>
-                <Label Text="{Binding AppInfo.VersionString}">
+                <Label Text="{Binding AppInfo.VersionString}" AutomationId="VersionLabel">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EnableDeveloperSettingsCommand}"/>
                     </Label.GestureRecognizers>
