@@ -1,9 +1,9 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using UITest.NewsReader.Views;
 
 namespace UITest.NewsReader;
 
 public class UITest() : UITestBase("Waf.NewsReader_a8txtqew917ny!App",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/NewsReader.UITest/")
 {
-    public AppiumElement GetShellWindow() => Driver.FindElement(MobileBy.ClassName("WinUIDesktopWin32WindowClass")) ?? throw new InvalidOperationException("MainWindow not found");
+    public ShellWindow GetShellWindow() => new(Driver);
 }
