@@ -24,7 +24,7 @@ on:
 jobs:
   getVersionJob:
     name: 🔢 Get Build Version
-    runs-on: windows-2025
+    runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.getVersionStep.outputs.version }}
       versionCode: ${{ steps.getVersionStep.outputs.versionCode }}
