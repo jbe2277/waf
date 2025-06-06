@@ -1,0 +1,42 @@
+name: NewsReader.UITestAndroid
+
+on: 
+  workflow_run:
+    workflows: ["NewsReader.CI"]
+    types:
+    - completed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  UITest:    
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔖 Check-out
+      uses: actions/checkout@v4
+
+    - name: 📜 Authenticate GitHub CLI
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+    - name: ⚙️ Get latest successful run ID
+      id: get_run
+      run: |
+        RUN_ID=$(gh run list \
+          --workflow="CreateArtifacts.yml" \
+          --branch=main \
+          --json databaseId,status,conclusion \
+          --jq '.[] | select(.conclusion=="success") | .databaseId' \
+          | head -n 1)
+        echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+        echo "run_id=$RUN_ID"
+
+    - name: 📦 Download APK
+      run: |
+        gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderAndroid" --dir=./NewsReaderAndroid
+
+    - shell: bash
+      run: |
+        ls ./NewsReaderAndroid
