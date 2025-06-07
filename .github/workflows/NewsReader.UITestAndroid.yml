@@ -80,3 +80,8 @@ jobs:
 
     - name: ⚙️ Start Appium Server
       run: appium &
+
+    - name: 🖥️ UI Test
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --logger GitHubActions -maxCpuCount:1

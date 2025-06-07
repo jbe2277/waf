@@ -3,36 +3,65 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Appium;
 using System.Reflection;
 using Xunit;
+using OpenQA.Selenium.Appium.Android;
 
 namespace UITest;
 
 public abstract class UITestBase : IDisposable
 {
-    protected UITestBase(string appId, string testOutputPath)
+    private readonly string app;
+    private readonly string testOutPath;
+
+    protected UITestBase(string androidApkFile, string windowsAppId, string testOutputPath)
     {
+        var devicePlatform = DeviceManager.GetDevicePlatform(GetType());
+
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
         var rootPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../"));
-        AppId = appId;
-        TestOutPath = Path.GetFullPath(Path.IsPathFullyQualified(testOutputPath) ? testOutputPath : Path.Combine(rootPath, testOutputPath));
-        Directory.CreateDirectory(TestOutPath);
-        Log.WriteLine($"OSVersion:       {Environment.OSVersion}");
-        Log.WriteLine($"ProcessorCount:  {Environment.ProcessorCount}");
-        Log.WriteLine($"MachineName:     {Environment.MachineName}");
-        Log.WriteLine($"UserInteractive: {Environment.UserInteractive}");
-        Log.WriteLine($"AppId:           {AppId}");
-        Log.WriteLine($"TestOutPath:     {TestOutPath}");
+        testOutPath = Path.GetFullPath(Path.IsPathFullyQualified(testOutputPath) ? testOutputPath : Path.Combine(rootPath, testOutputPath));
+        Directory.CreateDirectory(testOutPath);
+        app = devicePlatform switch
+        {
+            DevicePlatform.Android => androidApkFile,
+            DevicePlatform.Windows => windowsAppId,
+            _ => throw new NotSupportedException()
+        };
+        Log.WriteLine(("DevicePlatform:", $"{devicePlatform}"));
+        Log.WriteLine(("App:", $"{app}"));
+        Log.WriteLine(("TestOutPath:", $"{testOutPath}"));
 
-        Driver = SetupWindows(new Uri("http://localhost:4723"));
+        if (devicePlatform == DevicePlatform.Android)
+        {
+            Driver = SetupAndroid(new Uri("http://localhost:4723"));
+        }
+        else if (devicePlatform == DevicePlatform.Windows)
+        {
+            Driver = SetupWindows(new Uri("http://localhost:4723"));
+        }
+        else throw new NotSupportedException();
+        
         Log.WriteLine("");
     }
 
-    public ITestOutputHelper Log { get; } = TestContext.Current.TestOutputHelper ?? throw new InvalidOperationException("Test context not available.");
-
-    public string AppId { get; }
-
-    public string TestOutPath { get; }
-
     public AppiumDriver Driver { get; }
+
+    public bool IsAndroid => Driver.IsAndroid();
+
+    public bool IsIOS => Driver.IsIOS();
+
+    public bool IsWindows => Driver.IsWindows();
+
+    private AndroidDriver SetupAndroid(Uri serverUri)
+    {
+        // See: https://github.com/appium/appium-uiautomator2-driver
+        var driverOptions = new AppiumOptions()
+        {
+            AutomationName = AutomationName.AndroidUIAutomator2,
+            PlatformName = MobilePlatform.Android,
+            App = app,
+        };
+        return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
+    }
 
     private WindowsDriver SetupWindows(Uri serverUri)
     {
@@ -41,9 +70,8 @@ public abstract class UITestBase : IDisposable
         {
             AutomationName = "Windows",
             PlatformName = MobilePlatform.Windows,
-            App = AppId
+            App = app
         };
-
         return new WindowsDriver(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 
@@ -56,7 +84,7 @@ public abstract class UITestBase : IDisposable
 
     private string GetScreenshotFile(string fileName)
     {
-        var file = Path.Combine(TestOutPath, string.Join("-", TestContext.Current.TestClass!.TestClassSimpleName, TestContext.Current.TestMethod!.MethodName, fileName));
+        var file = Path.Combine(testOutPath, string.Join("-", TestContext.Current.TestClass!.TestClassSimpleName, TestContext.Current.TestMethod!.MethodName, fileName));
         if (string.IsNullOrEmpty(Path.GetExtension(file))) file += ".png";
         return file;
     }
