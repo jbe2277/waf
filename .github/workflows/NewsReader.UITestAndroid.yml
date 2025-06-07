@@ -68,7 +68,7 @@ jobs:
         emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
         adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 
-    - name: List devices
+    - name: ⚙️ List Android Devices
       run: |
         $ANDROID_SDK_ROOT/platform-tools/adb devices
 
@@ -85,3 +85,12 @@ jobs:
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
         dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Android --logger GitHubActions
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: NewsReaderUITestResults
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
