@@ -44,3 +44,39 @@ jobs:
     - shell: bash
       run: |
         ls ./NewsReaderAndroid
+
+    - name: ⚙️ Enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: ⚙️ Start Android Emulator
+      run: |
+        export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+      
+        echo "Installing system image"
+        echo "y" | sdkmanager "system-images;android-35;google_apis;x86_64"
+
+        echo "Setting ANDROID_AVD_HOME"
+        export ANDROID_AVD_HOME=$HOME/.config/.android/avd
+
+        echo "Creating AVD"
+        echo "no" | avdmanager create avd -n test_emulator -k "system-images;android-35;google_apis;x86_64" --force
+
+        echo "Starting emulator"
+        emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
+        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
+
+    - name: List devices
+      run: |
+        $ANDROID_SDK_ROOT/platform-tools/adb devices
+
+    - name: ⚙️ Install Appium Server
+      run: |
+        npm install appium -g
+        appium driver install uiautomator2
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      run: appium &
