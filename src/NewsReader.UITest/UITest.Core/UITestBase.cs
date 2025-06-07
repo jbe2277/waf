@@ -9,13 +9,17 @@ namespace UITest;
 
 public abstract class UITestBase : IDisposable
 {
+    private readonly string appId;
     private readonly string app;
+    private readonly string androidAppActivity;
     private readonly string testOutPath;
 
-    protected UITestBase(string androidApkFile, string windowsAppId, string testOutputPath)
+    protected UITestBase(string appId, string androidApkFile, string androidAppActivity, string windowsAppId, string testOutputPath)
     {
         var devicePlatform = DeviceManager.GetDevicePlatform(GetType());
 
+        this.appId = appId;
+        this.androidAppActivity = androidAppActivity;
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
         var rootPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../"));
         testOutPath = Path.GetFullPath(Path.IsPathFullyQualified(testOutputPath) ? testOutputPath : Path.Combine(rootPath, testOutputPath));
@@ -27,7 +31,9 @@ public abstract class UITestBase : IDisposable
             _ => throw new NotSupportedException()
         };
         Log.WriteLine(("DevicePlatform:", $"{devicePlatform}"));
+        Log.WriteLine(("AppId:", $"{appId}"));
         Log.WriteLine(("App:", $"{app}"));
+        Log.WriteLine(("AndroidAppActivity:", $"{androidAppActivity}"));
         Log.WriteLine(("TestOutPath:", $"{testOutPath}"));
 
         if (devicePlatform == DevicePlatform.Android)
@@ -60,6 +66,9 @@ public abstract class UITestBase : IDisposable
             PlatformName = MobilePlatform.Android,
             App = app,
         };
+        // TODO: Use this instead of App for local dev
+        //driverOptions.AddAdditionalAppiumOption("appPackage", appId);
+        //driverOptions.AddAdditionalAppiumOption("appActivity", androidAppActivity);
         return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 

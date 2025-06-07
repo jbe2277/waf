@@ -12,6 +12,7 @@ public abstract class NewsReaderTest : UITest
     {
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
+        if (IsAndroid) window.MenuButton.SafeClick();
         window.SettingsItem.SafeClick();
         var settingsView = window.SettingsView;
         settingsView.TabItems[2].SafeClick();
