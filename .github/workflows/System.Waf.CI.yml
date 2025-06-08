@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: 🛠️ Build and test
-    runs-on: windows-2025
+    runs-on: windows-2022
 
     steps:
     - name: 🔖 Check-out
