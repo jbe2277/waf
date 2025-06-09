@@ -24,8 +24,8 @@ jobs:
       id: get_run
       run: |
         RUN_ID=$(gh run list \
-          --workflow="CreateArtifacts.yml" \
-          --branch=main \
+          --workflow="NewsReader.CI.yml" \
+          --branch=master \
           --json databaseId,status,conclusion \
           --jq '.[] | select(.conclusion=="success") | .databaseId' \
           | head -n 1)
