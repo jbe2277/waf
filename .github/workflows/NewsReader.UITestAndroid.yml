@@ -6,7 +6,6 @@ on:
     types:
     - completed
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -36,10 +35,6 @@ jobs:
     - name: 📦 Download APK
       run: |
         gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderAndroid" --dir=./NewsReaderAndroid
-
-    - shell: bash
-      run: |
-        ls ./NewsReaderAndroid
 
     - name: ⚙️ Enable KVM
       run: |
