@@ -15,7 +15,7 @@ public abstract class NewsReaderTest : UITest
         if (IsAndroid) window.MenuButton.SafeClick();
         window.SettingsItem.SafeClick();
         var settingsView = window.SettingsView;
-        settingsView.TabItems[2].SafeClick();
+        settingsView.InfoTabButton.SafeClick();
         Log.WriteLine(("Version:", settingsView.InfoView.VersionLabel.Text));
         Thread.Sleep(1000);
         CreateScreenshot("About");

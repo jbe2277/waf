@@ -17,8 +17,23 @@ public static class ElementHelper
 
     public static void SafeClick(this AppiumElement element)
     {
-        if (element.IsWindows()) Thread.Sleep(100);
-        element.Click();
-        if (element.IsWindows()) Thread.Sleep(200);
+        if (element.IsWindows())
+        {
+            Thread.Sleep(100);
+            var d = element.GetDriver();
+            var windowPos = d.Manage().Window.Position;
+            var center = element.Rect.Center();
+            // Workaround: Add Window.Position to the coordinates: https://github.com/appium/appium-windows-driver/issues/280
+            d.ExecuteScript("windows: hover", new Dictionary<string, object>()
+            {
+                ["startX"] = windowPos.X + center.X,
+                ["startY"] = windowPos.Y + center.Y,
+                ["endX"] = windowPos.X + center.X,
+                ["endY"] = windowPos.Y + center.Y
+            });
+            element.Click();
+            Thread.Sleep(200);
+        }
+        else element.Click();
     }
 }

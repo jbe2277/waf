@@ -4,17 +4,14 @@ namespace UITest.NewsReader.Views;
 
 public record SettingsView(AppiumElement Element)
 {
-    public IReadOnlyList<AppiumElement> TabItems => Element.OnPlatform(
-        android: () => 
-        {
-            var container = Element.GetDriver().Find("navigationlayout_toptabs");
-            string[] buttons = ["General", "Data Sync", "Info"];
-            return [.. buttons.Select(x => container.Find(MobileBy.AccessibilityId(x)))];
-        },
+    public AppiumElement InfoTabButton => Element.OnPlatform(
+        android: () => AndroidTopTabs.Find(MobileBy.AccessibilityId("Info")),
         iOS: () => throw new NotSupportedException(),
-        windows: () => Element.Find("TopNavMenuItemsHost").FindAll("navViewItem"));
+        windows: () => Element.Find("TopNavMenuItemsHost").FindAll("navViewItem")[2]);
 
     public InfoView InfoView => new(Element.Find("InfoView"));
+
+    private AppiumElement AndroidTopTabs => Element.GetDriver().Find("navigationlayout_toptabs");
 }
 
 public record InfoView(AppiumElement Element)
