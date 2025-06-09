@@ -12,6 +12,7 @@ public abstract class UITestBase : IDisposable
     private readonly string appId;
     private readonly string app;
     private readonly string androidAppActivity;
+    private readonly string rootPath;
     private readonly string testOutPath;
 
     protected UITestBase(string appId, string androidApkFile, string androidAppActivity, string windowsAppId, string testOutputPath)
@@ -21,7 +22,7 @@ public abstract class UITestBase : IDisposable
         this.appId = appId;
         this.androidAppActivity = androidAppActivity;
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
-        var rootPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../"));
+        rootPath = Path.GetFullPath(Path.Combine(assemblyPath, "../../../../../../../"));
         testOutPath = Path.GetFullPath(Path.IsPathFullyQualified(testOutputPath) ? testOutputPath : Path.Combine(rootPath, testOutputPath));
         Directory.CreateDirectory(testOutPath);
         app = devicePlatform switch
@@ -59,12 +60,14 @@ public abstract class UITestBase : IDisposable
 
     private AndroidDriver SetupAndroid(Uri serverUri)
     {
+        var apk = Path.GetFullPath(Path.IsPathFullyQualified(app) ? app : Path.Combine(rootPath, app));
+
         // See: https://github.com/appium/appium-uiautomator2-driver
         var driverOptions = new AppiumOptions()
         {
             AutomationName = AutomationName.AndroidUIAutomator2,
             PlatformName = MobilePlatform.Android,
-            App = app,
+            App = apk,
         };
         // TODO: Use this instead of App for local dev
         //driverOptions.AddAdditionalAppiumOption("appPackage", appId);

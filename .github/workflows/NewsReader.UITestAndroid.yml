@@ -6,7 +6,6 @@ on:
     types:
     - completed
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -37,10 +36,6 @@ jobs:
       run: |
         gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderAndroid" --dir=./NewsReaderAndroid
 
-    - shell: bash
-      run: |
-        ls ./NewsReaderAndroid
-
     - name: ⚙️ Enable KVM
       run: |
         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -64,10 +59,6 @@ jobs:
         emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
         adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 
-    - name: ⚙️ List Android Devices
-      run: |
-        $ANDROID_SDK_ROOT/platform-tools/adb devices
-
     - name: ⚙️ Install Appium Server
       run: |
         npm install appium -g
@@ -80,7 +71,7 @@ jobs:
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Android --logger GitHubActions
+        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Android --logger GitHubActions -e UITestApkFile=NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net9.0-android/publish/Waf.NewsReader-Signed.apk
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
