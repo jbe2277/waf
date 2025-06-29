@@ -26,7 +26,7 @@
     </FlyoutPage.Resources>
     
     <FlyoutPage.Flyout>
-        <ContentPage Title="{x:Static p:Resources.Menu}">
+        <ContentPage Title="{x:Static p:Resources.Menu}" AutomationId="MenuView">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
                     <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}" AutomationId="{Binding AutomationId, Mode=OneTime}">
@@ -68,7 +68,7 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
-                        <Grid Margin="0,5" AutomationId="NavigationItem">
+                        <Grid Margin="0,5" AutomationId="Feed">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
@@ -91,7 +91,7 @@
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" AutomationId="FeedsList"/>
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" AutomationId="FeedList"/>
 
                 <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
                           HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}" AutomationId="FooterMenu"/>

@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
-             Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel">
+             Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel" AutomationId="FeedView">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
             <ToolbarItem.IconImageSource>
@@ -52,7 +52,7 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:FeedItem">
-                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
+                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False" AutomationId="FeedItem">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
@@ -64,7 +64,7 @@
                                 <TapGestureRecognizer Command="{Binding ShowFeedItemViewCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"/>
                             </VerticalStackLayout.GestureRecognizers>
 
-                            <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
+                            <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3" AutomationId="NameLabel">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding MarkAsRead}" Value="True">
                                         <Setter Property="FontAttributes" Value="None"/>
@@ -78,7 +78,7 @@
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}">
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" AutomationId="FeedItemList">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
                             <VerticalStackLayout Padding="10,3" BackgroundColor="{StaticResource Gray100}">
