@@ -57,7 +57,6 @@ jobs:
 
         echo "Starting emulator"
         emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
-        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 
     - name: ⚙️ Install Appium Server
       run: |
@@ -67,6 +66,11 @@ jobs:
 
     - name: ⚙️ Start Appium Server
       run: appium &
+
+    - name: ⚙️ Wait for Android Emulator to complete booting
+      run: |
+        export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
 
     - name: 🖥️ UI Test
       run: |
