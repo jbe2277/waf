@@ -68,6 +68,9 @@ jobs:
     - name: ⚙️ Start Appium Server
       run: appium &
 
+    - name: ⚙️ Wait for Android Emulator to complete booting
+      run: timeout 120 sh -c 'until adb shell getprop sys.boot_completed | grep -m 1 "1"; do sleep 10; done'
+
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
