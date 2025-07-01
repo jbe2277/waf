@@ -57,7 +57,6 @@ jobs:
 
         echo "Starting emulator"
         emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
-        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 
     - name: ⚙️ Install Appium Server
       run: |
@@ -69,7 +68,7 @@ jobs:
       run: appium &
 
     - name: ⚙️ Wait for Android Emulator to complete booting
-      run: timeout 120 sh -c 'until adb shell getprop sys.boot_completed | grep -m 1 "1"; do sleep 10; done'
+      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
 
     - name: 🖥️ UI Test
       run: |
