@@ -8,7 +8,7 @@
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
              Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel" AutomationId="FeedView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
+        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}" AutomationId="SearchButton">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
             </ToolbarItem.IconImageSource>
@@ -22,7 +22,7 @@
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </VerticalStackLayout>
 
-            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False" Background="{StaticResource Gray100}"/>
+            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False" Background="{StaticResource Gray100}" AutomationId="SearchBar"/>
 
             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={Static c:NullToBoolConverter.Instance}, ConverterParameter=invert}" Padding="10,5">
                 <Label Text="{x:Static p:Resources.SelectFeedInfo}"/>
