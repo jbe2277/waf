@@ -72,14 +72,6 @@ jobs:
         export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
         adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
 
-        # Extra: Wait for lock screen to be dismissed
-        sleep 10
-        # Extra: Check that adb shell is usable
-        for i in {1..5}; do
-          adb shell pm list packages && break || sleep 5
-        done
-        adb devices
-
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
