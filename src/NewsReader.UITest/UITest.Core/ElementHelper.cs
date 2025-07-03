@@ -36,4 +36,17 @@ public static class ElementHelper
         }
         else element.Click();
     }
+
+    public static void SafeSendKeys(this AppiumElement element, string value)
+    {
+        if (element.IsWindows())
+        {
+            foreach (var character in value)
+            {
+                element.SendKeys(character.ToString());
+                Thread.Sleep(10);
+            }
+        }
+        else element.SendKeys(value);
+    }
 }
