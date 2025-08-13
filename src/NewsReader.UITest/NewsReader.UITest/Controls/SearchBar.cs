@@ -19,8 +19,16 @@ public record SearchBar(AppiumElement Element)
     {
         Entry.SafeClick();
         Entry.Clear();
-        Entry.SendKeys(value);
-        if (Element.IsWindows()) Thread.Sleep(250);
-        if (!Element.IsWindows()) Element.GetDriver().HideKeyboard();
+        if (Element.IsWindows())
+        {
+            foreach (var x in value)
+            {
+                Entry.SendKeys(x.ToString());
+                Thread.Sleep(50);
+            }
+        }
+        else Entry.SendKeys(value);
+        
+        if (Element.IsAndroid()) Element.GetDriver().HideKeyboard();
     }
 }
