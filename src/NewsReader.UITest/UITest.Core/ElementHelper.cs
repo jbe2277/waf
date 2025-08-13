@@ -1,5 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Enums;
-using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Enums;
 
 namespace UITest;
 
@@ -35,5 +35,18 @@ public static class ElementHelper
             Thread.Sleep(200);
         }
         else element.Click();
+    }
+
+    public static void SafeSendKeys(this AppiumElement element, string text)
+    {
+        if (element.IsWindows())
+        {
+            foreach (var x in text)
+            {
+                element.SendKeys(x.ToString());
+                Thread.Sleep(50);
+            }
+        }
+        else element.SendKeys(text);
     }
 }

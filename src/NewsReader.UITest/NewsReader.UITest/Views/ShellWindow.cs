@@ -11,7 +11,7 @@ public record ShellWindow(AppiumDriver Driver)
 {
     public AppiumElement MenuButton => Driver.OnPlatform(
         android: () => Driver.Find(MobileBy.AccessibilityId("Open navigation drawer")),
-        iOS: () => throw new NotSupportedException(),
+        iOS: () => Driver.Find("Menu"),
         windows: () => throw new NotSupportedException()
     );
 
@@ -26,6 +26,7 @@ public record ShellWindow(AppiumDriver Driver)
     public void Back()
     {
         if (Driver.IsAndroid()) ((AndroidDriver)Driver).PressKeyCode(AndroidKeyCode.Back);
+        else if (Driver.IsIOS()) Driver.Navigate().Back();
         else if (Driver.IsWindows()) Driver.Find("NavigationViewBackButton").SafeClick();
         else throw new NotSupportedException();
     }

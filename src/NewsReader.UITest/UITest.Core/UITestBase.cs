@@ -1,9 +1,10 @@
-﻿using OpenQA.Selenium.Appium.Enums;
+﻿using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium.Enums;
+using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Appium.Windows;
-using OpenQA.Selenium.Appium;
 using System.Reflection;
 using Xunit;
-using OpenQA.Selenium.Appium.Android;
 
 namespace UITest;
 
@@ -28,6 +29,7 @@ public abstract class UITestBase : IDisposable
         app = devicePlatform switch
         {
             DevicePlatform.Android => androidApkFile,
+            DevicePlatform.IOS => "",
             DevicePlatform.Windows => windowsAppId,
             _ => throw new NotSupportedException()
         };
@@ -40,6 +42,10 @@ public abstract class UITestBase : IDisposable
         if (devicePlatform == DevicePlatform.Android)
         {
             Driver = SetupAndroid(new Uri("http://localhost:4723"));
+        }
+        else if (devicePlatform == DevicePlatform.IOS)
+        {
+            Driver = SetupIOS(new Uri("http://localhost:4723"));
         }
         else if (devicePlatform == DevicePlatform.Windows)
         {
@@ -72,6 +78,26 @@ public abstract class UITestBase : IDisposable
         // TODO: Use this instead of App for local dev
         //driverOptions.AddAdditionalAppiumOption("appPackage", appId);
         //driverOptions.AddAdditionalAppiumOption("appActivity", androidAppActivity);
+        return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
+    }
+
+    private IOSDriver SetupIOS(Uri serverUri)
+    {
+        // See: https://github.com/appium/appium-xcuitest-driver and https://appium.github.io/appium-xcuitest-driver/latest/reference/capabilities/
+        var driverOptions = new AppiumOptions()
+        {
+            AutomationName = AutomationName.iOSXcuiTest,
+            PlatformName = MobilePlatform.IOS,
+        };
+        driverOptions.AddAdditionalAppiumOption("bundleId", appId);
+
+        // TODO: Use this if you have a physical device
+        //driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, "");
+
+        // TODO: xcode settings are required for deployment of the WebDriverAgent: https://appium.github.io/appium-xcuitest-driver/latest/preparation/prov-profile-basic-auto/
+        //driverOptions.AddAdditionalAppiumOption("xcodeOrgId", "");
+        //driverOptions.AddAdditionalAppiumOption("xcodeSigningId", "");
+
         return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 

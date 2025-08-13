@@ -8,7 +8,7 @@ public record FeedView(AppiumElement Element)
     public AppiumElement SearchButton => Element.OnPlatform(
         android: () => Element.GetDriver().Find(MobileBy.AccessibilityId("SearchButton")),
         windows: () => Element.GetDriver().Find("SearchButton"),
-        iOS: () => throw new NotSupportedException());
+        iOS: () => Element.GetDriver().Find("SearchButton"));
 
     public SearchBar SearchBar => new(Element.Find("SearchBar"));
 

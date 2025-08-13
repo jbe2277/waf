@@ -2,8 +2,10 @@
 
 namespace UITest.NewsReader;
 
-[DeviceCollectionTrait(DevicePlatform.Windows)] public class WindowsNewsReaderTest : NewsReaderTest { }
 [DeviceCollectionTrait(DevicePlatform.Android)] public class AndroidNewsReaderTest : NewsReaderTest { }
+[DeviceCollectionTrait(DevicePlatform.IOS)] public class IOSNewsReaderTest : NewsReaderTest { }
+[DeviceCollectionTrait(DevicePlatform.Windows)] public class WindowsNewsReaderTest : NewsReaderTest { }
+
 
 public abstract class NewsReaderTest : UITest
 {
@@ -12,12 +14,12 @@ public abstract class NewsReaderTest : UITest
     {
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
-        if (IsAndroid) window.MenuButton.SafeClick();
+        if (!IsWindows) window.MenuButton.SafeClick();
         var menuView = window.MenuView;
         var firstItem = menuView.FeedNavigationItems[0];        
         Log.WriteLine(("1. Feed:", firstItem.TitleLabel.Text));
         firstItem.Element.SafeClick();
-        if (IsAndroid) window.TapEmptySpace();  // Close menu flyout
+        if (!IsWindows) window.TapEmptySpace();  // Close menu flyout
 
         var feedView = window.FeedView;
         Log.WriteLine("Feed items:");
@@ -44,7 +46,7 @@ public abstract class NewsReaderTest : UITest
     {
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
-        if (IsAndroid) window.MenuButton.SafeClick();
+        if (!IsWindows) window.MenuButton.SafeClick();
         window.MenuView.SettingsItem.SafeClick();
         var settingsView = window.SettingsView;
         settingsView.InfoTabButton.SafeClick();

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 
 namespace UITest.NewsReader.Views;
 
@@ -6,10 +7,13 @@ public record SettingsView(AppiumElement Element)
 {
     public AppiumElement InfoTabButton => Element.OnPlatform(
         android: () => AndroidTopTabs.Find(MobileBy.AccessibilityId("Info")),
-        iOS: () => throw new NotSupportedException(),
+        iOS: () => Element.Find(By.XPath("""//XCUIElementTypeButton[@name="InfoView"]""")),
         windows: () => Element.Find("TopNavMenuItemsHost").FindAll("navViewItem")[2]);
 
-    public InfoView InfoView => new(Element.Find("InfoView"));
+    public InfoView InfoView => new(Element.OnPlatform(
+        android: () => Element.Find("InfoView"),
+        iOS: () => Element.Find(By.XPath("""//XCUIElementTypeOther[@name="InfoView"]""")),
+        windows: () => Element.Find("InfoView")));
 
     private AppiumElement AndroidTopTabs => Element.GetDriver().Find("navigationlayout_toptabs");
 }
