@@ -44,7 +44,7 @@ public static class ElementHelper
             foreach (var x in text)
             {
                 element.SendKeys(x.ToString());
-                Thread.Sleep(50);
+                Thread.Sleep(200);
             }
         }
         else element.SendKeys(text);
