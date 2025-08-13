@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Interactions;
 
 namespace UITest.NewsReader.Controls;
 
@@ -19,8 +20,17 @@ public record SearchBar(AppiumElement Element)
     {
         Entry.SafeClick();
         Entry.Clear();
-        Entry.SendKeys(value);
-        if (Element.IsWindows()) Thread.Sleep(250);
-        if (!Element.IsWindows()) Element.GetDriver().HideKeyboard();
+        if (Element.IsWindows())
+        {
+            var a = new Actions(Element.GetDriver());
+            foreach (var x in value)
+            {
+                a.SendKeys(x.ToString()).Pause(TimeSpan.FromMilliseconds(100));
+            }
+            a.Perform();
+        }
+        else Entry.SendKeys(value);
+        
+        if (Element.IsAndroid()) Element.GetDriver().HideKeyboard();
     }
 }
