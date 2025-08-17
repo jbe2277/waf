@@ -9,6 +9,8 @@ on:
     - '.github/workflows/**' 
     - '!.github/workflows/System.Waf.CI.yml' 
 
+  workflow_dispatch:
+
 jobs:
   GetVersion:
     uses: ./.github/workflows/GetBuildVersion.yml
