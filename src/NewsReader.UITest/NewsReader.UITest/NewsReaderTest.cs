@@ -54,4 +54,30 @@ public abstract class NewsReaderTest : UITest
         Thread.Sleep(1000);
         CreateScreenshot("About");
     }
+
+    [Fact]
+    public void AddFeedValidationTest()
+    {
+        if (IsWindows) Driver.Manage().Window.Maximize();
+        var window = GetShellWindow();
+        if (!IsWindows) window.MenuButton.SafeClick();
+        var menuView = window.MenuView;
+        menuView.AddFeedItem.SafeClick();
+        var addEditFeedView = window.AddEditFeedView;
+        Assert.False(addEditFeedView.AddEditButton.Enabled);
+        Assert.Empty(addEditFeedView.TryLoadErrorLabel?.Text ?? "");
+        Assert.True(addEditFeedView.FeedUrlEntry.IsTextEmpty);
+        addEditFeedView.FeedUrlEntry.EnterText("wrong");
+        addEditFeedView.LoadFeedButton.SafeClick();
+
+        Assert.True(addEditFeedView.FeedNameEntry.IsTextEmpty);
+        Assert.NotEmpty(addEditFeedView.FeedErrorLabel.Text);
+        addEditFeedView.FeedNameEntry.EnterText("Test");
+        Thread.Sleep(1000);
+        Assert.Empty(addEditFeedView.FeedErrorLabel.Text);
+
+        Thread.Sleep(5000);
+        Assert.NotEmpty(addEditFeedView.TryLoadErrorLabel?.Text ?? "");
+        Assert.False(addEditFeedView.AddEditButton.Enabled);
+    }
 }

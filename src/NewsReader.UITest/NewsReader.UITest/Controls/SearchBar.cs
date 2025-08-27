@@ -20,7 +20,6 @@ public record SearchBar(AppiumElement Element)
         Entry.SafeClick();
         Entry.Clear();
         Entry.SafeSendKeys(text);
-        
         if (Element.IsAndroid()) Element.GetDriver().HideKeyboard();
     }
 }

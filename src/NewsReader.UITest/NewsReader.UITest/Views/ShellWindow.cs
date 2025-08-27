@@ -16,10 +16,12 @@ public record ShellWindow(AppiumDriver Driver)
     );
 
     public MenuView MenuView => new(Driver.Find("MenuView"));
-    
+
     public FeedView FeedView => new(Driver.Find("FeedView"));
 
     public FeedItemView FeedItemView => new(Driver.Find("FeedItemView"));
+
+    public AddEditFeedView AddEditFeedView => new(Driver.Find("AddEditFeedView"));
 
     public SettingsView SettingsView => new(Driver.Find("SettingsView"));
 
@@ -48,6 +50,8 @@ public record ShellWindow(AppiumDriver Driver)
 public record MenuView(AppiumElement Element)
 {
     public IReadOnlyList<FeedNavigationItem> FeedNavigationItems => Element.Find("FeedList").FindAll("Feed").Select(x => new FeedNavigationItem(x)).ToArray();
+
+    public AppiumElement AddFeedItem => Element.Find("AddFeedItem");
 
     public AppiumElement SettingsItem => Element.Find("SettingsItem");
 }
