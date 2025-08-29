@@ -74,8 +74,8 @@ public partial class App : Application
     private void OnDeactivated()
     {
         Log.Default.Info("App deactivated");
-        // Only Save on iOS. See: https://developer.android.com/guide/components/activities/activity-lifecycle
-        // - Android: don't use onPause to save data
+        // Only Save on iOS.
+        // - Android: don't use onPause to save data. See: https://developer.android.com/guide/components/activities/activity-lifecycle
         // - Windows: Minimize window will call OnStopped and OnDeactivated after each other > file locked exception can occur
 #if IOS
         Save();
