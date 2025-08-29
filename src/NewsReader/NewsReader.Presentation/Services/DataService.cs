@@ -21,6 +21,7 @@ public class DataService : IDataService
 
     public async Task<T?> Load<T>(Stream? dataStream = null) where T : class
     {
+        Log.Default.Info("DataService.Load started. From {0}.", dataStream is null ? containerFileName : "stream");
         try
         {
             return await Task.Run(() =>   // Use background thread -> otherwise, a Android.OS.NetworkOnMainThreadException occurs for network streams.
@@ -49,6 +50,7 @@ public class DataService : IDataService
     public void Save(object data)
     {
         ArgumentNullException.ThrowIfNull(data);
+        Log.Default.Info("DataService.Save started. To {0}.", containerFileName);
         using var archiveStream = File.Create(containerFileName);
         using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true);
         var entry = archive.CreateEntry(itemFileName, CompressionLevel.Optimal);

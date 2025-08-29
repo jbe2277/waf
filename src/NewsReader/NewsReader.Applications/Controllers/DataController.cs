@@ -66,8 +66,16 @@ internal sealed class DataController
     {
         if (!loadCompletion.Task.IsCompleted) return Task.CompletedTask;
         var feedManager = loadCompletion.Task.GetAwaiter().GetResult();
-        dataService.Save(feedManager);
-        return Upload();
+        try
+        {
+            dataService.Save(feedManager);
+            return Upload();
+        }
+        catch (Exception ex)
+        {
+            Log.Default.Error(ex, "DataController.Save: Error");
+            return Task.CompletedTask;
+        }
     }
 
     private async Task SignIn()

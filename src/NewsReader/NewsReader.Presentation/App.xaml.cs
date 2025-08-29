@@ -7,7 +7,6 @@ using NLog;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
 using LogLevel = NLog.LogLevel;
-using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.Presentation;
 
@@ -75,7 +74,10 @@ public partial class App : Application
     private void OnDeactivated()
     {
         Log.Default.Info("App deactivated");
-#if !ANDROID   // Android: don't use onPause to save data. See: https://developer.android.com/guide/components/activities/activity-lifecycle
+        // Only Save on iOS. See: https://developer.android.com/guide/components/activities/activity-lifecycle
+        // - Android: don't use onPause to save data
+        // - Windows: Minimize window will call OnStopped and OnDeactivated after each other > file locked exception can occur
+#if IOS
         Save();
 #endif
     }
@@ -119,7 +121,7 @@ public partial class App : Application
                 ArchiveNumbering = ArchiveNumberingMode.Rolling
             }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
 #if DEBUG
-            var traceTarget = c.ForTarget("traceTarget").WriteTo(new AppTraceTarget
+            var traceTarget = c.ForTarget("traceTarget").WriteTo(new Services.AppTraceTarget
             {
                 Layout = layout,
             }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
