@@ -12,30 +12,22 @@ public class DataService : IDataService
 
     public Stream GetReadStream() => File.OpenRead(containerFileName);
 
-    public string GetHash()
+    public Stream GetWriteStream() => File.Create(containerFileName);
+
+    public string GetHash(Stream dataStream)
     {
-        using var stream = GetReadStream();
         using var sha1 = SHA1.Create();
-        return Convert.ToHexString(sha1.ComputeHash(stream));
+        return Convert.ToHexString(sha1.ComputeHash(dataStream));
     }
 
-    public async Task<T?> Load<T>(Stream? dataStream = null) where T : class
+    public async Task<T?> Load<T>(Stream dataStream) where T : class
     {
-        Log.Default.Info("DataService.Load started. From {0}.", dataStream is null ? containerFileName : "stream");
-        try
-        {
-            return await Task.Run(() =>   // Use background thread -> otherwise, a Android.OS.NetworkOnMainThreadException occurs for network streams.
-            {
-                using var archiveStream = dataStream ?? GetReadStream();
-                var result = LoadItem<T>(archiveStream, itemFileName);
-                Log.Default.Info("DataService.Load completed. From {0}.", dataStream is null ? containerFileName : "stream");
-                return result;
-            }).ConfigureAwait(false);
-        }
-        catch (FileNotFoundException)
-        {
-            return null;
-        }
+        Log.Default.Info("DataService.Load started.");
+        using var memory = new MemoryStream();
+        await dataStream.CopyToAsync(memory).ConfigureAwait(false);
+        var result = LoadItem<T>(dataStream, itemFileName);
+        Log.Default.Info("DataService.Load completed.");
+        return result;
     }
 
     private static T LoadItem<T>(Stream archiveStream, string fileName) where T : class
@@ -47,18 +39,17 @@ public class DataService : IDataService
         return (T)(serializer.ReadObject(stream) ?? throw new InvalidOperationException($"Deserialize returned null."));
     }
 
-    public void Save(object data)
+    public void Save(object data, Stream target)
     {
         ArgumentNullException.ThrowIfNull(data);
-        Log.Default.Info("DataService.Save started. To {0}.", containerFileName);
-        using var archiveStream = File.Create(containerFileName);
-        using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, leaveOpen: true);
+        Log.Default.Info("DataService.Save started.");
+        using var archive = new ZipArchive(target, ZipArchiveMode.Create, leaveOpen: true);
         var entry = archive.CreateEntry(itemFileName, CompressionLevel.Optimal);
         // Set always the same write time -> only content changes should result in a different hash.
         entry.LastWriteTime = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
         using var stream = entry.Open();
         var serializer = new DataContractSerializer(data.GetType());
         serializer.WriteObject(stream, data);
-        Log.Default.Info("DataService.Save completed. To {0}.", containerFileName);
+        Log.Default.Info("DataService.Save completed.");
     }
 }

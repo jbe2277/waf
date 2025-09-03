@@ -48,7 +48,9 @@ internal sealed class DataController
         FeedManager? feedManager;
         try
         {
-            feedManager = (await dataService.Load<FeedManager>()) ?? new FeedManager();
+            using var stream = dataService.GetReadStream();
+            feedManager = await dataService.Load<FeedManager>(stream).ConfigureAwait(false);
+            feedManager ??= new();
         }
         catch (Exception ex)
         {
@@ -62,19 +64,25 @@ internal sealed class DataController
 
     public Task Update() => DownloadAndMerge();
 
-    public Task Save()
+    public async Task Save()
     {
-        if (!loadCompletion.Task.IsCompleted) return Task.CompletedTask;
-        var feedManager = loadCompletion.Task.GetAwaiter().GetResult();
+        if (!loadCompletion.Task.IsCompleted) return;
+        var feedManager = await loadCompletion.Task.ConfigureAwait(false);
         try
         {
-            dataService.Save(feedManager);
-            return Upload();
+            var memory = new MemoryStream();
+            dataService.Save(feedManager, memory);
+            using (var stream = dataService.GetWriteStream())
+            {
+                memory.Position = 0;
+                await memory.CopyToAsync(stream).ConfigureAwait(false);
+            }
+            memory.Position = 0;
+            await Upload(memory).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
             Log.Default.Error(ex, "DataController.Save: Error");
-            return Task.CompletedTask;
         }
     }
 
@@ -100,10 +108,11 @@ internal sealed class DataController
         FeedManager? feedManagerFromWeb = null;
         try
         {
-            var (stream, cTag) = await webStorageService.DownloadFile(appSettings.WebStorageCTag);
-            if (!string.IsNullOrEmpty(cTag))
+            var download = await webStorageService.DownloadFile(appSettings.WebStorageCTag);
+            using var stream = download.stream;
+            if (stream is not null && !string.IsNullOrEmpty(download.cTag))
             {
-                appSettings.WebStorageCTag = cTag;
+                appSettings.WebStorageCTag = download.cTag;
                 feedManagerFromWeb = await dataService.Load<FeedManager>(stream);
             }
             else
@@ -125,17 +134,22 @@ internal sealed class DataController
         }
     }
 
-    private async Task Upload()
+    private async Task Upload(Stream stream)
     {
         if (!isInSync || webStorageService.CurrentAccount == null || !networkInfoService.InternetAccess) return;
         try
         {
-            var dataFileHash = dataService.GetHash();
+            var dataFileHash = dataService.GetHash(stream);
             if (dataFileHash != appSettings.LastUploadedFileHash)
             {
-                var cTag = await webStorageService.UploadFile(dataService.GetReadStream()).ConfigureAwait(false);
+                stream.Position = 0;
+                var cTag = await webStorageService.UploadFile(stream).ConfigureAwait(false);
                 appSettings.WebStorageCTag = cTag;
                 appSettings.LastUploadedFileHash = dataFileHash;
+            }
+            else
+            {
+                Log.Default.Info("DataController.Upload: Skip because it has the same hash.");
             }
         }
         catch (Exception ex)

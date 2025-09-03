@@ -60,7 +60,7 @@ internal sealed class AppController : IAppController
 
     public void Save()
     {
-        Task.Run(dataController.Save).GetAwaiter().GetResult();  // Task.Run needed to avoid dead-lock when Save uses await.
+        dataController.Save().GetAwaiter().GetResult();
     }
 
     public async void Update()

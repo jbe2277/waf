@@ -4,9 +4,11 @@ public interface IDataService
 {
     Stream GetReadStream();
 
-    string GetHash();
+    Stream GetWriteStream();
 
-    Task<T?> Load<T>(Stream? dataStream = null) where T : class;
+    string GetHash(Stream dataStream);
 
-    void Save(object data);
+    Task<T?> Load<T>(Stream dataStream) where T : class;
+
+    void Save(object data, Stream target);
 }
