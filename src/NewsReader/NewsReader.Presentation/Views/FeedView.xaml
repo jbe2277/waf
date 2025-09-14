@@ -52,7 +52,7 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:FeedItem">
-                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False" AutomationId="FeedItem">
+                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False" AutomationId="FeedItem" SemanticProperties.Description="{Binding MarkAsRead, StringFormat='MarkAsRead{0}'}">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 

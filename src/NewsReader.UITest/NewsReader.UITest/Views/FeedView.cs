@@ -20,4 +20,11 @@ public record FeedItem(AppiumElement Element)
     public AppiumElement NameLabel => Element.Find("NameLabel");
 
     public AppiumElement DescriptionLabel => Element.Find("DescriptionLabel");
+
+    public bool MarkAsRead => Element.GetStatusInfo() switch
+    {
+        "MarkAsReadFalse" => false,
+        "MarkAsReadTrue" => true,
+        var x => throw new InvalidOperationException($"Status: {x} is not supported")
+    };
 }

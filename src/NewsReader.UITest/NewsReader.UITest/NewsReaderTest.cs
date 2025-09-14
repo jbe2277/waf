@@ -16,21 +16,24 @@ public abstract class NewsReaderTest : UITest
         var window = GetShellWindow();
         if (!IsWindows) window.MenuButton.SafeClick();
         var menuView = window.MenuView;
-        var firstItem = menuView.FeedNavigationItems[0];        
-        Log.WriteLine(("1. Feed:", firstItem.TitleLabel.Text));
-        firstItem.Element.SafeClick();
+        var firstFeed = menuView.FeedNavigationItems[0];        
+        Log.WriteLine(("1. Feed:", firstFeed.TitleLabel.Text));
+        firstFeed.Element.SafeClick();
         if (!IsWindows) window.TapEmptySpace();  // Close menu flyout
 
         var feedView = window.FeedView;
         Log.WriteLine("Feed items:");
         foreach (var x in feedView.FeedItems) Log.WriteLine("  " + x.NameLabel.Text);
-        feedView.FeedItems[0].Element.SafeClick();
+        var item = feedView.FeedItems[0];
+        Assert.False(item.MarkAsRead);
+        item.Element.SafeClick();
 
         var feedItemView = window.FeedItemView;
-        Thread.Sleep(2000);
+        Thread.Sleep(3500);
         CreateScreenshot("FeedView");        
 
         window.Back();
+        Assert.True(item.MarkAsRead);
         feedView.SearchButton.SafeClick();
         feedView.SearchBar.EnterText("DoesNotExist_34jlk534");
         Assert.Equal("DoesNotExist_34jlk534", feedView.SearchBar.Text);
