@@ -29,7 +29,7 @@ public abstract class NewsReaderTest : UITest
         item.Element.SafeClick();
 
         var feedItemView = window.FeedItemView;
-        Thread.Sleep(3500);
+        Thread.Sleep(4500);
         CreateScreenshot("FeedView");        
 
         window.Back();

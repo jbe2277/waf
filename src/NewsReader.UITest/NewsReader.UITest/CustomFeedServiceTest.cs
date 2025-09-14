@@ -23,6 +23,7 @@ public abstract class CustomFeedServiceTest : UITest
         var addEditFeedView = window.AddEditFeedView;
         addEditFeedView.FeedUrlEntry.EnterText("http://localhost:5000/feed/rss");
         addEditFeedView.LoadFeedButton.SafeClick();
+        await Task.Delay(1000, CancellationToken.None);
 
         Assert.Equal("FeedTitle", addEditFeedView.FeedNameEntry.Text);
         Assert.Empty(addEditFeedView.FeedErrorLabel.Text);
