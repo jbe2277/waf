@@ -15,7 +15,7 @@ public static class ElementHelper
         _ => throw new NotSupportedException($"Platform not supported: {element.GetDriver().PlatformName}")
     };
 
-    public static void SafeClick(this AppiumElement element)
+    public static void SafeClick(this AppiumElement element, bool isRightButton = false)
     {
         if (element.IsWindows())
         {
@@ -31,7 +31,12 @@ public static class ElementHelper
                 ["endX"] = windowPos.X + center.X,
                 ["endY"] = windowPos.Y + center.Y
             });
-            element.Click();
+            d.ExecuteScript("windows: click", new Dictionary<string, object>()
+            {
+                ["x"] = windowPos.X + center.X,
+                ["y"] = windowPos.Y + center.Y,
+                ["button"] = isRightButton ? "right" : "left"
+            });
             Thread.Sleep(200);
         }
         else element.Click();

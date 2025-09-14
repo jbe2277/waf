@@ -3,6 +3,7 @@ using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Android.Enums;
 using OpenQA.Selenium.Interactions;
 using System.Drawing;
+using UITest.NewsReader.Controls;
 using PointerInputDevice = OpenQA.Selenium.Appium.Interactions.PointerInputDevice;
 
 namespace UITest.NewsReader.Views;
@@ -54,6 +55,15 @@ public record MenuView(AppiumElement Element)
     public AppiumElement AddFeedItem => Element.Find("AddFeedItem");
 
     public AppiumElement SettingsItem => Element.Find("SettingsItem");
+
+    public MenuContextMenu ContextMenu => new(Element.GetDriver());
+}
+
+public record MenuContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
+{
+    public AppiumElement EditMenuItem => MenuItems[0];
+
+    public AppiumElement RemoveMenuItem => MenuItems[1];
 }
 
 public record FeedNavigationItem(AppiumElement Element)

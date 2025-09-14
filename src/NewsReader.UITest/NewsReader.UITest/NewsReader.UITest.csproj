@@ -13,5 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UITest.Core\UITest.Core.csproj" />
+    <ProjectReference Include="..\UITest.FeedService\UITest.FeedService.csproj" />
   </ItemGroup>
 </Project>

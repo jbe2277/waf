@@ -71,7 +71,7 @@
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
-                            <Label Text="{Binding Description}" MaxLines="3"/>
+                            <Label Text="{Binding Description}" MaxLines="3" AutomationId="DescriptionLabel"/>
                         </VerticalStackLayout>
                     </ControlTemplate>
                 </RefreshView.Resources>
