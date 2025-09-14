@@ -17,5 +17,7 @@ public record FeedView(AppiumElement Element)
 
 public record FeedItem(AppiumElement Element)
 {
-    public AppiumElement NameLabel = Element.Find("NameLabel");
+    public AppiumElement NameLabel => Element.Find("NameLabel");
+
+    public AppiumElement DescriptionLabel => Element.Find("DescriptionLabel");
 }

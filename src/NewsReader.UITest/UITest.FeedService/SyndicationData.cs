@@ -8,7 +8,7 @@ public class SyndicationData
     {
         Feed = new("FeedTitle", "FeedDescription", new Uri("https://sample.com/feed/rss"), "FeedId", DateTime.Now,
         [
-            new SyndicationItem("ItemTitle", "ItemContent", new Uri("https://sample.com/posts/1"), "ItemId", DateTime.Now)
+            new SyndicationItem("ItemTitle", "ItemContent", new Uri("https://sample.com/posts/1"), "ItemId", DateTime.Now) { PublishDate = DateTime.Now },
         ]);
     }
 

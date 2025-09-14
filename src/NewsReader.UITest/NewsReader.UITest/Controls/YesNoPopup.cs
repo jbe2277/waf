@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium.Appium;
 
 namespace UITest.NewsReader.Controls;
+
 public record YesNoPopup(AppiumDriver Driver) : Popup(Driver)
 {
     public AppiumElement YesButton => Driver.OnPlatform(

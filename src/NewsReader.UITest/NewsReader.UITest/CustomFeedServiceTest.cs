@@ -33,6 +33,14 @@ public abstract class CustomFeedServiceTest : UITest
         Assert.Equal(itemsCount + 1, menuView.FeedNavigationItems.Count);
         var lastItem = menuView.FeedNavigationItems[^1];
         Assert.Equal("FeedTitle", lastItem.TitleLabel.Text);
+
+        lastItem.Element.SafeClick();
+        if (!IsWindows) window.TapEmptySpace();  // Close menu flyout
+        var feedView = window.FeedView;
+        var item = feedView.FeedItems.Single();
+        Assert.Equal("ItemTitle", item.NameLabel.Text);
+        Assert.Equal("ItemContent", item.DescriptionLabel.Text);
+
         lastItem.Element.SafeClick(isRightButton: true);
         menuView.ContextMenu.RemoveMenuItem.SafeClick();
         var popup = new YesNoPopup(Driver);
