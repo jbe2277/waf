@@ -1,4 +1,5 @@
 ﻿using UITest.FeedService;
+using UITest.NewsReader.Controls;
 using Xunit;
 
 namespace UITest.NewsReader;
@@ -17,6 +18,7 @@ public abstract class CustomFeedServiceTest : UITest
         var window = GetShellWindow();
         if (!IsWindows) window.MenuButton.SafeClick();
         var menuView = window.MenuView;
+        var itemsCount = menuView.FeedNavigationItems.Count;
         menuView.AddFeedItem.SafeClick();
         var addEditFeedView = window.AddEditFeedView;
         addEditFeedView.FeedUrlEntry.EnterText("http://localhost:5000/feed/rss");
@@ -28,8 +30,15 @@ public abstract class CustomFeedServiceTest : UITest
 
         if (!IsWindows) window.MenuButton.SafeClick();
         menuView = window.MenuView;
+        Assert.Equal(itemsCount + 1, menuView.FeedNavigationItems.Count);
         var lastItem = menuView.FeedNavigationItems[^1];
         Assert.Equal("FeedTitle", lastItem.TitleLabel.Text);
+        lastItem.Element.SafeClick(isRightButton: true);
+        menuView.ContextMenu.RemoveMenuItem.SafeClick();
+        var popup = new YesNoPopup(Driver);
+        Assert.Contains("FeedTitle", popup.Message);
+        popup.YesButton.SafeClick();
+        Assert.Equal(itemsCount, menuView.FeedNavigationItems.Count);
 
         cts.Cancel();
         await serviceTask;

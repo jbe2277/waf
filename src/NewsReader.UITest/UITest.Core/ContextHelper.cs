@@ -32,13 +32,13 @@ public static class ContextHelper
 
     public static bool IsWindows(this AppiumElement element) => IsWindows(element.GetDriver());
 
-    public static T OnPlatform<T>(this AppiumElement element, Func<T> android, Func<T> iOS, Func<T> windows) => OnPlatform(element.GetDriver(), android, iOS, windows);
+    public static T OnPlatform<T>(this AppiumElement element, Func<T>? android = null, Func<T>? iOS = null, Func<T>? windows = null) => OnPlatform(element.GetDriver(), android, iOS, windows);
 
-    public static T OnPlatform<T>(this AppiumDriver driver, Func<T> android, Func<T> iOS, Func<T> windows)
+    public static T OnPlatform<T>(this AppiumDriver driver, Func<T>? android = null, Func<T>? iOS = null, Func<T>? windows = null)
     {
-        if (driver.IsAndroid()) return android();
-        else if (driver.IsIOS()) return iOS();
-        else if (driver.IsWindows()) return windows();
+        if (driver.IsAndroid() && android is not null) return android();
+        else if (driver.IsIOS() && iOS is not null) return iOS();
+        else if (driver.IsWindows() && windows is not null) return windows();
         throw new NotSupportedException($"Platform '{driver.PlatformName}' is not supported");
     }
 }

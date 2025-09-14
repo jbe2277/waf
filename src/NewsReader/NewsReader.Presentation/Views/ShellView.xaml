@@ -70,9 +70,11 @@
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
                         <Grid Margin="0,5" AutomationId="Feed">
                             <FlyoutBase.ContextFlyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
-                                    <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
+                                <MenuFlyout AutomationId="MenuFlyout">
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" AutomationId="EditMenuItem"
+                                            Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" AutomationId="RemoveMenuItem"
+                                            Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
