@@ -33,6 +33,7 @@ public abstract class NewsReaderTest : UITest
         CreateScreenshot("FeedView");        
 
         window.Back();
+        if (IsWindows) Thread.Sleep(1000);
         Assert.True(item.MarkAsRead);
         feedView.SearchButton.SafeClick();
         feedView.SearchBar.EnterText("DoesNotExist_34jlk534");
