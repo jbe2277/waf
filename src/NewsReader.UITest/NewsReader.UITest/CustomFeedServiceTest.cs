@@ -11,8 +11,7 @@ public abstract class CustomFeedServiceTest : UITest
     [Fact]
     public async Task CustomFeedServiceAddAndListTest()
     {
-        var cts = new CancellationTokenSource();
-        var serviceTask = FeedWebApp.RunService(new SyndicationData(), null, cts.Token);
+        await using var feedWebApp = FeedWebApp.RunService(new SyndicationData(), null);
 
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
@@ -48,8 +47,5 @@ public abstract class CustomFeedServiceTest : UITest
         Assert.Contains("FeedTitle", popup.Message);
         popup.YesButton.SafeClick();
         Assert.Equal(itemsCount, menuView.FeedNavigationItems.Count);
-
-        cts.Cancel();
-        await serviceTask;
     }
 }
