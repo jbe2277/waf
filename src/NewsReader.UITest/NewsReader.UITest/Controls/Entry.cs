@@ -13,6 +13,5 @@ public record Entry(AppiumElement Element, string? Placeholder = null)
         Element.Click();
         Element.Clear();
         Element.SendKeys(value);
-        if (Element.IsAndroid()) Element.GetDriver().HideKeyboard();
     }
 }
