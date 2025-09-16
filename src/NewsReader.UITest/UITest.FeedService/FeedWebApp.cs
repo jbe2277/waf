@@ -1,36 +1,60 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.ServiceModel.Syndication;
+using System.Xml;
 
 namespace UITest.FeedService;
 
 public static class FeedWebApp
 {
-    public static async Task RunService(SyndicationData feed, string? address, CancellationToken cancellation)
+    public static IAsyncDisposable RunService(SyndicationData feed, string? address)
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddSingleton(feed);
-        var part = new AssemblyPart(typeof(FeedWebApp).Assembly);
-        builder.Services.AddControllers().ConfigureApplicationPartManager(x => x.ApplicationParts.Add(part));
-
         var app = builder.Build();
-        app.MapControllers();
 
         address ??= "http://localhost:5000";
-        var serviceTask = app.RunAsync(address);
+        app.Urls.Add(address);
 
-        try
+        var feedGroup = app.MapGroup("/feed");
+        feedGroup.MapGet("/rss", GetFeedRss);
+        feedGroup.MapGet("/atom", GetFeedAtom);
+
+        return new AppAsyncDisposable(app, app.RunAsync());
+    }
+
+    private static IResult GetFeedRss(SyndicationData data)
+    {
+        var stream = new MemoryStream();
+        using (var writer = XmlWriter.Create(stream, new() { Indent = true }))
         {
-            await Task.Delay(Timeout.InfiniteTimeSpan, cancellation).ConfigureAwait(false);
+            var rssFormatter = new Rss20FeedFormatter(data.Feed);
+            rssFormatter.WriteTo(writer);
         }
-        catch (OperationCanceledException) { }
-        finally
+        stream.Position = 0;
+        return TypedResults.Stream(stream, "application/rss+xml");
+    }
+
+    private static IResult GetFeedAtom(SyndicationData data)
+    {
+        var stream = new MemoryStream();
+        using (var writer = XmlWriter.Create(stream, new() { Indent = true }))
         {
-            try
-            {
-                await Task.WhenAll(app.StopAsync(CancellationToken.None), serviceTask).ConfigureAwait(false);
-            }
-            catch (OperationCanceledException) { }
+            var atomFormatter = new Atom10FeedFormatter(data.Feed);
+            atomFormatter.WriteTo(writer);
+        }
+        stream.Position = 0;
+        return TypedResults.Stream(stream, "application/atom+xml");
+    }
+
+
+    private sealed class AppAsyncDisposable(WebApplication app, Task appTask) : IAsyncDisposable
+    {
+        public async ValueTask DisposeAsync()
+        {
+            await app.StopAsync().ConfigureAwait(false);
+            await appTask.ConfigureAwait(false);
         }
     }
 }
