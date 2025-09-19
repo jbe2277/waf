@@ -65,7 +65,9 @@ jobs:
         appium --version
 
     - name: ⚙️ Start Appium Server
-      run: appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/out/NewsReader.UITest
+        appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
 
     - name: ⚙️ Wait for Android Emulator to complete booting
       run: |
