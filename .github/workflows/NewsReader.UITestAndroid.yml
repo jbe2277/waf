@@ -65,7 +65,7 @@ jobs:
         appium --version
 
     - name: ⚙️ Start Appium Server
-      run: appium &
+      run: appium > /out/NewsReader.UITest/appium.log 2>&1 &
 
     - name: ⚙️ Wait for Android Emulator to complete booting
       run: |
