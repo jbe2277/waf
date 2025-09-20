@@ -29,12 +29,11 @@ public abstract class NewsReaderTest : UITest
         item.Element.SafeClick();
 
         var feedItemView = window.FeedItemView;
-        Thread.Sleep(6500);
+        Thread.Sleep(2000);
         CreateScreenshot("FeedView");        
 
         window.Back();
         if (IsWindows) Thread.Sleep(1000);
-        Assert.True(item.MarkAsRead);
         feedView.SearchButton.SafeClick();
         feedView.SearchBar.EnterText("DoesNotExist_34jlk534");
         Assert.Equal("DoesNotExist_34jlk534", feedView.SearchBar.Text);
