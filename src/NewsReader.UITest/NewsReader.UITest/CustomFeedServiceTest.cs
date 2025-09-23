@@ -4,8 +4,10 @@ using Xunit;
 
 namespace UITest.NewsReader;
 
+[DeviceCollectionTrait(DevicePlatform.Android)] public class AndroidCustomFeedServiceTest : CustomFeedServiceTest { }
 [DeviceCollectionTrait(DevicePlatform.Windows)] public class WindowsCustomFeedServiceTest : CustomFeedServiceTest { }
 
+// Android: This works only with the Google Android Emulator.
 public abstract class CustomFeedServiceTest : UITest
 {
     [Fact]
@@ -20,7 +22,8 @@ public abstract class CustomFeedServiceTest : UITest
         var itemsCount = menuView.FeedNavigationItems.Count;
         menuView.AddFeedItem.SafeClick();
         var addEditFeedView = window.AddEditFeedView;
-        addEditFeedView.FeedUrlEntry.EnterText("http://localhost:5000/feed/rss");
+        var host = IsAndroid ? "10.0.2.2" : "localhost";
+        addEditFeedView.FeedUrlEntry.EnterText($"http://{host}:5000/feed/rss");
         addEditFeedView.LoadFeedButton.SafeClick();
         await Task.Delay(1000, CancellationToken.None);
 
@@ -41,8 +44,19 @@ public abstract class CustomFeedServiceTest : UITest
         Assert.Equal("ItemTitle", item.NameLabel.Text);
         Assert.Equal("ItemContent", item.DescriptionLabel.Text);
 
-        lastItem.Element.SafeClick(isRightButton: true);
-        menuView.ContextMenu.RemoveMenuItem.SafeClick();
+        if (!IsWindows) window.MenuButton.SafeClick();
+        menuView = window.MenuView;
+        lastItem = menuView.FeedNavigationItems[^1];
+        if (IsWindows)
+        {
+            lastItem.Element.SafeClick(isRightButton: true);
+            menuView.ContextMenu.RemoveMenuItem.SafeClick();
+        }
+        else
+        {
+            lastItem.Element.SwipeRight();
+            menuView.SwipeView.RemoveSwipeItem.SafeClick();
+        }
         var popup = new YesNoPopup(Driver);
         Assert.Contains("FeedTitle", popup.Message);
         popup.YesButton.SafeClick();

@@ -57,6 +57,8 @@ public record MenuView(AppiumElement Element)
     public AppiumElement SettingsItem => Element.Find("SettingsItem");
 
     public MenuContextMenu ContextMenu => new(Element.GetDriver());
+
+    public MenuSwipeView SwipeView => new(Element);
 }
 
 public record MenuContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
@@ -64,6 +66,13 @@ public record MenuContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
     public AppiumElement EditMenuItem => MenuItems[0];
 
     public AppiumElement RemoveMenuItem => MenuItems[1];
+}
+
+public record MenuSwipeView(AppiumElement Element)
+{
+    public AppiumElement EditSwipeItem => Element.Find(MobileBy.AccessibilityId("EditSwipeItem"));
+
+    public AppiumElement RemoveSwipeItem => Element.Find(MobileBy.AccessibilityId("RemoveSwipeItem"));
 }
 
 public record FeedNavigationItem(AppiumElement Element)

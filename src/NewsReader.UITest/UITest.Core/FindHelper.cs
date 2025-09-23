@@ -58,12 +58,20 @@ public static class FindHelper
         MobilePlatform.Windows => MobileBy.AccessibilityId(automationId),
         _ => throw new NotSupportedException($"Platform not supported: {driver.PlatformName}")
     };
-    
+
     private static AppiumElement WaitFind(Func<AppiumDriver, string, AppiumElement> func, AppiumDriver driver, string automationId, AppiumElement? owner = null)
     {
         try
         {
-            return driver.Wait().Until(x => func(driver, automationId));
+            return driver.Wait().Until(x =>
+            {
+                var result = func(driver, automationId);
+                if (driver.IsAndroid())  // Workaround to prevent StaleElementReferenceException later on (e.g. because of an animation)
+                {
+                    if (!result.Displayed) return null;
+                }
+                return result;
+            });
         }
         catch (Exception ex) when (ex is NoSuchElementException or WebDriverTimeoutException)
         {
