@@ -25,12 +25,12 @@ public abstract class CustomFeedServiceTest : UITest
         var addEditFeedView = window.AddEditFeedView;
         var host = IsAndroid ? "10.0.2.2" : "localhost";
         addEditFeedView.FeedUrlEntry.EnterText($"http://{host}:5000/feed/rss");
+        if (IsAndroid && Driver.IsKeyboardShown()) Driver.HideKeyboard();
         addEditFeedView.LoadFeedButton.SafeClick();
         await Task.Delay(1000, CancellationToken.None);
 
         Assert.Equal("FeedTitle", addEditFeedView.FeedNameEntry.Text);
-        Assert.Empty(addEditFeedView.FeedErrorLabel.Text);
-        if (IsAndroid && Driver.IsKeyboardShown()) Driver.HideKeyboard();
+        Assert.Empty(addEditFeedView.FeedErrorLabel.Text);        
         addEditFeedView.AddEditButton.SafeClick();
 
         if (!IsWindows) window.MenuButton.SafeClick();
@@ -57,6 +57,7 @@ public abstract class CustomFeedServiceTest : UITest
         else
         {
             lastItem.Element.SwipeRight();
+            await Task.Delay(500, CancellationToken.None);
             menuView.SwipeView.RemoveSwipeItem.SafeClick();
         }
         var popup = new YesNoPopup(Driver);
