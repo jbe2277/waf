@@ -68,7 +68,7 @@ public static class FindHelper
                 var result = func(driver, automationId);
                 if (driver.IsAndroid())  // Workaround to prevent StaleElementReferenceException later on (e.g. because of an animation)
                 {
-                    if (!result.Displayed) return null;
+                    _ = result.Displayed;  // Might throw StaleElementReferenceException -> repeat until timeout
                 }
                 return result;
             });

@@ -14,6 +14,7 @@ public abstract class CustomFeedServiceTest : UITest
     public async Task CustomFeedServiceAddAndListTest()
     {
         await using var feedWebApp = FeedWebApp.RunService(new SyndicationData(), null);
+        await Task.Delay(2000, CancellationToken.None);
 
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
