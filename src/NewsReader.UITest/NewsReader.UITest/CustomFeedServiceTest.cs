@@ -14,7 +14,7 @@ public abstract class CustomFeedServiceTest : UITest
     public async Task CustomFeedServiceAddAndListTest()
     {
         await using var feedWebApp = FeedWebApp.RunService(new SyndicationData(), null);
-        await Task.Delay(2000, CancellationToken.None);
+        if (IsAndroid) await Task.Delay(2000, CancellationToken.None);
 
         if (IsWindows) Driver.Manage().Window.Maximize();
         var window = GetShellWindow();
@@ -30,6 +30,7 @@ public abstract class CustomFeedServiceTest : UITest
 
         Assert.Equal("FeedTitle", addEditFeedView.FeedNameEntry.Text);
         Assert.Empty(addEditFeedView.FeedErrorLabel.Text);
+        if (IsAndroid && Driver.IsKeyboardShown()) Driver.HideKeyboard();
         addEditFeedView.AddEditButton.SafeClick();
 
         if (!IsWindows) window.MenuButton.SafeClick();
