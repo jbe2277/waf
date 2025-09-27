@@ -45,6 +45,42 @@ public abstract class NewsReaderTest : UITest
     }
 
     [Fact]
+    public void ReadUnreadStateTest()
+    {
+        if (IsWindows) Driver.Manage().Window.Maximize();
+        var window = GetShellWindow();
+        var feedView = window.FeedView;
+        Log.WriteLine("Feed items:");
+        foreach (var x in feedView.FeedItems) Log.WriteLine("  " + x.NameLabel.Text);
+        var item = feedView.FeedItems[0];
+        Assert.False(item.MarkAsRead);
+        
+        if (IsWindows)
+        {
+            item.Element.SafeClick(isRightButton: true);
+            item.ContextMenu.ReadUnreadMenuItem.SafeClick();
+        }
+        else
+        {
+            item.Element.SwipeRight();
+            item.SwipeView.ReadUnreadSwipeItem.SafeClick();
+        }
+        Assert.True(item.MarkAsRead);
+        
+        if (IsWindows)
+        {
+            item.Element.SafeClick(isRightButton: true);
+            item.ContextMenu.ReadUnreadMenuItem.SafeClick();
+        }
+        else
+        {
+            item.Element.SwipeRight();
+            item.SwipeView.ReadUnreadSwipeItem.SafeClick();
+        }
+        Assert.False(item.MarkAsRead);
+    }
+
+    [Fact]
     public void InfoViewTest()
     {
         if (IsWindows) Driver.Manage().Window.Maximize();

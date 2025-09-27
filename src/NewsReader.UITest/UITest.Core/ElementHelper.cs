@@ -59,7 +59,7 @@ public static class ElementHelper
 
     public static void SwipeRight(this AppiumElement element)
     {
-        var xOffset = (int)(element.Rect.Width * 0.07);
+        var xOffset = (int)(element.Rect.Width * 0.1);
         var startPoint = new Point(xOffset + element.Rect.Left, element.Rect.Top + element.Rect.Height / 2);
         var endPoint = new Point(-xOffset + element.Rect.Left + element.Rect.Width, startPoint.Y);
         Log.WriteLine($"Swipe from {startPoint} to {endPoint} for Element (Rect: {element.Rect})");

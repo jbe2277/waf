@@ -35,7 +35,7 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
-                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
+                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue" AutomationId="ReadUnreadSwipeItem">
                                         <SwipeItem.IconImageSource>
                                             <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
                                         </SwipeItem.IconImageSource>
@@ -56,7 +56,7 @@
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
-                                        Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
+                                        Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" AutomationId="ReadUnreadMenuItem"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 

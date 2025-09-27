@@ -12,10 +12,10 @@ public record FeedView(AppiumElement Element)
 
     public SearchBar SearchBar => new(Element.Find("SearchBar"));
 
-    public IReadOnlyList<FeedItem> FeedItems => Element.Find("FeedItemList").FindAll("FeedItem").Select(x => new FeedItem(x)).ToArray();
+    public IReadOnlyList<FeedItem> FeedItems => Element.Find("FeedItemList").FindAll("FeedItem").Select(x => new FeedItem(x, Element)).ToArray();
 }
 
-public record FeedItem(AppiumElement Element)
+public record FeedItem(AppiumElement Element, AppiumElement Parent)
 {
     public AppiumElement NameLabel => Element.Find("NameLabel");
 
@@ -27,4 +27,18 @@ public record FeedItem(AppiumElement Element)
         "MarkAsReadTrue" => true,
         var x => throw new InvalidOperationException($"Status: {x} is not supported")
     };
+
+    public FeedItemContextMenu ContextMenu => new(Element.GetDriver());
+
+    public FeedItemSwipeView SwipeView => new(Parent);
+}
+
+public record FeedItemContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
+{
+    public AppiumElement ReadUnreadMenuItem => MenuItems[0];
+}
+
+public record FeedItemSwipeView(AppiumElement Element)
+{
+    public AppiumElement ReadUnreadSwipeItem => Element.Find(MobileBy.AccessibilityId("ReadUnreadSwipeItem"));
 }
