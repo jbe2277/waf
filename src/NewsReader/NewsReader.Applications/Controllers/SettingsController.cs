@@ -8,6 +8,9 @@ namespace Waf.NewsReader.Applications.Controllers;
 
 internal sealed class SettingsController
 {
+    private const string autoLanguage = "Auto";
+    private static readonly IReadOnlyList<string> languages = [autoLanguage, "en-US", "de-DE"];
+    
     private readonly AppSettings appSettings;
     private readonly DataController dataController;
     private readonly Lazy<SettingsViewModel> settingsViewModel;
@@ -36,18 +39,18 @@ internal sealed class SettingsController
         vm.EnableDeveloperSettingsCommand = enableDeveloperSettingsCommand;
         vm.SignInCommand = dataController.SignInCommand;
         vm.SignOutCommand = dataController.SignOutCommand;
-        vm.Languages = new[] { "Auto", "en-US", "de-DE" };
-        vm.SelectedLanguage = appSettings.Language ?? "Auto";
-        vm.PropertyChanged += DeveloperSettingsViewModelPropertyChanged;
+        vm.Languages = languages;
+        vm.SelectedLanguage = appSettings.Language ?? autoLanguage;
+        vm.PropertyChanged += SettingsViewModelPropertyChanged;
         vm.Initialize();
         return vm;
     }
 
-    private void DeveloperSettingsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void SettingsViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName is nameof(ViewModels.SettingsViewModel.SelectedLanguage))
         {
-            appSettings.Language = settingsViewModel.Value.SelectedLanguage == "Auto" ? null : settingsViewModel.Value.SelectedLanguage;
+            appSettings.Language = settingsViewModel.Value.SelectedLanguage == autoLanguage ? null : settingsViewModel.Value.SelectedLanguage;
         }
     }
 }
