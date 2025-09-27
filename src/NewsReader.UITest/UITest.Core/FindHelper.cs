@@ -103,7 +103,7 @@ public static class FindHelper
 
     private static string GetElementInfo(AppiumElement element)
     {
-        return $"AId=\"{GetAutomationId(element)}\" TagName=\"{TryGet(() => element.TagName)}\" Text=\"{TryGet(() => element.Text)}\" Rect=\"{TryGet(element.Rect.ToString)}\" Id=\"{TryGet(() => element.Id)}\"";
+        return $"AId=\"{GetAutomationId(element)}\" TagName=\"{TryGet(() => element.TagName)}\" Text=\"{TryGet(() => element.Text)}\" Rect=\"{TryGet(() => element.Rect.ToString())}\" Id=\"{TryGet(() => element.Id)}\"";
 
         static string? GetAutomationId(AppiumElement element) => element.GetDriver().PlatformName switch
         {
