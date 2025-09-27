@@ -56,7 +56,7 @@ public static class FindHelper
         MobilePlatform.Android => MobileBy.Id(automationId),
         MobilePlatform.IOS => MobileBy.Id(automationId),
         MobilePlatform.Windows => MobileBy.AccessibilityId(automationId),
-        _ => throw new NotSupportedException($"Platform not supported: {driver.PlatformName}")
+        var x => throw new NotSupportedException($"Platform not supported: {x}")
     };
 
     private static AppiumElement WaitFind(Func<AppiumDriver, string, AppiumElement> func, AppiumDriver driver, string automationId, AppiumElement? owner = null)
