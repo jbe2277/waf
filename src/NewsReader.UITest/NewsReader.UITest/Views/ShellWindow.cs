@@ -50,32 +50,32 @@ public record ShellWindow(AppiumDriver Driver)
 
 public record MenuView(AppiumElement Element)
 {
-    public IReadOnlyList<FeedNavigationItem> FeedNavigationItems => Element.Find("FeedList").FindAll("Feed").Select(x => new FeedNavigationItem(x)).ToArray();
+    public IReadOnlyList<FeedNavigationItem> FeedNavigationItems => Element.Find("FeedList").FindAll("Feed").Select(x => new FeedNavigationItem(x, Element)).ToArray();
 
     public AppiumElement AddFeedItem => Element.Find("AddFeedItem");
 
     public AppiumElement SettingsItem => Element.Find("SettingsItem");
-
-    public MenuContextMenu ContextMenu => new(Element.GetDriver());
-
-    public MenuSwipeView SwipeView => new(Element);
 }
 
-public record MenuContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
+public record FeedNavigationItem(AppiumElement Element, AppiumElement Parent)
+{
+    public AppiumElement TitleLabel => Element.Find("TitleLabel");
+
+    public FeedNavigationItemContextMenu ContextMenu => new(Element.GetDriver());
+
+    public FeedNavigationItemSwipeView SwipeView => new(Parent);
+}
+
+public record FeedNavigationItemContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
 {
     public AppiumElement EditMenuItem => MenuItems[0];
 
     public AppiumElement RemoveMenuItem => MenuItems[1];
 }
 
-public record MenuSwipeView(AppiumElement Element)
+public record FeedNavigationItemSwipeView(AppiumElement Element)
 {
     public AppiumElement EditSwipeItem => Element.Find(MobileBy.AccessibilityId("EditSwipeItem"));
 
     public AppiumElement RemoveSwipeItem => Element.Find(MobileBy.AccessibilityId("RemoveSwipeItem"));
-}
-
-public record FeedNavigationItem(AppiumElement Element)
-{
-    public AppiumElement TitleLabel => Element.Find("TitleLabel");
 }
