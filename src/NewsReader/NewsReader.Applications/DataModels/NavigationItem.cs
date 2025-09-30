@@ -2,7 +2,7 @@
 
 namespace Waf.NewsReader.Applications.DataModels;
 
-public class NavigationItem(string title, string iconGlyph) : Model
+public class NavigationItem(string title, string iconGlyph, string automationId) : Model
 {
     private ICommand? command;
     private bool isCommandEnabled;
@@ -10,6 +10,8 @@ public class NavigationItem(string title, string iconGlyph) : Model
     public string Title { get => title; set => SetProperty(ref title, value); }
 
     public string IconGlyph { get => iconGlyph; set => SetProperty(ref iconGlyph, value); }
+
+    public string AutomationId => automationId;
 
     public ICommand? Command
     {

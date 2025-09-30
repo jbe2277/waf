@@ -28,8 +28,8 @@ internal sealed class AppController : IAppController
         this.feedsController = feedsController;
         this.settingsController = settingsController;
         this.shellViewModel = shellViewModel;
-        addFeedNavigationItem = new(Resources.AddFeed, "\uf412") { Command = feedsController.AddFeedCommand };
-        settingsNavigationItem = new(Resources.Settings, "\uf493")
+        addFeedNavigationItem = new(Resources.AddFeed, "\uf412", "AddFeedItem") { Command = feedsController.AddFeedCommand };
+        settingsNavigationItem = new(Resources.Settings, "\uf493", "SettingsItem")
         {
             Command = new DelegateCommand(() => shellViewModel.Navigate(this.settingsController.SettingsViewModel))
         };
@@ -60,7 +60,7 @@ internal sealed class AppController : IAppController
 
     public void Save()
     {
-        Task.Run(dataController.Save).GetAwaiter().GetResult();  // Task.Run needed to avoid dead-lock when Save uses await.
+        dataController.Save().GetAwaiter().GetResult();
     }
 
     public async void Update()

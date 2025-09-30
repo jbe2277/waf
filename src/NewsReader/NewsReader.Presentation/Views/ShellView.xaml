@@ -25,14 +25,14 @@
             </Setter>
         </Style>
     </FlyoutPage.Resources>
-    
+
     <FlyoutPage.Flyout>
-        <ContentPage Title="{x:Static p:Resources.Menu}">
+        <ContentPage Title="{x:Static p:Resources.Menu}" AutomationId="MenuView">
             <ContentPage.Resources>
                 <DataTemplate x:Key="NavigationItemTemplate" x:DataType="dm:NavigationItem">
-                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}">
+                    <Grid ColumnDefinitions="Auto,*" IsEnabled="{Binding IsCommandEnabled}" HeightRequest="60" Style="{StaticResource NavigationItemStyle}" AutomationId="{Binding AutomationId, Mode=OneTime}">
                         <Label x:Name="iconLabel" Text="{Binding IconGlyph}" FontFamily="MaterialIcons" FontSize="22" VerticalOptions="Center" Margin="12,0,7,0" />
-                        <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" />
+                        <Label x:Name="titleLabel" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource Subtitle}" VerticalOptions="Center" AutomationId="TitleLabel"/>
                     </Grid>
                 </DataTemplate>
             </ContentPage.Resources>
@@ -44,12 +44,14 @@
                             <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
-                                        <SwipeItem Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}">
+                                        <SwipeItem Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}"
+                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}" AutomationId="EditSwipeItem">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
                                             </SwipeItem.IconImageSource>
                                         </SwipeItem>
-                                        <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red">
+                                        <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" 
+                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red" AutomationId="RemoveSwipeItem">
                                             <SwipeItem.IconImageSource>
                                                 <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
                                             </SwipeItem.IconImageSource>
@@ -69,16 +71,18 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:Feed">
-                        <Grid Margin="0,5">
+                        <Grid Margin="0,5" AutomationId="Feed">
                             <FlyoutBase.ContextFlyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
-                                    <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
+                                <MenuFlyout AutomationId="MenuFlyout">
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Edit}" AutomationId="EditMenuItem"
+                                            Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
+                                    <MenuFlyoutItem Text="{x:Static p:Resources.Remove}" AutomationId="RemoveMenuItem"
+                                            Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" CommandParameter="{Binding}"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
                             <VerticalStackLayout VerticalOptions="Center" Padding="10,5,10,10" Spacing="5">
-                                <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1"/>
+                                <Label Text="{Binding Name}" Style="{StaticResource Subtitle}" MaxLines="1" AutomationId="TitleLabel"/>
                                 <HorizontalStackLayout Spacing="15">
                                     <Label Text="{Binding Items.Count, StringFormat={x:Static p:Resources.ItemsWithCount}}"/>
                                     <Label Text="{Binding UnreadItemsCount, StringFormat={x:Static p:Resources.UnreadWithCount}}"/>
@@ -92,10 +96,10 @@
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" Grid.Row="2" ItemsSource="{Binding Feeds}" SelectedItem="{Binding SelectedFeed}" SelectionMode="Single" CanReorderItems="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" Margin="5"/>
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" Margin="5" AutomationId="FeedList"/>
 
                 <CollectionView Grid.Row="3" ItemsSource="{Binding FooterMenu}" SelectedItem="{Binding SelectedFooterMenu}" SelectionMode="Single"
-                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}" Margin="5"/>
+                          HeightRequest="125" VerticalScrollBarVisibility="Never" ItemTemplate="{StaticResource NavigationItemTemplate}" Margin="5" AutomationId="FooterMenu"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>

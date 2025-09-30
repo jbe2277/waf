@@ -5,8 +5,11 @@ on:
     paths: 
     - 'src/*'
     - 'src/NewsReader/**'
+    - 'src/NewsReader.UITest/**'
     - '.github/workflows/**' 
     - '!.github/workflows/System.Waf.CI.yml' 
+
+  workflow_dispatch:
 
 jobs:
   GetVersion:
@@ -42,7 +45,7 @@ jobs:
     - name: 📦 Upload AAB, APK
       uses: actions/upload-artifact@v4
       with:
-        name: newsreader-android
+        name: NewsReaderAndroid
         if-no-files-found: error
         path: |
           ./**/publish/*Signed.aab
@@ -91,10 +94,45 @@ jobs:
     - name: 📦 Upload MSIX
       uses: actions/upload-artifact@v4
       with:
-        name: newsreader-windows
+        name: NewsReaderWindows
         if-no-files-found: error
         path: |
           ./**/AppPackages/**/NewsReader*.msix
+    
+    - name: ⚙️ Install App
+      shell: pwsh
+      run: |
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\bin\Release\net9.0-windows10.0.19041.0\win10-x64\"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
+        Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
+        Add-AppxPackage -Path $msixFile
+        Get-AppxPackage -Name Waf.NewsReader
+    
+    - name: ⚙️ Install Appium Server
+      shell: pwsh  
+      run: |
+        npm install -g appium
+        appium driver install windows
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      shell: bash
+      run: appium &
+      
+    - name: 🖥️ UI Test
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Windows --logger GitHubActions
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: NewsReaderUITestResults
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
 
   iOS:
     runs-on: macos-15
@@ -105,7 +143,7 @@ jobs:
 
     - name: ⚙️ Set Xcode version
       run: |
-        XCODE_ROOT=/Applications/Xcode_16.3.app
+        XCODE_ROOT=/Applications/Xcode_16.4.app
         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
         sudo xcode-select -s $XCODE_ROOT
     

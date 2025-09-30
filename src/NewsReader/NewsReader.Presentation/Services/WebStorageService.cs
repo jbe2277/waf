@@ -1,8 +1,6 @@
-﻿using Microsoft.Graph;
-using Microsoft.Graph.Models;
-using Microsoft.Graph.Models.ODataErrors;
-using Microsoft.Identity.Client;
-using Microsoft.Kiota.Abstractions.Authentication;
+﻿using Microsoft.Identity.Client;
+using System.Net;
+using System.Net.Http.Json;
 using Waf.NewsReader.Applications.Services;
 
 namespace Waf.NewsReader.Presentation.Services;
@@ -22,10 +20,10 @@ namespace Waf.NewsReader.Presentation.Services;
 internal sealed partial class WebStorageService : Model, IWebStorageService
 {
     private const string dataFileName = "data.zip";
-    private static readonly string[] scopes = [ "User.Read", "Files.ReadWrite.AppFolder" ];
+    private static readonly string[] scopes = ["User.Read", "Files.ReadWrite.AppFolder"];
 
     private readonly IPublicClientApplication? publicClient;
-    private GraphServiceClient? graphClient;
+    private HttpClient? httpClient;
     private UserAccount? currentAccount;
 
     public WebStorageService()
@@ -108,7 +106,8 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     public async Task SignOut()
     {
         CurrentAccount = null;
-        graphClient = null;
+        httpClient?.Dispose();
+        httpClient = null;
         if (publicClient != null)
         {
             var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
@@ -138,24 +137,24 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
     private async Task InitGraphClient()
     {
         if (publicClient is null) return;
-        var authenticationProvider = new BaseBearerTokenAuthenticationProvider(new TokenProvider(publicClient));
-        graphClient = new GraphServiceClient(authenticationProvider);            
-        var user = await graphClient.Me.GetAsync();
+        var handler = new MsalAuthorizationHandler(publicClient, scopes) { InnerHandler = new HttpClientHandler() };
+        httpClient = new HttpClient(handler) { BaseAddress = new("https://graph.microsoft.com/v1.0/") };
+        var user = await httpClient.GetFromJsonAsync("me", GraphApi.Default.User);
         ArgumentNullException.ThrowIfNull(user);
         CurrentAccount = new(!string.IsNullOrEmpty(user.DisplayName) ? user.DisplayName : user.UserPrincipalName ?? "", user.Mail);
     }
 
     public async Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag)
     {
-        if (graphClient == null) return default;
+        if (httpClient == null) return default;
         Log.Default.Trace("WebStorageService.DownloadFile started");
-        var itemRequest = await GetItemRequest(dataFileName).ConfigureAwait(false);
+
         DriveItem? item;
         try
         {
-            item = await itemRequest.GetAsync().ConfigureAwait(false);
+            item = await httpClient.GetFromJsonAsync(new Uri($"me/drive/special/approot:/{dataFileName}", UriKind.Relative), GraphApi.Default.DriveItem).ConfigureAwait(false);
         }
-        catch (ODataError odataError) when (odataError.Error?.Code?.Equals(GraphErrorCode.ItemNotFound.ToString(), StringComparison.OrdinalIgnoreCase) == true)
+        catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
         {
             Log.Default.Info("WebStorageService.DownloadFile: Item not found");
             return default;
@@ -163,7 +162,10 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
         ArgumentNullException.ThrowIfNull(item);
         if (item.CTag != cTag)
         {
-            var result = (await itemRequest.Content.GetAsync().ConfigureAwait(false), item.CTag);
+            var response = await httpClient.GetAsync(new Uri($"me/drive/special/approot:/{dataFileName}:/content", UriKind.Relative)).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            var result = (stream, item.CTag);
             Log.Default.Info("WebStorageService.DownloadFile completed. CTag: {0}", item.CTag);
             return result;
         }
@@ -173,41 +175,15 @@ internal sealed partial class WebStorageService : Model, IWebStorageService
 
     public async Task<string?> UploadFile(Stream source)
     {
-        if (graphClient == null) return null;
+        if (httpClient == null) return null;
         Log.Default.Trace("WebStorageService.UploadFile started");
-        var itemRequest = await GetItemRequest(dataFileName).ConfigureAwait(false);
-        var newItem = await itemRequest.Content.PutAsync(source).ConfigureAwait(false);
+        var response = await httpClient.PutAsync(new Uri($"me/drive/special/approot:/{dataFileName}:/content", UriKind.Relative), new StreamContent(source)).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        var newItem = await response.Content.ReadFromJsonAsync(GraphApi.Default.DriveItem).ConfigureAwait(false);
         ArgumentNullException.ThrowIfNull(newItem);
         Log.Default.Info("WebStorageService.UploadFile completed. CTag: {0}", newItem.CTag);
         return newItem.CTag;
     }
 
-    private async Task<CustomDriveItemItemRequestBuilder> GetItemRequest(string fileName)
-    {
-        if (graphClient is null) throw new InvalidOperationException("graphClient is null");
-
-        // Using workaround to get the driveId because AppFolder scope does not allow to the read Drive directly. https://github.com/microsoftgraph/msgraph-sdk-dotnet/issues/2624
-        var result = await graphClient.Me.Drive.WithUrl($"{graphClient.RequestAdapter.BaseUrl}/drive/special/approot:/{fileName}").GetAsync().ConfigureAwait(false);
-        var driveId = result?.Id?.Split("!")[0] ?? throw new InvalidOperationException("graphClient: not able to get the driveId");
-        
-        var appRootFolder = await graphClient.Drives[driveId].Special["AppRoot"].GetAsync().ConfigureAwait(false)
-                ?? throw new InvalidOperationException("graphClient: not able to get the appRootFolder");
-        return graphClient.Drives[driveId].Items[appRootFolder.Id].ItemWithPath(fileName);
-    }
-
     static partial void GetApplicationId(ref string? applicationId);
-
-
-    private sealed class TokenProvider(IPublicClientApplication publicClient) : IAccessTokenProvider
-    {
-        public AllowedHostsValidator AllowedHostsValidator { get; } = new();
-
-        public async Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object>? additionalAuthenticationContext = null, CancellationToken cancellationToken = default)
-        {
-            var accounts = await publicClient.GetAccountsAsync().ConfigureAwait(false);
-            if (!accounts.Any()) return "";
-            var result = await publicClient.AcquireTokenSilent(scopes, accounts.First()).ExecuteAsync(cancellationToken).ConfigureAwait(false);
-            return result.AccessToken;
-        }
-    }
 }

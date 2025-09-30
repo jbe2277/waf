@@ -12,6 +12,7 @@ internal static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseWindowsAutomationTreeFix()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -33,4 +34,28 @@ internal static class MauiProgram
             }));
         return builder.Build();
     }
+}
+
+
+internal static class AppBuilderExtensions
+{
+    public static MauiAppBuilder UseWindowsAutomationTreeFix(this MauiAppBuilder builder)
+    {
+#if WINDOWS
+        Microsoft.Maui.Handlers.ViewHandler.ViewMapper.AppendToMapping(nameof(IView.AutomationId), MapAutomationId);
+#endif
+        return builder;
+    }
+
+
+#if WINDOWS
+    private static void MapAutomationId(IViewHandler handler, IView view)
+    {
+        // Workaround for https://github.com/dotnet/maui/issues/4715; Layouts, Pages and ContentViews are not exposed in AutomationTree
+        if (string.IsNullOrEmpty(view.AutomationId) || view is not Microsoft.Maui.ILayout and not Page and not ContentView) return;
+        var platformView = (Microsoft.UI.Xaml.FrameworkElement?)handler.PlatformView;
+        if (platformView is null) return;
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(platformView, view.AutomationId);
+    }
+#endif
 }

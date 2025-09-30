@@ -8,9 +8,9 @@
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              xmlns:do="clr-namespace:Waf.NewsReader.Domain;assembly=Waf.NewsReader.Domain"
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
-             Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel">
+             Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel" AutomationId="FeedView">
     <ct:LayoutPage.ToolbarItems>
-        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}">
+        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}" AutomationId="SearchButton">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
             </ToolbarItem.IconImageSource>
@@ -28,7 +28,7 @@
                 <Label Text="{Binding Feed.LoadError.Message}" MaxLines="4"/>
             </VerticalStackLayout>
 
-            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False" Background="{StaticResource Gray100}"/>
+            <SearchBar Grid.Row="1" x:Name="searchBar" Text="{Binding SearchText}" IsVisible="False" Background="{StaticResource Gray100}" AutomationId="SearchBar"/>
 
             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding Feed, Converter={Static c:NullToBoolConverter.Instance}, ConverterParameter=invert}" Padding="10,5">
                 <Label Text="{x:Static p:Resources.SelectFeedInfo}"/>
@@ -40,8 +40,8 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
-                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue">
+                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
+                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue" AutomationId="ReadUnreadSwipeItem">
                                         <SwipeItem.IconImageSource>
                                             <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
                                         </SwipeItem.IconImageSource>
@@ -58,11 +58,11 @@
                     </DataTemplate>
 
                     <ControlTemplate x:Key="ItemTemplate" x:DataType="do:FeedItem">
-                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False">
+                        <VerticalStackLayout Padding="10,5,10,10" Spacing="3" InputTransparent="False" AutomationId="FeedItem" SemanticProperties.Description="{Binding MarkAsRead, StringFormat='MarkAsRead{0}'}">
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
-                                    <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
-                                        Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}"/>
+                                    <MenuFlyoutItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
+                                        Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" AutomationId="ReadUnreadMenuItem"/>
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
 
@@ -70,21 +70,21 @@
                                 <TapGestureRecognizer Command="{Binding ShowFeedItemViewCommand, Source={RelativeSource AncestorType={Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"/>
                             </VerticalStackLayout.GestureRecognizers>
 
-                            <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3">
+                            <Label Text="{Binding Name}" Style="{StaticResource Title}" MaxLines="3" AutomationId="NameLabel">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding MarkAsRead}" Value="True">
                                         <Setter Property="FontAttributes" Value="None"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
-                            <Label Text="{Binding Description}" MaxLines="3"/>
+                            <Label Text="{Binding Description}" MaxLines="3" AutomationId="DescriptionLabel"/>
                         </VerticalStackLayout>
                     </ControlTemplate>
                 </RefreshView.Resources>
 
                 <!-- TODO: Use separate ItemTemplate for Windows because using a SwipeView crashes on Windows. https://github.com/dotnet/maui/issues/8870 -->
                 <CollectionView x:Name="listView" ItemsSource="{Binding ItemsListView}" IsGrouped="True"
-                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}">
+                        ItemTemplate="{OnPlatform WinUI={StaticResource DesktopItemTemplate}, Default={StaticResource MobileItemTemplate}}" AutomationId="FeedItemList">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate x:DataType="{x:Null}">
                             <VerticalStackLayout Padding="10,3" BackgroundColor="{StaticResource Gray100}">

@@ -5,7 +5,7 @@
              xmlns:c="clr-namespace:Waf.NewsReader.Presentation.Converters"
              xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              x:Class="Waf.NewsReader.Presentation.Views.AddEditFeedView"
-             Title="{x:Static p:Resources.AddFeed}" x:DataType="vm:AddEditFeedViewModel">
+             Title="{x:Static p:Resources.AddFeed}" x:DataType="vm:AddEditFeedViewModel" AutomationId="AddEditFeedView">
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage" Binding="{Binding IsEditMode}" Value="True">
             <Setter Property="Title" Value="{x:Static p:Resources.EditFeed}"/>
@@ -16,10 +16,11 @@
         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="15" ColumnSpacing="10" Margin="10" MaximumWidthRequest="600" HorizontalOptions="Start">
             <Label Grid.ColumnSpan="2" Text="{x:Static p:Resources.EnterOrPasteFeedUrlBelow}" LineBreakMode="WordWrap"/>
 
-            <Entry Grid.Row="1" Text="{Binding FeedUrl}" Placeholder="{x:Static p:Resources.FeedUrl}" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"/>
-            <Button Grid.Row="1" Grid.Column="1" Command="{Binding LoadFeedCommand}" Text="&#xf453;" FontFamily="MaterialIcons"/>
+            <Entry Grid.Row="1" Text="{Binding FeedUrl}" Placeholder="{x:Static p:Resources.FeedUrl}" Keyboard="Url" ReturnCommand="{Binding LoadFeedCommand}" Unfocused="FeedUrlUnfocused"
+                    AutomationId="FeedUrlEntry"/>
+            <Button Grid.Row="1" Grid.Column="1" Command="{Binding LoadFeedCommand}" Text="&#xf453;" FontFamily="MaterialIcons" AutomationId="LoadFeedButton"/>
 
-            <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding LoadErrorMessage}" TextColor="DarkRed">
+            <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding LoadErrorMessage}" TextColor="DarkRed" AutomationId="LoadErrorLabel">
                 <Label.Triggers>
                     <DataTrigger TargetType="Label" Binding="{Binding LoadErrorMessage, TargetNullValue='Null'}" Value="Null">
                         <Setter Property="IsVisible" Value="False"/>
@@ -27,15 +28,15 @@
                 </Label.Triggers>
             </Label>
 
-            <Label Grid.Row="3" Text="{Binding Feed.Title, StringFormat={x:Static p:Resources.TitleWithParam}, FallbackValue={x:Static p:Resources.Title}}" Margin="0,0,0,10"/>
+            <Label Grid.Row="3" Text="{Binding Feed.Title, StringFormat={x:Static p:Resources.TitleWithParam}, FallbackValue={x:Static p:Resources.Title}}" Margin="0,0,0,10" AutomationId="FeedTitleLabel"/>
 
-            <Entry Grid.Row="4" Text="{Binding Feed.Name}" Placeholder="{x:Static p:Resources.FeedName}"/>
+            <Entry Grid.Row="4" Text="{Binding Feed.Name}" Placeholder="{x:Static p:Resources.FeedName}" AutomationId="FeedNameEntry"/>
 
-            <Button Grid.Row="4" Grid.Column="1" Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="MaterialIcons"/>
+            <Button Grid.Row="4" Grid.Column="1" Command="{Binding UseTitleAsNameCommand}" Text="&#xf464;" FontFamily="MaterialIcons" AutomationId="UseTitleAsNameButton"/>
 
-            <Label Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Feed.Errors, Converter={Static c:ErrorsToMessageConverter.Instance}, ConverterParameter=Name}" TextColor="DarkRed"/>
+            <Label Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Feed.Errors, Converter={Static c:ErrorsToMessageConverter.Instance}, ConverterParameter=Name}" TextColor="DarkRed" AutomationId="FeedErrorLabel"/>
 
-            <Button Grid.Row="6" Text="{x:Static p:Resources.Add}" Command="{Binding AddUpdateCommand}" HorizontalOptions="Start" WidthRequest="120">
+            <Button Grid.Row="6" Text="{x:Static p:Resources.Add}" Command="{Binding AddUpdateCommand}" HorizontalOptions="Start" WidthRequest="120" AutomationId="AddEditButton">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsEditMode}" Value="True">
                         <Setter Property="Text" Value="{x:Static p:Resources.Update}"/>
