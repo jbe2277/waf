@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace UITest.NewsReader;
+namespace UITest.NewsReader.Tests;
 
 [DeviceCollectionTrait(DevicePlatform.Android)] public class AndroidNewsReaderTest : NewsReaderTest { }
 [DeviceCollectionTrait(DevicePlatform.IOS)] public class IOSNewsReaderTest : NewsReaderTest { }
@@ -113,7 +113,7 @@ public abstract class NewsReaderTest : UITest
         Assert.NotEmpty(addEditFeedView.FeedErrorLabel.Text);
         addEditFeedView.FeedNameEntry.EnterText("Test");
         Thread.Sleep(1000);
-        Assert.Empty(addEditFeedView.FeedErrorLabel.Text);
+        Assert.Empty(addEditFeedView.TryFeedErrorLabel?.Text ?? "");
 
         Thread.Sleep(5000);
         Assert.NotEmpty(addEditFeedView.TryLoadErrorLabel?.Text ?? "");

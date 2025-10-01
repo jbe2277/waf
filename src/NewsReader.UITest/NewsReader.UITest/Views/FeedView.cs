@@ -40,5 +40,7 @@ public record FeedItemContextMenu(AppiumDriver Driver) : ContextMenu(Driver)
 
 public record FeedItemSwipeView(AppiumElement Element)
 {
-    public AppiumElement ReadUnreadSwipeItem => Element.Find(MobileBy.AccessibilityId("ReadUnreadSwipeItem"));
+    public AppiumElement ReadUnreadSwipeItem => Element.OnPlatform(
+        android: () => Element.Find(MobileBy.AccessibilityId("ReadUnreadSwipeItem")),
+        iOS: () => Element.Find(MobileBy.ClassName("XCUIElementTypeButton")));
 }
