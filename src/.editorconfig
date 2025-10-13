@@ -29,6 +29,9 @@ indent_style = space
 # IDE0160: Convert to block scoped namespace
 csharp_style_namespace_declarations = file_scoped
 
+# IDE0200: Remove unnecessary lambda expression - see: https://github.com/dotnet/roslyn/issues/77395
+dotnet_diagnostic.IDE0200.severity = none
+
 
 [*.{xml,csproj,props,targets,config,resx,ruleset}]
 
