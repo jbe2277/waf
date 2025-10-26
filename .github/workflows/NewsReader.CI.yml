@@ -153,7 +153,7 @@ jobs:
         dotnet-version: '9'
     
     - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui-android maui-ios
+      run: dotnet workload install maui-ios
 
     - name: 📜 Prepare WebStorageService AppId
       shell: pwsh
