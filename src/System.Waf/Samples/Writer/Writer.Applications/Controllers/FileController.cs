@@ -40,7 +40,7 @@ internal class FileController
         fileService.SaveCommand = saveCommand = new(SaveCommand, CanSaveCommand);
         fileService.SaveAsCommand = saveAsCommand = new(SaveAsCommand, CanSaveAsCommand);
         settings = settingsService.Get<AppSettings>();
-        recentFileList = settings.RecentFileList ?? new();
+        recentFileList = (settings.RecentFileList ??= new());
         this.fileService.RecentFileList = recentFileList;
         fileService.PropertyChanged += FileServicePropertyChanged;
     }
@@ -52,8 +52,6 @@ internal class FileController
         get => fileService.ActiveDocument;
         set => fileService.ActiveDocument = value;
     }
-
-    public void Shutdown() => settings.RecentFileList = recentFileList;
 
     public IDocument? Open(string fileName)
     {

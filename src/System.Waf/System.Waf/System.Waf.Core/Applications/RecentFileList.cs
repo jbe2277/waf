@@ -93,6 +93,13 @@ namespace System.Waf.Applications
             recentFile.PropertyChanged -= RecentFilePropertyChanged;
         }
 
+        /// <summary>Removes all recent file items from the list.</summary>
+        public void Clear()
+        {
+            foreach (var x in recentFiles) x.PropertyChanged -= RecentFilePropertyChanged;
+            recentFiles.Clear();
+        }
+
         XmlSchema IXmlSerializable.GetSchema() => null!;
 
         void IXmlSerializable.ReadXml(XmlReader reader)
@@ -140,13 +147,7 @@ namespace System.Waf.Applications
         }
 
         private void RemoveRange(int index, int count) { for (int i = 0; i < count; i++) RemoveAt(index); }
-
-        private void Clear()
-        {
-            foreach (var x in recentFiles) x.PropertyChanged -= RecentFilePropertyChanged;
-            recentFiles.Clear();
-        }
-
+                
         private void RecentFilePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(RecentFile.IsPinned))

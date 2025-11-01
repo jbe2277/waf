@@ -18,6 +18,7 @@ public record AddEditFeedView(AppiumElement Element)
     public AppiumElement UseTitleAsNameButton => Element.Find("UseTitleAsNameButton");
 
     public AppiumElement FeedErrorLabel => Element.Find("FeedErrorLabel");
+    public AppiumElement? TryFeedErrorLabel => Element.TryFind("FeedErrorLabel");
 
     public AppiumElement AddEditButton => Element.Find("AddEditButton");
 }

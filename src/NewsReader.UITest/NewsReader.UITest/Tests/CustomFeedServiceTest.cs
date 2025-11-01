@@ -2,7 +2,7 @@
 using UITest.NewsReader.Controls;
 using Xunit;
 
-namespace UITest.NewsReader;
+namespace UITest.NewsReader.Tests;
 
 [DeviceCollectionTrait(DevicePlatform.Android)] public class AndroidCustomFeedServiceTest : CustomFeedServiceTest { }
 [DeviceCollectionTrait(DevicePlatform.Windows)] public class WindowsCustomFeedServiceTest : CustomFeedServiceTest { }

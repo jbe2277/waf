@@ -44,7 +44,7 @@ internal class ModuleController : IModuleController
         shellViewModel.Show();
     }
 
-    public void Shutdown() => fileController.Shutdown();
+    public void Shutdown() { }
 
     private void Close() => shellViewModel.Close();
 
