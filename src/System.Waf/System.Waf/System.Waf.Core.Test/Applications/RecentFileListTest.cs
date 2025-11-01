@@ -122,6 +122,21 @@ namespace Test.Waf.Applications
         }
 
         [TestMethod]
+        public void Clear()
+        {
+            var recentFileList = new RecentFileList();
+
+            AssertHelper.ExpectedException<ArgumentNullException>(() => recentFileList.Remove(null!));
+
+            recentFileList.AddFile("Doc1");
+            recentFileList.AddFile("Doc2");
+            recentFileList.AddFile("Doc3");
+
+            recentFileList.Clear();
+            Assert.AreEqual(0, recentFileList.RecentFiles.Count);
+        }
+
+        [TestMethod]
         public void XmlSerializing()
         {
             var serializer = new XmlSerializer(typeof(RecentFileList));
