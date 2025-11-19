@@ -4,6 +4,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.Assembler</RootNamespace>
     <AssemblyName>InformationManager</AssemblyName>
+    <AssemblyTitle>$(Product)</AssemblyTitle>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>..\Common.Presentation\Resources\Images\InformationManager.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\InformationManager\$(Configuration)\</OutputPath>

@@ -4,6 +4,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>Waf.Writer.Presentation</RootNamespace>
     <AssemblyName>Writer</AssemblyName>
+    <AssemblyTitle>$(Product)</AssemblyTitle>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Images\Writer.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\Writer\$(Configuration)\</OutputPath>

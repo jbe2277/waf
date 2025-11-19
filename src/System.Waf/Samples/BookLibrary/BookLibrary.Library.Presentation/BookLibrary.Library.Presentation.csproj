@@ -4,6 +4,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>Waf.BookLibrary.Library.Presentation</RootNamespace>
     <AssemblyName>BookLibrary</AssemblyName>
+    <AssemblyTitle>$(Product)</AssemblyTitle>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Images\BookLibrary.ico</ApplicationIcon>
     <OutputPath>..\..\..\..\..\out\BookLibrary\$(Configuration)\</OutputPath>
