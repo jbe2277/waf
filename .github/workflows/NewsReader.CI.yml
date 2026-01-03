@@ -27,6 +27,9 @@ jobs:
       with:
         dotnet-version: '9'
 
+    - name: ⚙️ Install .NET MAUI
+      run: dotnet workload install maui-android
+
     - name: ⚙️ .NET MAUI Version info
       run: dotnet workload list
     
@@ -62,6 +65,9 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9'
+
+    - name: ⚙️ Install .NET MAUI
+      run: dotnet workload install maui-android maui-windows
       
     - name: ⚙️ .NET MAUI Version info
       run: dotnet workload list
