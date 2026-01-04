@@ -17,9 +17,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
 
+    <PackageReference Include="Microsoft.Identity.Client"/>
+    <PackageReference Include="System.ServiceModel.Syndication" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <PackageReference Include="Microsoft.Identity.Client.Broker" />
     <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" />
-    <PackageReference Include="System.ServiceModel.Syndication" />
   </ItemGroup>
 
   <ItemGroup>
