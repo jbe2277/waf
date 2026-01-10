@@ -1,5 +1,25 @@
 ﻿# Changelog
 
+### Version vNext (not yet released)
+- WAF: `RecentFileList`: Add a `Clear` method.
+- WAF: `TraceSourceExtensions`: Enable AggressiveInlining for better performance.
+- Samples: Migrate from MEF to AutoFac.
+- Samples: Set `AssemblyTitle` for `FileDescription`. Read by Task Manager.
+- Writer: Simplify the initialisation of the `RecentFileList`.
+- InfoMan: Refactor `IDocumentService` to improve testability.
+- InfoMan: Remove `ShellService` and simplify dependencies.
+- NewsReader: Improve the save implementation. Do not save upon deactivation anymore on Windows.
+- NewsReader: Remove the MS Graph SDK and use a plain HttpClient instead. This reduces the size of the app and improves efficiency.
+- NewsReader: Improve load, save and OneDrive sync.
+- NewsReader: Improve the language setting.
+- NewsReader: Improve the styling of the navigation buttons.
+- NewsReader: Set the UI style to light on iOS. Dark mode is not supported by the custom styling.
+- NewsReader: Set to Light mode in MAUI and on Android. Disable support for the dark mode theme.
+- NewsReader: Enable compiled bindings.
+- NewsReader: Use GitHub Actions to create Windows packages for x64 and arm64 with a self-signed certificate.
+- NewsReader: Add a UITest solution for Android, iOS and Windows using Appium.
+- NewsReader: Execute UITest for Android and Windows automatically via GitHub Actions.
+
 ### Version 8.1.0 (Release)
 - WAF: Add `TaskHelper.Run` overloads with `CancellationToken` support.
 - WAF: `ThrottledAction`: Improve performance of the implementation.
