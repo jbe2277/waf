@@ -1,7 +1,7 @@
 # Win Application Framework (WAF)
 #### Successor of the WPF Application Framework
 
-The Win Application Framework (WAF) is a lightweight Framework that helps you to create well-structured XAML Applications (MAUI, Xamarin, WPF, WinUI). It supports you in applying various architectural patterns:
+The Win Application Framework (WAF) is a lightweight Framework that helps you to create well-structured XAML Applications (MAUI, WPF, WinUI). It supports you in applying various architectural patterns:
 - [Layered Architecture](https://github.com/jbe2277/waf/wiki/Layered-Architecture)
 - [Model-View-ViewModel Pattern](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern)
 - [DataModel-View-ViewModel Pattern](https://github.com/jbe2277/waf/wiki/DataModel-View-ViewModel-Pattern)
@@ -11,11 +11,11 @@ The Win Application Framework (WAF) is a lightweight Framework that helps you to
 - The [Wiki](https://github.com/jbe2277/waf/wiki) provides further guidance.
 
 ## Supported Platforms
-
--	***.Core** *(.NET 6.0 and .NET Standard 2.0)*: Support for all .NET based applications.
--	***.Wpf** *(.NET 6.0 and .NET Framework 4.7.2)*: Extended support for Windows Presentation Foundation (WPF).
+- ***.Core** *(.NET 6.0 and .NET Standard 2.0)*: Support for all .NET based applications.
+- ***.Wpf** *(.NET 6.0 and .NET Framework 4.7.2)*: Extended support for Windows Presentation Foundation (WPF).
 
 ## NuGet Packages
+- [Changelog](src/System.Waf/Changelog.md)
 
 Package | Usage | Successor of
 --- | --- | ---
@@ -25,7 +25,6 @@ Package | Usage | Successor of
 [System.Waf.UnitTesting.Wpf](https://www.nuget.org/packages/System.Waf.UnitTesting.Wpf) | For unit testing of WPF applications | [waf.testing](https://www.nuget.org/packages/waf.testing)
 
 ## Features
-
 *System.Waf.Core*
 - *Foundation*
     - `Cache`: Provides support for [caching](https://github.com/jbe2277/waf/wiki/Cache-Pattern) a value.
@@ -37,12 +36,12 @@ Package | Usage | Successor of
     - `ValidatableModel`: Base class for a model that supports validation by implementing [INotifyDataErrorInfo](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo).
     - `WeakEvent`: Supports listening to events via a weak reference. This can prevent memory leaks. See [WeakEvent](https://github.com/jbe2277/waf/wiki/Weak-Event) page for more details.
 -	*Applications*
-    -	`ApplicationInfo`: Provides information about the running application.
+    - `ApplicationInfo`: Provides information about the running application.
     - `(Async)DelegateCommand`: An implementation of [ICommand](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand) that delegates Execute and CanExecute.
     - `RecentFileList`: Most recently used (MRU) file list.
     - `ViewModelCore`: [ViewModel](https://github.com/jbe2277/waf/wiki/Model-View-ViewModel-Pattern) base class with a simple approach to set the DataContext.
 -	*Presentation*
-    -	`SettingsService`: Load and save user settings as a XML file.
+    - `SettingsService`: Load and save user settings as a XML file.
 
 *System.Waf.Wpf*
 - *Foundation*
@@ -64,8 +63,8 @@ Package | Usage | Successor of
         - `MessageService`: Shows messages via the MessageBox.
        
 *System.Waf.UnitTesting.Core*
--	`AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
--	`UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of a UI synchronization context.
+- `AssertHelper`: Assertion helper methods for expected exceptions, [CanExecuteChanged](https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.icommand.canexecutechanged) event and [PropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged) event.
+- `UnitTestSynchronizationContext`: [Synchronization context](https://docs.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext) for unit tests that simulates the behavior of a UI synchronization context.
 
 ## Sample Applications
 Name | Type | Description
