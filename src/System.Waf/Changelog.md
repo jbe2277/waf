@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-### Version vNext (not yet released)
+### Version 8.2.0 (Release)
 - WAF: `RecentFileList`: Add a `Clear` method.
 - WAF: `TraceSourceExtensions`: Enable AggressiveInlining for better performance.
 - Samples: Migrate from MEF to AutoFac.
