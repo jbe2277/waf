@@ -43,7 +43,8 @@ jobs:
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - Samples.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test --solution ./src/Samples.UITest/Samples.UITest.slnx --max-parallel-test-modules 1
+        cd ./src/Samples.UITest
+        dotnet test --solution ./Samples.UITest.slnx --max-parallel-test-modules 1
 
     - name: 🕵️ Code Coverage
       run: |
