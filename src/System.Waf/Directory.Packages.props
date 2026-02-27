@@ -10,11 +10,11 @@
     
     <!-- Samples-->
     <PackageVersion Include="Autofac" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.22" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="8.0.22" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.CommandLine" Version="10.0.3" />
     <PackageVersion Include="NLog" Version="5.5.1" />
     
     <!-- Unit tests -->
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <GlobalPackageReference Include="MinVer" Version="6.1.0" />    
+    <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.103" />
+    <GlobalPackageReference Include="MinVer" Version="7.0.0" />    
   </ItemGroup>
 </Project>
