@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="BookLibrary.Test/BookLibrary.Test.csproj" />
+  <Project Path="InformationManager.Test/InformationManager.Test.csproj" />
+  <Project Path="UITest.Core/UITest.Core.csproj" />
+  <Project Path="Writer.Test/Writer.Test.csproj" />
+</Solution>
