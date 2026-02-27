@@ -92,6 +92,14 @@ jobs:
         cd src/NewsReader/NewsReader.MauiSystem
         dotnet publish -f:net10.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
 
+    - name: 🛠️ Copy msix into another folder as the arm64 build will remove the folder
+      shell: pwsh
+      run: |
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        $destination = Join-Path $rootFolder $msixFile.Name
+        Copy-Item -Path $msixFile.FullName -Destination $destination
+
     - name: 🛠️ Build arm64
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
@@ -109,7 +117,7 @@ jobs:
       shell: pwsh
       run: |
         $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
-        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *x64.msix | Select-Object -First 1
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
         Add-AppxPackage -Path $msixFile
