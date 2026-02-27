@@ -1,0 +1,82 @@
+<Solution>
+  <Folder Name="/Samples/" />
+  <Folder Name="/Samples/BookLibrary/">
+    <File Path="Samples/BookLibrary/BookLibrary.docx" />
+    <File Path="Samples/BookLibrary/Directory.Build.props" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Applications.Test/BookLibrary.Library.Applications.Test.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Applications/BookLibrary.Library.Applications.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Domain.Test/BookLibrary.Library.Domain.Test.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Domain/BookLibrary.Library.Domain.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Presentation.Test/BookLibrary.Library.Presentation.Test.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Library.Presentation/BookLibrary.Library.Presentation.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Reporting.Applications.Test/BookLibrary.Reporting.Applications.Test.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Reporting.Applications/BookLibrary.Reporting.Applications.csproj" />
+    <Project Path="Samples/BookLibrary/BookLibrary.Reporting.Presentation/BookLibrary.Reporting.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Samples/InformationManager/">
+    <File Path="Samples/InformationManager/Directory.Build.props" />
+    <File Path="Samples/InformationManager/InformationManager.docx" />
+    <Project Path="Samples/InformationManager/Assembler/Assembler.csproj">
+      <BuildDependency Project="Samples/InformationManager/AddressBook.Modules.Presentation/AddressBook.Modules.Presentation.csproj" />
+      <BuildDependency Project="Samples/InformationManager/EmailClient.Modules.Presentation/EmailClient.Modules.Presentation.csproj" />
+      <BuildDependency Project="Samples/InformationManager/Infrastructure.Modules.Presentation/Infrastructure.Modules.Presentation.csproj" />
+    </Project>
+  </Folder>
+  <Folder Name="/Samples/InformationManager/AddressBook/">
+    <Project Path="Samples/InformationManager/AddressBook.Interfaces/AddressBook.Interfaces.csproj" />
+    <Project Path="Samples/InformationManager/AddressBook.Modules.Applications.Test/AddressBook.Modules.Applications.Test.csproj" />
+    <Project Path="Samples/InformationManager/AddressBook.Modules.Applications/AddressBook.Modules.Applications.csproj" />
+    <Project Path="Samples/InformationManager/AddressBook.Modules.Domain.Test/AddressBook.Modules.Domain.Test.csproj" />
+    <Project Path="Samples/InformationManager/AddressBook.Modules.Domain/AddressBook.Modules.Domain.csproj" />
+    <Project Path="Samples/InformationManager/AddressBook.Modules.Presentation/AddressBook.Modules.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Samples/InformationManager/Common/">
+    <Project Path="Samples/InformationManager/Common.Applications.Test/Common.Applications.Test.csproj" />
+    <Project Path="Samples/InformationManager/Common.Applications/Common.Applications.csproj" />
+    <Project Path="Samples/InformationManager/Common.Domain.Test/Common.Domain.Test.csproj" />
+    <Project Path="Samples/InformationManager/Common.Presentation/Common.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Samples/InformationManager/EmailClient/">
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Applications.Test/EmailClient.Modules.Applications.Test.csproj" />
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Applications/EmailClient.Modules.Applications.csproj" />
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Domain.Test/EmailClient.Modules.Domain.Test.csproj" />
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Domain/EmailClient.Modules.Domain.csproj" />
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Presentation.Test/EmailClient.Modules.Presentation.Test.csproj" />
+    <Project Path="Samples/InformationManager/EmailClient.Modules.Presentation/EmailClient.Modules.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Samples/InformationManager/Infrastructure/">
+    <Project Path="Samples/InformationManager/Infrastructure.Interfaces/Infrastructure.Interfaces.csproj" />
+    <Project Path="Samples/InformationManager/Infrastructure.Modules.Applications.Test/Infrastructure.Modules.Applications.Test.csproj" />
+    <Project Path="Samples/InformationManager/Infrastructure.Modules.Applications/Infrastructure.Modules.Applications.csproj" />
+    <Project Path="Samples/InformationManager/Infrastructure.Modules.Presentation.Test/Infrastructure.Modules.Presentation.Test.csproj" />
+    <Project Path="Samples/InformationManager/Infrastructure.Modules.Presentation/Infrastructure.Modules.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Samples/Localization/">
+    <File Path="Samples/Localization/LocalizationSample.docx" />
+    <Project Path="Samples/Localization/LocalizationSample/LocalizationSample.csproj" />
+  </Folder>
+  <Folder Name="/Samples/Writer/">
+    <File Path="Samples/Writer/Directory.Build.props" />
+    <File Path="Samples/Writer/Writer.docx" />
+    <Project Path="Samples/Writer/Writer.Applications.Test/Writer.Applications.Test.csproj" />
+    <Project Path="Samples/Writer/Writer.Applications/Writer.Applications.csproj" />
+    <Project Path="Samples/Writer/Writer.Presentation.Test/Writer.Presentation.Test.csproj" />
+    <Project Path="Samples/Writer/Writer.Presentation/Writer.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="../.editorconfig" />
+    <File Path="Changelog.md" />
+    <File Path="CodeCoverage.runsettings" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/System.Waf/">
+    <File Path="System.Waf/Directory.Build.props" />
+    <Project Path="System.Waf/System.Waf.Core.Test/System.Waf.Core.Test.csproj" />
+    <Project Path="System.Waf/System.Waf.Core/System.Waf.Core.csproj" />
+    <Project Path="System.Waf/System.Waf.UnitTesting.Core/System.Waf.UnitTesting.Core.csproj" />
+    <Project Path="System.Waf/System.Waf.UnitTesting.Wpf/System.Waf.UnitTesting.Wpf.csproj" />
+    <Project Path="System.Waf/System.Waf.Wpf.Test/System.Waf.Wpf.Test.csproj" />
+    <Project Path="System.Waf/System.Waf.Wpf/System.Waf.Wpf.csproj" />
+  </Folder>
+</Solution>
