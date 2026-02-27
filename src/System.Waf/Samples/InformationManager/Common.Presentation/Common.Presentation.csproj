@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <RootNamespace>Waf.InformationManager.Common.Presentation</RootNamespace>
     <AssemblyName>Waf.InformationManager.Common.Presentation</AssemblyName>
     <UseWPF>true</UseWPF>
