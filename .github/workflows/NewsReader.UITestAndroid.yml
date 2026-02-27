@@ -77,7 +77,7 @@ jobs:
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Android --logger GitHubActions -e UITestApkFile=NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net9.0-android/publish/Waf.NewsReader-Signed.apk
+        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.slnx --filter DevicePlatform=Android --logger GitHubActions -e UITestApkFile=NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
