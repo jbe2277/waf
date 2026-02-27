@@ -138,7 +138,7 @@ jobs:
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader.UITest
-        dotnet test --solution ./NewsReader.UITest.slnx --filter DevicePlatform=Windows
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait "DevicePlatform=Windows"
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
