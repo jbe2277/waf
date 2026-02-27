@@ -109,7 +109,7 @@ jobs:
       shell: pwsh
       run: |
         $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
-        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter '*x64.msix' | Select-Object -First 1
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -Index 1
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
         Add-AppxPackage -Path $msixFile
@@ -129,7 +129,8 @@ jobs:
     - name: 🖥️ UI Test
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.slnx --filter DevicePlatform=Windows --logger GitHubActions
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter DevicePlatform=Windows
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
