@@ -95,7 +95,7 @@ jobs:
     - name: 🛠️ Build arm64
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net10.0-windows10.0.19041.0 -c:Release -p:RuntimeIdentifierOverride=win10-arm64 -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
+        dotnet publish -f:net10.0-windows10.0.19041.0 -c:Release -p:RuntimeIdentifierOverride=win-arm64 -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
   
     - name: 📦 Upload MSIX
       uses: actions/upload-artifact@v4
