@@ -6,6 +6,9 @@ dotnet_diagnostic.CA1031.severity = suggestion
 # CA1062: Validate arguments of public methods
 dotnet_diagnostic.CA1062.severity = none
 
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = suggestion
+
 # CA1859: Use concrete types when possible for improved performance
 dotnet_diagnostic.CA1859.severity = none
 

@@ -24,12 +24,12 @@ jobs:
         dotnet-version: '10'
 
     - name: 🛠️ Build
-      run: dotnet build ./src/System.Waf/System.Waf.sln -c Release -p:ContinuousIntegrationBuild=true
+      run: dotnet build ./src/System.Waf/System.Waf.slnx -c Release -p:ContinuousIntegrationBuild=true
 
     - name: 🕵️ Test
       run: |
-        echo "## 🕵️ Test Results - System.Waf.sln" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/System.Waf/System.Waf.sln -c Release --no-build --logger GitHubActions
+        echo "## 🕵️ Test Results - System.Waf.slnx" >> $Env:GITHUB_STEP_SUMMARY
+        dotnet test ./src/System.Waf/System.Waf.slnx -c Release --no-build --logger GitHubActions
 
     - name: 📦 Upload NuGet Packages
       uses: actions/upload-artifact@v4
