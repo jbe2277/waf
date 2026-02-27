@@ -109,7 +109,7 @@ jobs:
       shell: pwsh
       run: |
         $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
-        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *x64.msix | Select-Object -First 1
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
         Add-AppxPackage -Path $msixFile
