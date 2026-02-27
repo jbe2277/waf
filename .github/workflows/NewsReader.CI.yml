@@ -108,7 +108,7 @@ jobs:
     - name: ⚙️ Install App
       shell: pwsh
       run: |
-        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\bin\Release\net10.0-windows10.0.19041.0\win-x64\"
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
         $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
