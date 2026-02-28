@@ -5,32 +5,25 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class Pop3SettingsViewModel : ViewModel<IPop3SettingsView>
+public class Pop3SettingsViewModel(IPop3SettingsView view) : ViewModel<IPop3SettingsView>(view)
 {
-    private Pop3Settings model = null!;
-    private bool useSameUserCredits;
-
-    public Pop3SettingsViewModel(IPop3SettingsView view) : base(view)
-    {
-    }
-
     public Pop3Settings Model
     {
-        get => model;
+        get;
         set
         {
-            if (!SetProperty(ref model, value)) return;
-            WeakEvent.PropertyChanged.Add(model.Pop3UserCredits, Pop3UserCreditsPropertyChanged);
+            if (!SetProperty(ref field, value)) return;
+            WeakEvent.PropertyChanged.Add(field.Pop3UserCredits, Pop3UserCreditsPropertyChanged);
         }
-    }
+    } = null!;
 
     public bool UseSameUserCredits
     {
-        get => useSameUserCredits;
+        get;
         set
         {
-            if (!SetProperty(ref useSameUserCredits, value)) return;
-            if (useSameUserCredits)
+            if (!SetProperty(ref field, value)) return;
+            if (field)
             {
                 Model.SmtpUserCredits.UserName = Model.Pop3UserCredits.UserName;
                 Model.SmtpUserCredits.Password = Model.Pop3UserCredits.Password;

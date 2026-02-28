@@ -4,17 +4,7 @@ using Waf.InformationManager.AddressBook.Modules.Domain;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-public class ContactViewModel : ViewModel<IContactView>
+public class ContactViewModel(IContactView view) : ViewModel<IContactView>(view)
 {
-    private Contact? contact;
-
-    public ContactViewModel(IContactView view) : base(view)
-    {
-    }
-
-    public Contact? Contact
-    {
-        get => contact;
-        set => SetProperty(ref contact, value);
-    }
+    public Contact? Contact { get; set => SetProperty(ref field, value); }
 }

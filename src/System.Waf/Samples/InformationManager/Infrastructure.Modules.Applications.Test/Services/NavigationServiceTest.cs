@@ -73,7 +73,7 @@ public class NavigationServiceTest
         var nodeA2 = navigationService.AddNavigationNode("A2", "Node A2", ShowAction, CloseAction, 0, 1);
         var nodeB1 = navigationService.AddNavigationNode("B1", "Node B1", ShowAction, CloseAction, 1, 0);
 
-        AssertHelper.SequenceEqual(new[] { nodeA1, nodeA2, nodeB1, nodeB2 }, navigationService.NavigationNodes);
+        AssertHelper.SequenceEqual([nodeA1, nodeA2, nodeB1, nodeB2], navigationService.NavigationNodes);
         Assert.IsFalse(((NavigationNode)nodeA1).IsFirstItemOfNewGroup);
         Assert.IsFalse(((NavigationNode)nodeA2).IsFirstItemOfNewGroup);
         Assert.IsTrue(((NavigationNode)nodeB1).IsFirstItemOfNewGroup);

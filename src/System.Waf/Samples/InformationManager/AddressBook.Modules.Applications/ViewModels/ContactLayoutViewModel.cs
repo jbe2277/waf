@@ -3,24 +3,9 @@ using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-public class ContactLayoutViewModel : ViewModel<IContactLayoutView>
+public class ContactLayoutViewModel(IContactLayoutView view) : ViewModel<IContactLayoutView>(view)
 {
-    private object? contactListView;
-    private object? contactView;
+    public object? ContactListView { get; set => SetProperty(ref field, value); }
 
-    public ContactLayoutViewModel(IContactLayoutView view) : base(view)
-    {
-    }
-
-    public object? ContactListView
-    {
-        get => contactListView;
-        set => SetProperty(ref contactListView, value);
-    }
-
-    public object? ContactView
-    {
-        get => contactView;
-        set => SetProperty(ref contactView, value);
-    }
+    public object? ContactView { get; set => SetProperty(ref field, value); }
 }

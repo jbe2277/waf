@@ -8,11 +8,6 @@ namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
 public class NewEmailViewModel : ViewModel<INewEmailView>
 {
-    private EmailAccount? selectedEmailAccount;
-    private Email email = null!;
-    private string to = "";
-    private string cc = "";
-    private string bcc = "";
     private IWeakEventProxy? emailPropertyChangedProxy;
 
     public NewEmailViewModel(INewEmailView view) : base(view)
@@ -28,70 +23,66 @@ public class NewEmailViewModel : ViewModel<INewEmailView>
 
     public IReadOnlyList<EmailAccount> EmailAccounts { get; set; } = null!;
 
-    public EmailAccount? SelectedEmailAccount
-    {
-        get => selectedEmailAccount;
-        set => SetProperty(ref selectedEmailAccount, value);
-    }
+    public EmailAccount? SelectedEmailAccount { get; set => SetProperty(ref field, value); }
 
     public Email Email
     {
-        get => email;
+        get;
         set
         {
-            if (email == value) return;
+            if (field == value) return;
             WeakEvent.TryRemove(ref emailPropertyChangedProxy);
-            email = value;
-            emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(email, EmailPropertyChanged);
+            field = value;
+            emailPropertyChangedProxy = WeakEvent.PropertyChanged.Add(field, EmailPropertyChanged);
             UpdateProperties();
             RaisePropertyChanged();
         }
-    }
+    } = null!;
 
     public string To
     {
-        get => to;
+        get;
         set
         {
-            if (to == value) return;
+            if (field == value) return;
             var emails = ParseEmails(value);
-            to = FormatEmails(emails);
+            field = FormatEmails(emails);
             Email.To = emails;
             RaisePropertyChanged();
         }
-    }
+    } = "";
 
     public string CC
     {
-        get => cc;
+        get;
         set
         {
-            if (cc == value) return;
+            if (field == value) return;
             var emails = ParseEmails(value);
-            cc = FormatEmails(emails);
+            field = FormatEmails(emails);
             Email.CC = emails;
             RaisePropertyChanged();
         }
-    }
+    } = "";
 
     public string Bcc
     {
-        get => bcc;
+        get;
         set
         {
-            if (bcc == value) return;
+            if (field == value) return;
             var emails = ParseEmails(value);
-            bcc = FormatEmails(emails);
+            field = FormatEmails(emails);
             Email.Bcc = emails;
             RaisePropertyChanged();
         }
-    }
+    } = "";
 
     public void Show(object owner) => ViewCore.Show(owner);
 
     public void Close() => ViewCore.Close();
 
-    private static IReadOnlyList<string> ParseEmails(string text) => text.Trim().Split([ ';', ',', ' ' ], StringSplitOptions.RemoveEmptyEntries);
+    private static IReadOnlyList<string> ParseEmails(string text) => text.Trim().Split([';', ',', ' '], StringSplitOptions.RemoveEmptyEntries);
 
     private static string FormatEmails(IEnumerable<string> emailList) => string.Join("; ", emailList);
 

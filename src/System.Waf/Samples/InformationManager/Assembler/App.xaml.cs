@@ -9,7 +9,6 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Waf.Applications;
-using System.Waf.Applications.Services;
 using System.Windows;
 using Waf.InformationManager.Assembler.Properties;
 using Waf.InformationManager.Common.Applications.Services;

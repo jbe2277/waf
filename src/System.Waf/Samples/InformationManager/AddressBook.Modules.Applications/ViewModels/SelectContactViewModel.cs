@@ -4,12 +4,8 @@ using Waf.InformationManager.AddressBook.Modules.Applications.Views;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-public class SelectContactViewModel : ViewModel<ISelectContactView>
+public class SelectContactViewModel(ISelectContactView view) : ViewModel<ISelectContactView>(view)
 {
-    public SelectContactViewModel(ISelectContactView view) : base(view)
-    {
-    }
-
     public ICommand OkCommand { get; set; } = DelegateCommand.DisabledCommand;
 
     public object? ContactListView { get; set; }

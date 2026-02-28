@@ -5,14 +5,8 @@ using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class EmailAccountsViewModel : ViewModel<IEmailAccountsView>
+public class EmailAccountsViewModel(IEmailAccountsView view) : ViewModel<IEmailAccountsView>(view)
 {
-    private EmailAccount? selectedEmailAccount;
-
-    public EmailAccountsViewModel(IEmailAccountsView view) : base(view)
-    {
-    }
-
     public EmailClientRoot EmailClientRoot { get; set; } = null!;
 
     public ICommand NewAccountCommand { get; set; } = null!;
@@ -21,11 +15,7 @@ public class EmailAccountsViewModel : ViewModel<IEmailAccountsView>
 
     public ICommand EditAccountCommand { get; set; } = null!;
 
-    public EmailAccount? SelectedEmailAccount
-    {
-        get => selectedEmailAccount;
-        set => SetProperty(ref selectedEmailAccount, value);
-    }
+    public EmailAccount? SelectedEmailAccount { get; set => SetProperty(ref field, value); }
 
     public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
 }

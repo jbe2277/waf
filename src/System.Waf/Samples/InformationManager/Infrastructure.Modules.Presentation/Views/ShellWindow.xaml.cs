@@ -74,7 +74,7 @@ public partial class ShellWindow : IShellView
     private void LoadedHandler(object sender, RoutedEventArgs e)
     {
         var firstNode = ViewModel.NavigationService.NavigationNodes.FirstOrDefault();
-        if (firstNode != null) firstNode.IsSelected = true;
+        firstNode?.IsSelected = true;
     }
 
     private static void ShowLog()

@@ -10,28 +10,19 @@ using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 namespace Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 
 /// <summary>Responsible for the whole module. This controller delegates the tasks to other controllers.</summary>
-internal class ModuleController : IModuleController, IAddressBookService
+internal class ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
+    Func<ContactController> contactControllerFactory, Func<SelectContactController> selectContactControllerFactory) 
+    : IModuleController, IAddressBookService
 {
     private const string documentPartPath = "AddressBook/Content.xml";
 
-    private readonly IShellService shellService;
-    private readonly IDocumentService documentService;
-    private readonly INavigationService navigationService;
-    private readonly Func<ContactController> contactControllerFactory;
-    private readonly Func<SelectContactController> selectContactControllerFactory;
-    private readonly Lazy<DataContractSerializer> serializer;
+    private readonly IShellService shellService = shellService;
+    private readonly IDocumentService documentService = documentService;
+    private readonly INavigationService navigationService = navigationService;
+    private readonly Func<ContactController> contactControllerFactory = contactControllerFactory;
+    private readonly Func<SelectContactController> selectContactControllerFactory = selectContactControllerFactory;
+    private readonly Lazy<DataContractSerializer> serializer = new(CreateDataContractSerializer);
     private ContactController? activeContactController;
-
-    public ModuleController(IShellService shellService, IDocumentService documentService, INavigationService navigationService,
-        Func<ContactController> contactControllerFactory, Func<SelectContactController> selectContactControllerFactory)
-    {
-        this.shellService = shellService;
-        this.documentService = documentService;
-        this.navigationService = navigationService;
-        this.contactControllerFactory = contactControllerFactory;
-        this.selectContactControllerFactory = selectContactControllerFactory;
-        serializer = new(CreateDataContractSerializer);
-    }
 
     internal AddressBookRoot Root { get; private set; } = null!;
 

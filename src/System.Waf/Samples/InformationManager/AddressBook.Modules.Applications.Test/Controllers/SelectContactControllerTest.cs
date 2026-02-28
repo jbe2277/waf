@@ -2,8 +2,6 @@
 using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
-using System.Waf.Applications;
-using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using System.Waf.UnitTesting;
 
 namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers;

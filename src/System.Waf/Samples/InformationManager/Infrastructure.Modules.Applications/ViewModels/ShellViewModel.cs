@@ -13,7 +13,6 @@ public class ShellViewModel : ViewModel<IShellView>, IShellService
     private readonly IMessageService messageService;
     private readonly ISystemService systemService;
     private readonly AppSettings settings;
-    private object? contentView;
 
     public ShellViewModel(IShellView view, IMessageService messageService, ISystemService systemService, NavigationService navigationService, ISettingsService settingsService) : base(view)
     {
@@ -48,11 +47,7 @@ public class ShellViewModel : ViewModel<IShellView>, IShellService
 
     public object ShellView => ViewCore;
 
-    public object? ContentView
-    {
-        get => contentView;
-        set => SetProperty(ref contentView, value);
-    }
+    public object? ContentView { get; set => SetProperty(ref field, value); }
 
     public void Show() => ViewCore.Show();
 

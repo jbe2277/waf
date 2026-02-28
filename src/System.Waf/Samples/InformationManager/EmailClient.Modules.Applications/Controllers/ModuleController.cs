@@ -116,7 +116,7 @@ internal class ModuleController : IModuleController
         newEmailController.Run();
     }
 
-    private DataContractSerializer CreateDataContractSerializer() => new(typeof(EmailClientRoot), [ typeof(ExchangeSettings), typeof(Pop3Settings) ]);
+    private DataContractSerializer CreateDataContractSerializer() => new(typeof(EmailClientRoot), [typeof(ExchangeSettings), typeof(Pop3Settings)]);
 
 
     private class ItemCountSynchronizer : Model

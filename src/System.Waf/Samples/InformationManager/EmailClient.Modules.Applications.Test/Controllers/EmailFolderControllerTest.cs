@@ -5,7 +5,6 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;
 

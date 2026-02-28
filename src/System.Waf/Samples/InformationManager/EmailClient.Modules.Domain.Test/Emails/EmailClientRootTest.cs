@@ -20,7 +20,7 @@ public class EmailClientRootTest : DomainTest
 
         var emailAccount2 = new EmailAccount();
         root.AddEmailAccount(emailAccount2);
-        AssertHelper.SequenceEqual(new[] { emailAccount1, emailAccount2 }, root.EmailAccounts);
+        AssertHelper.SequenceEqual([emailAccount1, emailAccount2], root.EmailAccounts);
 
         root.RemoveEmailAccount(emailAccount1);
         Assert.AreEqual(emailAccount2, root.EmailAccounts.Single());

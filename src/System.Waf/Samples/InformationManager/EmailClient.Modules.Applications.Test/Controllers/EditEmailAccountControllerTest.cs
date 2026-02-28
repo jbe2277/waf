@@ -2,8 +2,6 @@
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
-using System.Waf.Applications;
-using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using System.Waf.UnitTesting;
 using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
@@ -86,7 +84,7 @@ public class EditEmailAccountControllerTest : EmailClientTest
         editEmailAccountViewModel.NextCommand.Execute(null);
 
         // We are now on the Pop3 settings page; call the back command
-        Assert.IsInstanceOfType(editEmailAccountViewModel.ContentView, typeof(MockPop3SettingsView));
+        Assert.IsInstanceOfType<MockPop3SettingsView>(editEmailAccountViewModel.ContentView);
         Assert.IsTrue(editEmailAccountViewModel.IsLastPage);
         AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () => editEmailAccountViewModel.BackCommand.Execute(null));
 
@@ -96,7 +94,7 @@ public class EditEmailAccountControllerTest : EmailClientTest
         AssertHelper.CanExecuteChangedEvent(editEmailAccountViewModel.BackCommand, () => editEmailAccountViewModel.NextCommand.Execute(null));
 
         // We are now again on the Pop3 settings page; call the next command
-        Assert.IsInstanceOfType(editEmailAccountViewModel.ContentView, typeof(MockPop3SettingsView));
+        Assert.IsInstanceOfType<MockPop3SettingsView>(editEmailAccountViewModel.ContentView);
         editEmailAccountViewModel.NextCommand.Execute(null);
 
         // The wizard is finished
@@ -116,7 +114,7 @@ public class EditEmailAccountControllerTest : EmailClientTest
         editEmailAccountViewModel.NextCommand.Execute(null);
 
         // We are now on the Exchange settings page
-        Assert.IsInstanceOfType(editEmailAccountViewModel.ContentView, typeof(MockExchangeSettingsView));
+        Assert.IsInstanceOfType<MockExchangeSettingsView>(editEmailAccountViewModel.ContentView);
         Assert.IsTrue(editEmailAccountViewModel.IsLastPage);
 
         // Go back to the first page and then call the next command twice

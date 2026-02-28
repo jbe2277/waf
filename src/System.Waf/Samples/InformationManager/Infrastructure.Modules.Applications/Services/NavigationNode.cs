@@ -7,9 +7,6 @@ public class NavigationNode : Model, INavigationNode
 {
     private readonly Action showAction;
     private readonly Action closeAction;
-    private int? itemCount;
-    private bool isSelected;
-    private bool isFirstItemOfNewGroup;
 
     public NavigationNode(string automationId, string name, Action showAction, Action closeAction, double group, double order)
     {
@@ -33,28 +30,20 @@ public class NavigationNode : Model, INavigationNode
 
     public double Order { get; }
 
-    public int? ItemCount
-    {
-        get => itemCount;
-        set => SetProperty(ref itemCount, value);
-    }
+    public int? ItemCount { get; set => SetProperty(ref field, value); }
 
     public bool IsSelected
     {
-        get => isSelected;
+        get;
         set
         {
-            if (isSelected == value) return;
-            if (isSelected) closeAction();
-            isSelected = value;
+            if (field == value) return;
+            if (field) closeAction();
+            field = value;
             RaisePropertyChanged();
-            if (isSelected) showAction();
+            if (field) showAction();
         }
     }
 
-    public bool IsFirstItemOfNewGroup
-    {
-        get => isFirstItemOfNewGroup;
-        set => SetProperty(ref isFirstItemOfNewGroup, value);
-    }
+    public bool IsFirstItemOfNewGroup { get; set => SetProperty(ref field, value); }
 }

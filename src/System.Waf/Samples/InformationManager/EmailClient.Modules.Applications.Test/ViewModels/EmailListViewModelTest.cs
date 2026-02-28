@@ -32,7 +32,7 @@ public class EmailListViewModelTest : EmailClientTest
         {
             Title = "Duis nunc",
             From = "user@adventure-works.com",
-            To = new[] { "harry@example.com", "admin@adventure-works.com" }
+            To = ["harry@example.com", "admin@adventure-works.com"]
         };
 
         Assert.IsTrue(viewModel.Filter(email1));

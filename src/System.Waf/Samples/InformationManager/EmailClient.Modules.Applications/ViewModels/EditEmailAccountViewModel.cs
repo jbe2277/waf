@@ -4,37 +4,17 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class EditEmailAccountViewModel : ViewModel<IEditEmailAccountView>
+public class EditEmailAccountViewModel(IEditEmailAccountView view) : ViewModel<IEditEmailAccountView>(view)
 {
-    private object contentView = null!;
-    private bool isValid = true;
-    private bool isLastPage;
-
-    public EditEmailAccountViewModel(IEditEmailAccountView view) : base(view)
-    {
-    }
-
     public ICommand BackCommand { get; set; } = null!;
 
     public ICommand NextCommand { get; set; } = null!;
 
-    public object ContentView
-    {
-        get => contentView;
-        set => SetProperty(ref contentView, value);
-    }
+    public object ContentView { get; set => SetProperty(ref field, value); } = null!;
 
-    public bool IsValid
-    {
-        get => isValid;
-        set => SetProperty(ref isValid, value);
-    }
+    public bool IsValid { get; set => SetProperty(ref field, value); } = true;
 
-    public bool IsLastPage
-    {
-        get => isLastPage;
-        set => SetProperty(ref isLastPage, value);
-    }
+    public bool IsLastPage { get; set => SetProperty(ref field, value); }
 
     public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
 

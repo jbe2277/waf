@@ -1,13 +1,10 @@
 ﻿using System.Waf.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.InformationManager.AddressBook.Modules.Applications.Views;
-using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.AddressBook.Modules.Applications.Controllers;
 using Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 using Waf.InformationManager.AddressBook.Modules.Domain;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
-using Waf.InformationManager.Infrastructure.Modules.Applications.Services;
-using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 
 namespace Test.InformationManager.AddressBook.Modules.Applications.Controllers;
 

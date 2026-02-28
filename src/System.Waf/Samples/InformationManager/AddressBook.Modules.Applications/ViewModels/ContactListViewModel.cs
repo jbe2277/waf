@@ -5,38 +5,23 @@ using System.Windows.Input;
 
 namespace Waf.InformationManager.AddressBook.Modules.Applications.ViewModels;
 
-public class ContactListViewModel : ViewModel<IContactListView>
+public class ContactListViewModel(IContactListView view) : ViewModel<IContactListView>(view)
 {
-    private Contact? selectedContact;
-    private string filterText = "";
-
-    public ContactListViewModel(IContactListView view) : base(view)
-    {
-    }
-
     public IReadOnlyList<Contact> Contacts { get; set; } = null!;
 
-    public Contact? SelectedContact
-    {
-        get => selectedContact;
-        set => SetProperty(ref selectedContact, value);
-    }
+    public Contact? SelectedContact { get; set => SetProperty(ref field, value); }
 
     public ICommand DeleteContactCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-    public string FilterText
-    {
-        get => filterText;
-        set => SetProperty(ref filterText, value);
-    }
+    public string FilterText { get; set => SetProperty(ref field, value); } = "";
 
     public void FocusItem() => ViewCore.FocusItem();
 
     public bool Filter(Contact contact)
     {
-        return string.IsNullOrEmpty(filterText)
-            || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-            || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-            || (!string.IsNullOrEmpty(contact.Email) && contact.Email.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
+        return string.IsNullOrEmpty(FilterText)
+            || (!string.IsNullOrEmpty(contact.Firstname) && contact.Firstname.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+            || (!string.IsNullOrEmpty(contact.Lastname) && contact.Lastname.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+            || (!string.IsNullOrEmpty(contact.Email) && contact.Email.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase));
     }
 }

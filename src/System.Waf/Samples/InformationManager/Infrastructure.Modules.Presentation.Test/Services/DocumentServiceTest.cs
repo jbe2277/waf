@@ -6,7 +6,7 @@ using Test.InformationManager.Infrastructure.Modules.Applications;
 using Test.InformationManager.Infrastructure.Modules.Applications.Services;
 using Waf.InformationManager.Infrastructure.Modules.Presentation.Services;
 
-namespace Test.InformationManager.Infrastructure.Modules.Presentation;
+namespace Test.InformationManager.Infrastructure.Modules.Presentation.Services;
 
 [TestClass]
 public class DocumentServiceTest : InfrastructureTest

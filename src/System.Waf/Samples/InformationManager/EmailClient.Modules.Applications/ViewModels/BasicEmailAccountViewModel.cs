@@ -5,45 +5,37 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class BasicEmailAccountViewModel : ViewModel<IBasicEmailAccountView>
+public class BasicEmailAccountViewModel(IBasicEmailAccountView view) : ViewModel<IBasicEmailAccountView>(view)
 {
-    private EmailAccount emailAccount = null!;
-    private bool isPop3Checked = true;
-    private bool isExchangeChecked;
-
-    public BasicEmailAccountViewModel(IBasicEmailAccountView view) : base(view)
-    {
-    }
-
     public EmailAccount EmailAccount
     {
-        get => emailAccount;
+        get;
         set
         {
-            if (emailAccount == value) return;
-            emailAccount = value;
-            if (emailAccount.EmailAccountSettings is Pop3Settings) IsPop3Checked = true;
-            else if (emailAccount.EmailAccountSettings is ExchangeSettings) IsExchangeChecked = true;
+            if (field == value) return;
+            field = value;
+            if (field.EmailAccountSettings is Pop3Settings) IsPop3Checked = true;
+            else if (field.EmailAccountSettings is ExchangeSettings) IsExchangeChecked = true;
             RaisePropertyChanged();
         }
-    }
+    } = null!;
 
     public bool IsPop3Checked
     {
-        get => isPop3Checked;
+        get;
         set
         {
-            if (!SetProperty(ref isPop3Checked, value)) return;
+            if (!SetProperty(ref field, value)) return;
             IsExchangeChecked = !value;
         }
-    }
+    } = true;
 
     public bool IsExchangeChecked
     {
-        get => isExchangeChecked;
+        get;
         set
         {
-            if (!SetProperty(ref isExchangeChecked, value)) return;
+            if (!SetProperty(ref field, value)) return;
             IsPop3Checked = !value;
         }
     }

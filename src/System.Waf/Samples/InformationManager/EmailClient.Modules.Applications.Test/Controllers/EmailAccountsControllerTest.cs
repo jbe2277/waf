@@ -2,8 +2,6 @@
 using Waf.InformationManager.EmailClient.Modules.Applications.Controllers;
 using Waf.InformationManager.EmailClient.Modules.Domain.Emails;
 using Test.InformationManager.EmailClient.Modules.Applications.Views;
-using System.Waf.Applications;
-using Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 using System.Waf.UnitTesting;
 
 namespace Test.InformationManager.EmailClient.Modules.Applications.Controllers;

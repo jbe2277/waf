@@ -4,11 +4,7 @@ using Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class ExchangeSettingsViewModel : ViewModel<IExchangeSettingsView>
+public class ExchangeSettingsViewModel(IExchangeSettingsView view) : ViewModel<IExchangeSettingsView>(view)
 {
-    public ExchangeSettingsViewModel(IExchangeSettingsView view) : base(view)
-    {
-    }
-
     public ExchangeSettings? Model { get; set; }
 }

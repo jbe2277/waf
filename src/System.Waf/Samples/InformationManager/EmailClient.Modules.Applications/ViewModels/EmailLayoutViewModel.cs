@@ -3,24 +3,9 @@ using Waf.InformationManager.EmailClient.Modules.Applications.Views;
 
 namespace Waf.InformationManager.EmailClient.Modules.Applications.ViewModels;
 
-public class EmailLayoutViewModel : ViewModel<IEmailLayoutView>
+public class EmailLayoutViewModel(IEmailLayoutView view) : ViewModel<IEmailLayoutView>(view)
 {
-    private object? emailListView;
-    private object? emailView;
+    public object? EmailListView { get; set => SetProperty(ref field, value); }
 
-    public EmailLayoutViewModel(IEmailLayoutView view) : base(view)
-    {
-    }
-
-    public object? EmailListView
-    {
-        get => emailListView;
-        set => SetProperty(ref emailListView, value);
-    }
-
-    public object? EmailView
-    {
-        get => emailView;
-        set => SetProperty(ref emailView, value);
-    }
+    public object? EmailView { get; set => SetProperty(ref field, value); }
 }

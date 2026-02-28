@@ -37,7 +37,7 @@ internal class ContactController
 
     public void Initialize()
     {
-        contactsView = new(Root!.Contacts, null, ContactListViewModel.Filter, null);
+        contactsView = new(Root.Contacts, null, ContactListViewModel.Filter, null);
         ContactListViewModel.Contacts = contactsView;
         ContactListViewModel.DeleteContactCommand = DeleteContactCommand;
         WeakEvent.PropertyChanged.Add(ContactListViewModel, ContactListViewModelPropertyChanged);
