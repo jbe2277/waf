@@ -9,17 +9,7 @@
     mc:Ignorable="d" d:DataContext="{d:DesignInstance domain:Person}"
     Title="{x:Static p:Resources.WpfLocalizationDemo}" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="400" MinHeight="300">
     
-    <Grid Margin="0,0,11,11">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
+    <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto" Margin="0,0,11,11">
         <Label Content="{x:Static p:Resources.Name}" Grid.Column="0" Grid.Row="0" Margin="11,10,0,0"/>
         <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="0" Width="100" Margin="11,11,0,0"/>
         

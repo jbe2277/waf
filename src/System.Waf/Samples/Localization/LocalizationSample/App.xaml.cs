@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Windows;
-using System.Windows.Markup;
 using LocalizationSample.Domain;
 using LocalizationSample.Presentation;
 using LocalizationSample.Properties;
