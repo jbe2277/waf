@@ -25,16 +25,7 @@
             
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,3,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*"/>
-                            <ColumnDefinition Width="12*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
+                    <Grid ColumnDefinitions="8*,12*" RowDefinitions="Auto,Auto" Margin="0,0,3,0">
                         <TextBlock Text="{Binding Firstname, ValidatesOnNotifyDataErrors=False, Converter={x:Static cc:TargetStringEmptyValueConverter.Default}}" 
                                 Margin="7" AutomationProperties.AutomationId="FirstnameLabel"/>
 

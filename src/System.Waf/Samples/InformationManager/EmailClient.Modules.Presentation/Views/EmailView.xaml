@@ -17,11 +17,7 @@
         <ContentControl Content="{Binding Email}" DockPanel.Dock="Top" Margin="0,7,0,0">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
-                    <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Grid ColumnDefinitions="60,*" DockPanel.Dock="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

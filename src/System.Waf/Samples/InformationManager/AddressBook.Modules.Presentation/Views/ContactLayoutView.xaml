@@ -6,12 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="700" AutomationProperties.AutomationId="ContactLayoutView"
              d:DataContext="{d:DesignInstance dd:SampleContactLayoutViewModel, IsDesignTimeCreatable=True}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="8*"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid ColumnDefinitions="12*,8*">
         <ContentControl Content="{Binding ContactListView}" Focusable="False" Margin="0,0,4,0"/>
 
         <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="4"/>

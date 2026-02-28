@@ -14,16 +14,7 @@
         <s:EmailItemTemplateSelector x:Key="EmailItemTemplateSelector"/>
 
         <DataTemplate x:Key="ReceivedEmailItemTemplate">
-            <Grid Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
                 <TextBlock Text="{Binding From, ValidatesOnNotifyDataErrors=False}" Margin="7" AutomationProperties.AutomationId="FromLabel"/>
 
                 <TextBlock Text="{Binding Sent, ValidatesOnNotifyDataErrors=False, StringFormat=d}" Grid.Column="1" Margin="7" AutomationProperties.AutomationId="SentLabel"/>
@@ -33,16 +24,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="SentEmailItemTemplate">
-            <Grid Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,0,3,0" d:DataContext="{d:DesignInstance domain:Email}">
                 <TextBlock Text="{Binding To, ValidatesOnNotifyDataErrors=False, Converter={x:Static c:StringCollectionToStringConverter.Default}}"
                            Margin="7" TextTrimming="CharacterEllipsis" AutomationProperties.AutomationId="ToLabel"/>
 

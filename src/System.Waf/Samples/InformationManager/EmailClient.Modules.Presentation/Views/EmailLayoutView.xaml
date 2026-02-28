@@ -6,12 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600" AutomationProperties.AutomationId="EmailLayoutView"
              d:DataContext="{d:DesignInstance dd:SampleEmailLayoutViewModel, IsDesignTimeCreatable=True}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="11*"/>
-        </Grid.ColumnDefinitions>
-        
+    <Grid ColumnDefinitions="9*,11*">
         <ContentControl Content="{Binding EmailListView}" Focusable="False" Margin="0,0,4,0"/>
         
         <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="4"/>
