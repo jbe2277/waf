@@ -9,19 +9,7 @@
     Title="{Binding Title}" MinWidth="440" MinHeight="300" SizeToContent="WidthAndHeight" ShowInTaskbar="False" 
     Icon="{StaticResource WriterImageSource}" AutomationProperties.AutomationId="SaveChangesWindow">
     
-    <Grid Margin="0,0,11,11">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
+    <Grid ColumnDefinitions="*,Auto,Auto,Auto" RowDefinitions="Auto,*,Auto" Margin="0,0,11,11">
         <Label Content="{x:Static p:Resources.SaveChangesTo}" Padding="0" Grid.ColumnSpan="4" Style="{StaticResource HeaderLabel}" />
         
         <Border BorderBrush="#828790" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="11,11,0,11">

@@ -131,13 +131,7 @@
                 </RibbonGroup>
 
                 <RibbonGroup Header="{x:Static p:Resources.Font}">
-                    <Grid Margin="0,5,0,5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="7"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
+                    <Grid RowDefinitions="*,7,*" Margin="0,5,0,5">
                         <RibbonControlGroup HorizontalAlignment="Left">
                             <RibbonToggleButton Command="EditingCommands.ToggleBold" IsChecked="{Binding ShellService.ActiveEditingCommands.IsBold}"
                                                 SmallImageSource="{StaticResource BoldImageSource}" KeyTip="B" AutomationProperties.AutomationId="ToggleBoldButton"
