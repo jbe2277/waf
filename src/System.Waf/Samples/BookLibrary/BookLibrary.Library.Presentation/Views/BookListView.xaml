@@ -46,11 +46,7 @@
                 <DataGridTemplateColumn Header="{x:Static p:Resources.LendTo}" IsReadOnly="True" SortMemberPath="Book.LendTo.Firstname" Width="3*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid ColumnDefinitions="*,Auto">
                                 <TextBlock Padding="4,2,4,3" AutomationProperties.AutomationId="LendToLabel">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
