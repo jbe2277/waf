@@ -75,9 +75,10 @@ jobs:
         adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
 
     - name: 🖥️ UI Test
+      env:
+        UITestApkFile: NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
-        UITestApkFile=NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY        
         cd ./src/NewsReader.UITest
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
 
