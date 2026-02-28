@@ -13,7 +13,7 @@ public record AppInfo(string CompanyName, string ProductName, string SettingsFil
 public abstract class UITest : UITestBase
 {
     protected UITest() : base("BookLibrary.exe",
-        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net8.0-windows/",
+        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/BookLibrary/Release/net10.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/BookLibrary/")
     {
         var companyName = FileVersionInfo.GetVersionInfo(Executable).CompanyName ?? throw new InvalidOperationException("Could not read the CompanyName from the exe.");

@@ -9,7 +9,7 @@ using Xunit;
 namespace UITest.Writer;
 
 public abstract class UITest() : UITestBase("Writer.exe",
-        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/Writer/Release/net8.0-windows/",
+        Environment.GetEnvironmentVariable("UITestExePath") ?? "out/Writer/Release/net10.0-windows/",
         Environment.GetEnvironmentVariable("UITestOutputPath") ?? "out/Samples.UITest/Writer/")
 {
     public Application Launch(LaunchArguments? arguments = null, bool resetSettings = true)

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="NewsReader.UITest/NewsReader.UITest.csproj" />
+  <Project Path="UITest.Core/UITest.Core.csproj" />
+  <Project Path="UITest.FeedService/UITest.FeedService.csproj" />
+</Solution>

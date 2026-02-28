@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="NewsReader.Applications.Test/NewsReader.Applications.Test.csproj" />
+  <Project Path="NewsReader.Applications/NewsReader.Applications.csproj" />
+  <Project Path="NewsReader.Domain.Test/NewsReader.Domain.Test.csproj" />
+  <Project Path="NewsReader.Domain/NewsReader.Domain.csproj" />
+  <Project Path="NewsReader.MauiSystem/NewsReader.MauiSystem.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="NewsReader.Presentation.Test/NewsReader.Presentation.Test.csproj" />
+  <Project Path="NewsReader.Presentation/NewsReader.Presentation.csproj" />
+</Solution>

@@ -25,7 +25,7 @@ jobs:
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9'
+        dotnet-version: '10'
 
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-android maui-ios
@@ -43,7 +43,7 @@ jobs:
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net9.0-android -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f:net10.0-android -c:Release -p:ApplicationVersion=${{ needs.GetVersion.outputs.versionCode }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
     
     - name: 📦 Upload AAB, APK
       uses: actions/upload-artifact@v4
@@ -64,7 +64,7 @@ jobs:
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9'
+        dotnet-version: '10'
 
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-android maui-windows maui-ios
@@ -90,12 +90,20 @@ jobs:
       # -p:ApplicationVersion=0 because of https://github.com/dotnet/maui/issues/18571
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
+        dotnet publish -f:net10.0-windows10.0.19041.0 -c:Release -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
+
+    - name: 🛠️ Copy msix into another folder as the arm64 build will remove the folder
+      shell: pwsh
+      run: |
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        $destination = Join-Path $rootFolder $msixFile.Name
+        Copy-Item -Path $msixFile.FullName -Destination $destination
 
     - name: 🛠️ Build arm64
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f:net9.0-windows10.0.19041.0 -c:Release -p:RuntimeIdentifierOverride=win10-arm64 -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
+        dotnet publish -f:net10.0-windows10.0.19041.0 -c:Release -p:RuntimeIdentifierOverride=win-arm64 -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationVersion=0 -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 --self-contained
   
     - name: 📦 Upload MSIX
       uses: actions/upload-artifact@v4
@@ -108,8 +116,8 @@ jobs:
     - name: ⚙️ Install App
       shell: pwsh
       run: |
-        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\bin\Release\net9.0-windows10.0.19041.0\win10-x64\"
-        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *.msix | Select-Object -First 1
+        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *x64.msix | Select-Object -First 1
         Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
         Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
         Add-AppxPackage -Path $msixFile
@@ -128,8 +136,9 @@ jobs:
       
     - name: 🖥️ UI Test
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/NewsReader.UITest/NewsReader.UITest.sln --filter DevicePlatform=Windows --logger GitHubActions
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait "DevicePlatform=Windows"
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v4
@@ -149,14 +158,14 @@ jobs:
 
     - name: ⚙️ Set Xcode version
       run: |
-        XCODE_ROOT=/Applications/Xcode_26.0.1.app
+        XCODE_ROOT=/Applications/Xcode_26.2.app
         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
         sudo xcode-select -s $XCODE_ROOT
     
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9'
+        dotnet-version: '10'
     
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-android maui-ios
@@ -171,7 +180,7 @@ jobs:
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet build -f net9.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet build -f net10.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
         
   Test:
     runs-on: windows-2025
@@ -183,7 +192,7 @@ jobs:
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9'
+        dotnet-version: '10'
 
     - name: ⚙️ Install .NET MAUI
       run: dotnet workload install maui-android maui-ios
@@ -191,4 +200,4 @@ jobs:
     - name: 🕵️ Test
       run: |
         echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/NewsReader/NewsReader.sln -c:Release -p:Version=${{ needs.GetVersion.outputs.version }} --logger GitHubActions
+        dotnet test ./src/NewsReader/NewsReader.slnx -c:Release -p:Version=${{ needs.GetVersion.outputs.version }} --logger GitHubActions
