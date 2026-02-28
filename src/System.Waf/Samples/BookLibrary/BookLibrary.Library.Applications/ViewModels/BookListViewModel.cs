@@ -5,58 +5,34 @@ using Waf.BookLibrary.Library.Applications.Views;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-public class BookListViewModel : ViewModel<IBookListView>
+public class BookListViewModel(IBookListView view) : ViewModel<IBookListView>(view)
 {
     private readonly ObservableList<BookDataModel> selectedBooks = [];
-    private bool isValid = true;
-    private BookDataModel? selectedBook;
-    private string filterText = "";
-    private Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>>? sort;
-
-    public BookListViewModel(IBookListView view) : base(view)
-    {
-    }
 
     public IReadOnlyObservableList<BookDataModel> SelectedBooks => selectedBooks;
 
-    public bool IsValid
-    {
-        get => isValid;
-        set => SetProperty(ref isValid, value);
-    }
+    public bool IsValid { get; set => SetProperty(ref field, value); } = true;
 
     public IReadOnlyList<BookDataModel>? Books { get; set; }
 
-    public BookDataModel? SelectedBook
-    {
-        get => selectedBook;
-        set => SetProperty(ref selectedBook, value);
-    }
+    public BookDataModel? SelectedBook { get; set => SetProperty(ref field, value); }
 
     public ICommand? AddNewCommand { get; set; }
 
     public ICommand? RemoveCommand { get; set; }
 
-    public string FilterText
-    {
-        get => filterText;
-        set => SetProperty(ref filterText, value);
-    }
+    public string FilterText { get; set => SetProperty(ref field, value); } = "";
 
-    public Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>>? Sort
-    {
-        get => sort;
-        set => SetProperty(ref sort, value);
-    }
+    public Func<IEnumerable<BookDataModel>, IOrderedEnumerable<BookDataModel>>? Sort { get; set => SetProperty(ref field, value); }
 
     public void Focus() => ViewCore.FocusFirstCell();
 
     public bool Filter(BookDataModel bookDataModel)
     {
         var book = bookDataModel.Book;
-        return string.IsNullOrEmpty(filterText)
-            || (!string.IsNullOrEmpty(book.Title) && book.Title.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-            || (!string.IsNullOrEmpty(book.Author) && book.Author.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
+        return string.IsNullOrEmpty(FilterText)
+            || (!string.IsNullOrEmpty(book.Title) && book.Title.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+            || (!string.IsNullOrEmpty(book.Author) && book.Author.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public void AddSelectedBook(BookDataModel bookDataModel) => selectedBooks.Add(bookDataModel);

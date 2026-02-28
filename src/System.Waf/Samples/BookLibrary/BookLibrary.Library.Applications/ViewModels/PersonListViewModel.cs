@@ -5,33 +5,17 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-public class PersonListViewModel : ViewModel<IPersonListView>
+public class PersonListViewModel(IPersonListView view) : ViewModel<IPersonListView>(view)
 {
     private readonly ObservableList<Person> selectedPersons = [];
-    private bool isValid = true;
-    private Person? selectedPerson;
-    private string filterText = "";
-    private Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? sort;
-
-    public PersonListViewModel(IPersonListView view) : base(view)
-    {
-    }
 
     public IReadOnlyList<Person> SelectedPersons => selectedPersons;
 
-    public bool IsValid
-    {
-        get => isValid;
-        set => SetProperty(ref isValid, value);
-    }
+    public bool IsValid { get; set => SetProperty(ref field, value); } = true;
 
     public IReadOnlyList<Person>? Persons { get; set; }
 
-    public Person? SelectedPerson
-    {
-        get => selectedPerson;
-        set => SetProperty(ref selectedPerson, value);
-    }
+    public Person? SelectedPerson { get; set => SetProperty(ref field, value); }
 
     public ICommand? AddNewCommand { get; set; }
 
@@ -39,25 +23,17 @@ public class PersonListViewModel : ViewModel<IPersonListView>
 
     public ICommand? CreateNewEmailCommand { get; set; }
 
-    public string FilterText
-    {
-        get => filterText;
-        set => SetProperty(ref filterText, value);
-    }
+    public string FilterText { get; set => SetProperty(ref field, value); } = "";
 
-    public Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? Sort
-    {
-        get => sort;
-        set => SetProperty(ref sort, value);
-    }
+    public Func<IEnumerable<Person>, IOrderedEnumerable<Person>>? Sort { get; set => SetProperty(ref field, value); }
 
     public void Focus() => ViewCore.FocusFirstCell();
 
     public bool Filter(Person person)
     {
-        return string.IsNullOrEmpty(filterText)
-            || (!string.IsNullOrEmpty(person.Firstname) && person.Firstname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
-            || (!string.IsNullOrEmpty(person.Lastname) && person.Lastname.Contains(filterText, StringComparison.CurrentCultureIgnoreCase));
+        return string.IsNullOrEmpty(FilterText)
+            || (!string.IsNullOrEmpty(person.Firstname) && person.Firstname.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase))
+            || (!string.IsNullOrEmpty(person.Lastname) && person.Lastname.Contains(FilterText, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public void AddSelectedPerson(Person person) => selectedPersons.Add(person);

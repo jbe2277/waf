@@ -11,15 +11,13 @@ public class PersonTest
     [TestMethod]
     public void GeneralPersonTest()
     {
-        var person = new Person();
-        Assert.IsNotNull(person.Id);
-
-        person.Firstname = "Harry";
-        person.Lastname = "Potter";
-        person.Email = "harry.potter@hogwarts.edu";
-
+        var person = new Person
+        {
+            Firstname = "Harry",
+            Lastname = "Potter",
+            Email = "harry.potter@hogwarts.edu"
+        };
         Assert.IsTrue(person.Validate());
-
         Assert.AreEqual("Harry Potter", person.ToString(null, CultureInfo.InvariantCulture));
     }
 

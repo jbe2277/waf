@@ -4,8 +4,6 @@ namespace Waf.BookLibrary.Reporting.Presentation.Reports;
 
 public partial class BookListReport : IBookListReport
 {
-    private object? reportData;
-
     public BookListReport()
     {
         InitializeComponent();
@@ -17,10 +15,10 @@ public partial class BookListReport : IBookListReport
 
     public object? ReportData
     {
-        get => reportData;
+        get;
         set
         {
-            reportData = value;
+            field = value;
             flowDocument.DataContext = value;
         }
     }

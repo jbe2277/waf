@@ -5,16 +5,10 @@ using Waf.BookLibrary.Library.Presentation.Properties;
 
 namespace Waf.BookLibrary.Library.Presentation.Services;
 
-internal sealed class EmailService : IEmailService
+internal sealed class EmailService(IMessageService messageService, IShellService shellService) : IEmailService
 {
-    private readonly IMessageService messageService;
-    private readonly IShellService shellService;
-
-    public EmailService(IMessageService messageService, IShellService shellService)
-    {
-        this.messageService = messageService;
-        this.shellService = shellService;
-    }
+    private readonly IMessageService messageService = messageService;
+    private readonly IShellService shellService = shellService;
 
     public void CreateNewEmail(string toEmailAddress)
     {

@@ -34,8 +34,8 @@ public class PersonControllerTest : ApplicationsTest
 
         // Check that Initialize shows the PersonListView and PersonView
         var shellService = Get<ShellService>();
-        Assert.IsInstanceOfType(shellService.PersonListView, typeof(IPersonListView));
-        Assert.IsInstanceOfType(shellService.PersonView, typeof(IPersonView));
+        Assert.IsInstanceOfType<IPersonListView>(shellService.PersonListView);
+        Assert.IsInstanceOfType<IPersonView>(shellService.PersonView);
 
         // Check that the first Person is selected
         var personListView = Get<IPersonListView>();

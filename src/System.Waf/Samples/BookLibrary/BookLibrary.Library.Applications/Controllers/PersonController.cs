@@ -81,7 +81,7 @@ internal class PersonController
 
     private void RemovePerson()
     {
-        var personsToExclude = personListViewModel.SelectedPersons.Except(new[] { personListViewModel.SelectedPerson });
+        var personsToExclude = personListViewModel.SelectedPersons.Except([personListViewModel.SelectedPerson]);
         var nextPerson = personListViewModel.Persons!.Except(personsToExclude).GetNextElementOrDefault(personListViewModel.SelectedPerson);
         foreach (var x in personListViewModel.SelectedPersons.ToArray()) entityService.Persons.Remove(x);
         personListViewModel.SelectedPerson = nextPerson ?? personListViewModel.Persons!.LastOrDefault();

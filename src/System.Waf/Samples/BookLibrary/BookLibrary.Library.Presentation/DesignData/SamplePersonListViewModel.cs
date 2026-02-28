@@ -1,6 +1,5 @@
 ﻿using Waf.BookLibrary.Library.Applications.ViewModels;
 using Waf.BookLibrary.Library.Applications.Views;
-using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Presentation.DesignData;
 
@@ -9,8 +8,8 @@ public class SamplePersonListViewModel : PersonListViewModel
     public SamplePersonListViewModel() : base(new MockPersonListView())
     {
         FilterText = "An example search text";
-        Persons = new List<Person>
-        {
+        Persons =
+        [
             new()
             {
                 Firstname = "Harry",
@@ -23,7 +22,7 @@ public class SamplePersonListViewModel : PersonListViewModel
                 Lastname = "Weasley",
                 Email = "hermione.granger@howarts.edu"
             }
-        };
+        ];
     }
 
 

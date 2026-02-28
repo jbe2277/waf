@@ -12,19 +12,17 @@ public class BookTest
     [TestMethod]
     public void GeneralBookTest()
     {
-        var book = new Book();
-        Assert.IsNotNull(book.Id);
-
-        book.Title = "Star Wars - Heir to the Empire";
-        book.Author = "Timothy Zahn";
-        book.Publisher = "Spectra";
-        book.PublishDate = new DateTime(1992, 5, 1);
-        book.Isbn = "0553296124";
-        book.Language = Language.English;
-        book.Pages = 416;
-
+        var book = new Book
+        {
+            Title = "Star Wars - Heir to the Empire",
+            Author = "Timothy Zahn",
+            Publisher = "Spectra",
+            PublishDate = new DateTime(1992, 5, 1),
+            Isbn = "0553296124",
+            Language = Language.English,
+            Pages = 416
+        };
         Assert.IsTrue(book.Validate());
-
         Assert.AreEqual("Star Wars - Heir to the Empire by Timothy Zahn", book.ToString(null, CultureInfo.InvariantCulture));
     }
 

@@ -8,9 +8,6 @@ namespace Waf.BookLibrary.Library.Applications.ViewModels;
 public class LendToViewModel : ViewModel<ILendToView>
 {
     private readonly DelegateCommand okCommand;
-    private Book? book;
-    private bool isLendTo;
-    private Person? selectedPerson;
     private bool dialogResult;
 
     public LendToViewModel(ILendToView view) : base(view)
@@ -22,30 +19,21 @@ public class LendToViewModel : ViewModel<ILendToView>
 
     public ICommand OkCommand => okCommand;
 
-    [DisallowNull]
-    public Book? Book
+    [DisallowNull] public Book? Book
     {
-        get => book;
+        get;
         set
         {
-            if (!SetProperty(ref book, value)) return;
+            if (!SetProperty(ref field, value)) return;
             IsLendTo = value.LendTo != null;
         }
     }
 
     public IReadOnlyList<Person> Persons { get; set; } = [];
 
-    public bool IsLendTo
-    {
-        get => isLendTo;
-        set => SetProperty(ref isLendTo, value);
-    }
+    public bool IsLendTo { get; set => SetProperty(ref field, value); }
 
-    public Person? SelectedPerson
-    {
-        get => selectedPerson;
-        set => SetProperty(ref selectedPerson, value);
-    }
+    public Person? SelectedPerson { get; set => SetProperty(ref field, value); }
 
     public bool ShowDialog(object owner)
     {

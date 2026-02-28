@@ -8,8 +8,8 @@ public class SampleLendToViewModel : LendToViewModel
 {
     public SampleLendToViewModel() : base(new MockLendToView())
     {
-        Persons = new List<Person>
-        {
+        Persons =
+        [
             new()
             {
                 Firstname = "Harry",
@@ -20,7 +20,7 @@ public class SampleLendToViewModel : LendToViewModel
                 Firstname = "Ron",
                 Lastname = "Weasley"
             }
-        };
+        ];
         Book = new Book
         {
             Title = "Serenity, Vol 1: Those Left Behind",

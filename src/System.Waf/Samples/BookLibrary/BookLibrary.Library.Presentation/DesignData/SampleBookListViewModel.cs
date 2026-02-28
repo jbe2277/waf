@@ -12,8 +12,8 @@ public class SampleBookListViewModel : BookListViewModel
     {
         FilterText = "An example search text";
         var command = new DelegateCommand(() => { });
-        Books = new List<BookDataModel>
-        {
+        Books =
+        [
             new(new Book
             {
                 Title = "Serenity, Vol 1: Those Left Behind",
@@ -37,7 +37,7 @@ public class SampleBookListViewModel : BookListViewModel
                 Author = "J.R.R. Tolkien",
                 PublishDate = new DateTime(1986, 12, 8)
             }, command),
-        };
+        ];
     }
 
 

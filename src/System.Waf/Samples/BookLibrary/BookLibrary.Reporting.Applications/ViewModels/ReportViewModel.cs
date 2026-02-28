@@ -4,19 +4,9 @@ using Waf.BookLibrary.Reporting.Applications.Views;
 
 namespace Waf.BookLibrary.Reporting.Applications.ViewModels;
 
-public class ReportViewModel : ViewModel<IReportView>
+public class ReportViewModel(IReportView view) : ViewModel<IReportView>(view)
 {
-    private object? report;
-
-    public ReportViewModel(IReportView view) : base(view)
-    {
-    }
-
-    public object? Report
-    {
-        get => report;
-        set => SetProperty(ref report, value);
-    }
+    public object? Report { get; set => SetProperty(ref field, value); }
 
     public ICommand? CreateBookListReportCommand { get; set; }
 

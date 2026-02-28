@@ -5,29 +5,18 @@ using Waf.BookLibrary.Library.Domain;
 
 namespace Waf.BookLibrary.Library.Applications.ViewModels;
 
-public class PersonViewModel : ViewModel<IPersonView>
+public class PersonViewModel(IPersonView view) : ViewModel<IPersonView>(view)
 {
-    private bool isValid = true;
-    private Person? person;
-
-    public PersonViewModel(IPersonView view) : base(view)
-    {
-    }
-
     public bool IsEnabled => Person != null;
 
-    public bool IsValid
-    {
-        get => isValid;
-        set => SetProperty(ref isValid, value);
-    }
+    public bool IsValid { get; set => SetProperty(ref field, value); } = true;
 
     public Person? Person
     {
-        get => person;
+        get;
         set
         {
-            if (!SetProperty(ref person, value)) return;
+            if (!SetProperty(ref field, value)) return;
             RaisePropertyChanged(nameof(IsEnabled));
         }
     }

@@ -11,7 +11,6 @@ public class ShellViewModel : ViewModel<IShellView>
 {
     private readonly IMessageService messageService;
     private readonly AppSettings settings;
-    private bool isValid = true;
 
     public ShellViewModel(IShellView view, IMessageService messageService, IShellService shellService, ISettingsService settingsService) : base(view)
     {
@@ -45,11 +44,7 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public ICommand? ExitCommand { get; set; }
 
-    public bool IsValid
-    {
-        get => isValid;
-        set => SetProperty(ref isValid, value);
-    }
+    public bool IsValid { get; set => SetProperty(ref field, value); } = true;
 
     public string DatabasePath { get; set; } = Resources.NotAvailable;
 

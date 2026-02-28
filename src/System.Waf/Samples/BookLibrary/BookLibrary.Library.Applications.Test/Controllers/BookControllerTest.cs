@@ -37,8 +37,8 @@ public class BookControllerTest : ApplicationsTest
 
         // Check that Initialize shows the BookListView and BookView
         var shellService = Get<ShellService>();
-        Assert.IsInstanceOfType(shellService.BookListView, typeof(IBookListView));
-        Assert.IsInstanceOfType(shellService.BookView, typeof(IBookView));
+        Assert.IsInstanceOfType<IBookListView>(shellService.BookListView);
+        Assert.IsInstanceOfType<IBookView>(shellService.BookView);
 
         // Check that the first Book is selected
         var bookListView = Get<MockBookListView>();

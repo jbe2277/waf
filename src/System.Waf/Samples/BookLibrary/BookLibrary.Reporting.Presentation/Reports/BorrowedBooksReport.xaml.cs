@@ -1,12 +1,9 @@
 ﻿using Waf.BookLibrary.Reporting.Applications.Reports;
-using System.ComponentModel.Composition;
 
 namespace Waf.BookLibrary.Reporting.Presentation.Reports;
 
 public partial class BorrowedBooksReport : IBorrowedBooksReport
 {
-    private object? reportData;
-
     public BorrowedBooksReport()
     {
         InitializeComponent();
@@ -18,10 +15,10 @@ public partial class BorrowedBooksReport : IBorrowedBooksReport
 
     public object? ReportData
     {
-        get => reportData;
+        get;
         set
         {
-            reportData = value;
+            field = value;
             flowDocument.DataContext = value;
         }
     }

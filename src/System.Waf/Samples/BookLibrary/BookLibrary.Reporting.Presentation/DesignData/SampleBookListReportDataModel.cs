@@ -5,8 +5,8 @@ namespace Waf.BookLibrary.Reporting.Presentation.DesignData;
 
 public class SampleBookListReportDataModel : BookListReportDataModel
 {
-    public SampleBookListReportDataModel() : base(new List<Book>
-        {
+    public SampleBookListReportDataModel() : base(
+        [
             new()
             {
                 Title = "Serenity, Vol 1: Those Left Behind",
@@ -30,7 +30,7 @@ public class SampleBookListReportDataModel : BookListReportDataModel
                 Author = "J.R.R. Tolkien",
                 PublishDate = new DateTime(1986, 12, 8)
             },
-        })
+        ])
     {
     }
 }
