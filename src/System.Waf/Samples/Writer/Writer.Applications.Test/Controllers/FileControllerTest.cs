@@ -44,14 +44,14 @@ public class FileControllerTest : ApplicationsTest
         Assert.IsNull(fileService.ActiveDocument);
 
         var document = fileController.New(documentType);
-        AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
+        AssertHelper.SequenceEqual([document], fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
 
         AssertHelper.ExpectedException<ArgumentNullException>(() => fileController.New(null!));
         AssertHelper.ExpectedException<ArgumentException>(() => fileController.New(new MockRichTextDocumentType()));
 
         AssertHelper.PropertyChangedEvent(fileService, x => x.ActiveDocument, () => fileService.ActiveDocument = null);
-        Assert.AreEqual(null, fileService.ActiveDocument);
+        Assert.IsNull(fileService.ActiveDocument);
 
         AssertHelper.ExpectedException<ArgumentException>(() => fileService.ActiveDocument = documentType.New());
     }
@@ -80,14 +80,14 @@ public class FileControllerTest : ApplicationsTest
         var document = fileService.Documents[^1];
         Assert.AreEqual("Document1.rtf", document.FileName);
 
-        AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
+        AssertHelper.SequenceEqual([document], fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
 
         // Open the same file again -> It's not opened again, just activated.
 
         fileService.ActiveDocument = null;
         fileService.OpenCommand.Execute("Document1.rtf");
-        AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
+        AssertHelper.SequenceEqual([document], fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
 
         // Now the user cancels the OpenFileDialog box
@@ -97,7 +97,7 @@ public class FileControllerTest : ApplicationsTest
         fileService.OpenCommand.Execute(null);
         Assert.AreEqual(documentsCount, fileService.Documents.Count);
 
-        AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
+        AssertHelper.SequenceEqual([document], fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
     }
 
@@ -115,7 +115,7 @@ public class FileControllerTest : ApplicationsTest
         var document = fileService.Documents[^1];
         Assert.AreEqual("Document1.rtf", document.FileName);
 
-        AssertHelper.SequenceEqual(new[] { document }, fileService.Documents);
+        AssertHelper.SequenceEqual([document], fileService.Documents);
         Assert.AreEqual(document, fileService.ActiveDocument);
 
         // Call open with a fileName that has an invalid extension
@@ -246,8 +246,8 @@ public class FileControllerTest : ApplicationsTest
 
         var saveAsMethod = typeof(FileController).GetMethod("SaveAs", BindingFlags.Instance | BindingFlags.NonPublic)!;
         var document = fileController.New(documentType);
-        var exception = AssertHelper.ExpectedException<TargetInvocationException>(() => saveAsMethod.Invoke(fileController, new[] { document }));
-        Assert.IsInstanceOfType(exception.InnerException, typeof(InvalidOperationException));
+        var exception = AssertHelper.ExpectedException<TargetInvocationException>(() => saveAsMethod.Invoke(fileController, [document]));
+        Assert.IsInstanceOfType<InvalidOperationException>(exception.InnerException);
     }
 
     [TestMethod]

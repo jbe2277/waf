@@ -5,37 +5,20 @@ namespace Waf.Writer.Applications.Services;
 
 internal class ShellService : Model, IShellService
 {
-    private string? documentName;
-    private IEditingCommands activeEditingCommands;
-    private IZoomCommands activeZoomCommands;
-
     public ShellService()
     {
-        activeEditingCommands = new DisabledEditingCommands();
-        activeZoomCommands = new DisabledZoomCommands();
+        ActiveEditingCommands = new DisabledEditingCommands();
+        ActiveZoomCommands = new DisabledZoomCommands();
     }
 
     public object ShellView { get; set; } = null!;
 
-    public string? DocumentName
-    {
-        get => documentName;
-        set => SetProperty(ref documentName, value);
-    }
+    public string? DocumentName { get; set => SetProperty(ref field, value); }
+
+    [AllowNull] public IEditingCommands ActiveEditingCommands { get; set => SetProperty(ref field, value ?? new DisabledEditingCommands()); }
 
     [AllowNull]
-    public IEditingCommands ActiveEditingCommands
-    {
-        get => activeEditingCommands;
-        set => SetProperty(ref activeEditingCommands, value ?? new DisabledEditingCommands());
-    }
-
-    [AllowNull]
-    public IZoomCommands ActiveZoomCommands
-    {
-        get => activeZoomCommands;
-        set => SetProperty(ref activeZoomCommands, value ?? new DisabledZoomCommands());
-    }
+    public IZoomCommands ActiveZoomCommands { get; set => SetProperty(ref field, value ?? new DisabledZoomCommands()); }
 
 
     private sealed class DisabledEditingCommands : Model, IEditingCommands

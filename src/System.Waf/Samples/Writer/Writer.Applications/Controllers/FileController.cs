@@ -33,7 +33,7 @@ internal class FileController
         this.shellService = shellService;
         this.fileService = fileService;
         this.saveChangesViewModelFactory = saveChangesViewModelFactory;
-        documentTypes = [ richTextDocumentType, xpsExportDocumentType ];
+        documentTypes = [richTextDocumentType, xpsExportDocumentType];
         fileService.NewCommand = new DelegateCommand(NewCommand);
         fileService.OpenCommand = new DelegateCommand(OpenCommand);
         fileService.CloseCommand = closeCommand = new(CloseCommand, CanCloseCommand);
@@ -94,9 +94,9 @@ internal class FileController
     {
         if (e.PropertyName == nameof(IFileService.ActiveDocument))
         {
-            if (lastActiveDocument != null) lastActiveDocument.PropertyChanged -= ActiveDocumentPropertyChanged;
+            lastActiveDocument?.PropertyChanged -= ActiveDocumentPropertyChanged;
             lastActiveDocument = fileService.ActiveDocument;
-            if (lastActiveDocument != null) lastActiveDocument.PropertyChanged += ActiveDocumentPropertyChanged;
+            lastActiveDocument?.PropertyChanged += ActiveDocumentPropertyChanged;
             UpdateCommands();
         }
     }

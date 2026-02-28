@@ -9,7 +9,6 @@ public class MainViewModel : ViewModel<IMainView>
 {
     private readonly IShellService shellService;
     private IDocument? activeDocument;
-    private object? activeDocumentView;
 
     public MainViewModel(IMainView view, IShellService shellService, IFileService fileService) : base(view)
     {
@@ -25,11 +24,7 @@ public class MainViewModel : ViewModel<IMainView>
 
     public ObservableList<object> DocumentViews { get; } = [];
 
-    public object? ActiveDocumentView
-    {
-        get => activeDocumentView;
-        set => SetProperty(ref activeDocumentView, value);
-    }
+    public object? ActiveDocumentView { get; set => SetProperty(ref field, value); }
 
     private void DocumentViewsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
@@ -40,9 +35,9 @@ public class MainViewModel : ViewModel<IMainView>
     {
         if (e.PropertyName == nameof(IFileService.ActiveDocument))
         {
-            if (activeDocument != null) activeDocument.PropertyChanged -= ActiveDocumentPropertyChanged;
+            activeDocument?.PropertyChanged -= ActiveDocumentPropertyChanged;
             activeDocument = FileService.ActiveDocument;
-            if (activeDocument != null) activeDocument.PropertyChanged += ActiveDocumentPropertyChanged;
+            activeDocument?.PropertyChanged += ActiveDocumentPropertyChanged;
             UpdateShellServiceDocumentName();
         }
     }

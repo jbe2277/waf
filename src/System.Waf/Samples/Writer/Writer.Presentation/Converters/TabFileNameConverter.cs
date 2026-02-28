@@ -21,7 +21,7 @@ public class TabFileNameConverter : IMultiValueConverter
         string fileName = Path.GetFileName((string)values[0]!);
         if (fileName.Length > MaxCharacters)
         {
-            fileName = fileName.Remove(MaxCharacters - 3) + "...";
+            fileName = fileName[..(MaxCharacters - 3)] + "...";
         }
 
         bool modified = (bool)values[1]!;

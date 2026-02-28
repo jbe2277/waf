@@ -12,8 +12,6 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
     private readonly DelegateCommand zoomInCommand;
     private readonly DelegateCommand zoomOutCommand;
     private readonly DelegateCommand fitToWidthCommand;
-    private bool isVisible;
-    private double zoom;
 
     protected ZoomViewModel(T view, IShellService shellService) : base(view)
     {
@@ -22,7 +20,6 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
         zoomInCommand = new DelegateCommand(ZoomIn, CanZoomIn);
         zoomOutCommand = new DelegateCommand(ZoomOut, CanZoomOut);
         fitToWidthCommand = new DelegateCommand(FitToWidth);
-        zoom = 1;
     }
 
     public IReadOnlyList<string> DefaultZooms { get; }
@@ -35,26 +32,26 @@ public abstract class ZoomViewModel<T> : ViewModel<T>, IZoomCommands where T : I
 
     public bool IsVisible
     {
-        get => isVisible;
+        get;
         set
         {
-            if (!SetProperty(ref isVisible, value)) return;
-            ShellService.ActiveZoomCommands = isVisible ? this : null;
+            if (!SetProperty(ref field, value)) return;
+            ShellService.ActiveZoomCommands = field ? this : null;
         }
     }
 
     public double Zoom
     {
-        get => zoom;
+        get;
         set
         {
-            if (zoom == value) return;
-            zoom = Math.Max(value, minZoom);
-            zoom = Math.Min(zoom, maxZoom);
+            if (field == value) return;
+            field = Math.Max(value, minZoom);
+            field = Math.Min(field, maxZoom);
             RaisePropertyChanged();
             DelegateCommand.RaiseCanExecuteChanged(zoomInCommand, zoomOutCommand);
         }
-    }
+    } = 1;
 
     protected IShellService ShellService { get; }
 

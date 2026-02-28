@@ -8,9 +8,7 @@ public class MockShellService : Model, IShellService
 
     public string? DocumentName { get; set; } = "Document 1";
 
-    [AllowNull]
-    public IEditingCommands ActiveEditingCommands { get; set; } = null!;
+    [AllowNull] public IEditingCommands ActiveEditingCommands { get; set; } = null!;
 
-    [AllowNull]
-    public IZoomCommands ActiveZoomCommands { get; set; } = null!;
+    [AllowNull] public IZoomCommands ActiveZoomCommands { get; set; } = null!;
 }

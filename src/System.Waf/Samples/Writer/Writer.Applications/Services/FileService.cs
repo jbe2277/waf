@@ -7,7 +7,6 @@ namespace Waf.Writer.Applications.Services;
 internal class FileService : Model, IFileService
 {
     private readonly ObservableList<IDocument> documents = [];
-    private IDocument? activeDocument;
 
     public FileService()
     {
@@ -18,12 +17,12 @@ internal class FileService : Model, IFileService
 
     public IDocument? ActiveDocument
     {
-        get => activeDocument;
+        get;
         set
         {
-            if (activeDocument == value) return;
+            if (field == value) return;
             if (value != null && !documents.Contains(value)) throw new ArgumentException("value is not an item of the Documents collection.");
-            activeDocument = value;
+            field = value;
             RaisePropertyChanged();
         }
     }

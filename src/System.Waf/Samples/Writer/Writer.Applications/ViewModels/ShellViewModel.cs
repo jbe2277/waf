@@ -12,8 +12,6 @@ public class ShellViewModel : ViewModel<IShellView>
 {
     private readonly IMessageService messageService;
     private readonly AppSettings settings;
-    private object contentView = null!;
-    private bool isPrintPreviewVisible;
 
     public ShellViewModel(IShellView view, IMessageService messageService, IShellService shellService, IFileService fileService, ISettingsService settingsService) : base(view)
     {
@@ -62,17 +60,9 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public ICommand ExitCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-    public object ContentView
-    {
-        get => contentView;
-        set => SetProperty(ref contentView, value);
-    }
+    public object ContentView { get; set => SetProperty(ref field, value); } = null!;
 
-    public bool IsPrintPreviewVisible
-    {
-        get => isPrintPreviewVisible;
-        set => SetProperty(ref isPrintPreviewVisible, value);
-    }
+    public bool IsPrintPreviewVisible { get; set => SetProperty(ref field, value); }
 
     public event CancelEventHandler? Closing;
 

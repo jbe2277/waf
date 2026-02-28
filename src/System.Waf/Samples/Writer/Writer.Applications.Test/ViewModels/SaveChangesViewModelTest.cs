@@ -40,14 +40,14 @@ public class SaveChangesViewModelTest
             viewModel.YesCommand.Execute(null);
         };
         dialogResult = viewModel.ShowDialog(owner);
-        Assert.AreEqual(true, dialogResult);
+        Assert.IsTrue(dialogResult);
 
         MockSaveChangesView.ShowDialogAction = _ =>
         {
             viewModel.NoCommand.Execute(null);
         };
         dialogResult = viewModel.ShowDialog(owner);
-        Assert.AreEqual(false, dialogResult);
+        Assert.IsFalse(dialogResult);
 
         MockSaveChangesView.ShowDialogAction = null;
     }

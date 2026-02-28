@@ -5,15 +5,10 @@ using System.IO;
 
 namespace Waf.Writer.Presentation.Services;
 
-public class RichTextDocument : Document, IRichTextDocument
+public class RichTextDocument(IRichTextDocumentType documentType, FlowDocument? content = null) : Document(documentType), IRichTextDocument
 {
-    public RichTextDocument(IRichTextDocumentType documentType, FlowDocument? content = null) : base(documentType)
-    {
-        Content = content ?? new FlowDocument();
-    }
+    public FlowDocument Content { get; } = content ?? new FlowDocument();
 
-    public FlowDocument Content { get; }
-    
     object IRichTextDocument.Content => Content;
 
     public FlowDocument CloneContent()

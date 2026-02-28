@@ -1,5 +1,4 @@
-﻿using Waf.Writer.Applications.Documents;
-using Waf.Writer.Applications.ViewModels;
+﻿using Waf.Writer.Applications.ViewModels;
 using Waf.Writer.Applications.Views;
 using Waf.Writer.Presentation.Services;
 
@@ -9,11 +8,11 @@ public class SampleSaveChangesViewModel : SaveChangesViewModel
 {
     public SampleSaveChangesViewModel() : base(new MockSaveChangesView())
     {
-        Documents = new List<IDocument>
-        {
+        Documents =
+        [
             new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\Document 1.rtf" },
             new RichTextDocument(new RichTextDocumentType()) { FileName = @"C:\Users\Admin\My Documents\WAF Writer\Readme.rtf" }
-        };
+        ];
     }
 
     private sealed class MockSaveChangesView : ISaveChangesView

@@ -21,7 +21,5 @@ public sealed class AppSettings : UserSettingsBase
 
     [DataMember] public RecentFileList? RecentFileList { get; set; }
 
-    protected override void SetDefaultValues() 
-    {
-    }
+    protected override void SetDefaultValues() { }
 }

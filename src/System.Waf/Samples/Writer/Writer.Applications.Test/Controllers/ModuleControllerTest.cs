@@ -81,7 +81,7 @@ public class ModuleControllerTest : ApplicationsTest
         MockSaveChangesView.ShowDialogAction = view =>
         {
             showDialogCalled = true;
-            AssertHelper.SequenceEqual(new[] { richTextViewModel.Document }, view.ViewModel.Documents);
+            AssertHelper.SequenceEqual([richTextViewModel.Document], view.ViewModel.Documents);
             view.Close();
         };
 

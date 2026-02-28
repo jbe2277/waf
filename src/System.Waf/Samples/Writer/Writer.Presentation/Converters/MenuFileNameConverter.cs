@@ -14,7 +14,7 @@ public class MenuFileNameConverter : IValueConverter
     {
         if (value is not string fileName || string.IsNullOrEmpty(fileName)) return "";
         fileName = Path.GetFileName(fileName);
-        return fileName.Length <= MaxCharacters ? fileName : fileName.Remove(MaxCharacters - 3) + "...";
+        return fileName.Length <= MaxCharacters ? fileName : fileName[..(MaxCharacters - 3)] + "...";
     }
 
     public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture) => throw new NotSupportedException();
