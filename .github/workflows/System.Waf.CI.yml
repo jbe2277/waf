@@ -29,7 +29,8 @@ jobs:
     - name: 🕵️ Test
       run: |
         echo "## 🕵️ Test Results - System.Waf.slnx" >> $Env:GITHUB_STEP_SUMMARY
-        dotnet test ./src/System.Waf/System.Waf.slnx -c Release --no-build --logger GitHubActions
+        cd ./src/System.Waf
+        dotnet test --solution ./System.Waf.slnx
 
     - name: 📦 Upload NuGet Packages
       uses: actions/upload-artifact@v4
