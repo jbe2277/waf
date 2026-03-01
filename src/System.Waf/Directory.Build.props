@@ -19,6 +19,9 @@
         <PackageReference Include="GitHubActionsTestLogger" />
         <PackageReference Include="MSTest" />
       </ItemGroup>
+      <ItemGroup Condition="!$(TargetFramework.StartsWith(net4))">
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+      </ItemGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
