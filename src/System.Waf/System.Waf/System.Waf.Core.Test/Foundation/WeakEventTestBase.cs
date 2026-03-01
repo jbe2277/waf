@@ -24,7 +24,7 @@ namespace Test.Waf.Foundation
         int HandlerCallCount { get; }
     }
 
-    public class WeakEventTestBase<TManager, TPublisher, TSubscriber>
+    public abstract class WeakEventTestBase<TManager, TPublisher, TSubscriber>
         where TManager : class, IManager<TPublisher, TSubscriber>, new()
         where TPublisher : class, IPublisher, new()
         where TSubscriber : class, ISubscriber, new()
