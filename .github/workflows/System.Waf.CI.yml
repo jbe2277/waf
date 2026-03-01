@@ -30,7 +30,8 @@ jobs:
       run: |
         echo "## 🕵️ Test Results - System.Waf.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/System.Waf
-        dotnet test --solution ./System.Waf.slnx
+        dotnet test --solution ./System.Waf.slnx --ignore-exit-code 8
+      # Ignore exit code 8 - test session ran zero tests; https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-exit-codes
 
     - name: 📦 Upload NuGet Packages
       uses: actions/upload-artifact@v4
