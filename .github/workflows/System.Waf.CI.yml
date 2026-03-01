@@ -50,8 +50,10 @@ jobs:
 
     - name: 🕵️ Code Coverage
       run: |
-        dotnet tool exec -y dotnet-coverage -- merge --output ./out/CodeCoverage/System.Waf.cobertura.xml --output-format cobertura "./src/**/TestResults/**/*.coverage"
-        dotnet tool exec -y dotnet-reportgenerator-globaltool -- -reports:./out/CodeCoverage/System.Waf.cobertura.xml -targetdir:./out/CodeCoverage -reporttypes:"MarkdownSummaryGithub"
+        dotnet tool update -g dotnet-coverage
+        dotnet-coverage merge --output ./out/CodeCoverage/System.Waf.cobertura.xml --output-format cobertura "./src/**/TestResults/**/*.coverage"
+        dotnet tool update -g dotnet-reportgenerator-globaltool
+        reportgenerator -reports:./out/CodeCoverage/System.Waf.cobertura.xml -targetdir:./out/CodeCoverage -reporttypes:"MarkdownSummaryGithub"
         echo "## 🕵️ Code Coverage" >> $Env:GITHUB_STEP_SUMMARY
         cat ./out/CodeCoverage/SummaryGithub.md >> $Env:GITHUB_STEP_SUMMARY
         
