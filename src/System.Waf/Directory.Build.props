@@ -12,12 +12,8 @@
 
   <Choose>
     <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
-      <PropertyGroup>
-        <IsPackable>false</IsPackable>
-      </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="GitHubActionsTestLogger" />
-        <PackageReference Include="MSTest" />
       </ItemGroup>
       <ItemGroup Condition="!$(TargetFramework.StartsWith(net4))">
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />

@@ -19,7 +19,6 @@
     
     <!-- Unit tests -->
     <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.1" />
-    <PackageVersion Include="MSTest" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
