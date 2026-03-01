@@ -13,22 +13,22 @@ namespace Test.Waf.UnitTesting
             AssertHelper.ExpectedException<ArgumentNullException>(ThrowsArgumentNullException);
         }
 
-        [TestMethod, ExpectedException(typeof(AssertException))]
+        [TestMethod]
         public void ExpectedExceptionTest2()
         {
-            AssertHelper.ExpectedException<ArgumentException>(ThrowsArgumentNullException);
+            Assert.ThrowsExactly<AssertException>(() => AssertHelper.ExpectedException<ArgumentException>(ThrowsArgumentNullException));
         }
 
-        [TestMethod, ExpectedException(typeof(AssertException))]
+        [TestMethod]
         public void ExpectedExceptionTest3()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(DoNothing);
+            Assert.ThrowsExactly<AssertException>(() => AssertHelper.ExpectedException<ArgumentNullException>(DoNothing));
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
         public void ExpectedExceptionTest4()
         {
-            AssertHelper.ExpectedException<InvalidOperationException>(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => AssertHelper.ExpectedException<InvalidOperationException>(null!));
         }
 
         private static void ThrowsArgumentNullException()

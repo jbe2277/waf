@@ -18,10 +18,8 @@
     <PackageVersion Include="NLog" Version="5.5.1" />
     
     <!-- Unit tests -->
-    <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="3.9.3" />
-    <PackageVersion Include="MSTest.TestFramework" Version="3.9.3" />
+    <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.1" />
+    <PackageVersion Include="MSTest" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>

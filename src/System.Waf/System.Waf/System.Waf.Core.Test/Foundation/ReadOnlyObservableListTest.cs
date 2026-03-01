@@ -25,7 +25,7 @@ namespace Test.Waf.Foundation
             int countPropertyChangedCalled = 0;
             
             if (supportsCollectionChanging) readOnlyList.CollectionChanging += CollectionChangingHandler;
-            else Assert.ThrowsException<NotSupportedException>(() => readOnlyList.CollectionChanging += CollectionChangingHandler);
+            else Assert.ThrowsExactly<NotSupportedException>(() => readOnlyList.CollectionChanging += CollectionChangingHandler);
             readOnlyList.CollectionChanged += CollectionChangedHandler;
             readOnlyList.PropertyChanged += PropertyChangedHandler;
             list.Add("Hello");

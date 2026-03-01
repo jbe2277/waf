@@ -14,13 +14,10 @@
     <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
       <PropertyGroup>
         <IsPackable>false</IsPackable>
-        <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
       </PropertyGroup>
       <ItemGroup>
-        <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" />
-        <PackageReference Include="MSTest.TestAdapter" />
-        <PackageReference Include="MSTest.TestFramework" />
+        <PackageReference Include="GitHubActionsTestLogger" />
+        <PackageReference Include="MSTest" />
       </ItemGroup>
     </When>
     <Otherwise>
