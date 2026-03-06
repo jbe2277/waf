@@ -9,10 +9,6 @@ namespace Waf.NewsReader.Applications.ViewModels;
 
 public class ShellViewModel(IShellView view, IAppInfoService appInfoService) : ViewModelCore<IShellView>(view, false), INavigationService
 {
-    private NavigationItem? selectedFooterMenu;
-    private ObservableList<Feed> feeds = null!;
-    private Feed? selectedFeed;
-    private object? currentPage;
     private bool suppressSelectedFooterMenuCommand;
     private bool suppressSelectedFeedCommand;
 
@@ -26,34 +22,34 @@ public class ShellViewModel(IShellView view, IAppInfoService appInfoService) : V
 
     public IReadOnlyList<NavigationItem> FooterMenu { get; internal set; } = null!;
 
-    public object? CurrentPage { get => currentPage; private set => SetProperty(ref currentPage, value); }
+    public object? CurrentPage { get; private set => SetProperty(ref field, value); }
 
     public NavigationItem? SelectedFooterMenu
     {
-        get => selectedFooterMenu;
+        get;
         set
         {
-            if (!SetProperty(ref selectedFooterMenu, value)) return;
-            if (selectedFooterMenu is not null)
+            if (!SetProperty(ref field, value)) return;
+            if (field is not null)
             {
                 SelectedFeed = null;
-                if (!suppressSelectedFooterMenuCommand) selectedFooterMenu.Command?.Execute(null);
+                if (!suppressSelectedFooterMenuCommand) field.Command?.Execute(null);
             }
         }
     }
 
-    public ObservableList<Feed> Feeds { get => feeds; internal set => SetProperty(ref feeds, value); }
+    public ObservableList<Feed> Feeds { get; internal set => SetProperty(ref field, value); } = null!;
 
     public Feed? SelectedFeed
     {
-        get => selectedFeed;
+        get;
         set
         {
-            if (!SetProperty(ref selectedFeed, value)) return;
-            if (selectedFeed is not null)
+            if (!SetProperty(ref field, value)) return;
+            if (field is not null)
             {
                 SelectedFooterMenu = null;
-                if (!suppressSelectedFeedCommand) ShowFeedViewCommand.Execute(selectedFeed);
+                if (!suppressSelectedFeedCommand) ShowFeedViewCommand.Execute(field);
             }
         }
     }

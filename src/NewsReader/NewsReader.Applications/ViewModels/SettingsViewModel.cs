@@ -13,11 +13,8 @@ public class SettingsViewModel(ISettingsView view) : ViewModelCore<ISettingsView
 {
     private DisplayItemLifetime selectedItemLifetime;
     private DisplayMaxItemsLimit selectedMaxItemsLimit;
-    private FeedManager feedManager = null!;
     private bool setSelectedItemLifetimeRunning;
     private bool setSelectedMaxItemsLimitRunning;
-    private bool developerSettingsEnabled;
-    private string selectedLanguage = null!;
 
     public required IAppInfoService AppInfo { get; init; }
 
@@ -39,11 +36,11 @@ public class SettingsViewModel(ISettingsView view) : ViewModelCore<ISettingsView
 
     public ICommand EnableDeveloperSettingsCommand { get; set; } = null!;
 
-    public bool DeveloperSettingsEnabled { get => developerSettingsEnabled; set => SetProperty(ref developerSettingsEnabled, value); }
+    public bool DeveloperSettingsEnabled { get; set => SetProperty(ref field, value); }
 
     public IReadOnlyList<string> Languages { get; set; } = null!;
 
-    public string SelectedLanguage { get => selectedLanguage; set => SetProperty(ref selectedLanguage, value); }
+    public string SelectedLanguage { get; set => SetProperty(ref field, value); } = null!;
 
     public string UICulture => CultureInfo.CurrentUICulture.ToString();
 
@@ -55,14 +52,14 @@ public class SettingsViewModel(ISettingsView view) : ViewModelCore<ISettingsView
 
     internal FeedManager FeedManager
     {
-        get => feedManager;
+        get;
         set
         {
-            feedManager = value;
-            selectedItemLifetime = DisplayItemLifetimeHelper.FromValue(feedManager.ItemLifetime);
-            selectedMaxItemsLimit = DisplayMaxItemsLimitHelper.FromValue(feedManager.MaxItemsLimit);
+            field = value;
+            selectedItemLifetime = DisplayItemLifetimeHelper.FromValue(field.ItemLifetime);
+            selectedMaxItemsLimit = DisplayMaxItemsLimitHelper.FromValue(field.MaxItemsLimit);
         }
-    }
+    } = null!;
 
     private async void SetSelectedItemLifetime(DisplayItemLifetime value)
     {

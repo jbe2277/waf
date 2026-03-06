@@ -45,13 +45,13 @@ public class FeedManager : Model, IDataManager
 
     private void FeedsCollectionChanging(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? feeds : e.OldItems?.Cast<Feed>() ?? Array.Empty<Feed>();
+        var oldItems = e.Action == NotifyCollectionChangedAction.Reset ? feeds : e.OldItems?.Cast<Feed>() ?? [];
         foreach (var x in oldItems) x.DataManager = null;        
     }
 
     private void FeedsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        foreach (var x in e.NewItems?.Cast<Feed>() ?? Array.Empty<Feed>()) x.DataManager = this;
+        foreach (var x in e.NewItems?.Cast<Feed>() ?? []) x.DataManager = this;
     }
 
     [OnDeserialized] private void OnDeserialized(StreamingContext context) => Initialize();

@@ -8,18 +8,17 @@ namespace Test.NewsReader.Applications.Views;
 public class MockShellView : MockView, IShellView
 {
     private readonly Stack<object> pageStack = new();
-    private object currentPage = null!;
 
     public object CurrentPage 
     { 
-        get => currentPage;
+        get;
         private set
         {
-            currentPage = value;
+            field = value;
             ((ShellViewModel)DataContext!).InternalSetCurrentPage(CurrentPage);
         }
-    }
-    
+    } = null!;
+
     public Task PushAsync(object page) { pageStack.Push(page); CurrentPage = page; return Task.CompletedTask; }
 
     public Task PopAsync() { CurrentPage = pageStack.Pop(); return Task.CompletedTask; }

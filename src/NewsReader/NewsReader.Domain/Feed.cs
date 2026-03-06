@@ -55,7 +55,7 @@ public class Feed : ValidatableModel
         set
         {
             if (dataManager == value) return;
-            if (dataManager != null) dataManager.PropertyChanged -= DataManagerPropertyChanged;
+            dataManager?.PropertyChanged -= DataManagerPropertyChanged;
             dataManager = value;
             if (dataManager != null)
             {

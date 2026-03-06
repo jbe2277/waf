@@ -8,11 +8,6 @@ namespace Waf.NewsReader.Applications.ViewModels;
 public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
 {
     private readonly DelegateCommand useTitleAsNameCommand;
-    private bool isEditMode;
-    private string? feedUrl;
-    private Feed? oldFeed;
-    private Feed? feed;
-    private string? loadErrorMessage;
 
     public AddEditFeedViewModel(IAddEditFeedView view) : base(view, false)
     {
@@ -27,34 +22,34 @@ public class AddEditFeedViewModel : ViewModelCore<IAddEditFeedView>
 
     public event PropertyChangedEventHandler? FeedChanged;
 
-    public bool IsEditMode { get => isEditMode; set => SetProperty(ref isEditMode, value); }
+    public bool IsEditMode { get; set => SetProperty(ref field, value); }
 
     public string? FeedUrl
     {
-        get => feedUrl;
+        get;
         set
         {
-            if (!SetProperty(ref feedUrl, value)) return;
+            if (!SetProperty(ref field, value)) return;
             Feed = null;
             LoadErrorMessage = null;
         }
     }
 
-    public Feed? OldFeed { get => oldFeed; set => SetProperty(ref oldFeed, value); }
+    public Feed? OldFeed { get; set => SetProperty(ref field, value); }
 
     public Feed? Feed
     {
-        get => feed;
+        get;
         set
         {
-            var oldFeed = feed;
-            if (!SetProperty(ref feed, value)) return;
-            if (oldFeed != null) oldFeed.PropertyChanged -= FeedPropertyChanged;
-            if (feed != null) feed.PropertyChanged += FeedPropertyChanged;
+            var oldFeed = field;
+            if (!SetProperty(ref field, value)) return;
+            oldFeed?.PropertyChanged -= FeedPropertyChanged;
+            field?.PropertyChanged += FeedPropertyChanged;
         }
     }
 
-    public string? LoadErrorMessage { get => loadErrorMessage; set => SetProperty(ref loadErrorMessage, value); }
+    public string? LoadErrorMessage { get; set => SetProperty(ref field, value); }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {

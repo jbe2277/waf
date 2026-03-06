@@ -4,15 +4,13 @@ namespace Waf.NewsReader.Presentation.Services;
 
 public class NetworkInfoService : Model, INetworkInfoService
 {
-    private bool internetAccess;
-
     public NetworkInfoService()
     {
         Connectivity.ConnectivityChanged += ConnectivityChanged;
-        internetAccess = Connectivity.NetworkAccess == NetworkAccess.Internet;
+        InternetAccess = Connectivity.NetworkAccess == NetworkAccess.Internet;
     }
 
-    public bool InternetAccess { get => internetAccess; set => SetProperty(ref internetAccess, value); }
+    public bool InternetAccess { get; set => SetProperty(ref field, value); }
 
     private void ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {

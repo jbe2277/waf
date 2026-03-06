@@ -4,16 +4,10 @@ using System.Security.Authentication;
 
 namespace Waf.NewsReader.Presentation.Services;
 
-internal sealed class MsalAuthorizationHandler : DelegatingHandler
+internal sealed class MsalAuthorizationHandler(IPublicClientApplication client, string[] scopes) : DelegatingHandler
 {
-    private readonly IPublicClientApplication client;
-    private readonly string[] scopes;
-
-    public MsalAuthorizationHandler(IPublicClientApplication client, string[] scopes)
-    {
-        this.client = client;
-        this.scopes = scopes;
-    }
+    private readonly IPublicClientApplication client = client;
+    private readonly string[] scopes = scopes;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {

@@ -7,9 +7,7 @@ namespace Waf.NewsReader.Applications.ViewModels;
 
 public class FeedItemViewModel(IFeedItemView view) : ViewModelCore<IFeedItemView>(view, false)
 {
-    private FeedItem? feedItem;
-
     public ICommand LaunchBrowserCommand { get; set; } = null!;
 
-    public FeedItem? FeedItem { get => feedItem; set => SetProperty(ref feedItem, value); }
+    public FeedItem? FeedItem { get; set => SetProperty(ref field, value); }
 }

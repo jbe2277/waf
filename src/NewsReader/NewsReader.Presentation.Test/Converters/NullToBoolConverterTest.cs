@@ -1,7 +1,7 @@
 ﻿using Waf.NewsReader.Presentation.Converters;
 using Xunit;
 
-namespace Test.Presentation.Converters;
+namespace Test.NewsReader.Presentation.Converters;
 
 public class NullToBoolConverterTest
 {

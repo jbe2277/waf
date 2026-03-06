@@ -4,9 +4,6 @@ namespace Waf.NewsReader.Applications.DataModels;
 
 public class NavigationItem(string title, string iconGlyph, string automationId) : Model
 {
-    private ICommand? command;
-    private bool isCommandEnabled;
-
     public string Title { get => title; set => SetProperty(ref title, value); }
 
     public string IconGlyph { get => iconGlyph; set => SetProperty(ref iconGlyph, value); }
@@ -15,20 +12,20 @@ public class NavigationItem(string title, string iconGlyph, string automationId)
 
     public ICommand? Command
     {
-        get => command;
+        get;
         set
         {
-            var oldCommand = command;
-            if (SetProperty(ref command, value))
+            var oldCommand = field;
+            if (SetProperty(ref field, value))
             {
-                if (oldCommand != null) oldCommand.CanExecuteChanged -= CommandCanExecuteChanged;
-                if (command != null) command.CanExecuteChanged += CommandCanExecuteChanged;
-                IsCommandEnabled = command?.CanExecute(null) ?? false;
+                oldCommand?.CanExecuteChanged -= CommandCanExecuteChanged;
+                field?.CanExecuteChanged += CommandCanExecuteChanged;
+                IsCommandEnabled = field?.CanExecute(null) ?? false;
             }
         }
     }
 
-    public bool IsCommandEnabled { get => isCommandEnabled; set => SetProperty(ref isCommandEnabled, value); }
+    public bool IsCommandEnabled { get; set => SetProperty(ref field, value); }
 
-    private void CommandCanExecuteChanged(object? sender, EventArgs e) => IsCommandEnabled = command?.CanExecute(null) ?? false;
+    private void CommandCanExecuteChanged(object? sender, EventArgs e) => IsCommandEnabled = Command?.CanExecute(null) ?? false;
 }

@@ -4,9 +4,7 @@ namespace Test.NewsReader.Applications.Services;
 
 public class MockWebStorageService : Model, IWebStorageService
 {
-    private UserAccount? currentAccount;
-
-    public UserAccount? CurrentAccount { get => currentAccount; set => SetProperty(ref currentAccount, value); }
+    public UserAccount? CurrentAccount { get; set => SetProperty(ref field, value); }
 
     public Task<(Stream? stream, string? cTag)> DownloadFile(string? cTag) => throw new NotImplementedException();
 

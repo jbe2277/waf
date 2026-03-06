@@ -15,7 +15,7 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
 
     public ObservableGroupedListView(IEnumerable<TElement> originalList, Func<IEnumerable<TElement>, IEnumerable<IGrouping<TKey, TElement>>> createGrouping,
         IEqualityComparer<TKey>? keyComparer, IEqualityComparer<TElement>? elementComparer)
-        : base(new List<ObservableGroupingView<TKey, TElement>>())
+        : base([])
     {
         this.originalList = originalList;
         this.createGrouping = createGrouping;
@@ -23,7 +23,7 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
         this.elementComparer = elementComparer ?? EqualityComparer<TElement>.Default;
         InnerList.AddRange(CreateGroupingList());
         originalObservableCollection = originalList as INotifyCollectionChanged;
-        if (originalObservableCollection != null) originalObservableCollection.CollectionChanged += OriginalCollectionChanged;
+        originalObservableCollection?.CollectionChanged += OriginalCollectionChanged;
     }
 
     public Predicate<TElement>? Filter
@@ -52,7 +52,7 @@ public class ObservableGroupedListView<TKey, TElement> : ObservableListViewBase<
         OnDispose(disposing);
         if (disposing)
         {
-            if (originalObservableCollection != null) originalObservableCollection.CollectionChanged -= OriginalCollectionChanged;
+            originalObservableCollection?.CollectionChanged -= OriginalCollectionChanged;
         }
     }
 

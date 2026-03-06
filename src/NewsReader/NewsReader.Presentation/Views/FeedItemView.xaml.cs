@@ -65,10 +65,7 @@ public partial class FeedItemView : IFeedItemView
         try
         {
             await delayTask;
-            if (viewModel.FeedItem != null)
-            {
-                viewModel.FeedItem.MarkAsRead = true;
-            }
+            viewModel.FeedItem?.MarkAsRead = true;
         }
         catch (OperationCanceledException) { }
     }

@@ -9,8 +9,6 @@ namespace Waf.NewsReader.Applications.ViewModels;
 public class FeedViewModel : ViewModelCore<IFeedView>
 {
     private readonly ThrottledAction updateSearchAction;
-    private Feed? feed;
-    private string searchText = "";
 
     public FeedViewModel(IFeedView view) : base(view, false)
     {
@@ -28,10 +26,10 @@ public class FeedViewModel : ViewModelCore<IFeedView>
 
     public Feed? Feed
     {
-        get => feed;
+        get;
         set
         {
-            if (!SetProperty(ref feed, value)) return;
+            if (!SetProperty(ref field, value)) return;
             SearchText = "";
             UpdateItemsListView();
         }
@@ -39,13 +37,13 @@ public class FeedViewModel : ViewModelCore<IFeedView>
 
     public string SearchText
     {
-        get => searchText;
+        get;
         set
         {
-            if (!SetProperty(ref searchText, value)) return;
+            if (!SetProperty(ref field, value)) return;
             updateSearchAction.InvokeAccumulated();
         }
-    }
+    } = "";
 
     private void UpdateSearch() => ItemsListView.Refresh();
 
