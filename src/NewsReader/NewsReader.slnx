@@ -3,6 +3,7 @@
     <File Path="../.editorconfig" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
   </Folder>
   <Project Path="NewsReader.Applications.Test/NewsReader.Applications.Test.csproj" />
   <Project Path="NewsReader.Applications/NewsReader.Applications.csproj" />
