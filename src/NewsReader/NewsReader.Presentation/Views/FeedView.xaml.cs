@@ -25,7 +25,7 @@ public partial class FeedView : IFeedView
         viewModel.SearchText = "";
     }
 
-    private void SearchClicked(object sender, EventArgs e)
+    private void SearchClicked(object? sender, EventArgs e)
     {
         searchBar.IsVisible = !searchBar.IsVisible;
         if (searchBar.IsVisible) searchBar.Focus();

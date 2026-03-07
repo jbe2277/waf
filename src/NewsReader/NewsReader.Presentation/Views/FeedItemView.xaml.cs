@@ -45,7 +45,7 @@ public partial class FeedItemView : IFeedItemView
         else return base.OnBackButtonPressed();
     }
 
-    private async void WebViewNavigating(object sender, WebNavigatingEventArgs e)
+    private async void WebViewNavigating(object? sender, WebNavigatingEventArgs e)
     {
         webViewNavigated = new();
         activityIndicator.IsVisible = true;
@@ -70,5 +70,5 @@ public partial class FeedItemView : IFeedItemView
         catch (OperationCanceledException) { }
     }
 
-    private void WebViewNavigated(object sender, WebNavigatedEventArgs e) => webViewNavigated?.TrySetResult(null);
+    private void WebViewNavigated(object? sender, WebNavigatedEventArgs e) => webViewNavigated?.TrySetResult(null);
 }

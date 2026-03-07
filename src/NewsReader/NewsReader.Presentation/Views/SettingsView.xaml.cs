@@ -9,7 +9,7 @@ public partial class SettingsView : TabbedPage, ISettingsView
         InitializeComponent();
     }
 
-    private async void ShareLogFileClicked(object sender, EventArgs e)
+    private async void ShareLogFileClicked(object? sender, EventArgs e)
     {
         try
         {
