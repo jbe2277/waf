@@ -44,17 +44,11 @@
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Command="{Binding EditFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}"
-                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}" AutomationId="EditSwipeItem">
-                                            <SwipeItem.IconImageSource>
-                                                <FontImageSource Glyph="&#xf90b;" FontFamily="MaterialIcons"/>
-                                            </SwipeItem.IconImageSource>
-                                        </SwipeItem>
-                                        <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}" 
-                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red" AutomationId="RemoveSwipeItem">
-                                            <SwipeItem.IconImageSource>
-                                                <FontImageSource Glyph="&#xf1c0;" FontFamily="MaterialIcons"/>
-                                            </SwipeItem.IconImageSource>
-                                        </SwipeItem>
+                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Edit}" AutomationId="EditSwipeItem"
+                                                   IconImageSource="{FontImageSource Glyph='&#xf90b;', FontFamily=MaterialIcons}" />
+                                        <SwipeItem Command="{Binding RemoveFeedCommand, Source={RelativeSource AncestorType={x:Type vm:ShellViewModel}}, x:DataType=vm:ShellViewModel}"
+                                                   CommandParameter="{Binding}" Text="{x:Static p:Resources.Remove}" IsDestructive="True" BackgroundColor="Red" AutomationId="RemoveSwipeItem"
+                                                   IconImageSource="{FontImageSource Glyph='&#xf1c0;', FontFamily=MaterialIcons}" />
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
 

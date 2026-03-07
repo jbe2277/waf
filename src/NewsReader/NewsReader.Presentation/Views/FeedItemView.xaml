@@ -6,11 +6,8 @@
              x:Class="Waf.NewsReader.Presentation.Views.FeedItemView"
              Title="{Binding FeedItem.Name}" x:DataType="vm:FeedItemViewModel" AutomationId="FeedItemView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding LaunchBrowserCommand}" Text="{x:Static p:Resources.Browser}">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="&#xf59f;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
+        <ToolbarItem Command="{Binding LaunchBrowserCommand}" Text="{x:Static p:Resources.Browser}" 
+                     IconImageSource="{FontImageSource Glyph='&#xf59f;', FontFamily=MaterialIcons, Color=Black, Size=20}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

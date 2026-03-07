@@ -8,11 +8,8 @@
              x:Class="Waf.NewsReader.Presentation.Views.FeedView"
              Title="{Binding Feed.Name}" x:DataType="vm:FeedViewModel" AutomationId="FeedView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}" AutomationId="SearchButton">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="&#xfc59;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
+        <ToolbarItem Clicked="SearchClicked" Text="{x:Static p:Resources.Search}" AutomationId="SearchButton" 
+                     IconImageSource="{FontImageSource Glyph='&#xfc59;', FontFamily=MaterialIcons, Color=Black, Size=20}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -34,12 +31,9 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}" 
-                                            Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue" AutomationId="ReadUnreadSwipeItem">
-                                        <SwipeItem.IconImageSource>
-                                            <FontImageSource Glyph="&#xfb6e;" FontFamily="MaterialIcons" Color="Black" Size="48"/>
-                                        </SwipeItem.IconImageSource>
-                                    </SwipeItem>
+                                        <SwipeItem Command="{Binding ReadUnreadCommand, Source={RelativeSource AncestorType={x:Type vm:FeedViewModel}}, x:DataType=vm:FeedViewModel}" CommandParameter="{Binding}"
+                                                Text="{Binding MarkAsRead, Converter={Static c:MarkAsReadConverter.Instance}}" BackgroundColor="LightBlue" AutomationId="ReadUnreadSwipeItem"
+                                                IconImageSource="{FontImageSource Glyph='&#xfb6e;', FontFamily=MaterialIcons, Color=Black, Size=48}" />
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 

@@ -7,10 +7,7 @@
             xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
             Title="{x:Static p:Resources.Settings}" x:DataType="vm:SettingsViewModel" AutomationId="SettingsView">
-    <ContentPage Title="{x:Static p:Resources.General}" AutomationId="GeneralView">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf493;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
-        </ContentPage.IconImageSource>
+    <ContentPage Title="{x:Static p:Resources.General}" AutomationId="GeneralView" IconImageSource="{FontImageSource Glyph='&#xf493;', FontFamily=MaterialIcons, Color=Black, Size=20}">
 
         <ScrollView>
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
@@ -23,10 +20,7 @@
         </ScrollView>
     </ContentPage>
 
-    <ContentPage Title="{x:Static p:Resources.DataSync}" AutomationId="DataSyncView">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf4e6;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
-        </ContentPage.IconImageSource>
+    <ContentPage Title="{x:Static p:Resources.DataSync}" AutomationId="DataSyncView" IconImageSource="{FontImageSource Glyph='&#xf4e6;', FontFamily=MaterialIcons, Color=Black, Size=20}">
 
         <ScrollView>
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
@@ -50,10 +44,7 @@
         </ScrollView>
     </ContentPage>
 
-    <ContentPage Title="{x:Static p:Resources.Info}" AutomationId="InfoView">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf2fd;" FontFamily="MaterialIcons" Color="Black" Size="20"/>
-        </ContentPage.IconImageSource>
+    <ContentPage Title="{x:Static p:Resources.Info}" AutomationId="InfoView" IconImageSource="{FontImageSource Glyph='&#xf2fd;', FontFamily=MaterialIcons, Color=Black, Size=20}">
 
         <ScrollView>
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
