@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/maui/global"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
              x:Class="Waf.NewsReader.Presentation.Views.AddEditFeedView"
-             Title="{x:Static Resources.AddFeed}" x:DataType="vm:AddEditFeedViewModel" AutomationId="AddEditFeedView">
+             Title="{x:Static Resources.AddFeed}" x:DataType="AddEditFeedViewModel" AutomationId="AddEditFeedView">
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage" Binding="{Binding IsEditMode}" Value="True">
             <Setter Property="Title" Value="{x:Static Resources.EditFeed}"/>

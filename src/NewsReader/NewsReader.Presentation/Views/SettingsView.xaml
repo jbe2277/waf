@@ -1,19 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/maui/global"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:vm="clr-namespace:Waf.NewsReader.Applications.ViewModels;assembly=Waf.NewsReader.Applications"
-            xmlns:dm="clr-namespace:Waf.NewsReader.Applications.DataModels;assembly=Waf.NewsReader.Applications"
             x:Class="Waf.NewsReader.Presentation.Views.SettingsView"
-            Title="{x:Static Resources.Settings}" x:DataType="vm:SettingsViewModel" AutomationId="SettingsView">
+            Title="{x:Static Resources.Settings}" x:DataType="SettingsViewModel" AutomationId="SettingsView">
     <ContentPage Title="{x:Static Resources.General}" AutomationId="GeneralView" IconImageSource="{FontImageSource Glyph='&#xf493;', FontFamily=MaterialIcons, Color=Black, Size=20}">
 
         <ScrollView>
             <VerticalStackLayout Spacing="10" Margin="15,10" MaximumWidthRequest="600" HorizontalOptions="Start">
                 <Label Text="{x:Static Resources.DataManagement}" Style="{StaticResource Title}"/>
                 <Label Text="{x:Static Resources.StoreFeedItemsFor}"/>
-                <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={Static LocalizeDisplayItemLifetimeConverter.Instance}, x:DataType=dm:DisplayItemLifetime}"/>
+                <Picker ItemsSource="{Binding ItemLifetimes}" SelectedItem="{Binding SelectedItemLifetime}" ItemDisplayBinding="{Binding Converter={Static LocalizeDisplayItemLifetimeConverter.Instance}, x:DataType=DisplayItemLifetime}"/>
                 <Label Text="{x:Static Resources.StoreAtMaximumFeedItemsPerFeed}"/>
-                <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={Static LocalizeDisplayMaxItemsLimitConverter.Instance}, x:DataType=dm:DisplayMaxItemsLimit}"/>
+                <Picker ItemsSource="{Binding MaxItemsLimits}" SelectedItem="{Binding SelectedMaxItemsLimit}" ItemDisplayBinding="{Binding Converter={Static LocalizeDisplayMaxItemsLimitConverter.Instance}, x:DataType=DisplayMaxItemsLimit}"/>
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage>
