@@ -83,7 +83,7 @@ jobs:
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
 
     - name: 📦 Upload UI Test results
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: always()
       with:
         name: NewsReaderUITestResults
