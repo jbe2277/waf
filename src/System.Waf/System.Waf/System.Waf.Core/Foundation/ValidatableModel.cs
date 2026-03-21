@@ -101,14 +101,12 @@ namespace System.Waf.Foundation
                 var memberNames = validationResult.MemberNames.Any() ? validationResult.MemberNames : new[] { "" };
                 foreach (string memberName in memberNames)
                 {
-                    if (!newErrors.ContainsKey(memberName))
+                    if (!newErrors.TryGetValue(memberName, out var errorList))
                     {
-                        newErrors.Add(memberName, new List<ValidationResult>() { validationResult });
+                        errorList = new List<ValidationResult>();
+                        newErrors.Add(memberName, errorList);
                     }
-                    else
-                    {
-                        newErrors[memberName].Add(validationResult);
-                    }
+                    errorList.Add(validationResult);
                 }
             }
 
@@ -132,10 +130,10 @@ namespace System.Waf.Foundation
                 ErrorsDictionary.Add(propertyToAdd, newErrors[propertyToAdd]);
             }
 
-            if (changedProperties.Any())
+            if (changedProperties.Count > 0)
             {
                 errors = ErrorsDictionary.Values.SelectMany(x => x).Distinct().ToArray();
-                HasErrors = ErrorsDictionary.Any();
+                HasErrors = ErrorsDictionary.Count > 0;
                 RaisePropertyChanged(nameof(Errors));
             }
 
