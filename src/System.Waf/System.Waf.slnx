@@ -68,6 +68,7 @@
     <File Path="Changelog.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
   </Folder>
   <Folder Name="/System.Waf/">
     <File Path="System.Waf/Directory.Build.props" />

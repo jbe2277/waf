@@ -18,7 +18,7 @@
     <PackageVersion Include="NLog" Version="5.5.1" />
     
     <!-- Unit tests -->
-    <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.1" />
+    <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.4" />
   </ItemGroup>
 
   <ItemGroup>
