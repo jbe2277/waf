@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Waf.UnitTesting;
 using Test.Writer.Applications.Views;
-using Waf.Writer.Applications.Documents;
 using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.ViewModels;
 

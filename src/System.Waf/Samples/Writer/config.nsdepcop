@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NsDepCopConfig IsEnabled="true" ChildCanDependOnParentImplicitly="true">
+  <!-- SEE ALSO: ./Architecture.md -->
+
+  <!-- Global -->
+  <Allowed From="*" To="System.*" />
+  <Allowed From="*" To="NLog" />
+
+
+  <!-- Applications -->
+  <Disallowed From="Waf.Writer.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.Writer.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.Writer.Applications" To="Autofac.*" />
+
+  <Allowed From="Waf.Writer.Applications.*" To="Waf.Writer.Applications.Properties" />
+  <Allowed From="Waf.Writer.Applications" To="Waf.Writer.Applications.*" />
+
+  <Allowed From="Waf.Writer.Applications.Controllers" To="Waf.Writer.Applications.Documents" />
+  <Allowed From="Waf.Writer.Applications.Controllers" To="Waf.Writer.Applications.Services" />
+  <Allowed From="Waf.Writer.Applications.Controllers" To="Waf.Writer.Applications.ViewModels" />
+
+  <Allowed From="Waf.Writer.Applications.Documents" To="Waf.Writer.Applications.Services" />
+
+  <Allowed From="Waf.Writer.Applications.Services" To="Waf.Writer.Applications.Views" />
+
+  <Allowed From="Waf.Writer.Applications.ViewModels" To="Waf.Writer.Applications.Documents" />
+  <Allowed From="Waf.Writer.Applications.ViewModels" To="Waf.Writer.Applications.Services" />
+  <Allowed From="Waf.Writer.Applications.ViewModels" To="Waf.Writer.Applications.Views" />
+
+
+  <!-- Presentation -->
+  <Allowed From="Waf.Writer.Presentation" To="Autofac.*" />
+  <Allowed From="Waf.Writer.Presentation" To="Microsoft.Extensions.Configuration" />
+  <Allowed From="Waf.Writer.Presentation" To="NLog.*" />
+
+  <Allowed From="Waf.Writer.Presentation.*" To="Waf.Writer.Applications.*" />
+  <Allowed From="Waf.Writer.Presentation.*" To="Waf.Writer.Presentation.Properties" />
+  <Allowed From="Waf.Writer.Presentation" To="Waf.Writer.Presentation.*" />
+
+  <Allowed From="Waf.Writer.Presentation.Converters" To="Waf.Writer.Presentation.Services" />
+
+  <Allowed From="Waf.Writer.Presentation.DesignData" To="Waf.Writer.Presentation.Services" />
+  <Allowed From="Waf.Writer.Presentation.DesignData" To="Waf.Writer.Presentation.Views" />
+
+  <Allowed From="Waf.Writer.Presentation.Views" To="Waf.Writer.Presentation.Converters" />
+  <Allowed From="Waf.Writer.Presentation.Views" To="Waf.Writer.Presentation.Services" />
+</NsDepCopConfig>

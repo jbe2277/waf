@@ -5,6 +5,7 @@ using System.Windows.Xps.Serialization;
 using Waf.Writer.Applications.Documents;
 using System.IO;
 using Waf.Writer.Presentation.Properties;
+using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.Services;
 

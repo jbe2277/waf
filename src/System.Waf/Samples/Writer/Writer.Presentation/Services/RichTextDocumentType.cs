@@ -4,6 +4,7 @@ using System.Globalization;
 using Waf.Writer.Applications.Documents;
 using Waf.Writer.Presentation.Properties;
 using System.IO;
+using Waf.Writer.Applications.Services;
 
 namespace Waf.Writer.Presentation.Services;
 

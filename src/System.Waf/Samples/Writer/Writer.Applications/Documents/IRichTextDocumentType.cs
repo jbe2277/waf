@@ -1,4 +1,6 @@
-﻿namespace Waf.Writer.Applications.Documents;
+﻿using Waf.Writer.Applications.Services;
+
+namespace Waf.Writer.Applications.Documents;
 
 public interface IRichTextDocumentType : IDocumentType
 {

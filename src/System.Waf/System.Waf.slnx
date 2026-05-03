@@ -56,6 +56,8 @@
     <Project Path="Samples/Localization/LocalizationSample/LocalizationSample.csproj" />
   </Folder>
   <Folder Name="/Samples/Writer/">
+    <File Path="Samples/Writer/Architecture.md" />
+    <File Path="Samples/Writer/config.nsdepcop" />
     <File Path="Samples/Writer/Directory.Build.props" />
     <File Path="Samples/Writer/Writer.docx" />
     <Project Path="Samples/Writer/Writer.Applications.Test/Writer.Applications.Test.csproj" />
