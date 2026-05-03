@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Waf.Writer.Applications.Documents;
+using Waf.Writer.Applications.Services;
 
 namespace Test.Writer.Applications.Documents;
 

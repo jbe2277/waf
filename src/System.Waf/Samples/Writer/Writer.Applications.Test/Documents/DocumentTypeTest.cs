@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using Waf.Writer.Applications.Documents;
+using Waf.Writer.Applications.Services;
 
 namespace Test.Writer.Applications.Documents;
 

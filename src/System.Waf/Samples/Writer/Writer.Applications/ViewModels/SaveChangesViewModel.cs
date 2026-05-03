@@ -1,6 +1,6 @@
 ﻿using System.Waf.Applications;
 using System.Windows.Input;
-using Waf.Writer.Applications.Documents;
+using Waf.Writer.Applications.Services;
 using Waf.Writer.Applications.Views;
 
 namespace Waf.Writer.Applications.ViewModels;
