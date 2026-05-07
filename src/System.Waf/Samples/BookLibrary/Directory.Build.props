@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup Condition="!$(MSBuildProjectName.EndsWith('Test'))">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)config.nsdepcop" Link="config.nsdepcop" />
+  </ItemGroup>
+
   <ItemGroup>
     <Using Include="System.Collections.ObjectModel" />
     <Using Include="System.Collections.Specialized" />

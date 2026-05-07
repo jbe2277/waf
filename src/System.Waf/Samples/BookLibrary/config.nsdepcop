@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NsDepCopConfig IsEnabled="true" ChildCanDependOnParentImplicitly="true">
+  <!-- SEE ALSO: ./Architecture.md -->
+
+  <!-- Global -->
+  <Allowed From="*" To="System.*" />
+  <Allowed From="*" To="NLog" />
+
+
+  <!-- Domain -->
+  <Disallowed From="Waf.BookLibrary.Library.Domain" To="System.Windows.*" />
+  <Disallowed From="Waf.BookLibrary.Library.Domain" To="System.Waf.Presentation.*" />
+  <Disallowed From="Waf.BookLibrary.Library.Domain" To="System.Waf.Applications.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Domain" To="Waf.BookLibrary.Library.Domain.Properties" />
+
+
+  <!-- Library.Applications -->
+  <Disallowed From="Waf.BookLibrary.Library.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.BookLibrary.Library.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Applications" To="Autofac.*" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.*" To="Microsoft.EntityFrameworkCore.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Applications.*" To="Waf.BookLibrary.Library.Domain" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.*" To="Waf.BookLibrary.Library.Applications.Properties" />
+  <Allowed From="Waf.BookLibrary.Library.Applications" To="Waf.BookLibrary.Library.Applications.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Applications.Controllers" To="Waf.BookLibrary.Library.Applications.Data" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.Controllers" To="Waf.BookLibrary.Library.Applications.DataModels" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.Controllers" To="Waf.BookLibrary.Library.Applications.Services" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.Controllers" To="Waf.BookLibrary.Library.Applications.ViewModels" />
+
+  <Allowed From="Waf.BookLibrary.Library.Applications.Services" To="Waf.BookLibrary.Library.Applications.Views" />
+
+  <Allowed From="Waf.BookLibrary.Library.Applications.ViewModels" To="Waf.BookLibrary.Library.Applications.DataModels" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.ViewModels" To="Waf.BookLibrary.Library.Applications.Services" />
+  <Allowed From="Waf.BookLibrary.Library.Applications.ViewModels" To="Waf.BookLibrary.Library.Applications.Views" />
+
+
+  <!-- Library.Presentation -->
+  <Allowed From="Waf.BookLibrary.Library.Presentation" To="Autofac.*" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation" To="Microsoft.Extensions.Configuration" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation" To="NLog.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Presentation.*" To="Waf.BookLibrary.Library.Applications.*" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation.*" To="Waf.BookLibrary.Library.Domain" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation.*" To="Waf.BookLibrary.Library.Presentation.Properties" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation" To="Waf.BookLibrary.Library.Presentation.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Presentation.Data" To="Microsoft.EntityFrameworkCore.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Presentation.DesignData" To="Waf.BookLibrary.Library.Presentation.Views" />
+
+  <Allowed From="Waf.BookLibrary.Library.Presentation.Services" To="Waf.BookLibrary.Library.Presentation.Data" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation.Services" To="Microsoft.EntityFrameworkCore.*" />
+
+  <Allowed From="Waf.BookLibrary.Library.Presentation.Views" To="Waf.BookLibrary.Library.Presentation.Converters" />
+
+
+  <!-- Reporting.Applications -->
+  <Disallowed From="Waf.BookLibrary.Reporting.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.BookLibrary.Reporting.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Applications" To="Autofac.*" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.*" To="Waf.BookLibrary.Library.Domain" />
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.*" To="Waf.BookLibrary.Library.Applications.*" />
+  <Allowed From="Waf.BookLibrary.Reporting.Applications" To="Waf.BookLibrary.Reporting.Applications.*" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.Controllers" To="Waf.BookLibrary.Reporting.Applications.DataModels" />
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.Controllers" To="Waf.BookLibrary.Reporting.Applications.Reports" />
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.Controllers" To="Waf.BookLibrary.Reporting.Applications.ViewModels" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.DataModels" To="Waf.BookLibrary.Reporting.Applications.Reports" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.ViewModels" To="Waf.BookLibrary.Reporting.Applications.Reports" />
+  <Allowed From="Waf.BookLibrary.Reporting.Applications.ViewModels" To="Waf.BookLibrary.Reporting.Applications.Views" />
+
+
+  <!-- Reporting.Presentation -->
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation" To="Autofac.*" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation.*" To="Waf.BookLibrary.Library.Domain" />
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation.*" To="Waf.BookLibrary.Reporting.Applications.*" />
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation" To="Waf.BookLibrary.Reporting.Presentation.*" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation.DesignData" To="Waf.BookLibrary.Reporting.Presentation.Reports" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation.Reports" To="Waf.BookLibrary.Reporting.Presentation.Controls" />
+
+  <Allowed From="Waf.BookLibrary.Reporting.Presentation.Views" To="Waf.BookLibrary.Reporting.Presentation.Reports" />
+</NsDepCopConfig>
