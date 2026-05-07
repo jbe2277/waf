@@ -1,7 +1,9 @@
 <Solution>
   <Folder Name="/Samples/" />
   <Folder Name="/Samples/BookLibrary/">
+    <File Path="Samples/BookLibrary/Architecture.md" />
     <File Path="Samples/BookLibrary/BookLibrary.docx" />
+    <File Path="Samples/BookLibrary/config.nsdepcop" />
     <File Path="Samples/BookLibrary/Directory.Build.props" />
     <Project Path="Samples/BookLibrary/BookLibrary.Library.Applications.Test/BookLibrary.Library.Applications.Test.csproj" />
     <Project Path="Samples/BookLibrary/BookLibrary.Library.Applications/BookLibrary.Library.Applications.csproj" />
