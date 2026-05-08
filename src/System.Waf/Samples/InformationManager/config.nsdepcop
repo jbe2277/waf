@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NsDepCopConfig IsEnabled="true" ChildCanDependOnParentImplicitly="true">
+  <!-- SEE ALSO: ./Architecture.md -->
+
+  <!-- Global -->
+  <Allowed From="*" To="System.*" />
+  <Allowed From="*" To="NLog" />
+
+
+  <!-- Infrastructure.Interfaces -->
+  <Disallowed From="Waf.InformationManager.Infrastructure.Interfaces.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.InformationManager.Infrastructure.Interfaces.*" To="System.Waf.Presentation.*" />
+
+
+  <!-- AddressBook.Interfaces -->
+  <Disallowed From="Waf.InformationManager.AddressBook.Interfaces.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.InformationManager.AddressBook.Interfaces.*" To="System.Waf.Presentation.*" />
+
+
+  <!-- Common.Applications -->
+  <Disallowed From="Waf.InformationManager.Common.Applications.*" To="System.Windows.*" />
+  <Disallowed From="Waf.InformationManager.Common.Applications.*" To="System.Waf.Presentation.*" />
+
+
+  <!-- Common.Presentation -->
+  <Allowed From="Waf.InformationManager.Common.Presentation" To="Autofac.*" />
+
+
+  <!-- AddressBook.Modules.Domain -->
+  <Disallowed From="Waf.InformationManager.AddressBook.Modules.Domain" To="System.Windows.*" />
+  <Disallowed From="Waf.InformationManager.AddressBook.Modules.Domain" To="System.Waf.Presentation.*" />
+  <Disallowed From="Waf.InformationManager.AddressBook.Modules.Domain" To="System.Waf.Applications.*" />
+
+
+  <!-- EmailClient.Modules.Domain -->
+  <Disallowed From="Waf.InformationManager.EmailClient.Modules.Domain.*" To="System.Windows.*" />
+  <Disallowed From="Waf.InformationManager.EmailClient.Modules.Domain.*" To="System.Waf.Presentation.*" />
+  <Disallowed From="Waf.InformationManager.EmailClient.Modules.Domain.*" To="System.Waf.Applications.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Domain.Emails" To="Waf.InformationManager.EmailClient.Modules.Domain.AccountSettings" />
+
+
+  <!-- Infrastructure.Modules.Applications -->
+  <Disallowed From="Waf.InformationManager.Infrastructure.Modules.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.InformationManager.Infrastructure.Modules.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications" To="Autofac.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications" To="NLog.*" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications.*" To="Waf.InformationManager.Infrastructure.Modules.Applications.Properties" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications" To="Waf.InformationManager.Infrastructure.Modules.Applications.*" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications.Controllers" To="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels" To="Waf.InformationManager.Infrastructure.Modules.Applications.Services" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels" To="Waf.InformationManager.Infrastructure.Modules.Applications.Views" />
+
+
+  <!-- Infrastructure.Modules.Presentation -->
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation" To="Autofac.*" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Common.Applications.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Infrastructure.Modules.Applications.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation" To="Waf.InformationManager.Infrastructure.Modules.Presentation.*" />
+
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.Views" To="Waf.InformationManager.Infrastructure.Modules.Presentation.Converters" />
+
+
+  <!-- AddressBook.Modules.Applications -->
+  <Disallowed From="Waf.InformationManager.AddressBook.Modules.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.InformationManager.AddressBook.Modules.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications" To="Autofac.*" />
+
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.*" To="Waf.InformationManager.AddressBook.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.*" To="Waf.InformationManager.AddressBook.Modules.Domain" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications" To="Waf.InformationManager.AddressBook.Modules.Applications.*" />
+
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.Controllers" To="Waf.InformationManager.AddressBook.Modules.Applications.SampleData" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.Controllers" To="Waf.InformationManager.AddressBook.Modules.Applications.ViewModels" />
+
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Applications.ViewModels" To="Waf.InformationManager.AddressBook.Modules.Applications.Views" />
+
+
+  <!-- AddressBook.Modules.Presentation -->
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation" To="Autofac.*" />
+
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation.*" To="Waf.InformationManager.AddressBook.Modules.Applications.*" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation.*" To="Waf.InformationManager.AddressBook.Modules.Domain" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation.*" To="Waf.InformationManager.Common.Presentation.*" />
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation" To="Waf.InformationManager.AddressBook.Modules.Presentation.*" />
+
+
+  <!-- EmailClient.Modules.Applications -->
+  <Disallowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
+  <Disallowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="System.Waf.Presentation.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications" To="Autofac.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="Waf.InformationManager.AddressBook.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="Waf.InformationManager.EmailClient.Modules.Domain.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications" To="Waf.InformationManager.EmailClient.Modules.Applications.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.Controllers" To="Waf.InformationManager.EmailClient.Modules.Applications.SampleData" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.Controllers" To="Waf.InformationManager.EmailClient.Modules.Applications.ViewModels" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Applications.ViewModels" To="Waf.InformationManager.EmailClient.Modules.Applications.Views" />
+
+
+  <!-- EmailClient.Modules.Presentation -->
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation" To="Autofac.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.*" To="Waf.InformationManager.EmailClient.Modules.Applications.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.*" To="Waf.InformationManager.EmailClient.Modules.Domain.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.*" To="Waf.InformationManager.Common.Presentation.*" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation" To="Waf.InformationManager.EmailClient.Modules.Presentation.*" />
+
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.Views" To="Waf.InformationManager.EmailClient.Modules.Presentation.Converters" />
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.Views" To="Waf.InformationManager.EmailClient.Modules.Presentation.Selectors" />
+
+
+  <!-- Assembler -->
+  <Allowed From="Waf.InformationManager.Assembler" To="Autofac.*" />
+  <Allowed From="Waf.InformationManager.Assembler" To="Microsoft.Extensions.Configuration" />
+  <Allowed From="Waf.InformationManager.Assembler" To="NLog.*" />
+
+  <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Common.Applications.*" />
+  <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Common.Presentation" />
+  <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
+  <Allowed From="Waf.InformationManager.Assembler" To="Waf.InformationManager.Assembler.*" />
+</NsDepCopConfig>
