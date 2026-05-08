@@ -150,7 +150,7 @@ jobs:
           out/NewsReader.UITest/
 
   iOS:
-    runs-on: macos-15
+    runs-on: macos-26
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
