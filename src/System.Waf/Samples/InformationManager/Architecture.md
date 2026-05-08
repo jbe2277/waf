@@ -106,6 +106,8 @@ flowchart TB
   EP --> EA
   EP --> CP
 
+  AI_A --> AI_D
+
   ED_E --> ED_AS
 
   IMA_C --> IMA_VM

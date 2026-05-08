@@ -16,6 +16,8 @@
   <Disallowed From="Waf.InformationManager.AddressBook.Interfaces.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
   <Disallowed From="Waf.InformationManager.AddressBook.Interfaces.*" To="System.Waf.Presentation.*" />
 
+  <Allowed From="Waf.InformationManager.AddressBook.Interfaces.Applications" To="Waf.InformationManager.AddressBook.Interfaces.Domain" />
+
 
   <!-- Common.Applications -->
   <Disallowed From="Waf.InformationManager.Common.Applications.*" To="System.Windows.*" />
@@ -93,6 +95,8 @@
   <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation.*" To="Waf.InformationManager.Common.Presentation.*" />
   <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation" To="Waf.InformationManager.AddressBook.Modules.Presentation.*" />
 
+  <Allowed From="Waf.InformationManager.AddressBook.Modules.Presentation.DesignData" To="Waf.InformationManager.AddressBook.Modules.Presentation.Views" />
+
 
   <!-- EmailClient.Modules.Applications -->
   <Disallowed From="Waf.InformationManager.EmailClient.Modules.Applications.*" To="/^System\.Windows\.(?!Input(?:\.|$)).+/" />
@@ -119,6 +123,7 @@
   <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.*" To="Waf.InformationManager.Common.Presentation.*" />
   <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation" To="Waf.InformationManager.EmailClient.Modules.Presentation.*" />
 
+  <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.DesignData" To="Waf.InformationManager.EmailClient.Modules.Presentation.Views" />
   <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.Views" To="Waf.InformationManager.EmailClient.Modules.Presentation.Converters" />
   <Allowed From="Waf.InformationManager.EmailClient.Modules.Presentation.Views" To="Waf.InformationManager.EmailClient.Modules.Presentation.Selectors" />
 

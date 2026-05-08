@@ -36,7 +36,7 @@ csharp_style_namespace_declarations = file_scoped
 dotnet_diagnostic.IDE0200.severity = none
 
 
-[*.{xml,csproj,props,targets,config,resx,ruleset}]
+[*.{xml,csproj,props,targets,config,resx,ruleset,nsdepcop}]
 
 tab_width = 2
 indent_size = 2
