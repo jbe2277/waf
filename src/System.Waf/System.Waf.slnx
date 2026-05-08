@@ -16,6 +16,8 @@
     <Project Path="Samples/BookLibrary/BookLibrary.Reporting.Presentation/BookLibrary.Reporting.Presentation.csproj" />
   </Folder>
   <Folder Name="/Samples/InformationManager/">
+    <File Path="Samples/InformationManager/Architecture.md" />
+    <File Path="Samples/InformationManager/config.nsdepcop" />
     <File Path="Samples/InformationManager/Directory.Build.props" />
     <File Path="Samples/InformationManager/InformationManager.docx" />
     <Project Path="Samples/InformationManager/Assembler/Assembler.csproj">
