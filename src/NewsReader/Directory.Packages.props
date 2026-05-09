@@ -8,9 +8,9 @@
     <PackageVersion Include="Autofac" Version="9.1.0" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="11.0.0" />
     <PackageVersion Include="NLog" Version="5.5.1" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.79.2" />
-    <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.79.2" />
-    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.79.2" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.84.0" />
+    <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.84.0" />
+    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.84.0" />
     <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.7" />
     <PackageVersion Include="System.Waf.Core" Version="8.2.0" />
 
