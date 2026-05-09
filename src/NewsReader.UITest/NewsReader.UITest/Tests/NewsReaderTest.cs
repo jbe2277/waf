@@ -28,7 +28,7 @@ public abstract class NewsReaderTest : UITest
         Assert.False(item.MarkAsRead);
         item.Element.SafeClick();
 
-        var feedItemView = window.FeedItemView;
+        _ = window.FeedItemView;
         Thread.Sleep(2000);
         CreateScreenshot("FeedView");        
 

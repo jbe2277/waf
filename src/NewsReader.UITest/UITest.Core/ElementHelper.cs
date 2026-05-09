@@ -9,7 +9,7 @@ public static class ElementHelper
 {
     public static T? ToView<T>(this AppiumElement? element, Func<AppiumElement, T> factory) where T : class => element is null ? null : factory(element);
 
-    public static string GetStatusInfo(this AppiumElement element) => element.GetDriver().PlatformName switch
+    public static string? GetStatusInfo(this AppiumElement element) => element.GetDriver().PlatformName switch
     {
         MobilePlatform.Android => element.GetAttribute("content-desc"),
         MobilePlatform.IOS => element.GetAttribute("label"),
