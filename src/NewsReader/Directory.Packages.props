@@ -22,5 +22,6 @@
 
   <ItemGroup>
     <GlobalPackageReference Include="MinVer" Version="7.0.0" />
+    <GlobalPackageReference Include="NsDepCop" Version="2.7.0" />
   </ItemGroup>
 </Project>
