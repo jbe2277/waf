@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NsDepCopConfig IsEnabled="true" ChildCanDependOnParentImplicitly="true">
   <!-- SEE ALSO: ./Architecture.md -->
-	
-  
+
+
   <!-- Global -->
-	<Allowed From="*" To="System.*" />
-	<Allowed From="*" To="NLog" />
+  <Allowed From="*" To="System.*" />
+  <Allowed From="*" To="NLog" />
 
-  
-	<!-- Domain -->
+
+  <!-- Domain -->
   <Disallowed From="Waf.NewsReader.Domain.*" To="System.Waf.Presentation.*" />
-	<Disallowed From="Waf.NewsReader.Domain.*" To="System.Waf.Applications.*" />
+  <Disallowed From="Waf.NewsReader.Domain.*" To="System.Waf.Applications.*" />
 
-  
-	<!-- Applications -->
+
+  <!-- Applications -->
   <Disallowed From="Waf.NewsReader.Applications.*" To="System.Waf.Presentation.*" />
 
   <Allowed From="Waf.NewsReader.Applications" To="Autofac.*" />
 
-	<Allowed From="Waf.NewsReader.Applications.*" To="Waf.NewsReader.Domain.*" />
-	<Allowed From="Waf.NewsReader.Applications.*" To="Waf.NewsReader.Applications.Properties" />
-	<Allowed From="Waf.NewsReader.Applications" To="Waf.NewsReader.Applications.*" />
+  <Allowed From="Waf.NewsReader.Applications.*" To="Waf.NewsReader.Domain.*" />
+  <Allowed From="Waf.NewsReader.Applications.*" To="Waf.NewsReader.Applications.Properties" />
+  <Allowed From="Waf.NewsReader.Applications" To="Waf.NewsReader.Applications.*" />
 
-	<Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.DataModels" />
-	<Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.Services" />
-	<Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.ViewModels" />
+  <Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.DataModels" />
+  <Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.Services" />
+  <Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.ViewModels" />
   <Allowed From="Waf.NewsReader.Applications.Controllers" To="Waf.NewsReader.Applications.Views" />
 
-	<Allowed From="Waf.NewsReader.Applications.DataModels" To="Waf.NewsReader.Applications.Services" />
+  <Allowed From="Waf.NewsReader.Applications.DataModels" To="Waf.NewsReader.Applications.Services" />
 
-	<Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.DataModels" />
-	<Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.Services" />
-	<Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.Views" />
+  <Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.DataModels" />
+  <Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.Services" />
+  <Allowed From="Waf.NewsReader.Applications.ViewModels" To="Waf.NewsReader.Applications.Views" />
 
-  
-	<!-- Presentation -->
+
+  <!-- Presentation -->
   <Allowed From="Waf.NewsReader.Presentation" To="Autofac.*" />
   <Allowed From="Waf.NewsReader.Presentation.*" To="Microsoft.Maui.*" />
   <Allowed From="Waf.NewsReader.Presentation.*" To="NLog.*" />
@@ -42,32 +42,32 @@
   <Allowed From="Waf.NewsReader.Presentation.Services" To="Foundation.*" />
   <Allowed From="Waf.NewsReader.Presentation.Services" To="Microsoft.Identity.Client.*" />
   <Allowed From="Waf.NewsReader.Presentation.Services" To="WinRT.*" />
-  
-	<Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Applications.*" />
-	<Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Domain.*" />
-	<Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Presentation.Properties" />
-	<Allowed From="Waf.NewsReader.Presentation" To="Waf.NewsReader.Presentation.*" />
 
-	<Allowed From="Waf.NewsReader.Presentation.Converters" To="Waf.NewsReader.Presentation.Services" />
+  <Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Applications.*" />
+  <Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Domain.*" />
+  <Allowed From="Waf.NewsReader.Presentation.*" To="Waf.NewsReader.Presentation.Properties" />
+  <Allowed From="Waf.NewsReader.Presentation" To="Waf.NewsReader.Presentation.*" />
 
-	<Allowed From="Waf.NewsReader.Presentation.Views" To="Waf.NewsReader.Presentation.Converters" />
-	<Allowed From="Waf.NewsReader.Presentation.Views" To="Waf.NewsReader.Presentation.Services" />
+  <Allowed From="Waf.NewsReader.Presentation.Converters" To="Waf.NewsReader.Presentation.Services" />
 
-  
-	<!-- MauiSystem -->
-	<Allowed From="Waf.NewsReader.MauiSystem.*" To="Autofac.*" />
-	<Allowed From="Waf.NewsReader.MauiSystem" To="NLog.*" />
-	<Allowed From="Waf.NewsReader.MauiSystem" To="Waf.NewsReader.MauiSystem.*" />
+  <Allowed From="Waf.NewsReader.Presentation.Views" To="Waf.NewsReader.Presentation.Converters" />
+  <Allowed From="Waf.NewsReader.Presentation.Views" To="Waf.NewsReader.Presentation.Services" />
+
+
+  <!-- MauiSystem -->
+  <Allowed From="Waf.NewsReader.MauiSystem.*" To="Autofac.*" />
+  <Allowed From="Waf.NewsReader.MauiSystem" To="NLog.*" />
+  <Allowed From="Waf.NewsReader.MauiSystem" To="Waf.NewsReader.MauiSystem.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.*" To="Microsoft.UI.Xaml.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.Android.*" To="Android.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.Android.*" To="AndroidX.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.Android.*" To="Microsoft.Identity.Client.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.iOS.*" To="Foundation.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.iOS.*" To="UIKit.*" />
-  
-	<Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Applications.*" />
-	<Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Domain.*" />
-	<Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Presentation.*" />
+
+  <Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Applications.*" />
+  <Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Domain.*" />
+  <Allowed From="Waf.NewsReader.MauiSystem.*" To="Waf.NewsReader.Presentation.*" />
   <Allowed From="Waf.NewsReader.MauiSystem.*" To="Microsoft.Maui.*" />
 
   <Allowed From="Waf.NewsReader.MauiSystem.Platforms.Android" To="Waf.NewsReader.MauiSystem.Platforms.Android.*" />
