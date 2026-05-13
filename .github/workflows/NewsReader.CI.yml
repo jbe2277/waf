@@ -180,7 +180,7 @@ jobs:
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet publish -f net10.0-ios -c:Release /p:packageApp=true /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet publish -f net10.0-ios -c:Release -p:RuntimeIdentifier=iossimulator-arm64 -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
 
     - name: 📦 Upload iOS App for simulator
       uses: actions/upload-artifact@v6
