@@ -40,18 +40,18 @@ jobs:
       run: |
         gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderiOSSimulator" --dir=./NewsReaderiOSSimulator
 
-    - name: ⚙️ Show available simulators
-      run: xcrun simctl list devices available
+    # - name: ⚙️ Show available simulators
+    #   run: xcrun simctl list devices available
 
-    - name: ⚙️ Create and boot simulator and install app
-      run: |
-        DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
-        RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
-        UDID=$(xcrun simctl create "CI iPhone" "$DEVICE_TYPE" "$RUNTIME")
-        echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
-        xcrun simctl boot "$UDID"
-        xcrun simctl bootstatus "$UDID" -b
-        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app        
+    # - name: ⚙️ Create and boot simulator and install app
+    #   run: |
+    #     DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
+    #     RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
+    #     UDID=$(xcrun simctl create "CI iPhone" "$DEVICE_TYPE" "$RUNTIME")
+    #     echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
+    #     xcrun simctl boot "$UDID"
+    #     xcrun simctl bootstatus "$UDID" -b
+    #     xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app        
 
     - name: ⚙️ Install Appium Server
       run: |
