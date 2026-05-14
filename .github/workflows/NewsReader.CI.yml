@@ -188,7 +188,7 @@ jobs:
         name: NewsReaderiOSSimulator
         if-no-files-found: error
         path: |
-          ./**/bin/Release/*/iossimulator-arm64/NewsReader.MauiSystem.app/**
+          ./src/NewsReader/NewsReader.MauiSystem/bin/Release/*/iossimulator-arm64/NewsReader.MauiSystem.app/**
         
   Test:
     runs-on: windows-2025
