@@ -43,7 +43,7 @@ jobs:
     - name: Show available simulators
       run: xcrun simctl list devices available
 
-    - name: Create and boot simulator
+    - name: Create and boot simulator and install and launch App
       run: |
         DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
         RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
@@ -51,6 +51,8 @@ jobs:
         echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
         xcrun simctl boot "$UDID"
         xcrun simctl bootstatus "$UDID" -b
+        xcrun simctl install "$UDID" NewsReaderiOSSimulator/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+        xcrun simctl launch "$UDID" Waf.NewsReader
 
     - name: Show booted simulator
       run: xcrun simctl list devices | grep Booted
