@@ -40,10 +40,10 @@ jobs:
       run: |
         gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderiOSSimulator" --dir=./NewsReaderiOSSimulator
 
-    - name: Show available simulators
+    - name: ⚙️ Show available simulators
       run: xcrun simctl list devices available
 
-    - name: Create and boot simulator and install and launch App
+    - name: ⚙️ Create and boot simulator and install app
       run: |
         DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
         RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
@@ -51,12 +51,7 @@ jobs:
         echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
         xcrun simctl boot "$UDID"
         xcrun simctl bootstatus "$UDID" -b
-        ls -la ./NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
-        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
-        xcrun simctl launch "$UDID" Waf.NewsReader
-
-    - name: Show booted simulator
-      run: xcrun simctl list devices | grep Booted
+        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app        
 
     - name: ⚙️ Install Appium Server
       run: |
@@ -70,12 +65,10 @@ jobs:
         appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
 
     - name: 🖥️ UI Test
-      env:
-        UITestApkFile: NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY        
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader.UITest
-        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=IOS
 
     - name: 📦 Upload UI Test results
       uses: actions/upload-artifact@v6
