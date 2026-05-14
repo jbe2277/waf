@@ -1,6 +1,10 @@
 name: NewsReader.UITestIOS
 
 on: 
+  push:
+    paths: 
+    - '**/NewsReader.UITestIOS.yml'
+
   workflow_run:
     workflows: ["NewsReader.CI"]
     types:
