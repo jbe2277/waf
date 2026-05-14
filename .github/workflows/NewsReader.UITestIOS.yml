@@ -65,6 +65,8 @@ jobs:
         appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
 
     - name: 🖥️ UI Test
+      env:
+        UITestApp: NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
       run: |
         echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader.UITest

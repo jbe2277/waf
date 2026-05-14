@@ -16,7 +16,7 @@ public abstract class UITestBase : IDisposable
     private readonly string rootPath;
     private readonly string testOutPath;
 
-    protected UITestBase(string appId, string androidApkFile, string androidAppActivity, string windowsAppId, string testOutputPath)
+    protected UITestBase(string appId, string androidApkFile, string androidAppActivity, string? iosApp, string windowsAppId, string testOutputPath)
     {
         var devicePlatform = DeviceManager.GetDevicePlatform(GetType());
 
@@ -29,7 +29,7 @@ public abstract class UITestBase : IDisposable
         app = devicePlatform switch
         {
             DevicePlatform.Android => androidApkFile,
-            DevicePlatform.IOS => "",
+            DevicePlatform.IOS => iosApp ?? "",
             DevicePlatform.Windows => windowsAppId,
             _ => throw new NotSupportedException()
         };
@@ -89,6 +89,11 @@ public abstract class UITestBase : IDisposable
             AutomationName = AutomationName.iOSXcuiTest,
             PlatformName = MobilePlatform.IOS,
         };
+        if (!string.IsNullOrEmpty(app))
+        {
+            var appPath = Path.GetFullPath(Path.IsPathFullyQualified(app) ? app : Path.Combine(rootPath, app));
+            driverOptions.App = appPath;
+        }
         driverOptions.AddAdditionalAppiumOption("bundleId", appId);
 
         // TODO: Use this if you have a physical device
