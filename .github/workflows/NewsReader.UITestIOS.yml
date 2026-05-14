@@ -51,8 +51,8 @@ jobs:
         echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
         xcrun simctl boot "$UDID"
         xcrun simctl bootstatus "$UDID" -b
-        ls -la ./NewsReaderiOSSimulator
-        xcrun simctl install "$UDID" NewsReaderiOSSimulator/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+        ls -la ./NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
         xcrun simctl launch "$UDID" Waf.NewsReader
 
     - name: Show booted simulator
