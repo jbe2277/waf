@@ -95,6 +95,7 @@ public abstract class UITestBase : IDisposable
             driverOptions.App = appPath;
         }
         driverOptions.AddAdditionalAppiumOption("bundleId", appId);
+        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 180_000);
 
         // TODO: Use this if you have a physical device
         //driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, "");
