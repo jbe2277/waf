@@ -30,7 +30,7 @@ jobs:
       run: |
         RUN_ID=$(gh run list \
           --workflow="NewsReader.CI.yml" \
-          --branch=BuildPublishIosApp \
+          --branch=master \
           --json databaseId,status,conclusion \
           --jq '.[] | select(.conclusion=="success") | .databaseId' \
           | head -n 1)
