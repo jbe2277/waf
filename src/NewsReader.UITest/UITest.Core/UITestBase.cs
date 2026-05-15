@@ -95,7 +95,8 @@ public abstract class UITestBase : IDisposable
             driverOptions.App = appPath;
         }
         driverOptions.AddAdditionalAppiumOption("bundleId", appId);
-        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 180_000);
+        driverOptions.AddAdditionalAppiumOption("simulatorStartupTimeout", 300_000);   // Increate timeouts for CI, as simulator startup can be slow
+        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 180_000);          // Increate timeouts for CI, as WebDriverAgent startup can be slow
 
         // TODO: Use this if you have a physical device
         //driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, "");
