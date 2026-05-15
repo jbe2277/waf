@@ -12,12 +12,12 @@ public abstract class UITestBase : IDisposable
 {
     private readonly string? deviceId;
     private readonly string appId;
-    private readonly string app;
+    private readonly string? app;
     private readonly string androidAppActivity;
     private readonly string rootPath;
     private readonly string testOutPath;
 
-    protected UITestBase(string? deviceId, string appId, string androidApkFile, string androidAppActivity, string? iosApp, string windowsAppId, string testOutputPath)
+    protected UITestBase(string? deviceId, string appId, string? androidApkFile, string androidAppActivity, string? iosApp, string windowsAppId, string testOutputPath)
     {
         var devicePlatform = DeviceManager.GetDevicePlatform(GetType());
         this.deviceId = deviceId;
@@ -30,7 +30,7 @@ public abstract class UITestBase : IDisposable
         app = devicePlatform switch
         {
             DevicePlatform.Android => androidApkFile,
-            DevicePlatform.IOS => iosApp ?? "",
+            DevicePlatform.IOS => iosApp,
             DevicePlatform.Windows => windowsAppId,
             _ => throw new NotSupportedException()
         };
@@ -68,18 +68,22 @@ public abstract class UITestBase : IDisposable
 
     private AndroidDriver SetupAndroid(Uri serverUri)
     {
-        var apk = Path.GetFullPath(Path.IsPathFullyQualified(app) ? app : Path.Combine(rootPath, app));
-
         // See: https://github.com/appium/appium-uiautomator2-driver
         var driverOptions = new AppiumOptions()
         {
             AutomationName = AutomationName.AndroidUIAutomator2,
             PlatformName = MobilePlatform.Android,
-            App = apk,
         };
-        // TODO: Use this instead of App for local dev
-        //driverOptions.AddAdditionalAppiumOption("appPackage", appId);
-        //driverOptions.AddAdditionalAppiumOption("appActivity", androidAppActivity);
+        if (!string.IsNullOrEmpty(app))
+        {
+            var apk = Path.GetFullPath(Path.IsPathFullyQualified(app) ? app : Path.Combine(rootPath, app));
+            driverOptions.App = apk;
+        }
+        else
+        {
+            driverOptions.AddAdditionalAppiumOption("appPackage", appId);
+            driverOptions.AddAdditionalAppiumOption("appActivity", androidAppActivity);
+        }
         return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 
@@ -98,17 +102,12 @@ public abstract class UITestBase : IDisposable
         }
         if (!string.IsNullOrEmpty(deviceId)) driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, deviceId);
         driverOptions.AddAdditionalAppiumOption("bundleId", appId);
-        driverOptions.AddAdditionalAppiumOption("simulatorStartupTimeout", 300_000);   // Increased timeouts for CI, as simulator startup can be slow
-        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 300_000);          // Increased timeouts for CI, as WebDriverAgent startup can be slow
-
-        // TODO: Use this if you have a physical device
-        //driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, "");
 
         // TODO: xcode settings are required for deployment of the WebDriverAgent: https://appium.github.io/appium-xcuitest-driver/latest/preparation/prov-profile-basic-auto/
         //driverOptions.AddAdditionalAppiumOption("xcodeOrgId", "");
         //driverOptions.AddAdditionalAppiumOption("xcodeSigningId", "");
 
-        return new(serverUri, driverOptions, TimeSpan.FromMinutes(10));                // Increased timeout for CI, as simulator and WebDriverAgent startup can be slow
+        return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
     }
 
     private WindowsDriver SetupWindows(Uri serverUri)
