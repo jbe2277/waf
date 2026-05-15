@@ -180,7 +180,15 @@ jobs:
     - name: 🛠️ Build
       run: |
         cd src/NewsReader/NewsReader.MauiSystem
-        dotnet build -f net10.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        dotnet build -f net10.0-ios -c:Release -p:RuntimeIdentifier=iossimulator-arm64 -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+
+    - name: 📦 Upload iOS App for simulator
+      uses: actions/upload-artifact@v6
+      with:
+        name: NewsReaderiOSSimulator
+        if-no-files-found: error
+        path: |
+          ./src/NewsReader/NewsReader.MauiSystem/bin/Release/*/iossimulator-arm64/NewsReader.MauiSystem.app/**
         
   Test:
     runs-on: windows-2025

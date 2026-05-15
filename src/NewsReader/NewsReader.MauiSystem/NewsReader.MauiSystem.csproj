@@ -21,9 +21,6 @@
     <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 
     <WindowsAppSDKSelfContained>True</WindowsAppSDKSelfContained>
-
-    <!-- Workaround for https://github.com/xamarin/xamarin-macios/issues/21013 -->
-    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
 
   <!--TODO: Workaround for https://github.com/microsoft/WindowsAppSDK/issues/3337; 

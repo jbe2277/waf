@@ -10,16 +10,17 @@ namespace UITest;
 
 public abstract class UITestBase : IDisposable
 {
+    private readonly string? deviceId;
     private readonly string appId;
     private readonly string app;
     private readonly string androidAppActivity;
     private readonly string rootPath;
     private readonly string testOutPath;
 
-    protected UITestBase(string appId, string androidApkFile, string androidAppActivity, string windowsAppId, string testOutputPath)
+    protected UITestBase(string? deviceId, string appId, string androidApkFile, string androidAppActivity, string? iosApp, string windowsAppId, string testOutputPath)
     {
         var devicePlatform = DeviceManager.GetDevicePlatform(GetType());
-
+        this.deviceId = deviceId;
         this.appId = appId;
         this.androidAppActivity = androidAppActivity;
         var assemblyPath = Assembly.GetAssembly(typeof(UITestBase))!.Location;
@@ -29,11 +30,12 @@ public abstract class UITestBase : IDisposable
         app = devicePlatform switch
         {
             DevicePlatform.Android => androidApkFile,
-            DevicePlatform.IOS => "",
+            DevicePlatform.IOS => iosApp ?? "",
             DevicePlatform.Windows => windowsAppId,
             _ => throw new NotSupportedException()
         };
         Log.WriteLine(("DevicePlatform:", $"{devicePlatform}"));
+        Log.WriteLine(("DeviceId:", $"{deviceId}"));
         Log.WriteLine(("AppId:", $"{appId}"));
         Log.WriteLine(("App:", $"{app}"));
         Log.WriteLine(("AndroidAppActivity:", $"{androidAppActivity}"));
@@ -89,7 +91,15 @@ public abstract class UITestBase : IDisposable
             AutomationName = AutomationName.iOSXcuiTest,
             PlatformName = MobilePlatform.IOS,
         };
+        if (!string.IsNullOrEmpty(app))
+        {
+            var appPath = Path.GetFullPath(Path.IsPathFullyQualified(app) ? app : Path.Combine(rootPath, app));
+            driverOptions.App = appPath;
+        }
+        if (!string.IsNullOrEmpty(deviceId)) driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, deviceId);
         driverOptions.AddAdditionalAppiumOption("bundleId", appId);
+        driverOptions.AddAdditionalAppiumOption("simulatorStartupTimeout", 300_000);   // Increased timeouts for CI, as simulator startup can be slow
+        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 300_000);          // Increased timeouts for CI, as WebDriverAgent startup can be slow
 
         // TODO: Use this if you have a physical device
         //driverOptions.AddAdditionalAppiumOption(MobileCapabilityType.Udid, "");
@@ -98,7 +108,7 @@ public abstract class UITestBase : IDisposable
         //driverOptions.AddAdditionalAppiumOption("xcodeOrgId", "");
         //driverOptions.AddAdditionalAppiumOption("xcodeSigningId", "");
 
-        return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
+        return new(serverUri, driverOptions, TimeSpan.FromMinutes(10));                // Increased timeout for CI, as simulator and WebDriverAgent startup can be slow
     }
 
     private WindowsDriver SetupWindows(Uri serverUri)

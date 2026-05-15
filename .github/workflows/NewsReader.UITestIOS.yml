@@ -1,0 +1,83 @@
+name: NewsReader.UITestIOS
+
+on: 
+  push:
+    paths: 
+    - '**/NewsReader.UITestIOS.yml'
+    - 'src/NewsReader.UITest/**'
+
+  workflow_run:
+    workflows: ["NewsReader.CI"]
+    types:
+    - completed
+
+  workflow_dispatch:
+
+jobs:
+  UITest:    
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: macos-26
+    
+    steps:
+    - name: 🔖 Check-out
+      uses: actions/checkout@v6
+
+    - name: 📜 Authenticate GitHub CLI
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+    - name: ⚙️ Get latest successful run ID
+      id: get_run
+      run: |
+        RUN_ID=$(gh run list \
+          --workflow="NewsReader.CI.yml" \
+          --branch=master \
+          --json databaseId,status,conclusion \
+          --jq '.[] | select(.conclusion=="success") | .databaseId' \
+          | head -n 1)
+        echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+        echo "run_id=$RUN_ID"
+
+    - name: 📦 Download Simulator App
+      run: |
+        gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderiOSSimulator" --dir=./NewsReaderiOSSimulator
+
+    - name: ⚙️ Show available simulators 
+      run: xcrun simctl list devices available
+
+    - name: ⚙️ Create and boot simulator and install app
+      run: |
+        DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
+        RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
+        UDID=$(xcrun simctl create "CI iPhone" "$DEVICE_TYPE" "$RUNTIME")
+        echo "UITestDeviceId=$UDID" >> "$GITHUB_ENV"
+        xcrun simctl boot "$UDID"
+        xcrun simctl bootstatus "$UDID" -b
+        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+
+    - name: ⚙️ Install Appium Server
+      run: |
+        npm install appium -g
+        appium driver install xcuitest
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/out/NewsReader.UITest
+        appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
+
+    - name: 🖥️ UI Test
+      env:
+        UITestApp: NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=IOS
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: NewsReaderUITestResults
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/

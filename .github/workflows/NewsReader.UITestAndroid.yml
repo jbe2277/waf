@@ -1,6 +1,11 @@
 name: NewsReader.UITestAndroid
 
 on: 
+  push:
+    paths: 
+    - '**/NewsReader.UITestAndroid.yml'
+    - 'src/NewsReader.UITest/**'
+
   workflow_run:
     workflows: ["NewsReader.CI"]
     types:
