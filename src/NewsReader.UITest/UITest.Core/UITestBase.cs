@@ -106,8 +106,9 @@ public abstract class UITestBase : IDisposable
         // TODO: xcode settings are required for deployment of the WebDriverAgent: https://appium.github.io/appium-xcuitest-driver/latest/preparation/prov-profile-basic-auto/
         //driverOptions.AddAdditionalAppiumOption("xcodeOrgId", "");
         //driverOptions.AddAdditionalAppiumOption("xcodeSigningId", "");
-
-        return new(serverUri, driverOptions, TimeSpan.FromMinutes(3));
+        
+        driverOptions.AddAdditionalAppiumOption("wdaLaunchTimeout", 300_000);          // Increased timeouts for CI, as WebDriverAgent startup can be slow
+        return new(serverUri, driverOptions, TimeSpan.FromMinutes(10));                // Increased timeout for CI, as simulator and WebDriverAgent startup can be slow
     }
 
     private WindowsDriver SetupWindows(Uri serverUri)
