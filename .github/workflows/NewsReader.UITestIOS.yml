@@ -51,6 +51,7 @@ jobs:
         UDID=$(xcrun simctl create "CI iPhone" "$DEVICE_TYPE" "$RUNTIME")
         echo "UITestDeviceId=$UDID" >> "$GITHUB_ENV"
         xcrun simctl boot "$UDID"
+        open -a Simulator   # <-- open the UI so Appium doesn't need to restart it
         xcrun simctl bootstatus "$UDID" -b
         xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
 
