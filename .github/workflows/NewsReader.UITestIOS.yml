@@ -40,7 +40,7 @@ jobs:
       run: |
         gh run download ${{ steps.get_run.outputs.run_id }} --name="NewsReaderiOSSimulator" --dir=./NewsReaderiOSSimulator
 
-    # - name: ⚙️ Show available simulators
+    # - name: ⚙️ Show available simulators 
     #   run: xcrun simctl list devices available
 
     # - name: ⚙️ Create and boot simulator and install app
