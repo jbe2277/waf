@@ -75,6 +75,7 @@ public static class ElementHelper
                 {
                     cts.Cancel();  // Text is corrupted
                 }
+                Thread.Sleep(500);
                 return false;
             }, cts.Token);
         }
