@@ -11,14 +11,14 @@ public record SearchBar(AppiumElement Element)
 
     public string Text => Entry.Text;
 
-    public void Click() => Entry.Click();
+    public void Click() => Entry.SafeClick();
 
     public void Clear() => Entry.Clear();
 
     public void EnterText(string text)
     {
-        Entry.SafeClick();
-        Entry.Clear();
-        Entry.SafeSendKeys(text);
+        Click();
+        Clear();
+        Entry.SendKeys(text);
     }
 }

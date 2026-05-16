@@ -4,5 +4,8 @@ namespace UITest;
 
 public static class RectangleHelper
 {
-    public static Point Center(this Rectangle rect) => new(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2);
+    extension(Rectangle rect)
+    {
+        public Point Center => new(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2);
+    }
 }

@@ -15,7 +15,7 @@ public record SettingsView(AppiumElement Element)
         iOS: () => Element.Find(By.XPath("""//XCUIElementTypeOther[@name="InfoView"]""")),
         windows: () => Element.Find("InfoView")));
 
-    private AppiumElement AndroidTopTabs => Element.GetDriver().Find("navigationlayout_toptabs");
+    private AppiumElement AndroidTopTabs => Element.Driver.Find("navigationlayout_toptabs");
 }
 
 public record InfoView(AppiumElement Element)

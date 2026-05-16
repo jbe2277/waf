@@ -9,22 +9,22 @@ public static class ElementHelper
 {
     public static T? ToView<T>(this AppiumElement? element, Func<AppiumElement, T> factory) where T : class => element is null ? null : factory(element);
 
-    public static string? GetStatusInfo(this AppiumElement element) => element.GetDriver().PlatformName switch
+    public static string? GetStatusInfo(this AppiumElement element) => element.Driver.PlatformName switch
     {
         MobilePlatform.Android => element.GetAttribute("content-desc"),
         MobilePlatform.IOS => element.GetAttribute("label"),
         MobilePlatform.Windows => element.GetDomAttribute("Name"),  // Note: GetAttribute does not work here - but GetDomAttribute.
-        _ => throw new NotSupportedException($"Platform not supported: {element.GetDriver().PlatformName}")
+        _ => throw new NotSupportedException($"Platform not supported: {element.Driver.PlatformName}")
     };
 
     public static void SafeClick(this AppiumElement element, bool isRightButton = false)
     {
-        if (element.IsWindows())
+        if (element.IsWindows)
         {
             Thread.Sleep(100);
-            var d = element.GetDriver();
+            var d = element.Driver;
             var windowPos = d.Manage().Window.Position;
-            var center = element.Rect.Center();
+            var center = element.Rect.Center;
             // Workaround: Add Window.Position to the coordinates: https://github.com/appium/appium-windows-driver/issues/280
             d.ExecuteScript("windows: hover", new Dictionary<string, object>()
             {
@@ -44,19 +44,6 @@ public static class ElementHelper
         else element.Click();
     }
 
-    public static void SafeSendKeys(this AppiumElement element, string text)
-    {
-        if (element.IsWindows())
-        {
-            foreach (var x in text)
-            {
-                element.SendKeys(x.ToString());
-                Thread.Sleep(200);
-            }
-        }
-        else element.SendKeys(text);
-    }
-
     public static void SwipeRight(this AppiumElement element)
     {
         var xOffset = (int)(element.Rect.Width * 0.1);
@@ -69,6 +56,6 @@ public static class ElementHelper
         swipe.AddAction(input.CreatePointerDown(MouseButton.Left));
         swipe.AddAction(input.CreatePointerMove(CoordinateOrigin.Viewport, endPoint.X, endPoint.Y, TimeSpan.FromSeconds(1)));
         swipe.AddAction(input.CreatePointerUp(MouseButton.Left));
-        element.GetDriver().PerformActions([swipe]);
+        element.Driver.PerformActions([swipe]);
     }
 }

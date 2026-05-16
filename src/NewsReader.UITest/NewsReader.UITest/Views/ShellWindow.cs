@@ -28,9 +28,9 @@ public record ShellWindow(AppiumDriver Driver)
 
     public void Back()
     {
-        if (Driver.IsAndroid()) ((AndroidDriver)Driver).PressKeyCode(AndroidKeyCode.Back);
-        else if (Driver.IsIOS()) Driver.Navigate().Back();
-        else if (Driver.IsWindows()) Driver.Find("NavigationViewBackButton").SafeClick();
+        if (Driver.IsAndroid) ((AndroidDriver)Driver).PressKeyCode(AndroidKeyCode.Back);
+        else if (Driver.IsIOS) Driver.Navigate().Back();
+        else if (Driver.IsWindows) Driver.Find("NavigationViewBackButton").SafeClick();
         else throw new NotSupportedException();
     }
 
@@ -61,7 +61,7 @@ public record FeedNavigationItem(AppiumElement Element, AppiumElement Parent)
 {
     public AppiumElement TitleLabel => Element.Find("TitleLabel");
 
-    public FeedNavigationItemContextMenu ContextMenu => new(Element.GetDriver());
+    public FeedNavigationItemContextMenu ContextMenu => new(Element.Driver);
 
     public FeedNavigationItemSwipeView SwipeView => new(Parent);
 }
