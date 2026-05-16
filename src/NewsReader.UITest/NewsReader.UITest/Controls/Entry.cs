@@ -10,8 +10,8 @@ public record Entry(AppiumElement Element, string? Placeholder = null)
 
     public void EnterText(string value)
     {
-        Element.Click();
+        Element.SafeClick();
         Element.Clear();
-        Element.SendKeys(value);
+        Element.SafeSendKeys(value);
     }
 }

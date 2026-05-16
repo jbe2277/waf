@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Interactions;
 using System.Drawing;
@@ -46,15 +47,40 @@ public static class ElementHelper
 
     public static void SafeSendKeys(this AppiumElement element, string text)
     {
-        if (element.IsWindows())
+        if (!element.IsWindows()) 
         {
-            foreach (var x in text)
-            {
-                element.SendKeys(x.ToString());
-                Thread.Sleep(200);
-            }
+            element.SendKeys(text);
+            return;
         }
-        else element.SendKeys(text);
+
+        using var cts = new CancellationTokenSource();
+        var expected = element.Text + text;
+        var textToSend = text;
+        try
+        {
+            element.GetDriver().Wait().Until(x =>
+            {
+                element.SendKeys(textToSend);
+                var actual = element.Text;
+                if (string.Equals(expected, actual, StringComparison.Ordinal))
+                {
+                    return true;
+                }                
+                if (expected.StartsWith(actual, StringComparison.Ordinal))
+                {
+                    textToSend = expected[actual.Length..];  // Only send the remaining suffix on the next attempt
+                }
+                else
+                {                    
+                    cts.Cancel();  // Text is corrupted
+                }
+                return false;
+            }, cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            throw new InvalidElementStateException($"Failed to send text '{text}' to element within the expected time. Last known text: '{element.Text}'");
+        }
     }
 
     public static void SwipeRight(this AppiumElement element)
