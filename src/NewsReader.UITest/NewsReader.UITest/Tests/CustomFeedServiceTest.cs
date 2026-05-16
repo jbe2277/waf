@@ -5,9 +5,11 @@ using Xunit;
 namespace UITest.NewsReader.Tests;
 
 [DeviceCollectionTrait(DevicePlatform.Android)] public class AndroidCustomFeedServiceTest : CustomFeedServiceTest { }
+[DeviceCollectionTrait(DevicePlatform.IOS)] public class IOSCustomFeedServiceTest : CustomFeedServiceTest { }
 [DeviceCollectionTrait(DevicePlatform.Windows)] public class WindowsCustomFeedServiceTest : CustomFeedServiceTest { }
 
-// Android: This works only with the Google Android Emulator.
+// Note for Android: This works only with the Google Android Emulator - not physical devices.
+// Note for iOS: This works only with the iOS Simulator - not physical devices.
 public abstract class CustomFeedServiceTest : UITest
 {
     [Fact]
@@ -29,7 +31,7 @@ public abstract class CustomFeedServiceTest : UITest
         await Task.Delay(1000, CancellationToken.None);
 
         Assert.Equal("FeedTitle", addEditFeedView.FeedNameEntry.Text);
-        Assert.Empty(addEditFeedView.FeedErrorLabel.Text);        
+        Assert.Empty(addEditFeedView.TryFeedErrorLabel?.Text ?? "");
         addEditFeedView.AddEditButton.SafeClick();
 
         if (!IsWindows) window.MenuButton.SafeClick();

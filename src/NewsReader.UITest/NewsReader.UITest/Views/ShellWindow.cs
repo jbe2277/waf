@@ -75,7 +75,11 @@ public record FeedNavigationItemContextMenu(AppiumDriver Driver) : ContextMenu(D
 
 public record FeedNavigationItemSwipeView(AppiumElement Element)
 {
-    public AppiumElement EditSwipeItem => Element.Find(MobileBy.AccessibilityId("EditSwipeItem"));
+    public AppiumElement EditSwipeItem => Element.OnPlatform(
+        android: () => Element.Find(MobileBy.AccessibilityId("EditSwipeItem")),
+        iOS: () => Element.Find("Edit"));
 
-    public AppiumElement RemoveSwipeItem => Element.Find(MobileBy.AccessibilityId("RemoveSwipeItem"));
+    public AppiumElement RemoveSwipeItem => Element.OnPlatform(
+        android: () => Element.Find(MobileBy.AccessibilityId("RemoveSwipeItem")),
+        iOS: () => Element.Find("Remove"));
 }
