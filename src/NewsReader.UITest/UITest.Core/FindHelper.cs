@@ -9,23 +9,23 @@ public static class FindHelper
 {
     public static IReadOnlyList<AppiumElement> FindAll(this AppiumDriver driver, string automationId, int atLeast = 0) => WaitFindAll((d, id) => d.FindElements(driver.ById(id)), driver, automationId, atLeast);
 
-    public static IReadOnlyList<AppiumElement> FindAll(this AppiumElement element, string automationId, int atLeast = 0) => WaitFindAll((d, id) => element.FindElements(d.ById(id)), element.GetDriver(), automationId, atLeast, element);
+    public static IReadOnlyList<AppiumElement> FindAll(this AppiumElement element, string automationId, int atLeast = 0) => WaitFindAll((d, id) => element.FindElements(d.ById(id)), element.Driver, automationId, atLeast, element);
 
     public static IReadOnlyList<AppiumElement> FindAll(this AppiumDriver driver, By by, int atLeast = 0) => WaitFindAll((d, id) => d.FindElements(by), driver, by.ToString(), atLeast);
 
-    public static IReadOnlyList<AppiumElement> FindAll(this AppiumElement element, By by, int atLeast = 0) => WaitFindAll((d, id) => element.FindElements(by), element.GetDriver(), by.ToString(), atLeast, element);
+    public static IReadOnlyList<AppiumElement> FindAll(this AppiumElement element, By by, int atLeast = 0) => WaitFindAll((d, id) => element.FindElements(by), element.Driver, by.ToString(), atLeast, element);
 
     public static AppiumElement Find(this AppiumDriver driver, string automationId) => WaitFind((d, id) => d.FindElement(d.ById(id)), driver, automationId);
 
-    public static AppiumElement Find(this AppiumElement element, string automationId) => WaitFind((d, id) => element.FindElement(d.ById(id)), element.GetDriver(), automationId, element);
+    public static AppiumElement Find(this AppiumElement element, string automationId) => WaitFind((d, id) => element.FindElement(d.ById(id)), element.Driver, automationId, element);
 
     public static AppiumElement Find(this AppiumDriver driver, By by) => WaitFind((d, id) => d.FindElement(by), driver, by.ToString());
 
-    public static AppiumElement Find(this AppiumElement element, By by) => WaitFind((d, id) => element.FindElement(by), element.GetDriver(), by.ToString(), element);
+    public static AppiumElement Find(this AppiumElement element, By by) => WaitFind((d, id) => element.FindElement(by), element.Driver, by.ToString(), element);
 
     public static AppiumElement? TryFind(this AppiumDriver driver, string automationId) => TryFind(driver, driver.ById(automationId));
 
-    public static AppiumElement? TryFind(this AppiumElement element, string automationId) => TryFind(element, element.GetDriver().ById(automationId));
+    public static AppiumElement? TryFind(this AppiumElement element, string automationId) => TryFind(element, element.Driver.ById(automationId));
 
     public static AppiumElement? TryFind(this AppiumDriver driver, By by)
     {
@@ -66,7 +66,7 @@ public static class FindHelper
             return driver.Wait().Until(x =>
             {
                 var result = func(driver, automationId);
-                if (driver.IsAndroid())  // Workaround to prevent StaleElementReferenceException later on (e.g. because of an animation)
+                if (driver.IsAndroid)      // Workaround to prevent StaleElementReferenceException later on (e.g. because of an animation)
                 {
                     _ = result.Displayed;  // Might throw StaleElementReferenceException -> repeat until timeout
                 }
@@ -105,7 +105,7 @@ public static class FindHelper
     {
         return $"AId=\"{GetAutomationId(element)}\" TagName=\"{TryGet(() => element.TagName)}\" Text=\"{TryGet(() => element.Text)}\" Rect=\"{TryGet(() => element.Rect.ToString())}\" Id=\"{TryGet(() => element.Id)}\"";
 
-        static string? GetAutomationId(AppiumElement element) => element.GetDriver().PlatformName switch
+        static string? GetAutomationId(AppiumElement element) => element.Driver.PlatformName switch
         {
             MobilePlatform.Android => TryGet(() => element.GetAttribute("resource-id")),
             MobilePlatform.IOS => TryGet(() => element.GetAttribute("name")),

@@ -6,9 +6,9 @@ namespace UITest.NewsReader.Views;
 public record FeedView(AppiumElement Element)
 {
     public AppiumElement SearchButton => Element.OnPlatform(
-        android: () => Element.GetDriver().Find(MobileBy.AccessibilityId("SearchButton")),
-        windows: () => Element.GetDriver().Find("SearchButton"),
-        iOS: () => Element.GetDriver().Find("SearchButton"));
+        android: () => Element.Driver.Find(MobileBy.AccessibilityId("SearchButton")),
+        windows: () => Element.Driver.Find("SearchButton"),
+        iOS: () => Element.Driver.Find("SearchButton"));
 
     public SearchBar SearchBar => new(Element.Find("SearchBar"));
 
@@ -28,7 +28,7 @@ public record FeedItem(AppiumElement Element, AppiumElement Parent)
         var x => throw new InvalidOperationException($"Status: {x} is not supported")
     };
 
-    public FeedItemContextMenu ContextMenu => new(Element.GetDriver());
+    public FeedItemContextMenu ContextMenu => new(Element.Driver);
 
     public FeedItemSwipeView SwipeView => new(Parent);
 }

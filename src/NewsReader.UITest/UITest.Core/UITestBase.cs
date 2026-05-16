@@ -60,11 +60,11 @@ public abstract class UITestBase : IDisposable
 
     public AppiumDriver Driver { get; }
 
-    public bool IsAndroid => Driver.IsAndroid();
+    public bool IsAndroid => Driver.IsAndroid;
 
-    public bool IsIOS => Driver.IsIOS();
+    public bool IsIOS => Driver.IsIOS;
 
-    public bool IsWindows => Driver.IsWindows();
+    public bool IsWindows => Driver.IsWindows;
 
     private AndroidDriver SetupAndroid(Uri serverUri)
     {
