@@ -56,22 +56,23 @@ public static class ElementHelper
         using var cts = new CancellationTokenSource();
         var expected = element.Text + text;
         var textToSend = text;
+        element.SendKeys(textToSend);
         try
         {
             element.GetDriver().Wait().Until(x =>
             {
-                element.SendKeys(textToSend);
                 var actual = element.Text;
                 if (string.Equals(expected, actual, StringComparison.Ordinal))
                 {
                     return true;
-                }                
+                }
                 if (expected.StartsWith(actual, StringComparison.Ordinal))
                 {
                     textToSend = expected[actual.Length..];  // Only send the remaining suffix on the next attempt
+                    element.SendKeys(textToSend);
                 }
                 else
-                {                    
+                {
                     cts.Cancel();  // Text is corrupted
                 }
                 return false;
@@ -79,7 +80,7 @@ public static class ElementHelper
         }
         catch (OperationCanceledException)
         {
-            throw new InvalidElementStateException($"Failed to send text '{text}' to element within the expected time. Last known text: '{element.Text}'");
+            throw new InvalidElementStateException($"Failed to send text '{text}' to element. Text got corrupted, actual: '{element.Text}'");
         }
     }
 
