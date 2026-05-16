@@ -19,6 +19,6 @@ public record SearchBar(AppiumElement Element)
     {
         Click();
         Clear();
-        Entry.SafeSendKeys(text);
+        Entry.SendKeys(text);
     }
 }

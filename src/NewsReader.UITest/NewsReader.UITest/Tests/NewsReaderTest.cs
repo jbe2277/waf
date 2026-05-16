@@ -35,8 +35,8 @@ public abstract class NewsReaderTest : UITest
         window.Back();
         if (IsWindows) Thread.Sleep(1000);
         feedView.SearchButton.SafeClick();
-        feedView.SearchBar.EnterText("DoesNotExist_34jlk534");
-        Assert.Equal("DoesNotExist_34jlk534", feedView.SearchBar.Text);
+        feedView.SearchBar.EnterText("DoesNotExist_");
+        Assert.Equal("DoesNotExist_", feedView.SearchBar.Text);
         if (IsWindows) Thread.Sleep(1000);
         Assert.Empty(feedView.FeedItems);
         feedView.SearchBar.Clear();

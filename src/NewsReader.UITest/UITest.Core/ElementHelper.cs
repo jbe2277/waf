@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Interactions;
 using System.Drawing;
@@ -43,46 +42,6 @@ public static class ElementHelper
             Thread.Sleep(200);
         }
         else element.Click();
-    }
-
-    public static void SafeSendKeys(this AppiumElement element, string text)
-    {
-        if (!element.IsWindows()) 
-        {
-            element.SendKeys(text);
-            return;
-        }
-
-        using var cts = new CancellationTokenSource();
-        var expected = element.Text + text;
-        var textToSend = text;
-        element.SendKeys(textToSend);
-        try
-        {
-            element.GetDriver().Wait().Until(x =>
-            {
-                var actual = element.Text;
-                if (string.Equals(expected, actual, StringComparison.Ordinal))
-                {
-                    return true;
-                }
-                if (expected.StartsWith(actual, StringComparison.Ordinal))
-                {
-                    textToSend = expected[actual.Length..];  // Only send the remaining suffix on the next attempt
-                    element.SendKeys(textToSend);
-                }
-                else
-                {
-                    cts.Cancel();  // Text is corrupted
-                }
-                Thread.Sleep(500);
-                return false;
-            }, cts.Token);
-        }
-        catch (OperationCanceledException)
-        {
-            throw new InvalidElementStateException($"Failed to send text '{text}' to element. Text got corrupted, actual: '{element.Text}'");
-        }
     }
 
     public static void SwipeRight(this AppiumElement element)

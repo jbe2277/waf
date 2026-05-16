@@ -12,6 +12,6 @@ public record Entry(AppiumElement Element, string? Placeholder = null)
     {
         Element.SafeClick();
         Element.Clear();
-        Element.SafeSendKeys(value);
+        Element.SendKeys(value);
     }
 }
