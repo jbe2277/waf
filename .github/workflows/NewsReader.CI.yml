@@ -191,7 +191,7 @@ jobs:
           ./src/NewsReader/NewsReader.MauiSystem/bin/Release/*/iossimulator-arm64/NewsReader.MauiSystem.app/**
         
   Test:
-    runs-on: windows-2025
+    runs-on: ubuntu-latest
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
@@ -203,7 +203,7 @@ jobs:
         dotnet-version: '10'
 
     - name: ⚙️ Install .NET MAUI
-      run: dotnet workload install maui-android maui-ios
+      run: dotnet workload install maui-android
   
     - name: 🕵️ Test
       run: |
