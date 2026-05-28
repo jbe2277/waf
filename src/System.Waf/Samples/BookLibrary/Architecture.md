@@ -51,6 +51,7 @@ flowchart TB
 
   LP_S --> LP_D
   LP_V --> LP_C
+  LP_V --> LP_S
 
   LA_C --> LA_D
   LA_C --> LA_DM

@@ -56,6 +56,7 @@
   <Allowed From="Waf.BookLibrary.Library.Presentation.Services" To="Microsoft.EntityFrameworkCore.*" />
 
   <Allowed From="Waf.BookLibrary.Library.Presentation.Views" To="Waf.BookLibrary.Library.Presentation.Converters" />
+  <Allowed From="Waf.BookLibrary.Library.Presentation.Views" To="Waf.BookLibrary.Library.Presentation.Services" />
 
 
   <!-- Reporting.Applications -->

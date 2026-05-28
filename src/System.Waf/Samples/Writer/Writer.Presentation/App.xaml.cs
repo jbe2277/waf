@@ -1,27 +1,21 @@
-﻿using NLog.Targets.Wrappers;
-using NLog.Targets;
-using NLog;
+﻿using Autofac;
+using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows;
 using System.Windows.Markup;
-using Waf.Writer.Applications.Properties;
-using Microsoft.Extensions.Configuration;
-using Waf.Writer.Presentation.Properties;
-using Autofac;
 using Waf.Writer.Applications;
+using Waf.Writer.Applications.Properties;
+using Waf.Writer.Presentation.Properties;
 using IContainer = Autofac.IContainer;
 
 namespace Waf.Writer.Presentation;
 
 public partial class App
 {
-    private static readonly Lazy<string> logFileName = new(() => ((FileTarget)((AsyncTargetWrapper)LogManager.Configuration.FindTargetByName("fileTarget")).WrappedTarget).FileName.Render(new LogEventInfo()));
     private IContainer? container;
     private IReadOnlyList<IModuleController> moduleControllers = [];
-
-    public static string LogFileName => logFileName.Value;
 
     protected override void OnStartup(StartupEventArgs e)
     {

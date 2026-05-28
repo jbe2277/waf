@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using Waf.Writer.Applications.Views;
+using Waf.Writer.Presentation.Services;
 
 namespace Waf.Writer.Presentation.Views;
 
@@ -44,7 +45,7 @@ public partial class ShellWindow : IShellView
     {
         try
         {
-            Process.Start(new ProcessStartInfo(App.LogFileName) { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo(LogInfo.GetLogFileName()) { UseShellExecute = true });
         }
         catch (Exception ex)
         {

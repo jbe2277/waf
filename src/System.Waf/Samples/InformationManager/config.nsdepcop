@@ -63,6 +63,7 @@
   <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation" To="Autofac.*" />
 
   <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Common.Applications.*" />
+  <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Common.Presentation.*" />
   <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
   <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation.*" To="Waf.InformationManager.Infrastructure.Modules.Applications.*" />
   <Allowed From="Waf.InformationManager.Infrastructure.Modules.Presentation" To="Waf.InformationManager.Infrastructure.Modules.Presentation.*" />
@@ -134,7 +135,7 @@
   <Allowed From="Waf.InformationManager.Assembler" To="NLog.*" />
 
   <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Common.Applications.*" />
-  <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Common.Presentation" />
+  <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Common.Presentation.*" />
   <Allowed From="Waf.InformationManager.Assembler.*" To="Waf.InformationManager.Infrastructure.Interfaces.*" />
   <Allowed From="Waf.InformationManager.Assembler" To="Waf.InformationManager.Assembler.*" />
 </NsDepCopConfig>
