@@ -32,7 +32,7 @@
   <!-- Presentation -->
   <Allowed From="Waf.Writer.Presentation" To="Autofac.*" />
   <Allowed From="Waf.Writer.Presentation" To="Microsoft.Extensions.Configuration" />
-  <Allowed From="Waf.Writer.Presentation" To="NLog.*" />
+  <Allowed From="Waf.Writer.Presentation.*" To="NLog.*" />
 
   <Allowed From="Waf.Writer.Presentation.*" To="Waf.Writer.Applications.*" />
   <Allowed From="Waf.Writer.Presentation.*" To="Waf.Writer.Presentation.Properties" />

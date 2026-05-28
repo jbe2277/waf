@@ -14,7 +14,8 @@
     <PackageReference Include="Autofac" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" />
-    <PackageReference Include="NLog" />
+    <PackageReference Include="NLog.Targets.AtomicFile" />
+    <PackageReference Include="NLog.Targets.Trace" />
   </ItemGroup>
 
   <ItemGroup>

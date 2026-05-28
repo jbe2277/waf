@@ -3,7 +3,7 @@ using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
-using Waf.InformationManager.Common.Applications.Services;
+using Waf.InformationManager.Common.Presentation.Services;
 using Waf.InformationManager.Infrastructure.Interfaces.Applications;
 using Waf.InformationManager.Infrastructure.Modules.Applications.ViewModels;
 using Waf.InformationManager.Infrastructure.Modules.Applications.Views;
@@ -81,7 +81,7 @@ public partial class ShellWindow : IShellView
     {
         try
         {
-            Process.Start(new ProcessStartInfo(AppInfo.LogFileName) { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo(LogInfo.GetLogFileName()) { UseShellExecute = true });
         }
         catch (Exception ex)
         {

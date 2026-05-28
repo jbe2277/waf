@@ -2,6 +2,7 @@
 using System.Waf.Applications;
 using System.Windows;
 using Waf.BookLibrary.Library.Applications.Views;
+using Waf.BookLibrary.Library.Presentation.Services;
 
 namespace Waf.BookLibrary.Library.Presentation.Views;
 
@@ -41,7 +42,7 @@ public partial class ShellWindow : IShellView
     {
         try
         {
-            Process.Start(new ProcessStartInfo(App.LogFileName) { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo(LogInfo.GetLogFileName()) { UseShellExecute = true });
         }
         catch (Exception ex)
         {

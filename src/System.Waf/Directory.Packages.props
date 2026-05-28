@@ -2,12 +2,12 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <!-- WAF -->
     <PackageVersion Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageVersion Include="System.ComponentModel.Composition" Version="4.7.0" />
-    
+
     <!-- Samples-->
     <PackageVersion Include="Autofac" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
@@ -15,8 +15,10 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SQLite" Version="10.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.CommandLine" Version="10.0.3" />
-    <PackageVersion Include="NLog" Version="5.5.1" />
-    
+    <PackageVersion Include="NLog" Version="6.1.3" />
+    <PackageVersion Include="NLog.Targets.AtomicFile" Version="6.1.3" />
+    <PackageVersion Include="NLog.Targets.Trace" Version="6.0.3" />
+
     <!-- Unit tests -->
     <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.4" />
   </ItemGroup>

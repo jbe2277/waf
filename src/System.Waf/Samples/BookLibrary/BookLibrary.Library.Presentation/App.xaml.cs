@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Markup;
 using Waf.BookLibrary.Library.Applications;
 using Waf.BookLibrary.Library.Presentation.Properties;
+using Waf.BookLibrary.Library.Presentation.Services;
 using IContainer = Autofac.IContainer;
 
 namespace Waf.BookLibrary.Library.Presentation;
@@ -38,15 +39,14 @@ public partial class App
         {
             c.Configuration.DefaultCultureInfo = CultureInfo.InvariantCulture;
             var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message} ${exception}";
-            var fileTarget = c.ForTarget("fileTarget").WriteTo(new FileTarget
+            var fileTarget = c.ForTarget("fileTarget").WriteTo(new AtomicFileTarget
             {
-                FileName = LogFileName,
+                FileName = LogInfo.LogBaseFileName,
                 Layout = layout,
-                ConcurrentWrites = true,
                 ArchiveAboveSize = 5_000_000,  // 5 MB
-                MaxArchiveFiles = 1,
-                ArchiveNumbering = ArchiveNumberingMode.Rolling
+                MaxArchiveFiles = 2,
             }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
+            
             var traceTarget = c.ForTarget("traceTarget").WriteTo(new TraceTarget
             {
                 Layout = layout,
@@ -59,10 +59,6 @@ public partial class App
             }
         });
     }
-
-    private static string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationInfo.ProductName);
-
-    public static string LogFileName { get; } = Path.Combine(AppDataPath, "Log", "BookLibrary.log");
 
     protected override void OnStartup(StartupEventArgs e)
     {

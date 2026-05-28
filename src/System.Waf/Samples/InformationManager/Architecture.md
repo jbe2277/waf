@@ -12,6 +12,7 @@ flowchart TB
     direction LR
     CP_CT["Controls"]
     CP_C["Converters"]
+    CP_S["Services"]
   end
 
   subgraph CA["Common.Applications"]
