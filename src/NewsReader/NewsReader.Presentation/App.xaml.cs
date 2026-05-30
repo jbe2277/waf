@@ -7,6 +7,7 @@ using NLog;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
 using LogLevel = NLog.LogLevel;
+using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.Presentation;
 
@@ -40,8 +41,6 @@ public partial class App : Application
         this.appController = appController.Value;
     }
 
-    public static string LogFileName { get; } = Path.Combine(FileSystem.CacheDirectory, "Logging", "AppLog.txt");
-
     public static Window? CurrentWindow { get; private set; }
 
     protected override Window CreateWindow(IActivationState? activationState)
@@ -66,7 +65,7 @@ public partial class App : Application
         if (isCreated) return;   // On Android it seems that this might be called more than once
         isCreated = true;
 
-        Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
+        Log.Default.Info("App started {0}, {1} on {2}", appInfoService.AppName, appInfoService.VersionString, DateTimeOffset.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ssK", CultureInfo.InvariantCulture));
         Log.Default.Info("Device: {0} {1} {2}; Platform: {3} {4}", DeviceInfo.Idiom, DeviceInfo.Manufacturer, DeviceInfo.Model, DeviceInfo.Platform, DeviceInfo.Version);
         appController.Start();
     }
@@ -111,17 +110,16 @@ public partial class App : Application
         LogManager.Setup().LoadConfiguration(c =>
         {
             c.Configuration.DefaultCultureInfo = CultureInfo.InvariantCulture;
-            var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${logger} ${message} ${exception}";
+            var layout = "${date:universalTime=true:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${logger} ${message} ${exception}";
             var fileTarget = c.ForTarget("fileTarget").WriteTo(new FileTarget
             {
-                FileName = LogFileName,
+                FileName = LogInfo.LogBaseFileName,
                 Layout = layout,
                 ArchiveAboveSize = 5_000_000,  // 5 MB
-                MaxArchiveFiles = 1,
-                ArchiveNumbering = ArchiveNumberingMode.Rolling
+                MaxArchiveFiles = 2,
             }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
 #if DEBUG
-            var traceTarget = c.ForTarget("traceTarget").WriteTo(new Services.AppTraceTarget
+            var traceTarget = c.ForTarget("traceTarget").WriteTo(new AppTraceTarget
             {
                 Layout = layout,
             }).WithAsync(AsyncTargetWrapperOverflowAction.Block);
