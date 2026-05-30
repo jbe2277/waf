@@ -1,4 +1,5 @@
 ﻿using Waf.NewsReader.Applications.Views;
+using Waf.NewsReader.Presentation.Services;
 
 namespace Waf.NewsReader.Presentation.Views;
 
@@ -13,7 +14,7 @@ public partial class SettingsView : TabbedPage, ISettingsView
     {
         try
         {
-            await Share.RequestAsync(new ShareFileRequest(new ShareFile(App.LogFileName)));
+            await Share.RequestAsync(new ShareFileRequest(new ShareFile(LogInfo.GetLogFileName())));
         }
         catch (Exception ex)
         {
