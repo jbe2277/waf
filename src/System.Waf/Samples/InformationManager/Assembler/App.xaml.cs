@@ -43,7 +43,7 @@ public partial class App
         LogManager.Setup().LoadConfiguration(c =>
         {
             c.Configuration.DefaultCultureInfo = CultureInfo.InvariantCulture;
-            var layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message} ${exception}";
+            var layout = "${date:universalTime=true:format=yyyy-MM-dd HH\\:mm\\:ss.ff} [${level:format=FirstCharacter}] ${processid} ${logger} ${message} ${exception}";
             var fileTarget = c.ForTarget("fileTarget").WriteTo(new AtomicFileTarget
             {
                 FileName = LogInfo.LogBaseFileName,
