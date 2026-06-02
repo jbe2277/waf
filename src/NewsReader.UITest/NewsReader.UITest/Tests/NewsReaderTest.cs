@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using UITest.NewsReader.Views;
+using Xunit;
 
 namespace UITest.NewsReader.Tests;
 
@@ -49,8 +50,14 @@ public abstract class NewsReaderTest : UITest
         var window = GetShellWindow();
         var feedView = window.FeedView;
         Log.WriteLine("Feed items:");
-        foreach (var x in feedView.FeedItems) Log.WriteLine("  " + x.NameLabel.Text);
-        var item = feedView.FeedItems[0];
+        IReadOnlyList<FeedItem> items = [];
+        Driver.Wait().Until(x => 
+        {
+            items = feedView.FeedItems;
+            return items.Count > 0;
+        });
+        foreach (var x in items) Log.WriteLine("  " + x.NameLabel.Text);
+        var item = items[0];
         Assert.False(item.MarkAsRead);
         
         if (IsWindows)
