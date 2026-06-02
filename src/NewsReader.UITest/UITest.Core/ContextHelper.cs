@@ -19,19 +19,9 @@ public static class ContextHelper
 
         public bool IsWindows => element.Driver.IsWindows;
 
-        public WebDriverWait Wait() => element.WrappedDriver.Wait();
+        public WebDriverWait Wait() => element.Driver.Wait();
 
         public T OnPlatform<T>(Func<T>? android = null, Func<T>? iOS = null, Func<T>? windows = null) => element.Driver.OnPlatform(android, iOS, windows);
-    }
-
-    extension(IWebDriver driver)
-    {
-        public WebDriverWait Wait()
-        {
-            var w = new WebDriverWait(driver, DefaultTimeout);
-            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-            return w;
-        }
     }
 
     extension(AppiumDriver driver)
@@ -41,6 +31,17 @@ public static class ContextHelper
         public bool IsIOS => driver.PlatformName == MobilePlatform.IOS;
 
         public bool IsWindows => driver.PlatformName == MobilePlatform.Windows;
+
+        public WebDriverWait Wait()
+        {
+            var w = new WebDriverWait(driver, DefaultTimeout);
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            if (driver.IsWindows)
+            {
+                w.IgnoreExceptionTypes(typeof(InvalidOperationException));  // Workaround for GetElementId "The specified element ID is either null or the empty string."
+            }
+            return w;
+        }
 
         public T OnPlatform<T>(Func<T>? android = null, Func<T>? iOS = null, Func<T>? windows = null)
         {
