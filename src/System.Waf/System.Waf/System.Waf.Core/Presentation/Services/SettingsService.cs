@@ -44,7 +44,7 @@ namespace System.Waf.Presentation.Services
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <inheritdoc />
-        public T Get<T>() where T : class, new() => (T)settings.GetOrAdd(typeof(T), key => new(() => Load(key))).Value;
+        public T Get<T>() where T : class, new() => (T)settings.GetOrAdd(typeof(T), _ => new(() => Load<T>())).Value;
 
         /// <inheritdoc />
         public void Save()
@@ -99,8 +99,9 @@ namespace System.Waf.Presentation.Services
         {
             foreach (var setting in settingsList)
             {
-                var existingElement = GetSettingElement(document, setting.GetType());
-                var newElement = CreateSettingElement(setting);
+                var settingType = setting.GetType();
+                var existingElement = GetSettingElement(document, settingType);
+                var newElement = CreateSettingElement(setting, settingType);
                 if (existingElement != null) existingElement.ReplaceWith(newElement);
                 else document.Root!.Add(newElement);
             }
@@ -128,25 +129,26 @@ namespace System.Waf.Presentation.Services
 
         private void OnErrorOccurred(SettingsErrorEventArgs e) => ErrorOccurred?.Invoke(this, e);
 
-        private object Load(Type type)
+        private object Load<T>() where T : class, new()
         {
             object? settingObject = null;
             try
             {
-                settingObject = LoadCore(type);
+                settingObject = LoadCore<T>();
             }
             catch (Exception ex)
             {
                 OnErrorOccurred(new(ex, SettingsServiceAction.Open, FileName));
             }
-            return settingObject ?? Activator.CreateInstance(type)!;  // type has default ctor
+            return settingObject ?? new T();
         }
 
-        private object? LoadCore(Type type)
+        private object? LoadCore<T>() where T : class, new()
         {
             if (!File.Exists(FileName)) return null;
 
             using var stream = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var type = typeof(T);
             var element = GetSettingElement(XDocument.Load(stream), type);
             if (element != null)
             {
@@ -169,6 +171,7 @@ namespace System.Waf.Presentation.Services
             return document;
         }
 
+        private static readonly char[] namespaceSeparator = { ':' };
         private static XElement? GetSettingElement(XDocument document, Type settingType)
         {
             var dataContract = settingType.GetCustomAttribute<DataContractAttribute>();
@@ -177,7 +180,7 @@ namespace System.Waf.Presentation.Services
 
             foreach (var element in document.Root!.Elements())
             {
-                var typeValue = (element.Attribute(xsiNamespace + "type")?.Value.Split(new[] { ':' }, 2)) ?? throw new XmlException("Wrong XML format. Cannot read type.");
+                var typeValue = (element.Attribute(xsiNamespace + "type")?.Value.Split(namespaceSeparator, 2)) ?? throw new XmlException("Wrong XML format. Cannot read type.");
                 var typeNamespace = (element.Attribute(XNamespace.Xmlns + typeValue[0])?.Value) ?? throw new XmlException("Wrong XML format. Cannot read type namespace.");
                 var typeName = typeValue[1];
                 if (settingTypeNamespace == typeNamespace && settingTypeName == typeName) return element;
@@ -197,12 +200,12 @@ namespace System.Waf.Presentation.Services
             return name;
         }
 
-        private static XElement CreateSettingElement(object setting)
+        private static XElement CreateSettingElement(object setting, Type settingType)
         {
             var document = new XDocument();
             using (var writer = document.CreateWriter())
             {
-                var dcs = new DataContractSerializer(typeof(List<object>), new[] { setting.GetType() });
+                var dcs = new DataContractSerializer(typeof(List<object>), new[] { settingType });
                 dcs.WriteObject(writer, new List<object> { setting });
             }
             return document.Root!.Elements().Single();
