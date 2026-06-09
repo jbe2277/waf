@@ -20,7 +20,11 @@ namespace System.Waf.Foundation
 #if NET
         [RequiresUnreferencedCode("Uses reflection to discover types at runtime and is not compatible with trimming.")]
 #endif
-        public static IEnumerable<ValidationResult> Validate(object instance) => Validate(instance, instance.GetType());
+        public static IEnumerable<ValidationResult> Validate(object instance)
+        {
+            if (instance is null) throw new ArgumentNullException(nameof(instance));
+            return Validate(instance, instance.GetType());
+        }
 
         internal static IEnumerable<ValidationResult> Validate(object instance,
 #if NET
@@ -28,8 +32,6 @@ namespace System.Waf.Foundation
 #endif
             Type instanceType)
         {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            if (instanceType is null) throw new ArgumentNullException(nameof(instanceType));
             var info = cache.GetOrAdd(instanceType, CreateTypeCache);
             return ValidateCore(instance, instanceType, info);
         }
