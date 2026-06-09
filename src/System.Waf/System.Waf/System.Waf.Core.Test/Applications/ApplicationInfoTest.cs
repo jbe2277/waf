@@ -16,7 +16,9 @@ namespace Test.Waf.Applications
             _ = ApplicationInfo.Version;
             _ = ApplicationInfo.Company;
             _ = ApplicationInfo.Copyright;
+#pragma warning disable CS0618 // Type or member is obsolete
             Assert.IsNotNull(ApplicationInfo.ApplicationPath);
+#pragma warning restore CS0618 // Type or member is obsolete
 
             // The second time it returns the cached values
 
@@ -24,7 +26,9 @@ namespace Test.Waf.Applications
             _ = ApplicationInfo.Version;
             _ = ApplicationInfo.Company;
             _ = ApplicationInfo.Copyright;
+#pragma warning disable CS0618 // Type or member is obsolete
             Assert.IsNotNull(ApplicationInfo.ApplicationPath);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }

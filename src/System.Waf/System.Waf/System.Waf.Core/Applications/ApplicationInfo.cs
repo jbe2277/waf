@@ -6,11 +6,11 @@ namespace System.Waf.Applications
     /// <summary>This class provides information about the running application.</summary>
     public static class ApplicationInfo
     {
-        private static readonly Lazy<string> productName = new Lazy<string>(GetProductName);
-        private static readonly Lazy<string> version = new Lazy<string>(GetVersion);
-        private static readonly Lazy<string> company = new Lazy<string>(GetCompany);
-        private static readonly Lazy<string> copyright = new Lazy<string>(GetCopyright);
-        private static readonly Lazy<string> applicationPath = new Lazy<string>(GetApplicationPath);
+        private static readonly Lazy<string> productName = new(GetProductName);
+        private static readonly Lazy<string> version = new(GetVersion);
+        private static readonly Lazy<string> company = new(GetCompany);
+        private static readonly Lazy<string> copyright = new(GetCopyright);
+        private static readonly Lazy<string> applicationPath = new(GetApplicationPath);
 
         /// <summary>Gets the product name of the application.</summary>
         public static string ProductName => productName.Value;
@@ -25,6 +25,7 @@ namespace System.Waf.Applications
         public static string Copyright => copyright.Value;
 
         /// <summary>Gets the path for the executable file that started the application, not including the executable name.</summary>
+        [Obsolete("This returns an empty string when you publish an app as a single file. Use AppContext.BaseDirectory instead.")]
         public static string ApplicationPath => applicationPath.Value;
 
         private static string GetProductName()
@@ -70,7 +71,9 @@ namespace System.Waf.Applications
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly != null)
             {
+#pragma warning disable IL3000 // Avoid accessing Assembly file path when publishing as a single file
                 return Path.GetDirectoryName(entryAssembly.Location) ?? "";
+#pragma warning restore IL3000 // Avoid accessing Assembly file path when publishing as a single file
             }
             return "";
         }

@@ -26,7 +26,7 @@ internal sealed class DBContextService : IDBContextService
         {
             string dbFile = Path.GetFileName(dataSourcePath);
             Log.Default.Info("Create initial database: {0}", dbFile);            
-            File.Copy(Path.Combine(ApplicationInfo.ApplicationPath, ResourcesDirectoryName, dbFile), dataSourcePath);
+            File.Copy(Path.Combine(AppContext.BaseDirectory, ResourcesDirectoryName, dbFile), dataSourcePath);
         }
 
         Log.Default.Info("Load database: {0}", dataSourcePath);
