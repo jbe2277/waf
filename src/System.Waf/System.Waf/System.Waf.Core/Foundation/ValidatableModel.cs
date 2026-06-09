@@ -11,6 +11,9 @@ namespace System.Waf.Foundation
 {
     /// <summary>Defines a base class for a model that supports validation.</summary>
     [DataContract]
+#if NET
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif    
     public abstract class ValidatableModel : Model, INotifyDataErrorInfo
     {
         private static readonly ValidationResult[] noErrors = Array.Empty<ValidationResult>();
@@ -56,7 +59,7 @@ namespace System.Waf.Foundation
         /// <returns>True if the object is valid, otherwise false.</returns>
         public bool Validate()
         {
-            var validationResults = ValidationHelper.Validate(this);
+            var validationResults = ValidationHelper.Validate(this, GetType());
             UpdateErrors(validationResults);
             return !HasErrors;
         }

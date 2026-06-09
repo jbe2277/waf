@@ -10,22 +10,35 @@ namespace System.Waf.Foundation
     /// <summary>Provides helper methods for validating objects. This class extends the <see cref="Validator"/> class.</summary>
     public static class ValidationHelper
     {
-        private static readonly ConcurrentDictionary<Type, ValidationTypeCache> cache = new ConcurrentDictionary<Type, ValidationTypeCache>();
+        private static readonly ConcurrentDictionary<Type, ValidationTypeCache> cache = new();
 
         /// <summary>Validate the specified object. It considers attached <see cref="ValidationAttribute"/>(s) and the <see cref="IValidatableObject"/> interface.</summary>
         /// <param name="instance">The object to validate.</param>
         /// <returns>All validation errors.</returns>
         /// <remarks>This method is similar to <see cref="Validator.TryValidateObject(object, ValidationContext, ICollection{ValidationResult}, bool)"/> but it validates 
         /// all rules and does not abort when some errors are found. See also: https://github.com/dotnet/runtime/issues/31882 </remarks>
-        public static IEnumerable<ValidationResult> Validate(object instance)
+#if NET
+        [RequiresUnreferencedCode("Uses reflection to discover types at runtime and is not compatible with trimming.")]
+#endif
+        public static IEnumerable<ValidationResult> Validate(object instance) => Validate(instance, instance.GetType());
+
+        internal static IEnumerable<ValidationResult> Validate(object instance,
+#if NET
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
+            Type instanceType)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
-            var instanceType = instance.GetType();
+            if (instanceType is null) throw new ArgumentNullException(nameof(instanceType));
             var info = cache.GetOrAdd(instanceType, CreateTypeCache);
-            return ValidateCore(instance, info);
+            return ValidateCore(instance, instanceType, info);
         }
 
-        private static IEnumerable<ValidationResult> ValidateCore(object instance, ValidationTypeCache info)
+        private static IEnumerable<ValidationResult> ValidateCore(object instance,
+#if NET
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
+            Type instanceType, ValidationTypeCache info)
         {
             foreach (var property in info.ValidationProperties)
             {
@@ -64,7 +77,11 @@ namespace System.Waf.Foundation
             return !(result is null);
         }
 
-        private static ValidationTypeCache CreateTypeCache(Type instanceType)
+        private static ValidationTypeCache CreateTypeCache(
+#if NET
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
+            Type instanceType)
         {
             var attributes = instanceType.GetCustomAttributes(true).OfType<ValidationAttribute>().ToArray();
             var propertyInfos = instanceType.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x => !x.GetIndexParameters().Any());
