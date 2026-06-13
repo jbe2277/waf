@@ -1,10 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 using System.Waf.Foundation;
 
 namespace System.Waf.Applications.Services
 {
     /// <summary>Base class for user settings.</summary>
     [DataContract]
+#if NET
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
     public abstract class UserSettingsBase : Model, IExtensibleDataObject
     {
         /// <summary>Initializes a new instance of the UserSettingsBase.</summary>

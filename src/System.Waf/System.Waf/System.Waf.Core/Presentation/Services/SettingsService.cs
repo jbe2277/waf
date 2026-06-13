@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -44,7 +45,11 @@ namespace System.Waf.Presentation.Services
         public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
         /// <inheritdoc />
-        public T Get<T>() where T : class, new() => (T)settings.GetOrAdd(typeof(T), _ => new(() => Load<T>())).Value;
+        public T Get<
+#if NET
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
+        T>() where T : class, new() => (T)settings.GetOrAdd(typeof(T), _ => new(() => Load<T>())).Value;
 
         /// <inheritdoc />
         public void Save()
@@ -152,14 +157,14 @@ namespace System.Waf.Presentation.Services
             var element = GetSettingElement(XDocument.Load(stream), type);
             if (element != null)
             {
-                var serializer = new DataContractSerializer(typeof(List<object>), new[] { type });
+                var serializer = new DataContractSerializer(typeof(object[]), new[] { type });
                 var document = CreateEmptyDocument();
                 document.Root!.Add(element);
                 using var memoryStream = new MemoryStream();
                 document.Save(memoryStream);
                 memoryStream.Position = 0;
                 var settingObject = serializer.ReadObject(memoryStream);
-                return ((List<object>)settingObject!).Single();
+                return ((object[])settingObject!).Single();
             }
             return null;
         }
@@ -205,8 +210,8 @@ namespace System.Waf.Presentation.Services
             var document = new XDocument();
             using (var writer = document.CreateWriter())
             {
-                var dcs = new DataContractSerializer(typeof(List<object>), new[] { settingType });
-                dcs.WriteObject(writer, new List<object> { setting });
+                var dcs = new DataContractSerializer(typeof(object[]), new[] { settingType });
+                dcs.WriteObject(writer, new object[] { setting });
             }
             return document.Root!.Elements().Single();
         }

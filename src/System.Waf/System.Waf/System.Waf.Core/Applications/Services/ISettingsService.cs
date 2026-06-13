@@ -1,4 +1,6 @@
-﻿namespace System.Waf.Applications.Services
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System.Waf.Applications.Services
 {
     /// <summary>Service that is responsible to load and save user settings.</summary>
     public interface ISettingsService
@@ -17,7 +19,11 @@
         /// </summary>
         /// <typeparam name="T">The type of the user settings object.</typeparam>
         /// <returns>The user settings object.</returns>
-        T Get<T>() where T : class, new();
+        T Get<
+#if NET
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+#endif
+            T>() where T : class, new();
 
         /// <summary>
         /// Saves all user setting objects. Save is also called when this service gets disposed to ensure that the latest changes are persisted.
