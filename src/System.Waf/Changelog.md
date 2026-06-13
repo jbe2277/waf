@@ -1,5 +1,20 @@
 ﻿# Changelog
 
+### Version 8.3.0 (Release)
+- WAF: `ValidatableModel`: Support trimming and minor performance improvement.
+- WAF: `SettingsService`: Support trimming; refactor for type safety and clarity.
+- **OBSOLETE:** WAF: Mark `ApplicationInfo.ApplicationPath` as obsolete.
+- Samples: Migrate to .NET 10.
+- Samples: Add NsDepCop for layer validation and Architecture.md to visualize the dependencies (Mermaid).
+- Samples: Migrate to NLog 6.
+- Samples: Migrate UI tests to use .NET 10 and MTP (Microsoft Test Platform)
+- NewsReader: Migrate to MAUI 10 / .NET 10.
+- NewsReader: Migrate to NLog 6.
+- NewsReader: Add support for building the Android version on Linux.
+- NewsReader: Add NsDepCop for layer validation and Architecture.md to visualize the dependencies (Mermaid).
+- NewsReader: Migrate UI tests to use .NET 10 and MTP (Microsoft Test Platform)
+- NewsReader: Add UI tests for iOS using the iOS Simulator on GitHub runners.
+
 ### Version 8.2.0 (Release)
 - WAF: `RecentFileList`: Add a `Clear` method.
 - WAF: `TraceSourceExtensions`: Enable AggressiveInlining for better performance.
