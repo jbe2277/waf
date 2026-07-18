@@ -55,7 +55,7 @@ jobs:
           ./**/publish/*Signed.apk
 
   Windows:
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: GetVersion
     steps:
     - name: 🔖 Check-out
