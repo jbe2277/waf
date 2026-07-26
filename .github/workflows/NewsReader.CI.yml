@@ -190,7 +190,7 @@ jobs:
         path: |
           ./src/NewsReader/NewsReader.MauiSystem/bin/Release/*/iossimulator-arm64/NewsReader.MauiSystem.app/**
         
-  Test:
+  UnitTest:
     runs-on: ubuntu-latest
     needs: GetVersion
     steps:
@@ -210,3 +210,126 @@ jobs:
         echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader
         dotnet test --solution ./NewsReader.slnx -c:Release -p:Version=${{ needs.GetVersion.outputs.version }}
+
+  AndroidUITest:
+    runs-on: ubuntu-latest
+    needs: Android
+    steps:
+      - name: 🔖 Check-out
+      uses: actions/checkout@v6
+
+    - name: 📦 Download APK
+      uses: actions/download-artifact@v6
+      with:
+        name: NewsReaderAndroid
+        path: ./NewsReaderAndroid
+
+    - name: ⚙️ Enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: ⚙️ Start Android Emulator
+      run: |
+        export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+      
+        echo "Installing system image"
+        echo "y" | sdkmanager "system-images;android-35;google_atd;x86_64"
+
+        echo "Setting ANDROID_AVD_HOME"
+        export ANDROID_AVD_HOME=$HOME/.config/.android/avd
+
+        echo "Creating AVD"
+        echo "no" | avdmanager create avd -n test_emulator -k "system-images;android-35;google_atd;x86_64" --device "pixel_7" --force
+
+        echo "Starting emulator"
+        emulator -avd test_emulator -no-audio -no-boot-anim -no-window -no-snapshot &
+
+    - name: ⚙️ Install Appium Server
+      run: |
+        npm install appium -g
+        appium driver install uiautomator2
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/out/NewsReader.UITest
+        appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
+
+    - name: ⚙️ Wait for Android Emulator to complete booting
+      run: |
+        export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
+
+    - name: 🖥️ UI Test
+      env:
+        UITestApkFile: NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY        
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: NewsReaderUITestResults
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
+  
+  iOSUITest:
+    runs-on: macos-26
+    needs: iOS
+    steps:
+    - name: 🔖 Check-out
+      uses: actions/checkout@v6
+
+    - name: 📦 Download Simulator App
+      uses: actions/download-artifact@v6
+       with:
+         name: NewsReaderiOSSimulator
+         path: ./NewsReaderiOSSimulator  
+
+    - name: ⚙️ Show available simulators 
+      run: xcrun simctl list devices available
+
+    - name: ⚙️ Create and boot simulator and install app
+      run: |
+        DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-17"
+        RUNTIME=$(xcrun simctl list runtimes | grep 'iOS 26.4' | grep -o 'com.apple.CoreSimulator.SimRuntime.iOS-[0-9-]*' | head -1)
+        UDID=$(xcrun simctl create "CI iPhone" "$DEVICE_TYPE" "$RUNTIME")
+        echo "UITestDeviceId=$UDID" >> "$GITHUB_ENV"
+        xcrun simctl boot "$UDID"
+        open -a Simulator   # <-- open the UI so Appium doesn't need to restart it
+        xcrun simctl bootstatus "$UDID" -b
+        xcrun simctl install "$UDID" NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+
+    - name: ⚙️ Install Appium Server
+      run: |
+        npm install appium -g
+        appium driver install xcuitest
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/out/NewsReader.UITest
+        appium > $GITHUB_WORKSPACE/out/NewsReader.UITest/appium.log 2>&1 &
+
+    - name: 🖥️ UI Test
+      env:
+        UITestApp: NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=IOS
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: NewsReaderUITestResults
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
