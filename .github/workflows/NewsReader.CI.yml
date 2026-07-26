@@ -219,7 +219,7 @@ jobs:
       uses: actions/checkout@v6
 
     - name: 📦 Download APK
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         name: NewsReaderAndroid
         path: ./NewsReaderAndroid
@@ -287,7 +287,7 @@ jobs:
       uses: actions/checkout@v6
 
     - name: 📦 Download Simulator App
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         name: NewsReaderiOSSimulator
         path: ./NewsReaderiOSSimulator  
