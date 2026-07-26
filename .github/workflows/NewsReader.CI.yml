@@ -230,7 +230,7 @@ jobs:
       env:
         UITestApkFile: NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY        
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY        
         cd ./src/NewsReader.UITest
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
 
@@ -285,7 +285,7 @@ jobs:
       env:
         UITestApp: NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader.UITest
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=IOS
 
