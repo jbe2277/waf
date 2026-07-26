@@ -215,7 +215,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Android
     steps:
-      - name: 🔖 Check-out
+    - name: 🔖 Check-out
       uses: actions/checkout@v6
 
     - name: 📦 Download APK
