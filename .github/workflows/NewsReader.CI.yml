@@ -113,42 +113,6 @@ jobs:
         path: |
           ./**/AppPackages/**/NewsReader*.msix
     
-    - name: ⚙️ Install App
-      shell: pwsh
-      run: |
-        $rootFolder = ".\src\NewsReader\NewsReader.MauiSystem\AppPackages\"
-        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *x64.msix | Select-Object -First 1
-        Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
-        Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
-        Add-AppxPackage -Path $msixFile
-        Get-AppxPackage -Name Waf.NewsReader
-    
-    - name: ⚙️ Install Appium Server
-      shell: pwsh  
-      run: |
-        npm install -g appium
-        appium driver install windows
-        appium --version
-
-    - name: ⚙️ Start Appium Server
-      shell: bash
-      run: appium &
-      
-    - name: 🖥️ UI Test
-      run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
-        cd ./src/NewsReader.UITest
-        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait "DevicePlatform=Windows"
-
-    - name: 📦 Upload UI Test results
-      uses: actions/upload-artifact@v6
-      if: always()
-      with:
-        name: NewsReaderUITestResults
-        if-no-files-found: ignore
-        path: |
-          out/NewsReader.UITest/
-
   iOS:
     runs-on: macos-26
     needs: GetVersion
@@ -266,7 +230,7 @@ jobs:
       env:
         UITestApkFile: NewsReaderAndroid/src/NewsReader/NewsReader.MauiSystem/bin/Release/net10.0-android/publish/Waf.NewsReader-Signed.apk
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY        
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY        
         cd ./src/NewsReader.UITest
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=Android
 
@@ -274,7 +238,7 @@ jobs:
       uses: actions/upload-artifact@v6
       if: always()
       with:
-        name: NewsReaderUITestResults
+        name: UITestAndroid
         if-no-files-found: ignore
         path: |
           out/NewsReader.UITest/
@@ -321,7 +285,7 @@ jobs:
       env:
         UITestApp: NewsReaderiOSSimulator/net10.0-ios/iossimulator-arm64/NewsReader.MauiSystem.app
       run: |
-        echo "## 🕵️ Test Results - NewsReader.UITest.sln" >> $Env:GITHUB_STEP_SUMMARY
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/NewsReader.UITest
         dotnet test --solution ./NewsReader.UITest.slnx --filter-trait DevicePlatform=IOS
 
@@ -329,7 +293,56 @@ jobs:
       uses: actions/upload-artifact@v6
       if: always()
       with:
-        name: NewsReaderUITestResults
+        name: UITestiOS
+        if-no-files-found: ignore
+        path: |
+          out/NewsReader.UITest/
+
+  WindowsUITest:
+    runs-on: windows-2025
+    needs: Windows
+    steps:
+    - name: 🔖 Check-out
+      uses: actions/checkout@v6
+
+    - name: 📦 Download Windows App
+      uses: actions/download-artifact@v8
+      with:
+        name: NewsReaderWindows
+        path: ./NewsReaderWindows
+
+    - name: ⚙️ Install App
+      shell: pwsh
+      run: |
+        $rootFolder = "./NewsReaderWindows"
+        $msixFile = Get-ChildItem -Path $rootFolder -Recurse -Filter *x64.msix | Select-Object -First 1
+        Export-Certificate -Cert (Get-AuthenticodeSignature -FilePath $msixFile).SignerCertificate -FilePath ".\App.cer"
+        Import-Certificate -FilePath ".\App.cer" -CertStoreLocation "Cert:\LocalMachine\TrustedPeople"
+        Add-AppxPackage -Path $msixFile
+        Get-AppxPackage -Name Waf.NewsReader
+    
+    - name: ⚙️ Install Appium Server
+      shell: pwsh  
+      run: |
+        npm install -g appium
+        appium driver install windows
+        appium --version
+
+    - name: ⚙️ Start Appium Server
+      shell: bash
+      run: appium &
+      
+    - name: 🖥️ UI Test
+      run: |
+        echo "## 🕵️ Test Results - NewsReader.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
+        cd ./src/NewsReader.UITest
+        dotnet test --solution ./NewsReader.UITest.slnx --filter-trait "DevicePlatform=Windows"
+
+    - name: 📦 Upload UI Test results
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: UITestWindows
         if-no-files-found: ignore
         path: |
           out/NewsReader.UITest/
