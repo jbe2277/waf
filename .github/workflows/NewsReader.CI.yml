@@ -238,7 +238,7 @@ jobs:
       uses: actions/upload-artifact@v6
       if: always()
       with:
-        name: NewsReaderUITestResults
+        name: UITestAndroid
         if-no-files-found: ignore
         path: |
           out/NewsReader.UITest/
@@ -293,7 +293,7 @@ jobs:
       uses: actions/upload-artifact@v6
       if: always()
       with:
-        name: NewsReaderUITestResults
+        name: UITestiOS
         if-no-files-found: ignore
         path: |
           out/NewsReader.UITest/
@@ -342,7 +342,7 @@ jobs:
       uses: actions/upload-artifact@v6
       if: always()
       with:
-        name: NewsReaderUITestResults
+        name: UITestWindows
         if-no-files-found: ignore
         path: |
           out/NewsReader.UITest/
