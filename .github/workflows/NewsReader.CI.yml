@@ -288,9 +288,9 @@ jobs:
 
     - name: 📦 Download Simulator App
       uses: actions/download-artifact@v6
-       with:
-         name: NewsReaderiOSSimulator
-         path: ./NewsReaderiOSSimulator  
+      with:
+        name: NewsReaderiOSSimulator
+        path: ./NewsReaderiOSSimulator  
 
     - name: ⚙️ Show available simulators 
       run: xcrun simctl list devices available
