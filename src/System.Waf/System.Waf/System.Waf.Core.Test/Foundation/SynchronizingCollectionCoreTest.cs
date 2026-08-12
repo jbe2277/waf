@@ -40,7 +40,7 @@ namespace Test.Waf.Foundation
             NotifyCollectionChangedEventHandler handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(3, e.NewStartingIndex);
                 Assert.AreEqual(originalCollection.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
@@ -55,7 +55,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(0, e.NewStartingIndex);
                 Assert.AreEqual(originalCollection[0], e.NewItems!.Cast<MyDataModel>().Single().Model);
@@ -74,7 +74,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
                 Assert.AreEqual(2, e.OldStartingIndex);
                 Assert.AreEqual(itemToRemove, e.OldItems!.Cast<MyDataModel>().Single().Model);
@@ -90,7 +90,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Replace, e.Action);
                 Assert.AreEqual(1, e.NewStartingIndex);
                 Assert.AreEqual(1, e.OldStartingIndex);
@@ -107,7 +107,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Move, e.Action);
                 Assert.AreEqual(0, e.OldStartingIndex);
                 Assert.AreEqual(2, e.NewStartingIndex);
@@ -122,7 +122,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Reset, e.Action);
             };
             synchronizingCollection.CollectionChanged += handler;
@@ -151,7 +151,7 @@ namespace Test.Waf.Foundation
             NotifyCollectionChangedEventHandler handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(3, e.NewStartingIndex);
                 Assert.AreEqual(originalCollection.Last(), e.NewItems!.Cast<MyDataModel>().Single().Model);
@@ -170,7 +170,7 @@ namespace Test.Waf.Foundation
             handler = (sender, e) =>
             {
                 handlerCalled = true;
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
                 Assert.AreEqual(2, e.OldStartingIndex);
                 Assert.AreEqual(itemToRemove, e.OldItems!.Cast<MyDataModel>().Single().Model);
@@ -185,7 +185,7 @@ namespace Test.Waf.Foundation
             int handlerCalledCount = 0;
             handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 if (handlerCalledCount == 0)
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
@@ -212,7 +212,7 @@ namespace Test.Waf.Foundation
             handlerCalledCount = 0;
             handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 if (handlerCalledCount == 0)
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Reset, e.Action);
@@ -240,7 +240,7 @@ namespace Test.Waf.Foundation
             bool handlerCalled = false;
             PropertyChangedEventHandler handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingCollection, sender);
+                Assert.AreSame(synchronizingCollection, sender);
                 if (e.PropertyName == nameof(SynchronizingCollectionCore<MyDataModel, MyModel>.Count))
                 {
                     handlerCalled = true;

@@ -87,7 +87,7 @@ namespace Test.Waf.Foundation
 
             void PropertyChangedHandler(object? sender, PropertyChangedEventArgs e)
             {
-                Assert.AreEqual(list, sender);
+                Assert.AreSame(list, sender);
                 if (e.PropertyName == nameof(list.Count)) countChangedHandlerCalled = true;
             }
         }

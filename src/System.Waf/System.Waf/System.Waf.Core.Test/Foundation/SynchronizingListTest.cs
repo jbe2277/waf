@@ -197,7 +197,7 @@ namespace Test.Waf.Foundation
             int customHandlerCalled = 0;
             handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingList, sender);
+                Assert.AreSame(synchronizingList, sender);
                 if (customHandlerCalled == 0)
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Remove, e.Action);
@@ -224,7 +224,7 @@ namespace Test.Waf.Foundation
             customHandlerCalled = 0;
             handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingList, sender);
+                Assert.AreSame(synchronizingList, sender);
                 if (customHandlerCalled == 0)
                 {
                     Assert.AreEqual(NotifyCollectionChangedAction.Reset, e.Action);
@@ -296,7 +296,7 @@ namespace Test.Waf.Foundation
             bool handlerCalled = false;
             PropertyChangedEventHandler handler = (sender, e) =>
             {
-                Assert.AreEqual(synchronizingList, sender);
+                Assert.AreSame(synchronizingList, sender);
                 if (e.PropertyName == nameof(SynchronizingList<MyDataModel, MyModel>.Count))
                 {
                     handlerCalled = true;
