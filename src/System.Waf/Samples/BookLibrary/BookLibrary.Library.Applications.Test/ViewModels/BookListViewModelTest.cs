@@ -26,7 +26,7 @@ public class BookListViewModelTest
         var bookDataModels = new SynchronizingList<BookDataModel, Book>(books, b => new BookDataModel(b, dummyCommand));
         var bookListViewModel = new BookListViewModel(bookListView) { Books = bookDataModels };
 
-        Assert.AreEqual(bookDataModels, bookListViewModel.Books);
+        Assert.AreSame(bookDataModels, bookListViewModel.Books);
         Assert.IsNull(bookListViewModel.SelectedBook);
         Assert.IsFalse(bookListViewModel.SelectedBooks.Any());
 

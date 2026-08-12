@@ -243,7 +243,7 @@ public class BookControllerTest : ApplicationsTest
             Assert.IsTrue(view.IsVisible);
             LendToViewModel viewModel = view.ViewModel;
             Assert.AreEqual(fellowship, viewModel.Book);
-            Assert.AreEqual(entityService.Persons, viewModel.Persons);
+            Assert.AreSame(entityService.Persons, viewModel.Persons);
             Assert.IsFalse(viewModel.IsLendTo);
             viewModel.IsLendTo = true;
 
