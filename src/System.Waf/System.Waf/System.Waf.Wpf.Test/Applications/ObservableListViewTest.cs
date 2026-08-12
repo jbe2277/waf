@@ -46,7 +46,7 @@ namespace Test.Waf.Applications
             void Handler(object? sender, NotifyCollectionChangedEventArgs e)
             {
                 handlerCalled = true;
-                Assert.AreEqual(listView, sender);
+                Assert.AreSame(listView, sender);
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, e.Action);
                 Assert.AreEqual(1, e.NewStartingIndex);
                 Assert.AreEqual(originalCollection.Last(), e.NewItems!.Cast<MyModel>().Single());

@@ -22,7 +22,7 @@ public class SaveChangesViewModelTest
         var view = new MockSaveChangesView();
         var viewModel = new SaveChangesViewModel(view) { Documents = documents };
 
-        Assert.AreEqual(documents, viewModel.Documents);
+        Assert.AreSame(documents, viewModel.Documents);
 
         var owner = new object();
         Assert.IsFalse(view.IsVisible);

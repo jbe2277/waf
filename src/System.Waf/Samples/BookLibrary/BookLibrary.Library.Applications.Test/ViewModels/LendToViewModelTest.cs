@@ -28,15 +28,15 @@ public class LendToViewModelTest : ApplicationsTest
         var lendToView = new MockLendToView();
         var lendToViewModel = new LendToViewModel(lendToView) { Book = book, Persons = persons, SelectedPerson = book.LendTo };
 
-        Assert.AreEqual(book, lendToViewModel.Book);
-        Assert.AreEqual(persons, lendToViewModel.Persons);
+        Assert.AreSame(book, lendToViewModel.Book);
+        Assert.AreSame(persons, lendToViewModel.Persons);
 
         // Show the dialog
         var owner = new object();
         Action<MockLendToView> showDialogAction = _ =>
         {
             Assert.IsTrue(lendToView.IsVisible);
-            Assert.AreEqual(owner, lendToView.Owner);
+            Assert.AreSame(owner, lendToView.Owner);
 
             // Check the default values
             Assert.IsTrue(lendToViewModel.IsLendTo);

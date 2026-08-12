@@ -20,7 +20,7 @@ public class PersonListViewModelTest : ApplicationsTest
         var personListView = new MockPersonListView();
         var personListViewModel = new PersonListViewModel(personListView) { Persons = persons };
 
-        Assert.AreEqual(persons, personListViewModel.Persons);
+        Assert.AreSame(persons, personListViewModel.Persons);
         Assert.IsNull(personListViewModel.SelectedPerson);
         Assert.IsFalse(personListViewModel.SelectedPersons.Any());
 

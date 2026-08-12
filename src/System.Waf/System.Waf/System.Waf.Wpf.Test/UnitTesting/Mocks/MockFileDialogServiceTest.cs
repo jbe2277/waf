@@ -23,7 +23,7 @@ namespace Test.Waf.UnitTesting.Mocks
 
             Assert.AreEqual(FileDialogType.OpenFileDialog, fileDialogService.FileDialogType);
             Assert.AreEqual(owner, fileDialogService.Owner);
-            Assert.AreEqual(fileTypes, fileDialogService.FileTypes);
+            Assert.AreSame(fileTypes, fileDialogService.FileTypes);
             Assert.AreEqual(fileType, fileDialogService.DefaultFileType);
             Assert.AreEqual("defaultFileName", fileDialogService.DefaultFileName);
 
@@ -41,7 +41,7 @@ namespace Test.Waf.UnitTesting.Mocks
 
             Assert.AreEqual(FileDialogType.SaveFileDialog, fileDialogService.FileDialogType);
             Assert.AreEqual(owner, fileDialogService.Owner);
-            Assert.AreEqual(fileTypes, fileDialogService.FileTypes);
+            Assert.AreSame(fileTypes, fileDialogService.FileTypes);
             Assert.AreEqual(fileType, fileDialogService.DefaultFileType);
             Assert.AreEqual("defaultFileName", fileDialogService.DefaultFileName);
 
