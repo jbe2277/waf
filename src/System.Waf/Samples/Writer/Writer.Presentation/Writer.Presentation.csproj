@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <RuntimeHostConfigurationOption Include="Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection" Value="true" />
+    <RuntimeHostConfigurationOption Include="Switch.System.Windows.DisableXpsPackageBoundaryRestriction" Value="true" />
   </ItemGroup>
 
   <ItemGroup>
