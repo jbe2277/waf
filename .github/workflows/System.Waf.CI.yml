@@ -7,6 +7,8 @@ on:
     - 'src/Samples.UITest/**'
     - '.github/workflows/**' 
 
+  workflow_dispatch:
+
 jobs:
   build:
     name: 🛠️ Build and test
