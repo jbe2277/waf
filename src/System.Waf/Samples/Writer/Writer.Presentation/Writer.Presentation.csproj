@@ -11,7 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <RuntimeHostConfigurationOption Include="Switch.System.Windows.DisableXpsPackageBoundaryRestriction" Value="true" />
+    <!-- Workaround: See https://github.com/dotnet/wpf/issues/11836 -->
+    <RuntimeHostConfigurationOption Include="System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization" Value="false" />
+    <RuntimeHostConfigurationOption Include="CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS" Value="false" />
+    <RuntimeHostConfigurationOption Include="Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection" Value="true" />
   </ItemGroup>
 
   <ItemGroup>
