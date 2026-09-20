@@ -120,11 +120,9 @@ jobs:
     - name: 🔖 Check-out
       uses: actions/checkout@v6
 
-    - name: ⚙️ Set Xcode version
+    - name: ⚙️ Select Xcode
       run: |
-        XCODE_ROOT=/Applications/Xcode_26.6.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV       # set environment variable to specify Xcode for Mono and Xamarin
-        sudo xcode-select -s $XCODE_ROOT
+        echo "DEVELOPER_DIR=/Applications/Xcode_26.6.app" >> "$GITHUB_ENV"
     
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v5
