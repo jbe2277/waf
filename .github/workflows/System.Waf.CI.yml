@@ -9,11 +9,11 @@ on:
 
 jobs:
   build:
-    name: 🛠️ Build and test
+    name: 🔨 Build and test
     runs-on: windows-2022
 
     steps:
-    - name: 🔖 Check-out
+    - name: 📥 Check-out
       uses: actions/checkout@v6
       with:
         fetch-depth: 0
@@ -23,12 +23,12 @@ jobs:
       with:
         dotnet-version: '10'
 
-    - name: 🛠️ Build
+    - name: 🔨 Build
       run: dotnet build ./src/System.Waf/System.Waf.slnx -c Release -p:ContinuousIntegrationBuild=true
 
-    - name: 🕵️ Test
+    - name: 🧪 Test
       run: |
-        echo "## 🕵️ Test Results - System.Waf.slnx" >> $Env:GITHUB_STEP_SUMMARY
+        echo "## 🧪 Test Results - System.Waf.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/System.Waf
         dotnet test --solution ./System.Waf.slnx --coverage --ignore-exit-code 8
       # Ignore exit code 8 - test session ran zero tests; https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-exit-codes
@@ -44,17 +44,17 @@ jobs:
 
     - name: 🖥️ UI Test
       run: |
-        echo "## 🕵️ Test Results - Samples.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
+        echo "## 🖥️ Test Results - Samples.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/Samples.UITest
         dotnet test --solution ./Samples.UITest.slnx --max-parallel-test-modules 1
 
-    - name: 🕵️ Code Coverage
+    - name: 📊 Code Coverage
       run: |
         dotnet tool update -g dotnet-coverage
         dotnet-coverage merge --output ./out/CodeCoverage/System.Waf.cobertura.xml --output-format cobertura "./src/**/TestResults/**/*.coverage"
         dotnet tool update -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:./out/CodeCoverage/System.Waf.cobertura.xml -targetdir:./out/CodeCoverage -reporttypes:"MarkdownSummaryGithub"
-        echo "## 🕵️ Code Coverage" >> $Env:GITHUB_STEP_SUMMARY
+        echo "## 📊 Code Coverage" >> $Env:GITHUB_STEP_SUMMARY
         cat ./out/CodeCoverage/SummaryGithub.md >> $Env:GITHUB_STEP_SUMMARY
         
     - name: 📦 Upload UI Test results
