@@ -1,13 +1,15 @@
-﻿using OpenQA.Selenium.Appium.Enums;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
+using System.Runtime.CompilerServices;
 
 namespace UITest;
 
 public static class ContextHelper
 {
-    public static TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromSeconds(10);
+    private static readonly TimeSpan defaultTimeout = TimeSpan.FromSeconds(10);
+    private static readonly ConditionalWeakTable<AppiumDriver, StrongBox<TimeSpan>> driverDefaultTimeouts = [];
 
     extension(AppiumElement element)
     {
@@ -32,9 +34,15 @@ public static class ContextHelper
 
         public bool IsWindows => driver.PlatformName == MobilePlatform.Windows;
 
+        public TimeSpan DefaultTimeout
+        {
+            get => driverDefaultTimeouts.TryGetValue(driver, out var box) ? box.Value : defaultTimeout;
+            set => driverDefaultTimeouts.AddOrUpdate(driver, new StrongBox<TimeSpan>(value));
+        }
+
         public WebDriverWait Wait()
         {
-            var w = new WebDriverWait(driver, DefaultTimeout);
+            var w = new WebDriverWait(driver, driver.DefaultTimeout);
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             if (driver.IsWindows)
             {
@@ -49,6 +57,28 @@ public static class ContextHelper
             else if (driver.IsIOS && iOS is not null) return iOS();
             else if (driver.IsWindows && windows is not null) return windows();
             throw new NotSupportedException($"Platform '{driver.PlatformName}' is not supported");
+        }
+
+        public AppiumElement? TryGet(Func<AppiumElement?> accessElement)
+        {
+            var defaultTimeout = driver.DefaultTimeout;
+            driver.DefaultTimeout = TimeSpan.Zero;
+            try
+            {
+                return accessElement();
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return null;
+            }
+            finally
+            {
+                driver.DefaultTimeout = defaultTimeout;
+            }
         }
     }
 }

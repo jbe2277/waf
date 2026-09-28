@@ -9,7 +9,7 @@ public record AddEditFeedView(AppiumElement Element)
 
     public AppiumElement LoadFeedButton => Element.Find("LoadFeedButton");
 
-    public AppiumElement? TryLoadErrorLabel => Element.TryFind("LoadErrorLabel");
+    public AppiumElement LoadErrorLabel => Element.Find("LoadErrorLabel");
 
     public AppiumElement FeedTitleLabel => Element.Find("FeedTitleLabel");
 
@@ -18,7 +18,6 @@ public record AddEditFeedView(AppiumElement Element)
     public AppiumElement UseTitleAsNameButton => Element.Find("UseTitleAsNameButton");
 
     public AppiumElement FeedErrorLabel => Element.Find("FeedErrorLabel");
-    public AppiumElement? TryFeedErrorLabel => Element.TryFind("FeedErrorLabel");
 
     public AppiumElement AddEditButton => Element.Find("AddEditButton");
 }
