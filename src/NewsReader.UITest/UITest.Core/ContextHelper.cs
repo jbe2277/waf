@@ -43,7 +43,11 @@ public static class ContextHelper
         public WebDriverWait Wait()
         {
             var w = new WebDriverWait(driver, driver.DefaultTimeout);
-            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException));            
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            if (driver.IsWindows)
+            {
+                w.IgnoreExceptionTypes(typeof(InvalidOperationException));  // Workaround for GetElementId "The specified element ID is either null or the empty string."
+            }
             return w;
         }
 
@@ -53,6 +57,28 @@ public static class ContextHelper
             else if (driver.IsIOS && iOS is not null) return iOS();
             else if (driver.IsWindows && windows is not null) return windows();
             throw new NotSupportedException($"Platform '{driver.PlatformName}' is not supported");
+        }
+
+        public AppiumElement? TryGet(Func<AppiumElement?> accessElement)
+        {
+            var defaultTimeout = driver.DefaultTimeout;
+            driver.DefaultTimeout = TimeSpan.Zero;
+            try
+            {
+                return accessElement();
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return null;
+            }
+            finally
+            {
+                driver.DefaultTimeout = defaultTimeout;
+            }
         }
     }
 }

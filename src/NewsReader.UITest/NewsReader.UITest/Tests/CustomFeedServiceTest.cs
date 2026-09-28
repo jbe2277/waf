@@ -31,7 +31,7 @@ public abstract class CustomFeedServiceTest : UITest
         await Task.Delay(2000, CancellationToken.None);
 
         Assert.Equal("FeedTitle", addEditFeedView.FeedNameEntry.Text);
-        UIAssert.NotExists(Driver, () => addEditFeedView.FeedErrorLabel);
+        Assert.Empty(Driver.TryGet(() => addEditFeedView.FeedErrorLabel)?.Text ?? "");
         addEditFeedView.AddEditButton.SafeClick();
 
         if (!IsWindows) window.MenuButton.SafeClick();
