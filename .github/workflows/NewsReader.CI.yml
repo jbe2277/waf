@@ -114,7 +114,7 @@ jobs:
           ./**/AppPackages/**/NewsReader*.msix
     
   iOS:
-    runs-on: macos-27
+    runs-on: xcode-27
     needs: GetVersion
     steps:
     - name: 📥 Check-out
