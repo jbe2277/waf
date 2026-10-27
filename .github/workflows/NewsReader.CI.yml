@@ -122,7 +122,7 @@ jobs:
 
     - name: ⚙️ Select Xcode
       run: |
-        echo "DEVELOPER_DIR=/Applications/Xcode_26.6.app" >> "$GITHUB_ENV"
+        echo "DEVELOPER_DIR=/Applications/Xcode_27.1.app" >> "$GITHUB_ENV"
     
     - name: ⚙️ Setup .NET
       uses: actions/setup-dotnet@v5
