@@ -3,6 +3,7 @@
 [assembly: SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.NewsReader.MauiSystem.Platforms.iOS.AppDelegate")]
 [assembly: SuppressMessage("Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.NewsReader.MauiSystem.Platforms.iOS.AppDelegate")]
 [assembly: SuppressMessage("Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "~T:Waf.NewsReader.MauiSystem.Platforms.iOS.Services.LocalizationService")]
+[assembly: SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>", Scope = "type", Target = "~T:Waf.NewsReader.MauiSystem.Platforms.iOS.SceneDelegate")]
 
 #elif ANDROID
 
