@@ -9,12 +9,12 @@ public static class ElementHelper
 {
     public static T? ToView<T>(this AppiumElement? element, Func<AppiumElement, T> factory) where T : class => element is null ? null : factory(element);
 
-    public static string? GetStatusInfo(this AppiumElement element) => element.Driver.PlatformName switch
+    public static string? GetStatusInfo(this AppiumElement element) => element.Driver.CapabilityPlatformName switch
     {
         MobilePlatform.Android => element.GetAttribute("content-desc"),
         MobilePlatform.IOS => element.GetAttribute("label"),
         MobilePlatform.Windows => element.GetDomAttribute("Name"),  // Note: GetAttribute does not work here - but GetDomAttribute.
-        _ => throw new NotSupportedException($"Platform not supported: {element.Driver.PlatformName}")
+        _ => throw new NotSupportedException($"Platform not supported: {element.Driver.CapabilityPlatformName}")
     };
 
     public static void SafeClick(this AppiumElement element, bool isRightButton = false)

@@ -105,7 +105,7 @@ public static class FindHelper
     {
         return $"AId=\"{GetAutomationId(element)}\" TagName=\"{TryGet(() => element.TagName)}\" Text=\"{TryGet(() => element.Text)}\" Rect=\"{TryGet(() => element.Rect.ToString())}\" Id=\"{TryGet(() => element.Id)}\"";
 
-        static string? GetAutomationId(AppiumElement element) => element.Driver.PlatformName switch
+        static string? GetAutomationId(AppiumElement element) => element.Driver.CapabilityPlatformName switch
         {
             MobilePlatform.Android => TryGet(() => element.GetAttribute("resource-id")),
             MobilePlatform.IOS => TryGet(() => element.GetAttribute("name")),

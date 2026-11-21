@@ -58,7 +58,7 @@ public static class ContextHelper
             if (driver.IsAndroid && android is not null) return android();
             else if (driver.IsIOS && iOS is not null) return iOS();
             else if (driver.IsWindows && windows is not null) return windows();
-            throw new NotSupportedException($"Platform '{driver.PlatformName}' is not supported");
+            throw new NotSupportedException($"Platform '{driver.CapabilityPlatformName}' is not supported");
         }
 
         public AppiumElement? TryGet(Func<AppiumElement?> accessElement)
