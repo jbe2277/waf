@@ -300,6 +300,11 @@ jobs:
     - name: 📥 Check-out
       uses: actions/checkout@v6
 
+    - name: ⚙️ Set display resolution
+      shell: pwsh
+      run: |
+        Set-DisplayResolution -Width 1920 -Height 1080 -Force
+
     - name: 📦 Download Windows App
       uses: actions/download-artifact@v8
       with:
