@@ -28,11 +28,11 @@ public static class ContextHelper
 
     extension(AppiumDriver driver)
     {
-        public bool IsAndroid => driver.PlatformName == MobilePlatform.Android;
+        public bool IsAndroid => driver.IsPlatform(MobilePlatform.Android);
 
-        public bool IsIOS => driver.PlatformName == MobilePlatform.IOS;
+        public bool IsIOS => driver.IsPlatform(MobilePlatform.IOS);
 
-        public bool IsWindows => driver.PlatformName == MobilePlatform.Windows;
+        public bool IsWindows => driver.IsPlatform(MobilePlatform.Windows);
 
         public TimeSpan DefaultTimeout
         {
@@ -80,5 +80,7 @@ public static class ContextHelper
                 driver.DefaultTimeout = defaultTimeout;
             }
         }
+
+        private bool IsPlatform(string platformName) => string.Equals(driver.Capabilities.GetCapability(MobileCapabilityType.PlatformName)?.ToString(), platformName, StringComparison.OrdinalIgnoreCase);
     }
 }
