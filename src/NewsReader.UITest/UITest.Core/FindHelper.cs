@@ -51,13 +51,13 @@ public static class FindHelper
         }
     }
 
-    public static By ById(this AppiumDriver driver, string automationId) => driver.PlatformName switch
+    public static By ById(this AppiumDriver driver, string automationId)
     {
-        MobilePlatform.Android => MobileBy.Id(automationId),
-        MobilePlatform.IOS => MobileBy.Id(automationId),
-        MobilePlatform.Windows => MobileBy.AccessibilityId(automationId),
-        var x => throw new NotSupportedException($"Platform not supported: {x}")
-    };
+        if (driver.IsAndroid) return MobileBy.Id(automationId);
+        if (driver.IsIOS) return MobileBy.Id(automationId);
+        if (driver.IsWindows) return MobileBy.AccessibilityId(automationId);
+        throw new NotSupportedException($"Platform not supported: {driver.CapabilityPlatformName}");
+    }
 
     private static AppiumElement WaitFind(Func<AppiumDriver, string, AppiumElement> func, AppiumDriver driver, string automationId, AppiumElement? owner = null)
     {
