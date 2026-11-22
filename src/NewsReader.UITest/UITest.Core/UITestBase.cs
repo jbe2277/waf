@@ -116,7 +116,7 @@ public abstract class UITestBase : IDisposable
         // See: https://github.com/appium/appium-windows-driver
         var driverOptions = new AppiumOptions()
         {
-            AutomationName = "Wincore",
+            AutomationName = "Windows",
             PlatformName = MobilePlatform.Windows,
             App = app
         };
