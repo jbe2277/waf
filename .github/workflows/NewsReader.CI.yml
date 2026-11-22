@@ -319,7 +319,7 @@ jobs:
     - name: ⚙️ Install Appium Server
       shell: pwsh  
       run: |
-        npm install -g appium
+        npm install -g appium@3
         appium driver install windows
         appium --version
 

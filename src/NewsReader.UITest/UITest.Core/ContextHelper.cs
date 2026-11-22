@@ -28,11 +28,13 @@ public static class ContextHelper
 
     extension(AppiumDriver driver)
     {
-        public bool IsAndroid => driver.PlatformName == MobilePlatform.Android;
+        public string? CapabilityPlatformName => driver.Capabilities.GetCapability(MobileCapabilityType.PlatformName)?.ToString();
 
-        public bool IsIOS => driver.PlatformName == MobilePlatform.IOS;
+        public bool IsAndroid => driver.CapabilityPlatformName is MobilePlatform.Android;
 
-        public bool IsWindows => driver.PlatformName == MobilePlatform.Windows;
+        public bool IsIOS => driver.CapabilityPlatformName is MobilePlatform.IOS;
+
+        public bool IsWindows => driver.CapabilityPlatformName is MobilePlatform.Windows;
 
         public TimeSpan DefaultTimeout
         {
@@ -56,7 +58,7 @@ public static class ContextHelper
             if (driver.IsAndroid && android is not null) return android();
             else if (driver.IsIOS && iOS is not null) return iOS();
             else if (driver.IsWindows && windows is not null) return windows();
-            throw new NotSupportedException($"Platform '{driver.PlatformName}' is not supported");
+            throw new NotSupportedException($"Platform '{driver.CapabilityPlatformName}' is not supported");
         }
 
         public AppiumElement? TryGet(Func<AppiumElement?> accessElement)

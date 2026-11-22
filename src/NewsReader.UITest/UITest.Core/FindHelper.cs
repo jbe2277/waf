@@ -51,13 +51,13 @@ public static class FindHelper
         }
     }
 
-    public static By ById(this AppiumDriver driver, string automationId) => driver.PlatformName switch
+    public static By ById(this AppiumDriver driver, string automationId)
     {
-        MobilePlatform.Android => MobileBy.Id(automationId),
-        MobilePlatform.IOS => MobileBy.Id(automationId),
-        MobilePlatform.Windows => MobileBy.AccessibilityId(automationId),
-        var x => throw new NotSupportedException($"Platform not supported: {x}")
-    };
+        if (driver.IsAndroid) return MobileBy.Id(automationId);
+        if (driver.IsIOS) return MobileBy.Id(automationId);
+        if (driver.IsWindows) return MobileBy.AccessibilityId(automationId);
+        throw new NotSupportedException($"Platform not supported: {driver.CapabilityPlatformName}");
+    }
 
     private static AppiumElement WaitFind(Func<AppiumDriver, string, AppiumElement> func, AppiumDriver driver, string automationId, AppiumElement? owner = null)
     {
@@ -105,7 +105,7 @@ public static class FindHelper
     {
         return $"AId=\"{GetAutomationId(element)}\" TagName=\"{TryGet(() => element.TagName)}\" Text=\"{TryGet(() => element.Text)}\" Rect=\"{TryGet(() => element.Rect.ToString())}\" Id=\"{TryGet(() => element.Id)}\"";
 
-        static string? GetAutomationId(AppiumElement element) => element.Driver.PlatformName switch
+        static string? GetAutomationId(AppiumElement element) => element.Driver.CapabilityPlatformName switch
         {
             MobilePlatform.Android => TryGet(() => element.GetAttribute("resource-id")),
             MobilePlatform.IOS => TryGet(() => element.GetAttribute("name")),
