@@ -42,7 +42,11 @@ public static class ElementHelper
         //    Thread.Sleep(200);
         //}
         //else 
-            element.Click();
+        if (isRightButton && element.IsWindows)
+        {
+            new Actions(element.Driver).ContextClick(element).Perform();
+        }
+        else element.Click();
     }
 
     public static void SwipeRight(this AppiumElement element)
