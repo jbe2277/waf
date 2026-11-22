@@ -19,29 +19,30 @@ public static class ElementHelper
 
     public static void SafeClick(this AppiumElement element, bool isRightButton = false)
     {
-        if (element.IsWindows)
-        {
-            Thread.Sleep(100);
-            var d = element.Driver;
-            var windowPos = d.Manage().Window.Position;
-            var center = element.Rect.Center;
-            // Workaround: Add Window.Position to the coordinates: https://github.com/appium/appium-windows-driver/issues/280
-            d.ExecuteScript("windows: hover", new Dictionary<string, object>()
-            {
-                ["startX"] = windowPos.X + center.X,
-                ["startY"] = windowPos.Y + center.Y,
-                ["endX"] = windowPos.X + center.X,
-                ["endY"] = windowPos.Y + center.Y
-            });
-            d.ExecuteScript("windows: click", new Dictionary<string, object>()
-            {
-                ["x"] = windowPos.X + center.X,
-                ["y"] = windowPos.Y + center.Y,
-                ["button"] = isRightButton ? "right" : "left"
-            });
-            Thread.Sleep(200);
-        }
-        else element.Click();
+        //if (element.IsWindows)
+        //{
+        //    Thread.Sleep(100);
+        //    var d = element.Driver;
+        //    var windowPos = d.Manage().Window.Position;
+        //    var center = element.Rect.Center;
+        //    // Workaround: Add Window.Position to the coordinates: https://github.com/appium/appium-windows-driver/issues/280
+        //    d.ExecuteScript("windows: hover", new Dictionary<string, object>()
+        //    {
+        //        ["startX"] = windowPos.X + center.X,
+        //        ["startY"] = windowPos.Y + center.Y,
+        //        ["endX"] = windowPos.X + center.X,
+        //        ["endY"] = windowPos.Y + center.Y
+        //    });
+        //    d.ExecuteScript("windows: click", new Dictionary<string, object>()
+        //    {
+        //        ["x"] = windowPos.X + center.X,
+        //        ["y"] = windowPos.Y + center.Y,
+        //        ["button"] = isRightButton ? "right" : "left"
+        //    });
+        //    Thread.Sleep(200);
+        //}
+        //else 
+            element.Click();
     }
 
     public static void SwipeRight(this AppiumElement element)
