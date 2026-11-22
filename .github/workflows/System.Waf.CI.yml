@@ -42,11 +42,6 @@ jobs:
           src/System.Waf/System.Waf/**/*.nupkg
           src/System.Waf/System.Waf/**/*.snupkg
 
-    - name: ⚙️ Set display resolution
-      shell: pwsh
-      run: |
-        Set-DisplayResolution -Width 1920 -Height 1080 -Force
-
     - name: 🖥️ UI Test
       run: |
         echo "## 🖥️ Test Results - Samples.UITest.slnx" >> $Env:GITHUB_STEP_SUMMARY
